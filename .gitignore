@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+.env
+
+# Outputs
+runs/
+data/experiments/
+*.csv
+*.log
+*.mp4
+*.gif
+*.png
+!docs/assets/*.png
+!figures/.gitkeep
+!data/.gitkeep
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
