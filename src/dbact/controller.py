@@ -80,7 +80,14 @@ class DBACTController:
                 )
                 centroid = self.cvt.compute_centroid(i, agents, neighbor_indices, density, self.domain)
                 u_nom = self.params.kp_cage * (centroid - agent.position)
-                u_nom += self._transport_bias(agent, observations, cargoes)
+                # Caging-only stage:
+                # Do NOT use cargo geometry prior here.
+                # The controller must not call cargo.closest_boundary(), cargo.center,
+                # cargo.radius, or cargo.vertices.
+                # Cargo geometry is only used inside the simulated local sensor to generate
+                # local BoundaryObservation.
+                # Transport bias is disabled because cargo is assumed unknown.
+                # u_nom += self._transport_bias(agent, observations, cargoes)
                 mode = "dbact_cage"
             else:
                 u_nom = self._exploration_velocity(i, agents, neighbor_indices, timestamp)
@@ -95,7 +102,10 @@ class DBACTController:
     def _ensure_maps(self, agents: list[AgentState]) -> None:
         for agent in agents:
             self.maps.setdefault(agent.agent_id, LocalBoundaryMap(ttl=self.params.map_ttl))
-
+    # NOTE:
+    # This function uses simulator-side cargo geometry and is NOT used in the
+    # unknown-cargo caging experiments. Keep it disabled unless a future transport
+    # module explicitly provides object motion information through local sensing.
     def _transport_bias(self, agent: AgentState, observations: list, cargoes: list[Cargo]) -> np.ndarray:
         # Task-level transport direction is assumed available after object discovery in the simulator.
         # For physical robots this should come from task planning or operator command.
