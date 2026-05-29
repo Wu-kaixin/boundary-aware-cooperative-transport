@@ -25,6 +25,22 @@ def boundary_coverage(cargo: Cargo, agents: list[AgentState], contact_radius: fl
     dists = np.linalg.norm(boundary[:, None, :] - positions[None, :, :], axis=2)
     return float(np.mean(np.any(dists <= contact_radius, axis=1)))
 
+def recruited_agents_count(
+    cargo: Cargo,
+    agents: list[AgentState],
+    contact_radius: float = 0.42,
+) -> int:
+    """Count agents close enough to the cargo boundary.
+
+    This is an offline evaluation metric. It is allowed to use the true cargo
+    geometry here because this function is not part of the controller.
+    """
+    count = 0
+    for agent in agents:
+        _, _, distance = cargo.closest_boundary(agent.position)
+        if distance <= contact_radius:
+            count += 1
+    return count
 
 def path_lengths(history: dict[str, list[np.ndarray]]) -> dict[str, float]:
     out: dict[str, float] = {}

@@ -7,7 +7,12 @@ import json
 import numpy as np
 
 from dbact.controller import DBACTController
-from dbact.metrics import boundary_coverage, min_inter_agent_distance, path_lengths
+from dbact.metrics import (
+    boundary_coverage,
+    min_inter_agent_distance,
+    path_lengths,
+    recruited_agents_count,
+)
 from dbact.transport_dynamics import SimpleCagingTransportDynamics
 from dbact.types import AgentState
 
@@ -68,12 +73,22 @@ class SimulationEnvironment:
         out.mkdir(parents=True, exist_ok=True)
         self._save_trajectories(out / "trajectories.csv")
         lengths = path_lengths(self.log.agent_positions)
+        evaluation_contact_radius = 0.50
+        recruited_agents = {
+            cargo.object_id: recruited_agents_count(
+                cargo,
+                self.agents,
+                contact_radius=evaluation_contact_radius,
+            )
+            for cargo in self.cargoes
+        }
         metrics = {
             "final_time": self.log.times[-1] if self.log.times else 0.0,
             "min_inter_agent_distance": min(self.log.min_distances) if self.log.min_distances else None,
             "mean_path_length": float(np.mean(list(lengths.values()))) if lengths else 0.0,
             "path_lengths": lengths,
             "final_coverage": {k: v[-1] if v else 0.0 for k, v in self.log.cargo_coverages.items()},
+            "recruited_agents": recruited_agents,
         }
         (out / "metrics.json").write_text(json.dumps(metrics, indent=2), encoding="utf-8")
 
