@@ -1,8 +1,11 @@
 from __future__ import annotations
 
+import argparse
 from dataclasses import dataclass
+from pathlib import Path
 
 import numpy as np
+import yaml
 
 from mas_adapter.decentralized_transport_controller import DecentralizedTransportController
 
@@ -24,40 +27,22 @@ class MockWorldState:
     robots: list[MockRobotState]
 
 
-def make_controller() -> DecentralizedTransportController:
+def load_yaml(path: str | Path) -> dict:
+    with Path(path).open("r", encoding="utf-8") as f:
+        return yaml.safe_load(f)
+
+
+def make_controller(
+    controller_config_path: str | Path,
+    dtransport_config_path: str | Path,
+) -> DecentralizedTransportController:
+    controller_cfg = load_yaml(controller_config_path)
+    dtransport_cfg = load_yaml(dtransport_config_path)
+
     config = {
-        "controller": {
-            "type": "dtransport",
-            "robot_mode": "free",
-        },
+        "controller": controller_cfg["controller"],
         "controller_params": {
-            "dtransport": {
-                "sensor_range": 1.20,
-                "comm_range": 2.40,
-                "cage_offset": 0.28,
-                "sigma": 0.34,
-                "d_min": 0.30,
-                "max_speed": 0.30,
-                "kp_explore": 0.20,
-                "kp_cage": 1.20,
-                "kp_transport": 0.0,
-                "grid_resolution": 24,
-                "map_ttl": 8.0,
-                "cbf_gamma": 6.0,
-                "virtual_object": {
-                    "enabled": True,
-                    "id": "cargo_0",
-                    "vertices": [
-                        [3.10, 4.55],
-                        [4.45, 4.30],
-                        [5.10, 4.90],
-                        [4.80, 5.75],
-                        [3.70, 6.05],
-                        [3.05, 5.30],
-                    ],
-                    "transport_direction": [0.0, 1.0],
-                },
-            }
+            "dtransport": dtransport_cfg,
         },
     }
 
@@ -77,9 +62,9 @@ def make_controller() -> DecentralizedTransportController:
 
     limits_config = {
         "chassis": {
-            "max_vx": 0.30,
-            "max_vy": 0.30,
-            "max_wz": 0.60,
+            "max_vx": float(dtransport_cfg.get("max_speed", 0.30)),
+            "max_vy": float(dtransport_cfg.get("max_speed", 0.30)),
+            "max_wz": float(dtransport_cfg.get("max_wz", 0.60)),
         }
     }
 
@@ -104,13 +89,34 @@ def make_world_state() -> MockWorldState:
 
 
 def main() -> None:
-    controller = make_controller()
+    parser = argparse.ArgumentParser(
+        description="Run a mock MAS pipeline with DBACT adapter."
+    )
+    parser.add_argument(
+        "--controller-config",
+        default="configs/mas/controller.yaml",
+        help="Path to MAS-style controller.yaml.",
+    )
+    parser.add_argument(
+        "--dtransport-config",
+        default="configs/mas/dtransport_mock.yaml",
+        help="Path to mock dtransport config.",
+    )
+    args = parser.parse_args()
+
+    controller = make_controller(
+        controller_config_path=args.controller_config,
+        dtransport_config_path=args.dtransport_config,
+    )
     world_state = make_world_state()
 
     velocities = controller.compute_planar_velocities(world_state)
 
     print("Mock MAS pipeline:")
     print("WorldState -> DecentralizedTransportController -> planar velocities")
+    print()
+    print(f"controller_config: {args.controller_config}")
+    print(f"dtransport_config: {args.dtransport_config}")
     print()
 
     for robot_id, velocity in velocities.items():
