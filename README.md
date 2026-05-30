@@ -1,183 +1,249 @@
 # DBACT: Decentralized Boundary-Aware Cooperative Transportation
 
-> **Decentralized Boundary-Aware Cooperative Transportation of Arbitrarily Shaped Objects Without Prior Object Knowledge** > 面向未知任意形状物体的去中心化边界感知协同搬运算法
+DBACT is a research-oriented Python framework for cooperative multi-robot transport of unknown, arbitrary-shaped objects. It studies how a robot team can discover an object's boundary from local observations, self-allocate around the object, maintain safety, and produce coordinated caging / pushing behavior without relying on prior object geometry.
 
-DBACT is a research-grade algorithmic framework designed for multi-robot cooperative transportation tasks involving objects of unknown positions, sizes, and arbitrary geometry. Relying **strictly** on local sensing, local communication, and local control, robots adaptively discover object boundaries, encircle the cargo, and achieve cooperative transportation via caging and pushing dynamics.
-
----
-
-## 🌟 Key Features
-
-* **Zero Prior Knowledge:** No pre-loaded maps, shapes, or size profiles of the cargo are required.
-* **Decentralized Coordination:** Scalable swarm control driven entirely by local peer-to-peer communication and limited-range sensing.
-* **Boundary-Aware Density Fields:** Adaptive target generation utilizing Gaussian kernels along the object's outer normals.
-* **Safety-Critical Execution:** Lightweight Control Barrier Function (CBF) safety filter ensures collision-free multi-agent interaction.
-* **Hardware-Ready Architecture:** Includes an out-of-the-box adapter layer tailored for the RoboMaster S1 MAS (Multi-Agent System) platform.
-
----
-
-## 🛠️ Repository Architecture
+The repository contains a runnable simulation stack, a modular controller implementation, scenario configurations, tests, documentation, and an adapter path toward an OptiTrack + RoboMaster S1 multi-robot platform.
 
 ```text
-boundary-aware-cooperative-transport/
-├── configs/                  # Configuration files
-│   ├── sim/                  # Simulation scenario profiles (Circle, L-shape, etc.)
-│   └── mas/                  # MAS platform integration configurations
-├── src/                      # Source code
-│   ├── dbact/                # Core algorithmic modules
-│   │   ├── geometry.py       # Polygon and vector geometry helpers
-│   │   ├── local_sensing.py  # Local boundary sensor emulation
-│   │   ├── local_cvt.py      # Constrained/Limited Centroidal Voronoi Tessellation
-│   │   └── local_cbf_qp.py   # Analytical/QP Control Barrier Function safety filter
-│   ├── dbact_sim/            # Lightweight simulation engine
-│   └── mas_adapter/          # Bridge adapters for the RoboMaster S1 MAS platform
-├── scripts/                  # Batch execution and automation scripts
-├── tests/                    # Unit testing suite (PyTest)
-└── docs/                     # In-depth technical documentation
-
+local boundary sensing
+  -> boundary-aware density construction
+  -> local CVT-based allocation
+  -> local CBF-style safety filtering
+  -> caging / pushing transport dynamics
 ```
 
----
+## Highlights
 
-## ⚡ Quick Start
+- **Unknown-object operation**: the controller is structured around local boundary observations rather than direct access to global object shape.
+- **Boundary-aware coordination**: boundary points are offset along outward normals to create cage targets, then converted into a density field for spatial allocation.
+- **Decentralized information flow**: each agent uses its own observations plus neighbor-shared observations within communication range.
+- **Local safety filtering**: velocity commands pass through a lightweight CBF-style projection layer for inter-agent separation.
+- **Simulation-to-platform bridge**: `src/mas_adapter` connects the DBACT controller to a MAS-public-style control interface for staged RoboMaster S1 integration.
+- **Reproducible scenarios**: circle, rectangle, L-shape, non-convex, caging, and multi-object configurations are included under `configs/sim`.
 
-### 1. Environment Setup
+## Repository Structure
 
-Clone the repository and set up a virtual environment:
+```text
+.
+|-- src/dbact/                 # Core DBACT algorithm modules
+|-- src/dbact_sim/             # Simulation environment, scenarios, metrics, visualization
+|-- src/mas_adapter/           # MAS-public compatible controller adapter
+|-- configs/sim/               # Simulation scenario YAML files
+|-- configs/mas/               # DBACT configuration for MAS-style integration
+|-- scripts/                   # Batch runs and mock MAS pipeline utilities
+|-- tests/                     # Root DBACT unit and smoke tests
+|-- docs/                      # Architecture, algorithm notes, integration roadmap
+`-- platforms/mas_public/      # OptiTrack + RoboMaster S1 platform subtree
+```
+
+## Installation
+
+Python 3.9 or newer is supported. Python 3.10+ is recommended for development.
 
 ```bash
-git clone https://github.com/yourusername/boundary-aware-cooperative-transport.git
-cd boundary-aware-cooperative-transport
-
 python -m venv .venv
-source .venv/bin/activate  # On Windows use: .venv\Scripts\activate
+source .venv/bin/activate      # Windows: .venv\Scripts\activate
 
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+pip install -e .
 ```
 
-### 2. Install Dependencies
-
-Install the package in editable mode along with development dependencies:
+For a minimal editable install with only package metadata dependencies:
 
 ```bash
 pip install -e .[dev]
-
 ```
 
-### 3. Run a Demo Simulation
-
-Execute a benchmark simulation with an asymmetrical L-shaped object:
+## Quick Verification
 
 ```bash
-python -m dbact_sim.run_sim --config configs/sim/l_shape.yaml --steps 400 --output runs/l_shape
-
+python -m pytest
+python -m compileall -q src tests scripts platforms/mas_public/src platforms/mas_public/apps
 ```
 
-Outputs will be saved dynamically to `runs/l_shape/`:
-
-* `trajectories.csv` & `metrics.json` (Numerical logs)
-* `trajectory.png` & `final_snapshot.png` (Visual summaries)
-
-### 4. Run Tests
-
-Verify the installation by running the test suite:
-
-```bash
-pytest
-
-```
-
----
-
-## 🧬 Algorithmic Pipeline
+Expected root test status:
 
 ```text
-[ Local Sensing ] ──> [ Boundary Point Detection ] ──> [ Cage Target Generation ]
-                                                                   │
-                                                                   ▼
-[ Collision-Free Output ] <── [ Local CBF Filter ] <── [ Local/Limited CVT ]
-           │
-           ▼
-[ Caging & Pushing Transport ]
-
+6 passed
 ```
 
-### Deep Dive into Core Modules
+## Run a Simulation
 
-1. **Local Boundary Sensing:** Robots detect raw boundary points only within their predefined `sensor_range`. The `LocalBoundarySensor` samples these points directly from the target polygon dynamically.
-2. **Boundary-Aware Density Field:** For every detected boundary point $b$ and its corresponding outer normal $n_{\text{out}}$, a caging target is generated via:
+```bash
+python -m dbact_sim.run_sim \
+  --config configs/sim/l_shape.yaml \
+  --steps 400 \
+  --output runs/l_shape
+```
 
-$$q_{\text{target}} = b + d_{\text{cage}} \cdot n_{\text{out}}$$
+The simulator writes trajectories, metrics, and plots:
 
+```text
+runs/l_shape/
+|-- trajectories.csv
+|-- metrics.json
+|-- final_snapshot.png
+`-- trajectory.png
+```
 
+Run the default scenario batch:
 
-A continuous local density field is then constructed by overlaying Gaussian kernels:
+```bash
+python scripts/run_all_scenarios.py
+```
 
-$$\rho(q) = \rho_0 + \sum_i w_i \exp\left(-\frac{\|q - q_i\|^2}{2\sigma^2}\right)$$
+Useful single-scenario commands:
 
+```bash
+python -m dbact_sim.run_sim --config configs/sim/circle.yaml --steps 300 --output runs/circle
+python -m dbact_sim.run_sim --config configs/sim/rectangle.yaml --steps 400 --output runs/rectangle
+python -m dbact_sim.run_sim --config configs/sim/l_shape.yaml --steps 500 --output runs/l_shape
+python -m dbact_sim.run_sim --config configs/sim/nonconvex.yaml --steps 500 --output runs/nonconvex
+python -m dbact_sim.run_sim --config configs/sim/multi_object.yaml --steps 600 --output runs/multi_object
+```
 
-3. **Local/Limited CVT:** Robots compute a weighted Centroidal Voronoi Tessellation (CVT) over locally sampled points, restricted by their communication topologies.
-4. **Local CBF Safety Filter:** Inter-robot collision avoidance constraints are strictly enforced via a half-plane projection implementation of Control Barrier Functions ($h_{ij} = \|p_i - p_j\|^2 - d_{\text{min}}^2 \ge 0$), keeping the system lightweight and independent of heavy QP solvers like `cvxpy`.
-5. **Transport Dynamics:** A stylized caging-pushing dynamic evaluates boundary coverage. Once encirclement criteria are satisfied, the object is transported cooperatively along the designated vector.
+## Mock MAS Pipeline
 
----
+Before running on real hardware, the MAS adapter can be validated with a virtual object and a mock world state:
 
-## 📊 Evaluation Scenarios
+```bash
+python scripts/run_mock_mas_pipeline.py \
+  --steps 80 \
+  --dt 0.05 \
+  --print-every 20 \
+  --output runs/mock_mas_pipeline
+```
 
-Run the provided benchmarks to test the system's robustness across various geometries:
+This exercises the integration path:
 
-| Command | Target Geometry | Challenge Highlight |
-| --- | --- | --- |
-| `python -m dbact_sim.run_sim --config configs/sim/circle.yaml` | **Circle** | Baseline uniformity test |
-| `python -m dbact_sim.run_sim --config configs/sim/rectangle.yaml` | **Rectangle** | High-curvature corner negotiation |
-| `python -m dbact_sim.run_sim --config configs/sim/l_shape.yaml` | **L-Shape** | Asymmetric center-of-mass balancing |
-| `python -m dbact_sim.run_sim --config configs/sim/nonconvex.yaml` | **Non-Convex** | Local minima avoidance inside cavities |
-| `python -m dbact_sim.run_sim --config configs/sim/multi_object.yaml` | **Multi-Object** | Dynamic cluster splitting and allocation |
+```text
+mock WorldState
+  -> DecentralizedTransportController
+  -> ObjectObserver virtual object
+  -> DBACTController
+  -> planar velocity commands
+  -> integrated mock WorldState
+```
 
-> 💡 **Tip:** To evaluate all scenarios in a single batch run, execute: `python scripts/run_all_scenarios.py`
+Expected outputs:
 
----
+```text
+runs/mock_mas_pipeline/
+|-- states.csv
+|-- commands.csv
+`-- mock_trajectory.png
+```
 
-## 🤖 RoboMaster S1 / MAS Integration
+## Core Modules
 
-The framework keeps the upstream `MAS-public` repository untouched by operating entirely through an adapter layer located in `src/mas_adapter/`.
+| Module | Purpose |
+| --- | --- |
+| `cargo.py` | Polygon cargo representation for simulation and sensing |
+| `local_sensing.py` | Local boundary observations within sensor range |
+| `boundary_map.py` | Per-agent local memory and neighbor observation exchange |
+| `boundary_density.py` | Gaussian density over boundary-offset cage targets |
+| `local_cvt.py` | Local weighted CVT centroid approximation |
+| `local_cbf_qp.py` | Lightweight CBF-style velocity projection |
+| `transport_dynamics.py` | Simplified caging / pushing object dynamics |
+| `controller.py` | End-to-end DBACT controller pipeline |
+| `metrics.py` | Coverage, path length, recruitment, and safety metrics |
 
-To deploy DBACT onto your MAS platform workspace, follow these integration steps:
+## Algorithm Notes
 
-1. Copy or symlink `src/mas_adapter/decentralized_transport_controller.py` into your MAS-public directory at `src/controller/`.
-2. Copy `configs/mas/dtransport.yaml` into your MAS-public directory at `configs/controllers/dtransport.yaml`.
-3. Register the `dtransport` type inside the MAS `config_loader.py`.
-4. Register `DecentralizedTransportController` within your `controller_module.py`.
-5. Update your primary system config (`configs/controller.yaml`) by changing the controller type to `dtransport`.
+For each local boundary observation `(b, n_out)`, DBACT creates a cage target outside the object:
 
-For a comprehensive guide, please refer to [docs/MAS_INTEGRATION.md](https://www.google.com/search?q=docs/MAS_INTEGRATION.md).
+```text
+q_target = b + d_cage * n_out
+```
 
----
+The controller then constructs a Gaussian density field around these targets and computes a local weighted CVT centroid using only the robot and communication-range neighbors. Inter-agent safety is enforced with the constraint:
 
-## 📈 Project Status & Roadmap
+```text
+h_ij = ||p_i - p_j||^2 - d_min^2 >= 0
+```
 
-This repository contains the complete, verified algorithmic framework for decentralized multi-agent coordination.
+The current implementation uses an iterative half-plane projection as a lightweight CBF-style filter. This keeps the default simulator dependency-light while preserving a clean path toward a formal QP solver.
 
-* [x] Fully functional Python simulation environment
-* [x] Modular boundary-aware density field & CVT control loop
-* [x] Analytical CBF safety filtering
-* [x] RoboMaster S1 hardware adapter hooks
-* [ ] Real-world point cloud noise filtering modules
-* [ ] High-fidelity rigid-body contact dynamics integration
-* [ ] Closed-loop physical fleet deployment tests
+## MAS / RoboMaster S1 Integration
 
----
+The root DBACT package remains hardware-independent. Hardware-facing functionality is isolated in the platform subtree and adapter layer:
 
-## 📄 Citation & Acknowledgements
+```text
+src/mas_adapter/decentralized_transport_controller.py
+  MAS-public-style DBACT controller wrapper
 
-This framework builds upon foundational theories in multi-agent robotics. If you use this software in your research, please cite our project alongside the following foundational methodologies:
+src/mas_adapter/object_observer.py
+  virtual object observer now; real object observer later
 
-* **CVT-based multi-agent coverage control** (Centroidal Voronoi Tessellations)
-* **Control Barrier Function** (CBF) safety-critical control laws
-* **Adaptive Self-Allocation paradigms** for cooperative manipulation without prior shape knowledge
-* The **MAS-public** RoboMaster S1 multi-agent development ecosystem
+platforms/mas_public/
+  OptiTrack input, ZeroMQ messaging, controller process,
+  robot communication, logging, plotting, and supervisor orchestration
+```
 
----
+Recommended integration sequence:
 
-## ⚖️ License
+1. Validate the root DBACT tests and simulations.
+2. Run `scripts/run_mock_mas_pipeline.py` in virtual-object mode.
+3. Register the adapter in the MAS-public controller stack.
+4. Validate MAS mock IO.
+5. Move to OptiTrack / RoboMaster S1 experiments with physical safety procedures in place.
 
-Distributed under the **MIT License**. See `LICENSE` for more information.
+Detailed notes:
+
+- `docs/MAS_INTEGRATION.md`
+- `docs/stage2_mas_virtual_object.md`
+- `platforms/mas_public/README.md`
+
+## Development Health Checks
+
+Parse all YAML configurations:
+
+```bash
+python - <<'PY'
+from pathlib import Path
+import yaml
+
+paths = list(Path("configs").rglob("*.yaml"))
+paths += list(Path("platforms/mas_public/configs").rglob("*.yaml"))
+
+for path in paths:
+    yaml.safe_load(path.read_text(encoding="utf-8"))
+    print("ok", path)
+PY
+```
+
+Platform-specific tests live in `platforms/mas_public/apps/pytest_tests`. They require platform dependencies such as `pandas` and `pyzmq`; hardware-facing dependencies are listed in `platforms/mas_public/requirements.txt`.
+
+## Current Status
+
+Implemented:
+
+- Arbitrary polygon cargo simulation
+- Local boundary sensing and local boundary memory
+- Boundary-aware density construction
+- Local CVT-based spatial allocation
+- Local CBF-style safety filter
+- Simplified caging / pushing dynamics
+- MAS adapter import tests and mock pipeline tests
+- OptiTrack + RoboMaster S1 platform subtree
+
+Open research and engineering work:
+
+- Replace the lightweight projection filter with a formal QP solver
+- Add boundary gap detection and adaptive recruitment
+- Estimate object pose from accumulated local boundary memory
+- Add nonholonomic robot and contact-rich physical dynamics
+- Complete real-hardware DBACT experiments on the MAS / RoboMaster S1 stack
+
+## Documentation
+
+- `docs/ARCHITECTURE.md`: package layout and data flow
+- `docs/ALGORITHM.md`: algorithm notes
+- `docs/MAS_INTEGRATION.md`: MAS-public integration plan
+- `docs/stage2_mas_virtual_object.md`: virtual-object MAS pipeline progress
+- `docs/ROADMAP.md`: staged project roadmap
+
+## License
+
+MIT License.
