@@ -1,0 +1,32 @@
+kp_x: 1.3
+kd_x: 0.12
+kp_y: 4.5
+kd_y: 0.3
+kp_yaw: 0.45
+kd_yaw: 0.08
+position_tolerance_m: 0.015
+yaw_tolerance_rad: 0.02
+hold_enabled: true
+hold_kp_x: 0.5
+hold_kd_x: 0.08
+hold_kp_y: 1.2
+hold_kd_y: 0.12
+hold_kp_yaw: 0.5
+hold_kd_yaw: 0.02
+hold_max_vx: 0.08
+hold_max_vy: 0.15
+hold_max_wz: 0.18
+hold_duration_s: 0.5
+targets:
+  robot_1:
+    x: 0.5
+    y: 0.8
+    yaw: 1.507
+  robot_2:
+    x: 0.8
+    y: -0.8
+    yaw: 0.0
+  robot_3:
+    x: -0.8
+    y: -1.0
+    yaw: 1.507

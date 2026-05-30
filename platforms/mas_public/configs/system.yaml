@@ -1,0 +1,73 @@
+experiment_name: manual
+experiment:
+  auto_stop_on_task_completed: true
+  auto_stop_on_untracked: true
+  untracked_timeout_s: 3.0
+z_up_transform:
+  enabled: true
+  motive_to_world_rx_deg: 90.0
+worldstate_smoothing:
+  enabled: false
+  method: ema
+  alpha_xy: 0.4
+  alpha_yaw: 0.5
+  near_target_only: true
+  near_target_distance_m: 0.3
+limits:
+  chassis:
+    max_vx: 1.0
+    max_vy: 1.0
+    max_wz: 1.0
+  gimbal:
+    max_yaw_speed: 90.0
+    max_pitch_speed: 90.0
+gimbal_control:
+  yaw_follow:
+    enabled: true
+    feedforward_enabled: true
+    feedback_enabled: true
+    feedback_kp: 3.0
+    feedback_deadband_deg: 0.5
+    feedback_max_speed_deg_s: 35.0
+    feedback_timeout_s: 0.5
+  pitch_hold:
+    enabled: true
+    target_deg: 0.0
+    kp: -3.0
+    deadband_deg: 0.5
+    max_speed_deg_s: 35.0
+    feedback_timeout_s: 0.5
+robot_command_transform:
+  enabled: true
+  linear:
+    dimension: 2
+    matrix:
+      - [1.0, 0.0]
+      - [0.0, -1.0]
+  angular:
+    dimension: 1
+    scale: -1.0
+  gimbal:
+    yaw_scale: -1.0
+frequency:
+  optitrack_publish_hz: 100
+  controller_hz: 20
+  robot_command_hz: 20
+network:
+  backend: zmq
+  host: 127.0.0.1
+  ports:
+    world_state: 5555
+    system_command: 5556
+    control_command: 5557
+    module_status: 5558
+world:
+  x_min: -1.0
+  x_max: 1.0
+  y_min: -1.5
+  y_max: 1.5
+  z_min: -0.1
+  z_max: 1.0
+  stop_on_out_of_bounds: true
+  out_of_bounds_fail_delay_s: 5.0
+

@@ -1,0 +1,48 @@
+robots:
+  expected_count: 3
+  list:
+    - robot_id: robot_1
+      sn: "robot_1_sn"
+      group: red
+      rigid_body_name: "Rigid Body 001"
+      rigid_body_id: 1
+      chassis_enabled: true
+      gimbal_enabled: true
+    - robot_id: robot_2
+      sn: "robot_2_sn"
+      group: blue
+      rigid_body_name: "Rigid Body 002"
+      rigid_body_id: 2
+      chassis_enabled: true
+      gimbal_enabled: true
+    - robot_id: robot_3
+      sn: "robot_3_sn"
+      group: green
+      rigid_body_name: "Rigid Body 003"
+      rigid_body_id: 3
+      chassis_enabled: true
+      gimbal_enabled: true
+connection:
+  conn_type: sta
+  proto_type: udp
+  retry_count: 2
+  require_sn: true
+chassis:
+  angular_unit: rad_per_s
+  sdk_z_unit: deg_per_s
+  sdk_drive_timeout_s: 0.06
+  stop_on_exit: true
+gimbal:
+  angle_status:
+    enabled: true
+    freq_hz: 10
+  init_zero_on_connect:
+    enabled: true
+    pitch_deg: 0.0
+    yaw_deg: 0.0
+    pitch_speed: 60.0
+    yaw_speed: 60.0
+    wait_timeout_s: 5.0
+watchdog:
+  command_timeout_ms: 200
+  stop_on_timeout: true

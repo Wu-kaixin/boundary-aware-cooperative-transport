@@ -1,0 +1,14 @@
+﻿.venv/
+__pycache__/
+*.pyc
+.env
+*.log
+logs/*.log
+data/experiments/*
+!data/experiments/.gitkeep
+!data/.gitkeep
+*.tak
+*.cal
+.pytest_cache/
+htmlcov/
+.coverage

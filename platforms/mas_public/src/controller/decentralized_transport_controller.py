@@ -18,7 +18,7 @@ import numpy as np
 
 from dbact.controller import DBACTController, DBACTParams
 from dbact.types import AgentState
-from mas_adapter.object_observer import ObjectObserver
+from src.controller.object_observer import ObjectObserver
 
 try:  # MAS-public imports, available only inside MAS project.
     from src.common.math_utils import clamp, wrap_angle_rad
@@ -64,9 +64,17 @@ class DecentralizedTransportController(BaseController):  # type: ignore[misc]
         self.robot_mode = str(config.get("controller", {}).get("robot_mode", "free"))
         params: dict[str, Any] = config.get("controller_params", {}).get("dtransport", config.get("controller_params", {}))
         chassis_limits = (limits_config or {}).get("chassis", {})
-        self.max_vx = float(chassis_limits.get("max_vx", params.get("max_speed", 0.18)))
-        self.max_vy = float(chassis_limits.get("max_vy", params.get("max_speed", 0.18)))
-        self.max_wz = float(chassis_limits.get("max_wz", params.get("max_wz", 0.6)))
+        param_max_speed = float(params.get("max_speed", 0.18))
+        param_max_wz = float(params.get("max_wz", 0.6))
+
+        system_max_vx = float(chassis_limits.get("max_vx", param_max_speed))
+        system_max_vy = float(chassis_limits.get("max_vy", param_max_speed))
+        system_max_wz = float(chassis_limits.get("max_wz", param_max_wz))
+
+        self.max_vx = min(system_max_vx, param_max_speed)
+        self.max_vy = min(system_max_vy, param_max_speed)
+        self.max_wz = min(system_max_wz, param_max_wz)
+        
         self.kp_yaw = float(params.get("kp_yaw", 0.8))
         self.target_yaw = float(params.get("target_yaw", 0.0))
         self.yaw_mode = str(params.get("yaw_mode", "face_velocity"))

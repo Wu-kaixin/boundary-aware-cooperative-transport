@@ -1,0 +1,32 @@
+# Mock MAS pipeline config.
+# This file is used by scripts/run_mock_mas_pipeline.py only.
+# It does not modify the real MAS / RoboMaster config.
+
+hold_enabled: false
+
+sensor_range: 1.20
+comm_range: 2.40
+cage_offset: 0.28
+sigma: 0.34
+map_ttl: 8.0
+
+d_min: 0.30
+max_speed: 0.30
+max_wz: 0.60
+kp_explore: 0.20
+kp_cage: 1.20
+kp_transport: 0.0
+grid_resolution: 24
+cbf_gamma: 6.0
+
+virtual_object:
+  enabled: true
+  id: cargo_0
+  vertices:
+    - [-0.35, 0.20]
+    - [0.25, 0.10]
+    - [0.45, 0.45]
+    - [0.20, 0.80]
+    - [-0.30, 0.70]
+    - [-0.50, 0.40]
+  transport_direction: [0.0, 1.0]
