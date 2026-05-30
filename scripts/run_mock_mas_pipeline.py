@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import csv
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -118,7 +119,56 @@ def integrate_world_state(
             robot.y += robot.vy * dt
 
     world_state.timestamp += dt
+def append_state_rows(
+    rows: list[dict],
+    step: int,
+    world_state: MockWorldState,
+) -> None:
+    for robot in world_state.robots:
+        rows.append(
+            {
+                "step": step,
+                "time": world_state.timestamp,
+                "robot_id": robot.robot_id,
+                "x": robot.x,
+                "y": robot.y,
+                "vx": robot.vx,
+                "vy": robot.vy,
+                "yaw": robot.yaw,
+                "tracked": robot.tracked,
+            }
+        )
 
+
+def append_command_rows(
+    rows: list[dict],
+    step: int,
+    world_state: MockWorldState,
+    velocities: dict[str, np.ndarray],
+) -> None:
+    for robot_id, velocity in velocities.items():
+        rows.append(
+            {
+                "step": step,
+                "time": world_state.timestamp,
+                "robot_id": robot_id,
+                "cmd_vx": float(velocity[0]),
+                "cmd_vy": float(velocity[1]),
+                "cmd_speed": float(np.linalg.norm(velocity)),
+            }
+        )
+
+
+def write_csv(path: Path, rows: list[dict]) -> None:
+    if not rows:
+        return
+
+    path.parent.mkdir(parents=True, exist_ok=True)
+
+    with path.open("w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=list(rows[0].keys()))
+        writer.writeheader()
+        writer.writerows(rows)
 
 def main() -> None:
     parser = argparse.ArgumentParser(
@@ -152,6 +202,11 @@ def main() -> None:
         default=5,
         help="Print one command summary every N steps.",
     )
+    parser.add_argument(
+        "--output",
+        default="runs/mock_mas_pipeline",
+        help="Output directory for mock states and commands CSV files.",
+    )
     args = parser.parse_args()
 
     controller = make_controller(
@@ -170,10 +225,14 @@ def main() -> None:
     print()
 
     last_velocities: dict[str, np.ndarray] = {}
+    state_rows: list[dict] = []
+    command_rows: list[dict] = []
 
     for step in range(args.steps):
         velocities = controller.compute_planar_velocities(world_state)
         last_velocities = velocities
+        append_state_rows(state_rows, step, world_state)
+        append_command_rows(command_rows, step, world_state, velocities)
 
         if step % args.print_every == 0 or step == args.steps - 1:
             print_velocities(step, world_state, velocities)
@@ -191,6 +250,16 @@ def main() -> None:
 
     max_speed = max(float(np.linalg.norm(v)) for v in last_velocities.values())
     print()
+    output_dir = Path(args.output)
+    states_path = output_dir / "states.csv"
+    commands_path = output_dir / "commands.csv"
+
+    write_csv(states_path, state_rows)
+    write_csv(commands_path, command_rows)
+
+    print()
+    print(f"states_csv={states_path}")
+    print(f"commands_csv={commands_path}")
     print(f"max_last_step_speed={max_speed:.4f}")
     print("Done.")
 
