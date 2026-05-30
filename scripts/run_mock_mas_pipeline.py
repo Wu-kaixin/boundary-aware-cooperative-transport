@@ -88,9 +88,41 @@ def make_world_state() -> MockWorldState:
     )
 
 
+def print_velocities(step: int, world_state: MockWorldState, velocities: dict[str, np.ndarray]) -> None:
+    print(f"step={step}, t={world_state.timestamp:.2f}s")
+    for robot in world_state.robots:
+        velocity = velocities[robot.robot_id]
+        speed = float(np.linalg.norm(velocity))
+        print(
+            f"  {robot.robot_id}: "
+            f"pos=({robot.x: .3f}, {robot.y: .3f}), "
+            f"vx={velocity[0]: .4f}, "
+            f"vy={velocity[1]: .4f}, "
+            f"speed={speed: .4f}"
+        )
+
+
+def integrate_world_state(
+    world_state: MockWorldState,
+    velocities: dict[str, np.ndarray],
+    dt: float,
+) -> None:
+    for robot in world_state.robots:
+        velocity = velocities.get(robot.robot_id, np.zeros(2, dtype=float))
+
+        robot.vx = float(velocity[0])
+        robot.vy = float(velocity[1])
+
+        if robot.tracked:
+            robot.x += robot.vx * dt
+            robot.y += robot.vy * dt
+
+    world_state.timestamp += dt
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Run a mock MAS pipeline with DBACT adapter."
+        description="Run a multi-step mock MAS pipeline with DBACT adapter."
     )
     parser.add_argument(
         "--controller-config",
@@ -102,6 +134,24 @@ def main() -> None:
         default="configs/mas/dtransport_mock.yaml",
         help="Path to mock dtransport config.",
     )
+    parser.add_argument(
+        "--steps",
+        type=int,
+        default=20,
+        help="Number of mock integration steps.",
+    )
+    parser.add_argument(
+        "--dt",
+        type=float,
+        default=0.05,
+        help="Mock integration time step.",
+    )
+    parser.add_argument(
+        "--print-every",
+        type=int,
+        default=5,
+        help="Print one command summary every N steps.",
+    )
     args = parser.parse_args()
 
     controller = make_controller(
@@ -110,25 +160,38 @@ def main() -> None:
     )
     world_state = make_world_state()
 
-    velocities = controller.compute_planar_velocities(world_state)
-
-    print("Mock MAS pipeline:")
-    print("WorldState -> DecentralizedTransportController -> planar velocities")
+    print("Mock MAS multi-step pipeline:")
+    print("WorldState -> DecentralizedTransportController -> planar velocities -> integrated WorldState")
     print()
     print(f"controller_config: {args.controller_config}")
     print(f"dtransport_config: {args.dtransport_config}")
+    print(f"steps: {args.steps}")
+    print(f"dt: {args.dt}")
     print()
 
-    for robot_id, velocity in velocities.items():
-        speed = float(np.linalg.norm(velocity))
+    last_velocities: dict[str, np.ndarray] = {}
+
+    for step in range(args.steps):
+        velocities = controller.compute_planar_velocities(world_state)
+        last_velocities = velocities
+
+        if step % args.print_every == 0 or step == args.steps - 1:
+            print_velocities(step, world_state, velocities)
+            print()
+
+        integrate_world_state(world_state, velocities, args.dt)
+
+    print("Final mock robot states:")
+    for robot in world_state.robots:
         print(
-            f"{robot_id}: "
-            f"vx={velocity[0]: .4f}, "
-            f"vy={velocity[1]: .4f}, "
-            f"speed={speed: .4f}"
+            f"  {robot.robot_id}: "
+            f"pos=({robot.x: .3f}, {robot.y: .3f}), "
+            f"vel=({robot.vx: .4f}, {robot.vy: .4f})"
         )
 
+    max_speed = max(float(np.linalg.norm(v)) for v in last_velocities.values())
     print()
+    print(f"max_last_step_speed={max_speed:.4f}")
     print("Done.")
 
 
