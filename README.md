@@ -1,15 +1,4 @@
-Here is a beautifully formatted, modern, and engaging English version of your GitHub `README.md`.
-
-It utilizes clear typography, logical grouping, structured tables, visual highlights, and professional iconography placeholders to make your research project look highly polished and accessible to the open-source community.
-
----
-
-```markdown
 # DBACT: Decentralized Boundary-Aware Cooperative Transportation
-
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![CI Status](https://github.com/yourusername/boundary-aware-cooperative-transport/actions/workflows/tests.yml/badge.svg)](https://github.com/yourusername/boundary-aware-cooperative-transport/actions)
 
 > **Decentralized Boundary-Aware Cooperative Transportation of Arbitrarily Shaped Objects Without Prior Object Knowledge** > 面向未知任意形状物体的去中心化边界感知协同搬运算法
 
@@ -57,7 +46,7 @@ boundary-aware-cooperative-transport/
 Clone the repository and set up a virtual environment:
 
 ```bash
-git clone [https://github.com/yourusername/boundary-aware-cooperative-transport.git](https://github.com/yourusername/boundary-aware-cooperative-transport.git)
+git clone https://github.com/yourusername/boundary-aware-cooperative-transport.git
 cd boundary-aware-cooperative-transport
 
 python -m venv .venv
@@ -101,7 +90,7 @@ pytest
 
 ## 🧬 Algorithmic Pipeline
 
-```
+```text
 [ Local Sensing ] ──> [ Boundary Point Detection ] ──> [ Cage Target Generation ]
                                                                    │
                                                                    ▼
@@ -192,7 +181,3 @@ This framework builds upon foundational theories in multi-agent robotics. If you
 ## ⚖️ License
 
 Distributed under the **MIT License**. See `LICENSE` for more information.
-
-```
-
-```
