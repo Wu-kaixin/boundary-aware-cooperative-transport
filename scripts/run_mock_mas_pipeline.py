@@ -5,6 +5,7 @@ import csv
 from dataclasses import dataclass
 from pathlib import Path
 
+import matplotlib.pyplot as plt
 import numpy as np
 import yaml
 
@@ -170,6 +171,46 @@ def write_csv(path: Path, rows: list[dict]) -> None:
         writer.writeheader()
         writer.writerows(rows)
 
+
+def plot_mock_trajectory(
+    path: Path,
+    state_rows: list[dict],
+    dtransport_config: dict,
+) -> None:
+    if not state_rows:
+        return
+
+    path.parent.mkdir(parents=True, exist_ok=True)
+
+    robot_ids = sorted({row["robot_id"] for row in state_rows})
+
+    plt.figure(figsize=(7, 7))
+
+    for robot_id in robot_ids:
+        xs = [float(row["x"]) for row in state_rows if row["robot_id"] == robot_id]
+        ys = [float(row["y"]) for row in state_rows if row["robot_id"] == robot_id]
+
+        plt.plot(xs, ys, linewidth=1.5, label=robot_id)
+        plt.scatter(xs[0], ys[0], marker="o", s=30)
+        plt.scatter(xs[-1], ys[-1], marker="x", s=40)
+
+    virtual_object = dtransport_config.get("virtual_object", {})
+    if virtual_object.get("enabled", False):
+        vertices = np.array(virtual_object["vertices"], dtype=float)
+        closed = np.vstack([vertices, vertices[0]])
+        plt.plot(closed[:, 0], closed[:, 1], linewidth=2.0, label="virtual cargo")
+
+    plt.axis("equal")
+    plt.grid(True)
+    plt.xlabel("x [m]")
+    plt.ylabel("y [m]")
+    plt.title("Mock MAS Pipeline Trajectory")
+    plt.legend(loc="best", fontsize=8)
+    plt.tight_layout()
+    plt.savefig(path, dpi=160)
+    plt.close()
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(
         description="Run a multi-step mock MAS pipeline with DBACT adapter."
@@ -213,6 +254,7 @@ def main() -> None:
         controller_config_path=args.controller_config,
         dtransport_config_path=args.dtransport_config,
     )
+    dtransport_config = load_yaml(args.dtransport_config)
     world_state = make_world_state()
 
     print("Mock MAS multi-step pipeline:")
@@ -253,13 +295,16 @@ def main() -> None:
     output_dir = Path(args.output)
     states_path = output_dir / "states.csv"
     commands_path = output_dir / "commands.csv"
+    trajectory_path = output_dir / "mock_trajectory.png"
 
     write_csv(states_path, state_rows)
     write_csv(commands_path, command_rows)
+    plot_mock_trajectory(trajectory_path, state_rows, dtransport_config)
 
     print()
     print(f"states_csv={states_path}")
     print(f"commands_csv={commands_path}")
+    print(f"trajectory_png={trajectory_path}")
     print(f"max_last_step_speed={max_speed:.4f}")
     print("Done.")
 
