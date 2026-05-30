@@ -74,6 +74,59 @@ class DecentralizedTransportController(BaseController):  # type: ignore[misc]
         domain = self._domain_from_world_config(world_config)
         self.dbact = DBACTController(DBACTParams.from_dict(params), domain)
         self.object_observer = ObjectObserver(params)
+    
+    def compute_planar_velocities(self, world_state: Any | None) -> dict[str, np.ndarray]:
+        """Compute world-frame planar velocities without MAS message classes.
+
+        This method is used for unit tests and mock integration before running
+        inside MAS-public. It verifies the pipeline:
+
+            mock WorldState -> DBACTController -> planar velocity commands
+
+        The returned velocities are in the world frame.
+        """
+        if world_state is None:
+            return {rid: np.zeros(2, dtype=float) for rid in self.robot_ids}
+
+        state_by_id = {robot.robot_id: robot for robot in world_state.robots}
+
+        tracked = [
+            state_by_id[rid]
+            for rid in self.robot_ids
+            if rid in state_by_id and state_by_id[rid].tracked
+        ]
+
+        if not tracked:
+            return {rid: np.zeros(2, dtype=float) for rid in self.robot_ids}
+
+        agents = [
+            AgentState(
+                agent_id=s.robot_id,
+                position=np.array([s.x, s.y], dtype=float),
+                velocity=np.array([s.vx, s.vy], dtype=float),
+                yaw=s.yaw,
+            )
+            for s in tracked
+        ]
+
+        cargoes = self.object_observer.observe()
+
+        commands = self.dbact.step(
+            agents,
+            cargoes,
+            float(world_state.timestamp),
+            dt=0.05,
+        )
+
+        velocity_by_id = {
+            cmd.agent_id: cmd.velocity
+            for cmd in commands
+        }
+
+        return {
+            rid: velocity_by_id.get(rid, np.zeros(2, dtype=float))
+            for rid in self.robot_ids
+        }
 
     def compute(self, world_state: Any | None) -> Any:
         if ControlCommand is None or RobotCommand is None:
