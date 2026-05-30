@@ -1,0 +1,23 @@
+[project]
+name = "mas-s1-system"
+version = "0.1.0"
+description = "OptiTrack + RoboMaster S1 multi-robot closed-loop control platform"
+requires-python = ">=3.10"
+dependencies = [
+  "numpy",
+  "PyYAML",
+  "pyzmq",
+  "matplotlib",
+  "pandas",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["apps/pytest_tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+exclude = ["third_party"]
+
+

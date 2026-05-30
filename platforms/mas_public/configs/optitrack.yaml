@@ -1,0 +1,22 @@
+natnet:
+  server_ip: 127.0.0.1
+  client_ip: 127.0.0.1
+  connection_type: Unicast
+  stream_type: d
+  data_port: 1511
+  command_port: 1510
+  connect_check_timeout_s: 2.0
+  python_client_path: third_party/natnet_client
+tracking_validation:
+  enabled: false
+  reject_position_jump: false
+  max_position_jump_m: 1.0
+  tracking_timeout_enabled: false
+  tracking_timeout_ms: 200
+state_estimation:
+  enable_velocity_estimation: true
+publish:
+  publish_untracked: true
+diagnostics:
+  log_rigid_bodies: true
+  log_interval_s: 10.0
