@@ -78,12 +78,42 @@ def write_csv(path: Path, rows: list[dict]) -> None:
         writer.writerows(rows)
 
 
+
+def out_of_bounds_robot_ids(
+    robot_states: dict[str, dict[str, float]],
+    world_config: dict,
+) -> list[str]:
+    x_min = float(world_config.get("x_min", -float("inf")))
+    x_max = float(world_config.get("x_max", float("inf")))
+    y_min = float(world_config.get("y_min", -float("inf")))
+    y_max = float(world_config.get("y_max", float("inf")))
+
+    out = []
+    for robot_id, state in robot_states.items():
+        x = float(state["x"])
+        y = float(state["y"])
+        if x < x_min or x > x_max or y < y_min or y > y_max:
+            out.append(robot_id)
+    return out
+
+
+def world_bounds_text(world_config: dict) -> str:
+    return (
+        f"x=[{world_config.get('x_min')}, {world_config.get('x_max')}], "
+        f"y=[{world_config.get('y_min')}, {world_config.get('y_max')}]"
+    )
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="DBACT dtransport MAS dry-run without hardware.")
     parser.add_argument("--steps", type=int, default=80)
     parser.add_argument("--dt", type=float, default=0.05)
     parser.add_argument("--print-every", type=int, default=20)
     parser.add_argument("--output", type=Path, default=Path("data/dry_runs/dtransport"))
+    parser.add_argument(
+    "--stop-on-out-of-bounds",
+    action="store_true",
+    help="Stop dry-run when any robot leaves system.world bounds.",
+)
     args = parser.parse_args()
 
     configs = load_all_configs()
@@ -108,12 +138,16 @@ def main() -> None:
 
     state_rows: list[dict] = []
     command_rows: list[dict] = []
+    event_rows: list[dict] = []
+    final_status = "completed"
 
     print("MAS dtransport dry-run")
     print("No OptiTrack. No RoboMaster. No network.")
     print(f"controller.type={controller_config['controller']['type']}")
     print(f"robot_ids={robot_ids}")
     print(f"steps={args.steps}, dt={args.dt}")
+    print(f"world_bounds={world_bounds_text(system_config['world'])}")
+    print(f"stop_on_out_of_bounds={args.stop_on_out_of_bounds}")
 
     for step in range(args.steps):
         timestamp = step * args.dt
@@ -164,11 +198,32 @@ def main() -> None:
                 )
 
         integrate_robot_states(robot_states, control_command, args.dt)
+        out_ids = out_of_bounds_robot_ids(robot_states, system_config["world"])
+        if out_ids:
+            event = {
+                "step": step,
+                "time": timestamp,
+                "event": "out_of_bounds",
+                "robot_ids": ";".join(out_ids),
+            }
+            event_rows.append(event)
+            print(
+                f"WARNING: out_of_bounds at step={step}, "
+                f"t={timestamp:.2f}s, robot_ids={out_ids}"
+            )
+            if args.stop_on_out_of_bounds:
+                final_status = "stopped_out_of_bounds"
+                break
 
     states_csv = args.output / "states.csv"
     commands_csv = args.output / "commands.csv"
+    events_csv = args.output / "events.csv"
+
     write_csv(states_csv, state_rows)
     write_csv(commands_csv, command_rows)
+    write_csv(events_csv, event_rows)
+
+    print(f"\nFinal dry-run status: {final_status}")
 
     print("\nFinal dry-run robot states:")
     for robot_id, state in robot_states.items():
@@ -178,9 +233,10 @@ def main() -> None:
             f"yaw={state['yaw']: .3f}, "
             f"vel=({state['vx']: .4f}, {state['vy']: .4f})"
         )
-
     print(f"\nstates_csv={states_csv}")
     print(f"commands_csv={commands_csv}")
+    print(f"events_csv={events_csv}")
+    print(f"final_status={final_status}")
     print("Done.")
 
 
