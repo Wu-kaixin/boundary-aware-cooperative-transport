@@ -4,46 +4,52 @@
 
 ### Product overview
 
-Python research monorepo: **DBACT** (decentralized boundary-aware cooperative transport) + vendored **MAS S1** lab stack (`platforms/mas_public`) for OptiTrack/RoboMaster integration. There is no Node/npm or Makefile.
+Python research monorepo: **DBACT** (decentralized boundary-aware cooperative transport) + vendored **MAS S1** lab stack (`platforms/mas_public`). No Node/npm or Makefile.
 
-### Python environment
+### Python environment (canonical: Conda `dbact`)
 
-- Use the repo virtualenv at `/workspace/.venv` (Python 3.12+).
-- Activate before any command: `source /workspace/.venv/bin/activate`
-- Set headless plotting: `export MPLBACKEND=Agg PYTHONUTF8=1`
-- On a fresh Ubuntu VM, `python3 -m venv` requires the system package `python3.12-venv` (one-time `apt` install outside the update script).
+The project README and local workflow use:
 
-Install layout (also what the VM update script refreshes):
+```bash
+conda activate dbact
+export MPLBACKEND=Agg PYTHONUTF8=1
+```
 
-1. `pip install -r requirements.txt && pip install -e .` from repo root
-2. `pip install -r platforms/mas_public/requirements.txt` (adds `pyzmq`, `ruff`, RoboMaster SDK from git)
+- Expected Python: **3.10.x** (README documents 3.10.20).
+- Install (repo root): `pip install -r requirements.txt && pip install -e .`
+- MAS extras: `pip install -r platforms/mas_public/requirements.txt` from repo root, or `cd platforms/mas_public` and install there.
+
+**Cloud VM note:** Miniconda lives at `~/miniconda3` with env `dbact`. New shells need `source ~/miniconda3/etc/profile.d/conda.sh` before `conda activate dbact` (conda init is in `~/.bashrc`).
+
+**MAS on Python 3.10:** `rm_libmedia_codec==0.0.1` (test PyPI) may not install on 3.10; if `pip install -r platforms/mas_public/requirements.txt` fails, install `pyzmq`, `ruff`, and the `robomaster` git dependency manually—tests and dry-runs still pass without `rm_libmedia_codec`.
+
+A legacy `/workspace/.venv` may exist from an earlier cloud setup; prefer **`conda activate dbact`** to match the README.
 
 ### Services (what to run when)
 
-| Goal | Processes / command | Notes |
+| Goal | Command | Notes |
 | --- | --- | --- |
-| DBACT simulation only | `python -m dbact_sim.run_sim --config configs/sim/<scenario>.yaml --output runs/<name>` | No ZMQ or hardware |
-| Root mock MAS bridge | `python scripts/run_mock_mas_pipeline.py` | Single process; no ZMQ |
-| MAS controller dry-run | `cd platforms/mas_public && python apps/dbact/run_dtransport_dry_run.py` | No OptiTrack/Robot/ZMQ |
-| MAS software closed loop | Three terminals from `platforms/mas_public`: `mock_optitrack.py` → `run_controller.py` → `mock_robot.py` | Start OptiTrack mock first; localhost ZMQ ports in `configs/system.yaml` |
-| Real hardware | Motive/NatNet + `run_optitrack.py` + `run_robot_comm.py` + `run_controller.py` | Not available in cloud VM |
+| DBACT simulation | `python -m dbact_sim.run_sim --config configs/sim/<scenario>.yaml --output runs/<name>` | No ZMQ/hardware |
+| Root mock MAS bridge | `python scripts/run_mock_mas_pipeline.py` | Single process |
+| MAS dtransport dry-run | `cd platforms/mas_public && python apps/dbact/run_dtransport_dry_run.py` | No OptiTrack/Robot/ZMQ |
+| MAS mock closed loop | `mock_optitrack.py` → `run_controller.py` → `mock_robot.py` (from `platforms/mas_public`) | ZMQ on localhost; start mock OptiTrack first |
+| Real hardware | Motive + `run_optitrack.py` + `run_robot_comm.py` + `run_controller.py` | Not in cloud VM |
 
-**Mock closed-loop caveat:** `mock_optitrack.py` publishes poses outside the default `system.yaml` world box (`x/y` roughly ±1 m). The controller may emit `world_out_of_bounds` stop commands until mock poses are retuned or world bounds widened—this still proves ZMQ wiring works.
+Mock OptiTrack poses can trigger `world_out_of_bounds` against default `system.yaml` bounds; that still validates ZMQ wiring.
 
-### Lint / test / smoke (see `README.md` for full lists)
+### Lint / test (see `README.md`)
 
-| Scope | Command (from repo root unless noted) |
+| Scope | Command |
 | --- | --- |
-| Root tests | `python -m pytest` |
+| Root tests | `conda activate dbact` then `python -m pytest` (expect **6 passed**) |
 | MAS tests | `cd platforms/mas_public && python -m pytest -q apps/pytest_tests` |
-| Byte-compile smoke | `python -m compileall -q src tests scripts platforms/mas_public/src platforms/mas_public/apps` |
-| MAS lint | `cd platforms/mas_public && python -m ruff check .` (pre-existing style findings possible) |
-| Dependency sanity | `python -m pip check` |
+| Byte-compile | `python -m compileall -q src tests scripts platforms/mas_public/src platforms/mas_public/apps` |
+| MAS lint | `cd platforms/mas_public && python -m ruff check .` |
 
-Long-running MAS modules should use **tmux** (`tmux -f /exec-daemon/tmux.portal.conf`), not detached one-shot shells.
+Long-running MAS modules: use **tmux** (`tmux -f /exec-daemon/tmux.portal.conf`).
 
 ### Generated output
 
-- Simulation: `runs/` (gitignored)
-- MAS experiments: `platforms/mas_public/data/experiments/`
-- MAS dry-runs: `platforms/mas_public/data/dry_runs/`
+- `runs/` — simulation
+- `platforms/mas_public/data/experiments/` — MAS runs
+- `platforms/mas_public/data/dry_runs/` — dry-runs
