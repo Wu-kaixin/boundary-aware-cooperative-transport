@@ -49,7 +49,45 @@ def integrate_robot_states(
     robot_states: dict[str, dict[str, float]],
     control_command,
     dt: float,
-) -> None:
+    world_config: dict | None = None,
+    clamp_to_world_bounds: bool = False,
+) -> list[str]:
+    clamped_robot_ids: list[str] = []
+
+    x_min = float(world_config.get("x_min", -float("inf"))) if world_config else -float("inf")
+    x_max = float(world_config.get("x_max", float("inf"))) if world_config else float("inf")
+    y_min = float(world_config.get("y_min", -float("inf"))) if world_config else -float("inf")
+    y_max = float(world_config.get("y_max", float("inf"))) if world_config else float("inf")
+
+    for command in control_command.commands:
+        state = robot_states[command.robot_id]
+        vx = float(command.chassis_vx or 0.0)
+        vy = float(command.chassis_vy or 0.0)
+        wz = float(command.chassis_wz or 0.0)
+
+        next_x = state["x"] + vx * dt
+        next_y = state["y"] + vy * dt
+
+        if clamp_to_world_bounds:
+            clamped_x = min(max(next_x, x_min), x_max)
+            clamped_y = min(max(next_y, y_min), y_max)
+
+            if clamped_x != next_x or clamped_y != next_y:
+                clamped_robot_ids.append(command.robot_id)
+
+            next_x = clamped_x
+            next_y = clamped_y
+
+            vx = (next_x - state["x"]) / dt
+            vy = (next_y - state["y"]) / dt
+
+        state["x"] = next_x
+        state["y"] = next_y
+        state["yaw"] = wrap_angle(state.get("yaw", 0.0) + wz * dt)
+        state["vx"] = vx
+        state["vy"] = vy
+
+    return clamped_robot_ids
     for command in control_command.commands:
         state = robot_states[command.robot_id]
         vx = float(command.chassis_vx or 0.0)
@@ -251,6 +289,11 @@ def main() -> None:
     action="store_true",
     help="Stop dry-run when any robot leaves system.world bounds.",
 )
+    parser.add_argument(
+    "--clamp-to-world-bounds",
+    action="store_true",
+    help="Clamp integrated robot states to system.world bounds during dry-run.",
+)
     args = parser.parse_args()
 
     configs = load_all_configs()
@@ -285,6 +328,7 @@ def main() -> None:
     print(f"steps={args.steps}, dt={args.dt}")
     print(f"world_bounds={world_bounds_text(system_config['world'])}")
     print(f"stop_on_out_of_bounds={args.stop_on_out_of_bounds}")
+    print(f"clamp_to_world_bounds={args.clamp_to_world_bounds}")
     print("initial_robot_states:")
     for robot_id, state in robot_states.items():
         print(
@@ -340,7 +384,27 @@ def main() -> None:
                     f"speed={math.hypot(vx, vy): .4f}, mode={command.controller_mode}"
                 )
 
-        integrate_robot_states(robot_states, control_command, args.dt)
+        clamped_ids = integrate_robot_states(
+            robot_states,
+            control_command,
+            args.dt,
+            system_config["world"],
+            args.clamp_to_world_bounds,
+        )
+
+        if clamped_ids:
+            event_rows.append(
+                {
+                    "step": step,
+                    "time": timestamp,
+                    "event": "clamped_to_world_bounds",
+                    "robot_ids": ";".join(clamped_ids),
+                }
+            )
+            print(
+                f"WARNING: clamped_to_world_bounds at step={step}, "
+                f"t={timestamp:.2f}s, robot_ids={clamped_ids}"
+            )
         out_ids = out_of_bounds_robot_ids(robot_states, system_config["world"])
         if out_ids:
             event = {
