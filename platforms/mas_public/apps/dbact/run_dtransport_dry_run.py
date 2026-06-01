@@ -6,6 +6,9 @@ import math
 import sys
 from pathlib import Path
 
+import matplotlib.pyplot as plt
+import numpy as np
+
 
 MAS_ROOT = Path(__file__).resolve().parents[2]
 if str(MAS_ROOT) not in sys.path:
@@ -102,6 +105,70 @@ def world_bounds_text(world_config: dict) -> str:
         f"x=[{world_config.get('x_min')}, {world_config.get('x_max')}], "
         f"y=[{world_config.get('y_min')}, {world_config.get('y_max')}]"
     )
+
+def plot_trajectory(
+    path: Path,
+    state_rows: list[dict],
+    controller_config: dict,
+    system_config: dict,
+    event_rows: list[dict],
+) -> None:
+    if not state_rows:
+        return
+
+    path.parent.mkdir(parents=True, exist_ok=True)
+
+    robot_ids = sorted({row["robot_id"] for row in state_rows})
+    world = system_config["world"]
+
+    plt.figure(figsize=(7, 7))
+
+    for robot_id in robot_ids:
+        rows = [row for row in state_rows if row["robot_id"] == robot_id]
+        xs = [float(row["x"]) for row in rows]
+        ys = [float(row["y"]) for row in rows]
+
+        plt.plot(xs, ys, linewidth=1.5, label=robot_id)
+        plt.scatter(xs[0], ys[0], marker="o", s=30)
+        plt.scatter(xs[-1], ys[-1], marker="x", s=45)
+
+    params = controller_config.get("controller_params", {}).get("dtransport", {})
+    virtual_object = params.get("virtual_object", {})
+    if virtual_object.get("enabled", False):
+        vertices = np.array(virtual_object["vertices"], dtype=float)
+        closed = np.vstack([vertices, vertices[0]])
+        plt.plot(closed[:, 0], closed[:, 1], linewidth=2.0, label="virtual cargo")
+
+    x_min = float(world.get("x_min", -1.0))
+    x_max = float(world.get("x_max", 1.0))
+    y_min = float(world.get("y_min", -1.5))
+    y_max = float(world.get("y_max", 1.5))
+
+    bounds_x = [x_min, x_max, x_max, x_min, x_min]
+    bounds_y = [y_min, y_min, y_max, y_max, y_min]
+    plt.plot(bounds_x, bounds_y, linestyle="--", linewidth=1.5, label="world bounds")
+
+    if event_rows:
+        first_event = event_rows[0]
+        event_step = int(first_event["step"])
+        event_robot_ids = str(first_event["robot_ids"]).split(";")
+        for robot_id in event_robot_ids:
+            matches = [
+                row for row in state_rows
+                if int(row["step"]) == event_step and row["robot_id"] == robot_id
+            ]
+            for row in matches:
+                plt.scatter(float(row["x"]), float(row["y"]), marker="*", s=120, label="first out-of-bounds")
+
+    plt.axis("equal")
+    plt.grid(True)
+    plt.xlabel("x [m]")
+    plt.ylabel("y [m]")
+    plt.title("MAS dtransport dry-run trajectory")
+    plt.legend(loc="best", fontsize=8)
+    plt.tight_layout()
+    plt.savefig(path, dpi=160)
+    plt.close()
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="DBACT dtransport MAS dry-run without hardware.")
@@ -218,10 +285,12 @@ def main() -> None:
     states_csv = args.output / "states.csv"
     commands_csv = args.output / "commands.csv"
     events_csv = args.output / "events.csv"
+    trajectory_png = args.output / "trajectory.png"
 
     write_csv(states_csv, state_rows)
     write_csv(commands_csv, command_rows)
     write_csv(events_csv, event_rows)
+    plot_trajectory(trajectory_png, state_rows, controller_config, system_config, event_rows)
 
     print(f"\nFinal dry-run status: {final_status}")
 
@@ -236,6 +305,7 @@ def main() -> None:
     print(f"\nstates_csv={states_csv}")
     print(f"commands_csv={commands_csv}")
     print(f"events_csv={events_csv}")
+    print(f"trajectory_png={trajectory_png}")
     print(f"final_status={final_status}")
     print("Done.")
 
