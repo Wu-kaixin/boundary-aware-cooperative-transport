@@ -106,6 +106,69 @@ def world_bounds_text(world_config: dict) -> str:
         f"y=[{world_config.get('y_min')}, {world_config.get('y_max')}]"
     )
 
+def build_initial_robot_states(
+    robot_ids: list[str],
+    controller_config: dict,
+    system_config: dict,
+) -> dict[str, dict[str, float]]:
+    world = system_config["world"]
+    x_min = float(world.get("x_min", -1.0))
+    x_max = float(world.get("x_max", 1.0))
+    y_min = float(world.get("y_min", -1.5))
+    y_max = float(world.get("y_max", 1.5))
+
+    params = controller_config.get("controller_params", {}).get("dtransport", {})
+    virtual_object = params.get("virtual_object", {})
+    cage_offset = float(params.get("cage_offset", 0.28))
+
+    if virtual_object.get("enabled", False) and "vertices" in virtual_object:
+        vertices = np.array(virtual_object["vertices"], dtype=float)
+        cargo_min_x = float(np.min(vertices[:, 0]))
+        cargo_max_x = float(np.max(vertices[:, 0]))
+        cargo_min_y = float(np.min(vertices[:, 1]))
+        cargo_center_x = float(np.mean(vertices[:, 0]))
+    else:
+        cargo_min_x = -0.2
+        cargo_max_x = 0.2
+        cargo_min_y = 0.2
+        cargo_center_x = 0.0
+
+    n = len(robot_ids)
+
+    span = max(cargo_max_x - cargo_min_x, 0.6)
+    left = cargo_center_x - 0.5 * span
+    right = cargo_center_x + 0.5 * span
+
+    # Keep the automatically generated row safely inside MAS world bounds.
+    margin_x = max(0.18, 0.10 * (x_max - x_min))
+    left = max(left, x_min + margin_x)
+    right = min(right, x_max - margin_x)
+
+    if right < left:
+        center = min(max(cargo_center_x, x_min + margin_x), x_max - margin_x)
+        left = right = center
+
+    if n == 1:
+        x_positions = [0.5 * (left + right)]
+    else:
+        x_positions = np.linspace(left, right, n).tolist()
+
+    y_row = cargo_min_y - (cage_offset + 0.22)
+    y_row = max(y_row, y_min + 0.12)
+    y_row = min(y_row, y_max - 0.12)
+
+    robot_states: dict[str, dict[str, float]] = {}
+    for robot_id, x in zip(robot_ids, x_positions):
+        robot_states[robot_id] = {
+            "x": float(x),
+            "y": float(y_row),
+            "yaw": 0.0,
+            "vx": 0.0,
+            "vy": 0.0,
+        }
+    return robot_states
+
+
 def plot_trajectory(
     path: Path,
     state_rows: list[dict],
@@ -158,7 +221,13 @@ def plot_trajectory(
                 if int(row["step"]) == event_step and row["robot_id"] == robot_id
             ]
             for row in matches:
-                plt.scatter(float(row["x"]), float(row["y"]), marker="*", s=120, label="first out-of-bounds")
+                plt.scatter(
+                    float(row["x"]),
+                    float(row["y"]),
+                    marker="*",
+                    s=120,
+                    label="first out-of-bounds",
+                )
 
     plt.axis("equal")
     plt.grid(True)
@@ -169,6 +238,7 @@ def plot_trajectory(
     plt.tight_layout()
     plt.savefig(path, dpi=160)
     plt.close()
+
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="DBACT dtransport MAS dry-run without hardware.")
@@ -197,11 +267,11 @@ def main() -> None:
         system_config.get("limits", {}),
     )
 
-    robot_states = {
-        robot_ids[0]: {"x": -0.45, "y": -0.45, "yaw": 0.0, "vx": 0.0, "vy": 0.0},
-        robot_ids[1]: {"x": 0.00, "y": -0.45, "yaw": 0.0, "vx": 0.0, "vy": 0.0},
-        robot_ids[2]: {"x": 0.45, "y": -0.45, "yaw": 0.0, "vx": 0.0, "vy": 0.0},
-    }
+    robot_states = build_initial_robot_states(
+        robot_ids,
+        controller_config,
+        system_config,
+    )
 
     state_rows: list[dict] = []
     command_rows: list[dict] = []
@@ -215,6 +285,12 @@ def main() -> None:
     print(f"steps={args.steps}, dt={args.dt}")
     print(f"world_bounds={world_bounds_text(system_config['world'])}")
     print(f"stop_on_out_of_bounds={args.stop_on_out_of_bounds}")
+    print("initial_robot_states:")
+    for robot_id, state in robot_states.items():
+        print(
+            f"  {robot_id}: "
+            f"pos=({state['x']: .3f}, {state['y']: .3f}), yaw={state['yaw']: .3f}"
+        )
 
     for step in range(args.steps):
         timestamp = step * args.dt
