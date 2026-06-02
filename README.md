@@ -29,7 +29,7 @@ The project has four staged layers.
 | Stage 1: DBACT simulation | Done | Arbitrary polygon cargo caging works without using cargo geometry as a controller prior. |
 | Stage 2: MAS virtual-object integration | Done | `dtransport` controller is registered in the MAS platform and can produce MAS `ControlCommand`. |
 | Stage 3: MAS dry-run | Done | Controller-level and ControllerModule-level dry-runs work without OptiTrack, RoboMaster, or network runtime. |
-| Stage 4: OptiTrack read-only bridge | In progress | Read OptiTrack / mock NatNet `WorldState` to CSV before sending any command to real robots. |
+| Stage 4: OptiTrack read-only bridge | In progress | Mock logger works; NatNet/Motive connection works; current blocker is creating/enabling Motive rigid bodies so `raw_bodies > 0`. |
 | Final experiment | Not yet complete | Real cargo observation, real OptiTrack-to-DBACT object bridge, low-speed RoboMaster trials, and visualization remain. |
 
 Important current limitation: the MAS stack already reads robot poses from OptiTrack, but the DBACT `ObjectObserver` is still a virtual-object placeholder. For a physical unknown-object experiment, cargo/object boundary observations still need to be connected from OptiTrack markers, vision, tactile/contact sensing, or another object-perception source.
@@ -165,6 +165,16 @@ platforms/mas_public/apps/dbact/log_optitrack_world_state.py
 
 It does not start `ControllerModule`, does not start RoboMaster communication, and does not publish `ControlCommand`. Use it before any real robot experiment to confirm that OptiTrack rigid bodies, robot IDs, coordinate axes, yaw, velocities, and world bounds are sane.
 
+Current Stage 4 hardware-side status:
+
+- NatNet Python SDK files are present under `platforms/mas_public/third_party/natnet_client`.
+- `NatNetClient` can be imported.
+- Real `NatNetAdapter` can be selected instead of `MockNatNetAdapter`.
+- Motive connection through `127.0.0.1` Unicast has been validated.
+- Python receives continuous MoCap frames.
+- The read-only logger writes CSV headers and supports `--print-raw-bodies`.
+- Current blocker: Motive has not yet created or streamed robot rigid bodies, so the logger can receive frames while still reporting `raw_bodies=0` and `robots=0`.
+
 ## Repository Structure
 
 ```text
@@ -262,6 +272,219 @@ These files are for testing, validation, debugging, or generated output. They ar
 | `platforms/mas_public/data/dry_runs/` | Generated MAS dry-run outputs, ignored by Git through CSV/output rules. |
 | `platforms/mas_public/data/optitrack_readonly/` | Generated OptiTrack read-only CSV outputs. |
 | `.pytest_cache/`, `__pycache__/`, `.venv/` | Local caches/environments, ignored by Git. |
+
+## Healthy File Policy
+
+The GitHub repository should contain source code, configs, docs, tests, platform integration code, and the local Codex environment file. It should not contain generated experiment data, temporary test directories, bytecode, plots, CSV logs, caches, or local virtual environments.
+
+Currently healthy tracked file groups:
+
+| Group | Count | Purpose |
+| --- | ---: | --- |
+| `.codex` | 1 | Codex local environment setup for this project. |
+| root files | 6 | README, license, packaging, dependency, and ignore metadata. |
+| `configs` | 16 | Root simulation and MAS adapter configs. |
+| `docs` | 9 | Algorithm, architecture, roadmap, and stage notes. |
+| `platforms/mas_public` | 100 | MAS / OptiTrack / RoboMaster platform subtree. |
+| `scripts` | 3 | Root utility and dry-run scripts. |
+| `src` | 25 | DBACT core, simulator, MAS adapter, and currently tracked package metadata. |
+| `tests` | 5 | Root DBACT tests. |
+
+Generated or unhealthy files that should stay out of Git:
+
+```text
+runs/
+outputs/
+*.csv
+*.png
+*.log
+__pycache__/
+.pytest_cache/
+.venv/
+platforms/mas_public/data/
+platforms/mas_public/logs/
+platforms/mas_public/**/__pycache__/
+```
+
+Note: `src/dbact.egg-info/*` is currently tracked historical packaging metadata. It is not normally edited by hand; future cleanup can remove it from tracking if the repository policy is tightened.
+
+## Complete Tracked File Inventory
+
+This inventory is based on the current local Git tracked files. These are the files that should be considered part of the repository's healthy project state unless a future cleanup explicitly removes them.
+
+```text
+.codex/environments/environment.toml
+.gitignore
+LICENSE
+README.md
+README_DBACT.md
+pyproject.toml
+requirements.txt
+
+configs/mas/controller.yaml
+configs/mas/dtransport.yaml
+configs/mas/dtransport_mock.yaml
+configs/sim/baseline_unknown_polygon_caging.yaml
+configs/sim/baseline_unknown_polygon_caging_tight.yaml
+configs/sim/circle.yaml
+configs/sim/l_shape.yaml
+configs/sim/multi_object.yaml
+configs/sim/nonconvex.yaml
+configs/sim/one_circle_caging.yaml
+configs/sim/one_nonconvex_polygon_caging.yaml
+configs/sim/one_nonconvex_polygon_caging_tight.yaml
+configs/sim/one_polygon_caging.yaml
+configs/sim/one_rectangle_polygon_caging.yaml
+configs/sim/one_rectangle_polygon_caging_tight.yaml
+configs/sim/rectangle.yaml
+
+docs/ALGORITHM.md
+docs/ARCHITECTURE.md
+docs/MAS_INTEGRATION.md
+docs/ROADMAP.md
+docs/daily_health_2026-05-30.md
+docs/stage1_results.md
+docs/stage2_mas_virtual_object.md
+docs/stage3_mas_dry_run.md
+docs/stage4_optitrack_readonly.md
+
+scripts/make_repo_tree.py
+scripts/run_all_scenarios.py
+scripts/run_mock_mas_pipeline.py
+
+src/dbact/__init__.py
+src/dbact/boundary_density.py
+src/dbact/boundary_map.py
+src/dbact/cargo.py
+src/dbact/controller.py
+src/dbact/geometry.py
+src/dbact/local_cbf_qp.py
+src/dbact/local_cvt.py
+src/dbact/local_sensing.py
+src/dbact/metrics.py
+src/dbact/transport_dynamics.py
+src/dbact/types.py
+src/dbact.egg-info/PKG-INFO
+src/dbact.egg-info/SOURCES.txt
+src/dbact.egg-info/dependency_links.txt
+src/dbact.egg-info/requires.txt
+src/dbact.egg-info/top_level.txt
+src/dbact_sim/__init__.py
+src/dbact_sim/environment.py
+src/dbact_sim/run_sim.py
+src/dbact_sim/scenarios.py
+src/dbact_sim/visualization.py
+src/mas_adapter/__init__.py
+src/mas_adapter/decentralized_transport_controller.py
+src/mas_adapter/object_observer.py
+
+tests/test_cargo.py
+tests/test_controller_smoke.py
+tests/test_density.py
+tests/test_mas_adapter_import.py
+tests/test_mas_adapter_mock_pipeline.py
+
+platforms/mas_public/.gitignore
+platforms/mas_public/README.md
+platforms/mas_public/pyproject.toml
+platforms/mas_public/requirements.txt
+platforms/mas_public/apps/check_experiment.py
+platforms/mas_public/apps/plot_experiment.py
+platforms/mas_public/apps/run_controller.py
+platforms/mas_public/apps/run_optitrack.py
+platforms/mas_public/apps/run_robot_comm.py
+platforms/mas_public/apps/run_supervisor.py
+platforms/mas_public/apps/dbact/log_optitrack_world_state.py
+platforms/mas_public/apps/dbact/run_controller_module_dtransport_dry_run.py
+platforms/mas_public/apps/dbact/run_dtransport_dry_run.py
+platforms/mas_public/apps/manual_tests/mock_optitrack.py
+platforms/mas_public/apps/manual_tests/mock_robot.py
+platforms/mas_public/apps/manual_tests/test_closed_loop_io.py
+platforms/mas_public/apps/manual_tests/test_optitrack_module.py
+platforms/mas_public/apps/manual_tests/test_robot_module.py
+platforms/mas_public/apps/pytest_tests/test_check_experiment.py
+platforms/mas_public/apps/pytest_tests/test_command_limiter.py
+platforms/mas_public/apps/pytest_tests/test_config_loader.py
+platforms/mas_public/apps/pytest_tests/test_controller_autoplot.py
+platforms/mas_public/apps/pytest_tests/test_controller_command_normalization.py
+platforms/mas_public/apps/pytest_tests/test_cvt_controller.py
+platforms/mas_public/apps/pytest_tests/test_data_recorder.py
+platforms/mas_public/apps/pytest_tests/test_experiment_logger.py
+platforms/mas_public/apps/pytest_tests/test_messages.py
+platforms/mas_public/apps/pytest_tests/test_natnet_adapter_callbacks.py
+platforms/mas_public/apps/pytest_tests/test_optitrack_diagnostics.py
+platforms/mas_public/apps/pytest_tests/test_plotter_cvt.py
+platforms/mas_public/apps/pytest_tests/test_point_controller.py
+platforms/mas_public/apps/pytest_tests/test_robomaster_adapter.py
+platforms/mas_public/apps/pytest_tests/test_robot_command_transform.py
+platforms/mas_public/apps/pytest_tests/test_robot_module_startup.py
+platforms/mas_public/apps/pytest_tests/test_supervisor_config.py
+platforms/mas_public/apps/pytest_tests/test_tracking_validator.py
+platforms/mas_public/apps/pytest_tests/test_world_bounds.py
+platforms/mas_public/configs/controller.yaml
+platforms/mas_public/configs/logging.yaml
+platforms/mas_public/configs/optitrack.yaml
+platforms/mas_public/configs/robots.yaml
+platforms/mas_public/configs/supervisor.yaml
+platforms/mas_public/configs/system.yaml
+platforms/mas_public/configs/controllers/cvt.yaml
+platforms/mas_public/configs/controllers/dtransport.yaml
+platforms/mas_public/configs/controllers/manual.yaml
+platforms/mas_public/configs/controllers/point.yaml
+platforms/mas_public/docs/config_description.md
+platforms/mas_public/docs/hardware_setup.md
+platforms/mas_public/docs/usage_and_debug.md
+platforms/mas_public/src/__init__.py
+platforms/mas_public/src/common/__init__.py
+platforms/mas_public/src/common/config_loader.py
+platforms/mas_public/src/common/exceptions.py
+platforms/mas_public/src/common/logger.py
+platforms/mas_public/src/common/math_utils.py
+platforms/mas_public/src/common/messages.py
+platforms/mas_public/src/common/time_utils.py
+platforms/mas_public/src/controller/__init__.py
+platforms/mas_public/src/controller/base_controller.py
+platforms/mas_public/src/controller/controller_module.py
+platforms/mas_public/src/controller/coordinate_transform.py
+platforms/mas_public/src/controller/cvt_controller.py
+platforms/mas_public/src/controller/cvt_utils.py
+platforms/mas_public/src/controller/data_recorder.py
+platforms/mas_public/src/controller/decentralized_transport_controller.py
+platforms/mas_public/src/controller/experiment_logger.py
+platforms/mas_public/src/controller/manual_controller.py
+platforms/mas_public/src/controller/object_observer.py
+platforms/mas_public/src/controller/point_controller.py
+platforms/mas_public/src/controller/world_bounds.py
+platforms/mas_public/src/controller/plotting/__init__.py
+platforms/mas_public/src/controller/plotting/common_plots.py
+platforms/mas_public/src/controller/plotting/cvt_plots.py
+platforms/mas_public/src/controller/plotting/experiment_plotter.py
+platforms/mas_public/src/messaging/__init__.py
+platforms/mas_public/src/messaging/base_transport.py
+platforms/mas_public/src/messaging/factory.py
+platforms/mas_public/src/messaging/topics.py
+platforms/mas_public/src/messaging/zmq_transport.py
+platforms/mas_public/src/optitrack/__init__.py
+platforms/mas_public/src/optitrack/natnet_adapter.py
+platforms/mas_public/src/optitrack/optitrack_module.py
+platforms/mas_public/src/optitrack/rigid_body_mapper.py
+platforms/mas_public/src/optitrack/state_estimator.py
+platforms/mas_public/src/optitrack/tracking_validator.py
+platforms/mas_public/src/robot/__init__.py
+platforms/mas_public/src/robot/command_limiter.py
+platforms/mas_public/src/robot/robomaster_adapter.py
+platforms/mas_public/src/robot/robot_command_transform.py
+platforms/mas_public/src/robot/robot_module.py
+platforms/mas_public/src/robot/robot_registry.py
+platforms/mas_public/src/robot/video_interface.py
+platforms/mas_public/src/robot/watchdog.py
+platforms/mas_public/src/supervisor/__init__.py
+platforms/mas_public/src/supervisor/process_manager.py
+platforms/mas_public/src/supervisor/supervisor.py
+platforms/mas_public/third_party/natnet_client/DataDescriptions.py
+platforms/mas_public/third_party/natnet_client/MoCapData.py
+platforms/mas_public/third_party/natnet_client/NatNetClient.py
+```
 
 ## Installation
 
@@ -611,6 +834,7 @@ OptiTrack robot poses + real object boundary observations
 | `docs/stage1_results.md` | Unknown polygon caging baseline and tight baseline results. |
 | `docs/stage2_mas_virtual_object.md` | MAS virtual-object integration progress. |
 | `docs/stage3_mas_dry_run.md` | MAS dry-run stage notes. |
+| `docs/stage4_optitrack_readonly.md` | OptiTrack / NatNet read-only status and validation commands. |
 | `docs/MAS_INTEGRATION.md` | MAS integration guide. |
 | `docs/ROADMAP.md` | Staged roadmap. |
 | `platforms/mas_public/docs/*.md` | MAS platform hardware, config, usage, and debug notes. |

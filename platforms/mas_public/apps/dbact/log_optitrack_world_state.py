@@ -59,8 +59,9 @@ class ReadOnlyWorldStateBuilder:
     def stop(self) -> None:
         self.adapter.stop()
 
-    def next_world_state(self) -> WorldState:
-        return self.build_world_state(self.adapter.next_frame())
+    def next_world_state(self) -> tuple[WorldState, list[NatNetRigidBody]]:
+        bodies = self.adapter.next_frame()
+        return self.build_world_state(bodies), bodies
 
     def build_world_state(self, bodies: list[NatNetRigidBody]) -> WorldState:
         self.frame_id += 1
@@ -166,6 +167,7 @@ def main() -> None:
     parser.add_argument("--hz", type=float, default=100.0)
     parser.add_argument("--mock", action="store_true", help="Use MockNatNetAdapter instead of real NatNet.")
     parser.add_argument("--print-every", type=int, default=20)
+    parser.add_argument("--print-raw-bodies", action="store_true", help="Print raw NatNet rigid bodies before robot mapping.")
     parser.add_argument(
         "--output",
         type=Path,
@@ -193,9 +195,22 @@ def main() -> None:
         builder.start()
         for index in range(args.frames):
             loop_start = time.monotonic()
-            world_state = builder.next_world_state()
+            world_state, bodies = builder.next_world_state()
             rows.extend(world_state_rows(world_state))
-            if index % args.print_every == 0 or index == args.frames - 1:
+
+            should_print = index % args.print_every == 0 or index == args.frames - 1
+            if should_print and args.print_raw_bodies:
+                print(f"  raw_bodies={len(bodies)}")
+                for body in bodies:
+                    print(
+                        "    "
+                        f"name={body.name!r}, "
+                        f"id={body.rigid_body_id}, "
+                        f"tracked={body.tracked}, "
+                        f"pos={body.position}"
+                    )
+
+            if should_print:
                 print_world_state(index, world_state)
             sleep_until_next(loop_start, period)
     finally:
