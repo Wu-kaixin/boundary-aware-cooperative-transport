@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from collections.abc import Callable
 from dataclasses import dataclass, field
 from pathlib import Path
 import json
@@ -24,6 +25,7 @@ class SimulationLog:
     times: list[float] = field(default_factory=list)
     agent_positions: dict[str, list[np.ndarray]] = field(default_factory=dict)
     cargo_centers: dict[str, list[np.ndarray]] = field(default_factory=dict)
+    cargo_vertices: dict[str, list[np.ndarray]] = field(default_factory=dict)
     min_distances: list[float] = field(default_factory=list)
     cargo_coverages: dict[str, list[float]] = field(default_factory=dict)
 
@@ -43,6 +45,7 @@ class SimulationEnvironment:
             self.log.agent_positions[a.agent_id] = []
         for c in self.cargoes:
             self.log.cargo_centers[c.object_id] = []
+            self.log.cargo_vertices[c.object_id] = []
             self.log.cargo_coverages[c.object_id] = []
 
     def step(self) -> None:
@@ -52,10 +55,18 @@ class SimulationEnvironment:
         self._record()
         self.t += self.dt
 
-    def run(self, steps: int) -> SimulationLog:
+    def run(
+        self,
+        steps: int,
+        on_frame: Callable[[int, "SimulationEnvironment"], None] | None = None,
+    ) -> SimulationLog:
         self._record()
-        for _ in range(steps):
+        if on_frame is not None:
+            on_frame(0, self)
+        for step_index in range(1, steps + 1):
             self.step()
+            if on_frame is not None:
+                on_frame(step_index, self)
         return self.log
 
     def _record(self) -> None:
@@ -64,6 +75,7 @@ class SimulationEnvironment:
             self.log.agent_positions[a.agent_id].append(a.position.copy())
         for c in self.cargoes:
             self.log.cargo_centers[c.object_id].append(c.center.copy())
+            self.log.cargo_vertices[c.object_id].append(c.vertices.copy())
             contact_radius = float(self.config.get("transport", {}).get("contact_radius", 0.42))
             self.log.cargo_coverages[c.object_id].append(boundary_coverage(c, self.agents, contact_radius=contact_radius))
         self.log.min_distances.append(min_inter_agent_distance(self.agents))
@@ -72,6 +84,8 @@ class SimulationEnvironment:
         out = Path(output_dir)
         out.mkdir(parents=True, exist_ok=True)
         self._save_trajectories(out / "trajectories.csv")
+        self._save_agent_positions(out / "agent_positions.csv")
+        self._save_coverage_rates(out / "coverage_rates.csv")
         lengths = path_lengths(self.log.agent_positions)
         evaluation_contact_radius = 0.50
         recruited_agents = {
@@ -88,6 +102,10 @@ class SimulationEnvironment:
             "mean_path_length": float(np.mean(list(lengths.values()))) if lengths else 0.0,
             "path_lengths": lengths,
             "final_coverage": {k: v[-1] if v else 0.0 for k, v in self.log.cargo_coverages.items()},
+            "cargo_displacement": {
+                cargo_id: float(np.linalg.norm(hist[-1] - hist[0])) if len(hist) >= 2 else 0.0
+                for cargo_id, hist in self.log.cargo_centers.items()
+            },
             "recruited_agents": recruited_agents,
         }
         (out / "metrics.json").write_text(json.dumps(metrics, indent=2), encoding="utf-8")
@@ -101,4 +119,19 @@ class SimulationEnvironment:
             for cargo_id, hist in self.log.cargo_centers.items():
                 p = hist[ti]
                 lines.append(f"{t:.4f},cargo,{cargo_id},{p[0]:.6f},{p[1]:.6f}")
+        path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+    def _save_agent_positions(self, path: Path) -> None:
+        lines = ["iteration,time,agent_id,x,y"]
+        for ti, t in enumerate(self.log.times):
+            for agent_id, hist in self.log.agent_positions.items():
+                p = hist[ti]
+                lines.append(f"{ti},{t:.4f},{agent_id},{p[0]:.6f},{p[1]:.6f}")
+        path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+    def _save_coverage_rates(self, path: Path) -> None:
+        lines = ["iteration,time,cargo_id,coverage_rate"]
+        for ti, t in enumerate(self.log.times):
+            for cargo_id, hist in self.log.cargo_coverages.items():
+                lines.append(f"{ti},{t:.4f},{cargo_id},{hist[ti]:.6f}")
         path.write_text("\n".join(lines) + "\n", encoding="utf-8")

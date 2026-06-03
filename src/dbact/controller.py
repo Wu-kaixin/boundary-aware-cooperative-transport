@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 import numpy as np
 
@@ -16,6 +16,7 @@ from .types import AgentState, ControlCommand
 
 @dataclass
 class DBACTParams:
+    task_mode: str = "caging"
     sensor_range: float = 1.1
     comm_range: float = 1.6
     cage_offset: float = 0.32
@@ -28,6 +29,12 @@ class DBACTParams:
     grid_resolution: int = 34
     map_ttl: float = 4.0
     cbf_gamma: float = 6.0
+    cbf_use_qp: bool = True
+    cbf_slack_weight: float = 1000.0
+    target_center: list[float] = field(default_factory=lambda: [4.0, 4.0])
+    target_radius: float = 1.0
+    target_sensor_range: float = 2.0
+    target_samples: int = 36
 
     @classmethod
     def from_dict(cls, data: dict) -> "DBACTParams":
@@ -48,8 +55,15 @@ class DBACTController:
         self.domain = domain
         self.sensor = LocalBoundarySensor(sensor_range=params.sensor_range)
         self.cvt = LocalCVT(grid_resolution=params.grid_resolution, local_radius=params.comm_range)
-        self.cbf = LocalCBFQP(d_min=params.d_min, gamma=params.cbf_gamma, max_speed=params.max_speed)
+        self.cbf = LocalCBFQP(
+            d_min=params.d_min,
+            gamma=params.cbf_gamma,
+            max_speed=params.max_speed,
+            use_qp=params.cbf_use_qp,
+            slack_weight=params.cbf_slack_weight,
+        )
         self.maps: dict[str, LocalBoundaryMap] = {}
+        self.target_region_points = self._build_target_region_points()
 
     def step(self, agents: list[AgentState], cargoes: list[Cargo], timestamp: float, dt: float) -> list[ControlCommand]:
         self._ensure_maps(agents)
@@ -71,27 +85,30 @@ class DBACTController:
         commands: list[ControlCommand] = []
         for i, agent in enumerate(agents):
             neighbor_indices = [j for j, other in enumerate(agents) if j != i and np.linalg.norm(agent.position - other.position) <= self.params.comm_range]
-            observations = self.maps[agent.agent_id].all_observations(timestamp)
-            if observations:
-                density = BoundaryAwareDensity.from_observations(
-                    observations,
-                    cage_offset=self.params.cage_offset,
-                    sigma=self.params.sigma,
-                )
-                centroid = self.cvt.compute_centroid(i, agents, neighbor_indices, density, self.domain)
-                u_nom = self.params.kp_cage * (centroid - agent.position)
-                # Caging-only stage:
-                # Do NOT use cargo geometry prior here.
-                # The controller must not call cargo.closest_boundary(), cargo.center,
-                # cargo.radius, or cargo.vertices.
-                # Cargo geometry is only used inside the simulated local sensor to generate
-                # local BoundaryObservation.
-                # Transport bias is disabled because cargo is assumed unknown.
-                # u_nom += self._transport_bias(agent, observations, cargoes)
-                mode = "dbact_cage"
+            if self.params.task_mode == "coverage":
+                u_nom, mode = self._coverage_command(i, agents, neighbor_indices)
             else:
-                u_nom = self._exploration_velocity(i, agents, neighbor_indices, timestamp)
-                mode = "dbact_explore"
+                observations = self.maps[agent.agent_id].all_observations(timestamp)
+                if observations:
+                    density = BoundaryAwareDensity.from_observations(
+                        observations,
+                        cage_offset=self.params.cage_offset,
+                        sigma=self.params.sigma,
+                    )
+                    centroid = self.cvt.compute_centroid(i, agents, neighbor_indices, density, self.domain)
+                    u_nom = self.params.kp_cage * (centroid - agent.position)
+                    # Caging-only stage:
+                    # Do NOT use cargo geometry prior here.
+                    # The controller must not call cargo.closest_boundary(), cargo.center,
+                    # cargo.radius, or cargo.vertices.
+                    # Cargo geometry is only used inside the simulated local sensor to generate
+                    # local BoundaryObservation.
+                    # Transport bias is disabled because cargo is assumed unknown.
+                    # u_nom += self._transport_bias(agent, observations, cargoes)
+                    mode = "dbact_cage"
+                else:
+                    u_nom = self._exploration_velocity(i, agents, neighbor_indices, timestamp)
+                    mode = "dbact_explore"
 
             neighbor_positions = [agents[j].position for j in neighbor_indices]
             neighbor_velocities = [agents[j].velocity for j in neighbor_indices]
@@ -102,6 +119,51 @@ class DBACTController:
     def _ensure_maps(self, agents: list[AgentState]) -> None:
         for agent in agents:
             self.maps.setdefault(agent.agent_id, LocalBoundaryMap(ttl=self.params.map_ttl))
+
+    def _coverage_command(
+        self,
+        i: int,
+        agents: list[AgentState],
+        neighbor_indices: list[int],
+    ) -> tuple[np.ndarray, str]:
+        agent = agents[i]
+        visible_targets = self._visible_target_points(agent.position)
+        if len(visible_targets) == 0:
+            return self._exploration_velocity(i, agents, neighbor_indices, 0.0), "dbact_search"
+        density = BoundaryAwareDensity.from_targets(
+            visible_targets,
+            sigma=self.params.sigma,
+            object_id="coverage_region",
+        )
+        centroid = self.cvt.compute_centroid(i, agents, neighbor_indices, density, self.domain)
+        return self.params.kp_cage * (centroid - agent.position), "dbact_coverage"
+
+    def _build_target_region_points(self) -> np.ndarray:
+        center = np.asarray(self.params.target_center, dtype=float).reshape(2)
+        count = max(1, int(self.params.target_samples))
+        if count == 1:
+            return center.reshape(1, 2)
+
+        rings = max(1, int(np.ceil(np.sqrt(count))) - 1)
+        points = [center]
+        for ring in range(1, rings + 1):
+            radius = self.params.target_radius * ring / rings
+            samples = max(6, int(np.ceil(2.0 * np.pi * ring)))
+            for k in range(samples):
+                if len(points) >= count:
+                    break
+                angle = 2.0 * np.pi * k / samples
+                points.append(center + radius * np.array([np.cos(angle), np.sin(angle)]))
+            if len(points) >= count:
+                break
+        return np.asarray([clip_to_domain(p, self.domain) for p in points], dtype=float)
+
+    def _visible_target_points(self, position: np.ndarray) -> np.ndarray:
+        if len(self.target_region_points) == 0:
+            return np.empty((0, 2))
+        distances = np.linalg.norm(self.target_region_points - position[None, :], axis=1)
+        return self.target_region_points[distances <= self.params.target_sensor_range]
+
     # NOTE:
     # This function uses simulator-side cargo geometry and is NOT used in the
     # unknown-cargo caging experiments. Keep it disabled unless a future transport

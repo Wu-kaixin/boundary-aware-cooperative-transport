@@ -1,0 +1,43 @@
+dt: 0.05
+
+domain:
+  xmin: 0.0
+  xmax: 6.0
+  ymin: 0.0
+  ymax: 6.0
+
+agents:
+  count: 9
+  layout: grid
+  center: [3.0, 1.0]
+  spacing: 0.42
+
+cargoes: []
+
+controller:
+  task_mode: coverage
+  sensor_range: 1.0
+  comm_range: 1.25
+  cage_offset: 0.30
+  sigma: 0.32
+  d_min: 0.32
+  max_speed: 0.28
+  kp_explore: 0.18
+  kp_cage: 0.85
+  kp_transport: 0.0
+  grid_resolution: 34
+  map_ttl: 4.0
+  cbf_gamma: 6.0
+  cbf_use_qp: true
+  cbf_slack_weight: 1000.0
+  target_center: [3.0, 4.2]
+  target_radius: 0.85
+  target_sensor_range: 3.8
+  target_samples: 40
+
+transport:
+  contact_radius: 0.42
+  coverage_threshold: 0.50
+  min_contact_agents: 3
+  speed: 0.0
+  boundary_samples: 120

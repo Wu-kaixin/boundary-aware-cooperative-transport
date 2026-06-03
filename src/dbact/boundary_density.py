@@ -36,6 +36,26 @@ class BoundaryAwareDensity:
             points.append(DensityPoint(target=target, weight=float(obs.confidence), object_id=obs.object_id))
         return cls(points, sigma=sigma, base_density=base_density)
 
+    @classmethod
+    def from_targets(
+        cls,
+        targets: list[np.ndarray] | np.ndarray,
+        sigma: float,
+        weights: list[float] | np.ndarray | None = None,
+        object_id: str = "target_region",
+        base_density: float = 1e-3,
+    ) -> "BoundaryAwareDensity":
+        arr = np.asarray(targets, dtype=float).reshape(-1, 2)
+        if weights is None:
+            weight_arr = np.ones(len(arr), dtype=float)
+        else:
+            weight_arr = np.asarray(weights, dtype=float).reshape(len(arr))
+        points = [
+            DensityPoint(target=target.copy(), weight=float(weight), object_id=object_id)
+            for target, weight in zip(arr, weight_arr)
+        ]
+        return cls(points, sigma=sigma, base_density=base_density)
+
     @property
     def targets(self) -> np.ndarray:
         if not self.density_points:

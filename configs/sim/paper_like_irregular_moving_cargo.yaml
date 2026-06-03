@@ -1,0 +1,51 @@
+dt: 0.05
+
+domain:
+  xmin: 0.0
+  xmax: 8.0
+  ymin: 0.0
+  ymax: 9.0
+
+agents:
+  count: 14
+  layout: grid
+  center: [4.0, 2.0]
+  spacing: 0.36
+
+cargoes:
+  - id: cargo_0
+    shape: polygon
+    vertices:
+      - [3.05, 4.15]
+      - [4.20, 4.00]
+      - [5.05, 4.45]
+      - [4.48, 4.88]
+      - [5.05, 5.42]
+      - [3.85, 5.82]
+      - [3.08, 5.30]
+      - [3.62, 4.78]
+    transport_direction: [0.0, 1.0]
+
+controller:
+  task_mode: caging
+  sensor_range: 1.60
+  comm_range: 2.45
+  cage_offset: 0.30
+  sigma: 0.35
+  d_min: 0.30
+  max_speed: 0.30
+  kp_explore: 0.20
+  kp_cage: 1.18
+  kp_transport: 0.0
+  grid_resolution: 52
+  map_ttl: 8.0
+  cbf_gamma: 6.0
+  cbf_use_qp: true
+  cbf_slack_weight: 1000.0
+
+transport:
+  contact_radius: 0.52
+  coverage_threshold: 0.68
+  min_contact_agents: 7
+  speed: 0.18
+  boundary_samples: 260
