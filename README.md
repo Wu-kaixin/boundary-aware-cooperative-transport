@@ -34,12 +34,12 @@ Important current limitation: the MAS stack reads robot poses from OptiTrack, bu
 
 ## Latest Health
 
-Last full health check: **2026-06-03** in Conda environment `dbact`.
+Last full health check: **2026-06-08** in Conda environment `dbact`.
 
 | Scope | Root pytest | Compileall | YAML parse | Platform pytest |
 | --- | --- | --- | --- | --- |
-| All branch refs | PASS, 6 passed each | PASS | PASS, 26 files each | PASS, 106 passed each |
-| Current `main` working tree | PASS, 10 passed | PASS | PASS, 28 files | PASS, 106 passed |
+| All active branch refs | PASS, `main` 10 passed and stage branches 6 passed | PASS | PASS, `main` 28 files and stage branches 26 files | PASS, 106 passed each |
+| Current `main` working tree | PASS, 16 passed | PASS | PASS, 28 files | PASS, 106 passed |
 
 Branch refs checked:
 
@@ -48,14 +48,13 @@ main
 stage2-mas-virtual-object
 stage3-mas-dry-run
 stage4-optitrack-readonly
-origin/cursor/cloud-dev-env-setup-b5ed
 ```
 
 Detailed reports:
 
 ```text
-docs/daily_health_2026-06-03.md
-docs/repository_inventory_2026-06-03.md
+docs/daily_health_2026-06-08.md
+docs/repository_inventory_2026-06-08.md
 ```
 
 ## What Has Been Built
@@ -190,6 +189,16 @@ Current Stage 4 hardware-side status:
 - The read-only logger writes CSV headers and supports `--print-raw-bodies`.
 - Current blocker: Motive has not yet created or streamed robot rigid bodies, so the logger can receive frames while still reporting `raw_bodies=0` and `robots=0`.
 
+### Seven-S1 Command Smoke Test
+
+The repository now includes a low-speed command-streaming smoke path for seven RoboMaster S1 robots:
+
+- `src/dbact/agent_control.py` defines agent state providers, CVT/DBACT command policies, world-to-body command conversion, velocity limits, a mock backend, and an optional `S1RoboMasterBackend`.
+- `scripts/run_seven_s1_cvt_test.py` runs in mock mode by default, supports `--real` for seven configured S1 robots, supports `--controller cvt` and `--controller dbact-box`, and includes a `--connect-only` hardware check.
+- `tests/test_agent_control.py` covers command limiting, command-frame conversion, mock backend behavior, and both command policies.
+
+This smoke test is useful for validating command generation and conservative S1 command streaming. It is not a substitute for OptiTrack feedback or physical safety checks unless a real state provider is connected and verified.
+
 ## Repository Structure
 
 ```text
@@ -208,7 +217,7 @@ Current Stage 4 hardware-side status:
 Detailed file inventory:
 
 ```text
-docs/repository_inventory_2026-06-03.md
+docs/repository_inventory_2026-06-08.md
 ```
 
 ## Healthy File Policy
@@ -261,6 +270,7 @@ Note: `src/dbact.egg-info/*` is currently tracked historical packaging metadata.
 | `src/dbact/local_cvt.py` | Local weighted CVT centroid approximation. |
 | `src/dbact/local_cbf_qp.py` | Optional QP-backed CBF safety filter with projection fallback. |
 | `src/dbact/controller.py` | End-to-end caging and coverage controller pipeline. |
+| `src/dbact/agent_control.py` | Seven-S1 command policies, safety limiting, state providers, and mock / RoboMaster backends. |
 | `src/dbact/transport_dynamics.py` | Simplified simulation caging / pushing dynamics. |
 | `src/dbact/metrics.py` | Coverage, recruitment, safety, and path metrics. |
 
@@ -274,6 +284,7 @@ Note: `src/dbact.egg-info/*` is currently tracked historical packaging metadata.
 | `src/dbact_sim/visualization.py` | Snapshot, trajectory, coverage, paper-frame, live, and GIF plots. |
 | `configs/sim/*.yaml` | Circle, rectangle, L-shape, nonconvex, caging, coverage, and moving-cargo scenarios. |
 | `scripts/run_all_scenarios.py` | Batch simulation runner with live/animation options. |
+| `scripts/run_seven_s1_cvt_test.py` | Mock or real seven-S1 low-speed command smoke test. |
 
 ### MAS / RoboMaster / OptiTrack
 
@@ -458,6 +469,35 @@ runs/mock_mas_pipeline/
 |-- commands.csv
 `-- mock_trajectory.png
 ```
+
+## Run Seven-S1 Command Smoke Test
+
+Mock mode from the repository root:
+
+```powershell
+conda activate dbact
+python scripts/run_seven_s1_cvt_test.py --duration 3
+```
+
+Real hardware connect-only check:
+
+```powershell
+python scripts/run_seven_s1_cvt_test.py --real --connect-only
+```
+
+Low-speed real CVT command stream:
+
+```powershell
+python scripts/run_seven_s1_cvt_test.py --real --duration 12 --max-speed 0.05 --max-vx 0.05 --max-vy 0.05
+```
+
+Low-speed virtual-box DBACT command stream:
+
+```powershell
+python scripts/run_seven_s1_cvt_test.py --real --controller dbact-box --duration 12 --max-speed 0.05
+```
+
+For first hardware runs, keep physical access to an emergency stop and prefer `--connect-only` before any movement command.
 
 ## Run MAS Platform Dry-Runs
 
@@ -656,8 +696,10 @@ Recommended implementation path:
 | `docs/stage4_optitrack_readonly.md` | Stage 4 OptiTrack read-only bridge status and blocker. |
 | `docs/MAS_INTEGRATION.md` | MAS integration guide. |
 | `docs/ROADMAP.md` | Staged roadmap. |
-| `docs/daily_health_2026-06-03.md` | Latest full branch and working-tree health report. |
-| `docs/repository_inventory_2026-06-03.md` | Detailed local repository file inventory. |
+| `docs/daily_health_2026-06-08.md` | Latest full branch and working-tree health report. |
+| `docs/repository_inventory_2026-06-08.md` | Detailed local repository file inventory. |
+| `docs/daily_health_2026-06-03.md` | Historical branch and working-tree health report. |
+| `docs/repository_inventory_2026-06-03.md` | Historical local repository file inventory. |
 | `platforms/mas_public/docs/*.md` | MAS platform hardware, config, usage, and debug notes. |
 
 ## Roadmap
@@ -667,11 +709,12 @@ Next engineering steps:
 1. Create and enable Motive rigid bodies for each robot so NatNet reports `raw_bodies > 0`.
 2. Run `log_optitrack_world_state.py` against real Motive/NatNet with robots only.
 3. Confirm axes, yaw, rigid-body names/IDs, and world bounds.
-4. Add object/cargo OptiTrack observation support.
-5. Run `OptiTrack -> ControllerModule -> ControlCommand` dry-run with robot output disabled.
-6. Run low-speed caging-only RoboMaster experiment.
-7. Add visualization for real experiments and compare simulation vs hardware logs.
-8. Replace virtual/known object with a real boundary-observation pipeline.
+4. Run `run_seven_s1_cvt_test.py --real --connect-only`, then very-low-speed command streaming only after physical safety checks.
+5. Add object/cargo OptiTrack observation support.
+6. Run `OptiTrack -> ControllerModule -> ControlCommand` dry-run with robot output disabled.
+7. Run low-speed caging-only RoboMaster experiment.
+8. Add visualization for real experiments and compare simulation vs hardware logs.
+9. Replace virtual/known object with a real boundary-observation pipeline.
 
 Research work still open:
 

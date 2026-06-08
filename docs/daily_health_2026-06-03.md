@@ -17,16 +17,17 @@ Generated: 2026-06-03, Asia/Tokyo
 
 ## Commands
 
-The final branch-ref checks used the `dbact` environment Python directly:
+The final branch-ref checks can be run from `E:\DBACT\boundary-aware-cooperative-transport` with the active Python environment:
 
 ```powershell
-C:\Users\kevin\miniconda3\envs\dbact\python.exe -m pytest -q tests
-C:\Users\kevin\miniconda3\envs\dbact\python.exe -m compileall -q src tests scripts platforms\mas_public\src platforms\mas_public\apps
-C:\Users\kevin\miniconda3\envs\dbact\python.exe -c "<parse configs/**/*.yaml and platforms/mas_public/configs/**/*.yaml>"
-C:\Users\kevin\miniconda3\envs\dbact\python.exe -m pytest -q platforms\mas_public\apps\pytest_tests
+cd /d E:\DBACT\boundary-aware-cooperative-transport
+python -m pytest -q tests
+python -m compileall -q src tests scripts platforms\mas_public\src platforms\mas_public\apps
+python -c "<parse configs/**/*.yaml and platforms/mas_public/configs/**/*.yaml>"
+python -m pytest -q platforms\mas_public\apps\pytest_tests
 ```
 
-Temporary branch archives were extracted under `%TEMP%`. `PYTHONPATH` was set per archive to the archive `src` and `platforms\mas_public` directories so platform tests imported the branch under test. Platform pytest was run with an explicit writable `--basetemp` to avoid the local Windows permission issue at `C:\Users\kevin\AppData\Local\Temp\pytest-of-kevin`.
+Temporary branch archives were extracted under `%TEMP%`. `PYTHONPATH` was set per archive to the archive `src` and `platforms\mas_public` directories so platform tests imported the branch under test. Platform pytest was run with an explicit writable `--basetemp`, for example `%TEMP%\pytest-dbact`, to avoid local Windows permission issues.
 
 ## Branch Results
 
