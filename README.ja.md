@@ -1,4 +1,4 @@
-# DBACT: 境界認識型協調搬送
+# DBACT: 分散型境界認識型協調搬送
 
 [English](README.en.md) | [繁體中文](README.zh-TW.md) | [日本語](README.ja.md)
 
