@@ -1,4 +1,4 @@
-# DBACT：邊界感知協同搬運
+# DBACT：去中心化的邊界感知協同運輸系統
 
 [English](README.en.md) | [繁體中文](README.zh-TW.md) | [日本語](README.ja.md)
 
