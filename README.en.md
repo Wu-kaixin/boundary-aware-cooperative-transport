@@ -1,4 +1,4 @@
-# DBACT: Boundary-Aware Cooperative Transport
+# DBACT: Decentralized Boundary-Aware Cooperative Transportation
 
 [English](README.en.md) | [繁體中文](README.zh-TW.md) | [日本語](README.ja.md)
 
