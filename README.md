@@ -1,180 +1,90 @@
-# DBACT: Decentralized Boundary-Aware Cooperative Transportationt
+<div align="center">
 
-[English](README.en.md) | [繁體中文](README.zh-TW.md) | [日本語](README.ja.md)
+# DBACT: Decentralized Boundary-Aware Cooperative Transport
 
-## Project Context
+Reproducible decentralized multi-robot caging and transport experiments with metrics, reports, MAS dry-runs, and visualizations.
 
-This repository is a research software stack for decentralized cooperative transport with multiple mobile robots.
+[English](README.md) | [繁體中文](README.zh-TW.md) | [日本語](README.ja.md)
 
-The project asks a practical robotics question:
+![License](https://img.shields.io/badge/License-MIT-green.svg)
+![Python](https://img.shields.io/badge/Python-3.9%2B-blue.svg)
+![Tests](https://img.shields.io/badge/Tests-16%20passed-brightgreen.svg)
+![Version](https://img.shields.io/badge/Version-0.1.0-informational.svg)
+![Visualization](https://img.shields.io/badge/Visualization-Matplotlib-orange.svg)
+![Platform](https://img.shields.io/badge/Platform-MAS%20%7C%20RoboMaster%20S1-lightgrey.svg)
 
-> Can multiple robots form a useful caging and transport structure around an object whose complete shape, center, radius, and required team size are not given to the controller?
+</div>
 
-The immediate purpose is narrower than a full physical transport system:
+DBACT is a research prototype for **Decentralized Boundary-Aware Cooperative Transport**. It studies how multiple mobile robots can form a useful caging and transport structure around an object whose complete shape, center, radius, and required team size are not given to the controller.
 
-> Build a reproducible DBACT simulation stack, connect it to MAS-style controller interfaces, produce visual experimental evidence, and prepare a safe path toward RoboMaster S1 + OptiTrack validation.
+The repository combines a standalone simulation stack, boundary-aware local control, metrics, GitHub-renderable visual artifacts, a MAS-compatible controller adapter, OptiTrack read-only tooling, and conservative RoboMaster S1 command smoke tests.
 
-The research lineage is:
+> This repository is a research prototype, not a completed physical transport product. Simulation and dry-run paths are working; full physical transport remains a staged validation target.
 
-```text
-Cooperative-Transport-Multi-Agent-System
-        -> DBACT: Decentralized Boundary-Aware Cooperative Transportation
-        -> MAS adapter / OptiTrack read-only / RoboMaster S1 smoke path
-```
+---
 
-This repository should be read as an active research prototype. The simulation and dry-run paths are working; the full physical transport experiment is still a staged validation target.
-
-## Current Research Decision
-
-The current project direction is:
-
-- Keep `main` as the maintained branch.
-- Treat simulation and MAS dry-runs as the primary validation surface.
-- Do not claim a completed physical transport experiment yet.
-- Do not send real robot commands before read-only OptiTrack logging, mock pipeline checks, and low-speed command smoke tests pass.
-- Keep visualization as a first-class output, because the project value depends on making caging, coverage, density, and safety behavior understandable.
-
-The action item is therefore:
-
-```text
-Maintain a clear simulation-to-hardware path:
-local boundary simulation
-  -> visual result generation
-  -> MAS-compatible dry-run
-  -> OptiTrack read-only validation
-  -> low-speed RoboMaster S1 smoke testing
-  -> future closed-loop physical transport
-```
-
-## Current Project Scope
-
-This repository currently focuses on:
-
-```text
-unknown polygon caging
-+ local boundary sensing
-+ boundary-aware density
-+ local CVT target allocation
-+ local CBF-style safety filtering
-+ simplified caging / pushing transport dynamics
-+ simulation metrics and visualizations
-+ MAS-compatible ControlCommand generation
-+ OptiTrack read-only logging path
-+ RoboMaster S1 command smoke path
-```
-
-Out of scope for the current validated stage:
-
-```text
-complete physical transport validation
-real cargo perception from arbitrary sensors
-force-controlled contact dynamics
-paper-grade QP solver integration for every path
-large-scale hardware deployment
-fully automated process-launcher experiments
-```
-
-## Controller And Simulation Model
-
-DBACT models each robot as a local decision maker. Each agent has:
-
-- position and velocity;
-- sensing range;
-- communication range;
-- safety radius / minimum inter-agent distance;
-- local boundary observations;
-- local neighbor states.
-
-The controller intentionally avoids direct access to:
-
-```text
-cargo.center
-cargo.radius
-cargo.vertices
-cargo.closest_boundary()
-global robot assignment
-global all-pairs QP
-predefined team size
-```
-
-The simulator may use true cargo geometry to generate local sensor observations and offline metrics, but the controller path is kept boundary-observation based.
-
-## DBACT Boundary-Aware Pipeline
-
-The main DBACT idea is:
-
-> Move robots toward useful boundary-adjacent cage targets, not toward a known object center.
-
-Current DBACT flow:
-
-1. generate local boundary observations;
-2. estimate outward boundary normals;
-3. create cage target points outside the object;
-4. build a boundary-aware Gaussian density field;
-5. compute local weighted CVT centroids using nearby robots;
-6. apply local CBF-style safety filtering;
-7. output robot-level velocity commands;
-8. export trajectories, coverage curves, figures, and optional animations.
-
-The cage target rule is:
-
-```text
-q_target = b + d_cage * n_out
-```
-
-The inter-agent safety constraint is:
-
-```text
-h_ij = ||p_i - p_j||^2 - d_min^2 >= 0
-```
-
-Main implementation:
-
-```text
-src/dbact/controller.py
-src/dbact/local_sensing.py
-src/dbact/boundary_density.py
-src/dbact/local_cvt.py
-src/dbact/local_cbf_qp.py
-src/dbact/transport_dynamics.py
-src/dbact_sim/run_sim.py
-src/mas_adapter/decentralized_transport_controller.py
-```
-
-## Visualization Priority
-
-The project value depends strongly on visualization.
-
-The visual output should make the simulation understandable at a glance:
-
-- robot trajectories;
-- unknown cargo shape;
-- cage target region;
-- local CVT / Voronoi structure;
-- boundary-aware density surface;
-- boundary coverage curve;
-- minimum distance and safety behavior;
-- MAS dry-run trajectory evidence.
-
-The selected README assets are stored in `docs/assets/` so they render correctly on GitHub.
+## Visual Showcase
 
 ![DBACT moving cargo demo](docs/assets/dbact-moving-cargo.gif)
 
-| Density + Local CVT | Trajectory |
+> A tracked GIF artifact generated from simulation replay. Unlike local `runs/*.gif` files, this file is committed under `docs/assets/`, so it renders directly on GitHub.
+
+![DBACT density and local CVT frame](docs/assets/dbact-density-cvt-frame.png)
+
+> Paper-style frame showing unknown cargo, local CVT / Voronoi structure, robot safety regions, and boundary-aware density surface.
+
+---
+
+## Media Gallery
+
+All inline media below points to committed repository files under `docs/assets/`, so GitHub can render them without local run artifacts.
+
+| Animation | Density + Local CVT |
 | --- | --- |
-| ![DBACT density and local CVT frame](docs/assets/dbact-density-cvt-frame.png) | ![DBACT trajectory](docs/assets/dbact-trajectory.png) |
+| <img src="docs/assets/dbact-moving-cargo.gif" alt="DBACT moving cargo animation" width="100%"> | <img src="docs/assets/dbact-density-cvt-frame.png" alt="DBACT density and local CVT frame" width="100%"> |
 
-| Coverage Curve | Final Snapshot |
+| Trajectory | Coverage Curve |
 | --- | --- |
-| ![DBACT coverage curve](docs/assets/dbact-coverage-curve.png) | ![DBACT final snapshot](docs/assets/dbact-final-snapshot.png) |
+| <img src="docs/assets/dbact-trajectory.png" alt="DBACT trajectory" width="100%"> | <img src="docs/assets/dbact-coverage-curve.png" alt="DBACT coverage curve" width="100%"> |
 
-If new images, GIFs, or videos should appear on GitHub, copy them from `runs/` into `docs/assets/` and reference that stable path. Generated files under `runs/` remain ignored by Git.
+| Final Snapshot | Asset Manifest |
+| --- | --- |
+| <img src="docs/assets/dbact-final-snapshot.png" alt="DBACT final snapshot" width="100%"> | [`docs/assets/README.md`](docs/assets/README.md) |
 
-## Experimental Results
+Generated PNG, GIF, CSV, and MP4 artifacts are still produced under `runs/` or `platforms/mas_public/data/` by default and are intentionally ignored by Git. For GitHub display, copy selected figures into `docs/assets/`, or publish larger videos through GitHub Releases.
 
-Stage 1 validates unknown polygon caging without direct cargo-geometry access inside the controller.
+---
 
-Original baseline results:
+## Project Snapshot
+
+| Item | Details |
+| --- | --- |
+| Project name | DBACT: Decentralized Boundary-Aware Cooperative Transport |
+| Purpose | Test local boundary-aware caging and transport around unknown-shaped objects. |
+| Core stack | Python 3.9+, NumPy, PyYAML, Matplotlib, pytest |
+| Main scenarios | `paper_like_irregular_moving_cargo.yaml`, `l_shape.yaml`, `nonconvex.yaml`, `multi_object.yaml` |
+| Output types | CSV trajectories, coverage metrics, JSON summaries, PNG figures, GIF animations |
+| Integration path | DBACT simulation -> MAS dry-run -> OptiTrack read-only -> RoboMaster S1 smoke test |
+| Current status | Simulation and dry-runs working; full physical experiment not yet complete |
+
+---
+
+## Features
+
+- **Decentralized boundary-aware control**: robots use local boundary observations and neighbor states rather than global object geometry.
+- **Unknown-object caging**: the controller avoids direct use of `cargo.center`, `cargo.radius`, `cargo.vertices`, and closest-boundary queries.
+- **Local CVT allocation**: each robot computes a local weighted centroid using itself and nearby neighbors.
+- **CBF-style safety filtering**: inter-agent distance constraints and velocity limits keep the caging process conservative.
+- **Visualization-first workflow**: simulations export trajectories, coverage curves, final snapshots, paper-style frames, and optional GIF animations.
+- **Hardware-oriented staging**: MAS adapter, OptiTrack read-only logging, and RoboMaster S1 smoke tests prepare a safe path toward real experiments.
+
+---
+
+## Results & Visualizations
+
+### Stage 1 Unknown Polygon Caging
+
+Stage 1 validates that caging can be formed around arbitrary polygonal cargo without direct complete-cargo access inside the controller.
 
 | Scenario | Cargo Type | Agents | Steps | Final Coverage | Recruited Agents | Min Inter-Agent Distance |
 | --- | --- | ---: | ---: | ---: | ---: | ---: |
@@ -182,7 +92,9 @@ Original baseline results:
 | `one_rectangle_polygon_caging` | rectangle polygon | 12 | 900 | 0.7000 | 6 / 12 | 0.3446 m |
 | `one_nonconvex_polygon_caging` | nonconvex polygon | 14 | 1000 | 0.90625 | 9 / 14 | 0.3393 m |
 
-Tight baseline results:
+### Tight Baseline Results
+
+The tight baseline improves caging compactness by reducing cage offset and narrowing the density field.
 
 | Scenario | Cargo Type | Agents | Steps | Final Coverage | Recruited Agents | Min Inter-Agent Distance |
 | --- | --- | ---: | ---: | ---: | ---: | ---: |
@@ -190,7 +102,7 @@ Tight baseline results:
 | `one_rectangle_polygon_caging_tight` | rectangle polygon | 12 | 900 | 0.99375 | 9 / 12 | 0.3450 m |
 | `one_nonconvex_polygon_caging_tight` | nonconvex polygon | 14 | 1000 | 0.9750 | 13 / 14 | 0.3370 m |
 
-Moving irregular cargo demo:
+### Moving Irregular Cargo Demo
 
 | Metric | Value |
 | --- | ---: |
@@ -201,47 +113,26 @@ Moving irregular cargo demo:
 | Minimum inter-agent distance | 0.3571 m |
 | Mean path length | 4.6999 m |
 
-The tight caging settings improve boundary coverage while keeping the minimum inter-agent distance above 0.33 m in the reported Stage 1 benchmarks.
+**Interpretation**
 
-## Repository Structure
+- Tight caging improves boundary coverage while maintaining minimum inter-agent distance above 0.33 m in the reported Stage 1 benchmarks.
+- The moving-cargo demo shows caging and transport-like displacement, but physical contact dynamics are still simplified.
+- Current results are simulation evidence and MAS dry-run evidence, not a final claim of full real-world transport.
 
-```text
-boundary-aware-cooperative-transport/
-|-- configs/
-|   |-- sim/
-|   `-- mas/
-|-- docs/
-|   |-- assets/
-|   |-- ARCHITECTURE.md
-|   |-- ALGORITHM.md
-|   |-- MAS_INTEGRATION.md
-|   |-- ROADMAP.md
-|   `-- stage1_results.md
-|-- src/
-|   |-- dbact/
-|   |-- dbact_sim/
-|   `-- mas_adapter/
-|-- scripts/
-|   |-- run_all_scenarios.py
-|   |-- run_mock_mas_pipeline.py
-|   `-- run_seven_s1_cvt_test.py
-|-- tests/
-|-- platforms/
-|   `-- mas_public/
-|-- README.md
-|-- README.en.md
-|-- README.zh-TW.md
-|-- README.ja.md
-|-- requirements.txt
-|-- pyproject.toml
-`-- LICENSE
+---
+
+## Quick Start
+
+### 1. Clone
+
+```bash
+git clone https://github.com/Wu-kaixin/boundary-aware-cooperative-transport.git
+cd boundary-aware-cooperative-transport
 ```
 
-## Conda Setup
+### 2. Create an Environment
 
-The known working local environment is a Conda environment named `dbact`.
-
-Create and install:
+Conda:
 
 ```bash
 conda create -n dbact python=3.10
@@ -251,157 +142,178 @@ pip install -r requirements.txt
 pip install -e .[dev]
 ```
 
-For the vendored MAS platform:
+Windows PowerShell virtual environment:
 
-```bash
-conda activate dbact
-cd platforms/mas_public
-python -m pip install -r requirements.txt
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install -U pip
+python -m pip install -e ".[dev]"
 ```
 
-## Run Simulations
+macOS / Linux virtual environment:
 
-Moving irregular cargo demo:
+```bash
+python -m venv .venv
+source .venv/bin/activate
+python -m pip install -U pip
+python -m pip install -e ".[dev]"
+```
+
+### 3. One-line Smoke Experiment
 
 ```bash
 python -m dbact_sim.run_sim --config configs/sim/paper_like_irregular_moving_cargo.yaml --steps 520 --output runs/paper_like_irregular_moving_cargo --animate
 ```
 
-L-shape scenario with paper-style figures:
+Important outputs:
 
-```bash
-python -m dbact_sim.run_sim --config configs/sim/l_shape.yaml --steps 400 --output runs/l_shape
+- `runs/paper_like_irregular_moving_cargo/animation.gif`
+- `runs/paper_like_irregular_moving_cargo/trajectory.png`
+- `runs/paper_like_irregular_moving_cargo/final_snapshot.png`
+- `runs/paper_like_irregular_moving_cargo/coverage_rate_curve.png`
+- `runs/paper_like_irregular_moving_cargo/metrics.json`
+- `runs/paper_like_irregular_moving_cargo/figures/FIG_520.png`
+
+---
+
+## How It Works
+
+1. **Load scenario configuration**
+   YAML files define domain size, cargo geometry, robot initial states, sensing range, communication range, transport direction, and controller parameters.
+
+2. **Generate local boundary observations**
+   The simulator uses cargo geometry to generate local boundary observations, but the controller does not directly consume full cargo shape.
+
+3. **Create cage targets**
+   Each observed boundary point `b` is shifted outward by a cage offset:
+
+```text
+q_target = b + d_cage * n_out
 ```
 
-Batch run:
+4. **Build boundary-aware density**
+   Cage targets become Gaussian density peaks that attract robots toward useful boundary-adjacent locations.
+
+5. **Run local CVT allocation**
+   Each robot computes a local weighted centroid using itself and neighbors within communication range.
+
+6. **Apply safety filtering**
+   The CBF-style filter keeps inter-agent distance above the configured minimum:
+
+```text
+h_ij = ||p_i - p_j||^2 - d_min^2 >= 0
+```
+
+7. **Save replay, metrics, and figures**
+   Simulation runs write CSV logs, metrics, final snapshots, trajectory plots, coverage curves, paper-style frames, and optional animations.
+
+---
+
+## Repository Structure
+
+```text
+boundary-aware-cooperative-transport/
+|-- configs/                         # Simulation and MAS configuration
+|   |-- sim/
+|   `-- mas/
+|-- src/
+|   |-- dbact/                       # Core controller, sensing, density, CVT, safety, metrics
+|   |-- dbact_sim/                   # Simulation environment, scenarios, visualization, CLI
+|   `-- mas_adapter/                 # MAS-compatible controller adapter
+|-- scripts/                         # Batch runs, mock MAS pipeline, RoboMaster S1 smoke tests
+|-- docs/                            # Architecture, algorithm notes, reports, staged validation
+|   |-- assets/                      # Tracked GitHub-renderable README media
+|   |-- ARCHITECTURE.md
+|   |-- ALGORITHM.md
+|   |-- MAS_INTEGRATION.md
+|   `-- stage1_results.md
+|-- platforms/mas_public/            # Vendored MAS platform code
+|-- runs/                            # Local generated runs, ignored by Git
+|-- tests/                           # Unit and smoke tests
+|-- README.md
+|-- README.en.md
+|-- README.zh-TW.md
+`-- README.ja.md
+```
+
+---
+
+## Useful Commands
+
+Run standard scenarios:
 
 ```bash
 python scripts/run_all_scenarios.py --steps 400 --animate
 ```
 
-## Outputs
+Run an L-shape scenario:
 
-Each simulation run saves:
+```bash
+python -m dbact_sim.run_sim --config configs/sim/l_shape.yaml --steps 400 --output runs/l_shape
+```
 
-- `trajectories.csv`;
-- `agent_positions.csv`;
-- `coverage_rates.csv`;
-- `metrics.json` when metrics export is enabled;
-- `final_snapshot.png`;
-- `trajectory.png`;
-- `coverage_rate_curve.png`;
-- `figures/FIG_*.png`;
-- optional `animation.gif`.
-
-Generated outputs are ignored by Git. Curated README visuals are tracked under `docs/assets/`.
-
-## MAS And Hardware Validation
-
-Mock MAS pipeline:
+Run the mock MAS pipeline:
 
 ```bash
 python scripts/run_mock_mas_pipeline.py --steps 80 --dt 0.05 --print-every 20 --output runs/mock_mas_pipeline
 ```
 
-MAS dry-run:
+Run MAS dry-run:
 
 ```bash
 cd platforms/mas_public
 python apps/dbact/run_dtransport_dry_run.py --steps 80 --dt 0.05 --print-every 20 --output data/dry_runs/dtransport_auto_init --clamp-to-world-bounds
 ```
 
-ControllerModule-level dry-run:
-
-```bash
-cd platforms/mas_public
-python apps/dbact/run_controller_module_dtransport_dry_run.py --steps 80 --dt 0.05 --print-every 20 --output data/dry_runs/controller_module_dtransport
-```
-
-OptiTrack read-only check:
+Run OptiTrack read-only check:
 
 ```bash
 cd platforms/mas_public
 python apps/dbact/log_optitrack_world_state.py --mock --frames 50 --hz 100 --print-every 10 --output data/optitrack_readonly/mock_world_states.csv
 ```
 
-RoboMaster S1 mock command smoke test:
+Run RoboMaster S1 mock command smoke test:
 
 ```bash
 python scripts/run_seven_s1_cvt_test.py --duration 3
 ```
 
-Safety rules:
+Run tests:
+
+```bash
+python -m pytest -q tests
+python -m compileall -q src tests scripts platforms/mas_public/src platforms/mas_public/apps
+python -m pytest -q --rootdir platforms/mas_public platforms/mas_public/apps/pytest_tests
+```
+
+---
+
+## Current Research Direction
+
+The next useful work is staged validation, not broad feature expansion. Priority items are:
+
+- preserve `docs/assets/` as the stable GitHub media surface;
+- add side-by-side scenario comparison figures;
+- improve moving-cargo transport metrics and dashboard summaries;
+- replace virtual-object assumptions with a real boundary-observation pipeline;
+- validate Motive rigid bodies until robot poses are stable;
+- run low-speed caging-only physical experiments only after read-only logging and dry-runs pass.
+
+---
+
+## Safety Notes
 
 - Run read-only OptiTrack logging before enabling controller output.
 - Verify robot ID to rigid-body mapping one robot at a time.
 - Use very low speed limits for the first physical run.
 - Keep a physical emergency stop available during hardware tests.
-- Inspect command and state logs after each run.
+- Inspect command and state logs after every run.
 
-## Reports And Documentation
+---
 
-Existing documentation:
+## Contributing & License
 
-```text
-docs/ARCHITECTURE.md
-docs/ALGORITHM.md
-docs/MAS_INTEGRATION.md
-docs/ROADMAP.md
-docs/stage1_results.md
-docs/stage2_mas_virtual_object.md
-docs/stage3_mas_dry_run.md
-docs/stage4_optitrack_readonly.md
-docs/daily_health_2026-06-18.md
-docs/assets/README.md
-```
+Contributions are welcome through Issues and Pull Requests. New scenarios, clearer visualizations, stronger metrics, and better staged hardware validation are especially useful.
 
-These reports should be read as staged research evidence, not as a final physical-experiment claim.
-
-## Tests
-
-Run root tests:
-
-```bash
-python -m pytest -q tests
-```
-
-Compile check:
-
-```bash
-python -m compileall -q src tests scripts platforms/mas_public/src platforms/mas_public/apps
-```
-
-MAS platform tests:
-
-```bash
-python -m pytest -q --rootdir platforms/mas_public platforms/mas_public/apps/pytest_tests
-```
-
-The latest verified local health report is recorded in:
-
-```text
-docs/daily_health_2026-06-18.md
-```
-
-## Near-Term Plan
-
-Recommended next implementation targets:
-
-1. Preserve `docs/assets/` as the stable GitHub visualization surface.
-2. Add more side-by-side scenario comparison figures.
-3. Improve moving-cargo transport metrics and summary dashboards.
-4. Replace virtual object assumptions with a real boundary-observation pipeline.
-5. Validate Motive rigid bodies until robot poses are stable.
-6. Run low-speed caging-only physical experiments after read-only and dry-run checks.
-
-## Research Interpretation
-
-A positive result means DBACT-style local boundary sensing and local allocation can produce useful caging behavior for unknown-shaped objects.
-
-A weak result is also useful. It identifies which component should be improved next: local sensing, density shaping, CVT target allocation, safety filtering, or physical contact modeling.
-
-The current repository is therefore designed to create reliable simulation evidence and a safe hardware-validation basis before claiming full real-world cooperative transport.
-
-## License
-
-This project is released under the MIT License. See [LICENSE](LICENSE) for details.
+This project is released under the [MIT License](LICENSE).

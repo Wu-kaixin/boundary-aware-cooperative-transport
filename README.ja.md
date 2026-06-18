@@ -1,180 +1,90 @@
-# DBACT: 分散型境界認識型協調搬送
+<div align="center">
 
-[English](README.en.md) | [繁體中文](README.zh-TW.md) | [日本語](README.ja.md)
+# DBACT: Decentralized Boundary-Aware Cooperative Transport
 
-## プロジェクト背景
+再現可能な分散型マルチロボット囲い込み・搬送実験。指標、レポート、MAS dry-run、可視化を含みます。
 
-このリポジトリは、複数移動ロボットによる分散協調搬送のための研究用ソフトウェアスタックです。
+[English](README.md) | [繁體中文](README.zh-TW.md) | [日本語](README.ja.md)
 
-このプロジェクトは、次の実践的なロボティクス課題を扱います。
+![License](https://img.shields.io/badge/License-MIT-green.svg)
+![Python](https://img.shields.io/badge/Python-3.9%2B-blue.svg)
+![Tests](https://img.shields.io/badge/Tests-16%20passed-brightgreen.svg)
+![Version](https://img.shields.io/badge/Version-0.1.0-informational.svg)
+![Visualization](https://img.shields.io/badge/Visualization-Matplotlib-orange.svg)
+![Platform](https://img.shields.io/badge/Platform-MAS%20%7C%20RoboMaster%20S1-lightgrey.svg)
 
-> 物体の完全な形状、中心、半径、必要なロボット数がコントローラに与えられていない場合でも、複数ロボットは有用な囲い込み・搬送構造を形成できるか？
+</div>
 
-現在の目的は、完全な実機搬送システムよりも狭く、より実験的です。
+DBACT は **Decentralized Boundary-Aware Cooperative Transport** の研究プロトタイプです。物体の完全な形状、中心、半径、必要なチーム規模がコントローラに与えられていない場合に、複数の移動ロボットが有用な囲い込み・搬送構造を形成できるかを調べます。
 
-> 再現可能な DBACT シミュレーションスタックを構築し、MAS 形式のコントローラインターフェースへ接続し、視覚的な実験証拠を生成し、RoboMaster S1 + OptiTrack 検証へ向けた安全な道筋を整備する。
+このリポジトリは、独立したシミュレーションスタック、境界認識型の局所制御、指標、GitHub で表示可能な可視化素材、MAS-compatible controller adapter、OptiTrack read-only tooling、保守的な RoboMaster S1 command smoke tests を統合しています。
 
-研究の流れは次の通りです。
+> このリポジトリは研究プロトタイプであり、完成済みの実機搬送製品ではありません。シミュレーションと dry-run は動作していますが、完全な実機搬送は段階的な検証目標です。
 
-```text
-Cooperative-Transport-Multi-Agent-System
-        -> DBACT: Decentralized Boundary-Aware Cooperative Transportation
-        -> MAS adapter / OptiTrack read-only / RoboMaster S1 smoke path
-```
+---
 
-このリポジトリは、進行中の研究プロトタイプとして読むべきものです。シミュレーションと dry-run は動作していますが、完全な実機搬送実験はまだ段階的な検証目標です。
-
-## 現在の研究判断
-
-現在の方針は次の通りです。
-
-- `main` を保守対象ブランチとして維持する。
-- シミュレーションと MAS dry-run を主要な検証面とする。
-- 完了済みの実機搬送実験とは主張しない。
-- 読み取り専用 OptiTrack logging、mock pipeline、低速 command smoke test が通る前に実ロボットへ運動命令を送らない。
-- 囲い込み、被覆率、密度場、安全挙動を理解しやすくするため、可視化を第一級の出力として扱う。
-
-したがって、現在の action item は次の通りです。
-
-```text
-明確な simulation-to-hardware 経路を維持する：
-local boundary simulation
-  -> visual result generation
-  -> MAS-compatible dry-run
-  -> OptiTrack read-only validation
-  -> low-speed RoboMaster S1 smoke testing
-  -> future closed-loop physical transport
-```
-
-## 現在のスコープ
-
-このリポジトリは現在、次に集中しています。
-
-```text
-unknown polygon caging
-+ local boundary sensing
-+ boundary-aware density
-+ local CVT target allocation
-+ local CBF-style safety filtering
-+ simplified caging / pushing transport dynamics
-+ simulation metrics and visualizations
-+ MAS-compatible ControlCommand generation
-+ OptiTrack read-only logging path
-+ RoboMaster S1 command smoke path
-```
-
-現在の検証済み段階では範囲外のもの：
-
-```text
-完全な実機搬送検証
-任意センサからの実 cargo perception
-力制御を含む接触ダイナミクス
-すべての経路での paper-grade QP solver
-大規模ハードウェア展開
-完全自動 process-launcher 実験
-```
-
-## コントローラとシミュレーションモデル
-
-DBACT は各ロボットを局所的な意思決定者として扱います。各 agent は次を持ちます。
-
-- 位置と速度；
-- センサ範囲；
-- 通信範囲；
-- 安全半径または最小ロボット間距離；
-- 局所境界観測；
-- 局所近傍状態。
-
-コントローラは意図的に次へ直接アクセスしません。
-
-```text
-cargo.center
-cargo.radius
-cargo.vertices
-cargo.closest_boundary()
-global robot assignment
-global all-pairs QP
-predefined team size
-```
-
-シミュレータは局所センサ観測とオフライン評価指標を生成するために真の cargo 幾何を使えますが、コントローラ経路は境界観測ベースに保たれます。
-
-## DBACT 境界認識パイプライン
-
-DBACT の中心的な考え方は次です。
-
-> ロボットを既知の物体中心へ向けるのではなく、有用な境界近傍の cage target へ向ける。
-
-現在の DBACT flow：
-
-1. 局所境界観測を生成する；
-2. 境界の外向き法線を推定する；
-3. 物体外側に cage target を作る；
-4. 境界認識型ガウス密度場を構築する；
-5. 近傍ロボットを使って局所 weighted CVT centroid を計算する；
-6. 局所 CBF-style safety filtering を適用する；
-7. ロボット速度命令を出力する；
-8. 軌跡、被覆率カーブ、図、任意のアニメーションを出力する。
-
-cage target の規則：
-
-```text
-q_target = b + d_cage * n_out
-```
-
-ロボット間安全制約：
-
-```text
-h_ij = ||p_i - p_j||^2 - d_min^2 >= 0
-```
-
-主な実装：
-
-```text
-src/dbact/controller.py
-src/dbact/local_sensing.py
-src/dbact/boundary_density.py
-src/dbact/local_cvt.py
-src/dbact/local_cbf_qp.py
-src/dbact/transport_dynamics.py
-src/dbact_sim/run_sim.py
-src/mas_adapter/decentralized_transport_controller.py
-```
-
-## 可視化の優先度
-
-このプロジェクトの価値は可視化に強く依存します。
-
-視覚出力は、シミュレーションを一目で理解できる必要があります。
-
-- ロボット軌跡；
-- 未知 cargo 形状；
-- cage target 領域；
-- 局所 CVT / Voronoi 構造；
-- 境界認識密度曲面；
-- 境界被覆率カーブ；
-- 最小距離と安全挙動；
-- MAS dry-run の軌跡証拠。
-
-選定済み README assets は `docs/assets/` に保存されているため、GitHub 上で正しく表示されます。
+## ビジュアルショーケース
 
 ![DBACT moving cargo demo](docs/assets/dbact-moving-cargo.gif)
 
-| Density + Local CVT | Trajectory |
+> シミュレーション replay から生成され、リポジトリに追跡されている GIF です。ローカルの `runs/*.gif` とは異なり、`docs/assets/` にコミットされているため GitHub で直接表示されます。
+
+![DBACT density and local CVT frame](docs/assets/dbact-density-cvt-frame.png)
+
+> 未知 cargo、局所 CVT / Voronoi 構造、ロボット安全領域、境界認識密度曲面を示す論文風フレームです。
+
+---
+
+## メディアギャラリー
+
+以下のインラインメディアはすべて `docs/assets/` 下のコミット済みファイルを参照しているため、ローカル run artifact がなくても GitHub で表示できます。
+
+| Animation | Density + Local CVT |
 | --- | --- |
-| ![DBACT density and local CVT frame](docs/assets/dbact-density-cvt-frame.png) | ![DBACT trajectory](docs/assets/dbact-trajectory.png) |
+| <img src="docs/assets/dbact-moving-cargo.gif" alt="DBACT moving cargo animation" width="100%"> | <img src="docs/assets/dbact-density-cvt-frame.png" alt="DBACT density and local CVT frame" width="100%"> |
 
-| Coverage Curve | Final Snapshot |
+| Trajectory | Coverage Curve |
 | --- | --- |
-| ![DBACT coverage curve](docs/assets/dbact-coverage-curve.png) | ![DBACT final snapshot](docs/assets/dbact-final-snapshot.png) |
+| <img src="docs/assets/dbact-trajectory.png" alt="DBACT trajectory" width="100%"> | <img src="docs/assets/dbact-coverage-curve.png" alt="DBACT coverage curve" width="100%"> |
 
-新しい画像、GIF、動画を GitHub で表示したい場合は、`runs/` から `docs/assets/` へコピーし、README から安定したパスを参照してください。`runs/` の生成物は引き続き Git では無視されます。
+| Final Snapshot | Asset Manifest |
+| --- | --- |
+| <img src="docs/assets/dbact-final-snapshot.png" alt="DBACT final snapshot" width="100%"> | [`docs/assets/README.md`](docs/assets/README.md) |
 
-## 実験結果
+生成された PNG、GIF、CSV、MP4 は通常 `runs/` または `platforms/mas_public/data/` に保存され、Git では意図的に無視されます。GitHub 表示用には、選定した図を `docs/assets/` にコピーするか、大きな動画を GitHub Releases で公開してください。
 
-Stage 1 は、コントローラ内で完全な cargo 幾何へ直接アクセスせずに、未知多角形 cargo の囲い込みを検証します。
+---
 
-Original baseline results：
+## プロジェクト概要
+
+| 項目 | 詳細 |
+| --- | --- |
+| Project name | DBACT: Decentralized Boundary-Aware Cooperative Transport |
+| Purpose | 未知形状物体に対する局所境界認識型の囲い込み・搬送を検証する。 |
+| Core stack | Python 3.9+, NumPy, PyYAML, Matplotlib, pytest |
+| Main scenarios | `paper_like_irregular_moving_cargo.yaml`, `l_shape.yaml`, `nonconvex.yaml`, `multi_object.yaml` |
+| Output types | CSV trajectories, coverage metrics, JSON summaries, PNG figures, GIF animations |
+| Integration path | DBACT simulation -> MAS dry-run -> OptiTrack read-only -> RoboMaster S1 smoke test |
+| Current status | シミュレーションと dry-run は動作中。完全な実機実験は未完了。 |
+
+---
+
+## 特徴
+
+- **分散型境界認識制御**：ロボットは全体物体形状ではなく、局所境界観測と近傍状態を使います。
+- **未知物体の囲い込み**：コントローラは `cargo.center`、`cargo.radius`、`cargo.vertices`、closest-boundary query を直接使いません。
+- **局所 CVT 割り当て**：各ロボットは自分自身と近傍ロボットから局所 weighted centroid を計算します。
+- **CBF-style safety filtering**：ロボット間距離制約と速度制限により、囲い込み過程を保守的にします。
+- **可視化優先ワークフロー**：軌跡、被覆率カーブ、最終スナップショット、論文風フレーム、任意の GIF を出力します。
+- **ハードウェア検証への段階的経路**：MAS adapter、OptiTrack read-only logging、RoboMaster S1 smoke tests を含みます。
+
+---
+
+## 結果と可視化
+
+### Stage 1 未知多角形囲い込み
+
+Stage 1 は、コントローラが完全な cargo 幾何へ直接アクセスしなくても、任意多角形 cargo の囲い込みを形成できることを検証します。
 
 | Scenario | Cargo Type | Agents | Steps | Final Coverage | Recruited Agents | Min Inter-Agent Distance |
 | --- | --- | ---: | ---: | ---: | ---: | ---: |
@@ -182,7 +92,9 @@ Original baseline results：
 | `one_rectangle_polygon_caging` | rectangle polygon | 12 | 900 | 0.7000 | 6 / 12 | 0.3446 m |
 | `one_nonconvex_polygon_caging` | nonconvex polygon | 14 | 1000 | 0.90625 | 9 / 14 | 0.3393 m |
 
-Tight baseline results：
+### Tight Baseline 結果
+
+Tight baseline は cage offset を小さくし、density field を狭めることで囲い込みのコンパクトさを改善します。
 
 | Scenario | Cargo Type | Agents | Steps | Final Coverage | Recruited Agents | Min Inter-Agent Distance |
 | --- | --- | ---: | ---: | ---: | ---: | ---: |
@@ -190,7 +102,7 @@ Tight baseline results：
 | `one_rectangle_polygon_caging_tight` | rectangle polygon | 12 | 900 | 0.99375 | 9 / 12 | 0.3450 m |
 | `one_nonconvex_polygon_caging_tight` | nonconvex polygon | 14 | 1000 | 0.9750 | 13 / 14 | 0.3370 m |
 
-Moving irregular cargo demo：
+### Moving Irregular Cargo Demo
 
 | Metric | Value |
 | --- | ---: |
@@ -201,47 +113,26 @@ Moving irregular cargo demo：
 | Minimum inter-agent distance | 0.3571 m |
 | Mean path length | 4.6999 m |
 
-Tight caging 設定は、報告された Stage 1 benchmark において境界被覆率を改善し、最小ロボット間距離を 0.33 m 以上に保ちます。
+**解釈**
 
-## リポジトリ構成
+- Tight caging は Stage 1 benchmark で境界被覆率を改善し、最小ロボット間距離を 0.33 m 以上に保ちます。
+- Moving-cargo demo は囲い込みと搬送に似た変位を示しますが、物理接触ダイナミクスはまだ簡略化されています。
+- 現在の結果はシミュレーションと MAS dry-run の証拠であり、完全な実世界搬送の主張ではありません。
 
-```text
-boundary-aware-cooperative-transport/
-|-- configs/
-|   |-- sim/
-|   `-- mas/
-|-- docs/
-|   |-- assets/
-|   |-- ARCHITECTURE.md
-|   |-- ALGORITHM.md
-|   |-- MAS_INTEGRATION.md
-|   |-- ROADMAP.md
-|   `-- stage1_results.md
-|-- src/
-|   |-- dbact/
-|   |-- dbact_sim/
-|   `-- mas_adapter/
-|-- scripts/
-|   |-- run_all_scenarios.py
-|   |-- run_mock_mas_pipeline.py
-|   `-- run_seven_s1_cvt_test.py
-|-- tests/
-|-- platforms/
-|   `-- mas_public/
-|-- README.md
-|-- README.en.md
-|-- README.zh-TW.md
-|-- README.ja.md
-|-- requirements.txt
-|-- pyproject.toml
-`-- LICENSE
+---
+
+## クイックスタート
+
+### 1. クローン
+
+```bash
+git clone https://github.com/Wu-kaixin/boundary-aware-cooperative-transport.git
+cd boundary-aware-cooperative-transport
 ```
 
-## Conda セットアップ
+### 2. 環境作成
 
-既知の動作環境は `dbact` という名前の Conda 環境です。
-
-作成とインストール：
+Conda：
 
 ```bash
 conda create -n dbact python=3.10
@@ -251,157 +142,178 @@ pip install -r requirements.txt
 pip install -e .[dev]
 ```
 
-Vendored MAS platform：
+Windows PowerShell virtual environment：
 
-```bash
-conda activate dbact
-cd platforms/mas_public
-python -m pip install -r requirements.txt
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install -U pip
+python -m pip install -e ".[dev]"
 ```
 
-## シミュレーション実行
+macOS / Linux virtual environment：
 
-Moving irregular cargo demo：
+```bash
+python -m venv .venv
+source .venv/bin/activate
+python -m pip install -U pip
+python -m pip install -e ".[dev]"
+```
+
+### 3. One-line Smoke Experiment
 
 ```bash
 python -m dbact_sim.run_sim --config configs/sim/paper_like_irregular_moving_cargo.yaml --steps 520 --output runs/paper_like_irregular_moving_cargo --animate
 ```
 
-L-shape scenario：
+重要な出力：
 
-```bash
-python -m dbact_sim.run_sim --config configs/sim/l_shape.yaml --steps 400 --output runs/l_shape
+- `runs/paper_like_irregular_moving_cargo/animation.gif`
+- `runs/paper_like_irregular_moving_cargo/trajectory.png`
+- `runs/paper_like_irregular_moving_cargo/final_snapshot.png`
+- `runs/paper_like_irregular_moving_cargo/coverage_rate_curve.png`
+- `runs/paper_like_irregular_moving_cargo/metrics.json`
+- `runs/paper_like_irregular_moving_cargo/figures/FIG_520.png`
+
+---
+
+## 仕組み
+
+1. **シナリオ設定を読み込む**
+   YAML は領域サイズ、cargo 幾何、ロボット初期状態、センサ範囲、通信範囲、搬送方向、制御パラメータを定義します。
+
+2. **局所境界観測を生成する**
+   シミュレータは cargo 幾何から局所境界観測を生成しますが、コントローラは完全な cargo 形状を直接消費しません。
+
+3. **cage target を作る**
+   観測された各境界点 `b` を外向きにずらします。
+
+```text
+q_target = b + d_cage * n_out
 ```
 
-Batch run：
+4. **境界認識密度を構築する**
+   cage target は Gaussian density peak となり、有用な境界近傍位置へロボットを引き寄せます。
+
+5. **局所 CVT 割り当てを実行する**
+   各ロボットは自分自身と通信範囲内の近傍ロボットから局所 weighted centroid を計算します。
+
+6. **安全フィルタを適用する**
+   CBF-style filter はロボット間距離を設定下限より大きく保ちます。
+
+```text
+h_ij = ||p_i - p_j||^2 - d_min^2 >= 0
+```
+
+7. **Replay、指標、図を保存する**
+   simulation run は CSV log、metrics、final snapshot、trajectory plot、coverage curve、paper-style frame、任意の animation を出力します。
+
+---
+
+## リポジトリ構成
+
+```text
+boundary-aware-cooperative-transport/
+|-- configs/                         # Simulation and MAS configuration
+|   |-- sim/
+|   `-- mas/
+|-- src/
+|   |-- dbact/                       # Core controller, sensing, density, CVT, safety, metrics
+|   |-- dbact_sim/                   # Simulation environment, scenarios, visualization, CLI
+|   `-- mas_adapter/                 # MAS-compatible controller adapter
+|-- scripts/                         # Batch runs, mock MAS pipeline, RoboMaster S1 smoke tests
+|-- docs/                            # Architecture, algorithm notes, reports, staged validation
+|   |-- assets/                      # Tracked GitHub-renderable README media
+|   |-- ARCHITECTURE.md
+|   |-- ALGORITHM.md
+|   |-- MAS_INTEGRATION.md
+|   `-- stage1_results.md
+|-- platforms/mas_public/            # Vendored MAS platform code
+|-- runs/                            # Local generated runs, ignored by Git
+|-- tests/                           # Unit and smoke tests
+|-- README.md
+|-- README.en.md
+|-- README.zh-TW.md
+`-- README.ja.md
+```
+
+---
+
+## 便利なコマンド
+
+標準シナリオを実行：
 
 ```bash
 python scripts/run_all_scenarios.py --steps 400 --animate
 ```
 
-## 出力
+L-shape scenario を実行：
 
-各シミュレーション run は次を保存します。
+```bash
+python -m dbact_sim.run_sim --config configs/sim/l_shape.yaml --steps 400 --output runs/l_shape
+```
 
-- `trajectories.csv`;
-- `agent_positions.csv`;
-- `coverage_rates.csv`;
-- metrics export が有効な場合の `metrics.json`;
-- `final_snapshot.png`;
-- `trajectory.png`;
-- `coverage_rate_curve.png`;
-- `figures/FIG_*.png`;
-- 任意の `animation.gif`。
-
-生成出力は Git では無視されます。選定済み README visuals は `docs/assets/` に追跡されています。
-
-## MAS とハードウェア検証
-
-Mock MAS pipeline：
+mock MAS pipeline を実行：
 
 ```bash
 python scripts/run_mock_mas_pipeline.py --steps 80 --dt 0.05 --print-every 20 --output runs/mock_mas_pipeline
 ```
 
-MAS dry-run：
+MAS dry-run を実行：
 
 ```bash
 cd platforms/mas_public
 python apps/dbact/run_dtransport_dry_run.py --steps 80 --dt 0.05 --print-every 20 --output data/dry_runs/dtransport_auto_init --clamp-to-world-bounds
 ```
 
-ControllerModule-level dry-run：
-
-```bash
-cd platforms/mas_public
-python apps/dbact/run_controller_module_dtransport_dry_run.py --steps 80 --dt 0.05 --print-every 20 --output data/dry_runs/controller_module_dtransport
-```
-
-OptiTrack read-only check：
+OptiTrack read-only check を実行：
 
 ```bash
 cd platforms/mas_public
 python apps/dbact/log_optitrack_world_state.py --mock --frames 50 --hz 100 --print-every 10 --output data/optitrack_readonly/mock_world_states.csv
 ```
 
-RoboMaster S1 mock command smoke test：
+RoboMaster S1 mock command smoke test を実行：
 
 ```bash
 python scripts/run_seven_s1_cvt_test.py --duration 3
 ```
 
-安全規則：
-
-- コントローラ出力を有効にする前に、読み取り専用 OptiTrack logging を実行する。
-- robot ID と rigid-body mapping を 1 台ずつ確認する。
-- 最初の実機 run では非常に低い速度制限を使う。
-- ハードウェアテスト中は物理的な emergency stop を利用可能にする。
-- 各 run 後に command と state log を確認する。
-
-## レポートとドキュメント
-
-既存ドキュメント：
-
-```text
-docs/ARCHITECTURE.md
-docs/ALGORITHM.md
-docs/MAS_INTEGRATION.md
-docs/ROADMAP.md
-docs/stage1_results.md
-docs/stage2_mas_virtual_object.md
-docs/stage3_mas_dry_run.md
-docs/stage4_optitrack_readonly.md
-docs/daily_health_2026-06-18.md
-docs/assets/README.md
-```
-
-これらの report は段階的な研究証拠として読むべきであり、最終的な実機実験の主張ではありません。
-
-## テスト
-
-Root tests：
+テストを実行：
 
 ```bash
 python -m pytest -q tests
-```
-
-Compile check：
-
-```bash
 python -m compileall -q src tests scripts platforms/mas_public/src platforms/mas_public/apps
-```
-
-MAS platform tests：
-
-```bash
 python -m pytest -q --rootdir platforms/mas_public platforms/mas_public/apps/pytest_tests
 ```
 
-最新のローカル health report：
+---
 
-```text
-docs/daily_health_2026-06-18.md
-```
+## 現在の研究方向
 
-## 近い計画
+次に有用なのは広い機能追加ではなく、段階的な検証です。優先項目：
 
-推奨される次の実装目標：
+- `docs/assets/` を安定した GitHub media surface として維持する；
+- side-by-side scenario comparison figures を追加する；
+- moving-cargo transport metrics と dashboard summary を改善する；
+- virtual-object assumption を実際の boundary-observation pipeline に置き換える；
+- robot pose が安定するまで Motive rigid body を検証する；
+- read-only logging と dry-run 通過後のみ、低速 caging-only 実機実験を行う。
 
-1. `docs/assets/` を GitHub 用の安定した可視化表示面として維持する。
-2. より多くのシナリオで side-by-side comparison figures を追加する。
-3. moving-cargo transport metrics と summary dashboards を改善する。
-4. virtual object assumption を実際の boundary-observation pipeline に置き換える。
-5. Motive rigid bodies を検証し、ロボット姿勢が安定するまで確認する。
-6. read-only と dry-run checks の後に低速 caging-only 実機実験を行う。
+---
 
-## 研究解釈
+## 安全メモ
 
-良い結果は、DBACT-style の局所境界認識と局所割り当てが、未知形状物体に対して有用な囲い込み挙動を生成できることを意味します。
+- コントローラ出力を有効化する前に read-only OptiTrack logging を行う。
+- robot ID と rigid-body mapping を 1 台ずつ確認する。
+- 最初の実機 run では非常に低い速度制限を使う。
+- ハードウェアテスト中は物理 emergency stop を用意する。
+- 各 run 後に command と state log を確認する。
 
-弱い、または否定的な結果も有用です。local sensing、density shaping、CVT target allocation、safety filtering、physical contact modeling のどこを改善すべきかを示すからです。
+---
 
-したがって、このリポジトリは、完全な実世界協調搬送を主張する前に、信頼できるシミュレーション証拠と安全なハードウェア検証基盤を作るために設計されています。
+## コントリビューションとライセンス
 
-## ライセンス
+Issues と Pull Requests を歓迎します。新しいシナリオ、より明確な可視化、強い指標、より良い段階的ハードウェア検証は特に有用です。
 
-このプロジェクトは MIT License で公開されています。詳細は [LICENSE](LICENSE) を参照してください。
+このプロジェクトは [MIT License](LICENSE) で公開されています。
