@@ -1,5 +1,33 @@
 # Roadmap
 
+## Paper-v1 focus (active)
+
+Branch: `paper-v1-boundary-aware`
+
+Prioritize algorithm + simulation + paper formulation. Freeze Motive / RoboMaster / MAS depth work; keep hardware-agnostic interfaces only.
+
+### Phase 1 — algorithm core
+
+- [x] Ray-cast local sensing + PCA normal estimation (no GT outward normals).
+- [x] LocalBoundaryMap voxel dedup, confidence fusion, age decay.
+- [x] Boundary-measure-induced density (`Δs`, confidence, decay, gap weight).
+- [x] Strict limited Local CVT on `D ∩ B(p_i, R_ℓ)`.
+- [x] Distributed responsibility-splitting CBF-QP + object-boundary CBF.
+
+### Phase 2 — physics transport
+
+- [x] PyMunk planar rigid-body world (`dbact_sim/rigid_body_world.py`).
+- [x] Switchable transport backend: `scripted` | `pymunk`.
+- [x] Optional transport bias from task velocity using local measurements only.
+- [x] Optional deps: `pip install -e ".[sim,qp,analysis,dev]"`.
+
+### Phase 3 — experiment matrix
+
+- [x] Baselines B0 ARM / B1 oracle / B2 no-CBF / B3 full DBACT (`controller.method`).
+- [x] Extended metrics: `T_enclosure`, `d_min_obs`, `R_CBF`, `T_solve`, `P_success`.
+- [x] Paper configs under `configs/sim/paper/`.
+- [x] Multi-seed batch runner `scripts/run_paper_matrix.py`.
+
 ## Stage 1: Simulation Baseline
 
 - [x] Arbitrary polygon cargo model.
@@ -31,35 +59,22 @@
 - [x] Add ControllerModule-level dry-run.
 - [x] Document Stage 3 dry-run scope and remaining gaps.
 
-## Stage 4: OptiTrack Read-Only Bridge
+## Stage 4–6: Hardware (frozen for paper-v1)
 
-- [x] Inspect MAS OptiTrack to `WorldState` chain.
-- [x] Add read-only OptiTrack / mock NatNet `WorldState` CSV logger.
-- [x] Validate logger with `MockNatNetAdapter`.
+OptiTrack validation, hardware dry-run, and physical experiments remain future physical validation. Do not block the paper-v1 algorithm track on these items.
+
 - [ ] Validate logger with real Motive / NatNet robot rigid bodies.
 - [ ] Confirm rigid-body names/IDs, axes, yaw, velocity estimates, and world bounds.
 - [ ] Add cargo/object OptiTrack observation path.
-
-## Stage 5: Hardware Dry-Run
-
-- [ ] Run `OptiTrack -> WORLD_STATE -> ControllerModule -> ControlCommand` with robot output disabled.
-- [ ] Log and plot real OptiTrack-driven command outputs.
-- [ ] Verify stop behavior and shutdown command records.
-- [ ] Tune low-speed safety limits for RoboMaster S1.
-
-## Stage 6: Physical Experiments
-
-- [ ] Low-speed caging-only RoboMaster S1 experiment with virtual or known cargo polygon.
-- [ ] Add real cargo boundary observation or marker-derived boundary samples.
-- [ ] Run circle / rectangle / L-shape / nonconvex benchmark experiments.
-- [ ] Compare against baseline CVT + fixed circular AOI.
-- [ ] Ablation: no CBF, no boundary density, no communication.
-- [ ] Paper-quality real unknown-object caging / transport demo.
+- [ ] Hardware dry-run with robot output disabled.
+- [ ] Physical caging / transport demos.
 
 ## Research and Engineering Backlog
 
-- [ ] Replace the half-plane projection filter with a formal QP solver.
-- [ ] Add boundary gap detection and explicit adaptive recruitment.
+- [x] Formal QP path for distributed CBF (CVXPY) with projection fallback.
+- [x] Gap-weighted density term (heuristic uncovered-gap score).
+- [x] Physics-based contact transport (PyMunk backend).
+- [x] Paper baselines / ablations / scalability suite skeleton.
+- [ ] Larger multi-seed paper tables (N=8/32/64, random polygons ×50).
 - [ ] Estimate object pose and boundary from local memory.
 - [ ] Add nonholonomic robot model.
-- [ ] Add contact force and friction model.

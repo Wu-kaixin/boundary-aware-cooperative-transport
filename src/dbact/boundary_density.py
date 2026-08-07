@@ -15,7 +15,19 @@ class DensityPoint:
 
 
 class BoundaryAwareDensity:
-    """Gaussian density field centered at boundary-offset cage targets."""
+    """Boundary-measure-induced Gaussian density field.
+
+    Continuous form (paper):
+        φ_i(q,t) = φ_0 + ∫_{Γ̂_i(t)} w_i(b,t) K_σ(q - [b + d_c n(b)]) ds
+
+    Discrete approximation:
+        φ_i(q,t) = φ_0 + Σ_k Δs_k c_k e^{-λ(t-t_k)} (1 + κ g_k) K_σ(q - ξ_k)
+        ξ_k = b_k + d_c n_k
+
+    Density total mass grows with estimated boundary length, so larger / more
+    complex objects naturally request more allocation without knowing radius,
+    perimeter, or a predefined team size.
+    """
 
     def __init__(self, density_points: list[DensityPoint], sigma: float = 0.35, base_density: float = 1e-3):
         self.density_points = density_points
@@ -29,11 +41,27 @@ class BoundaryAwareDensity:
         cage_offset: float,
         sigma: float,
         base_density: float = 1e-3,
+        timestamp: float | None = None,
+        decay_lambda: float = 0.35,
+        gap_gain: float = 1.0,
+        age_weights: dict[int, float] | list[float] | None = None,
     ) -> "BoundaryAwareDensity":
         points: list[DensityPoint] = []
-        for obs in observations:
+        t_now = float(timestamp) if timestamp is not None else None
+        for idx, obs in enumerate(observations):
             target = obs.point + cage_offset * obs.normal
-            points.append(DensityPoint(target=target, weight=float(obs.confidence), object_id=obs.object_id))
+            if age_weights is not None:
+                if isinstance(age_weights, dict):
+                    age = float(age_weights.get(idx, 1.0))
+                else:
+                    age = float(age_weights[idx]) if idx < len(age_weights) else 1.0
+            elif t_now is not None:
+                age = float(np.exp(-decay_lambda * max(0.0, t_now - obs.timestamp)))
+            else:
+                age = 1.0
+            gap = float(max(0.0, obs.gap_score))
+            weight = float(obs.arc_length) * float(obs.confidence) * age * (1.0 + gap_gain * gap)
+            points.append(DensityPoint(target=target, weight=max(weight, 0.0), object_id=obs.object_id))
         return cls(points, sigma=sigma, base_density=base_density)
 
     @classmethod
@@ -61,6 +89,9 @@ class BoundaryAwareDensity:
         if not self.density_points:
             return np.empty((0, 2), dtype=float)
         return np.vstack([p.target for p in self.density_points])
+
+    def total_mass(self) -> float:
+        return float(sum(p.weight for p in self.density_points))
 
     def __call__(self, q: np.ndarray) -> np.ndarray:
         q = np.asarray(q, dtype=float)
