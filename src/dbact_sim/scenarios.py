@@ -27,6 +27,9 @@ def build_agents(cfg: dict) -> list[AgentState]:
     center = np.asarray(a.get("center", [4.0, 4.0]), dtype=float)
     spacing = float(a.get("spacing", 0.35))
     layout = str(a.get("layout", "grid"))
+    seed = int(a.get("seed", cfg.get("seed", 1)))
+    jitter = float(a.get("jitter", 0.0))
+    rng = np.random.default_rng(seed)
     agents: list[AgentState] = []
     if layout == "grid":
         cols = int(np.ceil(np.sqrt(count)))
@@ -37,10 +40,12 @@ def build_agents(cfg: dict) -> list[AgentState]:
                 if idx >= count:
                     break
                 offset = np.array([(c - (cols - 1) / 2) * spacing, (r - (rows - 1) / 2) * spacing])
-                agents.append(AgentState(agent_id=f"agent_{idx:02d}", position=center + offset))
+                pos = center + offset
+                if jitter > 0.0:
+                    pos = pos + rng.normal(scale=jitter, size=2)
+                agents.append(AgentState(agent_id=f"agent_{idx:02d}", position=pos))
                 idx += 1
     else:
-        rng = np.random.default_rng(int(a.get("seed", 1)))
         for idx in range(count):
             agents.append(AgentState(agent_id=f"agent_{idx:02d}", position=center + rng.normal(scale=spacing, size=2)))
     return agents
@@ -51,7 +56,9 @@ def build_cargoes(cfg: dict) -> list[Cargo]:
 
 
 def controller_params_from_config(cfg: dict) -> DBACTParams:
-    return DBACTParams.from_dict(cfg.get("controller", {}))
+    data = dict(cfg.get("controller", {}))
+    data.setdefault("random_seed", int(cfg.get("seed", 1)))
+    return DBACTParams.from_dict(data)
 
 
 def transport_params_from_config(cfg: dict) -> TransportParams:

@@ -19,6 +19,18 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
+sim = [
+  "scipy>=1.13",
+  "shapely>=2.0",
+  "pymunk>=6.6",
+]
+qp = [
+  "cvxpy>=1.4",
+  "osqp>=0.6",
+]
+analysis = [
+  "pandas>=2.2",
+]
 dev = [
   "pytest>=7.0",
 ]
