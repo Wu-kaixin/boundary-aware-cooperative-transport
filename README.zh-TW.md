@@ -7,13 +7,20 @@
 [English](README.md) | [繁體中文](README.zh-TW.md) | [日本語](README.ja.md)
 
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
-![Python](https://img.shields.io/badge/Python-3.9%2B-blue.svg)
-![Tests](https://img.shields.io/badge/Tests-16%20passed-brightgreen.svg)
-![Version](https://img.shields.io/badge/Version-0.1.0-informational.svg)
+![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg)
+![Tests](https://img.shields.io/badge/Tests-200%20passed-brightgreen.svg)
+![Version](https://img.shields.io/badge/Version-0.2.0-informational.svg)
 ![Visualization](https://img.shields.io/badge/Visualization-Matplotlib-orange.svg)
 ![Platform](https://img.shields.io/badge/Platform-MAS%20%7C%20RoboMaster%20S1-lightgrey.svg)
 
 </div>
+
+> **目前狀態（分支 `A-boundary-aware`）。** 研究流程已依合併路線圖重建：跨層契約層
+> C1–C3 加上 S1–S7 各階段。引用本倉庫任何數字前，請先閱讀
+> [`docs/REFACTOR_2026-08-08.md`](docs/REFACTOR_2026-08-08.md)。**定向搬運尚未達成**：
+> 閉環產生方向正確的正進度（與目標夾角 34.8°，重構前為 170.11°），但在低於任務門檻處
+> 停在準靜態 caging 平衡上。邊界圍合、零穿模安全性與硬 CBF-QP 均成立。在物體邊界 CBF
+> 存在之前測得的所有覆蓋率數字一律撤回。
 
 DBACT 是 **Decentralized Boundary-Aware Cooperative Transport** 的研究原型。它研究多台移動機器人如何在不知道物體完整形狀、中心、半徑與所需隊伍規模的情況下，形成有用的圍捕與搬運結構。
 

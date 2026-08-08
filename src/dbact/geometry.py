@@ -127,6 +127,248 @@ def sample_polygon_boundary(vertices: np.ndarray, count: int = 128) -> tuple[np.
     return np.asarray(points), np.asarray(normals)
 
 
+def polygon_perimeter(vertices: np.ndarray) -> float:
+    v = np.asarray(vertices, dtype=float)
+    edges = np.roll(v, -1, axis=0) - v
+    return float(np.sum(np.linalg.norm(edges, axis=1)))
+
+
+def polygon_second_moment(vertices: np.ndarray, center: np.ndarray | None = None) -> float:
+    """Area second moment of a polygon about ``center`` (unit density)."""
+    v = ensure_ccw(vertices)
+    c = polygon_centroid(v) if center is None else np.asarray(center, dtype=float)
+    p = v - c
+    q = np.roll(p, -1, axis=0)
+    cross = p[:, 0] * q[:, 1] - q[:, 0] * p[:, 1]
+    terms = np.sum(p * p, axis=1) + np.sum(p * q, axis=1) + np.sum(q * q, axis=1)
+    return float(np.sum(cross * terms) / 12.0)
+
+
+def points_in_polygon(points: np.ndarray, vertices: np.ndarray) -> np.ndarray:
+    """Vectorised even-odd containment test. Returns a boolean array."""
+    p = np.asarray(points, dtype=float).reshape(-1, 2)
+    v = np.asarray(vertices, dtype=float)
+    if len(p) == 0:
+        return np.zeros(0, dtype=bool)
+    x, y = p[:, 0], p[:, 1]
+    xi, yi = v[:, 0], v[:, 1]
+    xj, yj = np.roll(xi, 1), np.roll(yi, 1)
+    straddles = (yi[None, :] > y[:, None]) != (yj[None, :] > y[:, None])
+    dy = (yj - yi)[None, :]
+    dy = np.where(np.abs(dy) < EPS, EPS, dy)
+    x_cross = (xj - xi)[None, :] * (y[:, None] - yi[None, :]) / dy + xi[None, :]
+    crossings = np.sum(straddles & (x[:, None] < x_cross), axis=1)
+    return crossings % 2 == 1
+
+
+def closest_boundary_points(points: np.ndarray, vertices: np.ndarray) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+    """Vectorised closest boundary point, unsigned distance and edge index."""
+    p = np.asarray(points, dtype=float).reshape(-1, 2)
+    v = ensure_ccw(vertices)
+    if len(p) == 0:
+        return np.empty((0, 2)), np.empty(0), np.empty(0, dtype=int)
+    a = v
+    e = np.roll(v, -1, axis=0) - v
+    denom = np.sum(e * e, axis=1)
+    denom = np.where(denom < EPS, EPS, denom)
+    rel = p[:, None, :] - a[None, :, :]
+    t = np.clip(np.sum(rel * e[None, :, :], axis=2) / denom[None, :], 0.0, 1.0)
+    q = a[None, :, :] + t[:, :, None] * e[None, :, :]
+    d = np.linalg.norm(p[:, None, :] - q, axis=2)
+    k = np.argmin(d, axis=1)
+    rows = np.arange(len(p))
+    return q[rows, k], d[rows, k], k
+
+
+def signed_distance_to_polygon(points: np.ndarray, vertices: np.ndarray) -> np.ndarray:
+    """Signed distance to a polygon boundary: positive outside, negative inside."""
+    p = np.asarray(points, dtype=float).reshape(-1, 2)
+    if len(p) == 0:
+        return np.empty(0)
+    _, d, _ = closest_boundary_points(p, vertices)
+    inside = points_in_polygon(p, vertices)
+    return np.where(inside, -d, d)
+
+
+def signed_distance_and_gradient(points: np.ndarray, vertices: np.ndarray) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+    """Signed distance, its gradient (outward unit normal) and the footpoint.
+
+    The gradient of the signed distance is ``(p - q)/||p - q||`` outside and
+    ``(q - p)/||q - p||`` inside, which stays correct at convex corners where the
+    incident edge normals disagree. Degenerate points sitting exactly on the
+    boundary fall back to the edge normal.
+    """
+    p = np.asarray(points, dtype=float).reshape(-1, 2)
+    v = ensure_ccw(vertices)
+    if len(p) == 0:
+        return np.empty(0), np.empty((0, 2)), np.empty((0, 2))
+    q, d, k = closest_boundary_points(p, v)
+    inside = points_in_polygon(p, v)
+    signed = np.where(inside, -d, d)
+
+    direction = p - q
+    scale = np.where(inside, -1.0, 1.0)[:, None]
+    grad = direction * scale
+    norms = np.linalg.norm(grad, axis=1)
+    degenerate = norms < 1e-9
+    if np.any(degenerate):
+        e = np.roll(v, -1, axis=0) - v
+        edge_normals = np.column_stack([e[:, 1], -e[:, 0]])
+        edge_norms = np.linalg.norm(edge_normals, axis=1)
+        edge_norms = np.where(edge_norms < EPS, EPS, edge_norms)
+        edge_normals = edge_normals / edge_norms[:, None]
+        grad[degenerate] = edge_normals[k[degenerate]]
+        norms = np.linalg.norm(grad, axis=1)
+    norms = np.where(norms < EPS, EPS, norms)
+    return signed, grad / norms[:, None], q
+
+
+def ray_polygon_first_hit(
+    origin: np.ndarray,
+    direction: np.ndarray,
+    vertices: np.ndarray,
+    max_range: float,
+) -> tuple[np.ndarray, np.ndarray, float] | None:
+    """First intersection of a ray with a polygon boundary.
+
+    Returns ``(point, outward_edge_normal, range)`` for the nearest hit within
+    ``max_range``, or ``None`` when the ray misses. Taking the nearest hit -- not
+    every sampled boundary point within sensor range -- is what makes the sensor
+    respect occlusion.
+    """
+    o = np.asarray(origin, dtype=float).reshape(2)
+    d = normalize(np.asarray(direction, dtype=float).reshape(2))
+    v = ensure_ccw(vertices)
+    a = v
+    e = np.roll(v, -1, axis=0) - v
+
+    denom = d[0] * e[:, 1] - d[1] * e[:, 0]
+    diff = a - o[None, :]
+    with np.errstate(divide="ignore", invalid="ignore"):
+        t = (diff[:, 0] * e[:, 1] - diff[:, 1] * e[:, 0]) / denom
+        s = (diff[:, 0] * d[1] - diff[:, 1] * d[0]) / denom
+    valid = (np.abs(denom) > EPS) & (s >= -1e-12) & (s <= 1.0 + 1e-12) & (t > 1e-9) & (t <= max_range)
+    if not np.any(valid):
+        return None
+    idx = int(np.argmin(np.where(valid, t, np.inf)))
+    hit = o + t[idx] * d
+    edge = e[idx]
+    normal = normalize(np.array([edge[1], -edge[0]], dtype=float))
+    return hit, normal, float(t[idx])
+
+
+def ray_batch_first_hits(
+    origin: np.ndarray,
+    directions: np.ndarray,
+    vertices: np.ndarray,
+    max_range: float,
+) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+    """Vectorised :func:`ray_polygon_first_hit` over a whole scan.
+
+    Returns ``(ranges, edge_indices, hit_mask)`` with ``ranges[k] = inf`` where the
+    ray missed. A full scan is one array operation instead of one Python call per
+    ray, which matters because the sensor is the hot loop of the simulation.
+    """
+    o = np.asarray(origin, dtype=float).reshape(2)
+    d = np.asarray(directions, dtype=float).reshape(-1, 2)
+    v = ensure_ccw(vertices)
+    a = v
+    e = np.roll(v, -1, axis=0) - v
+
+    denom = d[:, 0:1] * e[None, :, 1] - d[:, 1:2] * e[None, :, 0]
+    diff = a - o[None, :]
+    numer_t = diff[:, 0] * e[:, 1] - diff[:, 1] * e[:, 0]
+    numer_s = diff[None, :, 0] * d[:, 1:2] - diff[None, :, 1] * d[:, 0:1]
+
+    with np.errstate(divide="ignore", invalid="ignore"):
+        t = numer_t[None, :] / denom
+        s = numer_s / denom
+    valid = (
+        (np.abs(denom) > EPS)
+        & (s >= -1e-12)
+        & (s <= 1.0 + 1e-12)
+        & (t > 1e-9)
+        & (t <= max_range)
+    )
+    t_masked = np.where(valid, t, np.inf)
+    edge_index = np.argmin(t_masked, axis=1)
+    ranges = t_masked[np.arange(len(d)), edge_index]
+    return ranges, edge_index, np.isfinite(ranges)
+
+
+def outward_edge_normals(vertices: np.ndarray) -> np.ndarray:
+    """Unit outward normal of every edge of a CCW polygon."""
+    v = ensure_ccw(vertices)
+    e = np.roll(v, -1, axis=0) - v
+    normals = np.column_stack([e[:, 1], -e[:, 0]])
+    norms = np.linalg.norm(normals, axis=1)
+    return normals / np.where(norms < EPS, EPS, norms)[:, None]
+
+
+def segment_hits_polygon(a: np.ndarray, b: np.ndarray, vertices: np.ndarray, tolerance: float = 0.0) -> bool:
+    """True when the open segment ``a``--``b`` crosses the polygon boundary.
+
+    ``tolerance`` shortens the segment at both ends so that a segment which only
+    touches the boundary at its own endpoint is not reported as occluded.
+    """
+    p0 = np.asarray(a, dtype=float).reshape(2)
+    p1 = np.asarray(b, dtype=float).reshape(2)
+    seg = p1 - p0
+    length = float(np.linalg.norm(seg))
+    if length < EPS:
+        return False
+    trim = min(tolerance, 0.49 * length)
+    hit = ray_polygon_first_hit(p0 + (trim / length) * seg, seg, vertices, length - 2.0 * trim)
+    return hit is not None
+
+
+def triangulate_simple_polygon(vertices: np.ndarray) -> list[np.ndarray]:
+    """Ear-clipping decomposition of a simple polygon into triangles.
+
+    Rigid-body engines accept convex shapes only, so a concave cargo has to be
+    attached to its body as several convex pieces. Triangles are the safe choice:
+    they are always convex and the decomposition never depends on the concavity
+    pattern of the outline.
+    """
+    v = ensure_ccw(np.asarray(vertices, dtype=float))
+    indices = list(range(len(v)))
+    triangles: list[np.ndarray] = []
+    guard = 0
+    while len(indices) > 3 and guard < 10 * len(v):
+        guard += 1
+        clipped = False
+        for k in range(len(indices)):
+            i_prev = indices[k - 1]
+            i_cur = indices[k]
+            i_next = indices[(k + 1) % len(indices)]
+            a, b, c = v[i_prev], v[i_cur], v[i_next]
+            cross = (b[0] - a[0]) * (c[1] - a[1]) - (b[1] - a[1]) * (c[0] - a[0])
+            if cross <= EPS:  # reflex or degenerate corner
+                continue
+            others = [v[i] for i in indices if i not in (i_prev, i_cur, i_next)]
+            if others and np.any(_points_in_triangle(np.asarray(others), a, b, c)):
+                continue
+            triangles.append(np.vstack([a, b, c]))
+            indices.pop(k)
+            clipped = True
+            break
+        if not clipped:
+            break
+    if len(indices) == 3:
+        triangles.append(np.vstack([v[indices[0]], v[indices[1]], v[indices[2]]]))
+    return triangles
+
+
+def _points_in_triangle(points: np.ndarray, a: np.ndarray, b: np.ndarray, c: np.ndarray) -> np.ndarray:
+    p = np.asarray(points, dtype=float).reshape(-1, 2)
+    d1 = (p[:, 0] - b[0]) * (a[1] - b[1]) - (a[0] - b[0]) * (p[:, 1] - b[1])
+    d2 = (p[:, 0] - c[0]) * (b[1] - c[1]) - (b[0] - c[0]) * (p[:, 1] - c[1])
+    d3 = (p[:, 0] - a[0]) * (c[1] - a[1]) - (c[0] - a[0]) * (p[:, 1] - a[1])
+    has_neg = (d1 < -EPS) | (d2 < -EPS) | (d3 < -EPS)
+    has_pos = (d1 > EPS) | (d2 > EPS) | (d3 > EPS)
+    return ~(has_neg & has_pos)
+
+
 def make_circle(center: Iterable[float], radius: float, count: int = 64) -> np.ndarray:
     center = np.asarray(center, dtype=float)
     theta = np.linspace(0.0, 2.0 * math.pi, count, endpoint=False)

@@ -7,9 +7,9 @@ Reproducible decentralized multi-robot caging and transport experiments with met
 [English](README.md) | [繁體中文](README.zh-TW.md) | [日本語](README.ja.md)
 
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
-![Python](https://img.shields.io/badge/Python-3.9%2B-blue.svg)
-![Tests](https://img.shields.io/badge/Tests-16%20passed-brightgreen.svg)
-![Version](https://img.shields.io/badge/Version-0.1.0-informational.svg)
+![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg)
+![Tests](https://img.shields.io/badge/Tests-200%20passed-brightgreen.svg)
+![Version](https://img.shields.io/badge/Version-0.2.0-informational.svg)
 ![Visualization](https://img.shields.io/badge/Visualization-Matplotlib-orange.svg)
 ![Platform](https://img.shields.io/badge/Platform-MAS%20%7C%20RoboMaster%20S1-lightgrey.svg)
 
@@ -20,6 +20,26 @@ DBACT is a research prototype for **Decentralized Boundary-Aware Cooperative Tra
 The repository combines a standalone simulation stack, boundary-aware local control, metrics, GitHub-renderable visual artifacts, a MAS-compatible controller adapter, OptiTrack read-only tooling, and conservative RoboMaster S1 command smoke tests.
 
 > This repository is a research prototype, not a completed physical transport product. Simulation and dry-run paths are working; full physical transport remains a staged validation target.
+
+> **Current status (branch `A-boundary-aware`).** The research pipeline was rebuilt
+> around a cross-layer contract layer (C1–C3) plus stages S1–S7. Read
+> [`docs/REFACTOR_2026-08-08.md`](docs/REFACTOR_2026-08-08.md) before using any
+> number from this repository.
+>
+> What holds: complete boundary enclosure (strict coverage 1.000), zero robots
+> inside the cargo, inter-robot safety maintained exactly at `d_min`, a hard
+> CBF-QP with no slack variable, and contact-only object motion cross-validated
+> between two independent physics engines to 0.7%.
+>
+> What does not: **directed transport is not achieved.** The closed loop produces
+> positive, direction-efficient progress (`J = +0.06 m`, efficiency 0.82–0.91,
+> 34.8° from the goal — against 170.11° before the refactor) that then stalls at a
+> quasi-static caging equilibrium, below the task threshold.
+>
+> Withdrawn: every coverage number measured before the object-boundary CBF existed,
+> because robots standing *inside* the cargo counted as covering its boundary. With
+> the barrier disabled, 9 of 16 robots end up inside the object while the old metric
+> still reports 1.000.
 
 ---
 

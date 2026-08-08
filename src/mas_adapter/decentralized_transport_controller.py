@@ -72,8 +72,13 @@ class DecentralizedTransportController(BaseController):  # type: ignore[misc]
         self.yaw_mode = str(params.get("yaw_mode", "face_velocity"))
 
         domain = self._domain_from_world_config(world_config)
-        self.dbact = DBACTController(DBACTParams.from_dict(params), domain)
         self.object_observer = ObjectObserver(params)
+        controller_params = {k: v for k, v in params.items() if k in DBACTParams.__dataclass_fields__}
+        self.dbact = DBACTController(
+            DBACTParams.from_dict(controller_params),
+            domain,
+            goal_directions=self.object_observer.goal_directions(),
+        )
     
     def compute_planar_velocities(self, world_state: Any | None) -> dict[str, np.ndarray]:
         """Compute world-frame planar velocities without MAS message classes.

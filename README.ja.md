@@ -7,13 +7,21 @@
 [English](README.md) | [繁體中文](README.zh-TW.md) | [日本語](README.ja.md)
 
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
-![Python](https://img.shields.io/badge/Python-3.9%2B-blue.svg)
-![Tests](https://img.shields.io/badge/Tests-16%20passed-brightgreen.svg)
-![Version](https://img.shields.io/badge/Version-0.1.0-informational.svg)
+![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg)
+![Tests](https://img.shields.io/badge/Tests-200%20passed-brightgreen.svg)
+![Version](https://img.shields.io/badge/Version-0.2.0-informational.svg)
 ![Visualization](https://img.shields.io/badge/Visualization-Matplotlib-orange.svg)
 ![Platform](https://img.shields.io/badge/Platform-MAS%20%7C%20RoboMaster%20S1-lightgrey.svg)
 
 </div>
+
+> **現在の状態（ブランチ `A-boundary-aware`）。** 研究パイプラインは、層をまたぐ契約層
+> C1–C3 と S1–S7 の各段階として再構築されました。本リポジトリの数値を引用する前に
+> [`docs/REFACTOR_2026-08-08.md`](docs/REFACTOR_2026-08-08.md) を参照してください。
+> **有向搬送は未達成**です。閉ループは目標方向に対して正の進捗（目標との角度 34.8°、
+> リファクタ前は 170.11°）を生みますが、タスク閾値未満で準静的ケージング平衡に停止します。
+> 境界包囲・貫通ゼロの安全性・スラック無しの硬 CBF-QP はいずれも成立しています。
+> 物体境界 CBF 導入以前に測定した被覆率の数値はすべて撤回します。
 
 DBACT は **Decentralized Boundary-Aware Cooperative Transport** の研究プロトタイプです。物体の完全な形状、中心、半径、必要なチーム規模がコントローラに与えられていない場合に、複数の移動ロボットが有用な囲い込み・搬送構造を形成できるかを調べます。
 

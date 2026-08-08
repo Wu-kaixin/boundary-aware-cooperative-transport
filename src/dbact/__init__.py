@@ -1,11 +1,18 @@
-"""DBACT: Decentralized Boundary-Aware Cooperative Transportation."""
+"""DBACT: Decentralized Boundary-Aware Enclosure and Cooperative Transport."""
 
-from .types import AgentState, BoundaryObservation, ControlCommand
 from .cargo import Cargo
+from .contracts import (
+    ContactSafetyContract,
+    ContractViolation,
+    CoverageContract,
+    DirectionalProgressContract,
+    SolverContract,
+    SuccessVerdict,
+)
 from .controller import DBACTController, DBACTParams
-"""DBACT: Decentralized Boundary-Aware Cooperative Transportation."""
+from .types import AgentState, BoundaryObservation, ControlCommand
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 
 __all__ = [
     "AgentState",
@@ -14,4 +21,10 @@ __all__ = [
     "Cargo",
     "DBACTController",
     "DBACTParams",
+    "ContractViolation",
+    "ContactSafetyContract",
+    "SolverContract",
+    "DirectionalProgressContract",
+    "SuccessVerdict",
+    "CoverageContract",
 ]

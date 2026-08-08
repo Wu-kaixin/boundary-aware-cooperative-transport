@@ -1,5 +1,15 @@
 # DBACT: Decentralized Boundary-Aware Cooperative Transportation
 
+> **设计文档 / design document.** 这是原始设计与规划文档，保留其历史价值。
+> 分支 `A-boundary-aware` 上的实际实现已按合并路线图重建（契约层 C1–C3 + S1–S7），
+> 当前状态、实测数字、以及哪些早期结论被撤回，见
+> [`docs/REFACTOR_2026-08-08.md`](docs/REFACTOR_2026-08-08.md)。
+>
+> 两处与现实现直接冲突，以现实现为准：安全滤波器**没有** slack 变量（`u_i = 0`
+> 恒可行，因此硬 QP 可解，报告的零违反是解的性质而非罚权重的产物）；定向搬运
+> 目前**未**达成——闭环产生方向正确、效率 0.82–0.91 的正进度，但在低于任务阈值处
+> 停在准静态 caging 平衡上。三条贡献均不依赖搬运，且都已被验证。
+
 > 面向未知任意形状物体的去中心化边界感知协同搬运算法  
 > Decentralized Boundary-Aware Cooperative Transportation of Arbitrarily Shaped Objects Without Prior Object Knowledge
 
@@ -896,7 +906,10 @@ Suggested benchmark table:
 - [ ] Replace global pairwise QP with per-agent local QP.
 - [ ] Add robot-robot safety constraints.
 - [ ] Add object boundary/contact constraints.
-- [ ] Add slack variable for infeasible QP.
+- [x] ~~Add slack variable for infeasible QP.~~ Superseded: the filter is a hard QP
+      with no slack, justified by a zero-input feasibility certificate. Constraint
+      conflicts are handled by a two-tier solve that relaxes the ISSf margin `rho`
+      (never the barrier) and counts every relaxation.
 
 ### Stage 5: Transport Dynamics
 

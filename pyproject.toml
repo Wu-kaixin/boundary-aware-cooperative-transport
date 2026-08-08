@@ -4,24 +4,29 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "dbact"
-version = "0.1.0"
-description = "Decentralized Boundary-Aware Cooperative Transportation for arbitrarily shaped objects."
+version = "0.2.0"
+description = "Decentralized boundary-aware enclosure and cooperative transport of unknown-shaped objects."
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 license = {text = "MIT"}
 authors = [
   {name = "DBACT Contributors"}
 ]
 dependencies = [
-  "numpy>=1.23",
-  "matplotlib>=3.7",
+  "numpy>=1.26",
+  "scipy>=1.13",
+  "matplotlib>=3.9",
   "PyYAML>=6.0",
 ]
 
 [project.optional-dependencies]
-dev = [
-  "pytest>=7.0",
-]
+# The exact planar QP solver in dbact.qp2d needs none of these. cvxpy is the
+# independent cross-check backend, pymunk the independent contact engine; the
+# paper configurations use both, so they belong in the reproduction environment.
+qp = ["cvxpy>=1.4", "osqp>=0.6"]
+sim = ["pymunk>=6.6", "shapely>=2.0"]
+analysis = ["pandas>=2.2"]
+dev = ["pytest>=8.0"]
 
 [tool.setuptools.packages.find]
 where = ["src"]

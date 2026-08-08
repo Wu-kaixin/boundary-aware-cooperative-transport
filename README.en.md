@@ -7,13 +7,23 @@ Reproducible decentralized multi-robot caging and transport experiments with met
 [English](README.md) | [繁體中文](README.zh-TW.md) | [日本語](README.ja.md)
 
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
-![Python](https://img.shields.io/badge/Python-3.9%2B-blue.svg)
-![Tests](https://img.shields.io/badge/Tests-16%20passed-brightgreen.svg)
-![Version](https://img.shields.io/badge/Version-0.1.0-informational.svg)
+![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg)
+![Tests](https://img.shields.io/badge/Tests-200%20passed-brightgreen.svg)
+![Version](https://img.shields.io/badge/Version-0.2.0-informational.svg)
 ![Visualization](https://img.shields.io/badge/Visualization-Matplotlib-orange.svg)
 ![Platform](https://img.shields.io/badge/Platform-MAS%20%7C%20RoboMaster%20S1-lightgrey.svg)
 
 </div>
+
+> **Current status (branch `A-boundary-aware`).** The research pipeline was rebuilt
+> around a cross-layer contract layer (C1–C3) plus stages S1–S7. Read
+> [`docs/REFACTOR_2026-08-08.md`](docs/REFACTOR_2026-08-08.md) before using any
+> number from this repository. **Directed transport is not achieved**: the closed
+> loop produces positive, direction-efficient progress (34.8° from the goal, against
+> 170.11° before the refactor) that stalls at a quasi-static caging equilibrium below
+> the task threshold. Boundary enclosure, penetration-free safety and the hard
+> CBF-QP all hold. Every coverage number measured before the object-boundary CBF
+> existed is withdrawn.
 
 DBACT is a research prototype for **Decentralized Boundary-Aware Cooperative Transport**. It studies how multiple mobile robots can form a useful caging and transport structure around an object whose complete shape, center, radius, and required team size are not given to the controller.
 
