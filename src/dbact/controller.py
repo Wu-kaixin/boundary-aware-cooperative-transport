@@ -108,6 +108,7 @@ class DBACTParams:
     max_object_rows: int = 12
     object_row_range: float = 0.60
     object_row_window: float = 0.28
+    object_row_inner_limit: float | None = None
     recovery_fraction: float = 0.6
 
     # --- gains ---
@@ -120,6 +121,19 @@ class DBACTParams:
     min_push_agents: int = 3
     contact_band_tolerance: float = 0.08
     object_velocity_filter: float = 0.4
+    # Common feed-forward velocity used after a locally observed contact quorum
+    # has persisted for ``transport_dwell_steps``.  A non-zero value translates
+    # the *whole* enclosure; restricting it to the pushing arc tears the cage
+    # apart as soon as the cargo starts to move.  Contact forces still arise only
+    # from the physics engine and the push-side robots still provide the inward
+    # preload through ``kp_transport``.
+    transport_speed: float = 0.0
+    transport_dwell_steps: int = 0
+    # Stop the feed-forward/pushing phase after this locally estimated signed
+    # displacement.  Zero disables the bound.  The estimate is the integral of
+    # point-to-plane map registrations, so the controller does not read the
+    # simulator's cargo pose to decide when to stop.
+    transport_distance: float = 0.0
 
     # --- legacy 'coverage' task mode (region coverage without a cargo) ---
     target_center: list[float] = field(default_factory=lambda: [4.0, 4.0])
@@ -167,6 +181,7 @@ class AgentDiagnostics:
     push_side: bool
     solver_status: str
     modification: float
+    transport_progress: float = 0.0
 
 
 class DBACTController:
@@ -219,7 +234,9 @@ class DBACTController:
                 max_object_rows=params.max_object_rows,
                 object_row_range=params.object_row_range,
                 object_row_window=params.object_row_window,
-                object_row_inner_limit=params.robot_radius,
+                object_row_inner_limit=(
+                    params.robot_radius if params.object_row_inner_limit is None else params.object_row_inner_limit
+                ),
                 recovery_fraction=params.recovery_fraction,
             ),
             contract=contract,
@@ -240,6 +257,9 @@ class DBACTController:
         self._redeploy_target: dict[str, np.ndarray | None] = {}
         self.object_velocity: dict[str, dict[str, np.ndarray]] = {}
         self._object_centroid: dict[str, dict[str, np.ndarray]] = {}
+        self._transport_ready_streak: dict[str, int] = {}
+        self._transport_progress: dict[str, dict[str, float]] = {}
+        self._transport_complete_latch: dict[str, bool] = {}
         self.target_region_points = self._build_target_region_points()
         self.diagnostics: list[AgentDiagnostics] = []
         self._time = 0.0
@@ -268,17 +288,32 @@ class DBACTController:
                 batch.extend(sensed[agents[j].agent_id])
             self.maps[agent.agent_id].update(batch, timestamp)
             fused[agent.agent_id] = self.maps[agent.agent_id].all_observations(timestamp)
+            self._accumulate_transport_progress(agent.agent_id)
             self._update_object_velocity(agent.agent_id, fused[agent.agent_id], dt)
 
         contact_ready = [self._contact_ready(agents[i], fused[agents[i].agent_id]) for i in range(len(agents))]
+        transport_active: list[bool] = []
+        transport_complete: list[bool] = []
+        for i, agent in enumerate(agents):
+            supporters = int(contact_ready[i]) + sum(int(contact_ready[j]) for j in neighbors[i])
+            if self.params.task_mode == "transport" and supporters >= self.params.min_push_agents:
+                self._transport_ready_streak[agent.agent_id] = self._transport_ready_streak.get(agent.agent_id, 0) + 1
+            else:
+                self._transport_ready_streak[agent.agent_id] = 0
+            ready = self._transport_ready_streak[agent.agent_id] >= max(0, int(self.params.transport_dwell_steps))
+            complete = self._transport_complete(agent.agent_id, fused[agent.agent_id])
+            transport_complete.append(complete)
+            transport_active.append(ready and not complete)
 
         self.diagnostics = []
         commands: list[ControlCommand] = []
         for i, agent in enumerate(agents):
             observations = fused[agent.agent_id]
             u_nom, mode, cell_mass, push_side = self._nominal_command(
-                i, agents, neighbors[i], observations, contact_ready
+                i, agents, neighbors[i], observations, contact_ready, transport_active[i]
             )
+            if transport_complete[i] and not push_side:
+                mode = "hold"
             points, normals, v_obj = self._object_rows_from_map(agent.agent_id, agent.position, observations)
             result = self.safety.filter_velocity(
                 agent.position,
@@ -299,9 +334,53 @@ class DBACTController:
                     push_side=push_side,
                     solver_status=result.status,
                     modification=result.modification,
+                    transport_progress=self._progress_for(agent.agent_id, observations),
                 )
             )
         return commands
+
+    def _accumulate_transport_progress(self, agent_id: str) -> None:
+        """Integrate only map-estimated body motion along the task direction."""
+        progress = self._transport_progress.setdefault(agent_id, {})
+        boundary_map = self.maps[agent_id]
+        for object_id, translation in boundary_map.last_motion.items():
+            goal = self.goal_directions.get(object_id)
+            if goal is None:
+                continue
+            progress[object_id] = progress.get(object_id, 0.0) + float(np.dot(translation, goal))
+
+    def _progress_for(self, agent_id: str, observations: list[BoundaryObservation]) -> float:
+        progress = self._transport_progress.get(agent_id, {})
+        for obs in observations:
+            if obs.object_id in progress:
+                return float(progress[obs.object_id])
+        return 0.0
+
+    def _transport_complete(self, agent_id: str, observations: list[BoundaryObservation]) -> bool:
+        if self.params.transport_distance <= 0.0:
+            return False
+        if self._transport_complete_latch.get(agent_id, False):
+            return True
+        complete = self._progress_for(agent_id, observations) >= self.params.transport_distance
+        if complete:
+            self._transport_complete_latch[agent_id] = True
+        return complete
+
+    def transport_progress_summary(self) -> dict[str, dict[str, float]]:
+        """Per-object range of local progress estimates for provenance/diagnosis."""
+        by_object: dict[str, list[float]] = {}
+        for progress in self._transport_progress.values():
+            for object_id, value in progress.items():
+                by_object.setdefault(object_id, []).append(float(value))
+        return {
+            object_id: {
+                "min": float(np.min(values)),
+                "mean": float(np.mean(values)),
+                "max": float(np.max(values)),
+            }
+            for object_id, values in by_object.items()
+            if values
+        }
 
     # ------------------------------------------------------------------ #
     # nominal control law
@@ -314,6 +393,7 @@ class DBACTController:
         neighbor_indices: list[int],
         observations: list[BoundaryObservation],
         contact_ready: list[bool],
+        transport_active: bool = False,
     ) -> tuple[np.ndarray, str, float, bool]:
         agent = agents[i]
         if self.params.task_mode == "coverage":
@@ -347,9 +427,17 @@ class DBACTController:
         u = self.params.kp_cage * (cell.centroid - agent.position)
         push_side = False
         if self.params.task_mode == "transport":
-            bias, push_side = self._transport_bias(i, agents, neighbor_indices, observations, contact_ready)
+            if transport_active and goal is not None and self.params.transport_speed > 0.0:
+                # Translate the entire locally informed enclosure.  This is a
+                # task-space feed-forward term, not an object-motion shortcut:
+                # the cargo still moves only through measured contacts.
+                u = u + self.params.transport_speed * goal
+            bias, push_side = self._transport_bias(
+                i, agents, neighbor_indices, observations, contact_ready, transport_active
+            )
             u = u + bias
-        return u, "cage" if not push_side else "push", cell.cell_mass, push_side
+        mode = "push" if push_side else ("convoy" if transport_active else "cage")
+        return u, mode, cell.cell_mass, push_side
 
     def _redeploy_step(
         self,
@@ -445,9 +533,10 @@ class DBACTController:
         neighbor_indices: list[int],
         observations: list[BoundaryObservation],
         contact_ready: list[bool],
+        transport_active: bool = True,
     ) -> tuple[np.ndarray, bool]:
         agent = agents[i]
-        if not contact_ready[i]:
+        if not transport_active or not contact_ready[i]:
             return np.zeros(2), False
         supporters = 1 + sum(1 for j in neighbor_indices if contact_ready[j])
         if supporters < self.params.min_push_agents:
@@ -551,34 +640,27 @@ class DBACTController:
     def _update_object_velocity(
         self, agent_id: str, observations: list[BoundaryObservation], dt: float
     ) -> None:
-        """Estimate object velocity by differencing the observed map centroid.
+        """Estimate object velocity from point-to-plane map registration.
 
-        This estimate is biased whenever the visible arc changes, which is why the
-        object-boundary barrier is stated as ISSf rather than exact: the residual
-        is absorbed by ``rho`` and by the bound on ``||v_obj_hat - v_obj||``.
+        Differencing the centroid of a *visible arc* does not estimate rigid-body
+        motion: the centroid can jump when a corner enters or leaves the scan even
+        while the object is static.  In the 500-frame scenario that produced a
+        fictitious velocity ``[0.182, 0.372] m/s`` and made otherwise safe object
+        rows mutually infeasible.  ``LocalBoundaryMap.last_motion`` is instead the
+        point-to-plane rigid translation estimated between consecutive scans.
+        Its remaining error is what the ISSf margin ``rho`` covers.
         """
-        current: dict[str, np.ndarray] = {}
-        grouped: dict[str, list[BoundaryObservation]] = {}
-        for obs in observations:
-            grouped.setdefault(obs.object_id, []).append(obs)
-        for object_id, items in grouped.items():
-            points = np.vstack([o.point for o in items])
-            current[object_id] = points.mean(axis=0)
-
-        previous = self._object_centroid.get(agent_id, {})
+        object_ids = {obs.object_id for obs in observations}
         filtered = self.object_velocity.setdefault(agent_id, {})
         alpha = float(np.clip(self.params.object_velocity_filter, 0.0, 1.0))
-        for object_id, centroid in current.items():
-            if object_id in previous and dt > 1e-9:
-                raw = (centroid - previous[object_id]) / dt
-                prior = filtered.get(object_id, np.zeros(2))
-                filtered[object_id] = (1.0 - alpha) * prior + alpha * raw
-            else:
-                filtered.setdefault(object_id, np.zeros(2))
+        motions = self.maps[agent_id].last_motion
+        for object_id in object_ids:
+            raw = motions.get(object_id, np.zeros(2)) / max(float(dt), 1e-9)
+            prior = filtered.get(object_id, np.zeros(2))
+            filtered[object_id] = (1.0 - alpha) * prior + alpha * raw
         for object_id in list(filtered):
-            if object_id not in current:
+            if object_id not in object_ids:
                 del filtered[object_id]
-        self._object_centroid[agent_id] = current
 
     def _contact_ready(self, agent: AgentState, observations: list[BoundaryObservation]) -> bool:
         """True when the robot's *own* map says it sits in the contact band."""

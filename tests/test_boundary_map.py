@@ -164,3 +164,51 @@ def test_object_ids_are_tracked_separately():
     m.update(first + second, 0.0)
     assert m.object_ids() == ["obj", "other"]
     assert m.total_arc_length("obj") == pytest.approx(m.total_arc_length("other"))
+
+
+def test_point_to_plane_motion_compensation_moves_the_map_once_per_scan():
+    """A translating cargo must not leave a world-frame density trail behind it."""
+    m = LocalBoundaryMap(
+        voxel_size=0.04,
+        age_decay=0.0,
+        motion_match_radius=0.20,
+        motion_min_matches=5,
+        max_translation_per_update=0.08,
+    )
+    horizontal = wall_observations(timestamp=0.0, count=11, spacing=0.08)
+    vertical = [
+        BoundaryObservation(
+            "obj",
+            "a1",
+            np.array([0.0, (k - 5) * 0.08]),
+            np.array([1.0, 0.0]),
+            0.0,
+            0.9,
+            arc_length=0.08,
+        )
+        for k in range(11)
+    ]
+    m.update(horizontal + vertical, 0.0)
+    before = np.mean(np.vstack([o.point for o in m.all_observations(0.0)]), axis=0)
+
+    shift = np.array([0.03, -0.02])
+    moved = [
+        BoundaryObservation(
+            o.object_id,
+            o.agent_id,
+            o.point + shift,
+            o.normal,
+            1.0,
+            o.confidence,
+            arc_length=o.arc_length,
+        )
+        for o in horizontal + vertical
+    ]
+    m.update(moved, 1.0)
+    after = np.mean(np.vstack([o.point for o in m.all_observations(1.0)]), axis=0)
+    assert m.last_motion["obj"] == pytest.approx(shift, abs=2e-3)
+    assert after - before == pytest.approx(shift, abs=1e-2)
+
+    # Same-frame relay is a duplicate, not a second body motion.
+    m.update(moved * 4, 1.0)
+    assert np.mean(np.vstack([o.point for o in m.all_observations(1.0)]), axis=0) == pytest.approx(after)

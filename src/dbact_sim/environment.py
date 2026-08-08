@@ -74,7 +74,7 @@ class SimulationEnvironment:
         self.domain = domain_from_config(config)
         self.agents = build_agents(config, seed=self.seed)
         self.cargoes = build_cargoes(config)
-        self.goal_directions = goal_directions_from_config(config)
+        self.goal_directions = goal_directions_from_config(config, seed=self.seed)
 
         params = controller_params_from_config(config)
         assert_initial_state_valid(self.agents, self.cargoes, params.d_min, params.robot_radius)
@@ -90,8 +90,11 @@ class SimulationEnvironment:
         self.evaluation_contact_radius = float(config.get("evaluation", {}).get("contact_radius", 0.42))
         self.success_contract = DirectionalProgressContract(
             j_min=float(config.get("evaluation", {}).get("j_min", 0.15)),
+            j_max=float(config.get("evaluation", {}).get("j_max", float("inf"))),
             efficiency_min=float(config.get("evaluation", {}).get("efficiency_min", 0.7)),
             displacement_gate=float(config.get("evaluation", {}).get("displacement_gate", 0.1)),
+            coverage_min=float(config.get("evaluation", {}).get("coverage_min", 0.0)),
+            max_rotation_deg=float(config.get("evaluation", {}).get("max_rotation_deg", float("inf"))),
             # Filled in at summary time from the measured cargo speed; see
             # `_discrete_overshoot`.
             discrete_overshoot=0.0,
@@ -200,13 +203,16 @@ class SimulationEnvironment:
             max_penetration = max(self.log.max_penetration[cid]) if self.log.max_penetration[cid] else 0.0
             contacts = self.log.contact_counts[cid]
             forces = np.vstack(self.log.net_force[cid]) if self.log.net_force[cid] else np.zeros((1, 2))
+            rotation_deg = (
+                float(np.degrees(self.log.cargo_angles[cid][-1] - self.log.cargo_angles[cid][0]))
+                if len(self.log.cargo_angles[cid]) >= 2
+                else 0.0
+            )
 
             entry = {
                 "displacement_vector": (centers[-1] - centers[0]).tolist() if len(centers) >= 2 else [0.0, 0.0],
                 "displacement": float(np.linalg.norm(centers[-1] - centers[0])) if len(centers) >= 2 else 0.0,
-                "rotation_deg": float(np.degrees(self.log.cargo_angles[cid][-1] - self.log.cargo_angles[cid][0]))
-                if len(self.log.cargo_angles[cid]) >= 2
-                else 0.0,
+                "rotation_deg": rotation_deg,
                 "final_coverage_legacy": self.log.coverage[cid][-1] if self.log.coverage[cid] else 0.0,
                 "final_strict_coverage": self.log.strict_coverage[cid][-1] if self.log.strict_coverage[cid] else 0.0,
                 "max_strict_coverage": max(self.log.strict_coverage[cid], default=0.0),
@@ -219,7 +225,33 @@ class SimulationEnvironment:
                 "peak_net_force": float(np.max(np.linalg.norm(forces, axis=1))),
                 "recruited_agents": recruited_agents_count(cargo, self.agents, self.evaluation_contact_radius),
             }
+            first_detection = next(
+                (
+                    k
+                    for k, modes in enumerate(self.log.mode_counts)
+                    if any(name not in {"explore", "search"} and count > 0 for name, count in modes.items())
+                ),
+                None,
+            )
+            first_enclosure = next(
+                (k for k, value in enumerate(self.log.strict_coverage[cid]) if value >= self.success_contract.coverage_min),
+                None,
+            )
+            first_transport = next(
+                (
+                    k
+                    for k, modes in enumerate(self.log.mode_counts)
+                    if modes.get("push", 0) + modes.get("convoy", 0) > 0
+                ),
+                None,
+            )
+            entry["phase_frames"] = {
+                "first_detection": first_detection,
+                "first_enclosure": first_enclosure,
+                "first_transport": first_transport,
+            }
             if goal is not None and len(centers) >= 2:
+                entry["goal_direction"] = np.asarray(goal, dtype=float).tolist()
                 entry.update(directional_progress(centers[0], centers[-1], goal))
                 verdict = self.success_contract.evaluate(
                     centers[0],
@@ -231,9 +263,26 @@ class SimulationEnvironment:
                     solver_fallbacks=solver_stats["fallbacks"],
                     min_inter_agent_distance=min_distance,
                     d_min=params.d_min,
+                    final_strict_coverage=entry["final_strict_coverage"],
+                    rotation_deg=rotation_deg,
                 )
-                entry["success"] = verdict.success
-                entry["failure_reasons"] = verdict.reasons
+                phase_reasons: list[str] = []
+                if first_detection is None:
+                    phase_reasons.append("phase gate: cargo was never detected")
+                if first_enclosure is None:
+                    phase_reasons.append("phase gate: enclosure threshold was never reached")
+                if first_transport is None:
+                    phase_reasons.append("phase gate: transport phase never activated")
+                if (
+                    first_enclosure is not None
+                    and first_transport is not None
+                    and first_transport < first_enclosure
+                ):
+                    phase_reasons.append(
+                        f"phase gate: transport started at frame {first_transport} before enclosure at frame {first_enclosure}"
+                    )
+                entry["success"] = verdict.success and not phase_reasons
+                entry["failure_reasons"] = verdict.reasons + phase_reasons
             else:
                 entry["success"] = None
                 entry["failure_reasons"] = ["no goal direction configured for this cargo"]
@@ -255,6 +304,7 @@ class SimulationEnvironment:
                 "discrete_overshoot": self.success_contract.discrete_overshoot,
             },
             "solver": solver_stats,
+            "transport_progress_estimates": self.controller.transport_progress_summary(),
             "min_inter_agent_distance": min_distance,
             "mean_path_length": float(np.mean(list(lengths.values()))) if lengths else 0.0,
             "cargoes": cargo_summaries,

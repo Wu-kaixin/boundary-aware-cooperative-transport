@@ -207,7 +207,26 @@ def animate_simulation(
 
         time_s = env.log.times[frame_index]
         min_dist = env.log.min_distances[frame_index]
-        ax.set_title(f"{title} | t={time_s:.1f}s | min distance={min_dist:.2f}m")
+        modes = env.log.mode_counts[frame_index] if frame_index < len(env.log.mode_counts) else {}
+        if modes.get("push", 0) + modes.get("convoy", 0) > 0:
+            phase = "TRANSPORT"
+        elif modes.get("hold", 0) > 0:
+            phase = "HOLD"
+        elif any(modes.get(name, 0) > 0 for name in ("cage", "approach", "redeploy")):
+            phase = "ENCLOSE"
+        else:
+            phase = "SEARCH"
+        ax.set_title(f"{title} | {phase} | t={time_s:.1f}s | min distance={min_dist:.2f}m")
+        ax.text(
+            0.02,
+            0.98,
+            "  ".join(f"{name}:{count}" for name, count in sorted(modes.items())),
+            transform=ax.transAxes,
+            ha="left",
+            va="top",
+            fontsize=8,
+            bbox={"facecolor": "white", "alpha": 0.75, "edgecolor": "0.7"},
+        )
         return artists
 
     ani = animation.FuncAnimation(fig, draw, frames=frames, interval=1000 / fps, blit=False)

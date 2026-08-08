@@ -152,6 +152,26 @@ def test_c3_rejects_a_run_with_solver_fallbacks():
     assert any("fallback" in r for r in verdict.reasons)
 
 
+def test_c3_enforces_the_controlled_transport_range_enclosure_and_rotation():
+    contract = DirectionalProgressContract(
+        j_min=0.15,
+        j_max=0.60,
+        coverage_min=0.70,
+        max_rotation_deg=5.0,
+    )
+    verdict = contract.evaluate(
+        np.zeros(2),
+        np.array([0.75, 0.0]),
+        np.array([1.0, 0.0]),
+        final_strict_coverage=0.55,
+        rotation_deg=8.0,
+    )
+    assert not verdict.success
+    assert any("J_max" in r for r in verdict.reasons)
+    assert any("strict coverage" in r for r in verdict.reasons)
+    assert any("rotation" in r for r in verdict.reasons)
+
+
 def test_c3_reports_reasons_as_strings_not_a_bare_boolean():
     contract = DirectionalProgressContract(j_min=0.15)
     verdict = contract.evaluate(np.zeros(2), np.zeros(2), np.array([1.0, 0.0]))

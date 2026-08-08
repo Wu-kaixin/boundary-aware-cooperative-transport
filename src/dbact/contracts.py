@@ -227,8 +227,11 @@ class DirectionalProgressContract:
     """
 
     j_min: float = 0.15
+    j_max: float = float("inf")
     efficiency_min: float = 0.7
     displacement_gate: float = 0.1
+    coverage_min: float = 0.0
+    max_rotation_deg: float = float("inf")
     discrete_overshoot: float = 0.0
 
     def evaluate(
@@ -243,6 +246,8 @@ class DirectionalProgressContract:
         solver_fallbacks: int | None = None,
         min_inter_agent_distance: float | None = None,
         d_min: float | None = None,
+        final_strict_coverage: float | None = None,
+        rotation_deg: float | None = None,
     ) -> SuccessVerdict:
         x0 = np.asarray(start, dtype=float).reshape(2)
         xt = np.asarray(end, dtype=float).reshape(2)
@@ -260,6 +265,8 @@ class DirectionalProgressContract:
         reasons: list[str] = []
         if j < self.j_min:
             reasons.append(f"C3: directional progress J={j:.4f} m < J_min={self.j_min:.4f} m")
+        if j > self.j_max:
+            reasons.append(f"C3: directional progress J={j:.4f} m > J_max={self.j_max:.4f} m")
         if displacement >= self.displacement_gate and efficiency < self.efficiency_min:
             reasons.append(
                 f"C3: progress efficiency J/||dx||={efficiency:.4f} < {self.efficiency_min:.2f} "
@@ -285,12 +292,22 @@ class DirectionalProgressContract:
             reasons.append(
                 f"C3: min inter-agent distance {min_inter_agent_distance:.4f} m < d_min {d_min:.4f} m"
             )
+        if final_strict_coverage is not None and final_strict_coverage < self.coverage_min:
+            reasons.append(
+                f"C3: final strict coverage {final_strict_coverage:.4f} < {self.coverage_min:.4f}"
+            )
+        if rotation_deg is not None and abs(rotation_deg) > self.max_rotation_deg:
+            reasons.append(
+                f"C3: |cargo rotation|={abs(rotation_deg):.4f} deg > {self.max_rotation_deg:.4f} deg"
+            )
 
         metrics = {
             "directional_progress_J": j,
             "displacement": displacement,
             "progress_efficiency": efficiency,
             "goal_direction": u.tolist(),
+            "final_strict_coverage": final_strict_coverage,
+            "rotation_deg": rotation_deg,
         }
         return SuccessVerdict(success=not reasons, reasons=reasons, metrics=metrics)
 

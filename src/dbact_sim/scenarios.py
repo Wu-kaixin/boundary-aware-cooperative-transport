@@ -191,7 +191,7 @@ def build_cargoes(cfg: dict) -> list[Cargo]:
     return [Cargo.from_config(item) for item in cfg.get("cargoes", [])]
 
 
-def goal_directions_from_config(cfg: dict) -> dict[str, np.ndarray]:
+def goal_directions_from_config(cfg: dict, seed: int = 0) -> dict[str, np.ndarray]:
     """Task goal directions, keyed by cargo id.
 
     Held by the task, never by the body. ``transport_direction`` is still read
@@ -206,6 +206,43 @@ def goal_directions_from_config(cfg: dict) -> dict[str, np.ndarray]:
             goals[str(item.get("id", "cargo"))] = normalize(np.asarray(direction, dtype=float))
     for object_id, direction in (cfg.get("task", {}).get("goal_directions", {}) or {}).items():
         goals[str(object_id)] = normalize(np.asarray(direction, dtype=float))
+
+    random_cfg = (cfg.get("task", {}).get("random_goal", {}) or {})
+    if bool(random_cfg.get("enabled", False)):
+        angle_min = float(random_cfg.get("angle_min_deg", 0.0))
+        angle_max = float(random_cfg.get("angle_max_deg", 360.0))
+        if angle_max <= angle_min:
+            raise ContractViolation("task.random_goal requires angle_max_deg > angle_min_deg")
+        distance = float(random_cfg.get("target_distance", 0.30))
+        wall_margin = float(random_cfg.get("wall_margin", 0.50))
+        max_attempts = int(random_cfg.get("max_attempts", 256))
+        xmin, xmax, ymin, ymax = domain_from_config(cfg)
+        for item in cfg.get("cargoes", []):
+            object_id = str(item.get("id", "cargo"))
+            # An explicit task goal remains authoritative.  The random mode fills
+            # only missing goals so a baseline can override one cargo without
+            # silently randomising the others.
+            if object_id in goals:
+                continue
+            center = np.asarray(item.get("center", [0.0, 0.0]), dtype=float).reshape(2)
+            rng = frame_rng("random_goal", object_id, base=seed)
+            accepted = None
+            for _ in range(max_attempts):
+                angle = np.deg2rad(rng.uniform(angle_min, angle_max))
+                direction = np.array([np.cos(angle), np.sin(angle)], dtype=float)
+                target = center + distance * direction
+                if (
+                    xmin + wall_margin <= target[0] <= xmax - wall_margin
+                    and ymin + wall_margin <= target[1] <= ymax - wall_margin
+                ):
+                    accepted = direction
+                    break
+            if accepted is None:
+                raise ContractViolation(
+                    f"task.random_goal could not place the {distance:.3f} m target for {object_id!r} "
+                    f"inside the domain margin after {max_attempts} attempts"
+                )
+            goals[object_id] = accepted
     return goals
 
 

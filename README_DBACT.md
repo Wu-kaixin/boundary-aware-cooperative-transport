@@ -10,6 +10,14 @@
 > 目前**未**达成——闭环产生方向正确、效率 0.82–0.91 的正进度，但在低于任务阈值处
 > 停在准静态 caging 平衡上。三条贡献均不依赖搬运，且都已被验证。
 
+> **后续闭环实现。** 分支 `A-boundary-aware-closed-loop-v2` 已加入
+> SEARCH → ENCLOSE → TRANSPORT → HOLD 的 500-frame 闭环、受约束随机任务方向、
+> 移动物体的局部边界地图补偿，以及更严格的 C3 验收门。当前 L 型物体实验为
+> 12/12 seeds 通过、72,000 次 QP 零 fallback；该结果仍只覆盖一个凹物体与
+> `[-10°, 60°]` 的可行方向范围，不能直接表述为任意形状/任意方向的理论结论。
+> 复现方式、实测统计和论文缺口见
+> [`docs/CLOSED_LOOP_500.md`](docs/CLOSED_LOOP_500.md)。
+
 > 面向未知任意形状物体的去中心化边界感知协同搬运算法  
 > Decentralized Boundary-Aware Cooperative Transportation of Arbitrarily Shaped Objects Without Prior Object Knowledge
 

@@ -55,7 +55,12 @@ class LocalBoundaryMap:
     age_decay: float = 0.30
     max_voxels_per_object: int = 600
     min_weight: float = 1e-3
+    motion_compensation: bool = True
+    motion_match_radius: float = 0.18
+    motion_min_matches: int = 5
+    max_translation_per_update: float = 0.04
     records: dict[tuple[str, int, int], VoxelRecord] = field(default_factory=dict)
+    last_motion: dict[str, np.ndarray] = field(default_factory=dict)
 
     # ------------------------------------------------------------------ #
 
@@ -71,6 +76,13 @@ class LocalBoundaryMap:
         if not new_observations:
             self.prune(timestamp)
             return
+
+        if self.motion_compensation:
+            grouped: dict[str, list[BoundaryObservation]] = {}
+            for obs in new_observations:
+                grouped.setdefault(obs.object_id, []).append(obs)
+            for object_id, batch in grouped.items():
+                self._compensate_translation(object_id, batch)
 
         # A relayed observation is an exact duplicate of one already in the batch,
         # and it must count once. Deduplicating on (source, time, point) does that
@@ -122,6 +134,95 @@ class LocalBoundaryMap:
             record.observations += 1
 
         self.prune(timestamp)
+
+    def _compensate_translation(
+        self,
+        object_id: str,
+        observations: list[BoundaryObservation],
+    ) -> None:
+        """Move the world-frame map with a translating rigid body.
+
+        Point-to-point nearest-neighbour motion is biased along a straight edge:
+        a newly sampled point can slide along that edge even when the object is
+        static.  Point-to-plane ICP removes that ambiguity.  For every
+        normal-compatible match it contributes
+
+            n_k.T t = n_k.T (b_new - b_old),
+
+        and the least-squares translation ``t`` is applied once per newer scan.
+        With two non-parallel visible faces the estimate is full rank; with one
+        face the minimum-norm solution moves only in the observable normal
+        direction.  Same-frame relays cannot move the map repeatedly because the
+        stored records already carry that timestamp after the first update.
+        """
+        self.last_motion[object_id] = np.zeros(2, dtype=float)
+        old = [rec for rec in self.records.values() if rec.object_id == object_id]
+        if len(old) < self.motion_min_matches or len(observations) < self.motion_min_matches:
+            return
+        latest_old = max(float(rec.timestamp) for rec in old)
+        latest_new = max(float(obs.timestamp) for obs in observations)
+        if latest_new <= latest_old + 1e-12:
+            return
+
+        old_points = np.vstack([rec.point for rec in old])
+        old_normals = np.vstack([rec.normal for rec in old])
+        new_points = np.vstack([obs.point for obs in observations])
+        new_normals = np.vstack([obs.normal for obs in observations])
+        dist2 = np.sum((new_points[:, None, :] - old_points[None, :, :]) ** 2, axis=2)
+        alignment = new_normals @ old_normals.T
+        admissible = alignment >= 0.70
+        masked = np.where(admissible, dist2, np.inf)
+        match = np.argmin(masked, axis=1)
+        best = masked[np.arange(len(new_points)), match]
+        valid = np.isfinite(best) & (best <= self.motion_match_radius ** 2)
+        if int(np.sum(valid)) < self.motion_min_matches:
+            return
+
+        q_old = old_points[match[valid]]
+        n_old = old_normals[match[valid]]
+        q_new = new_points[valid]
+        rhs = np.sum(n_old * (q_new - q_old), axis=1)
+        try:
+            translation, _, _, _ = np.linalg.lstsq(n_old, rhs, rcond=None)
+        except np.linalg.LinAlgError:
+            return
+
+        residual = np.abs(n_old @ translation - rhs)
+        tolerance = max(0.5 * self.voxel_size, 3.0 * float(np.median(residual)) + 1e-9)
+        inliers = residual <= tolerance
+        if int(np.sum(inliers)) >= self.motion_min_matches and not np.all(inliers):
+            try:
+                translation, _, _, _ = np.linalg.lstsq(n_old[inliers], rhs[inliers], rcond=None)
+            except np.linalg.LinAlgError:
+                return
+
+        magnitude = float(np.linalg.norm(translation))
+        if magnitude <= 1e-6 or magnitude > self.max_translation_per_update:
+            return
+        self._shift_object_records(object_id, translation)
+        self.last_motion[object_id] = np.asarray(translation, dtype=float).copy()
+
+    def _shift_object_records(self, object_id: str, translation: np.ndarray) -> None:
+        """Shift one object's records and rebuild voxel keys without mass growth."""
+        rebuilt: dict[tuple[str, int, int], VoxelRecord] = {}
+        for key, record in self.records.items():
+            if record.object_id == object_id:
+                record.point = record.point + translation
+                key = self._key(record.object_id, record.point)
+            incumbent = rebuilt.get(key)
+            if incumbent is None:
+                rebuilt[key] = record
+                continue
+            # A re-key collision represents one spatial cell, not two pieces of
+            # boundary.  Keep the stronger geometry and the maximum arc measure.
+            if record.weight_sum > incumbent.weight_sum:
+                record.arc_length = max(record.arc_length, incumbent.arc_length)
+                record.confidence = max(record.confidence, incumbent.confidence)
+                rebuilt[key] = record
+            else:
+                incumbent.arc_length = max(incumbent.arc_length, record.arc_length)
+                incumbent.confidence = max(incumbent.confidence, record.confidence)
+        self.records = rebuilt
 
     def prune(self, timestamp: float) -> None:
         """Drop faded cells, then apply the capacity cap per object.

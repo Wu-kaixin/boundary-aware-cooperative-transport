@@ -8,7 +8,7 @@ Reproducible decentralized multi-robot caging and transport experiments with met
 
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
 ![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg)
-![Tests](https://img.shields.io/badge/Tests-200%20passed-brightgreen.svg)
+![Tests](https://img.shields.io/badge/Tests-204%20passed-brightgreen.svg)
 ![Version](https://img.shields.io/badge/Version-0.2.0-informational.svg)
 ![Visualization](https://img.shields.io/badge/Visualization-Matplotlib-orange.svg)
 ![Platform](https://img.shields.io/badge/Platform-MAS%20%7C%20RoboMaster%20S1-lightgrey.svg)
@@ -41,9 +41,22 @@ The repository combines a standalone simulation stack, boundary-aware local cont
 > the barrier disabled, 9 of 16 robots end up inside the object while the old metric
 > still reports 1.000.
 
+> **500-frame closed-loop branch.** `A-boundary-aware-closed-loop-v2` adds a
+> bounded SEARCH → ENCLOSE → TRANSPORT → HOLD loop for an unknown L-shaped
+> cargo.  In the current constrained random-direction benchmark, 12/12 seeds
+> pass within 500 frames with zero QP fallback.  This is a narrow engineering
+> result, not yet a general arbitrary-shape theorem.  See
+> [`docs/CLOSED_LOOP_500.md`](docs/CLOSED_LOOP_500.md) for commands, metrics,
+> acceptance gates, and the remaining paper-grade work.
+
 ---
 
 ## Visual Showcase
+
+![DBACT 500-frame closed-loop demo](docs/assets/dbact-closed-loop-500.gif)
+
+> New branch result: local discovery, enclosure, constrained-direction contact
+> transport, and bounded hold within one 500-frame run.
 
 ![DBACT moving cargo demo](docs/assets/dbact-moving-cargo.gif)
 

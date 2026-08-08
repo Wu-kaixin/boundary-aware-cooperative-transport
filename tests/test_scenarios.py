@@ -105,6 +105,47 @@ def test_task_block_can_override_the_goal_direction():
     assert goal_directions_from_config(cfg)["cargo_0"] == pytest.approx([0.0, -1.0])
 
 
+def test_random_goal_is_seeded_bounded_and_kept_inside_the_controlled_domain():
+    cfg = base_config()
+    del cfg["cargoes"][0]["transport_direction"]
+    cfg["task"] = {
+        "random_goal": {
+            "enabled": True,
+            "angle_min_deg": -20.0,
+            "angle_max_deg": 50.0,
+            "target_distance": 0.30,
+            "wall_margin": 1.0,
+        }
+    }
+    g1 = goal_directions_from_config(cfg, seed=7)["cargo_0"]
+    g2 = goal_directions_from_config(cfg, seed=7)["cargo_0"]
+    g3 = goal_directions_from_config(cfg, seed=8)["cargo_0"]
+    assert g1 == pytest.approx(g2)
+    assert not np.allclose(g1, g3)
+    angle = np.degrees(np.arctan2(g1[1], g1[0]))
+    assert -20.0 <= angle <= 50.0
+    target = np.asarray(cfg["cargoes"][0]["center"], dtype=float) + 0.30 * g1
+    assert 1.0 <= target[0] <= 7.0
+    assert 1.0 <= target[1] <= 7.0
+
+
+def test_random_goal_fails_when_no_direction_can_fit_the_margin():
+    cfg = base_config()
+    del cfg["cargoes"][0]["transport_direction"]
+    cfg["task"] = {
+        "random_goal": {
+            "enabled": True,
+            "angle_min_deg": 0.0,
+            "angle_max_deg": 1.0,
+            "target_distance": 20.0,
+            "wall_margin": 1.0,
+            "max_attempts": 4,
+        }
+    }
+    with pytest.raises(ContractViolation, match="could not place"):
+        goal_directions_from_config(cfg, seed=0)
+
+
 # --------------------------------------------------------------------------- #
 # layouts
 # --------------------------------------------------------------------------- #
