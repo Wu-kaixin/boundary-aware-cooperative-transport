@@ -122,14 +122,24 @@ class DBACTParams:
     kp_cage: float = 0.9
     kp_transport: float = 0.18
 
-    # Search without object-position knowledge.  ``contracting_ring`` preserves
-    # the connected deployment while sweeping the configured work region from
-    # outside the sensor horizon towards its centre.
-    search_pattern: str = "legacy"  # "legacy" | "contracting_ring"
+    # Search without object-position knowledge. ``paired_lanes`` gives a finite
+    # rectangular-workspace coverage bound: two lane teams sweep inward from
+    # opposite sides, rendezvous, and hold long enough for neighbour-to-neighbour
+    # map gossip before enclosure starts.
+    search_pattern: str = "legacy"  # "legacy" | "contracting_ring" | "paired_lanes"
     search_center: list[float] | None = None
     search_inner_radius: float = 1.6
     search_inward_speed: float = 0.18
     search_angular_speed: float = 0.04
+    search_detection_radius: float = 0.80
+    search_speed: float = 0.30
+    search_meeting_gap: float = 0.40
+    search_gossip_time: float = 0.90
+    search_local_gossip_time: float = 0.60
+    map_gossip: bool = False
+    boundary_mapping_time: float = 0.0
+    boundary_mapping_radius: float = 1.0
+    boundary_mapping_angular_speed: float = 0.35
 
     # --- transport gating (S7) ---
     push_side_threshold: float = 0.35
@@ -144,6 +154,7 @@ class DBACTParams:
     # preload through ``kp_transport``.
     transport_speed: float = 0.0
     transport_dwell_steps: int = 0
+    transport_min_steps: int = 0
     # Stop the feed-forward/pushing phase after this locally estimated signed
     # displacement.  Zero disables the bound.  The estimate is the integral of
     # point-to-plane map registrations, so the controller does not read the
@@ -216,8 +227,19 @@ class DBACTController:
 
         if params.perception_every < 1 or params.planning_every < 1:
             raise ValueError("perception_every and planning_every must both be positive integers")
-        if params.search_pattern not in {"legacy", "contracting_ring"}:
-            raise ValueError("search_pattern must be 'legacy' or 'contracting_ring'")
+        if params.search_pattern not in {"legacy", "contracting_ring", "paired_lanes"}:
+            raise ValueError("search_pattern must be 'legacy', 'contracting_ring' or 'paired_lanes'")
+        if params.search_pattern == "paired_lanes":
+            if params.search_speed <= 0.0:
+                raise ValueError("paired_lanes search_speed must be positive")
+            if params.search_detection_radius <= 0.0:
+                raise ValueError("paired_lanes search_detection_radius must be positive")
+            if params.search_meeting_gap < params.d_min:
+                raise ValueError("paired_lanes search_meeting_gap must be at least d_min")
+            if params.search_gossip_time < 0.0 or params.search_local_gossip_time < 0.0:
+                raise ValueError("paired_lanes gossip times cannot be negative")
+            if params.boundary_mapping_time < 0.0 or params.boundary_mapping_radius <= 0.0:
+                raise ValueError("paired_lanes boundary mapping time/radius are invalid")
 
         # Contracts first: a controller that cannot satisfy them must not be built.
         params.coverage_contract().assert_valid()
@@ -279,12 +301,17 @@ class DBACTController:
         self._object_centroid: dict[str, dict[str, np.ndarray]] = {}
         self._transport_ready_streak: dict[str, int] = {}
         self._transport_progress: dict[str, dict[str, float]] = {}
+        self._transport_origin_centroid: dict[str, dict[str, np.ndarray]] = {}
         self._transport_complete_latch: dict[str, bool] = {}
+        self._transport_start_frame: dict[str, int] = {}
         self._search_initial_polar: dict[str, tuple[float, float]] = {}
+        self._search_initial_pose: dict[str, np.ndarray] = {}
+        self._first_observation_time: dict[str, float] = {}
         self._nominal_cache: dict[str, tuple[np.ndarray, str, float, bool]] = {}
         self._fused_cache: dict[str, list[BoundaryObservation]] = {}
         self.target_region_points = self._build_target_region_points()
         self.diagnostics: list[AgentDiagnostics] = []
+        self.last_detection_counts: dict[str, int] = {}
         self._time = 0.0
         self._frame = 0
 
@@ -302,19 +329,29 @@ class DBACTController:
         if refresh_perception:
             for agent in agents:
                 sensed[agent.agent_id] = self.sensor.sense(agent, cargoes, timestamp)
+            self.last_detection_counts = {}
+            for observations in sensed.values():
+                for observation in observations:
+                    self.last_detection_counts[observation.object_id] = (
+                        self.last_detection_counts.get(observation.object_id, 0) + 1
+                    )
+        else:
+            self.last_detection_counts = {}
 
         # Own observations first, then one hop of neighbour relay. Voxel fusion
         # makes the relay idempotent: hearing the same cell twice adds no mass.
         # The fused view is read once per agent per step and reused, because
         # rebuilding it for every consumer also re-prunes the map each time.
         fused: dict[str, list[BoundaryObservation]] = {}
+        prior_fused = {agent_id: list(items) for agent_id, items in self._fused_cache.items()}
         for i, agent in enumerate(agents):
             if refresh_perception:
                 batch = list(sensed[agent.agent_id])
                 for j in neighbors[i]:
                     batch.extend(sensed[agents[j].agent_id])
+                    if self.params.map_gossip:
+                        batch.extend(prior_fused.get(agents[j].agent_id, []))
                 self.maps[agent.agent_id].update(batch, timestamp)
-                self._accumulate_transport_progress(agent.agent_id)
                 self._fused_cache[agent.agent_id] = self.maps[agent.agent_id].all_observations(timestamp)
             fused[agent.agent_id] = self._fused_cache.get(agent.agent_id, [])
             if refresh_perception:
@@ -329,14 +366,30 @@ class DBACTController:
         transport_complete: list[bool] = []
         for i, agent in enumerate(agents):
             supporters = int(contact_ready[i]) + sum(int(contact_ready[j]) for j in neighbors[i])
-            if self.params.task_mode == "transport" and supporters >= self.params.min_push_agents:
+            search_released = (
+                self.params.search_pattern != "paired_lanes"
+                or self._time >= self._paired_search_durations()[0] + self._paired_search_durations()[1]
+                + self._paired_search_durations()[2] - 1e-12
+            )
+            if (
+                self.params.task_mode == "transport"
+                and supporters >= self.params.min_push_agents
+                and search_released
+            ):
                 self._transport_ready_streak[agent.agent_id] = self._transport_ready_streak.get(agent.agent_id, 0) + 1
             else:
                 self._transport_ready_streak[agent.agent_id] = 0
             ready = self._transport_ready_streak[agent.agent_id] >= max(0, int(self.params.transport_dwell_steps))
+            if ready:
+                self._transport_start_frame.setdefault(agent.agent_id, self._frame)
             complete = self._transport_complete(agent.agent_id, fused[agent.agent_id])
             transport_complete.append(complete)
             transport_active.append(ready and not complete)
+
+        if refresh_perception:
+            for i, agent in enumerate(agents):
+                if transport_active[i]:
+                    self._accumulate_transport_progress(agent.agent_id)
 
         self.diagnostics = []
         commands: list[ControlCommand] = []
@@ -381,14 +434,32 @@ class DBACTController:
         return commands
 
     def _accumulate_transport_progress(self, agent_id: str) -> None:
-        """Integrate only map-estimated body motion along the task direction."""
+        """Measure displacement of the locally gossiped boundary-map centroid.
+
+        Incrementally summing scan registrations is fragile under rotation: a
+        small per-scan bias accumulates for hundreds of frames and can prevent
+        HOLD even after the cargo has visibly passed the target.  At transport
+        activation the boundary map is already required to be epsilon-dense, so
+        its voxel centroid is a bounded local proxy for body translation.  The
+        baseline/difference form does not integrate drift and still reads no
+        simulator pose.
+        """
+        if self.params.search_pattern == "paired_lanes":
+            sweep, rendezvous, gossip = self._paired_search_durations()
+            if self._time < sweep + rendezvous + gossip - 1e-12:
+                return
         progress = self._transport_progress.setdefault(agent_id, {})
-        boundary_map = self.maps[agent_id]
-        for object_id, translation in boundary_map.last_motion.items():
+        origins = self._transport_origin_centroid.setdefault(agent_id, {})
+        observations = self.maps[agent_id].all_observations(self._time)
+        object_ids = {obs.object_id for obs in observations}
+        for object_id in object_ids:
             goal = self.goal_directions.get(object_id)
             if goal is None:
                 continue
-            progress[object_id] = progress.get(object_id, 0.0) + float(np.dot(translation, goal))
+            points = np.vstack([obs.point for obs in observations if obs.object_id == object_id])
+            centroid = np.mean(points, axis=0)
+            origin = origins.setdefault(object_id, centroid.copy())
+            progress[object_id] = float(np.dot(centroid - origin, goal))
 
     def _progress_for(self, agent_id: str, observations: list[BoundaryObservation]) -> float:
         progress = self._transport_progress.get(agent_id, {})
@@ -400,6 +471,13 @@ class DBACTController:
     def _transport_complete(self, agent_id: str, observations: list[BoundaryObservation]) -> bool:
         if self.params.transport_distance <= 0.0:
             return False
+        start_frame = self._transport_start_frame.get(agent_id)
+        if start_frame is None or self._frame - start_frame < max(0, int(self.params.transport_min_steps)):
+            return False
+        if self.params.search_pattern == "paired_lanes":
+            sweep, rendezvous, gossip = self._paired_search_durations()
+            if self._time < sweep + rendezvous + gossip - 1e-12:
+                return False
         if self._transport_complete_latch.get(agent_id, False):
             return True
         complete = self._progress_for(agent_id, observations) >= self.params.transport_distance
@@ -440,6 +518,34 @@ class DBACTController:
         if self.params.task_mode == "coverage":
             u, mode = self._region_coverage_command(i, agents, neighbor_indices, self._time)
             return u, mode, 0.0, False
+
+        if observations:
+            self._first_observation_time.setdefault(agent.agent_id, float(self._time))
+        forced_search_phase = self._forced_search_phase(self._time)
+        if self.params.search_pattern == "paired_lanes" and observations:
+            seen_for = float(self._time) - self._first_observation_time[agent.agent_id]
+            mapping_start = float(self.params.search_local_gossip_time)
+            mapping_end = mapping_start + float(self.params.boundary_mapping_time)
+            relay = self._is_search_relay(i, len(agents))
+            # One courier on each side completes the sweep and carries the map to
+            # rendezvous. Other informed robots remain near the cargo, first
+            # gossiping locally and then scanning occluded boundary arcs.
+            if (forced_search_phase is None or not relay) and mapping_start <= seen_for < mapping_end:
+                return (
+                    self._boundary_mapping_velocity(i, agents, observations, self._time),
+                    "map_boundary",
+                    0.0,
+                    False,
+                )
+            if not relay and seen_for >= mapping_end:
+                forced_search_phase = None
+        if forced_search_phase is not None:
+            return (
+                self._exploration_velocity(i, agents, neighbor_indices, self._time),
+                forced_search_phase,
+                0.0,
+                False,
+            )
 
         if not observations:
             return self._exploration_velocity(i, agents, neighbor_indices, self._time), "explore", 0.0, False
@@ -651,6 +757,8 @@ class DBACTController:
         agent = agents[i]
         if self.params.search_pattern == "contracting_ring":
             return self._contracting_ring_velocity(agent, timestamp)
+        if self.params.search_pattern == "paired_lanes":
+            return self._paired_lane_velocity(agent, timestamp)
 
         repel = np.zeros(2, dtype=float)
         for j in neighbor_indices:
@@ -696,6 +804,111 @@ class DBACTController:
             + radius * float(self.params.search_angular_speed) * tangent
         )
         return feed_forward + self.params.kp_explore * (target - agent.position)
+
+    def _paired_search_durations(self) -> tuple[float, float, float]:
+        """Return sweep, rendezvous, and gossip durations in seconds."""
+        xmin, xmax, _, _ = self.domain
+        half_width = 0.5 * (xmax - xmin)
+        initial = next(iter(self._search_initial_pose.values()), None)
+        if initial is None:
+            # Before the first control call the configured layout convention is
+            # the only information available.  The robot radius is a conservative
+            # edge padding and matches the default paired_sweep layout.
+            edge_padding = self.params.robot_radius
+        else:
+            edge_padding = min(float(initial[0] - xmin), float(xmax - initial[0]))
+        sweep_distance = max(0.0, half_width - edge_padding - self.params.search_detection_radius)
+        rendezvous_distance = max(
+            0.0, self.params.search_detection_radius - 0.5 * self.params.search_meeting_gap
+        )
+        speed = float(self.params.search_speed)
+        return sweep_distance / speed, rendezvous_distance / speed, float(self.params.search_gossip_time)
+
+    def _forced_search_phase(self, timestamp: float) -> str | None:
+        if self.params.search_pattern != "paired_lanes":
+            return None
+        sweep, rendezvous, gossip = self._paired_search_durations()
+        t = float(timestamp)
+        if t < sweep - 1e-12:
+            return "search_sweep"
+        if t < sweep + rendezvous - 1e-12:
+            return "search_rendezvous"
+        release = sweep + rendezvous + gossip
+        if t < release - 1e-12:
+            return "search_gossip"
+        return None
+
+    @staticmethod
+    def _is_search_relay(index: int, count: int) -> bool:
+        if count < 2 or count % 2:
+            return False
+        per_side = count // 2
+        return index in {per_side // 2, per_side + per_side // 2}
+
+    def paired_search_bound(self) -> dict[str, float]:
+        """Controller-side timing record used by the independent certificate."""
+        sweep, rendezvous, gossip = self._paired_search_durations()
+        return {
+            "sweep_seconds": sweep,
+            "rendezvous_seconds": rendezvous,
+            "gossip_seconds": gossip,
+            "release_seconds": sweep + rendezvous + gossip,
+            "mapping_seconds": float(self.params.boundary_mapping_time),
+        }
+
+    def _paired_lane_velocity(self, agent: AgentState, timestamp: float) -> np.ndarray:
+        """Execute the predetermined lane path without cargo-pose information."""
+        xmin, xmax, _, _ = self.domain
+        center_x = 0.5 * (xmin + xmax)
+        initial = self._search_initial_pose.setdefault(agent.agent_id, agent.position.copy())
+        side = -1.0 if initial[0] < center_x else 1.0
+        toward_center = -side
+        sweep, rendezvous, _ = self._paired_search_durations()
+        speed = float(self.params.search_speed)
+
+        if timestamp < sweep:
+            distance = min(speed * float(timestamp), speed * sweep)
+            target = initial + np.array([toward_center * distance, 0.0])
+            feed_forward = np.array([toward_center * speed, 0.0])
+        elif timestamp < sweep + rendezvous:
+            sweep_end = np.array([center_x + side * self.params.search_detection_radius, initial[1]])
+            distance = min(speed * (float(timestamp) - sweep), speed * rendezvous)
+            target = sweep_end + np.array([toward_center * distance, 0.0])
+            feed_forward = np.array([toward_center * speed, 0.0])
+        else:
+            target = np.array([center_x + side * 0.5 * self.params.search_meeting_gap, initial[1]])
+            feed_forward = np.zeros(2)
+        return feed_forward + self.params.kp_explore * (target - agent.position)
+
+    def _boundary_mapping_velocity(
+        self,
+        i: int,
+        agents: list[AgentState],
+        observations: list[BoundaryObservation],
+        timestamp: float,
+    ) -> np.ndarray:
+        """Distribute observers around the discovered outline before caging.
+
+        The centre is computed from the locally gossiped boundary map.  No cargo
+        pose or simulator vertex is used.  Equally spaced deterministic slots
+        expose occluded sides to different robots; a slow common rotation scans
+        around vertices and narrow concavities instead of freezing one set of
+        sight lines.
+        """
+        center = self._map_centroid(observations)
+        first_seen = self._first_observation_time.get(agents[i].agent_id, float(timestamp))
+        elapsed = max(0.0, float(timestamp) - first_seen - float(self.params.search_local_gossip_time))
+        # Golden-angle slots make either half-team alone cover the full circle;
+        # contiguous agent ids would otherwise occupy only one semicircle.
+        angle = 2.0 * np.pi * ((i * 0.6180339887498949) % 1.0) + float(
+            self.params.boundary_mapping_angular_speed
+        ) * elapsed
+        radial = np.array([np.cos(angle), np.sin(angle)], dtype=float)
+        tangent = np.array([-radial[1], radial[0]], dtype=float)
+        radius = float(self.params.boundary_mapping_radius)
+        target = center + radius * radial
+        feed_forward = radius * float(self.params.boundary_mapping_angular_speed) * tangent
+        return feed_forward + self.params.kp_explore * (target - agents[i].position)
 
     # ------------------------------------------------------------------ #
     # map-derived quantities

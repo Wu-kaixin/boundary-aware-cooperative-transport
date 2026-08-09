@@ -206,5 +206,25 @@ def test_v3_frame_discovery_and_phase_deadlines_are_revalidated():
     assert any("first_detection=151" in reason for reason in reasons)
 
 
+def test_required_guarantee_certificate_and_runtime_map_witness_are_fail_closed():
+    s = valid_summary()
+    s["contracts"]["require_guarantee_certificate"] = True
+    s["cargoes"]["cargo_0"]["guarantee_certificate"] = {
+        "eligible": True,
+        "failure_reasons": [],
+        "checks": {"simple_polygon": {"passed": True}},
+        "mapping": {"required_max_boundary_gap": 0.20},
+        "runtime_map_witness": {"max_boundary_gap": 0.10},
+        "runtime_eligible": True,
+        "runtime_failure_reasons": [],
+    }
+    assert validate(s) == []
+
+    s["cargoes"]["cargo_0"]["guarantee_certificate"]["runtime_map_witness"][
+        "max_boundary_gap"
+    ] = 0.21
+    assert any("not epsilon-dense" in reason for reason in validate(s))
+
+
 def test_an_empty_summary_rejects():
     assert validate({}) != []

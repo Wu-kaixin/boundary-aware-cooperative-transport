@@ -73,6 +73,14 @@ def test_projection_backend_is_banned_from_paper_configs():
         validate_config(cfg)
 
 
+def test_required_guarantee_certificate_cannot_be_silently_disabled():
+    cfg = base_config()
+    cfg["evaluation"] = {"require_guarantee_certificate": True}
+    cfg["guarantee"] = {"enabled": False}
+    with pytest.raises(ContractViolation, match="require_guarantee_certificate=true"):
+        validate_config(cfg)
+
+
 def test_scripted_engine_is_allowed_outside_paper_configs():
     """The B0 baseline has to remain runnable; it is simply not a paper result."""
     cfg = load_yaml("configs/sim/baseline_scripted_b0.yaml")

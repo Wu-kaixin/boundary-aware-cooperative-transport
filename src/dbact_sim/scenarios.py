@@ -78,6 +78,14 @@ def validate_config(cfg: dict) -> None:
             "configuration; use 'qp'"
         )
 
+    evaluation = cfg.get("evaluation", {}) or {}
+    if bool(evaluation.get("require_guarantee_certificate", False)) and not bool(
+        (cfg.get("guarantee", {}) or {}).get("enabled", False)
+    ):
+        problems.append(
+            "evaluation.require_guarantee_certificate=true requires guarantee.enabled=true"
+        )
+
     if problems:
         raise ContractViolation("configuration rejected:\n  - " + "\n  - ".join(problems))
 
@@ -97,7 +105,8 @@ def build_agents(cfg: dict, seed: int = 0) -> list[AgentState]:
 
     ``grid``     a compact block, all robots arriving from one side
     ``ring``     evenly spaced on a circle around the work area
-    ``scatter``  rejection-sampled in an annulus with a guaranteed separation
+    ``scatter``       rejection-sampled in an annulus with a guaranteed separation
+    ``paired_sweep``  two connected lane teams deployed on opposite domain edges
 
     ``scatter`` uses rejection sampling rather than plain Gaussian jitter because
     an unconstrained draw regularly places two robots closer than ``d_min``, and a
@@ -151,8 +160,25 @@ def build_agents(cfg: dict, seed: int = 0) -> list[AgentState]:
                 f"annulus [{radius_min}, {radius_max}] after {attempts} attempts; widen the annulus or "
                 "reduce the robot count rather than accepting an overlapping start"
             )
+    elif layout == "paired_sweep":
+        if count < 2 or count % 2:
+            raise ContractViolation("paired_sweep requires a positive even agent count")
+        xmin, xmax, ymin, ymax = domain
+        edge_padding = float(a.get("edge_padding", cfg.get("controller", {}).get("robot_radius", 0.16)))
+        if not (0.0 <= edge_padding < 0.5 * (xmax - xmin)):
+            raise ContractViolation("paired_sweep edge_padding must lie inside the domain")
+        per_side = count // 2
+        lane_spacing = (ymax - ymin) / per_side
+        for idx in range(count):
+            side = -1.0 if idx < per_side else 1.0
+            lane = idx % per_side
+            x = xmin + edge_padding if side < 0.0 else xmax - edge_padding
+            y = ymin + (lane + 0.5) * lane_spacing
+            positions.append(np.array([x, y], dtype=float))
     else:
-        raise ContractViolation(f"unknown agents.layout {layout!r}; expected 'grid', 'ring' or 'scatter'")
+        raise ContractViolation(
+            f"unknown agents.layout {layout!r}; expected 'grid', 'ring', 'scatter' or 'paired_sweep'"
+        )
 
     return [AgentState(agent_id=f"agent_{i:02d}", position=p) for i, p in enumerate(positions)]
 
@@ -187,6 +213,40 @@ def assert_initial_state_valid(agents: list[AgentState], cargoes: list, d_min: f
         raise ContractViolation("invalid initial state:\n  - " + "\n  - ".join(problems))
 
 
+def _materialize_seeded_outline(item: dict, seed: int) -> dict:
+    """Turn a seeded radial outline into an ordinary local-frame polygon.
+
+    Sorting one vertex inside each angular sector yields a star-shaped simple
+    polygon for every seed.  Shape generation belongs to episode construction;
+    downstream perception and control still receive only ray observations.
+    """
+    if str(item.get("shape", "")) != "random_simple_polygon":
+        return dict(item)
+    count = int(item.get("vertex_count", 9))
+    if count < 3:
+        raise ContractViolation("random_simple_polygon vertex_count must be at least 3")
+    radius_min = float(item.get("radius_min", 0.35))
+    radius_max = float(item.get("radius_max", 0.70))
+    if not (0.0 < radius_min <= radius_max):
+        raise ContractViolation("random_simple_polygon requires 0 < radius_min <= radius_max")
+    jitter = float(item.get("angle_jitter", 0.30))
+    if not (0.0 <= jitter < 0.5):
+        raise ContractViolation("random_simple_polygon angle_jitter must lie in [0, 0.5)")
+    object_id = str(item.get("id", "cargo"))
+    rng = frame_rng("random_simple_polygon", object_id, base=seed)
+    step = 2.0 * np.pi / count
+    angles = step * np.arange(count) + rng.uniform(-jitter * step, jitter * step, size=count)
+    angles = np.mod(angles, 2.0 * np.pi)
+    angles.sort()
+    radii = rng.uniform(radius_min, radius_max, size=count)
+    local = np.column_stack([radii * np.cos(angles), radii * np.sin(angles)])
+    item_cfg = dict(item)
+    item_cfg["shape"] = "polygon"
+    item_cfg["vertices"] = local.tolist()
+    item_cfg["vertices_frame"] = "local"
+    return item_cfg
+
+
 def build_cargoes(
     cfg: dict,
     seed: int = 0,
@@ -204,7 +264,7 @@ def build_cargoes(
     positions = np.vstack([agent.position for agent in agents]) if agents else np.empty((0, 2))
     cargoes: list[Cargo] = []
     for item in cfg.get("cargoes", []):
-        item_cfg = dict(item)
+        item_cfg = _materialize_seeded_outline(dict(item), seed)
         random_cfg = item_cfg.get("random_center", {}) or {}
         if not bool(random_cfg.get("enabled", False)):
             cargoes.append(Cargo.from_config(item_cfg))

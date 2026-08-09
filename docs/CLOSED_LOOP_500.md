@@ -1,132 +1,147 @@
-# DBACT v3: 500-Frame Search, Enclosure, and Bounded Transport
+# DBACT v3: Certificate-Backed 500-Frame Closed Loop
 
-Branch `A-boundary-aware-closed-loop-v3` closes the main gap left by v2: the
-episode now begins with **zero cargo observations**. Twelve agents sweep a
-controlled work region, discover a seeded random-position L-shaped cargo from
-local rays, enclose its boundary, transport it along a reproducible random
-direction, and latch into HOLD within a fixed 500-step budget.
+Branch `A-boundary-aware-closed-loop-v3` deliberately separates two statements:
 
-This is an engineering result for one concave shape and a controlled experiment
-region. It is not a claim of formal caging or arbitrary-shape global search.
+1. a deterministic paired-lane policy gives a finite-time discovery bound over
+   the complete rectangular workspace; and
+2. enclosure and transport carry a conditional guarantee only for simple
+   polygons whose geometry, observed map, cage, swept corridor, force, error,
+   safety, and time certificates all pass.
+
+The controller has no L-shape whitelist. The default experiment creates a
+seeded, previously unseen random simple polygon at a feasible pose and samples a
+feasible task direction over 360 degrees. The exact theorem, predicates, and
+non-claims are in [`CONDITIONAL_GUARANTEE.md`](CONDITIONAL_GUARANTEE.md).
 
 ## One-command demonstration
 
 ```bash
-conda env update -n dbact -f environment.yml
-conda run -n dbact python scripts/run_500_closed_loop.py \
-  --seed 0 --output runs/closed_loop_v3_seed0
+python scripts/run_500_closed_loop.py \
+  --config configs/sim/v3/arbitrary_shape_full_workspace_500.yaml \
+  --seed 0 --output runs/full_workspace_v3_seed0
 ```
 
-The command runs exactly 500 control/physics steps and exits non-zero when any
-validity gate fails. It writes:
+The command executes exactly 500 control/physics steps and exits non-zero when
+any strict validity gate fails. It writes the attributed summary and manifest,
+trajectories, safety time series, paper figures, final plots, and an animation.
+Use `--no-animation` for simulation-only timing. `--animation-stride 2` still
+runs all 500 steps but renders every second recorded state.
 
-- `summary.json`, `demo_manifest.json`, trajectories, and safety time series;
-- frame 0/100/200/350/500 paper figures and final trajectory/snapshot plots;
-- `closed_loop_500.gif` containing the initial state plus all 500 control steps.
+![DBACT full-workspace 500-frame demonstration](assets/dbact-full-workspace-v3-500.gif)
 
-Use `--no-animation` for simulation-only timing. Rendering is offline
-post-processing and is not included in `simulation_frames_per_wall_second`.
+![DBACT full-workspace final state](assets/dbact-full-workspace-v3-500-final.png)
 
-![DBACT v3 500-frame demonstration](assets/dbact-closed-loop-v3-500.gif)
+## Seed-0 release artifact
 
-![DBACT v3 final state](assets/dbact-closed-loop-v3-500-final.png)
+The checked-in animation uses seed 0, all 500 control steps, and 251 rendered
+states. The independent strict validator passes its `summary.json`.
 
-## Executable phase contract
+| Quantity | Result |
+| --- | ---: |
+| Initial detections | 0 |
+| First detection | frame 127 |
+| Strict enclosure | frame 234 |
+| Transport activation | frame 283 |
+| HOLD | frame 462 |
+| Random task angle | -121.94 degrees |
+| Directional progress `J` | 0.0983 m |
+| Progress efficiency | 0.9726 |
+| Final strict coverage | 1.0000 |
+| Cargo rotation | -5.36 degrees |
+| Certified boundary-map gap upper bound | 0.0399 m (`epsilon_map = 0.20 m`) |
+| Exact-QP solves / fallback / infeasible | 9,000 / 0 / 0 |
+| Pure simulation throughput | 18.15 control frames/s |
 
-| Phase event | Deadline | Seed-0 frame | Twelve-seed range |
-| --- | ---: | ---: | ---: |
-| First detection | 150 | 52 | 43–76 |
-| Strict enclosure ≥ 0.70 | 300 | 168 | 153–174 |
-| Transport activation | 350 | 181 | 178–202 |
-| Bounded-progress HOLD | 500 | 259 | 253–343 |
+Animation encoding is offline and is excluded from the throughput figure.
 
-The supervisor is event-driven; deadlines are validity gates, not scheduled
-phase switches. Transport requires a 45-step local contact quorum and cannot be
-declared successful before strict enclosure. HOLD is triggered by locally
-integrated point-to-plane map motion after 0.30 m, not by simulator cargo pose.
+## Static 500-frame accounting
 
-The scenario-level contracts are:
+| Component | Certified or declared bound (frames) |
+| --- | ---: |
+| Full half-workspace lane sweep | 204 |
+| Rendezvous | 37 |
+| Finite-hop gossip | 27 |
+| Post-release enclosure premise | 1 |
+| Transport premise | 210 |
+| Hold premise | 20 |
+| Total | 499 |
 
-- seeded random cargo reference point in the configured central search region;
-- every initial robot-to-polygon clearance greater than the 1.20 m sensor range;
-- connected 3.0 m deployment ring and a contracting/rotating search sweep that
-  depends on workspace, time, and the robot's initial slot—not cargo position;
-- seeded task direction in the controlled interval `[-10°, 60°]`;
-- target/cargo footprint rejection against workspace margins;
-- contact-only penalty dynamics; the transport engine never reads the goal;
-- 500 steps, safe initial state, hard QP, zero fallback/infeasibility, and C3
-  progress/coverage/rotation/safety gates.
+Search coverage is proved from the workspace, lane spacing, finite ray count,
+sensor range, and a constructive inscribed-feature witness. The post-release
+enclosure and transport bounds are explicit conditional premises and are
+checked against the finished trajectory; they are not inferred from the seed-0
+animation.
 
-## Efficiency changes
+## Conditional-domain and rejection evidence
 
-The safety QP and contact physics remain at 20 Hz. Expensive ray/PCA sensing,
-voxel-map registration, density construction, and Local CVT planning run every
-third step (6.67 Hz), so their held result is at most 100 ms old. The object
-velocity estimate is correspondingly low-pass filtered before entering the
-moving-boundary ISSf row.
+Six seeded random-polygon candidates were evaluated with the same configuration.
+Five passed the runtime map-density predicate and all **5/5 eligible runs**
+passed the strict closed-loop validator. The sixth was rejected because its
+maximum boundary-map gap was `0.5537 m > 0.20 m`, even though its physical run
+looked successful. This is intentional fail-closed behavior.
 
-Two implementation changes remove avoidable overhead:
+| Metric over the five eligible runs | Mean | Range |
+| --- | ---: | ---: |
+| Directional progress `J` | 0.1243 m | 0.0983-0.1642 m |
+| Progress efficiency | 0.9093 | 0.7175-0.9798 |
+| Displacement | 0.1383 m | 0.1011-0.1707 m |
+| Final strict coverage | 1.0000 | 1.0000-1.0000 |
+| Cargo rotation | -4.97 degrees | -18.19-5.21 degrees |
 
-1. fused map observations are rebuilt only on perception frames and reused
-   between updates;
-2. an entire scan is quantized to voxel indices in one NumPy operation instead
-   of calling `np.round` for every packet.
+Across those runs, 45,000 exact QPs completed with zero fallback and zero
+infeasible solve. There were 228 optional robustness-margin relaxations. The
+nominal hard barrier remained enforced, but the full configured `rho` robustness
+margin must not be claimed on those relaxed frames.
 
-The final seed-0 visual-demo run simulated at **27.76 frame/s** on the validation host. Across
-the twelve-seed batch, conservative end-to-end throughput (including environment
-construction and output serialization) averaged **23.14 frame/s**, with range
-**20.87–28.77 frame/s**. All twelve runs remained above 20 frame/s.
+The same controller also passed current 500-frame regressions for a circle,
+cage-feasible U shape, and star, each with strict coverage 1.0. A deliberately
+narrow U shape is rejected by the cage self-clearance certificate. These cases
+exercise shape independence; they do not replace the admissibility predicates.
 
-## Twelve-seed validation
+## Reproduction matrix
 
 ```bash
-conda run -n dbact python scripts/run_batch.py \
-  --configs configs/sim/v3/l_shape_search_closed_loop_500.yaml \
-  --seeds 0..11 --steps 500 --out runs/v3_sweep_12
+python scripts/run_batch.py \
+  --configs configs/sim/v3/arbitrary_shape_full_workspace_500.yaml \
+  --seeds 0..5 --steps 500 --out runs/full_workspace_sweep
 
-conda run -n dbact python scripts/plot_closed_loop_sweep.py \
-  runs/v3_sweep_12/batch_report.json \
-  --output runs/v3_sweep_12/closed_loop_sweep.png
+python scripts/run_shape_workspace_matrix.py \
+  --steps 500 --out runs/full_workspace_shape_matrix
+
+python scripts/validate_run.py runs/full_workspace_v3_seed0/summary.json
 ```
 
-All **12/12** runs passed. Across **72,000 hard-QP solves**, there were zero
-fallbacks, zero infeasible solves, and zero optional-margin relaxations.
-
-| Metric | Mean | Range | Acceptance |
-| --- | ---: | ---: | ---: |
-| Directional progress `J` | 0.3880 m | 0.3082–0.4860 m | 0.15–0.60 m |
-| Progress efficiency | 0.9909 | 0.9665–0.9998 | ≥ 0.70 |
-| Final strict coverage | 0.9958 | 0.9563–1.0000 | ≥ 0.70 |
-| Cargo rotation | 0.0697° | −0.2257–0.6232° | absolute value ≤ 5° |
-| Minimum robot separation | 0.3883 m | 0.3207–0.4707 m | ≥ 0.32 m |
-| Goal angle | 31.86° | 2.57–58.34° | configured interval |
-
-![DBACT v3 twelve-seed validation](assets/dbact-closed-loop-v3-500-sweep.png)
+The batch report shows candidate count, certificate-eligible count, rejections,
+and success statistics over the conditional domain separately. It never hides
+ineligible samples by averaging only survivors without reporting rejection.
 
 ## Implementation map
 
 | File | Responsibility |
 | --- | --- |
-| `configs/sim/v3/l_shape_search_closed_loop_500.yaml` | Zero-observation search, deadlines, multi-rate control, and controlled random task |
-| `src/dbact_sim/scenarios.py` | Seeded cargo-position sampler, initial sensor-gap contract, and goal footprint rejection |
-| `src/dbact/controller.py` | Contracting-ring search and multi-rate perception/planning with per-step safety |
-| `src/dbact/boundary_map.py` | Vectorized scan-to-voxel quantization and moving-map registration |
-| `src/dbact_sim/environment.py` | Initial-observation audit, phase deadlines, target provenance, and per-agent modes |
-| `src/dbact_sim/visualization.py` | Phase/role colors, goal route, coverage, progress, and 500-step animation |
-| `scripts/validate_run.py` | Independent revalidation of frame, discovery, phase, solver, safety, and success contracts |
+| `configs/sim/v3/arbitrary_shape_full_workspace_500.yaml` | Full-domain sampling, paired search, 360-degree task, and theorem bounds |
+| `src/dbact/guarantees.py` | Executable geometry, search, map, cage, corridor, wrench, error, and time certificate |
+| `src/dbact_sim/scenarios.py` | Paired deployment and seeded simple-polygon generation |
+| `src/dbact/controller.py` | Sweep/rendezvous/gossip/map/enclose/transport/HOLD closed loop |
+| `src/dbact/boundary_map.py` | Distributed voxel map and point-to-plane SE(2) registration |
+| `src/dbact_sim/environment.py` | Independent runtime witness, phase log, and fail-closed success gate |
+| `scripts/validate_run.py` | Independent certificate, solver, safety, phase, and outcome validation |
+| `scripts/run_shape_workspace_matrix.py` | Same-controller diverse-shape regression and explicit rejection report |
 
-## Claim boundary and remaining work
+## Claim boundary
 
 The defensible present-tense statement is:
 
-> In a 2-D penalty-contact simulation, twelve decentralized agents starting
-> outside the sensing horizon discover, enclose, and boundedly transport one
-> seeded random-position L-shaped cargo within 500 steps for twelve seeded task
-> directions in a controlled angular range.
+> The paired-lane finite-ray sensor tubes cover the complete rectangular
+> workspace for every collision-free cargo pose carrying the configured
+> inscribed-feature witness. For one unknown simple-polygon cargo whose
+> epsilon-dense boundary map, cage corridor, covering number, zero-torque goal
+> wrench, bounded errors, safety constraints, and finite-time premises all
+> pass, the strict 500-frame validator requires safe enclosure, bounded positive
+> task-direction transport, and HOLD using the exact hard-QP backend.
 
-The branch does not establish arbitrary-shape or full-workspace global search.
-Before making that stronger claim, validate random simple concave polygons,
-multiple workspace cells, full feasible 360° directions, perception/communication
-faults, multiple robot counts, and an independent PyMunk end-to-end matrix. The
-translation-only map registration also remains a known limitation for cargoes
-with significant rotation.
+This is conditional, not universal over every planar set. Self-intersecting or
+disconnected outlines, sub-resolution features, failed map completion,
+wall-blocked cages, infeasible transport corridors, insufficient agents or
+force, multiple mutually occluding cargoes, and unbounded errors are outside the
+theorem domain.

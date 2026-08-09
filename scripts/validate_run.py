@@ -94,6 +94,44 @@ def validate(summary: dict) -> list[str]:
 
     for cargo_id, entry in cargoes.items():
         prefix = f"cargo {cargo_id}"
+        if contracts.get("require_guarantee_certificate"):
+            certificate = entry.get("guarantee_certificate")
+            if not isinstance(certificate, dict):
+                reasons.append(f"{prefix}: admissibility guarantee certificate is missing")
+            elif certificate.get("eligible") is not True:
+                failed = ", ".join(certificate.get("failure_reasons") or []) or "unspecified check"
+                reasons.append(f"{prefix}: admissibility guarantee certificate failed ({failed})")
+            else:
+                checks = certificate.get("checks") or {}
+                failed_checks = [name for name, check in checks.items() if check.get("passed") is not True]
+                if failed_checks:
+                    reasons.append(
+                        f"{prefix}: certificate says eligible but failed checks remain ({', '.join(failed_checks)})"
+                    )
+                mapping = certificate.get("mapping") or {}
+                required_gap = mapping.get("required_max_boundary_gap")
+                witness = certificate.get("runtime_map_witness")
+                if required_gap is None:
+                    reasons.append(f"{prefix}: certificate boundary-map resolution is missing")
+                elif not isinstance(witness, dict):
+                    reasons.append(f"{prefix}: runtime boundary-map witness is missing")
+                elif witness.get("max_boundary_gap") is None:
+                    reasons.append(f"{prefix}: runtime boundary-map gap is missing")
+                elif witness["max_boundary_gap"] > required_gap:
+                    reasons.append(
+                        f"{prefix}: boundary map is not epsilon-dense: max gap "
+                        f"{witness['max_boundary_gap']:.4f} > {required_gap:.4f} m"
+                    )
+                elif certificate.get("runtime_eligible") is not True:
+                    reasons.append(f"{prefix}: runtime admissibility certificate is not eligible")
+                for phase_name, bound in (certificate.get("time_bounds") or {}).items():
+                    frame = (entry.get("phase_frames") or {}).get(phase_name)
+                    if frame is None:
+                        reasons.append(f"{prefix}: theorem bound {phase_name}<={int(bound)} has no event")
+                    elif frame > int(bound):
+                        reasons.append(
+                            f"{prefix}: theorem bound violated: {phase_name}={frame} > {int(bound)}"
+                        )
         if contracts.get("require_initially_unobserved"):
             initial = entry.get("initial_detection_count")
             if initial is None:

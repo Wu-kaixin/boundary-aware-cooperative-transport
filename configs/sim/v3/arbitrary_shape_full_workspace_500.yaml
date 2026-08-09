@@ -1,0 +1,167 @@
+# Certificate-backed v3 experiment.
+#
+# The search path covers the complete 8 m x 8 m rectangle.  The shape is not
+# selected from a controller whitelist: every seed creates a different simple
+# radial polygon and the independent admissibility certificate decides whether
+# that instance belongs to the theorem domain.
+paper: true
+dt: 0.05
+
+domain: {xmin: 0.0, xmax: 8.0, ymin: 0.0, ymax: 8.0}
+
+agents:
+  count: 18
+  layout: paired_sweep
+  edge_padding: 0.20
+
+cargoes:
+  - id: cargo_0
+    shape: random_simple_polygon
+    center: [4.0, 4.0]
+    vertex_count: 9
+    radius_min: 0.45
+    radius_max: 0.75
+    angle_jitter: 0.25
+    surface_density: 1.5
+    random_center:
+      enabled: true
+      # No central search box: rejection sampling ranges over the complete
+      # domain and removes only poses whose physical footprint cannot fit.
+      domain_margin: 0.45
+      initial_sensor_gap: 0.0
+      yaw_min_deg: 0.0
+      yaw_max_deg: 360.0
+      max_attempts: 2048
+
+task:
+  random_goal:
+    enabled: true
+    angle_min_deg: 0.0
+    angle_max_deg: 360.0
+    target_distance: 0.05
+    wall_margin: 0.45
+    footprint_margin: 0.45
+    max_attempts: 1024
+
+controller:
+  task_mode: transport
+
+  sensor_range: 1.20
+  ray_count: 96
+  range_noise_std: 0.0
+  pca_neighbors: 5
+  residual_tolerance: 0.030
+  # A zero-confidence raw hit is retained as a discovery event.  The enclosure
+  # density still weights it by 1e-6 until better multi-ray scans replace it.
+  min_confidence: 0.0
+  perception_every: 3
+  planning_every: 3
+  comm_range: 1.60
+
+  voxel_size: 0.07
+  # Early detections must survive the deterministic rendezvous time so that the
+  # finite-hop map flood can deliver them to the other lane team.
+  age_decay: 0.08
+  max_voxels_per_object: 600
+
+  density_mode: offset
+  cage_offset: 0.135
+  lead_offset: 0.22
+  lead_threshold: 0.55
+  sigma: 0.20
+  base_density: 0.001
+  gap_gain: 0.6
+  gap_radius: 0.35
+
+  local_radius: 0.80
+  grid_resolution: 18
+  approach_mass_ratio: 3.0
+  redeploy_gap_ratio: 0.15
+
+  robot_radius: 0.16
+  delta_max: 0.05
+  d_min: 0.32
+  gamma_agent: 6.0
+  gamma_obj: 8.0
+  rho: 0.10
+  max_speed: 0.30
+  backend: qp
+  max_object_rows: 4
+  object_row_range: 0.60
+  object_row_window: 0.20
+  object_row_inner_limit: 0.0
+  recovery_fraction: 0.25
+
+  kp_explore: 1.20
+  search_pattern: paired_lanes
+  # Must not exceed the finite-ray radius in the certificate.
+  search_detection_radius: 0.75
+  search_speed: 0.30
+  search_meeting_gap: 0.40
+  search_gossip_time: 1.35
+  search_local_gossip_time: 0.90
+  map_gossip: true
+  boundary_mapping_time: 3.00
+  boundary_mapping_radius: 1.00
+  boundary_mapping_angular_speed: 0.40
+
+  kp_cage: 1.20
+  kp_transport: 2.00
+  push_side_threshold: 0.0
+  min_push_agents: 3
+  contact_band_tolerance: 0.08
+  # Rotation makes a translation-only registration look like contradictory
+  # boundary velocities on an irregular outline.  The certificate therefore
+  # uses a static-row estimate and reserves rho for bounded cargo motion.
+  object_velocity_filter: 0.0
+  transport_speed: 0.20
+  transport_dwell_steps: 15
+  transport_min_steps: 180
+  transport_distance: 0.05
+
+transport:
+  engine: penalty
+  stiffness: 500.0
+  damping: 12.0
+  friction: 0.6
+  tangential_stiffness: 60.0
+  ground_friction: 0.30
+  gravity: 9.81
+  substeps: 4
+
+guarantee:
+  enabled: true
+  min_feature_radius: 0.10
+  max_perimeter: 6.0
+  max_diameter: 1.60
+  boundary_map_epsilon: 0.20
+  force_margin: 1.05
+  bounded_errors:
+    normal_error_deg: 25.0
+    velocity_error: 0.10
+  # Conditional theorem premises for the post-rendezvous controller.  The run
+  # validator separately checks the observed phase frames against these bounds.
+  # Enclosure is required to finish during the overlapping SEARCH/MAP interval,
+  # no later than one frame after global release. Transport then owns the rest
+  # of the budget and HOLD latches near the horizon.
+  enclosure_bound_frames: 1
+  transport_bound_frames: 210
+  hold_bound_frames: 20
+  search:
+    required_returns: 3
+
+evaluation:
+  frame_budget: 500
+  contact_radius: 0.50
+  j_min: 0.04
+  j_max: 0.35
+  efficiency_min: 0.55
+  displacement_gate: 0.06
+  coverage_min: 0.65
+  max_rotation_deg: 30.0
+  require_initially_unobserved: false
+  require_guarantee_certificate: true
+  detection_deadline: 205
+  enclosure_deadline: 400
+  transport_deadline: 450
+  hold_deadline: 500

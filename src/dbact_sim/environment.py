@@ -12,6 +12,7 @@ trusting whoever reports it.
 from __future__ import annotations
 
 import json
+import copy
 from collections.abc import Callable
 from dataclasses import dataclass, field, replace
 from pathlib import Path
@@ -20,6 +21,7 @@ import numpy as np
 
 from dbact.contracts import DirectionalProgressContract
 from dbact.controller import DBACTController
+from dbact.guarantees import boundary_map_gap_upper_bound, build_admissibility_certificate
 from dbact.metrics import (
     boundary_coverage,
     directional_progress,
@@ -63,6 +65,7 @@ class SimulationLog:
     net_force: dict[str, list[np.ndarray]] = field(default_factory=dict)
     net_torque: dict[str, list[float]] = field(default_factory=dict)
     cargo_speed: dict[str, list[float]] = field(default_factory=dict)
+    detection_counts: dict[str, list[int]] = field(default_factory=dict)
     mode_counts: list[dict[str, int]] = field(default_factory=list)
     agent_modes: dict[str, list[str]] = field(default_factory=dict)
 
@@ -83,6 +86,24 @@ class SimulationEnvironment:
         assert_initial_state_valid(self.agents, self.cargoes, params.d_min, params.robot_radius)
         self.controller = DBACTController(params, self.domain, self.goal_directions, seed=self.seed)
         self.contact_params = contact_params_from_config(config)
+        self.guarantee_certificates = {
+            cargo.object_id: build_admissibility_certificate(
+                cargo=cargo,
+                agents=self.agents,
+                domain=self.domain,
+                goal_direction=self.goal_directions.get(cargo.object_id),
+                config=config,
+                controller=params,
+                contact=self.contact_params,
+                dt=self.dt,
+            )
+            for cargo in self.cargoes
+        }
+        self.boundary_map_witnesses: dict[str, dict] = {}
+        self.guarantee_release_time = max(
+            (cert.get("search", {}).get("release_bound_frames", 0) for cert in self.guarantee_certificates.values()),
+            default=0,
+        ) * self.dt
         self.engine_name = str(config["transport"]["engine"])
         self.engine = build_engine(
             self.engine_name,
@@ -106,6 +127,7 @@ class SimulationEnvironment:
         )
         evaluation = config.get("evaluation", {})
         self.require_initially_unobserved = bool(evaluation.get("require_initially_unobserved", False))
+        self.require_guarantee_certificate = bool(evaluation.get("require_guarantee_certificate", False))
         self.frame_budget = evaluation.get("frame_budget")
         self.phase_deadlines = {
             "first_detection": evaluation.get("detection_deadline"),
@@ -137,6 +159,7 @@ class SimulationEnvironment:
                 self.log.net_force,
                 self.log.net_torque,
                 self.log.cargo_speed,
+                self.log.detection_counts,
             ):
                 store[c.object_id] = []
         self._last_statuses = {}
@@ -193,6 +216,42 @@ class SimulationEnvironment:
             self.log.net_force[c.object_id].append(status.net_force.copy() if status else np.zeros(2))
             self.log.net_torque[c.object_id].append(status.net_torque if status else 0.0)
             self.log.cargo_speed[c.object_id].append(float(np.linalg.norm(c.linear_velocity)))
+            detections = (
+                self.initial_detection_counts.get(c.object_id, 0)
+                if abs(self.t) <= 1e-12
+                else self.controller.last_detection_counts.get(c.object_id, 0)
+            )
+            self.log.detection_counts[c.object_id].append(int(detections))
+        if self.t + 1e-12 >= self.guarantee_release_time and not self.boundary_map_witnesses:
+            self._capture_boundary_map_witnesses()
+
+    def _capture_boundary_map_witnesses(self) -> None:
+        """Measure the theorem's map-completeness premise at rendezvous release.
+
+        Ground-truth boundary samples are used only by this independent witness;
+        neither the controller nor the map receives them.
+        """
+        all_observations = [
+            obs
+            for boundary_map in self.controller.maps.values()
+            for obs in boundary_map.all_observations(self.t)
+        ]
+        for cargo in self.cargoes:
+            mapped = [obs.point for obs in all_observations if obs.object_id == cargo.object_id]
+            if not mapped:
+                self.boundary_map_witnesses[cargo.object_id] = {
+                    "frame": int(round(self.t / self.dt)),
+                    "points": 0,
+                    "max_boundary_gap": float("inf"),
+                    "p95_boundary_gap": float("inf"),
+                }
+                continue
+            gap_witness = boundary_map_gap_upper_bound(cargo.vertices, np.vstack(mapped), sample_count=1024)
+            self.boundary_map_witnesses[cargo.object_id] = {
+                "frame": int(round(self.t / self.dt)),
+                "points": int(len(mapped)),
+                **gap_witness,
+            }
 
     # ------------------------------------------------------------------ #
 
@@ -250,11 +309,7 @@ class SimulationEnvironment:
                 "initial_detection_count": self.initial_detection_counts.get(cid, 0),
             }
             first_detection = next(
-                (
-                    k
-                    for k, modes in enumerate(self.log.mode_counts)
-                    if any(name not in {"explore", "search"} and count > 0 for name, count in modes.items())
-                ),
+                (k for k, count in enumerate(self.log.detection_counts[cid]) if count > 0),
                 None,
             )
             first_enclosure = next(
@@ -306,6 +361,24 @@ class SimulationEnvironment:
                     )
                 if first_detection is None:
                     phase_reasons.append("phase gate: cargo was never detected")
+                certificate = self.guarantee_certificates.get(cid)
+                if self.require_guarantee_certificate and not bool((certificate or {}).get("eligible")):
+                    failed = ", ".join((certificate or {}).get("failure_reasons", [])) or "missing certificate"
+                    phase_reasons.append(f"guarantee gate: admissibility certificate failed ({failed})")
+                elif self.require_guarantee_certificate:
+                    witness = self.boundary_map_witnesses.get(cid)
+                    required_gap = ((certificate or {}).get("mapping") or {}).get("required_max_boundary_gap")
+                    if (
+                        not isinstance(witness, dict)
+                        or required_gap is None
+                        or witness.get("max_boundary_gap") is None
+                        or witness["max_boundary_gap"] > required_gap
+                    ):
+                        measured = (witness or {}).get("max_boundary_gap", float("inf"))
+                        phase_reasons.append(
+                            f"guarantee gate: boundary map max gap {measured:.4f} m exceeds "
+                            f"epsilon {float(required_gap or 0.0):.4f} m"
+                        )
                 if first_enclosure is None:
                     phase_reasons.append("phase gate: enclosure threshold was never reached")
                 if first_transport is None:
@@ -317,6 +390,10 @@ class SimulationEnvironment:
                 ):
                     phase_reasons.append(
                         f"phase gate: transport started at frame {first_transport} before enclosure at frame {first_enclosure}"
+                    )
+                if first_hold is not None and first_transport is not None and first_hold < first_transport:
+                    phase_reasons.append(
+                        f"phase gate: HOLD started at frame {first_hold} before transport at frame {first_transport}"
                     )
                 for phase_name, frame in entry["phase_frames"].items():
                     deadline = self.phase_deadlines.get(phase_name)
@@ -333,7 +410,24 @@ class SimulationEnvironment:
             else:
                 entry["success"] = None
                 entry["failure_reasons"] = ["no goal direction configured for this cargo"]
+            certificate = copy.deepcopy(self.guarantee_certificates.get(cid))
+            if isinstance(certificate, dict):
+                witness = self.boundary_map_witnesses.get(cid)
+                certificate["runtime_map_witness"] = witness
+                required_gap = (certificate.get("mapping") or {}).get("required_max_boundary_gap")
+                map_ok = bool(
+                    isinstance(witness, dict)
+                    and required_gap is not None
+                    and witness.get("max_boundary_gap") is not None
+                    and witness["max_boundary_gap"] <= required_gap
+                )
+                certificate["runtime_eligible"] = bool(certificate.get("eligible")) and map_ok
+                runtime_failures = list(certificate.get("failure_reasons") or [])
+                if not map_ok:
+                    runtime_failures.append("boundary_map_epsilon")
+                certificate["runtime_failure_reasons"] = runtime_failures
             cargo_summaries[cid] = entry
+            entry["guarantee_certificate"] = certificate
 
         lengths = path_lengths(self.log.agent_positions)
         return {
@@ -352,6 +446,7 @@ class SimulationEnvironment:
                 "require_initially_unobserved": self.require_initially_unobserved,
                 "phase_deadlines": self.phase_deadlines,
                 "frame_budget": self.frame_budget,
+                "require_guarantee_certificate": self.require_guarantee_certificate,
             },
             "solver": solver_stats,
             "transport_progress_estimates": self.controller.transport_progress_summary(),

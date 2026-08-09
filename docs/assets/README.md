@@ -6,6 +6,8 @@ Generated simulation outputs under `runs/` are intentionally ignored by Git, so 
 
 | File | Source | Purpose |
 | --- | --- | --- |
+| `dbact-full-workspace-v3-500.gif` | `runs/full_workspace_visual_seed0/closed_loop_500.gif` | Certificate-eligible random polygon over a complete-domain 500-step run; 251 rendered states at stride 2. |
+| `dbact-full-workspace-v3-500-final.png` | `runs/full_workspace_visual_seed0/final_snapshot.png` | Final state of the full-workspace seed-0 release artifact. |
 | `dbact-closed-loop-v3-500.gif` | `runs/v3_demo_seed0/closed_loop_500.gif` | Initial state plus all 500 v3 search/enclosure/transport/hold steps. |
 | `dbact-closed-loop-v3-500-final.png` | `runs/v3_demo_seed0/final_snapshot.png` | Seed-0 bounded transport final state. |
 | `dbact-closed-loop-v3-500-sweep.png` | `runs/v3_sweep_12_final/closed_loop_sweep.png` | Phase deadlines, outcome gates, and throughput for twelve seeds. |

@@ -12,15 +12,20 @@ from __future__ import annotations
 
 import argparse
 import json
+import sys
 import time
 from pathlib import Path
+
+# Prefer the source tree beside this entry point. This makes the one-command
+# reproduction deterministic even when another checkout is installed editable.
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 from dbact_sim.environment import SimulationEnvironment
 from dbact_sim.scenarios import load_yaml
 from dbact_sim.visualization import animate_simulation, plot_snapshot, plot_trajectories, write_paper_figures
 
 
-DEFAULT_CONFIG = "configs/sim/v3/l_shape_search_closed_loop_500.yaml"
+DEFAULT_CONFIG = "configs/sim/v3/arbitrary_shape_full_workspace_500.yaml"
 
 
 def main() -> None:
@@ -34,7 +39,7 @@ def main() -> None:
     args = parser.parse_args()
 
     config_path = Path(args.config)
-    output = Path(args.output) if args.output else Path("runs") / f"closed_loop_v3_500_seed{args.seed}"
+    output = Path(args.output) if args.output else Path("runs") / f"full_workspace_v3_500_seed{args.seed}"
     output.mkdir(parents=True, exist_ok=True)
 
     env = SimulationEnvironment(load_yaml(config_path), seed=args.seed)
@@ -75,6 +80,9 @@ def main() -> None:
         "final_strict_coverage": entry.get("final_strict_coverage"),
         "solver_fallbacks": summary["solver"]["fallbacks"],
         "multi_rate": summary.get("multi_rate", {}),
+        "guarantee_theorem": (entry.get("guarantee_certificate") or {}).get("theorem_id"),
+        "guarantee_eligible": (entry.get("guarantee_certificate") or {}).get("eligible"),
+        "guarantee_failures": (entry.get("guarantee_certificate") or {}).get("failure_reasons", []),
         "failure_reasons": entry.get("failure_reasons", []),
     }
     (output / "demo_manifest.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")

@@ -59,8 +59,10 @@ class LocalBoundaryMap:
     motion_match_radius: float = 0.18
     motion_min_matches: int = 5
     max_translation_per_update: float = 0.04
+    max_rotation_per_update: float = 0.12
     records: dict[tuple[str, int, int], VoxelRecord] = field(default_factory=dict)
     last_motion: dict[str, np.ndarray] = field(default_factory=dict)
+    last_rotation: dict[str, float] = field(default_factory=dict)
 
     # ------------------------------------------------------------------ #
 
@@ -166,6 +168,7 @@ class LocalBoundaryMap:
         stored records already carry that timestamp after the first update.
         """
         self.last_motion[object_id] = np.zeros(2, dtype=float)
+        self.last_rotation[object_id] = 0.0
         old = [rec for rec in self.records.values() if rec.object_id == object_id]
         if len(old) < self.motion_min_matches or len(observations) < self.motion_min_matches:
             return
@@ -192,32 +195,56 @@ class LocalBoundaryMap:
         n_old = old_normals[match[valid]]
         q_new = new_points[valid]
         rhs = np.sum(n_old * (q_new - q_old), axis=1)
+        center = np.mean(old_points, axis=0)
+        lever = q_old - center[None, :]
+        rotational_column = np.sum(n_old * np.column_stack([-lever[:, 1], lever[:, 0]]), axis=1)
+        system = np.column_stack([n_old, rotational_column])
         try:
-            translation, _, _, _ = np.linalg.lstsq(n_old, rhs, rcond=None)
+            twist, _, _, _ = np.linalg.lstsq(system, rhs, rcond=None)
         except np.linalg.LinAlgError:
             return
 
-        residual = np.abs(n_old @ translation - rhs)
+        residual = np.abs(system @ twist - rhs)
         tolerance = max(0.5 * self.voxel_size, 3.0 * float(np.median(residual)) + 1e-9)
         inliers = residual <= tolerance
         if int(np.sum(inliers)) >= self.motion_min_matches and not np.all(inliers):
             try:
-                translation, _, _, _ = np.linalg.lstsq(n_old[inliers], rhs[inliers], rcond=None)
+                twist, _, _, _ = np.linalg.lstsq(system[inliers], rhs[inliers], rcond=None)
             except np.linalg.LinAlgError:
                 return
 
+        translation = np.asarray(twist[:2], dtype=float)
+        rotation = float(twist[2])
         magnitude = float(np.linalg.norm(translation))
-        if magnitude <= 1e-6 or magnitude > self.max_translation_per_update:
+        if magnitude > self.max_translation_per_update or abs(rotation) > self.max_rotation_per_update:
             return
+        if magnitude <= 1e-6 and abs(rotation) <= 1e-6:
+            return
+        # Translate the world-frame voxel map, but keep its accumulated outline
+        # orientation.  Rotating a partially observed map about its sample mean
+        # moves unseen-side proxies and destabilises the coverage density.  The
+        # SE(2) solve is still essential: separating rotation keeps the reported
+        # translational task progress from being polluted by spin.
         self._shift_object_records(object_id, translation)
         self.last_motion[object_id] = np.asarray(translation, dtype=float).copy()
+        self.last_rotation[object_id] = rotation
 
-    def _shift_object_records(self, object_id: str, translation: np.ndarray) -> None:
-        """Shift one object's records and rebuild voxel keys without mass growth."""
+    def _shift_object_records(
+        self,
+        object_id: str,
+        translation: np.ndarray,
+        rotation: float = 0.0,
+        center: np.ndarray | None = None,
+    ) -> None:
+        """Apply one planar rigid increment and rebuild voxel keys."""
+        pivot = np.zeros(2) if center is None else np.asarray(center, dtype=float).reshape(2)
+        c, s = math.cos(rotation), math.sin(rotation)
+        matrix = np.array([[c, -s], [s, c]], dtype=float)
         rebuilt: dict[tuple[str, int, int], VoxelRecord] = {}
         for key, record in self.records.items():
             if record.object_id == object_id:
-                record.point = record.point + translation
+                record.point = (record.point - pivot) @ matrix.T + pivot + translation
+                record.normal = record.normal @ matrix.T
                 key = self._key(record.object_id, record.point)
             incumbent = rebuilt.get(key)
             if incumbent is None:

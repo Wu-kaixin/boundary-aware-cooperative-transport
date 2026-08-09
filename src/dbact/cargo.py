@@ -178,7 +178,15 @@ class Cargo:
         if shape == "nonconvex":
             return cls.nonconvex(object_id, cfg.get("center", [0, 0]), float(cfg.get("scale", 1.0)), float(cfg.get("yaw", 0.0)), **extra)
         if shape == "polygon":
-            return cls(object_id, np.asarray(cfg["vertices"], dtype=float), **extra)
+            vertices = np.asarray(cfg["vertices"], dtype=float)
+            frame = str(cfg.get("vertices_frame", "world"))
+            if frame == "local":
+                vertices = rotate(vertices, float(cfg.get("yaw", 0.0))) + np.asarray(
+                    cfg.get("center", [0.0, 0.0]), dtype=float
+                )
+            elif frame != "world":
+                raise ValueError("polygon vertices_frame must be 'world' or 'local'")
+            return cls(object_id, vertices, **extra)
         raise ValueError(f"Unknown cargo shape: {shape}")
 
 
