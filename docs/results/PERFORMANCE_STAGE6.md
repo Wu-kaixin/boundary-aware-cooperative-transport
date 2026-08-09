@@ -3,16 +3,16 @@
 ## Result
 
 On the fixed three-case runtime ablation, the optimized headless simulator runs
-at **22.16–35.24 control frames/s** (mean **28.69 fps**, median **28.67 fps**).
+at **23.15–35.49 control frames/s** (mean **28.43 fps**, median **26.65 fps**).
 The matched pre-optimization mean was 16.65 fps, so the measured mean gain is
-72.26%.  These are wall-clock measurements on the development machine, not
+70.71%.  These are wall-clock measurements on the development machine, not
 portable timing guarantees.
 
 | case | seed | baseline fps | final fps | change | final classification |
 |---|---:|---:|---:|---:|---|
-| circle | 0 | 24.30 | 35.24 | +45.05% | SUCCESS |
-| concave random, 7 vertices | 2 | 14.42 | 28.67 | +98.82% | CONTRACT_FAILURE |
-| polygon, 32 vertices | 2 | 11.25 | 22.16 | +97.00% | MAP_INCOMPLETE |
+| circle | 0 | 24.30 | 35.49 | +46.07% | SUCCESS |
+| concave random, 7 vertices | 2 | 14.42 | 26.65 | +84.86% | CONTRACT_FAILURE |
+| polygon, 32 vertices | 2 | 11.25 | 23.15 | +105.78% | MAP_INCOMPLETE |
 
 All three final episodes have hard-QP fallback = 0, infeasible = 0, and rho
 relaxation = 0.  The two failed episodes remain failures: no eligibility,
@@ -49,9 +49,9 @@ Stage-6 measurement explicitly bound imports to this branch:
 
 ```powershell
 $env:PYTHONPATH=(Resolve-Path 'src').Path
-python scripts/run_arbitrary_shape_monte_carlo.py --seeds 0 --shapes circle --max-steps 1500 --output runs/stage6_circle_final_v2
-python scripts/run_arbitrary_shape_monte_carlo.py --seeds 2 --shapes concave_random7 --max-steps 1500 --output runs/stage6_concave7_final_v2
-python scripts/run_arbitrary_shape_monte_carlo.py --seeds 2 --shapes polygon32 --max-steps 1500 --output runs/stage6_polygon32_final
+python scripts/run_arbitrary_shape_monte_carlo.py --seeds 0 --shapes circle --max-steps 1500 --output runs/stage7_perf_circle
+python scripts/run_arbitrary_shape_monte_carlo.py --seeds 2 --shapes concave_random7 --max-steps 1500 --output runs/stage7_perf_concave7
+python scripts/run_arbitrary_shape_monte_carlo.py --seeds 2 --shapes polygon32 --max-steps 1500 --output runs/stage7_perf_polygon32
 ```
 
 The machine-readable result is

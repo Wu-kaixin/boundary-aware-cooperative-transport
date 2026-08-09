@@ -1,0 +1,955 @@
+{
+  "schema_version": 1,
+  "config": "configs/sim/research/adaptive_progress_closed_loop.yaml",
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "shapes": [
+    "circle",
+    "rectangle",
+    "ellipse24",
+    "l_shape",
+    "u_shape",
+    "c_shape",
+    "star10",
+    "convex_random",
+    "concave_random7",
+    "concave_random15",
+    "high_aspect",
+    "polygon32"
+  ],
+  "distance_m": 0.1,
+  "max_steps_timeout": 1500,
+  "truth_audit": false,
+  "sampling": {
+    "position_classes": [
+      "center",
+      "edge",
+      "corner",
+      "random"
+    ],
+    "yaw": "uniform [0, 2*pi)",
+    "goal_direction": "uniform feasible direction from scenario sampler",
+    "surface_density": [
+      0.8,
+      1.5,
+      2.2
+    ],
+    "ground_friction": [
+      0.15,
+      0.3,
+      0.45
+    ],
+    "contact_friction": [
+      0.4,
+      0.6,
+      0.8
+    ]
+  },
+  "cases": [
+    {
+      "case_id": "circle__seed_000",
+      "shape": "circle",
+      "seed": 0,
+      "position_class": "center",
+      "center": [
+        4.0,
+        4.0
+      ],
+      "yaw_deg": 262.54648308551936,
+      "surface_density": 0.8,
+      "ground_friction": 0.15,
+      "contact_friction": 0.4,
+      "vertex_count": 96
+    },
+    {
+      "case_id": "rectangle__seed_000",
+      "shape": "rectangle",
+      "seed": 0,
+      "position_class": "edge",
+      "center": [
+        1.2283988502348748,
+        2.281563635405675
+      ],
+      "yaw_deg": 46.50815208630955,
+      "surface_density": 2.2,
+      "ground_friction": 0.3,
+      "contact_friction": 0.6,
+      "vertex_count": null
+    },
+    {
+      "case_id": "ellipse24__seed_000",
+      "shape": "ellipse24",
+      "seed": 0,
+      "position_class": "corner",
+      "center": [
+        1.27,
+        1.27
+      ],
+      "yaw_deg": 357.58259839781886,
+      "surface_density": 1.5,
+      "ground_friction": 0.45,
+      "contact_friction": 0.8,
+      "vertex_count": 24
+    },
+    {
+      "case_id": "l_shape__seed_000",
+      "shape": "l_shape",
+      "seed": 0,
+      "position_class": "random",
+      "center": [
+        2.2463560630204813,
+        6.205947497057067
+      ],
+      "yaw_deg": 150.13354941300088,
+      "surface_density": 0.8,
+      "ground_friction": 0.15,
+      "contact_friction": 0.4,
+      "vertex_count": null
+    },
+    {
+      "case_id": "u_shape__seed_000",
+      "shape": "u_shape",
+      "seed": 0,
+      "position_class": "center",
+      "center": [
+        4.0,
+        4.0
+      ],
+      "yaw_deg": 80.0081172593723,
+      "surface_density": 2.2,
+      "ground_friction": 0.3,
+      "contact_friction": 0.6,
+      "vertex_count": 8
+    },
+    {
+      "case_id": "c_shape__seed_000",
+      "shape": "c_shape",
+      "seed": 0,
+      "position_class": "edge",
+      "center": [
+        1.40146931829632,
+        2.811401337562124
+      ],
+      "yaw_deg": 356.0678098233227,
+      "surface_density": 1.5,
+      "ground_friction": 0.45,
+      "contact_friction": 0.8,
+      "vertex_count": 8
+    },
+    {
+      "case_id": "star10__seed_000",
+      "shape": "star10",
+      "seed": 0,
+      "position_class": "corner",
+      "center": [
+        1.25,
+        1.25
+      ],
+      "yaw_deg": 129.99678586310552,
+      "surface_density": 0.8,
+      "ground_friction": 0.15,
+      "contact_friction": 0.4,
+      "vertex_count": 10
+    },
+    {
+      "case_id": "convex_random__seed_000",
+      "shape": "convex_random",
+      "seed": 0,
+      "position_class": "random",
+      "center": [
+        6.426239681609279,
+        5.198982242002602
+      ],
+      "yaw_deg": 260.91002928503667,
+      "surface_density": 2.2,
+      "ground_friction": 0.3,
+      "contact_friction": 0.6,
+      "vertex_count": 8
+    },
+    {
+      "case_id": "concave_random7__seed_000",
+      "shape": "concave_random7",
+      "seed": 0,
+      "position_class": "center",
+      "center": [
+        4.0,
+        4.0
+      ],
+      "yaw_deg": 315.6412039401132,
+      "surface_density": 1.5,
+      "ground_friction": 0.45,
+      "contact_friction": 0.8,
+      "vertex_count": 7
+    },
+    {
+      "case_id": "concave_random15__seed_000",
+      "shape": "concave_random15",
+      "seed": 0,
+      "position_class": "edge",
+      "center": [
+        1.2629494943094066,
+        5.325082126993666
+      ],
+      "yaw_deg": 202.31885129177655,
+      "surface_density": 0.8,
+      "ground_friction": 0.15,
+      "contact_friction": 0.4,
+      "vertex_count": 15
+    },
+    {
+      "case_id": "high_aspect__seed_000",
+      "shape": "high_aspect",
+      "seed": 0,
+      "position_class": "corner",
+      "center": [
+        1.3597067370350824,
+        1.3597067370350824
+      ],
+      "yaw_deg": 84.24872770161949,
+      "surface_density": 2.2,
+      "ground_friction": 0.3,
+      "contact_friction": 0.6,
+      "vertex_count": null
+    },
+    {
+      "case_id": "polygon32__seed_000",
+      "shape": "polygon32",
+      "seed": 0,
+      "position_class": "random",
+      "center": [
+        2.6982679057133643,
+        4.693024544077966
+      ],
+      "yaw_deg": 16.111286554303035,
+      "surface_density": 1.5,
+      "ground_friction": 0.45,
+      "contact_friction": 0.8,
+      "vertex_count": 32
+    },
+    {
+      "case_id": "circle__seed_001",
+      "shape": "circle",
+      "seed": 1,
+      "position_class": "edge",
+      "center": [
+        1.13,
+        4.6578133984125945
+      ],
+      "yaw_deg": 17.85163620845264,
+      "surface_density": 1.5,
+      "ground_friction": 0.45,
+      "contact_friction": 0.6,
+      "vertex_count": 96
+    },
+    {
+      "case_id": "rectangle__seed_001",
+      "shape": "rectangle",
+      "seed": 1,
+      "position_class": "corner",
+      "center": [
+        1.2283988502348748,
+        1.2283988502348748
+      ],
+      "yaw_deg": 40.78965765634334,
+      "surface_density": 0.8,
+      "ground_friction": 0.15,
+      "contact_friction": 0.8,
+      "vertex_count": null
+    },
+    {
+      "case_id": "ellipse24__seed_001",
+      "shape": "ellipse24",
+      "seed": 1,
+      "position_class": "random",
+      "center": [
+        6.6028281252897205,
+        6.138532764158672
+      ],
+      "yaw_deg": 272.8856409512105,
+      "surface_density": 2.2,
+      "ground_friction": 0.3,
+      "contact_friction": 0.4,
+      "vertex_count": 24
+    },
+    {
+      "case_id": "l_shape__seed_001",
+      "shape": "l_shape",
+      "seed": 1,
+      "position_class": "center",
+      "center": [
+        4.0,
+        4.0
+      ],
+      "yaw_deg": 336.39350147859767,
+      "surface_density": 1.5,
+      "ground_friction": 0.45,
+      "contact_friction": 0.6,
+      "vertex_count": null
+    },
+    {
+      "case_id": "u_shape__seed_001",
+      "shape": "u_shape",
+      "seed": 1,
+      "position_class": "edge",
+      "center": [
+        1.40146931829632,
+        2.802329258917546
+      ],
+      "yaw_deg": 69.6096216381834,
+      "surface_density": 0.8,
+      "ground_friction": 0.15,
+      "contact_friction": 0.8,
+      "vertex_count": 8
+    },
+    {
+      "case_id": "c_shape__seed_001",
+      "shape": "c_shape",
+      "seed": 1,
+      "position_class": "corner",
+      "center": [
+        1.40146931829632,
+        1.40146931829632
+      ],
+      "yaw_deg": 63.03263739504365,
+      "surface_density": 2.2,
+      "ground_friction": 0.3,
+      "contact_friction": 0.4,
+      "vertex_count": 8
+    },
+    {
+      "case_id": "star10__seed_001",
+      "shape": "star10",
+      "seed": 1,
+      "position_class": "random",
+      "center": [
+        1.4773544811861197,
+        5.853247982296032
+      ],
+      "yaw_deg": 270.02920599634257,
+      "surface_density": 1.5,
+      "ground_friction": 0.45,
+      "contact_friction": 0.6,
+      "vertex_count": 10
+    },
+    {
+      "case_id": "convex_random__seed_001",
+      "shape": "convex_random",
+      "seed": 1,
+      "position_class": "center",
+      "center": [
+        4.0,
+        4.0
+      ],
+      "yaw_deg": 243.95703031309742,
+      "surface_density": 0.8,
+      "ground_friction": 0.15,
+      "contact_friction": 0.8,
+      "vertex_count": 8
+    },
+    {
+      "case_id": "concave_random7__seed_001",
+      "shape": "concave_random7",
+      "seed": 1,
+      "position_class": "edge",
+      "center": [
+        1.1410719070838646,
+        3.992923814272387
+      ],
+      "yaw_deg": 194.5565936680401,
+      "surface_density": 2.2,
+      "ground_friction": 0.3,
+      "contact_friction": 0.4,
+      "vertex_count": 7
+    },
+    {
+      "case_id": "concave_random15__seed_001",
+      "shape": "concave_random15",
+      "seed": 1,
+      "position_class": "corner",
+      "center": [
+        1.264372255988567,
+        1.264372255988567
+      ],
+      "yaw_deg": 152.58934367155675,
+      "surface_density": 1.5,
+      "ground_friction": 0.45,
+      "contact_friction": 0.6,
+      "vertex_count": 15
+    },
+    {
+      "case_id": "high_aspect__seed_001",
+      "shape": "high_aspect",
+      "seed": 1,
+      "position_class": "random",
+      "center": [
+        3.785961432835393,
+        1.8345006841749205
+      ],
+      "yaw_deg": 196.75899415511842,
+      "surface_density": 0.8,
+      "ground_friction": 0.15,
+      "contact_friction": 0.8,
+      "vertex_count": null
+    },
+    {
+      "case_id": "polygon32__seed_001",
+      "shape": "polygon32",
+      "seed": 1,
+      "position_class": "center",
+      "center": [
+        4.0,
+        4.0
+      ],
+      "yaw_deg": 302.32732255598563,
+      "surface_density": 2.2,
+      "ground_friction": 0.3,
+      "contact_friction": 0.4,
+      "vertex_count": 32
+    },
+    {
+      "case_id": "circle__seed_002",
+      "shape": "circle",
+      "seed": 2,
+      "position_class": "corner",
+      "center": [
+        1.13,
+        1.13
+      ],
+      "yaw_deg": 273.3898459324699,
+      "surface_density": 2.2,
+      "ground_friction": 0.3,
+      "contact_friction": 0.8,
+      "vertex_count": 96
+    },
+    {
+      "case_id": "rectangle__seed_002",
+      "shape": "rectangle",
+      "seed": 2,
+      "position_class": "random",
+      "center": [
+        5.169848849974979,
+        2.499696696029301
+      ],
+      "yaw_deg": 241.03637329924862,
+      "surface_density": 1.5,
+      "ground_friction": 0.45,
+      "contact_friction": 0.4,
+      "vertex_count": null
+    },
+    {
+      "case_id": "ellipse24__seed_002",
+      "shape": "ellipse24",
+      "seed": 2,
+      "position_class": "center",
+      "center": [
+        4.0,
+        4.0
+      ],
+      "yaw_deg": 282.30859301854144,
+      "surface_density": 0.8,
+      "ground_friction": 0.15,
+      "contact_friction": 0.6,
+      "vertex_count": 24
+    },
+    {
+      "case_id": "l_shape__seed_002",
+      "shape": "l_shape",
+      "seed": 2,
+      "position_class": "edge",
+      "center": [
+        1.5,
+        3.768420539522949
+      ],
+      "yaw_deg": 239.30054247397902,
+      "surface_density": 2.2,
+      "ground_friction": 0.3,
+      "contact_friction": 0.8,
+      "vertex_count": null
+    },
+    {
+      "case_id": "u_shape__seed_002",
+      "shape": "u_shape",
+      "seed": 2,
+      "position_class": "corner",
+      "center": [
+        1.40146931829632,
+        1.40146931829632
+      ],
+      "yaw_deg": 199.77010392899552,
+      "surface_density": 1.5,
+      "ground_friction": 0.45,
+      "contact_friction": 0.4,
+      "vertex_count": 8
+    },
+    {
+      "case_id": "c_shape__seed_002",
+      "shape": "c_shape",
+      "seed": 2,
+      "position_class": "random",
+      "center": [
+        5.603429962288823,
+        4.925407306591992
+      ],
+      "yaw_deg": 278.39617554429293,
+      "surface_density": 0.8,
+      "ground_friction": 0.15,
+      "contact_friction": 0.6,
+      "vertex_count": 8
+    },
+    {
+      "case_id": "star10__seed_002",
+      "shape": "star10",
+      "seed": 2,
+      "position_class": "center",
+      "center": [
+        4.0,
+        4.0
+      ],
+      "yaw_deg": 347.9019967663498,
+      "surface_density": 2.2,
+      "ground_friction": 0.3,
+      "contact_friction": 0.8,
+      "vertex_count": 10
+    },
+    {
+      "case_id": "convex_random__seed_002",
+      "shape": "convex_random",
+      "seed": 2,
+      "position_class": "edge",
+      "center": [
+        1.5005037680084663,
+        2.10773375291459
+      ],
+      "yaw_deg": 337.2622368509505,
+      "surface_density": 1.5,
+      "ground_friction": 0.45,
+      "contact_friction": 0.4,
+      "vertex_count": 8
+    },
+    {
+      "case_id": "concave_random7__seed_002",
+      "shape": "concave_random7",
+      "seed": 2,
+      "position_class": "corner",
+      "center": [
+        1.2039141558505042,
+        1.2039141558505042
+      ],
+      "yaw_deg": 216.52760698992762,
+      "surface_density": 0.8,
+      "ground_friction": 0.15,
+      "contact_friction": 0.6,
+      "vertex_count": 7
+    },
+    {
+      "case_id": "concave_random15__seed_002",
+      "shape": "concave_random15",
+      "seed": 2,
+      "position_class": "random",
+      "center": [
+        2.8049086309611435,
+        3.668767638003582
+      ],
+      "yaw_deg": 309.5142270118176,
+      "surface_density": 2.2,
+      "ground_friction": 0.3,
+      "contact_friction": 0.8,
+      "vertex_count": 15
+    },
+    {
+      "case_id": "high_aspect__seed_002",
+      "shape": "high_aspect",
+      "seed": 2,
+      "position_class": "center",
+      "center": [
+        4.0,
+        4.0
+      ],
+      "yaw_deg": 219.89281769988543,
+      "surface_density": 1.5,
+      "ground_friction": 0.45,
+      "contact_friction": 0.4,
+      "vertex_count": null
+    },
+    {
+      "case_id": "polygon32__seed_002",
+      "shape": "polygon32",
+      "seed": 2,
+      "position_class": "edge",
+      "center": [
+        1.2016714585800092,
+        5.2047395474612745
+      ],
+      "yaw_deg": 99.43800797792899,
+      "surface_density": 0.8,
+      "ground_friction": 0.15,
+      "contact_friction": 0.6,
+      "vertex_count": 32
+    },
+    {
+      "case_id": "circle__seed_003",
+      "shape": "circle",
+      "seed": 3,
+      "position_class": "random",
+      "center": [
+        6.082673678513471,
+        5.149039385665354
+      ],
+      "yaw_deg": 229.42038685889761,
+      "surface_density": 0.8,
+      "ground_friction": 0.15,
+      "contact_friction": 0.4,
+      "vertex_count": 96
+    },
+    {
+      "case_id": "rectangle__seed_003",
+      "shape": "rectangle",
+      "seed": 3,
+      "position_class": "center",
+      "center": [
+        4.0,
+        4.0
+      ],
+      "yaw_deg": 204.00947278697308,
+      "surface_density": 2.2,
+      "ground_friction": 0.3,
+      "contact_friction": 0.6,
+      "vertex_count": null
+    },
+    {
+      "case_id": "ellipse24__seed_003",
+      "shape": "ellipse24",
+      "seed": 3,
+      "position_class": "edge",
+      "center": [
+        1.27,
+        5.415027408547415
+      ],
+      "yaw_deg": 28.3743237270002,
+      "surface_density": 1.5,
+      "ground_friction": 0.45,
+      "contact_friction": 0.8,
+      "vertex_count": 24
+    },
+    {
+      "case_id": "l_shape__seed_003",
+      "shape": "l_shape",
+      "seed": 3,
+      "position_class": "corner",
+      "center": [
+        1.5,
+        1.5
+      ],
+      "yaw_deg": 49.39068689768056,
+      "surface_density": 0.8,
+      "ground_friction": 0.15,
+      "contact_friction": 0.4,
+      "vertex_count": null
+    },
+    {
+      "case_id": "u_shape__seed_003",
+      "shape": "u_shape",
+      "seed": 3,
+      "position_class": "random",
+      "center": [
+        1.9340958855572767,
+        3.4952753970610972
+      ],
+      "yaw_deg": 133.9239128179114,
+      "surface_density": 2.2,
+      "ground_friction": 0.3,
+      "contact_friction": 0.6,
+      "vertex_count": 8
+    },
+    {
+      "case_id": "c_shape__seed_003",
+      "shape": "c_shape",
+      "seed": 3,
+      "position_class": "center",
+      "center": [
+        4.0,
+        4.0
+      ],
+      "yaw_deg": 0.2989584279922042,
+      "surface_density": 1.5,
+      "ground_friction": 0.45,
+      "contact_friction": 0.8,
+      "vertex_count": 8
+    },
+    {
+      "case_id": "star10__seed_003",
+      "shape": "star10",
+      "seed": 3,
+      "position_class": "edge",
+      "center": [
+        1.25,
+        5.775040387889408
+      ],
+      "yaw_deg": 320.84579223322913,
+      "surface_density": 0.8,
+      "ground_friction": 0.15,
+      "contact_friction": 0.4,
+      "vertex_count": 10
+    },
+    {
+      "case_id": "convex_random__seed_003",
+      "shape": "convex_random",
+      "seed": 3,
+      "position_class": "corner",
+      "center": [
+        1.503389873327221,
+        1.503389873327221
+      ],
+      "yaw_deg": 162.18228796349496,
+      "surface_density": 2.2,
+      "ground_friction": 0.3,
+      "contact_friction": 0.6,
+      "vertex_count": 9
+    },
+    {
+      "case_id": "concave_random7__seed_003",
+      "shape": "concave_random7",
+      "seed": 3,
+      "position_class": "random",
+      "center": [
+        3.012861082160808,
+        3.401770227243932
+      ],
+      "yaw_deg": 177.39049882168976,
+      "surface_density": 1.5,
+      "ground_friction": 0.45,
+      "contact_friction": 0.8,
+      "vertex_count": 7
+    },
+    {
+      "case_id": "concave_random15__seed_003",
+      "shape": "concave_random15",
+      "seed": 3,
+      "position_class": "center",
+      "center": [
+        4.0,
+        4.0
+      ],
+      "yaw_deg": 52.70992015071057,
+      "surface_density": 0.8,
+      "ground_friction": 0.15,
+      "contact_friction": 0.4,
+      "vertex_count": 15
+    },
+    {
+      "case_id": "high_aspect__seed_003",
+      "shape": "high_aspect",
+      "seed": 3,
+      "position_class": "edge",
+      "center": [
+        1.3597067370350824,
+        3.5319944760492903
+      ],
+      "yaw_deg": 278.4163831644996,
+      "surface_density": 2.2,
+      "ground_friction": 0.3,
+      "contact_friction": 0.6,
+      "vertex_count": null
+    },
+    {
+      "case_id": "polygon32__seed_003",
+      "shape": "polygon32",
+      "seed": 3,
+      "position_class": "corner",
+      "center": [
+        1.2092867662959141,
+        1.2092867662959141
+      ],
+      "yaw_deg": 153.61302037434476,
+      "surface_density": 1.5,
+      "ground_friction": 0.45,
+      "contact_friction": 0.8,
+      "vertex_count": 32
+    },
+    {
+      "case_id": "circle__seed_004",
+      "shape": "circle",
+      "seed": 4,
+      "position_class": "center",
+      "center": [
+        4.0,
+        4.0
+      ],
+      "yaw_deg": 183.91347533479401,
+      "surface_density": 1.5,
+      "ground_friction": 0.45,
+      "contact_friction": 0.6,
+      "vertex_count": 96
+    },
+    {
+      "case_id": "rectangle__seed_004",
+      "shape": "rectangle",
+      "seed": 4,
+      "position_class": "edge",
+      "center": [
+        1.2283988502348748,
+        4.336451428054454
+      ],
+      "yaw_deg": 272.70288371273796,
+      "surface_density": 0.8,
+      "ground_friction": 0.15,
+      "contact_friction": 0.8,
+      "vertex_count": null
+    },
+    {
+      "case_id": "ellipse24__seed_004",
+      "shape": "ellipse24",
+      "seed": 4,
+      "position_class": "corner",
+      "center": [
+        1.27,
+        1.27
+      ],
+      "yaw_deg": 287.55895913548756,
+      "surface_density": 2.2,
+      "ground_friction": 0.3,
+      "contact_friction": 0.4,
+      "vertex_count": 24
+    },
+    {
+      "case_id": "l_shape__seed_004",
+      "shape": "l_shape",
+      "seed": 4,
+      "position_class": "random",
+      "center": [
+        1.987771756740007,
+        5.848845311956271
+      ],
+      "yaw_deg": 170.3263491370353,
+      "surface_density": 1.5,
+      "ground_friction": 0.45,
+      "contact_friction": 0.6,
+      "vertex_count": null
+    },
+    {
+      "case_id": "u_shape__seed_004",
+      "shape": "u_shape",
+      "seed": 4,
+      "position_class": "center",
+      "center": [
+        4.0,
+        4.0
+      ],
+      "yaw_deg": 288.33655922770885,
+      "surface_density": 0.8,
+      "ground_friction": 0.15,
+      "contact_friction": 0.8,
+      "vertex_count": 8
+    },
+    {
+      "case_id": "c_shape__seed_004",
+      "shape": "c_shape",
+      "seed": 4,
+      "position_class": "edge",
+      "center": [
+        1.40146931829632,
+        4.137627847350327
+      ],
+      "yaw_deg": 285.07608131650414,
+      "surface_density": 2.2,
+      "ground_friction": 0.3,
+      "contact_friction": 0.4,
+      "vertex_count": 8
+    },
+    {
+      "case_id": "star10__seed_004",
+      "shape": "star10",
+      "seed": 4,
+      "position_class": "corner",
+      "center": [
+        1.25,
+        1.25
+      ],
+      "yaw_deg": 233.03288211806444,
+      "surface_density": 1.5,
+      "ground_friction": 0.45,
+      "contact_friction": 0.6,
+      "vertex_count": 10
+    },
+    {
+      "case_id": "convex_random__seed_004",
+      "shape": "convex_random",
+      "seed": 4,
+      "position_class": "random",
+      "center": [
+        2.6098714810641725,
+        3.5038151119810843
+      ],
+      "yaw_deg": 167.04533658209192,
+      "surface_density": 0.8,
+      "ground_friction": 0.15,
+      "contact_friction": 0.8,
+      "vertex_count": 8
+    },
+    {
+      "case_id": "concave_random7__seed_004",
+      "shape": "concave_random7",
+      "seed": 4,
+      "position_class": "center",
+      "center": [
+        4.0,
+        4.0
+      ],
+      "yaw_deg": 221.15948094066687,
+      "surface_density": 2.2,
+      "ground_friction": 0.3,
+      "contact_friction": 0.4,
+      "vertex_count": 7
+    },
+    {
+      "case_id": "concave_random15__seed_004",
+      "shape": "concave_random15",
+      "seed": 4,
+      "position_class": "edge",
+      "center": [
+        1.2634524492646997,
+        3.703531540160989
+      ],
+      "yaw_deg": 222.59369283622593,
+      "surface_density": 1.5,
+      "ground_friction": 0.45,
+      "contact_friction": 0.6,
+      "vertex_count": 15
+    },
+    {
+      "case_id": "high_aspect__seed_004",
+      "shape": "high_aspect",
+      "seed": 4,
+      "position_class": "corner",
+      "center": [
+        1.3597067370350824,
+        1.3597067370350824
+      ],
+      "yaw_deg": 150.39487108065967,
+      "surface_density": 0.8,
+      "ground_friction": 0.15,
+      "contact_friction": 0.8,
+      "vertex_count": null
+    },
+    {
+      "case_id": "polygon32__seed_004",
+      "shape": "polygon32",
+      "seed": 4,
+      "position_class": "random",
+      "center": [
+        6.4898751967517185,
+        1.5713863623608373
+      ],
+      "yaw_deg": 75.86887098618719,
+      "surface_density": 2.2,
+      "ground_friction": 0.3,
+      "contact_friction": 0.4,
+      "vertex_count": 32
+    }
+  ]
+}

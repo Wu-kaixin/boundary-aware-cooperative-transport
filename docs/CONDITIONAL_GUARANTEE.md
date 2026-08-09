@@ -194,20 +194,23 @@ empirical statistic and must be reported under a separate label.
 
 ## Reproduction
 
-```bash
-python scripts/run_500_closed_loop.py --seed 0
+```powershell
+python scripts/run_publication_representative.py `
+  --max-steps 1500 --output artifacts/publication/representative
 
-python scripts/run_batch.py \
-  --configs configs/sim/v3/arbitrary_shape_full_workspace_500.yaml \
-  --seeds 0..9 --steps 500 --out runs/full_workspace_sweep
+python scripts/run_arbitrary_shape_monte_carlo.py `
+  --seeds 0..4 --max-steps 1500 `
+  --output runs/arbitrary_shape_final_se2_60
 
-python scripts/run_shape_workspace_matrix.py \
-  --steps 500 --out runs/full_workspace_shape_matrix
+python scripts/generate_publication_artifacts.py `
+  --monte-carlo runs/arbitrary_shape_final_se2_60/monte_carlo.json `
+  --output artifacts/publication
 ```
 
-`scripts/validate_run.py` is fail-closed: missing certificates, a non-dense map,
-QP fallback/infeasibility, safety violation, missed deadline, insufficient goal
-progress, or failed coverage rejects the run.
+The frame count is a safety timeout, not a success premise. Each episode stops at
+HOLD, an explicit failure classification, or timeout. Missing certificates, a
+non-dense map, QP fallback/infeasibility, safety violation, insufficient goal
+progress, or failed enclosure rejects the theoretical claim.
 
 ## Explicit non-claims
 

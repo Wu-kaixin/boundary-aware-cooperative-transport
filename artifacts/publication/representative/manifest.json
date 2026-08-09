@@ -1,0 +1,131 @@
+{
+  "schema_version": 1,
+  "config": "configs/sim/research/adaptive_progress_closed_loop.yaml",
+  "case": {
+    "shape": "circle",
+    "seed": 0,
+    "position_class": "center",
+    "center": [
+      4.0,
+      4.0
+    ],
+    "yaw_deg": 262.54648308551936,
+    "surface_density": 0.8,
+    "ground_friction": 0.15,
+    "contact_friction": 0.4,
+    "vertex_count": 96
+  },
+  "seed": 0,
+  "truth_audit": true,
+  "max_steps_timeout": 1500,
+  "termination": "SUCCESS_HOLD",
+  "frame": 327,
+  "wall_seconds": 18.89700160000939,
+  "task_success": true,
+  "J_m": 0.11866800910486552,
+  "efficiency": 0.9982848369895576,
+  "max_cross_track_error_m": 0.0069592202109874796,
+  "max_abs_rotation_deg": 4.036414647250814,
+  "phase_frames": {
+    "first_detection": 136,
+    "first_map_complete": 268,
+    "first_enclosure": 233,
+    "first_contact": 205,
+    "first_transport": 282,
+    "first_brake": 307,
+    "first_hold": 327
+  },
+  "measured_error_audit": {
+    "cargo_0": {
+      "normal_error_deg": {
+        "n": 14611,
+        "mean": 5.331994789519524,
+        "p50": 4.7573160064778435,
+        "p95": 14.276448545020298,
+        "p99": 17.81306452122927,
+        "max": 65.0202406889917
+      },
+      "normal_error_norm": {
+        "n": 14611,
+        "mean": 0.09290465766933197,
+        "p50": 0.0830069789113336,
+        "p95": 0.24852694585335838,
+        "p99": 0.3096460441198546,
+        "max": 1.074897142012716
+      },
+      "boundary_point_error_m": {
+        "n": 14611,
+        "mean": 0.0012064453917116542,
+        "p50": 0.0003641628701428132,
+        "p95": 0.0049853163219624845,
+        "p99": 0.014987790684733741,
+        "max": 0.018395354715019813
+      },
+      "map_point_error_m": {
+        "n": 82053,
+        "mean": 0.02029069669319236,
+        "p50": 0.006376625933578618,
+        "p95": 0.08689102428704734,
+        "p99": 0.12347739104997399,
+        "max": 0.16348112867534917
+      },
+      "object_velocity_error_mps": {
+        "n": 3402,
+        "mean": 0.023869049748684586,
+        "p50": 0.011460126591923234,
+        "p95": 0.09000891778889865,
+        "p99": 0.22115092374004347,
+        "max": 0.32987498157449513
+      },
+      "object_velocity_projection_error_mps": {
+        "n": 43620,
+        "mean": 0.022287745907988692,
+        "p50": 0.010599314588441643,
+        "p95": 0.0854703902677788,
+        "p99": 0.19050487092889754,
+        "max": 0.3298713277217437
+      },
+      "boundary_velocity_error_mps": {
+        "n": 43620,
+        "mean": 0.053501004145555676,
+        "p50": 0.024371237951957007,
+        "p95": 0.1553536476543193,
+        "p99": 0.23691051574863387,
+        "max": 0.3298808706388774
+      },
+      "cbf_velocity_projection_error_mps": {
+        "n": 43620,
+        "mean": 0.0319424919195806,
+        "p50": 0.015676818700676658,
+        "p95": 0.11460544388262445,
+        "p99": 0.19507239904624404,
+        "max": 0.32986716940935046
+      }
+    }
+  },
+  "solver": {
+    "solves": 5886,
+    "fallbacks": 0,
+    "infeasible": 0,
+    "margin_relaxations": 0,
+    "zero_input_feasible": true,
+    "zero_input_feasible_checks": 5886,
+    "zero_input_feasible_failures": 0,
+    "inside_margin_band": 95,
+    "max_slack": 0.0,
+    "max_modification_norm": 0.5500034160373073,
+    "statuses": {
+      "optimal": 5886
+    }
+  },
+  "artifacts": [
+    "summary.json",
+    "trajectories.csv",
+    "safety_timeseries.csv",
+    "cargo_timeseries.csv",
+    "perception_errors.csv",
+    "closed_loop_final.png",
+    "closed_loop_trajectories.png",
+    "closed_loop.gif"
+  ]
+}

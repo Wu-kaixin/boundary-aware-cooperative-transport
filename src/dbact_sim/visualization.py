@@ -260,7 +260,7 @@ def animate_simulation(
             phase = "SEARCH"
         final_frame = len(env.log.times) - 1
         ax.set_title(
-            f"DBACT v3 · {phase} · frame {frame_index:03d}/{final_frame}\n"
+            f"DBACT closed loop · {phase} · frame {frame_index:03d}/{final_frame}\n"
             f"t={time_s:.1f}s · min robot distance={min_dist:.2f} m",
             fontsize=10,
         )
@@ -288,7 +288,18 @@ def animate_simulation(
 
     ani = animation.FuncAnimation(fig, draw, frames=frames, interval=1000 / fps, blit=False)
     try:
-        ani.save(path, writer=animation.PillowWriter(fps=fps), dpi=140)
+        if path.suffix.lower() == ".mp4":
+            if not animation.FFMpegWriter.isAvailable():
+                raise RuntimeError("FFmpeg is required to write MP4 animations")
+            writer = animation.FFMpegWriter(
+                fps=fps,
+                codec="h264",
+                bitrate=2200,
+                extra_args=["-pix_fmt", "yuv420p"],
+            )
+        else:
+            writer = animation.PillowWriter(fps=fps)
+        ani.save(path, writer=writer, dpi=140)
     finally:
         plt.close(fig)
 

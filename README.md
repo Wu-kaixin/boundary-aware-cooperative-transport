@@ -41,15 +41,17 @@ The repository combines a standalone simulation stack, boundary-aware local cont
 > the barrier disabled, 9 of 16 robots end up inside the object while the old metric
 > still reports 1.000.
 
-> **Certificate-backed 500-frame closed loop.** `A-boundary-aware-closed-loop-v3`
-> covers the complete rectangular workspace with a deterministic paired-lane
-> search and accepts shapes by executable simple-polygon, sensing, map-density,
-> cage-corridor, boundary-covering, wrench, and timing predicates -- not by an
-> L-shape whitelist. It executes SEARCH -> MAP -> ENCLOSE -> TRANSPORT -> HOLD
-> under per-step hard-QP safety. See
+> **Timeout-bounded research closed loop.** `Codex-boundary-aware-closed-loop-v1`
+> runs SEARCH -> MAP -> ENCLOSE -> TRANSPORT -> BRAKE -> HOLD until success, an
+> explicit failure, or a safety timeout; 500 frames is no longer a correctness
+> premise. It covers the rectangular workspace with deterministic paired-lane
+> search and classifies arbitrary simple shapes through executable sensing,
+> map-density, cage-corridor, boundary-covering, wrench, error, and rate
+> predicates -- not a shape whitelist. See
 > [`docs/CONDITIONAL_GUARANTEE.md`](docs/CONDITIONAL_GUARANTEE.md) for the theorem
-> and non-claims, and [`docs/CLOSED_LOOP_500.md`](docs/CLOSED_LOOP_500.md) for the
-> reproducible experiment protocol.
+> and non-claims, and
+> [`docs/FINAL_RESEARCH_REPORT_CODEX_V1.md`](docs/FINAL_RESEARCH_REPORT_CODEX_V1.md)
+> for the retained evidence, failures, and reproduction commands.
 > Historical baseline: the earlier central-region L-shape configuration remains
 > available as `configs/sim/v3/l_shape_search_closed_loop_500.yaml`.
 
