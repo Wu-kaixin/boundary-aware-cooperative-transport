@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "classification": "empirical_headless_runtime_ablation",
+  "python_source_binding": "PYTHONPATH=<worktree>/src",
+  "physics_dt_s": 0.05,
+  "safety_qp_every_physics_frame": true,
+  "baseline": {
+    "description": "worktree-bound Stage-6 baseline before vectorized re-key, stale-scan fast path, and certified-window map gossip scheduling",
+    "cases": [
+      {"shape": "circle", "seed": 0, "fps": 24.295801599449266},
+      {"shape": "concave_random7", "seed": 2, "fps": 14.418361186104077},
+      {"shape": "polygon32", "seed": 2, "fps": 11.249160037387245}
+    ],
+    "mean_fps": 16.654440940980194
+  },
+  "optimized": {
+    "cases": [
+      {
+        "shape": "circle",
+        "seed": 0,
+        "fps": 35.24057177397607,
+        "frame": 333,
+        "classification": "SUCCESS",
+        "fallbacks": 0,
+        "infeasible": 0,
+        "rho_relaxations": 0
+      },
+      {
+        "shape": "concave_random7",
+        "seed": 2,
+        "fps": 28.666279886828253,
+        "frame": 369,
+        "classification": "CONTRACT_FAILURE",
+        "fallbacks": 0,
+        "infeasible": 0,
+        "rho_relaxations": 0
+      },
+      {
+        "shape": "polygon32",
+        "seed": 2,
+        "fps": 22.160947950557865,
+        "frame": 345,
+        "classification": "MAP_INCOMPLETE",
+        "fallbacks": 0,
+        "infeasible": 0,
+        "rho_relaxations": 0
+      }
+    ],
+    "min_fps": 22.160947950557865,
+    "mean_fps": 28.68926653712073,
+    "median_fps": 28.666279886828253,
+    "max_fps": 35.24057177397607,
+    "mean_improvement_percent": 72.2619608715141
+  },
+  "limitations": [
+    "wall-clock rates are machine- and load-dependent empirical measurements, not theorem constants",
+    "the concave_random7 case remains a contract failure and polygon32 remains MAP_INCOMPLETE; runtime optimization did not relabel them as successes",
+    "30-40 fps is reached on the circle case but not uniformly over all tested geometries"
+  ]
+}

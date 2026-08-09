@@ -842,6 +842,7 @@ class SimulationEnvironment:
             "multi_rate": {
                 "perception_every": params.perception_every,
                 "planning_every": params.planning_every,
+                "map_gossip_every": params.map_gossip_every,
                 "safety_every": 1,
             },
             "communication": {

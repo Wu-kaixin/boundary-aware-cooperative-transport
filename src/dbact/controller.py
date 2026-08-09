@@ -78,6 +78,11 @@ class DBACTParams:
     # step.  A value of one preserves the original behaviour.
     perception_every: int = 1
     planning_every: int = 1
+    # Full-rate flooding is retained during the certified rendezvous relay
+    # interval.  During independent sweep and subsequent boundary mapping,
+    # complete map snapshots can be exchanged less often because local scans and
+    # hard safety rows continue at ``perception_every``.
+    map_gossip_every: int = 1
 
     # --- communication ---
     comm_range: float = 1.6
@@ -293,8 +298,14 @@ class DBACTController:
         self.seed = int(seed)
         self.goal_directions = {k: normalize(np.asarray(v, dtype=float)) for k, v in (goal_directions or {}).items()}
 
-        if params.perception_every < 1 or params.planning_every < 1:
-            raise ValueError("perception_every and planning_every must both be positive integers")
+        if (
+            params.perception_every < 1
+            or params.planning_every < 1
+            or params.map_gossip_every < 1
+        ):
+            raise ValueError(
+                "perception_every, planning_every and map_gossip_every must be positive integers"
+            )
         if not 0.0 <= params.communication_dropout_prob < 1.0:
             raise ValueError("communication_dropout_prob must lie in [0, 1)")
         if not 0.0 <= params.safety_min_confidence <= 1.0:
@@ -516,6 +527,7 @@ class DBACTController:
             full_map_gossip = full_map_gossip and self._time <= (
                 sweep + rendezvous + gossip + self.params.boundary_mapping_time
             )
+        gossip_due = self._map_gossip_due(refresh_perception)
         for i, agent in enumerate(agents):
             if refresh_perception:
                 batch = list(sensed[agent.agent_id])
@@ -530,7 +542,7 @@ class DBACTController:
                     # hard CBF rows for this agent.
                 self._safety_observation_cache[agent.agent_id] = safety_batch
                 self.maps[agent.agent_id].update(batch, timestamp)
-                if full_map_gossip:
+                if full_map_gossip and gossip_due:
                     for j in neighbors[i]:
                         self.maps[agent.agent_id].merge_observations(
                             prior_fused.get(agents[j].agent_id, []),
@@ -734,7 +746,10 @@ class DBACTController:
                 ) + delta
                 progress[object_id] = float(np.dot(displacement[object_id], goal))
                 continue
-            points = np.vstack([obs.point for obs in observations if obs.object_id == object_id])
+            points = np.asarray(
+                [obs.point for obs in observations if obs.object_id == object_id],
+                dtype=float,
+            )
             centroid = np.mean(points, axis=0)
             origin = origins.setdefault(object_id, centroid.copy())
             displacement[object_id] = centroid - origin
@@ -1210,7 +1225,10 @@ class DBACTController:
         if not observations:
             return self._exploration_velocity(i, agents, neighbor_indices, self._time), "explore", 0.0, False
 
-        crowd = np.vstack([agent.position] + [agents[j].position for j in neighbor_indices])
+        crowd = np.asarray(
+            [agent.position] + [agents[j].position for j in neighbor_indices],
+            dtype=float,
+        )
         goal = self._goal_for(observations) if self.params.task_mode == "transport" else None
         density = BoundaryAwareDensity.from_observations(
             observations, self.density_params, robot_positions=crowd, goal_direction=goal
@@ -1401,8 +1419,8 @@ class DBACTController:
     def _cage_targets(
         self, observations: list[BoundaryObservation], goal: np.ndarray | None
     ) -> np.ndarray:
-        points = np.vstack([obs.point for obs in observations])
-        normals = np.vstack([obs.normal for obs in observations])
+        points = np.asarray([obs.point for obs in observations], dtype=float)
+        normals = np.asarray([obs.normal for obs in observations], dtype=float)
         offsets = self.density_params.offsets_for(normals, goal)
         return points + offsets[:, None] * normals
 
@@ -1548,7 +1566,7 @@ class DBACTController:
     def _nearest_observation(observations: list[BoundaryObservation], position: np.ndarray) -> BoundaryObservation | None:
         if not observations:
             return None
-        points = np.vstack([obs.point for obs in observations])
+        points = np.asarray([obs.point for obs in observations], dtype=float)
         return observations[int(np.argmin(np.linalg.norm(points - position[None, :], axis=1)))]
 
     def _approach_target(
@@ -1573,7 +1591,7 @@ class DBACTController:
 
     @staticmethod
     def _map_centroid(observations: list[BoundaryObservation]) -> np.ndarray:
-        points = np.vstack([obs.point for obs in observations])
+        points = np.asarray([obs.point for obs in observations], dtype=float)
         weights = np.asarray([max(obs.confidence, 1e-6) for obs in observations])
         return np.sum(points * weights[:, None], axis=0) / float(np.sum(weights))
 
@@ -1630,6 +1648,26 @@ class DBACTController:
             + radius * float(self.params.search_angular_speed) * tangent
         )
         return feed_forward + self.params.kp_explore * (target - agent.position)
+
+    def _map_gossip_due(self, refresh_perception: bool) -> bool:
+        """Schedule planning-map flooding without decimating hard safety.
+
+        The paired-lane discovery proof needs one relay opportunity per
+        perception update during its explicit rendezvous/gossip interval.  The
+        independent sweep before it and boundary mapping after it may exchange
+        the much larger snapshots at a lower rate.  Local perception, raw CBF
+        rows, and the QP are unaffected.
+        """
+        if not refresh_perception or not self.params.map_gossip:
+            return False
+        if self.params.search_pattern == "paired_lanes":
+            sweep, rendezvous, gossip = self._paired_search_durations()
+            relay_start = sweep + rendezvous
+            relay_end = relay_start + gossip
+            if relay_start - 1e-12 <= self._time <= relay_end + 1e-12:
+                return True
+        perception_index = self._frame // int(self.params.perception_every)
+        return perception_index % int(self.params.map_gossip_every) == 0
 
     def _paired_search_durations(self) -> tuple[float, float, float]:
         """Return sweep, rendezvous, and gossip durations in seconds."""
@@ -1811,7 +1849,7 @@ class DBACTController:
                 for obs in selected
             ]
         )
-        normals = np.vstack([obs.normal for obs in selected])
+        normals = np.asarray([obs.normal for obs in selected], dtype=float)
         return points, normals, v_obj
 
     def _update_object_velocity(
@@ -1907,7 +1945,7 @@ class DBACTController:
     def _neighbor_indices(self, agents: list[AgentState]) -> list[list[int]]:
         if not agents:
             return []
-        positions = np.vstack([a.position for a in agents])
+        positions = np.asarray([a.position for a in agents], dtype=float)
         d = np.linalg.norm(positions[:, None, :] - positions[None, :, :], axis=2)
         np.fill_diagonal(d, np.inf)
         return [list(np.where(row <= self.params.comm_range)[0]) for row in d]

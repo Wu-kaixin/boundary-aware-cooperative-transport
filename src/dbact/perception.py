@@ -144,7 +144,7 @@ class RayCastBoundarySensor:
 
         origin = np.asarray(agent.position, dtype=float).reshape(2)
         for object_id, items in by_object.items():
-            points = np.vstack([item["point"] for item in items])
+            points = np.asarray([item["point"] for item in items], dtype=float)
             arc = self._arc_lengths(points, [item["ray_index"] for item in items])
             k = min(self.params.pca_neighbors, len(points))
             for idx, item in enumerate(items):

@@ -241,6 +241,33 @@ def test_research_config_disables_fixed_feedforward_and_enables_feedback():
     assert params.transport_speed == 0.0
     assert params.transport_progress_estimator == "motion_integral"
     assert params.wrench_allocation is True
+    assert params.map_gossip_every == 3
+
+
+def test_map_gossip_decimation_starts_only_after_certified_search_relay():
+    params = DBACTParams(
+        search_pattern="paired_lanes",
+        map_gossip=True,
+        perception_every=3,
+        map_gossip_every=3,
+        d_min=0.32,
+    )
+    controller = DBACTController(params, (0.0, 8.0, 0.0, 8.0))
+    controller._paired_search_durations = lambda: (1.0, 1.0, 1.0)
+    controller._frame = 3
+    controller._time = 0.5
+    assert not controller._map_gossip_due(refresh_perception=True)
+
+    controller._frame = 3
+    controller._time = 2.5
+    assert controller._map_gossip_due(refresh_perception=True)
+
+    controller._time = 3.5
+    controller._frame = 12  # perception index 4: not a decimated gossip cycle
+    assert not controller._map_gossip_due(refresh_perception=True)
+    controller._frame = 18  # perception index 6: one full-map exchange
+    assert controller._map_gossip_due(refresh_perception=True)
+    assert not controller._map_gossip_due(refresh_perception=False)
 
 
 def test_communication_dropout_is_symmetric_deterministic_and_measured():

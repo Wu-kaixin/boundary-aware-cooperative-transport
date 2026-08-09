@@ -163,7 +163,12 @@ def test_v3_starts_unobserved_and_serialises_the_deadline_contract():
         "first_transport": 350,
         "first_hold": 500,
     }
-    assert summary["multi_rate"] == {"perception_every": 3, "planning_every": 3, "safety_every": 1}
+    assert summary["multi_rate"] == {
+        "perception_every": 3,
+        "planning_every": 3,
+        "map_gossip_every": 1,
+        "safety_every": 1,
+    }
     assert all(len(modes) == 4 for modes in env.log.agent_modes.values())
 
 

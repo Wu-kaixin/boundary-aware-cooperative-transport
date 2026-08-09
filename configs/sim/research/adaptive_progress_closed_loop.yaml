@@ -101,6 +101,9 @@ controller:
   search_gossip_time: 1.35
   search_local_gossip_time: 0.90
   map_gossip: true
+  # The explicit rendezvous relay stays full-rate for the discovery proof.
+  # Independent sweep and later large boundary-map snapshots use this rate.
+  map_gossip_every: 3
   boundary_mapping_time: 3.00
   boundary_mapping_radius: 1.00
   boundary_mapping_angular_speed: 0.40

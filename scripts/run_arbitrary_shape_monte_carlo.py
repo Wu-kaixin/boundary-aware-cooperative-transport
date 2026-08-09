@@ -294,7 +294,11 @@ def main() -> int:
             record["contract_failure_reasons"] = saved_cargo.get("failure_reasons", [])
     existing_ids = {record["case_id"] for record in records}
     for seed in seeds:
-        for index, shape_name in enumerate(args.shapes):
+        for shape_name in args.shapes:
+            # A filtered run must reproduce the exact case from the full matrix.
+            # Enumeration over the CLI subset changed position/friction/yaw
+            # strata and made performance ablations incomparable.
+            index = SHAPE_NAMES.index(shape_name)
             config, metadata = configure_case(base, shape_name, seed, index, args.distance)
             config["evaluation"]["online_truth_audit"] = bool(args.truth_audit)
             config["evaluation"]["require_measured_error_bounds"] = bool(args.truth_audit)
