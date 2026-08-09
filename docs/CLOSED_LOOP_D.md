@@ -228,8 +228,15 @@ the gate exists.
 
 ## Regression against the A branch: S1's certificate rate
 
-`scripts/verify_refactor.py` on this branch reports **S1 FAIL, S2–S7 PASS**. The
-A branch reports S1–S7 PASS. The single number that changed is the zero-input
+`scripts/verify_refactor.py` reports:
+
+| | S1 | S2–S6 | S7 |
+| --- | --- | --- | --- |
+| A branch | PASS | PASS | **FAIL** (the stall) |
+| D branch | **FAIL** | PASS | PASS |
+
+So the trade is exactly one stage each way, and it is worth stating precisely
+rather than as a net score. The single number that moved in S1 is the zero-input
 certificate failure rate — the fraction of solves on which `u = 0` does not
 satisfy the margin-free barrier, so the robot has to actively retreat:
 
