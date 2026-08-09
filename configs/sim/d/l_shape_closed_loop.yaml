@@ -188,7 +188,11 @@ controller:
   # transport; 4.0 turns the same error into 22 deg.
   # Membership in the push arc is fixed by the task direction, so the steering
   # gain can be raised without the arc collapsing.
-  cross_track_gain: 6.0
+  # PD, not P. Cross-track is the integral of the direction error, so a
+  # proportional law alone closes an undamped second-order loop; the damping term
+  # is what lets the gain be raised without the offset ringing.
+  cross_track_gain: 10.0
+  cross_track_damping: 12.0
   cross_track_max_deg: 45.0
   cross_track_deadband: 0.02
   cross_track_reference: 0.08

@@ -335,10 +335,42 @@ term: the barrier is still a continuous-time condition evaluated on an estimate
 that updates in jumps, and only a DT-CBF makes the demand consistent with one step
 of that.
 
-**Cross-track, 5 of 12 seeds.** Over a 1.5 m push, 0.15 m is a 10% corridor, and
-the press is always along a robot's own normal, so the arc's lateral authority is
-bounded by which faces the shape offers. The rotation-based allocation is the best
-of the three tried.
+**Cross-track, 7 of 12 seeds — now the leading gate.** It is not an independent
+quantity. Measured over twelve seeds,
+
+```
+max cross-track  =  J * sin(direction error) ,     correlation 0.968
+```
+
+so the gate "cross-track <= 0.15 m" at `J ~ 1.5 m` *is* the requirement "hold the
+net force direction to within 5.7 degrees for the whole push". The two gates are
+one gate, and lifting the frame budget made it harder in exactly the way it should
+have: tripling the distance triples the lateral error a given direction bias
+produces. At 0.46 m of travel a 6-degree bias cost 0.05 m; at 1.5 m it costs 0.16.
+
+That identity also says what the loop is. Lateral position is the *integral* of
+direction error, so a proportional law on it closes a second-order loop with no
+damping — which is why giving the allocation more authority produced 0.68 m of
+ringing rather than a smaller offset. The lateral component of the robot's own
+velocity estimate is the damping signal, and it is free: the same registration
+output the transport loop already runs on.
+
+| | P only | PD |
+| --- | --- | --- |
+| G500 | 2/12 | **3/12** |
+| cross-track mean | 0.192 m | **0.165 m** |
+| cross-track max | 0.536 m | **0.321 m** |
+| direction error | 6.61 ± 5.34° | **5.71 ± 3.76°** |
+| seeds over 0.15 m | 7 | 7 |
+
+The worst case nearly halved and the spread on direction error fell by 30%, but
+the *number* of seeds over the line did not move: five of them now sit between
+0.16 and 0.24 m, just outside. The mean direction error is 5.71° against the
+5.7° the gate implies — the loop is sitting exactly on its own requirement, which
+is the signature of a loop that is at the limit of its authority rather than
+badly tuned. The press is always along a robot's own observed normal, so the
+achievable force directions are the cone spanned by whichever faces the arc is
+touching; on a faceted object that cone is coarse, and no gain makes it finer.
 
 ## Regression against the A branch: S1's certificate rate
 
