@@ -282,13 +282,19 @@ class SimulationEnvironment:
             "progress_estimate_final": self.log.progress_estimate[cid][-1]
             if self.log.progress_estimate.get(cid)
             else None,
+            # Only meaningful once the cargo has actually travelled: dividing the
+            # estimate by a J of a few millimetres reports a ratio of -13 and
+            # poisons any average taken over the seeds.
             "progress_estimate_ratio": (
                 self.log.progress_estimate[cid][-1] / j
-                if self.log.progress_estimate.get(cid) and abs(j) > 1e-9
+                if self.log.progress_estimate.get(cid) and j > 0.1
                 else None
             ),
             "solver_fallbacks": solver_stats["fallbacks"],
             "solver_infeasible": solver_stats["infeasible"],
+            "margin_relaxations": solver_stats["margin_relaxations"],
+            "barrier_scalings": solver_stats["barrier_scalings"],
+            "min_barrier_scale": solver_stats["min_barrier_scale"],
             "min_inter_agent_distance": min_distance,
             "d_min": params.d_min,
             "min_signed_clearance": entry["min_signed_clearance"],

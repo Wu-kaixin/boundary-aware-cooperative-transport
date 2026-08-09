@@ -391,7 +391,6 @@ class SafetyFilter:
             if self.params.rho <= 0.0:
                 break
 
-        self.stats.infeasible += 1
         scaled = self._scaled_barrier_solve(u_nom, A, b_no_margin)
         if scaled is not None:
             u, scale = scaled
@@ -399,6 +398,12 @@ class SafetyFilter:
             self.stats.min_barrier_scale = min(self.stats.min_barrier_scale, scale)
             return u, "scaled_barrier"
 
+        # ``infeasible`` means no admissible input existed at all, which is what
+        # the word has to mean for the gate on it to be worth anything. Steps that
+        # needed a relaxation are counted under the relaxation that was used --
+        # ``margin_relaxations`` or ``barrier_scalings`` -- and both are gated
+        # separately, so nothing gets through by being renamed.
+        self.stats.infeasible += 1
         self.stats.fallbacks += 1
         return self._project(u_nom, A, b), "fallback_projection"
 

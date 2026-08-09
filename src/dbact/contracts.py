@@ -334,6 +334,10 @@ class ClosedLoopContract:
     progress_max_ratio: float = 1.40
     hold_speed_max: float = 0.02
     yaw_max_deg: float = 15.0
+    # Steps on which the object-barrier decrease rate had to be scaled down to
+    # keep the QP feasible. Zero by default: a relaxation that is counted but not
+    # scored is a relaxation that has been renamed rather than removed.
+    barrier_scalings_max: int = 0
 
     def evaluate(self, report: dict) -> SuccessVerdict:
         reasons: list[str] = []
@@ -406,12 +410,21 @@ class ClosedLoopContract:
 
         if report.get("engine") == "scripted":
             reasons.append("G500: engine='scripted' -- the cargo was translated, not transported")
-        for name, label in (("solver_fallbacks", "solver fallback"), ("solver_infeasible", "QP infeasibility")):
+        for name, label, limit in (
+            ("solver_fallbacks", "solver fallback", 0),
+            ("solver_infeasible", "QP infeasibility", 0),
+            ("barrier_scalings", "scaled-barrier", self.barrier_scalings_max),
+        ):
             count = report.get(name)
             if count is None:
                 reasons.append(f"G500: {label} count was not recorded")
-            elif int(count) != 0:
-                reasons.append(f"G500: {int(count)} {label} event(s); the contract requires zero")
+            elif int(count) > limit:
+                detail = ""
+                if name == "barrier_scalings" and report.get("min_barrier_scale") is not None:
+                    detail = f", smallest factor {float(report['min_barrier_scale']):.3f}"
+                reasons.append(
+                    f"G500: {int(count)} {label} event(s){detail}; the contract allows {limit}"
+                )
 
         distance = report.get("min_inter_agent_distance")
         d_min = report.get("d_min")
@@ -453,6 +466,7 @@ class ClosedLoopContract:
             "progress_max_ratio": self.progress_max_ratio,
             "hold_speed_max": self.hold_speed_max,
             "yaw_max_deg": self.yaw_max_deg,
+            "barrier_scalings_max": self.barrier_scalings_max,
         }
 
 

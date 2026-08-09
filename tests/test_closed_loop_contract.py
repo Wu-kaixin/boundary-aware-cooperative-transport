@@ -24,6 +24,8 @@ def passing_report(**overrides) -> dict:
         "reached_frame": 340,
         "solver_fallbacks": 0,
         "solver_infeasible": 0,
+        "barrier_scalings": 0,
+        "min_barrier_scale": 1.0,
         "min_inter_agent_distance": 0.3402,
         "d_min": 0.34,
         "min_signed_clearance": 0.1101,
@@ -104,6 +106,15 @@ def test_solver_provenance_is_a_gate_and_zero_means_zero():
     assert any("QP infeasibility" in r for r in reasons(solver_infeasible=1))
 
 
+def test_a_relaxation_that_is_only_renamed_still_fails_the_run():
+    """The scaled-barrier tier keeps the inter-robot rows hard and gives up part
+    of the object barrier's decrease rate. That is better than a projection
+    fallback and it is still not a clean run, so it is scored rather than
+    absorbed."""
+    problems = reasons(barrier_scalings=7, min_barrier_scale=0.42)
+    assert any("scaled-barrier" in r and "0.420" in r for r in problems)
+
+
 def test_a_scripted_engine_is_rejected_outright():
     assert any("scripted" in r for r in reasons(engine="scripted"))
 
@@ -117,6 +128,7 @@ def test_a_missing_measurement_fails_rather_than_passes():
         "max_cross_track",
         "max_strict_coverage",
         "solver_fallbacks",
+        "barrier_scalings",
         "min_inter_agent_distance",
         "min_signed_clearance",
         "max_penetration",
