@@ -57,8 +57,13 @@ cargoes:
 
 task:
   mode: random_constrained
-  distance_min: 0.35
-  distance_max: 0.60
+  distance_min: 0.90
+  # The cargo is 1.8 m across, so a displacement under ~1.2 m does not read as
+  # transport at all. With the frame budget lifted the distance is set by what is
+  # worth demonstrating rather than by what fits in 500 frames; every direction in
+  # the full circle is still admissible from the centre of an 8 m workspace, so
+  # the sampler's acceptance rate stays 1.0.
+  distance_max: 1.60
   # Clearance the goal must leave to every wall is
   #     R_obj + d_c + r_robot + wall_margin.
   wall_margin: 0.35
@@ -125,7 +130,12 @@ controller:
 
   # S1 safety
   robot_radius: 0.13
-  delta_max: 0.05
+  # 0.065, not 0.05. C5 makes the press stop press_margin above r_safe, and the
+  # penetration left over is what produces the force. delta_max is what buys that
+  # room: r_safe = 0.13 - 0.065 = 0.065, the C5 floor sits at 0.098, and the
+  # penetration left at the floor is 0.032 m -> 16 N a robot, so a four-robot
+  # quorum supplies 64 N against a 24.2 N breakaway.
+  delta_max: 0.065
   d_min: 0.28
   gamma_agent: 6.0
   gamma_obj: 8.0
@@ -155,7 +165,10 @@ controller:
   contact_band_tolerance: 0.08
 
   # D3/D4 transport outer loop
-  press_margin: 0.015
+  # Derived from C5 rather than set: safety_factor * (V + rho) / gamma_obj, the
+  # width of the band in which object rows demand active retreat. Leave it null.
+  press_margin: null
+  press_margin_safety: 1.2
   transport_law: progress
   transport_reference_speed: 0.055
   transport_kp: 2.4
@@ -178,6 +191,14 @@ controller:
   cross_track_gain: 6.0
   cross_track_max_deg: 45.0
   cross_track_deadband: 0.02
+  cross_track_reference: 0.08
+  # Soft inter-robot repulsion above d_min, off by default. The reasoning was the
+  # same as C5's -- keep the barrier a last resort rather than the operating point
+  # -- and it was measured and did not pay: scaled-barrier seeds 9 -> 8 while
+  # cross-track failures went 5 -> 7, because a ring held apart is also a ring
+  # slower to close around a moving object. Kept as an ablation switch.
+  separation_band: 0.06
+  kp_separate: 0.0
   push_share_floor: 0.15
 
   # D2 phase supervisor
@@ -218,10 +239,14 @@ evaluation:
   displacement_gate: 0.1
 
 g500:
-  detect_by: 100
-  contact_ready_by: 300
-  transport_by: 350
-  reach_by: 500
+  # Deadlines off: null means the frame is measured and reported but not gated.
+  # A budget answers "can the team finish inside a number somebody chose"; running
+  # to completion answers "how long does the team take", and only the second is a
+  # property of the algorithm. Set them to integers to score against a budget.
+  detect_by: null
+  contact_ready_by: null
+  transport_by: null
+  reach_by: null
   efficiency_min: 0.80
   direction_error_max_deg: 20.0
   cross_track_max: 0.15

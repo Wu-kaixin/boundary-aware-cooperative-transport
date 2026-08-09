@@ -76,7 +76,13 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--config", default="configs/sim/d/l_shape_closed_loop.yaml")
     parser.add_argument("--seeds", default="0..11")
-    parser.add_argument("--frames", type=int, default=500)
+    parser.add_argument("--frames", type=int, default=500,
+                        help="Fixed frame budget. Ignored when --until-settled is given.")
+    parser.add_argument("--until-settled", action="store_true",
+                        help="Run each episode to completion instead of to a budget, so that the "
+                             "enclosure and transport times are measured rather than assumed.")
+    parser.add_argument("--max-frames", type=int, default=3000, help="Watchdog for --until-settled.")
+    parser.add_argument("--settle-frames", type=int, default=40)
     parser.add_argument("--out", default="runs/d_sweep")
     parser.add_argument("--save-replays", action="store_true", help="Keep replay.npz for every seed.")
     args = parser.parse_args()
@@ -90,8 +96,13 @@ def main() -> None:
     for seed in seeds:
         env = SimulationEnvironment(load_yaml(args.config), seed=seed)
         started = time.perf_counter()
-        env.run(args.frames)
+        if args.until_settled:
+            termination = env.run_until_settled(max_frames=args.max_frames, settle_frames=args.settle_frames)
+        else:
+            env.run(args.frames)
+            termination = {"frames_run": args.frames, "terminated_by": "budget", "settled": None}
         wall = time.perf_counter() - started
+        frames_run = termination["frames_run"]
         summary = env.summary()
         if args.save_replays:
             env.save_outputs(out / f"seed{seed}")
@@ -103,7 +114,9 @@ def main() -> None:
             seed=seed,
             success=g500["success"],
             reasons=g500["failure_reasons"],
-            frames_per_second=args.frames / wall if wall > 0 else float("inf"),
+            frames_run=frames_run,
+            terminated_by=termination["terminated_by"],
+            frames_per_second=frames_run / wall if wall > 0 else float("inf"),
             barrier_scalings=summary["solver"]["barrier_scalings"],
             min_barrier_scale=summary["solver"]["min_barrier_scale"],
             margin_relaxations=summary["solver"]["margin_relaxations"],
@@ -118,6 +131,7 @@ def main() -> None:
               f"J={metrics['J']:.4f}  eff={metrics['efficiency']:.3f}  "
               f"cross={metrics['max_cross_track']:.4f}  "
               f"transport@{metrics['transport_frame']}  hold@{metrics['hold_frame']}  "
+              f"end@{frames_run}({termination['terminated_by'][:4]})  "
               f"{metrics['frames_per_second']:.1f} fps")
 
     passed = sum(1 for row in rows if row["success"])
@@ -139,6 +153,8 @@ def main() -> None:
     report = {
         "config": args.config,
         "frames": args.frames,
+        "until_settled": bool(args.until_settled),
+        "max_frames": args.max_frames,
         "seeds": seeds,
         "g500_pass": passed,
         "g500_total": len(rows),
@@ -154,6 +170,7 @@ def main() -> None:
                 "min_signed_clearance", "max_penetration", "first_detection_frame",
                 "contact_ready_frame", "transport_frame", "hold_frame",
                 "progress_estimate_ratio", "barrier_scalings", "frames_per_second",
+                "frames_run", "margin_relaxations",
             )
         },
         "gate_failure_counts": dict(sorted(failures.items(), key=lambda kv: -kv[1])),

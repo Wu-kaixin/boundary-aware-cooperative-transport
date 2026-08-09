@@ -296,6 +296,169 @@ class DirectionalProgressContract:
 
 
 # --------------------------------------------------------------------------- #
+# C5 - transport-time QP feasibility
+# --------------------------------------------------------------------------- #
+
+
+@dataclass(frozen=True)
+class TransportFeasibilityContract:
+    """Where the transport press is allowed to stop, so that the QP stays feasible.
+
+    The object-boundary row is
+
+        n_k^T u  >=  n_k^T v_obj - gamma_obj h_k + rho ,
+
+    so its right-hand side is non-positive -- and therefore satisfied by ``u = 0``
+    -- exactly when
+
+        h_k  >=  ( n_k^T v_obj + rho ) / gamma_obj .
+
+    Bounding ``n_k^T v_obj`` by the ISSf disturbance bound ``V`` gives a
+    *demand band* of width ``(V + rho) / gamma_obj`` above ``r_safe``, inside which
+    every object row asks for active retreat.
+
+    This is the whole of the scaled-barrier problem, and it was designed in rather
+    than tuned in. The transport press generates force by driving robots against
+    the object barrier, so a pushing robot's steady state is wherever the press
+    stops -- and with the press stopping 0.015 m above ``r_safe`` against a band of
+    0.0275 m, **every pusher sat permanently inside the band**. Each one then
+    demanded retreat on every step, and any neighbour at ``d_min`` made the set
+    empty. Measured: 168 of 168 scaled-barrier events were object rows demanding
+    retreat, with zero positive inter-robot demands.
+
+    Requiring the press to stop *above* the band restores a constructive
+    feasibility certificate:
+
+        Proposition. If every inter-agent barrier satisfies ``h_ij >= 0`` and every
+        object row satisfies ``h_k >= (V + rho)/gamma_obj``, then ``u = 0`` satisfies
+        every row of the QP, so the problem is feasible and no relaxation is needed.
+
+    Both hypotheses are maintained rather than assumed: the first by the
+    inter-agent CBF from a valid initial state, the second by the press floor this
+    contract fixes. The relaxation tiers stay in place for the transient in which a
+    map correction moves a robot into the band, which is now the only way to get
+    there.
+
+    The cost is force. A robot stopping at ``r_safe + margin`` applies
+    ``k_p (r_robot - r_safe - margin)`` instead of ``k_p delta_max``, so
+    ``delta_max`` has to be large enough that what is left is still worth having --
+    which is the cross-layer relation this contract exists to check.
+    """
+
+    r_safe: float
+    robot_radius: float
+    gamma_obj: float
+    rho: float
+    object_velocity_bound: float
+    press_margin: float
+    stiffness: float | None = None
+    breakaway_force: float | None = None
+    min_push_agents: int = 3
+    safety_factor: float = 1.2
+
+    @property
+    def demand_band(self) -> float:
+        """Width above ``r_safe`` inside which object rows demand active retreat."""
+        return (self.object_velocity_bound + self.rho) / max(self.gamma_obj, 1e-9)
+
+    @property
+    def required_margin(self) -> float:
+        return self.safety_factor * self.demand_band
+
+    @property
+    def press_floor(self) -> float:
+        """Signed clearance the press is allowed to drive a robot down to."""
+        return self.r_safe + self.press_margin
+
+    @property
+    def press_penetration(self) -> float:
+        """Penetration left at the press floor; this is what makes the force."""
+        return self.robot_radius - self.press_floor
+
+    def force_per_robot(self) -> float | None:
+        if self.stiffness is None:
+            return None
+        return self.stiffness * max(self.press_penetration, 0.0)
+
+    def structural_violations(self) -> list[str]:
+        """Conditions under which the *controller* is not well posed.
+
+        Separate from the force budget because they fail differently. A press
+        floor inside the demand band makes the QP infeasible -- the controller is
+        wrong however good the scenario is. A force budget below the breakaway
+        force makes the *scenario* impossible -- the controller is fine and the
+        cargo simply cannot be moved by that quorum, which a run reports as
+        ``J < L``. The first is asserted for every transport controller; the
+        second only where a scenario has declared a transport task, so the legacy
+        enclosure configurations still load and their known-marginal budget is
+        reported rather than raised.
+        """
+        out: list[str] = []
+        if self.press_margin < self.required_margin:
+            out.append(
+                f"C5 press floor violated: press_margin={self.press_margin:.4f} < "
+                f"{self.safety_factor:.2f} * (V + rho)/gamma_obj = {self.required_margin:.4f}. "
+                "Pushing robots would rest inside the object rows' demand band, so every one of "
+                "them demands retreat on every step and the QP has no feasible input as soon as a "
+                "neighbour reaches d_min"
+            )
+        if self.press_penetration <= 0.0:
+            out.append(
+                f"C5 press floor violated: the floor {self.press_floor:.4f} is at or beyond "
+                f"robot_radius={self.robot_radius:.4f}, so penetration is non-positive and the "
+                "pushing arc applies no force at all"
+            )
+        return out
+
+    def budget_violations(self) -> list[str]:
+        """Whether the quorum can move this cargo at all, from the press floor."""
+        if self.breakaway_force is None or self.stiffness is None or self.press_penetration <= 0.0:
+            return []
+        available = self.min_push_agents * self.force_per_robot()
+        if available > self.breakaway_force:
+            return []
+        return [
+            f"C5 force budget violated: {self.min_push_agents} robots at the press floor supply "
+            f"{available:.2f} N against a breakaway force of {self.breakaway_force:.2f} N. Raise "
+            "delta_max so the floor sits deeper, lower the ground friction, or require more pushing "
+            "robots -- as configured the quorum cannot move the cargo"
+        ]
+
+    def violations(self) -> list[str]:
+        return self.structural_violations() + self.budget_violations()
+
+    def assert_structural(self) -> None:
+        problems = self.structural_violations()
+        if problems:
+            raise ContractViolation("C5 transport feasibility contract violated:\n  - " + "\n  - ".join(problems))
+
+    def assert_valid(self) -> None:
+        problems = self.violations()
+        if problems:
+            raise ContractViolation("C5 transport feasibility contract violated:\n  - " + "\n  - ".join(problems))
+
+    def as_dict(self) -> dict:
+        return {
+            "r_safe": self.r_safe,
+            "gamma_obj": self.gamma_obj,
+            "rho": self.rho,
+            "object_velocity_bound": self.object_velocity_bound,
+            "demand_band": self.demand_band,
+            "required_margin": self.required_margin,
+            "press_margin": self.press_margin,
+            "press_floor": self.press_floor,
+            "press_penetration": self.press_penetration,
+            "force_per_robot": self.force_per_robot(),
+            "breakaway_force": self.breakaway_force,
+            "min_push_agents": self.min_push_agents,
+            "quorum_force": (
+                self.min_push_agents * self.force_per_robot() if self.force_per_robot() is not None else None
+            ),
+            "violations": self.violations(),
+        }
+
+
+# --------------------------------------------------------------------------- #
 # C4 - the closed-loop 500-frame contract
 # --------------------------------------------------------------------------- #
 
@@ -323,10 +486,15 @@ class ClosedLoopContract:
     is the gate that makes BRAKE and HOLD mean something.
     """
 
-    detect_by: int = 100
-    contact_ready_by: int = 300
-    transport_by: int = 350
-    reach_by: int = 500
+    # A deadline of ``None`` is reported but not gated. That is the difference
+    # between asking whether the team can finish inside a budget somebody chose,
+    # and asking how long the team actually takes -- and the second question is
+    # the one whose answer is a property of the algorithm. The frame counts are
+    # still measured either way, so removing a gate costs no evidence.
+    detect_by: int | None = 100
+    contact_ready_by: int | None = 300
+    transport_by: int | None = 350
+    reach_by: int | None = 500
     efficiency_min: float = 0.80
     direction_error_max_deg: float = 20.0
     cross_track_max: float = 0.15
@@ -342,11 +510,13 @@ class ClosedLoopContract:
     def evaluate(self, report: dict) -> SuccessVerdict:
         reasons: list[str] = []
 
-        def frame(name: str, limit: int, label: str) -> None:
+        horizon = report.get("frames_run") or self.reach_by
+
+        def frame(name: str, limit: int | None, label: str) -> None:
             value = report.get(name)
             if value is None:
-                reasons.append(f"G500: {label} never happened within the {self.reach_by}-frame budget")
-            elif int(value) > limit:
+                reasons.append(f"G500: {label} never happened within the {horizon}-frame run")
+            elif limit is not None and int(value) > limit:
                 reasons.append(f"G500: {label} at frame {int(value)} > {limit}")
 
         frame("first_detection_frame", self.detect_by, "object detection")

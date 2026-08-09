@@ -50,7 +50,7 @@ import numpy as np
 from .boundary_density import BoundaryAwareDensity, DensityParams
 from .boundary_map import LocalBoundaryMap
 from .cargo import Cargo
-from .contracts import ContactSafetyContract, CoverageContract
+from .contracts import ContactSafetyContract, CoverageContract, TransportFeasibilityContract
 from .geometry import clip_to_domain, normalize
 from .local_cvt import LocalCVT, empty_cell_threshold
 from .perception import PerceptionParams, RayCastBoundarySensor
@@ -162,8 +162,13 @@ class DBACTParams:
     kp_press: float = 3.0
     standoff_range: float = 0.55
     # Slack the transport press leaves between its deepest command and the object
-    # barrier's own boundary. See ``_transport_command``.
-    press_margin: float = 0.015
+    # barrier's own boundary. ``None`` derives it from C5 rather than setting it:
+    # ``safety_factor * (object_velocity_bound + rho) / gamma_obj``, the width of
+    # the band inside which object rows demand active retreat. A literal value is
+    # allowed so the ablation can put the press back inside the band and show the
+    # scaled-barrier events return.
+    press_margin: float | None = None
+    press_margin_safety: float = 1.2
     # Standoff used once the team is holding: strictly above robot_radius, so the
     # enclosure is kept without any robot remaining in contact. A cage at the
     # contact offset never stops pushing -- every trailing robot still applies
@@ -177,9 +182,19 @@ class DBACTParams:
     lead_lookahead_max: float = 0.18
     # Lateral steering: how hard the push arc is rotated to cancel cross-track
     # error, and the largest rotation it may ask for.
-    cross_track_gain: float = 3.0
+    # Soft inter-robot separation. The inter-agent barrier is a *last resort*, and
+    # C5 makes the same argument for the object barrier: at every scaled-barrier
+    # event the agent rows were satisfiable at u = 0 but only barely (h_ij between
+    # 0.0007 and 0.006), so a robot asked to retreat from the object had nowhere to
+    # go. A repulsion that switches on above d_min keeps that slack available, and
+    # costs nothing when the ring is not crowded.
+    separation_band: float = 0.06
+    kp_separate: float = 1.2
+    cross_track_gain: float = 0.8
     cross_track_max_deg: float = 30.0
     cross_track_deadband: float = 0.03
+    # Lateral error at which the differential allocation reaches full authority.
+    cross_track_reference: float = 0.10
     push_share_floor: float = 0.15
 
     # --- phase supervisor (D2) ---
@@ -222,6 +237,24 @@ class DBACTParams:
 
     def coverage_contract(self) -> CoverageContract:
         return CoverageContract(local_radius=self.local_radius, comm_range=self.comm_range)
+
+    def transport_feasibility(
+        self, stiffness: float | None = None, breakaway_force: float | None = None
+    ) -> TransportFeasibilityContract:
+        contract = TransportFeasibilityContract(
+            r_safe=self.r_safe,
+            robot_radius=self.robot_radius,
+            gamma_obj=self.gamma_obj,
+            rho=self.rho,
+            object_velocity_bound=self.object_velocity_bound,
+            press_margin=0.0,
+            stiffness=stiffness,
+            breakaway_force=breakaway_force,
+            min_push_agents=self.min_push_agents,
+            safety_factor=self.press_margin_safety,
+        )
+        margin = self.press_margin if self.press_margin is not None else contract.required_margin
+        return replace(contract, press_margin=margin)
 
     def transport_control(self) -> TransportControlParams:
         return TransportControlParams(
@@ -334,6 +367,14 @@ class DBACTController:
             lead_offset=params.lead_offset if params.task_mode == "transport" else None,
             lead_threshold=params.lead_threshold,
         )
+        # C5 fixes where the press may stop. Asserted at construction with the force
+        # budget left out -- the contact stiffness lives in the simulator, so the
+        # environment re-asserts the full contract once it knows it.
+        self.feasibility = params.transport_feasibility()
+        if params.task_mode == "transport":
+            self.feasibility.assert_structural()
+        self._press_floor = self.feasibility.press_floor
+
         self.empty_cell_mass = empty_cell_threshold(
             params.local_radius, params.base_density, params.approach_mass_ratio
         )
@@ -544,7 +585,9 @@ class DBACTController:
         if target is not None:
             return self.params.kp_cage * (target - agent.position), "redeploy", cell.cell_mass, False, 0.0
 
-        u = self.params.kp_cage * (cell.centroid - agent.position)
+        u = self.params.kp_cage * (cell.centroid - agent.position) + self._separation_velocity(
+            agent, [agents[j] for j in neighbor_indices]
+        )
         push_side = False
         effort = 0.0
         if self.params.task_mode == "transport":
@@ -797,6 +840,14 @@ class DBACTController:
             # the arc. The floor keeps a robot that the steering has turned away
             # from still holding its patch of boundary: dropping it to zero was
             # measured and cost more force than the aim was worth.
+            # Weighted against the steered direction, inside an arc whose membership
+            # is fixed by the task direction. Weighting each robot directly by how
+            # its own press acts on the lateral error -- first-order in the error
+            # rather than second -- was measured and is worse, not better: the loop
+            # from allocation to force direction to drift carries a delay, and the
+            # direct weight drove it into a lateral oscillation that reached 0.68 m
+            # against 0.39 m for the rotation. ``_lateral_weight`` is kept for the
+            # ablation that shows it.
             share = float(np.clip(-float(np.dot(normal, command)), self.params.push_share_floor, 1.0))
             speed = effort.effort * share
 
@@ -811,7 +862,7 @@ class DBACTController:
             # r_safe keeps that slack: the force is k_p (r_robot - r_safe -
             # margin) instead of k_p delta_max, which is 17.5 N against 25 N here
             # and still several times the per-robot share of the breakaway.
-            floor = self.params.r_safe + self.params.press_margin
+            floor = self._press_floor
             approach = max(0.0, (measured - floor)) / max(dt, 1e-9)
             press = min(speed, approach) * (-normal)
             return bias + press, True, effort.effort, normal
@@ -832,6 +883,44 @@ class DBACTController:
         if speed > self.params.max_speed:
             press = press * (self.params.max_speed / speed)
         return bias + press, False, 0.0, None
+
+    def _separation_velocity(self, agent: AgentState, neighbours: list[AgentState]) -> np.ndarray:
+        """Push apart before the barrier has to. Zero unless a neighbour is inside
+        ``d_min + separation_band``, so it never perturbs an uncrowded ring."""
+        if not neighbours or self.params.kp_separate <= 0.0:
+            return np.zeros(2)
+        threshold = self.params.d_min + self.params.separation_band
+        others = np.vstack([n.position for n in neighbours])
+        delta = agent.position[None, :] - others
+        distance = np.linalg.norm(delta, axis=1)
+        close = (distance < threshold) & (distance > 1e-9)
+        if not np.any(close):
+            return np.zeros(2)
+        weight = (threshold - distance[close]) / max(threshold, 1e-9)
+        direction = delta[close] / distance[close][:, None]
+        return self.params.kp_separate * float(np.sum(weight)) * normalize(
+            np.sum(direction * weight[:, None], axis=0)
+        )
+
+    def _lateral_weight(
+        self, agent_id: str, object_id: str, goal: np.ndarray, normal: np.ndarray
+    ) -> float:
+        """Scale one robot's press by how it acts on the cross-track error.
+
+        A robot presses along ``-n``, so the lateral component of its force is
+        ``-(n . e_hat)`` for a unit lateral-error direction ``e_hat``. To pull the
+        cargo back towards the line, robots with ``n . e_hat > 0`` are favoured and
+        the rest are damped, in proportion to the error and saturating at
+        ``cross_track_reference``. Below the noise floor the weight is exactly one,
+        so an on-track run is untouched.
+        """
+        displacement = self.maps[agent_id].object_displacement(object_id)
+        lateral = displacement - float(np.dot(displacement, goal)) * goal
+        offset = float(np.linalg.norm(lateral))
+        if offset < self.params.cross_track_deadband:
+            return 1.0
+        strength = min(offset / max(self.params.cross_track_reference, 1e-9), 1.0)
+        return 1.0 + self.params.cross_track_gain * strength * float(np.dot(normal, lateral / offset))
 
     def _steered_direction(self, agent_id: str, object_id: str, goal: np.ndarray) -> np.ndarray:
         """Task direction rotated to bring the cargo back onto the goal line.

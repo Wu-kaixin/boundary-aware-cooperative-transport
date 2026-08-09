@@ -104,6 +104,23 @@ class SimulationEnvironment:
             scripted_params_from_config(config) if self.engine_name == "scripted" else None,
         )
 
+        # C5 with the force budget filled in. The controller can only check where
+        # the press stops; whether what is left of the penetration still moves the
+        # cargo needs the contact stiffness and the cargo mass, which live here.
+        if params.task_mode == "transport" and self.cargoes:
+            heaviest = max(c.mass for c in self.cargoes)
+            self.controller.feasibility = params.transport_feasibility(
+                stiffness=self.contact_params.stiffness,
+                breakaway_force=self.contact_params.breakaway_force(heaviest),
+            )
+            # Full check, budget included, only where a scenario has declared a
+            # transport task: a run that cannot possibly move the cargo should say
+            # so at construction rather than after three thousand frames.
+            if self.tasks:
+                self.controller.feasibility.assert_valid()
+            else:
+                self.controller.feasibility.assert_structural()
+
         self.evaluation_contact_radius = float(config.get("evaluation", {}).get("contact_radius", 0.42))
         self.success_contract = DirectionalProgressContract(
             j_min=float(config.get("evaluation", {}).get("j_min", 0.15)),
@@ -162,6 +179,58 @@ class SimulationEnvironment:
             if on_frame is not None:
                 on_frame(step_index, self)
         return self.log
+
+    def run_until_settled(
+        self,
+        max_frames: int = 3000,
+        settle_frames: int = 40,
+        settle_speed: float = 0.005,
+        on_frame: Callable[[int, "SimulationEnvironment"], None] | None = None,
+    ) -> dict:
+        """Run until the episode finishes rather than until a frame budget expires.
+
+        A fixed budget answers "can the team finish inside a number somebody
+        chose". Running to completion answers "how long does the team take", and
+        only the second is a property of the algorithm -- the enclosure and
+        transport times become measurements instead of assumptions, and a run that
+        needs 900 frames reports 900 rather than failing at 500 with no idea how
+        close it was.
+
+        Termination is HOLD plus a settle window during which the cargo does not
+        move: the phase latch alone is not enough, because it fires on the team's
+        own estimate and the cargo may still be coasting. ``max_frames`` remains as
+        a watchdog so a deadlocked run ends and is reported as a deadlock rather
+        than running forever.
+        """
+        self._record()
+        if on_frame is not None:
+            on_frame(0, self)
+
+        quiet = 0
+        frame = 0
+        for frame in range(1, int(max_frames) + 1):
+            self.step()
+            if on_frame is not None:
+                on_frame(frame, self)
+            if self.controller.phase_monitor.reached(Phase.HOLD):
+                speed = max(
+                    (self.log.cargo_speed[c.object_id][-1] for c in self.cargoes),
+                    default=0.0,
+                )
+                quiet = quiet + 1 if speed <= settle_speed else 0
+                if quiet >= settle_frames:
+                    break
+            else:
+                quiet = 0
+
+        return {
+            "frames_run": frame,
+            "max_frames": int(max_frames),
+            "settled": quiet >= settle_frames,
+            "terminated_by": "settled" if quiet >= settle_frames else "watchdog",
+            "settle_frames": settle_frames,
+            "settle_speed": settle_speed,
+        }
 
     def _record(self) -> None:
         self.log.times.append(self.t)
@@ -279,6 +348,7 @@ class SimulationEnvironment:
             "brake_frame": phases["brake_frame"],
             "hold_frame": phases["hold_frame"],
             "reached_frame": self._reached_frame.get(cid),
+            "frames_run": len(self.log.times) - 1,
             "progress_estimate_final": self.log.progress_estimate[cid][-1]
             if self.log.progress_estimate.get(cid)
             else None,

@@ -140,7 +140,7 @@ supervisor never goes backwards (enclosure quality dips every time the cargo
 breaks loose, and a machine that fell back would chatter at the stick-slip
 frequency), and `CONTACT_READY` needs a quorum *held* for a dwell.
 
-Each episode samples its own task: `theta ~ U(0, 2pi)`, `L ~ U(0.35, 0.60)`, with
+Each episode samples its own task: `theta ~ U(0, 2pi)`, `L ~ U(0.90, 1.60)`, with
 rejection unless the object and its ring still fit in the workspace at the end.
 That rejection is what makes "a random direction, but within the controllable
 range" a definition rather than a hope — the admissible set is the set of accepted
@@ -155,9 +155,9 @@ be written into.
 ```bash
 export PYTHONPATH=src
 python scripts/probe_transport_ceiling.py --steps 400 --out runs/d0_probe
-python scripts/run_closed_loop.py --seed 4 --out runs/d_seed4
-python scripts/render_closed_loop.py runs/d_seed4 --stride 2 --fps 25
-python scripts/evaluate_closed_loop.py --seeds 0..11 --out runs/d_sweep
+python scripts/run_closed_loop.py --seed 2 --until-settled --out runs/d_seed2
+python scripts/render_closed_loop.py runs/d_seed2 --stride 2 --fps 25
+python scripts/evaluate_closed_loop.py --seeds 0..11 --until-settled --out runs/d_sweep
 python -m pytest tests -q
 ```
 
@@ -171,98 +171,124 @@ density surface reconstructed from the simulator's polygon looks better and
 answers none of the questions worth asking about it. The true outline is drawn
 beside it, so the estimation gap is visible rather than hidden.
 
-## Measured, 12 seeds, 500 frames
+## C5: where the press may stop, and why the QP was infeasible
 
-`configs/sim/d/l_shape_closed_loop.yaml`, `scripts/evaluate_closed_loop.py --seeds 0..11`.
-Every seed is in these numbers, including the failures.
+The object-boundary row's right-hand side is `n^T v_obj - gamma_obj h + rho`, so
+it is non-positive — and therefore satisfied by `u = 0` — exactly when
 
-**G500: 2 / 12** (Wilson 95%: 0.05–0.45). **Seven of the twelve failures are the
-scaled-barrier gate and nothing else.**
+```
+h  >=  ( n^T v_obj + rho ) / gamma_obj .
+```
+
+Bounding `n^T v_obj` by the ISSf disturbance bound `V` gives a **demand band** of
+width `(V + rho)/gamma_obj` above `r_safe`, inside which every object row asks for
+active retreat. With `V = 0.20`, `rho = 0.02`, `gamma_obj = 8` that band is
+**0.0275 m**, and the transport press was stopping **0.015 m** above `r_safe`.
+
+**Every pushing robot therefore sat permanently inside the band, by construction.**
+The press generates force by driving robots against the object barrier, so their
+steady state is wherever the press stops; each one then demanded retreat on every
+step, and any neighbour at `d_min` made the constraint set empty. That is exactly
+what the instrumentation showed: 168 of 168 scaled-barrier events were object rows
+demanding retreat, with **zero** positive inter-robot demands.
+
+`TransportFeasibilityContract` (C5) turns this into an assertion, and with it a
+constructive feasibility certificate:
+
+> **Proposition.** If every inter-agent barrier satisfies `h_ij >= 0` and every
+> object row satisfies `h_k >= (V + rho)/gamma_obj`, then `u = 0` satisfies every
+> row of the QP, so the problem is feasible and no relaxation is needed.
+
+Both hypotheses are *maintained*, not assumed: the first by the inter-agent CBF
+from a valid initial state, the second by the press floor C5 fixes at
+`r_safe + safety_factor * (V + rho)/gamma_obj`. The contract also checks what the
+floor costs — the penetration left at the floor is what makes the force — and
+refuses a configuration whose quorum could not move the cargo. On the current
+scenario: floor 0.098 m, penetration 0.032 m, 16 N a robot, **64 N for a
+four-robot quorum against a 24.2 N breakaway**.
+
+Applied to the legacy `configs/sim/v2` scenarios, C5 is also an immediate
+explanation of the original stall: four robots at their press floor supply 25 N
+against a 31.1 N breakaway. Those configurations are *not transportable by their
+own quorum*, and the contract says so at construction instead of after 500 frames.
+
+Measured effect: scaled-barrier events on the worst seed fell from 32 to 7.
+**Not to zero** — see below.
+
+## Measured, 12 seeds, run to completion
+
+`configs/sim/d/l_shape_closed_loop.yaml`,
+`scripts/evaluate_closed_loop.py --seeds 0..11 --until-settled`.
+No frame budget: each episode runs until HOLD plus a 40-frame settle window, with
+a 3000-frame watchdog. **All twelve settled; none reached the watchdog.** Every
+seed is in these numbers, including the failures.
+
+**G500: 2 / 12** (Wilson 95%: 0.05–0.45), with only two gates ever failing.
 
 | quantity | mean ± sd | min–max | gate |
 | --- | --- | --- | --- |
-| directional progress `J` | 0.533 ± 0.178 m | 0.008 – 0.699 | `>= L` |
-| efficiency `J/‖dx‖` | 0.975 ± 0.044 | 0.844 – 1.000 | `>= 0.80` |
-| cross-track | 0.082 ± 0.066 m | 0.005 – 0.227 | `<= 0.15` (2 over) |
-| direction error | 8.7 ± 9.5° | 0.4 – 32.4 | `<= 20°` (1 over) |
-| cargo yaw | +0.10 ± 0.18° | −0.06 – +0.57 | `<= 15°` |
-| strict coverage (peak) | 0.994 ± 0.013 | 0.956 – 1.000 | `>= 0.70` |
-| min inter-robot distance | 0.283 ± 0.007 m | 0.280 – 0.304 | `>= 0.28` |
-| min signed clearance | 0.091 ± 0.003 m | 0.086 – 0.096 | `>= 0` |
-| max penetration | 0.039 ± 0.003 m | 0.034 – 0.044 | `<= 0.078` |
-| transport frame | 120 ± 66 | 58 – 278 | `<= 350` |
-| HOLD frame | 208 ± 84 (11/12) | 137 – 397 | — |
-| on-board progress / truth | 0.856 ± 0.055 | 0.761 – 0.951 | — |
-| simulation rate | 24.0 ± 0.5 frame/s | 23.5 – 25.4 | — |
+| directional progress `J` | 1.474 ± 0.231 m | 1.110 – 1.853 | `>= L`, 12/12 |
+| sampled target `L` | 1.211 ± 0.190 m | 0.941 – 1.501 | — |
+| efficiency `J/‖dx‖` | 0.993 ± 0.008 | 0.975 – 1.000 | `>= 0.80`, pass |
+| direction error | 5.8 ± 3.9° | 1.3 – 12.9 | `<= 20°`, pass |
+| cross-track | 0.161 ± 0.122 m | 0.037 – 0.387 | `<= 0.15`, **5 over** |
+| cargo yaw | +0.08 ± 1.28° | −2.19 – +3.83 | `<= 15°`, pass |
+| strict coverage (peak) | 0.981 ± 0.027 | 0.938 – 1.000 | `>= 0.70`, pass |
+| min inter-robot distance | 0.281 ± 0.002 m | 0.280 – 0.285 | `>= 0.28`, pass |
+| min signed clearance | 0.085 ± 0.005 m | 0.077 – 0.092 | `>= 0`, pass |
+| max penetration | 0.045 ± 0.005 m | 0.038 – 0.053 | `<= 0.098`, pass |
+| **contact-ready frame** | **75.5 ± 8.4** | 57 – 89 | derived |
+| **transport frame** | **122.8 ± 60.3** | 69 – 237 | derived |
+| **HOLD frame** | **274.0 ± 102.0** | 169 – 530 | derived |
+| **episode length** | **314.5 ± 101.7** | 210 – 570 | derived |
+| on-board progress / truth | 0.832 ± 0.042 | 0.772 – 0.900 | — |
+| simulation rate | 23.9 ± 0.4 frame/s | 23.3 – 24.7 | — |
 
-Solver, 8,000 QP solves per run: **0 fallbacks and 0 infeasible on every seed**.
-Scaled-barrier events per seed: `0, 79, 1, 207, 0, 21, 3, 25, 3, 93, 0, 1` — four
-seeds are clean, five are in single figures, and three carry almost all of it.
+Solver: **0 fallbacks and 0 infeasible on every seed.** Scaled-barrier events per
+seed: `7, 14, 0, 60, 31, 4, 0, 39, 15, 94, 29, 0` — three seeds clean.
 
-| count | gate that failed |
-| --- | --- |
-| 9 | scaled barrier |
-| 2 | cross-track |
-| 2 | target not reached |
-| 1 | direction error |
-| 1 | not holding |
+Of the ten failures, **five fail on the scaled barrier alone and one on cross-track
+alone**; every other gate passes on all twelve.
 
-The A branch, same object, same budget: `J = 0.0561 m`, flat from frame 97, one
-solver fallback, 4.9 frame/s.
+### Lifting the frame budget is what made the timings measurements
 
-### Cross-track: fixed, by decoupling membership from weight
+The enclosure and transport times are now outputs. Contact-ready lands at
+**75 ± 8** frames with a spread of 32 across twelve random directions — much
+tighter than transport activation (**123 ± 60**), which is where the direction
+dependence lives, and than HOLD (**274 ± 102**), which additionally carries the
+distance. Under the old 500-frame cap, seeds 2 and 6 read as "never transported";
+run to completion they are two of the three cleanest runs, finishing at frames 426
+and 570. **The budget was rejecting runs that were working, and hiding that the
+times are a distribution rather than a number.**
 
-The press is always along a robot's own observed normal, so the only steering
-authority the arc has is *how much* each robot presses. Deciding both the arc's
-membership and its weights against the steered direction coupled them: correcting
-a lateral error rotated the membership test too, robots at the edge of a
-three-robot arc dropped out entirely, and the correction cost more force than it
-bought aim. Membership is now fixed by the task direction and only the weights
-follow the steered one, with a floor so a robot the steering has turned away from
-still holds its patch. Cross-track went from 0.104 ± 0.103 m (max 0.330) to
-0.082 ± 0.066 m (max 0.227), and efficiency from 0.935 to 0.975.
+Transport distance went from 0.46 ± 0.07 m sampled to **1.21 ± 0.19 m sampled and
+1.47 ± 0.23 m achieved** — 0.82 of the cargo's own 1.8 m width, so the displacement
+now reads as transport rather than as settling.
 
-### The scaled-barrier count is structural, not a parameter
+### What is still open, and what was measured and rejected
 
-Instrumenting every event on the worst seed gave an unambiguous answer: **168 of
-168 were object rows demanding retreat, and zero involved a positive inter-robot
-demand** — the agent rows were satisfiable at `u = 0`, just barely (`h_ij` between
-0.0007 and 0.006), so the robot had to retreat from the object in a direction its
-neighbours forbade.
+**Scaled barrier, 8 of 12 seeds.** C5 removed the systematic cause; what remains is
+the transient it predicts — a map correction that moves a robot into the band. Two
+further mechanisms were built and measured, and both are off by default because
+they did not pay:
 
-Six different attacks were measured, and the count moved without ever reaching
-zero:
-
-| change | scaled-barrier seeds | what else it did |
+| mechanism | scaled barrier | cross-track |
 | --- | --- | --- |
-| tier-2 right-hand side computed before the reachability cap (a real bug) | 11/12 | fixed a case where tier 2 relaxed nothing |
-| `rho` 0.05 → 0.02 | 11/12 | — |
-| 16 robots → 12 | 4/12 | four seeds never activated transport |
-| `r_robot` 0.16 → 0.13 at 16 robots | 9/12 | transport strong again |
-| `max_speed` 0.35 → 0.45 | 12/12 | *worse*: faster robots spend more time in the band |
-| map-jump clamp 0.60 → 0.25 m/s | 11/12 | — |
-| press stops `press_margin` short of `r_safe` | 9/12 | best overall state |
+| C5 press floor (kept) | worst seed 32 → 7 | worst seed 0.33 → 0.21 m |
+| soft inter-robot repulsion above `d_min` | 9 → 8 seeds | 5 → 7 failures |
+| direct lateral differential allocation | 9 → 8 seeds | max 0.39 → **0.68 m** |
 
-The pattern across all of them is one trade: anything that makes the transport
-stronger moves the cargo faster, and a faster boundary produces larger `n·v_obj`
-terms in rows whose robots are already at their own barrier. That is a property of
-the formulation rather than of a gain. The object barrier is a continuous-time CBF
-evaluated on an *estimate* that updates in discrete jumps, and the transport loop's
-job is to hold robots against that barrier, because the barrier boundary is where
-the contact force comes from. Two constraint families both active at their
-boundaries, driven by a state that steps, will occasionally have an empty feasible
-set.
+The repulsion keeps the ring apart and therefore slower to close on a moving
+object; the differential allocation closes a loop that has delay in it and
+oscillates. Closing the residual needs the discrete-time formulation, not another
+term: the barrier is still a continuous-time condition evaluated on an estimate
+that updates in jumps, and only a DT-CBF makes the demand consistent with one step
+of that.
 
-What would actually close it, none of which is done here:
-
-* a **discrete-time CBF**, whose demands are consistent with one step by
-  construction instead of being a continuous-time rate sampled at 20 Hz;
-* a **prioritised QP with a proven bound** on the object-row violation, so the
-  relaxation carries a guarantee rather than a count;
-* or **re-deriving `rho`** to absorb the map-update jump explicitly, which would
-  make the scaled tier unnecessary rather than merely rarer.
-
-The gate stays at zero and those seven seeds stay FAIL.
+**Cross-track, 5 of 12 seeds.** Over a 1.5 m push, 0.15 m is a 10% corridor, and
+the press is always along a robot's own normal, so the arc's lateral authority is
+bounded by which faces the shape offers. The rotation-based allocation is the best
+of the three tried.
 
 ## Regression against the A branch: S1's certificate rate
 

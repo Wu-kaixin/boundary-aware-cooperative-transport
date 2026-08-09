@@ -42,6 +42,9 @@ def main() -> int:
     parser.add_argument("--config", default="configs/sim/d/l_shape_closed_loop.yaml")
     parser.add_argument("--seed", type=int, default=0)
     parser.add_argument("--frames", type=int, default=500, help="Control frames; the G500 budget.")
+    parser.add_argument("--until-settled", action="store_true",
+                        help="Run to completion instead of to a budget.")
+    parser.add_argument("--max-frames", type=int, default=3000)
     parser.add_argument("--out", default="")
     parser.add_argument("--no-render", action="store_true", help="Simulate only; render later from replay.npz.")
     parser.add_argument("--animation-stride", type=int, default=4)
@@ -53,21 +56,28 @@ def main() -> int:
 
     env = SimulationEnvironment(config, seed=args.seed)
     started = time.perf_counter()
-    env.run(args.frames)
+    if args.until_settled:
+        termination = env.run_until_settled(max_frames=args.max_frames)
+    else:
+        env.run(args.frames)
+        termination = {"frames_run": args.frames, "terminated_by": "budget", "settled": None}
     wall = time.perf_counter() - started
+    frames = termination["frames_run"]
 
     summary = env.save_outputs(out)
     summary["timing"] = {
-        "frames": args.frames,
+        "frames": frames,
+        "terminated_by": termination["terminated_by"],
         "simulation_seconds": wall,
-        "frames_per_second": args.frames / wall if wall > 0 else float("inf"),
+        "frames_per_second": frames / wall if wall > 0 else float("inf"),
     }
+    summary["feasibility_c5"] = env.controller.feasibility.as_dict()
     (out / "summary.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
 
     if not args.no_render:
         render_outputs(out, summary, args.animation_stride, args.animation_fps)
 
-    print(f"seed {args.seed}: {wall:.1f} s of wall clock for {args.frames} frames "
+    print(f"seed {args.seed}: {wall:.1f} s of wall clock for {frames} frames "
           f"({summary['timing']['frames_per_second']:.1f} frame/s)")
     passed = True
     for cargo_id, entry in summary["cargoes"].items():
