@@ -67,6 +67,7 @@ class ContactSafetyContract:
     delta_max: float
     gamma_obj: float
     rho: float
+    boundary_error_bound: float = 0.0
     d_min: float | None = None
     lead_offset: float | None = None
 
@@ -82,7 +83,11 @@ class ContactSafetyContract:
     @property
     def barrier_margin(self) -> float:
         """``gamma_obj * (d_c - r_safe) - rho``; must be strictly positive."""
-        return self.gamma_obj * (self.cage_offset - self.r_safe) - self.rho
+        return (
+            self.gamma_obj
+            * (self.cage_offset - self.r_safe - self.boundary_error_bound)
+            - self.rho
+        )
 
     def violations(self) -> list[str]:
         out: list[str] = []
@@ -117,12 +122,22 @@ class ContactSafetyContract:
             )
         if self.rho < 0.0:
             out.append(f"rho must be non-negative, got {self.rho:.4f}")
+        if self.boundary_error_bound < 0.0:
+            out.append(
+                f"boundary_error_bound must be non-negative, got {self.boundary_error_bound:.4f}"
+            )
+        if self.cage_offset <= self.r_safe + self.boundary_error_bound:
+            out.append(
+                "C1 perception-robust lower bound violated: cage_offset must exceed "
+                "r_safe + boundary_error_bound"
+            )
         if self.gamma_obj <= 0.0:
             out.append(f"gamma_obj must be positive, got {self.gamma_obj:.4f}")
         elif self.barrier_margin <= 0.0:
             out.append(
-                f"C1 barrier margin violated: gamma_obj*(d_c - r_safe) = "
-                f"{self.gamma_obj * (self.cage_offset - self.r_safe):.4f} <= rho = {self.rho:.4f}; "
+                f"C1 barrier margin violated: gamma_obj*(d_c - r_safe - epsilon_b) = "
+                f"{self.gamma_obj * (self.cage_offset - self.r_safe - self.boundary_error_bound):.4f} "
+                f"<= rho = {self.rho:.4f}; "
                 "robots are repelled before reaching the cage ring"
             )
         return out
@@ -139,9 +154,11 @@ class ContactSafetyContract:
             "delta_max": self.delta_max,
             "gamma_obj": self.gamma_obj,
             "rho": self.rho,
+            "boundary_error_bound": self.boundary_error_bound,
             "d_min": self.d_min,
             "lead_offset": self.lead_offset,
             "r_safe": self.r_safe,
+            "effective_r_safe": self.r_safe + self.boundary_error_bound,
             "barrier_margin": self.barrier_margin,
         }
 

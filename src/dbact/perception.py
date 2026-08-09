@@ -34,7 +34,7 @@ from dataclasses import dataclass, field
 import numpy as np
 
 from .cargo import Cargo
-from .geometry import outward_edge_normals, ray_batch_first_hits, segment_hits_polygon
+from .geometry import ensure_ccw, outward_edge_normals, ray_batch_first_hits, segment_hits_polygon
 from .provenance import frame_rng
 from .types import AgentState, BoundaryObservation
 
@@ -173,12 +173,34 @@ class RayCastBoundarySensor:
             return direction, float("inf")
 
         distances = np.linalg.norm(points - target[None, :], axis=1)
-        neighborhood = points[np.argsort(distances)[:k]]
-        centered = neighborhood - neighborhood.mean(axis=0, keepdims=True)
-        cov = centered.T @ centered / max(1, len(neighborhood) - 1)
-        eigvals, eigvecs = np.linalg.eigh(cov)
-        normal = eigvecs[:, 0]
-        residual = math.sqrt(max(0.0, float(eigvals[0])))
+        candidates = [points[np.argsort(distances)[:k]]]
+        # Ray returns are ordered by bearing.  Around a polygon vertex the
+        # symmetric k-neighbour set straddles two faces and PCA invents their
+        # average normal.  Complete one-sided windows stay on one incident face;
+        # selecting the best residual yields a valid edge normal at the corner.
+        if index + 1 >= k:
+            candidates.append(points[index - k + 1 : index + 1])
+        if len(points) - index >= k:
+            candidates.append(points[index : index + k])
+
+        fits: list[tuple[float, np.ndarray]] = []
+        for neighborhood in candidates:
+            if len(neighborhood) < 3:
+                continue
+            # Never bridge an occlusion gap merely because two returns are
+            # adjacent in the bearing-ordered array.
+            if len(neighborhood) > 1 and np.max(np.linalg.norm(np.diff(neighborhood, axis=0), axis=1)) > self.params.max_arc_gap:
+                continue
+            centered = neighborhood - neighborhood.mean(axis=0, keepdims=True)
+            cov = centered.T @ centered / max(1, len(neighborhood) - 1)
+            eigvals, eigvecs = np.linalg.eigh(cov)
+            fits.append((math.sqrt(max(0.0, float(eigvals[0]))), eigvecs[:, 0]))
+        if not fits:
+            fallback = target - origin
+            norm = float(np.linalg.norm(fallback))
+            direction = -fallback / norm if norm > 1e-9 else np.array([1.0, 0.0])
+            return direction, float("inf")
+        residual, normal = min(fits, key=lambda item: item[0])
 
         # Orient outward: the observer stands outside, so the outward normal has a
         # positive component along (observer - boundary point).
@@ -283,19 +305,69 @@ def occlusion_rate(
 
 
 def normal_errors_deg(observations: list[BoundaryObservation], cargoes: list[Cargo]) -> np.ndarray:
-    """Angle between each estimated normal and the true outward normal."""
-    from .geometry import signed_distance_and_gradient
+    """Distance in angle to the true polygon normal set.
 
+    At an edge interior the set contains one outward normal.  At a convex
+    vertex the signed-distance CBF has a normal cone, so any unit vector in the
+    cone is a valid generalized outward normal.  Treating one arbitrarily chosen
+    incident edge as *the* truth produced spurious 80--90 degree errors at exact
+    vertices.  Concave vertices retain the union of their incident edge normals;
+    a blended vector across the re-entrant angle is not certified as safe.
+    """
     by_id = {cargo.object_id: cargo for cargo in cargoes}
     errors: list[float] = []
     for obs in observations:
         cargo = by_id.get(obs.object_id)
         if cargo is None:
             continue
-        _, grad, _ = signed_distance_and_gradient(obs.point[None, :], cargo.vertices)
-        cosine = float(np.clip(np.dot(obs.normal, grad[0]), -1.0, 1.0))
-        errors.append(math.degrees(math.acos(cosine)))
+        vertices = ensure_ccw(cargo.vertices)
+        edges = np.roll(vertices, -1, axis=0) - vertices
+        denom = np.maximum(np.sum(edges * edges, axis=1), 1e-12)
+        rel = np.asarray(obs.point, dtype=float)[None, :] - vertices
+        t = np.clip(np.sum(rel * edges, axis=1) / denom, 0.0, 1.0)
+        foot = vertices + t[:, None] * edges
+        distances = np.linalg.norm(np.asarray(obs.point, dtype=float)[None, :] - foot, axis=1)
+        tied = np.where(distances <= float(np.min(distances)) + 1e-7)[0]
+        edge_normals = outward_edge_normals(vertices)
+        # Auditing must be observational.  ``np.asarray`` may alias the
+        # controller's BoundaryObservation; normalising that array in place made
+        # truth-audit on/off change the simulated trajectory.
+        estimate = np.asarray(obs.normal, dtype=float).copy()
+        estimate /= max(float(np.linalg.norm(estimate)), 1e-12)
+
+        error = min(
+            math.degrees(math.acos(float(np.clip(np.dot(estimate, edge_normals[k]), -1.0, 1.0))))
+            for k in tied
+        )
+        # If the closest point is a convex vertex, the two adjacent outward
+        # normals generate the valid generalized-normal cone.
+        for vertex_index in range(len(vertices)):
+            incoming = (vertex_index - 1) % len(vertices)
+            outgoing = vertex_index
+            if incoming not in tied or outgoing not in tied:
+                continue
+            cross = float(
+                edges[incoming, 0] * edges[outgoing, 1]
+                - edges[incoming, 1] * edges[outgoing, 0]
+            )
+            if cross <= 1e-12:
+                continue
+            matrix = np.column_stack([edge_normals[incoming], edge_normals[outgoing]])
+            try:
+                coefficients = np.linalg.solve(matrix, estimate)
+            except np.linalg.LinAlgError:
+                continue
+            if np.all(coefficients >= -1e-9):
+                error = 0.0
+                break
+        errors.append(error)
     return np.asarray(errors, dtype=float)
+
+
+def normal_error_norms(observations: list[BoundaryObservation], cargoes: list[Cargo]) -> np.ndarray:
+    """Euclidean ``||n_hat-n_true||`` distance to the polygon normal set."""
+    angles = np.radians(normal_errors_deg(observations, cargoes))
+    return 2.0 * np.sin(0.5 * angles)
 
 
 __all__ = [
@@ -304,4 +376,5 @@ __all__ = [
     "LegacyProximitySampler",
     "occlusion_rate",
     "normal_errors_deg",
+    "normal_error_norms",
 ]

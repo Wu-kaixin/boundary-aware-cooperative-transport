@@ -1,0 +1,25 @@
+{
+  "date": "2026-08-09",
+  "branch": "Codex-boundary-aware-closed-loop-v1",
+  "config": "configs/sim/research/adaptive_progress_closed_loop.yaml",
+  "seed": 0,
+  "timeout_steps": 800,
+  "error_bounds": {
+    "boundary_point_error_m": 0.023,
+    "map_point_error_m": 0.27,
+    "object_velocity_error_mps": 0.35,
+    "boundary_velocity_error_mps": 0.35,
+    "cbf_velocity_projection_error_mps": 0.35
+  },
+  "variants": [
+    {"name": "nominal", "hold_frame": 597, "J_m": 0.1642663865, "efficiency": 0.8670331124, "rotation_deg": -7.2340776531, "max_penetration_m": 0.0122576041, "boundary_point_error_max_m": 0.0098276853, "cbf_velocity_error_max_mps": 0.3175070588, "fps": 20.8751539389, "success": true, "fallbacks": 0, "infeasible": 0, "rho_relaxations": 0},
+    {"name": "range_noise_005", "hold_frame": 447, "J_m": 0.1222611394, "efficiency": 0.9401538966, "rotation_deg": -2.1511835788, "max_penetration_m": 0.0097222719, "boundary_point_error_max_m": 0.0202890021, "cbf_velocity_error_max_mps": 0.1659679071, "fps": 30.7122975372, "success": true, "fallbacks": 0, "infeasible": 0, "rho_relaxations": 0},
+    {"name": "slow_updates_5", "hold_frame": 502, "J_m": 0.1433477148, "efficiency": 0.7792639061, "rotation_deg": -5.6017931796, "max_penetration_m": 0.0129658968, "boundary_point_error_max_m": 0.0080310543, "cbf_velocity_error_max_mps": 0.3261820529, "fps": 37.6531864009, "success": true, "fallbacks": 0, "infeasible": 0, "rho_relaxations": 0},
+    {"name": "comm_dropout_10", "hold_frame": 414, "J_m": 0.1313120227, "efficiency": 0.8344466848, "rotation_deg": -3.9163433370, "max_penetration_m": 0.0129616598, "boundary_point_error_max_m": 0.0100172691, "cbf_velocity_error_max_mps": 0.2268199036, "communication_delivery_rate": 0.9001957905, "fps": 30.7298121056, "success": true, "fallbacks": 0, "infeasible": 0, "rho_relaxations": 0},
+    {"name": "combined", "hold_frame": 484, "J_m": 0.1389186217, "efficiency": 0.9161997261, "rotation_deg": -8.3927814885, "max_penetration_m": 0.0107402406, "boundary_point_error_max_m": 0.0177549631, "cbf_velocity_error_max_mps": 0.2603081722, "communication_delivery_rate": 0.8993246753, "fps": 34.9280877581, "success": true, "fallbacks": 0, "infeasible": 0, "rho_relaxations": 0}
+  ],
+  "excluded_stress_case": {
+    "name": "range_noise_010",
+    "reason": "boundary point error exceeded epsilon_b and the episode timed out; not in the certified domain"
+  }
+}

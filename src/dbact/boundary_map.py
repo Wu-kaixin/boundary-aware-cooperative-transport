@@ -147,6 +147,48 @@ class LocalBoundaryMap:
 
         self.prune(timestamp)
 
+    def merge_observations(
+        self,
+        observations: list[BoundaryObservation],
+        timestamp: float,
+    ) -> None:
+        """Idempotently merge a relayed voxel map without re-running ICP.
+
+        Relayed records are historical state, not a new scan.  Feeding them to
+        :meth:`update` made point-to-plane registration interpret gossip traffic
+        as object motion and rebuilt arrays containing several complete neighbour
+        maps every perception frame.  This merge keeps at most one record per
+        target voxel and selects the freshest geometry, so replaying the same
+        packet cannot add mass or change the motion estimate.
+        """
+        for obs in observations:
+            key = self._key(obs.object_id, obs.point)
+            incumbent = self.records.get(key)
+            if incumbent is None:
+                weight = max(float(obs.confidence), 1e-6)
+                self.records[key] = VoxelRecord(
+                    object_id=obs.object_id,
+                    point=np.asarray(obs.point, dtype=float).copy(),
+                    normal=np.asarray(obs.normal, dtype=float).copy(),
+                    confidence=float(obs.confidence),
+                    arc_length=min(float(obs.arc_length), self.voxel_diagonal),
+                    timestamp=float(obs.timestamp),
+                    weight_sum=weight,
+                    observations=1,
+                )
+                continue
+            if float(obs.timestamp) > incumbent.timestamp + 1e-12:
+                incumbent.point = np.asarray(obs.point, dtype=float).copy()
+                incumbent.normal = np.asarray(obs.normal, dtype=float).copy()
+                incumbent.timestamp = float(obs.timestamp)
+            incumbent.confidence = max(incumbent.confidence, float(obs.confidence))
+            incumbent.arc_length = max(
+                incumbent.arc_length,
+                min(float(obs.arc_length), self.voxel_diagonal),
+            )
+            incumbent.weight_sum = max(incumbent.weight_sum, float(obs.confidence), 1e-6)
+        self.prune(timestamp)
+
     def _compensate_translation(
         self,
         object_id: str,
@@ -216,16 +258,29 @@ class LocalBoundaryMap:
         translation = np.asarray(twist[:2], dtype=float)
         rotation = float(twist[2])
         magnitude = float(np.linalg.norm(translation))
-        if magnitude > self.max_translation_per_update or abs(rotation) > self.max_rotation_per_update:
-            return
+        # Reject implausible components independently.  A corner can make the
+        # angular column ill-conditioned while the two translational columns are
+        # still well observed; discarding the complete twist then freezes task
+        # progress under range noise.  Clipping is deliberately avoided because
+        # it would turn an outlier into a plausible-looking motion increment.
+        if magnitude > self.max_translation_per_update:
+            translation = np.zeros(2, dtype=float)
+        if abs(rotation) > self.max_rotation_per_update:
+            rotation = 0.0
+        magnitude = float(np.linalg.norm(translation))
         if magnitude <= 1e-6 and abs(rotation) <= 1e-6:
             return
-        # Translate the world-frame voxel map, but keep its accumulated outline
-        # orientation.  Rotating a partially observed map about its sample mean
-        # moves unseen-side proxies and destabilises the coverage density.  The
-        # SE(2) solve is still essential: separating rotation keeps the reported
-        # translational task progress from being polluted by spin.
-        self._shift_object_records(object_id, translation)
+        # Apply the complete estimated rigid increment to the world-frame map.
+        # Historical code discarded rotation, so a perfectly rigid outline
+        # accumulated 0.2--0.3 m point error after only a few degrees of cargo
+        # yaw.  The translation component remains separately exposed through
+        # ``last_motion`` and therefore does not pollute task progress with spin.
+        self._shift_object_records(
+            object_id,
+            translation,
+            rotation=rotation,
+            center=center,
+        )
         self.last_motion[object_id] = np.asarray(translation, dtype=float).copy()
         self.last_rotation[object_id] = rotation
 

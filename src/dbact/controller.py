@@ -29,9 +29,10 @@ the ones actually behind the object -- add bias.
 contact band and enough of its neighbours report the same. This is one bit per
 neighbour, so it stays decentralised.
 
-The object-boundary rows given to the safety filter come from the robot's own
-map, never from the simulator. That is what makes the normal-estimate error a
-quantity with consequences rather than a number in a table.
+The object-boundary rows given to the safety filter come from the robot's latest
+raw scan, never from the persistent planning map or the simulator.  Keeping
+those channels separate prevents stale gossiped geometry from becoming a hard
+constraint while retaining it for enclosure planning.
 """
 
 from __future__ import annotations
@@ -49,6 +50,7 @@ from .geometry import clip_to_domain, normalize
 from .local_cvt import LocalCVT, empty_cell_threshold
 from .perception import PerceptionParams, RayCastBoundarySensor
 from .progress_control import ProgressPIController, ProgressPIOutput, ProgressPIParams
+from .provenance import frame_rng
 from .safety_filter import SafetyFilter, SafetyFilterParams
 from .types import AgentState, BoundaryObservation, ControlCommand
 
@@ -66,6 +68,10 @@ class DBACTParams:
     pca_neighbors: int = 5
     residual_tolerance: float = 0.03
     min_confidence: float = 0.15
+    # Hard CBF rows need a stronger contract than planning-map samples.  Raw
+    # observations below this PCA residual confidence remain available to the
+    # map/auditor but cannot define a safety half-space.
+    safety_min_confidence: float = 0.15
 
     # Perception and local CVT are the two expensive loops.  They may run at a
     # lower rate than the safety filter, which remains active on every physics
@@ -75,11 +81,14 @@ class DBACTParams:
 
     # --- communication ---
     comm_range: float = 1.6
+    communication_dropout_prob: float = 0.0
 
     # --- map (S3) ---
     voxel_size: float = 0.06
     age_decay: float = 0.30
     max_voxels_per_object: int = 600
+    map_max_translation_per_update: float = 0.03
+    map_max_rotation_per_update: float = 0.04
 
     # --- density (S4) ---
     density_mode: str = "offset"
@@ -104,7 +113,9 @@ class DBACTParams:
     # --- safety (S1) ---
     robot_radius: float = 0.16
     delta_max: float = 0.05
+    boundary_error_bound: float = 0.0
     d_min: float = 0.30
+    agent_distance_buffer: float = 0.0
     gamma_agent: float = 6.0
     gamma_obj: float = 4.0
     rho: float = 0.05
@@ -117,6 +128,10 @@ class DBACTParams:
     object_row_range: float = 0.60
     object_row_window: float = 0.28
     object_row_inner_limit: float | None = None
+    object_barrier_geometry: str = "tangent_plane"
+    object_active_tolerance: float = 0.02
+    object_polyline_max_gap: float = 0.15
+    object_polyline_max_normal_angle_deg: float = 30.0
     recovery_fraction: float = 0.6
 
     # --- gains ---
@@ -168,6 +183,8 @@ class DBACTParams:
     # keep this disabled; research configs enable it and no longer depend on a
     # fixed transport feed-forward speed or a scheduled HOLD frame.
     progress_feedback: bool = False
+    progress_consensus: bool = True
+    progress_consensus_hops: int = 18
     progress_kp: float = 0.8
     progress_max_speed: float = 0.18
     pressure_position_gain: float = 0.25
@@ -194,6 +211,7 @@ class DBACTParams:
     contact_release_gain: float = 3.0
     contact_release_speed: float = 0.20
     contact_release_enabled: bool = True
+    safety_pressure_reserve: bool = True
 
     # --- legacy 'coverage' task mode (region coverage without a cargo) ---
     target_center: list[float] = field(default_factory=lambda: [4.0, 4.0])
@@ -223,6 +241,7 @@ class DBACTParams:
             delta_max=self.delta_max,
             gamma_obj=self.gamma_obj,
             rho=self.rho,
+            boundary_error_bound=self.boundary_error_bound,
             d_min=self.d_min,
             lead_offset=self.lead_offset if self.task_mode == "transport" else None,
         )
@@ -251,6 +270,11 @@ class AgentDiagnostics:
     wrench_weight: float = 1.0
     wrench_residual: float = 0.0
     wrench_feasible: bool = True
+    max_full_margin_deficit: float = 0.0
+    max_barrier_deficit: float = 0.0
+    max_object_margin_deficit: float = 0.0
+    min_object_h: float = float("inf")
+    max_object_velocity_projection: float = 0.0
 
 
 class DBACTController:
@@ -270,6 +294,36 @@ class DBACTController:
 
         if params.perception_every < 1 or params.planning_every < 1:
             raise ValueError("perception_every and planning_every must both be positive integers")
+        if not 0.0 <= params.communication_dropout_prob < 1.0:
+            raise ValueError("communication_dropout_prob must lie in [0, 1)")
+        if not 0.0 <= params.safety_min_confidence <= 1.0:
+            raise ValueError("safety_min_confidence must lie in [0, 1]")
+        if params.object_barrier_geometry not in {
+            "tangent_plane",
+            "point_distance",
+            "polyline_distance",
+        }:
+            raise ValueError(
+                "object_barrier_geometry must be 'tangent_plane', 'point_distance' or "
+                "'polyline_distance'"
+            )
+        if params.object_active_tolerance < 0.0:
+            raise ValueError("object_active_tolerance cannot be negative")
+        if params.use_object_barrier and params.rho >= params.max_speed:
+            raise ValueError(
+                "rho must be strictly below max_speed; otherwise the full ISSf row is "
+                "kinematically infeasible at h=0 even for a stationary object"
+            )
+        if params.agent_distance_buffer < 0.0:
+            raise ValueError("agent_distance_buffer cannot be negative")
+        if params.map_max_translation_per_update <= 0.0:
+            raise ValueError("map_max_translation_per_update must be positive")
+        if params.map_max_rotation_per_update <= 0.0:
+            raise ValueError("map_max_rotation_per_update must be positive")
+        if params.object_polyline_max_gap <= 0.0:
+            raise ValueError("object_polyline_max_gap must be positive")
+        if not 0.0 <= params.object_polyline_max_normal_angle_deg < 180.0:
+            raise ValueError("object_polyline_max_normal_angle_deg must lie in [0, 180)")
         if params.search_pattern not in {"legacy", "contracting_ring", "paired_lanes"}:
             raise ValueError("search_pattern must be 'legacy', 'contracting_ring' or 'paired_lanes'")
         if params.search_pattern == "paired_lanes":
@@ -315,6 +369,8 @@ class DBACTController:
                 raise ValueError("wrench_weight_limit must be positive")
             if params.wrench_gossip_hops < 1:
                 raise ValueError("wrench_gossip_hops must be positive")
+            if params.progress_consensus_hops < 1:
+                raise ValueError("progress_consensus_hops must be positive")
             if params.contact_release_gain < 0.0 or params.contact_release_speed < 0.0:
                 raise ValueError("contact release gain/speed cannot be negative")
         if params.transport_progress_estimator not in {"centroid", "motion_integral"}:
@@ -344,11 +400,12 @@ class DBACTController:
         )
         self.safety = SafetyFilter(
             SafetyFilterParams(
-                d_min=params.d_min,
+                d_min=params.d_min + params.agent_distance_buffer,
                 gamma_agent=params.gamma_agent,
                 gamma_obj=params.gamma_obj,
                 rho=params.rho,
                 r_safe=params.r_safe,
+                boundary_error_bound=params.boundary_error_bound,
                 max_speed=params.max_speed,
                 backend=params.backend,
                 enable_object_rows=params.use_object_barrier,
@@ -358,6 +415,10 @@ class DBACTController:
                 object_row_inner_limit=(
                     params.robot_radius if params.object_row_inner_limit is None else params.object_row_inner_limit
                 ),
+                object_barrier_geometry=params.object_barrier_geometry,
+                object_active_tolerance=params.object_active_tolerance,
+                object_polyline_max_gap=params.object_polyline_max_gap,
+                object_polyline_max_normal_angle_deg=params.object_polyline_max_normal_angle_deg,
                 recovery_fraction=params.recovery_fraction,
             ),
             contract=contract,
@@ -396,9 +457,18 @@ class DBACTController:
         self._first_observation_time: dict[str, float] = {}
         self._nominal_cache: dict[str, tuple[np.ndarray, str, float, bool]] = {}
         self._fused_cache: dict[str, list[BoundaryObservation]] = {}
+        # Planning needs a persistent, gossiped outline.  Safety does not: old
+        # tangent planes become false half-spaces when the cargo rotates.  Keep
+        # the most recent one-hop raw scan separately so the CBF only sees
+        # locally observable, time-bounded geometry.
+        self._safety_observation_cache: dict[str, list[BoundaryObservation]] = {}
         self.target_region_points = self._build_target_region_points()
         self.diagnostics: list[AgentDiagnostics] = []
         self.last_detection_counts: dict[str, int] = {}
+        self.last_sensed_observations: dict[str, list[BoundaryObservation]] = {}
+        self.last_perception_timestamp: float | None = None
+        self.communication_candidate_links = 0
+        self.communication_delivered_links = 0
         self._time = 0.0
         self._frame = 0
 
@@ -409,13 +479,18 @@ class DBACTController:
     def step(self, agents: list[AgentState], cargoes: list[Cargo], timestamp: float, dt: float) -> list[ControlCommand]:
         self._time = float(timestamp)
         self._ensure_maps(agents)
-        neighbors = self._neighbor_indices(agents)
+        physical_neighbors = self._neighbor_indices(agents)
+        neighbors = self._communication_neighbor_indices(agents, physical_neighbors)
 
         refresh_perception = self._frame % int(self.params.perception_every) == 0
         sensed: dict[str, list[BoundaryObservation]] = {agent.agent_id: [] for agent in agents}
         if refresh_perception:
             for agent in agents:
                 sensed[agent.agent_id] = self.sensor.sense(agent, cargoes, timestamp)
+            self.last_sensed_observations = {
+                agent_id: list(observations) for agent_id, observations in sensed.items()
+            }
+            self.last_perception_timestamp = float(timestamp)
             self.last_detection_counts = {}
             for observations in sensed.values():
                 for observation in observations:
@@ -431,14 +506,32 @@ class DBACTController:
         # rebuilding it for every consumer also re-prunes the map each time.
         fused: dict[str, list[BoundaryObservation]] = {}
         prior_fused = {agent_id: list(items) for agent_id, items in self._fused_cache.items()}
+        full_map_gossip = self.params.map_gossip
+        if self.params.search_pattern == "paired_lanes":
+            sweep, rendezvous, gossip = self._paired_search_durations()
+            full_map_gossip = full_map_gossip and self._time <= (
+                sweep + rendezvous + gossip + self.params.boundary_mapping_time
+            )
         for i, agent in enumerate(agents):
             if refresh_perception:
                 batch = list(sensed[agent.agent_id])
+                safety_batch = [
+                    obs for obs in batch if obs.confidence >= self.params.safety_min_confidence
+                ]
                 for j in neighbors[i]:
                     batch.extend(sensed[agents[j].agent_id])
-                    if self.params.map_gossip:
-                        batch.extend(prior_fused.get(agents[j].agent_id, []))
+                    # Neighbour scans improve map completeness but their tangent
+                    # planes need not be local to this robot (especially across
+                    # a concave corner).  They are therefore never admitted as
+                    # hard CBF rows for this agent.
+                self._safety_observation_cache[agent.agent_id] = safety_batch
                 self.maps[agent.agent_id].update(batch, timestamp)
+                if full_map_gossip:
+                    for j in neighbors[i]:
+                        self.maps[agent.agent_id].merge_observations(
+                            prior_fused.get(agents[j].agent_id, []),
+                            timestamp,
+                        )
                 self._fused_cache[agent.agent_id] = self.maps[agent.agent_id].all_observations(timestamp)
             fused[agent.agent_id] = self._fused_cache.get(agent.agent_id, [])
             if refresh_perception:
@@ -472,12 +565,25 @@ class DBACTController:
                     self._transport_phase.setdefault(agent.agent_id, "transport")
             ready_flags.append(ready)
 
+        if self.params.progress_feedback and self.params.progress_consensus:
+            ready_flags = self._consensus_ready_flags(agents, neighbors, ready_flags)
+            for i, agent in enumerate(agents):
+                if ready_flags[i]:
+                    self._transport_start_frame.setdefault(agent.agent_id, self._frame)
+                    self._transport_phase.setdefault(agent.agent_id, "transport")
+
         if refresh_perception:
+            track_progress = bool(self._transport_phase)
             for i, agent in enumerate(agents):
                 phase = self._transport_phase.get(agent.agent_id, "cage")
-                if ready_flags[i] or phase in {"transport", "brake", "hold"}:
+                if track_progress or ready_flags[i] or phase in {"transport", "brake", "hold"}:
                     self._accumulate_transport_progress(agent.agent_id)
-                    if self.params.progress_feedback:
+            if self.params.progress_feedback and self.params.progress_consensus:
+                self._consensus_progress_and_velocity(agents, neighbors, fused)
+            if self.params.progress_feedback:
+                for i, agent in enumerate(agents):
+                    phase = self._transport_phase.get(agent.agent_id, "cage")
+                    if ready_flags[i] or phase in {"transport", "brake", "hold"}:
                         self._update_progress_feedback(
                             agent.agent_id,
                             fused[agent.agent_id],
@@ -538,11 +644,24 @@ class DBACTController:
             u_nom, mode, cell_mass, push_side = cached[0].copy(), cached[1], cached[2], cached[3]
             if transport_complete[i] and not push_side and mode != "hold":
                 mode = "hold"
-            points, normals, v_obj = self._object_rows_from_map(agent.agent_id, agent.position, observations)
+            # Persistent/gossiped geometry remains the planning map.  The
+            # safety rows deliberately use only the latest local/one-hop scan.
+            # Between perception frames its boundary points are propagated by
+            # the locally estimated object velocity.
+            safety_observations = self._safety_observation_cache.get(agent.agent_id, [])
+            points, normals, v_obj = self._object_rows_from_map(
+                agent.agent_id,
+                agent.position,
+                safety_observations,
+                timestamp=self._time,
+            )
             result = self.safety.filter_velocity(
                 agent.position,
                 u_nom,
-                [agents[j].position for j in neighbors[i]],
+                [agents[j].position for j in physical_neighbors[i]],
+                # Inter-agent safety is based on local relative-position sensing,
+                # not a best-effort communication packet.  Dropout therefore
+                # affects map/progress/wrench messages but never removes a CBF row.
                 boundary_points=points,
                 boundary_normals=normals,
                 object_velocity=v_obj,
@@ -569,6 +688,11 @@ class DBACTController:
                     wrench_weight=self._wrench_weights.get(agent.agent_id, 1.0),
                     wrench_residual=self._wrench_residuals.get(agent.agent_id, 0.0),
                     wrench_feasible=self._wrench_feasible.get(agent.agent_id, True),
+                    max_full_margin_deficit=result.max_full_margin_deficit,
+                    max_barrier_deficit=result.max_barrier_deficit,
+                    max_object_margin_deficit=result.max_object_margin_deficit,
+                    min_object_h=result.min_object_h,
+                    max_object_velocity_projection=result.max_object_velocity_projection,
                 )
             )
         self._frame += 1
@@ -641,6 +765,95 @@ class DBACTController:
             self._progress_regulators[key] = regulator
         return regulator
 
+    def _consensus_progress_and_velocity(
+        self,
+        agents: list[AgentState],
+        neighbors: list[list[int]],
+        fused: dict[str, list[BoundaryObservation]],
+    ) -> None:
+        """Finite-hop consensus-equivalent robust fusion of task estimates.
+
+        Every perception period each local estimator contributes one motion
+        increment.  Component-wise medians reject a single ICP jump and, because
+        the previous consensus value is shared, integrate the median increment
+        without accessing simulator cargo state.
+        """
+        unseen = set(range(len(agents)))
+        while unseen:
+            root = min(unseen)
+            component = {root}
+            frontier = {root}
+            for _ in range(int(self.params.progress_consensus_hops)):
+                expanded: set[int] = set()
+                for index in frontier:
+                    expanded.update(neighbors[index])
+                expanded -= component
+                if not expanded:
+                    break
+                component.update(expanded)
+                frontier = expanded
+            unseen -= component
+            object_ids = {
+                obs.object_id
+                for index in component
+                for obs in fused.get(agents[index].agent_id, [])
+                if obs.object_id in self.goal_directions
+            }
+            for object_id in object_ids:
+                progress_values = [
+                    self._transport_progress.get(agents[index].agent_id, {}).get(object_id)
+                    for index in component
+                ]
+                progress_values = [float(value) for value in progress_values if value is not None]
+                if progress_values:
+                    consensus_progress = float(np.median(progress_values))
+                    for index in component:
+                        self._transport_progress.setdefault(agents[index].agent_id, {})[
+                            object_id
+                        ] = consensus_progress
+                velocity_values = [
+                    self.object_velocity.get(agents[index].agent_id, {}).get(object_id)
+                    for index in component
+                ]
+                velocity_values = [
+                    np.asarray(value, dtype=float) for value in velocity_values if value is not None
+                ]
+                if velocity_values:
+                    consensus_velocity = np.median(np.vstack(velocity_values), axis=0)
+                    for index in component:
+                        self.object_velocity.setdefault(agents[index].agent_id, {})[
+                            object_id
+                        ] = consensus_velocity.copy()
+
+    def _consensus_ready_flags(
+        self,
+        agents: list[AgentState],
+        neighbors: list[list[int]],
+        ready_flags: list[bool],
+    ) -> list[bool]:
+        """Flood a persistent local contact quorum through each comm component."""
+        consensus = list(ready_flags)
+        unseen = set(range(len(agents)))
+        while unseen:
+            root = min(unseen)
+            component = {root}
+            frontier = {root}
+            for _ in range(int(self.params.progress_consensus_hops)):
+                expanded: set[int] = set()
+                for index in frontier:
+                    expanded.update(neighbors[index])
+                expanded -= component
+                if not expanded:
+                    break
+                component.update(expanded)
+                frontier = expanded
+            unseen -= component
+            component_ready = any(ready_flags[index] for index in component)
+            if component_ready:
+                for index in component:
+                    consensus[index] = True
+        return consensus
+
     def _update_progress_feedback(
         self,
         agent_id: str,
@@ -694,6 +907,11 @@ class DBACTController:
             phase = "brake"
             self._transport_phase[agent_id] = phase
             self._transport_brake_streak[agent_id] = 0
+            object_id = self._progress_object_id(observations)
+            if object_id is not None:
+                # The positive transport-pressure integral must not survive the
+                # mode switch and overpower a negative BRAKE position error.
+                self._progress_regulator(agent_id, object_id).reset()
             self._update_progress_feedback(agent_id, observations, 0.0, braking=True)
             feedback = self._progress_feedback.get(agent_id, feedback)
 
@@ -980,6 +1198,8 @@ class DBACTController:
                 u = u + self.params.convoy_feedback_gain * feedback.velocity_reference * goal
                 allocation_weight = self._wrench_weights.get(agent.agent_id, 1.0)
                 effort = float(feedback.effort) * allocation_weight
+                if self.params.safety_pressure_reserve:
+                    effort *= self._pressure_reserve_scale(agent)
                 drive = goal if feedback.effort >= 0.0 else -goal
                 bias, push_side = self._transport_bias(
                     i,
@@ -1022,6 +1242,41 @@ class DBACTController:
         else:
             mode = "push" if push_side else ("convoy" if transport_active else "cage")
         return u, mode, cell.cell_mass, push_side
+
+    def _pressure_reserve_scale(self, agent: AgentState) -> float:
+        """Taper inward PI effort before the full ISSf row becomes active.
+
+        At zero robot velocity, the full object row is feasible whenever
+        ``gamma*h >= max(0, n.T v_hat) + rho``.  The cage controller already
+        targets ``cage_offset``; this scale only suppresses the additional
+        contact pressure as the measured clearance enters that reserve band.
+        """
+        observations = self._safety_observation_cache.get(agent.agent_id, [])
+        nearest = self._nearest_observation(observations, agent.position)
+        if nearest is None:
+            return 0.0
+        velocity = np.asarray(
+            self.object_velocity.get(agent.agent_id, {}).get(nearest.object_id, np.zeros(2)),
+            dtype=float,
+        )
+        point = np.asarray(nearest.point, dtype=float) + max(
+            0.0,
+            self._time - float(nearest.timestamp),
+        ) * velocity
+        relative = np.asarray(agent.position, dtype=float) - point
+        distance = float(np.linalg.norm(relative))
+        if distance <= 1e-12:
+            return 0.0
+        radial = relative / distance
+        effective_r_safe = self.params.r_safe + self.params.boundary_error_bound
+        h = distance - effective_r_safe
+        reserve = (
+            max(0.0, float(np.dot(radial, velocity))) + self.params.rho
+        ) / max(self.params.gamma_obj, 1e-9)
+        nominal_band = max(self.params.cage_offset - effective_r_safe, 1e-9)
+        if reserve >= nominal_band:
+            return 0.0 if h <= reserve else 1.0
+        return float(np.clip((h - reserve) / (nominal_band - reserve), 0.0, 1.0))
 
     def _redeploy_step(
         self,
@@ -1415,18 +1670,32 @@ class DBACTController:
     # ------------------------------------------------------------------ #
 
     def _object_rows_from_map(
-        self, agent_id: str, position: np.ndarray, observations: list[BoundaryObservation]
+        self,
+        agent_id: str,
+        position: np.ndarray,
+        observations: list[BoundaryObservation],
+        timestamp: float | None = None,
     ) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
         if not observations:
             return np.empty((0, 2)), np.empty((0, 2)), np.zeros(2)
-        points = np.vstack([obs.point for obs in observations])
-        normals = np.vstack([obs.normal for obs in observations])
         velocities = self.object_velocity.get(agent_id, {})
-        v_obj = np.zeros(2)
-        if velocities:
-            nearest = self._nearest_observation(observations, position)
-            if nearest is not None:
-                v_obj = velocities.get(nearest.object_id, np.zeros(2))
+        nearest = self._nearest_observation(observations, position)
+        if nearest is None:
+            return np.empty((0, 2)), np.empty((0, 2)), np.zeros(2)
+        # One QP call carries one object velocity.  Restrict the rows to the
+        # nearest observed object rather than silently applying its velocity to
+        # every cargo in a multi-object scene.
+        selected = [obs for obs in observations if obs.object_id == nearest.object_id]
+        v_obj = np.asarray(velocities.get(nearest.object_id, np.zeros(2)), dtype=float)
+        now = self._time if timestamp is None else float(timestamp)
+        points = np.vstack(
+            [
+                np.asarray(obs.point, dtype=float)
+                + max(0.0, now - float(obs.timestamp)) * v_obj
+                for obs in selected
+            ]
+        )
+        normals = np.vstack([obs.normal for obs in selected])
         return points, normals, v_obj
 
     def _update_object_velocity(
@@ -1514,6 +1783,8 @@ class DBACTController:
                     voxel_size=self.params.voxel_size,
                     age_decay=self.params.age_decay,
                     max_voxels_per_object=self.params.max_voxels_per_object,
+                    max_translation_per_update=self.params.map_max_translation_per_update,
+                    max_rotation_per_update=self.params.map_max_rotation_per_update,
                 ),
             )
 
@@ -1524,6 +1795,43 @@ class DBACTController:
         d = np.linalg.norm(positions[:, None, :] - positions[None, :, :], axis=2)
         np.fill_diagonal(d, np.inf)
         return [list(np.where(row <= self.params.comm_range)[0]) for row in d]
+
+    def _communication_neighbor_indices(
+        self,
+        agents: list[AgentState],
+        physical_neighbors: list[list[int]],
+    ) -> list[list[int]]:
+        """Apply deterministic symmetric packet dropout to communication links."""
+        if self.params.communication_dropout_prob <= 0.0:
+            candidates = sum(len(row) for row in physical_neighbors) // 2
+            self.communication_candidate_links += candidates
+            self.communication_delivered_links += candidates
+            return [list(row) for row in physical_neighbors]
+        delivered = [[] for _ in agents]
+        for i, row in enumerate(physical_neighbors):
+            for j in row:
+                if j <= i:
+                    continue
+                self.communication_candidate_links += 1
+                rng = frame_rng(
+                    "communication_link",
+                    agents[i].agent_id,
+                    agents[j].agent_id,
+                    self._frame,
+                    base=self.seed,
+                )
+                if float(rng.random()) < self.params.communication_dropout_prob:
+                    continue
+                delivered[i].append(j)
+                delivered[j].append(i)
+                self.communication_delivered_links += 1
+        return delivered
+
+    @property
+    def communication_delivery_rate(self) -> float:
+        if self.communication_candidate_links <= 0:
+            return 1.0
+        return self.communication_delivered_links / self.communication_candidate_links
 
     def apply_commands(self, agents: list[AgentState], commands: list[ControlCommand], dt: float) -> None:
         by_id = {cmd.agent_id: cmd for cmd in commands}

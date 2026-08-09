@@ -31,6 +31,7 @@ from dbact.metrics import (
     recruited_agents_count,
     strict_boundary_coverage,
 )
+from dbact.perception import normal_errors_deg
 from dbact.provenance import run_provenance
 from dbact.transport_dynamics import build_engine
 
@@ -68,6 +69,15 @@ class SimulationLog:
     detection_counts: dict[str, list[int]] = field(default_factory=dict)
     mode_counts: list[dict[str, int]] = field(default_factory=list)
     agent_modes: dict[str, list[str]] = field(default_factory=dict)
+    normal_error_deg: dict[str, list[float]] = field(default_factory=dict)
+    normal_error_norm: dict[str, list[float]] = field(default_factory=dict)
+    boundary_point_error: dict[str, list[float]] = field(default_factory=dict)
+    map_point_error: dict[str, list[float]] = field(default_factory=dict)
+    object_velocity_error: dict[str, list[float]] = field(default_factory=dict)
+    object_velocity_projection_error: dict[str, list[float]] = field(default_factory=dict)
+    boundary_velocity_error: dict[str, list[float]] = field(default_factory=dict)
+    cbf_velocity_projection_error: dict[str, list[float]] = field(default_factory=dict)
+    relaxation_events: list[dict] = field(default_factory=list)
 
 
 @dataclass(frozen=True)
@@ -137,6 +147,9 @@ class SimulationEnvironment:
         evaluation = config.get("evaluation", {})
         self.require_initially_unobserved = bool(evaluation.get("require_initially_unobserved", False))
         self.require_guarantee_certificate = bool(evaluation.get("require_guarantee_certificate", False))
+        self.require_measured_error_bounds = bool(evaluation.get("require_measured_error_bounds", False))
+        self.measured_error_bounds = dict(evaluation.get("measured_error_bounds", {}) or {})
+        self.online_truth_audit = bool(evaluation.get("online_truth_audit", False))
         self.frame_budget = evaluation.get("frame_budget")
         self.phase_deadlines = {
             "first_detection": evaluation.get("detection_deadline"),
@@ -169,6 +182,14 @@ class SimulationEnvironment:
                 self.log.net_torque,
                 self.log.cargo_speed,
                 self.log.detection_counts,
+                self.log.normal_error_deg,
+                self.log.normal_error_norm,
+                self.log.boundary_point_error,
+                self.log.map_point_error,
+                self.log.object_velocity_error,
+                self.log.object_velocity_projection_error,
+                self.log.boundary_velocity_error,
+                self.log.cbf_velocity_projection_error,
             ):
                 store[c.object_id] = []
         self._last_statuses = {}
@@ -253,6 +274,7 @@ class SimulationEnvironment:
 
     def _record(self) -> None:
         self.log.times.append(self.t)
+        frame = len(self.log.times) - 1
         for a in self.agents:
             self.log.agent_positions[a.agent_id].append(a.position.copy())
         mode_by_agent = {diag.agent_id: diag.mode for diag in self.controller.diagnostics}
@@ -261,6 +283,30 @@ class SimulationEnvironment:
             self.log.agent_modes[a.agent_id].append(mode_by_agent.get(a.agent_id, initial_mode))
         self.log.min_distances.append(min_inter_agent_distance(self.agents))
         self.log.mode_counts.append(self.controller.mode_counts())
+        for diag in self.controller.diagnostics:
+            if diag.solver_status == "relaxed_margin":
+                agent = next(a for a in self.agents if a.agent_id == diag.agent_id)
+                true_clearance = min(
+                    (
+                        float(c.signed_distance(agent.position[None, :])[0][0])
+                        for c in self.cargoes
+                    ),
+                    default=float("inf"),
+                )
+                self.log.relaxation_events.append(
+                    {
+                        "frame": frame,
+                        "time": float(self.t),
+                        "agent_id": diag.agent_id,
+                        "mode": diag.mode,
+                        "max_full_margin_deficit": diag.max_full_margin_deficit,
+                        "max_barrier_deficit": diag.max_barrier_deficit,
+                        "max_object_margin_deficit": diag.max_object_margin_deficit,
+                        "min_object_h": diag.min_object_h,
+                        "max_object_velocity_projection": diag.max_object_velocity_projection,
+                        "true_surface_clearance": true_clearance,
+                    }
+                )
 
         robot_radius = self.contact_params.robot_radius
         for c in self.cargoes:
@@ -289,6 +335,74 @@ class SimulationEnvironment:
                 else self.controller.last_detection_counts.get(c.object_id, 0)
             )
             self.log.detection_counts[c.object_id].append(int(detections))
+            fresh_perception = (
+                self.controller.last_perception_timestamp is not None
+                and abs(self.controller.last_perception_timestamp - (self.t - self.dt)) <= 1e-9
+            )
+            if fresh_perception and self.online_truth_audit:
+                observations = [
+                    obs
+                    for items in self.controller.last_sensed_observations.values()
+                    for obs in items
+                    if obs.object_id == c.object_id
+                ]
+                if observations:
+                    normal_angles = normal_errors_deg(observations, [c])
+                    self.log.normal_error_deg[c.object_id].extend(normal_angles.tolist())
+                    self.log.normal_error_norm[c.object_id].extend(
+                        (2.0 * np.sin(0.5 * np.radians(normal_angles))).tolist()
+                    )
+                    points = np.vstack([obs.point for obs in observations])
+                    signed, _, _ = c.signed_distance(points)
+                    self.log.boundary_point_error[c.object_id].extend(np.abs(signed).tolist())
+                map_points = [
+                    record.point
+                    for boundary_map in self.controller.maps.values()
+                    for record in boundary_map.records.values()
+                    if record.object_id == c.object_id
+                ]
+                if map_points:
+                    signed_map, _, _ = c.signed_distance(np.vstack(map_points))
+                    self.log.map_point_error[c.object_id].extend(np.abs(signed_map).tolist())
+            if self.online_truth_audit:
+                for agent_id, estimates in self.controller.object_velocity.items():
+                    if c.object_id in estimates:
+                        velocity_error = np.asarray(estimates[c.object_id]) - c.linear_velocity
+                        self.log.object_velocity_error[c.object_id].append(
+                            float(np.linalg.norm(velocity_error))
+                        )
+                        normals = [
+                            obs.normal
+                            for obs in self.controller._safety_observation_cache.get(agent_id, [])
+                            if obs.object_id == c.object_id
+                        ]
+                        if normals:
+                            projections = np.abs(np.vstack(normals) @ velocity_error)
+                            self.log.object_velocity_projection_error[c.object_id].extend(
+                                projections.tolist()
+                            )
+                        agent = next(a for a in self.agents if a.agent_id == agent_id)
+                        safety_observations = [
+                            obs
+                            for obs in self.controller._safety_observation_cache.get(agent_id, [])
+                            if obs.object_id == c.object_id
+                        ]
+                        for obs in safety_observations:
+                            true_point_velocity = c.point_velocity(np.asarray(obs.point, dtype=float))
+                            point_velocity_error = (
+                                np.asarray(estimates[c.object_id], dtype=float) - true_point_velocity
+                            )
+                            self.log.boundary_velocity_error[c.object_id].append(
+                                float(np.linalg.norm(point_velocity_error))
+                            )
+                            radial = np.asarray(agent.position, dtype=float) - np.asarray(
+                                obs.point, dtype=float
+                            )
+                            radial_norm = float(np.linalg.norm(radial))
+                            if radial_norm > 1e-12:
+                                self.log.cbf_velocity_projection_error[c.object_id].append(
+                                    abs(float(np.dot(radial / radial_norm, point_velocity_error)))
+                                )
         if self.t + 1e-12 >= self.guarantee_release_time and not self.boundary_map_witnesses:
             self._capture_boundary_map_witnesses()
 
@@ -344,6 +458,7 @@ class SimulationEnvironment:
         min_distance = min(self.log.min_distances) if self.log.min_distances else float("inf")
 
         cargo_summaries: dict[str, dict] = {}
+        error_audit: dict[str, dict] = {}
         for cargo in self.cargoes:
             cid = cargo.object_id
             centers = self.log.cargo_centers[cid]
@@ -379,6 +494,22 @@ class SimulationEnvironment:
                 (k for k, count in enumerate(self.log.detection_counts[cid]) if count > 0),
                 None,
             )
+            error_audit[cid] = {
+                "normal_error_deg": self._distribution(self.log.normal_error_deg[cid]),
+                "normal_error_norm": self._distribution(self.log.normal_error_norm[cid]),
+                "boundary_point_error_m": self._distribution(self.log.boundary_point_error[cid]),
+                "map_point_error_m": self._distribution(self.log.map_point_error[cid]),
+                "object_velocity_error_mps": self._distribution(self.log.object_velocity_error[cid]),
+                "object_velocity_projection_error_mps": self._distribution(
+                    self.log.object_velocity_projection_error[cid]
+                ),
+                "boundary_velocity_error_mps": self._distribution(
+                    self.log.boundary_velocity_error[cid]
+                ),
+                "cbf_velocity_projection_error_mps": self._distribution(
+                    self.log.cbf_velocity_projection_error[cid]
+                ),
+            }
             first_enclosure = next(
                 (k for k, value in enumerate(self.log.strict_coverage[cid]) if value >= self.success_contract.coverage_min),
                 None,
@@ -484,6 +615,34 @@ class SimulationEnvironment:
                         phase_reasons.append(
                             f"phase gate: HOLD started at frame {first_hold} before BRAKE at frame {first_brake}"
                         )
+                if self.require_measured_error_bounds:
+                    observed = error_audit[cid]
+                    for key, audit_key in (
+                        ("normal_error_deg", "normal_error_deg"),
+                        ("normal_error_norm", "normal_error_norm"),
+                        ("boundary_point_error_m", "boundary_point_error_m"),
+                        ("map_point_error_m", "map_point_error_m"),
+                        ("object_velocity_error_mps", "object_velocity_error_mps"),
+                        (
+                            "object_velocity_projection_error_mps",
+                            "object_velocity_projection_error_mps",
+                        ),
+                        ("boundary_velocity_error_mps", "boundary_velocity_error_mps"),
+                        (
+                            "cbf_velocity_projection_error_mps",
+                            "cbf_velocity_projection_error_mps",
+                        ),
+                    ):
+                        bound = self.measured_error_bounds.get(key)
+                        if bound is None:
+                            continue
+                        maximum = (observed.get(audit_key) or {}).get("max")
+                        if maximum is None:
+                            phase_reasons.append(f"error-bound gate: {key} bound/measurement is missing")
+                        elif maximum > float(bound):
+                            phase_reasons.append(
+                                f"error-bound gate: measured {key}={maximum:.6g} exceeds {float(bound):.6g}"
+                            )
                 for phase_name, frame in entry["phase_frames"].items():
                     deadline = self.phase_deadlines.get(phase_name)
                     if deadline is None:
@@ -537,8 +696,12 @@ class SimulationEnvironment:
                 "phase_deadlines": self.phase_deadlines,
                 "frame_budget": self.frame_budget,
                 "require_guarantee_certificate": self.require_guarantee_certificate,
+                "online_truth_audit": self.online_truth_audit,
+                "measured_error_bounds": self.measured_error_bounds,
             },
             "solver": solver_stats,
+            "relaxation_events": self.log.relaxation_events,
+            "measured_error_audit": error_audit,
             "transport_progress_estimates": self.controller.transport_progress_summary(),
             "transport_feedback": self.controller.transport_feedback_summary(),
             "goal_targets": {key: value.tolist() for key, value in self.goal_targets.items()},
@@ -547,9 +710,28 @@ class SimulationEnvironment:
                 "planning_every": params.planning_every,
                 "safety_every": 1,
             },
+            "communication": {
+                "dropout_probability": params.communication_dropout_prob,
+                "measured_delivery_rate": self.controller.communication_delivery_rate,
+            },
             "min_inter_agent_distance": min_distance,
             "mean_path_length": float(np.mean(list(lengths.values()))) if lengths else 0.0,
             "cargoes": cargo_summaries,
+        }
+
+    @staticmethod
+    def _distribution(values: list[float]) -> dict:
+        data = np.asarray(values, dtype=float)
+        data = data[np.isfinite(data)]
+        if len(data) == 0:
+            return {"n": 0, "mean": None, "p50": None, "p95": None, "p99": None, "max": None}
+        return {
+            "n": int(len(data)),
+            "mean": float(np.mean(data)),
+            "p50": float(np.quantile(data, 0.50)),
+            "p95": float(np.quantile(data, 0.95)),
+            "p99": float(np.quantile(data, 0.99)),
+            "max": float(np.max(data)),
         }
 
     # ------------------------------------------------------------------ #

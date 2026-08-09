@@ -39,6 +39,19 @@ def test_progress_pi_anti_windup_keeps_integral_bounded_under_saturation():
     assert abs(regulator.integral) <= params.integral_limit + 1e-12
 
 
+def test_reset_removes_transport_integral_before_braking():
+    regulator = ProgressPIController(
+        ProgressPIParams(target=0.1, velocity_ki=1.0, integral_limit=2.0)
+    )
+    for _ in range(10):
+        regulator.update(0.0, 0.0, 0.1)
+    assert regulator.integral > 0.0
+    regulator.reset()
+    output = regulator.update(0.16, 0.0, 0.0, braking=True)
+    assert output.integral == 0.0
+    assert output.effort < 0.0
+
+
 def test_feedback_supervisor_requires_brake_before_hold():
     params = DBACTParams(
         task_mode="transport",
@@ -148,3 +161,41 @@ def test_research_config_disables_fixed_feedforward_and_enables_feedback():
     assert params.transport_speed == 0.0
     assert params.transport_progress_estimator == "motion_integral"
     assert params.wrench_allocation is True
+
+
+def test_communication_dropout_is_symmetric_deterministic_and_measured():
+    params = DBACTParams(
+        task_mode="transport",
+        progress_feedback=True,
+        d_min=0.32,
+        transport_distance=0.1,
+        communication_dropout_prob=0.5,
+    )
+    controller = DBACTController(params, (0.0, 8.0, 0.0, 8.0), {"obj": np.array([1.0, 0.0])})
+    agents = [AgentState("a0", np.array([0.0, 0.0])), AgentState("a1", np.array([0.5, 0.0]))]
+    physical = [[1], [0]]
+    outcomes = []
+    for frame in range(100):
+        controller._frame = frame
+        delivered = controller._communication_neighbor_indices(agents, physical)
+        assert (1 in delivered[0]) == (0 in delivered[1])
+        outcomes.append(bool(delivered[0]))
+    assert any(outcomes) and not all(outcomes)
+    assert controller.communication_candidate_links == 100
+    assert controller.communication_delivery_rate == pytest.approx(sum(outcomes) / 100)
+
+
+def test_controller_rejects_rho_above_kinematic_authority():
+    with pytest.raises(ValueError, match="rho must be strictly below max_speed"):
+        DBACTController(
+            DBACTParams(
+                task_mode="transport",
+                progress_feedback=True,
+                d_min=0.32,
+                transport_distance=0.1,
+                rho=0.3,
+                max_speed=0.3,
+            ),
+            (0.0, 8.0, 0.0, 8.0),
+            {"obj": np.array([1.0, 0.0])},
+        )

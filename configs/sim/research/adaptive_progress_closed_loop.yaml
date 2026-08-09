@@ -48,15 +48,19 @@ controller:
   pca_neighbors: 5
   residual_tolerance: 0.030
   min_confidence: 0.0
+  safety_min_confidence: 0.15
   perception_every: 3
   planning_every: 3
   comm_range: 1.60
+  communication_dropout_prob: 0.0
 
   voxel_size: 0.07
   age_decay: 0.08
   max_voxels_per_object: 600
+  map_max_translation_per_update: 0.030
+  map_max_rotation_per_update: 0.040
   density_mode: offset
-  cage_offset: 0.135
+  cage_offset: 0.159
   lead_offset: 0.22
   lead_threshold: 0.55
   sigma: 0.20
@@ -71,16 +75,22 @@ controller:
 
   robot_radius: 0.16
   delta_max: 0.05
+  boundary_error_bound: 0.023
   d_min: 0.32
+  agent_distance_buffer: 0.0002
   gamma_agent: 6.0
-  gamma_obj: 8.0
-  rho: 0.10
-  max_speed: 0.30
+  gamma_obj: 20.0
+  rho: 0.35
+  max_speed: 0.45
   backend: qp
-  max_object_rows: 4
+  max_object_rows: 1
   object_row_range: 0.60
   object_row_window: 0.20
   object_row_inner_limit: 0.0
+  object_barrier_geometry: polyline_distance
+  object_active_tolerance: 0.0
+  object_polyline_max_gap: 0.15
+  object_polyline_max_normal_angle_deg: 30.0
   recovery_fraction: 0.25
 
   kp_explore: 1.20
@@ -106,10 +116,12 @@ controller:
   transport_speed: 0.0
   transport_dwell_steps: 15
   transport_min_steps: 0
-  transport_distance: 0.10
+  transport_distance: 0.12
   transport_progress_estimator: motion_integral
 
   progress_feedback: true
+  progress_consensus: true
+  progress_consensus_hops: 18
   progress_kp: 1.0
   progress_max_speed: 0.14
   pressure_position_gain: 3.0
@@ -138,6 +150,7 @@ controller:
   contact_release_gain: 3.0
   contact_release_speed: 0.20
   contact_release_enabled: true
+  safety_pressure_reserve: true
 
 transport:
   engine: penalty
@@ -155,6 +168,14 @@ guarantee:
   enabled: false
 
 evaluation:
+  online_truth_audit: true
+  require_measured_error_bounds: true
+  measured_error_bounds:
+    boundary_point_error_m: 0.023
+    map_point_error_m: 0.27
+    object_velocity_error_mps: 0.35
+    boundary_velocity_error_mps: 0.35
+    cbf_velocity_projection_error_mps: 0.35
   contact_radius: 0.50
   j_min: 0.075
   j_max: 0.30

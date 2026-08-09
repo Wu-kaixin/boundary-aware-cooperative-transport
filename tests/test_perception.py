@@ -103,6 +103,15 @@ def test_normals_are_estimated_not_taken_from_the_simulator():
     assert float(np.max(errors)) > 0.0
 
 
+def test_normal_error_audit_does_not_mutate_observations():
+    cargo, agents = l_shape_and_viewpoints(count=8)
+    observations = sensor(range_noise_std=0.01).sense(agents[0], [cargo], 0.0, apply_gate=False)
+    before = [obs.normal.copy() for obs in observations]
+    normal_errors_deg(observations, [cargo])
+    for observation, expected in zip(observations, before):
+        assert np.array_equal(observation.normal, expected)
+
+
 def test_legacy_sampler_has_identically_zero_normal_error():
     """Which is why any robustness margin derived against it is vacuous."""
     cargo, agents = l_shape_and_viewpoints(count=8)
