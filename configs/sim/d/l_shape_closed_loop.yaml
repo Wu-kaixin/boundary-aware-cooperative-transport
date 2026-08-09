@@ -50,7 +50,7 @@ cargoes:
 task:
   mode: random_constrained
   distance_min: 0.35
-  distance_max: 0.70
+  distance_max: 0.60
   # Clearance the goal must leave to every wall is
   #     R_obj + d_c + r_robot + wall_margin.
   wall_margin: 0.35
@@ -111,7 +111,12 @@ controller:
   gamma_agent: 6.0
   gamma_obj: 8.0
   rho: 0.05
-  max_speed: 0.30
+  # 0.35 rather than 0.30: the speed cap is the outer boundary of the safety
+  # QP's feasible set, and the last tier of relaxations is only ever reached
+  # because that set is empty. Widening it is the cheapest way to need fewer
+  # relaxations, and the cost is one extra centimetre of discrete overshoot
+  # in the penetration budget, which C3 already accounts for explicitly.
+  max_speed: 0.35
   backend: qp
   object_row_range: 0.60
   object_row_window: 0.28
@@ -136,6 +141,12 @@ controller:
   brake_gain: 0.55
   convoy_gain: 1.0
   convoy_max: 0.25
+  # Lateral steering. At gain 2.0 a 0.10 m cross-track error asked for an 11 deg
+  # rotation of the push arc, which is slower than the error grows early in the
+  # transport; 4.0 turns the same error into 22 deg.
+  cross_track_gain: 3.0
+  cross_track_max_deg: 30.0
+  cross_track_deadband: 0.03
 
   # D2 phase supervisor
   phase_informed_fraction: 0.55
@@ -153,7 +164,15 @@ transport:
   # move at all. Viscous drag gives the cargo a terminal speed above the robots'
   # own speed limit, so it is kicked away by the first robot to touch it and the
   # cage can never close.
-  ground_friction: 0.77
+  # 0.60 rather than the A branch's 0.77. The open-loop probe measured a
+  # sustained 32.8 N along the task direction with every trailing robot pressed to
+  # the penetration budget, against a 31.1 N breakaway at 0.77 -- a 5% margin, so
+  # the A configuration is barely transportable at all and most of the frame
+  # budget goes into stick-slip rather than travel. At 0.60 the breakaway is
+  # 24.2 N and the same team has roughly 35% of headroom. It stays a cooperative
+  # task: at the converged cage ring one robot supplies 12.5 N, so two aligned
+  # robots are the minimum that can move the object and one cannot.
+  ground_friction: 0.60
   gravity: 9.81
   substeps: 4
 

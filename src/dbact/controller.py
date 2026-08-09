@@ -174,8 +174,9 @@ class DBACTParams:
     lead_lookahead_max: float = 0.18
     # Lateral steering: how hard the push arc is rotated to cancel cross-track
     # error, and the largest rotation it may ask for.
-    cross_track_gain: float = 2.0
-    cross_track_max_deg: float = 40.0
+    cross_track_gain: float = 3.0
+    cross_track_max_deg: float = 30.0
+    cross_track_deadband: float = 0.03
 
     # --- phase supervisor (D2) ---
     phase_informed_fraction: float = 0.55
@@ -770,6 +771,15 @@ class DBACTController:
             # depth limiter, so the transport loop does not need to be one, and a
             # robot chasing a receding cargo keeps its contact instead of settling
             # at a standoff the object has already left.
+            # The allocation is the only steering authority the arc has: the press
+            # is always along the robot's own normal -- a press along the commanded
+            # direction is inward only at the centre of the trailing face and
+            # tangential everywhere else -- so what the steered direction changes is
+            # *how much* each robot presses, not where. The share is linear in the
+            # alignment; squaring it to concentrate the effort was measured and made
+            # things worse (2/12 G500 to 0/12), because the arc on a faceted object
+            # is already only three or four robots wide and narrowing it further
+            # costs more in force than it gains in aim.
             share = min(1.0, -alignment)
             press = effort.effort * share * (-normal)
             return bias + press, True, effort.effort, normal
@@ -803,6 +813,17 @@ class DBACTController:
         """
         displacement = self.maps[agent_id].object_displacement(object_id)
         lateral = displacement - float(np.dot(displacement, goal)) * goal
+        offset = float(np.linalg.norm(lateral))
+        if offset < self.params.cross_track_deadband:
+            # Below the estimator's own noise floor the "cross-track error" is
+            # registration jitter, and steering on it swings the push arc off the
+            # trailing face for no reason: measured, a run that reached 0.51 m with
+            # the arc held straight reached 0.06 m once it started chasing a 0.02 m
+            # phantom offset. The band is on the lateral component alone rather than
+            # on total displacement, so a run that is genuinely leaving the line is
+            # corrected from the first centimetre that exceeds the noise instead of
+            # after the cargo has travelled far enough to notice.
+            return goal
         correction = -self.params.cross_track_gain * lateral
         limit = np.tan(np.radians(self.params.cross_track_max_deg))
         magnitude = float(np.linalg.norm(correction))

@@ -161,10 +161,17 @@ class DirectionalProgressController:
         raw = p.kp * error + p.ki * self.integral
         effort = float(np.clip(raw, 0.0, p.effort_max))
         saturated = raw > p.effort_max or raw < 0.0
-        if p.ki > 0.0 and saturated:
-            # Back-calculation: retract the integral to the value that reproduces
-            # the clipped output, so leaving saturation costs one step, not the
-            # seconds the integral took to build.
+        if p.ki > 0.0 and raw > p.effort_max:
+            # Back-calculation, upper clip only: retract the integral to the value
+            # that reproduces the clipped output, so leaving saturation costs one
+            # step rather than the seconds the integral took to build.
+            #
+            # Deliberately *not* applied at the lower clip. There the same formula
+            # solves ``0 = kp e + ki s`` for a large negative ``e``, which asks for
+            # a large positive ``s`` -- so a cargo that suddenly ran away would
+            # have re-armed the integral to its bound at the exact moment the loop
+            # wanted to let go. At the lower clip ordinary integration is already
+            # the right behaviour: the error is negative, so the state falls.
             self.integral = float(np.clip((effort - p.kp * error) / p.ki, 0.0, p.integral_max))
 
         return TransportEffort(
