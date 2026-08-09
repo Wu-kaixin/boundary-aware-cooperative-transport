@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import json
 import copy
+import math
 from collections.abc import Callable
 from dataclasses import asdict, dataclass, field, replace
 from pathlib import Path
@@ -428,8 +429,26 @@ class SimulationEnvironment:
                         ]
                         for obs in safety_observations:
                             true_point_velocity = c.point_velocity(np.asarray(obs.point, dtype=float))
+                            estimated_centroid = np.asarray(
+                                self.controller._object_centroid.get(agent_id, {}).get(
+                                    c.object_id,
+                                    c.position,
+                                ),
+                                dtype=float,
+                            )
+                            estimated_omega = float(
+                                self.controller.object_angular_velocity.get(agent_id, {}).get(
+                                    c.object_id,
+                                    0.0,
+                                )
+                            )
+                            lever = np.asarray(obs.point, dtype=float) - estimated_centroid
+                            estimated_point_velocity = np.asarray(
+                                estimates[c.object_id],
+                                dtype=float,
+                            ) + estimated_omega * np.array([-lever[1], lever[0]], dtype=float)
                             point_velocity_error = (
-                                np.asarray(estimates[c.object_id], dtype=float) - true_point_velocity
+                                estimated_point_velocity - true_point_velocity
                             )
                             self.log.boundary_velocity_error[c.object_id].append(
                                 float(np.linalg.norm(point_velocity_error))
@@ -878,6 +897,8 @@ class SimulationEnvironment:
         (out / "summary.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
         self._save_trajectories(out / "trajectories.csv")
         self._save_safety_timeseries(out / "safety_timeseries.csv")
+        self._save_cargo_timeseries(out / "cargo_timeseries.csv", summary)
+        self._save_perception_errors(out / "perception_errors.csv")
         return summary
 
     def _save_trajectories(self, path: Path) -> None:
@@ -908,6 +929,69 @@ class SimulationEnvironment:
                     f"{self.log.agents_inside[cargo_id][ti]},"
                     f"{self.log.contact_counts[cargo_id][ti]},"
                     f"{f[0]:.6f},{f[1]:.6f},{self.log.net_torque[cargo_id][ti]:.6f}"
+                )
+        path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+    def _save_cargo_timeseries(self, path: Path, summary: dict) -> None:
+        """Save publication metrics without requiring simulator object access."""
+        lines = [
+            "iteration,time,cargo_id,x,y,yaw_deg,J,cross_track,cargo_speed,"
+            "strict_coverage,contacts,net_force_parallel,net_force_cross,net_torque,"
+            "min_inter_agent_distance,min_signed_clearance,max_penetration"
+        ]
+        for cargo_id, centers in self.log.cargo_centers.items():
+            entry = summary["cargoes"][cargo_id]
+            direction = np.asarray(entry.get("goal_direction", [0.0, 0.0]), dtype=float)
+            direction_norm = float(np.linalg.norm(direction))
+            if direction_norm > 1e-12:
+                direction = direction / direction_norm
+            cross_direction = np.array([-direction[1], direction[0]], dtype=float)
+            origin = np.asarray(
+                entry.get("transport_activation_center", centers[0]),
+                dtype=float,
+            )
+            activation_frame = (entry.get("phase_frames") or {}).get("first_transport")
+            for ti, (t, center) in enumerate(zip(self.log.times, centers)):
+                displacement = np.asarray(center, dtype=float) - origin
+                force = np.asarray(self.log.net_force[cargo_id][ti], dtype=float)
+                task_active = activation_frame is not None and ti >= int(activation_frame)
+                task_progress = float(np.dot(displacement, direction)) if task_active else math.nan
+                cross_track = (
+                    float(np.dot(displacement, cross_direction)) if task_active else math.nan
+                )
+                lines.append(
+                    f"{ti},{t:.6f},{cargo_id},{center[0]:.9f},{center[1]:.9f},"
+                    f"{math.degrees(self.log.cargo_angles[cargo_id][ti]):.9f},"
+                    f"{task_progress:.9f},{cross_track:.9f},"
+                    f"{self.log.cargo_speed[cargo_id][ti]:.9f},"
+                    f"{self.log.strict_coverage[cargo_id][ti]:.9f},"
+                    f"{self.log.contact_counts[cargo_id][ti]},"
+                    f"{float(np.dot(force, direction)):.9f},"
+                    f"{float(np.dot(force, cross_direction)):.9f},"
+                    f"{self.log.net_torque[cargo_id][ti]:.9f},"
+                    f"{self.log.min_distances[ti]:.9f},"
+                    f"{self.log.min_clearance[cargo_id][ti]:.9f},"
+                    f"{self.log.max_penetration[cargo_id][ti]:.9f}"
+                )
+        path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+    def _save_perception_errors(self, path: Path) -> None:
+        stores = {
+            "normal_error_deg": self.log.normal_error_deg,
+            "normal_error_norm": self.log.normal_error_norm,
+            "boundary_point_error_m": self.log.boundary_point_error,
+            "map_point_error_m": self.log.map_point_error,
+            "object_velocity_error_mps": self.log.object_velocity_error,
+            "object_velocity_projection_error_mps": self.log.object_velocity_projection_error,
+            "boundary_velocity_error_mps": self.log.boundary_velocity_error,
+            "cbf_velocity_projection_error_mps": self.log.cbf_velocity_projection_error,
+        }
+        lines = ["cargo_id,error_type,value"]
+        for error_type, by_cargo in stores.items():
+            for cargo_id, values in by_cargo.items():
+                lines.extend(
+                    f"{cargo_id},{error_type},{float(value):.12g}"
+                    for value in values
                 )
         path.write_text("\n".join(lines) + "\n", encoding="utf-8")
 

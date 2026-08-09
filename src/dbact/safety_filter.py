@@ -204,7 +204,13 @@ class SafetyFilter:
             return np.empty((0, 2)), np.empty(0), np.empty(0), np.empty(0)
         normals = np.asarray(boundary_normals, dtype=float).reshape(-1, 2)
         p = np.asarray(position, dtype=float).reshape(2)
-        v_obj = np.asarray(object_velocity, dtype=float).reshape(2)
+        velocity_input = np.asarray(object_velocity, dtype=float)
+        if velocity_input.shape == (2,):
+            point_velocities = np.repeat(velocity_input[None, :], len(pts), axis=0)
+        else:
+            point_velocities = velocity_input.reshape(-1, 2)
+            if len(point_velocities) != len(pts):
+                raise ValueError("one object point velocity is required per boundary point")
 
         rel = p[None, :] - pts
         if self.params.object_barrier_geometry in {"point_distance", "polyline_distance"}:
@@ -214,6 +220,7 @@ class SafetyFilter:
                 return np.empty((0, 2)), np.empty(0), np.empty(0), np.empty(0)
             candidate_points = pts[near]
             candidate_normals = normals[near]
+            candidate_velocities = point_velocities[near]
             if self.params.object_barrier_geometry == "polyline_distance" and len(pts) >= 2:
                 edges = np.diff(pts, axis=0)
                 lengths = np.linalg.norm(edges, axis=1)
@@ -238,6 +245,14 @@ class SafetyFilter:
                     candidate_normals = np.vstack(
                         [candidate_normals, normals[:-1][valid] + normals[1:][valid]]
                     )
+                    segment_velocities = point_velocities[1:] - point_velocities[:-1]
+                    footpoint_velocities = (
+                        point_velocities[:-1][valid]
+                        + fraction[:, None] * segment_velocities[valid]
+                    )
+                    candidate_velocities = np.vstack(
+                        [candidate_velocities, footpoint_velocities]
+                    )
             candidate_rel = p[None, :] - candidate_points
             candidate_distances = np.linalg.norm(candidate_rel, axis=1)
             best = int(np.argmin(candidate_distances))
@@ -247,6 +262,7 @@ class SafetyFilter:
             else:
                 fallback = candidate_normals[best]
                 normals = fallback[None, :] / max(float(np.linalg.norm(fallback)), 1e-12)
+            row_velocities = candidate_velocities[best : best + 1]
             effective_r_safe = self.params.r_safe + self.params.boundary_error_bound
             h = np.array([distance - effective_r_safe], dtype=float)
             if self.params.object_barrier_geometry == "point_distance":
@@ -259,6 +275,7 @@ class SafetyFilter:
                 point_distances = distances[near][active]
                 normals = point_rel / np.maximum(point_distances[:, None], 1e-12)
                 h = point_h[active]
+                row_velocities = point_velocities[near][active]
         else:
             if self.params.object_barrier_geometry != "tangent_plane":
                 raise ValueError(
@@ -278,11 +295,12 @@ class SafetyFilter:
             if not np.any(near):
                 return np.empty((0, 2)), np.empty(0), np.empty(0), np.empty(0)
             normals, normal_offset = normals[near], normal_offset[near]
+            row_velocities = point_velocities[near]
             h = normal_offset - self.params.r_safe - self.params.boundary_error_bound
 
         if len(h) > self.params.max_object_rows:
             keep = np.argsort(h)[: self.params.max_object_rows]
-            normals, h = normals[keep], h[keep]
+            normals, h, row_velocities = normals[keep], h[keep], row_velocities[keep]
 
         # Saturate only the recovery term.  Capping the complete RHS would also
         # cap ``n.T v_obj + rho`` at h=0 and destroy forward invariance exactly on
@@ -291,7 +309,8 @@ class SafetyFilter:
         # state has already crossed the boundary.
         cap = self.params.recovery_fraction * self.params.max_speed
         recovery = np.minimum(-self.params.gamma_obj * h, cap)
-        rhs_barrier = normals @ v_obj + recovery
+        velocity_projection = np.sum(normals * row_velocities, axis=1)
+        rhs_barrier = velocity_projection + recovery
         rhs = rhs_barrier + self.params.rho
         return normals, rhs, rhs_barrier, h
 
@@ -353,11 +372,11 @@ class SafetyFilter:
         deficits = b - A @ u if len(A) else np.empty(0)
         barrier_deficits = b_no_margin - A @ u if len(A) else np.empty(0)
         object_deficits = deficits[len(A_agent) :] if len(A_obj) else np.empty(0)
-        velocity_projection = (
-            A_obj @ np.asarray(object_velocity if object_velocity is not None else np.zeros(2), dtype=float)
-            if len(A_obj)
-            else np.empty(0)
+        recovery = np.minimum(
+            -self.params.gamma_obj * h_obj,
+            self.params.recovery_fraction * self.params.max_speed,
         )
+        velocity_projection = b_obj_barrier - recovery if len(A_obj) else np.empty(0)
 
         modification = float(np.linalg.norm(u - u_nom))
         self.stats.max_modification = max(self.stats.max_modification, modification)

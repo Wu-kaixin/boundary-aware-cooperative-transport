@@ -205,6 +205,24 @@ def test_moving_object_velocity_enters_the_row():
     assert advancing.velocity[1] > static.velocity[1]
 
 
+def test_rigid_point_velocities_are_admitted_per_boundary_sample():
+    f = make_filter(object_barrier_geometry="point_distance", max_object_rows=1)
+    points, normals = flat_boundary(0.0)
+    velocities = np.zeros_like(points)
+    nearest = len(points) // 2
+    velocities[nearest, 1] = 0.25
+    result = f.filter_velocity(
+        np.array([0.0, 0.12]),
+        np.zeros(2),
+        (),
+        points,
+        normals,
+        object_velocity=velocities,
+    )
+    assert result.velocity[1] > 0.0
+    assert result.max_object_velocity_projection == pytest.approx(0.25)
+
+
 # --------------------------------------------------------------------------- #
 # tiers and backends
 # --------------------------------------------------------------------------- #

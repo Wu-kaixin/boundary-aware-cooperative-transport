@@ -127,6 +127,25 @@ def test_one_hop_wrench_allocation_balances_opposite_contact_torques():
     assert controller._wrench_weights["a0"] == pytest.approx(controller._wrench_weights["a1"])
 
 
+def test_object_rows_use_estimated_se2_point_velocity():
+    params = DBACTParams(d_min=0.32)
+    controller = DBACTController(params, (0.0, 8.0, 0.0, 8.0))
+    observations = [
+        BoundaryObservation("obj", "a0", np.array([1.0, 0.0]), np.array([1.0, 0.0]), 0.0),
+        BoundaryObservation("obj", "a0", np.array([0.0, 1.0]), np.array([0.0, 1.0]), 0.0),
+    ]
+    controller.object_velocity = {"a0": {"obj": np.array([0.1, -0.2])}}
+    controller.object_angular_velocity = {"a0": {"obj": 0.5}}
+    controller._object_centroid = {"a0": {"obj": np.zeros(2)}}
+    _, _, point_velocities = controller._object_rows_from_map(
+        "a0",
+        np.array([1.1, 0.0]),
+        observations,
+        timestamp=0.0,
+    )
+    assert np.allclose(point_velocities, [[0.1, 0.3], [-0.4, -0.2]])
+
+
 def test_contact_release_overrides_inward_cvt_component_on_leading_face():
     params = DBACTParams(
         task_mode="transport",

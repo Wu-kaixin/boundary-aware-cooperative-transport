@@ -452,6 +452,7 @@ class DBACTController:
         self.maps: dict[str, LocalBoundaryMap] = {}
         self._redeploy_target: dict[str, np.ndarray | None] = {}
         self.object_velocity: dict[str, dict[str, np.ndarray]] = {}
+        self.object_angular_velocity: dict[str, dict[str, float]] = {}
         self._object_centroid: dict[str, dict[str, np.ndarray]] = {}
         self._transport_ready_streak: dict[str, int] = {}
         self._transport_progress: dict[str, dict[str, float]] = {}
@@ -874,6 +875,20 @@ class DBACTController:
                         self.object_velocity.setdefault(agents[index].agent_id, {})[
                             object_id
                         ] = consensus_velocity.copy()
+                angular_values = [
+                    self.object_angular_velocity.get(agents[index].agent_id, {}).get(object_id)
+                    for index in component
+                ]
+                angular_values = [
+                    float(value) for value in angular_values if value is not None
+                ]
+                if angular_values:
+                    consensus_angular_velocity = float(np.median(angular_values))
+                    for index in component:
+                        self.object_angular_velocity.setdefault(
+                            agents[index].agent_id,
+                            {},
+                        )[object_id] = consensus_angular_velocity
 
     def _consensus_ready_flags(
         self,
@@ -1833,6 +1848,7 @@ class DBACTController:
         if not observations:
             return np.empty((0, 2)), np.empty((0, 2)), np.zeros(2)
         velocities = self.object_velocity.get(agent_id, {})
+        angular_velocities = self.object_angular_velocity.get(agent_id, {})
         nearest = self._nearest_observation(observations, position)
         if nearest is None:
             return np.empty((0, 2)), np.empty((0, 2)), np.zeros(2)
@@ -1841,16 +1857,36 @@ class DBACTController:
         # every cargo in a multi-object scene.
         selected = [obs for obs in observations if obs.object_id == nearest.object_id]
         v_obj = np.asarray(velocities.get(nearest.object_id, np.zeros(2)), dtype=float)
-        now = self._time if timestamp is None else float(timestamp)
-        points = np.vstack(
-            [
-                np.asarray(obs.point, dtype=float)
-                + max(0.0, now - float(obs.timestamp)) * v_obj
-                for obs in selected
-            ]
+        omega = float(angular_velocities.get(nearest.object_id, 0.0))
+        centroid = np.asarray(
+            self._object_centroid.get(agent_id, {}).get(
+                nearest.object_id,
+                np.mean(np.asarray([obs.point for obs in selected], dtype=float), axis=0),
+            ),
+            dtype=float,
         )
+        now = self._time if timestamp is None else float(timestamp)
+        points = []
+        rotated_relatives = []
+        for obs in selected:
+            age = max(0.0, now - float(obs.timestamp))
+            relative = np.asarray(obs.point, dtype=float) - centroid
+            angle = omega * age
+            c, s = np.cos(angle), np.sin(angle)
+            rotated = np.array(
+                [c * relative[0] - s * relative[1], s * relative[0] + c * relative[1]],
+                dtype=float,
+            )
+            points.append(centroid + age * v_obj + rotated)
+            rotated_relatives.append(rotated)
+        points = np.asarray(points, dtype=float)
         normals = np.asarray([obs.normal for obs in selected], dtype=float)
-        return points, normals, v_obj
+        relative_points = np.asarray(rotated_relatives, dtype=float)
+        rotational_velocity = omega * np.column_stack(
+            [-relative_points[:, 1], relative_points[:, 0]]
+        )
+        point_velocities = v_obj[None, :] + rotational_velocity
+        return points, normals, point_velocities
 
     def _update_object_velocity(
         self, agent_id: str, observations: list[BoundaryObservation], dt: float
@@ -1867,15 +1903,29 @@ class DBACTController:
         """
         object_ids = {obs.object_id for obs in observations}
         filtered = self.object_velocity.setdefault(agent_id, {})
+        filtered_angular = self.object_angular_velocity.setdefault(agent_id, {})
+        centroids = self._object_centroid.setdefault(agent_id, {})
         alpha = float(np.clip(self.params.object_velocity_filter, 0.0, 1.0))
         motions = self.maps[agent_id].last_motion
+        rotations = self.maps[agent_id].last_rotation
         for object_id in object_ids:
             raw = motions.get(object_id, np.zeros(2)) / max(float(dt), 1e-9)
             prior = filtered.get(object_id, np.zeros(2))
             filtered[object_id] = (1.0 - alpha) * prior + alpha * raw
+            raw_angular = float(rotations.get(object_id, 0.0)) / max(float(dt), 1e-9)
+            prior_angular = float(filtered_angular.get(object_id, 0.0))
+            filtered_angular[object_id] = (1.0 - alpha) * prior_angular + alpha * raw_angular
+            points = np.asarray(
+                [obs.point for obs in observations if obs.object_id == object_id],
+                dtype=float,
+            )
+            if len(points):
+                centroids[object_id] = np.mean(points, axis=0)
         for object_id in list(filtered):
             if object_id not in object_ids:
                 del filtered[object_id]
+                filtered_angular.pop(object_id, None)
+                centroids.pop(object_id, None)
 
     def _contact_ready(self, agent: AgentState, observations: list[BoundaryObservation]) -> bool:
         """True when the robot's *own* map says it sits in the contact band."""
