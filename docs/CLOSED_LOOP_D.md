@@ -441,6 +441,41 @@ eight seeds violate `d_min`. Sixteen robots recalled to a single token position
 converge on the same point, and the recall command has no notion of the ring they
 are supposed to form — it is a go-to-point, so the crowding is designed in.
 
+### The approach phase: attempted, not landed
+
+The obvious fix is to give each robot a bearing on the ring the token implies and
+let it travel *there* rather than to the token's centre, spreading the team while
+it is still on its way in. The bearing half works and is cheap: robot ``i`` takes
+``2 pi i / N`` under a polar controller about the token, which sends a robot
+assigned to the far side *around* the object instead of through it, and needs no
+more agreement than the search lanes already assume.
+
+The radius half does not work, and the reason is worth recording because it is not
+a tuning failure.
+
+**A token cannot yet say how big the object is.** Two candidate estimates were
+measured on the same run, and both are wrong in opposite directions:
+
+| estimate | seed 2 at first sight | implied ring | object radius |
+| --- | --- | --- | --- |
+| extent of the observed points | 0.104 m | 1.005 m | 1.320 m |
+| holder's own distance to the centroid | 2.613 m | 3.018 m | 1.320 m |
+
+The first is a sliver of one face, so the ring lands *inside* the object and the
+whole team is aimed through it. The second is not the finder's standoff at all --
+the fused view contains relayed points, so a robot 2.6 m away computes its own
+distance to a centroid it never saw directly, and the ring lands so far out that
+nobody ever gets within sensor range. Measured against the committed go-to-point
+recall, the first version made things worse: three of eight seeds hit the watchdog
+without transporting and one pushed the cargo 4.04 m without ever stopping,
+against zero watchdog timeouts before.
+
+The attempt is stashed rather than committed. What it needs is an extent estimate
+that is honest at first sight, and the shape of that is now clear: the token has to
+carry the *observer's* standoff -- measured by the robot that actually saw the
+surface, before relay mixes it with second-hand points -- and grow the ring as more
+of the boundary is observed rather than fixing it at detection.
+
 So the honest reading of D9 is: **discovery is solved and enclosure-after-discovery
 is not.** The claim "the team finds an object at an unknown position" is now
 supported by 8 seeds with a coverage bound behind it. The claim "and then encloses
