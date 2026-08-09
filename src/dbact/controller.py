@@ -105,6 +105,16 @@ class DBACTParams:
     # shows why a uniform cage cannot be transported).
     lead_offset: float | None = 0.22
     lead_threshold: float = 0.35
+    # D10-DWELL. ``_enclosure_geometry`` documents ENCLOSE as "one uniform contact
+    # ring" and did not implement it: before TRANSPORT it returned the base
+    # geometry, which carries ``lead_offset``. Lifting the leading arc clear is
+    # what stops it resisting the press, and during ENCLOSE there is no press to
+    # resist -- what it does instead is put those robots' standoff floor *above*
+    # the contact band, so a robot that enters the band is immediately driven back
+    # out of it by the very loop that band membership switches on. Measured over
+    # eight seeds, 96-97% of all band exits were robots whose own floor was above
+    # the band. True restores the documented geometry; False is the ablation.
+    enclose_uniform_ring: bool = False
     sigma: float = 0.20
     base_density: float = 1e-3
     gap_gain: float = 0.6
@@ -845,6 +855,11 @@ class DBACTController:
         Three regimes, each with a reason:
 
         ``ENCLOSE``    one uniform contact ring; the team is forming the cage.
+                       Only when ``enclose_uniform_ring`` is set -- without it the
+                       leading arc is already lifted to ``lead_offset``, which is
+                       above the contact band, so those robots are driven out of
+                       the band as soon as they enter it and the contact quorum
+                       cannot hold its dwell. See D10-DWELL.
         ``TRANSPORT``  trailing arc at the contact offset so it can press, leading
                        arc lifted clear *and* pushed out by the distance the object
                        covers while a robot steps aside. Without that look-ahead
@@ -863,7 +878,7 @@ class DBACTController:
             standoff = max(self.params.hold_offset, self.params.robot_radius + 1e-3)
             return replace(base, cage_offset=standoff, lead_offset=standoff)
         if not self.phase_monitor.reached(Phase.TRANSPORT) or base.lead_offset is None:
-            return base
+            return replace(base, lead_offset=None) if self.params.enclose_uniform_ring else base
         speed = 0.0
         for object_id in np.unique(view.object_ids):
             speed = max(speed, float(np.linalg.norm(self.maps[agent_id].object_velocity(str(object_id)))))

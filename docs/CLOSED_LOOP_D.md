@@ -973,6 +973,112 @@ in and out of the contact band, re-arming the timer. That is 58 frames a seed
 against the 39 an oracle gate could ever recover. The next measurement is why the
 band membership chatters, not what certifies enclosure.
 
+## D10-DWELL: why the contact quorum chatters, and a fix that did not pay
+
+D10-ENC left the dwell as the binding constraint on six seeds of eight, with the
+quorum forming 67–115 frames before it finally held. `scripts/diagnose_dwell.py`
+records band membership per robot per frame across both `explore_gain` arms.
+
+Membership is one predicate — `||p_i - b_i|| <= cage_offset + contact_band_tolerance`
+= 0.185 m against the robot's *own* nearest map point. It is one-sided, so a robot
+only ever leaves by its distance growing, and that can happen for two quite
+different reasons which separate exactly:
+
+```
+d_t - d_{t-1}  =  ( |p_t - b_{t-1}| - d_{t-1} )  +  ( d_t - |p_t - b_{t-1}| )
+                          robot term                        map term
+```
+
+The first holds the map fixed and moves the robot, the second holds the robot
+fixed and lets the map update, and they sum to the total with no residual.
+
+### The measurement
+
+| | `explore_gain = 6` | `explore_gain = 0` |
+| --- | --- | --- |
+| **exits whose standoff setpoint was above the band** | **50.6 of 52.4 (97%)** | **162 of 168 (96%)** |
+| mean setpoint at exit | 0.229 m | 0.231 m (band 0.185) |
+| exit cause | **robot 84%**, map 16% | **robot 79%**, map 21% |
+| control mode at exit | **cage 99%** | cage 95% |
+| mean residence in the band | 19.5 frames | 6.7 frames |
+| robot's step at exit, and its outward component | 7.1 / **5.6 mm** | 7.2 / **5.3 mm** |
+
+Four fifths of the robot's motion at the instant it leaves is directly away from
+the boundary. It is being driven out, not drifting, and the map term is a
+sixth — so this is a control problem and not the estimation discontinuity that
+T4 dealt with.
+
+**The predicate gates the loop that drives it.** `_transport_command` returns
+early unless `contact_ready[i]`, and its standoff floor is `ring`, graded from
+`cage_offset = 0.105` to `lead_offset = 0.26` by how much the robot's own face
+opposes the goal. The ramp crosses the band threshold at `n . d_goal = 0.129`, so
+every robot more aligned than that is regulated to a standoff **outside the band
+it has to be inside**:
+
+```
+enter band -> standoff loop switches on -> its floor is above the band
+           -> kp_press (measured - ring) drives the robot outward
+           -> leaves the band -> loop switches off -> coverage law returns it
+```
+
+Mean residence 6.7 frames against a 20-frame dwell is that loop, measured.
+
+**Two things this refuted.** The exploration term did not cause the chatter — it
+*reduced* it, chatter 142 ± 104 falling to 51 ± 37 frames and residence rising
+from 6.7 to 19.5. And the obvious repair, excluding leading-arc robots from the
+quorum, was screened offline and is worse: mean streak 296 → 554, because the
+eligible pool is 2–6 robots of 16 and needing four of five simultaneously is
+harder than four of sixteen. Those transient members were supplying the quorum as
+well as breaking it.
+
+### The minimal fix, and its measured cost
+
+`_enclosure_geometry` documents `ENCLOSE` as "one uniform contact ring" and does
+not implement it: before `TRANSPORT` it returns the base geometry, which carries
+`lead_offset`. Lifting the leading arc clear is what stops it resisting the press,
+and during `ENCLOSE` there is no press to resist. So the change is one line —
+`enclose_uniform_ring` makes the documented behaviour real — and it removes the
+cause by construction, since a uniform ring puts every setpoint at 0.105, below
+the band.
+
+It works on exactly the quantity it targets and is rejected on everything else.
+
+| 8 seeds, one parameter apart | committed | uniform ENCLOSE ring |
+| --- | --- | --- |
+| `T_contact_ready` | 344 ± 135 | **268 ± 77** |
+| `T_transport` | 510 ± 215 | 334 ± 157 |
+| peak strict coverage | **0.783 ± 0.214** | 0.592 ± 0.164 |
+| final strict coverage | **0.767 ± 0.213** | 0.481 ± 0.227 |
+| min inter-agent distance | **0.280** | **0.247 ± 0.036** |
+| `d_min` breaches | **0 / 8** | **4 / 8** (0.205, 0.214, 0.204, 0.230 m) |
+| watchdog timeouts | **0 / 8** | **4 / 8** |
+| solver infeasible / fallbacks | **0** | **2481** |
+| scaled-barrier events | **975** | 9099 |
+
+Six of seven pre-stated criteria fail. **Reverted**, and the switch is kept off by
+default as the ablation.
+
+The failure is the one the geometry's own docstring predicted. A leading robot
+held at the contact offset through `ENCLOSE` is *in contact with the leading face*
+when `TRANSPORT` starts, and it then has to retreat to `lead_offset` plus the
+look-ahead through a cargo that has begun advancing, with a neighbour at `d_min`
+behind it — "the one state in which the safety QP has no feasible input". 2481
+infeasible solves is that state, counted.
+
+So the two constants encode a real conflict rather than an oversight:
+`contact_band_tolerance` says how close counts as being on the ring, and
+`lead_offset` says how far the leading arc must stand clear so it does not resist
+the push. Both are load-bearing, and satisfying one during `ENCLOSE` breaks the
+other at the transition. What the measurement suggests — and this is a hypothesis,
+not a result — is that any fix has to give the leading arc time to retreat *before*
+the press begins, which is a second mechanism rather than a smaller version of this
+one. That is where the next attempt belongs, and it has not been made.
+
+**Status: root cause identified and quantified; minimal fix implemented, measured
+and rejected.** The diagnosis scripts are kept because the decomposition is what
+made the cause legible, and the switch is kept because the ablation is the
+evidence.
+
 ## Regression against the A branch: S1's certificate rate
 
 `scripts/verify_refactor.py` reports:
@@ -1016,12 +1122,13 @@ branch has not done.
   solver cost. It is still four to five times the 75 ± 8 of a ring start, one seed
   of eight got worse, and peak coverage is still under 0.60 on three seeds. See
   D10-DIAG and D10 above.
-* **The contact quorum chatters, and that is now the binding constraint.**
-  D10-ENC settled the enclosure gate: it binds on two of eight seeds, an oracle
-  gate could recover 39 frames of 344, and the quorum forming and breaking before
-  it finally holds its dwell costs 58. Why band membership is unstable — robots
-  swinging in and out as the coverage law and the standoff loop disagree — is the
-  next thing to measure.
+* **The contact quorum chatters because two configured constants conflict, and no
+  minimal fix for it has passed.** D10-DWELL found the cause — 96–97% of band
+  exits are robots whose own standoff floor sits above the band, driven out by the
+  loop that band membership switches on — and the one-line repair buys 76 frames
+  of contact-ready while breaking `d_min` on four seeds and producing 2481
+  infeasible solves. Reverted. Any fix has to let the leading arc retreat *before*
+  the press starts, which is a second mechanism.
 * **The direction-bitmap enclosure certificate is in the tree, tested, and
   unused.** `dbact.enclosure_gate` is the quantity that actually means "the team
   has enclosed the object", and on the current runs every threshold of it that

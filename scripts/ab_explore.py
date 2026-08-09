@@ -43,9 +43,10 @@ from dbact_sim.scenarios import load_yaml  # noqa: E402
 D_MIN_TOLERANCE = 1e-6
 
 
-def run_arm(config: dict, seed: int, gain: float, max_frames: int, settle_frames: int) -> dict:
+def run_arm(config: dict, seed: int, gain, max_frames: int, settle_frames: int,
+            param: str = "explore_gain") -> dict:
     cfg = json.loads(json.dumps(config))  # deep copy; the config is plain data
-    cfg["controller"]["explore_gain"] = float(gain)
+    cfg["controller"][param] = gain
     env = SimulationEnvironment(cfg, seed=seed)
     env.controller.trace_enabled = True
     trace = SeedTrace(env)
@@ -66,7 +67,8 @@ def run_arm(config: dict, seed: int, gain: float, max_frames: int, settle_frames
     backside = trace.backside_first
     return {
         "seed": seed,
-        "explore_gain": gain,
+        "param": param,
+        "value": gain,
         "T_detect": detect,
         "T_backside_discovery": (backside - detect) if (backside is not None and detect is not None) else None,
         "T_contact_ready": phases.get("contact_ready_frame"),
@@ -127,13 +129,9 @@ def table(arms: dict[float, list[dict]]) -> str:
     return "\n".join(lines)
 
 
-def verdict(baseline: list[dict], candidate: list[dict]) -> dict:
-    """The keep/revert decision, stated before the numbers were in."""
-    def mean(rows, key):
-        s = stats([r[key] for r in rows])
-        return s["mean"]
-
-    checks = {
+def _safety_checks(baseline: list[dict], candidate: list[dict]) -> dict:
+    """The gates every candidate has to clear, whatever it was trying to improve."""
+    return {
         "safety not reduced": (
             sum(r["d_min_breach"] for r in candidate) <= sum(r["d_min_breach"] for r in baseline)
             and max(r["agents_inside"] for r in candidate) <= max(r["agents_inside"] for r in baseline)
@@ -146,11 +144,47 @@ def verdict(baseline: list[dict], candidate: list[dict]) -> dict:
             sum(r["fallbacks"] for r in candidate) <= sum(r["fallbacks"] for r in baseline)
             and sum(r["infeasible"] for r in candidate) <= sum(r["infeasible"] for r in baseline)
         ),
-        "far-side discovery faster": _better(baseline, candidate, "T_backside_discovery", lower=True),
-        "contact-ready earlier": _better(baseline, candidate, "T_contact_ready", lower=True),
-        "coverage improved": _better(baseline, candidate, "peak_strict_coverage", lower=False),
     }
+
+
+def verdict(baseline: list[dict], candidate: list[dict], criteria: str = "explore") -> dict:
+    """The keep/revert decision, stated before the numbers were in.
+
+    The safety gates are common. What differs is what the change was *for*, and a
+    candidate is not allowed to be scored against a target it was not aimed at:
+    the exploration term is judged on far-side discovery and coverage, the uniform
+    enclosure ring on contact-ready and on not losing the transport it feeds.
+    """
+    def mean(rows, key):
+        return stats([r[key] for r in rows])["mean"]
+
+    checks = _safety_checks(baseline, candidate)
+    if criteria == "explore":
+        checks["far-side discovery faster"] = _better(baseline, candidate, "T_backside_discovery", lower=True)
+        checks["contact-ready earlier"] = _better(baseline, candidate, "T_contact_ready", lower=True)
+        checks["coverage improved"] = _better(baseline, candidate, "peak_strict_coverage", lower=False)
+    elif criteria == "enclose":
+        checks["contact-ready earlier"] = _better(baseline, candidate, "T_contact_ready", lower=True)
+        # The lead offset exists so the leading arc does not resist the press.
+        # Removing it during ENCLOSE must not cost the transport that follows:
+        # every seed that reached HOLD before must still reach it, and the
+        # enclosure it certifies must not be worse.
+        checks["transport completion not degraded"] = (
+            sum(1 for r in candidate if r["T_hold"] is not None)
+            >= sum(1 for r in baseline if r["T_hold"] is not None)
+        )
+        checks["coverage not degraded"] = (
+            (mean(candidate, "peak_strict_coverage") or 0.0)
+            >= (mean(baseline, "peak_strict_coverage") or 0.0) - 0.02
+        )
+        checks["scaled barrier not worse"] = (
+            sum(r["barrier_scalings"] for r in candidate)
+            <= sum(r["barrier_scalings"] for r in baseline)
+        )
+    else:
+        raise ValueError(f"unknown criteria set {criteria!r}")
     return {
+        "criteria": criteria,
         "checks": checks,
         "keep": all(checks.values()),
         "baseline_contact_ready": mean(baseline, "T_contact_ready"),
@@ -182,8 +216,12 @@ def main() -> None:
                                      formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--config", default="configs/sim/d/l_shape_search.yaml")
     parser.add_argument("--seeds", default="0..7")
+    parser.add_argument("--param", default="explore_gain",
+                        help="Controller parameter to sweep. The first value is the baseline.")
     parser.add_argument("--gains", default="0,6",
-                        help="Comma-separated explore_gain values. 0 is the committed baseline.")
+                        help="Comma-separated values for --param. The first is the committed baseline.")
+    parser.add_argument("--criteria", default="explore", choices=("explore", "enclose"),
+                        help="Which pre-stated keep criteria to apply.")
     parser.add_argument("--max-frames", type=int, default=3000)
     parser.add_argument("--settle-frames", type=int, default=40)
     parser.add_argument("--out", default="runs/d10_ab")
@@ -198,9 +236,9 @@ def main() -> None:
     arms: dict[float, list[dict]] = {g: [] for g in gains}
     for gain in gains:
         for seed in seeds:
-            row = run_arm(config, seed, gain, args.max_frames, args.settle_frames)
+            row = run_arm(config, seed, gain, args.max_frames, args.settle_frames, args.param)
             arms[gain].append(row)
-            print(f"gain {gain:5g}  seed {seed:2d}  detect@{row['T_detect']}  "
+            print(f"{args.param}={gain:g}  seed {seed:2d}  detect@{row['T_detect']}  "
                   f"far-side+{row['T_backside_discovery']}  CR@{row['T_contact_ready']}  "
                   f"cov {row['peak_strict_coverage']:.3f}  union {row['peak_union_map_coverage']:.3f}  "
                   f"d_min {row['min_inter_agent']:.4f}  end@{row['frames_run']}"
@@ -209,11 +247,10 @@ def main() -> None:
     report = table(arms)
     print("\n" + report)
 
-    payload = {"config": args.config, "seeds": seeds, "gains": gains,
-               "arms": {str(g): arms[g] for g in gains}}
-    if 0.0 in arms and len(gains) == 2:
-        other = [g for g in gains if g != 0.0][0]
-        payload["verdict"] = verdict(arms[0.0], arms[other])
+    payload = {"config": args.config, "seeds": seeds, "param": args.param, "gains": gains,
+               "criteria": args.criteria, "arms": {str(g): arms[g] for g in gains}}
+    if len(gains) == 2:
+        payload["verdict"] = verdict(arms[gains[0]], arms[gains[1]], args.criteria)
         print("\nverdict:")
         for name, ok in payload["verdict"]["checks"].items():
             print(f"  {'PASS' if ok else 'FAIL'}  {name}")
