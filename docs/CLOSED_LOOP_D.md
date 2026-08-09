@@ -846,6 +846,133 @@ gain 20 is bought with exactly the property this branch does not trade, and the
 selection rule is therefore "the largest gain at which the solver never fails",
 not "the gain with the best contact-ready".
 
+## D10-ENC: the enclosure gate, and why it is not touched
+
+D10 left the `DISCOVER -> ENCLOSE` guard alone on the grounds that it was
+downstream of the blindness. That is a claim, so it is now measured.
+`scripts/diagnose_enclosure_gate.py` records the guard and four families of
+candidate certificate on every frame of the eight `explore_gain = 6` runs, and
+`scripts/analyse_enclosure_gate.py` scores them. Nothing is modified.
+
+### The counterfactual is exact, not a screen
+
+**Nothing in the control path reads `ENCLOSE`.** The controller branches on
+`CONTACT_READY`, `TRANSPORT` and `HOLD` and on nothing else; the `ENCLOSE` label
+exists only as the precondition the monotone machine needs before it will arm the
+contact dwell. So moving the guard cannot change a single command issued before
+contact-ready, and therefore cannot change `T_streak20` — the frame at which the
+contact quorum has been held for its 20-step dwell. That gives an identity:
+
+```
+T_contact_ready  =  max( T_gate, T_streak20 )  -  1
+```
+
+and it is **verified with zero residual on all eight seeds**. It converts "when
+would this candidate have fired" into "what would contact-ready have been" with
+no hand-waving, and the script refuses to report anything if the identity ever
+stops holding.
+
+### Which constraint actually binds
+
+| seed | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| gate opens | 217 | **222** | **414** | 150 | 449 | 214 | 156 | 369 |
+| quorum held for the dwell | 236 | 128 | 199 | 211 | 587 | 344 | 276 | 468 |
+| binds | dwell | **gate** | **gate** | dwell | dwell | dwell | dwell | dwell |
+| what the gate costs | 0 | 94 | 215 | 0 | 0 | 0 | 0 | 0 |
+
+**The gate binds on two of eight seeds. The contact-quorum dwell binds on six.**
+Before D10 the gate was the binding constraint almost everywhere — correlation
+0.943 with contact-ready, the same frame to within one on three of eight seeds.
+Fixing the blindness moved the bottleneck, which is what "downstream" meant.
+
+And the ceiling on the whole exercise:
+
+| | frames |
+| --- | --- |
+| contact-ready now | 343.8 |
+| dwell floor — a gate that fires at frame 0 | 305.1 |
+| **headroom available to any gate change whatever** | **38.6 (11.2%)** |
+| quorum chatter beyond the necessary dwell | **58.2** |
+
+An *oracle* gate saves 11%. The quorum forming and breaking before it finally
+holds costs more than that. Nothing about the gate is worth 58 frames of the
+team's time.
+
+### The candidates, and one family that had to be thrown away
+
+The first certificates tried were bearing histograms — the committed guard's own
+measure, asked of the team's map instead of one robot's. They are not a weaker
+version of the right idea, they are ill-posed. `angular_coverage` bins bearings
+about the centroid *of the map points themselves*, and when the map is a sliver
+the centroid sits on the sliver. Measured on seed 1, a union bearing histogram
+about the relayed token reaches 0.80 at **frame 22, with true strict coverage
+0.000 and 1.5 m of the perimeter unheld.** Moving the origin does not fix it,
+because every available origin is derived from the same evidence. The defect is
+the family, and it is now a test:
+`test_bearing_bins_depend_on_the_chosen_origin`.
+
+What replaces it needs no origin. A robot in the contact band knows the outward
+normal of the face it is touching; if the team's normals leave no angular gap
+wider than `gap_max`, then for every direction there is boundary known — and, for
+the held version, a robot standing on it — with a component opposing that
+direction. That is what enclosure is for, it is what the transport needs, and it
+is invariant to where the object is, how big it is, and where the team happens to
+have arrived from. The team-wide union is a **max-consensus on a 36-bin direction
+bitmap**, one hop per step: 36 numbers per object, smaller than the observations
+already on the link, and decentralised in exactly the sense the object token is.
+Observation latches, because "has anybody ever seen a face pointing this way" is
+monotone like the phase machine it feeds; occupancy expires on the token's own
+TTL, because a robot that leaves the band must stop counting.
+
+| candidate | fires on | mean contact-ready | vs now | strict coverage when it fires |
+| --- | --- | --- | --- | --- |
+| **G0 current** | 8/8 | **343.8** | — | 0.409 |
+| G1 known normals <= 120° | 8/8 | 362.1 | **+18.4** | 0.459 |
+| G1 known normals <= 150° | 8/8 | 343.8 | +0.0 | 0.417 |
+| G1 known normals <= 170° | 8/8 | 324.9 | −18.9 | 0.383 |
+| G1 known <= 60° / <= 90° | 6/8, 7/8 | — | **deadlock** | — |
+| G2 held normals <= 90°…170° | 5/8–7/8 | — | **deadlock** | — |
+| G3 hybrid, all 12 settings | 5/8–7/8 | — | **deadlock** | — |
+| oracle, fires at frame 0 | 8/8 | 305.1 | −38.6 | — |
+
+**Every certificate with real enclosure content fails to fire on at least one
+seed**, which under a monotone machine is not a late transition but a run that
+never transitions. The two seeds that kill them — 1 and 2 — are the two with the
+worst enclosure (peak strict coverage 0.525 and 0.569), and they are also the two
+where the current gate binds. The gate is late there *because the team has not
+enclosed the object*, which is the gate working rather than obstructing.
+
+The only candidate that fires everywhere and earlier is a 170° gap — barely more
+than a half-plane. It buys 18.9 frames of 344 by certifying strict coverage 0.383
+with 1.8 robots in the band, against 0.409 and 2.9 for the guard it replaces. It
+is a weaker condition that happens to fire sooner, it has no physical reading, and
+half the seeds would enter `ENCLOSE` having seen one side of the object. Taking it
+would be lowering a threshold to reduce a time, which is the one thing this
+exercise was set up not to do.
+
+### Decision: the gate is kept unchanged
+
+No A/B was run, and the reason is that the identity above makes one unnecessary:
+`T_contact_ready` under every candidate is already known exactly, and no candidate
+is both universally firing and earlier. An eight-seed A/B would be a noisier way
+of re-deriving a number that is not in doubt.
+
+**So the answer to "is the guard still using single-robot local knowledge as a
+proxy for a team property" is: yes, and after D10 it no longer costs anything
+worth having.** It is the wrong quantity for the right reason — it is cheap,
+it fires on every seed, and the thing it is too conservative about is now slack on
+six seeds of eight. The direction-bitmap consensus in `dbact.enclosure_gate` is
+the certificate that *means* something, and it is kept in the tree, tested and
+unused, because the honest measurement is that adopting it today would deadlock
+two runs in eight.
+
+**What this points at instead.** The dwell binds on six seeds, and the quorum
+first forms 67–115 frames before it finally holds on five of them — robots swing
+in and out of the contact band, re-arming the timer. That is 58 frames a seed
+against the 39 an oracle gate could ever recover. The next measurement is why the
+band membership chatters, not what certifies enclosure.
+
 ## Regression against the A branch: S1's certificate rate
 
 `scripts/verify_refactor.py` reports:
@@ -889,12 +1016,18 @@ branch has not done.
   solver cost. It is still four to five times the 75 ± 8 of a ring start, one seed
   of eight got worse, and peak coverage is still under 0.60 on three seeds. See
   D10-DIAG and D10 above.
-* **The `DISCOVER -> ENCLOSE` gate has not been re-examined since D10.** It was
-  the proximate cause of 44% of the pre-D10 post-detection time (correlation 0.943
-  with contact-ready) and was deliberately left alone because it is downstream of
-  the blindness that D10 fixes. Whether one robot's own-map angular coverage is
-  the right quantity to gate a team-level transition — and whether 0.70 is the
-  right number for it now — is measurable and unmeasured.
+* **The contact quorum chatters, and that is now the binding constraint.**
+  D10-ENC settled the enclosure gate: it binds on two of eight seeds, an oracle
+  gate could recover 39 frames of 344, and the quorum forming and breaking before
+  it finally holds its dwell costs 58. Why band membership is unstable — robots
+  swinging in and out as the coverage law and the standoff loop disagree — is the
+  next thing to measure.
+* **The direction-bitmap enclosure certificate is in the tree, tested, and
+  unused.** `dbact.enclosure_gate` is the quantity that actually means "the team
+  has enclosed the object", and on the current runs every threshold of it that
+  carries real content fails to fire on at least one seed. It is kept because it
+  is the right certificate for a team that encloses reliably, and it is not
+  adopted because this team does not yet.
 * **Cross-track is the dominant remaining G500 failure.** The press is always
   along a robot's own observed normal — a press along the commanded direction is
   inward only at the centre of the trailing face and tangential everywhere else —
