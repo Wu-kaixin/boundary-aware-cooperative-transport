@@ -27,7 +27,12 @@ class AgentState:
 
 @dataclass
 class BoundaryObservation:
-    """A local boundary point observed by one robot."""
+    """Local boundary measurement z_ik = (b_hat, n_hat, c, t).
+
+    The controller never observes complete object geometry. It only receives
+    locally visible boundary measurements of this form. Optional ``arc_length``
+    approximates the boundary measure element Δs_k for density integration.
+    """
 
     object_id: str
     agent_id: str
@@ -35,6 +40,8 @@ class BoundaryObservation:
     normal: np.ndarray
     timestamp: float
     confidence: float = 1.0
+    arc_length: float = 1.0
+    gap_score: float = 0.0
 
     def __post_init__(self) -> None:
         self.point = asvec2(self.point)
@@ -42,6 +49,9 @@ class BoundaryObservation:
         norm = float(np.linalg.norm(self.normal))
         if norm > 1e-9:
             self.normal = self.normal / norm
+        self.confidence = float(np.clip(self.confidence, 0.0, 1.0))
+        self.arc_length = float(max(0.0, self.arc_length))
+        self.gap_score = float(max(0.0, self.gap_score))
 
 
 @dataclass

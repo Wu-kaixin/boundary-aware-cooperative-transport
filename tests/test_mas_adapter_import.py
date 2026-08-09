@@ -18,7 +18,7 @@ def test_mas_adapter_import_and_init_without_mas_public():
                 "kp_explore": 0.20,
                 "kp_cage": 1.20,
                 "kp_transport": 0.0,
-                "grid_resolution": 24,
+                "grid_spacing": 0.08,
                 "map_ttl": 8.0,
                 "cbf_gamma": 6.0,
                 "virtual_object": {

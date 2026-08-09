@@ -1,0 +1,18 @@
+name: dbact
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - numpy>=1.26
+  - matplotlib>=3.9
+  - pyyaml>=6.0
+  - scipy>=1.13
+  - shapely>=2.0
+  - pandas>=2.2
+  - pyarrow>=16
+  - cvxpy>=1.4
+  - osqp>=0.6
+  - pytest>=8.0
+  - pip
+  - pip:
+      - pymunk>=6.8

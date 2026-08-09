@@ -25,11 +25,10 @@ controller:
   kp_explore: 0.18
   kp_cage: 0.85
   kp_transport: 0.0
-  grid_resolution: 34
+  grid_spacing: 0.08
   map_ttl: 4.0
   cbf_gamma: 6.0
   cbf_use_qp: true
-  cbf_slack_weight: 1000.0
   target_center: [3.0, 4.2]
   target_radius: 0.85
   target_sensor_range: 3.8

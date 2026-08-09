@@ -5,7 +5,7 @@
 #   pip install -r requirements.txt
 #   pip install -e .          # editable package (recommended)
 #
-# Python: >=3.9 (3.10+ recommended)
+# Paper environment: Python 3.10 (see environment.yml)
 
 # --- Core runtime (required by all layers) ---
 numpy>=1.26
@@ -15,8 +15,9 @@ PyYAML>=6.0
 # --- Simulation & geometry extensions ---
 scipy>=1.13
 shapely>=2.0
+pymunk>=6.6
 
-# --- Formal CBF-QP solver (Stage 2 roadmap; current default uses lightweight projection) ---
+# --- Hard distributed CBF-QP solver (OSQP backend) ---
 cvxpy>=1.4
 osqp>=0.6
 

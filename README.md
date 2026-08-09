@@ -7,8 +7,8 @@ Reproducible decentralized multi-robot caging and transport experiments with met
 [English](README.md) | [繁體中文](README.zh-TW.md) | [日本語](README.ja.md)
 
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
-![Python](https://img.shields.io/badge/Python-3.9%2B-blue.svg)
-![Tests](https://img.shields.io/badge/Tests-16%20passed-brightgreen.svg)
+![Python](https://img.shields.io/badge/Python-3.10-blue.svg)
+![Tests](https://img.shields.io/badge/Tests-33%20passed-brightgreen.svg)
 ![Version](https://img.shields.io/badge/Version-0.1.0-informational.svg)
 ![Visualization](https://img.shields.io/badge/Visualization-Matplotlib-orange.svg)
 ![Platform](https://img.shields.io/badge/Platform-MAS%20%7C%20RoboMaster%20S1-lightgrey.svg)
@@ -61,7 +61,7 @@ Generated PNG, GIF, CSV, and MP4 artifacts are still produced under `runs/` or `
 | --- | --- |
 | Project name | DBACT: Decentralized Boundary-Aware Cooperative Transport |
 | Purpose | Test local boundary-aware caging and transport around unknown-shaped objects. |
-| Core stack | Python 3.9+, NumPy, PyYAML, Matplotlib, pytest |
+| Core stack | Python 3.10, NumPy, CVXPY/OSQP, PyMunk, PyYAML, Matplotlib, pytest |
 | Main scenarios | `paper_like_irregular_moving_cargo.yaml`, `l_shape.yaml`, `nonconvex.yaml`, `multi_object.yaml` |
 | Output types | CSV trajectories, coverage metrics, JSON summaries, PNG figures, GIF animations |
 | Integration path | DBACT simulation -> MAS dry-run -> OptiTrack read-only -> RoboMaster S1 smoke test |
@@ -74,13 +74,24 @@ Generated PNG, GIF, CSV, and MP4 artifacts are still produced under `runs/` or `
 - **Decentralized boundary-aware control**: robots use local boundary observations and neighbor states rather than global object geometry.
 - **Unknown-object caging**: the controller avoids direct use of `cargo.center`, `cargo.radius`, `cargo.vertices`, and closest-boundary queries.
 - **Local CVT allocation**: each robot computes a local weighted centroid using itself and nearby neighbors.
-- **CBF-style safety filtering**: inter-agent distance constraints and velocity limits keep the caging process conservative.
+- **Hard distributed CBF filtering**: slack-free responsibility-split constraints protect inter-agent separation and estimated object-boundary clearance.
+- **Contact-only transport**: paper scenarios move convex and concave rigid cargoes through PyMunk contact impulses, never scripted translation.
+- **Reproducible experiments**: stable seeded sensing, config-driven multi-seed batches, CSV/JSON/optional Parquet results, and one-command comparison plots.
 - **Visualization-first workflow**: simulations export trajectories, coverage curves, final snapshots, paper-style frames, and optional GIF animations.
 - **Hardware-oriented staging**: MAS adapter, OptiTrack read-only logging, and RoboMaster S1 smoke tests prepare a safe path toward real experiments.
 
 ---
 
 ## Results & Visualizations
+
+### Paper-driven 2026 refactor
+
+The current `boundary-aware` branch follows a risk-first research route: scoped literature audit, L-shape PyMunk spike, paper/venue decision, then sensing-map-density-CVT-CBF-physics refactoring. The implementation route and evidence are documented in:
+
+- [`docs/LITERATURE_AUDIT_2026-08-08.md`](docs/LITERATURE_AUDIT_2026-08-08.md)
+- [`docs/REFACTOR_ROUTE_2026-08-08.md`](docs/REFACTOR_ROUTE_2026-08-08.md)
+
+The 300-step end-to-end L-shape validation achieved 0.623 m contact-driven cargo displacement, maintained a 0.3056 m minimum inter-agent distance for `d_min=0.28 m`, and recorded zero hard-QP infeasible calls. These are engineering validation results, not yet a statistically sufficient paper table.
 
 ### Stage 1 Unknown Polygon Caging
 
@@ -135,11 +146,8 @@ cd boundary-aware-cooperative-transport
 Conda:
 
 ```bash
-conda create -n dbact python=3.10
-conda activate dbact
-python -m pip install --upgrade pip
-pip install -r requirements.txt
-pip install -e .[dev]
+conda env update -n dbact -f environment.yml
+conda run -n dbact python -m pytest -q
 ```
 
 Windows PowerShell virtual environment:

@@ -117,7 +117,7 @@ class VirtualBoxDBACTPolicy:
                 max_speed=args.max_speed,
                 kp_explore=args.kp_explore,
                 kp_cage=args.kp_cage,
-                grid_resolution=args.grid_resolution,
+                grid_spacing=args.grid_spacing,
                 cbf_use_qp=False,
             ),
             (args.world_x_min, args.world_x_max, args.world_y_min, args.world_y_max),
@@ -291,6 +291,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--kp-cage", type=float, default=0.25, help="DBACT cage gain.")
     parser.add_argument("--kp-explore", type=float, default=0.05, help="DBACT explore gain.")
     parser.add_argument("--grid-resolution", type=int, default=28, help="CVT grid resolution.")
+    parser.add_argument("--grid-spacing", type=float, default=0.08, help="DBACT local-CVT grid spacing in meters.")
     return parser.parse_args()
 
 
