@@ -161,12 +161,15 @@ class DBACTParams:
     # ``standoff_range``; further out the coverage law has the robot on its own.
     kp_press: float = 3.0
     standoff_range: float = 0.55
+    # Slack the transport press leaves between its deepest command and the object
+    # barrier's own boundary. See ``_transport_command``.
+    press_margin: float = 0.015
     # Standoff used once the team is holding: strictly above robot_radius, so the
     # enclosure is kept without any robot remaining in contact. A cage at the
     # contact offset never stops pushing -- every trailing robot still applies
     # k_p (r_robot - d_c) = 12.5 N -- so "arrived" and "still creeping" would be
     # the same state.
-    hold_offset: float = 0.20
+    hold_offset: float = 0.17
     # The leading arc stands off by the distance the object covers while a robot
     # gets out of the way. Without it the enclosure is run over from behind
     # exactly when the transport is working.
@@ -177,6 +180,7 @@ class DBACTParams:
     cross_track_gain: float = 3.0
     cross_track_max_deg: float = 30.0
     cross_track_deadband: float = 0.03
+    push_share_floor: float = 0.15
 
     # --- phase supervisor (D2) ---
     phase_informed_fraction: float = 0.55
@@ -740,13 +744,27 @@ class DBACTController:
         command = self._steered_direction(agent.agent_id, object_id, goal)
         ring = float(shape.offsets_for(normal[None, :], command)[0])
 
+        progress = self._agent_progress(agent.agent_id, object_id)
+        distance = task.distance if task is not None else float("inf")
         quorum = 1 + sum(1 for j in neighbor_indices if contact_ready[j])
-        # The outward normal of the trailing face points against the goal.
-        alignment = float(np.dot(normal, command))
+        # Membership is decided against the *task* direction and the weight against
+        # the *steered* one. Deciding both against the steered direction couples
+        # them: rotating the command to correct a lateral error also rotates the
+        # membership test, robots at the edge of a three-robot arc drop out of the
+        # push set entirely, and the correction costs more force than it buys aim.
+        # Split like this, steering redistributes effort inside a stable arc.
+        alignment = float(np.dot(normal, goal))
         pushing = (
             quorum >= self.params.min_push_agents
             and self.phase_monitor.reached(Phase.CONTACT_READY)
             and alignment <= -self.params.push_side_threshold
+            # A robot whose own estimate says the cargo has arrived stops being a
+            # pusher and becomes part of the ring, which is what backs it out to
+            # the hold standoff. Leaving it in the push set only zeroed its
+            # *effort*: it stayed where it was, still in contact at k_p (r_robot -
+            # d_c) = 12.5 N, and the cargo went on creeping -- measured, one seed
+            # latched HOLD at frame 134 and still ended at J/L = 2.15.
+            and progress < distance
         )
 
         if pushing and self.params.transport_law == "constant":
@@ -754,8 +772,6 @@ class DBACTController:
             return bias + self.params.kp_transport * (-alignment) * (-normal), True, 0.0, normal
 
         if pushing:
-            progress = self._agent_progress(agent.agent_id, object_id)
-            distance = task.distance if task is not None else float("inf")
             effort = loop.update(
                 direction=command,
                 object_velocity=velocity,
@@ -775,13 +791,29 @@ class DBACTController:
             # is always along the robot's own normal -- a press along the commanded
             # direction is inward only at the centre of the trailing face and
             # tangential everywhere else -- so what the steered direction changes is
-            # *how much* each robot presses, not where. The share is linear in the
-            # alignment; squaring it to concentrate the effort was measured and made
-            # things worse (2/12 G500 to 0/12), because the arc on a faceted object
-            # is already only three or four robots wide and narrowing it further
-            # costs more in force than it gains in aim.
-            share = min(1.0, -alignment)
-            press = effort.effort * share * (-normal)
+            # *how much* each robot presses, not where. Weighted against the steered
+            # direction inside an arc whose membership is fixed by the task
+            # direction, so a correction redistributes effort instead of shrinking
+            # the arc. The floor keeps a robot that the steering has turned away
+            # from still holding its patch of boundary: dropping it to zero was
+            # measured and cost more force than the aim was worth.
+            share = float(np.clip(-float(np.dot(normal, command)), self.params.push_share_floor, 1.0))
+            speed = effort.effort * share
+
+            # The barrier is a limit, not a setpoint. Left alone, the press drives
+            # every pushing robot onto h = 0 exactly, because that is where the
+            # object row stops it -- and then the barrier state is being held on
+            # the edge of an *estimate* that moves in steps. Instrumenting the
+            # scaled-barrier events showed every single one is an object row
+            # demanding retreat with the inter-robot rows already at h ~ 0, and
+            # the demands are the size gamma_obj times one map update, not the
+            # size of anything the robot did. Stopping ``press_margin`` short of
+            # r_safe keeps that slack: the force is k_p (r_robot - r_safe -
+            # margin) instead of k_p delta_max, which is 17.5 N against 25 N here
+            # and still several times the per-robot share of the breakaway.
+            floor = self.params.r_safe + self.params.press_margin
+            approach = max(0.0, (measured - floor)) / max(dt, 1e-9)
+            press = min(speed, approach) * (-normal)
             return bias + press, True, effort.effort, normal
 
         # One-sided for everyone who is not pressing, and only ever outwards.

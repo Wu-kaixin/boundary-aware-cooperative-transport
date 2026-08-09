@@ -199,7 +199,7 @@ class SafetyFilter:
     ) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
         pts = np.asarray(boundary_points, dtype=float).reshape(-1, 2)
         if len(pts) == 0:
-            return np.empty((0, 2)), np.empty(0), np.empty(0)
+            return np.empty((0, 2)), np.empty(0), np.empty(0), np.empty(0)
         normals = np.asarray(boundary_normals, dtype=float).reshape(-1, 2)
         p = np.asarray(position, dtype=float).reshape(2)
         v_obj = np.asarray(object_velocity, dtype=float).reshape(2)
@@ -225,7 +225,7 @@ class SafetyFilter:
             & (normal_offset >= -self.params.object_row_inner_limit)
         )
         if not np.any(near):
-            return np.empty((0, 2)), np.empty(0), np.empty(0)
+            return np.empty((0, 2)), np.empty(0), np.empty(0), np.empty(0)
         normals, normal_offset = normals[near], normal_offset[near]
         distance = np.linalg.norm(rel[near], axis=1)
 
@@ -241,16 +241,24 @@ class SafetyFilter:
         same_face = normals @ anchor >= self.params.object_row_face_cosine
         normals, normal_offset = normals[same_face], normal_offset[same_face]
         if len(normals) == 0:
-            return np.empty((0, 2)), np.empty(0), np.empty(0)
+            return np.empty((0, 2)), np.empty(0), np.empty(0), np.empty(0)
 
         h = normal_offset - self.params.r_safe
         if len(h) > self.params.max_object_rows:
             keep = np.argsort(h)[: self.params.max_object_rows]
             normals, h = normals[keep], h[keep]
 
-        rhs = normals @ v_obj - self.params.gamma_obj * h + self.params.rho
-        rhs = self._cap_to_reachable(normals, rhs)
-        return normals, rhs, h
+        # Both right-hand sides are built from the uncapped expression and capped
+        # afterwards. Deriving the margin-free one by subtracting ``rho`` from the
+        # *capped* row is wrong whenever the cap binds: the cap is a limit on what
+        # the actuator can do, not a term of the barrier, so the subtraction lands
+        # on a number that no longer contains ``rho`` and tier 2 relaxes nothing.
+        # That is why steps whose barrier was perfectly satisfiable at ``u = 0``
+        # were still reaching the scaled tier.
+        demand = normals @ v_obj - self.params.gamma_obj * h
+        rhs = self._cap_to_reachable(normals, demand + self.params.rho)
+        rhs_no_margin = self._cap_to_reachable(normals, demand)
+        return normals, rhs, rhs_no_margin, h
 
     def _cap_to_reachable(self, normals: np.ndarray, rhs: np.ndarray) -> np.ndarray:
         """Cap the object rows at what a speed-limited robot can actually deliver.
@@ -301,9 +309,9 @@ class SafetyFilter:
 
         A_agent, b_agent = self._agent_rows(position, list(neighbor_positions))
         if not self.params.enable_object_rows or boundary_points is None or len(boundary_points) == 0:
-            A_obj, b_obj, h_obj = np.empty((0, 2)), np.empty(0), np.empty(0)
+            A_obj, b_obj, b_obj_free, h_obj = np.empty((0, 2)), np.empty(0), np.empty(0), np.empty(0)
         else:
-            A_obj, b_obj, h_obj = self._object_rows(
+            A_obj, b_obj, b_obj_free, h_obj = self._object_rows(
                 position,
                 boundary_points,
                 boundary_normals if boundary_normals is not None else np.zeros_like(boundary_points),
@@ -315,7 +323,7 @@ class SafetyFilter:
         b = np.concatenate([b_agent, b_obj]) if len(b_agent) or len(b_obj) else np.empty(0)
         # Same rows with the ISSf robustness margin removed. Used only when the
         # margin itself is what makes the problem infeasible.
-        b_no_margin = np.concatenate([b_agent, b_obj - self.params.rho]) if len(b) else b
+        b_no_margin = np.concatenate([b_agent, b_obj_free]) if len(b) else b
 
         # The certificate is about the barrier, so it is evaluated against the
         # margin-free right-hand side. Evaluating it with rho included would report

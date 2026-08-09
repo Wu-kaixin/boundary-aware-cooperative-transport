@@ -176,55 +176,93 @@ beside it, so the estimation gap is visible rather than hidden.
 `configs/sim/d/l_shape_closed_loop.yaml`, `scripts/evaluate_closed_loop.py --seeds 0..11`.
 Every seed is in these numbers, including the failures.
 
-**G500: 2 / 12** (Wilson 95%: 0.05–0.45).
+**G500: 2 / 12** (Wilson 95%: 0.05–0.45). **Seven of the twelve failures are the
+scaled-barrier gate and nothing else.**
 
 | quantity | mean ± sd | min–max | gate |
 | --- | --- | --- | --- |
-| directional progress `J` | 0.496 ± 0.238 m | 0.004 – 0.781 | `>= L` |
-| sampled target `L` | 0.461 ± 0.068 m | 0.365 – 0.565 | — |
-| efficiency `J/‖dx‖` | 0.935 ± 0.127 | 0.552 – 1.000 | `>= 0.80` |
-| cross-track | 0.104 ± 0.103 m | 0.002 – 0.330 | `<= 0.15` |
-| direction error | 13.8 ± 16.1° | 0.14 – 56.5 | `<= 20°` |
-| cargo yaw | +0.88 ± 1.77° | −0.06 – +5.98 | `<= 15°` |
-| strict coverage (peak) | 0.989 ± 0.020 | 0.944 – 1.000 | `>= 0.70` |
-| min inter-robot distance | 0.3406 ± 0.0008 m | 0.3400 – 0.3426 | `>= 0.34` |
-| min signed clearance | 0.1214 ± 0.0027 m | 0.1186 – 0.1266 | `>= 0` |
-| max penetration | 0.0386 ± 0.0027 m | 0.0334 – 0.0414 | `<= 0.078` |
-| contact-ready frame | 72 ± 11 | 57 – 91 | `<= 300` |
-| transport frame | 146 ± 124 | 67 – 499 | `<= 350` |
-| HOLD frame | 220 ± 88 (10/12) | 131 – 417 | — |
-| simulation rate | 9.4 ± 1.6 frame/s | 5.8 – 11.5 | — |
+| directional progress `J` | 0.533 ± 0.178 m | 0.008 – 0.699 | `>= L` |
+| efficiency `J/‖dx‖` | 0.975 ± 0.044 | 0.844 – 1.000 | `>= 0.80` |
+| cross-track | 0.082 ± 0.066 m | 0.005 – 0.227 | `<= 0.15` (2 over) |
+| direction error | 8.7 ± 9.5° | 0.4 – 32.4 | `<= 20°` (1 over) |
+| cargo yaw | +0.10 ± 0.18° | −0.06 – +0.57 | `<= 15°` |
+| strict coverage (peak) | 0.994 ± 0.013 | 0.956 – 1.000 | `>= 0.70` |
+| min inter-robot distance | 0.283 ± 0.007 m | 0.280 – 0.304 | `>= 0.28` |
+| min signed clearance | 0.091 ± 0.003 m | 0.086 – 0.096 | `>= 0` |
+| max penetration | 0.039 ± 0.003 m | 0.034 – 0.044 | `<= 0.078` |
+| transport frame | 120 ± 66 | 58 – 278 | `<= 350` |
+| HOLD frame | 208 ± 84 (11/12) | 137 – 397 | — |
+| on-board progress / truth | 0.856 ± 0.055 | 0.761 – 0.951 | — |
+| simulation rate | 24.0 ± 0.5 frame/s | 23.5 – 25.4 | — |
 
 Solver, 8,000 QP solves per run: **0 fallbacks and 0 infeasible on every seed**.
-The scaled-barrier tier was used on 10 of 12 seeds (0–131 steps, i.e. up to 1.6%
-of solves), with smallest scale factors from 1.000 down to 0.004.
+Scaled-barrier events per seed: `0, 79, 1, 207, 0, 21, 3, 25, 3, 93, 0, 1` — four
+seeds are clean, five are in single figures, and three carry almost all of it.
 
-Which gate failed, counted across the twelve seeds:
-
-| count | gate |
+| count | gate that failed |
 | --- | --- |
-| 10 | scaled barrier (`barrier_scalings != 0`) |
-| 4 | target not reached |
-| 3 | cross-track |
-| 2 | direction error |
-| 2 | overshoot |
-| 2 | not holding |
-| 1 | still drifting, transport deadline, efficiency (one each) |
+| 9 | scaled barrier |
+| 2 | cross-track |
+| 2 | target not reached |
+| 1 | direction error |
+| 1 | not holding |
 
 The A branch, same object, same budget: `J = 0.0561 m`, flat from frame 97, one
-solver fallback. Ten of twelve seeds here move the cargo 0.42–0.78 m and stop.
+solver fallback, 4.9 frame/s.
 
-### The scaled-barrier count is the honest headline
+### Cross-track: fixed, by decoupling membership from weight
 
-The two hard provenance gates the brief asks for — solver fallback and infeasible
-solve — are zero everywhere, and `min_inter_agent_distance` never drops below
-`d_min` on any of the 96,000 solves. What is not zero is the scaled-barrier count,
-which is the tier that keeps the inter-robot rows hard and gives up part of the
-object barrier's *decrease rate* when the full set is empty. It is counted, it is
-reported with its smallest factor, and G500 scores it at zero tolerance, so those
-ten seeds are FAIL and not "PASS with a footnote". Renaming the counter would have
-turned 2/12 into 10/12 without changing a single trajectory; that is the reason
-the gate exists.
+The press is always along a robot's own observed normal, so the only steering
+authority the arc has is *how much* each robot presses. Deciding both the arc's
+membership and its weights against the steered direction coupled them: correcting
+a lateral error rotated the membership test too, robots at the edge of a
+three-robot arc dropped out entirely, and the correction cost more force than it
+bought aim. Membership is now fixed by the task direction and only the weights
+follow the steered one, with a floor so a robot the steering has turned away from
+still holds its patch. Cross-track went from 0.104 ± 0.103 m (max 0.330) to
+0.082 ± 0.066 m (max 0.227), and efficiency from 0.935 to 0.975.
+
+### The scaled-barrier count is structural, not a parameter
+
+Instrumenting every event on the worst seed gave an unambiguous answer: **168 of
+168 were object rows demanding retreat, and zero involved a positive inter-robot
+demand** — the agent rows were satisfiable at `u = 0`, just barely (`h_ij` between
+0.0007 and 0.006), so the robot had to retreat from the object in a direction its
+neighbours forbade.
+
+Six different attacks were measured, and the count moved without ever reaching
+zero:
+
+| change | scaled-barrier seeds | what else it did |
+| --- | --- | --- |
+| tier-2 right-hand side computed before the reachability cap (a real bug) | 11/12 | fixed a case where tier 2 relaxed nothing |
+| `rho` 0.05 → 0.02 | 11/12 | — |
+| 16 robots → 12 | 4/12 | four seeds never activated transport |
+| `r_robot` 0.16 → 0.13 at 16 robots | 9/12 | transport strong again |
+| `max_speed` 0.35 → 0.45 | 12/12 | *worse*: faster robots spend more time in the band |
+| map-jump clamp 0.60 → 0.25 m/s | 11/12 | — |
+| press stops `press_margin` short of `r_safe` | 9/12 | best overall state |
+
+The pattern across all of them is one trade: anything that makes the transport
+stronger moves the cargo faster, and a faster boundary produces larger `n·v_obj`
+terms in rows whose robots are already at their own barrier. That is a property of
+the formulation rather than of a gain. The object barrier is a continuous-time CBF
+evaluated on an *estimate* that updates in discrete jumps, and the transport loop's
+job is to hold robots against that barrier, because the barrier boundary is where
+the contact force comes from. Two constraint families both active at their
+boundaries, driven by a state that steps, will occasionally have an empty feasible
+set.
+
+What would actually close it, none of which is done here:
+
+* a **discrete-time CBF**, whose demands are consistent with one step by
+  construction instead of being a continuous-time rate sampled at 20 Hz;
+* a **prioritised QP with a proven bound** on the object-row violation, so the
+  relaxation carries a guarantee rather than a count;
+* or **re-deriving `rho`** to absorb the map-update jump explicitly, which would
+  make the scaled tier unnecessary rather than merely rarer.
+
+The gate stays at zero and those seven seeds stay FAIL.
 
 ## Regression against the A branch: S1's certificate rate
 

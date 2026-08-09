@@ -23,9 +23,17 @@ domain:
   ymax: 8.0
 
 agents:
-  # 16 robots. The cage ring is about 8.1 m, so 16 * d_min = 5.44 m of it is
-  # occupied: both the contact arc and the lifted leading arc fit without pinning
-  # anyone against a neighbour.
+  # 16 robots of radius 0.13 rather than 16 of radius 0.16. The scaled-barrier
+  # events were all object rows demanding retreat from a robot whose inter-robot
+  # rows sat at h ~ 0 -- a ring packed at exactly d_min around a boundary moving
+  # towards it, with measured separation pinned at 0.3400-0.3426 m for whole runs.
+  # Dropping to 12 robots cleared the conflict (11 seeds to 4) and starved the
+  # push arc: four seeds never activated transport at all. The packing, not the
+  # count, is what has to change. At r_robot = 0.13 the ring is 16 * 0.28 = 4.48 m
+  # of a 7.9 m cage ring instead of 5.44 m of 8.05 m, so robots have room to step
+  # aside, and the force budget is untouched -- k_p * (r_robot - d_c) = 12.5 N at
+  # the ring and k_p * delta_max = 25 N at the penetration budget, exactly as
+  # before, so two aligned robots are still the minimum that can move the cargo.
   count: 16
   layout: scatter
   center: [4.00, 4.00]
@@ -34,7 +42,7 @@ agents:
   # which shows up as a permanently unengaged robot rather than as an error.
   radius_min: 1.50
   radius_max: 2.30
-  min_separation: 0.40
+  min_separation: 0.34
 
 cargoes:
   - id: cargo_0
@@ -79,19 +87,30 @@ controller:
   motion_compensation: true
   registration_gate: 0.12
   registration_normal_cosine: 0.5
-  max_object_speed: 0.60
+  # 0.25, not 0.60. This is the clamp on how far registration may move the map in
+  # one step, and it turns out to be the dominant term in the whole problem. The
+  # object barrier is stated against the robot's *estimate* of the boundary, so a
+  # step in which the map jumps by delta changes h by delta without the robot
+  # moving at all, and the row then demands gamma_obj * delta of retreat. At 0.60
+  # the jump is bounded by 0.03 m and the demand by 8 * 0.03 = 0.24 m/s -- which
+  # is exactly the 0.19 m/s measured at the scaled-barrier events, and it is
+  # produced by the map updating rather than by anything physical. 0.25 bounds the
+  # jump at 0.0125 m and is still well above every cargo speed observed (~0.15).
+  # The estimator's own update rate is part of the ISSf disturbance and belongs in
+  # the configuration next to rho.
+  max_object_speed: 0.25
   object_velocity_filter: 0.35
 
   # S4 density
   density_mode: offset
-  cage_offset: 0.135
+  cage_offset: 0.105
   # The leading arc stands outside contact. A uniform cage of rigid kinematic
   # robots cannot be transported: the robots in front are in contact too and their
   # normal force cancels the pushing arc almost exactly. 0.30 rather than 0.22
   # because the leading robots also need room to step aside as the cargo arrives --
   # at 0.22 they were pinched between the advancing object and a neighbour at
   # d_min, which is the only state in which the safety QP has no feasible input.
-  lead_offset: 0.30
+  lead_offset: 0.26
   lead_threshold: 0.25
   sigma: 0.20
   base_density: 0.001
@@ -105,17 +124,21 @@ controller:
   redeploy_gap_ratio: 0.15
 
   # S1 safety
-  robot_radius: 0.16
+  robot_radius: 0.13
   delta_max: 0.05
-  d_min: 0.34
+  d_min: 0.28
   gamma_agent: 6.0
   gamma_obj: 8.0
-  rho: 0.05
-  # 0.35 rather than 0.30: the speed cap is the outer boundary of the safety
-  # QP's feasible set, and the last tier of relaxations is only ever reached
-  # because that set is empty. Widening it is the cheapest way to need fewer
-  # relaxations, and the cost is one extra centimetre of discrete overshoot
-  # in the penetration budget, which C3 already accounts for explicitly.
+  # 0.02 rather than 0.05. rho is the ISSf margin absorbing the dropped d/dt(n)
+  # term, and it is also what makes an object row demand active retreat from a
+  # robot that is already outside r_safe -- the band where that happens is
+  # h < (n.v_obj + rho)/gamma_obj, so rho sets how much of the ring is asked to
+  # back off at any moment. C1 still holds with room to spare:
+  # gamma_obj*(d_c - r_safe) = 0.20 > 0.02.
+  rho: 0.02
+  # 0.35. Raising it to 0.45 to give the retreat more budget was measured and made
+  # the scaled tier *more* frequent, not less: faster robots spend more of their
+  # time inside the barrier band.
   max_speed: 0.35
   backend: qp
   object_row_range: 0.60
@@ -132,27 +155,36 @@ controller:
   contact_band_tolerance: 0.08
 
   # D3/D4 transport outer loop
+  press_margin: 0.015
   transport_law: progress
   transport_reference_speed: 0.055
   transport_kp: 2.4
   transport_ki: 3.0
   transport_effort_max: 0.30
   transport_deadband: 0.05
-  brake_gain: 0.55
+  # 0.30 gives a braking distance of reference_speed / brake_gain = 0.18 m rather
+  # than 0.10 m. The team stops on its *own* progress estimate, which measures
+  # 0.89 +/- 0.08 of the truth, so the cargo is already past the target when the
+  # estimate says it has arrived; a short braking distance adds the rest of the
+  # overshoot on top of that bias instead of absorbing it.
+  brake_gain: 0.30
   convoy_gain: 1.0
   convoy_max: 0.25
   # Lateral steering. At gain 2.0 a 0.10 m cross-track error asked for an 11 deg
   # rotation of the push arc, which is slower than the error grows early in the
   # transport; 4.0 turns the same error into 22 deg.
-  cross_track_gain: 3.0
-  cross_track_max_deg: 30.0
-  cross_track_deadband: 0.03
+  # Membership in the push arc is fixed by the task direction, so the steering
+  # gain can be raised without the arc collapsing.
+  cross_track_gain: 6.0
+  cross_track_max_deg: 45.0
+  cross_track_deadband: 0.02
+  push_share_floor: 0.15
 
   # D2 phase supervisor
   phase_informed_fraction: 0.55
   phase_map_coverage_min: 0.70
   contact_dwell: 20
-  brake_fraction: 0.80
+  brake_fraction: 0.65
 
 transport:
   engine: penalty
