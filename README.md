@@ -80,12 +80,8 @@ the machine-readable run record in
 
 ```mermaid
 flowchart LR
-    S["SEARCH<br/>paired-lane workspace sweep"] --> M["MAP<br/>local fusion and bounded gossip"]
-    M --> E["ENCLOSE<br/>operational certificate"]
-    E --> T["TRANSPORT<br/>progress and wrench feedback"]
-    T --> B["BRAKE<br/>terminal contraction"]
-    B --> H["HOLD<br/>position and speed streak"]
-    S -.-> F["Explicit failure or timeout"]
+    S["SEARCH"] --> M["MAP"] --> E["ENCLOSE"] --> T["TRANSPORT"] --> B["BRAKE"] --> H["HOLD"]
+    S -.-> F["FAIL / TIMEOUT"]
     M -.-> F
     E -.-> F
     T -.-> F
