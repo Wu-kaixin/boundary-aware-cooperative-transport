@@ -40,6 +40,7 @@ from .scenarios import (
     controller_params_from_config,
     domain_from_config,
     goal_directions_from_config,
+    goal_targets_from_config,
     scripted_params_from_config,
     validate_config,
 )
@@ -63,6 +64,7 @@ class SimulationLog:
     net_torque: dict[str, list[float]] = field(default_factory=dict)
     cargo_speed: dict[str, list[float]] = field(default_factory=dict)
     mode_counts: list[dict[str, int]] = field(default_factory=list)
+    agent_modes: dict[str, list[str]] = field(default_factory=dict)
 
 
 class SimulationEnvironment:
@@ -73,8 +75,9 @@ class SimulationEnvironment:
         self.dt = float(config.get("dt", 0.05))
         self.domain = domain_from_config(config)
         self.agents = build_agents(config, seed=self.seed)
-        self.cargoes = build_cargoes(config)
-        self.goal_directions = goal_directions_from_config(config, seed=self.seed)
+        self.cargoes = build_cargoes(config, seed=self.seed, agents=self.agents)
+        self.goal_directions = goal_directions_from_config(config, seed=self.seed, cargoes=self.cargoes)
+        self.goal_targets = goal_targets_from_config(config, self.cargoes, self.goal_directions)
 
         params = controller_params_from_config(config)
         assert_initial_state_valid(self.agents, self.cargoes, params.d_min, params.robot_radius)
@@ -84,7 +87,9 @@ class SimulationEnvironment:
         self.engine = build_engine(
             self.engine_name,
             self.contact_params,
-            scripted_params_from_config(config) if self.engine_name == "scripted" else None,
+            scripted_params_from_config(config, seed=self.seed, cargoes=self.cargoes)
+            if self.engine_name == "scripted"
+            else None,
         )
 
         self.evaluation_contact_radius = float(config.get("evaluation", {}).get("contact_radius", 0.42))
@@ -99,11 +104,25 @@ class SimulationEnvironment:
             # `_discrete_overshoot`.
             discrete_overshoot=0.0,
         )
+        evaluation = config.get("evaluation", {})
+        self.require_initially_unobserved = bool(evaluation.get("require_initially_unobserved", False))
+        self.frame_budget = evaluation.get("frame_budget")
+        self.phase_deadlines = {
+            "first_detection": evaluation.get("detection_deadline"),
+            "first_enclosure": evaluation.get("enclosure_deadline"),
+            "first_transport": evaluation.get("transport_deadline"),
+            "first_hold": evaluation.get("hold_deadline"),
+        }
+        self.initial_detection_counts = {cargo.object_id: 0 for cargo in self.cargoes}
+        for agent in self.agents:
+            for observation in self.controller.sensor.sense(agent, self.cargoes, 0.0):
+                self.initial_detection_counts[observation.object_id] += 1
 
         self.t = 0.0
         self.log = SimulationLog()
         for a in self.agents:
             self.log.agent_positions[a.agent_id] = []
+            self.log.agent_modes[a.agent_id] = []
         for c in self.cargoes:
             for store in (
                 self.log.cargo_centers,
@@ -146,6 +165,10 @@ class SimulationEnvironment:
         self.log.times.append(self.t)
         for a in self.agents:
             self.log.agent_positions[a.agent_id].append(a.position.copy())
+        mode_by_agent = {diag.agent_id: diag.mode for diag in self.controller.diagnostics}
+        for a in self.agents:
+            initial_mode = "explore" if self.controller.params.task_mode != "coverage" else "search"
+            self.log.agent_modes[a.agent_id].append(mode_by_agent.get(a.agent_id, initial_mode))
         self.log.min_distances.append(min_inter_agent_distance(self.agents))
         self.log.mode_counts.append(self.controller.mode_counts())
 
@@ -224,6 +247,7 @@ class SimulationEnvironment:
                 "max_contacts": int(np.max(contacts)) if contacts else 0,
                 "peak_net_force": float(np.max(np.linalg.norm(forces, axis=1))),
                 "recruited_agents": recruited_agents_count(cargo, self.agents, self.evaluation_contact_radius),
+                "initial_detection_count": self.initial_detection_counts.get(cid, 0),
             }
             first_detection = next(
                 (
@@ -245,13 +269,21 @@ class SimulationEnvironment:
                 ),
                 None,
             )
+            first_hold = next(
+                (k for k, modes in enumerate(self.log.mode_counts) if modes.get("hold", 0) > 0),
+                None,
+            )
             entry["phase_frames"] = {
                 "first_detection": first_detection,
                 "first_enclosure": first_enclosure,
                 "first_transport": first_transport,
+                "first_hold": first_hold,
             }
             if goal is not None and len(centers) >= 2:
                 entry["goal_direction"] = np.asarray(goal, dtype=float).tolist()
+                entry["goal_angle_deg"] = float(np.degrees(np.arctan2(goal[1], goal[0])))
+                if cid in self.goal_targets:
+                    entry["goal_target"] = self.goal_targets[cid].tolist()
                 entry.update(directional_progress(centers[0], centers[-1], goal))
                 verdict = self.success_contract.evaluate(
                     centers[0],
@@ -267,6 +299,11 @@ class SimulationEnvironment:
                     rotation_deg=rotation_deg,
                 )
                 phase_reasons: list[str] = []
+                if self.require_initially_unobserved and self.initial_detection_counts.get(cid, 0) > 0:
+                    phase_reasons.append(
+                        f"phase gate: {self.initial_detection_counts[cid]} boundary returns existed at frame 0; "
+                        "the episode did not start from an unknown object"
+                    )
                 if first_detection is None:
                     phase_reasons.append("phase gate: cargo was never detected")
                 if first_enclosure is None:
@@ -281,6 +318,16 @@ class SimulationEnvironment:
                     phase_reasons.append(
                         f"phase gate: transport started at frame {first_transport} before enclosure at frame {first_enclosure}"
                     )
+                for phase_name, frame in entry["phase_frames"].items():
+                    deadline = self.phase_deadlines.get(phase_name)
+                    if deadline is None:
+                        continue
+                    if frame is None:
+                        phase_reasons.append(f"phase deadline: {phase_name} was not reached by frame {int(deadline)}")
+                    elif frame > int(deadline):
+                        phase_reasons.append(
+                            f"phase deadline: {phase_name}={frame} exceeded frame {int(deadline)}"
+                        )
                 entry["success"] = verdict.success and not phase_reasons
                 entry["failure_reasons"] = verdict.reasons + phase_reasons
             else:
@@ -302,9 +349,18 @@ class SimulationEnvironment:
                 "d_min": params.d_min,
                 "delta_max": params.delta_max,
                 "discrete_overshoot": self.success_contract.discrete_overshoot,
+                "require_initially_unobserved": self.require_initially_unobserved,
+                "phase_deadlines": self.phase_deadlines,
+                "frame_budget": self.frame_budget,
             },
             "solver": solver_stats,
             "transport_progress_estimates": self.controller.transport_progress_summary(),
+            "goal_targets": {key: value.tolist() for key, value in self.goal_targets.items()},
+            "multi_rate": {
+                "perception_every": params.perception_every,
+                "planning_every": params.planning_every,
+                "safety_every": 1,
+            },
             "min_inter_agent_distance": min_distance,
             "mean_path_length": float(np.mean(list(lengths.values()))) if lengths else 0.0,
             "cargoes": cargo_summaries,

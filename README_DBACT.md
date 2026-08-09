@@ -10,10 +10,10 @@
 > 目前**未**达成——闭环产生方向正确、效率 0.82–0.91 的正进度，但在低于任务阈值处
 > 停在准静态 caging 平衡上。三条贡献均不依赖搬运，且都已被验证。
 
-> **后续闭环实现。** 分支 `A-boundary-aware-closed-loop-v2` 已加入
-> SEARCH → ENCLOSE → TRANSPORT → HOLD 的 500-frame 闭环、受约束随机任务方向、
-> 移动物体的局部边界地图补偿，以及更严格的 C3 验收门。当前 L 型物体实验为
-> 12/12 seeds 通过、72,000 次 QP 零 fallback；该结果仍只覆盖一个凹物体与
+> **后续闭环实现。** 分支 `A-boundary-aware-closed-loop-v3` 已加入初始零观测的
+> 收缩环搜索、随机受控位置、SEARCH → ENCLOSE → TRANSPORT → HOLD 的 500-step
+> 闭环，以及感知/规划分频和逐步安全 QP。当前 L 型物体实验为 12/12 seeds 通过、
+> 72,000 次 QP 零 fallback/零 infeasible，保守端到端吞吐均高于 20 frame/s；结果仍只覆盖一个凹物体与
 > `[-10°, 60°]` 的可行方向范围，不能直接表述为任意形状/任意方向的理论结论。
 > 复现方式、实测统计和论文缺口见
 > [`docs/CLOSED_LOOP_500.md`](docs/CLOSED_LOOP_500.md)。

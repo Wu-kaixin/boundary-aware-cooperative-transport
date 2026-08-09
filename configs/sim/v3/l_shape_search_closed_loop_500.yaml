@@ -1,0 +1,137 @@
+# V3: true zero-observation discovery -> enclosure -> bounded transport -> hold.
+# The controller knows the workspace and its search pattern, but not the sampled
+# cargo center or outline.  Cargo motion remains contact-only.
+paper: true
+dt: 0.05
+
+domain: {xmin: 0.0, xmax: 8.0, ymin: 0.0, ymax: 8.0}
+
+agents:
+  count: 12
+  # Adjacent chord = 1.553 m < R_comm, so the search ring begins connected.
+  layout: ring
+  center: [4.0, 4.0]
+  radius: 3.0
+  phase: 0.15
+
+cargoes:
+  - id: cargo_0
+    shape: l_shape
+    center: [4.0, 4.0]  # fallback only; random_center is authoritative
+    scale: 1.50
+    surface_density: 2.0
+    random_center:
+      enabled: true
+      xmin: 3.70
+      xmax: 4.30
+      ymin: 3.70
+      ymax: 4.30
+      # Every robot center must begin farther than the sensor horizon from the
+      # sampled polygon boundary.  This makes frame-zero discovery impossible.
+      initial_sensor_gap: 1.25
+      domain_margin: 0.35
+      max_attempts: 512
+
+task:
+  random_goal:
+    enabled: true
+    # This is the experimentally controlled direction interval.  Seeds sample
+    # continuously inside it; infeasible targets are rejected before the run.
+    angle_min_deg: -10.0
+    angle_max_deg: 60.0
+    target_distance: 0.30
+    wall_margin: 1.00
+    footprint_margin: 0.35
+    max_attempts: 128
+
+controller:
+  task_mode: transport
+
+  sensor_range: 1.20
+  ray_count: 72
+  range_noise_std: 0.010
+  pca_neighbors: 5
+  residual_tolerance: 0.030
+  min_confidence: 0.15
+  # Expensive perception/CVT loops run at 6.67 Hz; the hard safety QP remains at
+  # the 20 Hz physics rate.  The held scan is at most 100 ms old.
+  perception_every: 3
+  planning_every: 3
+  comm_range: 1.60
+
+  voxel_size: 0.07
+  age_decay: 0.45
+  max_voxels_per_object: 420
+
+  density_mode: offset
+  cage_offset: 0.135
+  lead_offset: 0.22
+  lead_threshold: 0.35
+  sigma: 0.20
+  base_density: 0.001
+  gap_gain: 0.6
+  gap_radius: 0.35
+
+  local_radius: 0.80
+  grid_resolution: 18
+  approach_mass_ratio: 3.0
+  redeploy_gap_ratio: 0.15
+
+  robot_radius: 0.16
+  delta_max: 0.05
+  d_min: 0.32
+  gamma_agent: 6.0
+  gamma_obj: 8.0
+  rho: 0.05
+  max_speed: 0.30
+  backend: qp
+  max_object_rows: 4
+  object_row_range: 0.60
+  object_row_window: 0.20
+  object_row_inner_limit: 0.0
+
+  kp_explore: 1.20
+  search_pattern: contracting_ring
+  search_center: [4.0, 4.0]
+  search_inner_radius: 1.60
+  search_inward_speed: 0.20
+  search_angular_speed: 0.035
+  kp_cage: 0.90
+  kp_transport: 0.60
+
+  push_side_threshold: 0.35
+  min_push_agents: 3
+  contact_band_tolerance: 0.08
+  # Registration is updated at 6.67 Hz; the lower gain rejects single-scan
+  # velocity spikes before they enter the moving-boundary ISSf row.
+  object_velocity_filter: 0.20
+  transport_speed: 0.05
+  # A 45-step local quorum dwell kept transport behind the strict enclosure gate
+  # across the 12-seed development matrix.
+  transport_dwell_steps: 45
+  transport_distance: 0.30
+
+transport:
+  engine: penalty
+  stiffness: 500.0
+  damping: 12.0
+  friction: 0.6
+  tangential_stiffness: 60.0
+  ground_friction: 0.77
+  gravity: 9.81
+  substeps: 4
+
+evaluation:
+  frame_budget: 500
+  contact_radius: 0.42
+  j_min: 0.15
+  j_max: 0.60
+  efficiency_min: 0.70
+  displacement_gate: 0.10
+  coverage_min: 0.70
+  max_rotation_deg: 5.0
+  require_initially_unobserved: true
+  detection_deadline: 150
+  enclosure_deadline: 300
+  transport_deadline: 350
+  hold_deadline: 500

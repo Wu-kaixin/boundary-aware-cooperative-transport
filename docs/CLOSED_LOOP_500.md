@@ -1,123 +1,132 @@
-# DBACT 500-Frame Closed-Loop Transport
+# DBACT v3: 500-Frame Search, Enclosure, and Bounded Transport
 
-This document records the new closed-loop path on branch
-`A-boundary-aware-closed-loop-v2`.  It is deliberately narrower than a claim of
-general arbitrary-shape transport: the validated task is one L-shaped cargo, 12
-robots, a bounded random goal direction, and 500 simulation frames.
+Branch `A-boundary-aware-closed-loop-v3` closes the main gap left by v2: the
+episode now begins with **zero cargo observations**. Twelve agents sweep a
+controlled work region, discover a seeded random-position L-shaped cargo from
+local rays, enclose its boundary, transport it along a reproducible random
+direction, and latch into HOLD within a fixed 500-step budget.
 
-## Reproduce the visual demonstration
+This is an engineering result for one concave shape and a controlled experiment
+region. It is not a claim of formal caging or arbitrary-shape global search.
+
+## One-command demonstration
 
 ```bash
-python -m pip install -r requirements.txt
-export PYTHONPATH=src
-python scripts/run_500_closed_loop.py --seed 0 --output runs/closed_loop_seed0
+conda env update -n dbact -f environment.yml
+conda run -n dbact python scripts/run_500_closed_loop.py \
+  --seed 0 --output runs/closed_loop_v3_seed0
 ```
 
-The command always runs exactly 500 frames and writes:
+The command runs exactly 500 control/physics steps and exits non-zero when any
+validity gate fails. It writes:
 
-- `summary.json` and `demo_manifest.json` with provenance and pass/fail gates;
-- `trajectories.csv`, the final snapshot, and trajectory plot;
-- paper frames at 0, 100, 200, 350, and 500;
-- `closed_loop_500.gif` unless `--no-animation` is supplied.
+- `summary.json`, `demo_manifest.json`, trajectories, and safety time series;
+- frame 0/100/200/350/500 paper figures and final trajectory/snapshot plots;
+- `closed_loop_500.gif` containing the initial state plus all 500 control steps.
 
-The command exits with status 2 when any acceptance gate fails.  The animation
-is therefore not treated as evidence independently of the recorded contracts.
+Use `--no-animation` for simulation-only timing. Rendering is offline
+post-processing and is not included in `simulation_frames_per_wall_second`.
 
-![500-frame closed-loop demonstration](assets/dbact-closed-loop-500.gif)
+![DBACT v3 500-frame demonstration](assets/dbact-closed-loop-v3-500.gif)
 
-![Seed 0 final state](assets/dbact-closed-loop-500-final.png)
+![DBACT v3 final state](assets/dbact-closed-loop-v3-500-final.png)
 
-## Closed-loop state sequence
+## Executable phase contract
 
-The controller now executes a measurable sequence rather than enabling pushing
-from the first contact:
-
-1. **SEARCH** — local ray observations discover the unknown boundary.
-2. **ENCLOSE** — local boundary memory and local CVT fill the visible gaps.
-3. **TRANSPORT** — a contact quorum must persist for 35 steps; only then does a
-   common task-direction feed-forward translate the enclosure.  The physics
-   engine, not the task configuration, is the only mechanism that moves cargo.
-4. **HOLD** — local point-to-plane map registration integrates signed transport
-   progress and latches the transport command off after 0.30 m.
-
-The random goal is task state.  It is seeded, restricted to `[-10°, 60°]`, and
-rejected when the requested target would violate a 1 m workspace margin.
-
-## What changed relative to `A-boundary-aware`
-
-| Layer | New behavior | Why it was needed |
-| --- | --- | --- |
-| Local boundary map | Point-to-plane translation registration and world-map compensation | The old world-frame memory stayed behind when cargo moved. |
-| Object velocity | Derived from registered map motion | Visible-arc centroid differencing created fictitious velocities and infeasible object rows. |
-| Task supervisor | Dwell-gated SEARCH/ENCLOSE/TRANSPORT/HOLD sequence | Contact alone was too weak a transport trigger. |
-| Enclosure motion | Common feed-forward plus push-side inward preload | Moving only the rear arc tore the cage and recreated the quasi-static stall. |
-| Local safety rows | Retain locally visible/supporting half-spaces | A relayed far face of a thin concavity must not constrain a robot on the opposite side. |
-| Stop condition | Local signed progress estimate and completion latch | Prevents unbounded motion without reading simulator cargo pose. |
-| C3 contract | Lower and upper progress bounds, coverage, rotation, phase order | A visually plausible GIF is insufficient for a transport claim. |
-| Scenario | Reproducible bounded random goal | Makes the direction random without silently creating wall collisions. |
-
-## Current validation result
-
-Twelve seeds were run for 500 frames each using
-`configs/sim/v2/l_shape_closed_loop_500.yaml`.  All 12 passed the configured
-contract.  Across 72,000 QP solves there were zero fallbacks and zero infeasible
-solves; three calls relaxed only the optional ISSf robustness margin while the
-base hard barrier remained active.
-
-| Metric | Mean ± population SD | Range | Acceptance |
+| Phase event | Deadline | Seed-0 frame | Twelve-seed range |
 | --- | ---: | ---: | ---: |
-| Directional progress `J` | 0.4157 ± 0.0462 m | 0.3591–0.5036 m | 0.15–0.60 m |
-| Progress efficiency | 0.9877 ± 0.0170 | 0.9474–0.9999 | ≥ 0.70 |
-| Final strict coverage | 0.8438 ± 0.1020 | 0.7438–0.9875 | ≥ 0.70 |
-| Cargo rotation | 0.0145 ± 0.1093° | −0.1263–0.2901° | absolute value ≤ 5° |
-| Minimum signed clearance | 0.1137 ± 0.0016 m | 0.1090–0.1156 m | ≥ 0 m |
-| Minimum robot separation | 0.3237 ± 0.0030 m | 0.3200–0.3296 m | ≥ 0.32 m |
-| First enclosure | frame 93.3 ± 1.9 | frame 87–94 | before transport |
-| First transport | frame 103.8 ± 0.4 | frame 103–104 | within 500 frames |
+| First detection | 150 | 52 | 43–76 |
+| Strict enclosure ≥ 0.70 | 300 | 168 | 153–174 |
+| Transport activation | 350 | 181 | 178–202 |
+| Bounded-progress HOLD | 500 | 259 | 253–343 |
 
-![Twelve-seed closed-loop validation](assets/dbact-closed-loop-500-sweep.png)
+The supervisor is event-driven; deadlines are validity gates, not scheduled
+phase switches. Transport requires a 45-step local contact quorum and cannot be
+declared successful before strict enclosure. HOLD is triggered by locally
+integrated point-to-plane map motion after 0.30 m, not by simulator cargo pose.
 
-For seed 0, the simulation portion completed in 28.65 s, or 17.45 simulated
-frames per wall-clock second on the validation host.  GIF export is additional
-post-processing time and is not included in that rate.
+The scenario-level contracts are:
 
-## What these results do and do not establish
+- seeded random cargo reference point in the configured central search region;
+- every initial robot-to-polygon clearance greater than the 1.20 m sensor range;
+- connected 3.0 m deployment ring and a contracting/rotating search sweep that
+  depends on workspace, time, and the robot's initial slot—not cargo position;
+- seeded task direction in the controlled interval `[-10°, 60°]`;
+- target/cargo footprint rejection against workspace margins;
+- contact-only penalty dynamics; the transport engine never reads the goal;
+- 500 steps, safe initial state, hard QP, zero fallback/infeasibility, and C3
+  progress/coverage/rotation/safety gates.
 
-The branch establishes an executable engineering loop for one concave cargo and
-a bounded family of random directions.  It does **not** yet establish general
-caging or transport for arbitrary irregular objects.
+## Efficiency changes
 
-The following work remains before a strong paper claim is defensible:
+The safety QP and contact physics remain at 20 Hz. Expensive ray/PCA sensing,
+voxel-map registration, density construction, and Local CVT planning run every
+third step (6.67 Hz), so their held result is at most 100 ms old. The object
+velocity estimate is correspondingly low-pass filtered before entering the
+moving-boundary ISSf row.
 
-1. Replace translation-only registration with robust `SE(2)` estimation and
-   derive a bound on translational and angular estimation error.
-2. State and prove a discrete-time moving-boundary CBF/ISSf theorem using that
-   bound; account explicitly for the three optional-margin relaxations.
-3. Define the contribution as boundary enclosure/contact formation unless an
-   immobilization or caging theorem is actually proved.
-4. Run at least 20–50 seeds for multiple convex and concave random polygons,
-   multiple scales, and directions spanning the full feasible 360° workspace.
-5. Add noise, occlusion, packet loss, communication delay, friction/mass, and
-   robot-count sweeps, plus ablations for map compensation, phase gating, and
-   common enclosure feed-forward.
-6. Compare against fixed-center CVT, no-motion-compensation, push-only, and an
-   oracle/full-shape baseline using identical contact physics and validity gates.
-7. Cross-validate the complete 500-frame controller with the independent PyMunk
-   engine, then proceed through MAS dry-run, OptiTrack replay, and guarded
-   low-speed hardware tests.
-8. Profile and move sensing/PCA, boundary-map updates, and local-CVT grid work to
-   multirate or vectorized execution.  The current 17.45 frame/s is fast for
-   iteration but below a strict 20 Hz real-time target.
+Two implementation changes remove avoidable overhead:
 
-## Recommended paper claim boundary
+1. fused map observations are rebuilt only on perception frames and reused
+   between updates;
+2. an entire scan is quantized to voxel indices in one NumPy operation instead
+   of calling `np.round` for every packet.
 
-A defensible present-tense statement is:
+The final seed-0 visual-demo run simulated at **27.76 frame/s** on the validation host. Across
+the twelve-seed batch, conservative end-to-end throughput (including environment
+construction and output serialization) averaged **23.14 frame/s**, with range
+**20.87–28.77 frame/s**. All twelve runs remained above 20 frame/s.
 
-> In a 2-D penalty-contact simulation, 12 decentralized agents using local
-> boundary observations complete discovery, boundary enclosure, and bounded
-> directional transport of one unknown L-shaped cargo within 500 frames for 12
-> seeded task directions in a constrained angular range.
+## Twelve-seed validation
 
-Do not replace “one unknown L-shaped cargo” with “arbitrary-shaped objects” until
-the broader experiment matrix and the missing theoretical conditions above are
-closed.
+```bash
+conda run -n dbact python scripts/run_batch.py \
+  --configs configs/sim/v3/l_shape_search_closed_loop_500.yaml \
+  --seeds 0..11 --steps 500 --out runs/v3_sweep_12
+
+conda run -n dbact python scripts/plot_closed_loop_sweep.py \
+  runs/v3_sweep_12/batch_report.json \
+  --output runs/v3_sweep_12/closed_loop_sweep.png
+```
+
+All **12/12** runs passed. Across **72,000 hard-QP solves**, there were zero
+fallbacks, zero infeasible solves, and zero optional-margin relaxations.
+
+| Metric | Mean | Range | Acceptance |
+| --- | ---: | ---: | ---: |
+| Directional progress `J` | 0.3880 m | 0.3082–0.4860 m | 0.15–0.60 m |
+| Progress efficiency | 0.9909 | 0.9665–0.9998 | ≥ 0.70 |
+| Final strict coverage | 0.9958 | 0.9563–1.0000 | ≥ 0.70 |
+| Cargo rotation | 0.0697° | −0.2257–0.6232° | absolute value ≤ 5° |
+| Minimum robot separation | 0.3883 m | 0.3207–0.4707 m | ≥ 0.32 m |
+| Goal angle | 31.86° | 2.57–58.34° | configured interval |
+
+![DBACT v3 twelve-seed validation](assets/dbact-closed-loop-v3-500-sweep.png)
+
+## Implementation map
+
+| File | Responsibility |
+| --- | --- |
+| `configs/sim/v3/l_shape_search_closed_loop_500.yaml` | Zero-observation search, deadlines, multi-rate control, and controlled random task |
+| `src/dbact_sim/scenarios.py` | Seeded cargo-position sampler, initial sensor-gap contract, and goal footprint rejection |
+| `src/dbact/controller.py` | Contracting-ring search and multi-rate perception/planning with per-step safety |
+| `src/dbact/boundary_map.py` | Vectorized scan-to-voxel quantization and moving-map registration |
+| `src/dbact_sim/environment.py` | Initial-observation audit, phase deadlines, target provenance, and per-agent modes |
+| `src/dbact_sim/visualization.py` | Phase/role colors, goal route, coverage, progress, and 500-step animation |
+| `scripts/validate_run.py` | Independent revalidation of frame, discovery, phase, solver, safety, and success contracts |
+
+## Claim boundary and remaining work
+
+The defensible present-tense statement is:
+
+> In a 2-D penalty-contact simulation, twelve decentralized agents starting
+> outside the sensing horizon discover, enclose, and boundedly transport one
+> seeded random-position L-shaped cargo within 500 steps for twelve seeded task
+> directions in a controlled angular range.
+
+The branch does not establish arbitrary-shape or full-workspace global search.
+Before making that stronger claim, validate random simple concave polygons,
+multiple workspace cells, full feasible 360° directions, perception/communication
+faults, multiple robot counts, and an independent PyMunk end-to-end matrix. The
+translation-only map registration also remains a known limitation for cargoes
+with significant rotation.

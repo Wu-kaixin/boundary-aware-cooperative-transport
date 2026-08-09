@@ -95,16 +95,26 @@ class LocalBoundaryMap:
             )
         observations = list(unique.values())
 
+        # Quantise a scan in one NumPy operation.  Calling ``np.round`` once per
+        # packet dominated long closed-loop runs even though every packet is
+        # headed for the same fixed voxel grid.
+        cells = np.rint(
+            np.vstack([obs.point for obs in observations]) / float(self.voxel_size)
+        ).astype(int)
+        voxel_keys = [
+            (obs.object_id, int(cell[0]), int(cell[1]))
+            for obs, cell in zip(observations, cells)
+        ]
+
         # Arc length is summed only within one scan of one robot; across robots
         # and across time it is a maximum. Summing everywhere would let a relayed
         # observation add mass that no extra boundary corresponds to.
         batch: dict[tuple[tuple[str, int, int], str], float] = {}
-        for obs in observations:
-            key = (self._key(obs.object_id, obs.point), obs.agent_id)
+        for obs, voxel_key in zip(observations, voxel_keys):
+            key = (voxel_key, obs.agent_id)
             batch[key] = batch.get(key, 0.0) + float(obs.arc_length)
 
-        for obs in observations:
-            key = self._key(obs.object_id, obs.point)
+        for obs, key in zip(observations, voxel_keys):
             scan_arc = min(batch[(key, obs.agent_id)], self.voxel_diagonal)
             weight = max(float(obs.confidence), 1e-6)
             record = self.records.get(key)

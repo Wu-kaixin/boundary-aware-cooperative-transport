@@ -20,7 +20,7 @@ from dbact_sim.scenarios import load_yaml
 from dbact_sim.visualization import animate_simulation, plot_snapshot, plot_trajectories, write_paper_figures
 
 
-DEFAULT_CONFIG = "configs/sim/v2/l_shape_closed_loop_500.yaml"
+DEFAULT_CONFIG = "configs/sim/v3/l_shape_search_closed_loop_500.yaml"
 
 
 def main() -> None:
@@ -29,12 +29,12 @@ def main() -> None:
     parser.add_argument("--seed", type=int, default=0)
     parser.add_argument("--output", default="")
     parser.add_argument("--no-animation", action="store_true")
-    parser.add_argument("--animation-stride", type=int, default=5)
-    parser.add_argument("--animation-fps", type=int, default=12)
+    parser.add_argument("--animation-stride", type=int, default=1)
+    parser.add_argument("--animation-fps", type=int, default=20)
     args = parser.parse_args()
 
     config_path = Path(args.config)
-    output = Path(args.output) if args.output else Path("runs") / f"closed_loop_500_seed{args.seed}"
+    output = Path(args.output) if args.output else Path("runs") / f"closed_loop_v3_500_seed{args.seed}"
     output.mkdir(parents=True, exist_ok=True)
 
     env = SimulationEnvironment(load_yaml(config_path), seed=args.seed)
@@ -56,18 +56,25 @@ def main() -> None:
         )
 
     entry = next(iter(summary["cargoes"].values()))
+    stride = max(1, int(args.animation_stride))
+    animation_states = 0 if args.no_animation else 500 // stride + 1 + int(500 % stride != 0)
     manifest = {
         "config": str(config_path),
         "seed": args.seed,
         "frames": 500,
+        "rendered_states": animation_states,
         "wall_seconds": wall_seconds,
         "simulation_frames_per_wall_second": 500.0 / max(wall_seconds, 1e-9),
         "success": bool(entry.get("success")),
         "phase_frames": entry.get("phase_frames", {}),
+        "initial_detection_count": entry.get("initial_detection_count"),
+        "goal_angle_deg": entry.get("goal_angle_deg"),
+        "goal_target": entry.get("goal_target"),
         "directional_progress_J": entry.get("J"),
         "progress_efficiency": entry.get("efficiency"),
         "final_strict_coverage": entry.get("final_strict_coverage"),
         "solver_fallbacks": summary["solver"]["fallbacks"],
+        "multi_rate": summary.get("multi_rate", {}),
         "failure_reasons": entry.get("failure_reasons", []),
     }
     (output / "demo_manifest.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")

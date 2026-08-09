@@ -11,6 +11,7 @@ from dbact_sim.scenarios import (
     build_agents,
     build_cargoes,
     goal_directions_from_config,
+    goal_targets_from_config,
     load_yaml,
     validate_config,
 )
@@ -190,6 +191,31 @@ def test_unknown_layout_is_rejected():
     cfg["agents"] = {"count": 4, "layout": "spiral", "center": [4.0, 4.0]}
     with pytest.raises(ContractViolation, match="unknown agents.layout"):
         build_agents(cfg, seed=0)
+
+
+def test_random_cargo_center_is_seeded_and_starts_outside_every_sensor_horizon():
+    cfg = load_yaml("configs/sim/v3/l_shape_search_closed_loop_500.yaml")
+    agents = build_agents(cfg, seed=4)
+    first = build_cargoes(cfg, seed=4, agents=agents)[0]
+    replay = build_cargoes(cfg, seed=4, agents=agents)[0]
+    different = build_cargoes(cfg, seed=5, agents=build_agents(cfg, seed=5))[0]
+
+    assert first.position == pytest.approx(replay.position)
+    assert not np.allclose(first.position, different.position)
+    clearances = np.array([first.signed_distance(a.position[None, :])[0][0] for a in agents])
+    assert float(np.min(clearances)) > cfg["cargoes"][0]["random_center"]["initial_sensor_gap"]
+
+
+def test_random_goal_target_uses_the_sampled_cargo_pose():
+    cfg = load_yaml("configs/sim/v3/l_shape_search_closed_loop_500.yaml")
+    agents = build_agents(cfg, seed=2)
+    cargoes = build_cargoes(cfg, seed=2, agents=agents)
+    goals = goal_directions_from_config(cfg, seed=2, cargoes=cargoes)
+    targets = goal_targets_from_config(cfg, cargoes, goals)
+    distance = cfg["task"]["random_goal"]["target_distance"]
+
+    assert targets["cargo_0"] == pytest.approx(cargoes[0].center + distance * goals["cargo_0"])
+    assert not np.allclose(cargoes[0].center, np.asarray(cfg["cargoes"][0]["center"], dtype=float))
 
 
 # --------------------------------------------------------------------------- #

@@ -13,6 +13,19 @@ from dbact.cargo import Cargo
 from .environment import SimulationEnvironment
 
 
+MODE_COLORS = {
+    "initial": "#6b7280",
+    "explore": "#2563eb",
+    "search": "#2563eb",
+    "approach": "#f59e0b",
+    "redeploy": "#f59e0b",
+    "cage": "#10b981",
+    "push": "#dc2626",
+    "convoy": "#8b5cf6",
+    "hold": "#374151",
+}
+
+
 def plot_snapshot(env: SimulationEnvironment, path: str | Path, title: str = "DBACT final snapshot") -> None:
     fig, ax = plt.subplots(figsize=(7, 7))
     _draw_world(ax, env)
@@ -164,7 +177,6 @@ def animate_simulation(
     xmin, xmax, ymin, ymax = env.domain
     agent_ids = list(env.log.agent_positions)
     cargo_ids = list(env.log.cargo_vertices)
-    colors = plt.get_cmap("tab10")
 
     def draw(frame_index: int) -> list:
         ax.clear()
@@ -182,7 +194,22 @@ def animate_simulation(
             ax.add_patch(patch)
             artists.append(patch)
             center = env.log.cargo_centers[cargo_id][frame_index]
+            start = env.log.cargo_centers[cargo_id][0]
             direction = env.goal_directions.get(cargo_id, np.zeros(2))
+            target = env.goal_targets.get(cargo_id)
+            if target is not None:
+                route = ax.plot(
+                    [start[0], target[0]],
+                    [start[1], target[1]],
+                    linestyle="--",
+                    color="tab:red",
+                    linewidth=1.4,
+                    alpha=0.75,
+                )[0]
+                goal_marker = ax.scatter(
+                    target[0], target[1], marker="X", s=85, color="tab:red", edgecolor="white", zorder=7
+                )
+                artists.extend([route, goal_marker])
             arrow = ax.arrow(
                 center[0],
                 center[1],
@@ -194,14 +221,26 @@ def animate_simulation(
             )
             artists.append(arrow)
             coverage = env.log.strict_coverage[cargo_id][frame_index]
-            text = ax.text(center[0], center[1], f"{cargo_id}\ncoverage={coverage:.2f}", ha="center", va="center", fontsize=8)
+            progress = float(np.dot(center - start, direction)) if np.linalg.norm(direction) > 0.0 else 0.0
+            text = ax.text(
+                center[0],
+                center[1],
+                f"{cargo_id}\ncoverage={coverage:.2f}\nJ={progress:.2f} m",
+                ha="center",
+                va="center",
+                fontsize=8,
+            )
             artists.append(text)
 
         for k, agent_id in enumerate(agent_ids):
             hist = np.vstack(env.log.agent_positions[agent_id])
             trail = hist[: frame_index + 1]
-            line = ax.plot(trail[:, 0], trail[:, 1], color=colors(k % 10), linewidth=1.0, alpha=0.7)[0]
-            point = ax.scatter(hist[frame_index, 0], hist[frame_index, 1], s=35, color=colors(k % 10))
+            mode = env.log.agent_modes[agent_id][frame_index]
+            color = MODE_COLORS.get(mode, "#6b7280")
+            line = ax.plot(trail[:, 0], trail[:, 1], color="0.65", linewidth=0.8, alpha=0.5)[0]
+            point = ax.scatter(
+                hist[frame_index, 0], hist[frame_index, 1], s=42, color=color, edgecolor="white", linewidth=0.4
+            )
             label = ax.text(hist[frame_index, 0], hist[frame_index, 1] + 0.08, agent_id.split("_")[-1], fontsize=6, ha="center")
             artists.extend([line, point, label])
 
@@ -216,7 +255,12 @@ def animate_simulation(
             phase = "ENCLOSE"
         else:
             phase = "SEARCH"
-        ax.set_title(f"{title} | {phase} | t={time_s:.1f}s | min distance={min_dist:.2f}m")
+        final_frame = len(env.log.times) - 1
+        ax.set_title(
+            f"DBACT v3 · {phase} · frame {frame_index:03d}/{final_frame}\n"
+            f"t={time_s:.1f}s · min robot distance={min_dist:.2f} m",
+            fontsize=10,
+        )
         ax.text(
             0.02,
             0.98,
@@ -225,6 +269,16 @@ def animate_simulation(
             ha="left",
             va="top",
             fontsize=8,
+            bbox={"facecolor": "white", "alpha": 0.75, "edgecolor": "0.7"},
+        )
+        ax.text(
+            0.02,
+            0.02,
+            "blue search  ·  amber approach  ·  green enclose  ·  red push  ·  purple convoy  ·  gray hold",
+            transform=ax.transAxes,
+            ha="left",
+            va="bottom",
+            fontsize=7,
             bbox={"facecolor": "white", "alpha": 0.75, "edgecolor": "0.7"},
         )
         return artists
@@ -368,6 +422,11 @@ def _draw_world(ax, env: SimulationEnvironment) -> None:
         goal = env.goal_directions.get(cargo.object_id)
         if goal is not None:
             ax.arrow(c[0], c[1], 0.45 * goal[0], 0.45 * goal[1], width=0.02, length_includes_head=True)
+        target = env.goal_targets.get(cargo.object_id)
+        if target is not None:
+            start = env.log.cargo_centers[cargo.object_id][0]
+            ax.plot([start[0], target[0]], [start[1], target[1]], "--", color="tab:red", linewidth=1.2)
+            ax.scatter(target[0], target[1], marker="X", s=75, color="tab:red", edgecolor="white", zorder=6)
     if env.agents:
         pts = np.vstack([a.position for a in env.agents])
         ax.scatter(pts[:, 0], pts[:, 1], s=25, marker="o")

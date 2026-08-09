@@ -65,6 +65,11 @@ def validate(summary: dict) -> list[str]:
     # continuous-time condition can be overshot by one step of relative motion.
     overshoot = contracts.get("discrete_overshoot") or 0.0
     c1 = contracts.get("C1")
+    frame_budget = contracts.get("frame_budget")
+    if frame_budget is not None and summary.get("steps") != int(frame_budget):
+        reasons.append(
+            f"frame budget violated: recorded steps={summary.get('steps')} != {int(frame_budget)}"
+        )
     if c1 is None and summary.get("task_mode") != "coverage":
         reasons.append("missing C1 contract record")
     elif isinstance(c1, dict):
@@ -89,6 +94,20 @@ def validate(summary: dict) -> list[str]:
 
     for cargo_id, entry in cargoes.items():
         prefix = f"cargo {cargo_id}"
+        if contracts.get("require_initially_unobserved"):
+            initial = entry.get("initial_detection_count")
+            if initial is None:
+                reasons.append(f"{prefix}: initial_detection_count is missing")
+            elif initial != 0:
+                reasons.append(f"{prefix}: {initial} boundary return(s) existed at frame 0")
+        for phase_name, deadline in (contracts.get("phase_deadlines") or {}).items():
+            if deadline is None:
+                continue
+            frame = (entry.get("phase_frames") or {}).get(phase_name)
+            if frame is None:
+                reasons.append(f"{prefix}: {phase_name} was not reached by frame {int(deadline)}")
+            elif frame > int(deadline):
+                reasons.append(f"{prefix}: {phase_name}={frame} exceeded frame {int(deadline)}")
         clearance = entry.get("min_signed_clearance")
         if clearance is None:
             reasons.append(f"{prefix}: min_signed_clearance not recorded")
