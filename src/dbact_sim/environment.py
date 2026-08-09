@@ -14,7 +14,7 @@ from __future__ import annotations
 import json
 import copy
 from collections.abc import Callable
-from dataclasses import dataclass, field, replace
+from dataclasses import asdict, dataclass, field, replace
 from pathlib import Path
 
 import numpy as np
@@ -68,6 +68,15 @@ class SimulationLog:
     detection_counts: dict[str, list[int]] = field(default_factory=dict)
     mode_counts: list[dict[str, int]] = field(default_factory=list)
     agent_modes: dict[str, list[str]] = field(default_factory=dict)
+
+
+@dataclass(frozen=True)
+class EpisodeTermination:
+    status: str
+    frame: int
+    time: float
+    success: bool
+    detail: str
 
 
 class SimulationEnvironment:
@@ -163,6 +172,7 @@ class SimulationEnvironment:
             ):
                 store[c.object_id] = []
         self._last_statuses = {}
+        self.last_termination: EpisodeTermination | None = None
 
     # ------------------------------------------------------------------ #
 
@@ -183,6 +193,63 @@ class SimulationEnvironment:
             if on_frame is not None:
                 on_frame(step_index, self)
         return self.log
+
+    def run_until(
+        self,
+        max_steps: int,
+        on_frame: Callable[[int, "SimulationEnvironment"], None] | None = None,
+    ) -> EpisodeTermination:
+        """Run until closed-loop HOLD, a hard failure, or an explicit timeout.
+
+        ``max_steps`` is a safety timeout, not a success deadline. Historical
+        fixed-horizon experiments continue to use :meth:`run` unchanged.
+        """
+        if max_steps < 1:
+            raise ValueError("max_steps must be positive")
+        if not self.log.times:
+            self._record()
+            if on_frame is not None:
+                on_frame(0, self)
+        for frame in range(1, int(max_steps) + 1):
+            self.step()
+            if on_frame is not None:
+                on_frame(frame, self)
+            stats = self.controller.safety.stats
+            if stats.fallbacks or stats.infeasible:
+                return self._terminate(
+                    "SOLVER_FAILURE",
+                    frame,
+                    False,
+                    f"fallbacks={stats.fallbacks}, infeasible={stats.infeasible}",
+                )
+            phases = self.controller._transport_phase
+            feedback_hold = (
+                self.controller.params.progress_feedback
+                and len(phases) == len(self.agents)
+                and all(value == "hold" for value in phases.values())
+            )
+            legacy_hold = (
+                not self.controller.params.progress_feedback
+                and self.controller.mode_counts().get("hold", 0) == len(self.agents)
+            )
+            if feedback_hold or legacy_hold:
+                return self._terminate(
+                    "SUCCESS_HOLD",
+                    frame,
+                    True,
+                    "all local progress supervisors completed BRAKE and entered HOLD",
+                )
+        return self._terminate(
+            "TIMEOUT",
+            int(max_steps),
+            False,
+            "episode did not reach a terminal success/failure condition before max_steps",
+        )
+
+    def _terminate(self, status: str, frame: int, success: bool, detail: str) -> EpisodeTermination:
+        result = EpisodeTermination(status, int(frame), float(self.t), bool(success), detail)
+        self.last_termination = result
+        return result
 
     def _record(self) -> None:
         self.log.times.append(self.t)
@@ -324,14 +391,25 @@ class SimulationEnvironment:
                 ),
                 None,
             )
+            first_contact = next(
+                (k for k, count in enumerate(self.log.contact_counts[cid]) if count >= params.min_push_agents),
+                None,
+            )
+            first_brake = next(
+                (k for k, modes in enumerate(self.log.mode_counts) if modes.get("brake", 0) > 0),
+                None,
+            )
             first_hold = next(
                 (k for k, modes in enumerate(self.log.mode_counts) if modes.get("hold", 0) > 0),
                 None,
             )
             entry["phase_frames"] = {
                 "first_detection": first_detection,
+                "first_map_complete": (self.boundary_map_witnesses.get(cid) or {}).get("frame"),
                 "first_enclosure": first_enclosure,
+                "first_contact": first_contact,
                 "first_transport": first_transport,
+                "first_brake": first_brake,
                 "first_hold": first_hold,
             }
             if goal is not None and len(centers) >= 2:
@@ -395,6 +473,17 @@ class SimulationEnvironment:
                     phase_reasons.append(
                         f"phase gate: HOLD started at frame {first_hold} before transport at frame {first_transport}"
                     )
+                if params.progress_feedback:
+                    if first_brake is None:
+                        phase_reasons.append("phase gate: feedback transport never entered BRAKE")
+                    elif first_transport is not None and first_brake < first_transport:
+                        phase_reasons.append(
+                            f"phase gate: BRAKE started at frame {first_brake} before transport at frame {first_transport}"
+                        )
+                    if first_hold is not None and first_brake is not None and first_hold < first_brake:
+                        phase_reasons.append(
+                            f"phase gate: HOLD started at frame {first_hold} before BRAKE at frame {first_brake}"
+                        )
                 for phase_name, frame in entry["phase_frames"].items():
                     deadline = self.phase_deadlines.get(phase_name)
                     if deadline is None:
@@ -437,6 +526,7 @@ class SimulationEnvironment:
             "density_mode": params.density_mode,
             "steps": len(self.log.times) - 1,
             "final_time": self.log.times[-1] if self.log.times else 0.0,
+            "termination": asdict(self.last_termination) if self.last_termination is not None else None,
             "contracts": {
                 "C1": params.contact_contract().as_dict() if params.task_mode != "coverage" else None,
                 "coverage": {"local_radius": params.local_radius, "comm_range": params.comm_range},
@@ -450,6 +540,7 @@ class SimulationEnvironment:
             },
             "solver": solver_stats,
             "transport_progress_estimates": self.controller.transport_progress_summary(),
+            "transport_feedback": self.controller.transport_feedback_summary(),
             "goal_targets": {key: value.tolist() for key, value in self.goal_targets.items()},
             "multi_rate": {
                 "perception_every": params.perception_every,
@@ -504,4 +595,4 @@ class SimulationEnvironment:
         path.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
-__all__ = ["SimulationEnvironment", "SimulationLog"]
+__all__ = ["SimulationEnvironment", "SimulationLog", "EpisodeTermination"]

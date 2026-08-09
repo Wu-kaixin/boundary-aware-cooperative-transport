@@ -122,6 +122,15 @@ def test_frame_callback_receives_step_then_environment():
     assert seen == [(0, 1), (1, 2), (2, 3)]
 
 
+def test_run_until_uses_timeout_as_failure_not_as_success_deadline():
+    env = SimulationEnvironment(load_yaml(PAPER), seed=0)
+    termination = env.run_until(max_steps=2)
+    assert termination.status == "TIMEOUT"
+    assert termination.success is False
+    assert termination.frame == 2
+    assert env.summary()["termination"]["status"] == "TIMEOUT"
+
+
 def test_v3_starts_unobserved_and_serialises_the_deadline_contract():
     env = SimulationEnvironment(load_yaml("configs/sim/v3/l_shape_search_closed_loop_500.yaml"), seed=0)
     assert env.initial_detection_counts == {"cargo_0": 0}

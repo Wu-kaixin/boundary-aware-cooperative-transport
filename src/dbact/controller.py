@@ -39,6 +39,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 
 import numpy as np
+from scipy.optimize import lsq_linear, nnls
 
 from .boundary_density import BoundaryAwareDensity, DensityParams
 from .boundary_map import LocalBoundaryMap
@@ -47,6 +48,7 @@ from .contracts import ContactSafetyContract, CoverageContract
 from .geometry import clip_to_domain, normalize
 from .local_cvt import LocalCVT, empty_cell_threshold
 from .perception import PerceptionParams, RayCastBoundarySensor
+from .progress_control import ProgressPIController, ProgressPIOutput, ProgressPIParams
 from .safety_filter import SafetyFilter, SafetyFilterParams
 from .types import AgentState, BoundaryObservation, ControlCommand
 
@@ -160,6 +162,38 @@ class DBACTParams:
     # point-to-plane map registrations, so the controller does not read the
     # simulator's cargo pose to decide when to stop.
     transport_distance: float = 0.0
+    transport_progress_estimator: str = "centroid"  # "centroid" | "motion_integral"
+
+    # Closed-loop task-progress / contact-pressure regulation. Legacy configs
+    # keep this disabled; research configs enable it and no longer depend on a
+    # fixed transport feed-forward speed or a scheduled HOLD frame.
+    progress_feedback: bool = False
+    progress_kp: float = 0.8
+    progress_max_speed: float = 0.18
+    pressure_position_gain: float = 0.25
+    pressure_velocity_kp: float = 0.9
+    pressure_velocity_ki: float = 0.35
+    pressure_bias: float = 0.025
+    pressure_limit: float = 0.20
+    pressure_integral_limit: float = 0.50
+    pressure_anti_windup_gain: float = 1.0
+    brake_position_gain: float = 0.15
+    brake_activation_distance: float = 0.035
+    brake_position_tolerance: float = 0.025
+    brake_speed_tolerance: float = 0.025
+    brake_dwell_steps: int = 12
+    brake_reengage_error: float = 0.06
+    hold_exit_error: float = 0.08
+    convoy_feedback_gain: float = 1.0
+    wrench_allocation: bool = False
+    wrench_torque_weight: float = 1.0
+    wrench_residual_tolerance: float = 0.35
+    wrench_weight_limit: float = 3.0
+    wrench_gossip_hops: int = 18
+    wrench_regularization: float = 0.0
+    contact_release_gain: float = 3.0
+    contact_release_speed: float = 0.20
+    contact_release_enabled: bool = True
 
     # --- legacy 'coverage' task mode (region coverage without a cargo) ---
     target_center: list[float] = field(default_factory=lambda: [4.0, 4.0])
@@ -208,6 +242,15 @@ class AgentDiagnostics:
     solver_status: str
     modification: float
     transport_progress: float = 0.0
+    parallel_velocity: float = 0.0
+    position_error: float = 0.0
+    velocity_error: float = 0.0
+    velocity_reference: float = 0.0
+    pressure_effort: float = 0.0
+    pressure_saturated: bool = False
+    wrench_weight: float = 1.0
+    wrench_residual: float = 0.0
+    wrench_feasible: bool = True
 
 
 class DBACTController:
@@ -240,6 +283,42 @@ class DBACTController:
                 raise ValueError("paired_lanes gossip times cannot be negative")
             if params.boundary_mapping_time < 0.0 or params.boundary_mapping_radius <= 0.0:
                 raise ValueError("paired_lanes boundary mapping time/radius are invalid")
+        if params.progress_feedback:
+            ProgressPIParams(
+                target=params.transport_distance,
+                progress_kp=params.progress_kp,
+                max_reference_speed=params.progress_max_speed,
+                position_effort_gain=params.pressure_position_gain,
+                velocity_kp=params.pressure_velocity_kp,
+                velocity_ki=params.pressure_velocity_ki,
+                pressure_bias=params.pressure_bias,
+                effort_limit=params.pressure_limit,
+                integral_limit=params.pressure_integral_limit,
+                anti_windup_gain=params.pressure_anti_windup_gain,
+                brake_position_gain=params.brake_position_gain,
+            ).assert_valid()
+            if params.brake_activation_distance < 0.0 or params.brake_position_tolerance < 0.0:
+                raise ValueError("brake distances cannot be negative")
+            if params.brake_speed_tolerance < 0.0 or params.brake_dwell_steps < 1:
+                raise ValueError("brake speed tolerance/dwell are invalid")
+            if params.brake_reengage_error <= params.brake_position_tolerance:
+                raise ValueError("brake_reengage_error must exceed brake_position_tolerance")
+            if params.hold_exit_error <= params.brake_position_tolerance:
+                raise ValueError("hold_exit_error must exceed brake_position_tolerance")
+            if params.convoy_feedback_gain < 0.0:
+                raise ValueError("convoy_feedback_gain cannot be negative")
+            if params.wrench_torque_weight < 0.0 or params.wrench_residual_tolerance < 0.0:
+                raise ValueError("wrench allocation weights/tolerance cannot be negative")
+            if params.wrench_regularization < 0.0:
+                raise ValueError("wrench_regularization cannot be negative")
+            if params.wrench_weight_limit <= 0.0:
+                raise ValueError("wrench_weight_limit must be positive")
+            if params.wrench_gossip_hops < 1:
+                raise ValueError("wrench_gossip_hops must be positive")
+            if params.contact_release_gain < 0.0 or params.contact_release_speed < 0.0:
+                raise ValueError("contact release gain/speed cannot be negative")
+        if params.transport_progress_estimator not in {"centroid", "motion_integral"}:
+            raise ValueError("transport_progress_estimator must be 'centroid' or 'motion_integral'")
 
         # Contracts first: a controller that cannot satisfy them must not be built.
         params.coverage_contract().assert_valid()
@@ -304,6 +383,14 @@ class DBACTController:
         self._transport_origin_centroid: dict[str, dict[str, np.ndarray]] = {}
         self._transport_complete_latch: dict[str, bool] = {}
         self._transport_start_frame: dict[str, int] = {}
+        self._transport_phase: dict[str, str] = {}
+        self._transport_brake_streak: dict[str, int] = {}
+        self._progress_regulators: dict[tuple[str, str], ProgressPIController] = {}
+        self._progress_feedback: dict[str, ProgressPIOutput] = {}
+        self._planned_transport_phase: dict[str, str] = {}
+        self._wrench_weights: dict[str, float] = {}
+        self._wrench_residuals: dict[str, float] = {}
+        self._wrench_feasible: dict[str, bool] = {}
         self._search_initial_polar: dict[str, tuple[float, float]] = {}
         self._search_initial_pose: dict[str, np.ndarray] = {}
         self._first_observation_time: dict[str, float] = {}
@@ -362,8 +449,7 @@ class DBACTController:
                 )
 
         contact_ready = [self._contact_ready(agents[i], fused[agents[i].agent_id]) for i in range(len(agents))]
-        transport_active: list[bool] = []
-        transport_complete: list[bool] = []
+        ready_flags: list[bool] = []
         for i, agent in enumerate(agents):
             supporters = int(contact_ready[i]) + sum(int(contact_ready[j]) for j in neighbors[i])
             search_released = (
@@ -382,14 +468,51 @@ class DBACTController:
             ready = self._transport_ready_streak[agent.agent_id] >= max(0, int(self.params.transport_dwell_steps))
             if ready:
                 self._transport_start_frame.setdefault(agent.agent_id, self._frame)
-            complete = self._transport_complete(agent.agent_id, fused[agent.agent_id])
-            transport_complete.append(complete)
-            transport_active.append(ready and not complete)
+                if self.params.progress_feedback:
+                    self._transport_phase.setdefault(agent.agent_id, "transport")
+            ready_flags.append(ready)
 
         if refresh_perception:
             for i, agent in enumerate(agents):
-                if transport_active[i]:
+                phase = self._transport_phase.get(agent.agent_id, "cage")
+                if ready_flags[i] or phase in {"transport", "brake", "hold"}:
                     self._accumulate_transport_progress(agent.agent_id)
+                    if self.params.progress_feedback:
+                        self._update_progress_feedback(
+                            agent.agent_id,
+                            fused[agent.agent_id],
+                            dt * int(self.params.perception_every),
+                            braking=phase == "brake",
+                        )
+
+        transport_phases: list[str] = []
+        transport_complete: list[bool] = []
+        transport_active: list[bool] = []
+        for i, agent in enumerate(agents):
+            if self.params.progress_feedback:
+                phase = self._advance_transport_phase(
+                    agent.agent_id,
+                    fused[agent.agent_id],
+                    ready=ready_flags[i],
+                )
+                planned_phase = phase if ready_flags[i] or phase == "hold" else "cage"
+                transport_phases.append(planned_phase)
+                transport_complete.append(phase == "hold")
+                transport_active.append(planned_phase == "transport")
+            else:
+                complete = self._transport_complete(agent.agent_id, fused[agent.agent_id])
+                transport_complete.append(complete)
+                transport_active.append(ready_flags[i] and not complete)
+                transport_phases.append("hold" if complete else ("transport" if transport_active[-1] else "cage"))
+
+        if self.params.progress_feedback and self.params.wrench_allocation:
+            self._update_wrench_allocations(
+                agents,
+                neighbors,
+                fused,
+                contact_ready,
+                transport_phases,
+            )
 
         self.diagnostics = []
         commands: list[ControlCommand] = []
@@ -398,14 +521,22 @@ class DBACTController:
             refresh_plan = (
                 self._frame % int(self.params.planning_every) == 0
                 or agent.agent_id not in self._nominal_cache
+                or self._planned_transport_phase.get(agent.agent_id) != transport_phases[i]
             )
             if refresh_plan:
                 self._nominal_cache[agent.agent_id] = self._nominal_command(
-                    i, agents, neighbors[i], observations, contact_ready, transport_active[i]
+                    i,
+                    agents,
+                    neighbors[i],
+                    observations,
+                    contact_ready,
+                    transport_active[i],
+                    transport_phase=transport_phases[i],
                 )
+                self._planned_transport_phase[agent.agent_id] = transport_phases[i]
             cached = self._nominal_cache[agent.agent_id]
             u_nom, mode, cell_mass, push_side = cached[0].copy(), cached[1], cached[2], cached[3]
-            if transport_complete[i] and not push_side:
+            if transport_complete[i] and not push_side and mode != "hold":
                 mode = "hold"
             points, normals, v_obj = self._object_rows_from_map(agent.agent_id, agent.position, observations)
             result = self.safety.filter_velocity(
@@ -417,6 +548,7 @@ class DBACTController:
                 object_velocity=v_obj,
             )
             commands.append(ControlCommand(agent.agent_id, result.velocity, mode=mode))
+            feedback = self._progress_feedback.get(agent.agent_id)
             self.diagnostics.append(
                 AgentDiagnostics(
                     agent_id=agent.agent_id,
@@ -428,21 +560,28 @@ class DBACTController:
                     solver_status=result.status,
                     modification=result.modification,
                     transport_progress=self._progress_for(agent.agent_id, observations),
+                    parallel_velocity=feedback.parallel_velocity if feedback is not None else 0.0,
+                    position_error=feedback.position_error if feedback is not None else 0.0,
+                    velocity_error=feedback.velocity_error if feedback is not None else 0.0,
+                    velocity_reference=feedback.velocity_reference if feedback is not None else 0.0,
+                    pressure_effort=feedback.effort if feedback is not None else 0.0,
+                    pressure_saturated=feedback.saturated if feedback is not None else False,
+                    wrench_weight=self._wrench_weights.get(agent.agent_id, 1.0),
+                    wrench_residual=self._wrench_residuals.get(agent.agent_id, 0.0),
+                    wrench_feasible=self._wrench_feasible.get(agent.agent_id, True),
                 )
             )
         self._frame += 1
         return commands
 
     def _accumulate_transport_progress(self, agent_id: str) -> None:
-        """Measure displacement of the locally gossiped boundary-map centroid.
+        """Update locally estimated task progress without reading cargo truth.
 
-        Incrementally summing scan registrations is fragile under rotation: a
-        small per-scan bias accumulates for hundreds of frames and can prevent
-        HOLD even after the cargo has visibly passed the target.  At transport
-        activation the boundary map is already required to be epsilon-dense, so
-        its voxel centroid is a bounded local proxy for body translation.  The
-        baseline/difference form does not integrate drift and still reads no
-        simulator pose.
+        Historical v3 uses a boundary-map centroid difference. The feedback
+        controller instead integrates the translational component of the SE(2)
+        point-to-plane registration. That avoids treating changing visible-map
+        support as body motion while the registration explicitly separates
+        rotation from translation.
         """
         if self.params.search_pattern == "paired_lanes":
             sweep, rendezvous, gossip = self._paired_search_durations()
@@ -456,6 +595,12 @@ class DBACTController:
             goal = self.goal_directions.get(object_id)
             if goal is None:
                 continue
+            if self.params.transport_progress_estimator == "motion_integral":
+                delta = np.asarray(
+                    self.maps[agent_id].last_motion.get(object_id, np.zeros(2)), dtype=float
+                )
+                progress[object_id] = float(progress.get(object_id, 0.0) + np.dot(delta, goal))
+                continue
             points = np.vstack([obs.point for obs in observations if obs.object_id == object_id])
             centroid = np.mean(points, axis=0)
             origin = origins.setdefault(object_id, centroid.copy())
@@ -467,6 +612,252 @@ class DBACTController:
             if obs.object_id in progress:
                 return float(progress[obs.object_id])
         return 0.0
+
+    def _progress_object_id(self, observations: list[BoundaryObservation]) -> str | None:
+        for obs in observations:
+            if obs.object_id in self.goal_directions:
+                return obs.object_id
+        return None
+
+    def _progress_regulator(self, agent_id: str, object_id: str) -> ProgressPIController:
+        key = (agent_id, object_id)
+        regulator = self._progress_regulators.get(key)
+        if regulator is None:
+            regulator = ProgressPIController(
+                ProgressPIParams(
+                    target=self.params.transport_distance,
+                    progress_kp=self.params.progress_kp,
+                    max_reference_speed=self.params.progress_max_speed,
+                    position_effort_gain=self.params.pressure_position_gain,
+                    velocity_kp=self.params.pressure_velocity_kp,
+                    velocity_ki=self.params.pressure_velocity_ki,
+                    pressure_bias=self.params.pressure_bias,
+                    effort_limit=self.params.pressure_limit,
+                    integral_limit=self.params.pressure_integral_limit,
+                    anti_windup_gain=self.params.pressure_anti_windup_gain,
+                    brake_position_gain=self.params.brake_position_gain,
+                )
+            )
+            self._progress_regulators[key] = regulator
+        return regulator
+
+    def _update_progress_feedback(
+        self,
+        agent_id: str,
+        observations: list[BoundaryObservation],
+        dt: float,
+        *,
+        braking: bool,
+    ) -> ProgressPIOutput | None:
+        """Update one agent's regulator from local map motion only."""
+        object_id = self._progress_object_id(observations)
+        if object_id is None:
+            return None
+        progress = float(self._transport_progress.get(agent_id, {}).get(object_id, 0.0))
+        goal = self.goal_directions[object_id]
+        velocity = np.asarray(
+            self.object_velocity.get(agent_id, {}).get(object_id, np.zeros(2)), dtype=float
+        )
+        output = self._progress_regulator(agent_id, object_id).update(
+            progress,
+            float(np.dot(velocity, goal)),
+            dt,
+            braking=braking,
+        )
+        self._progress_feedback[agent_id] = output
+        return output
+
+    def _advance_transport_phase(
+        self,
+        agent_id: str,
+        observations: list[BoundaryObservation],
+        *,
+        ready: bool,
+    ) -> str:
+        """Distributed TRANSPORT -> BRAKE -> HOLD supervisor.
+
+        Transitions use only the agent's progress/velocity feedback. Loss of the
+        local contact quorum pauses pressure application but does not erase the
+        phase or integrator, so a transient communication gap can recover.
+        """
+        phase = self._transport_phase.get(agent_id, "cage")
+        if phase == "cage" and ready:
+            phase = "transport"
+            self._transport_phase[agent_id] = phase
+        feedback = self._progress_feedback.get(agent_id)
+        if feedback is None:
+            return phase
+
+        if phase == "transport" and feedback.progress >= (
+            self.params.transport_distance - self.params.brake_activation_distance
+        ):
+            phase = "brake"
+            self._transport_phase[agent_id] = phase
+            self._transport_brake_streak[agent_id] = 0
+            self._update_progress_feedback(agent_id, observations, 0.0, braking=True)
+            feedback = self._progress_feedback.get(agent_id, feedback)
+
+        if phase == "brake":
+            position_ok = abs(feedback.position_error) <= self.params.brake_position_tolerance
+            speed_ok = abs(feedback.parallel_velocity) <= self.params.brake_speed_tolerance
+            if position_ok and speed_ok:
+                streak = self._transport_brake_streak.get(agent_id, 0) + 1
+                self._transport_brake_streak[agent_id] = streak
+                if streak >= int(self.params.brake_dwell_steps):
+                    phase = "hold"
+                    self._transport_phase[agent_id] = phase
+            else:
+                self._transport_brake_streak[agent_id] = 0
+                if abs(feedback.position_error) >= self.params.brake_reengage_error:
+                    phase = "transport"
+                    self._transport_phase[agent_id] = phase
+                    self._update_progress_feedback(agent_id, observations, 0.0, braking=False)
+
+        if phase == "hold" and abs(feedback.position_error) >= self.params.hold_exit_error:
+            phase = "transport"
+            self._transport_phase[agent_id] = phase
+            self._transport_brake_streak[agent_id] = 0
+            self._update_progress_feedback(agent_id, observations, 0.0, braking=False)
+        return phase
+
+    def _update_wrench_allocations(
+        self,
+        agents: list[AgentState],
+        neighbors: list[list[int]],
+        fused: dict[str, list[BoundaryObservation]],
+        contact_ready: list[bool],
+        phases: list[str],
+    ) -> None:
+        """Finite-hop consensus allocation of nonnegative contact pressure.
+
+        Repeated neighbour flooding gives every robot in a connected component
+        the same contact descriptors and map-centroid estimates.  This routine
+        computes that converged result directly (bounded by
+        ``wrench_gossip_hops``), then solves one common force/zero-torque NNLS.
+        No simulator pose or measured contact wrench enters the calculation.
+        """
+        for agent in agents:
+            self._wrench_weights[agent.agent_id] = 0.0
+            self._wrench_residuals[agent.agent_id] = 0.0
+            self._wrench_feasible[agent.agent_id] = True
+
+        unseen = set(range(len(agents)))
+        while unseen:
+            root = min(unseen)
+            component = {root}
+            frontier = {root}
+            for _ in range(int(self.params.wrench_gossip_hops)):
+                expanded = set(frontier)
+                for index in frontier:
+                    expanded.update(neighbors[index])
+                expanded -= component
+                if not expanded:
+                    break
+                component.update(expanded)
+                frontier = expanded
+            unseen -= component
+
+            active = sorted(
+                index
+                for index in component
+                if contact_ready[index] and phases[index] in {"transport", "brake"}
+            )
+            if not active:
+                continue
+            object_ids = [
+                self._progress_object_id(fused.get(agents[index].agent_id, [])) for index in active
+            ]
+            object_id = next((value for value in object_ids if value is not None), None)
+            if object_id is None:
+                for index in active:
+                    self._wrench_feasible[agents[index].agent_id] = False
+                    self._wrench_residuals[agents[index].agent_id] = float("inf")
+                continue
+
+            signed_efforts = [
+                self._progress_feedback[agents[index].agent_id].effort
+                for index in active
+                if agents[index].agent_id in self._progress_feedback
+            ]
+            sign = 1.0 if not signed_efforts or float(np.median(signed_efforts)) >= 0.0 else -1.0
+            drive = sign * self.goal_directions[object_id]
+            component_points = [
+                obs.point
+                for index in component
+                for obs in fused.get(agents[index].agent_id, [])
+                if obs.object_id == object_id
+            ]
+            if not component_points:
+                continue
+            points = np.vstack(component_points)
+            center = np.mean(points, axis=0)
+            scale = max(float(np.max(np.linalg.norm(points - center[None, :], axis=1))), 1e-6)
+
+            candidate_indices: list[int] = []
+            columns: list[np.ndarray] = []
+            alignments: list[float] = []
+            for index in active:
+                local = [
+                    obs
+                    for obs in fused.get(agents[index].agent_id, [])
+                    if obs.object_id == object_id
+                ]
+                nearest = self._nearest_observation(local, agents[index].position)
+                if nearest is None:
+                    continue
+                force = -np.asarray(nearest.normal, dtype=float)
+                alignment = float(np.dot(force, drive))
+                if alignment <= 1e-6:
+                    continue
+                arm = np.asarray(nearest.point, dtype=float) - center
+                torque = float(arm[0] * force[1] - arm[1] * force[0]) / scale
+                candidate_indices.append(index)
+                alignments.append(alignment)
+                columns.append(
+                    np.array(
+                        [force[0], force[1], self.params.wrench_torque_weight * torque],
+                        dtype=float,
+                    )
+                )
+
+            if not columns:
+                for index in active:
+                    self._wrench_feasible[agents[index].agent_id] = False
+                    self._wrench_residuals[agents[index].agent_id] = float("inf")
+                continue
+            matrix = np.column_stack(columns)
+            target = np.array([drive[0], drive[1], 0.0], dtype=float)
+            try:
+                if self.params.wrench_regularization > 0.0:
+                    root_regularization = float(np.sqrt(self.params.wrench_regularization))
+                    prior = np.asarray(alignments, dtype=float)
+                    augmented = np.vstack(
+                        [matrix, root_regularization * np.eye(matrix.shape[1])]
+                    )
+                    augmented_target = np.concatenate([target, root_regularization * prior])
+                    result = lsq_linear(augmented, augmented_target, bounds=(0.0, np.inf))
+                    if not result.success:
+                        raise RuntimeError(str(result.message))
+                    allocation = np.asarray(result.x, dtype=float)
+                    residual = float(np.linalg.norm(matrix @ allocation - target))
+                else:
+                    allocation, residual = nnls(matrix, target)
+            except (RuntimeError, ValueError, np.linalg.LinAlgError):
+                allocation = np.asarray(alignments, dtype=float)
+                residual = float(np.linalg.norm(matrix @ allocation - target))
+            positive = allocation[allocation > 1e-9]
+            if len(positive):
+                allocation = allocation / float(np.mean(positive))
+            allocation = np.clip(allocation, 0.0, self.params.wrench_weight_limit)
+            feasible = bool(
+                np.isfinite(residual) and residual <= self.params.wrench_residual_tolerance
+            )
+            for index in active:
+                agent_id = agents[index].agent_id
+                self._wrench_residuals[agent_id] = float(residual)
+                self._wrench_feasible[agent_id] = feasible
+                if index in candidate_indices:
+                    self._wrench_weights[agent_id] = float(allocation[candidate_indices.index(index)])
 
     def _transport_complete(self, agent_id: str, observations: list[BoundaryObservation]) -> bool:
         if self.params.transport_distance <= 0.0:
@@ -513,6 +904,7 @@ class DBACTController:
         observations: list[BoundaryObservation],
         contact_ready: list[bool],
         transport_active: bool = False,
+        transport_phase: str = "cage",
     ) -> tuple[np.ndarray, str, float, bool]:
         agent = agents[i]
         if self.params.task_mode == "coverage":
@@ -574,16 +966,61 @@ class DBACTController:
         u = self.params.kp_cage * (cell.centroid - agent.position)
         push_side = False
         if self.params.task_mode == "transport":
-            if transport_active and goal is not None and self.params.transport_speed > 0.0:
+            feedback = self._progress_feedback.get(agent.agent_id) if self.params.progress_feedback else None
+            if (
+                self.params.progress_feedback
+                and transport_phase in {"transport", "brake"}
+                and feedback is not None
+                and goal is not None
+            ):
+                # A position loop generates v_ref; the whole enclosure follows
+                # that reference while the selected contact arc applies the PI
+                # pressure effort. BRAKE sets v_ref=0 and may reverse the contact
+                # side according to the measured object velocity.
+                u = u + self.params.convoy_feedback_gain * feedback.velocity_reference * goal
+                allocation_weight = self._wrench_weights.get(agent.agent_id, 1.0)
+                effort = float(feedback.effort) * allocation_weight
+                drive = goal if feedback.effort >= 0.0 else -goal
+                bias, push_side = self._transport_bias(
+                    i,
+                    agents,
+                    neighbor_indices,
+                    observations,
+                    contact_ready,
+                    transport_active=True,
+                    effort=abs(effort),
+                    drive_direction=drive,
+                )
+                u = u + bias
+                if self.params.contact_release_enabled:
+                    u = self._release_unallocated_contact(
+                        agent,
+                        observations,
+                        u,
+                        drive,
+                        contact_ready[i],
+                        allocation_weight,
+                    )
+            elif transport_active and goal is not None and self.params.transport_speed > 0.0:
                 # Translate the entire locally informed enclosure.  This is a
                 # task-space feed-forward term, not an object-motion shortcut:
                 # the cargo still moves only through measured contacts.
                 u = u + self.params.transport_speed * goal
-            bias, push_side = self._transport_bias(
-                i, agents, neighbor_indices, observations, contact_ready, transport_active
-            )
-            u = u + bias
-        mode = "push" if push_side else ("convoy" if transport_active else "cage")
+                bias, push_side = self._transport_bias(
+                    i, agents, neighbor_indices, observations, contact_ready, transport_active
+                )
+                u = u + bias
+            elif not self.params.progress_feedback:
+                bias, push_side = self._transport_bias(
+                    i, agents, neighbor_indices, observations, contact_ready, transport_active
+                )
+                u = u + bias
+        if transport_phase == "hold":
+            mode = "hold"
+        elif transport_phase == "brake":
+            mode = "brake"
+        else:
+            mode = "push" if push_side else ("convoy" if transport_active else "cage")
         return u, mode, cell.cell_mass, push_side
 
     def _redeploy_step(
@@ -681,6 +1118,8 @@ class DBACTController:
         observations: list[BoundaryObservation],
         contact_ready: list[bool],
         transport_active: bool = True,
+        effort: float | None = None,
+        drive_direction: np.ndarray | None = None,
     ) -> tuple[np.ndarray, bool]:
         agent = agents[i]
         if not transport_active or not contact_ready[i]:
@@ -689,7 +1128,7 @@ class DBACTController:
         if supporters < self.params.min_push_agents:
             return np.zeros(2), False
 
-        goal = self._goal_for(observations)
+        goal = self._goal_for(observations) if drive_direction is None else normalize(drive_direction)
         if goal is None:
             return np.zeros(2), False
 
@@ -709,7 +1148,48 @@ class DBACTController:
         # force from +3.55 N to -3.75 N. Pressing along -n keeps each robot on its
         # own patch of boundary, and scaling by (-n . u_goal) makes the press
         # strongest exactly where it does the most good for the task.
-        return self.params.kp_transport * (-alignment) * (-nearest.normal), True
+        magnitude = self.params.kp_transport if effort is None else max(0.0, float(effort))
+        return magnitude * (-alignment) * (-nearest.normal), True
+
+    def _release_unallocated_contact(
+        self,
+        agent: AgentState,
+        observations: list[BoundaryObservation],
+        nominal: np.ndarray,
+        drive_direction: np.ndarray,
+        contact_ready: bool,
+        allocation_weight: float,
+    ) -> np.ndarray:
+        """Remove passive contacts that oppose the allocated wrench.
+
+        A zero allocation is ineffective if Local-CVT continues pressing the
+        robot into the leading face.  This local radial override moves such a
+        robot to the configured leading offset while preserving tangential CVT
+        motion and leaving the final command to the hard-QP filter.
+        """
+        if not contact_ready:
+            return nominal
+        nearest = self._nearest_observation(observations, agent.position)
+        if nearest is None:
+            return nominal
+        normal = np.asarray(nearest.normal, dtype=float)
+        leading = float(np.dot(normal, normalize(drive_direction))) >= -self.params.push_side_threshold
+        unallocated = allocation_weight <= 1e-8
+        if not (leading or unallocated):
+            return nominal
+        desired = float(self.params.lead_offset or (self.params.robot_radius + self.params.delta_max))
+        distance = float(np.linalg.norm(agent.position - nearest.point))
+        outward = float(
+            np.clip(
+                self.params.contact_release_gain * max(0.0, desired - distance),
+                0.0,
+                self.params.contact_release_speed,
+            )
+        )
+        current = float(np.dot(nominal, normal))
+        if current >= outward:
+            return nominal
+        return nominal + (outward - current) * normal
 
     def _goal_for(self, observations: list[BoundaryObservation]) -> np.ndarray | None:
         for obs in observations:
@@ -854,6 +1334,26 @@ class DBACTController:
             "gossip_seconds": gossip,
             "release_seconds": sweep + rendezvous + gossip,
             "mapping_seconds": float(self.params.boundary_mapping_time),
+        }
+
+    def transport_feedback_summary(self) -> dict[str, dict[str, object]]:
+        return {
+            agent_id: {
+                "progress": output.progress,
+                "parallel_velocity": output.parallel_velocity,
+                "position_error": output.position_error,
+                "velocity_reference": output.velocity_reference,
+                "velocity_error": output.velocity_error,
+                "pressure_effort": output.effort,
+                "integral": output.integral,
+                "saturated": output.saturated,
+                "braking": output.braking,
+                "phase": self._transport_phase.get(agent_id, "cage"),
+                "wrench_weight": self._wrench_weights.get(agent_id, 1.0),
+                "wrench_residual": self._wrench_residuals.get(agent_id, 0.0),
+                "wrench_feasible": self._wrench_feasible.get(agent_id, True),
+            }
+            for agent_id, output in self._progress_feedback.items()
         }
 
     def _paired_lane_velocity(self, agent: AgentState, timestamp: float) -> np.ndarray:

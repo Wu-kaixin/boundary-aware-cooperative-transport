@@ -1,0 +1,166 @@
+paper: true
+dt: 0.05
+
+domain: {xmin: 0.0, xmax: 8.0, ymin: 0.0, ymax: 8.0}
+
+agents:
+  count: 18
+  layout: paired_sweep
+  edge_padding: 0.20
+
+cargoes:
+  - id: cargo_0
+    shape: random_simple_polygon
+    center: [4.0, 4.0]
+    vertex_count: 9
+    radius_min: 0.45
+    radius_max: 0.75
+    angle_jitter: 0.25
+    surface_density: 1.5
+    random_center:
+      enabled: true
+      domain_margin: 0.45
+      initial_sensor_gap: 0.0
+      yaw_min_deg: 0.0
+      yaw_max_deg: 360.0
+      max_attempts: 2048
+
+task:
+  random_goal:
+    enabled: true
+    angle_min_deg: 0.0
+    angle_max_deg: 360.0
+    target_distance: 0.10
+    wall_margin: 0.45
+    footprint_margin: 0.45
+    max_attempts: 1024
+
+episode:
+  # A safety timeout, not a success deadline. run_until exits earlier on HOLD or
+  # an explicit hard failure.
+  max_steps: 1500
+
+controller:
+  task_mode: transport
+  sensor_range: 1.20
+  ray_count: 96
+  range_noise_std: 0.0
+  pca_neighbors: 5
+  residual_tolerance: 0.030
+  min_confidence: 0.0
+  perception_every: 3
+  planning_every: 3
+  comm_range: 1.60
+
+  voxel_size: 0.07
+  age_decay: 0.08
+  max_voxels_per_object: 600
+  density_mode: offset
+  cage_offset: 0.135
+  lead_offset: 0.22
+  lead_threshold: 0.55
+  sigma: 0.20
+  base_density: 0.001
+  gap_gain: 0.6
+  gap_radius: 0.35
+
+  local_radius: 0.80
+  grid_resolution: 18
+  approach_mass_ratio: 3.0
+  redeploy_gap_ratio: 0.15
+
+  robot_radius: 0.16
+  delta_max: 0.05
+  d_min: 0.32
+  gamma_agent: 6.0
+  gamma_obj: 8.0
+  rho: 0.10
+  max_speed: 0.30
+  backend: qp
+  max_object_rows: 4
+  object_row_range: 0.60
+  object_row_window: 0.20
+  object_row_inner_limit: 0.0
+  recovery_fraction: 0.25
+
+  kp_explore: 1.20
+  search_pattern: paired_lanes
+  search_detection_radius: 0.75
+  search_speed: 0.30
+  search_meeting_gap: 0.40
+  search_gossip_time: 1.35
+  search_local_gossip_time: 0.90
+  map_gossip: true
+  boundary_mapping_time: 3.00
+  boundary_mapping_radius: 1.00
+  boundary_mapping_angular_speed: 0.40
+
+  kp_cage: 1.20
+  kp_transport: 2.00
+  push_side_threshold: 0.0
+  min_push_agents: 3
+  contact_band_tolerance: 0.08
+  object_velocity_filter: 0.35
+
+  # Legacy fixed-feed-forward terms are disabled in this research controller.
+  transport_speed: 0.0
+  transport_dwell_steps: 15
+  transport_min_steps: 0
+  transport_distance: 0.10
+  transport_progress_estimator: motion_integral
+
+  progress_feedback: true
+  progress_kp: 1.0
+  progress_max_speed: 0.14
+  pressure_position_gain: 3.0
+  pressure_velocity_kp: 1.5
+  pressure_velocity_ki: 0.5
+  pressure_bias: 0.45
+  pressure_limit: 2.0
+  pressure_integral_limit: 1.0
+  pressure_anti_windup_gain: 1.0
+
+  brake_position_gain: 0.8
+  brake_activation_distance: 0.03
+  brake_position_tolerance: 0.025
+  brake_speed_tolerance: 0.025
+  brake_dwell_steps: 12
+  brake_reengage_error: 0.06
+  hold_exit_error: 0.08
+
+  convoy_feedback_gain: 0.0
+  wrench_allocation: true
+  wrench_torque_weight: 2.0
+  wrench_residual_tolerance: 0.5
+  wrench_weight_limit: 3.0
+  wrench_gossip_hops: 18
+  wrench_regularization: 0.10
+  contact_release_gain: 3.0
+  contact_release_speed: 0.20
+  contact_release_enabled: true
+
+transport:
+  engine: penalty
+  stiffness: 500.0
+  damping: 12.0
+  friction: 0.6
+  tangential_stiffness: 60.0
+  ground_friction: 0.30
+  gravity: 9.81
+  substeps: 4
+
+# Finite-time certification is intentionally deferred. This configuration is
+# for controller development and empirical timing, not a predeclared theorem.
+guarantee:
+  enabled: false
+
+evaluation:
+  contact_radius: 0.50
+  j_min: 0.075
+  j_max: 0.30
+  efficiency_min: 0.55
+  displacement_gate: 0.08
+  coverage_min: 0.65
+  max_rotation_deg: 30.0
+  require_initially_unobserved: false
+  require_guarantee_certificate: false

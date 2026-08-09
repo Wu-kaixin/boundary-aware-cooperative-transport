@@ -22,6 +22,7 @@ MODE_COLORS = {
     "cage": "#10b981",
     "push": "#dc2626",
     "convoy": "#8b5cf6",
+    "brake": "#ea580c",
     "hold": "#374151",
 }
 
@@ -247,7 +248,9 @@ def animate_simulation(
         time_s = env.log.times[frame_index]
         min_dist = env.log.min_distances[frame_index]
         modes = env.log.mode_counts[frame_index] if frame_index < len(env.log.mode_counts) else {}
-        if modes.get("push", 0) + modes.get("convoy", 0) > 0:
+        if modes.get("brake", 0) > 0:
+            phase = "BRAKE"
+        elif modes.get("push", 0) + modes.get("convoy", 0) > 0:
             phase = "TRANSPORT"
         elif modes.get("hold", 0) > 0:
             phase = "HOLD"
@@ -274,7 +277,7 @@ def animate_simulation(
         ax.text(
             0.02,
             0.02,
-            "blue search  ·  amber approach  ·  green enclose  ·  red push  ·  purple convoy  ·  gray hold",
+            "blue search  ·  green enclose  ·  red push  ·  purple convoy  ·  orange brake  ·  gray hold",
             transform=ax.transAxes,
             ha="left",
             va="bottom",
