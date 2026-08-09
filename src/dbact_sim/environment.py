@@ -472,11 +472,26 @@ class SimulationEnvironment:
                 if len(self.log.cargo_angles[cid]) >= 2
                 else 0.0
             )
+            max_abs_rotation_deg = (
+                float(
+                    np.max(
+                        np.abs(
+                            np.degrees(
+                                np.asarray(self.log.cargo_angles[cid], dtype=float)
+                                - self.log.cargo_angles[cid][0]
+                            )
+                        )
+                    )
+                )
+                if self.log.cargo_angles[cid]
+                else 0.0
+            )
 
             entry = {
                 "displacement_vector": (centers[-1] - centers[0]).tolist() if len(centers) >= 2 else [0.0, 0.0],
                 "displacement": float(np.linalg.norm(centers[-1] - centers[0])) if len(centers) >= 2 else 0.0,
                 "rotation_deg": rotation_deg,
+                "max_abs_rotation_deg": max_abs_rotation_deg,
                 "final_coverage_legacy": self.log.coverage[cid][-1] if self.log.coverage[cid] else 0.0,
                 "final_strict_coverage": self.log.strict_coverage[cid][-1] if self.log.strict_coverage[cid] else 0.0,
                 "max_strict_coverage": max(self.log.strict_coverage[cid], default=0.0),
@@ -487,6 +502,10 @@ class SimulationEnvironment:
                 "max_cargo_speed": max(self.log.cargo_speed[cid], default=0.0),
                 "max_contacts": int(np.max(contacts)) if contacts else 0,
                 "peak_net_force": float(np.max(np.linalg.norm(forces, axis=1))),
+                "peak_abs_net_torque": max(
+                    (abs(value) for value in self.log.net_torque[cid]),
+                    default=0.0,
+                ),
                 "recruited_agents": recruited_agents_count(cargo, self.agents, self.evaluation_contact_radius),
                 "initial_detection_count": self.initial_detection_counts.get(cid, 0),
             }
@@ -543,14 +562,51 @@ class SimulationEnvironment:
                 "first_brake": first_brake,
                 "first_hold": first_hold,
             }
+            if first_transport is not None:
+                entry["min_strict_coverage_during_transport"] = min(
+                    self.log.strict_coverage[cid][first_transport:],
+                    default=0.0,
+                )
+                entry["min_contact_count_during_transport"] = min(
+                    self.log.contact_counts[cid][first_transport:],
+                    default=0,
+                )
+            else:
+                entry["min_strict_coverage_during_transport"] = None
+                entry["min_contact_count_during_transport"] = None
             if goal is not None and len(centers) >= 2:
                 entry["goal_direction"] = np.asarray(goal, dtype=float).tolist()
                 entry["goal_angle_deg"] = float(np.degrees(np.arctan2(goal[1], goal[0])))
                 if cid in self.goal_targets:
                     entry["goal_target"] = self.goal_targets[cid].tolist()
-                entry.update(directional_progress(centers[0], centers[-1], goal))
+                episode_progress = directional_progress(centers[0], centers[-1], goal)
+                entry["episode_total_J"] = episode_progress["J"]
+                entry["episode_total_displacement"] = episode_progress["displacement"]
+                entry["episode_total_efficiency"] = episode_progress["efficiency"]
+                # Task progress is defined from controller activation, not from
+                # the beginning of SEARCH.  Search/enclosure contacts can move
+                # the cargo passively; counting that displacement toward the
+                # requested transport length makes the estimator, HOLD latch and
+                # success contract refer to different physical tasks.
+                transport_origin_index = first_transport if first_transport is not None else 0
+                transport_origin = np.asarray(centers[transport_origin_index], dtype=float)
+                entry["transport_activation_center"] = transport_origin.tolist()
+                entry["transport_goal_target"] = (
+                    transport_origin + params.transport_distance * np.asarray(goal, dtype=float)
+                ).tolist()
+                entry.update(directional_progress(transport_origin, centers[-1], goal))
+                center_array = np.vstack(centers)
+                displacement_history = center_array[transport_origin_index:] - transport_origin
+                unit_goal = np.asarray(goal, dtype=float)
+                unit_goal = unit_goal / max(float(np.linalg.norm(unit_goal)), 1e-12)
+                cross_track = np.abs(
+                    unit_goal[0] * displacement_history[:, 1]
+                    - unit_goal[1] * displacement_history[:, 0]
+                )
+                entry["final_cross_track_error"] = float(cross_track[-1])
+                entry["max_cross_track_error"] = float(np.max(cross_track))
                 verdict = self.success_contract.evaluate(
-                    centers[0],
+                    transport_origin,
                     centers[-1],
                     goal,
                     min_signed_clearance=min_clearance,

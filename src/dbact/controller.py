@@ -185,6 +185,7 @@ class DBACTParams:
     progress_feedback: bool = False
     progress_consensus: bool = True
     progress_consensus_hops: int = 18
+    cross_track_gain: float = 2.0
     progress_kp: float = 0.8
     progress_max_speed: float = 0.18
     pressure_position_gain: float = 0.25
@@ -361,6 +362,8 @@ class DBACTController:
                 raise ValueError("hold_exit_error must exceed brake_position_tolerance")
             if params.convoy_feedback_gain < 0.0:
                 raise ValueError("convoy_feedback_gain cannot be negative")
+            if params.cross_track_gain < 0.0:
+                raise ValueError("cross_track_gain cannot be negative")
             if params.wrench_torque_weight < 0.0 or params.wrench_residual_tolerance < 0.0:
                 raise ValueError("wrench allocation weights/tolerance cannot be negative")
             if params.wrench_regularization < 0.0:
@@ -441,6 +444,7 @@ class DBACTController:
         self._object_centroid: dict[str, dict[str, np.ndarray]] = {}
         self._transport_ready_streak: dict[str, int] = {}
         self._transport_progress: dict[str, dict[str, float]] = {}
+        self._transport_displacement: dict[str, dict[str, np.ndarray]] = {}
         self._transport_origin_centroid: dict[str, dict[str, np.ndarray]] = {}
         self._transport_complete_latch: dict[str, bool] = {}
         self._transport_start_frame: dict[str, int] = {}
@@ -534,7 +538,8 @@ class DBACTController:
                         )
                 self._fused_cache[agent.agent_id] = self.maps[agent.agent_id].all_observations(timestamp)
             fused[agent.agent_id] = self._fused_cache.get(agent.agent_id, [])
-            if refresh_perception:
+        if refresh_perception:
+            for agent in agents:
                 self._update_object_velocity(
                     agent.agent_id,
                     fused[agent.agent_id],
@@ -712,6 +717,7 @@ class DBACTController:
             if self._time < sweep + rendezvous + gossip - 1e-12:
                 return
         progress = self._transport_progress.setdefault(agent_id, {})
+        displacement = self._transport_displacement.setdefault(agent_id, {})
         origins = self._transport_origin_centroid.setdefault(agent_id, {})
         observations = self.maps[agent_id].all_observations(self._time)
         object_ids = {obs.object_id for obs in observations}
@@ -723,12 +729,16 @@ class DBACTController:
                 delta = np.asarray(
                     self.maps[agent_id].last_motion.get(object_id, np.zeros(2)), dtype=float
                 )
-                progress[object_id] = float(progress.get(object_id, 0.0) + np.dot(delta, goal))
+                displacement[object_id] = np.asarray(
+                    displacement.get(object_id, np.zeros(2)), dtype=float
+                ) + delta
+                progress[object_id] = float(np.dot(displacement[object_id], goal))
                 continue
             points = np.vstack([obs.point for obs in observations if obs.object_id == object_id])
             centroid = np.mean(points, axis=0)
             origin = origins.setdefault(object_id, centroid.copy())
-            progress[object_id] = float(np.dot(centroid - origin, goal))
+            displacement[object_id] = centroid - origin
+            progress[object_id] = float(np.dot(displacement[object_id], goal))
 
     def _progress_for(self, agent_id: str, observations: list[BoundaryObservation]) -> float:
         progress = self._transport_progress.get(agent_id, {})
@@ -809,6 +819,31 @@ class DBACTController:
                     consensus_progress = float(np.median(progress_values))
                     for index in component:
                         self._transport_progress.setdefault(agents[index].agent_id, {})[
+                            object_id
+                        ] = consensus_progress
+                displacement_values = [
+                    self._transport_displacement.get(agents[index].agent_id, {}).get(object_id)
+                    for index in component
+                ]
+                displacement_values = [
+                    np.asarray(value, dtype=float)
+                    for value in displacement_values
+                    if value is not None
+                ]
+                if displacement_values:
+                    consensus_displacement = np.median(
+                        np.vstack(displacement_values),
+                        axis=0,
+                    )
+                    consensus_progress = float(
+                        np.dot(consensus_displacement, self.goal_directions[object_id])
+                    )
+                    for index in component:
+                        agent_id = agents[index].agent_id
+                        self._transport_displacement.setdefault(agent_id, {})[
+                            object_id
+                        ] = consensus_displacement.copy()
+                        self._transport_progress.setdefault(agent_id, {})[
                             object_id
                         ] = consensus_progress
                 velocity_values = [
@@ -998,7 +1033,12 @@ class DBACTController:
                 if agents[index].agent_id in self._progress_feedback
             ]
             sign = 1.0 if not signed_efforts or float(np.median(signed_efforts)) >= 0.0 else -1.0
-            drive = sign * self.goal_directions[object_id]
+            representative_id = agents[active[0]].agent_id
+            drive = self._transport_drive_direction(
+                representative_id,
+                object_id,
+                longitudinal_sign=sign,
+            )
             component_points = [
                 obs.point
                 for index in component
@@ -1015,6 +1055,16 @@ class DBACTController:
             columns: list[np.ndarray] = []
             alignments: list[float] = []
             for index in active:
+                # A contact whose full ISSf reserve is nearly exhausted has no
+                # safe inward wrench capacity. Exclude it before solving the
+                # allocation so its zero weight activates local contact release;
+                # rho and d_min remain unchanged in the hard QP.
+                release_guard = self.params.contact_release_speed / max(
+                    self.params.gamma_obj,
+                    1e-9,
+                )
+                if self._contact_robust_margin(agents[index], object_id) <= release_guard:
+                    continue
                 local = [
                     obs
                     for obs in fused.get(agents[index].agent_id, [])
@@ -1200,7 +1250,16 @@ class DBACTController:
                 effort = float(feedback.effort) * allocation_weight
                 if self.params.safety_pressure_reserve:
                     effort *= self._pressure_reserve_scale(agent)
-                drive = goal if feedback.effort >= 0.0 else -goal
+                object_id = self._progress_object_id(observations)
+                drive = (
+                    self._transport_drive_direction(
+                        agent.agent_id,
+                        object_id,
+                        longitudinal_sign=1.0 if feedback.effort >= 0.0 else -1.0,
+                    )
+                    if object_id is not None
+                    else (goal if feedback.effort >= 0.0 else -goal)
+                )
                 bias, push_side = self._transport_bias(
                     i,
                     agents,
@@ -1424,7 +1483,12 @@ class DBACTController:
         """
         if not contact_ready:
             return nominal
-        nearest = self._nearest_observation(observations, agent.position)
+        # Contact release is a local geometric decision. The persistent
+        # planning map can lag a translating/rotating cargo, so prefer the
+        # latest raw local scan whenever it contains an object return.
+        safety_observations = self._safety_observation_cache.get(agent.agent_id, [])
+        release_observations = safety_observations or observations
+        nearest = self._nearest_observation(release_observations, agent.position)
         if nearest is None:
             return nominal
         normal = np.asarray(nearest.normal, dtype=float)
@@ -1445,6 +1509,33 @@ class DBACTController:
         if current >= outward:
             return nominal
         return nominal + (outward - current) * normal
+
+    def _contact_robust_margin(self, agent: AgentState, object_id: str) -> float:
+        """Remaining local clearance beyond the full moving-boundary ISSf reserve."""
+        observations = [
+            obs
+            for obs in self._safety_observation_cache.get(agent.agent_id, [])
+            if obs.object_id == object_id
+        ]
+        nearest = self._nearest_observation(observations, agent.position)
+        if nearest is None:
+            return float("inf")
+        velocity = np.asarray(
+            self.object_velocity.get(agent.agent_id, {}).get(object_id, np.zeros(2)),
+            dtype=float,
+        )
+        point = np.asarray(nearest.point, dtype=float) + max(
+            0.0,
+            self._time - float(nearest.timestamp),
+        ) * velocity
+        relative = np.asarray(agent.position, dtype=float) - point
+        distance = float(np.linalg.norm(relative))
+        radial = relative / max(distance, 1e-12)
+        h = distance - self.params.r_safe - self.params.boundary_error_bound
+        reserve = (
+            max(0.0, float(np.dot(radial, velocity))) + self.params.rho
+        ) / max(self.params.gamma_obj, 1e-9)
+        return float(h - reserve)
 
     def _goal_for(self, observations: list[BoundaryObservation]) -> np.ndarray | None:
         for obs in observations:
@@ -1572,6 +1663,31 @@ class DBACTController:
         if t < release - 1e-12:
             return "search_gossip"
         return None
+
+    def _transport_drive_direction(
+        self,
+        agent_id: str,
+        object_id: str,
+        longitudinal_sign: float = 1.0,
+    ) -> np.ndarray:
+        """Goal direction with feedback that rejects estimated cross-track drift.
+
+        The controller uses only the distributed motion estimate accumulated
+        from boundary-map registration.  Cargo truth is never consulted.  The
+        lateral correction keeps the commanded wrench pointed back toward the
+        task line while ``longitudinal_sign`` independently supports forward
+        transport and reverse braking.
+        """
+        goal = np.asarray(self.goal_directions[object_id], dtype=float)
+        displacement = np.asarray(
+            self._transport_displacement.get(agent_id, {}).get(object_id, np.zeros(2)),
+            dtype=float,
+        )
+        cross_track = displacement - float(np.dot(displacement, goal)) * goal
+        command = float(longitudinal_sign) * goal - self.params.cross_track_gain * cross_track
+        if float(np.linalg.norm(command)) <= 1e-12:
+            return normalize(float(longitudinal_sign) * goal)
+        return normalize(command)
 
     @staticmethod
     def _is_search_relay(index: int, count: int) -> bool:

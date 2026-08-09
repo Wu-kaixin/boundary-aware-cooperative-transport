@@ -154,6 +154,86 @@ def test_contact_release_overrides_inward_cvt_component_on_leading_face():
     assert released[1] == pytest.approx(0.05)
 
 
+def test_transport_drive_direction_rejects_estimated_cross_track_drift():
+    params = DBACTParams(
+        task_mode="transport",
+        progress_feedback=True,
+        d_min=0.32,
+        transport_distance=0.10,
+        cross_track_gain=2.0,
+    )
+    controller = DBACTController(params, (0.0, 8.0, 0.0, 8.0), {"obj": np.array([1.0, 0.0])})
+    controller._transport_displacement = {"a0": {"obj": np.array([0.4, 0.2])}}
+
+    forward = controller._transport_drive_direction("a0", "obj", longitudinal_sign=1.0)
+    braking = controller._transport_drive_direction("a0", "obj", longitudinal_sign=-1.0)
+
+    assert forward[0] > 0.0
+    assert braking[0] < 0.0
+    assert forward[1] < 0.0
+    assert braking[1] < 0.0
+
+
+def test_contact_release_prefers_latest_local_safety_scan():
+    params = DBACTParams(
+        task_mode="transport",
+        progress_feedback=True,
+        d_min=0.32,
+        transport_distance=0.10,
+        lead_offset=0.22,
+        contact_release_gain=3.0,
+        contact_release_speed=0.2,
+    )
+    controller = DBACTController(params, (0.0, 8.0, 0.0, 8.0), {"obj": np.array([1.0, 0.0])})
+    agent = AgentState("a0", np.array([0.135, 0.0]))
+    stale_planning = [
+        BoundaryObservation("obj", "a0", np.zeros(2), np.array([-1.0, 0.0]), 0.0)
+    ]
+    controller._safety_observation_cache["a0"] = [
+        BoundaryObservation("obj", "a0", np.zeros(2), np.array([1.0, 0.0]), 1.0)
+    ]
+
+    released = controller._release_unallocated_contact(
+        agent,
+        stale_planning,
+        nominal=np.array([-0.1, 0.0]),
+        drive_direction=np.array([1.0, 0.0]),
+        contact_ready=True,
+        allocation_weight=1.0,
+    )
+
+    assert released[0] > 0.0
+
+
+def test_contact_robust_margin_detects_exhausted_inward_wrench_capacity():
+    params = DBACTParams(
+        task_mode="transport",
+        progress_feedback=True,
+        d_min=0.32,
+        transport_distance=0.10,
+        robot_radius=0.16,
+        delta_max=0.05,
+        boundary_error_bound=0.023,
+        gamma_obj=20.0,
+        rho=0.35,
+        max_speed=0.45,
+        cage_offset=0.159,
+        lead_offset=0.22,
+        contact_release_gain=3.0,
+        contact_release_speed=0.2,
+    )
+    controller = DBACTController(params, (0.0, 8.0, 0.0, 8.0), {"obj": np.array([1.0, 0.0])})
+    # r_safe + epsilon_b = 0.133; distance 0.158 gives h=0.025,
+    # inside the rho/gamma + one-time-constant release guard (0.0275).
+    agent = AgentState("a0", np.array([0.158, 0.0]))
+    controller._safety_observation_cache["a0"] = [
+        BoundaryObservation("obj", "a0", np.zeros(2), np.array([-1.0, 0.0]), 0.0)
+    ]
+    controller.object_velocity["a0"] = {"obj": np.zeros(2)}
+
+    assert controller._contact_robust_margin(agent, "obj") == pytest.approx(0.0075)
+
+
 def test_research_config_disables_fixed_feedforward_and_enables_feedback():
     cfg = load_yaml("configs/sim/research/adaptive_progress_closed_loop.yaml")
     params = controller_params_from_config(cfg)

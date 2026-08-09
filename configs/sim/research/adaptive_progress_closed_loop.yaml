@@ -122,22 +122,23 @@ controller:
   progress_feedback: true
   progress_consensus: true
   progress_consensus_hops: 18
+  cross_track_gain: 2.0
   progress_kp: 1.0
   progress_max_speed: 0.14
-  pressure_position_gain: 3.0
+  pressure_position_gain: 0.5
   pressure_velocity_kp: 1.5
   pressure_velocity_ki: 0.5
-  pressure_bias: 0.45
-  pressure_limit: 2.0
-  pressure_integral_limit: 1.0
+  pressure_bias: 0.10
+  pressure_limit: 0.6
+  pressure_integral_limit: 0.2
   pressure_anti_windup_gain: 1.0
 
   brake_position_gain: 0.8
-  brake_activation_distance: 0.03
+  brake_activation_distance: 0.025
   brake_position_tolerance: 0.025
   brake_speed_tolerance: 0.025
   brake_dwell_steps: 12
-  brake_reengage_error: 0.06
+  brake_reengage_error: 0.026
   hold_exit_error: 0.08
 
   convoy_feedback_gain: 0.0
