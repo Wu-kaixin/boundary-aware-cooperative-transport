@@ -502,14 +502,17 @@ def build_admissibility_certificate(
     if goal_ok:
         goal = goal / float(np.linalg.norm(goal))
     distance = float(random_goal.get("target_distance", task.get("target_distance", 0.0)))
+    target_reserve = float(spec.get("transport_target_reserve_m", 0.0))
     add(
         "transport_distance_consistency",
-        distance > 0.0 and abs(controller.transport_distance - distance) <= 1e-12,
+        distance > 0.0
+        and abs(controller.transport_distance - distance - target_reserve) <= 1e-12,
         controller.transport_distance,
-        f"== task distance {distance:.6g} m",
-        "The local HOLD latch and the certified swept corridor must refer to the same task distance.",
+        f"== task distance {distance:.6g} m + declared reserve {target_reserve:.6g} m",
+        "The local HOLD latch and swept corridor include only an explicitly declared estimator reserve.",
     )
-    shift = distance * goal if goal_ok else np.zeros(2)
+    certified_distance = distance + max(0.0, target_reserve)
+    shift = certified_distance * goal if goal_ok else np.zeros(2)
     cargo_margin = min(_domain_margin(cargo.vertices, domain), _domain_margin(cargo.vertices + shift, domain))
     add(
         "swept_cargo_corridor",
@@ -642,11 +645,29 @@ def build_admissibility_certificate(
         "The sum of the certified/assumed phase bounds must fit the requested horizon.",
     )
 
-    eligible = bool(spec.get("enabled", False)) and all(check.passed for check in checks.values())
+    time_check_names = {
+        "declared_finite_time_bounds",
+        "frame_budget",
+        "derived_conditional_finite_time_bound",
+    }
+    domain_checks = {
+        name: check for name, check in checks.items() if name not in time_check_names
+    }
+    time_checks = {
+        name: check for name, check in checks.items() if name in time_check_names
+    }
+    enabled = bool(spec.get("enabled", False))
+    domain_eligible = enabled and all(check.passed for check in domain_checks.values())
+    finite_time_eligible = enabled and bool(time_checks) and all(
+        check.passed for check in time_checks.values()
+    )
+    eligible = domain_eligible and finite_time_eligible
     return {
         "theorem_id": THEOREM_ID,
-        "enabled": bool(spec.get("enabled", False)),
+        "enabled": enabled,
         "eligible": eligible,
+        "domain_eligible": domain_eligible,
+        "finite_time_eligible": finite_time_eligible,
         "claim": (
             "complete rectangular-workspace discovery plus conditional enclosure and bounded transport "
             "for this admissible simple polygon"
@@ -672,6 +693,8 @@ def build_admissibility_certificate(
         "mapping": {"required_max_boundary_gap": map_epsilon},
         "task": {
             "transport_distance": distance,
+            "transport_target_reserve": target_reserve,
+            "certified_corridor_distance": certified_distance,
             "cargo_corridor_margin": cargo_margin,
             "cage_corridor_margin": cage_margin,
             "cooperative_agents_required": cooperative_need,
@@ -688,6 +711,12 @@ def build_admissibility_certificate(
         "derived_finite_time_bound": derived_time_bound,
         "checks": {name: check.as_dict() for name, check in checks.items()},
         "failure_reasons": [name for name, check in checks.items() if not check.passed],
+        "domain_failure_reasons": [
+            name for name, check in domain_checks.items() if not check.passed
+        ],
+        "finite_time_failure_reasons": [
+            name for name, check in time_checks.items() if not check.passed
+        ],
     }
 
 

@@ -167,6 +167,7 @@ transport:
 # for controller development and empirical timing, not a predeclared theorem.
 guarantee:
   enabled: false
+  transport_target_reserve_m: 0.001
   # Zero rates are intentional fail-closed placeholders. Replace them only with
   # independently proved/certified constants, never fitted survivor timings.
   finite_time:

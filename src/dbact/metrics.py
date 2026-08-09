@@ -126,6 +126,7 @@ def operational_enclosure_certificate(
     cage_offset: float,
     min_engaged_agents: int,
     engaged_radius: float | None = None,
+    facing_clearance_m: float | None = None,
     samples: int = 360,
 ) -> dict:
     """Truth-audit certificate for operational boundary enclosure.
@@ -149,7 +150,11 @@ def operational_enclosure_certificate(
     engagement_limit = float(contact_radius if engaged_radius is None else engaged_radius)
     engaged = int(np.sum(outside & (clearances <= engagement_limit))) if len(clearances) else 0
     minimum_distance = min_inter_agent_distance(agents)
-    facing_clearance = minimum_facing_cage_clearance(cargo.vertices, float(cage_offset))
+    facing_clearance = (
+        minimum_facing_cage_clearance(cargo.vertices, float(cage_offset))
+        if facing_clearance_m is None
+        else float(facing_clearance_m)
+    )
     checks = {
         "strict_boundary_coverage": bool(coverage + 1e-12 >= float(strict_coverage_min)),
         "maximum_uncovered_boundary_arc": bool(

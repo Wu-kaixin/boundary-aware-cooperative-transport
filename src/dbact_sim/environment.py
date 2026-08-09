@@ -21,7 +21,11 @@ import numpy as np
 
 from dbact.contracts import DirectionalProgressContract
 from dbact.controller import DBACTController
-from dbact.guarantees import boundary_map_gap_upper_bound, build_admissibility_certificate
+from dbact.guarantees import (
+    boundary_map_gap_upper_bound,
+    build_admissibility_certificate,
+    minimum_facing_cage_clearance,
+)
 from dbact.metrics import (
     boundary_coverage,
     directional_progress,
@@ -160,6 +164,13 @@ class SimulationEnvironment:
         self.enclosure_engaged_radius = float(
             enclosure.get("engaged_radius_m", self.evaluation_contact_radius)
         )
+        self.enclosure_facing_clearance = {
+            cargo.object_id: minimum_facing_cage_clearance(
+                cargo.local_vertices,
+                params.cage_offset,
+            )
+            for cargo in self.cargoes
+        }
         self.require_initially_unobserved = bool(evaluation.get("require_initially_unobserved", False))
         self.require_guarantee_certificate = bool(evaluation.get("require_guarantee_certificate", False))
         self.require_measured_error_bounds = bool(evaluation.get("require_measured_error_bounds", False))
@@ -342,6 +353,7 @@ class SimulationEnvironment:
                 cage_offset=self.controller.params.cage_offset,
                 min_engaged_agents=self.enclosure_min_engaged_agents,
                 engaged_radius=self.enclosure_engaged_radius,
+                facing_clearance_m=self.enclosure_facing_clearance[c.object_id],
                 samples=self.enclosure_samples,
             )
             self.log.operational_enclosure[c.object_id].append(enclosure)
@@ -775,10 +787,18 @@ class SimulationEnvironment:
                     and witness["max_boundary_gap"] <= required_gap
                 )
                 certificate["runtime_eligible"] = bool(certificate.get("eligible")) and map_ok
+                certificate["runtime_domain_eligible"] = bool(
+                    certificate.get("domain_eligible")
+                ) and map_ok
                 runtime_failures = list(certificate.get("failure_reasons") or [])
+                runtime_domain_failures = list(
+                    certificate.get("domain_failure_reasons") or []
+                )
                 if not map_ok:
                     runtime_failures.append("boundary_map_epsilon")
+                    runtime_domain_failures.append("boundary_map_epsilon")
                 certificate["runtime_failure_reasons"] = runtime_failures
+                certificate["runtime_domain_failure_reasons"] = runtime_domain_failures
             cargo_summaries[cid] = entry
             entry["guarantee_certificate"] = certificate
 

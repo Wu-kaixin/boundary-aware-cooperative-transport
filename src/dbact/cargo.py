@@ -65,6 +65,7 @@ class Cargo:
         self.mass = max(self.surface_density * self.area, 1e-9)
         self.inertia = max(self.surface_density * polygon_second_moment(self.local_vertices, np.zeros(2)), 1e-9)
         self.initial_position = self.position.copy()
+        self._local_boundary_sample_cache: dict[int, tuple[np.ndarray, np.ndarray]] = {}
 
     # ------------------------------------------------------------------ #
     # geometry
@@ -83,7 +84,20 @@ class Cargo:
         return polygon_perimeter(self.local_vertices)
 
     def boundary_samples(self, count: int = 128) -> tuple[np.ndarray, np.ndarray]:
-        return sample_polygon_boundary(self.vertices, count=count)
+        sample_count = max(3, int(count))
+        cached = self._local_boundary_sample_cache.get(sample_count)
+        if cached is None:
+            local_points, local_normals = sample_polygon_boundary(
+                self.local_vertices,
+                count=sample_count,
+            )
+            cached = (local_points, local_normals)
+            self._local_boundary_sample_cache[sample_count] = cached
+        local_points, local_normals = cached
+        return (
+            rotate(local_points, self.angle) + self.position[None, :],
+            rotate(local_normals, self.angle),
+        )
 
     def closest_boundary(self, point: np.ndarray) -> tuple[np.ndarray, np.ndarray, float]:
         return closest_boundary_point_and_normal(self.vertices, point)
