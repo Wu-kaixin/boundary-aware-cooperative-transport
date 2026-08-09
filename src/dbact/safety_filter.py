@@ -95,6 +95,12 @@ class SafetyFilterParams:
     object_velocity_bound: float = 0.20
     # Number of bisection steps used by the last relaxation tier.
     barrier_scale_steps: int = 8
+    # "aggregate" represents a face by one smooth weighted plane; "pointwise" keeps
+    # one row per map sample, which is the pre-T4 construction and the ablation.
+    object_row_mode: str = "aggregate"
+    # Control period, used only to check that the sampled barrier condition is a
+    # valid discrete-time CBF: ``gamma_obj * dt <= 1``.
+    dt: float = 0.05
 
 
 @dataclass
@@ -169,6 +175,23 @@ class SafetyFilter:
                     f"safety filter r_safe={params.r_safe:.6f} disagrees with the C1 contract "
                     f"r_safe={contract.r_safe:.6f} (robot_radius - delta_max)"
                 )
+        if params.object_row_mode not in ("aggregate", "pointwise"):
+            raise ContractViolation(
+                f"object_row_mode must be 'aggregate' or 'pointwise', got {params.object_row_mode!r}"
+            )
+        # Discrete-time admissibility. ``h_{t+1} >= (1 - alpha) h_t`` with
+        # ``alpha = gamma_obj * dt`` is the discrete-time CBF condition the sampled
+        # row implements, and it is only a decrease condition for ``alpha <= 1``.
+        # Above that the row asks for more decrease than one step can contain, and
+        # the barrier is no longer a barrier -- it is a constraint the integrator
+        # cannot honour, which is a modelling error rather than a solver one.
+        if params.gamma_obj * params.dt > 1.0 + 1e-9:
+            raise ContractViolation(
+                f"discrete-time CBF admissibility violated: gamma_obj * dt = "
+                f"{params.gamma_obj * params.dt:.4f} > 1 (gamma_obj={params.gamma_obj:.4f}, "
+                f"dt={params.dt:.4f}). The sampled object row demands more decrease than a single "
+                "step can deliver; lower gamma_obj or the control period"
+            )
         self.stats = SafetyFilterStats()
 
     # ------------------------------------------------------------------ #
@@ -244,7 +267,9 @@ class SafetyFilter:
             return np.empty((0, 2)), np.empty(0), np.empty(0), np.empty(0)
 
         h = normal_offset - self.params.r_safe
-        if len(h) > self.params.max_object_rows:
+        if self.params.object_row_mode == "aggregate":
+            normals, h = self._aggregate_face(p, pts[near][same_face], normals, distance[same_face])
+        elif len(h) > self.params.max_object_rows:
             keep = np.argsort(h)[: self.params.max_object_rows]
             normals, h = normals[keep], h[keep]
 
@@ -259,6 +284,59 @@ class SafetyFilter:
         rhs = self._cap_to_reachable(normals, demand + self.params.rho)
         rhs_no_margin = self._cap_to_reachable(normals, demand)
         return normals, rhs, rhs_no_margin, h
+
+    def _aggregate_face(
+        self, position: np.ndarray, points: np.ndarray, normals: np.ndarray, distance: np.ndarray
+    ) -> tuple[np.ndarray, np.ndarray]:
+        """One smooth plane for the face, instead of one row per map sample.
+
+        This is the discrete-time half of the barrier problem, and it is a
+        *discontinuity* rather than a magnitude. The sampled condition
+        ``n^T u >= n^T v_obj - gamma h + rho`` is a valid discrete-time CBF for
+        ``gamma dt <= 1`` provided ``h`` evolves as ``h + dt n^T (u - v_obj)``. It
+        does not. ``h`` is read off a *set* of map cells, and the set changes: a
+        carve deletes the nearest cell, a new return creates one, and the row that
+        was binding is replaced by a different row a whole voxel away. ``h`` then
+        steps by up to the voxel size with the robot stationary, and the honest
+        robust margin for that is ``rho = W/dt`` -- 0.25 m/s for a 0.0125 m jump at
+        20 Hz, larger than the speed limit, which is why no amount of ``rho`` could
+        buy feasibility.
+
+        Aggregating removes the discontinuity at its source. The face is
+        represented by a single confidence- and proximity-weighted plane,
+
+            n_bar = normalize( sum_k g_k n_k ),
+            d_bar = ( sum_k g_k n_k^T b_k ) / ( sum_k g_k ),
+            h_bar = n_bar^T p - d_bar - r_safe,
+
+        so adding or removing one cell moves the plane by ``O(g_k / sum g)``
+        instead of switching which sample defines the constraint. The face filter
+        has already restricted the set to one face, which is what makes a single
+        plane the right summary rather than a convex-hull approximation of a
+        non-convex object.
+
+        It also leaves the object family trivially feasible: one half-plane
+        intersected with the speed ball is non-empty whenever the reachability cap
+        holds, so the only way to an empty set is a conflict with the inter-robot
+        rows.
+        """
+        if len(normals) == 0:
+            return normals, np.empty(0)
+        scale = max(self.params.object_row_window, 1e-6)
+        weight = np.exp(-0.5 * (distance / scale) ** 2)
+        total = float(np.sum(weight))
+        if total <= 1e-12:
+            weight = np.ones(len(normals))
+            total = float(len(normals))
+
+        stacked = weight @ normals
+        norm = float(np.linalg.norm(stacked))
+        if norm <= 1e-9:
+            return np.empty((0, 2)), np.empty(0)
+        n_bar = stacked / norm
+        offset = float(np.sum(weight * np.einsum("ij,ij->i", normals, points)) / total)
+        h_bar = float(np.dot(n_bar, position)) - offset - self.params.r_safe
+        return n_bar.reshape(1, 2), np.array([h_bar])
 
     def _cap_to_reachable(self, normals: np.ndarray, rhs: np.ndarray) -> np.ndarray:
         """Cap the object rows at what a speed-limited robot can actually deliver.

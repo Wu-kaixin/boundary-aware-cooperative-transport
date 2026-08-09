@@ -148,11 +148,54 @@ def test_rows_from_the_far_face_of_a_thin_part_are_dropped():
     assert result.object_rows == 1
 
 
-def test_object_row_count_is_capped():
-    f = make_filter(max_object_rows=4)
+def test_object_row_count_is_capped_in_pointwise_mode():
+    f = make_filter(max_object_rows=4, object_row_mode="pointwise")
     points, normals = flat_boundary(0.0, count=41, spacing=0.01)
     result = f.filter_velocity(np.array([0.0, 0.20]), np.array([0.0, -0.1]), (), points, normals)
     assert result.object_rows == 4
+
+
+def test_aggregate_mode_summarises_a_face_as_one_row():
+    f = make_filter(object_row_mode="aggregate")
+    points, normals = flat_boundary(0.0, count=41, spacing=0.01)
+    result = f.filter_velocity(np.array([0.0, 0.20]), np.array([0.0, -0.1]), (), points, normals)
+    assert result.object_rows == 1
+
+
+def test_aggregate_mode_is_continuous_when_a_map_cell_disappears():
+    """The point of the aggregate: ``h`` must not step when the *set* of map cells
+    changes. Pointwise, deleting the cell that happened to be nearest replaces the
+    binding row with one a whole voxel away and ``h`` jumps with the robot
+    stationary -- which is the disturbance no affordable ``rho`` can absorb."""
+    # A sparse face with one cell standing proud of the rest -- the situation a
+    # voxel map is in, and the one carving creates when it deletes exactly that
+    # cell. On a uniformly flat face every sample reports the same offset and
+    # deleting one changes nothing either way, so the test would measure nothing.
+    xs = (np.arange(7) - 3) * 0.06
+    ys = np.zeros(len(xs))
+    ys[3] = 0.014
+    points = np.column_stack([xs, ys])
+    normals = np.tile([0.0, 1.0], (len(points), 1))
+    position = np.array([0.0, 0.20])
+    dropped = np.arange(len(points)) != 3
+
+    def barrier(mode: str, mask) -> float:
+        f = make_filter(object_row_mode=mode)
+        rows = f._object_rows(position, points[mask], normals[mask], np.zeros(2))
+        return float(np.min(rows[3]))
+
+    aggregate_step = abs(barrier("aggregate", np.ones(len(points), bool)) - barrier("aggregate", dropped))
+    pointwise_step = abs(barrier("pointwise", np.ones(len(points), bool)) - barrier("pointwise", dropped))
+    # The aggregate moves by O(weight of the lost cell / total weight); the
+    # pointwise minimum moves by the full gap to the next-lowest sample.
+    assert pointwise_step > 0.01
+    assert aggregate_step < 0.4 * pointwise_step
+
+
+def test_a_barrier_that_cannot_decrease_in_one_step_is_rejected():
+    """``gamma_obj * dt <= 1`` is what makes the sampled row a discrete-time CBF."""
+    with pytest.raises(ContractViolation, match="discrete-time CBF admissibility"):
+        make_filter(gamma_obj=30.0, dt=0.05)
 
 
 def test_moving_object_velocity_enters_the_row():

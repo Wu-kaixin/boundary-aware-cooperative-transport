@@ -213,7 +213,57 @@ against a 31.1 N breakaway. Those configurations are *not transportable by their
 own quorum*, and the contract says so at construction instead of after 500 frames.
 
 Measured effect: scaled-barrier events on the worst seed fell from 32 to 7.
-**Not to zero** — see below.
+**Not to zero**, because C5 removes the systematic cause and leaves a transient —
+which is what the second half of T4 is about.
+
+## T4, second half: the barrier has to be a smooth function of the map
+
+C5 fixes *where* the press stops. What remained was a **discontinuity**, and it is
+worth separating the two because only one of them is a magnitude.
+
+The sampled row `n^T u >= n^T v_obj - gamma_obj h + rho` is a valid discrete-time
+CBF — it enforces `h_{t+1} >= (1 - gamma_obj dt) h_t` — **provided `h` evolves as
+`h + dt n^T (u - v_obj)`**. It did not. `h` was read off a *set* of map cells and
+the set changes: a carve deletes the cell that happened to be nearest, a fresh
+return creates one, and the row that was binding is replaced by a different row a
+whole voxel away. `h` then steps with the robot stationary. The honest robust
+margin for a jump `W` is `rho = W/dt`, which for a 0.0125 m jump at 20 Hz is
+**0.25 m/s — larger than the speed limit**. That is why no value of `rho` could
+ever have bought feasibility, and why this was never a tuning problem.
+
+`object_row_mode: aggregate` removes the discontinuity at its source. Each face is
+summarised by one confidence- and proximity-weighted plane
+
+```
+n_bar = normalize( sum_k g_k n_k ),
+d_bar = ( sum_k g_k n_k^T b_k ) / ( sum_k g_k ),
+h_bar = n_bar^T p - d_bar - r_safe ,
+```
+
+so adding or removing a cell moves the constraint by `O(g_k / sum g)` instead of
+switching which sample defines it. The face filter has already reduced the set to
+a single face, which is what makes one plane the right summary rather than a
+convex-hull approximation of a non-convex object. It also leaves the object family
+trivially feasible — one half-plane against the speed ball — so an empty set can
+now only come from a conflict with the inter-robot rows.
+
+`gamma_obj * dt <= 1` is asserted at construction: above it the row asks for more
+decrease than one step can deliver, which is a modelling error rather than a
+solver one.
+
+| | pointwise (pre-T4) | aggregate |
+| --- | --- | --- |
+| scaled-barrier events, 12 seeds | **293** | **54** |
+| per seed | 7, 14, 0, 60, 31, 4, 0, 39, 15, 94, 29, 0 | 0, 13, 3, 25, 0, 11, 1, 0, 0, 1, 0, 0 |
+| seeds completely clean | 3 / 12 | **6 / 12** |
+| seeds with <= 3 events | 5 / 12 | **9 / 12** |
+| failures on the barrier alone | 5 | **3** |
+| cross-track, mean | 0.161 m | 0.192 m |
+| `J`, mean | 1.474 m | 1.509 m |
+
+54 events across roughly 84,000 solves is **0.064%**. The remaining three seeds
+carry almost all of it, and the cost is a slightly softer constraint and therefore
+a little more lateral slip.
 
 ## Measured, 12 seeds, run to completion
 

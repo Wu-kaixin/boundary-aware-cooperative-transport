@@ -132,6 +132,8 @@ class DBACTParams:
     object_row_range: float = 0.60
     object_row_window: float = 0.28
     object_row_face_cosine: float = 0.26
+    object_row_mode: str = "aggregate"
+    dt: float = 0.05
     object_velocity_bound: float = 0.20
     recovery_fraction: float = 0.6
 
@@ -352,6 +354,8 @@ class DBACTController:
                 object_row_window=params.object_row_window,
                 object_row_inner_limit=params.robot_radius,
                 object_row_face_cosine=params.object_row_face_cosine,
+                object_row_mode=params.object_row_mode,
+                dt=params.dt,
                 object_velocity_bound=params.object_velocity_bound,
                 recovery_fraction=params.recovery_fraction,
             ),

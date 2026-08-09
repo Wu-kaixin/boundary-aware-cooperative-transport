@@ -259,7 +259,11 @@ def tasks_from_config(cfg: dict, cargoes: list[Cargo], seed: int = 0) -> dict[st
 
 
 def controller_params_from_config(cfg: dict) -> DBACTParams:
-    return DBACTParams.from_dict(cfg.get("controller", {}))
+    controller = dict(cfg.get("controller", {}))
+    # The safety filter needs the control period to check discrete-time
+    # admissibility of the object barrier, and dt is a top-level scenario field.
+    controller.setdefault("dt", float(cfg.get("dt", 0.05)))
+    return DBACTParams.from_dict(controller)
 
 
 def contact_params_from_config(cfg: dict) -> ContactParams:
