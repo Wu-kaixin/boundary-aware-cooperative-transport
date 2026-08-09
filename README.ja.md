@@ -1,220 +1,337 @@
 <div align="center">
 
-# DBACT: Decentralized Boundary-Aware Cooperative Transport
+# DBACT：分散型・境界認識協調搬送
 
-再現可能な分散型マルチロボット囲い込み・搬送実験。指標、レポート、MAS dry-run、可視化を含みます。
+形状が未知の物体を探索し、包囲し、搬送する —— すべての主張に測定を添えて。
 
 [English](README.md) | [繁體中文](README.zh-TW.md) | [日本語](README.ja.md)
 
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
 ![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg)
-![Tests](https://img.shields.io/badge/Tests-200%20passed-brightgreen.svg)
-![Version](https://img.shields.io/badge/Version-0.2.0-informational.svg)
+![Tests](https://img.shields.io/badge/Tests-287%20passed-brightgreen.svg)
+![Branch](https://img.shields.io/badge/Branch-Claude--boundary--aware--closed--loop--v1-informational.svg)
 ![Visualization](https://img.shields.io/badge/Visualization-Matplotlib-orange.svg)
 ![Platform](https://img.shields.io/badge/Platform-MAS%20%7C%20RoboMaster%20S1-lightgrey.svg)
 
 </div>
 
-> **現在の状態（ブランチ `A-boundary-aware`）。** 研究パイプラインは、層をまたぐ契約層
-> C1–C3 と S1–S7 の各段階として再構築されました。本リポジトリの数値を引用する前に
-> [`docs/REFACTOR_2026-08-08.md`](docs/REFACTOR_2026-08-08.md) を参照してください。
-> **有向搬送は未達成**です。閉ループは目標方向に対して正の進捗（目標との角度 34.8°、
-> リファクタ前は 170.11°）を生みますが、タスク閾値未満で準静的ケージング平衡に停止します。
-> 境界包囲・貫通ゼロの安全性・スラック無しの硬 CBF-QP はいずれも成立しています。
-> 物体境界 CBF 導入以前に測定した被覆率の数値はすべて撤回します。
+移動ロボットのチームが作業空間に置かれる。物体がどこにあるか、どんな形か、
+どれくらいの大きさか、動かすのに何台必要か —— 誰も教えない。ロボットたちは誰かが
+物体を見つけるまで作業空間を掃引し、その事実を中継し、集結し、推定しながら形づくる
+境界の周りにケージを組み、押し、サンプリングされた方向へサンプリングされた距離だけ
+動かし、制動し、停止する。
 
-DBACT は **Decentralized Boundary-Aware Cooperative Transport** の研究プロトタイプです。物体の完全な形状、中心、半径、必要なチーム規模がコントローラに与えられていない場合に、複数の移動ロボットが有用な囲い込み・搬送構造を形成できるかを調べます。
+**制御経路のどこもシミュレータを読まない。** バリア行も、速度推定も、停止条件も。
+各ロボットは自分自身の測距リターン、自分自身のボクセル地図、そして 1 ホップ分の
+近傍メッセージだけで動作する。
 
-このリポジトリは、独立したシミュレーションスタック、境界認識型の局所制御、指標、GitHub で表示可能な可視化素材、MAS-compatible controller adapter、OptiTrack read-only tooling、保守的な RoboMaster S1 command smoke tests を統合しています。
-
-> このリポジトリは研究プロトタイプであり、完成済みの実機搬送製品ではありません。シミュレーションと dry-run は動作していますが、完全な実機搬送は段階的な検証目標です。
-
----
-
-## ビジュアルショーケース
-
-![DBACT moving cargo demo](docs/assets/dbact-moving-cargo.gif)
-
-> シミュレーション replay から生成され、リポジトリに追跡されている GIF です。ローカルの `runs/*.gif` とは異なり、`docs/assets/` にコミットされているため GitHub で直接表示されます。
-
-![DBACT density and local CVT frame](docs/assets/dbact-density-cvt-frame.png)
-
-> 未知 cargo、局所 CVT / Voronoi 構造、ロボット安全領域、境界認識密度曲面を示す論文風フレームです。
+> **ブランチ `Claude-boundary-aware-closed-loop-v1`。** 閉ループは端から端まで動作し、
+> シードごとに測定されている。本書は「実証されたこと」と「実証されていないこと」を
+> 同じ詳しさで報告する。完全な導出、失敗した試み、撤回は
+> [`docs/CLOSED_LOOP_D.md`](docs/CLOSED_LOOP_D.md) にある。
 
 ---
 
-## メディアギャラリー
+## 閉ループ
 
-以下のインラインメディアはすべて `docs/assets/` 下のコミット済みファイルを参照しているため、ローカル run artifact がなくても GitHub で表示できます。
+```text
+SEARCH ──▶ DISCOVER ──▶ ENCLOSE ──▶ CONTACT_READY ──▶ TRANSPORT ──▶ BRAKE ──▶ HOLD
+   │           │            │             │               │           │        │
+ レーン      物体         境界認識       定足数が接触帯    自己推定に   自己推定  リング
+ 掃引        トークン中継 CVT 被覆       に滞留           よる押圧     で停止    を解放
+```
 
-| Animation | Density + Local CVT |
+すべての遷移は**測定量**に対するガードであり、フレーム番号に対するものでは決してない。
+スーパーバイザは単調である：貨物が滑るたびに包囲品質は落ちるので、後戻りする機械は
+スティックスリップの周波数でチャタリングすることになる。
+
+---
+
+## ビジュアル
+
+| 近距離・閉ループ（seed 2） | 遠距離・探索（seed 7） |
 | --- | --- |
-| <img src="docs/assets/dbact-moving-cargo.gif" alt="DBACT moving cargo animation" width="100%"> | <img src="docs/assets/dbact-density-cvt-frame.png" alt="DBACT density and local CVT frame" width="100%"> |
+| <img src="docs/assets/closed_loop_d_seed2.gif" alt="閉ループ搬送 seed 2" width="100%"> | <img src="docs/assets/search_d_seed7.gif" alt="遠距離レーン掃引と発見 seed 7" width="100%"> |
+| 発見・包囲・方向性搬送・停止。描かれているのは**あるロボット自身の境界地図**であり、真の輪郭ではない —— 真の輪郭は隣に描かれ、推定の誤差が隠されずに見えるようにしてある。 | 16 台が静的なレーン分割を掃引し、誰かが物体を見つけるとトークンを中継して集結する。 |
 
-| Trajectory | Coverage Curve |
+| 閉ループ seed 4 | 閉ループ seed 8 |
 | --- | --- |
-| <img src="docs/assets/dbact-trajectory.png" alt="DBACT trajectory" width="100%"> | <img src="docs/assets/dbact-coverage-curve.png" alt="DBACT coverage curve" width="100%"> |
+| <img src="docs/assets/closed_loop_d_seed4.gif" alt="閉ループ搬送 seed 4" width="100%"> | <img src="docs/assets/closed_loop_d_seed8.gif" alt="閉ループ搬送 seed 8" width="100%"> |
 
-| Final Snapshot | Asset Manifest |
+| 密度と局所 CVT | ロボット軌跡 |
 | --- | --- |
-| <img src="docs/assets/dbact-final-snapshot.png" alt="DBACT final snapshot" width="100%"> | [`docs/assets/README.md`](docs/assets/README.md) |
+| <img src="docs/assets/dbact-density-cvt-frame.png" alt="境界認識密度と局所 CVT" width="100%"> | <img src="docs/assets/dbact-trajectory.png" alt="ロボット軌跡" width="100%"> |
 
-生成された PNG、GIF、CSV、MP4 は通常 `runs/` または `platforms/mas_public/data/` に保存され、Git では意図的に無視されます。GitHub 表示用には、選定した図を `docs/assets/` にコピーするか、大きな動画を GitHub Releases で公開してください。
+シミュレーションと描画は分離されている。実行は `replay.npz` を書くだけで一切描画せず、
+図は後からそのファイルから作られる。したがって実行が報告するフレームレートは
+Matplotlib ではなく**制御ループ**のフレームレートである。
 
 ---
 
-## プロジェクト概要
+## 実証されたこと
 
-| 項目 | 詳細 |
+### 近距離：包囲と方向性搬送、12 シード、完了まで実行
+
+`configs/sim/d/l_shape_closed_loop.yaml`。チームは最初から物体の周りに分布している。
+各エピソードは自分のタスクをサンプリングする：方向 `θ ~ U(0, 2π)`、距離
+`L ~ U(0.90, 1.60)` m。終点で物体とそのリングが作業空間に収まらない場合は棄却する。
+**12 シードすべてが整定し、ウォッチドッグに達したものはない。**
+
+| 量 | 平均 ± 標準偏差 | 最小–最大 | 判定 |
+| --- | --- | --- | --- |
+| 方向進行 `J` | 1.474 ± 0.231 m | 1.110 – 1.853 | `>= L`、12/12 |
+| 効率 `J/‖dx‖` | 0.993 ± 0.008 | 0.975 – 1.000 | `>= 0.80`、合格 |
+| 方向誤差 | 5.8 ± 3.9° | 1.3 – 12.9 | `<= 20°`、合格 |
+| 横偏差 | 0.161 ± 0.122 m | 0.037 – 0.387 | `<= 0.15`、**5 件超過** |
+| 厳密被覆率（ピーク） | 0.981 ± 0.027 | 0.938 – 1.000 | `>= 0.70`、合格 |
+| ロボット間最小距離 | 0.281 ± 0.002 m | 0.280 – 0.285 | `>= 0.28`、合格 |
+| 最小符号付きクリアランス | 0.085 ± 0.005 m | 0.077 – 0.092 | `>= 0`、合格 |
+| 接触準備完了フレーム | 75.5 ± 8.4 | 57 – 89 | 導出 |
+| HOLD フレーム | 274.0 ± 102.0 | 169 – 530 | 導出 |
+
+ソルバ：**全シードでフォールバック 0、実行不能 0。** 複合判定（`G500`、全条件同時）は
+**2 / 12** で合格。10 件の不合格のうち 5 件はスケール済みバリア単独、1 件は横偏差単独で、
+他のすべての条件は 12 シードすべてで合格している。
+
+### 遠距離：一度も教えられていない物体をチームが見つける、8 シード
+
+`configs/sim/d/l_shape_search.yaml`。貨物中心は作業空間が許す範囲で任意にサンプリングされ、
+`require_initial_ignorance` は「ロボットが自分のセンサ範囲内から開始してしまう」抽選を
+棄却する —— したがって検出時間は配置ではなく**探索**を測る。
+
+`N` 台中 `i` 番目のロボットは 1 本の縦レーンを担当し、端から端まで歩く。7.1 m に対する
+16 本のレーンと 1.20 m のセンサ半径は、作業空間の任意の点がいずれかのロボットの掃引幅に
+入ることを意味し、1 往復で被覆できる：
+
+```text
+T_cover  <=  ( d_to_lane + H ) / v_search  =  ( <=4 + 7.1 ) / 0.28  ~  510 フレーム
+```
+
+これは物体の位置に依存しない被覆の**上界**であり、以前の外向きスパイラルには
+提示できなかったものである。
+
+| 量 | 測定値 |
 | --- | --- |
-| Project name | DBACT: Decentralized Boundary-Aware Cooperative Transport |
-| Purpose | 未知形状物体に対する局所境界認識型の囲い込み・搬送を検証する。 |
-| Core stack | Python 3.9+, NumPy, PyYAML, Matplotlib, pytest |
-| Main scenarios | `paper_like_irregular_moving_cargo.yaml`, `l_shape.yaml`, `nonconvex.yaml`, `multi_object.yaml` |
-| Output types | CSV trajectories, coverage metrics, JSON summaries, PNG figures, GIF animations |
-| Integration path | DBACT simulation -> MAS dry-run -> OptiTrack read-only -> RoboMaster S1 smoke test |
-| Current status | シミュレーションと dry-run は動作中。完全な実機実験は未完了。 |
+| `T_detect` | **74.6 ± 80.3 フレーム**（上界 ~510 に対して） |
+| `T_contact_ready` | 344 ± 135 フレーム |
+| 厳密被覆率ピーク | 0.783 ± 0.214 |
+| `d_min` 違反 / ウォッチドッグ / ソルバ・フォールバック | **0 / 0 / 0** |
+
+検出は最悪ケースのおよそ 7 分の 1 に収まる：物体は通常、最後に訪れるレーンにはいない。
+全シードが検出に成功し、全エピソードがウォッチドッグではなく整定によって終了した。
 
 ---
 
-## 特徴
+## 読む価値のある部分：遠距離のギャップをどう埋めたか
 
-- **分散型境界認識制御**：ロボットは全体物体形状ではなく、局所境界観測と近傍状態を使います。
-- **未知物体の囲い込み**：コントローラは `cargo.center`、`cargo.radius`、`cargo.vertices`、closest-boundary query を直接使いません。
-- **局所 CVT 割り当て**：各ロボットは自分自身と近傍ロボットから局所 weighted centroid を計算します。
-- **CBF-style safety filtering**：ロボット間距離制約と速度制限により、囲い込み過程を保守的にします。
-- **可視化優先ワークフロー**：軌跡、被覆率カーブ、最終スナップショット、論文風フレーム、任意の GIF を出力します。
-- **ハードウェア検証への段階的経路**：MAS adapter、OptiTrack read-only logging、RoboMaster S1 smoke tests を含みます。
+片側の壁から到着する場合、接触準備完了までかつては **591 ± 234** フレームを要していた
+（リング開始なら **75 ± 8**）。3 つの機構が実装・測定された —— リング方位、
+外延を修正したリング方位、2 つの偵察密度での壁沿い走行 ——
+**どれも単純な直行リコールに勝てなかった。** いずれも「進入路上でロボットがどこへ行くか」
+を変えるものであり、問題のフレームは**すでに到着している**チームが費やしている。
+
+そこで次の一手はヒューリスティクスの 4 つ目ではなく、計装だった。
+
+<img src="docs/assets/d10-post-detection-stages.png" alt="シードごとの発見後ステージ時間" width="100%">
+
+検出から接触準備完了までの各フレームを、測定状態に対する排他的カスケードでラベル付けした。
+このパイプラインが設計上想定していたステージ —— *定足数が到着し、境界が地図化されている* ——
+は **一度も現れない：4128 フレーム中 0 フレーム。**
+
+<img src="docs/assets/d10-coverage-and-gap.png" alt="和集合地図被覆率・厳密被覆率・最大未観測弧" width="100%">
+
+理由は 1 つの測定に表れる：**7.2 m の周長のうち 4.34 ± 0.79 m が終始どのロボットの地図にも
+入っておらず、0.72 m を下回ることが一度もない。** 再配置ルールの要求の 84.5% は候補を
+返さなかった —— 境界が占有されていたからではなく、そこに存在しなかったからである。
+
+これはソースから直接読み取れる事実と一致する。地図が空でないロボットにとって、
+到着後の制御経路上の*すべての*目標 —— CVT 重心、接近目標、再配置目標 —— は
+自分の地図点のアフィン関数であり、したがって到達可能な目標集合は**観測済み**境界の
+オフセットリングに含まれる。誰も見ていない境界を制御器が要求することは不可能だった。
+
+**修正は同じ密度の中の 1 項**であり、新しい航法則ではない：
+
+```text
+φ  =  φ_boundary  +  λ_e · φ_explore
+```
+
+`φ_explore` は、観測済み範囲の端から接線方向に 1 歩進んだ位置に需要を置く。
+物体半径も形状事前分布も真値多角形も不要で、自動的に消える（完全に地図化された輪郭では
+追加される目標はちょうど 0 個）。しかも**密度**項なので、どのロボットが行くかは既存の
+有限範囲 CVT が決める —— 誰も新しいモードに入らず、安全層はこれを一切見ない。
+
+| A/B、8 シード、パラメータ 1 つだけの差 | `λ_e = 0` | `λ_e = 6` |
+| --- | --- | --- |
+| 裏側の発見 | 281 ± 284 | **82 ± 42** |
+| 接触準備完了 | 591 ± 234 | **344 ± 135** |
+| HOLD | 1131 ± 646 | **642 ± 284** |
+| 厳密被覆率ピーク | 0.689 ± 0.256 | **0.783 ± 0.214** |
+| ロボット間最小距離 / ウォッチドッグ / フォールバック | 0.280 / 0 / 0 | 0.280 / 0 / 0 |
+| スケール済みバリア事象 | 1415 | **975** |
+
+8 シード中 7 つが改善。**1 つは 128 フレーム悪化した**が、平均に埋もれさせず記録してある。
+
+**ゲインを選んだのはソルバであって時計ではない。** 接触準備完了は `λ_e = 60` まで改善し続けるが、
+`λ_e = 20` では 3 シード中 2 つでロボット間バリアが破れ（`d_min = 0.28` に対して 0.207 と
+0.213 m）、**589 回の実行不能求解**が発生する（`λ_e = 6` ではゼロ）。
+探索需要はロボットをリングから引き剥がす。ある重みを超えると、分離項が保てる以上の
+強さで引いてしまう。
+
+### 保存された否定的結果
+
+<img src="docs/assets/d10-gate-tradeoff.png" alt="包囲ゲート：遷移遅延と、それが証明する包囲品質" width="100%">
+
+`DISCOVER → ENCLOSE` のガードは**単一の最良ロボット**自身の地図を読む。チームレベルの
+主張にはふさわしくない量に見えるため、4 系統の代替が実装された ——
+観測境界**法線**に対する最大値合意に基づく、参照点不要の包囲証明書を含む。
+これこそ「あらゆる方向に対して、それに対抗する面に誰かが立っている」を意味する量である。
+
+制御経路のどこも `ENCLOSE` を読まないため、反実仮想は選別ではなく**厳密**である：
+
+```text
+T_contact_ready  =  max( T_gate, T_streak20 )  -  1        （8 シードすべてで残差 0）
+```
+
+これが全体に硬い上限を与える：**フレーム 0 で発火する神託ゲートですら、343.8 フレームから
+38.6 フレーム（11.2%）しか削れない。** 実質的な包囲内容をもつ候補はいずれも少なくとも
+1 シードで発火せず、単調機械のもとではそれは遅延ではなくデッドロックである。
+よってゲートは**変更しない**。証明書はテスト付き・未使用のままツリーに残す。
+正直な測定結果が「今日これを採用すれば 8 回中 2 回がデッドロックする」だからである。
+
+その図の右下 —— より早く**かつ**実質的な包囲を証明する領域 —— は空である。それが結果だ。
 
 ---
 
-## 結果と可視化
+## **実証されていない**こと
 
-### Stage 1 未知多角形囲い込み
+結果と同じくらい率直に述べる。勝ち星だけを並べた README は何の証拠にもならないからだ。
 
-Stage 1 は、コントローラが完全な cargo 幾何へ直接アクセスしなくても、任意多角形 cargo の囲い込みを形成できることを検証します。
+- **遠距離の複合判定は 8 シード中 0 件合格。** 発見と包囲は改善したが、品質条件
+  （とりわけ横偏差）は改善しておらず、D10 はそれらを狙ってもいない。
+- **横偏差は近距離の主要な不合格要因。** 12 シードで測定すると
+  `max cross-track = J · sin(方向誤差)`、相関 0.968 —— つまり `J ≈ 1.5 m` における
+  「横偏差 ≤ 0.15 m」は*すなわち*「押している間ずっと合力方向を 5.7° 以内に保て」である。
+  実測の方向誤差は 5.71°：ループは自らの要求のちょうど上に乗っており、これは調整不足では
+  なく**権限の限界**にあるループの兆候である。
+- **一部の目標方向では押しの定足数が決して形成されない。** その方向の後続弧が
+  L 字の凹んだ切り欠きにあたるためである。
+- **搭載進行推定は 10–15% 低く偏っている**ため、チーム自身の推定が「到着」と言う前に
+  貨物は目標を通り過ぎている。
+- **推定するのは並進のみ。ヨーは推定しない。** これは近似ではなく明示された限界である：
+  推定値は安全制約に入るので、誤差限界なしに SE(2) を主張することは未測定量を
+  バリアの中に入れることを意味する。
+- **形状は 1 種類のみ。** ここにあるすべてはスケール 1.5 の L 字である。
+- **物理搬送は未実施。** シミュレーションと MAS ドライランの経路は動作するが、
+  ハードウェアは段階的検証の目標のままである。
 
-| Scenario | Cargo Type | Agents | Steps | Final Coverage | Recruited Agents | Min Inter-Agent Distance |
-| --- | --- | ---: | ---: | ---: | ---: | ---: |
-| `baseline_unknown_polygon_caging` | arbitrary polygon | 12 | 900 | 0.7625 | 6 / 12 | 0.3446 m |
-| `one_rectangle_polygon_caging` | rectangle polygon | 12 | 900 | 0.7000 | 6 / 12 | 0.3446 m |
-| `one_nonconvex_polygon_caging` | nonconvex polygon | 14 | 1000 | 0.90625 | 9 / 14 | 0.3393 m |
+### 撤回
 
-### Tight Baseline 結果
+本書の以前の版では、遠距離 8 シードのうち 4 つが `d_min` に違反したと報告していた。
+それは誤りだった：判定が、**設計上ちょうど有効になっている**バリアに対して浮動小数点を
+厳密比較しており、QP の演算の最下位ビットを衝突として報告していた。実測の不足量は
+1e-16 〜 3e-8 m。35 ナノメートルは衝突ではない。この誤りの代償は、一度も起きていない
+安全問題に向けた一巡の作業だった。だからこの教訓は黙って修正せず記録する：
+**制御器が限界まで能動的に押し込む量に対する判定には、演算精度に見合った許容差が要る。**
 
-Tight baseline は cage offset を小さくし、density field を狭めることで囲い込みのコンパクトさを改善します。
-
-| Scenario | Cargo Type | Agents | Steps | Final Coverage | Recruited Agents | Min Inter-Agent Distance |
-| --- | --- | ---: | ---: | ---: | ---: | ---: |
-| `baseline_unknown_polygon_caging_tight` | arbitrary polygon | 12 | 900 | 0.95625 | 11 / 12 | 0.3450 m |
-| `one_rectangle_polygon_caging_tight` | rectangle polygon | 12 | 900 | 0.99375 | 9 / 12 | 0.3450 m |
-| `one_nonconvex_polygon_caging_tight` | nonconvex polygon | 14 | 1000 | 0.9750 | 13 / 14 | 0.3370 m |
-
-### Moving Irregular Cargo Demo
-
-| Metric | Value |
-| --- | ---: |
-| Final time | 25.95 s |
-| Final coverage | 0.83125 |
-| Cargo displacement | 1.539 m |
-| Recruited agents | 6 |
-| Minimum inter-agent distance | 0.3571 m |
-| Mean path length | 4.6999 m |
-
-**解釈**
-
-- Tight caging は Stage 1 benchmark で境界被覆率を改善し、最小ロボット間距離を 0.33 m 以上に保ちます。
-- Moving-cargo demo は囲い込みと搬送に似た変位を示しますが、物理接触ダイナミクスはまだ簡略化されています。
-- 現在の結果はシミュレーションと MAS dry-run の証拠であり、完全な実世界搬送の主張ではありません。
+物体境界バリアが存在する以前に測定されたすべての被覆率も撤回する。当時は貨物の**内部**に
+立っているロボットもその境界を被覆しているとみなされていた。バリアを無効にすると
+16 台中 9 台が物体内部に入るのに、旧指標は 1.000 を報告し続ける。上記の被覆率はすべて
+**厳密**被覆率であり、中心が貨物の外にあるロボットのみを数える。
 
 ---
 
 ## クイックスタート
 
-### 1. クローン
-
 ```bash
 git clone https://github.com/Wu-kaixin/boundary-aware-cooperative-transport.git
 cd boundary-aware-cooperative-transport
+python -m venv .venv && source .venv/bin/activate      # PowerShell：.\.venv\Scripts\Activate.ps1
+python -m pip install -U pip && python -m pip install -e ".[dev]"
+export PYTHONPATH=src                                   # PowerShell：$env:PYTHONPATH = "src"
 ```
 
-### 2. 環境作成
-
-Conda：
+閉ループを 1 エピソード実行し、描画する：
 
 ```bash
-conda create -n dbact python=3.10
-conda activate dbact
-python -m pip install --upgrade pip
-pip install -r requirements.txt
-pip install -e .[dev]
+python scripts/run_closed_loop.py --seed 2 --until-settled --out runs/d_seed2
 ```
-
-Windows PowerShell virtual environment：
-
-```powershell
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-python -m pip install -U pip
-python -m pip install -e ".[dev]"
-```
-
-macOS / Linux virtual environment：
 
 ```bash
-python -m venv .venv
-source .venv/bin/activate
-python -m pip install -U pip
-python -m pip install -e ".[dev]"
+python scripts/render_closed_loop.py runs/d_seed2 --stride 2 --fps 25
 ```
 
-### 3. One-line Smoke Experiment
+遠距離探索シナリオ：
 
 ```bash
-python -m dbact_sim.run_sim --config configs/sim/paper_like_irregular_moving_cargo.yaml --steps 520 --output runs/paper_like_irregular_moving_cargo --animate
+python scripts/run_closed_loop.py --config configs/sim/d/l_shape_search.yaml --seed 7 --until-settled --out runs/search_seed7
 ```
 
-重要な出力：
+テスト：
 
-- `runs/paper_like_irregular_moving_cargo/animation.gif`
-- `runs/paper_like_irregular_moving_cargo/trajectory.png`
-- `runs/paper_like_irregular_moving_cargo/final_snapshot.png`
-- `runs/paper_like_irregular_moving_cargo/coverage_rate_curve.png`
-- `runs/paper_like_irregular_moving_cargo/metrics.json`
-- `runs/paper_like_irregular_moving_cargo/figures/FIG_520.png`
+```bash
+python -m pytest tests -q
+```
+
+---
+
+## 本書の数字を再現する
+
+上の各表はそれぞれ 1 コマンドで得られる。出力は Git 無視の `runs/` に書かれる。
+
+```bash
+python scripts/evaluate_closed_loop.py --seeds 0..11 --until-settled --out runs/d_sweep
+```
+
+```bash
+python scripts/diagnose_redeployment.py --seeds 0..7 --out runs/d10_diag
+```
+
+```bash
+python scripts/ab_explore.py --seeds 0..7 --gains 0,6 --out runs/d10_ab
+```
+
+```bash
+python scripts/diagnose_enclosure_gate.py --seeds 0..7 --out runs/d10_enc
+```
+
+```bash
+python scripts/analyse_enclosure_gate.py --run runs/d10_enc --figure
+```
+
+契約チェック（制御器が満たしえない構成を拒否する）：
+
+```bash
+python scripts/check_contracts.py --config configs/sim/d/l_shape_search.yaml
+```
 
 ---
 
 ## 仕組み
 
-1. **シナリオ設定を読み込む**
-   YAML は領域サイズ、cargo 幾何、ロボット初期状態、センサ範囲、通信範囲、搬送方向、制御パラメータを定義します。
-
-2. **局所境界観測を生成する**
-   シミュレータは cargo 幾何から局所境界観測を生成しますが、コントローラは完全な cargo 形状を直接消費しません。
-
-3. **cage target を作る**
-   観測された各境界点 `b` を外向きにずらします。
-
-```text
-q_target = b + d_cage * n_out
-```
-
-4. **境界認識密度を構築する**
-   cage target は Gaussian density peak となり、有用な境界近傍位置へロボットを引き寄せます。
-
-5. **局所 CVT 割り当てを実行する**
-   各ロボットは自分自身と通信範囲内の近傍ロボットから局所 weighted centroid を計算します。
-
-6. **安全フィルタを適用する**
-   CBF-style filter はロボット間距離を設定下限より大きく保ちます。
-
-```text
-h_ij = ||p_i - p_j||^2 - d_min^2 >= 0
-```
-
-7. **Replay、指標、図を保存する**
-   simulation run は CSV log、metrics、final snapshot、trajectory plot、coverage curve、paper-style frame、任意の animation を出力します。
+1. **レイキャスト走査。** シミュレータは法線付きの局所境界リターンを生成し、信頼度は
+   局所平面フィットの残差から導く。制御器が多角形を受け取ることはない。
+2. **地図の位置合わせ。** `LocalBoundaryMap.register` はロボット自身の連続走査から
+   点対平面最小二乗で並進を推定し、地図を剛体的にずらす。移動する物体のワールド座標
+   地図は、物体が動いた瞬間に誤りとなる。可視法線がすべて平行なとき法線行列は
+   ランク落ちするが、これは「1 つの平面だけを見ているロボットはその面に沿った運動を
+   観測できない」という率直な言明である。
+3. **自由空間の削り取り。** 現在の走査が**透過している**セルは削除される。これがないと
+   ゴースト軌跡が真の表面の 0.06 m 内側に残り、押しているロボットはもう存在しない
+   境界に対して押し続けることになる。
+4. **境界認識密度。** 各観測はケージ目標 `ξ = b + d_c·n` に
+   `ds · c · (1 + κ·g) · K_σ(q − ξ)` を寄与する。`ds` はそのリターンが代表する弧長であり、
+   これが `φ` を「センサがたまたま生成したサンプル数の和」ではなく境界上の**測度**にする。
+   D10 以降は上記の探索項も担う。
+5. **有限範囲 CVT。** 厳密円板 `B(p_i, R_l)` 上で切断コスト `f(r) = min(r², R_l²)` に
+   対する重心移動を行う。切断は本質的である：これがないとフラックス項が相殺されず、
+   「重心移動は降下方向である」は端的に偽になる。`R_l ≤ R_comm/2` により、通信近傍から
+   計算されたセルは円板に制限された真の Voronoi セルと**一致**する。
+6. **搬送外側ループ。** タスク方向の物体速度に対する PI 則。静止摩擦の不感帯に対して
+   積分し、積分の上界は調整ではなくアクチュエータ限界が決める。
+7. **CBF-QP 安全フィルタ。** ロボット間の行は硬いまま。物体行はロボット自身の最近傍
+   リターンが指す面に絞り、面ごとに 1 枚の滑らかな平面に集約し、明示的な証拠点に対して
+   速度制限下のロボットが実際に出せる量に丸める —— これにより物体族は構成的に実行可能で、
+   その実行可能性を証明する点が明示される。
 
 ---
 
@@ -222,106 +339,59 @@ h_ij = ||p_i - p_j||^2 - d_min^2 >= 0
 
 ```text
 boundary-aware-cooperative-transport/
-|-- configs/                         # Simulation and MAS configuration
-|   |-- sim/
-|   `-- mas/
-|-- src/
-|   |-- dbact/                       # Core controller, sensing, density, CVT, safety, metrics
-|   |-- dbact_sim/                   # Simulation environment, scenarios, visualization, CLI
-|   `-- mas_adapter/                 # MAS-compatible controller adapter
-|-- scripts/                         # Batch runs, mock MAS pipeline, RoboMaster S1 smoke tests
-|-- docs/                            # Architecture, algorithm notes, reports, staged validation
-|   |-- assets/                      # Tracked GitHub-renderable README media
-|   |-- ARCHITECTURE.md
-|   |-- ALGORITHM.md
-|   |-- MAS_INTEGRATION.md
-|   `-- stage1_results.md
-|-- platforms/mas_public/            # Vendored MAS platform code
-|-- runs/                            # Local generated runs, ignored by Git
-|-- tests/                           # Unit and smoke tests
-|-- README.md
-|-- README.en.md
-|-- README.zh-TW.md
-`-- README.ja.md
+├── configs/sim/d/                  # 閉ループと遠距離探索のシナリオ
+├── src/
+│   ├── dbact/                      # 制御器・知覚・地図・密度・CVT・安全・契約
+│   │   ├── controller.py           # S7：分散型制御器
+│   │   ├── boundary_map.py         # 位置合わせ・融合・削り取り
+│   │   ├── boundary_density.py     # 境界測度 + D10 探索項
+│   │   ├── safety_filter.py        # CBF-QP、4 段構えの求解
+│   │   ├── phase.py                # 滞留付き単調スーパーバイザ
+│   │   ├── diagnosis.py            # D10-DIAG：発見後ステージ分割
+│   │   └── enclosure_gate.py       # D10-ENC：合意型包囲証明書（未使用）
+│   ├── dbact_sim/                  # 環境・シナリオ・リプレイ・描画
+│   └── mas_adapter/                # MAS 互換の制御器アダプタ
+├── scripts/                        # 実行・掃引・診断・A/B・契約チェック
+├── docs/
+│   ├── CLOSED_LOOP_D.md            # 完全な記録：導出・失敗・撤回
+│   ├── ALGORITHM.md · ARCHITECTURE.md · MAS_INTEGRATION.md
+│   └── assets/                     # Git 追跡、GitHub で表示可能なメディア
+├── platforms/mas_public/           # 同梱の MAS プラットフォームコード
+├── tests/                          # 287 テスト
+└── runs/                           # ローカル出力、Git 無視
 ```
 
 ---
 
-## 便利なコマンド
+## ハードウェア段階と安全
 
-標準シナリオを実行：
+物理実験までの経路は意図的に段階化されている：DBACT シミュレーション → MAS ドライラン →
+OptiTrack 読み取り専用ログ → RoboMaster S1 コマンド・スモークテスト。
+[`docs/MAS_INTEGRATION.md`](docs/MAS_INTEGRATION.md) を参照。
 
-```bash
-python scripts/run_all_scenarios.py --steps 400 --animate
-```
-
-L-shape scenario を実行：
-
-```bash
-python -m dbact_sim.run_sim --config configs/sim/l_shape.yaml --steps 400 --output runs/l_shape
-```
-
-mock MAS pipeline を実行：
-
-```bash
-python scripts/run_mock_mas_pipeline.py --steps 80 --dt 0.05 --print-every 20 --output runs/mock_mas_pipeline
-```
-
-MAS dry-run を実行：
-
-```bash
-cd platforms/mas_public
-python apps/dbact/run_dtransport_dry_run.py --steps 80 --dt 0.05 --print-every 20 --output data/dry_runs/dtransport_auto_init --clamp-to-world-bounds
-```
-
-OptiTrack read-only check を実行：
-
-```bash
-cd platforms/mas_public
-python apps/dbact/log_optitrack_world_state.py --mock --frames 50 --hz 100 --print-every 10 --output data/optitrack_readonly/mock_world_states.csv
-```
-
-RoboMaster S1 mock command smoke test を実行：
-
-```bash
-python scripts/run_seven_s1_cvt_test.py --duration 3
-```
-
-テストを実行：
-
-```bash
-python -m pytest -q tests
-python -m compileall -q src tests scripts platforms/mas_public/src platforms/mas_public/apps
-python -m pytest -q --rootdir platforms/mas_public platforms/mas_public/apps/pytest_tests
-```
+- 制御器出力を有効にする前に、まず OptiTrack の読み取り専用ログを実行する。
+- ロボット ID と剛体の対応は 1 台ずつ検証する。
+- 最初の物理実行では速度上限を非常に低くする。
+- ハードウェア試験中は物理的な非常停止を手元に置く。
+- 実行のたびにコマンドと状態のログを確認する。
 
 ---
 
-## 現在の研究方向
+## 参考資料
 
-次に有用なのは広い機能追加ではなく、段階的な検証です。優先項目：
-
-- `docs/assets/` を安定した GitHub media surface として維持する；
-- side-by-side scenario comparison figures を追加する；
-- moving-cargo transport metrics と dashboard summary を改善する；
-- virtual-object assumption を実際の boundary-observation pipeline に置き換える；
-- robot pose が安定するまで Motive rigid body を検証する；
-- read-only logging と dry-run 通過後のみ、低速 caging-only 実機実験を行う。
+| ドキュメント | 内容 |
+| --- | --- |
+| [`docs/CLOSED_LOOP_D.md`](docs/CLOSED_LOOP_D.md) | 本ブランチの完全な記録。測定のうえ却下された機構をすべて含む |
+| [`docs/ALGORITHM.md`](docs/ALGORITHM.md) | 密度・CVT・安全の導出 |
+| [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) | モジュール境界とデータフロー |
+| [`docs/MAS_INTEGRATION.md`](docs/MAS_INTEGRATION.md) | アダプタ・ドライラン・ハードウェア段階 |
 
 ---
 
-## 安全メモ
+## コントリビュートとライセンス
 
-- コントローラ出力を有効化する前に read-only OptiTrack logging を行う。
-- robot ID と rigid-body mapping を 1 台ずつ確認する。
-- 最初の実機 run では非常に低い速度制限を使う。
-- ハードウェアテスト中は物理 emergency stop を用意する。
-- 各 run 後に command と state log を確認する。
+Issue と Pull Request を歓迎します。ここで最も価値があるのは**測定**です：
+既存の主張を破るシナリオ、許容差が誤っている判定、あるいは試したうえで
+たとえ効果がなくても正直に報告された機構。
 
----
-
-## コントリビューションとライセンス
-
-Issues と Pull Requests を歓迎します。新しいシナリオ、より明確な可視化、強い指標、より良い段階的ハードウェア検証は特に有用です。
-
-このプロジェクトは [MIT License](LICENSE) で公開されています。
+[MIT License](LICENSE) のもとで公開しています。
