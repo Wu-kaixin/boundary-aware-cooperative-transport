@@ -125,7 +125,7 @@ Three changes, in order of how much they were needed:
   set feasible instead of abandoning the problem. The inter-robot rows stay hard,
   and what was given up is a number in the summary.
 
-Minimum inter-robot separation is now 0.340–0.343 m on every seed.
+Minimum inter-robot separation now holds at `d_min` on every seed (0.280–0.304 m against `d_min = 0.28`).
 
 ## The closed loop
 
