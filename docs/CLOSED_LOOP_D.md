@@ -561,6 +561,291 @@ distributes robots around the token as they travel rather than converging on it 
 the cage ring is known from the token position and the object's estimated extent,
 so the targets exist; nothing assigns them.
 
+## D10-DIAG: measuring the 591 frames instead of guessing at them
+
+Three mechanisms had been built and measured against the far-field approach
+problem, and none beat a go-to-point recall. What they have in common is that all
+three change *where the robots go on the way in*, and the frames they were meant
+to save are spent by a team that has already arrived. So the next step was not a
+fourth mechanism. `scripts/diagnose_redeployment.py` records what every robot is
+doing on every frame between first detection and contact-ready, and
+`dbact.diagnosis` turns that into stage durations. **The controller is not
+modified by any of it**: with tracing on, seed 2 produces a bit-identical cargo
+pose and the same contact-ready frame, and the whole run costs about half the
+frame rate.
+
+Two decisions make the output an argument rather than an opinion.
+
+**Coverage is measured on the true boundary, in arc length.** A bearing histogram
+about a centroid is cheap and wrong on a non-convex shape — two points of the L's
+perimeter can share a bearing, and the concave notch is systematically
+under-counted. The observed set is the uniformly-spaced boundary samples lying
+within 1.5 voxels of *some* robot's map point, and the gap is the longest
+**cyclic** run of unobserved samples, in metres against a 7.2 m perimeter. A
+non-cyclic scan reports a gap straddling the seam as two gaps, which understates
+exactly the case being looked for.
+
+**The segmentation is an exclusive cascade on measured state.** Each frame is
+labelled by the furthest stage whose precondition holds, so the seven durations
+partition the interval and no frame range is assigned by hand. `D REDEPLOY` is
+ranked deliberately *above* `E BACKSIDE_DISCOVERY`: if the existing rule were
+doing the work, the mass would land in D. The one threshold in the cascade — how
+much unobserved boundary counts as "the far side is unknown" — was varied over
+0.10, 0.20 and 0.30 of the perimeter and **the segmentation does not change at
+all**, because the unobserved arc never falls below even the lowest of them while
+the team is stalled. There is no threshold to tune here.
+
+### Where the frames go, 8 seeds, run to completion
+
+| seed | detect | contact-ready | post | A | B | C | D | E | F | G |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 0 | 45 | 938 | 893 | 0 | 23 | 37 | 99 | 31 | 0 | 703 |
+| 1 | 12 | 248 | 236 | 0 | 23 | 7 | 76 | 55 | 0 | 75 |
+| 2 | 18 | 285 | 267 | 0 | 19 | 26 | 6 | 162 | 0 | 54 |
+| 3 | 5 | 787 | 782 | 0 | 22 | 3 | 168 | 131 | 0 | 458 |
+| 4 | 218 | 657 | 439 | 17 | 0 | 65 | 164 | 140 | 0 | 53 |
+| 5 | 99 | 530 | 431 | 1 | 21 | 16 | 181 | 72 | 0 | 140 |
+| 6 | 30 | 657 | 627 | 0 | 23 | 20 | 305 | 70 | 0 | 209 |
+| 7 | 170 | 623 | 453 | 10 | 0 | 42 | 132 | 135 | 0 | 134 |
+| **all** | | | **4128** | 28 | 131 | 216 | 1131 | 796 | **0** | 1826 |
+| **share** | | | | 0.7% | 3.2% | 5.2% | **27.4%** | **19.3%** | **0.0%** | **44.2%** |
+
+`A` token recall, `B` first arrival, `C` local mapping, `D` redeploy,
+`E` backside discovery, `F` enclosure convergence, `G` contact formation.
+
+`T_detect` is 74.6 ± 80.3 and `T_contact_ready` 590.6 ± 234.1, reproducing D9.
+**`F` is zero on every seed**: there is not one frame in 4128 on which a quorum
+had arrived and the boundary was mapped. The stage the pipeline was designed
+around never occurs.
+
+### The redeploy rule asks for boundary that is not there
+
+| seed | stalled frames | agent-frames requesting | of those, no candidate | union map coverage when empty | unobserved arc when empty |
+| --- | --- | --- | --- | --- | --- |
+| 0 | 130 | 177 | 124 (70%) | 0.350 | 4.67 m |
+| 1 | 131 | 16 | 0 (0%) | — | — |
+| 2 | 168 | 1 | 0 (0%) | — | — |
+| 3 | 299 | 460 | 339 (74%) | 0.375 | 4.50 m |
+| 4 | 304 | 245 | 150 (61%) | 0.531 | 3.38 m |
+| 5 | 253 | 604 | 491 (81%) | 0.433 | 4.08 m |
+| 6 | 375 | 2124 | 1918 (90%) | 0.311 | 4.96 m |
+| 7 | 267 | 830 | 742 (89%) | 0.413 | 4.20 m |
+
+**3764 of 4457 requests — 84.5% — return no candidate at all**, and the state the
+map is in when that happens is the answer to *why*: union coverage 0.31–0.53 with
+3.4–5.0 m of a 7.2 m perimeter in nobody's map. The candidate set is not empty
+because the boundary is owned. It is empty because the boundary is not there.
+
+That is measurement agreeing with something that can be read off the source. For
+a robot with a non-empty map, **every** target in the post-arrival path — the CVT
+centroid, `_approach_target`, `_unheld_target` — is an affine function of
+`view.points`, so the reachable target set is contained in the offset ring over
+*observed* boundary. No mechanism in the controller can ask for boundary nobody
+has seen. The 84.5% is what that costs; it is not a bug in the redeploy rule.
+
+Across all 4128 post-detection frames the unobserved arc averages **4.34 ± 0.79 m
+of 7.2 m — 60% of the perimeter — and never once falls below 0.72 m.** Union map
+coverage averages 0.392 and peaks at 0.706. And redeploying does not help it: the
+arc closes at −0.003 to −0.019 m/frame while somebody is redeploying and at
+−0.000 to −0.017 m/frame while nobody is. Within the noise those are the same
+number, which is the quantitative form of "redeploy is redistribution over
+observed boundary, not exploration".
+
+### What 44% of the time is actually waiting for
+
+`G` is the largest stage, and reading it as "forming contacts" would be wrong.
+On those 1826 frames a contact quorum is **already standing on the object** —
+4.4 to 5.4 robots report themselves in the band — and 1440 of them (79%) are
+spent in phase `DISCOVER`.
+
+The `DISCOVER -> ENCLOSE` guard is `map_coverage >= 0.70`, where `map_coverage` is
+the maximum over robots of the angular coverage of one robot's own map about its
+own centroid. `CONTACT_READY` is reachable only from `ENCLOSE`. So the supervisor
+holds the team in `DISCOVER`, with contacts made, until some single robot's map
+wraps its own centroid to 70%:
+
+| seed | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| frame the gate opens | 939 | 249 | 286 | 681 | 455 | 420 | 620 | 474 |
+| contact-ready frame | 938 | 248 | 285 | 787 | 657 | 530 | 657 | 623 |
+
+Correlation **0.943**, mean lag 75 frames, and on seeds 0, 1 and 2 the two are the
+same frame to within one. `map_coverage` measured at contact-ready is 0.667–0.972
+with five of eight seeds between 0.69 and 0.75 — sitting on the gate, which is the
+signature of a gate that is binding rather than one that is being passed.
+
+So `T_contact_ready` is, to a first approximation, **the time for one robot's own
+map to reach 70% angular coverage**, and that is limited by the same blindness.
+`G` is not an independent problem; it is the meter that turns the blindness into
+wall-clock time.
+
+### The hypothesis, and where it needed correcting
+
+The hypothesis under test was: after a one-sided arrival the far side is in no
+robot's map, so the candidate set is empty, redeploy never fires, and the team
+shuffles on the near side until somebody stumbles round the back.
+
+**Confirmed:** the far side is in no robot's map (4.34 m of 7.2 m, throughout),
+and the candidate set is empty because of that rather than because the boundary is
+owned (84.5% of requests, with union coverage 0.31–0.53 at those moments).
+
+**Corrected on two points, and both matter.**
+
+*Redeploy fires constantly.* It is not silent — `D` is 27.4% of the post-detection
+time and 4531 agent-frames are spent in `redeploy` mode. What it cannot do is
+reduce the unobserved arc, and the arc-rate comparison above is the measurement of
+that. The failure is not that the rule is gated off; it is that the rule is
+working correctly on the wrong set.
+
+*"Somebody stumbles round the back" is not the unlock either.* First far-side
+sight lands 28–813 frames after detection, and contact-ready follows it by
+234 ± 159 frames — on seed 5 by **−15** frames, i.e. the run reached contact-ready
+before the far side had ever been seen. A single far-side return is worth almost
+nothing; what matters is the arc closing, and it closes slowly.
+
+The blindness is therefore real but it does not live in `_redeploy_step`. It lives
+in the density and in every target derived from it, which is a stronger statement
+and points somewhere different: not at a better redeploy rule, but at a term that
+puts demand where the map ends.
+
+### Root causes, ranked, with what argues against each
+
+**H1 — unobserved boundary generates no demand.** *For:* structural, from the
+source — every post-arrival target is an affine function of `view.points`;
+84.5% of redeploy requests empty; 4.34 ± 0.79 m of perimeter unmapped throughout;
+`F` never occurs; redeploying and idling close the arc at the same rate. *Against:*
+nothing measured. *Seeds:* all eight. *Contribution:* it is the binding constraint
+on `D`, `E` and `G` — about 91% of the post-detection time is spent in states
+whose limiting quantity is how much boundary is in the map. *Minimal
+intervention:* one extra term in the density, at the ends of what has been
+observed.
+
+**H2 — the `DISCOVER -> ENCLOSE` gate meters that blindness into time.** *For:*
+correlation 0.943 between the gate opening and contact-ready; 79% of `G` is
+`DISCOVER` with a contact quorum standing; `map_coverage` sits on 0.70 at
+contact-ready. *Against:* it is downstream of H1, not independent — the gate is a
+function of map coverage, so it should move on its own when H1 does. It is also
+not obviously wrong: the run *has* not enclosed, and peak strict coverage is
+0.41–0.48 on four seeds. Lowering the threshold would buy frames by declaring
+enclosure that has not happened. *Contribution:* 44.2% of the time, but not
+separable from H1. *Minimal intervention:* none yet — measure it again after H1.
+
+**H3 — insufficient tangential mobility in the local CVT.** *For:* the waiting
+robots move at 0.068–0.187 m/s against a 0.35 m/s limit, chasing a centroid
+0.15 m away. *Against:* they are moving, and the arc does close, just slowly; the
+constraint is which targets exist rather than how fast a robot reaches them, and
+seeds 1 and 2 stall with the redeploy rule almost never firing at all, which a
+mobility limit does not explain. *Seeds:* weakly, all. *Contribution:* not
+separable. **Not acted on** — the evidence does not support it as a root cause.
+
+Only H1 is acted on, and only with one change.
+
+## D10: exploitation of observed boundary, exploration of unobserved boundary
+
+The density was a measure on boundary that has been *seen*. It becomes
+
+```
+phi_i  =  phi_i^boundary  +  lambda_e phi_i^explore
+```
+
+where `phi_explore` places demand one tangent step past the ends of what has been
+observed. A frontier is an observation with no neighbour on one side of it along
+its own tangent; continuing by `explore_step` in that direction names a place the
+boundary probably goes and certainly is not yet known. Five properties are what
+make this the minimal change rather than a fourth navigation heuristic:
+
+* **it needs only the map.** A tangent is local: no object radius, no shape prior,
+  no truth polygon. The extent estimate that sank the ring approach is not needed
+  because nothing here is trying to guess where the whole object is;
+* **it switches itself off.** Once a robot stands there and scans, that direction
+  acquires a neighbour and stops being a frontier. On a fully mapped L the term
+  adds exactly zero targets, which is asserted in `tests/test_density.py`;
+* **it is a density term, not a mode.** The existing limited-range CVT decides
+  which robot goes. Nobody is put in a new state, nothing wall-follows, and the
+  whole team cannot pile onto one target because the cells partition and the gap
+  factor empties a target somebody is already standing on;
+* **the safety layer never sees it.** Barrier rows are built from map cells and a
+  frontier target is not a map cell;
+* **`explore_gain = 0` leaves the density bit-identical**, so the comparison below
+  is an ablation of one term rather than of two controllers.
+
+**A convex corner is not a frontier, and the first version thought it was.** The
+tangential test passes honestly at a corner — the boundary really does stop going
+that way — but the space past it is *known*, not unknown, and a naive
+implementation put a phantom target outside all four corners of a fully mapped
+square. The fix is to test the candidate's *ring target* against the existing ring
+targets rather than the boundary points against each other: at a convex corner the
+offset ring wraps and the neighbouring face's target lands 0.21 m away, while past
+a genuinely open end the nearest existing target is a full 0.25 m step away. The
+test is on the ring because the ring is what the robots are aiming at.
+
+### Measured, 8 seeds, run to completion
+
+`scripts/ab_explore.py --seeds 0..7 --gains 0,6`. Same scenario, same seeds, one
+parameter apart. The keep criteria were written into the script before the run.
+
+| quantity | baseline (`explore_gain = 0`) | candidate (`= 6`) |
+| --- | --- | --- |
+| `T_detect` | 74.6 ± 80.3 | 74.6 ± 80.3 |
+| **`T_backside_discovery`** | 281 ± 284 | **81.8 ± 42.1** |
+| **`T_contact_ready`** | 591 ± 234 | **344 ± 135** |
+| `T_transport` | 1007 ± 633 | **510 ± 215** |
+| `T_hold` | 1131 ± 646 | **642 ± 284** |
+| peak strict coverage | 0.689 ± 0.256 | **0.783 ± 0.214** |
+| final strict coverage | 0.688 ± 0.258 | **0.767 ± 0.213** |
+| peak union map coverage | 0.782 ± 0.240 | **0.866 ± 0.183** |
+| min inter-agent distance | 0.280 | 0.280 |
+| robots inside the cargo | 0 | 0 |
+| watchdog timeouts | 0 / 8 | 0 / 8 |
+| solver fallbacks / infeasible | 0 / 0 | 0 / 0 |
+| scaled-barrier events | 1415 | **975** |
+| simulation rate | 24.1 frame/s | 18.8 frame/s |
+
+`T_detect` is identical on every seed, which is the check that the term does
+nothing before there is a map to have a frontier in.
+
+Per seed, contact-ready goes 938 → 235, 248 → 221, **285 → 413**, 787 → 210,
+657 → 586, 530 → 343, 657 → 275, 623 → 467: **seven of eight improve and seed 2
+gets worse by 128 frames.** Far-side discovery improves on five, ties on two and
+is worse on one. The mean is not carrying a uniform effect, and the seed that
+regressed is recorded rather than averaged away.
+
+The scaled-barrier count falling from 1415 to 975 was not a target and is worth a
+line: a team that reaches the far side sooner spends less of the run crowded onto
+one arc, and the barrier is where crowding shows up.
+
+**What it does not fix.** G500 is 0/8 on both arms. The far-field pipeline still
+fails the quality gates — cross-track above all — and nothing here was aimed at
+them. The claim is about enclosure-after-discovery and stops there.
+
+### The gain was chosen by measurement, and 20 is unsafe
+
+Seeds 1, 2 and 6, four gains, full frame budget:
+
+| `explore_gain` | `T_contact_ready` | peak strict coverage | min inter-agent | `d_min` breaches | watchdog | infeasible | fallbacks |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 0 | 397 ± 226 | 0.633 | 0.280 | 0 / 3 | 0 / 3 | **0** | **0** |
+| **6** | **303 ± 99** | 0.688 | 0.280 | **0 / 3** | **0 / 3** | **0** | **0** |
+| 20 | 213 ± 66 | 0.748 | 0.233 | **2 / 3** | **2 / 3** | **589** | **589** |
+| 60 | 202 ± 57 | 0.787 | 0.254 | **1 / 3** | **1 / 3** | **418** | **418** |
+
+**Contact-ready and coverage both keep improving as the gain rises, and the
+constraint set stops being satisfiable.** At 20 the barrier is breached on two of
+three seeds — 0.207 and 0.213 m against `d_min = 0.28`, deficits of 0.073 and
+0.067 m. Those are three orders of magnitude above the arithmetic tolerance that
+made the retracted D9 "safety regression" a measurement error, so they are
+collisions in precisely the sense that those were not. The solver says the same
+thing independently: 589 infeasible solves against zero at gains 0 and 6, and
+every one of them falls through to a tier that satisfies nothing exactly.
+
+That is the argument for the gain being a number with a ceiling rather than a knob
+to turn up. Exploration demand pulls robots off the ring; past some weight it
+pulls harder than the separation terms can hold them apart, the QP has no feasible
+input, and the run neither finishes nor stays safe. The faster contact-ready at
+gain 20 is bought with exactly the property this branch does not trade, and the
+selection rule is therefore "the largest gain at which the solver never fails",
+not "the gain with the best contact-ready".
+
 ## Regression against the A branch: S1's certificate rate
 
 `scripts/verify_refactor.py` reports:
@@ -595,12 +880,21 @@ branch has not done.
 
 ## What is still open
 
-* **Discovery is done; enclosure-after-discovery is not.** `l_shape_search.yaml`
-  places the object at random, starts every robot outside its own sensor range,
-  and finds it in 78 ± 78 frames against a ~510-frame coverage bound. What follows
-  detection is the open problem: contact-ready takes 591 ± 219 frames instead of
-  75 ± 8, four of eight seeds never enclose, and four of eight breach `d_min`
-  while converging on the token. See D9 above.
+* **Enclosure-after-discovery is much better and is not solved.** `l_shape_search.yaml`
+  places the object at random, starts every robot outside its own sensor range, and
+  finds it in 75 ± 80 frames against a ~510-frame coverage bound. D10 measured what
+  the following frames were spent on and added one term for it: contact-ready is
+  now **344 ± 135** against 591 ± 234, far-side discovery **82 ± 42** against
+  281 ± 284, peak strict coverage 0.783 against 0.689, with no safety, watchdog or
+  solver cost. It is still four to five times the 75 ± 8 of a ring start, one seed
+  of eight got worse, and peak coverage is still under 0.60 on three seeds. See
+  D10-DIAG and D10 above.
+* **The `DISCOVER -> ENCLOSE` gate has not been re-examined since D10.** It was
+  the proximate cause of 44% of the pre-D10 post-detection time (correlation 0.943
+  with contact-ready) and was deliberately left alone because it is downstream of
+  the blindness that D10 fixes. Whether one robot's own-map angular coverage is
+  the right quantity to gate a team-level transition — and whether 0.70 is the
+  right number for it now — is measurable and unmeasured.
 * **Cross-track is the dominant remaining G500 failure.** The press is always
   along a robot's own observed normal — a press along the commanded direction is
   inward only at the centre of the trailing face and tangential everywhere else —

@@ -213,6 +213,77 @@ def test_observations_without_arc_length_still_produce_a_usable_field():
     assert density(np.array([0.0, 0.135])) > density(np.array([0.0, 2.0]))
 
 
+# --------------------------------------------------------------------------- #
+# D10 - exploration demand past the ends of what has been observed
+# --------------------------------------------------------------------------- #
+
+
+def test_exploration_is_off_by_default_and_changes_nothing():
+    observations = wall()
+    off = BoundaryAwareDensity.from_observations(observations, params())
+    explicit = BoundaryAwareDensity.from_observations(observations, params(explore_gain=0.0))
+    q = np.array([[0.0, 0.135], [1.5, 0.135], [-1.5, 0.135]])
+    assert np.allclose(off(q), explicit(q))
+    assert len(off.points) == len(observations)
+
+
+def test_exploration_adds_one_target_at_each_end_of_an_open_arc():
+    observations = wall(count=17)
+    density = BoundaryAwareDensity.from_observations(
+        observations, params(explore_gain=4.0, explore_step=0.25, explore_window=0.18)
+    )
+    assert len(density.points) == len(observations) + 2
+    added = density.points[len(observations):]
+    xs = np.sort(added[:, 0])
+    ends = np.array([observations[0].point[0], observations[-1].point[0]])
+    assert xs[0] == pytest.approx(ends.min() - 0.25, abs=1e-9)
+    assert xs[1] == pytest.approx(ends.max() + 0.25, abs=1e-9)
+
+
+def test_exploration_raises_the_density_past_the_end_and_not_in_the_middle():
+    observations = wall(count=17)
+    off = BoundaryAwareDensity.from_observations(observations, params())
+    on = BoundaryAwareDensity.from_observations(observations, params(explore_gain=4.0))
+    middle = np.array([[0.0, 0.135]])
+    beyond = np.array([[observations[-1].point[0] + 0.25, 0.135]])
+    # Not exactly equal: the added target has a Gaussian tail. It is 1.5e-8 of the
+    # value at the middle of a 1 m arc, which is what "local perturbation" means.
+    assert on(middle) == pytest.approx(off(middle), rel=1e-6)
+    assert on(beyond) > 1.5 * off(beyond)
+
+
+def test_a_closed_outline_has_no_frontier_to_explore():
+    """The demand has to switch itself off, or it competes with the cage forever."""
+    cargo = Cargo(object_id="c", vertices=np.array([[-1.0, -1.0], [1.0, -1.0], [1.0, 1.0], [-1.0, 1.0]]))
+    observations = full_map_of(cargo, spacing=0.05)
+    density = BoundaryAwareDensity.from_observations(
+        observations, params(explore_gain=4.0, explore_step=0.25, explore_window=0.18)
+    )
+    assert len(density.points) == len(observations)
+
+
+def test_a_continuation_into_already_mapped_boundary_is_dropped():
+    """A gap smaller than one step is not a frontier: the boundary is known there."""
+    left = wall(count=9)
+    right = [
+        BoundaryObservation("obj", "m", np.array([p.point[0] + 0.60, 0.0]), np.array([0.0, 1.0]),
+                            0.0, 1.0, arc_length=0.06)
+        for p in left
+    ]
+    density = BoundaryAwareDensity.from_observations(
+        left + right, params(explore_gain=4.0, explore_step=0.25, explore_window=0.18)
+    )
+    added = len(density.points) - (len(left) + len(right))
+    # Two outer ends are genuine frontiers; the 0.36 m interior gap is spanned by
+    # a 0.25 m step that lands within 0.11 m of the far segment, so it is dropped.
+    assert added == 2
+
+
+def test_a_negative_exploration_gain_is_rejected():
+    with pytest.raises(ValueError):
+        params(explore_gain=-1.0)
+
+
 def test_invalid_mode_is_rejected():
     with pytest.raises(ValueError, match="density mode"):
         DensityParams(mode="magic")

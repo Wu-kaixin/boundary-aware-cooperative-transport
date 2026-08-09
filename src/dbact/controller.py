@@ -116,6 +116,19 @@ class DBACTParams:
     approach_mass_ratio: float = 3.0
     redeploy_gap_ratio: float = 0.15
 
+    # --- unobserved-boundary exploration (D10) --- #
+    # The redeploy rule redistributes robots over boundary the map already holds.
+    # Measured over eight far-field seeds, 84.5% of its requests returned no
+    # candidate at all while 4.34 m of a 7.2 m perimeter was in nobody's map, so
+    # what it lacked was not a better choice among candidates but any candidate on
+    # the far side. ``explore_gain`` is the weight of a second term in the same
+    # density -- demand placed one tangent step past the ends of what has been
+    # observed -- and 0.0 leaves the density bit-identical, so the A/B is an
+    # ablation of one term rather than a comparison of two controllers.
+    explore_gain: float = 0.0
+    explore_step: float = 0.25
+    explore_window: float = 0.18
+
     # --- safety (S1) ---
     robot_radius: float = 0.16
     delta_max: float = 0.05
@@ -319,6 +332,42 @@ class AgentDiagnostics:
     progress: float = 0.0
     map_points: int = 0
 
+    # --- D10-DIAG trace fields ---------------------------------------- #
+    # Populated only when ``DBACTController.trace_enabled`` is set. They exist so
+    # that "the team took 591 frames to reach contact-ready" can be resolved into
+    # which robot was waiting on what; nothing in the control path reads them, and
+    # with tracing off they carry their defaults and cost nothing.
+    #
+    # Two of them are the whole point of the exercise. ``redeploy_reason`` says
+    # which branch of ``_redeploy_step`` a robot took, and
+    # ``redeploy_candidates`` says how many unheld cage targets its own map
+    # offered at that moment. A robot whose cell is saturated *and* whose
+    # candidate count is zero is a robot the redeploy rule cannot move, and the
+    # count separates "the boundary is all owned" from "the boundary is not in the
+    # map at all".
+    direct_visible: bool = False
+    own_scan_points: int = 0
+    boundary_distance: float = float("inf")
+    token_distance: float = float("inf")
+    map_angular_coverage: float = 0.0
+    cell_held_fraction: float = 0.0
+    cell_unheld_mass: float = 0.0
+    centroid_distance: float = 0.0
+    redeploy_requested: bool = False
+    redeploy_active: bool = False
+    redeploy_reason: str = ""
+    redeploy_candidates: int = 0
+    cage_targets: int = 0
+    agent_rows: int = 0
+    agent_rows_active: int = 0
+    object_rows_active: int = 0
+    zero_input_feasible: bool = True
+    speed_nominal: float = 0.0
+    speed_command: float = 0.0
+    map_centroid: tuple[float, float] = (float("nan"), float("nan"))
+    cvt_centroid: tuple[float, float] = (float("nan"), float("nan"))
+    redeploy_target: tuple[float, float] = (float("nan"), float("nan"))
+
 
 class DBACTController:
     """Decentralised boundary-aware enclosure and cooperative transport."""
@@ -394,6 +443,9 @@ class DBACTController:
             gap_radius=params.gap_radius,
             lead_offset=params.lead_offset if params.task_mode == "transport" else None,
             lead_threshold=params.lead_threshold,
+            explore_gain=params.explore_gain,
+            explore_step=params.explore_step,
+            explore_window=params.explore_window,
         )
         # C5 fixes where the press may stop. Asserted at construction with the force
         # budget left out -- the contact stiffness lives in the simulator, so the
@@ -421,6 +473,12 @@ class DBACTController:
         self.team_progress: dict[str, float] = {}
         self._time = 0.0
         self._frame = 0
+        # D10-DIAG. Off by default: the extra quantities cost an unheld-target
+        # search per robot per step, which is not free, and a diagnosis must not
+        # change the thing it is diagnosing. Set it before the first ``step``.
+        self.trace_enabled = False
+        self._trace: dict = {}
+        self.last_scans: dict[str, BoundaryView] = {}
 
     # ------------------------------------------------------------------ #
     # main loop
@@ -438,6 +496,12 @@ class DBACTController:
         neighbors = self._neighbor_indices(agents)
 
         scans = [self.sensor.sense_view(agent, cargoes, timestamp) for agent in agents]
+        if self.trace_enabled:
+            # A robot's own scan, before the neighbour relay is merged into it.
+            # Attribution needs it: "who first saw the far side" is a question about
+            # who pointed a sensor at it, and the fused view cannot answer it
+            # because a relayed point looks the same as an observed one.
+            self.last_scans = {agents[i].agent_id: scans[i] for i in range(len(agents))}
 
         # Own observations first, then one hop of neighbour relay. Voxel fusion
         # makes the relay idempotent: hearing the same cell twice adds no mass.
@@ -463,6 +527,7 @@ class DBACTController:
         commands: list[ControlCommand] = []
         for i, agent in enumerate(agents):
             view = self._views[agent.agent_id]
+            self._trace = {}
             u_nom, mode, cell_mass, push_side, effort = self._nominal_command(
                 i, agents, neighbors[i], view, contact_ready, dt
             )
@@ -476,23 +541,67 @@ class DBACTController:
                 object_velocity=v_obj,
             )
             commands.append(ControlCommand(agent.agent_id, result.velocity, mode=mode))
-            self.diagnostics.append(
-                AgentDiagnostics(
-                    agent_id=agent.agent_id,
-                    mode=mode,
-                    cell_mass=cell_mass,
-                    object_rows=result.object_rows,
-                    contact_ready=contact_ready[i],
-                    push_side=push_side,
-                    solver_status=result.status,
-                    modification=result.modification,
-                    effort=effort,
-                    progress=self._agent_progress(agent.agent_id),
-                    map_points=len(view),
-                )
+            diagnostic = AgentDiagnostics(
+                agent_id=agent.agent_id,
+                mode=mode,
+                cell_mass=cell_mass,
+                object_rows=result.object_rows,
+                contact_ready=contact_ready[i],
+                push_side=push_side,
+                solver_status=result.status,
+                modification=result.modification,
+                effort=effort,
+                progress=self._agent_progress(agent.agent_id),
+                map_points=len(view),
             )
+            if self.trace_enabled:
+                self._fill_trace(diagnostic, agent, view, scans[i], u_nom, result)
+            self.diagnostics.append(diagnostic)
         self._frame += 1
         return commands
+
+    # ------------------------------------------------------------------ #
+    # D10-DIAG instrumentation
+    # ------------------------------------------------------------------ #
+
+    def _fill_trace(self, diagnostic, agent, view, scan, u_nom, result) -> None:
+        """Copy this step's per-robot state onto the diagnostic record.
+
+        Everything here is read from quantities the step already computed, plus
+        one extra unheld-target search so that the *candidate count* is recorded
+        on every step rather than only on the steps where the redeploy rule
+        happened to ask for one. That distinction is the measurement: a rule that
+        never fires because its gate is closed and a rule that never fires because
+        its candidate set is empty are the same silence, and only the count tells
+        them apart.
+        """
+        scratch = self._trace
+        diagnostic.direct_visible = len(scan) > 0
+        diagnostic.own_scan_points = len(scan)
+        if len(view):
+            nearest = self._nearest_index(view, agent.position)
+            diagnostic.boundary_distance = float(np.linalg.norm(view.points[nearest] - agent.position))
+            diagnostic.map_angular_coverage = _angular_coverage(view.points)
+            centroid = view.points.mean(axis=0)
+            diagnostic.map_centroid = (float(centroid[0]), float(centroid[1]))
+        token = self._token_target(agent.agent_id)
+        if token is not None:
+            diagnostic.token_distance = float(np.linalg.norm(token - agent.position))
+        for name in ("cell_held_fraction", "cell_unheld_mass", "centroid_distance",
+                     "redeploy_requested", "redeploy_active", "redeploy_reason",
+                     "redeploy_candidates", "cage_targets"):
+            if name in scratch:
+                setattr(diagnostic, name, scratch[name])
+        for name in ("cvt_centroid", "redeploy_target"):
+            value = scratch.get(name)
+            if value is not None:
+                setattr(diagnostic, name, (float(value[0]), float(value[1])))
+        diagnostic.agent_rows = result.agent_rows
+        diagnostic.agent_rows_active = result.agent_rows_active
+        diagnostic.object_rows_active = result.object_rows_active
+        diagnostic.zero_input_feasible = result.zero_input_feasible
+        diagnostic.speed_nominal = float(np.linalg.norm(u_nom))
+        diagnostic.speed_command = float(np.linalg.norm(result.velocity))
 
     # ------------------------------------------------------------------ #
     # progress estimation (decentralised)
@@ -610,6 +719,14 @@ class DBACTController:
         )
         cell = self.cvt.compute(i, agents, neighbor_indices, density, self.domain)
 
+        if self.trace_enabled:
+            self._trace.update(
+                cell_held_fraction=float(cell.held_fraction),
+                cell_unheld_mass=float(cell.unheld_mass),
+                centroid_distance=float(np.linalg.norm(cell.centroid - agent.position)),
+                cvt_centroid=cell.centroid,
+            )
+            self._trace.update(self._candidate_census(view, agent.position, crowd, goal, shape))
 
         if cell.cell_mass <= self.empty_cell_mass:
             # Non-empty map, empty cell: head for the nearest piece of cage ring
@@ -680,11 +797,15 @@ class DBACTController:
         held, so the robots that are doing the work walk away to chase whatever
         fragment still looks unheld, and the contact set never stabilises.
         """
+        trace = self.trace_enabled
         if contact_ready:
             self._redeploy_target[agent.agent_id] = None
+            if trace:
+                self._trace.update(redeploy_reason="contact_ready", redeploy_active=False)
             return None
 
         held = self._redeploy_target.get(agent.agent_id)
+        reason = "committed" if held is not None else ""
         if held is not None:
             others = crowd[1:] if len(crowd) > 1 else np.empty((0, 2))
             arrived = float(np.linalg.norm(held - agent.position)) <= self.params.gap_radius
@@ -694,14 +815,28 @@ class DBACTController:
             if arrived or taken:
                 self._redeploy_target[agent.agent_id] = None
                 held = None
+                reason = "arrived" if arrived else "taken"
 
-        if held is None and cell.held_fraction >= 1.0 - self.params.redeploy_gap_ratio:
+        requested = held is None and cell.held_fraction >= 1.0 - self.params.redeploy_gap_ratio
+        if requested:
             candidate = self._unheld_target(
                 view, agent.position, crowd, self.params.local_radius, goal, shape
             )
             if candidate is not None:
                 self._redeploy_target[agent.agent_id] = candidate
                 held = candidate
+                reason = "committed_new"
+            else:
+                reason = "no_candidate"
+        elif held is None and not reason:
+            reason = "cell_not_saturated"
+        if trace:
+            self._trace.update(
+                redeploy_requested=bool(requested),
+                redeploy_active=held is not None,
+                redeploy_reason=reason,
+                redeploy_target=held if held is not None else None,
+            )
         return held
 
     def _enclosure_geometry(self, agent_id: str, view: BoundaryView) -> DensityParams:
@@ -759,6 +894,31 @@ class DBACTController:
             return None
         candidates = targets[free]
         return candidates[int(np.argmin(reach[free]))]
+
+    def _candidate_census(
+        self,
+        view: BoundaryView,
+        position: np.ndarray,
+        crowd: np.ndarray,
+        goal: np.ndarray | None,
+        shape: DensityParams | None,
+    ) -> dict:
+        """How many redeploy candidates this robot's map offers, whether or not the
+        rule asked. Diagnostic; the same predicate as ``_unheld_target``.
+
+        ``cage_targets`` is every ring target the map implies and
+        ``redeploy_candidates`` is the subset the rule would accept. Both are
+        drawn from ``view.points``, so both are zero on boundary the map does not
+        contain -- which is the structural statement the diagnosis has to
+        distinguish from "the boundary is contained and already owned".
+        """
+        if len(view) == 0:
+            return {"cage_targets": 0, "redeploy_candidates": 0}
+        targets = self._cage_targets(view, goal, shape)
+        occupancy = np.min(np.linalg.norm(targets[:, None, :] - crowd[None, :, :], axis=2), axis=1)
+        reach = np.linalg.norm(targets - position[None, :], axis=1)
+        free = (occupancy > self.params.gap_radius) & (reach > self.params.local_radius)
+        return {"cage_targets": int(len(targets)), "redeploy_candidates": int(np.count_nonzero(free))}
 
     # ------------------------------------------------------------------ #
     # transport

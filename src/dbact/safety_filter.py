@@ -69,6 +69,11 @@ import numpy as np
 from .contracts import ContactSafetyContract, ContractViolation, SolverContract
 from .qp2d import solve_min_norm_2d, solve_min_norm_2d_cvxpy
 
+# A row ``a^T u >= b`` counts as active when the returned input sits on it to
+# within the solver's own arithmetic. Diagnostic only -- nothing in the control
+# path branches on this.
+_ACTIVE_ROW_TOLERANCE = 1e-6
+
 
 @dataclass
 class SafetyFilterParams:
@@ -157,6 +162,12 @@ class FilterResult:
     agent_rows: int
     modification: float
     zero_input_feasible: bool
+    # Which rows the returned input is actually sitting on. A row count says how
+    # many constraints were *written*; an active count says how many were binding,
+    # and only the second distinguishes "the QP shaped this command" from "the QP
+    # passed the nominal input through". Diagnostic output, not a control signal.
+    agent_rows_active: int = 0
+    object_rows_active: int = 0
 
 
 class SafetyFilter:
@@ -420,6 +431,12 @@ class SafetyFilter:
 
         modification = float(np.linalg.norm(u - u_nom))
         self.stats.max_modification = max(self.stats.max_modification, modification)
+        agent_active = object_active = 0
+        if len(b):
+            residual = A @ u - b
+            active = np.abs(residual) <= _ACTIVE_ROW_TOLERANCE
+            agent_active = int(np.count_nonzero(active[: len(A_agent)]))
+            object_active = int(np.count_nonzero(active[len(A_agent) :]))
         return FilterResult(
             velocity=u,
             status=status,
@@ -427,6 +444,8 @@ class SafetyFilter:
             agent_rows=len(A_agent),
             modification=modification,
             zero_input_feasible=zero_feasible,
+            agent_rows_active=agent_active,
+            object_rows_active=object_active,
         )
 
     def _solve(

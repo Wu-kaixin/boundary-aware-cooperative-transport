@@ -59,10 +59,18 @@ class DensityParams:
     influence_sigmas: float = 3.0
     lead_offset: float | None = None
     lead_threshold: float = 0.35
+    # D10 -- exploration demand for boundary nobody has observed. ``0.0`` is off
+    # and reproduces the density exactly, which is what makes the A/B an ablation
+    # of one term rather than a comparison of two controllers.
+    explore_gain: float = 0.0
+    explore_step: float = 0.25
+    explore_window: float = 0.18
 
     def __post_init__(self) -> None:
         if self.mode not in ("offset", "distance_field"):
             raise ValueError(f"density mode must be 'offset' or 'distance_field', got {self.mode!r}")
+        if self.explore_gain < 0.0:
+            raise ValueError("explore_gain must be non-negative")
 
     def offsets_for(self, normals: np.ndarray, goal_direction: np.ndarray | None) -> np.ndarray:
         """Per-observation cage offset, graded by how much that face would resist.
@@ -169,6 +177,31 @@ class BoundaryAwareDensity:
             arc = np.ones_like(arc)
 
         weights = arc * view.confidence
+        object_ids = [str(name) for name in view.object_ids]
+
+        # D10 -- the exploration term. Everything above is a measure on boundary
+        # that has been *seen*; this adds mass just past the ends of what has been
+        # seen, so the same coverage law that spreads robots along observed
+        # boundary also pulls one of them off the end of it.
+        # Offset mode only. The distance-field model reads ``points`` as the
+        # boundary itself, so a virtual target appended to it would move the level
+        # set rather than add demand beside it.
+        if params.explore_gain > 0.0 and params.mode == "offset":
+            frontier, frontier_normals, source = _frontier_targets(
+                points, normals, offsets, params
+            )
+            if len(frontier):
+                unit = float(np.mean(weights)) if len(weights) else 1.0
+                points = np.vstack([points, frontier])
+                normals = np.vstack([normals, frontier_normals])
+                offsets = np.concatenate(
+                    [offsets, np.full(len(frontier), params.cage_offset)]
+                )
+                weights = np.concatenate(
+                    [weights, np.full(len(frontier), params.explore_gain * unit)]
+                )
+                object_ids = object_ids + [object_ids[k] for k in source]
+
         gap = None
         if robot_positions is not None and len(robot_positions) > 0:
             targets = points + offsets[:, None] * normals
@@ -180,7 +213,7 @@ class BoundaryAwareDensity:
             normals,
             weights,
             params,
-            [str(name) for name in view.object_ids],
+            object_ids,
             gap=gap,
             offsets=offsets,
         )
@@ -301,6 +334,88 @@ class BoundaryAwareDensity:
         if total <= 1e-12:
             return None
         return np.sum(samples * weights[:, None], axis=0) / total
+
+
+def _frontier_targets(
+    points: np.ndarray, normals: np.ndarray, offsets: np.ndarray, params: DensityParams
+) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+    """Where the observed boundary stops, continued one step along its own tangent.
+
+    This is the whole of the D10 mechanism, and what it is *not* matters as much
+    as what it is.
+
+    Every navigation target in the post-arrival control path -- the CVT centroid,
+    the approach target, the redeploy target -- is an affine function of the
+    robot's own map points, so the reachable target set is contained in the offset
+    ring over *observed* boundary. Nothing in the controller can therefore ask for
+    boundary nobody has seen. Measured over eight far-field seeds, 84.5% of the
+    redeploy rule's requests returned no candidate while 4.34 m of a 7.2 m
+    perimeter sat in nobody's map: the rule was not choosing badly among
+    candidates, it had none, and the missing ones were missing because they were
+    unobserved rather than because they were owned.
+
+    A frontier is an observation with no neighbour on one side of it along its own
+    tangent. Continuing by ``explore_step`` in that direction names a place the
+    boundary probably goes and certainly is not yet known, using only the map:
+
+    * no object radius and no shape prior -- a tangent is local;
+    * the demand disappears on its own, because once a robot stands there and
+      scans, that direction acquires a neighbour and stops being a frontier;
+    * it is a *density* term, so the existing limited-range CVT decides which
+      robot goes. Nobody is put in a new mode, no robot is told to wall-follow,
+      and the whole team cannot pile onto one target because the cells partition
+      and the gap factor empties a target somebody is already standing on;
+    * the safety layer never sees it. The barrier rows are built from the map, and
+      a frontier target is not a map cell.
+
+    The last filter is the one that took a test to get right. A convex corner
+    passes the tangential test honestly -- the boundary really does stop going
+    that way -- but the space past it is known, not unknown, and a naive version
+    of this function put a phantom frontier outside all four corners of a fully
+    mapped square. Comparing the candidate's *ring target* against the existing
+    ring targets separates the two cases, because at a convex corner the offset
+    ring wraps and the neighbouring face's target comes close, while past a
+    genuinely open end the nearest existing target is a full step away. The test
+    is on the ring rather than on the boundary for the same reason the ring is
+    what the robots are aiming at.
+    """
+    count = len(points)
+    if count < 2:
+        return np.empty((0, 2)), np.empty((0, 2)), np.empty(0, dtype=int)
+
+    tangents = np.column_stack([-normals[:, 1], normals[:, 0]])
+    delta = points[None, :, :] - points[:, None, :]          # (k, j, 2)
+    along = np.einsum("kjd,kd->kj", delta, tangents)
+    across = np.abs(np.einsum("kjd,kd->kj", delta, normals))
+    # A neighbour is a map point that lies within the tangential window of this
+    # observation's own plane, on one side or the other.
+    near = across <= params.explore_window
+    forward = np.any(near & (along > _EPS) & (along <= params.explore_step), axis=1)
+    backward = np.any(near & (along < -_EPS) & (along >= -params.explore_step), axis=1)
+
+    open_forward = np.flatnonzero(~forward)
+    open_backward = np.flatnonzero(~backward)
+    if len(open_forward) == 0 and len(open_backward) == 0:
+        return np.empty((0, 2)), np.empty((0, 2)), np.empty(0, dtype=int)
+
+    step = params.explore_step
+    proposed = np.vstack(
+        [
+            points[open_forward] + step * tangents[open_forward],
+            points[open_backward] - step * tangents[open_backward],
+        ]
+    )
+    source = np.concatenate([open_forward, open_backward])
+    existing = points + offsets[:, None] * normals
+    candidate_targets = proposed + params.cage_offset * normals[source]
+    distance = np.min(
+        np.linalg.norm(candidate_targets[:, None, :] - existing[None, :, :], axis=2), axis=1
+    )
+    # The source's own target sits a full step away, so this keeps a continuation
+    # only when no existing ring target is nearer than that -- which is exactly
+    # the statement that the step leaves the ring the map already implies.
+    keep = distance >= 0.9 * step
+    return proposed[keep], normals[source[keep]], source[keep]
 
 
 def _gap_weights(targets: np.ndarray, robot_positions: np.ndarray, gap_radius: float) -> np.ndarray:

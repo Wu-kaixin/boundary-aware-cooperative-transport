@@ -136,6 +136,22 @@ controller:
   approach_mass_ratio: 3.0
   redeploy_gap_ratio: 0.15
 
+  # D10 exploration demand for boundary nobody has observed. The redeploy rule
+  # redistributes robots over boundary the map already holds; measured over these
+  # eight seeds, 84.5% of its requests returned no candidate at all while 4.34 m
+  # of a 7.2 m perimeter sat in nobody's map. This term puts demand one tangent
+  # step past the ends of what has been observed, and disappears on its own once
+  # that direction is seen.
+  #
+  # 6.0, not 20. At 20 contact-ready is faster on every seed measured and the
+  # inter-agent barrier breaks on two of three -- 0.207 and 0.213 m against
+  # d_min = 0.28, with both runs hitting the watchdog. Exploration demand pulls
+  # robots off the ring, and past some weight it pulls harder than the separation
+  # terms can hold them apart. 0.0 restores the pre-D10 density exactly.
+  explore_gain: 6.0
+  explore_step: 0.25
+  explore_window: 0.18
+
   # S1 safety
   robot_radius: 0.13
   # 0.065, not 0.05. C5 makes the press stop press_margin above r_safe, and the
