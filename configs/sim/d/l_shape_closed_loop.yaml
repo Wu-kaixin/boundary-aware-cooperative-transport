@@ -1,0 +1,180 @@
+# D branch - closed-loop 500-frame scenario.
+#
+# 500 control frames at dt = 0.05 s is 25 s of physical time. The open-loop probe
+# (scripts/probe_transport_ceiling.py) measured this configuration at a sustained
+# 0.055 m/s along the task direction with the safety filter on, so the transport
+# phase can cover roughly 0.9 m in the frames it is likely to have. The task
+# distance is sampled from [0.35, 0.70] m, which leaves margin for a slow
+# enclosure without making the target unreachable.
+#
+# C1 is asserted at construction:
+#     r_safe = robot_radius - delta_max = 0.11 < cage_offset = 0.135 < robot_radius = 0.16
+#     gamma_obj * (cage_offset - r_safe) = 0.20 > rho = 0.05
+#     d_min = 0.34 >= 2 * robot_radius
+#     lead_offset = 0.30 > robot_radius
+
+paper: true
+dt: 0.05
+
+domain:
+  xmin: 0.0
+  xmax: 8.0
+  ymin: 0.0
+  ymax: 8.0
+
+agents:
+  # 16 robots. The cage ring is about 8.1 m, so 16 * d_min = 5.44 m of it is
+  # occupied: both the contact arc and the lifted leading arc fit without pinning
+  # anyone against a neighbour.
+  count: 16
+  layout: scatter
+  center: [4.00, 4.00]
+  # Bounded by comm_range so no robot starts outside the communication graph: an
+  # isolated robot never receives a relayed observation and explores forever,
+  # which shows up as a permanently unengaged robot rather than as an error.
+  radius_min: 1.50
+  radius_max: 2.30
+  min_separation: 0.40
+
+cargoes:
+  - id: cargo_0
+    shape: l_shape
+    center: [4.00, 4.00]
+    scale: 1.50
+    # Surface density sets the mass and the mass sets the Coulomb breakaway force.
+    # Chosen with transport.stiffness and ground_friction so one robot at the cage
+    # ring cannot move the object and roughly three aligned robots can:
+    #     mu_g m g / (k_p (r_robot - d_c)) ~ 2.5 robots.
+    surface_density: 2.0
+
+task:
+  mode: random_constrained
+  distance_min: 0.35
+  distance_max: 0.70
+  # Clearance the goal must leave to every wall is
+  #     R_obj + d_c + r_robot + wall_margin.
+  wall_margin: 0.35
+  tolerance: 0.12
+  angle_min_deg: 0.0
+  angle_max_deg: 360.0
+
+controller:
+  task_mode: transport
+
+  # S2 perception
+  sensor_range: 1.20
+  ray_count: 72
+  range_noise_std: 0.010
+  pca_neighbors: 5
+  residual_tolerance: 0.030
+  min_confidence: 0.15
+
+  # communication
+  comm_range: 1.60
+
+  # S3 map, now moving with the object
+  voxel_size: 0.06
+  age_decay: 0.30
+  max_voxels_per_object: 320
+  motion_compensation: true
+  registration_gate: 0.12
+  registration_normal_cosine: 0.5
+  max_object_speed: 0.60
+  object_velocity_filter: 0.35
+
+  # S4 density
+  density_mode: offset
+  cage_offset: 0.135
+  # The leading arc stands outside contact. A uniform cage of rigid kinematic
+  # robots cannot be transported: the robots in front are in contact too and their
+  # normal force cancels the pushing arc almost exactly. 0.30 rather than 0.22
+  # because the leading robots also need room to step aside as the cargo arrives --
+  # at 0.22 they were pinched between the advancing object and a neighbour at
+  # d_min, which is the only state in which the safety QP has no feasible input.
+  lead_offset: 0.30
+  lead_threshold: 0.25
+  sigma: 0.20
+  base_density: 0.001
+  gap_gain: 0.6
+  gap_radius: 0.35
+
+  # S5 coverage  (local_radius <= comm_range / 2)
+  local_radius: 0.80
+  grid_resolution: 20
+  approach_mass_ratio: 3.0
+  redeploy_gap_ratio: 0.15
+
+  # S1 safety
+  robot_radius: 0.16
+  delta_max: 0.05
+  d_min: 0.34
+  gamma_agent: 6.0
+  gamma_obj: 8.0
+  rho: 0.05
+  max_speed: 0.30
+  backend: qp
+  object_row_range: 0.60
+  object_row_window: 0.28
+  max_object_rows: 8
+
+  # gains
+  kp_explore: 0.25
+  kp_cage: 0.90
+
+  # S7 gating
+  push_side_threshold: 0.35
+  min_push_agents: 4
+  contact_band_tolerance: 0.08
+
+  # D3/D4 transport outer loop
+  transport_law: progress
+  transport_reference_speed: 0.055
+  transport_kp: 2.4
+  transport_ki: 3.0
+  transport_effort_max: 0.30
+  transport_deadband: 0.05
+  brake_gain: 0.55
+  convoy_gain: 1.0
+  convoy_max: 0.25
+
+  # D2 phase supervisor
+  phase_informed_fraction: 0.55
+  phase_map_coverage_min: 0.70
+  contact_dwell: 20
+  brake_fraction: 0.80
+
+transport:
+  engine: penalty
+  stiffness: 500.0
+  damping: 12.0
+  friction: 0.6
+  tangential_stiffness: 60.0
+  # Coulomb floor friction, not viscous drag: below mu_g m g the object does not
+  # move at all. Viscous drag gives the cargo a terminal speed above the robots'
+  # own speed limit, so it is kicked away by the first robot to touch it and the
+  # cage can never close.
+  ground_friction: 0.77
+  gravity: 9.81
+  substeps: 4
+
+render:
+  map_agent: agent_00
+
+evaluation:
+  contact_radius: 0.42
+  j_min: 0.15
+  efficiency_min: 0.7
+  displacement_gate: 0.1
+
+g500:
+  detect_by: 100
+  contact_ready_by: 300
+  transport_by: 350
+  reach_by: 500
+  efficiency_min: 0.80
+  direction_error_max_deg: 20.0
+  cross_track_max: 0.15
+  coverage_min: 0.70
+  progress_max_ratio: 1.40
+  hold_speed_max: 0.02
+  yaw_max_deg: 15.0

@@ -36,7 +36,7 @@ import numpy as np
 from .cargo import Cargo
 from .geometry import outward_edge_normals, ray_batch_first_hits, segment_hits_polygon
 from .provenance import frame_rng
-from .types import AgentState, BoundaryObservation
+from .types import AgentState, BoundaryObservation, BoundaryView
 
 
 @dataclass
@@ -69,11 +69,22 @@ class RayCastBoundarySensor:
         timestamp: float,
         apply_gate: bool = True,
     ) -> list[BoundaryObservation]:
+        view = self.sense_view(agent, cargoes, timestamp, apply_gate=apply_gate)
+        return view.to_observations(timestamp=timestamp, agent_id=agent.agent_id)
+
+    def sense_view(
+        self,
+        agent: AgentState,
+        cargoes: list[Cargo],
+        timestamp: float,
+        apply_gate: bool = True,
+    ) -> BoundaryView:
+        """The same scan as ``sense``, as arrays. This is the inner-loop form."""
         returns = self.raw_returns(agent, cargoes, timestamp)
-        observations = self._estimate_normals(agent, returns, timestamp)
-        if apply_gate:
-            observations = [obs for obs in observations if obs.confidence >= self.params.min_confidence]
-        return observations
+        view = self._estimate_normals_view(agent, returns)
+        if apply_gate and len(view):
+            view = view.select(view.confidence >= self.params.min_confidence)
+        return view
 
     # ------------------------------------------------------------------ #
     # ray casting
@@ -137,32 +148,69 @@ class RayCastBoundarySensor:
         returns: list[dict],
         timestamp: float,
     ) -> list[BoundaryObservation]:
-        observations: list[BoundaryObservation] = []
+        view = self._estimate_normals_view(agent, returns)
+        return view.to_observations(timestamp=timestamp, agent_id=agent.agent_id)
+
+    def _estimate_normals_view(self, agent: AgentState, returns: list[dict]) -> BoundaryView:
+        """Batched local plane fit: one ``eigh`` call for the whole scan.
+
+        The fit is per return over its ``k`` nearest neighbours in the same scan,
+        exactly as the per-point version, but the neighbourhoods are gathered into
+        one ``(N, k, 2)`` array so the covariances and their eigen-decompositions
+        are computed together. One scan is at most ``ray_count`` points, so the
+        dense pairwise distance is cheaper than any index would be.
+        """
+        if not returns:
+            return BoundaryView.empty()
         by_object: dict[str, list[dict]] = {}
         for item in returns:
             by_object.setdefault(item["object_id"], []).append(item)
 
         origin = np.asarray(agent.position, dtype=float).reshape(2)
+        chunks: list[BoundaryView] = []
         for object_id, items in by_object.items():
             points = np.vstack([item["point"] for item in items])
             arc = self._arc_lengths(points, [item["ray_index"] for item in items])
             k = min(self.params.pca_neighbors, len(points))
-            for idx, item in enumerate(items):
-                normal, residual = self._pca_normal(points, idx, k, origin)
-                confidence = float(np.clip(1.0 - residual / max(self.params.residual_tolerance, 1e-9), 0.0, 1.0))
-                observations.append(
-                    BoundaryObservation(
-                        object_id=object_id,
-                        agent_id=agent.agent_id,
-                        point=item["point"],
-                        normal=normal,
-                        timestamp=timestamp,
-                        confidence=confidence,
-                        arc_length=float(arc[idx]),
-                        residual=float(residual),
-                    )
+
+            if k < 3:
+                outward = points - origin[None, :]
+                norm = np.linalg.norm(outward, axis=1, keepdims=True)
+                normals = np.where(norm > 1e-9, -outward / np.maximum(norm, 1e-9), np.array([1.0, 0.0]))
+                residual = np.full(len(points), np.inf)
+            else:
+                d2 = np.sum((points[:, None, :] - points[None, :, :]) ** 2, axis=2)
+                neighbours = points[np.argsort(d2, axis=1, kind="stable")[:, :k]]
+                centered = neighbours - neighbours.mean(axis=1, keepdims=True)
+                cov = np.einsum("nki,nkj->nij", centered, centered) / max(1, k - 1)
+                eigenvalues, eigenvectors = np.linalg.eigh(cov)
+                normals = eigenvectors[:, :, 0]
+                residual = np.sqrt(np.maximum(eigenvalues[:, 0], 0.0))
+                # Orient outward: the observer stands outside, so the outward normal
+                # has a positive component along (observer - boundary point).
+                flip = np.einsum("ij,ij->i", normals, origin[None, :] - points) < 0.0
+                normals = np.where(flip[:, None], -normals, normals)
+
+            confidence = np.clip(1.0 - residual / max(self.params.residual_tolerance, 1e-9), 0.0, 1.0)
+            chunks.append(
+                BoundaryView(
+                    points=points,
+                    normals=normals,
+                    confidence=confidence,
+                    arc_length=arc,
+                    object_ids=np.full(len(points), object_id, dtype="<U32"),
                 )
-        return observations
+            )
+
+        if len(chunks) == 1:
+            return chunks[0]
+        return BoundaryView(
+            points=np.vstack([c.points for c in chunks]),
+            normals=np.vstack([c.normals for c in chunks]),
+            confidence=np.concatenate([c.confidence for c in chunks]),
+            arc_length=np.concatenate([c.arc_length for c in chunks]),
+            object_ids=np.concatenate([c.object_ids for c in chunks]),
+        )
 
     def _pca_normal(self, points: np.ndarray, index: int, k: int, origin: np.ndarray) -> tuple[np.ndarray, float]:
         target = points[index]

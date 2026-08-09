@@ -296,6 +296,167 @@ class DirectionalProgressContract:
 
 
 # --------------------------------------------------------------------------- #
+# C4 - the closed-loop 500-frame contract
+# --------------------------------------------------------------------------- #
+
+
+@dataclass(frozen=True)
+class ClosedLoopContract:
+    """G500: one budget, every stage of the loop scored inside it.
+
+    C3 asks whether the cargo ended up in the right place. That is necessary and
+    not sufficient for a closed loop: a run that spends 480 frames finding the
+    object and 20 pushing it has not demonstrated the same thing as one that
+    finds it in 60. The deadlines are therefore part of the criterion, and they
+    are deadlines on a shared budget rather than a per-phase schedule -- a run
+    that encloses early may spend the saving on transport.
+
+    Every gate here fails *closed*. A missing measurement is a failure, not a
+    pass, because a criterion that cannot be evaluated cannot be defended; and
+    every failure carries the number that caused it, so the summary says why
+    without anyone re-running it.
+
+    ``progress_max_ratio`` is the one gate that looks unusual. The team stops on
+    its *own* estimate of how far the cargo has gone, and that estimate is biased
+    low, so the cargo always travels somewhat past the target. Bounding the
+    overshoot is what distinguishes "stopped late" from "never stopped", and it
+    is the gate that makes BRAKE and HOLD mean something.
+    """
+
+    detect_by: int = 100
+    contact_ready_by: int = 300
+    transport_by: int = 350
+    reach_by: int = 500
+    efficiency_min: float = 0.80
+    direction_error_max_deg: float = 20.0
+    cross_track_max: float = 0.15
+    coverage_min: float = 0.70
+    progress_max_ratio: float = 1.40
+    hold_speed_max: float = 0.02
+    yaw_max_deg: float = 15.0
+
+    def evaluate(self, report: dict) -> SuccessVerdict:
+        reasons: list[str] = []
+
+        def frame(name: str, limit: int, label: str) -> None:
+            value = report.get(name)
+            if value is None:
+                reasons.append(f"G500: {label} never happened within the {self.reach_by}-frame budget")
+            elif int(value) > limit:
+                reasons.append(f"G500: {label} at frame {int(value)} > {limit}")
+
+        frame("first_detection_frame", self.detect_by, "object detection")
+        frame("contact_ready_frame", self.contact_ready_by, "enclosure / contact-ready")
+        frame("transport_frame", self.transport_by, "transport activation")
+        frame("reached_frame", self.reach_by, "target reached")
+
+        target = float(report.get("target_distance", 0.0))
+        progress = report.get("J")
+        if progress is None:
+            reasons.append("G500: directional progress J was not measured")
+        else:
+            progress = float(progress)
+            if progress < target:
+                reasons.append(f"G500: J={progress:.4f} m < target L={target:.4f} m")
+            elif target > 0.0 and progress > self.progress_max_ratio * target:
+                reasons.append(
+                    f"G500: J={progress:.4f} m overshot L={target:.4f} m by more than "
+                    f"{(self.progress_max_ratio - 1.0) * 100:.0f}%: the team did not stop"
+                )
+
+        efficiency = report.get("efficiency")
+        if efficiency is None:
+            reasons.append("G500: progress efficiency was not measured")
+        elif float(efficiency) < self.efficiency_min:
+            reasons.append(f"G500: efficiency J/||dx||={float(efficiency):.4f} < {self.efficiency_min:.2f}")
+
+        angle = report.get("direction_error_deg")
+        if angle is None:
+            reasons.append("G500: direction error was not measured")
+        elif float(angle) > self.direction_error_max_deg:
+            reasons.append(
+                f"G500: direction error {float(angle):.2f} deg > {self.direction_error_max_deg:.1f} deg"
+            )
+
+        cross = report.get("max_cross_track")
+        if cross is None:
+            reasons.append("G500: cross-track error was not measured")
+        elif float(cross) > self.cross_track_max:
+            reasons.append(f"G500: cross-track error {float(cross):.4f} m > {self.cross_track_max:.2f} m")
+
+        coverage = report.get("max_strict_coverage")
+        if coverage is None or float(coverage) < self.coverage_min:
+            reasons.append(
+                f"G500: strict boundary coverage {float(coverage or 0.0):.3f} < {self.coverage_min:.2f}: "
+                "the team never enclosed the object"
+            )
+
+        yaw = report.get("rotation_deg")
+        if yaw is not None and abs(float(yaw)) > self.yaw_max_deg:
+            reasons.append(f"G500: cargo rotated {float(yaw):+.2f} deg, beyond +/-{self.yaw_max_deg:.0f} deg")
+
+        if not report.get("holding", False):
+            reasons.append("G500: the run did not end in HOLD")
+        final_speed = report.get("final_cargo_speed")
+        if final_speed is None or float(final_speed) > self.hold_speed_max:
+            reasons.append(
+                f"G500: final cargo speed {float(final_speed or 0.0):.4f} m/s > {self.hold_speed_max:.3f} m/s: "
+                "the cargo was still drifting at the end of the budget"
+            )
+
+        if report.get("engine") == "scripted":
+            reasons.append("G500: engine='scripted' -- the cargo was translated, not transported")
+        for name, label in (("solver_fallbacks", "solver fallback"), ("solver_infeasible", "QP infeasibility")):
+            count = report.get(name)
+            if count is None:
+                reasons.append(f"G500: {label} count was not recorded")
+            elif int(count) != 0:
+                reasons.append(f"G500: {int(count)} {label} event(s); the contract requires zero")
+
+        distance = report.get("min_inter_agent_distance")
+        d_min = report.get("d_min")
+        if distance is None or d_min is None:
+            reasons.append("G500: inter-agent separation was not recorded")
+        elif float(distance) < float(d_min):
+            reasons.append(
+                f"G500: min inter-agent distance {float(distance):.4f} m < d_min {float(d_min):.4f} m"
+            )
+
+        clearance = report.get("min_signed_clearance")
+        if clearance is None:
+            reasons.append("G500: signed clearance was not recorded")
+        elif float(clearance) < 0.0:
+            reasons.append(f"G500: min signed clearance {float(clearance):.4f} m < 0 (a robot entered the cargo)")
+
+        penetration = report.get("max_penetration")
+        budget = report.get("penetration_budget")
+        if penetration is None or budget is None:
+            reasons.append("G500: penetration was not recorded")
+        elif float(penetration) > float(budget):
+            reasons.append(
+                f"G500: max penetration {float(penetration):.4f} m > budget {float(budget):.4f} m "
+                "(delta_max + discrete overshoot)"
+            )
+
+        return SuccessVerdict(success=not reasons, reasons=reasons, metrics=dict(report))
+
+    def as_dict(self) -> dict:
+        return {
+            "detect_by": self.detect_by,
+            "contact_ready_by": self.contact_ready_by,
+            "transport_by": self.transport_by,
+            "reach_by": self.reach_by,
+            "efficiency_min": self.efficiency_min,
+            "direction_error_max_deg": self.direction_error_max_deg,
+            "cross_track_max": self.cross_track_max,
+            "coverage_min": self.coverage_min,
+            "progress_max_ratio": self.progress_max_ratio,
+            "hold_speed_max": self.hold_speed_max,
+            "yaw_max_deg": self.yaw_max_deg,
+        }
+
+
+# --------------------------------------------------------------------------- #
 # coverage-layer contract
 # --------------------------------------------------------------------------- #
 
@@ -334,6 +495,7 @@ __all__ = [
     "ContactSafetyContract",
     "SolverContract",
     "DirectionalProgressContract",
+    "ClosedLoopContract",
     "SuccessVerdict",
     "CoverageContract",
     "VALID_BACKENDS",

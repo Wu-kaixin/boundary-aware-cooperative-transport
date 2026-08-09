@@ -86,6 +86,15 @@ class SafetyFilterParams:
     object_row_inner_limit: float = 0.16
     recovery_fraction: float = 0.6
     projection_iterations: int = 24
+    # Rows whose normal disagrees with the robot's nearest row by more than this
+    # angle describe a different face of the object. See ``_object_rows``.
+    object_row_face_cosine: float = 0.26  # cos(75 deg)
+    # Upper bound on the object-velocity estimate admitted into the barrier. This
+    # is the ISSf disturbance bound, so it belongs in the configuration next to
+    # ``rho`` rather than being whatever the estimator happened to produce.
+    object_velocity_bound: float = 0.20
+    # Number of bisection steps used by the last relaxation tier.
+    barrier_scale_steps: int = 8
 
 
 @dataclass
@@ -96,6 +105,11 @@ class SafetyFilterStats:
     fallbacks: int = 0
     infeasible: int = 0
     margin_relaxations: int = 0
+    # Steps that needed the scaled-barrier tier, and the smallest factor used.
+    # The inter-robot rows stayed hard on every one of them; what was given up is
+    # part of the object barrier's decrease rate, and that is what these report.
+    barrier_scalings: int = 0
+    min_barrier_scale: float = 1.0
     zero_input_feasible_checks: int = 0
     # Certificate failures: u = 0 does not satisfy the *barrier*. This is the
     # quantity the feasibility proposition is about.
@@ -117,6 +131,8 @@ class SafetyFilterStats:
             "fallbacks": self.fallbacks,
             "infeasible": self.infeasible,
             "margin_relaxations": self.margin_relaxations,
+            "barrier_scalings": self.barrier_scalings,
+            "min_barrier_scale": self.min_barrier_scale,
             "zero_input_feasible": self.zero_input_feasible_failures == 0,
             "zero_input_feasible_checks": self.zero_input_feasible_checks,
             "zero_input_feasible_failures": self.zero_input_feasible_failures,
@@ -188,6 +204,15 @@ class SafetyFilter:
         p = np.asarray(position, dtype=float).reshape(2)
         v_obj = np.asarray(object_velocity, dtype=float).reshape(2)
 
+        # The estimate is a measurement, and the barrier needs a *bounded*
+        # disturbance. An estimator spike enters the right-hand side directly, so
+        # an unclamped estimate lets a transient demand a retreat the robot cannot
+        # perform: measured, spikes to 0.21 m/s produced rows demanding the full
+        # recovery rate on faces the robot was 0.20 m clear of.
+        speed = float(np.linalg.norm(v_obj))
+        if speed > self.params.object_velocity_bound:
+            v_obj = v_obj * (self.params.object_velocity_bound / speed)
+
         rel = p[None, :] - pts
         normal_offset = np.sum(normals * rel, axis=1)
         tangential_offset = np.abs(normals[:, 0] * rel[:, 1] - normals[:, 1] * rel[:, 0])
@@ -202,6 +227,21 @@ class SafetyFilter:
         if not np.any(near):
             return np.empty((0, 2)), np.empty(0), np.empty(0)
         normals, normal_offset = normals[near], normal_offset[near]
+        distance = np.linalg.norm(rel[near], axis=1)
+
+        # Face consistency. The tangential window bounds how far a plane is
+        # extrapolated, but on a non-convex object two faces can both pass the
+        # window from opposite sides of a corner, and their rows then demand
+        # retreat in directions up to 180 degrees apart. No input satisfies both,
+        # and the QP reports infeasible for a robot that is in no danger at all --
+        # measured at 0.20 m of true clearance. The robot's own nearest return
+        # names the face it is standing off; rows whose normal disagrees with it by
+        # more than the face angle belong to a different face and are dropped.
+        anchor = normals[int(np.argmin(distance))]
+        same_face = normals @ anchor >= self.params.object_row_face_cosine
+        normals, normal_offset = normals[same_face], normal_offset[same_face]
+        if len(normals) == 0:
+            return np.empty((0, 2)), np.empty(0), np.empty(0)
 
         h = normal_offset - self.params.r_safe
         if len(h) > self.params.max_object_rows:
@@ -209,12 +249,37 @@ class SafetyFilter:
             normals, h = normals[keep], h[keep]
 
         rhs = normals @ v_obj - self.params.gamma_obj * h + self.params.rho
-        # Recovery cap: a robot already touching the object cannot be asked to
-        # retreat faster than its speed limit allows. Capping strictly below the
-        # limit leaves headroom for the other rows -- capping *at* the limit forces
-        # u = v_max * n exactly, which any other active row then contradicts.
-        rhs = np.minimum(rhs, self.params.recovery_fraction * self.params.max_speed)
+        rhs = self._cap_to_reachable(normals, rhs)
         return normals, rhs, h
+
+    def _cap_to_reachable(self, normals: np.ndarray, rhs: np.ndarray) -> np.ndarray:
+        """Cap the object rows at what a speed-limited robot can actually deliver.
+
+        A demand above the speed limit is not a stronger safety guarantee, it is an
+        infeasible problem: the robot cannot retreat faster than ``v_max`` however
+        the barrier is written, so a right-hand side above that turns a safety
+        margin into a solver failure. The cap is stated against an explicit witness
+        rather than a flat constant. With
+
+            w = normalize(sum_k n_k)      the common retreat direction
+            u* = f v_max w                f = recovery_fraction
+
+        the input ``u*`` satisfies every object row whose right-hand side obeys
+        ``r_k <= f v_max (n_k . w)``, so capping there leaves the object family
+        feasible *by construction* and names the point that proves it. Rows facing
+        away from ``w`` are capped at zero, which is the statement that a robot
+        cannot simultaneously retreat from two opposing faces -- true, and better
+        said in the constraint than discovered in the solver.
+        """
+        if len(normals) == 0:
+            return rhs
+        witness = normals.sum(axis=0)
+        norm = float(np.linalg.norm(witness))
+        if norm <= 1e-9:
+            return np.minimum(rhs, 0.0)
+        witness = witness / norm
+        reachable = self.params.recovery_fraction * self.params.max_speed * (normals @ witness)
+        return np.minimum(rhs, np.maximum(reachable, 0.0))
 
     # ------------------------------------------------------------------ #
     # solve
@@ -245,6 +310,7 @@ class SafetyFilter:
                 object_velocity if object_velocity is not None else np.zeros(2),
             )
 
+        self._agent_row_count = len(A_agent)
         A = np.vstack([A_agent, A_obj]) if len(A_agent) or len(A_obj) else np.empty((0, 2))
         b = np.concatenate([b_agent, b_obj]) if len(b_agent) or len(b_obj) else np.empty(0)
         # Same rows with the ISSf robustness margin removed. Used only when the
@@ -292,24 +358,31 @@ class SafetyFilter:
         counted and reported rather than hidden, because the ISSf constant only
         holds for steps where the margin was actually enforced.
 
-        Tier 3 -- infeasible even without the margin -- is a modelling failure
-        rather than a solver failure, so it does not raise here. It is counted as
-        a fallback, and C3 rejects any run whose fallback count is non-zero.
+        Tier 3 scales the object rows' right-hand side down by the largest factor
+        that leaves the whole set feasible, found by bisection. That replaces the
+        projection fallback, and the difference matters: the projection satisfies
+        *nothing* exactly, so a single infeasible step used to put a robot inside
+        the inter-robot barrier -- measured, the minimum separation fell to 0.218 m
+        against a d_min of 0.34 -- and the next step then demanded a harder retreat
+        that was infeasible again. Scaling keeps the inter-robot rows hard, keeps
+        the object rows in the same direction, and records how much of the
+        object-barrier decrease rate was given up, so the degradation is a number
+        in the summary instead of a violated invariant.
+
+        Tier 4 -- infeasible with the object rows dropped entirely -- means the
+        inter-robot rows alone have no solution, which is a modelling failure
+        rather than a solver failure. It is counted as a fallback, and the success
+        contracts reject any run whose fallback count is non-zero.
         """
         backend = self.params.backend
         if backend == "projection":
             return self._project(u_nom, A, b), "projection"
 
         for rhs, relaxed in ((b, False), (b_no_margin, True)):
-            if backend == "cvxpy":
-                try:
-                    solution = solve_min_norm_2d_cvxpy(u_nom, A, rhs, self.params.max_speed)
-                except Exception as exc:  # missing solver, numerical error, ...
-                    self.solver.on_solver_failure(f"cvxpy raised {type(exc).__name__}: {exc}")
-                    self.stats.fallbacks += 1
-                    return self._project(u_nom, A, b), "fallback_projection"
-            else:
-                solution = solve_min_norm_2d(u_nom, A, rhs, self.params.max_speed)
+            solution = self._attempt(u_nom, A, rhs)
+            if solution is None:
+                self.stats.fallbacks += 1
+                return self._project(u_nom, A, b), "fallback_projection"
             if solution.feasible:
                 if relaxed:
                     self.stats.margin_relaxations += 1
@@ -319,8 +392,49 @@ class SafetyFilter:
                 break
 
         self.stats.infeasible += 1
+        scaled = self._scaled_barrier_solve(u_nom, A, b_no_margin)
+        if scaled is not None:
+            u, scale = scaled
+            self.stats.barrier_scalings += 1
+            self.stats.min_barrier_scale = min(self.stats.min_barrier_scale, scale)
+            return u, "scaled_barrier"
+
         self.stats.fallbacks += 1
         return self._project(u_nom, A, b), "fallback_projection"
+
+    def _attempt(self, u_nom: np.ndarray, A: np.ndarray, rhs: np.ndarray):
+        if self.params.backend == "cvxpy":
+            try:
+                return solve_min_norm_2d_cvxpy(u_nom, A, rhs, self.params.max_speed)
+            except Exception as exc:  # missing solver, numerical error, ...
+                self.solver.on_solver_failure(f"cvxpy raised {type(exc).__name__}: {exc}")
+                return None
+        return solve_min_norm_2d(u_nom, A, rhs, self.params.max_speed)
+
+    def _scaled_barrier_solve(self, u_nom: np.ndarray, A: np.ndarray, b: np.ndarray):
+        """Largest ``s`` in [0, 1] for which scaling the object rows is feasible."""
+        split = getattr(self, "_agent_row_count", len(A))
+        if split >= len(A):
+            return None
+        b_zero = b.copy()
+        b_zero[split:] = np.minimum(b_zero[split:], 0.0)
+        solution = self._attempt(u_nom, A, b_zero)
+        if solution is None or not solution.feasible:
+            return None
+
+        best_u, best_scale = solution.u, 0.0
+        low, high = 0.0, 1.0
+        for _ in range(max(1, self.params.barrier_scale_steps)):
+            mid = 0.5 * (low + high)
+            rhs = b.copy()
+            rhs[split:] = np.where(b[split:] > 0.0, mid * b[split:], b[split:])
+            trial = self._attempt(u_nom, A, rhs)
+            if trial is not None and trial.feasible:
+                best_u, best_scale = trial.u, mid
+                low = mid
+            else:
+                high = mid
+        return best_u, best_scale
 
     def _project(self, u_nom: np.ndarray, A: np.ndarray, b: np.ndarray) -> np.ndarray:
         """Iterated half-plane projection. Explicit, inexact baseline only."""

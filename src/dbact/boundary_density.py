@@ -43,7 +43,7 @@ from dataclasses import dataclass, field
 
 import numpy as np
 
-from .types import BoundaryObservation
+from .types import BoundaryObservation, BoundaryView
 
 _EPS = 1e-12
 
@@ -141,20 +141,34 @@ class BoundaryAwareDensity:
         robot_positions: np.ndarray | None = None,
         goal_direction: np.ndarray | None = None,
     ) -> "BoundaryAwareDensity":
-        if not observations:
+        return cls.from_view(
+            BoundaryView.from_observations(list(observations)),
+            params,
+            robot_positions=robot_positions,
+            goal_direction=goal_direction,
+        )
+
+    @classmethod
+    def from_view(
+        cls,
+        view: BoundaryView,
+        params: DensityParams,
+        robot_positions: np.ndarray | None = None,
+        goal_direction: np.ndarray | None = None,
+    ) -> "BoundaryAwareDensity":
+        if len(view) == 0:
             return cls(np.empty((0, 2)), np.empty((0, 2)), np.empty(0), params)
-        points = np.vstack([obs.point for obs in observations])
-        normals = np.vstack([obs.normal for obs in observations])
+        points = view.points
+        normals = view.normals
         offsets = params.offsets_for(normals, goal_direction)
-        arc = np.asarray([max(obs.arc_length, 0.0) for obs in observations], dtype=float)
-        confidence = np.asarray([obs.confidence for obs in observations], dtype=float)
+        arc = np.maximum(view.arc_length, 0.0)
 
         # A map that never had arc lengths (e.g. a hand-built observation) still
         # has to produce a usable density, so fall back to unit weight per point.
         if float(np.sum(arc)) <= _EPS:
             arc = np.ones_like(arc)
 
-        weights = arc * confidence
+        weights = arc * view.confidence
         gap = None
         if robot_positions is not None and len(robot_positions) > 0:
             targets = points + offsets[:, None] * normals
@@ -166,7 +180,7 @@ class BoundaryAwareDensity:
             normals,
             weights,
             params,
-            [obs.object_id for obs in observations],
+            [str(name) for name in view.object_ids],
             gap=gap,
             offsets=offsets,
         )

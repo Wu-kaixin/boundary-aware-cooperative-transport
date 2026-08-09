@@ -27,17 +27,20 @@ from dbact.contracts import VALID_BACKENDS, ContractViolation
 from dbact.controller import DBACTParams
 from dbact.geometry import normalize, signed_distance_to_polygon
 from dbact.provenance import frame_rng
+from dbact.task import TaskSampler, TransportTask
 from dbact.transport_dynamics import ScriptedParams
 from dbact.types import AgentState
 
-PAPER_CONFIG_MARKERS = ("configs/sim/v2", "configs\\sim\\v2")
+TASK_MODES = ("fixed", "random_constrained")
+
+PAPER_CONFIG_MARKERS = ("configs/sim/v2", "configs\\sim\\v2", "configs/sim/d", "configs\\sim\\d")
 
 
 def load_yaml(path: str | Path) -> dict:
     with Path(path).open("r", encoding="utf-8") as f:
         cfg = yaml.safe_load(f) or {}
     cfg.setdefault("_source", str(path))
-    if any(marker in str(path).replace("\\", "/") for marker in ("configs/sim/v2",)):
+    if any(marker in str(path).replace("\\", "/") for marker in ("configs/sim/v2", "configs/sim/d")):
         cfg.setdefault("paper", True)
     return cfg
 
@@ -209,6 +212,52 @@ def goal_directions_from_config(cfg: dict) -> dict[str, np.ndarray]:
     return goals
 
 
+def task_sampler_from_config(cfg: dict) -> TaskSampler | None:
+    """Build the episode task sampler, or ``None`` for a fixed-direction scenario."""
+    task = cfg.get("task", {}) or {}
+    mode = str(task.get("mode", "fixed"))
+    if mode not in TASK_MODES:
+        raise ContractViolation(f"task.mode must be one of {list(TASK_MODES)}, got {mode!r}")
+    if mode == "fixed":
+        return None
+    known = {k: v for k, v in task.items() if k in TaskSampler.__dataclass_fields__}
+    unknown = sorted(set(task) - set(known) - {"mode", "goal_directions"})
+    if unknown:
+        raise ContractViolation(
+            f"unknown task parameters {unknown}; a silently ignored parameter is a configuration "
+            "that does not describe the experiment"
+        )
+    return TaskSampler(**known)
+
+
+def tasks_from_config(cfg: dict, cargoes: list[Cargo], seed: int = 0) -> dict[str, TransportTask]:
+    """Sample one transport task per cargo, reproducibly from the run seed.
+
+    The direction reaches the controller and the success criterion. It does not
+    reach ``build_engine``: no contact-dynamics dataclass has a field it could be
+    written into, so a run cannot restate its configuration as its result.
+    """
+    sampler = task_sampler_from_config(cfg)
+    if sampler is None:
+        return {}
+    params = controller_params_from_config(cfg)
+    domain = domain_from_config(cfg)
+    tasks: dict[str, TransportTask] = {}
+    for cargo in cargoes:
+        rng = frame_rng("transport_task", cargo.object_id, base=seed)
+        radius = float(np.max(np.linalg.norm(cargo.local_vertices, axis=1)))
+        tasks[cargo.object_id] = sampler.sample(
+            rng,
+            object_id=cargo.object_id,
+            start=cargo.position,
+            object_radius=radius,
+            cage_offset=params.cage_offset,
+            robot_radius=params.robot_radius,
+            domain=domain,
+        )
+    return tasks
+
+
 def controller_params_from_config(cfg: dict) -> DBACTParams:
     return DBACTParams.from_dict(cfg.get("controller", {}))
 
@@ -238,6 +287,8 @@ __all__ = [
     "assert_initial_state_valid",
     "build_cargoes",
     "goal_directions_from_config",
+    "task_sampler_from_config",
+    "tasks_from_config",
     "controller_params_from_config",
     "contact_params_from_config",
     "scripted_params_from_config",
