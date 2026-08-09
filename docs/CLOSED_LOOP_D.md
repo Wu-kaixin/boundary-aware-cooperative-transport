@@ -509,6 +509,49 @@ partition and the polar controller are the parts worth keeping if this is revisi
 is that a team arriving on one side has to get *around* an object whose far side
 nobody has seen, and a ring computed from one face is not that.
 
+### Wall-following: also attempted, also not landed
+
+The obvious follow-on is to have the first arrivals crawl the boundary and close
+the map before the coverage law is asked to do anything with it. It fits the
+architecture: `DISCOVER` is a phase in which nothing currently happens, and the law
+that runs there is exactly the one that cannot help — move-to-centroid on a
+limited-range cell has no gradient pointing *around* an object, so with the team
+arriving from one side nobody ever learns the far side exists.
+
+The primitive is standard. With `b` the nearest point in the robot's own map and
+`n` its normal, `kp (d_follow - n^T(p - b))(-n)` holds a standoff outside contact
+and `v_follow * sigma * perp(n)` slides along, with `sigma` alternating so scouts
+split and go both ways round. It ends on a quantity the robot owns: its own map's
+angular coverage about its own centroid.
+
+Two versions were measured against the committed baseline:
+
+| | coverage | `T_contact_ready` | watchdog | solver fallbacks |
+| --- | --- | --- | --- | --- |
+| go-to-point recall (committed) | **0.689 ± 0.240** | **591 ± 219** | **0 / 8** | **0** |
+| follow, all robots | 0.000 ± 0.000 | never | 8 / 8 | 10 843 |
+| follow, 4 scouts by stride | 0.633 ± 0.167 | 659 ± 317 | 4 / 8 | 0 |
+
+Putting every robot on the boundary is not a stronger version of the idea, it is a
+different and much worse one: sixteen robots on a 7.2 m perimeter at a 0.22 m
+standoff are packed tighter than `d_min`, the two directions meet head-on, and the
+QP loses feasibility outright — ten thousand fallbacks and not one seed that ever
+enclosed. Restricting to four scouts recovers the solver completely, and still does
+not beat the baseline: coverage slightly worse, contact-ready slightly slower, and
+half the seeds never finished.
+
+**Neither is merged.** Three attempts at the far-field approach problem — ring
+bearings, ring bearings with a corrected extent, and wall-following at two scout
+densities — and none beats a go-to-point recall. That is worth recording as a
+result rather than as three failures: what makes the far-field case hard is not
+*where the robots go on the way in*, which is what all three changed. The ~890
+frames between detection and enclosure are spent by a team that is **already at the
+object** and cannot distribute around it, and every one of these mechanisms stops
+acting exactly when a robot acquires the object and hands over to the coverage law.
+The next attempt belongs **after** hand-over, in the redeploy rule — which was
+written for a ring start and is the thing that has to escape the one-sided
+equilibrium.
+
 So the honest reading of D9 is: **discovery is solved and enclosure-after-discovery
 is not.** The claim "the team finds an object at an unknown position" is now
 supported by 8 seeds with a coverage bound behind it. The claim "and then encloses
