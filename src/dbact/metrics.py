@@ -17,6 +17,7 @@ import numpy as np
 
 from .cargo import Cargo
 from .geometry import signed_distance_to_polygon
+from .guarantees import minimum_facing_cage_clearance
 from .types import AgentState
 
 
@@ -73,6 +74,117 @@ def strict_boundary_coverage(
     boundary, _ = cargo.boundary_samples(samples)
     dists = np.linalg.norm(boundary[:, None, :] - positions[None, outside, :], axis=2)
     return float(np.mean(np.any(dists <= contact_radius, axis=1)))
+
+
+def maximum_uncovered_boundary_arc(
+    covered: np.ndarray,
+    perimeter: float,
+) -> dict[str, float | int]:
+    """Conservative sampled upper bound on the longest cyclic uncovered arc."""
+    mask = np.asarray(covered, dtype=bool).reshape(-1)
+    count = len(mask)
+    if count == 0:
+        return {
+            "sample_count": 0,
+            "sample_resolution_m": float("inf"),
+            "longest_uncovered_samples": 0,
+            "max_uncovered_arc_upper_m": float("inf"),
+        }
+    resolution = float(perimeter) / count
+    if np.all(mask):
+        longest = 0
+        upper = 0.0
+    elif not np.any(mask):
+        longest = count
+        upper = float(perimeter)
+    else:
+        doubled = np.concatenate([~mask, ~mask])
+        longest = 0
+        run = 0
+        for value in doubled:
+            run = run + 1 if value else 0
+            longest = min(count, max(longest, run))
+        # The two sample-adjacent half intervals add at most one sampling
+        # interval to the observed consecutive-uncovered run.
+        upper = min(float(perimeter), (longest + 1) * resolution)
+    return {
+        "sample_count": count,
+        "sample_resolution_m": resolution,
+        "longest_uncovered_samples": int(longest),
+        "max_uncovered_arc_upper_m": float(upper),
+    }
+
+
+def operational_enclosure_certificate(
+    cargo: Cargo,
+    agents: list[AgentState],
+    *,
+    contact_radius: float,
+    strict_coverage_min: float,
+    max_uncovered_arc_m: float,
+    d_min: float,
+    cage_offset: float,
+    min_engaged_agents: int,
+    engaged_radius: float | None = None,
+    samples: int = 360,
+) -> dict:
+    """Truth-audit certificate for operational boundary enclosure.
+
+    This is deliberately not a configuration-space escape proof and therefore
+    never claims formal caging.  It certifies measurable boundary occupancy,
+    exterior robot centres, pairwise safety, offset-curve compatibility and an
+    engaged quorum at one simulation frame.
+    """
+    positions = np.vstack([agent.position for agent in agents]) if agents else np.empty((0, 2))
+    clearances = signed_distance_to_polygon(positions, cargo.vertices) if agents else np.empty(0)
+    outside = clearances >= 0.0
+    boundary, _ = cargo.boundary_samples(max(3, int(samples)))
+    if len(positions) and np.any(outside):
+        distances = np.linalg.norm(boundary[:, None, :] - positions[None, outside, :], axis=2)
+        covered = np.any(distances <= float(contact_radius), axis=1)
+    else:
+        covered = np.zeros(len(boundary), dtype=bool)
+    coverage = float(np.mean(covered)) if len(covered) else 0.0
+    arc = maximum_uncovered_boundary_arc(covered, cargo.perimeter)
+    engagement_limit = float(contact_radius if engaged_radius is None else engaged_radius)
+    engaged = int(np.sum(outside & (clearances <= engagement_limit))) if len(clearances) else 0
+    minimum_distance = min_inter_agent_distance(agents)
+    facing_clearance = minimum_facing_cage_clearance(cargo.vertices, float(cage_offset))
+    checks = {
+        "strict_boundary_coverage": bool(coverage + 1e-12 >= float(strict_coverage_min)),
+        "maximum_uncovered_boundary_arc": bool(
+            arc["max_uncovered_arc_upper_m"] <= float(max_uncovered_arc_m) + 1e-12
+        ),
+        "all_robot_centres_outside": bool(len(clearances) == len(agents) and np.all(outside)),
+        "inter_agent_safety": bool(minimum_distance + 1e-12 >= float(d_min)),
+        "cage_offset_feasible": bool(facing_clearance + 1e-12 >= float(d_min)),
+        "engaged_quorum": bool(engaged >= int(min_engaged_agents)),
+    }
+    return {
+        "certificate_type": "operational_boundary_enclosure",
+        "formal_caging": False,
+        "formal_caging_nonclaim": "no configuration-space escape proof is implemented",
+        "passed": bool(all(checks.values())),
+        "strict_boundary_coverage": coverage,
+        **arc,
+        "all_robot_centres_outside": checks["all_robot_centres_outside"],
+        "min_signed_clearance_m": float(np.min(clearances)) if len(clearances) else float("inf"),
+        "min_inter_agent_distance_m": minimum_distance,
+        "facing_cage_clearance_m": (
+            float(facing_clearance) if np.isfinite(facing_clearance) else None
+        ),
+        "engaged_agents": engaged,
+        "thresholds": {
+            "strict_coverage_min": float(strict_coverage_min),
+            "max_uncovered_arc_m": float(max_uncovered_arc_m),
+            "d_min_m": float(d_min),
+            "cage_offset_m": float(cage_offset),
+            "min_engaged_agents": int(min_engaged_agents),
+            "engaged_radius_m": engagement_limit,
+        },
+        "checks": checks,
+        "failure_reasons": [name for name, passed in checks.items() if not passed],
+    }
 
 
 def penetration_report(cargo: Cargo, agents: list[AgentState], robot_radius: float) -> dict:
@@ -154,6 +266,8 @@ __all__ = [
     "signed_clearances",
     "boundary_coverage",
     "strict_boundary_coverage",
+    "maximum_uncovered_boundary_arc",
+    "operational_enclosure_certificate",
     "penetration_report",
     "clearance_margin",
     "recruited_agents_count",

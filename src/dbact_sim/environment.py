@@ -26,10 +26,10 @@ from dbact.metrics import (
     boundary_coverage,
     directional_progress,
     min_inter_agent_distance,
+    operational_enclosure_certificate,
     path_lengths,
     penetration_report,
     recruited_agents_count,
-    strict_boundary_coverage,
 )
 from dbact.perception import normal_errors_deg
 from dbact.provenance import run_provenance
@@ -78,6 +78,7 @@ class SimulationLog:
     boundary_velocity_error: dict[str, list[float]] = field(default_factory=dict)
     cbf_velocity_projection_error: dict[str, list[float]] = field(default_factory=dict)
     relaxation_events: list[dict] = field(default_factory=list)
+    operational_enclosure: dict[str, list[dict]] = field(default_factory=dict)
 
 
 @dataclass(frozen=True)
@@ -145,6 +146,20 @@ class SimulationEnvironment:
             discrete_overshoot=0.0,
         )
         evaluation = config.get("evaluation", {})
+        enclosure = evaluation.get("operational_enclosure", {}) or {}
+        self.enclosure_samples = int(enclosure.get("samples", 360))
+        self.enclosure_strict_coverage_min = float(
+            enclosure.get("strict_coverage_min", 0.99)
+        )
+        self.enclosure_max_uncovered_arc = float(
+            enclosure.get("max_uncovered_arc_m", 0.10)
+        )
+        self.enclosure_min_engaged_agents = int(
+            enclosure.get("min_engaged_agents", params.min_push_agents)
+        )
+        self.enclosure_engaged_radius = float(
+            enclosure.get("engaged_radius_m", self.evaluation_contact_radius)
+        )
         self.require_initially_unobserved = bool(evaluation.get("require_initially_unobserved", False))
         self.require_guarantee_certificate = bool(evaluation.get("require_guarantee_certificate", False))
         self.require_measured_error_bounds = bool(evaluation.get("require_measured_error_bounds", False))
@@ -190,6 +205,7 @@ class SimulationEnvironment:
                 self.log.object_velocity_projection_error,
                 self.log.boundary_velocity_error,
                 self.log.cbf_velocity_projection_error,
+                self.log.operational_enclosure,
             ):
                 store[c.object_id] = []
         self._last_statuses = {}
@@ -316,9 +332,20 @@ class SimulationEnvironment:
             self.log.coverage[c.object_id].append(
                 boundary_coverage(c, self.agents, contact_radius=self.evaluation_contact_radius)
             )
-            self.log.strict_coverage[c.object_id].append(
-                strict_boundary_coverage(c, self.agents, contact_radius=self.evaluation_contact_radius)
+            enclosure = operational_enclosure_certificate(
+                c,
+                self.agents,
+                contact_radius=self.evaluation_contact_radius,
+                strict_coverage_min=self.enclosure_strict_coverage_min,
+                max_uncovered_arc_m=self.enclosure_max_uncovered_arc,
+                d_min=self.controller.params.d_min,
+                cage_offset=self.controller.params.cage_offset,
+                min_engaged_agents=self.enclosure_min_engaged_agents,
+                engaged_radius=self.enclosure_engaged_radius,
+                samples=self.enclosure_samples,
             )
+            self.log.operational_enclosure[c.object_id].append(enclosure)
+            self.log.strict_coverage[c.object_id].append(enclosure["strict_boundary_coverage"])
             report = penetration_report(c, self.agents, robot_radius)
             self.log.min_clearance[c.object_id].append(report["min_signed_clearance"])
             self.log.max_penetration[c.object_id].append(report["max_penetration"])
@@ -508,6 +535,11 @@ class SimulationEnvironment:
                 ),
                 "recruited_agents": recruited_agents_count(cargo, self.agents, self.evaluation_contact_radius),
                 "initial_detection_count": self.initial_detection_counts.get(cid, 0),
+                "final_operational_enclosure": (
+                    self.log.operational_enclosure[cid][-1]
+                    if self.log.operational_enclosure[cid]
+                    else None
+                ),
             }
             first_detection = next(
                 (k for k, count in enumerate(self.log.detection_counts[cid]) if count > 0),
@@ -530,7 +562,11 @@ class SimulationEnvironment:
                 ),
             }
             first_enclosure = next(
-                (k for k, value in enumerate(self.log.strict_coverage[cid]) if value >= self.success_contract.coverage_min),
+                (
+                    k
+                    for k, certificate in enumerate(self.log.operational_enclosure[cid])
+                    if certificate["passed"]
+                ),
                 None,
             )
             first_transport = next(
@@ -571,9 +607,22 @@ class SimulationEnvironment:
                     self.log.contact_counts[cid][first_transport:],
                     default=0,
                 )
+                entry["max_uncovered_arc_during_transport_m"] = max(
+                    (
+                        certificate["max_uncovered_arc_upper_m"]
+                        for certificate in self.log.operational_enclosure[cid][first_transport:]
+                    ),
+                    default=float("inf"),
+                )
+                entry["operational_enclosure_maintained_during_transport"] = all(
+                    certificate["passed"]
+                    for certificate in self.log.operational_enclosure[cid][first_transport:]
+                )
             else:
                 entry["min_strict_coverage_during_transport"] = None
                 entry["min_contact_count_during_transport"] = None
+                entry["max_uncovered_arc_during_transport_m"] = None
+                entry["operational_enclosure_maintained_during_transport"] = None
             if goal is not None and len(centers) >= 2:
                 entry["goal_direction"] = np.asarray(goal, dtype=float).tolist()
                 entry["goal_angle_deg"] = float(np.degrees(np.arctan2(goal[1], goal[0])))
@@ -754,6 +803,15 @@ class SimulationEnvironment:
                 "require_guarantee_certificate": self.require_guarantee_certificate,
                 "online_truth_audit": self.online_truth_audit,
                 "measured_error_bounds": self.measured_error_bounds,
+                "operational_enclosure": {
+                    "certificate_type": "operational_boundary_enclosure",
+                    "formal_caging": False,
+                    "samples": self.enclosure_samples,
+                    "strict_coverage_min": self.enclosure_strict_coverage_min,
+                    "max_uncovered_arc_m": self.enclosure_max_uncovered_arc,
+                    "min_engaged_agents": self.enclosure_min_engaged_agents,
+                    "engaged_radius_m": self.enclosure_engaged_radius,
+                },
             },
             "solver": solver_stats,
             "relaxation_events": self.log.relaxation_events,

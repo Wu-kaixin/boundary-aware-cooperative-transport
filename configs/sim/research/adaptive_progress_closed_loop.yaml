@@ -167,6 +167,17 @@ transport:
 # for controller development and empirical timing, not a predeclared theorem.
 guarantee:
   enabled: false
+  # Zero rates are intentional fail-closed placeholders. Replace them only with
+  # independently proved/certified constants, never fitted survivor timings.
+  finite_time:
+    enclosure_initial_error_m: 11.314
+    enclosure_terminal_error_m: 0.05
+    enclosure_contraction_rate_hz: 0.0
+    transport_progress_rate_mps: 0.0
+    brake_initial_error_m: 0.025
+    brake_terminal_error_m: 0.025
+    brake_contraction_rate_hz: 0.0
+    hold_dwell_s: 0.60
 
 evaluation:
   online_truth_audit: true
@@ -183,6 +194,12 @@ evaluation:
   efficiency_min: 0.55
   displacement_gate: 0.08
   coverage_min: 0.65
+  operational_enclosure:
+    samples: 360
+    strict_coverage_min: 0.99
+    max_uncovered_arc_m: 0.05
+    min_engaged_agents: 3
+    engaged_radius_m: 0.50
   max_rotation_deg: 30.0
   require_initially_unobserved: false
   require_guarantee_certificate: false

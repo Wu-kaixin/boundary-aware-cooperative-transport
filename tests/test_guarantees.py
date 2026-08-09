@@ -8,7 +8,11 @@ import numpy as np
 import pytest
 
 from dbact.geometry import certified_inscribed_radius, is_simple_polygon
-from dbact.guarantees import boundary_map_gap_upper_bound, guaranteed_detection_radius
+from dbact.guarantees import (
+    boundary_map_gap_upper_bound,
+    derive_conditional_finite_time_bound,
+    guaranteed_detection_radius,
+)
 from dbact_sim.environment import SimulationEnvironment
 from dbact_sim.scenarios import build_agents, build_cargoes, load_yaml
 
@@ -34,6 +38,52 @@ def test_finite_ray_detection_radius_decreases_when_more_returns_are_required():
     one = guaranteed_detection_radius(1.2, 0.1, 96, required_returns=1)
     three = guaranteed_detection_radius(1.2, 0.1, 96, required_returns=3)
     assert 0.0 < three < one <= 1.2
+
+
+def test_conditional_finite_time_bound_sums_analytic_phase_bounds():
+    bound = derive_conditional_finite_time_bound(
+        dt=0.1,
+        search_bound_s=2.0,
+        map_bound_s=3.0,
+        enclosure_initial_error_m=0.8,
+        enclosure_terminal_error_m=0.02,
+        enclosure_contraction_rate_hz=1.0,
+        transport_distance_m=0.5,
+        brake_activation_distance_m=0.05,
+        transport_progress_rate_mps=0.1,
+        brake_initial_error_m=0.05,
+        brake_terminal_error_m=0.01,
+        brake_contraction_rate_hz=2.0,
+        hold_dwell_s=0.5,
+    )
+
+    assert bound["eligible"] is True
+    assert bound["empirical"] is False
+    assert bound["phase_bounds_s"]["enclose"] == pytest.approx(np.log(40.0))
+    assert bound["phase_bounds_s"]["transport"] == pytest.approx(4.5 + 0.5 * np.log(5.0))
+    assert bound["total_bound_frames"] == 146
+
+
+def test_conditional_finite_time_bound_fails_closed_without_progress_rate():
+    bound = derive_conditional_finite_time_bound(
+        dt=0.1,
+        search_bound_s=2.0,
+        map_bound_s=3.0,
+        enclosure_initial_error_m=0.8,
+        enclosure_terminal_error_m=0.02,
+        enclosure_contraction_rate_hz=1.0,
+        transport_distance_m=0.5,
+        brake_activation_distance_m=0.05,
+        transport_progress_rate_mps=0.0,
+        brake_initial_error_m=0.05,
+        brake_terminal_error_m=0.01,
+        brake_contraction_rate_hz=2.0,
+        hold_dwell_s=0.5,
+    )
+
+    assert bound["eligible"] is False
+    assert bound["total_bound_frames"] is None
+    assert "positive_transport_progress_rate" in bound["failure_reasons"]
 
 
 def test_boundary_map_gap_adds_a_continuous_sampling_upper_bound():

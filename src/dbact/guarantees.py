@@ -36,6 +36,7 @@ from .geometry import (
 
 
 THEOREM_ID = "DBACT-CONDITIONAL-SIMPLE-POLYGON-v1"
+FINITE_TIME_BOUND_ID = "DBACT-CONDITIONAL-FINITE-TIME-v1"
 
 
 @dataclass(frozen=True)
@@ -52,6 +53,133 @@ class Check:
             "bound": self.bound,
             "rationale": self.rationale,
         }
+
+
+def derive_conditional_finite_time_bound(
+    *,
+    dt: float,
+    search_bound_s: float,
+    map_bound_s: float,
+    enclosure_initial_error_m: float,
+    enclosure_terminal_error_m: float,
+    enclosure_contraction_rate_hz: float,
+    transport_distance_m: float,
+    brake_activation_distance_m: float,
+    transport_progress_rate_mps: float,
+    brake_initial_error_m: float,
+    brake_terminal_error_m: float,
+    brake_contraction_rate_hz: float,
+    hold_dwell_s: float,
+) -> dict:
+    """Conditional sufficient finite-time bound with explicit premises.
+
+    The enclosure premise is ``D+ E <= -lambda_e E`` until ``E <= E_tol``.
+    The transport premise is ``dot J >= v_min`` outside the BRAKE band.  The
+    braking premise is ``D+ |e_J| <= -lambda_b |e_J|`` until the terminal band.
+    These are theorem assumptions to prove or certify independently; they are
+    never estimated from a successful episode by this function.
+    """
+    values = {
+        "dt": float(dt),
+        "search_bound_s": float(search_bound_s),
+        "map_bound_s": float(map_bound_s),
+        "enclosure_initial_error_m": float(enclosure_initial_error_m),
+        "enclosure_terminal_error_m": float(enclosure_terminal_error_m),
+        "enclosure_contraction_rate_hz": float(enclosure_contraction_rate_hz),
+        "transport_distance_m": float(transport_distance_m),
+        "brake_activation_distance_m": float(brake_activation_distance_m),
+        "transport_progress_rate_mps": float(transport_progress_rate_mps),
+        "brake_initial_error_m": float(brake_initial_error_m),
+        "brake_terminal_error_m": float(brake_terminal_error_m),
+        "brake_contraction_rate_hz": float(brake_contraction_rate_hz),
+        "hold_dwell_s": float(hold_dwell_s),
+    }
+    checks = {
+        "positive_dt": values["dt"] > 0.0,
+        "finite_search_bound": values["search_bound_s"] >= 0.0,
+        "finite_map_bound": values["map_bound_s"] >= 0.0,
+        "enclosure_error_order": (
+            values["enclosure_initial_error_m"]
+            >= values["enclosure_terminal_error_m"]
+            > 0.0
+        ),
+        "positive_enclosure_contraction": values["enclosure_contraction_rate_hz"] > 0.0,
+        "positive_transport_distance": values["transport_distance_m"] > 0.0,
+        "valid_brake_activation": (
+            0.0
+            <= values["brake_activation_distance_m"]
+            <= values["transport_distance_m"]
+        ),
+        "positive_transport_progress_rate": values["transport_progress_rate_mps"] > 0.0,
+        "brake_error_order": (
+            values["brake_initial_error_m"]
+            >= values["brake_terminal_error_m"]
+            > 0.0
+        ),
+        "positive_brake_contraction": values["brake_contraction_rate_hz"] > 0.0,
+        "nonnegative_hold_dwell": values["hold_dwell_s"] >= 0.0,
+    }
+    eligible = bool(all(checks.values()))
+    if not eligible:
+        return {
+            "bound_id": FINITE_TIME_BOUND_ID,
+            "classification": "provable_sufficient_conditional",
+            "eligible": False,
+            "empirical": False,
+            "premises": values,
+            "checks": checks,
+            "failure_reasons": [name for name, passed in checks.items() if not passed],
+            "phase_bounds_s": None,
+            "phase_bounds_frames": None,
+            "total_bound_s": None,
+            "total_bound_frames": None,
+        }
+
+    enclosure_time = float(
+        np.log(
+            values["enclosure_initial_error_m"] / values["enclosure_terminal_error_m"]
+        )
+        / values["enclosure_contraction_rate_hz"]
+    )
+    drive_distance = max(
+        0.0,
+        values["transport_distance_m"] - values["brake_activation_distance_m"],
+    )
+    drive_time = drive_distance / values["transport_progress_rate_mps"]
+    brake_time = float(
+        np.log(values["brake_initial_error_m"] / values["brake_terminal_error_m"])
+        / values["brake_contraction_rate_hz"]
+    )
+    phase_seconds = {
+        "search": values["search_bound_s"],
+        "map": values["map_bound_s"],
+        "enclose": enclosure_time,
+        "transport": drive_time + brake_time,
+        "hold": values["hold_dwell_s"],
+    }
+    phase_frames = {
+        name: int(math.ceil(seconds / values["dt"] - 1e-12))
+        for name, seconds in phase_seconds.items()
+    }
+    return {
+        "bound_id": FINITE_TIME_BOUND_ID,
+        "classification": "provable_sufficient_conditional",
+        "eligible": True,
+        "empirical": False,
+        "premises": values,
+        "checks": checks,
+        "failure_reasons": [],
+        "formulas": {
+            "enclose": "log(E0/E_tol)/lambda_enclose",
+            "transport_drive": "max(0,L-e_brake)/v_progress_min",
+            "brake": "log(e_brake0/e_hold)/lambda_brake",
+            "total": "T_search+T_map+T_enclose+T_transport+T_hold",
+        },
+        "phase_bounds_s": phase_seconds,
+        "phase_bounds_frames": phase_frames,
+        "total_bound_s": float(sum(phase_seconds.values())),
+        "total_bound_frames": int(sum(phase_frames.values())),
+    }
 
 
 def guaranteed_detection_radius(
@@ -132,7 +260,7 @@ def _edge_offset_endpoints(vertices: np.ndarray, offset: float) -> np.ndarray:
     return np.vstack([v + offset * normals, np.roll(v, -1, axis=0) + offset * normals])
 
 
-def _minimum_facing_cage_clearance(vertices: np.ndarray, offset: float) -> float:
+def minimum_facing_cage_clearance(vertices: np.ndarray, offset: float) -> float:
     """Minimum gap between mutually facing non-adjacent offset edges."""
     v = np.asarray(vertices, dtype=float).reshape(-1, 2)
     normals = outward_edge_normals(v)
@@ -360,7 +488,7 @@ def build_admissibility_certificate(
         f"<= {count} agents",
         "Arclength plus triangle inequality gives a conservative continuous-boundary cover.",
     )
-    facing_clearance = _minimum_facing_cage_clearance(cargo.vertices, controller.cage_offset)
+    facing_clearance = minimum_facing_cage_clearance(cargo.vertices, controller.cage_offset)
     add(
         "cage_offset_self_clearance",
         facing_clearance >= controller.d_min - 1e-12,
@@ -435,6 +563,60 @@ def build_admissibility_certificate(
         "The conditional safety proof requires declared finite normal and moving-boundary estimation errors.",
     )
 
+    finite_time_spec = spec.get("finite_time")
+    derived_time_bound = None
+    if isinstance(finite_time_spec, dict):
+        derived_time_bound = derive_conditional_finite_time_bound(
+            dt=dt,
+            search_bound_s=sweep_frames * dt,
+            # A conservative serial accounting: rendezvous, map gossip and
+            # local boundary completion are not credited for overlap.
+            map_bound_s=(rendezvous_frames + gossip_frames) * dt
+            + float(controller.boundary_mapping_time),
+            enclosure_initial_error_m=float(
+                finite_time_spec.get("enclosure_initial_error_m", 0.0)
+            ),
+            enclosure_terminal_error_m=float(
+                finite_time_spec.get("enclosure_terminal_error_m", 0.0)
+            ),
+            enclosure_contraction_rate_hz=float(
+                finite_time_spec.get("enclosure_contraction_rate_hz", 0.0)
+            ),
+            transport_distance_m=distance,
+            brake_activation_distance_m=controller.brake_activation_distance,
+            transport_progress_rate_mps=float(
+                finite_time_spec.get("transport_progress_rate_mps", 0.0)
+            ),
+            brake_initial_error_m=float(
+                finite_time_spec.get(
+                    "brake_initial_error_m",
+                    controller.brake_activation_distance,
+                )
+            ),
+            brake_terminal_error_m=float(
+                finite_time_spec.get(
+                    "brake_terminal_error_m",
+                    controller.brake_position_tolerance,
+                )
+            ),
+            brake_contraction_rate_hz=float(
+                finite_time_spec.get("brake_contraction_rate_hz", 0.0)
+            ),
+            hold_dwell_s=float(
+                finite_time_spec.get(
+                    "hold_dwell_s",
+                    controller.brake_dwell_steps * dt,
+                )
+            ),
+        )
+        add(
+            "derived_conditional_finite_time_bound",
+            bool(derived_time_bound["eligible"]),
+            derived_time_bound.get("total_bound_frames"),
+            "finite under declared contraction/progress premises",
+            "Analytic sufficient bound; never inferred from successful episode durations.",
+        )
+
     frame_budget = int(evaluation.get("frame_budget", 0) or 0)
     enclosure_bound = int(spec.get("enclosure_bound_frames", 0) or 0)
     transport_bound = int(spec.get("transport_bound_frames", 0) or 0)
@@ -503,6 +685,7 @@ def build_admissibility_certificate(
             "first_transport": release_frames + enclosure_bound + transport_bound,
             "first_hold": total_bound,
         },
+        "derived_finite_time_bound": derived_time_bound,
         "checks": {name: check.as_dict() for name, check in checks.items()},
         "failure_reasons": [name for name, check in checks.items() if not check.passed],
     }
@@ -510,8 +693,11 @@ def build_admissibility_certificate(
 
 __all__ = [
     "THEOREM_ID",
+    "FINITE_TIME_BOUND_ID",
     "Check",
     "boundary_map_gap_upper_bound",
     "guaranteed_detection_radius",
+    "minimum_facing_cage_clearance",
+    "derive_conditional_finite_time_bound",
     "build_admissibility_certificate",
 ]

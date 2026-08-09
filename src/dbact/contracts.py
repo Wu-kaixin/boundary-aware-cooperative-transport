@@ -232,8 +232,8 @@ class SuccessVerdict:
 class DirectionalProgressContract:
     """Directional progress replaces displacement magnitude in the success test.
 
-    ``J = (x_T - x_0) . u_goal`` is a signed scalar projection, so a run that ends
-    up behind where it started scores negative and cannot pass. The efficiency
+    ``J = (x_T - x_activation) . u_goal`` is a signed scalar projection, so a run
+    that ends behind the TRANSPORT activation pose scores negative and cannot pass. The efficiency
     ratio ``J / ||dx||`` suppresses large lateral drift, but is only meaningful
     once the cargo has actually moved, hence the ``displacement_gate``: at small
     displacement the direction is dominated by transient jitter and is close to
