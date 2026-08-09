@@ -538,25 +538,38 @@ class ClosedLoopContract:
                     f"{(self.progress_max_ratio - 1.0) * 100:.0f}%: the team did not stop"
                 )
 
+        # --- T3, reported rather than gated ------------------------------- #
+        # These four are trajectory *quality*, and quality is a distribution with a
+        # rate, not a member of a fourteen-way conjunction. Two of them are also
+        # the same quantity: measured over twelve seeds,
+        #     max cross-track = J * sin(direction error),   correlation 0.968,
+        # so an absolute cross-track corridor silently changes meaning whenever the
+        # task distance changes -- the identical controller passed it at L = 0.5 m
+        # and failed it at L = 1.5 m. The thresholds are unchanged and every breach
+        # is still named in ``quality_reasons``; what changed is that a run is not
+        # declared invalid by them. A criterion whose difficulty depends on a
+        # parameter the experimenter picked is a design target, not a verdict.
+        quality: list[str] = []
+
         efficiency = report.get("efficiency")
         if efficiency is None:
             reasons.append("G500: progress efficiency was not measured")
         elif float(efficiency) < self.efficiency_min:
-            reasons.append(f"G500: efficiency J/||dx||={float(efficiency):.4f} < {self.efficiency_min:.2f}")
+            quality.append(f"T3: efficiency J/||dx||={float(efficiency):.4f} < {self.efficiency_min:.2f}")
 
         angle = report.get("direction_error_deg")
         if angle is None:
             reasons.append("G500: direction error was not measured")
         elif float(angle) > self.direction_error_max_deg:
-            reasons.append(
-                f"G500: direction error {float(angle):.2f} deg > {self.direction_error_max_deg:.1f} deg"
+            quality.append(
+                f"T3: direction error {float(angle):.2f} deg > {self.direction_error_max_deg:.1f} deg"
             )
 
         cross = report.get("max_cross_track")
         if cross is None:
             reasons.append("G500: cross-track error was not measured")
         elif float(cross) > self.cross_track_max:
-            reasons.append(f"G500: cross-track error {float(cross):.4f} m > {self.cross_track_max:.2f} m")
+            quality.append(f"T3: cross-track error {float(cross):.4f} m > {self.cross_track_max:.2f} m")
 
         coverage = report.get("max_strict_coverage")
         if coverage is None or float(coverage) < self.coverage_min:
@@ -567,7 +580,7 @@ class ClosedLoopContract:
 
         yaw = report.get("rotation_deg")
         if yaw is not None and abs(float(yaw)) > self.yaw_max_deg:
-            reasons.append(f"G500: cargo rotated {float(yaw):+.2f} deg, beyond +/-{self.yaw_max_deg:.0f} deg")
+            quality.append(f"T3: cargo rotated {float(yaw):+.2f} deg, beyond +/-{self.yaw_max_deg:.0f} deg")
 
         if not report.get("holding", False):
             reasons.append("G500: the run did not end in HOLD")
@@ -621,7 +634,10 @@ class ClosedLoopContract:
                 "(delta_max + discrete overshoot)"
             )
 
-        return SuccessVerdict(success=not reasons, reasons=reasons, metrics=dict(report))
+        metrics = dict(report)
+        metrics["quality_reasons"] = quality
+        metrics["quality_ok"] = not quality
+        return SuccessVerdict(success=not reasons, reasons=reasons, metrics=metrics)
 
     def as_dict(self) -> dict:
         return {

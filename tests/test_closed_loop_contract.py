@@ -84,10 +84,32 @@ def test_short_of_the_target_fails_even_with_perfect_direction():
     assert any("< target L" in r for r in problems)
 
 
-def test_direction_efficiency_and_cross_track_are_scored_separately():
-    assert any("efficiency" in r for r in reasons(efficiency=0.5))
-    assert any("direction error" in r for r in reasons(direction_error_deg=41.0))
-    assert any("cross-track" in r for r in reasons(max_cross_track=0.4))
+def quality(**overrides) -> list[str]:
+    return ClosedLoopContract().evaluate(passing_report(**overrides)).metrics["quality_reasons"]
+
+
+def test_trajectory_quality_is_reported_rather_than_gated():
+    """T3 is a distribution with a rate, not a member of the conjunction. The
+    thresholds are unchanged and every breach is still named; what changed is that
+    a breach does not make the run invalid. Two of them are also the same quantity:
+    max cross-track = J sin(direction error), so an absolute corridor changes
+    meaning whenever the task distance does."""
+    for field, value, needle in (
+        ("efficiency", 0.5, "efficiency"),
+        ("direction_error_deg", 41.0, "direction error"),
+        ("max_cross_track", 0.4, "cross-track"),
+        ("rotation_deg", 44.0, "rotated"),
+    ):
+        verdict = ClosedLoopContract().evaluate(passing_report(**{field: value}))
+        assert verdict.success, f"{field} should not invalidate the run"
+        assert not verdict.metrics["quality_ok"]
+        assert any(needle in r for r in verdict.metrics["quality_reasons"])
+
+
+def test_a_run_that_meets_every_quality_target_says_so():
+    verdict = ClosedLoopContract().evaluate(passing_report())
+    assert verdict.metrics["quality_ok"]
+    assert verdict.metrics["quality_reasons"] == []
 
 
 def test_a_run_that_never_enclosed_cannot_pass_on_displacement_alone():
@@ -95,10 +117,10 @@ def test_a_run_that_never_enclosed_cannot_pass_on_displacement_alone():
 
 
 def test_safety_is_part_of_the_criterion_not_a_separate_report():
+    """T1 stays in the conjunction. A safety invariant is not a distribution."""
     assert any("min inter-agent distance" in r for r in reasons(min_inter_agent_distance=0.21))
     assert any("entered the cargo" in r for r in reasons(min_signed_clearance=-0.02))
     assert any("max penetration" in r for r in reasons(max_penetration=0.12))
-    assert any("rotated" in r for r in reasons(rotation_deg=44.0))
 
 
 def test_solver_provenance_is_a_gate_and_zero_means_zero():

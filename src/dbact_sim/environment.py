@@ -84,11 +84,30 @@ class SimulationEnvironment:
         self.dt = float(config.get("dt", 0.05))
         self.domain = domain_from_config(config)
         self.agents = build_agents(config, seed=self.seed)
-        self.cargoes = build_cargoes(config)
+        params_preview = controller_params_from_config(config)
+        self.cargoes = build_cargoes(
+            config,
+            seed=self.seed,
+            avoid=np.vstack([a.position for a in self.agents]) if self.agents else None,
+            # One extra voxel beyond the sensor range, so the placement clears the
+            # ignorance gate rather than landing exactly on it.
+            keep_out=(params_preview.sensor_range + params_preview.voxel_size)
+            if config.get("require_initial_ignorance")
+            else 0.0,
+        )
         self.goal_directions = goal_directions_from_config(config)
 
         params = controller_params_from_config(config)
-        assert_initial_state_valid(self.agents, self.cargoes, params.d_min, params.robot_radius)
+        assert_initial_state_valid(
+            self.agents,
+            self.cargoes,
+            params.d_min,
+            params.robot_radius,
+            # Only enforced where a scenario asks for it: the near-field
+            # configurations are legitimate enclosure experiments, they simply do
+            # not support a claim about search.
+            sensor_range=params.sensor_range if config.get("require_initial_ignorance") else None,
+        )
         self.tasks = tasks_from_config(config, self.cargoes, seed=self.seed)
         for object_id, task in self.tasks.items():
             self.goal_directions[object_id] = task.direction

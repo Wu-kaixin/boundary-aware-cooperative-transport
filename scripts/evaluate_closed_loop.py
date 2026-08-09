@@ -93,6 +93,7 @@ def main() -> None:
 
     rows: list[dict] = []
     failures: Counter[str] = Counter()
+    quality_misses: Counter[str] = Counter()
     for seed in seeds:
         env = SimulationEnvironment(load_yaml(args.config), seed=seed)
         started = time.perf_counter()
@@ -125,6 +126,8 @@ def main() -> None:
         rows.append(metrics)
         for reason in g500["failure_reasons"]:
             failures[classify(reason)] += 1
+        for reason in metrics.get("quality_reasons", []):
+            quality_misses[classify(reason)] += 1
 
         print(f"seed {seed:2d}  {'PASS' if g500['success'] else 'FAIL'}  "
               f"goal {metrics['goal_angle_deg']:6.1f} deg  L={metrics['target_distance']:.3f}  "
@@ -132,7 +135,8 @@ def main() -> None:
               f"cross={metrics['max_cross_track']:.4f}  "
               f"transport@{metrics['transport_frame']}  hold@{metrics['hold_frame']}  "
               f"end@{frames_run}({termination['terminated_by'][:4]})  "
-              f"{metrics['frames_per_second']:.1f} fps")
+              f"{metrics['frames_per_second']:.1f} fps"
+              f"{'' if metrics.get('quality_ok') else '  [T3 miss]'}")
 
     passed = sum(1 for row in rows if row["success"])
     low, high = wilson(passed, len(rows))
@@ -174,14 +178,23 @@ def main() -> None:
             )
         },
         "gate_failure_counts": dict(sorted(failures.items(), key=lambda kv: -kv[1])),
+        # T3 is reported, not gated: how many runs met each quality target.
+        "quality_pass": sum(1 for row in rows if row.get("quality_ok")),
+        "quality_miss_counts": dict(sorted(quality_misses.items(), key=lambda kv: -kv[1])),
         "runs": rows,
     }
     (out / "g500_sweep.json").write_text(json.dumps(report, indent=2), encoding="utf-8")
 
     print()
-    print(f"G500 {passed}/{len(rows)}  (Wilson 95%: {low:.2f}-{high:.2f})")
-    print("gate failures, most common first:")
-    for gate, count in report["gate_failure_counts"].items():
+    print(f"T1/T2 validity {passed}/{len(rows)}  (Wilson 95%: {low:.2f}-{high:.2f})")
+    if report["gate_failure_counts"]:
+        print("gate failures, most common first:")
+        for gate, count in report["gate_failure_counts"].items():
+            print(f"  {count:3d}  {gate}")
+    quality_low, quality_high = wilson(report["quality_pass"], len(rows))
+    print(f"T3 quality targets met {report['quality_pass']}/{len(rows)}  "
+          f"(Wilson 95%: {quality_low:.2f}-{quality_high:.2f})  -- reported, not gated")
+    for gate, count in report["quality_miss_counts"].items():
         print(f"  {count:3d}  {gate}")
     print(f"wrote {out / 'g500_sweep.json'}")
 

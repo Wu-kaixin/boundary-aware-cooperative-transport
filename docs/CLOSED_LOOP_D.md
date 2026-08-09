@@ -372,6 +372,84 @@ badly tuned. The press is always along a robot's own observed normal, so the
 achievable force directions are the cone spanned by whichever faces the arc is
 touching; on a faceted object that cone is coarse, and no gain makes it finer.
 
+## D9: far-field search, and what it exposed
+
+`configs/sim/d/l_shape_search.yaml`. The cargo centre is sampled anywhere the
+workspace admits; the robots start on a line along one wall;
+`require_initial_ignorance: true` refuses any draw in which a robot begins inside
+its own sensor range of the object. So `first_detection_frame` measures the search
+rather than the layout — the near-field configuration detects at frame 0 on every
+seed and supports no such claim.
+
+**The sweep.** Robot `i` of `N` owns the vertical lane centred at
+`xmin + m + (i + 0.5)(W - 2m)/N` and walks it end to end, reversing at the ends.
+Sixteen lanes across 7.1 m of workspace is 0.443 m a lane against a 1.20 m sensor
+range, so every point of the workspace lies inside some robot's swath and a single
+lane traversal covers it:
+
+```
+T_cover  <=  ( d_to_lane + H ) / v_search  =  ( <=4 + 7.1 ) / 0.28  ~  510 frames
+```
+
+independent of where the object is. That is a coverage argument, which the earlier
+outward spiral could not make. The partition is a static function of the robot
+index and the workspace bounds — it is **not** a frontier method and does not
+re-plan as the map fills; that costs efficiency on a partly-explored workspace and
+buys a bound that holds with no assumption about the communication graph.
+
+**The token.** A detection has to cross the workspace, and robots sweeping
+adjacent lanes are the only ones inside each other's `comm_range`. Each robot that
+holds boundary refreshes a token — object id, an estimated position, the time it
+was seen — and every step each robot merges its neighbours' tokens and keeps the
+freshest per object. Tokens older than `token_ttl` expire, so a stale rumour does
+not pull the team to where the object used to be. No polygon and no shape travel,
+only where to look.
+
+### Measured, 8 seeds, run to completion
+
+| quantity | mean ± sd | min–max |
+| --- | --- | --- |
+| **`T_detect`** | **77.9 ± 78.0** | **5 – 227** |
+| `T_contact_ready` | 590.6 ± 219.0 | 248 – 938 |
+| `T_transport` | 1007.4 ± 592.3 | 249 – 2142 |
+| `T_hold` | 1131.0 ± 604.3 | 292 – 2198 |
+| episode length | 1194.2 ± 608.7 | 333 – 2238 |
+| peak strict coverage | 0.71 ± 0.22 | 0.41 – 1.00 |
+
+Detection lands at **78 ± 78 frames against a ~510-frame coverage bound**, so the
+sweep finds the object in about a seventh of its worst case — the object is
+usually not in the last lane visited. Every seed detected, and every episode
+terminated by settling rather than by the watchdog.
+
+### What it exposed, which is the more useful result
+
+Everything after detection got worse, and the reason is structural rather than
+incidental. **The enclosure stage was built and tuned for a ring initial
+condition.** In the near-field scenario the team starts distributed around the
+object and reaches contact-ready at 75 ± 8 frames. Arriving from one wall it takes
+**591 ± 219** — nearly eight times longer, with far more spread — and half the
+seeds never enclose at all (peak strict coverage 0.41–0.48 on four of eight, and
+0.82–1.00 on the other four).
+
+This is the local-equilibrium failure the redeploy rule was written for, at a scale
+it was not designed for: with every robot arriving from the same side, the near
+robots converge onto the arc they can see, no robot's disc ever overlaps the far
+side, and there is no gradient pointing around the object.
+
+Worse, and this is a **T1 safety regression that must be stated plainly**: four of
+eight seeds violate `d_min`. Sixteen robots recalled to a single token position
+converge on the same point, and the recall command has no notion of the ring they
+are supposed to form — it is a go-to-point, so the crowding is designed in.
+
+So the honest reading of D9 is: **discovery is solved and enclosure-after-discovery
+is not.** The claim "the team finds an object at an unknown position" is now
+supported by 8 seeds with a coverage bound behind it. The claim "and then encloses
+and transports it" is supported only from a ring start, and the far-field pipeline
+has an open safety failure. The next piece of work is an approach phase that
+distributes robots around the token as they travel rather than converging on it —
+the cage ring is known from the token position and the object's estimated extent,
+so the targets exist; nothing assigns them.
+
 ## Regression against the A branch: S1's certificate rate
 
 `scripts/verify_refactor.py` reports:
@@ -406,13 +484,12 @@ branch has not done.
 
 ## What is still open
 
-* **Discovery is near-field.** The robots are deployed in a ring around the work
-  area and the object is inside it, so `first_detection` is frame 0–1. The
-  controller does not know the shape, but this experiment does not demonstrate
-  search for an object at an unknown location. A far-field initial state with a
-  frontier sweep is the next piece of work, and until it exists the word
-  "discovery" should be read as "the boundary was found and estimated locally",
-  not as "the object was located".
+* **Discovery is done; enclosure-after-discovery is not.** `l_shape_search.yaml`
+  places the object at random, starts every robot outside its own sensor range,
+  and finds it in 78 ± 78 frames against a ~510-frame coverage bound. What follows
+  detection is the open problem: contact-ready takes 591 ± 219 frames instead of
+  75 ± 8, four of eight seeds never enclose, and four of eight breach `d_min`
+  while converging on the token. See D9 above.
 * **Cross-track is the dominant remaining G500 failure.** The press is always
   along a robot's own observed normal — a press along the commanded direction is
   inward only at the centre of the trailing face and tangential everywhere else —

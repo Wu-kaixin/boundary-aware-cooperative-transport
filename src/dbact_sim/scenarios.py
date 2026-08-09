@@ -160,7 +160,13 @@ def build_agents(cfg: dict, seed: int = 0) -> list[AgentState]:
     return [AgentState(agent_id=f"agent_{i:02d}", position=p) for i, p in enumerate(positions)]
 
 
-def assert_initial_state_valid(agents: list[AgentState], cargoes: list, d_min: float, robot_radius: float) -> None:
+def assert_initial_state_valid(
+    agents: list[AgentState],
+    cargoes: list,
+    d_min: float,
+    robot_radius: float,
+    sensor_range: float | None = None,
+) -> None:
     """Reject a scenario whose initial state already violates its own constraints.
 
     Both checks matter for the same reason: the barrier certificate is about
@@ -186,12 +192,78 @@ def assert_initial_state_valid(agents: list[AgentState], cargoes: list, d_min: f
                 f"a robot starts within the robot radius of cargo {cargo.object_id!r} "
                 f"(min signed clearance {float(np.min(clearances)):.4f} < r_robot {robot_radius:.4f})"
             )
+    if sensor_range is not None and agents:
+        # Discovery has to start from ignorance. If any robot can already see the
+        # object at t = 0 then ``first_detection_frame`` records the scenario's
+        # layout rather than the team's search -- which is exactly what the
+        # near-field configurations do: they detect at frame 0 on every seed.
+        positions = np.vstack([a.position for a in agents])
+        for cargo in cargoes:
+            reach = float(np.min(signed_distance_to_polygon(positions, cargo.vertices)))
+            if reach <= sensor_range:
+                problems.append(
+                    f"a robot starts {reach:.3f} m from cargo {cargo.object_id!r}, inside its "
+                    f"{sensor_range:.3f} m sensor range; the run would begin already knowing where the "
+                    "object is, so its detection frame would measure the layout, not the search"
+                )
     if problems:
         raise ContractViolation("invalid initial state:\n  - " + "\n  - ".join(problems))
 
 
-def build_cargoes(cfg: dict) -> list[Cargo]:
-    return [Cargo.from_config(item) for item in cfg.get("cargoes", [])]
+def build_cargoes(
+    cfg: dict,
+    seed: int = 0,
+    avoid: np.ndarray | None = None,
+    keep_out: float = 0.0,
+) -> list[Cargo]:
+    """Build the cargoes, sampling any whose position is declared random.
+
+    ``center_mode: random`` places the object anywhere the workspace admits, so
+    "the team found the object" becomes a claim about search rather than about
+    where the scenario happened to put it. ``assert_initial_state_valid``
+    separately refuses a placement that any robot can already see, which is what
+    makes the detection frame a measurement instead of a formality.
+    """
+    domain = domain_from_config(cfg)
+    out: list[Cargo] = []
+    for item in cfg.get("cargoes", []):
+        entry = dict(item)
+        mode = str(entry.pop("center_mode", "fixed"))
+        extra_margin = float(entry.pop("center_margin", 0.4))
+        if mode == "random":
+            probe = Cargo.from_config({**entry, "center": [0.0, 0.0]})
+            margin = extra_margin + float(np.max(np.linalg.norm(probe.local_vertices, axis=1)))
+            rng = frame_rng("cargo_placement", str(entry.get("id", "cargo")), base=seed)
+            lo = np.array([domain[0] + margin, domain[2] + margin])
+            hi = np.array([domain[1] - margin, domain[3] - margin])
+            if np.any(hi <= lo):
+                raise ContractViolation(
+                    f"cargo {entry.get('id')!r} cannot be placed at random: the workspace {domain} is "
+                    f"smaller than the object plus its margin ({margin:.3f} m)"
+                )
+            # Rejection against the robots' own start, so the draw cannot hand the
+            # team the answer. Sampling first and checking afterwards would reject
+            # whole seeds rather than whole placements, which would quietly bias
+            # the position distribution towards the far corners.
+            others = None if avoid is None or len(avoid) == 0 else np.asarray(avoid, dtype=float).reshape(-1, 2)
+            placed = None
+            for _ in range(400):
+                candidate = rng.uniform(lo, hi)
+                if others is None or keep_out <= 0.0:
+                    placed = candidate
+                    break
+                probe.set_pose(candidate, 0.0)
+                if float(np.min(signed_distance_to_polygon(others, probe.vertices))) > keep_out:
+                    placed = candidate
+                    break
+            if placed is None:
+                raise ContractViolation(
+                    f"could not place cargo {entry.get('id')!r} at least {keep_out:.3f} m clear of every "
+                    "robot's start after 400 draws; move the start line or enlarge the workspace"
+                )
+            entry["center"] = placed.tolist()
+        out.append(Cargo.from_config(entry))
+    return out
 
 
 def goal_directions_from_config(cfg: dict) -> dict[str, np.ndarray]:

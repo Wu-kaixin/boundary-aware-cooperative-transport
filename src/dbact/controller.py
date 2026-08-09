@@ -137,6 +137,27 @@ class DBACTParams:
     object_velocity_bound: float = 0.20
     recovery_fraction: float = 0.6
 
+    # --- search (D9) ---
+    # "sweep" is a boustrophedon lawnmower on a static lane partition; "spiral" is
+    # the pre-D9 outward drift, kept as the ablation. The sweep is what turns a
+    # detection time into a bounded quantity: robot i owns the lane
+    # ``x in [xmin + i W/N, xmin + (i+1) W/N]`` and traverses its height, so with
+    # ``W/N <= 2 R_s`` every point of the workspace passes within sensor range
+    # within ``T <= (H + d_lane) / v_max`` -- a coverage argument rather than a
+    # hope. The partition is static and known a priori; it is not negotiated at
+    # run time, and saying so is part of the claim.
+    search_mode: str = "sweep"
+    search_margin: float = 0.45
+    search_speed: float = 0.28
+    search_lane_tolerance: float = 0.12
+    # An object token is one message -- object id, an estimated position, and the
+    # time it was seen -- relayed hop by hop. Without it a detection stays inside
+    # one communication neighbourhood: robots sweeping lanes on an 8 m workspace
+    # are far outside ``comm_range`` of each other, so the finder would enclose the
+    # object alone. The token carries no polygon and no shape, only where to look.
+    token_ttl: float = 12.0
+    token_arrival_radius: float = 0.30
+
     # --- gains ---
     kp_explore: float = 0.25
     kp_cage: float = 0.9
@@ -389,6 +410,8 @@ class DBACTController:
         self.maps: dict[str, LocalBoundaryMap] = {}
         self._redeploy_target: dict[str, np.ndarray | None] = {}
         self._views: dict[str, BoundaryView] = {}
+        self._sweep_direction: dict[int, float] = {}
+        self._tokens: dict[str, dict[str, tuple[np.ndarray, float]]] = {}
         self._progress: dict[str, dict[str, float]] = {}
         self.transport_loops: dict[str, DirectionalProgressController] = {}
         self.phase_monitor = PhaseMonitor(gates=params.phase_gates())
@@ -430,6 +453,7 @@ class DBACTController:
             local_map.update(batch, timestamp, agent_codes=codes, dt=dt)
             self._views[agent.agent_id] = local_map.view(timestamp)
 
+        self._update_tokens(agents, neighbors, timestamp)
         contact_ready = [self._contact_ready(agents[i], self._views[agents[i].agent_id]) for i in range(len(agents))]
         self._update_progress(agents, neighbors)
         self.phase_signals = self._phase_signals(agents, contact_ready)
@@ -566,8 +590,17 @@ class DBACTController:
             return u, mode, 0.0, False, 0.0
 
         if len(view) == 0:
+            # Somebody has seen the object and the news reached here: go and look,
+            # rather than carry on sweeping a lane that no longer matters.
+            target = self._token_target(agent.agent_id)
+            if target is not None and float(np.linalg.norm(target - agent.position)) > self.params.token_arrival_radius:
+                u = self.params.kp_cage * (target - agent.position)
+                speed = float(np.linalg.norm(u))
+                if speed > self.params.max_speed:
+                    u = u * (self.params.max_speed / speed)
+                return u, "recall", 0.0, False, 0.0
             u = self._exploration_velocity(i, agents, neighbor_indices, self._time)
-            return u, "explore", 0.0, False, 0.0
+            return u, "search", 0.0, False, 0.0
 
         crowd = np.vstack([agent.position] + [agents[j].position for j in neighbor_indices])
         goal = self._goal_for(view) if self.params.task_mode == "transport" else None
@@ -1042,9 +1075,99 @@ class DBACTController:
             distance = float(np.linalg.norm(d))
             if distance > 1e-6:
                 repel += d / (distance * distance)
+        if self.params.search_mode == "sweep":
+            return self._sweep_velocity(i, len(agents), agent.position) + 0.15 * normalize(repel)
         angle = 0.7 * i + 0.25 * timestamp
         sweep = np.array([np.cos(angle), np.sin(angle)], dtype=float)
         return self.params.kp_explore * (0.7 * normalize(repel) + 0.3 * sweep)
+
+    def _sweep_velocity(self, index: int, count: int, position: np.ndarray) -> np.ndarray:
+        """Boustrophedon lane sweep.
+
+        Robot ``i`` of ``N`` owns the vertical lane centred at
+        ``xmin + m + (i + 0.5) (W - 2m) / N`` and walks it from end to end,
+        reversing at the ends. Two things follow, and both are the point.
+
+        *Coverage is bounded.* Every point of the workspace lies within
+        ``max(lane_width/2, R_s)`` of some lane centre, so once each robot has
+        traversed its lane height ``H`` the whole workspace has passed within
+        sensor range: ``T_cover <= (d_to_lane + H) / v_max``, with no dependence on
+        where the object is. That is the statement the spiral could not make.
+
+        *No run-time coordination is needed.* The partition is a function of the
+        robot index and the workspace bounds, both static. It is not a frontier
+        method and does not claim to be: nothing is re-planned as the map fills,
+        which costs efficiency on a partly-explored workspace and buys a bound that
+        holds without any assumption about the communication graph.
+        """
+        xmin, xmax, ymin, ymax = self.domain
+        margin = self.params.search_margin
+        lanes = max(1, int(count))
+        width = max(xmax - xmin - 2.0 * margin, 1e-6)
+        lane_x = xmin + margin + (index + 0.5) * width / lanes
+        low, high = ymin + margin, ymax - margin
+
+        state = self._sweep_direction.setdefault(index, 1.0 if (index % 2 == 0) else -1.0)
+        if position[1] >= high - self.params.search_lane_tolerance and state > 0.0:
+            state = -1.0
+        elif position[1] <= low + self.params.search_lane_tolerance and state < 0.0:
+            state = 1.0
+        self._sweep_direction[index] = state
+
+        # Cross-lane error first, then along-lane travel: a robot that is far from
+        # its lane closes on it before starting to sweep, so the lanes stay a
+        # partition instead of everyone drifting through the middle.
+        offset = lane_x - float(position[0])
+        along = state * self.params.search_speed
+        across = float(np.clip(2.0 * offset, -self.params.search_speed, self.params.search_speed))
+        velocity = np.array([across, along], dtype=float)
+        if abs(offset) > 4.0 * self.params.search_lane_tolerance:
+            velocity[1] *= 0.35
+        return velocity
+
+    # ------------------------------------------------------------------ #
+    # object token
+    # ------------------------------------------------------------------ #
+
+    def _update_tokens(self, agents: list[AgentState], neighbors: list[list[int]], timestamp: float) -> None:
+        """One message per known object, relayed hop by hop.
+
+        A robot that sees boundary refreshes its own token at the centroid of what
+        it holds. Every step each robot merges its neighbours' tokens and keeps the
+        freshest per object; tokens older than ``token_ttl`` are dropped, so a
+        stale rumour expires instead of pulling the team to where the object used
+        to be. This is the only thing that crosses the workspace: robots sweeping
+        8 m of lanes are nowhere near each other's ``comm_range``, so without a
+        relay the finder would have to enclose the object by itself.
+        """
+        for agent in agents:
+            view = self._views[agent.agent_id]
+            if len(view) == 0:
+                continue
+            store = self._tokens.setdefault(agent.agent_id, {})
+            for object_id in np.unique(view.object_ids):
+                picked = view.object_ids == object_id
+                store[str(object_id)] = (view.points[picked].mean(axis=0), float(timestamp))
+
+        merged: dict[str, dict[str, tuple[np.ndarray, float]]] = {}
+        for i, agent in enumerate(agents):
+            best = dict(self._tokens.get(agent.agent_id, {}))
+            for j in neighbors[i]:
+                for object_id, entry in self._tokens.get(agents[j].agent_id, {}).items():
+                    if object_id not in best or entry[1] > best[object_id][1]:
+                        best[object_id] = entry
+            merged[agent.agent_id] = {
+                object_id: entry
+                for object_id, entry in best.items()
+                if timestamp - entry[1] <= self.params.token_ttl
+            }
+        self._tokens = merged
+
+    def _token_target(self, agent_id: str) -> np.ndarray | None:
+        store = self._tokens.get(agent_id)
+        if not store:
+            return None
+        return min(store.values(), key=lambda entry: -entry[1])[0]
 
     # ------------------------------------------------------------------ #
     # map-derived quantities
