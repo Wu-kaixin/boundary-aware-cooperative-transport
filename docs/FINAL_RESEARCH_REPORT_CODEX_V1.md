@@ -195,8 +195,8 @@ survivors are not used to manufacture a finite bound.
   distinctions.
 - The unscreened 60-episode arbitrary-shape matrix and its failure composition.
 - A >20 fps minimum on the fixed three-case optimized performance ablation.
-- Fourteen PNG and fourteen PDF figures, raw CSV/JSON, a manifest, and a
-  representative GIF.
+- Fourteen PNG and fourteen PDF figures, raw CSV/JSON, a manifest, and
+  representative GIF/H.264 MP4 animations.
 
 ### Unsupported or remaining limitation
 
@@ -210,16 +210,13 @@ survivors are not used to manufacture a finite bound.
 - High conditional success probability: only seven eligible samples exist and
   five failed.
 - Hardware validity; this branch intentionally performs no robot experiment.
-- MP4 output in the retained environment because ffmpeg is unavailable. The
-  reproducible GIF is included and the script emits MP4 when an ffmpeg writer is
-  installed.
 
 ## Reproduction and artifacts
 
 ```powershell
 python scripts/run_publication_representative.py `
   --output artifacts/publication/representative `
-  --animation-stride 5 --animation-fps 16 --skip-mp4
+  --animation-stride 5 --animation-fps 16
 
 python scripts/run_arbitrary_shape_monte_carlo.py `
   --seeds 0..4 --max-steps 1500 `
@@ -237,4 +234,5 @@ Primary retained outputs:
 - `artifacts/publication/tables/`
 - `artifacts/publication/data/`
 - `artifacts/publication/representative/closed_loop.gif`
+- `artifacts/publication/representative/closed_loop.mp4`
 - `runs/arbitrary_shape_final_se2_60/{manifest.json,episodes.csv,monte_carlo.json}`

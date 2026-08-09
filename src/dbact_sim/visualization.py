@@ -1,7 +1,9 @@
 from __future__ import annotations
 
+import os
 from pathlib import Path
 
+import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib import animation
@@ -25,6 +27,29 @@ MODE_COLORS = {
     "brake": "#ea580c",
     "hold": "#374151",
 }
+
+
+def _configure_ffmpeg_writer() -> None:
+    """Resolve the Conda/Python-bundled ffmpeg binary for Matplotlib."""
+    if animation.FFMpegWriter.isAvailable():
+        return
+    configured_path = os.environ.get("IMAGEIO_FFMPEG_EXE")
+    if configured_path:
+        ffmpeg_path = Path(configured_path)
+    else:
+        try:
+            import imageio_ffmpeg
+        except ImportError as exc:
+            raise RuntimeError(
+                "MP4 export requires ffmpeg or the optional imageio-ffmpeg package; "
+                "install the project's 'media' extra or recreate environment.yml"
+            ) from exc
+        ffmpeg_path = Path(imageio_ffmpeg.get_ffmpeg_exe())
+    if not ffmpeg_path.is_file():
+        raise RuntimeError(f"imageio-ffmpeg binary does not exist: {ffmpeg_path}")
+    matplotlib.rcParams["animation.ffmpeg_path"] = str(ffmpeg_path)
+    if not animation.FFMpegWriter.isAvailable():
+        raise RuntimeError(f"Matplotlib cannot execute ffmpeg at {ffmpeg_path}")
 
 
 def plot_snapshot(env: SimulationEnvironment, path: str | Path, title: str = "DBACT final snapshot") -> None:
@@ -289,8 +314,7 @@ def animate_simulation(
     ani = animation.FuncAnimation(fig, draw, frames=frames, interval=1000 / fps, blit=False)
     try:
         if path.suffix.lower() == ".mp4":
-            if not animation.FFMpegWriter.isAvailable():
-                raise RuntimeError("FFmpeg is required to write MP4 animations")
+            _configure_ffmpeg_writer()
             writer = animation.FFMpegWriter(
                 fps=fps,
                 codec="h264",

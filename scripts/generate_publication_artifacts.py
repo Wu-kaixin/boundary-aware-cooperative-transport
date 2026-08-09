@@ -44,7 +44,13 @@ def save_figure(fig: plt.Figure, output: Path, name: str) -> list[str]:
     paths = []
     for suffix in ("png", "pdf"):
         path = output / f"{name}.{suffix}"
-        fig.savefig(path, dpi=300 if suffix == "png" else None, bbox_inches="tight")
+        metadata = {"CreationDate": None, "ModDate": None} if suffix == "pdf" else None
+        fig.savefig(
+            path,
+            dpi=300 if suffix == "png" else None,
+            bbox_inches="tight",
+            metadata=metadata,
+        )
         paths.append(path.name)
     plt.close(fig)
     return paths

@@ -94,6 +94,9 @@ All inline media below points to committed repository files under `docs/assets/`
 
 Generated PNG, GIF, CSV, and MP4 artifacts are still produced under `runs/` or `platforms/mas_public/data/` by default and are intentionally ignored by Git. For GitHub display, copy selected figures into `docs/assets/`, or publish larger videos through GitHub Releases.
 
+The reproducible Conda environment installs `imageio-ffmpeg`; MP4 export uses
+its bundled binary automatically when a system `ffmpeg` command is unavailable.
+
 ---
 
 ## Project Snapshot
