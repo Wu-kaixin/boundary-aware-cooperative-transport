@@ -506,6 +506,14 @@ class ClosedLoopContract:
     # keep the QP feasible. Zero by default: a relaxation that is counted but not
     # scored is a relaxation that has been renamed rather than removed.
     barrier_scalings_max: int = 0
+    # Tolerance on the inter-agent separation comparison. The barrier is *exactly*
+    # binding for most of a transport run -- the ring sits on d_min by design --
+    # so an exact float comparison reports the last bit of the QP's arithmetic as a
+    # collision. Measured deficits at those "breaches" were 1e-16 to 3e-8 m; a
+    # micrometre is a hundred times the worst of them and still nine orders of
+    # magnitude below anything physical, so this separates numerical noise from a
+    # safety event without weakening the gate.
+    d_min_tolerance: float = 1e-6
 
     def evaluate(self, report: dict) -> SuccessVerdict:
         reasons: list[str] = []
@@ -613,9 +621,10 @@ class ClosedLoopContract:
         d_min = report.get("d_min")
         if distance is None or d_min is None:
             reasons.append("G500: inter-agent separation was not recorded")
-        elif float(distance) < float(d_min):
+        elif float(distance) < float(d_min) - self.d_min_tolerance:
             reasons.append(
-                f"G500: min inter-agent distance {float(distance):.4f} m < d_min {float(d_min):.4f} m"
+                f"G500: min inter-agent distance {float(distance):.6f} m < d_min {float(d_min):.6f} m "
+                f"by {float(d_min) - float(distance):.2e} m"
             )
 
         clearance = report.get("min_signed_clearance")

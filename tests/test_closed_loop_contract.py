@@ -119,6 +119,10 @@ def test_a_run_that_never_enclosed_cannot_pass_on_displacement_alone():
 def test_safety_is_part_of_the_criterion_not_a_separate_report():
     """T1 stays in the conjunction. A safety invariant is not a distribution."""
     assert any("min inter-agent distance" in r for r in reasons(min_inter_agent_distance=0.21))
+    # ... but a deficit of nanometres on an exactly-binding barrier is the QP's
+    # last bit of arithmetic, not a collision. Reporting it as one cost a whole
+    # round of work chasing a safety regression that had never happened.
+    assert ClosedLoopContract().evaluate(passing_report(min_inter_agent_distance=0.34 - 3e-8)).success
     assert any("entered the cargo" in r for r in reasons(min_signed_clearance=-0.02))
     assert any("max penetration" in r for r in reasons(max_penetration=0.12))
 

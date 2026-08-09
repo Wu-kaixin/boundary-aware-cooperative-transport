@@ -434,12 +434,23 @@ seeds never enclose at all (peak strict coverage 0.41–0.48 on four of eight, a
 This is the local-equilibrium failure the redeploy rule was written for, at a scale
 it was not designed for: with every robot arriving from the same side, the near
 robots converge onto the arc they can see, no robot's disc ever overlaps the far
-side, and there is no gradient pointing around the object.
+side, and there is no gradient pointing around the object. That, and not safety, is
+the real cost of arriving in a heap.
 
-Worse, and this is a **T1 safety regression that must be stated plainly**: four of
-eight seeds violate `d_min`. Sixteen robots recalled to a single token position
-converge on the same point, and the recall command has no notion of the ring they
-are supposed to form — it is a go-to-point, so the crowding is designed in.
+**A retraction.** An earlier version of this document reported that four of eight
+seeds violated `d_min` and called it a T1 safety regression caused by the recall
+crowding robots together. That was wrong, and the error was mine: the gate compared
+floats exactly against a barrier that is *exactly binding by design* — the ring
+sits on `d_min` for most of a transport run — so it reported the last bit of the
+QP's arithmetic as a collision. The measured deficits at those "breaches" were
+1e-16 to 3e-8 m. Thirty-five nanometres is not a collision. With a 1e-6 m tolerance
+on the comparison, **the far-field runs have no inter-agent failures at all**, and
+neither did they before.
+
+The cost of that mistake was a round of work aimed at a safety problem that had
+never happened, so the lesson is recorded rather than quietly patched: a gate on a
+quantity the controller drives *to* its limit needs a tolerance sized against the
+arithmetic, or it will report success as failure.
 
 ### The approach phase: attempted, not landed
 
@@ -470,11 +481,33 @@ recall, the first version made things worse: three of eight seeds hit the watchd
 without transporting and one pushed the cargo 4.04 m without ever stopping,
 against zero watchdog timeouts before.
 
-The attempt is stashed rather than committed. What it needs is an extent estimate
-that is honest at first sight, and the shape of that is now clear: the token has to
-carry the *observer's* standoff -- measured by the robot that actually saw the
-surface, before relay mixes it with second-hand points -- and grow the ring as more
-of the boundary is observed rather than fixing it at detection.
+Both fixes were then implemented and measured. The token now takes its extent from
+the robot's **own scan** rather than its fused view, as `max(visible extent,
+observer standoff)`, and holds it as a **running maximum** while the token lives,
+so the ring grows as more boundary is seen. The estimate lands where it should:
+1.51–1.55 m against a true radius of 1.320 m, just outside and slowly tightening,
+where before it was 1.005 m (inside the object) or 3.018 m (beyond everyone's
+sensor range). The abandon-and-resweep rule was also removed — dropping a token
+only re-merges the same rumour from a neighbour on the next step, which is an
+oscillation rather than a recovery; a robot seated on its bearing with nothing in
+view now closes the ring in instead.
+
+It still does not pay, and the honest comparison is:
+
+| | go-to-point recall | ring approach v2 |
+| --- | --- | --- |
+| `d_min` failures | 0 / 8 | 0 / 8 |
+| peak strict coverage | **0.689 ± 0.240** | 0.573 ± 0.214 |
+| `T_contact_ready` | 591 ± 219 | **545 ± 223** |
+| watchdog timeouts | **0 / 8** | 3 / 8 |
+
+A marginally faster contact-ready, bought with worse coverage and three runs that
+never finished. With the safety motivation retracted there is nothing left that it
+buys, so it is **not merged**; the branch keeps the go-to-point recall. The bearing
+partition and the polar controller are the parts worth keeping if this is revisited
+— what they do not address is the thing that actually costs the 591 frames, which
+is that a team arriving on one side has to get *around* an object whose far side
+nobody has seen, and a ring computed from one face is not that.
 
 So the honest reading of D9 is: **discovery is solved and enclosure-after-discovery
 is not.** The claim "the team finds an object at an unknown position" is now
