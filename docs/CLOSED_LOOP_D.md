@@ -226,6 +226,31 @@ ten seeds are FAIL and not "PASS with a footnote". Renaming the counter would ha
 turned 2/12 into 10/12 without changing a single trajectory; that is the reason
 the gate exists.
 
+## Regression against the A branch: S1's certificate rate
+
+`scripts/verify_refactor.py` on this branch reports **S1 FAIL, S2–S7 PASS**. The
+A branch reports S1–S7 PASS. The single number that changed is the zero-input
+certificate failure rate — the fraction of solves on which `u = 0` does not
+satisfy the margin-free barrier, so the robot has to actively retreat:
+
+| | A branch | D branch | S1 criterion |
+| --- | --- | --- | --- |
+| certificate failure rate | 0.0415 | 0.1054 | `< 0.10` |
+| robots inside the cargo | 0 | 0 | `== 0` |
+| min signed clearance | 0.1067 m | 0.1207 m | `>= 0` |
+| max penetration | 0.0533 m | 0.0393 m | `<= budget` |
+| max slack | 0.0 | 0.0 | `== 0` |
+
+Every hard invariant still holds, and clearance and penetration are both *better*
+than the A branch. What got worse is how often a robot finds itself inside the
+barrier's band and has to retreat — which is what happens when the cargo is
+actually moving, since S1 is run on the A configuration where the A branch's cargo
+was stationary from frame 97. That is an explanation, not an excuse: the rate is a
+stated S1 criterion, it is over, and the threshold has not been touched. Deciding
+whether 10% is the right number for a scenario with a moving boundary, or whether
+the ISSf constant needs re-deriving against the measured disturbance, is work this
+branch has not done.
+
 ## What is still open
 
 * **Discovery is near-field.** The robots are deployed in a ring around the work
