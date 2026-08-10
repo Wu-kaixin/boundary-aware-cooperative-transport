@@ -4,6 +4,7 @@ from dataclasses import dataclass
 
 import numpy as np
 
+from .accel import voronoi_owners
 from .boundary_density import BoundaryAwareDensity
 from .geometry import clip_to_domain
 from .types import AgentState
@@ -38,9 +39,7 @@ class LocalCVT:
         if len(samples) == 0:
             return agent.position.copy()
 
-        diff = samples[:, None, :] - local_positions[None, :, :]
-        dist2 = np.sum(diff * diff, axis=2)
-        owners = np.argmin(dist2, axis=1)
+        owners = voronoi_owners(samples, local_positions)
         own_mask = owners == 0
         if not np.any(own_mask):
             return agent.position.copy()

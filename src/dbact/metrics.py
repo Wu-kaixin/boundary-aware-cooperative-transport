@@ -10,11 +10,11 @@ def min_inter_agent_distance(agents: list[AgentState]) -> float:
     if len(agents) < 2:
         return float("inf")
     pts = np.vstack([a.position for a in agents])
-    best = float("inf")
-    for i in range(len(pts)):
-        for j in range(i + 1, len(pts)):
-            best = min(best, float(np.linalg.norm(pts[i] - pts[j])))
-    return best
+    diff = pts[:, None, :] - pts[None, :, :]
+    dist = np.linalg.norm(diff, axis=2)
+    # Ignore the diagonal (self-distance = 0).
+    np.fill_diagonal(dist, np.inf)
+    return float(np.min(dist))
 
 
 def min_agent_boundary_distance(cargo: Cargo, agents: list[AgentState]) -> float:

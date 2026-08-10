@@ -79,6 +79,7 @@ Generated PNG, GIF, CSV, and MP4 artifacts are still produced under `runs/` or `
 - **Reproducible experiments**: stable seeded sensing, config-driven multi-seed batches, CSV/JSON/optional Parquet results, and one-command comparison plots.
 - **Visualization-first workflow**: simulations export trajectories, coverage curves, final snapshots, paper-style frames, and optional GIF animations.
 - **Hardware-oriented staging**: MAS adapter, OptiTrack read-only logging, and RoboMaster S1 smoke tests prepare a safe path toward real experiments.
+- **Optional performance acceleration**: boundary-sample caching, vectorized / optional Numba density–CVT kernels, `--workers` for in-step agent threads, and `--jobs` for batch scenario processes.
 
 ---
 
@@ -173,6 +174,23 @@ python -m pip install -e ".[dev]"
 ```bash
 python -m dbact_sim.run_sim --config configs/sim/paper_like_irregular_moving_cargo.yaml --steps 520 --output runs/paper_like_irregular_moving_cargo --animate
 ```
+
+### Optional performance acceleration
+
+Logic and CLI entry points stay the same. Speedups are opt-in or automatic fallbacks:
+
+```bash
+# Optional Numba hot kernels (NumPy fallback if not installed)
+python -m pip install -e ".[accel]"
+
+# Single-run worker threads (0/1=serial default; >=2 explicit thread pool)
+python -m dbact_sim.run_sim --config configs/sim/circle.yaml --steps 200 --output runs/circle --workers 1
+
+# Batch scenarios in parallel processes (main multi-core lever; 1 = legacy serial)
+python scripts/run_all_scenarios.py --steps 200 --jobs 0
+```
+
+Optional Numba installs OpenMP-style `prange` kernels for density / Voronoi ownership. Environment overrides: `DBACT_WORKERS`, `DBACT_FORCE_NUMPY=1`.
 
 Important outputs:
 

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 import numpy as np
 
@@ -32,6 +32,7 @@ class DistributedCBFQP:
     object_speed_bound: float = 0.0
     contact_allowance: float = 0.0
     feasibility_tolerance: float = 1e-7
+    _qp_cache: dict = field(default_factory=dict, init=False, repr=False)
 
     def filter_velocity(
         self,
@@ -136,6 +137,35 @@ class DistributedCBFQP:
             for a, b in constraints_meta
         )
 
+    def _get_qp_bundle(self, n_constraints: int):
+        """Reuse a Parameterized cvxpy Problem for a fixed constraint count."""
+        cached = self._qp_cache.get(n_constraints)
+        if cached is not None:
+            return cached
+        try:
+            import cvxpy as cp  # type: ignore
+        except Exception:
+            return None
+
+        u_var = cp.Variable(2)
+        u_nom = cp.Parameter(2)
+        a_mat = cp.Parameter((n_constraints, 2))
+        b_vec = cp.Parameter(n_constraints)
+        limit = self.component_limit
+        constraints = [u_var >= -limit, u_var <= limit, a_mat @ u_var >= b_vec]
+        objective = cp.Minimize(cp.sum_squares(u_var - u_nom))
+        problem = cp.Problem(objective, constraints)
+        bundle = {
+            "cp": cp,
+            "u_var": u_var,
+            "u_nom": u_nom,
+            "a_mat": a_mat,
+            "b_vec": b_vec,
+            "problem": problem,
+        }
+        self._qp_cache[n_constraints] = bundle
+        return bundle
+
     def _filter_velocity_qp(
         self,
         nominal_velocity: np.ndarray,
@@ -144,24 +174,22 @@ class DistributedCBFQP:
         boundary_points: list[np.ndarray],
         boundary_normals: list[np.ndarray],
     ) -> np.ndarray | None:
-        try:
-            import cvxpy as cp  # type: ignore
-        except Exception:
-            return None
-
         constraints_meta = self._build_constraints(
             position, neighbor_positions, boundary_points, boundary_normals
         )
         if not constraints_meta:
             return self._clip_box(nominal_velocity)
 
-        u_var = cp.Variable(2)
-        limit = self.component_limit
-        constraints = [u_var >= -limit, u_var <= limit]
-        for a, b in constraints_meta:
-            constraints.append(a @ u_var >= b)
-        objective = cp.Minimize(cp.sum_squares(u_var - nominal_velocity))
-        problem = cp.Problem(objective, constraints)
+        bundle = self._get_qp_bundle(len(constraints_meta))
+        if bundle is None:
+            return None
+
+        a_rows = np.vstack([a for a, _ in constraints_meta]).astype(float, copy=False)
+        b_vals = np.asarray([b for _, b in constraints_meta], dtype=float)
+        bundle["u_nom"].value = np.asarray(nominal_velocity, dtype=float).reshape(2)
+        bundle["a_mat"].value = a_rows
+        bundle["b_vec"].value = b_vals
+        problem = bundle["problem"]
         try:
             problem.solve(solver="OSQP", warm_start=True)
         except Exception:
@@ -169,6 +197,7 @@ class DistributedCBFQP:
                 problem.solve(warm_start=True)
             except Exception:
                 return None
+        u_var = bundle["u_var"]
         if problem.status not in {"optimal", "optimal_inaccurate"} or u_var.value is None:
             return None
         candidate = self._clip_box(np.asarray(u_var.value, dtype=float).reshape(2))
