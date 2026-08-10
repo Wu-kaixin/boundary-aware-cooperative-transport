@@ -10,9 +10,8 @@ import numpy as np
 from dbact.controller import DBACTController
 from dbact.geometry import clip_to_domain
 from dbact.metrics import (
-    boundary_coverage,
+    boundary_and_min_distance,
     enclosure_time,
-    min_agent_boundary_distance,
     min_inter_agent_distance,
     path_lengths,
     recruited_agents_count,
@@ -99,12 +98,11 @@ class SimulationEnvironment:
         for c in self.cargoes:
             self.log.cargo_centers[c.object_id].append(c.center.copy())
             self.log.cargo_vertices[c.object_id].append(c.vertices.copy())
-            self.log.cargo_coverages[c.object_id].append(
-                boundary_coverage(c, self.agents, contact_radius=contact_radius)
+            coverage, min_dist = boundary_and_min_distance(
+                c, self.agents, contact_radius=contact_radius
             )
-            self.log.min_boundary_distances[c.object_id].append(
-                min_agent_boundary_distance(c, self.agents)
-            )
+            self.log.cargo_coverages[c.object_id].append(coverage)
+            self.log.min_boundary_distances[c.object_id].append(min_dist)
         self.log.min_distances.append(min_inter_agent_distance(self.agents))
 
     def compute_metrics(self) -> dict:

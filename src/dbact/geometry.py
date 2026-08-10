@@ -78,6 +78,26 @@ def closest_point_on_segment(point: np.ndarray, a: np.ndarray, b: np.ndarray) ->
     return a + t * ab, t
 
 
+def closest_boundary_distances(vertices: np.ndarray, points: np.ndarray) -> np.ndarray:
+    """Exact min distance from each query point to the polygon boundary."""
+    v = ensure_ccw(vertices)
+    pts = np.asarray(points, dtype=float).reshape(-1, 2)
+    if len(pts) == 0:
+        return np.empty(0, dtype=float)
+    a = v
+    b = np.roll(v, -1, axis=0)
+    ab = b - a
+    denom = np.sum(ab * ab, axis=1)
+    # points (N,1,2), a (1,E,2)
+    ap = pts[:, None, :] - a[None, :, :]
+    t = np.sum(ap * ab[None, :, :], axis=2)
+    t = np.where(denom[None, :] < EPS, 0.0, t / np.maximum(denom[None, :], EPS))
+    t = np.clip(t, 0.0, 1.0)
+    closest = a[None, :, :] + t[:, :, None] * ab[None, :, :]
+    dist = np.linalg.norm(pts[:, None, :] - closest, axis=2)
+    return np.min(dist, axis=1)
+
+
 def closest_boundary_point_and_normal(vertices: np.ndarray, point: np.ndarray) -> tuple[np.ndarray, np.ndarray, float]:
     """Return closest boundary point, outward normal and distance.
 

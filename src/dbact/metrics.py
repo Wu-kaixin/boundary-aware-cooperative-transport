@@ -3,6 +3,7 @@ from __future__ import annotations
 import numpy as np
 
 from .cargo import Cargo
+from .geometry import closest_boundary_distances
 from .types import AgentState
 
 
@@ -21,20 +22,32 @@ def min_agent_boundary_distance(cargo: Cargo, agents: list[AgentState]) -> float
     """Minimum observed agent-to-true-boundary distance (evaluation only)."""
     if not agents:
         return float("inf")
-    best = float("inf")
-    for agent in agents:
-        _, _, distance = cargo.closest_boundary(agent.position)
-        best = min(best, float(distance))
-    return best
+    positions = np.vstack([a.position for a in agents])
+    return float(np.min(closest_boundary_distances(cargo.vertices, positions)))
+
+
+def boundary_and_min_distance(
+    cargo: Cargo,
+    agents: list[AgentState],
+    contact_radius: float = 0.42,
+    samples: int = 160,
+) -> tuple[float, float]:
+    """Coverage from samples plus exact min agent–boundary distance."""
+    if not agents:
+        return 0.0, float("inf")
+    boundary, _ = cargo.boundary_samples(samples)
+    positions = np.vstack([a.position for a in agents])
+    dists = np.linalg.norm(boundary[:, None, :] - positions[None, :, :], axis=2)
+    coverage = float(np.mean(np.any(dists <= contact_radius, axis=1)))
+    min_dist = float(np.min(closest_boundary_distances(cargo.vertices, positions)))
+    return coverage, min_dist
 
 
 def boundary_coverage(cargo: Cargo, agents: list[AgentState], contact_radius: float = 0.42, samples: int = 160) -> float:
     if not agents:
         return 0.0
-    boundary, _ = cargo.boundary_samples(samples)
-    positions = np.vstack([a.position for a in agents])
-    dists = np.linalg.norm(boundary[:, None, :] - positions[None, :, :], axis=2)
-    return float(np.mean(np.any(dists <= contact_radius, axis=1)))
+    coverage, _ = boundary_and_min_distance(cargo, agents, contact_radius=contact_radius, samples=samples)
+    return coverage
 
 
 def recruited_agents_count(

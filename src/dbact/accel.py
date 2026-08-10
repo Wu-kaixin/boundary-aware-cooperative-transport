@@ -142,6 +142,108 @@ def voronoi_owners(samples: np.ndarray, local_positions: np.ndarray) -> np.ndarr
     return _voronoi_owners_numpy(samples_arr, local_arr)
 
 
+@njit(cache=True, nogil=True)
+def _nearest_ray_hits_numba(
+    origin: np.ndarray,
+    directions: np.ndarray,
+    edge_a: np.ndarray,
+    edge_b: np.ndarray,
+    edge_object: np.ndarray,
+    max_range: float,
+    eps: float,
+) -> tuple:
+    """Nearest ray–segment hits across all object edges.
+
+    Returns (best_t, best_object_index) with -1 object index on miss.
+    """
+    n_rays = directions.shape[0]
+    n_edges = edge_a.shape[0]
+    best_t = np.full(n_rays, np.inf, dtype=np.float64)
+    best_obj = np.full(n_rays, -1, dtype=np.int64)
+    ox = origin[0]
+    oy = origin[1]
+    for i in range(n_rays):
+        dx = directions[i, 0]
+        dy = directions[i, 1]
+        for e in range(n_edges):
+            ax = edge_a[e, 0]
+            ay = edge_a[e, 1]
+            bx = edge_b[e, 0]
+            by = edge_b[e, 1]
+            abx = bx - ax
+            aby = by - ay
+            det = dx * (-aby) - dy * (-abx)
+            if det > -eps and det < eps:
+                continue
+            rhx = ax - ox
+            rhy = ay - oy
+            t = (rhx * (-aby) - rhy * (-abx)) / det
+            s = (dx * rhy - dy * rhx) / det
+            if t < eps or t > max_range or s < -eps or s > 1.0 + eps:
+                continue
+            if t < best_t[i]:
+                best_t[i] = t
+                best_obj[i] = edge_object[e]
+    return best_t, best_obj
+
+
+def _nearest_ray_hits_numpy(
+    origin: np.ndarray,
+    directions: np.ndarray,
+    edge_a: np.ndarray,
+    edge_b: np.ndarray,
+    edge_object: np.ndarray,
+    max_range: float,
+    eps: float,
+) -> tuple[np.ndarray, np.ndarray]:
+    n_rays = directions.shape[0]
+    best_t = np.full(n_rays, np.inf, dtype=np.float64)
+    best_obj = np.full(n_rays, -1, dtype=np.int64)
+    ox, oy = float(origin[0]), float(origin[1])
+    for i in range(n_rays):
+        dx, dy = float(directions[i, 0]), float(directions[i, 1])
+        for e in range(edge_a.shape[0]):
+            ax, ay = float(edge_a[e, 0]), float(edge_a[e, 1])
+            bx, by = float(edge_b[e, 0]), float(edge_b[e, 1])
+            abx, aby = bx - ax, by - ay
+            det = dx * (-aby) - dy * (-abx)
+            if abs(det) < eps:
+                continue
+            rhx, rhy = ax - ox, ay - oy
+            t = (rhx * (-aby) - rhy * (-abx)) / det
+            s = (dx * rhy - dy * rhx) / det
+            if t < eps or t > max_range or s < -eps or s > 1.0 + eps:
+                continue
+            if t < best_t[i]:
+                best_t[i] = t
+                best_obj[i] = int(edge_object[e])
+    return best_t, best_obj
+
+
+def nearest_ray_hits(
+    origin: np.ndarray,
+    directions: np.ndarray,
+    edge_a: np.ndarray,
+    edge_b: np.ndarray,
+    edge_object: np.ndarray,
+    max_range: float,
+    eps: float = 1e-9,
+) -> tuple[np.ndarray, np.ndarray]:
+    """Return nearest hit distance and object index for each ray."""
+    origin_arr = np.asarray(origin, dtype=np.float64).reshape(2)
+    dirs = np.asarray(directions, dtype=np.float64).reshape(-1, 2)
+    a = np.asarray(edge_a, dtype=np.float64).reshape(-1, 2)
+    b = np.asarray(edge_b, dtype=np.float64).reshape(-1, 2)
+    obj = np.asarray(edge_object, dtype=np.int64).reshape(-1)
+    if len(dirs) == 0:
+        return np.empty(0, dtype=np.float64), np.empty(0, dtype=np.int64)
+    if len(a) == 0:
+        return np.full(len(dirs), np.inf, dtype=np.float64), np.full(len(dirs), -1, dtype=np.int64)
+    if using_numba():
+        return _nearest_ray_hits_numba(origin_arr, dirs, a, b, obj, float(max_range), float(eps))
+    return _nearest_ray_hits_numpy(origin_arr, dirs, a, b, obj, float(max_range), float(eps))
+
+
 @lru_cache(maxsize=1)
 def warmup() -> bool:
     """Compile hot kernels once (no-op when numba is unavailable)."""
@@ -152,6 +254,11 @@ def warmup() -> bool:
     weights = np.ones(2, dtype=np.float64)
     _ = _gaussian_density_numba(q, targets, weights, 0.35, 1e-3)
     _ = _voronoi_owners_numba(q, targets)
+    dirs = np.array([[1.0, 0.0], [0.0, 1.0]], dtype=np.float64)
+    a = np.array([[0.5, -1.0], [-1.0, 0.5]], dtype=np.float64)
+    b = np.array([[0.5, 1.0], [1.0, 0.5]], dtype=np.float64)
+    obj = np.array([0, 1], dtype=np.int64)
+    _ = _nearest_ray_hits_numba(np.zeros(2, dtype=np.float64), dirs, a, b, obj, 2.0, 1e-9)
     return True
 
 
@@ -161,5 +268,6 @@ __all__ = [
     "using_numba",
     "gaussian_density",
     "voronoi_owners",
+    "nearest_ray_hits",
     "warmup",
 ]
