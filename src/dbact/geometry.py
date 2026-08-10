@@ -133,6 +133,100 @@ def polygon_perimeter(vertices: np.ndarray) -> float:
     return float(np.sum(np.linalg.norm(edges, axis=1)))
 
 
+def polygon_diameter(vertices: np.ndarray) -> float:
+    """Largest vertex-to-vertex distance of a polygon.
+
+    A polygon edge is a convex segment, so the maximum Euclidean distance over
+    the whole closed polygon is attained at vertices. This makes the value an
+    exact (not sampled) footprint diameter for the admissibility certificate.
+    """
+    v = np.asarray(vertices, dtype=float).reshape(-1, 2)
+    if len(v) < 2:
+        return 0.0
+    return float(np.max(np.linalg.norm(v[:, None, :] - v[None, :, :], axis=2)))
+
+
+def is_simple_polygon(vertices: np.ndarray) -> bool:
+    """Return whether ``vertices`` form a non-degenerate simple polygon.
+
+    Adjacent edges are allowed to meet at their shared endpoint; every other
+    intersection, a repeated non-adjacent vertex, or a zero-length edge rejects
+    the outline. The predicate is intentionally exact up to ``EPS`` because a
+    self-intersecting outline has no unambiguous inside/outside or cage offset,
+    and a certificate stated over it would be a certificate about nothing.
+    """
+    v = np.asarray(vertices, dtype=float).reshape(-1, 2)
+    n = len(v)
+    if n < 3 or abs(polygon_area(v)) <= EPS:
+        return False
+    edges = np.roll(v, -1, axis=0) - v
+    if np.any(np.linalg.norm(edges, axis=1) <= EPS):
+        return False
+    for i in range(n):
+        a, b = v[i], v[(i + 1) % n]
+        for j in range(i + 1, n):
+            # Consecutive edges and the first/last pair share one legal vertex.
+            if j == i or j == (i + 1) % n or i == (j + 1) % n:
+                continue
+            c, d = v[j], v[(j + 1) % n]
+            if _closed_segments_intersect(a, b, c, d):
+                return False
+    return True
+
+
+def _closed_segments_intersect(a: np.ndarray, b: np.ndarray, c: np.ndarray, d: np.ndarray) -> bool:
+    """Closed-segment intersection used by :func:`is_simple_polygon`."""
+
+    def orient(p: np.ndarray, q: np.ndarray, r: np.ndarray) -> float:
+        return float((q[0] - p[0]) * (r[1] - p[1]) - (q[1] - p[1]) * (r[0] - p[0]))
+
+    def on_segment(p: np.ndarray, q: np.ndarray, r: np.ndarray) -> bool:
+        return bool(
+            min(p[0], r[0]) - EPS <= q[0] <= max(p[0], r[0]) + EPS
+            and min(p[1], r[1]) - EPS <= q[1] <= max(p[1], r[1]) + EPS
+        )
+
+    o1, o2 = orient(a, b, c), orient(a, b, d)
+    o3, o4 = orient(c, d, a), orient(c, d, b)
+    if ((o1 > EPS and o2 < -EPS) or (o1 < -EPS and o2 > EPS)) and (
+        (o3 > EPS and o4 < -EPS) or (o3 < -EPS and o4 > EPS)
+    ):
+        return True
+    return bool(
+        (abs(o1) <= EPS and on_segment(a, c, b))
+        or (abs(o2) <= EPS and on_segment(a, d, b))
+        or (abs(o3) <= EPS and on_segment(c, a, d))
+        or (abs(o4) <= EPS and on_segment(c, b, d))
+    )
+
+
+def certified_inscribed_radius(vertices: np.ndarray) -> float:
+    """Certified lower bound on the radius of a disk contained in a polygon.
+
+    Ear clipping decomposes a simple polygon into interior triangles. The
+    incircle of every such triangle is contained in the polygon, hence the
+    largest triangle inradius is a constructive witness rather than an
+    optimistic grid estimate. A return value of zero means no witness exists.
+    """
+    v = ensure_ccw(np.asarray(vertices, dtype=float))
+    triangles = triangulate_simple_polygon(v)
+    radii: list[float] = []
+    for tri in triangles:
+        lengths = np.linalg.norm(np.roll(tri, -1, axis=0) - tri, axis=1)
+        perimeter = float(np.sum(lengths))
+        area = abs(polygon_area(tri))
+        if perimeter > EPS and area > EPS:
+            radii.append(2.0 * area / perimeter)
+    # The area centroid of a concave polygon need not be inside. When it is,
+    # however, its exact distance to the closed boundary is also a constructive
+    # inscribed disk. This avoids the needlessly tiny ear-triangle witness for a
+    # many-sided convex outline such as the polygonal circle factory.
+    centroid = polygon_centroid(v)
+    if point_in_polygon(centroid, v):
+        radii.append(float(-signed_distance_to_polygon(centroid[None, :], v)[0]))
+    return max(radii, default=0.0)
+
+
 def polygon_second_moment(vertices: np.ndarray, center: np.ndarray | None = None) -> float:
     """Area second moment of a polygon about ``center`` (unit density)."""
     v = ensure_ccw(vertices)
