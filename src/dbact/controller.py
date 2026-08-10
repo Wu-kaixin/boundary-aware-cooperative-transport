@@ -397,30 +397,21 @@ class DBACTController:
         self,
         observations: list[BoundaryObservation],
         agents: list[AgentState],
+        positions: np.ndarray | None = None,
     ) -> list[BoundaryObservation]:
         if not observations:
             return observations
-        positions = np.vstack([a.position for a in agents])
+        if positions is None:
+            positions = np.vstack([a.position for a in agents])
         radius = self.params.gap_cover_radius
-        annotated: list[BoundaryObservation] = []
-        for obs in observations:
-            target = obs.point + self.params.cage_offset * obs.normal
-            dists = np.linalg.norm(positions - target[None, :], axis=1)
-            covered = float(np.min(dists)) <= radius if len(dists) else False
-            gap = 0.0 if covered else 1.0
-            annotated.append(
-                BoundaryObservation(
-                    object_id=obs.object_id,
-                    agent_id=obs.agent_id,
-                    point=obs.point,
-                    normal=obs.normal,
-                    timestamp=obs.timestamp,
-                    confidence=obs.confidence,
-                    arc_length=obs.arc_length,
-                    gap_score=gap,
-                )
-            )
-        return annotated
+        targets = np.vstack(
+            [obs.point + self.params.cage_offset * obs.normal for obs in observations]
+        )
+        dists = np.linalg.norm(targets[:, None, :] - positions[None, :, :], axis=2)
+        covered = np.min(dists, axis=1) <= radius if positions.size else np.zeros(len(observations), dtype=bool)
+        for obs, is_covered in zip(observations, covered):
+            obs.gap_score = 0.0 if bool(is_covered) else 1.0
+        return observations
 
     def _nearest_boundary_constraints(
         self,

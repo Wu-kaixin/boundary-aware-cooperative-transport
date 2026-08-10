@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+from typing import Any
 
 import numpy as np
 
@@ -33,6 +34,17 @@ class DistributedCBFQP:
     contact_allowance: float = 0.0
     feasibility_tolerance: float = 1e-7
     _qp_cache: dict = field(default_factory=dict, init=False, repr=False)
+    _cp: Any = field(default=None, init=False, repr=False)
+
+    def __post_init__(self) -> None:
+        # Eager import so the first online step does not pay cvxpy startup cost.
+        if self.use_qp:
+            try:
+                import cvxpy as cp  # type: ignore
+
+                self._cp = cp
+            except Exception:
+                self._cp = None
 
     def filter_velocity(
         self,
@@ -48,19 +60,29 @@ class DistributedCBFQP:
         boundary_points = boundary_points or []
         boundary_normals = boundary_normals or []
 
-        if self.use_qp and (neighbor_positions or boundary_points):
-            solved = self._filter_velocity_qp(u, position, neighbor_positions, boundary_points, boundary_normals)
+        constraints_meta = self._build_constraints(
+            position, neighbor_positions, boundary_points, boundary_normals
+        )
+        if not constraints_meta:
+            self.last_feasible = True
+            self.last_solver = "unconstrained"
+            return self._clip_box(u)
+
+        # Same optimum as QP when the nominal already lies in the safe set.
+        clipped = self._clip_box(u)
+        if self._is_feasible(clipped, constraints_meta):
+            self.last_feasible = True
+            self.last_solver = "nominal"
+            return clipped
+
+        if self.use_qp:
+            solved = self._solve_qp(clipped, constraints_meta)
             if solved is not None:
                 self.last_feasible = True
                 self.last_solver = "qp"
                 return solved
 
-        projected = self._filter_velocity_projection(
-            u, position, neighbor_positions, boundary_points, boundary_normals
-        )
-        constraints_meta = self._build_constraints(
-            position, neighbor_positions, boundary_points, boundary_normals
-        )
+        projected = self._project(clipped, constraints_meta)
         self.last_feasible = self._is_feasible(projected, constraints_meta)
         self.last_solver = "projection"
         if not self.last_feasible and self._is_feasible(np.zeros(2), constraints_meta):
@@ -110,9 +132,15 @@ class DistributedCBFQP:
         boundary_points: list[np.ndarray],
         boundary_normals: list[np.ndarray],
     ) -> list[tuple[np.ndarray, float]]:
-        constraints_meta = [
-            self._robot_constraint(position, p_j) for p_j in neighbor_positions
-        ]
+        position = np.asarray(position, dtype=float).reshape(2)
+        constraints_meta: list[tuple[np.ndarray, float]] = []
+        if neighbor_positions:
+            neighbors = np.vstack([np.asarray(p, dtype=float).reshape(2) for p in neighbor_positions])
+            d = position[None, :] - neighbors
+            h = np.sum(d * d, axis=1) - self.d_min * self.d_min
+            a_rows = 2.0 * d
+            b_vals = -0.5 * self.gamma * h
+            constraints_meta.extend((a_rows[i], float(b_vals[i])) for i in range(len(neighbors)))
         constraints_meta.extend(
             self._object_constraint(position, b_pt, b_n)
             for b_pt, b_n in zip(boundary_points, boundary_normals)
@@ -142,10 +170,14 @@ class DistributedCBFQP:
         cached = self._qp_cache.get(n_constraints)
         if cached is not None:
             return cached
-        try:
-            import cvxpy as cp  # type: ignore
-        except Exception:
-            return None
+        cp = self._cp
+        if cp is None:
+            try:
+                import cvxpy as cp  # type: ignore
+
+                self._cp = cp
+            except Exception:
+                return None
 
         u_var = cp.Variable(2)
         u_nom = cp.Parameter(2)
@@ -156,7 +188,6 @@ class DistributedCBFQP:
         objective = cp.Minimize(cp.sum_squares(u_var - u_nom))
         problem = cp.Problem(objective, constraints)
         bundle = {
-            "cp": cp,
             "u_var": u_var,
             "u_nom": u_nom,
             "a_mat": a_mat,
@@ -166,20 +197,11 @@ class DistributedCBFQP:
         self._qp_cache[n_constraints] = bundle
         return bundle
 
-    def _filter_velocity_qp(
+    def _solve_qp(
         self,
         nominal_velocity: np.ndarray,
-        position: np.ndarray,
-        neighbor_positions: list[np.ndarray],
-        boundary_points: list[np.ndarray],
-        boundary_normals: list[np.ndarray],
+        constraints_meta: list[tuple[np.ndarray, float]],
     ) -> np.ndarray | None:
-        constraints_meta = self._build_constraints(
-            position, neighbor_positions, boundary_points, boundary_normals
-        )
-        if not constraints_meta:
-            return self._clip_box(nominal_velocity)
-
         bundle = self._get_qp_bundle(len(constraints_meta))
         if bundle is None:
             return None
@@ -205,19 +227,12 @@ class DistributedCBFQP:
             return None
         return candidate
 
-    def _filter_velocity_projection(
+    def _project(
         self,
         nominal_velocity: np.ndarray,
-        position: np.ndarray,
-        neighbor_positions: list[np.ndarray],
-        boundary_points: list[np.ndarray],
-        boundary_normals: list[np.ndarray],
+        constraints_meta: list[tuple[np.ndarray, float]],
     ) -> np.ndarray:
-        u = nominal_velocity.copy()
-        constraints_meta = self._build_constraints(
-            position, neighbor_positions, boundary_points, boundary_normals
-        )
-
+        u = np.asarray(nominal_velocity, dtype=float).reshape(2).copy()
         for _ in range(self.iterations):
             for a, b in constraints_meta:
                 denom = float(np.dot(a, a))
@@ -228,6 +243,35 @@ class DistributedCBFQP:
                     u = u + (violation / denom) * a
             u = self._clip_box(u)
         return self._clip_box(u)
+
+    # Backward-compatible wrappers used by older call sites / tests.
+    def _filter_velocity_qp(
+        self,
+        nominal_velocity: np.ndarray,
+        position: np.ndarray,
+        neighbor_positions: list[np.ndarray],
+        boundary_points: list[np.ndarray],
+        boundary_normals: list[np.ndarray],
+    ) -> np.ndarray | None:
+        constraints_meta = self._build_constraints(
+            position, neighbor_positions, boundary_points, boundary_normals
+        )
+        if not constraints_meta:
+            return self._clip_box(nominal_velocity)
+        return self._solve_qp(nominal_velocity, constraints_meta)
+
+    def _filter_velocity_projection(
+        self,
+        nominal_velocity: np.ndarray,
+        position: np.ndarray,
+        neighbor_positions: list[np.ndarray],
+        boundary_points: list[np.ndarray],
+        boundary_normals: list[np.ndarray],
+    ) -> np.ndarray:
+        constraints_meta = self._build_constraints(
+            position, neighbor_positions, boundary_points, boundary_normals
+        )
+        return self._project(nominal_velocity, constraints_meta)
 
     def _clip_box(self, velocity: np.ndarray) -> np.ndarray:
         limit = self.component_limit

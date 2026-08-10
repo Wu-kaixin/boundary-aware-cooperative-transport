@@ -1,10 +1,11 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 import hashlib
 
 import numpy as np
 
+from .accel import nearest_ray_hits
 from .cargo import Cargo
 from .geometry import EPS, ensure_ccw, normalize
 from .types import AgentState, BoundaryObservation
@@ -63,11 +64,12 @@ def _estimate_normals_pca(
         return normals, planarity
 
     k = min(neighbor_count, n_pts - 1)
+    # One all-pairs distance matrix replaces the previous per-point rebuild.
+    diff = points[:, None, :] - points[None, :, :]
+    dist2 = np.sum(diff * diff, axis=2)
+    np.fill_diagonal(dist2, np.inf)
     for i in range(n_pts):
-        diffs = points - points[i]
-        dist2 = np.sum(diffs * diffs, axis=1)
-        dist2[i] = np.inf
-        nn = np.argpartition(dist2, k)[:k]
+        nn = np.argpartition(dist2[i], k)[:k]
         local = points[np.concatenate(([i], nn))]
         centered = local - np.mean(local, axis=0)
         if len(local) < 2:
@@ -122,35 +124,76 @@ class LocalBoundarySensor:
     normal_neighbors: int = 4
     base_confidence: float = 1.0
     random_seed: int = 0
+    _ray_directions: np.ndarray | None = field(default=None, init=False, repr=False)
+    _edge_cache_token: int = field(default=-1, init=False, repr=False)
+    _edge_a: np.ndarray = field(default_factory=lambda: np.empty((0, 2)), init=False, repr=False)
+    _edge_b: np.ndarray = field(default_factory=lambda: np.empty((0, 2)), init=False, repr=False)
+    _edge_object: np.ndarray = field(default_factory=lambda: np.empty(0, dtype=np.int64), init=False, repr=False)
+    _object_ids: list[str] = field(default_factory=list, init=False, repr=False)
+
+    def _directions(self) -> np.ndarray:
+        if self._ray_directions is None or len(self._ray_directions) != int(self.num_rays):
+            angles = np.linspace(0.0, 2.0 * np.pi, int(self.num_rays), endpoint=False)
+            self._ray_directions = np.column_stack([np.cos(angles), np.sin(angles)]).astype(float)
+        return self._ray_directions
+
+    def _prepare_edges(self, cargoes: list[Cargo]) -> None:
+        token = hash(tuple((c.object_id, id(c.vertices), len(c.vertices)) for c in cargoes))
+        if token == self._edge_cache_token:
+            return
+        edge_a: list[np.ndarray] = []
+        edge_b: list[np.ndarray] = []
+        edge_object: list[int] = []
+        object_ids: list[str] = []
+        for obj_idx, cargo in enumerate(cargoes):
+            object_ids.append(cargo.object_id)
+            vertices = ensure_ccw(cargo.vertices)
+            n = len(vertices)
+            if n < 2:
+                continue
+            a = vertices
+            b = np.roll(vertices, -1, axis=0)
+            edge_a.append(a)
+            edge_b.append(b)
+            edge_object.extend([obj_idx] * n)
+        if edge_a:
+            self._edge_a = np.vstack(edge_a).astype(float, copy=False)
+            self._edge_b = np.vstack(edge_b).astype(float, copy=False)
+            self._edge_object = np.asarray(edge_object, dtype=np.int64)
+        else:
+            self._edge_a = np.empty((0, 2), dtype=float)
+            self._edge_b = np.empty((0, 2), dtype=float)
+            self._edge_object = np.empty(0, dtype=np.int64)
+        self._object_ids = object_ids
+        self._edge_cache_token = token
 
     def sense(self, agent: AgentState, cargoes: list[Cargo], timestamp: float) -> list[BoundaryObservation]:
         observations: list[BoundaryObservation] = []
+        if not cargoes:
+            return observations
         rng = np.random.default_rng(_stable_rng_seed(self.random_seed, agent.agent_id, timestamp))
-        origin = agent.position
-        angles = np.linspace(0.0, 2.0 * np.pi, self.num_rays, endpoint=False)
-        vertices_by_object = {
-            cargo.object_id: ensure_ccw(cargo.vertices) for cargo in cargoes
-        }
-        hits_by_object: dict[str, list[tuple[int, np.ndarray]]] = {}
+        origin = np.asarray(agent.position, dtype=float).reshape(2)
+        directions = self._directions()
+        self._prepare_edges(cargoes)
 
-        # Keep exactly the nearest intersection across all objects for each ray.
-        # This models both self-occlusion and occlusion by a nearer object.
-        for ray_index, angle in enumerate(angles):
-            direction = np.array([np.cos(angle), np.sin(angle)], dtype=float)
-            best_t: float | None = None
-            best_object: str | None = None
-            for object_id, vertices in vertices_by_object.items():
-                for edge_index in range(len(vertices)):
-                    a = vertices[edge_index]
-                    b = vertices[(edge_index + 1) % len(vertices)]
-                    t = _ray_segment_hit(origin, direction, a, b, self.sensor_range)
-                    if t is not None and (best_t is None or t < best_t):
-                        best_t = t
-                        best_object = object_id
-            if best_t is not None and best_object is not None:
-                hits_by_object.setdefault(best_object, []).append(
-                    (ray_index, origin + best_t * direction)
-                )
+        best_t, best_obj = nearest_ray_hits(
+            origin,
+            directions,
+            self._edge_a,
+            self._edge_b,
+            self._edge_object,
+            float(self.sensor_range),
+            float(EPS),
+        )
+
+        hits_by_object: dict[str, list[tuple[int, np.ndarray]]] = {}
+        for ray_index, (t, obj_idx) in enumerate(zip(best_t, best_obj)):
+            if obj_idx < 0 or not np.isfinite(t):
+                continue
+            object_id = self._object_ids[int(obj_idx)]
+            hits_by_object.setdefault(object_id, []).append(
+                (ray_index, origin + float(t) * directions[ray_index])
+            )
 
         for object_id, indexed_hits in hits_by_object.items():
             indexed_hits.sort(key=lambda item: item[0])

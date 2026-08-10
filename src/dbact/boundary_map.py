@@ -27,6 +27,8 @@ class LocalBoundaryMap:
     motion_min_matches: int = 3
     max_translation_per_update: float = 0.08
     observations: dict[str, list[BoundaryObservation]] = field(default_factory=dict)
+    _voxel_index: dict[tuple[str, int, int], int] = field(default_factory=dict, init=False, repr=False)
+    _last_prune_timestamp: float | None = field(default=None, init=False, repr=False)
 
     def update(self, new_observations: list[BoundaryObservation], timestamp: float) -> None:
         if self.motion_compensation and new_observations:
@@ -52,6 +54,12 @@ class LocalBoundaryMap:
             gap_score=obs.gap_score,
         )
 
+    def _rebuild_index_for_object(self, object_id: str) -> None:
+        for key in [k for k in self._voxel_index if k[0] == object_id]:
+            del self._voxel_index[key]
+        for idx, obs in enumerate(self.observations.get(object_id, [])):
+            self._voxel_index[self._voxel_key(obs)] = idx
+
     def _compensate_translation(
         self,
         object_id: str,
@@ -71,13 +79,18 @@ class LocalBoundaryMap:
             return
         old_points = np.vstack([obs.point for obs in old])
         old_normals = np.vstack([obs.normal for obs in old])
+        new_points = np.vstack([obs.point for obs in new_observations])
+        new_normals = np.vstack([obs.normal for obs in new_observations])
+        # Vectorized nearest-neighbor candidates among old map points.
+        dist2 = np.sum((new_points[:, None, :] - old_points[None, :, :]) ** 2, axis=2)
         deltas: list[np.ndarray] = []
-        for obs in new_observations:
-            dist2 = np.sum((old_points - obs.point[None, :]) ** 2, axis=1)
-            order = np.argsort(dist2)
-            for idx in order[: min(5, len(order))]:
-                distance = float(np.sqrt(dist2[int(idx)]))
-                alignment = float(np.dot(old_normals[int(idx)], obs.normal))
+        k = min(5, len(old))
+        for i, obs in enumerate(new_observations):
+            order = np.argpartition(dist2[i], kth=k - 1)[:k]
+            order = order[np.argsort(dist2[i, order])]
+            for idx in order:
+                distance = float(np.sqrt(dist2[i, int(idx)]))
+                alignment = float(np.dot(old_normals[int(idx)], new_normals[i]))
                 if distance <= self.motion_match_radius and alignment >= 0.7:
                     deltas.append(obs.point - old_points[int(idx)])
                     break
@@ -90,6 +103,7 @@ class LocalBoundaryMap:
         self.observations[object_id] = [
             self._clone(obs, point=obs.point + translation) for obs in old
         ]
+        self._rebuild_index_for_object(object_id)
 
     def _voxel_key(self, obs: BoundaryObservation) -> tuple[str, int, int]:
         vs = max(self.voxel_size, 1e-6)
@@ -102,11 +116,18 @@ class LocalBoundaryMap:
     def _upsert(self, obs: BoundaryObservation) -> None:
         key = self._voxel_key(obs)
         bucket = self.observations.setdefault(obs.object_id, [])
-        for idx, existing in enumerate(bucket):
+        idx = self._voxel_index.get(key)
+        if idx is not None and 0 <= idx < len(bucket) and self._voxel_key(bucket[idx]) == key:
+            bucket[idx] = self._fuse(bucket[idx], obs)
+            return
+        # Fallback linear scan keeps correctness if the index is stale.
+        for existing_idx, existing in enumerate(bucket):
             if self._voxel_key(existing) != key:
                 continue
-            bucket[idx] = self._fuse(existing, obs)
+            bucket[existing_idx] = self._fuse(existing, obs)
+            self._voxel_index[key] = existing_idx
             return
+        self._voxel_index[key] = len(bucket)
         bucket.append(self._clone(obs))
 
     def _fuse(self, old: BoundaryObservation, new: BoundaryObservation) -> BoundaryObservation:
@@ -151,6 +172,9 @@ class LocalBoundaryMap:
         )
 
     def prune(self, timestamp: float) -> None:
+        if self._last_prune_timestamp is not None and abs(timestamp - self._last_prune_timestamp) < 1e-15:
+            return
+        changed = False
         for object_id in list(self.observations):
             fresh = [obs for obs in self.observations[object_id] if timestamp - obs.timestamp <= self.ttl]
             if len(fresh) > self.max_points_per_object:
@@ -158,9 +182,19 @@ class LocalBoundaryMap:
                     : self.max_points_per_object
                 ]
             if fresh:
-                self.observations[object_id] = fresh
+                if fresh is not self.observations[object_id] and (
+                    len(fresh) != len(self.observations[object_id]) or fresh != self.observations[object_id]
+                ):
+                    self.observations[object_id] = fresh
+                    self._rebuild_index_for_object(object_id)
+                    changed = True
             else:
                 del self.observations[object_id]
+                for key in [k for k in self._voxel_index if k[0] == object_id]:
+                    del self._voxel_index[key]
+                changed = True
+        self._last_prune_timestamp = float(timestamp)
+        del changed
 
     def age_weight(self, obs: BoundaryObservation, timestamp: float) -> float:
         """Temporal decay e^{-λ(t - t_k)} for boundary-measure density."""
