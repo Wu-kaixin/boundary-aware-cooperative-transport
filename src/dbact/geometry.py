@@ -110,21 +110,21 @@ def sample_polygon_boundary(vertices: np.ndarray, count: int = 128) -> tuple[np.
         return v.copy(), np.zeros_like(v)
     cumulative = np.cumsum(lengths)
     distances = np.linspace(0.0, perimeter, count, endpoint=False)
-    points = []
-    normals = []
-    start = 0.0
-    edge_idx = 0
-    for d in distances:
-        while d >= cumulative[edge_idx] and edge_idx < len(v) - 1:
-            edge_idx += 1
-            start = cumulative[edge_idx - 1]
-        a = v[edge_idx]
-        e = edges[edge_idx]
-        length = lengths[edge_idx]
-        t = 0.0 if length < EPS else (d - start) / length
-        points.append(a + t * e)
-        normals.append(normalize(np.array([e[1], -e[0]], dtype=float)))
-    return np.asarray(points), np.asarray(normals)
+    # searchsorted is mathematically equivalent to the previous monotonic edge walk.
+    edge_idx = np.searchsorted(cumulative, distances, side="right")
+    edge_idx = np.clip(edge_idx, 0, len(v) - 1)
+    starts = np.where(edge_idx > 0, cumulative[edge_idx - 1], 0.0)
+    a = v[edge_idx]
+    e = edges[edge_idx]
+    length = lengths[edge_idx]
+    t = np.where(length < EPS, 0.0, (distances - starts) / length)
+    points = a + t[:, None] * e
+    raw_normals = np.column_stack([e[:, 1], -e[:, 0]])
+    norms = np.linalg.norm(raw_normals, axis=1)
+    normals = np.zeros_like(raw_normals)
+    valid = norms >= EPS
+    normals[valid] = raw_normals[valid] / norms[valid, None]
+    return points, normals
 
 
 def make_circle(center: Iterable[float], radius: float, count: int = 64) -> np.ndarray:

@@ -1,10 +1,14 @@
 from __future__ import annotations
 
+from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass, field
+import os
+import threading
 import time
 
 import numpy as np
 
+from .accel import warmup
 from .boundary_density import BoundaryAwareDensity
 from .boundary_map import LocalBoundaryMap
 from .cargo import Cargo
@@ -13,6 +17,26 @@ from .geometry import clip_to_domain, normalize
 from .local_cvt import LocalCVT
 from .local_sensing import LocalBoundarySensor
 from .types import AgentState, BoundaryObservation, ControlCommand
+
+
+def resolve_worker_count(requested: int, n_agents: int) -> int:
+    """Resolve parallel worker count.
+
+    ``0`` / auto stays serial: agent-level Python threads are usually slower here
+    because CBF-QP and map orchestration dominate. Use ``workers>=2`` only when
+    explicitly requested. Multi-core speedups primarily come from Numba ``prange``
+    kernels and batch ``--jobs`` processes.
+    """
+    env = os.environ.get("DBACT_WORKERS", "").strip()
+    if env:
+        try:
+            requested = int(env)
+        except ValueError:
+            pass
+    if requested <= 1:
+        return 1
+    cpu = os.cpu_count() or 1
+    return max(1, min(int(requested), n_agents, cpu))
 
 
 @dataclass
@@ -57,6 +81,8 @@ class DBACTParams:
     target_radius: float = 1.0
     target_sensor_range: float = 2.0
     target_samples: int = 36
+    # 0 = auto, 1 = serial, >=2 = thread pool size cap
+    workers: int = 0
 
     @classmethod
     def from_dict(cls, data: dict) -> "DBACTParams":
@@ -128,6 +154,9 @@ class DBACTController:
         self.target_region_points = self._build_target_region_points()
         self.stats = ControllerStats()
         self._rng = np.random.default_rng(int(params.random_seed))
+        self._stats_lock = threading.Lock()
+        self._cbf_local = threading.local()
+        warmup()
 
     def reset_stats(self) -> None:
         self.stats = ControllerStats()
@@ -146,12 +175,18 @@ class DBACTController:
                 detecting_agents.add(agent.agent_id)
             self.maps[agent.agent_id].update(observations, timestamp)
 
+        positions = np.vstack([a.position for a in agents])
+        if len(agents) >= 2:
+            dist = np.linalg.norm(positions[:, None, :] - positions[None, :, :], axis=2)
+        else:
+            dist = np.zeros((len(agents), len(agents)), dtype=float)
+
         if self.params.map_sharing:
             for i, agent in enumerate(agents):
                 for j, other in enumerate(agents):
                     if i == j:
                         continue
-                    if np.linalg.norm(agent.position - other.position) > self.params.comm_range:
+                    if dist[i, j] > self.params.comm_range:
                         continue
                     payload = sensed_by_agent.get(other.agent_id, [])
                     if self.params.packet_dropout > 0.0 and payload:
@@ -163,67 +198,127 @@ class DBACTController:
                         payload = keep
                     self.maps[agent.agent_id].update(payload, timestamp)
 
-        commands: list[ControlCommand] = []
-        for i, agent in enumerate(agents):
-            neighbor_indices = [
-                j
-                for j, other in enumerate(agents)
-                if j != i and np.linalg.norm(agent.position - other.position) <= self.params.comm_range
-            ]
-            if self.params.task_mode == "coverage":
-                u_nom, mode = self._coverage_command(i, agents, neighbor_indices)
-                boundary_points: list[np.ndarray] = []
-                boundary_normals: list[np.ndarray] = []
-            else:
-                observations = self.maps[agent.agent_id].all_observations(timestamp)
-                if self.params.gap_weighting:
-                    observations = self._annotate_gap_scores(observations, agents)
-                else:
-                    for obs in observations:
-                        obs.gap_score = 0.0
+        neighbor_lists = [
+            [j for j in range(len(agents)) if j != i and dist[i, j] <= self.params.comm_range]
+            for i in range(len(agents))
+        ]
 
-                if method in {"arm", "b0"}:
-                    u_nom, mode = self._arm_command(i, agents, neighbor_indices, detecting_agents, timestamp)
-                elif method in {"oracle", "b1"}:
-                    u_nom, mode = self._oracle_command(i, agents, neighbor_indices, cargoes, timestamp)
-                elif observations:
-                    age_weights = [
-                        self.maps[agent.agent_id].age_weight(obs, timestamp) for obs in observations
-                    ]
-                    density = BoundaryAwareDensity.from_observations(
-                        observations,
-                        cage_offset=self.params.cage_offset,
-                        sigma=self.params.sigma,
-                        timestamp=timestamp,
-                        decay_lambda=self.params.map_decay_lambda,
-                        gap_gain=self.params.density_gap_gain if self.params.gap_weighting else 0.0,
-                        age_weights=age_weights,
-                    )
-                    centroid = self.cvt.compute_centroid(i, agents, neighbor_indices, density, self.domain)
-                    u_nom = self.params.kp_cage * (centroid - agent.position)
-                    u_nom = u_nom + self._observation_transport_bias(
-                        agent, observations, timestamp
-                    )
-                    mode = "dbact_cage"
-                else:
-                    u_nom = self._exploration_velocity(i, agents, neighbor_indices, timestamp)
-                    mode = "dbact_explore"
-                boundary_points, boundary_normals = self._nearest_boundary_constraints(agent, observations)
-
-            neighbor_positions = [agents[j].position for j in neighbor_indices]
-            if method in {"no_cbf", "b2"}:
-                u_safe = self._cap_speed(np.asarray(u_nom, dtype=float).reshape(2))
-                mode = f"{mode}_nocbf"
-            else:
-                u_safe = self._filter_with_stats(
-                    agent.position,
-                    u_nom,
-                    neighbor_positions,
-                    boundary_points,
-                    boundary_normals,
+        workers = resolve_worker_count(int(self.params.workers), len(agents))
+        if workers <= 1 or len(agents) <= 1:
+            return [
+                self._command_for_agent(
+                    i,
+                    agents,
+                    cargoes,
+                    neighbor_lists[i],
+                    detecting_agents,
+                    timestamp,
+                    method,
                 )
-            commands.append(ControlCommand(agent.agent_id, u_safe, mode=mode))
-        return commands
+                for i in range(len(agents))
+            ]
+
+        with ThreadPoolExecutor(max_workers=workers) as pool:
+            futures = [
+                pool.submit(
+                    self._command_for_agent,
+                    i,
+                    agents,
+                    cargoes,
+                    neighbor_lists[i],
+                    detecting_agents,
+                    timestamp,
+                    method,
+                )
+                for i in range(len(agents))
+            ]
+            return [fut.result() for fut in futures]
+
+    def _command_for_agent(
+        self,
+        i: int,
+        agents: list[AgentState],
+        cargoes: list[Cargo],
+        neighbor_indices: list[int],
+        detecting_agents: set[str],
+        timestamp: float,
+        method: str,
+    ) -> ControlCommand:
+        agent = agents[i]
+        if self.params.task_mode == "coverage":
+            u_nom, mode = self._coverage_command(i, agents, neighbor_indices)
+            boundary_points: list[np.ndarray] = []
+            boundary_normals: list[np.ndarray] = []
+        else:
+            observations = self.maps[agent.agent_id].all_observations(timestamp)
+            if self.params.gap_weighting:
+                observations = self._annotate_gap_scores(observations, agents)
+            else:
+                for obs in observations:
+                    obs.gap_score = 0.0
+
+            if method in {"arm", "b0"}:
+                u_nom, mode = self._arm_command(i, agents, neighbor_indices, detecting_agents, timestamp)
+            elif method in {"oracle", "b1"}:
+                u_nom, mode = self._oracle_command(i, agents, neighbor_indices, cargoes, timestamp)
+            elif observations:
+                age_weights = [
+                    self.maps[agent.agent_id].age_weight(obs, timestamp) for obs in observations
+                ]
+                density = BoundaryAwareDensity.from_observations(
+                    observations,
+                    cage_offset=self.params.cage_offset,
+                    sigma=self.params.sigma,
+                    timestamp=timestamp,
+                    decay_lambda=self.params.map_decay_lambda,
+                    gap_gain=self.params.density_gap_gain if self.params.gap_weighting else 0.0,
+                    age_weights=age_weights,
+                )
+                centroid = self.cvt.compute_centroid(i, agents, neighbor_indices, density, self.domain)
+                u_nom = self.params.kp_cage * (centroid - agent.position)
+                u_nom = u_nom + self._observation_transport_bias(
+                    agent, observations, timestamp
+                )
+                mode = "dbact_cage"
+            else:
+                u_nom = self._exploration_velocity(i, agents, neighbor_indices, timestamp)
+                mode = "dbact_explore"
+            boundary_points, boundary_normals = self._nearest_boundary_constraints(agent, observations)
+
+        neighbor_positions = [agents[j].position for j in neighbor_indices]
+        if method in {"no_cbf", "b2"}:
+            u_safe = self._cap_speed(np.asarray(u_nom, dtype=float).reshape(2))
+            mode = f"{mode}_nocbf"
+        else:
+            u_safe = self._filter_with_stats(
+                agent.position,
+                u_nom,
+                neighbor_positions,
+                boundary_points,
+                boundary_normals,
+            )
+        return ControlCommand(agent.agent_id, u_safe, mode=mode)
+
+    def _thread_cbf(self) -> DistributedCBFQP:
+        """Per-thread CBF solver so Parameterized QPs can run concurrently."""
+        cbf = getattr(self._cbf_local, "cbf", None)
+        if cbf is None:
+            template = self.cbf
+            cbf = DistributedCBFQP(
+                d_min=template.d_min,
+                gamma=template.gamma,
+                max_speed=template.max_speed,
+                iterations=template.iterations,
+                use_qp=template.use_qp,
+                robot_radius=template.robot_radius,
+                alpha_object=template.alpha_object,
+                boundary_error_margin=template.boundary_error_margin,
+                object_speed_bound=template.object_speed_bound,
+                contact_allowance=template.contact_allowance,
+                feasibility_tolerance=template.feasibility_tolerance,
+            )
+            self._cbf_local.cbf = cbf
+        return cbf
 
     def _filter_with_stats(
         self,
@@ -233,8 +328,9 @@ class DBACTController:
         boundary_points: list[np.ndarray],
         boundary_normals: list[np.ndarray],
     ) -> np.ndarray:
+        cbf = self._thread_cbf()
         t0 = time.perf_counter()
-        u_safe = self.cbf.filter_velocity(
+        u_safe = cbf.filter_velocity(
             position,
             u_nom,
             neighbor_positions,
@@ -242,12 +338,18 @@ class DBACTController:
             boundary_normals=boundary_normals,
         )
         elapsed = time.perf_counter() - t0
-        self.stats.cbf_calls += 1
-        self.stats.solve_time_s += elapsed
-        if float(np.linalg.norm(np.asarray(u_safe) - np.asarray(u_nom))) > 1e-4:
-            self.stats.cbf_interventions += 1
-        if not bool(getattr(self.cbf, "last_feasible", True)):
-            self.stats.infeasible_calls += 1
+        intervened = float(np.linalg.norm(np.asarray(u_safe) - np.asarray(u_nom))) > 1e-4
+        infeasible = not bool(getattr(cbf, "last_feasible", True))
+        with self._stats_lock:
+            self.stats.cbf_calls += 1
+            self.stats.solve_time_s += elapsed
+            if intervened:
+                self.stats.cbf_interventions += 1
+            if infeasible:
+                self.stats.infeasible_calls += 1
+            # Keep the shared template's last_* flags in sync for callers.
+            self.cbf.last_feasible = bool(getattr(cbf, "last_feasible", True))
+            self.cbf.last_solver = getattr(cbf, "last_solver", "projection")
         return u_safe
 
     def _cap_speed(self, velocity: np.ndarray) -> np.ndarray:

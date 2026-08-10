@@ -4,6 +4,7 @@ from dataclasses import dataclass
 
 import numpy as np
 
+from .accel import gaussian_density
 from .types import BoundaryObservation
 
 
@@ -33,6 +34,12 @@ class BoundaryAwareDensity:
         self.density_points = density_points
         self.sigma = float(sigma)
         self.base_density = float(base_density)
+        if density_points:
+            self._targets = np.vstack([p.target for p in density_points]).astype(float, copy=False)
+            self._weights = np.asarray([p.weight for p in density_points], dtype=float)
+        else:
+            self._targets = np.empty((0, 2), dtype=float)
+            self._weights = np.empty(0, dtype=float)
 
     @classmethod
     def from_observations(
@@ -86,33 +93,22 @@ class BoundaryAwareDensity:
 
     @property
     def targets(self) -> np.ndarray:
-        if not self.density_points:
-            return np.empty((0, 2), dtype=float)
-        return np.vstack([p.target for p in self.density_points])
+        return self._targets
 
     def total_mass(self) -> float:
-        return float(sum(p.weight for p in self.density_points))
+        if self._weights.size == 0:
+            return 0.0
+        return float(np.sum(self._weights))
 
     def __call__(self, q: np.ndarray) -> np.ndarray:
-        q = np.asarray(q, dtype=float)
-        single = False
-        if q.ndim == 1:
-            q = q[None, :]
-            single = True
-        rho = np.full(q.shape[0], self.base_density, dtype=float)
-        if self.density_points:
-            targets = self.targets
-            weights = np.asarray([p.weight for p in self.density_points], dtype=float)
-            diff = q[:, None, :] - targets[None, :, :]
-            dist2 = np.sum(diff * diff, axis=2)
-            rho += np.sum(weights[None, :] * np.exp(-dist2 / (2.0 * self.sigma * self.sigma)), axis=1)
-        return rho[0] if single else rho
+        return gaussian_density(q, self._targets, self._weights, self.sigma, self.base_density)
 
     def weighted_centroid(self, samples: np.ndarray) -> np.ndarray | None:
         if len(samples) == 0:
             return None
-        weights = self(samples)
+        samples_arr = np.asarray(samples, dtype=float).reshape(-1, 2)
+        weights = np.atleast_1d(self(samples_arr))
         total = float(np.sum(weights))
         if total <= 1e-12:
             return None
-        return np.sum(samples * weights[:, None], axis=0) / total
+        return np.sum(samples_arr * weights[:, None], axis=0) / total

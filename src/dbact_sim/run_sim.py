@@ -38,9 +38,18 @@ def main() -> None:
         default="",
         help="Comma-separated iteration indices for paper-style FIG outputs. Defaults to 0/25/50/75/100 percent.",
     )
+    parser.add_argument(
+        "--workers",
+        type=int,
+        default=None,
+        help="Controller worker threads (0/1=serial, >=2=thread pool). Overrides controller.workers / DBACT_WORKERS.",
+    )
     args = parser.parse_args()
 
     cfg = load_yaml(args.config)
+    if args.workers is not None:
+        cfg.setdefault("controller", {})
+        cfg["controller"]["workers"] = int(args.workers)
     env = SimulationEnvironment(cfg)
     live_viewer = LivePaperViewer(env, update_stride=args.live_stride, pause_s=args.live_pause) if args.live else None
     env.run(

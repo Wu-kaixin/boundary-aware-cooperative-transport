@@ -30,14 +30,32 @@ class Cargo:
 
     def __post_init__(self) -> None:
         self.vertices = ensure_ccw(np.asarray(self.vertices, dtype=float))
-        self.transport_direction = normalize(np.asarray(self.transport_direction, dtype=float), fallback=np.array([1.0, 0.0]))
+        self.transport_direction = normalize(
+            np.asarray(self.transport_direction, dtype=float),
+            fallback=np.array([1.0, 0.0]),
+        )
+        self._boundary_cache: dict[int, tuple[np.ndarray, np.ndarray]] = {}
+        self._boundary_cache_token: int = id(self.vertices)
+
+    def _invalidate_boundary_cache(self) -> None:
+        self._boundary_cache.clear()
+        self._boundary_cache_token = id(self.vertices)
 
     @property
     def center(self) -> np.ndarray:
         return polygon_centroid(self.vertices)
 
     def boundary_samples(self, count: int = 128) -> tuple[np.ndarray, np.ndarray]:
-        return sample_polygon_boundary(self.vertices, count=count)
+        count = int(count)
+        token = id(self.vertices)
+        if token != self._boundary_cache_token:
+            self._invalidate_boundary_cache()
+        cached = self._boundary_cache.get(count)
+        if cached is not None:
+            return cached
+        points, normals = sample_polygon_boundary(self.vertices, count=count)
+        self._boundary_cache[count] = (points, normals)
+        return points, normals
 
     def closest_boundary(self, point: np.ndarray) -> tuple[np.ndarray, np.ndarray, float]:
         return closest_boundary_point_and_normal(self.vertices, point)
@@ -49,6 +67,7 @@ class Cargo:
         if not self.movable:
             return
         self.vertices = self.vertices + np.asarray(delta, dtype=float).reshape(2)
+        self._invalidate_boundary_cache()
 
     @classmethod
     def circle(cls, object_id: str, center: Iterable[float], radius: float, transport_direction=(1.0, 0.0)) -> "Cargo":
