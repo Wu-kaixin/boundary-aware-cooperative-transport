@@ -28,6 +28,11 @@ class PhaseHUD:
         self.ax = ax
         self.trace = trace
         self.style = style
+        seen: set[str] = set()
+        self._seen_phases: list[frozenset[str]] = []
+        for phase in trace.phase_labels:
+            seen.add(phase)
+            self._seen_phases.append(frozenset(seen))
         ax.set_axis_off()
         ax.set_facecolor(style.panel_face)
         ax.add_patch(
@@ -143,7 +148,7 @@ class PhaseHUD:
         self.clock_text.set_text(
             f"Frame {frame:04d}/{trace.frame_count - 1:04d}   t = {trace.times[frame]:6.2f} s"
         )
-        seen = set(trace.phase_labels[: frame + 1])
+        seen = self._seen_phases[frame]
         for name, node in self.phase_nodes.items():
             node.set_facecolor(PHASE_COLORS[name] if name in seen else "#334155")
             node.set_alpha(1.0 if name == phase else (0.58 if name in seen else 0.30))

@@ -37,6 +37,10 @@ def test_world_renderer_reuses_core_artists(trace):
     visualizer.update(trace.frame_count - 1)
     assert cargo_ids == {key: id(value) for key, value in visualizer.cargo_patches.items()}
     assert agent_ids == [id(value) for value in visualizer.agent_patches]
+    cached = dict(visualizer._overlay_cache)
+    visualizer.update(trace.frame_count - 1)
+    assert cached.keys() == visualizer._overlay_cache.keys()
+    assert all(cached[key] is visualizer._overlay_cache[key] for key in cached)
     visualizer.close()
 
 

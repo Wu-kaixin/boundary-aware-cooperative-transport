@@ -41,6 +41,7 @@ class ResearchVisualizer:
         self.show_truth_debug = (
             self.style.show_truth_debug if show_truth_debug is None else bool(show_truth_debug)
         )
+        self._overlay_cache: dict[int, tuple[np.ndarray, np.ndarray]] = {}
         if figure is None:
             if self.style.show_hud:
                 figure = plt.figure(figsize=(13.4, 7.6), facecolor=self.style.figure_face)
@@ -322,17 +323,21 @@ class ResearchVisualizer:
             )
 
         snapshot = trace.visual_snapshot(frame)
+        overlay = self._overlay_cache.get(snapshot.frame)
+        if overlay is None:
+            overlay = (sensor_segments(trace, frame), fused_boundary_polyline(trace, frame))
+            self._overlay_cache[snapshot.frame] = overlay
+        ray_segments, map_polyline = overlay
         if self.show_sensor:
-            self.sensor_collection.set_segments(sensor_segments(trace, frame))
+            self.sensor_collection.set_segments(ray_segments)
             self.detected_points.set_offsets(snapshot.detected_points)
         else:
             self.sensor_collection.set_segments([])
             self.detected_points.set_offsets(np.empty((0, 2)))
         if self.show_map:
             self.map_points.set_offsets(snapshot.mapped_points)
-            polyline = fused_boundary_polyline(trace, frame)
-            if len(polyline):
-                self.map_line.set_data(polyline[:, 0], polyline[:, 1])
+            if len(map_polyline):
+                self.map_line.set_data(map_polyline[:, 0], map_polyline[:, 1])
             else:
                 self.map_line.set_data([], [])
         else:
