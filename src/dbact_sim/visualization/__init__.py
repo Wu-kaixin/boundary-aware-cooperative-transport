@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from . import legacy as _legacy
 from .animation import RenderReport, render_animation
+from .comparison import write_outcome_comparison
 from .legacy import (
     LivePaperViewer,
     animate_simulation,
@@ -39,5 +40,6 @@ __all__ = [
     "render_animation",
     "phase_keyframes",
     "write_research_paper_figures",
+    "write_outcome_comparison",
     "write_paper_figures",
 ]
