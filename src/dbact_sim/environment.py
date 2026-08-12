@@ -89,6 +89,7 @@ class SimulationLog:
     qp_status_counts: list[dict[str, int]] = field(default_factory=list)
     solver_fallbacks: list[int] = field(default_factory=list)
     solver_infeasible: list[int] = field(default_factory=list)
+    transport_phase_counts: list[dict[str, int]] = field(default_factory=list)
 
 
 @dataclass(frozen=True)
@@ -328,6 +329,10 @@ class SimulationEnvironment:
         self.log.qp_status_counts.append(qp_counts)
         self.log.solver_fallbacks.append(int(self.controller.safety.stats.fallbacks))
         self.log.solver_infeasible.append(int(self.controller.safety.stats.infeasible))
+        supervisor_counts: dict[str, int] = {}
+        for phase in self.controller._transport_phase.values():
+            supervisor_counts[phase] = supervisor_counts.get(phase, 0) + 1
+        self.log.transport_phase_counts.append(supervisor_counts)
         for diag in self.controller.diagnostics:
             if diag.solver_status == "relaxed_margin":
                 agent = next(a for a in self.agents if a.agent_id == diag.agent_id)

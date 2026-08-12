@@ -13,6 +13,7 @@ from .legacy import (
     write_paper_figures,
 )
 from .renderer import DemoVisualizer, ResearchVisualizer
+from .paper_figures import phase_keyframes, write_research_paper_figures
 from .styles import MODE_COLORS, PHASE_COLORS, STYLES, VisualStyle, get_style
 
 # Existing callers and tests treat these as module attributes.
@@ -33,5 +34,7 @@ __all__ = [
     "plot_paper_frame",
     "plot_snapshot",
     "plot_trajectories",
+    "phase_keyframes",
+    "write_research_paper_figures",
     "write_paper_figures",
 ]

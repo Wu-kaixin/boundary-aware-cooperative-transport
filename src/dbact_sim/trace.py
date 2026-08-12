@@ -489,18 +489,22 @@ def _phase_labels(
     contact_ready: tuple[tuple[str, ...], ...],
 ) -> tuple[str, ...]:
     labels: list[str] = []
-    agent_count = max(1, len(env.agents))
     for frame, modes in enumerate(env.log.mode_counts):
+        supervisor = (
+            env.log.transport_phase_counts[frame]
+            if frame < len(env.log.transport_phase_counts)
+            else {}
+        )
         detections = sum(
             values[frame]
             for values in env.log.detection_counts.values()
             if frame < len(values)
         )
-        if modes.get("brake", 0) > 0:
-            label = "BRAKE"
-        elif modes.get("hold", 0) >= agent_count:
+        if supervisor.get("hold", 0) > 0 or modes.get("hold", 0) > 0:
             label = "HOLD"
-        elif modes.get("push", 0) + modes.get("convoy", 0) > 0:
+        elif supervisor.get("brake", 0) > 0 or modes.get("brake", 0) > 0:
+            label = "BRAKE"
+        elif supervisor.get("transport", 0) > 0 or modes.get("push", 0) + modes.get("convoy", 0) > 0:
             label = "TRANSPORT"
         elif frame < len(contact_ready) and contact_ready[frame]:
             label = "CONTACT_READY"
