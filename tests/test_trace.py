@@ -72,3 +72,7 @@ def test_trace_records_hud_diagnostics_at_every_frame():
     assert len(trace.qp_status_counts) == trace.frame_count
     assert len(trace.solver_fallbacks) == trace.frame_count
     assert len(trace.solver_infeasible) == trace.frame_count
+    cargo_id = trace.cargo_ids[0]
+    displacement = trace.cargo_centers[cargo_id][-1] - trace.cargo_centers[cargo_id][0]
+    expected = trace.directional_progress[cargo_id][-1] / max(np.linalg.norm(displacement), 1e-12)
+    assert trace.direction_efficiency[cargo_id][-1] == expected

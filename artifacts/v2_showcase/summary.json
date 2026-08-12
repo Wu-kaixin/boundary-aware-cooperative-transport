@@ -1,0 +1,834 @@
+{
+  "provenance": {
+    "git_sha": "e3af3da99aa95df540fa10b33f055a43f9a90dba-dirty",
+    "config_hash": "4e1f5373c44cd702",
+    "seed": 0,
+    "backend": "qp"
+  },
+  "engine": "penalty",
+  "task_mode": "transport",
+  "density_mode": "offset",
+  "steps": 336,
+  "final_time": 16.800000000000104,
+  "termination": {
+    "status": "SUCCESS_HOLD",
+    "frame": 336,
+    "time": 16.800000000000104,
+    "success": true,
+    "detail": "all local progress supervisors completed BRAKE and entered HOLD"
+  },
+  "contracts": {
+    "C1": {
+      "robot_radius": 0.16,
+      "cage_offset": 0.159,
+      "delta_max": 0.05,
+      "gamma_obj": 20.0,
+      "rho": 0.35,
+      "boundary_error_bound": 0.023,
+      "d_min": 0.32,
+      "lead_offset": 0.22,
+      "r_safe": 0.11,
+      "effective_r_safe": 0.133,
+      "barrier_margin": 0.17000000000000004
+    },
+    "coverage": {
+      "local_radius": 0.8,
+      "comm_range": 1.6
+    },
+    "d_min": 0.32,
+    "delta_max": 0.05,
+    "discrete_overshoot": 0.04153353432948509,
+    "require_initially_unobserved": false,
+    "phase_deadlines": {
+      "first_detection": null,
+      "first_enclosure": null,
+      "first_transport": null,
+      "first_hold": null
+    },
+    "frame_budget": null,
+    "require_guarantee_certificate": false,
+    "online_truth_audit": true,
+    "measured_error_bounds": {
+      "boundary_point_error_m": 0.023,
+      "map_point_error_m": 0.27,
+      "object_velocity_error_mps": 0.35,
+      "boundary_velocity_error_mps": 0.35,
+      "cbf_velocity_projection_error_mps": 0.35
+    },
+    "operational_enclosure": {
+      "certificate_type": "operational_boundary_enclosure",
+      "formal_caging": false,
+      "samples": 360,
+      "strict_coverage_min": 0.99,
+      "max_uncovered_arc_m": 0.05,
+      "min_engaged_agents": 3,
+      "engaged_radius_m": 0.5
+    }
+  },
+  "solver": {
+    "solves": 6048,
+    "fallbacks": 0,
+    "infeasible": 0,
+    "margin_relaxations": 1,
+    "zero_input_feasible": true,
+    "zero_input_feasible_checks": 6048,
+    "zero_input_feasible_failures": 0,
+    "inside_margin_band": 93,
+    "max_slack": 0.0,
+    "max_modification_norm": 0.5500034160373076,
+    "statuses": {
+      "optimal": 6047,
+      "relaxed_margin": 1
+    }
+  },
+  "relaxation_events": [
+    {
+      "frame": 315,
+      "time": 15.750000000000089,
+      "agent_id": "agent_12",
+      "mode": "brake",
+      "max_full_margin_deficit": 0.22139765314322127,
+      "max_barrier_deficit": 0.0,
+      "max_object_margin_deficit": 0.22139765314322127,
+      "min_object_h": 0.017500000010824884,
+      "max_object_velocity_projection": 0.04452642090002257,
+      "true_surface_clearance": 0.16040477275562218
+    }
+  ],
+  "measured_error_audit": {
+    "cargo_0": {
+      "normal_error_deg": {
+        "n": 15842,
+        "mean": 5.274019304396705,
+        "p50": 4.7316086723025546,
+        "p95": 14.186032239639543,
+        "p99": 17.68159654882764,
+        "max": 93.5268569928762
+      },
+      "normal_error_norm": {
+        "n": 15842,
+        "mean": 0.09188532380898615,
+        "p50": 0.08255868580203357,
+        "p95": 0.24696103757589635,
+        "p99": 0.30737895901364787,
+        "max": 1.457063074450596
+      },
+      "boundary_point_error_m": {
+        "n": 15842,
+        "mean": 0.0020180021993647665,
+        "p50": 0.0005405220037906425,
+        "p95": 0.01038521146605482,
+        "p99": 0.013278767669842342,
+        "max": 0.017576196921861673
+      },
+      "map_point_error_m": {
+        "n": 92020,
+        "mean": 0.027380387929244767,
+        "p50": 0.009053164423181569,
+        "p95": 0.11918209936413321,
+        "p99": 0.15970693115945592,
+        "max": 0.20947620672872536
+      },
+      "object_velocity_error_mps": {
+        "n": 3564,
+        "mean": 0.029295642485742585,
+        "p50": 0.012185089641894353,
+        "p95": 0.13888066434761778,
+        "p99": 0.2484946353107882,
+        "max": 0.3462321424293889
+      },
+      "object_velocity_projection_error_mps": {
+        "n": 47310,
+        "mean": 0.0274436141707627,
+        "p50": 0.010663867439295253,
+        "p95": 0.12566790224957494,
+        "p99": 0.21109100707322487,
+        "max": 0.3462272697135642
+      },
+      "boundary_velocity_error_mps": {
+        "n": 47310,
+        "mean": 0.05652575925321682,
+        "p50": 0.029787133593042695,
+        "p95": 0.174814603449197,
+        "p99": 0.2726577585755563,
+        "max": 0.3462329077807581
+      },
+      "cbf_velocity_projection_error_mps": {
+        "n": 47310,
+        "mean": 0.0343516742945645,
+        "p50": 0.015515997089716722,
+        "p95": 0.12996668404101375,
+        "p99": 0.2207981555042365,
+        "max": 0.3461934346752858
+      }
+    }
+  },
+  "transport_progress_estimates": {
+    "cargo_0": {
+      "min": 0.08040690073541149,
+      "mean": 0.0804069007354115,
+      "max": 0.08040690073541149
+    }
+  },
+  "transport_feedback": {
+    "agent_00": {
+      "progress": 0.08040690073541149,
+      "parallel_velocity": -0.0015018238734092653,
+      "position_error": 0.02059309926458852,
+      "velocity_reference": 0.0,
+      "velocity_error": 0.0015018238734092653,
+      "pressure_effort": 0.007347279674419982,
+      "integral": -0.022759871094729472,
+      "saturated": false,
+      "braking": true,
+      "phase": "hold",
+      "wrench_weight": 0.0,
+      "wrench_residual": 0.0,
+      "wrench_feasible": true
+    },
+    "agent_01": {
+      "progress": 0.08040690073541149,
+      "parallel_velocity": -0.0015018238734092653,
+      "position_error": 0.02059309926458852,
+      "velocity_reference": 0.0,
+      "velocity_error": 0.0015018238734092653,
+      "pressure_effort": 0.007347279674419982,
+      "integral": -0.022759871094729472,
+      "saturated": false,
+      "braking": true,
+      "phase": "hold",
+      "wrench_weight": 0.0,
+      "wrench_residual": 0.0,
+      "wrench_feasible": true
+    },
+    "agent_02": {
+      "progress": 0.08040690073541149,
+      "parallel_velocity": -0.0015018238734092653,
+      "position_error": 0.02059309926458852,
+      "velocity_reference": 0.0,
+      "velocity_error": 0.0015018238734092653,
+      "pressure_effort": 0.007347279674419982,
+      "integral": -0.022759871094729472,
+      "saturated": false,
+      "braking": true,
+      "phase": "hold",
+      "wrench_weight": 0.0,
+      "wrench_residual": 0.0,
+      "wrench_feasible": true
+    },
+    "agent_03": {
+      "progress": 0.08040690073541149,
+      "parallel_velocity": -0.0015018238734092653,
+      "position_error": 0.02059309926458852,
+      "velocity_reference": 0.0,
+      "velocity_error": 0.0015018238734092653,
+      "pressure_effort": 0.007347279674419982,
+      "integral": -0.022759871094729472,
+      "saturated": false,
+      "braking": true,
+      "phase": "hold",
+      "wrench_weight": 0.0,
+      "wrench_residual": 0.0,
+      "wrench_feasible": true
+    },
+    "agent_04": {
+      "progress": 0.08040690073541149,
+      "parallel_velocity": -0.0015018238734092653,
+      "position_error": 0.02059309926458852,
+      "velocity_reference": 0.0,
+      "velocity_error": 0.0015018238734092653,
+      "pressure_effort": 0.007347279674419982,
+      "integral": -0.022759871094729472,
+      "saturated": false,
+      "braking": true,
+      "phase": "hold",
+      "wrench_weight": 0.0,
+      "wrench_residual": 0.0,
+      "wrench_feasible": true
+    },
+    "agent_05": {
+      "progress": 0.08040690073541149,
+      "parallel_velocity": -0.0015018238734092653,
+      "position_error": 0.02059309926458852,
+      "velocity_reference": 0.0,
+      "velocity_error": 0.0015018238734092653,
+      "pressure_effort": 0.007347279674419982,
+      "integral": -0.022759871094729472,
+      "saturated": false,
+      "braking": true,
+      "phase": "hold",
+      "wrench_weight": 0.0,
+      "wrench_residual": 0.0,
+      "wrench_feasible": true
+    },
+    "agent_06": {
+      "progress": 0.08040690073541149,
+      "parallel_velocity": -0.0015018238734092653,
+      "position_error": 0.02059309926458852,
+      "velocity_reference": 0.0,
+      "velocity_error": 0.0015018238734092653,
+      "pressure_effort": 0.007347279674419982,
+      "integral": -0.022759871094729472,
+      "saturated": false,
+      "braking": true,
+      "phase": "hold",
+      "wrench_weight": 0.0,
+      "wrench_residual": 0.0,
+      "wrench_feasible": true
+    },
+    "agent_07": {
+      "progress": 0.08040690073541149,
+      "parallel_velocity": -0.0015018238734092653,
+      "position_error": 0.02059309926458852,
+      "velocity_reference": 0.0,
+      "velocity_error": 0.0015018238734092653,
+      "pressure_effort": 0.007347279674419982,
+      "integral": -0.022759871094729472,
+      "saturated": false,
+      "braking": true,
+      "phase": "hold",
+      "wrench_weight": 0.0,
+      "wrench_residual": 0.0,
+      "wrench_feasible": true
+    },
+    "agent_08": {
+      "progress": 0.08040690073541149,
+      "parallel_velocity": -0.0015018238734092653,
+      "position_error": 0.02059309926458852,
+      "velocity_reference": 0.0,
+      "velocity_error": 0.0015018238734092653,
+      "pressure_effort": 0.007347279674419982,
+      "integral": -0.022759871094729472,
+      "saturated": false,
+      "braking": true,
+      "phase": "hold",
+      "wrench_weight": 0.0,
+      "wrench_residual": 0.0,
+      "wrench_feasible": true
+    },
+    "agent_09": {
+      "progress": 0.08040690073541149,
+      "parallel_velocity": -0.0015018238734092653,
+      "position_error": 0.02059309926458852,
+      "velocity_reference": 0.0,
+      "velocity_error": 0.0015018238734092653,
+      "pressure_effort": 0.007347279674419982,
+      "integral": -0.022759871094729472,
+      "saturated": false,
+      "braking": true,
+      "phase": "hold",
+      "wrench_weight": 0.0,
+      "wrench_residual": 0.0,
+      "wrench_feasible": true
+    },
+    "agent_10": {
+      "progress": 0.08040690073541149,
+      "parallel_velocity": -0.0015018238734092653,
+      "position_error": 0.02059309926458852,
+      "velocity_reference": 0.0,
+      "velocity_error": 0.0015018238734092653,
+      "pressure_effort": 0.007347279674419982,
+      "integral": -0.022759871094729472,
+      "saturated": false,
+      "braking": true,
+      "phase": "hold",
+      "wrench_weight": 0.0,
+      "wrench_residual": 0.0,
+      "wrench_feasible": true
+    },
+    "agent_11": {
+      "progress": 0.08040690073541149,
+      "parallel_velocity": -0.0015018238734092653,
+      "position_error": 0.02059309926458852,
+      "velocity_reference": 0.0,
+      "velocity_error": 0.0015018238734092653,
+      "pressure_effort": 0.007347279674419982,
+      "integral": -0.022759871094729472,
+      "saturated": false,
+      "braking": true,
+      "phase": "hold",
+      "wrench_weight": 0.0,
+      "wrench_residual": 0.0,
+      "wrench_feasible": true
+    },
+    "agent_12": {
+      "progress": 0.08040690073541149,
+      "parallel_velocity": -0.0015018238734092653,
+      "position_error": 0.02059309926458852,
+      "velocity_reference": 0.0,
+      "velocity_error": 0.0015018238734092653,
+      "pressure_effort": 0.007347279674419982,
+      "integral": -0.022759871094729472,
+      "saturated": false,
+      "braking": true,
+      "phase": "hold",
+      "wrench_weight": 0.0,
+      "wrench_residual": 0.0,
+      "wrench_feasible": true
+    },
+    "agent_13": {
+      "progress": 0.08040690073541149,
+      "parallel_velocity": -0.0015018238734092653,
+      "position_error": 0.02059309926458852,
+      "velocity_reference": 0.0,
+      "velocity_error": 0.0015018238734092653,
+      "pressure_effort": 0.007347279674419982,
+      "integral": -0.022759871094729472,
+      "saturated": false,
+      "braking": true,
+      "phase": "hold",
+      "wrench_weight": 0.0,
+      "wrench_residual": 0.0,
+      "wrench_feasible": true
+    },
+    "agent_14": {
+      "progress": 0.08040690073541149,
+      "parallel_velocity": -0.0015018238734092653,
+      "position_error": 0.02059309926458852,
+      "velocity_reference": 0.0,
+      "velocity_error": 0.0015018238734092653,
+      "pressure_effort": 0.007347279674419982,
+      "integral": -0.022759871094729472,
+      "saturated": false,
+      "braking": true,
+      "phase": "hold",
+      "wrench_weight": 0.0,
+      "wrench_residual": 0.0,
+      "wrench_feasible": true
+    },
+    "agent_15": {
+      "progress": 0.08040690073541149,
+      "parallel_velocity": -0.0015018238734092653,
+      "position_error": 0.02059309926458852,
+      "velocity_reference": 0.0,
+      "velocity_error": 0.0015018238734092653,
+      "pressure_effort": 0.007347279674419982,
+      "integral": -0.022759871094729472,
+      "saturated": false,
+      "braking": true,
+      "phase": "hold",
+      "wrench_weight": 0.0,
+      "wrench_residual": 0.0,
+      "wrench_feasible": true
+    },
+    "agent_16": {
+      "progress": 0.08040690073541149,
+      "parallel_velocity": -0.0015018238734092653,
+      "position_error": 0.02059309926458852,
+      "velocity_reference": 0.0,
+      "velocity_error": 0.0015018238734092653,
+      "pressure_effort": 0.007347279674419982,
+      "integral": -0.022759871094729472,
+      "saturated": false,
+      "braking": true,
+      "phase": "hold",
+      "wrench_weight": 0.0,
+      "wrench_residual": 0.0,
+      "wrench_feasible": true
+    },
+    "agent_17": {
+      "progress": 0.08040690073541149,
+      "parallel_velocity": -0.0015018238734092653,
+      "position_error": 0.02059309926458852,
+      "velocity_reference": 0.0,
+      "velocity_error": 0.0015018238734092653,
+      "pressure_effort": 0.007347279674419982,
+      "integral": -0.022759871094729472,
+      "saturated": false,
+      "braking": true,
+      "phase": "hold",
+      "wrench_weight": 0.0,
+      "wrench_residual": 0.0,
+      "wrench_feasible": true
+    }
+  },
+  "goal_targets": {
+    "cargo_0": [
+      3.947102632182823,
+      3.91513617685945
+    ]
+  },
+  "multi_rate": {
+    "perception_every": 3,
+    "planning_every": 3,
+    "map_gossip_every": 3,
+    "safety_every": 1
+  },
+  "communication": {
+    "dropout_probability": 0.0,
+    "measured_delivery_rate": 1.0
+  },
+  "min_inter_agent_distance": 0.3202129166576722,
+  "mean_path_length": 4.540648617912501,
+  "cargoes": {
+    "cargo_0": {
+      "displacement_vector": [
+        -0.08957163727928785,
+        -0.09462525426547108
+      ],
+      "displacement": 0.17598974456424754,
+      "rotation_deg": 1.3845728579343848,
+      "max_abs_rotation_deg": 2.480583552073147,
+      "final_coverage_legacy": 1.0,
+      "final_strict_coverage": 1.0,
+      "max_strict_coverage": 1.0,
+      "min_signed_clearance": 0.14602815029252159,
+      "max_penetration": 0.013971849707478418,
+      "max_agents_inside": 0,
+      "mean_contacts": 0.9436201780415431,
+      "max_cargo_speed": 0.3806706865897018,
+      "max_contacts": 6,
+      "peak_net_force": 16.102011050426515,
+      "peak_abs_net_torque": 5.742021888444891,
+      "recruited_agents": 17,
+      "initial_detection_count": 0,
+      "final_operational_enclosure": {
+        "certificate_type": "operational_boundary_enclosure",
+        "formal_caging": false,
+        "formal_caging_nonclaim": "no configuration-space escape proof is implemented",
+        "passed": true,
+        "strict_boundary_coverage": 1.0,
+        "sample_count": 360,
+        "sample_resolution_m": 0.010118844839076425,
+        "longest_uncovered_samples": 0,
+        "max_uncovered_arc_upper_m": 0.0,
+        "all_robot_centres_outside": true,
+        "min_signed_clearance_m": 0.16515235071894818,
+        "min_inter_agent_distance_m": 0.3253557115152135,
+        "facing_cage_clearance_m": null,
+        "engaged_agents": 17,
+        "thresholds": {
+          "strict_coverage_min": 0.99,
+          "max_uncovered_arc_m": 0.05,
+          "d_min_m": 0.32,
+          "cage_offset_m": 0.159,
+          "min_engaged_agents": 3,
+          "engaged_radius_m": 0.5
+        },
+        "checks": {
+          "strict_boundary_coverage": true,
+          "maximum_uncovered_boundary_arc": true,
+          "all_robot_centres_outside": true,
+          "inter_agent_safety": true,
+          "cage_offset_feasible": true,
+          "engaged_quorum": true
+        },
+        "failure_reasons": []
+      },
+      "phase_frames": {
+        "first_detection": 136,
+        "first_map_complete": 268,
+        "first_enclosure": 233,
+        "first_contact": 205,
+        "first_transport": 282,
+        "first_brake": 313,
+        "first_hold": 336
+      },
+      "min_strict_coverage_during_transport": 1.0,
+      "min_contact_count_during_transport": 0,
+      "max_uncovered_arc_during_transport_m": 0.0,
+      "operational_enclosure_maintained_during_transport": true,
+      "goal_direction": [
+        -0.5289736781711862,
+        -0.8486382314049057
+      ],
+      "goal_angle_deg": -121.93613659280355,
+      "goal_target": [
+        3.947102632182823,
+        3.91513617685945
+      ],
+      "episode_total_J": 0.12768364685752912,
+      "episode_total_displacement": 0.13029588232057587,
+      "episode_total_efficiency": 0.9799515117705738,
+      "transport_activation_center": [
+        4.041581986017501,
+        4.022725149602108
+      ],
+      "transport_goal_target": [
+        3.9881556445222115,
+        3.9370126882302126
+      ],
+      "J": 0.1689648537136953,
+      "efficiency": 0.9600835215259506,
+      "angle_deg": 16.243105134838387,
+      "final_cross_track_error": 0.049226704148243046,
+      "max_cross_track_error": 0.04934304479990861,
+      "success": true,
+      "failure_reasons": [],
+      "guarantee_certificate": {
+        "theorem_id": "DBACT-CONDITIONAL-SIMPLE-POLYGON-v1",
+        "enabled": true,
+        "eligible": false,
+        "domain_eligible": true,
+        "finite_time_eligible": false,
+        "claim": "complete rectangular-workspace discovery plus conditional enclosure and bounded transport for this admissible simple polygon",
+        "search": {
+          "guaranteed_detection_radius": 1.16,
+          "configured_detection_tube": 0.75,
+          "lane_spacing": 0.8888888888888888,
+          "sweep_bound_frames": 204,
+          "rendezvous_bound_frames": 37,
+          "gossip_bound_frames": 27,
+          "release_bound_frames": 268,
+          "required_returns": 1
+        },
+        "shape": {
+          "vertices": 64,
+          "area": 1.0551349122196536,
+          "perimeter": 3.642784142067513,
+          "diameter": 1.1600000000000006,
+          "certified_inscribed_radius": 0.5793013645989171,
+          "required_boundary_agents": 6
+        },
+        "mapping": {
+          "required_max_boundary_gap": 0.1
+        },
+        "task": {
+          "transport_distance": 0.1,
+          "transport_target_reserve": 0.001,
+          "certified_corridor_distance": 0.101,
+          "cargo_corridor_margin": 3.3342875386281046,
+          "cage_corridor_margin": 3.114552538262967,
+          "cooperative_agents_required": 3,
+          "wrench_residual": 3.469446951953614e-18,
+          "wrench_equivalent_agents": 3.6165613697720596,
+          "total_bound_frames": 268
+        },
+        "time_bounds": {
+          "first_detection": 204,
+          "first_enclosure": 268,
+          "first_transport": 268,
+          "first_hold": 268
+        },
+        "derived_finite_time_bound": {
+          "bound_id": "DBACT-CONDITIONAL-FINITE-TIME-v1",
+          "classification": "provable_sufficient_conditional",
+          "eligible": false,
+          "empirical": false,
+          "premises": {
+            "dt": 0.05,
+            "search_bound_s": 10.200000000000001,
+            "map_bound_s": 6.2,
+            "enclosure_initial_error_m": 11.314,
+            "enclosure_terminal_error_m": 0.05,
+            "enclosure_contraction_rate_hz": 0.0,
+            "transport_distance_m": 0.1,
+            "brake_activation_distance_m": 0.025,
+            "transport_progress_rate_mps": 0.0,
+            "brake_initial_error_m": 0.025,
+            "brake_terminal_error_m": 0.025,
+            "brake_contraction_rate_hz": 0.0,
+            "hold_dwell_s": 0.6
+          },
+          "checks": {
+            "positive_dt": true,
+            "finite_search_bound": true,
+            "finite_map_bound": true,
+            "enclosure_error_order": true,
+            "positive_enclosure_contraction": false,
+            "positive_transport_distance": true,
+            "valid_brake_activation": true,
+            "positive_transport_progress_rate": false,
+            "brake_error_order": true,
+            "positive_brake_contraction": false,
+            "nonnegative_hold_dwell": true
+          },
+          "failure_reasons": [
+            "positive_enclosure_contraction",
+            "positive_transport_progress_rate",
+            "positive_brake_contraction"
+          ],
+          "phase_bounds_s": null,
+          "phase_bounds_frames": null,
+          "total_bound_s": null,
+          "total_bound_frames": null
+        },
+        "checks": {
+          "simple_polygon": {
+            "passed": true,
+            "value": true,
+            "bound": "true",
+            "rationale": "A simple, non-degenerate outline is required for inside/outside and boundary ordering."
+          },
+          "single_cargo_episode": {
+            "passed": true,
+            "value": 1,
+            "bound": "== 1",
+            "rationale": "The current search proof is a single-unknown-object theorem; occluding multiple cargoes are out of scope."
+          },
+          "feature_witness": {
+            "passed": true,
+            "value": 0.5793013645989171,
+            "bound": ">= 0.04 m",
+            "rationale": "An ear-triangle incircle is a constructive disk contained in the polygon."
+          },
+          "perimeter_bound": {
+            "passed": true,
+            "value": 3.642784142067513,
+            "bound": "<= 8 m",
+            "rationale": "A fixed team cannot cover an unbounded boundary."
+          },
+          "diameter_bound": {
+            "passed": true,
+            "value": 1.1600000000000006,
+            "bound": "<= 2.5 m",
+            "rationale": "The object and its cage must fit in the finite workspace."
+          },
+          "paired_lane_layout": {
+            "passed": true,
+            "value": "paired_sweep",
+            "bound": "paired_sweep with an even team",
+            "rationale": "Each half-workspace receives an independent lane cover."
+          },
+          "paired_lane_controller": {
+            "passed": true,
+            "value": "paired_lanes, gossip=True",
+            "bound": "paired_lanes and map_gossip=true",
+            "rationale": "The proof applies to the predetermined sweep/rendezvous protocol."
+          },
+          "finite_ray_detection_tube": {
+            "passed": true,
+            "value": 1.16,
+            "bound": ">= configured tube 0.75 m",
+            "rationale": "Finite angular ray spacing is included; this is not an ideal disk-sensor assumption."
+          },
+          "vertical_workspace_cover": {
+            "passed": true,
+            "value": 0.4444444444444444,
+            "bound": "<= tube 0.75 m",
+            "rationale": "Every point is within one sensor tube of a lane on its half-workspace."
+          },
+          "outer_edge_cover": {
+            "passed": true,
+            "value": 0.2,
+            "bound": "<= tube 0.75 m",
+            "rationale": "The sensor tubes reach the complete outer workspace boundary."
+          },
+          "rendezvous_connectivity": {
+            "passed": true,
+            "value": 0.8888888888888888,
+            "bound": "<= comm_range 1.6 m",
+            "rationale": "At rendezvous the two lane chains form one connected ladder graph."
+          },
+          "gossip_dissemination_time": {
+            "passed": true,
+            "value": 27,
+            "bound": ">= 27 frames (9 hops at perception_every=3)",
+            "rationale": "Flooding a finite map over a connected graph takes at most its hop diameter."
+          },
+          "boundary_map_resolution_declared": {
+            "passed": true,
+            "value": 0.1,
+            "bound": "> 0 m",
+            "rationale": "The post-search theorem is conditional on an epsilon-dense observed boundary map."
+          },
+          "boundary_covering_number": {
+            "passed": true,
+            "value": 6,
+            "bound": "<= 18 agents",
+            "rationale": "Arclength plus triangle inequality gives a conservative continuous-boundary cover."
+          },
+          "cage_offset_self_clearance": {
+            "passed": true,
+            "value": "no facing edge pair",
+            "bound": ">= d_min 0.32 m",
+            "rationale": "Robots assigned to mutually facing concavity walls must fit without violating inter-agent separation."
+          },
+          "transport_distance_consistency": {
+            "passed": true,
+            "value": 0.101,
+            "bound": "== task distance 0.1 m + declared reserve 0.001 m",
+            "rationale": "The local HOLD latch and swept corridor include only an explicitly declared estimator reserve."
+          },
+          "swept_cargo_corridor": {
+            "passed": true,
+            "value": 3.3342875386281046,
+            "bound": ">= 0 m",
+            "rationale": "A rectangle is convex, so start/end containment certifies every translated intermediate footprint."
+          },
+          "swept_cage_corridor": {
+            "passed": true,
+            "value": 3.114552538262967,
+            "bound": ">= robot_radius 0.16 m",
+            "rationale": "Every edge-offset cage centre and robot disk fits at both corridor endpoints."
+          },
+          "contact_force_capacity": {
+            "passed": true,
+            "value": 3,
+            "bound": "<= min_push_agents 3 <= team 18",
+            "rationale": "The locally gated pushing quorum exceeds Coulomb breakaway force at nominal cage penetration."
+          },
+          "goal_wrench_feasibility": {
+            "passed": true,
+            "value": {
+              "residual": 3.469446951953614e-18,
+              "equivalent_agents": 3.6165613697720596
+            },
+            "bound": "zero-torque goal wrench >= 1.05 x breakaway force",
+            "rationale": "A nonnegative edge-contact force allocation must produce the requested force with zero net torque."
+          },
+          "bounded_perception_and_motion_error": {
+            "passed": true,
+            "value": {
+              "normal_error_deg": 89.99,
+              "velocity_error": 0.35
+            },
+            "bound": "normal < 90 deg and velocity_error <= rho 0.35 m/s",
+            "rationale": "The conditional safety proof requires declared finite normal and moving-boundary estimation errors."
+          },
+          "derived_conditional_finite_time_bound": {
+            "passed": false,
+            "value": null,
+            "bound": "finite under declared contraction/progress premises",
+            "rationale": "Analytic sufficient bound; never inferred from successful episode durations."
+          },
+          "declared_finite_time_bounds": {
+            "passed": false,
+            "value": {
+              "search_release": 268,
+              "enclosure": 0,
+              "transport": 0,
+              "hold": 0
+            },
+            "bound": "positive phase bounds",
+            "rationale": "These are explicit theorem premises, not values inferred from successful trials."
+          },
+          "frame_budget": {
+            "passed": false,
+            "value": 268,
+            "bound": "<= 0 frames",
+            "rationale": "The sum of the certified/assumed phase bounds must fit the requested horizon."
+          }
+        },
+        "failure_reasons": [
+          "derived_conditional_finite_time_bound",
+          "declared_finite_time_bounds",
+          "frame_budget"
+        ],
+        "domain_failure_reasons": [],
+        "finite_time_failure_reasons": [
+          "derived_conditional_finite_time_bound",
+          "declared_finite_time_bounds",
+          "frame_budget"
+        ],
+        "runtime_map_witness": {
+          "frame": 268,
+          "points": 1996,
+          "boundary_samples": 1024,
+          "sampled_max_boundary_gap": 0.01641679845975303,
+          "sampling_resolution_bound": 0.0017787031943689029,
+          "max_boundary_gap": 0.018195501654121933,
+          "p95_boundary_gap": 0.009943574367671617
+        },
+        "runtime_eligible": false,
+        "runtime_domain_eligible": true,
+        "runtime_failure_reasons": [
+          "derived_conditional_finite_time_bound",
+          "declared_finite_time_bounds",
+          "frame_budget"
+        ],
+        "runtime_domain_failure_reasons": []
+      }
+    }
+  }
+}

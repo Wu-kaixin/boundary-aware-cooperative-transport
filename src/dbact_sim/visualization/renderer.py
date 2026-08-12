@@ -220,7 +220,7 @@ class ResearchVisualizer:
         )
 
         handles = [
-            Line2D([], [], color=style.cargo_face, linewidth=7, label="irregular cargo"),
+            Line2D([], [], color=style.cargo_face, linewidth=7, label="cargo"),
             Line2D([], [], marker="o", linestyle="", color=PHASE_COLORS["SEARCH"], label="search/map"),
             Line2D([], [], marker="o", linestyle="", color=PHASE_COLORS["ENCLOSE"], label="enclose/contact"),
             Line2D([], [], marker="o", linestyle="", color=PHASE_COLORS["TRANSPORT"], label="push"),

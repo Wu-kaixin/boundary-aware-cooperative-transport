@@ -244,15 +244,13 @@ class SimulationTrace:
             origin = centers[cargo_id][first_transport]
             displacement = centers[cargo_id] - origin
             values = displacement @ goal
-            increments = np.linalg.norm(np.diff(centers[cargo_id], axis=0), axis=1)
-            path = np.concatenate([[0.0], np.cumsum(increments)])
-            path = np.maximum(path - path[first_transport], 0.0)
             values[:first_transport] = 0.0
+            displacement_norm = np.linalg.norm(displacement, axis=1)
             efficiency = np.divide(
                 values,
-                path,
+                displacement_norm,
                 out=np.zeros_like(values),
-                where=path > 1e-12,
+                where=displacement_norm > 1e-12,
             )
             cross = np.abs(goal[0] * displacement[:, 1] - goal[1] * displacement[:, 0])
             cross[:first_transport] = 0.0

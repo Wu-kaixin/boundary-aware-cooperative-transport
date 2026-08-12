@@ -1,0 +1,115 @@
+{
+  "schema_version": 2,
+  "config": "configs/sim/research/adaptive_progress_closed_loop.yaml",
+  "case": {
+    "shape": "circle",
+    "seed": 0,
+    "position_class": "center",
+    "center": [
+      4.0,
+      4.0
+    ],
+    "yaw_deg": 262.54648308551936,
+    "surface_density": 0.8,
+    "ground_friction": 0.15,
+    "contact_friction": 0.4,
+    "vertex_count": 96
+  },
+  "seed": 0,
+  "truth_audit": true,
+  "termination": "SUCCESS_HOLD",
+  "frame": 336,
+  "wall_seconds": 13.067574099999547,
+  "simulation_fps": 25.712500072986895,
+  "render_reports": [
+    {
+      "output": "artifacts\\v2_showcase\\closed_loop.gif",
+      "view_mode": "demo",
+      "source_frames": 337,
+      "rendered_frames": 85,
+      "frame_stride": 4,
+      "playback_fps": 20.0,
+      "wall_seconds": 26.36794650000047,
+      "rendering_fps": 3.2236109095563616,
+      "simulation_fps": 25.712500072986895
+    },
+    {
+      "output": "artifacts\\v2_showcase\\closed_loop.mp4",
+      "view_mode": "demo",
+      "source_frames": 337,
+      "rendered_frames": 85,
+      "frame_stride": 4,
+      "playback_fps": 20.0,
+      "wall_seconds": 19.72982890000094,
+      "rendering_fps": 4.30819752319271,
+      "simulation_fps": 25.712500072986895
+    }
+  ],
+  "task_success": true,
+  "J_m": 0.1689648537136953,
+  "efficiency": 0.9600835215259506,
+  "max_cross_track_error_m": 0.04934304479990861,
+  "max_abs_rotation_deg": 2.480583552073147,
+  "phase_frames": {
+    "first_detection": 136,
+    "first_map_complete": 268,
+    "first_enclosure": 233,
+    "first_contact": 205,
+    "first_transport": 282,
+    "first_brake": 313,
+    "first_hold": 336
+  },
+  "solver": {
+    "solves": 6048,
+    "fallbacks": 0,
+    "infeasible": 0,
+    "margin_relaxations": 1,
+    "zero_input_feasible": true,
+    "zero_input_feasible_checks": 6048,
+    "zero_input_feasible_failures": 0,
+    "inside_margin_band": 93,
+    "max_slack": 0.0,
+    "max_modification_norm": 0.5500034160373076,
+    "statuses": {
+      "optimal": 6047,
+      "relaxed_margin": 1
+    }
+  },
+  "paper_figures": {
+    "A": [
+      "paper_figures\\figure_A_phase_sequence.png",
+      "paper_figures\\figure_A_phase_sequence.pdf",
+      "paper_figures\\figure_A_phase_sequence.svg"
+    ],
+    "B": [
+      "paper_figures\\figure_B_cargo_trajectory.png",
+      "paper_figures\\figure_B_cargo_trajectory.pdf",
+      "paper_figures\\figure_B_cargo_trajectory.svg"
+    ],
+    "C": [
+      "paper_figures\\figure_C_directional_progress.png",
+      "paper_figures\\figure_C_directional_progress.pdf",
+      "paper_figures\\figure_C_directional_progress.svg"
+    ],
+    "D": [
+      "paper_figures\\figure_D_coverage_boundary_gap.png",
+      "paper_figures\\figure_D_coverage_boundary_gap.pdf",
+      "paper_figures\\figure_D_coverage_boundary_gap.svg"
+    ],
+    "E": [
+      "paper_figures\\figure_E_safety.png",
+      "paper_figures\\figure_E_safety.pdf",
+      "paper_figures\\figure_E_safety.svg"
+    ],
+    "F": [
+      "paper_figures\\figure_F_transport_quality.png",
+      "paper_figures\\figure_F_transport_quality.pdf",
+      "paper_figures\\figure_F_transport_quality.svg"
+    ],
+    "G": [
+      "paper_figures\\figure_G_control_effort.png",
+      "paper_figures\\figure_G_control_effort.pdf",
+      "paper_figures\\figure_G_control_effort.svg"
+    ]
+  }
+}

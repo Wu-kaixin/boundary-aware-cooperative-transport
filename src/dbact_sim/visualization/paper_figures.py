@@ -63,7 +63,8 @@ def phase_keyframes(trace: SimulationTrace) -> dict[str, int | None]:
     """Choose the middle observed frame of each paper phase; never fabricate one."""
     selected: dict[str, int | None] = {}
     for phase, _ in PAPER_PHASES:
-        candidates = np.flatnonzero(np.asarray(trace.phase_labels) == phase)
+        aliases = ("ENCLOSE", "CONTACT_READY") if phase == "ENCLOSE" else (phase,)
+        candidates = np.flatnonzero(np.isin(np.asarray(trace.phase_labels), aliases))
         selected[phase] = int(candidates[len(candidates) // 2]) if len(candidates) else None
     return selected
 
@@ -189,28 +190,67 @@ def _draw_paper_world(ax, trace: SimulationTrace, frame: int, *, show_map: bool)
 def _cargo_trajectory(trace: SimulationTrace):
     style = get_style("paper")
     fig, ax = plt.subplots(figsize=(6.2, 5.2))
-    xmin, xmax, ymin, ymax = trace.domain
-    ax.set_xlim(xmin, xmax)
-    ax.set_ylim(ymin, ymax)
     ax.set_aspect("equal", adjustable="box")
     _paper_axes(ax, trace, "Cargo trajectory and transport goal", "x [m]", "y [m]")
+    extent_points: list[np.ndarray] = []
     for cargo_id in trace.cargo_ids:
         centers = trace.cargo_centers[cargo_id]
         ax.plot(centers[:, 0], centers[:, 1], color=style.goal, linewidth=2.0, label=f"{cargo_id} trajectory")
+        start_vertices = trace.cargo_vertices[cargo_id][0]
+        final_vertices = trace.cargo_vertices[cargo_id][-1]
+        ax.add_patch(
+            Polygon(
+                start_vertices,
+                closed=True,
+                facecolor="none",
+                edgecolor="#2563eb",
+                linestyle=":",
+                linewidth=1.2,
+                alpha=0.8,
+            )
+        )
+        ax.add_patch(
+            Polygon(
+                final_vertices,
+                closed=True,
+                facecolor=style.cargo_face,
+                edgecolor=style.cargo_edge,
+                linewidth=1.1,
+                alpha=0.35,
+            )
+        )
         ax.scatter(centers[0, 0], centers[0, 1], marker="o", s=48, color="#2563eb", label="start")
         ax.scatter(centers[-1, 0], centers[-1, 1], marker="s", s=48, color="#111827", label="final")
         goal = trace.goal_directions[cargo_id]
+        goal_tip = centers[0] + 0.85 * goal
         ax.annotate(
-            "goal direction",
-            xy=centers[0] + 0.85 * goal,
+            "",
+            xy=goal_tip,
             xytext=centers[0],
             arrowprops={"arrowstyle": "-|>", "color": style.goal, "lw": 2.0},
+        )
+        ax.text(
+            centers[0, 0] + 0.04,
+            centers[0, 1] + 0.06,
+            "goal direction",
             color=style.goal,
             fontsize=8,
+            ha="left",
+            va="bottom",
         )
         if cargo_id in trace.goal_targets:
             target = trace.goal_targets[cargo_id]
             ax.scatter(target[0], target[1], marker="X", s=85, color=style.target, label="target")
+            extent_points.append(target[None, :])
+        extent_points.extend([start_vertices, final_vertices, goal_tip[None, :]])
+    if extent_points:
+        extent = np.vstack(extent_points)
+        low = np.min(extent, axis=0)
+        high = np.max(extent, axis=0)
+        span = np.maximum(high - low, 0.5)
+        padding = 0.16 * float(np.max(span))
+        ax.set_xlim(low[0] - padding, high[0] + padding)
+        ax.set_ylim(low[1] - padding, high[1] + padding)
     ax.legend(frameon=False, fontsize=8)
     fig.tight_layout()
     return fig
@@ -318,6 +358,15 @@ def _save(fig, output: Path, stem: str, formats: tuple[str, ...], dpi: int) -> l
             raise ValueError(f"unsupported paper figure format: {suffix}")
         path = output / f"{stem}.{suffix}"
         fig.savefig(path, dpi=dpi if suffix == "png" else None, bbox_inches="tight")
+        if suffix == "svg":
+            # Matplotlib writes path commands with harmless trailing spaces.
+            # Normalize them so generated vector artifacts pass repository
+            # whitespace checks and produce stable text diffs.
+            content = path.read_text(encoding="utf-8")
+            path.write_text(
+                "\n".join(line.rstrip() for line in content.splitlines()) + "\n",
+                encoding="utf-8",
+            )
         paths.append(path)
     plt.close(fig)
     return paths

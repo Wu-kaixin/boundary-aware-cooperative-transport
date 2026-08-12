@@ -10,8 +10,8 @@ braking, and hold for initially unknown simple shapes.
 [English](README.md) · [繁體中文](README.zh-TW.md) · [日本語](README.ja.md)
 
 ![Python](https://img.shields.io/badge/Python-3.10%2B-2563eb.svg)
-![Tests](https://img.shields.io/badge/tests-245%20passed%20%7C%203%20skipped-059669.svg)
-![Branch](https://img.shields.io/badge/branch-Codex--boundary--aware--closed--loop--v1-7c3aed.svg)
+![Tests](https://img.shields.io/badge/tests-273%20passed-059669.svg)
+![Branch](https://img.shields.io/badge/branch-Codex--boundary--aware--closed--loop--v2-7c3aed.svg)
 ![Scope](https://img.shields.io/badge/scope-theory%20%2B%20simulation-ea580c.svg)
 ![License](https://img.shields.io/badge/license-MIT-64748b.svg)
 
@@ -35,6 +35,47 @@ selected-case demo or a physical-robot claim.
 > It is not unconditional convergence for every planar shape, and operational
 > boundary enclosure is not formal configuration-space caging.
 
+## V2 visual showcase
+
+<p align="center">
+  <img src="artifacts/v2_showcase/closed_loop.gif" alt="DBACT v2 closed loop with phase-aware HUD" width="920">
+</p>
+
+<p align="center"><strong>SEARCH → MAP → ENCLOSE → TRANSPORT → BRAKE → HOLD</strong></p>
+
+The v2 renderer is a read-only consumer of a saved compact trace. This retained
+truth-audited witness reaches `SUCCESS_HOLD` with zero fallback and zero
+infeasibility. Download the [H.264 MP4](artifacts/v2_showcase/closed_loop.mp4)
+or inspect the [machine-readable manifest](artifacts/v2_showcase/manifest.json).
+
+<table>
+  <tr>
+    <td width="50%"><a href="artifacts/v2_showcase/irregular_l_object_demo.png"><img src="artifacts/v2_showcase/irregular_l_object_demo.png" alt="Irregular L-object transport visualization" width="100%"></a><br><strong>Irregular-object demo</strong><br>This L-object run is retained as a visible failure witness; v2 does not hide its solver/safety failures.</td>
+    <td width="50%"><a href="artifacts/v2_showcase/paper_figures/figure_A_phase_sequence.png"><img src="artifacts/v2_showcase/paper_figures/figure_A_phase_sequence.png" alt="Five-frame closed-loop phase sequence" width="100%"></a><br><strong>Figure A — closed-loop phase sequence</strong> · <a href="artifacts/v2_showcase/paper_figures/figure_A_phase_sequence.pdf">PDF</a> · <a href="artifacts/v2_showcase/paper_figures/figure_A_phase_sequence.svg">SVG</a></td>
+  </tr>
+  <tr>
+    <td width="50%"><a href="artifacts/v2_showcase/paper_figures/figure_B_cargo_trajectory.png"><img src="artifacts/v2_showcase/paper_figures/figure_B_cargo_trajectory.png" alt="Cargo trajectory and goal direction" width="100%"></a><br><strong>Figure B — cargo trajectory and goal</strong></td>
+    <td width="50%"><a href="artifacts/v2_showcase/paper_figures/figure_D_coverage_boundary_gap.png"><img src="artifacts/v2_showcase/paper_figures/figure_D_coverage_boundary_gap.png" alt="Coverage and boundary gap metrics" width="100%"></a><br><strong>Figure D — coverage and boundary gap</strong></td>
+  </tr>
+</table>
+
+Reproduce the complete showcase in one command:
+
+```bash
+python scripts/generate_v2_showcase.py --output artifacts/v2_showcase
+```
+
+Or keep simulation and rendering as two explicit steps:
+
+```bash
+python -m dbact_sim.run_sim \
+  --config configs/sim/research/adaptive_progress_closed_loop.yaml \
+  --steps 400 --seed 0 --output runs/v2_demo --no-render
+python scripts/render_research_outputs.py \
+  --trace runs/v2_demo/trace --output runs/v2_demo/rendered \
+  --view-mode demo --video both
+```
+
 [Quick start](#quick-start) · [System](#closed-loop-system) ·
 [Audited run](#audited-closed-loop-witness) ·
 [Statistical evidence](#unscreened-arbitrary-shape-validation) ·
@@ -48,29 +89,23 @@ selected-case demo or a physical-robot claim.
 | Question | Current answer | Evidence class |
 |---|---|---|
 | Can the team discover an admissible object anywhere in the rectangular workspace? | Yes, under the finite-ray, contained-feature, lane-spacing, speed, and bounded-workspace premises. | Mathematically proved |
-| Does a complete contact-only closed loop exist? | Yes. The retained truth-audited witness reaches `HOLD` at frame 327. | Empirically validated |
-| Does the representative run maintain the full safety margin? | Yes: 5,886 QP solves, zero fallback, zero infeasibility, zero rho relaxation. | Empirically validated |
+| Does a complete contact-only closed loop exist? | Yes. The v2 retained truth-audited witness reaches `HOLD` at frame 336. | Empirically validated |
+| Does the representative run preserve hard safety? | Yes: 6,048 QP solves, zero fallback, zero infeasibility, and one logged robust-margin relaxation; failures are not hidden. | Empirically validated |
 | Does the method work for every simple shape without conditions? | Not established. The executable theorem domain rejects 53 of 60 sampled episodes. | Unsupported as a universal claim |
 | Is enclosure formal caging? | No. It is an operational boundary-enclosure certificate. | Explicit non-claim |
 | Is there a finite-time bound? | The conditional formula is proved, but current domain-wide positive rate constants are not. Eligible failures also prevent an empirical upper bound. | Formula proved; numerical bound unavailable |
 | Are physical robots validated? | No. This branch deliberately contains no physical-robot experiment. | Out of scope |
 
-## Closed-loop showcase
+## Before / after visualization
 
 <p align="center">
-  <img src="artifacts/publication/representative/closed_loop.gif" alt="DBACT closed loop progressing through search, mapping, enclosure, transport, brake, and hold" width="720">
+  <img src="artifacts/v2_showcase/closed_loop_final.png" alt="DBACT v2 phase-aware final state" width="820">
 </p>
-
-The animation is the retained truth-audited circle/seed-0 episode. A compact
-H.264 version is available as
-[`closed_loop.mp4`](artifacts/publication/representative/closed_loop.mp4), with
-the machine-readable run record in
-[`manifest.json`](artifacts/publication/representative/manifest.json).
 
 <table>
   <tr>
-    <td width="50%"><a href="artifacts/publication/representative/closed_loop_final.png"><img src="artifacts/publication/representative/closed_loop_final.png" alt="Final DBACT HOLD snapshot" width="100%"></a><br><strong>Final HOLD state</strong></td>
-    <td width="50%"><a href="artifacts/publication/representative/closed_loop_trajectories.png"><img src="artifacts/publication/representative/closed_loop_trajectories.png" alt="Agent and cargo trajectories for the representative closed loop" width="100%"></a><br><strong>Agent and cargo trajectories</strong></td>
+    <td width="50%"><a href="artifacts/publication/representative/closed_loop_final.png"><img src="artifacts/publication/representative/closed_loop_final.png" alt="V1 final snapshot" width="100%"></a><br><strong>V1</strong> — simulation-only snapshot with limited phase context.</td>
+    <td width="50%"><a href="artifacts/v2_showcase/closed_loop_final.png"><img src="artifacts/v2_showcase/closed_loop_final.png" alt="V2 phase-aware snapshot and HUD" width="100%"></a><br><strong>V2</strong> — reusable world artists, a separate HUD, controller-visible map overlays, contact/push encoding, and explicit solver/FPS status.</td>
   </tr>
 </table>
 
@@ -366,7 +401,7 @@ research narrative is in
 ```bash
 git clone https://github.com/Wu-kaixin/boundary-aware-cooperative-transport.git
 cd boundary-aware-cooperative-transport
-git switch Codex-boundary-aware-closed-loop-v1
+git switch Codex-boundary-aware-closed-loop-v2
 
 conda env create -f environment.yml
 conda activate dbact
@@ -390,10 +425,10 @@ python -m pip install -e ".[qp,sim,analysis,media,dev]"
 ### Audited representative run and animations
 
 ```bash
-python scripts/run_publication_representative.py \
-  --output artifacts/publication/representative \
-  --animation-stride 5 \
-  --animation-fps 16
+python scripts/generate_v2_showcase.py \
+  --output artifacts/v2_showcase \
+  --animation-stride 4 \
+  --animation-fps 20
 ```
 
 ### Actual perturbation ablation
