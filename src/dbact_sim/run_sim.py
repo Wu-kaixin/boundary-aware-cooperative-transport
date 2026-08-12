@@ -13,10 +13,9 @@ from .scenarios import load_yaml
 from .trace import SimulationTrace, VisualizationRecorder
 from .visualization import (
     LivePaperViewer,
-    animate_simulation,
-    plot_snapshot,
-    plot_trajectories,
-    write_paper_figures,
+    ResearchVisualizer,
+    render_animation,
+    write_research_paper_figures,
 )
 
 
@@ -26,10 +25,18 @@ def main() -> None:
     parser.add_argument("--steps", type=int, default=400, help="Number of simulation steps.")
     parser.add_argument("--seed", type=int, default=0, help="Run seed; recorded in summary.json.")
     parser.add_argument("--output", default="", help="Output directory. Defaults to runs/<config stem>_seed<seed>.")
-    parser.add_argument("--no-figures", action="store_true", help="Skip figure rendering (faster batch runs).")
-    parser.add_argument("--animate", action="store_true", help="Write an animated GIF of the run.")
-    parser.add_argument("--animation-stride", type=int, default=6, help="Simulation frames skipped between GIF frames.")
-    parser.add_argument("--animation-fps", type=int, default=12, help="Animated GIF frames per second.")
+    parser.add_argument(
+        "--no-render",
+        "--no-figures",
+        dest="no_render",
+        action="store_true",
+        help="Run headless and skip all figure/video rendering; the compact core trace is still saved.",
+    )
+    parser.add_argument("--animate", action="store_true", help="Offline-render the saved trace after simulation.")
+    parser.add_argument("--animation-format", choices=("mp4", "gif"), default="mp4")
+    parser.add_argument("--animation-stride", type=int, default=6, help="Source-frame stride for offline video.")
+    parser.add_argument("--animation-fps", type=int, default=20, help="Offline video playback FPS.")
+    parser.add_argument("--view-mode", choices=("demo", "paper", "debug"), default="demo")
     parser.add_argument(
         "--trace-stride",
         type=int,
@@ -60,18 +67,23 @@ def main() -> None:
     cfg = load_yaml(args.config)
     env = SimulationEnvironment(cfg, seed=args.seed)
     live_viewer = LivePaperViewer(env, update_stride=args.live_stride, pause_s=args.live_pause) if args.live else None
-    recorder = VisualizationRecorder(
-        stride=args.trace_stride,
-        sensor_ray_stride=args.sensor_ray_stride,
+    recorder = (
+        None
+        if args.no_render
+        else VisualizationRecorder(
+            stride=args.trace_stride,
+            sensor_ray_stride=args.sensor_ray_stride,
+        )
     )
 
     def observe(step_index: int, simulation: SimulationEnvironment) -> None:
-        recorder.capture(step_index, simulation)
+        if recorder is not None:
+            recorder.capture(step_index, simulation)
         if live_viewer is not None:
             live_viewer.update(step_index, simulation)
 
     simulation_started = time.perf_counter()
-    env.run(args.steps, on_frame=observe)
+    env.run(args.steps, on_frame=observe if recorder is not None or live_viewer is not None else None)
     simulation_seconds = time.perf_counter() - simulation_started
     if live_viewer is not None:
         live_viewer.update(args.steps, env, force=True)
@@ -79,15 +91,30 @@ def main() -> None:
     out = Path(args.output) if args.output else Path("runs") / f"{Path(args.config).stem}_seed{args.seed}"
     summary = env.save_outputs(out)
     simulation_fps = args.steps / max(simulation_seconds, 1e-12)
-    SimulationTrace.from_environment(env, recorder, simulation_fps=simulation_fps).save(out / "trace")
-    if not args.no_figures:
+    trace = SimulationTrace.from_environment(env, recorder, simulation_fps=simulation_fps)
+    trace.save(out / "trace")
+    if not args.no_render:
         with _noninteractive_output_figures():
-            plot_snapshot(env, out / "final_snapshot.png")
-            plot_trajectories(env, out / "trajectory.png")
-            frames = [int(i) for i in args.figure_frames.split(",") if i.strip()] if args.figure_frames else None
-            write_paper_figures(env, out, frames)
+            visualizer = ResearchVisualizer(trace, view_mode=args.view_mode)
+            visualizer.save_frame(trace.frame_count - 1, out / "final_snapshot.png")
+            visualizer.close()
+            write_research_paper_figures(trace, out / "paper_figures")
             if args.animate:
-                animate_simulation(env, out / "animation.gif", frame_stride=args.animation_stride, fps=args.animation_fps)
+                report = render_animation(
+                    trace,
+                    out / f"animation.{args.animation_format}",
+                    view_mode=args.view_mode,
+                    frame_stride=args.animation_stride,
+                    fps=args.animation_fps,
+                )
+                (out / "render_manifest.json").write_text(
+                    json.dumps(report.as_dict(), indent=2, allow_nan=False),
+                    encoding="utf-8",
+                )
+                print(
+                    f"  rendering: {report.rendering_fps:.2f} FPS "
+                    f"({report.rendered_frames} frames, {report.wall_seconds:.2f}s)"
+                )
 
     print(f"Saved DBACT simulation outputs to {out}")
     print(_headline(summary))

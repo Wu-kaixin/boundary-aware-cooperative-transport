@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from . import legacy as _legacy
+from .animation import RenderReport, render_animation
 from .legacy import (
     LivePaperViewer,
     animate_simulation,
@@ -26,6 +27,7 @@ __all__ = [
     "MODE_COLORS",
     "PHASE_COLORS",
     "ResearchVisualizer",
+    "RenderReport",
     "STYLES",
     "VisualStyle",
     "animate_simulation",
@@ -34,6 +36,7 @@ __all__ = [
     "plot_paper_frame",
     "plot_snapshot",
     "plot_trajectories",
+    "render_animation",
     "phase_keyframes",
     "write_research_paper_figures",
     "write_paper_figures",
