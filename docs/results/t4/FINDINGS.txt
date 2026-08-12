@@ -1,0 +1,54 @@
+==============================================================================
+CASE 1  rectangle__a0.10__seed004 -- the only solver failure
+==============================================================================
+  d_min                          0.2800 m
+  first separation breach        frame 2012
+  first infeasible solve         frame 2020
+  first fallback projection      frame 2020
+  solver fallbacks / infeasible  124 / 124
+  barrier scalings               658  (min scale 0.0000)
+  final phase                    CONTACT_READY
+
+  ORDER: the separation broke FIRST, by 8 frames.
+  Reading: this is not a solver failure. The inter-robot barrier is feasible at
+  u = 0 whenever h_ij >= 0; once two robots are inside d_min the row demands a
+  separation rate, and if the speed limit cannot deliver it the QP is genuinely
+  infeasible. The 124 infeasible solves are the consequence, and the label
+  SOLVER_FAILURE names the symptom.
+
+  cargo displacement             6.291 m on a 0.214 m task
+  peak cargo speed               0.1788 m/s
+  strict coverage peak / final   1.000 / 0.319
+
+==============================================================================
+CASE 2  polygon32 seed 2 -- 'pushing at 93 degrees', J ~ 0
+==============================================================================
+
+  polygon32__a0.10__seed002   target 0.203 m
+    total cargo displacement     0.005639 m
+    push-set threshold           alignment <= -0.35   (quorum 4)
+    max robots meeting alignment 10
+    max robots actually pushing  4
+    most negative alignment seen -1.0000
+    final phase                  TRANSPORT
+
+  polygon32__a0.40__seed002   target 0.811 m
+    total cargo displacement     0.000417 m
+    push-set threshold           alignment <= -0.35   (quorum 4)
+    max robots meeting alignment 8
+    max robots actually pushing  3
+    most negative alignment seen -1.0000
+    final phase                  CONTACT_READY
+
+  polygon32__a0.80__seed002   target 1.622 m
+    total cargo displacement     0.000417 m
+    push-set threshold           alignment <= -0.35   (quorum 4)
+    max robots meeting alignment 8
+    max robots actually pushing  3
+    most negative alignment seen -1.0000
+    final phase                  CONTACT_READY
+
+  On the reported 93 degrees: the displacement is of order 1e-5 m. The direction
+  error is arccos(J / |dx|) and both are at the numerical floor, so the angle is
+  not a measurement of a push direction. The finding is that the object did not
+  move, and the 93 degrees is an artefact of dividing two near-zero numbers.

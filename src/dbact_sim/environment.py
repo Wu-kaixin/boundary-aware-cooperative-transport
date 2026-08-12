@@ -20,6 +20,7 @@ import numpy as np
 
 from dbact.contracts import ClosedLoopContract, DirectionalProgressContract
 from dbact.controller import DBACTController
+from dbact.error_audit import ErrorAudit
 from dbact.phase import Phase
 from dbact.metrics import (
     boundary_coverage,
@@ -115,6 +116,31 @@ class SimulationEnvironment:
             params, self.domain, self.goal_directions, seed=self.seed, tasks=self.tasks
         )
         self.map_snapshot_agent = str(config.get("render", {}).get("map_agent", "agent_00"))
+
+        # T2: the six-term error audit. Enabled when the scenario declared error
+        # premises in ``guarantee.bounded_errors`` -- the audit exists to check those
+        # premises, so a config that declares none has nothing for it to check, and
+        # ``audit_errors: true`` is available for measuring a scenario that makes no
+        # claim. The declared bounds are read with ``.get``, unlike the certificate's
+        # premises: here a missing bound means "measure, do not judge", which the
+        # verdict reports as ``within_declared_bounds = None``.
+        error_spec = (config.get("guarantee", {}) or {}).get("bounded_errors", {}) or {}
+        audit_requested = bool(config.get("audit_errors", bool(error_spec)))
+        self.audit_stride = int(config.get("audit_stride", 10))
+        self.error_audit = (
+            ErrorAudit(
+                declared_normal_error_deg=(
+                    float(error_spec["normal_error_deg"]) if "normal_error_deg" in error_spec else None
+                ),
+                declared_velocity_error=(
+                    float(error_spec["velocity_error"]) if "velocity_error" in error_spec else None
+                ),
+            )
+            if audit_requested
+            else None
+        )
+        self._frame_index = 0
+
         self.contact_params = contact_params_from_config(config)
         self.engine_name = str(config["transport"]["engine"])
         self.engine = build_engine(
@@ -251,7 +277,51 @@ class SimulationEnvironment:
             "settle_speed": settle_speed,
         }
 
+    def _audit_errors(self) -> None:
+        """One frame of the T2 six-term error audit, over every robot's own map.
+
+        Called from ``_record``, so the audit sees exactly the frames the log sees and
+        cannot be run on a subset that happens to look good. It is deliberately a
+        *read* of state the step already produced: nothing here is fed back, and the
+        controller has already committed its commands by the time this runs.
+
+        Sampled rather than run every frame. The per-cell arithmetic is cheap but the
+        map-gap term costs a 512-point boundary resample against every robot's map, and
+        at 16 robots and 60000 solves that dominates the simulation. ``audit_stride``
+        is the declared sampling interval and is reported beside the numbers.
+        """
+        if self.error_audit is None:
+            return
+        if self._frame_index % max(1, self.audit_stride) != 0:
+            self._frame_index += 1
+            return
+        self._frame_index += 1
+        for cargo in self.cargoes:
+            pooled = []
+            for agent in self.agents:
+                local_map = self.controller.maps.get(agent.agent_id)
+                if local_map is None:
+                    continue
+                snapshot = local_map.view()
+                own = snapshot.object_ids == cargo.object_id
+                if not np.any(own):
+                    continue
+                points, normals = snapshot.points[own], snapshot.normals[own]
+                pooled.append(points)
+                self.error_audit.observe(
+                    cargo,
+                    points,
+                    normals,
+                    local_map.object_velocity(cargo.object_id),
+                    local_map.object_angular_velocity(cargo.object_id),
+                    local_map.object_reference_point(cargo.object_id),
+                )
+            if pooled:
+                self.error_audit.observe_map_gap(cargo, np.vstack(pooled))
+        self.error_audit.frames += 1
+
     def _record(self) -> None:
+        self._audit_errors()
         self.log.times.append(self.t)
         for a in self.agents:
             self.log.agent_positions[a.agent_id].append(a.position.copy())
@@ -478,6 +548,13 @@ class SimulationEnvironment:
                 "discrete_overshoot": self.success_contract.discrete_overshoot,
             },
             "solver": solver_stats,
+            # T2. ``None`` when the scenario declared no error premises, so that an
+            # absent audit is distinguishable from an audit that found nothing.
+            "error_audit": (
+                None
+                if self.error_audit is None
+                else {**self.error_audit.verdict(), "audit_stride": self.audit_stride}
+            ),
             "phases": self.controller.phase_monitor.as_dict(),
             "tasks": {cid: task.as_dict() for cid, task in self.tasks.items()},
             "min_inter_agent_distance": min_distance,

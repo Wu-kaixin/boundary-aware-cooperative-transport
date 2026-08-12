@@ -95,6 +95,14 @@ class DBACTParams:
     # the ghost trail behind a moving object, which is the A1 ablation.
     carve_enabled: bool = True
     carve_margin: float = 0.06
+    # SE(2) registration (T2). Off by default, and the default is a measured
+    # decision rather than caution: see docs/CLOSED_LOOP_V2.md. With it off the
+    # registration keeps two unknowns, no stored normal is rotated, and the
+    # boundary-point velocity reduces exactly to the translational one, so the
+    # baseline is bit-identical to v1.
+    estimate_object_yaw: bool = False
+    max_object_yaw_rate: float = 0.80
+    min_yaw_lever_voxels: float = 2.0
 
     # --- density (S4) ---
     density_mode: str = "offset"
@@ -541,7 +549,9 @@ class DBACTController:
             u_nom, mode, cell_mass, push_side, effort = self._nominal_command(
                 i, agents, neighbors[i], view, contact_ready, dt
             )
-            points, normals, v_obj = self._object_rows_from_map(agent.agent_id, agent.position, view)
+            points, normals, v_obj, v_points = self._object_rows_from_map(
+                agent.agent_id, agent.position, view
+            )
             result = self.safety.filter_velocity(
                 agent.position,
                 u_nom,
@@ -549,6 +559,7 @@ class DBACTController:
                 boundary_points=points,
                 boundary_normals=normals,
                 object_velocity=v_obj,
+                boundary_point_velocities=v_points,
             )
             commands.append(ControlCommand(agent.agent_id, result.velocity, mode=mode))
             diagnostic = AgentDiagnostics(
@@ -1350,14 +1361,26 @@ class DBACTController:
 
     def _object_rows_from_map(
         self, agent_id: str, position: np.ndarray, view: BoundaryView
-    ) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+    ) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray | None]:
+        """Rows for the safety filter, from this robot's own map only.
+
+        T2 adds the fourth return value: the estimated velocity of the material point
+        at each map cell. It is ``None`` while ``estimate_yaw`` is off, which makes the
+        filter take v1's single-translational-velocity path rather than an equivalent
+        but differently-computed one.
+        """
         if len(view) == 0:
-            return np.empty((0, 2)), np.empty((0, 2)), np.zeros(2)
+            return np.empty((0, 2)), np.empty((0, 2)), np.zeros(2), None
         nearest = self._nearest_index(view, position)
         velocity = np.zeros(2)
+        point_velocities = None
         if nearest is not None:
-            velocity = self.maps[agent_id].object_velocity(str(view.object_ids[nearest]))
-        return view.points, view.normals, velocity
+            object_id = str(view.object_ids[nearest])
+            local_map = self.maps[agent_id]
+            velocity = local_map.object_velocity(object_id)
+            if local_map.estimate_yaw:
+                point_velocities = local_map.object_point_velocities(object_id, view.points)
+        return view.points, view.normals, velocity, point_velocities
 
     def _contact_ready(self, agent: AgentState, view: BoundaryView) -> bool:
         """True when the robot's *own* map says it sits in the contact band."""
@@ -1426,6 +1449,9 @@ class DBACTController:
                     registration_normal_cosine=self.params.registration_normal_cosine,
                     max_object_speed=self.params.max_object_speed,
                     velocity_filter=self.params.object_velocity_filter,
+                    estimate_yaw=self.params.estimate_object_yaw,
+                    max_object_yaw_rate=self.params.max_object_yaw_rate,
+                    min_yaw_lever_voxels=self.params.min_yaw_lever_voxels,
                     carve_enabled=self.params.carve_enabled,
                     carve_margin=self.params.carve_margin,
                 )

@@ -230,7 +230,20 @@ class SafetyFilter:
         boundary_points: np.ndarray,
         boundary_normals: np.ndarray,
         object_velocity: np.ndarray,
+        point_velocities: np.ndarray | None = None,
     ) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+        """Assemble the object-boundary rows.
+
+        ``point_velocities`` (T2) is the estimated velocity of the material point at
+        each ``boundary_points`` entry. When it is ``None`` every row is built from
+        the single translational ``object_velocity``, which is exactly v1's
+        construction and the default. When it is supplied, each row carries its own
+        point's velocity, because the barrier ``h_k = n_k^T (p_i - b_k) - r_safe``
+        differentiates to ``n_k^T (u_i - v_{b_k})`` and ``v_{b_k}`` is the material
+        point's velocity, not the body's translational one. On a rotating object the
+        two differ by ``omega |b_k - c|``, which is largest on the widest part of the
+        object -- where the pushing robots stand.
+        """
         pts = np.asarray(boundary_points, dtype=float).reshape(-1, 2)
         if len(pts) == 0:
             return np.empty((0, 2)), np.empty(0), np.empty(0), np.empty(0)
@@ -247,6 +260,28 @@ class SafetyFilter:
         if speed > self.params.object_velocity_bound:
             v_obj = v_obj * (self.params.object_velocity_bound / speed)
 
+        if point_velocities is None:
+            row_velocity = None
+        else:
+            # The same ISSf disturbance bound, applied per row. It has to be the
+            # per-point velocity that is bounded rather than the body's: the row's
+            # right-hand side contains ``n_k^T v_{b_k}``, so bounding only the
+            # translational part would leave ``omega |b_k - c|`` unbounded and the
+            # ISSf constant would be stated over a quantity nothing constrains.
+            row_velocity = np.asarray(point_velocities, dtype=float).reshape(-1, 2)
+            if len(row_velocity) != len(pts):
+                raise ValueError(
+                    f"point_velocities has {len(row_velocity)} rows for {len(pts)} boundary "
+                    "points; the barrier pairs each row with its own point's velocity, so a "
+                    "length mismatch would silently pair a row with another point's motion"
+                )
+            magnitude = np.linalg.norm(row_velocity, axis=1)
+            excess = magnitude > self.params.object_velocity_bound
+            if np.any(excess):
+                scale = np.ones(len(row_velocity))
+                scale[excess] = self.params.object_velocity_bound / magnitude[excess]
+                row_velocity = row_velocity * scale[:, None]
+
         rel = p[None, :] - pts
         normal_offset = np.sum(normals * rel, axis=1)
         tangential_offset = np.abs(normals[:, 0] * rel[:, 1] - normals[:, 1] * rel[:, 0])
@@ -262,6 +297,8 @@ class SafetyFilter:
             return np.empty((0, 2)), np.empty(0), np.empty(0), np.empty(0)
         normals, normal_offset = normals[near], normal_offset[near]
         distance = np.linalg.norm(rel[near], axis=1)
+        if row_velocity is not None:
+            row_velocity = row_velocity[near]
 
         # Face consistency. The tangential window bounds how far a plane is
         # extrapolated, but on a non-convex object two faces can both pass the
@@ -276,13 +313,19 @@ class SafetyFilter:
         normals, normal_offset = normals[same_face], normal_offset[same_face]
         if len(normals) == 0:
             return np.empty((0, 2)), np.empty(0), np.empty(0), np.empty(0)
+        if row_velocity is not None:
+            row_velocity = row_velocity[same_face]
 
         h = normal_offset - self.params.r_safe
         if self.params.object_row_mode == "aggregate":
-            normals, h = self._aggregate_face(p, pts[near][same_face], normals, distance[same_face])
+            normals, h, row_velocity = self._aggregate_face(
+                p, pts[near][same_face], normals, distance[same_face], row_velocity
+            )
         elif len(h) > self.params.max_object_rows:
             keep = np.argsort(h)[: self.params.max_object_rows]
             normals, h = normals[keep], h[keep]
+            if row_velocity is not None:
+                row_velocity = row_velocity[keep]
 
         # Both right-hand sides are built from the uncapped expression and capped
         # afterwards. Deriving the margin-free one by subtracting ``rho`` from the
@@ -291,14 +334,24 @@ class SafetyFilter:
         # on a number that no longer contains ``rho`` and tier 2 relaxes nothing.
         # That is why steps whose barrier was perfectly satisfiable at ``u = 0``
         # were still reaching the scaled tier.
-        demand = normals @ v_obj - self.params.gamma_obj * h
+        normal_velocity = (
+            normals @ v_obj
+            if row_velocity is None
+            else np.einsum("ij,ij->i", normals, row_velocity)
+        )
+        demand = normal_velocity - self.params.gamma_obj * h
         rhs = self._cap_to_reachable(normals, demand + self.params.rho)
         rhs_no_margin = self._cap_to_reachable(normals, demand)
         return normals, rhs, rhs_no_margin, h
 
     def _aggregate_face(
-        self, position: np.ndarray, points: np.ndarray, normals: np.ndarray, distance: np.ndarray
-    ) -> tuple[np.ndarray, np.ndarray]:
+        self,
+        position: np.ndarray,
+        points: np.ndarray,
+        normals: np.ndarray,
+        distance: np.ndarray,
+        point_velocities: np.ndarray | None = None,
+    ) -> tuple[np.ndarray, np.ndarray, np.ndarray | None]:
         """One smooth plane for the face, instead of one row per map sample.
 
         This is the discrete-time half of the barrier problem, and it is a
@@ -330,9 +383,21 @@ class SafetyFilter:
         intersected with the speed ball is non-empty whenever the reachability cap
         holds, so the only way to an empty set is a conflict with the inter-robot
         rows.
+
+        The aggregated boundary-point velocity (T2)
+        -------------------------------------------
+        One plane needs one velocity, and the choice is not the weighted mean. The
+        aggregated row stands for the whole face, so it must demand at least as much
+        retreat as the fastest-approaching point on that face requires; a weighted
+        mean would let a fast-approaching arc be averaged away by the slow cells
+        beside it, which is the aggregate silently under-reporting the disturbance it
+        exists to summarise. The maximum of ``n_bar^T v_k`` over the face is taken
+        instead. On a purely translating object every ``v_k`` is equal and the maximum
+        *is* the mean, so this is conservative only where rotation is present -- which
+        is the only place it is doing anything at all.
         """
         if len(normals) == 0:
-            return normals, np.empty(0)
+            return normals, np.empty(0), None
         scale = max(self.params.object_row_window, 1e-6)
         weight = np.exp(-0.5 * (distance / scale) ** 2)
         total = float(np.sum(weight))
@@ -343,11 +408,16 @@ class SafetyFilter:
         stacked = weight @ normals
         norm = float(np.linalg.norm(stacked))
         if norm <= 1e-9:
-            return np.empty((0, 2)), np.empty(0)
+            return np.empty((0, 2)), np.empty(0), None
         n_bar = stacked / norm
         offset = float(np.sum(weight * np.einsum("ij,ij->i", normals, points)) / total)
         h_bar = float(np.dot(n_bar, position)) - offset - self.params.r_safe
-        return n_bar.reshape(1, 2), np.array([h_bar])
+
+        aggregated_velocity = None
+        if point_velocities is not None and len(point_velocities):
+            worst = int(np.argmax(point_velocities @ n_bar))
+            aggregated_velocity = point_velocities[worst].reshape(1, 2)
+        return n_bar.reshape(1, 2), np.array([h_bar]), aggregated_velocity
 
     def _cap_to_reachable(self, normals: np.ndarray, rhs: np.ndarray) -> np.ndarray:
         """Cap the object rows at what a speed-limited robot can actually deliver.
@@ -390,6 +460,7 @@ class SafetyFilter:
         boundary_points: np.ndarray | None = None,
         boundary_normals: np.ndarray | None = None,
         object_velocity: np.ndarray | None = None,
+        boundary_point_velocities: np.ndarray | None = None,
     ) -> FilterResult:
         u_nom = np.asarray(nominal_velocity, dtype=float).reshape(2)
         speed = float(np.linalg.norm(u_nom))
@@ -405,6 +476,7 @@ class SafetyFilter:
                 boundary_points,
                 boundary_normals if boundary_normals is not None else np.zeros_like(boundary_points),
                 object_velocity if object_velocity is not None else np.zeros(2),
+                boundary_point_velocities,
             )
 
         self._agent_row_count = len(A_agent)

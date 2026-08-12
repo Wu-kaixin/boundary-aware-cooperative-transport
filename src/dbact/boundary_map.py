@@ -41,14 +41,44 @@ parallel -- a robot looking at one flat face genuinely cannot observe motion alo
 that face -- so it is solved with a Tikhonov term and the unobservable component
 comes out as zero rather than as noise.
 
-Only translation is estimated. Yaw is not, and that is a stated limitation rather
-than an approximation: the object-boundary rows and the transport controller both
-use the estimate, so claiming SE(2) here without an error bound would put an
-unmeasured quantity inside a safety constraint.
+SE(2): estimated, measured, and off by default (T2)
+---------------------------------------------------
+The paragraph this replaces said yaw was not estimated, and gave the reason: the
+object rows and the transport controller both consume the estimate, so claiming
+SE(2) without an error bound would put an unmeasured quantity inside a safety
+constraint. That reasoning is still exactly right, and it is the reason
+``estimate_yaw`` defaults to ``False``. What has changed is that the error bound
+now exists. :mod:`dbact.error_audit` measures all six terms the object row depends
+on -- normal, boundary point, map gap, object translational velocity, rigid
+boundary-point velocity, and the normal-velocity projection that is the only one
+the constraint actually sees -- against the declared premises in
+``guarantee.bounded_errors``, and fails closed when a declared bound is breached.
 
-The same translation, accumulated, is the only thing any robot knows about how
-far the cargo has travelled. It is what the transport controller closes its loop
-on, so nothing in the control path reads a simulator pose.
+With ``estimate_yaw`` on, the same point-to-plane least squares gains a third
+unknown. For a small rotation ``theta`` about a reference point ``c``,
+
+    minimise_{t,theta}  sum_k ( n_k^T (p_k - b_k) - n_k^T t - theta c_k )^2
+    with                c_k = n_k^T R90 (b_k - c) = cross(b_k - c, n_k)
+
+which is the standard linearised point-to-plane form. ``c`` is the *map's own*
+centroid of that object's cells -- never a simulator pose, and never the object's
+true centre of area, which no robot knows. The unobservability structure carries
+over: a robot looking at one flat face cannot observe motion along it, and now also
+cannot separate rotation from translation, so the 3x3 normal matrix is solved with
+the same Tikhonov term and the unobservable combination comes out near zero rather
+than as noise.
+
+Why this matters to the barrier, concretely. The object row is built on
+``h_k = n_k^T (p_i - b_k) - r_safe``, whose exact derivative carries the velocity
+of the *material point* at ``b_k``. For a rigid body that is
+``v_c + omega R90 (b_k - c)``, not ``v_c``. Feeding a single translational velocity
+to every row understates the demand on a rotating object by
+``omega |b_k - c|`` on the arcs turning towards the robot -- largest exactly where
+the object is widest, which is where the pushing robots stand.
+
+The translation, accumulated, remains the only thing any robot knows about how far
+the cargo has travelled. It is what the transport controller closes its loop on, so
+nothing in the control path reads a simulator pose.
 """
 
 from __future__ import annotations
@@ -65,9 +95,25 @@ _CELL_STRIDE = 1 << 21
 _OBJECT_STRIDE = 1 << 42
 
 
+def rot90(vectors: np.ndarray) -> np.ndarray:
+    """``R(pi/2) v``, the generator of planar rotation.
+
+    Written once and used by the registration, the boundary-point velocity and the
+    audit, so that a sign error cannot disagree between the estimator and the thing
+    that measures it.
+    """
+    v = np.asarray(vectors, dtype=float).reshape(-1, 2)
+    return np.column_stack([-v[:, 1], v[:, 0]])
+
+
 @dataclass
 class RegistrationResult:
-    """One object's estimated frame-to-frame translation, with its diagnostics."""
+    """One object's estimated frame-to-frame motion, with its diagnostics.
+
+    ``rotation`` is the estimated yaw increment in radians about ``reference``, and
+    is exactly ``0.0`` with ``reference`` the origin when ``estimate_yaw`` is off --
+    which is what keeps the translation-only path bit-identical to v1.
+    """
 
     object_id: str
     translation: np.ndarray
@@ -75,6 +121,9 @@ class RegistrationResult:
     residual_rms: float
     conditioning: float
     clamped: bool
+    rotation: float = 0.0
+    reference: np.ndarray = field(default_factory=lambda: np.zeros(2))
+    yaw_clamped: bool = False
 
     @property
     def observable(self) -> bool:
@@ -111,6 +160,21 @@ class LocalBoundaryMap:
     registration_damping: float = 1e-3
     max_object_speed: float = 0.60
     velocity_filter: float = 0.35
+    # --- SE(2) (T2) ---
+    # Off by default. With it off every line below behaves exactly as v1 did: the
+    # design matrix keeps two columns, no normal is rotated, and the angular rate
+    # stays 0.0, so the boundary-point velocity reduces to the translational one.
+    estimate_yaw: bool = False
+    # Bound on the admitted yaw-rate estimate, the angular counterpart of
+    # ``max_object_speed``. It is a disturbance bound rather than a tuning knob: the
+    # rate multiplies the object's own reach in the boundary-point velocity, so an
+    # unclamped spike would enter the barrier's right-hand side amplified by up to
+    # the object radius.
+    max_object_yaw_rate: float = 0.80
+    # Minimum lever arm, in voxels, before a yaw estimate is admitted at all. Cells
+    # clustered inside one voxel of the reference point carry no torque information,
+    # and dividing by their lever arm is how a rotation estimate becomes noise.
+    min_yaw_lever_voxels: float = 2.0
     # Free-space carving. ``carve_margin`` is how much nearer than a return a cell
     # must be before the scan is taken to contradict it -- one voxel, so a cell
     # that merely straddles the surface survives. ``carve_aperture`` is the
@@ -131,8 +195,13 @@ class LocalBoundaryMap:
 
     _object_index: dict[str, int] = field(default_factory=dict)
     _step_motion: dict[str, np.ndarray] = field(default_factory=dict)
+    _step_rotation: dict[str, float] = field(default_factory=dict)
     displacement: dict[str, np.ndarray] = field(default_factory=dict)
     velocity: dict[str, np.ndarray] = field(default_factory=dict)
+    # SE(2) counterparts of ``displacement`` and ``velocity``, both identically zero
+    # while ``estimate_yaw`` is off.
+    rotation: dict[str, float] = field(default_factory=dict)
+    angular_velocity: dict[str, float] = field(default_factory=dict)
     last_registration: dict[str, RegistrationResult] = field(default_factory=dict)
 
     # ------------------------------------------------------------------ #
@@ -191,10 +260,28 @@ class LocalBoundaryMap:
             results[name] = result
             self.last_registration[name] = result
             if result.matches:
+                # T2: rotate before translating, about the reference the solve used.
+                # The normals rotate with the surface -- a stored normal that did not
+                # turn with its own cell would make the next step's point-to-plane
+                # residual disagree with the geometry it was fitted to, and the
+                # barrier would be built on a plane whose orientation is one frame
+                # stale. With ``estimate_yaw`` off ``rotation`` is exactly 0.0 and
+                # this branch is skipped, leaving v1's single shift.
+                if result.rotation != 0.0:
+                    self._rotate_rows(rows, result.reference, result.rotation)
+                    self._step_rotation[name] = self._step_rotation.get(name, 0.0) + result.rotation
                 self._points[rows] += result.translation[None, :]
                 self._step_motion[name] = self._step_motion.get(name, np.zeros(2)) + result.translation
                 self._rekey()
         return results
+
+    def _rotate_rows(self, rows: np.ndarray, reference: np.ndarray, theta: float) -> None:
+        """Rigidly rotate the given cells and their normals about ``reference``."""
+        cosine, sine = math.cos(theta), math.sin(theta)
+        matrix = np.array([[cosine, -sine], [sine, cosine]])
+        lever = self._points[rows] - reference[None, :]
+        self._points[rows] = reference[None, :] + lever @ matrix.T
+        self._normals[rows] = self._normals[rows] @ matrix.T
 
     def _commit_motion(self, dt: float) -> None:
         """Fold this step's estimated motion into displacement and velocity.
@@ -209,6 +296,7 @@ class LocalBoundaryMap:
         """
         if dt <= 0.0:
             self._step_motion.clear()
+            self._step_rotation.clear()
             return
         alpha = float(np.clip(self.velocity_filter, 0.0, 1.0))
         for name in set(self._step_motion) | set(self.velocity):
@@ -216,7 +304,17 @@ class LocalBoundaryMap:
             self.displacement[name] = self.displacement.get(name, np.zeros(2)) + motion
             prior = self.velocity.get(name, np.zeros(2))
             self.velocity[name] = (1.0 - alpha) * prior + alpha * (motion / dt)
+        # T2: the yaw rate is filtered with the same time constant as the linear one,
+        # so that the two components of one twist are not smoothed differently -- a
+        # boundary-point velocity assembled from a fast translation and a slow
+        # rotation is not the velocity of any rigid motion.
+        for name in set(self._step_rotation) | set(self.angular_velocity):
+            turn = float(self._step_rotation.get(name, 0.0))
+            self.rotation[name] = self.rotation.get(name, 0.0) + turn
+            prior_rate = float(self.angular_velocity.get(name, 0.0))
+            self.angular_velocity[name] = (1.0 - alpha) * prior_rate + alpha * (turn / dt)
         self._step_motion.clear()
+        self._step_rotation.clear()
 
     def _rekey(self) -> None:
         """Recompute cell keys after a shift and fuse cells that collided.
@@ -286,11 +384,34 @@ class LocalBoundaryMap:
         residual = np.einsum("ij,ij->i", n, p - b)
         # Trim the tail: a return that landed on a face the map does not hold yet
         # produces a large residual and would drag the estimate with it.
+        # T2: ``b`` is now trimmed alongside ``n`` and ``residual``, because the yaw
+        # column is built from the lever arm ``b - c``. Trimming only two of the three
+        # would pair each residual with a different cell's lever arm.
         if len(residual) >= 8:
             keep = np.abs(residual - np.median(residual)) <= 2.5 * (np.median(np.abs(residual - np.median(residual))) + 1e-6)
             if np.count_nonzero(keep) >= 4:
-                n, residual = n[keep], residual[keep]
+                n, residual, b = n[keep], residual[keep], b[keep]
 
+        # The reference point is the map's own centroid of this object's cells. It is
+        # not the object's centre of area and is not meant to be: no robot can know
+        # that. What the reference has to be is a point both the estimator and the
+        # boundary-point velocity agree on, and a quantity derived from the stored
+        # cells is the only such point available on board.
+        reference = self._points[rows].mean(axis=0)
+
+        if not self.estimate_yaw:
+            return self._solve_translation(object_id, n, residual, dt, reference)
+        return self._solve_se2(object_id, n, residual, b, reference, dt)
+
+    def _solve_translation(
+        self,
+        object_id: str,
+        n: np.ndarray,
+        residual: np.ndarray,
+        dt: float,
+        reference: np.ndarray,
+    ) -> RegistrationResult:
+        """v1's two-unknown point-to-plane solve, unchanged."""
         normal_matrix = n.T @ n
         rhs = n.T @ residual
         trace = float(np.trace(normal_matrix))
@@ -310,7 +431,83 @@ class LocalBoundaryMap:
             translation = translation * (limit / norm)
 
         rms = float(np.sqrt(np.mean((residual - n @ translation) ** 2)))
-        return RegistrationResult(object_id, translation, len(residual), rms, conditioning, clamped)
+        return RegistrationResult(
+            object_id, translation, len(residual), rms, conditioning, clamped, reference=reference
+        )
+
+    def _solve_se2(
+        self,
+        object_id: str,
+        n: np.ndarray,
+        residual: np.ndarray,
+        b: np.ndarray,
+        reference: np.ndarray,
+        dt: float,
+    ) -> RegistrationResult:
+        """Three-unknown linearised point-to-plane solve for ``(t, theta)``.
+
+        The design matrix is ``[n_x, n_y, cross(b - c, n)]``. Its third column is the
+        moment arm of each observed normal about the reference, which is zero for a
+        cell sitting on the reference and largest on the widest part of the object --
+        the same weighting that makes rotation matter to the barrier in the first
+        place.
+
+        ``conditioning`` stays the translation block's ratio rather than the full 3x3
+        one, deliberately: it is consumed by ``observable``, which is a statement
+        about whether *translation* was observable, and re-defining it here would
+        silently change the meaning of a quantity the transport loop already reads.
+        The rotation has its own admission test, on the lever arm.
+        """
+        lever = b - reference[None, :]
+        moment = np.einsum("ij,ij->i", rot90(lever), n)
+
+        design = np.column_stack([n, moment])
+        normal_matrix = design.T @ design
+        trace = float(np.trace(normal_matrix))
+        if trace <= 1e-12:
+            return RegistrationResult(
+                object_id, np.zeros(2), len(residual), 0.0, 0.0, False, reference=reference
+            )
+
+        damping = self.registration_damping * trace
+        solution = np.linalg.solve(normal_matrix + damping * np.eye(3), design.T @ residual)
+        translation, theta = solution[:2], float(solution[2])
+
+        # Translation observability is still read off the 2x2 block, so the meaning of
+        # ``observable`` is unchanged.
+        block = np.linalg.eigvalsh(n.T @ n)
+        conditioning = float(max(block[0], 0.0) / max(block[1], 1e-12))
+
+        # A rotation estimated from cells with no lever arm is a rotation estimated
+        # from noise. The test is on the arm actually present in the data, in voxels,
+        # so it scales with the map resolution rather than with the object.
+        if float(np.max(np.linalg.norm(lever, axis=1))) < self.min_yaw_lever_voxels * self.voxel_size:
+            theta = 0.0
+
+        limit = self.max_object_speed * dt
+        norm = float(np.linalg.norm(translation))
+        clamped = norm > limit
+        if clamped:
+            translation = translation * (limit / norm)
+
+        yaw_limit = self.max_object_yaw_rate * dt
+        yaw_clamped = abs(theta) > yaw_limit
+        if yaw_clamped:
+            theta = math.copysign(yaw_limit, theta)
+
+        predicted = design @ np.array([translation[0], translation[1], theta])
+        rms = float(np.sqrt(np.mean((residual - predicted) ** 2)))
+        return RegistrationResult(
+            object_id,
+            translation,
+            len(residual),
+            rms,
+            conditioning,
+            clamped,
+            rotation=theta,
+            reference=reference,
+            yaw_clamped=yaw_clamped,
+        )
 
     def _match_rows(
         self, points: np.ndarray, normals: np.ndarray, rows: np.ndarray
@@ -411,6 +608,48 @@ class LocalBoundaryMap:
 
     def object_displacement(self, object_id: str) -> np.ndarray:
         return self.displacement.get(str(object_id), np.zeros(2)).copy()
+
+    def object_angular_velocity(self, object_id: str) -> float:
+        """Estimated yaw rate, ``0.0`` whenever ``estimate_yaw`` is off (T2)."""
+        return float(self.angular_velocity.get(str(object_id), 0.0))
+
+    def object_rotation(self, object_id: str) -> float:
+        """Accumulated estimated yaw, the angular counterpart of the displacement."""
+        return float(self.rotation.get(str(object_id), 0.0))
+
+    def object_reference_point(self, object_id: str) -> np.ndarray | None:
+        """Centroid of this object's stored cells, or ``None`` if it holds none.
+
+        This is the point the yaw estimate is expressed about. It is a property of the
+        *map*, so two robots with different coverage of the same object hold different
+        reference points and each one's boundary-point velocity is consistent with its
+        own estimate. Nothing here reads the object's true centre of area, which no
+        robot can observe.
+        """
+        rows = np.flatnonzero(self._objects == str(object_id))
+        if len(rows) == 0:
+            return None
+        return self._points[rows].mean(axis=0)
+
+    def object_point_velocities(self, object_id: str, points: np.ndarray) -> np.ndarray:
+        """Estimated velocity of the material point at each of ``points``.
+
+        ``v_k = v_c + omega R90 (b_k - c)``, the rigid-body velocity field. With
+        ``estimate_yaw`` off ``omega`` is exactly ``0.0`` and every row gets ``v_c``,
+        which is numerically identical to what v1's single translational velocity
+        produced -- so the estimator being off makes the whole SE(2) path a no-op
+        rather than a differently-rounded version of the same thing.
+        """
+        query = np.asarray(points, dtype=float).reshape(-1, 2)
+        linear = self.object_velocity(object_id)
+        field_out = np.repeat(linear[None, :], len(query), axis=0)
+        omega = self.object_angular_velocity(object_id)
+        if omega == 0.0:
+            return field_out
+        reference = self.object_reference_point(object_id)
+        if reference is None:
+            return field_out
+        return field_out + omega * rot90(query - reference[None, :])
 
     # ------------------------------------------------------------------ #
     # update
