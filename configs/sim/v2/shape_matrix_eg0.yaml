@@ -1,0 +1,250 @@
+﻿# v2 - the decisive experiment: v1's controller against CODEX's shape matrix.
+#
+# This file is configs/sim/d/l_shape_closed_loop.yaml with four deliberate
+# changes and nothing else. Every controller parameter below is byte-identical to
+# the baseline, because the question this matrix answers is whether the *v1
+# controller* generalises, and a controller retuned per shape answers a different
+# question.
+#
+# 1. domain 10 x 10 rather than 8 x 8.
+#    The task distance is L = alpha * diameter and alpha reaches 0.8. The largest
+#    family here has a diameter near 2.7 m, so L reaches 2.15 m. In the 8 m box
+#    the goal clearance R_obj + d_c + r_robot + margin is about 1.94 m, which
+#    leaves 2.07 m of travel along the axes and 2.92 m along the diagonals -- so
+#    at alpha = 0.8 the sampler would have accepted only near-diagonal
+#    directions, and "performance at high alpha" would have been confounded with
+#    "performance on diagonal goals". The 10 m box keeps the accepted direction
+#    set the full circle for every (shape, alpha) in the matrix. Enlarging the
+#    workspace makes the run harder, not easier: further to travel, more area per
+#    robot. The sampler's acceptance rate is recorded per case so this is checked
+#    rather than asserted.
+#
+# 2. cargoes and agents.radius_* are written per case by the harness.
+#    The annulus is placed at R_obj + 0.35 so that no robot starts inside a shape
+#    that is wider than the L-shape; assert_initial_state_valid would reject that
+#    outright, and silently shrinking the object to fit the annulus would be the
+#    survivor filtering this experiment exists to avoid.
+#
+# 3. task.distance_min == distance_max == alpha * diameter.
+#    CODEX's fixed 0.10 m is not inherited. A fixed metric distance makes the
+#    reported displacement a statement about the number in the config rather than
+#    about the object, which is exactly why its J/diameter came out at 4-10%.
+#
+# 4. a guarantee block, so admissibility is a predicate rather than an opinion.
+#
+# What is deliberately NOT varied: surface density, ground friction and contact
+# friction are held at the baseline values. CODEX stratified them; holding them
+# fixed makes shape, scale and alpha the only factors and keeps the resulting
+# claim narrow and clean. The claim is therefore conditional on the baseline
+# mass/friction regime, and the documentation has to say so.
+
+paper: true
+dt: 0.05
+
+domain:
+  xmin: 0.0
+  xmax: 10.0
+  ymin: 0.0
+  ymax: 10.0
+
+agents:
+  count: 16
+  layout: scatter
+  center: [5.00, 5.00]
+  # radius_min / radius_max are overwritten per case from the object's own reach.
+  radius_min: 1.50
+  radius_max: 2.30
+  min_separation: 0.34
+
+# Written per case by scripts/run_arbitrary_shape_monte_carlo.py.
+cargoes: []
+
+task:
+  mode: random_constrained
+  # Overwritten per case with alpha * diameter, both ends equal.
+  distance_min: 0.90
+  distance_max: 1.60
+  wall_margin: 0.35
+  tolerance: 0.12
+  angle_min_deg: 0.0
+  angle_max_deg: 360.0
+
+controller:
+  task_mode: transport
+
+  # S2 perception
+  sensor_range: 1.20
+  ray_count: 72
+  range_noise_std: 0.010
+  pca_neighbors: 5
+  residual_tolerance: 0.030
+  min_confidence: 0.15
+
+  # communication
+  comm_range: 1.60
+
+  # S3 map, moving with the object
+  voxel_size: 0.06
+  age_decay: 0.30
+  max_voxels_per_object: 320
+  motion_compensation: true
+  registration_gate: 0.12
+  registration_normal_cosine: 0.5
+  max_object_speed: 0.25
+  object_velocity_filter: 0.35
+
+  # S4 density
+  density_mode: offset
+  cage_offset: 0.105
+  lead_offset: 0.26
+  lead_threshold: 0.25
+  sigma: 0.20
+  base_density: 0.001
+  gap_gain: 0.6
+  gap_radius: 0.35
+
+  # S5 coverage
+  local_radius: 0.80
+  grid_resolution: 20
+  approach_mass_ratio: 3.0
+  redeploy_gap_ratio: 0.15
+
+  # D10 exploration term, at the gain the A/B selected
+  explore_gain: 0.0
+
+  # S1 safety
+  robot_radius: 0.13
+  delta_max: 0.065
+  d_min: 0.28
+  gamma_agent: 6.0
+  gamma_obj: 8.0
+  rho: 0.02
+  max_speed: 0.35
+  backend: qp
+  object_row_range: 0.60
+  object_row_window: 0.28
+  max_object_rows: 8
+
+  # gains
+  kp_explore: 0.25
+  kp_cage: 0.90
+
+  # S7 gating
+  push_side_threshold: 0.35
+  min_push_agents: 4
+  contact_band_tolerance: 0.08
+
+  # D3/D4 transport outer loop
+  press_margin: null
+  press_margin_safety: 1.2
+  transport_law: progress
+  transport_reference_speed: 0.055
+  transport_kp: 2.4
+  transport_ki: 3.0
+  transport_effort_max: 0.30
+  transport_deadband: 0.05
+  brake_gain: 0.30
+  convoy_gain: 1.0
+  convoy_max: 0.25
+  cross_track_gain: 10.0
+  cross_track_damping: 12.0
+  cross_track_max_deg: 45.0
+  cross_track_deadband: 0.02
+  cross_track_reference: 0.08
+  separation_band: 0.06
+  kp_separate: 0.0
+  push_share_floor: 0.15
+
+  # D2 phase supervisor
+  phase_informed_fraction: 0.55
+  phase_map_coverage_min: 0.70
+  contact_dwell: 20
+  brake_fraction: 0.65
+
+transport:
+  engine: penalty
+  stiffness: 500.0
+  damping: 12.0
+  friction: 0.6
+  tangential_stiffness: 60.0
+  ground_friction: 0.60
+  gravity: 9.81
+  substeps: 4
+
+render:
+  map_agent: agent_00
+
+evaluation:
+  contact_radius: 0.42
+  j_min: 0.15
+  efficiency_min: 0.7
+  displacement_gate: 0.1
+  # Watchdog for the certificate's frame_budget premise. Not a scoring deadline:
+  # the g500 deadlines below stay null and every episode runs until it settles.
+  frame_budget: 3000
+
+g500:
+  detect_by: null
+  contact_ready_by: null
+  transport_by: null
+  reach_by: null
+  efficiency_min: 0.80
+  direction_error_max_deg: 20.0
+  # Absolute cross-track, kept at the baseline value so the matrix is scored by
+  # the same gate the 12-seed sweep was. The normalised quantity
+  # cross-track / diameter is reported alongside it, because a 0.15 m gate is a
+  # different demand on a 1.8 m object than on a 2.7 m one.
+  cross_track_max: 0.15
+  coverage_min: 0.70
+  progress_max_ratio: 1.40
+  hold_speed_max: 0.02
+  yaw_max_deg: 15.0
+
+guarantee:
+  enabled: true
+  # Every premise below is declared, not defaulted: src/dbact/guarantees.py
+  # raises rather than substituting a permissive bound.
+  #
+  # A disk of this radius must fit inside the outline for the finite-ray
+  # detection argument to give a positive tube.
+  min_feature_radius: 0.04
+  # Derived, not chosen. The conservative covering number is
+  # ceil(P / (2 (R_cov - d_c))) = ceil(P / 0.63), and the team has 16 robots, so
+  # a boundary longer than 16 * 0.63 = 10.08 m cannot be covered by this team at
+  # this contact radius. 10.0 m is that bound.
+  max_perimeter: 10.0
+  # The object, its cage and the swept corridor must fit the 10 m box.
+  max_diameter: 3.00
+  # The map must be this dense before the post-discovery statement applies. The
+  # voxel size is 0.06 m, so this is reachable rather than aspirational.
+  boundary_map_epsilon: 0.10
+  force_margin: 1.05
+  bounded_errors:
+    # DECLARED, NOT YET VERIFIED. The six-error audit that would measure these is
+    # the SE(2) work item and has not been run on this branch, so these are
+    # premises the certificate is conditional on, not measurements it rests on.
+    # The manifest records them with that status.
+    normal_error_deg: 30.0
+    # Must not exceed rho = 0.02, which is the ISSf margin the object rows are
+    # built with.
+    velocity_error: 0.02
+  # Phase bounds are premises. They are stated so the frame_budget check has
+  # something to add up, and the derived analytic bound below still reports
+  # itself unavailable because no contraction rate here is independently
+  # certified.
+  enclosure_bound_frames: 400
+  transport_bound_frames: 1200
+  hold_bound_frames: 100
+  finite_time:
+    map_bound_s: 6.0
+    enclosure_initial_error_m: 1.20
+    enclosure_terminal_error_m: 0.05
+    # These three are the rates the finite-time bound is stated over. Writing a
+    # number here does not certify it, and guarantees.py refuses to mark the
+    # bound available on the strength of a number written here.
+    enclosure_contraction_rate_hz: 0.25
+    transport_progress_rate_mps: 0.040
+    brake_initial_error_m: 0.40
+    brake_terminal_error_m: 0.02
+    brake_contraction_rate_hz: 0.30
+
