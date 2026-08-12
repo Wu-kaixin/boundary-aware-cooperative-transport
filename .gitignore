@@ -37,3 +37,9 @@ Thumbs.db
 
 # Local git worktrees
 .worktrees/
+
+# Committed evidence. docs/results is the curated home for run products a reader
+# is meant to check, so the blanket *.csv rule above must not silently drop them:
+# a number in a table that nobody can trace back to a file is exactly the problem
+# this directory exists to solve.
+!docs/results/**/*.csv

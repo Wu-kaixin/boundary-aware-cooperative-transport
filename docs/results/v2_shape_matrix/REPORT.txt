@@ -1,0 +1,216 @@
+====================================================================================================
+v2 DECISIVE MATRIX -- v1 controller x 12 shape families x scale-relative distance
+====================================================================================================
+git sha        : 742b251477095b6eec0428c6d4a6ae43e2a5ac67  (dirty=False)
+config         : configs/sim/v2/shape_matrix.yaml
+config sha256  : d268c46ea87dde60e37f40d7d9830be51a270f6c1761d4f718fd77beedd35962
+seeds          : [0, 1, 2, 3, 4]
+alphas         : [0.1, 0.4, 0.8]
+shape scale    : x1.5789 (anchored on l_shape = v1's cargo)
+distance rule  : L = alpha * polygon_diameter(cargo)
+screening      : none; every case enters the denominator including rejected and crashed ones
+episodes       : 180
+
+----------------------------------------------------------------------------------------------------
+1. HEADLINE
+----------------------------------------------------------------------------------------------------
+J/diameter  (all cases, pooled over alpha) : 0.470 +- 0.424   median 0.459   range [-0.000, 2.936]
+J/L         (reached the asked distance)   : 1.310 +- 2.390   median 1.183   range [-0.002, 29.355]
+P(eligible)                : 149/180 = 0.828  Wilson95 [0.766, 0.876]
+P(success | eligible)      : 41/149 = 0.275  Wilson95 [0.210, 0.352]
+P(success)  unconditional  : 54/180 = 0.300  Wilson95 [0.238, 0.371]
+solver: fallbacks=124  infeasible=124  barrier scalings=12324  rho relaxations=669
+termination: HOLD reached 138/180  watchdog 42
+
+----------------------------------------------------------------------------------------------------
+2. PER ALPHA  (J/diameter is bounded by ~alpha by construction; read J/L for reach)
+----------------------------------------------------------------------------------------------------
+ alpha    n          success            J/d            J/L            eff    dir err deg       xtrack/d     peak cover
+  0.10   60 19/60 [0.21,0.44]   0.186+-0.404   1.855+-4.038   0.873+-0.202 21.358+-21.478   0.057+-0.100   0.958+-0.093
+  0.40   60 16/60 [0.17,0.39]   0.435+-0.234   1.087+-0.584   0.881+-0.186 20.840+-20.535   0.131+-0.140   0.958+-0.093
+  0.80   60 19/60 [0.21,0.44]   0.789+-0.375   0.987+-0.469   0.879+-0.186 21.172+-20.419   0.233+-0.265   0.959+-0.093
+
+----------------------------------------------------------------------------------------------------
+3. PER SHAPE  (pooled over alpha and seed)
+----------------------------------------------------------------------------------------------------
+             shape    n    diam  concav          success            J/d            J/L            eff     peak cover
+           c_shape   15    2.69   0.352 11/15 [0.48,0.89]   0.692+-0.461   2.277+-3.334   0.926+-0.110   0.755+-0.069
+            circle   15    1.83   0.000  6/15 [0.20,0.64]   0.246+-0.308   0.635+-0.492   0.833+-0.122   1.000+-0.000
+  concave_random15   15    1.99   0.280  0/15 [0.00,0.20]   0.317+-0.308   0.820+-0.454   0.836+-0.187   0.995+-0.011
+   concave_random7   15    1.97   0.060  1/15 [0.01,0.30]   0.511+-0.348   1.188+-0.029   0.957+-0.057   1.000+-0.000
+     convex_random   15    2.62   0.000  8/15 [0.30,0.75]   0.494+-0.334   1.164+-0.108   0.986+-0.026   0.999+-0.005
+         ellipse24   15    2.27   0.000  8/15 [0.30,0.75]   0.408+-0.332   0.977+-0.318   0.888+-0.120   1.000+-0.000
+       high_aspect   15    2.56   0.000  7/15 [0.25,0.70]   0.591+-0.366   1.595+-1.120   0.805+-0.145   1.000+-0.000
+           l_shape   15    2.55   0.223  2/15 [0.04,0.38]   0.568+-0.387   1.330+-0.387   0.973+-0.058   0.990+-0.017
+         polygon32   15    2.03   0.080  5/15 [0.15,0.58]   0.215+-0.333   0.516+-0.572   0.618+-0.396   0.966+-0.066
+         rectangle   15    2.14   0.000  1/15 [0.01,0.30]   0.772+-0.710   3.224+-7.230   0.993+-0.012   1.000+-0.000
+            star10   15    2.10   0.400  0/15 [0.00,0.20]   0.255+-0.310   0.676+-0.514   0.777+-0.234   0.978+-0.013
+           u_shape   15    2.69   0.336  5/15 [0.15,0.58]   0.568+-0.412   1.311+-0.206   0.940+-0.073   0.820+-0.146
+
+----------------------------------------------------------------------------------------------------
+4. PER SHAPE x ALPHA  (success out of 5 seeds; J/L mean)
+----------------------------------------------------------------------------------------------------
+             shape             a=0.1             a=0.4             a=0.8
+           c_shape     4/5 J/L= 3.85     2/5 J/L= 1.74     5/5 J/L= 1.25
+            circle     2/5 J/L= 0.78     2/5 J/L= 0.59     2/5 J/L= 0.53
+  concave_random15     0/5 J/L= 1.00     0/5 J/L= 0.79     0/5 J/L= 0.67
+   concave_random7     1/5 J/L= 1.21     0/5 J/L= 1.18     0/5 J/L= 1.18
+     convex_random     3/5 J/L= 1.21     3/5 J/L= 1.17     2/5 J/L= 1.12
+         ellipse24     3/5 J/L= 1.05     3/5 J/L= 0.96     2/5 J/L= 0.92
+       high_aspect     2/5 J/L= 2.19     2/5 J/L= 1.31     3/5 J/L= 1.29
+           l_shape     0/5 J/L= 1.26     1/5 J/L= 1.51     1/5 J/L= 1.22
+         polygon32     2/5 J/L= 0.56     1/5 J/L= 0.50     2/5 J/L= 0.48
+         rectangle     0/5 J/L= 6.97     0/5 J/L= 1.36     1/5 J/L= 1.35
+            star10     0/5 J/L= 0.87     0/5 J/L= 0.61     0/5 J/L= 0.54
+           u_shape     2/5 J/L= 1.30     2/5 J/L= 1.33     1/5 J/L= 1.30
+
+----------------------------------------------------------------------------------------------------
+5. QUESTION 1 -- does performance degrade systematically with object DIAMETER?
+----------------------------------------------------------------------------------------------------
+Correlations are computed WITHIN each alpha. Pooling across alpha would mix the
+designed factor into the answer, because larger objects are given longer targets.
+  alpha=0.10
+    diameter vs J_over_target                    : rho=+0.447 p=0.0003  (pearson r=+0.068, slope=+0.8663/m, n=60)
+    diameter vs efficiency                       : rho=+0.226 p=0.0832  (pearson r=+0.241, slope=+0.1541/m, n=60)
+    diameter vs max_cross_track_over_diameter    : rho=+0.039 p=0.7686  (pearson r=+0.182, slope=+0.0578/m, n=60)
+    diameter vs max_strict_coverage              : rho=-0.435 p=0.0005  (pearson r=-0.474, slope=-0.1397/m, n=60)
+    diameter vs completion_time_s                : rho=-0.035 p=0.7929  (pearson r=-0.309, slope=-55.3017/m, n=60)
+  alpha=0.40
+    diameter vs J_over_target                    : rho=+0.515 p=0.0000  (pearson r=+0.470, slope=+0.8680/m, n=60)
+    diameter vs efficiency                       : rho=+0.207 p=0.1133  (pearson r=+0.237, slope=+0.1393/m, n=60)
+    diameter vs max_cross_track_over_diameter    : rho=+0.157 p=0.2295  (pearson r=+0.261, slope=+0.1154/m, n=60)
+    diameter vs max_strict_coverage              : rho=-0.429 p=0.0006  (pearson r=-0.459, slope=-0.1345/m, n=60)
+    diameter vs completion_time_s                : rho=-0.006 p=0.9625  (pearson r=-0.242, slope=-45.5425/m, n=60)
+  alpha=0.80
+    diameter vs J_over_target                    : rho=+0.485 p=0.0001  (pearson r=+0.442, slope=+0.6547/m, n=60)
+    diameter vs efficiency                       : rho=+0.211 p=0.1053  (pearson r=+0.222, slope=+0.1310/m, n=60)
+    diameter vs max_cross_track_over_diameter    : rho=+0.198 p=0.1293  (pearson r=+0.279, slope=+0.2332/m, n=60)
+    diameter vs max_strict_coverage              : rho=-0.453 p=0.0003  (pearson r=-0.452, slope=-0.1331/m, n=60)
+    diameter vs completion_time_s                : rho=-0.002 p=0.9853  (pearson r=-0.219, slope=-38.6370/m, n=60)
+
+----------------------------------------------------------------------------------------------------
+6. QUESTION 2 -- does CONCAVITY degrade performance?
+----------------------------------------------------------------------------------------------------
+concavity_ratio = 1 - area/area(convex hull); 0 for convex outlines.
+  alpha=0.10
+    concavity vs J_over_target                   : rho=+0.012 p=0.9282  (n=60)
+    concavity vs efficiency                      : rho=-0.017 p=0.8981  (n=60)
+    concavity vs max_strict_coverage             : rho=-0.681 p=0.0000  (n=60)
+    concavity vs completion_time_s               : rho=+0.014 p=0.9135  (n=60)
+  alpha=0.40
+    concavity vs J_over_target                   : rho=-0.011 p=0.9341  (n=60)
+    concavity vs efficiency                      : rho=-0.052 p=0.6946  (n=60)
+    concavity vs max_strict_coverage             : rho=-0.704 p=0.0000  (n=60)
+    concavity vs completion_time_s               : rho=+0.107 p=0.4149  (n=60)
+  alpha=0.80
+    concavity vs J_over_target                   : rho=-0.111 p=0.3985  (n=60)
+    concavity vs efficiency                      : rho=-0.014 p=0.9174  (n=60)
+    concavity vs max_strict_coverage             : rho=-0.719 p=0.0000  (n=60)
+    concavity vs completion_time_s               : rho=+0.118 p=0.3703  (n=60)
+  convex  (ratio<=0.01): 30/75 [0.30,0.51]  J/L  1.519+-3.321  peak cover  1.000+-0.002
+  concave (ratio> 0.01): 24/105 [0.16,0.32]  J/L  1.160+-1.388  peak cover  0.929+-0.112
+
+----------------------------------------------------------------------------------------------------
+7. QUESTION 3 -- when alpha rises, WHAT binds: authority, cross-track, or enclosure?
+----------------------------------------------------------------------------------------------------
+ alpha      reach J/L   stalled  never armed  encl t/o       xtrack m       xtrack/d     peak cover   barrier  watchdog
+  0.10   1.855+-4.038         7            3         0   0.135+-0.262   0.057+-0.100   0.958+-0.093      4073        12
+  0.40   1.087+-0.584        11            3         0   0.312+-0.362   0.131+-0.140   0.958+-0.093      4011        15
+  0.80   0.987+-0.469        12            2         0   0.555+-0.683   0.233+-0.265   0.959+-0.093      4240        15
+
+  gate attribution across alpha (which g500 reason fired, counted per case):
+    alpha=0.10: G500 x86
+    alpha=0.40: G500 x91
+    alpha=0.80: G500 x87
+
+----------------------------------------------------------------------------------------------------
+8. QUESTION 4 -- does any SHAPE FAMILY fail systematically?
+----------------------------------------------------------------------------------------------------
+             c_shape: 11/15 [0.48,0.89]   SAFETY_VIOLATION x2, COVER_INFEASIBLE x2
+              circle:  6/15 [0.20,0.64]   TRANSPORT_STALL x9
+    concave_random15:  0/15 [0.00,0.20]   CONTRACT_FAILURE x8, TRANSPORT_STALL x7
+     concave_random7:  1/15 [0.01,0.30]   CONTRACT_FAILURE x14
+       convex_random:  8/15 [0.30,0.75]   WRENCH_INFEASIBLE x4, CONTRACT_FAILURE x3
+           ellipse24:  8/15 [0.30,0.75]   CONTRACT_FAILURE x4, TRANSPORT_STALL x3
+         high_aspect:  7/15 [0.25,0.70]   CONTRACT_FAILURE x7, TRANSPORT_NEVER_ARMED x1
+             l_shape:  2/15 [0.04,0.38]   CONTRACT_FAILURE x12, TRANSPORT_NEVER_ARMED x1
+           polygon32:  5/15 [0.15,0.58]   TRANSPORT_NEVER_ARMED x5, TRANSPORT_STALL x4, CONTRACT_FAILURE x1
+           rectangle:  1/15 [0.01,0.30]   CONTRACT_FAILURE x10, WRENCH_INFEASIBLE x3, SOLVER_FAILURE x1
+              star10:  0/15 [0.00,0.20]   CONTRACT_FAILURE x8, TRANSPORT_STALL x6, TRANSPORT_NEVER_ARMED x1
+             u_shape:  5/15 [0.15,0.58]   MAP_INCOMPLETE x3, CONTRACT_FAILURE x3, WRENCH_INFEASIBLE x3
+
+  families whose Wilson UPPER bound is below the pooled success rate (0.300) -- i.e. worse than the matrix, not just unlucky:
+    concave_random15: 0/15, upper bound 0.204
+    concave_random7: 1/15, upper bound 0.298
+    rectangle: 1/15, upper bound 0.298
+    star10: 0/15, upper bound 0.204
+
+----------------------------------------------------------------------------------------------------
+9. REJECTIONS AND INFEASIBILITY
+----------------------------------------------------------------------------------------------------
+  rejected before the run (admissibility predicates) : 27/180
+  rejected at run time (map never reached epsilon)   : 4/180
+    goal_wrench_feasibility                      x15
+    perimeter_bound                              x15
+    boundary_covering_number                     x15
+    diameter_bound                               x3
+  construction failures : 0
+  map gap: mean 0.0462 m against a required 0.1 m
+
+----------------------------------------------------------------------------------------------------
+10. THE FIVE WORST CASES  (by J/diameter -- not a highlight reel)
+----------------------------------------------------------------------------------------------------
+  polygon32__a0.10__seed002
+     d=2.03 m  L=0.20 m  J=-0.000  J/d=-0.000  J/L=-0.002
+     eff=-0.067  dir_err=93.82445903919304  xtrack=0.006  peak_cover=1.000
+     phase=TRANSPORT  frames=3000  end=watchdog  class=TRANSPORT_STALL
+       - G500: target reached never happened within the 3000-frame run
+       - G500: J=-0.0004 m < target L=0.2028 m
+       - G500: the run did not end in HOLD
+       - G500: 154 scaled-barrier event(s), smallest factor 0.008; the contract allows 0
+  polygon32__a0.40__seed002
+     d=2.03 m  L=0.81 m  J=-0.000  J/d=-0.000  J/L=-0.000
+     eff=-0.051  dir_err=92.92869709089317  xtrack=0.000  peak_cover=1.000
+     phase=CONTACT_READY  frames=3000  end=watchdog  class=TRANSPORT_NEVER_ARMED
+       - G500: transport activation never happened within the 3000-frame run
+       - G500: target reached never happened within the 3000-frame run
+       - G500: J=-0.0000 m < target L=0.8112 m
+       - G500: the run did not end in HOLD
+  polygon32__a0.80__seed002
+     d=2.03 m  L=1.62 m  J=-0.000  J/d=-0.000  J/L=-0.000
+     eff=-0.051  dir_err=92.92869709089317  xtrack=0.000  peak_cover=1.000
+     phase=CONTACT_READY  frames=3000  end=watchdog  class=TRANSPORT_NEVER_ARMED
+       - G500: transport activation never happened within the 3000-frame run
+       - G500: target reached never happened within the 3000-frame run
+       - G500: J=-0.0000 m < target L=1.6225 m
+       - G500: the run did not end in HOLD
+  star10__a0.10__seed001
+     d=2.10 m  L=0.21 m  J=0.002  J/d=0.001  J/L=0.009
+     eff=0.261  dir_err=74.87645116352803  xtrack=0.020  peak_cover=0.975
+     phase=CONTACT_READY  frames=3000  end=watchdog  class=TRANSPORT_NEVER_ARMED
+       - G500: transport activation never happened within the 3000-frame run
+       - G500: target reached never happened within the 3000-frame run
+       - G500: J=0.0019 m < target L=0.2102 m
+       - G500: the run did not end in HOLD
+  circle__a0.40__seed003
+     d=1.83 m  L=0.73 m  J=0.012  J/d=0.006  J/L=0.016
+     eff=0.730  dir_err=43.09920510778299  xtrack=0.011  peak_cover=1.000
+     phase=TRANSPORT  frames=3000  end=watchdog  class=TRANSPORT_STALL
+       - G500: target reached never happened within the 3000-frame run
+       - G500: J=0.0116 m < target L=0.7326 m
+       - G500: the run did not end in HOLD
+       - G500: 63 scaled-barrier event(s), smallest factor 0.000; the contract allows 0
+
+----------------------------------------------------------------------------------------------------
+11. FAILURE TAXONOMY (all cases)
+----------------------------------------------------------------------------------------------------
+  CONTRACT_FAILURE             70  (0.389)
+  SUCCESS                      41  (0.228)
+  TRANSPORT_STALL              30  (0.167)
+  COVER_INFEASIBLE             13  (0.072)
+  WRENCH_INFEASIBLE            12  (0.067)
+  TRANSPORT_NEVER_ARMED         8  (0.044)
+  MAP_INCOMPLETE                3  (0.017)
+  SAFETY_VIOLATION              2  (0.011)
+  SOLVER_FAILURE                1  (0.006)
+
