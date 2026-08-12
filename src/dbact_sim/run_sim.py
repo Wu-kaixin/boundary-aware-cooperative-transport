@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import time
 from contextlib import contextmanager
 from pathlib import Path
 
@@ -69,13 +70,16 @@ def main() -> None:
         if live_viewer is not None:
             live_viewer.update(step_index, simulation)
 
+    simulation_started = time.perf_counter()
     env.run(args.steps, on_frame=observe)
+    simulation_seconds = time.perf_counter() - simulation_started
     if live_viewer is not None:
         live_viewer.update(args.steps, env, force=True)
 
     out = Path(args.output) if args.output else Path("runs") / f"{Path(args.config).stem}_seed{args.seed}"
     summary = env.save_outputs(out)
-    SimulationTrace.from_environment(env, recorder).save(out / "trace")
+    simulation_fps = args.steps / max(simulation_seconds, 1e-12)
+    SimulationTrace.from_environment(env, recorder, simulation_fps=simulation_fps).save(out / "trace")
     if not args.no_figures:
         with _noninteractive_output_figures():
             plot_snapshot(env, out / "final_snapshot.png")

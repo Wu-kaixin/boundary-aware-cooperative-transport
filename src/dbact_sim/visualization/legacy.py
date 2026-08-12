@@ -12,7 +12,7 @@ from matplotlib.patches import Polygon
 from dbact.boundary_density import BoundaryAwareDensity
 from dbact.cargo import Cargo
 
-from .environment import SimulationEnvironment
+from ..environment import SimulationEnvironment
 
 
 MODE_COLORS = {

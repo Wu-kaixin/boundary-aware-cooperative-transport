@@ -177,6 +177,7 @@ class SimulationTrace:
         cls,
         env: "SimulationEnvironment",
         recorder: VisualizationRecorder | None = None,
+        simulation_fps: float | None = None,
     ) -> "SimulationTrace":
         log = env.log
         if not log.times:
@@ -326,6 +327,9 @@ class SimulationTrace:
                 "cage_offset": float(env.controller.params.cage_offset),
                 "d_min": float(env.controller.params.d_min),
                 "comm_range": float(env.controller.params.comm_range),
+                "simulation_fps": (
+                    float(simulation_fps) if simulation_fps is not None else float("nan")
+                ),
             },
             visual_snapshots=snapshots,
         )
