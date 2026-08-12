@@ -75,6 +75,7 @@ class ResearchVisualizer:
         ax.tick_params(colors="#475569", labelsize=8.5)
 
         self.cargo_patches: dict[str, Polygon] = {}
+        self.truth_lines: dict[str, Line2D] = {}
         self.cargo_orientation: dict[str, Line2D] = {}
         self.cargo_trails: dict[str, Line2D] = {}
         self.goal_arrows: dict[str, FancyArrowPatch] = {}
@@ -90,6 +91,17 @@ class ResearchVisualizer:
             )
             ax.add_patch(patch)
             self.cargo_patches[cargo_id] = patch
+            truth_vertices = np.vstack([trace.cargo_vertices[cargo_id][0], trace.cargo_vertices[cargo_id][0][0]])
+            self.truth_lines[cargo_id] = ax.plot(
+                truth_vertices[:, 0],
+                truth_vertices[:, 1],
+                color="#111827",
+                linestyle="--",
+                linewidth=1.0,
+                alpha=0.65,
+                zorder=6,
+                visible=self.show_truth_debug,
+            )[0]
             self.cargo_orientation[cargo_id] = ax.plot(
                 [], [], color=style.cargo_edge, linewidth=2.2, zorder=5
             )[0]
@@ -133,6 +145,8 @@ class ResearchVisualizer:
 
         radius = float(trace.settings.get("robot_radius", 0.12))
         self.agent_patches: list[Circle] = []
+        self.contact_rings: list[Circle] = []
+        self.push_arrows: list[FancyArrowPatch] = []
         self.agent_labels = []
         self.agent_trails: list[Line2D] = []
         for index, agent_id in enumerate(trace.agent_ids):
@@ -147,6 +161,30 @@ class ResearchVisualizer:
             )
             ax.add_patch(circle)
             self.agent_patches.append(circle)
+            ring = Circle(
+                point,
+                1.45 * radius,
+                facecolor="none",
+                edgecolor=PHASE_COLORS["CONTACT_READY"],
+                linewidth=2.1,
+                alpha=0.95,
+                zorder=8,
+                visible=False,
+            )
+            ax.add_patch(ring)
+            self.contact_rings.append(ring)
+            push_arrow = FancyArrowPatch(
+                point,
+                point,
+                arrowstyle="-|>",
+                mutation_scale=11,
+                color=PHASE_COLORS["TRANSPORT"],
+                linewidth=1.7,
+                zorder=12,
+                visible=False,
+            )
+            ax.add_patch(push_arrow)
+            self.push_arrows.append(push_arrow)
             trail = ax.plot([], [], color=style.trajectory, linewidth=0.9, alpha=0.28, zorder=1)[0]
             self.agent_trails.append(trail)
             label = ax.text(
@@ -187,8 +225,12 @@ class ResearchVisualizer:
             Line2D([], [], marker="o", linestyle="", color=PHASE_COLORS["TRANSPORT"], label="push"),
             Line2D([], [], marker="o", linestyle="", color=PHASE_COLORS["HOLD"], label="hold"),
             Line2D([], [], color=style.detected, linewidth=1.2, label="detected boundary"),
-            Line2D([], [], color=style.mapped, linestyle=":", label="fused estimate"),
+            Line2D([], [], color=style.mapped, linestyle=":", label="estimated boundary"),
         ]
+        if self.show_truth_debug:
+            handles.append(
+                Line2D([], [], color="#111827", linestyle="--", label="ground truth (evaluation only)")
+            )
         ax.legend(
             handles=handles,
             loc="upper center",
@@ -220,11 +262,13 @@ class ResearchVisualizer:
 
         for cargo_id in trace.cargo_ids:
             vertices = trace.cargo_vertices[cargo_id][frame]
+            truth_vertices = np.vstack([vertices, vertices[0]])
             center = trace.cargo_centers[cargo_id][frame]
             angle = float(trace.cargo_angles[cargo_id][frame])
             span = max(float(np.ptp(vertices[:, 0])), float(np.ptp(vertices[:, 1])))
             direction = np.array([np.cos(angle), np.sin(angle)])
             self.cargo_patches[cargo_id].set_xy(vertices)
+            self.truth_lines[cargo_id].set_data(truth_vertices[:, 0], truth_vertices[:, 1])
             self.cargo_orientation[cargo_id].set_data(
                 [center[0], center[0] + 0.28 * span * direction[0]],
                 [center[1], center[1] + 0.28 * span * direction[1]],
@@ -237,6 +281,7 @@ class ResearchVisualizer:
             artists.extend(
                 [
                     self.cargo_patches[cargo_id],
+                    self.truth_lines[cargo_id],
                     self.cargo_orientation[cargo_id],
                     self.cargo_trails[cargo_id],
                     self.goal_arrows[cargo_id],
@@ -245,6 +290,9 @@ class ResearchVisualizer:
 
         contacts = set(trace.contact_ready_agents[frame])
         pushers = set(trace.push_agents[frame])
+        push_goal = (
+            trace.goal_directions[trace.cargo_ids[0]] if trace.cargo_ids else np.array([1.0, 0.0])
+        )
         for index, agent_id in enumerate(trace.agent_ids):
             point = trace.agent_positions[frame, index]
             mode = trace.agent_modes[frame][index]
@@ -257,10 +305,21 @@ class ResearchVisualizer:
             circle.center = point
             circle.set_facecolor(color)
             circle.set_linewidth(2.1 if agent_id in contacts or agent_id in pushers else 1.1)
+            ring = self.contact_rings[index]
+            ring.center = point
+            ring.set_edgecolor(
+                PHASE_COLORS["TRANSPORT"] if agent_id in pushers else PHASE_COLORS["CONTACT_READY"]
+            )
+            ring.set_visible(agent_id in contacts or agent_id in pushers)
+            push_arrow = self.push_arrows[index]
+            push_arrow.set_positions(point, point + 0.30 * push_goal)
+            push_arrow.set_visible(agent_id in pushers)
             history = trace.agent_positions[trail_start : frame + 1, index]
             self.agent_trails[index].set_data(history[:, 0], history[:, 1])
             self.agent_labels[index].set_position(point)
-            artists.extend([circle, self.agent_trails[index], self.agent_labels[index]])
+            artists.extend(
+                [circle, ring, push_arrow, self.agent_trails[index], self.agent_labels[index]]
+            )
 
         snapshot = trace.visual_snapshot(frame)
         if self.show_sensor:

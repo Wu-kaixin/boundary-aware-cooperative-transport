@@ -64,4 +64,20 @@ def test_debug_overlays_are_trace_data_not_simulator_truth(trace):
     snapshot = trace.visual_snapshot(trace.frame_count - 1)
     np.testing.assert_array_equal(visualizer.map_points.get_offsets(), snapshot.mapped_points)
     np.testing.assert_array_equal(visualizer.detected_points.get_offsets(), snapshot.detected_points)
+    assert all(line.get_visible() for line in visualizer.truth_lines.values())
+    visualizer.close()
+
+
+def test_contact_and_push_overlays_follow_trace_labels(trace):
+    visualizer = ResearchVisualizer(trace, view_mode="demo")
+    frame = trace.frame_count - 1
+    visualizer.update(frame)
+    contacts = set(trace.contact_ready_agents[frame])
+    pushers = set(trace.push_agents[frame])
+    for index, agent_id in enumerate(trace.agent_ids):
+        assert visualizer.contact_rings[index].get_visible() == (
+            agent_id in contacts or agent_id in pushers
+        )
+        assert visualizer.push_arrows[index].get_visible() == (agent_id in pushers)
+    assert not any(line.get_visible() for line in visualizer.truth_lines.values())
     visualizer.close()
