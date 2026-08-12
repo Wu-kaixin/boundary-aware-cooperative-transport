@@ -9,6 +9,7 @@ import matplotlib.pyplot as plt
 
 from .environment import SimulationEnvironment
 from .scenarios import load_yaml
+from .trace import SimulationTrace, VisualizationRecorder
 from .visualization import (
     LivePaperViewer,
     animate_simulation,
@@ -28,6 +29,18 @@ def main() -> None:
     parser.add_argument("--animate", action="store_true", help="Write an animated GIF of the run.")
     parser.add_argument("--animation-stride", type=int, default=6, help="Simulation frames skipped between GIF frames.")
     parser.add_argument("--animation-fps", type=int, default=12, help="Animated GIF frames per second.")
+    parser.add_argument(
+        "--trace-stride",
+        type=int,
+        default=5,
+        help="Simulation-frame stride for sparse sensor/map visualization snapshots.",
+    )
+    parser.add_argument(
+        "--sensor-ray-stride",
+        type=int,
+        default=3,
+        help="Display-only downsampling applied to detected sensor rays.",
+    )
     parser.add_argument("--live", action="store_true", help="Open a real-time paper-style simulation window.")
     parser.add_argument("--live-stride", type=int, default=5, help="Simulation steps between live window refreshes.")
     parser.add_argument("--live-pause", type=float, default=0.001, help="Matplotlib pause duration for live refresh.")
@@ -46,12 +59,23 @@ def main() -> None:
     cfg = load_yaml(args.config)
     env = SimulationEnvironment(cfg, seed=args.seed)
     live_viewer = LivePaperViewer(env, update_stride=args.live_stride, pause_s=args.live_pause) if args.live else None
-    env.run(args.steps, on_frame=live_viewer.update if live_viewer is not None else None)
+    recorder = VisualizationRecorder(
+        stride=args.trace_stride,
+        sensor_ray_stride=args.sensor_ray_stride,
+    )
+
+    def observe(step_index: int, simulation: SimulationEnvironment) -> None:
+        recorder.capture(step_index, simulation)
+        if live_viewer is not None:
+            live_viewer.update(step_index, simulation)
+
+    env.run(args.steps, on_frame=observe)
     if live_viewer is not None:
         live_viewer.update(args.steps, env, force=True)
 
     out = Path(args.output) if args.output else Path("runs") / f"{Path(args.config).stem}_seed{args.seed}"
     summary = env.save_outputs(out)
+    SimulationTrace.from_environment(env, recorder).save(out / "trace")
     if not args.no_figures:
         with _noninteractive_output_figures():
             plot_snapshot(env, out / "final_snapshot.png")

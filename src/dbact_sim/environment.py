@@ -84,6 +84,11 @@ class SimulationLog:
     cbf_velocity_projection_error: dict[str, list[float]] = field(default_factory=dict)
     relaxation_events: list[dict] = field(default_factory=list)
     operational_enclosure: dict[str, list[dict]] = field(default_factory=dict)
+    contact_ready_agents: list[list[str]] = field(default_factory=list)
+    push_agents: list[list[str]] = field(default_factory=list)
+    qp_status_counts: list[dict[str, int]] = field(default_factory=list)
+    solver_fallbacks: list[int] = field(default_factory=list)
+    solver_infeasible: list[int] = field(default_factory=list)
 
 
 @dataclass(frozen=True)
@@ -311,6 +316,18 @@ class SimulationEnvironment:
             self.log.agent_modes[a.agent_id].append(mode_by_agent.get(a.agent_id, initial_mode))
         self.log.min_distances.append(min_inter_agent_distance(self.agents))
         self.log.mode_counts.append(self.controller.mode_counts())
+        self.log.contact_ready_agents.append(
+            sorted(diag.agent_id for diag in self.controller.diagnostics if diag.contact_ready)
+        )
+        self.log.push_agents.append(
+            sorted(diag.agent_id for diag in self.controller.diagnostics if diag.push_side)
+        )
+        qp_counts: dict[str, int] = {}
+        for diag in self.controller.diagnostics:
+            qp_counts[diag.solver_status] = qp_counts.get(diag.solver_status, 0) + 1
+        self.log.qp_status_counts.append(qp_counts)
+        self.log.solver_fallbacks.append(int(self.controller.safety.stats.fallbacks))
+        self.log.solver_infeasible.append(int(self.controller.safety.stats.infeasible))
         for diag in self.controller.diagnostics:
             if diag.solver_status == "relaxed_margin":
                 agent = next(a for a in self.agents if a.agent_id == diag.agent_id)
