@@ -1,0 +1,132 @@
+{
+  "experiment": "T7 explore_gain frame-rate cost",
+  "status": "MACHINE-DEPENDENT EMPIRICAL EVIDENCE, NOT A RUNTIME BOUND",
+  "config": "configs/sim/d/l_shape_closed_loop.yaml",
+  "frames_per_episode": 400,
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "machine": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "processor": "Intel64 Family 6 Model 197 Stepping 2, GenuineIntel",
+    "python": "3.14.6",
+    "numpy": "2.4.4"
+  },
+  "explore_gain_0": {
+    "n": 6,
+    "fps_mean": 28.76904600302902,
+    "fps_sd": 0.8818261179811291,
+    "fps_min": 27.42023429849805,
+    "fps_max": 29.799529772362188,
+    "ms_per_frame_mean": 34.78699575000064
+  },
+  "explore_gain_6": {
+    "n": 6,
+    "fps_mean": 23.632978487004113,
+    "fps_sd": 2.4864094358906783,
+    "fps_min": 21.33001256321395,
+    "fps_max": 26.885975569385273,
+    "ms_per_frame_mean": 42.69796970833644
+  },
+  "paired_cost_ratio": {
+    "mean": 1.2255676610751212,
+    "sd": 0.09610878498847017,
+    "min": 1.1042268590614543,
+    "max": 1.3229473963860148
+  },
+  "runs": {
+    "eg0": [
+      {
+        "seed": 0,
+        "frames": 400,
+        "seconds": 14.587767400000303,
+        "fps": 27.42023429849805,
+        "ms_per_frame": 36.46941850000076
+      },
+      {
+        "seed": 1,
+        "frames": 400,
+        "seconds": 13.964867499998945,
+        "fps": 28.643307929705042,
+        "ms_per_frame": 34.91216874999736
+      },
+      {
+        "seed": 2,
+        "frames": 400,
+        "seconds": 13.423030599999038,
+        "fps": 29.799529772362188,
+        "ms_per_frame": 33.557576499997595
+      },
+      {
+        "seed": 3,
+        "frames": 400,
+        "seconds": 14.083336100000452,
+        "fps": 28.402361284268945,
+        "ms_per_frame": 35.20834025000113
+      },
+      {
+        "seed": 4,
+        "frames": 400,
+        "seconds": 13.956429100002424,
+        "fps": 28.660626377554593,
+        "ms_per_frame": 34.89107275000606
+      },
+      {
+        "seed": 5,
+        "frames": 400,
+        "seconds": 13.47335910000038,
+        "fps": 29.6882163557853,
+        "ms_per_frame": 33.68339775000095
+      }
+    ],
+    "eg6": [
+      {
+        "seed": 0,
+        "frames": 400,
+        "seconds": 18.752919100003055,
+        "fps": 21.33001256321395,
+        "ms_per_frame": 46.88229775000764
+      },
+      {
+        "seed": 1,
+        "frames": 400,
+        "seconds": 18.47478509999928,
+        "fps": 21.651131411537534,
+        "ms_per_frame": 46.1869627499982
+      },
+      {
+        "seed": 2,
+        "frames": 400,
+        "seconds": 15.329384700002265,
+        "fps": 26.093676153873343,
+        "ms_per_frame": 38.32346175000566
+      },
+      {
+        "seed": 3,
+        "frames": 400,
+        "seconds": 18.604257200000575,
+        "fps": 21.50045528289018,
+        "ms_per_frame": 46.51064300000144
+      },
+      {
+        "seed": 4,
+        "frames": 400,
+        "seconds": 16.436136200001783,
+        "fps": 24.3366199411244,
+        "ms_per_frame": 41.09034050000446
+      },
+      {
+        "seed": 5,
+        "frames": 400,
+        "seconds": 14.877645000000484,
+        "fps": 26.885975569385273,
+        "ms_per_frame": 37.19411250000121
+      }
+    ]
+  }
+}

@@ -11,6 +11,26 @@ its source here, so a reader can check any claim without re-running anything.
 | `v2_control_explore_gain0/` | 45 episodes: the `explore_gain` control, see below |
 | `v2_baseline_12seed/` | v1's 12-seed L-shape sweep, the regression reference |
 
+Phase-2 verification evidence, added after the matrix:
+
+| path | what | produced by |
+|---|---|---|
+| `se2/se2_ablation.json` | SE(2) boundary-point velocity, 12 seeds x {off, on}, plus the six-term error audit. **The gate fails and the estimator ships default-off.** | `scripts/run_se2_ablation.py` |
+| `t3/lateral_authority.json` | the reachable normal cone over the transport phase, 12 seeds. Refutes the authority-saturation explanation of the cross-track debt. | `scripts/analyse_lateral_authority.py` |
+| `t3/push_arc_ablation.json` | the controlled test of the dispersion reading: push-set membership threshold at 0.35 / 0.55 / 0.75 | `scripts/run_push_arc_ablation.py` |
+| `t4/FINDINGS.txt`, `t4/t4_traces.json` | the two unexplained cases, per-frame. Both located. | `scripts/diagnose_unexplained_cases.py` |
+| `t7/explore_gain_profile.json` | `explore_gain` frame-rate cost. Machine-dependent empirical evidence, **not** a runtime bound. | `scripts/profile_explore_gain.py` |
+
+The two v2 write-ups that read these files are `docs/CLOSED_LOOP_V2.md` (what was ported
+and what it cost) and `docs/CONDITIONAL_GUARANTEE_V2.md` (the claim ledger). Deleted lines
+under `src/` are justified segment by segment in `docs/SE2_DIFF_AUDIT.md`.
+
+Two findings here contradict statements made when the matrix was first written up, and the
+write-ups say so rather than quietly correcting them: concavity does **not** order success
+(the second most concave family is the best performer), and the declared perception error
+premises `normal_error_deg: 30.0` / `velocity_error: 0.02` are **not met** — the second by
+60% of measured cells.
+
 In each directory:
 
 * `monte_carlo.json` — manifest, aggregate statistics, and one full record per
