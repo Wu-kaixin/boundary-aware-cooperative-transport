@@ -40,6 +40,24 @@ def test_world_renderer_reuses_core_artists(trace):
     visualizer.close()
 
 
+def test_hud_phase_path_and_solver_metrics_are_updated(trace):
+    visualizer = ResearchVisualizer(trace, view_mode="demo")
+    visualizer.update(trace.frame_count - 1, rendering_fps=17.25)
+    assert visualizer.hud is not None
+    assert set(visualizer.hud.phase_nodes) == {
+        "SEARCH",
+        "MAP",
+        "ENCLOSE",
+        "CONTACT_READY",
+        "TRANSPORT",
+        "BRAKE",
+        "HOLD",
+    }
+    assert "rendering    17.25 FPS" in visualizer.hud.fps_text.get_text()
+    assert "fallback" in visualizer.hud.solver_text.get_text()
+    visualizer.close()
+
+
 def test_debug_overlays_are_trace_data_not_simulator_truth(trace):
     visualizer = ResearchVisualizer(trace, view_mode="debug")
     visualizer.update(trace.frame_count - 1)

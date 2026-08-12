@@ -5,11 +5,22 @@ from __future__ import annotations
 import math
 
 import numpy as np
-from matplotlib.patches import FancyBboxPatch, Rectangle
+from matplotlib.patches import Circle, FancyBboxPatch, Rectangle
 
 from dbact_sim.trace import SimulationTrace
 
 from .styles import PHASE_COLORS, VisualStyle
+
+
+PHASE_PATH = (
+    ("SEARCH", "SE"),
+    ("MAP", "MP"),
+    ("ENCLOSE", "EN"),
+    ("CONTACT_READY", "CT"),
+    ("TRANSPORT", "TR"),
+    ("BRAKE", "BR"),
+    ("HOLD", "HD"),
+)
 
 
 class PhaseHUD:
@@ -63,9 +74,32 @@ class PhaseHUD:
             color=style.muted,
             fontsize=8.5,
         )
+        self.phase_nodes: dict[str, Circle] = {}
+        for index, (phase, short) in enumerate(PHASE_PATH):
+            x = 0.105 + 0.132 * index
+            node = Circle(
+                (x, 0.81),
+                0.022,
+                transform=ax.transAxes,
+                facecolor="#334155",
+                edgecolor="none",
+            )
+            ax.add_patch(node)
+            ax.text(
+                x,
+                0.81,
+                short,
+                transform=ax.transAxes,
+                ha="center",
+                va="center",
+                color="#ffffff",
+                fontsize=5.7,
+                fontweight="bold",
+            )
+            self.phase_nodes[phase] = node
         self.metrics_text = ax.text(
             0.07,
-            0.79,
+            0.765,
             "",
             transform=ax.transAxes,
             ha="left",
@@ -109,6 +143,10 @@ class PhaseHUD:
         self.clock_text.set_text(
             f"Frame {frame:04d}/{trace.frame_count - 1:04d}   t = {trace.times[frame]:6.2f} s"
         )
+        seen = set(trace.phase_labels[: frame + 1])
+        for name, node in self.phase_nodes.items():
+            node.set_facecolor(PHASE_COLORS[name] if name in seen else "#334155")
+            node.set_alpha(1.0 if name == phase else (0.58 if name in seen else 0.30))
 
         detected = int(trace.detection_counts[cargo_id][frame])
         coverage = float(trace.strict_coverage[cargo_id][frame])
@@ -162,6 +200,8 @@ class PhaseHUD:
                 ]
             )
         )
+        solver_alert = int(trace.solver_fallbacks[frame]) or int(trace.solver_infeasible[frame])
+        self.solver_text.set_color("#fca5a5" if solver_alert else self.style.text)
         simulation_fps = float(trace.settings.get("simulation_fps", math.nan))
         render_value = math.nan if rendering_fps is None else float(rendering_fps)
         self.fps_text.set_text(
@@ -172,6 +212,7 @@ class PhaseHUD:
             self.phase_box,
             self.phase_text,
             self.clock_text,
+            *self.phase_nodes.values(),
             self.metrics_text,
             self.solver_text,
             self.fps_text,

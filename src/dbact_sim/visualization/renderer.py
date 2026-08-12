@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-import time
-
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.collections import LineCollection
@@ -59,8 +57,6 @@ class ResearchVisualizer:
         self.fig = figure
         self.world_ax = world_ax
         self.hud = PhaseHUD(hud_ax, trace, self.style) if hud_ax is not None else None
-        self._last_render_started: float | None = None
-        self._rendering_fps: float | None = None
         self._setup_world()
         self.update(0)
 
@@ -216,10 +212,9 @@ class ResearchVisualizer:
         )
         self.fig.subplots_adjust(bottom=0.13, top=0.97, left=0.07, right=0.985)
 
-    def update(self, frame: int) -> list:
+    def update(self, frame: int, rendering_fps: float | None = None) -> list:
         trace, style = self.trace, self.style
         frame = int(np.clip(frame, 0, trace.frame_count - 1))
-        started = time.perf_counter()
         trail_start = 0 if style.trail_frames is None else max(0, frame - style.trail_frames)
         artists: list = []
 
@@ -295,11 +290,8 @@ class ResearchVisualizer:
         self.phase_banner.set_visible(style.name != "paper")
         artists.append(self.phase_banner)
 
-        elapsed = time.perf_counter() - started
-        instantaneous = 1.0 / max(elapsed, 1e-9)
-        self._rendering_fps = instantaneous if self._rendering_fps is None else 0.9 * self._rendering_fps + 0.1 * instantaneous
         if self.hud is not None:
-            artists.extend(self.hud.update(frame, self._rendering_fps))
+            artists.extend(self.hud.update(frame, rendering_fps))
         return artists
 
     def save_frame(self, frame: int, path, *, dpi: int = 180) -> None:
