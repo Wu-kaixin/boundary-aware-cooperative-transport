@@ -344,18 +344,46 @@ def _edge_offset_endpoints(vertices: np.ndarray, offset: float) -> np.ndarray:
 
 
 def minimum_facing_cage_clearance(vertices: np.ndarray, offset: float) -> float:
-    """Minimum gap between mutually facing non-adjacent offset edges.
+    """Minimum signed gap between mutually facing non-adjacent offset edges.
 
     A concavity narrower than ``d_min`` at the cage offset is a place two robots
     are both told to stand and the inter-robot barrier forbids them both from
     standing. The run does not fail loudly when this happens -- it fails as a
     permanently open arc -- so the geometry is checked before the run instead.
+
+    A negative return value means the two offset walls have crossed: the concavity
+    is narrower than the two offsets together. ``inf`` means the outline has no
+    mutually facing non-adjacent edge pair at all, which is the normal answer for a
+    convex outline and must not be confused with zero.
+
+    Fixed here, and why (T1)
+    ------------------------
+    The ported version tested "does edge j lie on edge i's outward side" using the
+    *offset* midpoints, and skipped the pair when it did not. That skip is correct
+    for a back-to-back pair -- the top and bottom of a U are antiparallel but not
+    facing -- and wrong for the worst case in the class. Offsetting moves each
+    midpoint outward by ``offset``, so the offset separation is roughly the wall
+    separation minus ``2 * offset``; once a slot is narrower than that, the test
+    flips sign and the pair was skipped, reporting ``inf`` -- "no facing edge pair"
+    -- for precisely the geometry the predicate exists to reject. A 0.36 m slot at
+    a 0.20 m cage offset passed the check. That is a premise satisfied by an
+    accident of arithmetic rather than by the shape, which is the failure mode this
+    whole module is written against.
+
+    Facing is a property of the walls, so the facing test now runs on the un-offset
+    midpoints, where it is a well-posed geometric question, and the clearance is
+    still measured on the offset curves. The change is one-directional: because the
+    offset separation never exceeds the un-offset separation for an antiparallel
+    pair, every pair the old test admitted is still admitted and measured by the
+    same four-candidate distance. What is new is the crossed pairs, which now
+    report a negative width instead of nothing.
     """
     v = np.asarray(vertices, dtype=float).reshape(-1, 2)
     normals = outward_edge_normals(v)
     a = v + offset * normals
     b = np.roll(v, -1, axis=0) + offset * normals
     mid = 0.5 * (a + b)
+    wall_mid = 0.5 * (v + np.roll(v, -1, axis=0))
     best = float("inf")
     for i in range(len(v)):
         for j in range(i + 1, len(v)):
@@ -364,7 +392,20 @@ def minimum_facing_cage_clearance(vertices: np.ndarray, offset: float) -> float:
             delta = mid[j] - mid[i]
             if float(np.dot(normals[i], normals[j])) > -0.5:
                 continue
-            if float(np.dot(normals[i], delta)) <= 0.0 or float(np.dot(normals[j], -delta)) <= 0.0:
+            wall_delta = wall_mid[j] - wall_mid[i]
+            if (
+                float(np.dot(normals[i], wall_delta)) <= 0.0
+                or float(np.dot(normals[j], -wall_delta)) <= 0.0
+            ):
+                # Antiparallel but back to back: the outline's two outer faces, not
+                # a concavity. There is no corridor between them to measure.
+                continue
+            signed = min(float(np.dot(normals[i], delta)), float(np.dot(normals[j], -delta)))
+            if signed <= 0.0:
+                # The offset walls have crossed. Report the overlap so that the
+                # ``>= d_min`` check fails; an unsigned segment distance would
+                # return a small positive number, or zero, for the worst case.
+                best = min(best, signed)
                 continue
             candidates = [
                 np.linalg.norm(a[i] - closest_point_on_segment(a[i], a[j], b[j])[0]),

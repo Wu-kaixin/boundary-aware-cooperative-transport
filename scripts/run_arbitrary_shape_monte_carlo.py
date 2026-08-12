@@ -201,10 +201,21 @@ def build_case_config(base: dict, shape: str, seed: int, alpha: float) -> tuple[
     yaw = float(rng.uniform(0.0, 2.0 * np.pi))
 
     outline = local_outline(shape, rng) * SHAPE_SCALE
-    # Rotate in the body frame and place the centroid at the workspace centre.
-    # Cargo.__init__ re-centres on the centroid, so the object's centre of area
-    # is exactly the workspace centre and the displacement measurement has no
-    # offset built into it.
+    # Rotate in the body frame and place the *drawn outline* at the workspace centre.
+    #
+    # CORRECTED (T1), and not changed. This comment used to claim that
+    # Cargo.__init__'s re-centring puts the object's centre of area exactly at the
+    # workspace centre. That holds only for a family whose drawn outline is already
+    # centroid-centred. For an asymmetric one the object ends up offset by
+    # |centroid of the drawn outline|, and measured over all 60 (shape, seed)
+    # placements the worst offset is 0.290 m, on l_shape. See
+    # tests/test_monte_carlo_runner.py::
+    # test_case_config_clears_the_annulus_but_does_not_centre_asymmetric_objects.
+    #
+    # What the claim was load-bearing for -- that displacement has no offset built
+    # into it -- survives, because displacement is measured from
+    # cargo.initial_position, which is the centroid wherever it lands. What does not
+    # survive is the annulus margin below; see the note there.
     domain = base["domain"]
     centre = np.array(
         [0.5 * (domain["xmin"] + domain["xmax"]), 0.5 * (domain["ymin"] + domain["ymax"])]
@@ -228,6 +239,16 @@ def build_case_config(base: dict, shape: str, seed: int, alpha: float) -> tuple[
     # The robots start clear of the object rather than the object being shrunk to
     # fit a fixed annulus. 0.35 m of slack past the object's own reach keeps
     # assert_initial_state_valid satisfied for every family in the matrix.
+    #
+    # CORRECTED (T1): 0.35 m is the *nominal* slack and is not the realised one. The
+    # annulus is centred on the workspace centre while `reach` is measured from the
+    # object's centroid, and for an asymmetric family those differ (see above). The
+    # realised worst-case clearance between the object and the innermost possible
+    # robot is 0.0605 m, on l_shape -- a factor of six tighter than this comment
+    # implied. No episode started with a robot inside an object, so the matrix stands;
+    # the four asymmetric families simply started with less room than intended, and
+    # l_shape with the least. Left as-is deliberately: changing the placement would
+    # invalidate the committed 180 episodes.
     config["agents"] = dict(config["agents"])
     config["agents"]["center"] = centre.tolist()
     config["agents"]["radius_min"] = round(reach + 0.35, 4)
