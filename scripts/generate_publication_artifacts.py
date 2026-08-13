@@ -95,6 +95,24 @@ def wilson(successes: int, trials: int, z: float = 1.959963984540054) -> list[fl
     return [max(0.0, centre - half), min(1.0, centre + half)]
 
 
+def wilson_bars(counts: list[tuple[int, int]]) -> tuple[list[float], list[float], list[float]]:
+    """Rates and matplotlib-ready asymmetric error bars from (successes, trials) pairs.
+
+    Clamped at zero. The Wilson interval is asymmetric and clamped to [0, 1], so at 0/n or
+    n/n the arithmetic ``rate - lower`` can land a few ulps below zero, and matplotlib
+    rejects a negative ``yerr`` outright -- after the figure has been drawn. Doing the clamp
+    once here is what keeps a 0/12 arm from crashing the generator.
+    """
+    rates, lo, hi = [], [], []
+    for successes, trials in counts:
+        rate = successes / trials if trials else 0.0
+        interval = wilson(successes, trials) or [rate, rate]
+        rates.append(rate)
+        lo.append(max(0.0, rate - interval[0]))
+        hi.append(max(0.0, interval[1] - rate))
+    return rates, lo, hi
+
+
 class Artifacts:
     """Figure sink that writes PNG and PDF together and records what it wrote."""
 
@@ -169,10 +187,7 @@ def fig_success_by_shape(art: Artifacts, rows: list[dict]) -> None:
 
     fig, ax = plt.subplots(figsize=(8, 4.5))
     y = np.arange(len(counts))
-    rates = [s / max(n, 1) for _, s, n in counts]
-    intervals = [wilson(s, n) for _, s, n in counts]
-    lo = [r - (iv[0] if iv else r) for r, iv in zip(rates, intervals)]
-    hi = [(iv[1] if iv else r) - r for r, iv in zip(rates, intervals)]
+    rates, lo, hi = wilson_bars([(s, n) for _, s, n in counts])
     ax.barh(y, rates, color="#4878a8", xerr=[lo, hi], error_kw={"ecolor": "#333", "capsize": 3})
     ax.set_yticks(y)
     ax.set_yticklabels([f"{s}  ({k}/{n})" for s, k, n in counts])
@@ -467,10 +482,7 @@ def fig_conditional_domain(art: Artifacts, rows: list[dict]) -> None:
     ]
     fig, ax = plt.subplots(figsize=(6.4, 4.2))
     x = np.arange(len(groups))
-    rates = [k / max(n, 1) for _, k, n in groups]
-    intervals = [wilson(k, n) for _, k, n in groups]
-    lo = [r - (iv[0] if iv else r) for r, iv in zip(rates, intervals)]
-    hi = [(iv[1] if iv else r) - r for r, iv in zip(rates, intervals)]
+    rates, lo, hi = wilson_bars([(k, n) for _, k, n in groups])
     ax.bar(x, rates, color=["#888", "#4878a8", "#c07040"],
            yerr=[lo, hi], error_kw={"ecolor": "#333", "capsize": 4})
     ax.set_xticks(x)
@@ -515,10 +527,7 @@ def fig_robustness(art: Artifacts, t5: dict) -> None:
     x = np.arange(len(names))
     passes = [t5["arms"][n]["pass"] for n in names]
     totals = [t5["arms"][n]["total"] for n in names]
-    rates = [p / max(t, 1) for p, t in zip(passes, totals)]
-    intervals = [wilson(p, t) for p, t in zip(passes, totals)]
-    lo = [r - (iv[0] if iv else r) for r, iv in zip(rates, intervals)]
-    hi = [(iv[1] if iv else r) - r for r, iv in zip(rates, intervals)]
+    rates, lo, hi = wilson_bars(list(zip(passes, totals)))
     colours = ["#c04040" if t5["arms"][n]["measured_out_of_domain"] else "#4878a8" for n in names]
     ax.bar(x, rates, color=colours, yerr=[lo, hi], error_kw={"ecolor": "#333", "capsize": 3})
     ax.set_xticks(x)
@@ -560,10 +569,7 @@ def fig_distance_ablation(art: Artifacts, t6: dict) -> None:
     ax.set_title("Displacement against demand, 12 seeds per alpha")
     ax.legend(fontsize=8)
 
-    rates = [per[k]["success_rate"] for k in keys]
-    intervals = [per[k]["success_wilson95"] for k in keys]
-    lo = [r - iv[0] for r, iv in zip(rates, intervals)]
-    hi = [iv[1] - r for r, iv in zip(rates, intervals)]
+    rates, lo, hi = wilson_bars([(per[k]["successes"], per[k]["n"]) for k in keys])
     ax2.errorbar(alphas, rates, yerr=[lo, hi], fmt="s-", color="#c07040", capsize=3)
     ax2.set_xlabel("alpha = L / diameter")
     ax2.set_ylabel("contract success rate")

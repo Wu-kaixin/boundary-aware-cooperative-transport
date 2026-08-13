@@ -562,6 +562,102 @@ controller. The one currently in `g500` measures the task length.
 
 ---
 
+## 7b. The robustness ablation, and the noise the controller turns out to need
+
+`scripts/run_robustness_ablation.py`, eight arms x 12 seeds, 96 episodes. The three
+degradation mechanisms did not exist in v1 and were added for this experiment; all three
+default to exact no-ops, and `nominal` reproduces v1 to ten digits — J = 1.4907537944, 68
+barrier scalings, 8/12.
+
+| arm | pass | J | worst separation slack | barrier scalings | fallbacks | velocity-premise breach | spurious frontiers/frame |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| `nominal` | 8/12 | 1.491 | +0.00012 | 68 | 0 | 0.603 | 56.6 |
+| `range_noise_000` | **9/12** | 1.601 | **−0.00434** | **389** | 0 | **0.367** | 52.3 |
+| `range_noise_005` | 8/12 | 1.367 | +0.00001 | 119 | 0 | 0.519 | 53.3 |
+| `range_noise_010` | 8/12 | 1.491 | +0.00012 | 68 | 0 | 0.603 | 56.6 |
+| `range_noise_020` | **0/12** | **0.761** | −0.00000 | 99 | 0 | 0.511 | **68.7** |
+| `slow_updates_5` | 4/12 | 1.523 | +0.00003 | 63 | 0 | 0.567 | 49.3 |
+| `comm_dropout_10` | **0/12** | 1.470 | **−0.05803** | 87 | **3** | 0.609 | 56.5 |
+| `combined` | 3/12 | 1.699 | **−0.04385** | 113 | **592** | 0.563 | 50.9 |
+
+### 7b.1 The plan's `range_noise_010` arm is the baseline
+
+`configs/sim/d/l_shape_closed_loop.yaml` sets `range_noise_std: 0.01`, so the arm the plan
+names as the out-of-domain case is the configuration every headline number on this branch was
+produced at. The prediction and the check: `range_noise_010` is **bit-identical** to `nominal`
+on every measure, per-seed J included.
+
+By the plan's own rule — reject anything at or above 10 mm as out-of-domain — the **nominal
+arm is out-of-domain**, which is why the arm list was extended below and above the baseline
+rather than only degrading a configuration already at the rejection threshold.
+
+### 7b.2 The declared velocity premise is not a sensor-noise problem
+
+With a **noiseless** sensor the barrier-visible velocity error still exceeds its declared
+0.02 m/s bound on **36.7%** of measured cells, and the normal-error premise is breached on
+10.8% — slightly *worse* than nominal's 9.2%. Measured out-of-domain therefore fires on all
+eight arms, and the declared-versus-measured verdicts disagree on four of them.
+
+That sharpens §6.3 considerably. The violated premise is not attributable to range noise: it
+is the registration and fusion pipeline, and removing the sensor noise entirely does not bring
+it inside the bound. Re-deriving the ISSf constant against a moving boundary is therefore the
+outstanding item, not tightening the sensor.
+
+### 7b.3 The noise is load-bearing
+
+`range_noise_000` — a *perfect* sensor — is the only arm besides the two worst that **breaches
+`d_min`**, by 4.3 mm, and it needs **389 barrier scalings against nominal's 68**, a factor of
+5.7. It also achieves the best pass rate, 9/12, and the largest J.
+
+So removing the noise makes the transport better and the safety filter worse. The reading that
+fits is that the 10 mm noise acts as **dither**: with zero noise every robot's returns quantise
+into the same voxels, the maps agree exactly, the density and CVT targets coincide more tightly,
+and robots converge onto each other until the inter-robot barrier has to fight them apart. Noise
+decorrelates the targets.
+
+This is recorded rather than acted on, and it is stated as the reading that fits rather than as
+a mechanism: one arm at 12 seeds, and the causal claim would need an ablation that decorrelates
+the targets *without* adding sensor noise. What it does establish is that the baseline's noise
+is not a nuisance being tolerated — the safety filter is quieter with it than without it, and
+any future move to a cleaner sensor has to deal with that.
+
+### 7b.4 Where robustness actually ends
+
+* **20 mm range noise: 0/12, and J halves** to 0.761 while peak coverage stays at 0.998 — the
+  highest of any arm. Enclosure is unaffected; transport stops. Doubling the baseline noise is
+  past the limit.
+* **10% directed link loss: 0/12, separation breached by 58 mm, 3 fallbacks.** This is the
+  sharpest limit found. The dropout degrades the scan relay, the token flood, the progress
+  consensus and the local contact-ready quorum together, which is what a dropped packet costs.
+* **`slow_updates_5`: 4/12** with J *above* nominal (1.523) and cross-track worse (0.204). A
+  five-fold slower sensor and planner does not stop transport; it degrades aim.
+* **`combined`: 592 fallbacks** and a 43.9 mm separation breach. Compounding the perturbations
+  produces a solver failure mode none of them produces alone.
+
+### 7b.5 The pseudo-frontier rate is mostly not noise
+
+Every frontier target emitted after the pooled map satisfies the declared
+`boundary_map_epsilon` is provably spurious: there is no unobserved boundary left for it to
+point at. Measured over the 65–93% of sampled frames that fall after closure:
+
+Noise does inflate it, from 52.3 to 68.7 targets per frame between 0 and 20 mm — a 31% rise,
+which is the predicted mechanism, since a perturbed normal rotates the tangential window and a
+known neighbour falls outside it. But the rate at **zero** noise is already 52.3 per frame
+across a 16-robot team. So the great majority of spurious frontier demand is **intrinsic to the
+predicate**, not noise-induced: on a fully mapped object the tangential-neighbour test keeps
+declaring known boundary open. The noise-induced pseudo-frontier problem the plan asked about is
+real and is the smaller half of the effect.
+
+### 7b.6 What these arms can and cannot say
+
+The nominal contract rate is 8/12 here and 0.300 on the matrix, so an arm that moves two
+episodes has moved them across a gate most episodes already fail. The pass column is therefore
+not the headline, and the two arms that reach 0/12 and the three that breach `d_min` are
+stronger evidence than any of the intermediate pass counts. Separation and fallback counts are
+gate-independent and are the columns worth reading.
+
+---
+
 ## 8. Negative results carried forward from v1, unchanged
 
 These four are reproduced verbatim in substance from `CLOSED_LOOP_D.md`. None has been
@@ -605,6 +701,18 @@ progress estimate is biased low by roughly 10–15%.
    the difference is not significant, so the claim made is the weak one: no evidence of
    informativeness, not evidence of anti-informativeness.
 6. **The failure taxonomy hid a safety violation behind a solver label.** §7.1.
+7. **A noiseless sensor breaks `d_min` and needs 5.7x the barrier scalings.** §7b.3. The
+   baseline's 10 mm range noise is load-bearing, and the safety filter is quieter with it than
+   without it.
+8. **The velocity premise is violated even with a perfect sensor** — 36.7% of cells. §7b.2. It
+   is the registration pipeline, not the sensor, so tightening the sensor cannot fix it.
+9. **10% directed link loss takes the contract to 0/12 and breaks separation by 58 mm.** §7b.4.
+10. **Most spurious frontier demand is intrinsic to the predicate, not noise-induced** — 52.3
+    provably-spurious targets per frame at zero noise. §7b.5.
+11. **Success falls with task distance because the gate tightens, not because control
+    degrades.** §7a. `arcsin(0.15/J)` falls to 2.65° at alpha = 1.0 while measured direction
+    error stays in a 5–8° band.
+12. **The progress overshoot is ~24% and scale-invariant**, not the 10–15% v1 recorded. §7a.
 
 ---
 

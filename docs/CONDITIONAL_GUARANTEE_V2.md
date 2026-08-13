@@ -214,7 +214,45 @@ the gate while travelling 1.28 diameters at 0.989 efficiency.
 `corr(alpha, J/diameter) = +0.992`: displacement tracks demand almost exactly, which is the
 matrix's alpha finding reproduced on one shape at 12 seeds.
 
-### 4.8 Runtime performance
+### 4.8 Robustness, and the premise that fails with a perfect sensor
+
+Eight arms x 12 seeds (`docs/results/t5/robustness_ablation.json`). `nominal` reproduces v1 to
+ten digits, and the plan's `range_noise_010` arm is **bit-identical** to it, because the
+baseline config already sets `range_noise_std: 0.01`.
+
+| arm | pass | J | worst separation slack | fallbacks | velocity-premise breach |
+| --- | --- | --- | --- | --- | --- |
+| `nominal` (= 10 mm) | 8/12 | 1.491 | +0.00012 | 0 | 0.603 |
+| `range_noise_000` | 9/12 | 1.601 | **−0.00434** | 0 | **0.367** |
+| `range_noise_020` | **0/12** | 0.761 | −0.00000 | 0 | 0.511 |
+| `slow_updates_5` | 4/12 | 1.523 | +0.00003 | 0 | 0.567 |
+| `comm_dropout_10` | **0/12** | 1.470 | **−0.05803** | 3 | 0.609 |
+| `combined` | 3/12 | 1.699 | **−0.04385** | **592** | 0.563 |
+
+Three results bear on the claim directly:
+
+**The declared velocity premise fails with a noiseless sensor** — 36.7% of cells, against
+nominal's 60.3%. So §4.4's violation is not attributable to range noise; it is the registration
+and fusion pipeline, and no sensor improvement can bring it inside the bound. Measured
+out-of-domain fires on **all eight arms**.
+
+**The noise is load-bearing.** A perfect sensor breaches `d_min` by 4.3 mm and needs 389 barrier
+scalings against nominal's 68, while achieving the best pass rate. The reading that fits is
+dither: with zero noise every robot's returns quantise into the same voxels, the maps agree
+exactly, the targets coincide, and robots converge onto each other. Recorded as a reading rather
+than a mechanism — establishing it would need an ablation that decorrelates targets without
+adding sensor noise.
+
+**Robustness ends at 20 mm noise and at 10% link loss**, both 0/12, the latter with a 58 mm
+separation breach. `combined` produces 592 fallbacks, a failure mode no single perturbation
+produces.
+
+**Pseudo-frontier**: every frontier target emitted after the pooled map satisfies ε is provably
+spurious. Noise inflates the rate from 52.3 to 68.7 per frame between 0 and 20 mm, but 52.3 at
+*zero* noise means the great majority is intrinsic to the tangential-neighbour predicate rather
+than noise-induced.
+
+### 4.9 Runtime performance
 
 22.0–23.2 fps at 16 robots on the baseline over full until-settled episodes. On a fixed
 400-frame budget with the machine otherwise quiet, `explore_gain: 0` runs at 28.77 ± 0.88 fps
