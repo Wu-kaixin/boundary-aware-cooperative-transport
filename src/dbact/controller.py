@@ -55,6 +55,7 @@ from .geometry import clip_to_domain, normalize
 from .local_cvt import LocalCVT, empty_cell_threshold
 from .perception import PerceptionParams, RayCastBoundarySensor
 from .phase import Phase, PhaseGates, PhaseMonitor, PhaseSignals
+from .provenance import frame_rng
 from .safety_filter import SafetyFilter, SafetyFilterParams
 from .task import TransportTask
 from .transport_control import (
@@ -77,6 +78,31 @@ class DBACTParams:
     pca_neighbors: int = 5
     residual_tolerance: float = 0.03
     min_confidence: float = 0.15
+    # --- degradation knobs for the robustness ablation (T5) ---
+    # All three default to exact no-ops: 1, 1 and 0.0 reproduce v1 frame for frame,
+    # not approximately. They exist so that "what happens under a slower sensor, a
+    # slower planner, a lossy link" is a measurement rather than an argument.
+    #
+    # ``perception_every = k`` senses, registers, carves and fuses on one frame in
+    # ``k`` and leaves the robot acting on its previous view in between. The map
+    # update is skipped as well as the scan, because a sensor that did not fire
+    # produces no information to fuse -- updating the map from a stale scan would
+    # model a *duplicated* observation instead of a missing one. When the sensor does
+    # fire, registration is given the whole elapsed interval, so the velocity
+    # estimate is a rate rather than a per-call difference.
+    perception_every: int = 1
+    # ``planning_every = k`` recomputes the nominal command on one frame in ``k`` and
+    # holds it in between. The safety filter still runs every frame: a slow planner
+    # behind a fast barrier filter is the realistic degradation, and holding the
+    # *filtered* output instead would let a stale command drive through a constraint
+    # that has since become active.
+    planning_every: int = 1
+    # Per-frame, per-directed-link loss. Applied to ``_neighbor_indices``, so it
+    # degrades the scan relay, the object-token flood, the progress consensus and the
+    # local contact-ready quorum together -- which is what a dropped packet actually
+    # costs. Directed rather than symmetric: robot i losing j does not imply j loses
+    # i, and nothing downstream assumes a symmetric neighbour set.
+    communication_dropout_prob: float = 0.0
 
     # --- communication ---
     comm_range: float = 1.6
@@ -497,6 +523,11 @@ class DBACTController:
         self.trace_enabled = False
         self._trace: dict = {}
         self.last_scans: dict[str, BoundaryView] = {}
+        # T5 degradation state. Both are inert while ``perception_every`` and
+        # ``planning_every`` are 1: the interval then equals ``dt`` on every frame and
+        # the held command is overwritten before it is ever read.
+        self._sense_interval = 0.0
+        self._held_nominal: dict[str, tuple] = {}
 
     # ------------------------------------------------------------------ #
     # main loop
@@ -513,7 +544,20 @@ class DBACTController:
         self._ensure_state(agents)
         neighbors = self._neighbor_indices(agents)
 
-        scans = [self.sensor.sense_view(agent, cargoes, timestamp) for agent in agents]
+        # T5: a sensor that fires on one frame in ``perception_every``. Frame 0 always
+        # fires, so a run never starts blind, and the accumulated interval is what
+        # registration is given -- a sensor at 4 Hz observing a 20 Hz world must divide
+        # by the real elapsed time or it reports a quarter of the object's speed.
+        stride = max(1, int(self.params.perception_every))
+        sensing = (self._frame % stride == 0) or not self._views
+        self._sense_interval += dt
+        if sensing:
+            scans = [self.sensor.sense_view(agent, cargoes, timestamp) for agent in agents]
+            interval = self._sense_interval
+            self._sense_interval = 0.0
+        else:
+            scans = [BoundaryView.empty() for _ in agents]
+            interval = 0.0
         if self.trace_enabled:
             # A robot's own scan, before the neighbour relay is merged into it.
             # Attribution needs it: "who first saw the far side" is a question about
@@ -526,13 +570,20 @@ class DBACTController:
         # Registration runs on the robot's own scan only -- a relayed point is
         # another robot's view of the same surface at the same instant, so it adds
         # no temporal information.
+        # T5: skipped entirely on a non-sensing frame. A sensor that did not fire
+        # produces nothing to register, nothing to carve and nothing to fuse; running
+        # the update on an empty scan would age the map and decay its weights on a
+        # frame where no measurement contradicted it.
         for i, agent in enumerate(agents):
+            if not sensing:
+                self._views[agent.agent_id] = self.maps[agent.agent_id].view(timestamp)
+                continue
             local_map = self.maps[agent.agent_id]
-            local_map.register(scans[i], dt)
+            local_map.register(scans[i], interval)
             if local_map.carve_enabled:
                 local_map.carve(agent.position, scans[i])
             batch, codes = _merge_scans(scans, [i] + list(neighbors[i]))
-            local_map.update(batch, timestamp, agent_codes=codes, dt=dt)
+            local_map.update(batch, timestamp, agent_codes=codes, dt=interval)
             self._views[agent.agent_id] = local_map.view(timestamp)
 
         self._update_tokens(agents, neighbors, timestamp)
@@ -541,14 +592,27 @@ class DBACTController:
         self.phase_signals = self._phase_signals(agents, contact_ready)
         self.phase_monitor.update(self.phase_signals, self._frame)
 
+        # T5: a planner that recomputes on one frame in ``planning_every`` and holds its
+        # nominal command in between. The safety filter below still runs every frame, so
+        # a held command is re-projected against the *current* barrier rows -- holding
+        # the filtered output instead would let a stale command drive straight through a
+        # constraint that became active after it was computed, which is a different and
+        # much less defensible experiment.
+        plan_stride = max(1, int(self.params.planning_every))
+        planning = (self._frame % plan_stride == 0) or not self._held_nominal
+
         self.diagnostics = []
         commands: list[ControlCommand] = []
         for i, agent in enumerate(agents):
             view = self._views[agent.agent_id]
             self._trace = {}
-            u_nom, mode, cell_mass, push_side, effort = self._nominal_command(
-                i, agents, neighbors[i], view, contact_ready, dt
-            )
+            if planning:
+                u_nom, mode, cell_mass, push_side, effort = self._nominal_command(
+                    i, agents, neighbors[i], view, contact_ready, dt
+                )
+                self._held_nominal[agent.agent_id] = (u_nom, mode, cell_mass, push_side, effort)
+            else:
+                u_nom, mode, cell_mass, push_side, effort = self._held_nominal[agent.agent_id]
             points, normals, v_obj, v_points = self._object_rows_from_map(
                 agent.agent_id, agent.position, view
             )
@@ -1465,7 +1529,17 @@ class DBACTController:
         positions = np.vstack([a.position for a in agents])
         d = np.linalg.norm(positions[:, None, :] - positions[None, :, :], axis=2)
         np.fill_diagonal(d, np.inf)
-        return [list(np.flatnonzero(row <= self.params.comm_range)) for row in d]
+        within = d <= self.params.comm_range
+        dropout = float(self.params.communication_dropout_prob)
+        if dropout > 0.0:
+            # Drawn from the seeded frame RNG rather than a module-level one, so a
+            # dropout run is reproducible from its seed like every other run here. The
+            # frame index is part of the key, so the loss pattern changes frame to
+            # frame instead of latching a fixed subgraph -- a latched subgraph is a
+            # different experiment (a partitioned team) from a lossy link.
+            rng = frame_rng("comm_dropout", self._frame, base=self.seed)
+            within = within & (rng.random(within.shape) >= dropout)
+        return [list(np.flatnonzero(row)) for row in within]
 
     def apply_commands(self, agents: list[AgentState], commands: list[ControlCommand], dt: float) -> None:
         by_id = {cmd.agent_id: cmd for cmd in commands}
