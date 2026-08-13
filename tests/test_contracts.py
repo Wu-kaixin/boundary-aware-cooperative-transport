@@ -51,6 +51,17 @@ def test_c1_rejects_insufficient_barrier_margin():
     assert any("barrier margin" in p for p in contract.violations())
 
 
+def test_boundary_error_bound_is_part_of_the_contact_margin():
+    contract = valid_contact_contract(
+        cage_offset=0.155,
+        gamma_obj=10.0,
+        rho=0.25,
+        boundary_error_bound=0.02,
+    )
+    assert contract.barrier_margin == pytest.approx(0.0)
+    assert any("barrier margin" in item for item in contract.violations())
+
+
 def test_c1_rejects_overlapping_robot_discs():
     contract = valid_contact_contract(d_min=0.20)
     assert any("overlap" in p for p in contract.violations())

@@ -1,0 +1,4167 @@
+{
+  "manifest": {
+    "schema_version": 1,
+    "config": "configs/sim/research/adaptive_progress_closed_loop.yaml",
+    "seeds": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "shapes": [
+      "circle",
+      "rectangle",
+      "ellipse24",
+      "l_shape",
+      "u_shape",
+      "c_shape",
+      "star10",
+      "convex_random",
+      "concave_random7",
+      "concave_random15",
+      "high_aspect",
+      "polygon32"
+    ],
+    "distance_m": 0.1,
+    "max_steps_timeout": 1500,
+    "truth_audit": false,
+    "sampling": {
+      "position_classes": [
+        "center",
+        "edge",
+        "corner",
+        "random"
+      ],
+      "yaw": "uniform [0, 2*pi)",
+      "goal_direction": "uniform feasible direction from scenario sampler",
+      "surface_density": [
+        0.8,
+        1.5,
+        2.2
+      ],
+      "ground_friction": [
+        0.15,
+        0.3,
+        0.45
+      ],
+      "contact_friction": [
+        0.4,
+        0.6,
+        0.8
+      ]
+    },
+    "cases": [
+      {
+        "case_id": "circle__seed_000",
+        "shape": "circle",
+        "seed": 0,
+        "position_class": "center",
+        "center": [
+          4.0,
+          4.0
+        ],
+        "yaw_deg": 262.54648308551936,
+        "surface_density": 0.8,
+        "ground_friction": 0.15,
+        "contact_friction": 0.4,
+        "vertex_count": 96
+      },
+      {
+        "case_id": "rectangle__seed_000",
+        "shape": "rectangle",
+        "seed": 0,
+        "position_class": "edge",
+        "center": [
+          1.2283988502348748,
+          2.281563635405675
+        ],
+        "yaw_deg": 46.50815208630955,
+        "surface_density": 2.2,
+        "ground_friction": 0.3,
+        "contact_friction": 0.6,
+        "vertex_count": null
+      },
+      {
+        "case_id": "ellipse24__seed_000",
+        "shape": "ellipse24",
+        "seed": 0,
+        "position_class": "corner",
+        "center": [
+          1.27,
+          1.27
+        ],
+        "yaw_deg": 357.58259839781886,
+        "surface_density": 1.5,
+        "ground_friction": 0.45,
+        "contact_friction": 0.8,
+        "vertex_count": 24
+      },
+      {
+        "case_id": "l_shape__seed_000",
+        "shape": "l_shape",
+        "seed": 0,
+        "position_class": "random",
+        "center": [
+          2.2463560630204813,
+          6.205947497057067
+        ],
+        "yaw_deg": 150.13354941300088,
+        "surface_density": 0.8,
+        "ground_friction": 0.15,
+        "contact_friction": 0.4,
+        "vertex_count": null
+      },
+      {
+        "case_id": "u_shape__seed_000",
+        "shape": "u_shape",
+        "seed": 0,
+        "position_class": "center",
+        "center": [
+          4.0,
+          4.0
+        ],
+        "yaw_deg": 80.0081172593723,
+        "surface_density": 2.2,
+        "ground_friction": 0.3,
+        "contact_friction": 0.6,
+        "vertex_count": 8
+      },
+      {
+        "case_id": "c_shape__seed_000",
+        "shape": "c_shape",
+        "seed": 0,
+        "position_class": "edge",
+        "center": [
+          1.40146931829632,
+          2.811401337562124
+        ],
+        "yaw_deg": 356.0678098233227,
+        "surface_density": 1.5,
+        "ground_friction": 0.45,
+        "contact_friction": 0.8,
+        "vertex_count": 8
+      },
+      {
+        "case_id": "star10__seed_000",
+        "shape": "star10",
+        "seed": 0,
+        "position_class": "corner",
+        "center": [
+          1.25,
+          1.25
+        ],
+        "yaw_deg": 129.99678586310552,
+        "surface_density": 0.8,
+        "ground_friction": 0.15,
+        "contact_friction": 0.4,
+        "vertex_count": 10
+      },
+      {
+        "case_id": "convex_random__seed_000",
+        "shape": "convex_random",
+        "seed": 0,
+        "position_class": "random",
+        "center": [
+          6.426239681609279,
+          5.198982242002602
+        ],
+        "yaw_deg": 260.91002928503667,
+        "surface_density": 2.2,
+        "ground_friction": 0.3,
+        "contact_friction": 0.6,
+        "vertex_count": 8
+      },
+      {
+        "case_id": "concave_random7__seed_000",
+        "shape": "concave_random7",
+        "seed": 0,
+        "position_class": "center",
+        "center": [
+          4.0,
+          4.0
+        ],
+        "yaw_deg": 315.6412039401132,
+        "surface_density": 1.5,
+        "ground_friction": 0.45,
+        "contact_friction": 0.8,
+        "vertex_count": 7
+      },
+      {
+        "case_id": "concave_random15__seed_000",
+        "shape": "concave_random15",
+        "seed": 0,
+        "position_class": "edge",
+        "center": [
+          1.2629494943094066,
+          5.325082126993666
+        ],
+        "yaw_deg": 202.31885129177655,
+        "surface_density": 0.8,
+        "ground_friction": 0.15,
+        "contact_friction": 0.4,
+        "vertex_count": 15
+      },
+      {
+        "case_id": "high_aspect__seed_000",
+        "shape": "high_aspect",
+        "seed": 0,
+        "position_class": "corner",
+        "center": [
+          1.3597067370350824,
+          1.3597067370350824
+        ],
+        "yaw_deg": 84.24872770161949,
+        "surface_density": 2.2,
+        "ground_friction": 0.3,
+        "contact_friction": 0.6,
+        "vertex_count": null
+      },
+      {
+        "case_id": "polygon32__seed_000",
+        "shape": "polygon32",
+        "seed": 0,
+        "position_class": "random",
+        "center": [
+          2.6982679057133643,
+          4.693024544077966
+        ],
+        "yaw_deg": 16.111286554303035,
+        "surface_density": 1.5,
+        "ground_friction": 0.45,
+        "contact_friction": 0.8,
+        "vertex_count": 32
+      },
+      {
+        "case_id": "circle__seed_001",
+        "shape": "circle",
+        "seed": 1,
+        "position_class": "edge",
+        "center": [
+          1.13,
+          4.6578133984125945
+        ],
+        "yaw_deg": 17.85163620845264,
+        "surface_density": 1.5,
+        "ground_friction": 0.45,
+        "contact_friction": 0.6,
+        "vertex_count": 96
+      },
+      {
+        "case_id": "rectangle__seed_001",
+        "shape": "rectangle",
+        "seed": 1,
+        "position_class": "corner",
+        "center": [
+          1.2283988502348748,
+          1.2283988502348748
+        ],
+        "yaw_deg": 40.78965765634334,
+        "surface_density": 0.8,
+        "ground_friction": 0.15,
+        "contact_friction": 0.8,
+        "vertex_count": null
+      },
+      {
+        "case_id": "ellipse24__seed_001",
+        "shape": "ellipse24",
+        "seed": 1,
+        "position_class": "random",
+        "center": [
+          6.6028281252897205,
+          6.138532764158672
+        ],
+        "yaw_deg": 272.8856409512105,
+        "surface_density": 2.2,
+        "ground_friction": 0.3,
+        "contact_friction": 0.4,
+        "vertex_count": 24
+      },
+      {
+        "case_id": "l_shape__seed_001",
+        "shape": "l_shape",
+        "seed": 1,
+        "position_class": "center",
+        "center": [
+          4.0,
+          4.0
+        ],
+        "yaw_deg": 336.39350147859767,
+        "surface_density": 1.5,
+        "ground_friction": 0.45,
+        "contact_friction": 0.6,
+        "vertex_count": null
+      },
+      {
+        "case_id": "u_shape__seed_001",
+        "shape": "u_shape",
+        "seed": 1,
+        "position_class": "edge",
+        "center": [
+          1.40146931829632,
+          2.802329258917546
+        ],
+        "yaw_deg": 69.6096216381834,
+        "surface_density": 0.8,
+        "ground_friction": 0.15,
+        "contact_friction": 0.8,
+        "vertex_count": 8
+      },
+      {
+        "case_id": "c_shape__seed_001",
+        "shape": "c_shape",
+        "seed": 1,
+        "position_class": "corner",
+        "center": [
+          1.40146931829632,
+          1.40146931829632
+        ],
+        "yaw_deg": 63.03263739504365,
+        "surface_density": 2.2,
+        "ground_friction": 0.3,
+        "contact_friction": 0.4,
+        "vertex_count": 8
+      },
+      {
+        "case_id": "star10__seed_001",
+        "shape": "star10",
+        "seed": 1,
+        "position_class": "random",
+        "center": [
+          1.4773544811861197,
+          5.853247982296032
+        ],
+        "yaw_deg": 270.02920599634257,
+        "surface_density": 1.5,
+        "ground_friction": 0.45,
+        "contact_friction": 0.6,
+        "vertex_count": 10
+      },
+      {
+        "case_id": "convex_random__seed_001",
+        "shape": "convex_random",
+        "seed": 1,
+        "position_class": "center",
+        "center": [
+          4.0,
+          4.0
+        ],
+        "yaw_deg": 243.95703031309742,
+        "surface_density": 0.8,
+        "ground_friction": 0.15,
+        "contact_friction": 0.8,
+        "vertex_count": 8
+      },
+      {
+        "case_id": "concave_random7__seed_001",
+        "shape": "concave_random7",
+        "seed": 1,
+        "position_class": "edge",
+        "center": [
+          1.1410719070838646,
+          3.992923814272387
+        ],
+        "yaw_deg": 194.5565936680401,
+        "surface_density": 2.2,
+        "ground_friction": 0.3,
+        "contact_friction": 0.4,
+        "vertex_count": 7
+      },
+      {
+        "case_id": "concave_random15__seed_001",
+        "shape": "concave_random15",
+        "seed": 1,
+        "position_class": "corner",
+        "center": [
+          1.264372255988567,
+          1.264372255988567
+        ],
+        "yaw_deg": 152.58934367155675,
+        "surface_density": 1.5,
+        "ground_friction": 0.45,
+        "contact_friction": 0.6,
+        "vertex_count": 15
+      },
+      {
+        "case_id": "high_aspect__seed_001",
+        "shape": "high_aspect",
+        "seed": 1,
+        "position_class": "random",
+        "center": [
+          3.785961432835393,
+          1.8345006841749205
+        ],
+        "yaw_deg": 196.75899415511842,
+        "surface_density": 0.8,
+        "ground_friction": 0.15,
+        "contact_friction": 0.8,
+        "vertex_count": null
+      },
+      {
+        "case_id": "polygon32__seed_001",
+        "shape": "polygon32",
+        "seed": 1,
+        "position_class": "center",
+        "center": [
+          4.0,
+          4.0
+        ],
+        "yaw_deg": 302.32732255598563,
+        "surface_density": 2.2,
+        "ground_friction": 0.3,
+        "contact_friction": 0.4,
+        "vertex_count": 32
+      },
+      {
+        "case_id": "circle__seed_002",
+        "shape": "circle",
+        "seed": 2,
+        "position_class": "corner",
+        "center": [
+          1.13,
+          1.13
+        ],
+        "yaw_deg": 273.3898459324699,
+        "surface_density": 2.2,
+        "ground_friction": 0.3,
+        "contact_friction": 0.8,
+        "vertex_count": 96
+      },
+      {
+        "case_id": "rectangle__seed_002",
+        "shape": "rectangle",
+        "seed": 2,
+        "position_class": "random",
+        "center": [
+          5.169848849974979,
+          2.499696696029301
+        ],
+        "yaw_deg": 241.03637329924862,
+        "surface_density": 1.5,
+        "ground_friction": 0.45,
+        "contact_friction": 0.4,
+        "vertex_count": null
+      },
+      {
+        "case_id": "ellipse24__seed_002",
+        "shape": "ellipse24",
+        "seed": 2,
+        "position_class": "center",
+        "center": [
+          4.0,
+          4.0
+        ],
+        "yaw_deg": 282.30859301854144,
+        "surface_density": 0.8,
+        "ground_friction": 0.15,
+        "contact_friction": 0.6,
+        "vertex_count": 24
+      },
+      {
+        "case_id": "l_shape__seed_002",
+        "shape": "l_shape",
+        "seed": 2,
+        "position_class": "edge",
+        "center": [
+          1.5,
+          3.768420539522949
+        ],
+        "yaw_deg": 239.30054247397902,
+        "surface_density": 2.2,
+        "ground_friction": 0.3,
+        "contact_friction": 0.8,
+        "vertex_count": null
+      },
+      {
+        "case_id": "u_shape__seed_002",
+        "shape": "u_shape",
+        "seed": 2,
+        "position_class": "corner",
+        "center": [
+          1.40146931829632,
+          1.40146931829632
+        ],
+        "yaw_deg": 199.77010392899552,
+        "surface_density": 1.5,
+        "ground_friction": 0.45,
+        "contact_friction": 0.4,
+        "vertex_count": 8
+      },
+      {
+        "case_id": "c_shape__seed_002",
+        "shape": "c_shape",
+        "seed": 2,
+        "position_class": "random",
+        "center": [
+          5.603429962288823,
+          4.925407306591992
+        ],
+        "yaw_deg": 278.39617554429293,
+        "surface_density": 0.8,
+        "ground_friction": 0.15,
+        "contact_friction": 0.6,
+        "vertex_count": 8
+      },
+      {
+        "case_id": "star10__seed_002",
+        "shape": "star10",
+        "seed": 2,
+        "position_class": "center",
+        "center": [
+          4.0,
+          4.0
+        ],
+        "yaw_deg": 347.9019967663498,
+        "surface_density": 2.2,
+        "ground_friction": 0.3,
+        "contact_friction": 0.8,
+        "vertex_count": 10
+      },
+      {
+        "case_id": "convex_random__seed_002",
+        "shape": "convex_random",
+        "seed": 2,
+        "position_class": "edge",
+        "center": [
+          1.5005037680084663,
+          2.10773375291459
+        ],
+        "yaw_deg": 337.2622368509505,
+        "surface_density": 1.5,
+        "ground_friction": 0.45,
+        "contact_friction": 0.4,
+        "vertex_count": 8
+      },
+      {
+        "case_id": "concave_random7__seed_002",
+        "shape": "concave_random7",
+        "seed": 2,
+        "position_class": "corner",
+        "center": [
+          1.2039141558505042,
+          1.2039141558505042
+        ],
+        "yaw_deg": 216.52760698992762,
+        "surface_density": 0.8,
+        "ground_friction": 0.15,
+        "contact_friction": 0.6,
+        "vertex_count": 7
+      },
+      {
+        "case_id": "concave_random15__seed_002",
+        "shape": "concave_random15",
+        "seed": 2,
+        "position_class": "random",
+        "center": [
+          2.8049086309611435,
+          3.668767638003582
+        ],
+        "yaw_deg": 309.5142270118176,
+        "surface_density": 2.2,
+        "ground_friction": 0.3,
+        "contact_friction": 0.8,
+        "vertex_count": 15
+      },
+      {
+        "case_id": "high_aspect__seed_002",
+        "shape": "high_aspect",
+        "seed": 2,
+        "position_class": "center",
+        "center": [
+          4.0,
+          4.0
+        ],
+        "yaw_deg": 219.89281769988543,
+        "surface_density": 1.5,
+        "ground_friction": 0.45,
+        "contact_friction": 0.4,
+        "vertex_count": null
+      },
+      {
+        "case_id": "polygon32__seed_002",
+        "shape": "polygon32",
+        "seed": 2,
+        "position_class": "edge",
+        "center": [
+          1.2016714585800092,
+          5.2047395474612745
+        ],
+        "yaw_deg": 99.43800797792899,
+        "surface_density": 0.8,
+        "ground_friction": 0.15,
+        "contact_friction": 0.6,
+        "vertex_count": 32
+      },
+      {
+        "case_id": "circle__seed_003",
+        "shape": "circle",
+        "seed": 3,
+        "position_class": "random",
+        "center": [
+          6.082673678513471,
+          5.149039385665354
+        ],
+        "yaw_deg": 229.42038685889761,
+        "surface_density": 0.8,
+        "ground_friction": 0.15,
+        "contact_friction": 0.4,
+        "vertex_count": 96
+      },
+      {
+        "case_id": "rectangle__seed_003",
+        "shape": "rectangle",
+        "seed": 3,
+        "position_class": "center",
+        "center": [
+          4.0,
+          4.0
+        ],
+        "yaw_deg": 204.00947278697308,
+        "surface_density": 2.2,
+        "ground_friction": 0.3,
+        "contact_friction": 0.6,
+        "vertex_count": null
+      },
+      {
+        "case_id": "ellipse24__seed_003",
+        "shape": "ellipse24",
+        "seed": 3,
+        "position_class": "edge",
+        "center": [
+          1.27,
+          5.415027408547415
+        ],
+        "yaw_deg": 28.3743237270002,
+        "surface_density": 1.5,
+        "ground_friction": 0.45,
+        "contact_friction": 0.8,
+        "vertex_count": 24
+      },
+      {
+        "case_id": "l_shape__seed_003",
+        "shape": "l_shape",
+        "seed": 3,
+        "position_class": "corner",
+        "center": [
+          1.5,
+          1.5
+        ],
+        "yaw_deg": 49.39068689768056,
+        "surface_density": 0.8,
+        "ground_friction": 0.15,
+        "contact_friction": 0.4,
+        "vertex_count": null
+      },
+      {
+        "case_id": "u_shape__seed_003",
+        "shape": "u_shape",
+        "seed": 3,
+        "position_class": "random",
+        "center": [
+          1.9340958855572767,
+          3.4952753970610972
+        ],
+        "yaw_deg": 133.9239128179114,
+        "surface_density": 2.2,
+        "ground_friction": 0.3,
+        "contact_friction": 0.6,
+        "vertex_count": 8
+      },
+      {
+        "case_id": "c_shape__seed_003",
+        "shape": "c_shape",
+        "seed": 3,
+        "position_class": "center",
+        "center": [
+          4.0,
+          4.0
+        ],
+        "yaw_deg": 0.2989584279922042,
+        "surface_density": 1.5,
+        "ground_friction": 0.45,
+        "contact_friction": 0.8,
+        "vertex_count": 8
+      },
+      {
+        "case_id": "star10__seed_003",
+        "shape": "star10",
+        "seed": 3,
+        "position_class": "edge",
+        "center": [
+          1.25,
+          5.775040387889408
+        ],
+        "yaw_deg": 320.84579223322913,
+        "surface_density": 0.8,
+        "ground_friction": 0.15,
+        "contact_friction": 0.4,
+        "vertex_count": 10
+      },
+      {
+        "case_id": "convex_random__seed_003",
+        "shape": "convex_random",
+        "seed": 3,
+        "position_class": "corner",
+        "center": [
+          1.503389873327221,
+          1.503389873327221
+        ],
+        "yaw_deg": 162.18228796349496,
+        "surface_density": 2.2,
+        "ground_friction": 0.3,
+        "contact_friction": 0.6,
+        "vertex_count": 9
+      },
+      {
+        "case_id": "concave_random7__seed_003",
+        "shape": "concave_random7",
+        "seed": 3,
+        "position_class": "random",
+        "center": [
+          3.012861082160808,
+          3.401770227243932
+        ],
+        "yaw_deg": 177.39049882168976,
+        "surface_density": 1.5,
+        "ground_friction": 0.45,
+        "contact_friction": 0.8,
+        "vertex_count": 7
+      },
+      {
+        "case_id": "concave_random15__seed_003",
+        "shape": "concave_random15",
+        "seed": 3,
+        "position_class": "center",
+        "center": [
+          4.0,
+          4.0
+        ],
+        "yaw_deg": 52.70992015071057,
+        "surface_density": 0.8,
+        "ground_friction": 0.15,
+        "contact_friction": 0.4,
+        "vertex_count": 15
+      },
+      {
+        "case_id": "high_aspect__seed_003",
+        "shape": "high_aspect",
+        "seed": 3,
+        "position_class": "edge",
+        "center": [
+          1.3597067370350824,
+          3.5319944760492903
+        ],
+        "yaw_deg": 278.4163831644996,
+        "surface_density": 2.2,
+        "ground_friction": 0.3,
+        "contact_friction": 0.6,
+        "vertex_count": null
+      },
+      {
+        "case_id": "polygon32__seed_003",
+        "shape": "polygon32",
+        "seed": 3,
+        "position_class": "corner",
+        "center": [
+          1.2092867662959141,
+          1.2092867662959141
+        ],
+        "yaw_deg": 153.61302037434476,
+        "surface_density": 1.5,
+        "ground_friction": 0.45,
+        "contact_friction": 0.8,
+        "vertex_count": 32
+      },
+      {
+        "case_id": "circle__seed_004",
+        "shape": "circle",
+        "seed": 4,
+        "position_class": "center",
+        "center": [
+          4.0,
+          4.0
+        ],
+        "yaw_deg": 183.91347533479401,
+        "surface_density": 1.5,
+        "ground_friction": 0.45,
+        "contact_friction": 0.6,
+        "vertex_count": 96
+      },
+      {
+        "case_id": "rectangle__seed_004",
+        "shape": "rectangle",
+        "seed": 4,
+        "position_class": "edge",
+        "center": [
+          1.2283988502348748,
+          4.336451428054454
+        ],
+        "yaw_deg": 272.70288371273796,
+        "surface_density": 0.8,
+        "ground_friction": 0.15,
+        "contact_friction": 0.8,
+        "vertex_count": null
+      },
+      {
+        "case_id": "ellipse24__seed_004",
+        "shape": "ellipse24",
+        "seed": 4,
+        "position_class": "corner",
+        "center": [
+          1.27,
+          1.27
+        ],
+        "yaw_deg": 287.55895913548756,
+        "surface_density": 2.2,
+        "ground_friction": 0.3,
+        "contact_friction": 0.4,
+        "vertex_count": 24
+      },
+      {
+        "case_id": "l_shape__seed_004",
+        "shape": "l_shape",
+        "seed": 4,
+        "position_class": "random",
+        "center": [
+          1.987771756740007,
+          5.848845311956271
+        ],
+        "yaw_deg": 170.3263491370353,
+        "surface_density": 1.5,
+        "ground_friction": 0.45,
+        "contact_friction": 0.6,
+        "vertex_count": null
+      },
+      {
+        "case_id": "u_shape__seed_004",
+        "shape": "u_shape",
+        "seed": 4,
+        "position_class": "center",
+        "center": [
+          4.0,
+          4.0
+        ],
+        "yaw_deg": 288.33655922770885,
+        "surface_density": 0.8,
+        "ground_friction": 0.15,
+        "contact_friction": 0.8,
+        "vertex_count": 8
+      },
+      {
+        "case_id": "c_shape__seed_004",
+        "shape": "c_shape",
+        "seed": 4,
+        "position_class": "edge",
+        "center": [
+          1.40146931829632,
+          4.137627847350327
+        ],
+        "yaw_deg": 285.07608131650414,
+        "surface_density": 2.2,
+        "ground_friction": 0.3,
+        "contact_friction": 0.4,
+        "vertex_count": 8
+      },
+      {
+        "case_id": "star10__seed_004",
+        "shape": "star10",
+        "seed": 4,
+        "position_class": "corner",
+        "center": [
+          1.25,
+          1.25
+        ],
+        "yaw_deg": 233.03288211806444,
+        "surface_density": 1.5,
+        "ground_friction": 0.45,
+        "contact_friction": 0.6,
+        "vertex_count": 10
+      },
+      {
+        "case_id": "convex_random__seed_004",
+        "shape": "convex_random",
+        "seed": 4,
+        "position_class": "random",
+        "center": [
+          2.6098714810641725,
+          3.5038151119810843
+        ],
+        "yaw_deg": 167.04533658209192,
+        "surface_density": 0.8,
+        "ground_friction": 0.15,
+        "contact_friction": 0.8,
+        "vertex_count": 8
+      },
+      {
+        "case_id": "concave_random7__seed_004",
+        "shape": "concave_random7",
+        "seed": 4,
+        "position_class": "center",
+        "center": [
+          4.0,
+          4.0
+        ],
+        "yaw_deg": 221.15948094066687,
+        "surface_density": 2.2,
+        "ground_friction": 0.3,
+        "contact_friction": 0.4,
+        "vertex_count": 7
+      },
+      {
+        "case_id": "concave_random15__seed_004",
+        "shape": "concave_random15",
+        "seed": 4,
+        "position_class": "edge",
+        "center": [
+          1.2634524492646997,
+          3.703531540160989
+        ],
+        "yaw_deg": 222.59369283622593,
+        "surface_density": 1.5,
+        "ground_friction": 0.45,
+        "contact_friction": 0.6,
+        "vertex_count": 15
+      },
+      {
+        "case_id": "high_aspect__seed_004",
+        "shape": "high_aspect",
+        "seed": 4,
+        "position_class": "corner",
+        "center": [
+          1.3597067370350824,
+          1.3597067370350824
+        ],
+        "yaw_deg": 150.39487108065967,
+        "surface_density": 0.8,
+        "ground_friction": 0.15,
+        "contact_friction": 0.8,
+        "vertex_count": null
+      },
+      {
+        "case_id": "polygon32__seed_004",
+        "shape": "polygon32",
+        "seed": 4,
+        "position_class": "random",
+        "center": [
+          6.4898751967517185,
+          1.5713863623608373
+        ],
+        "yaw_deg": 75.86887098618719,
+        "surface_density": 2.2,
+        "ground_friction": 0.3,
+        "contact_friction": 0.4,
+        "vertex_count": 32
+      }
+    ]
+  },
+  "statistics": {
+    "episodes": 60,
+    "eligible": 7,
+    "eligible_successes": 2,
+    "eligible_failures": 5,
+    "rejected": 53,
+    "P_eligible": 0.11666666666666667,
+    "P_eligible_wilson95": [
+      0.0576772064005603,
+      0.2217878802417086
+    ],
+    "P_success_given_eligible": 0.2857142857142857,
+    "P_success_given_eligible_wilson95": [
+      0.08221892400405678,
+      0.6410655481673808
+    ],
+    "P_rejected": 0.8833333333333333,
+    "P_rejected_wilson95": [
+      0.7782121197582914,
+      0.9423227935994396
+    ],
+    "task_success_all": 14,
+    "solver": {
+      "fallback_free_episodes": 58,
+      "infeasible_free_episodes": 58,
+      "rho_relaxation_free_episodes": 55
+    },
+    "runtime_fps": {
+      "min": 10.336646695340582,
+      "mean": 23.12241893127518,
+      "median": 20.978294933977924,
+      "max": 124.30207922862306
+    },
+    "failure_composition": {
+      "SUCCESS": 2,
+      "WRENCH_INFEASIBLE": 21,
+      "MAP_INCOMPLETE": 28,
+      "SOLVER_FAILURE": 2,
+      "CONTRACT_FAILURE": 5,
+      "CAGE_INFEASIBLE": 2
+    },
+    "rejection_composition": {
+      "contact_force_capacity": 42,
+      "goal_wrench_feasibility": 33,
+      "boundary_map_epsilon": 29,
+      "cage_offset_self_clearance": 5
+    },
+    "completion_time_bound": {
+      "available": false,
+      "reason": "eligible failures are right-censored; no finite completion-time bound reported",
+      "confidence": 0.95
+    }
+  },
+  "records": [
+    {
+      "case_id": "circle__seed_000",
+      "shape": "circle",
+      "seed": 0,
+      "position_class": "center",
+      "center": [
+        4.0,
+        4.0
+      ],
+      "yaw_deg": 262.54648308551936,
+      "surface_density": 0.8,
+      "ground_friction": 0.15,
+      "contact_friction": 0.4,
+      "vertex_count": 96,
+      "goal_angle_deg": -121.93613659280355,
+      "diameter_m": 1.1600000000000006,
+      "perimeter_m": 3.642784142067513,
+      "domain_eligible": true,
+      "finite_time_eligible": false,
+      "theorem_eligible": false,
+      "rejection_reasons": [],
+      "termination": "SUCCESS_HOLD",
+      "task_success": true,
+      "success_given_eligible": true,
+      "failure_class": "SUCCESS",
+      "contract_failure_reasons": [],
+      "frame": 327,
+      "wall_seconds": 9.16995740000857,
+      "fps": 35.65992574836764,
+      "J_m": 0.11866800910486552,
+      "efficiency": 0.9982848369895576,
+      "max_cross_track_error_m": 0.0069592202109874796,
+      "max_abs_rotation_deg": 4.036414647250814,
+      "max_penetration_m": 0.013971849707478418,
+      "operational_enclosure_maintained": true,
+      "fallbacks": 0,
+      "infeasible": 0,
+      "rho_relaxations": 0,
+      "phase_frames": {
+        "first_detection": 136,
+        "first_map_complete": 268,
+        "first_enclosure": 233,
+        "first_contact": 205,
+        "first_transport": 282,
+        "first_brake": 307,
+        "first_hold": 327
+      }
+    },
+    {
+      "case_id": "rectangle__seed_000",
+      "shape": "rectangle",
+      "seed": 0,
+      "position_class": "edge",
+      "center": [
+        1.2283988502348748,
+        2.281563635405675
+      ],
+      "yaw_deg": 46.50815208630955,
+      "surface_density": 2.2,
+      "ground_friction": 0.3,
+      "contact_friction": 0.6,
+      "vertex_count": null,
+      "goal_angle_deg": -121.93613659280355,
+      "diameter_m": 1.3567977004697493,
+      "perimeter_m": 3.7399999999999993,
+      "domain_eligible": false,
+      "finite_time_eligible": false,
+      "theorem_eligible": false,
+      "rejection_reasons": [
+        "contact_force_capacity",
+        "goal_wrench_feasibility"
+      ],
+      "termination": "SUCCESS_HOLD",
+      "task_success": true,
+      "success_given_eligible": false,
+      "failure_class": "WRENCH_INFEASIBLE",
+      "contract_failure_reasons": [],
+      "frame": 378,
+      "wall_seconds": 16.501481499988586,
+      "fps": 22.907034135102442,
+      "J_m": 0.07664929640054577,
+      "efficiency": 0.9999986684324335,
+      "max_cross_track_error_m": 0.005043056731283002,
+      "max_abs_rotation_deg": 5.466943362875331,
+      "max_penetration_m": 0.01325139588344626,
+      "operational_enclosure_maintained": true,
+      "fallbacks": 0,
+      "infeasible": 0,
+      "rho_relaxations": 0,
+      "phase_frames": {
+        "first_detection": 0,
+        "first_map_complete": 268,
+        "first_enclosure": 186,
+        "first_contact": 160,
+        "first_transport": 282,
+        "first_brake": 361,
+        "first_hold": 378
+      }
+    },
+    {
+      "case_id": "ellipse24__seed_000",
+      "shape": "ellipse24",
+      "seed": 0,
+      "position_class": "corner",
+      "center": [
+        1.27,
+        1.27
+      ],
+      "yaw_deg": 357.58259839781886,
+      "surface_density": 1.5,
+      "ground_friction": 0.45,
+      "contact_friction": 0.8,
+      "vertex_count": 24,
+      "goal_angle_deg": -121.93613659280355,
+      "diameter_m": 1.4399999999999997,
+      "perimeter_m": 3.6332971918598282,
+      "domain_eligible": false,
+      "finite_time_eligible": false,
+      "theorem_eligible": false,
+      "rejection_reasons": [
+        "contact_force_capacity",
+        "goal_wrench_feasibility",
+        "boundary_map_epsilon"
+      ],
+      "termination": "SUCCESS_HOLD",
+      "task_success": false,
+      "success_given_eligible": false,
+      "failure_class": "MAP_INCOMPLETE",
+      "contract_failure_reasons": [
+        "phase gate: transport started at frame 282 before enclosure at frame 342"
+      ],
+      "frame": 345,
+      "wall_seconds": 12.309041000000434,
+      "fps": 28.02817863714873,
+      "J_m": 0.0844939376158449,
+      "efficiency": 0.8859262944831582,
+      "max_cross_track_error_m": 0.04423673754886211,
+      "max_abs_rotation_deg": 2.684208339829481,
+      "max_penetration_m": 0.011088424307490685,
+      "operational_enclosure_maintained": false,
+      "fallbacks": 0,
+      "infeasible": 0,
+      "rho_relaxations": 0,
+      "phase_frames": {
+        "first_detection": 0,
+        "first_map_complete": 268,
+        "first_enclosure": 342,
+        "first_contact": 165,
+        "first_transport": 282,
+        "first_brake": 331,
+        "first_hold": 345
+      }
+    },
+    {
+      "case_id": "l_shape__seed_000",
+      "shape": "l_shape",
+      "seed": 0,
+      "position_class": "random",
+      "center": [
+        2.2463560630204813,
+        6.205947497057067
+      ],
+      "yaw_deg": 150.13354941300088,
+      "surface_density": 0.8,
+      "ground_friction": 0.15,
+      "contact_friction": 0.4,
+      "vertex_count": null,
+      "goal_angle_deg": -121.93613659280355,
+      "diameter_m": 1.6122034611053275,
+      "perimeter_m": 4.559999999999999,
+      "domain_eligible": false,
+      "finite_time_eligible": false,
+      "theorem_eligible": false,
+      "rejection_reasons": [
+        "goal_wrench_feasibility"
+      ],
+      "termination": "SUCCESS_HOLD",
+      "task_success": false,
+      "success_given_eligible": false,
+      "failure_class": "WRENCH_INFEASIBLE",
+      "contract_failure_reasons": [
+        "phase gate: transport started at frame 282 before enclosure at frame 304"
+      ],
+      "frame": 366,
+      "wall_seconds": 19.17100559998653,
+      "fps": 19.091330295175396,
+      "J_m": 0.201985689955824,
+      "efficiency": 0.7636375325515424,
+      "max_cross_track_error_m": 0.1707761664196246,
+      "max_abs_rotation_deg": 9.805539170209709,
+      "max_penetration_m": 0.014237234521568942,
+      "operational_enclosure_maintained": false,
+      "fallbacks": 0,
+      "infeasible": 0,
+      "rho_relaxations": 0,
+      "phase_frames": {
+        "first_detection": 34,
+        "first_map_complete": 268,
+        "first_enclosure": 304,
+        "first_contact": 217,
+        "first_transport": 282,
+        "first_brake": 313,
+        "first_hold": 366
+      }
+    },
+    {
+      "case_id": "u_shape__seed_000",
+      "shape": "u_shape",
+      "seed": 0,
+      "position_class": "center",
+      "center": [
+        4.0,
+        4.0
+      ],
+      "yaw_deg": 80.0081172593723,
+      "surface_density": 2.2,
+      "ground_friction": 0.3,
+      "contact_friction": 0.6,
+      "vertex_count": 8,
+      "goal_angle_deg": -121.93613659280355,
+      "diameter_m": 1.70293863659264,
+      "perimeter_m": 6.299999999999998,
+      "domain_eligible": false,
+      "finite_time_eligible": false,
+      "theorem_eligible": false,
+      "rejection_reasons": [
+        "contact_force_capacity",
+        "goal_wrench_feasibility"
+      ],
+      "termination": "SUCCESS_HOLD",
+      "task_success": true,
+      "success_given_eligible": false,
+      "failure_class": "WRENCH_INFEASIBLE",
+      "contract_failure_reasons": [],
+      "frame": 333,
+      "wall_seconds": 18.19354479998583,
+      "fps": 18.30319509809102,
+      "J_m": 0.07908240615092274,
+      "efficiency": 0.9617318177133685,
+      "max_cross_track_error_m": 0.022978247461278117,
+      "max_abs_rotation_deg": 5.143888760469052,
+      "max_penetration_m": 0.014011315933405377,
+      "operational_enclosure_maintained": true,
+      "fallbacks": 0,
+      "infeasible": 0,
+      "rho_relaxations": 0,
+      "phase_frames": {
+        "first_detection": 136,
+        "first_map_complete": 268,
+        "first_enclosure": 240,
+        "first_contact": 205,
+        "first_transport": 282,
+        "first_brake": 313,
+        "first_hold": 333
+      }
+    },
+    {
+      "case_id": "c_shape__seed_000",
+      "shape": "c_shape",
+      "seed": 0,
+      "position_class": "edge",
+      "center": [
+        1.40146931829632,
+        2.811401337562124
+      ],
+      "yaw_deg": 356.0678098233227,
+      "surface_density": 1.5,
+      "ground_friction": 0.45,
+      "contact_friction": 0.8,
+      "vertex_count": 8,
+      "goal_angle_deg": -121.93613659280355,
+      "diameter_m": 1.7029386365926402,
+      "perimeter_m": 6.6000000000000005,
+      "domain_eligible": false,
+      "finite_time_eligible": false,
+      "theorem_eligible": false,
+      "rejection_reasons": [
+        "cage_offset_self_clearance",
+        "contact_force_capacity",
+        "goal_wrench_feasibility",
+        "boundary_map_epsilon"
+      ],
+      "termination": "SUCCESS_HOLD",
+      "task_success": false,
+      "success_given_eligible": false,
+      "failure_class": "MAP_INCOMPLETE",
+      "contract_failure_reasons": [
+        "phase gate: enclosure threshold was never reached"
+      ],
+      "frame": 336,
+      "wall_seconds": 13.642692699999316,
+      "fps": 24.628569109382408,
+      "J_m": 0.08757233220178541,
+      "efficiency": 0.8859690478735225,
+      "max_cross_track_error_m": 0.05156496201187491,
+      "max_abs_rotation_deg": 2.537709960187825,
+      "max_penetration_m": 0.0103594094828387,
+      "operational_enclosure_maintained": false,
+      "fallbacks": 0,
+      "infeasible": 0,
+      "rho_relaxations": 0,
+      "phase_frames": {
+        "first_detection": 0,
+        "first_map_complete": 268,
+        "first_enclosure": null,
+        "first_contact": 268,
+        "first_transport": 282,
+        "first_brake": 316,
+        "first_hold": 336
+      }
+    },
+    {
+      "case_id": "star10__seed_000",
+      "shape": "star10",
+      "seed": 0,
+      "position_class": "corner",
+      "center": [
+        1.25,
+        1.25
+      ],
+      "yaw_deg": 129.99678586310552,
+      "surface_density": 0.8,
+      "ground_friction": 0.15,
+      "contact_friction": 0.4,
+      "vertex_count": 10,
+      "goal_angle_deg": -121.93613659280355,
+      "diameter_m": 1.331479122813215,
+      "perimeter_m": 4.69582698443549,
+      "domain_eligible": false,
+      "finite_time_eligible": false,
+      "theorem_eligible": false,
+      "rejection_reasons": [
+        "boundary_map_epsilon"
+      ],
+      "termination": "SUCCESS_HOLD",
+      "task_success": false,
+      "success_given_eligible": false,
+      "failure_class": "MAP_INCOMPLETE",
+      "contract_failure_reasons": [
+        "C3: |cargo rotation|=45.4688 deg > 30.0000 deg",
+        "phase gate: enclosure threshold was never reached"
+      ],
+      "frame": 339,
+      "wall_seconds": 16.979982299992116,
+      "fps": 19.96468512220754,
+      "J_m": 0.1833737341606494,
+      "efficiency": 0.8805738530978029,
+      "max_cross_track_error_m": 0.09868843232381562,
+      "max_abs_rotation_deg": 45.468846460075994,
+      "max_penetration_m": 0.00760668147875368,
+      "operational_enclosure_maintained": false,
+      "fallbacks": 0,
+      "infeasible": 0,
+      "rho_relaxations": 0,
+      "phase_frames": {
+        "first_detection": 0,
+        "first_map_complete": 268,
+        "first_enclosure": null,
+        "first_contact": 226,
+        "first_transport": 282,
+        "first_brake": 319,
+        "first_hold": 339
+      }
+    },
+    {
+      "case_id": "convex_random__seed_000",
+      "shape": "convex_random",
+      "seed": 0,
+      "position_class": "random",
+      "center": [
+        6.426239681609279,
+        5.198982242002602
+      ],
+      "yaw_deg": 260.91002928503667,
+      "surface_density": 2.2,
+      "ground_friction": 0.3,
+      "contact_friction": 0.6,
+      "vertex_count": 8,
+      "goal_angle_deg": -121.93613659280355,
+      "diameter_m": 1.6617348358575277,
+      "perimeter_m": 4.134419986415793,
+      "domain_eligible": false,
+      "finite_time_eligible": false,
+      "theorem_eligible": false,
+      "rejection_reasons": [
+        "contact_force_capacity",
+        "goal_wrench_feasibility"
+      ],
+      "termination": "SUCCESS_HOLD",
+      "task_success": true,
+      "success_given_eligible": false,
+      "failure_class": "WRENCH_INFEASIBLE",
+      "contract_failure_reasons": [],
+      "frame": 381,
+      "wall_seconds": 17.972582699992927,
+      "fps": 21.198956563997335,
+      "J_m": 0.0821401295460551,
+      "efficiency": 0.998731874400722,
+      "max_cross_track_error_m": 0.0070673698514124375,
+      "max_abs_rotation_deg": 10.267592427438114,
+      "max_penetration_m": 0.011215857146753105,
+      "operational_enclosure_maintained": true,
+      "fallbacks": 0,
+      "infeasible": 0,
+      "rho_relaxations": 0,
+      "phase_frames": {
+        "first_detection": 0,
+        "first_map_complete": 268,
+        "first_enclosure": 259,
+        "first_contact": 146,
+        "first_transport": 282,
+        "first_brake": 370,
+        "first_hold": 381
+      }
+    },
+    {
+      "case_id": "concave_random7__seed_000",
+      "shape": "concave_random7",
+      "seed": 0,
+      "position_class": "center",
+      "center": [
+        4.0,
+        4.0
+      ],
+      "yaw_deg": 315.6412039401132,
+      "surface_density": 1.5,
+      "ground_friction": 0.45,
+      "contact_friction": 0.8,
+      "vertex_count": 7,
+      "goal_angle_deg": -121.93613659280355,
+      "diameter_m": 1.086192929559702,
+      "perimeter_m": 3.1853458891543496,
+      "domain_eligible": false,
+      "finite_time_eligible": false,
+      "theorem_eligible": false,
+      "rejection_reasons": [
+        "contact_force_capacity",
+        "goal_wrench_feasibility"
+      ],
+      "termination": "SUCCESS_HOLD",
+      "task_success": true,
+      "success_given_eligible": false,
+      "failure_class": "WRENCH_INFEASIBLE",
+      "contract_failure_reasons": [],
+      "frame": 327,
+      "wall_seconds": 11.464575599995442,
+      "fps": 28.522643262968234,
+      "J_m": 0.07799691223429683,
+      "efficiency": 0.9952295178085073,
+      "max_cross_track_error_m": 0.00790888565475926,
+      "max_abs_rotation_deg": 3.552024947288353,
+      "max_penetration_m": 0.01264450776491699,
+      "operational_enclosure_maintained": true,
+      "fallbacks": 0,
+      "infeasible": 0,
+      "rho_relaxations": 0,
+      "phase_frames": {
+        "first_detection": 148,
+        "first_map_complete": 268,
+        "first_enclosure": 233,
+        "first_contact": 225,
+        "first_transport": 282,
+        "first_brake": 310,
+        "first_hold": 327
+      }
+    },
+    {
+      "case_id": "concave_random15__seed_000",
+      "shape": "concave_random15",
+      "seed": 0,
+      "position_class": "edge",
+      "center": [
+        1.2629494943094066,
+        5.325082126993666
+      ],
+      "yaw_deg": 202.31885129177655,
+      "surface_density": 0.8,
+      "ground_friction": 0.15,
+      "contact_friction": 0.4,
+      "vertex_count": 15,
+      "goal_angle_deg": -121.93613659280355,
+      "diameter_m": 1.3460886495707853,
+      "perimeter_m": 4.409848351372869,
+      "domain_eligible": false,
+      "finite_time_eligible": false,
+      "theorem_eligible": false,
+      "rejection_reasons": [
+        "boundary_map_epsilon"
+      ],
+      "termination": "SUCCESS_HOLD",
+      "task_success": false,
+      "success_given_eligible": false,
+      "failure_class": "MAP_INCOMPLETE",
+      "contract_failure_reasons": [
+        "phase gate: transport started at frame 282 before enclosure at frame 324"
+      ],
+      "frame": 402,
+      "wall_seconds": 23.8940019000147,
+      "fps": 16.824306019652266,
+      "J_m": 0.131058286751172,
+      "efficiency": 0.9674855832302423,
+      "max_cross_track_error_m": 0.10646726306573856,
+      "max_abs_rotation_deg": 13.772751721826982,
+      "max_penetration_m": 0.01236672732270222,
+      "operational_enclosure_maintained": false,
+      "fallbacks": 0,
+      "infeasible": 0,
+      "rho_relaxations": 0,
+      "phase_frames": {
+        "first_detection": 0,
+        "first_map_complete": 268,
+        "first_enclosure": 324,
+        "first_contact": 224,
+        "first_transport": 282,
+        "first_brake": 331,
+        "first_hold": 402
+      }
+    },
+    {
+      "case_id": "high_aspect__seed_000",
+      "shape": "high_aspect",
+      "seed": 0,
+      "position_class": "corner",
+      "center": [
+        1.3597067370350824,
+        1.3597067370350824
+      ],
+      "yaw_deg": 84.24872770161949,
+      "surface_density": 2.2,
+      "ground_friction": 0.3,
+      "contact_friction": 0.6,
+      "vertex_count": null,
+      "goal_angle_deg": -121.93613659280355,
+      "diameter_m": 1.6194134740701651,
+      "perimeter_m": 3.7000000000000006,
+      "domain_eligible": false,
+      "finite_time_eligible": false,
+      "theorem_eligible": false,
+      "rejection_reasons": [
+        "contact_force_capacity",
+        "goal_wrench_feasibility",
+        "boundary_map_epsilon"
+      ],
+      "termination": "SUCCESS_HOLD",
+      "task_success": false,
+      "success_given_eligible": false,
+      "failure_class": "MAP_INCOMPLETE",
+      "contract_failure_reasons": [
+        "phase gate: enclosure threshold was never reached"
+      ],
+      "frame": 354,
+      "wall_seconds": 11.937935599999037,
+      "fps": 29.653368208824027,
+      "J_m": 0.12714193558176104,
+      "efficiency": 0.8256284016355673,
+      "max_cross_track_error_m": 0.0868856912164149,
+      "max_abs_rotation_deg": 3.2184244751918785,
+      "max_penetration_m": 0.004491018053507129,
+      "operational_enclosure_maintained": false,
+      "fallbacks": 0,
+      "infeasible": 0,
+      "rho_relaxations": 0,
+      "phase_frames": {
+        "first_detection": 0,
+        "first_map_complete": 268,
+        "first_enclosure": null,
+        "first_contact": 74,
+        "first_transport": 282,
+        "first_brake": 331,
+        "first_hold": 354
+      }
+    },
+    {
+      "case_id": "polygon32__seed_000",
+      "shape": "polygon32",
+      "seed": 0,
+      "position_class": "random",
+      "center": [
+        2.6982679057133643,
+        4.693024544077966
+      ],
+      "yaw_deg": 16.111286554303035,
+      "surface_density": 1.5,
+      "ground_friction": 0.45,
+      "contact_friction": 0.8,
+      "vertex_count": 32,
+      "goal_angle_deg": -121.93613659280355,
+      "diameter_m": 1.2749532666134789,
+      "perimeter_m": 4.094237597726095,
+      "domain_eligible": false,
+      "finite_time_eligible": false,
+      "theorem_eligible": false,
+      "rejection_reasons": [
+        "contact_force_capacity"
+      ],
+      "termination": "SOLVER_FAILURE",
+      "task_success": false,
+      "success_given_eligible": false,
+      "failure_class": "SOLVER_FAILURE",
+      "contract_failure_reasons": [
+        "C3: 1 solver fallback(s) occurred (violates C2)",
+        "C3: min inter-agent distance 0.3058 m < d_min 0.3200 m"
+      ],
+      "frame": 426,
+      "wall_seconds": 24.703372199990554,
+      "fps": 17.244609219795624,
+      "J_m": 0.0899050025931942,
+      "efficiency": 0.775961215163478,
+      "max_cross_track_error_m": 0.07308397934170216,
+      "max_abs_rotation_deg": 11.068064779557616,
+      "max_penetration_m": 0.02538424016406654,
+      "operational_enclosure_maintained": false,
+      "fallbacks": 1,
+      "infeasible": 1,
+      "rho_relaxations": 39,
+      "phase_frames": {
+        "first_detection": 49,
+        "first_map_complete": 268,
+        "first_enclosure": 260,
+        "first_contact": 185,
+        "first_transport": 282,
+        "first_brake": 424,
+        "first_hold": null
+      }
+    },
+    {
+      "case_id": "circle__seed_001",
+      "shape": "circle",
+      "seed": 1,
+      "position_class": "edge",
+      "center": [
+        1.13,
+        4.6578133984125945
+      ],
+      "yaw_deg": 17.85163620845264,
+      "surface_density": 1.5,
+      "ground_friction": 0.45,
+      "contact_friction": 0.6,
+      "vertex_count": 96,
+      "goal_angle_deg": -84.16317165138723,
+      "diameter_m": 1.1600000000000008,
+      "perimeter_m": 3.642784142067513,
+      "domain_eligible": false,
+      "finite_time_eligible": false,
+      "theorem_eligible": false,
+      "rejection_reasons": [
+        "contact_force_capacity"
+      ],
+      "termination": "SUCCESS_HOLD",
+      "task_success": true,
+      "success_given_eligible": false,
+      "failure_class": "WRENCH_INFEASIBLE",
+      "contract_failure_reasons": [],
+      "frame": 417,
+      "wall_seconds": 20.4589065000182,
+      "fps": 20.38232101992494,
+      "J_m": 0.08657955710517545,
+      "efficiency": 0.9796815375967087,
+      "max_cross_track_error_m": 0.01772448080444863,
+      "max_abs_rotation_deg": 0.018610278307227543,
+      "max_penetration_m": 0.011979039346986603,
+      "operational_enclosure_maintained": true,
+      "fallbacks": 0,
+      "infeasible": 0,
+      "rho_relaxations": 0,
+      "phase_frames": {
+        "first_detection": 0,
+        "first_map_complete": 268,
+        "first_enclosure": 168,
+        "first_contact": 75,
+        "first_transport": 282,
+        "first_brake": 406,
+        "first_hold": 417
+      }
+    },
+    {
+      "case_id": "rectangle__seed_001",
+      "shape": "rectangle",
+      "seed": 1,
+      "position_class": "corner",
+      "center": [
+        1.2283988502348748,
+        1.2283988502348748
+      ],
+      "yaw_deg": 40.78965765634334,
+      "surface_density": 0.8,
+      "ground_friction": 0.15,
+      "contact_friction": 0.8,
+      "vertex_count": null,
+      "goal_angle_deg": -84.16317165138723,
+      "diameter_m": 1.3567977004697496,
+      "perimeter_m": 3.74,
+      "domain_eligible": false,
+      "finite_time_eligible": false,
+      "theorem_eligible": false,
+      "rejection_reasons": [
+        "boundary_map_epsilon"
+      ],
+      "termination": "SUCCESS_HOLD",
+      "task_success": false,
+      "success_given_eligible": false,
+      "failure_class": "MAP_INCOMPLETE",
+      "contract_failure_reasons": [
+        "phase gate: enclosure threshold was never reached"
+      ],
+      "frame": 339,
+      "wall_seconds": 16.09980440000072,
+      "fps": 21.056156433800204,
+      "J_m": 0.15332334659483782,
+      "efficiency": 0.7508139104078185,
+      "max_cross_track_error_m": 0.1637143703257131,
+      "max_abs_rotation_deg": 12.217217320823782,
+      "max_penetration_m": 0.012973873954680942,
+      "operational_enclosure_maintained": false,
+      "fallbacks": 0,
+      "infeasible": 0,
+      "rho_relaxations": 0,
+      "phase_frames": {
+        "first_detection": 0,
+        "first_map_complete": 268,
+        "first_enclosure": null,
+        "first_contact": 216,
+        "first_transport": 282,
+        "first_brake": 319,
+        "first_hold": 339
+      }
+    },
+    {
+      "case_id": "ellipse24__seed_001",
+      "shape": "ellipse24",
+      "seed": 1,
+      "position_class": "random",
+      "center": [
+        6.6028281252897205,
+        6.138532764158672
+      ],
+      "yaw_deg": 272.8856409512105,
+      "surface_density": 2.2,
+      "ground_friction": 0.3,
+      "contact_friction": 0.4,
+      "vertex_count": 24,
+      "goal_angle_deg": -84.16317165138723,
+      "diameter_m": 1.4399999999999997,
+      "perimeter_m": 3.6332971918598282,
+      "domain_eligible": false,
+      "finite_time_eligible": false,
+      "theorem_eligible": false,
+      "rejection_reasons": [
+        "contact_force_capacity",
+        "goal_wrench_feasibility",
+        "boundary_map_epsilon"
+      ],
+      "termination": "SUCCESS_HOLD",
+      "task_success": false,
+      "success_given_eligible": false,
+      "failure_class": "MAP_INCOMPLETE",
+      "contract_failure_reasons": [
+        "phase gate: transport started at frame 282 before enclosure at frame 338"
+      ],
+      "frame": 462,
+      "wall_seconds": 23.893476900004316,
+      "fps": 19.33582131782238,
+      "J_m": 0.07994856040020161,
+      "efficiency": 0.9874825032670317,
+      "max_cross_track_error_m": 0.012770021812171444,
+      "max_abs_rotation_deg": 1.088891011045804,
+      "max_penetration_m": 0.010313183425258499,
+      "operational_enclosure_maintained": false,
+      "fallbacks": 0,
+      "infeasible": 0,
+      "rho_relaxations": 0,
+      "phase_frames": {
+        "first_detection": 0,
+        "first_map_complete": 268,
+        "first_enclosure": 338,
+        "first_contact": 462,
+        "first_transport": 282,
+        "first_brake": 451,
+        "first_hold": 462
+      }
+    },
+    {
+      "case_id": "l_shape__seed_001",
+      "shape": "l_shape",
+      "seed": 1,
+      "position_class": "center",
+      "center": [
+        4.0,
+        4.0
+      ],
+      "yaw_deg": 336.39350147859767,
+      "surface_density": 1.5,
+      "ground_friction": 0.45,
+      "contact_friction": 0.6,
+      "vertex_count": null,
+      "goal_angle_deg": -84.16317165138723,
+      "diameter_m": 1.6122034611053278,
+      "perimeter_m": 4.56,
+      "domain_eligible": false,
+      "finite_time_eligible": false,
+      "theorem_eligible": false,
+      "rejection_reasons": [
+        "contact_force_capacity",
+        "goal_wrench_feasibility"
+      ],
+      "termination": "SUCCESS_HOLD",
+      "task_success": true,
+      "success_given_eligible": false,
+      "failure_class": "WRENCH_INFEASIBLE",
+      "contract_failure_reasons": [],
+      "frame": 354,
+      "wall_seconds": 17.93806980003137,
+      "fps": 19.734564752300212,
+      "J_m": 0.07592807821913161,
+      "efficiency": 0.9969887933154569,
+      "max_cross_track_error_m": 0.007090816759349369,
+      "max_abs_rotation_deg": 16.61457140906469,
+      "max_penetration_m": 0.015288578861418295,
+      "operational_enclosure_maintained": true,
+      "fallbacks": 0,
+      "infeasible": 0,
+      "rho_relaxations": 0,
+      "phase_frames": {
+        "first_detection": 130,
+        "first_map_complete": 268,
+        "first_enclosure": 266,
+        "first_contact": 205,
+        "first_transport": 282,
+        "first_brake": 340,
+        "first_hold": 354
+      }
+    },
+    {
+      "case_id": "u_shape__seed_001",
+      "shape": "u_shape",
+      "seed": 1,
+      "position_class": "edge",
+      "center": [
+        1.40146931829632,
+        2.802329258917546
+      ],
+      "yaw_deg": 69.6096216381834,
+      "surface_density": 0.8,
+      "ground_friction": 0.15,
+      "contact_friction": 0.8,
+      "vertex_count": 8,
+      "goal_angle_deg": -84.16317165138723,
+      "diameter_m": 1.70293863659264,
+      "perimeter_m": 6.3,
+      "domain_eligible": false,
+      "finite_time_eligible": false,
+      "theorem_eligible": false,
+      "rejection_reasons": [
+        "boundary_map_epsilon"
+      ],
+      "termination": "SUCCESS_HOLD",
+      "task_success": false,
+      "success_given_eligible": false,
+      "failure_class": "MAP_INCOMPLETE",
+      "contract_failure_reasons": [
+        "C3: directional progress J=0.0568 m < J_min=0.0750 m",
+        "phase gate: transport started at frame 282 before enclosure at frame 325"
+      ],
+      "frame": 333,
+      "wall_seconds": 21.035466199973598,
+      "fps": 15.830407409768648,
+      "J_m": 0.056835938824963975,
+      "efficiency": 0.8285414875519899,
+      "max_cross_track_error_m": 0.038409682159767464,
+      "max_abs_rotation_deg": 2.8208521258646906,
+      "max_penetration_m": 0.009825368103518722,
+      "operational_enclosure_maintained": false,
+      "fallbacks": 0,
+      "infeasible": 0,
+      "rho_relaxations": 0,
+      "phase_frames": {
+        "first_detection": 0,
+        "first_map_complete": 268,
+        "first_enclosure": 325,
+        "first_contact": null,
+        "first_transport": 282,
+        "first_brake": 301,
+        "first_hold": 333
+      }
+    },
+    {
+      "case_id": "c_shape__seed_001",
+      "shape": "c_shape",
+      "seed": 1,
+      "position_class": "corner",
+      "center": [
+        1.40146931829632,
+        1.40146931829632
+      ],
+      "yaw_deg": 63.03263739504365,
+      "surface_density": 2.2,
+      "ground_friction": 0.3,
+      "contact_friction": 0.4,
+      "vertex_count": 8,
+      "goal_angle_deg": -84.16317165138723,
+      "diameter_m": 1.70293863659264,
+      "perimeter_m": 6.6000000000000005,
+      "domain_eligible": false,
+      "finite_time_eligible": false,
+      "theorem_eligible": false,
+      "rejection_reasons": [
+        "cage_offset_self_clearance",
+        "contact_force_capacity",
+        "goal_wrench_feasibility",
+        "boundary_map_epsilon"
+      ],
+      "termination": "SUCCESS_HOLD",
+      "task_success": false,
+      "success_given_eligible": false,
+      "failure_class": "MAP_INCOMPLETE",
+      "contract_failure_reasons": [
+        "phase gate: enclosure threshold was never reached"
+      ],
+      "frame": 366,
+      "wall_seconds": 17.30507940001553,
+      "fps": 21.1498596186546,
+      "J_m": 0.09173348195768607,
+      "efficiency": 0.926011855773258,
+      "max_cross_track_error_m": 0.03926490123223614,
+      "max_abs_rotation_deg": 13.660787758049642,
+      "max_penetration_m": 0.01291640109469211,
+      "operational_enclosure_maintained": false,
+      "fallbacks": 0,
+      "infeasible": 0,
+      "rho_relaxations": 0,
+      "phase_frames": {
+        "first_detection": 0,
+        "first_map_complete": 268,
+        "first_enclosure": null,
+        "first_contact": 202,
+        "first_transport": 282,
+        "first_brake": 352,
+        "first_hold": 366
+      }
+    },
+    {
+      "case_id": "star10__seed_001",
+      "shape": "star10",
+      "seed": 1,
+      "position_class": "random",
+      "center": [
+        1.4773544811861197,
+        5.853247982296032
+      ],
+      "yaw_deg": 270.02920599634257,
+      "surface_density": 1.5,
+      "ground_friction": 0.45,
+      "contact_friction": 0.6,
+      "vertex_count": 10,
+      "goal_angle_deg": -84.16317165138723,
+      "diameter_m": 1.331479122813215,
+      "perimeter_m": 4.695826984435488,
+      "domain_eligible": false,
+      "finite_time_eligible": false,
+      "theorem_eligible": false,
+      "rejection_reasons": [
+        "contact_force_capacity",
+        "goal_wrench_feasibility",
+        "boundary_map_epsilon"
+      ],
+      "termination": "SUCCESS_HOLD",
+      "task_success": false,
+      "success_given_eligible": false,
+      "failure_class": "MAP_INCOMPLETE",
+      "contract_failure_reasons": [
+        "phase gate: transport started at frame 282 before enclosure at frame 333"
+      ],
+      "frame": 405,
+      "wall_seconds": 22.35672089998843,
+      "fps": 18.115357874338788,
+      "J_m": 0.08591248818767966,
+      "efficiency": 0.9988290584579236,
+      "max_cross_track_error_m": 0.020264216943105044,
+      "max_abs_rotation_deg": 7.635303805885489,
+      "max_penetration_m": 0.010132002783209304,
+      "operational_enclosure_maintained": false,
+      "fallbacks": 0,
+      "infeasible": 0,
+      "rho_relaxations": 0,
+      "phase_frames": {
+        "first_detection": 0,
+        "first_map_complete": 268,
+        "first_enclosure": 333,
+        "first_contact": null,
+        "first_transport": 282,
+        "first_brake": 394,
+        "first_hold": 405
+      }
+    },
+    {
+      "case_id": "convex_random__seed_001",
+      "shape": "convex_random",
+      "seed": 1,
+      "position_class": "center",
+      "center": [
+        4.0,
+        4.0
+      ],
+      "yaw_deg": 243.95703031309742,
+      "surface_density": 0.8,
+      "ground_friction": 0.15,
+      "contact_friction": 0.8,
+      "vertex_count": 8,
+      "goal_angle_deg": -84.16317165138723,
+      "diameter_m": 1.555030956886214,
+      "perimeter_m": 4.3435245265930575,
+      "domain_eligible": false,
+      "finite_time_eligible": false,
+      "theorem_eligible": false,
+      "rejection_reasons": [
+        "contact_force_capacity"
+      ],
+      "termination": "SUCCESS_HOLD",
+      "task_success": true,
+      "success_given_eligible": false,
+      "failure_class": "WRENCH_INFEASIBLE",
+      "contract_failure_reasons": [],
+      "frame": 333,
+      "wall_seconds": 14.925375199993141,
+      "fps": 22.31099691216828,
+      "J_m": 0.1110795659411784,
+      "efficiency": 0.9998579394524737,
+      "max_cross_track_error_m": 0.011026402739463332,
+      "max_abs_rotation_deg": 3.7328069324834594,
+      "max_penetration_m": 0.022383545009404454,
+      "operational_enclosure_maintained": true,
+      "fallbacks": 0,
+      "infeasible": 0,
+      "rho_relaxations": 15,
+      "phase_frames": {
+        "first_detection": 127,
+        "first_map_complete": 268,
+        "first_enclosure": 236,
+        "first_contact": 201,
+        "first_transport": 282,
+        "first_brake": 301,
+        "first_hold": 333
+      }
+    },
+    {
+      "case_id": "concave_random7__seed_001",
+      "shape": "concave_random7",
+      "seed": 1,
+      "position_class": "edge",
+      "center": [
+        1.1410719070838646,
+        3.992923814272387
+      ],
+      "yaw_deg": 194.5565936680401,
+      "surface_density": 2.2,
+      "ground_friction": 0.3,
+      "contact_friction": 0.4,
+      "vertex_count": 7,
+      "goal_angle_deg": -84.16317165138723,
+      "diameter_m": 1.0497785226238223,
+      "perimeter_m": 2.964503111909454,
+      "domain_eligible": false,
+      "finite_time_eligible": false,
+      "theorem_eligible": false,
+      "rejection_reasons": [
+        "contact_force_capacity",
+        "goal_wrench_feasibility",
+        "boundary_map_epsilon"
+      ],
+      "termination": "SUCCESS_HOLD",
+      "task_success": false,
+      "success_given_eligible": false,
+      "failure_class": "MAP_INCOMPLETE",
+      "contract_failure_reasons": [
+        "C3: directional progress J=0.0679 m < J_min=0.0750 m",
+        "phase gate: transport started at frame 282 before enclosure at frame 330"
+      ],
+      "frame": 408,
+      "wall_seconds": 23.313087800052017,
+      "fps": 17.500899215894073,
+      "J_m": 0.06789673911011351,
+      "efficiency": 0.9589374088190917,
+      "max_cross_track_error_m": 0.02008131327292257,
+      "max_abs_rotation_deg": 4.014167131585103,
+      "max_penetration_m": 0.007638811231854947,
+      "operational_enclosure_maintained": false,
+      "fallbacks": 0,
+      "infeasible": 0,
+      "rho_relaxations": 0,
+      "phase_frames": {
+        "first_detection": 0,
+        "first_map_complete": 268,
+        "first_enclosure": 330,
+        "first_contact": 80,
+        "first_transport": 282,
+        "first_brake": 394,
+        "first_hold": 408
+      }
+    },
+    {
+      "case_id": "concave_random15__seed_001",
+      "shape": "concave_random15",
+      "seed": 1,
+      "position_class": "corner",
+      "center": [
+        1.264372255988567,
+        1.264372255988567
+      ],
+      "yaw_deg": 152.58934367155675,
+      "surface_density": 1.5,
+      "ground_friction": 0.45,
+      "contact_friction": 0.6,
+      "vertex_count": 15,
+      "goal_angle_deg": -84.16317165138723,
+      "diameter_m": 1.3369572413545319,
+      "perimeter_m": 5.0732413321583785,
+      "domain_eligible": false,
+      "finite_time_eligible": false,
+      "theorem_eligible": false,
+      "rejection_reasons": [
+        "contact_force_capacity",
+        "goal_wrench_feasibility",
+        "boundary_map_epsilon"
+      ],
+      "termination": "SUCCESS_HOLD",
+      "task_success": false,
+      "success_given_eligible": false,
+      "failure_class": "MAP_INCOMPLETE",
+      "contract_failure_reasons": [
+        "phase gate: transport started at frame 282 before enclosure at frame 333"
+      ],
+      "frame": 348,
+      "wall_seconds": 16.104527699993923,
+      "fps": 21.60882991931091,
+      "J_m": 0.09908728122742248,
+      "efficiency": 0.871349926118519,
+      "max_cross_track_error_m": 0.06059508275992092,
+      "max_abs_rotation_deg": 31.306230665611107,
+      "max_penetration_m": 0.013728423152167518,
+      "operational_enclosure_maintained": false,
+      "fallbacks": 0,
+      "infeasible": 0,
+      "rho_relaxations": 0,
+      "phase_frames": {
+        "first_detection": 0,
+        "first_map_complete": 268,
+        "first_enclosure": 333,
+        "first_contact": 175,
+        "first_transport": 282,
+        "first_brake": 304,
+        "first_hold": 348
+      }
+    },
+    {
+      "case_id": "high_aspect__seed_001",
+      "shape": "high_aspect",
+      "seed": 1,
+      "position_class": "random",
+      "center": [
+        3.785961432835393,
+        1.8345006841749205
+      ],
+      "yaw_deg": 196.75899415511842,
+      "surface_density": 0.8,
+      "ground_friction": 0.15,
+      "contact_friction": 0.8,
+      "vertex_count": null,
+      "goal_angle_deg": -84.16317165138723,
+      "diameter_m": 1.6194134740701647,
+      "perimeter_m": 3.6999999999999993,
+      "domain_eligible": false,
+      "finite_time_eligible": false,
+      "theorem_eligible": false,
+      "rejection_reasons": [
+        "boundary_map_epsilon"
+      ],
+      "termination": "SUCCESS_HOLD",
+      "task_success": false,
+      "success_given_eligible": false,
+      "failure_class": "MAP_INCOMPLETE",
+      "contract_failure_reasons": [
+        "C3: directional progress J=0.5721 m > J_max=0.2500 m"
+      ],
+      "frame": 402,
+      "wall_seconds": 17.643832300032955,
+      "fps": 22.784165773285498,
+      "J_m": 0.572057989691829,
+      "efficiency": 0.990884334505147,
+      "max_cross_track_error_m": 0.07777397530328088,
+      "max_abs_rotation_deg": 9.797089320642648,
+      "max_penetration_m": 0.0064432125210164,
+      "operational_enclosure_maintained": true,
+      "fallbacks": 0,
+      "infeasible": 0,
+      "rho_relaxations": 0,
+      "phase_frames": {
+        "first_detection": 112,
+        "first_map_complete": 268,
+        "first_enclosure": 231,
+        "first_contact": null,
+        "first_transport": 282,
+        "first_brake": 367,
+        "first_hold": 402
+      }
+    },
+    {
+      "case_id": "polygon32__seed_001",
+      "shape": "polygon32",
+      "seed": 1,
+      "position_class": "center",
+      "center": [
+        4.0,
+        4.0
+      ],
+      "yaw_deg": 302.32732255598563,
+      "surface_density": 2.2,
+      "ground_friction": 0.3,
+      "contact_friction": 0.4,
+      "vertex_count": 32,
+      "goal_angle_deg": -84.16317165138723,
+      "diameter_m": 1.2610741676934616,
+      "perimeter_m": 4.148777522806908,
+      "domain_eligible": false,
+      "finite_time_eligible": false,
+      "theorem_eligible": false,
+      "rejection_reasons": [
+        "contact_force_capacity"
+      ],
+      "termination": "SUCCESS_HOLD",
+      "task_success": true,
+      "success_given_eligible": false,
+      "failure_class": "WRENCH_INFEASIBLE",
+      "contract_failure_reasons": [],
+      "frame": 354,
+      "wall_seconds": 15.160512899979949,
+      "fps": 23.35013349056734,
+      "J_m": 0.07772023208443928,
+      "efficiency": 0.9597823899711262,
+      "max_cross_track_error_m": 0.022733869690860168,
+      "max_abs_rotation_deg": 2.173134855528918,
+      "max_penetration_m": 0.016692472192192415,
+      "operational_enclosure_maintained": true,
+      "fallbacks": 0,
+      "infeasible": 0,
+      "rho_relaxations": 18,
+      "phase_frames": {
+        "first_detection": 136,
+        "first_map_complete": 268,
+        "first_enclosure": 228,
+        "first_contact": 205,
+        "first_transport": 282,
+        "first_brake": 340,
+        "first_hold": 354
+      }
+    },
+    {
+      "case_id": "circle__seed_002",
+      "shape": "circle",
+      "seed": 2,
+      "position_class": "corner",
+      "center": [
+        1.13,
+        1.13
+      ],
+      "yaw_deg": 273.3898459324699,
+      "surface_density": 2.2,
+      "ground_friction": 0.3,
+      "contact_friction": 0.8,
+      "vertex_count": 96,
+      "goal_angle_deg": 150.85658010298832,
+      "diameter_m": 1.1600000000000001,
+      "perimeter_m": 3.642784142067513,
+      "domain_eligible": false,
+      "finite_time_eligible": false,
+      "theorem_eligible": false,
+      "rejection_reasons": [
+        "contact_force_capacity",
+        "boundary_map_epsilon"
+      ],
+      "termination": "SUCCESS_HOLD",
+      "task_success": false,
+      "success_given_eligible": false,
+      "failure_class": "MAP_INCOMPLETE",
+      "contract_failure_reasons": [
+        "phase gate: transport started at frame 282 before enclosure at frame 357"
+      ],
+      "frame": 480,
+      "wall_seconds": 22.125228300050367,
+      "fps": 21.694691394389242,
+      "J_m": 0.08316415027279603,
+      "efficiency": 0.9196208990214694,
+      "max_cross_track_error_m": 0.03552275406364859,
+      "max_abs_rotation_deg": 0.49971864655416876,
+      "max_penetration_m": 0.01175641411456707,
+      "operational_enclosure_maintained": false,
+      "fallbacks": 0,
+      "infeasible": 0,
+      "rho_relaxations": 0,
+      "phase_frames": {
+        "first_detection": 0,
+        "first_map_complete": 268,
+        "first_enclosure": 357,
+        "first_contact": 265,
+        "first_transport": 282,
+        "first_brake": 463,
+        "first_hold": 480
+      }
+    },
+    {
+      "case_id": "rectangle__seed_002",
+      "shape": "rectangle",
+      "seed": 2,
+      "position_class": "random",
+      "center": [
+        5.169848849974979,
+        2.499696696029301
+      ],
+      "yaw_deg": 241.03637329924862,
+      "surface_density": 1.5,
+      "ground_friction": 0.45,
+      "contact_friction": 0.4,
+      "vertex_count": null,
+      "goal_angle_deg": 150.85658010298832,
+      "diameter_m": 1.3567977004697491,
+      "perimeter_m": 3.739999999999998,
+      "domain_eligible": false,
+      "finite_time_eligible": false,
+      "theorem_eligible": false,
+      "rejection_reasons": [
+        "contact_force_capacity",
+        "goal_wrench_feasibility"
+      ],
+      "termination": "SUCCESS_HOLD",
+      "task_success": false,
+      "success_given_eligible": false,
+      "failure_class": "WRENCH_INFEASIBLE",
+      "contract_failure_reasons": [
+        "phase gate: transport started at frame 282 before enclosure at frame 298"
+      ],
+      "frame": 330,
+      "wall_seconds": 12.508494800014887,
+      "fps": 26.382071166516955,
+      "J_m": 0.08124236668951622,
+      "efficiency": 0.9996168020306677,
+      "max_cross_track_error_m": 0.006726448857249743,
+      "max_abs_rotation_deg": 7.385342748196103,
+      "max_penetration_m": 0.013920371307980184,
+      "operational_enclosure_maintained": false,
+      "fallbacks": 0,
+      "infeasible": 0,
+      "rho_relaxations": 0,
+      "phase_frames": {
+        "first_detection": 61,
+        "first_map_complete": 268,
+        "first_enclosure": 298,
+        "first_contact": 272,
+        "first_transport": 282,
+        "first_brake": 316,
+        "first_hold": 330
+      }
+    },
+    {
+      "case_id": "ellipse24__seed_002",
+      "shape": "ellipse24",
+      "seed": 2,
+      "position_class": "center",
+      "center": [
+        4.0,
+        4.0
+      ],
+      "yaw_deg": 282.30859301854144,
+      "surface_density": 0.8,
+      "ground_friction": 0.15,
+      "contact_friction": 0.6,
+      "vertex_count": 24,
+      "goal_angle_deg": 150.85658010298832,
+      "diameter_m": 1.44,
+      "perimeter_m": 3.6332971918598282,
+      "domain_eligible": true,
+      "finite_time_eligible": false,
+      "theorem_eligible": false,
+      "rejection_reasons": [],
+      "termination": "SUCCESS_HOLD",
+      "task_success": false,
+      "success_given_eligible": false,
+      "failure_class": "CONTRACT_FAILURE",
+      "contract_failure_reasons": [
+        "C3: directional progress J=0.4448 m > J_max=0.2500 m"
+      ],
+      "frame": 372,
+      "wall_seconds": 17.40398990001995,
+      "fps": 21.37440909452456,
+      "J_m": 0.4447633830466002,
+      "efficiency": 0.995843783074249,
+      "max_cross_track_error_m": 0.04067711887373665,
+      "max_abs_rotation_deg": 8.198946611279917,
+      "max_penetration_m": 0.013668276362281434,
+      "operational_enclosure_maintained": true,
+      "fallbacks": 0,
+      "infeasible": 0,
+      "rho_relaxations": 0,
+      "phase_frames": {
+        "first_detection": 148,
+        "first_map_complete": 268,
+        "first_enclosure": 239,
+        "first_contact": 214,
+        "first_transport": 282,
+        "first_brake": 343,
+        "first_hold": 372
+      }
+    },
+    {
+      "case_id": "l_shape__seed_002",
+      "shape": "l_shape",
+      "seed": 2,
+      "position_class": "edge",
+      "center": [
+        1.5,
+        3.768420539522949
+      ],
+      "yaw_deg": 239.30054247397902,
+      "surface_density": 2.2,
+      "ground_friction": 0.3,
+      "contact_friction": 0.8,
+      "vertex_count": null,
+      "goal_angle_deg": 150.85658010298832,
+      "diameter_m": 1.6122034611053282,
+      "perimeter_m": 4.56,
+      "domain_eligible": false,
+      "finite_time_eligible": false,
+      "theorem_eligible": false,
+      "rejection_reasons": [
+        "contact_force_capacity",
+        "goal_wrench_feasibility"
+      ],
+      "termination": "SUCCESS_HOLD",
+      "task_success": false,
+      "success_given_eligible": false,
+      "failure_class": "WRENCH_INFEASIBLE",
+      "contract_failure_reasons": [
+        "C3: directional progress J=0.0683 m < J_min=0.0750 m",
+        "phase gate: transport started at frame 282 before enclosure at frame 317"
+      ],
+      "frame": 441,
+      "wall_seconds": 37.61949030001415,
+      "fps": 11.722646864246167,
+      "J_m": 0.06826245131578614,
+      "efficiency": 0.7768085964771821,
+      "max_cross_track_error_m": 0.05533843995428324,
+      "max_abs_rotation_deg": 21.408700401499306,
+      "max_penetration_m": 0.012565557456479498,
+      "operational_enclosure_maintained": false,
+      "fallbacks": 0,
+      "infeasible": 0,
+      "rho_relaxations": 0,
+      "phase_frames": {
+        "first_detection": 0,
+        "first_map_complete": 268,
+        "first_enclosure": 317,
+        "first_contact": 134,
+        "first_transport": 282,
+        "first_brake": 430,
+        "first_hold": 441
+      }
+    },
+    {
+      "case_id": "u_shape__seed_002",
+      "shape": "u_shape",
+      "seed": 2,
+      "position_class": "corner",
+      "center": [
+        1.40146931829632,
+        1.40146931829632
+      ],
+      "yaw_deg": 199.77010392899552,
+      "surface_density": 1.5,
+      "ground_friction": 0.45,
+      "contact_friction": 0.4,
+      "vertex_count": 8,
+      "goal_angle_deg": 150.85658010298832,
+      "diameter_m": 1.7029386365926402,
+      "perimeter_m": 6.300000000000001,
+      "domain_eligible": false,
+      "finite_time_eligible": false,
+      "theorem_eligible": false,
+      "rejection_reasons": [
+        "contact_force_capacity",
+        "goal_wrench_feasibility",
+        "boundary_map_epsilon"
+      ],
+      "termination": "SUCCESS_HOLD",
+      "task_success": false,
+      "success_given_eligible": false,
+      "failure_class": "MAP_INCOMPLETE",
+      "contract_failure_reasons": [
+        "phase gate: enclosure threshold was never reached"
+      ],
+      "frame": 435,
+      "wall_seconds": 20.81296549999388,
+      "fps": 20.900433434155644,
+      "J_m": 0.07805090670897057,
+      "efficiency": 0.8664058160519957,
+      "max_cross_track_error_m": 0.04498351715481215,
+      "max_abs_rotation_deg": 0.2929455858071694,
+      "max_penetration_m": 0.01122124966632368,
+      "operational_enclosure_maintained": false,
+      "fallbacks": 0,
+      "infeasible": 0,
+      "rho_relaxations": 0,
+      "phase_frames": {
+        "first_detection": 0,
+        "first_map_complete": 268,
+        "first_enclosure": null,
+        "first_contact": null,
+        "first_transport": 282,
+        "first_brake": 424,
+        "first_hold": 435
+      }
+    },
+    {
+      "case_id": "c_shape__seed_002",
+      "shape": "c_shape",
+      "seed": 2,
+      "position_class": "random",
+      "center": [
+        5.603429962288823,
+        4.925407306591992
+      ],
+      "yaw_deg": 278.39617554429293,
+      "surface_density": 0.8,
+      "ground_friction": 0.15,
+      "contact_friction": 0.6,
+      "vertex_count": 8,
+      "goal_angle_deg": 150.85658010298832,
+      "diameter_m": 1.702938636592641,
+      "perimeter_m": 6.6000000000000005,
+      "domain_eligible": false,
+      "finite_time_eligible": false,
+      "theorem_eligible": false,
+      "rejection_reasons": [
+        "cage_offset_self_clearance"
+      ],
+      "termination": "SUCCESS_HOLD",
+      "task_success": false,
+      "success_given_eligible": false,
+      "failure_class": "CAGE_INFEASIBLE",
+      "contract_failure_reasons": [
+        "phase gate: enclosure threshold was never reached"
+      ],
+      "frame": 336,
+      "wall_seconds": 26.351581000024453,
+      "fps": 12.750658110406667,
+      "J_m": 0.08035066551072226,
+      "efficiency": 0.9853593310938125,
+      "max_cross_track_error_m": 0.02505768601673089,
+      "max_abs_rotation_deg": 28.471783589756956,
+      "max_penetration_m": 0.014040007282062478,
+      "operational_enclosure_maintained": false,
+      "fallbacks": 0,
+      "infeasible": 0,
+      "rho_relaxations": 0,
+      "phase_frames": {
+        "first_detection": 31,
+        "first_map_complete": 268,
+        "first_enclosure": null,
+        "first_contact": 191,
+        "first_transport": 282,
+        "first_brake": 301,
+        "first_hold": 336
+      }
+    },
+    {
+      "case_id": "star10__seed_002",
+      "shape": "star10",
+      "seed": 2,
+      "position_class": "center",
+      "center": [
+        4.0,
+        4.0
+      ],
+      "yaw_deg": 347.9019967663498,
+      "surface_density": 2.2,
+      "ground_friction": 0.3,
+      "contact_friction": 0.8,
+      "vertex_count": 10,
+      "goal_angle_deg": 150.85658010298832,
+      "diameter_m": 1.3314791228132152,
+      "perimeter_m": 4.69582698443549,
+      "domain_eligible": false,
+      "finite_time_eligible": false,
+      "theorem_eligible": false,
+      "rejection_reasons": [
+        "contact_force_capacity",
+        "goal_wrench_feasibility"
+      ],
+      "termination": "SUCCESS_HOLD",
+      "task_success": true,
+      "success_given_eligible": false,
+      "failure_class": "WRENCH_INFEASIBLE",
+      "contract_failure_reasons": [],
+      "frame": 342,
+      "wall_seconds": 18.154890300007537,
+      "fps": 18.837899560310646,
+      "J_m": 0.08164082994794623,
+      "efficiency": 0.9596146471311082,
+      "max_cross_track_error_m": 0.023933588636288063,
+      "max_abs_rotation_deg": 7.730924769888741,
+      "max_penetration_m": 0.018993439591180994,
+      "operational_enclosure_maintained": true,
+      "fallbacks": 0,
+      "infeasible": 0,
+      "rho_relaxations": 0,
+      "phase_frames": {
+        "first_detection": 133,
+        "first_map_complete": 268,
+        "first_enclosure": 237,
+        "first_contact": 215,
+        "first_transport": 282,
+        "first_brake": 325,
+        "first_hold": 342
+      }
+    },
+    {
+      "case_id": "convex_random__seed_002",
+      "shape": "convex_random",
+      "seed": 2,
+      "position_class": "edge",
+      "center": [
+        1.5005037680084663,
+        2.10773375291459
+      ],
+      "yaw_deg": 337.2622368509505,
+      "surface_density": 1.5,
+      "ground_friction": 0.45,
+      "contact_friction": 0.4,
+      "vertex_count": 8,
+      "goal_angle_deg": 150.85658010298832,
+      "diameter_m": 1.8671603669337489,
+      "perimeter_m": 4.937029918310841,
+      "domain_eligible": false,
+      "finite_time_eligible": false,
+      "theorem_eligible": false,
+      "rejection_reasons": [
+        "contact_force_capacity",
+        "goal_wrench_feasibility",
+        "boundary_map_epsilon"
+      ],
+      "termination": "SUCCESS_HOLD",
+      "task_success": false,
+      "success_given_eligible": false,
+      "failure_class": "MAP_INCOMPLETE",
+      "contract_failure_reasons": [
+        "phase gate: transport started at frame 282 before enclosure at frame 336"
+      ],
+      "frame": 603,
+      "wall_seconds": 40.76267799997004,
+      "fps": 14.79294368246471,
+      "J_m": 0.0773293302450559,
+      "efficiency": 0.972168478969247,
+      "max_cross_track_error_m": 0.01863559186986055,
+      "max_abs_rotation_deg": 0.0,
+      "max_penetration_m": 0.012162111977768869,
+      "operational_enclosure_maintained": false,
+      "fallbacks": 0,
+      "infeasible": 0,
+      "rho_relaxations": 0,
+      "phase_frames": {
+        "first_detection": 0,
+        "first_map_complete": 268,
+        "first_enclosure": 336,
+        "first_contact": 516,
+        "first_transport": 282,
+        "first_brake": 589,
+        "first_hold": 603
+      }
+    },
+    {
+      "case_id": "concave_random7__seed_002",
+      "shape": "concave_random7",
+      "seed": 2,
+      "position_class": "corner",
+      "center": [
+        1.2039141558505042,
+        1.2039141558505042
+      ],
+      "yaw_deg": 216.52760698992762,
+      "surface_density": 0.8,
+      "ground_friction": 0.15,
+      "contact_friction": 0.6,
+      "vertex_count": 7,
+      "goal_angle_deg": 150.85658010298832,
+      "diameter_m": 1.0876368503392826,
+      "perimeter_m": 2.878084170040788,
+      "domain_eligible": true,
+      "finite_time_eligible": false,
+      "theorem_eligible": false,
+      "rejection_reasons": [],
+      "termination": "SUCCESS_HOLD",
+      "task_success": false,
+      "success_given_eligible": false,
+      "failure_class": "CONTRACT_FAILURE",
+      "contract_failure_reasons": [
+        "C3: progress efficiency J/||dx||=0.4702 < 0.55 (||dx||=0.2063 m)",
+        "phase gate: transport started at frame 282 before enclosure at frame 317"
+      ],
+      "frame": 381,
+      "wall_seconds": 17.9435022000107,
+      "fps": 21.233313081978658,
+      "J_m": 0.09698593580679428,
+      "efficiency": 0.4701853550549945,
+      "max_cross_track_error_m": 0.1998376927746399,
+      "max_abs_rotation_deg": 10.247626704512703,
+      "max_penetration_m": 0.010596448567262079,
+      "operational_enclosure_maintained": false,
+      "fallbacks": 0,
+      "infeasible": 0,
+      "rho_relaxations": 0,
+      "phase_frames": {
+        "first_detection": 0,
+        "first_map_complete": 268,
+        "first_enclosure": 317,
+        "first_contact": 246,
+        "first_transport": 282,
+        "first_brake": 370,
+        "first_hold": 381
+      }
+    },
+    {
+      "case_id": "concave_random15__seed_002",
+      "shape": "concave_random15",
+      "seed": 2,
+      "position_class": "random",
+      "center": [
+        2.8049086309611435,
+        3.668767638003582
+      ],
+      "yaw_deg": 309.5142270118176,
+      "surface_density": 2.2,
+      "ground_friction": 0.3,
+      "contact_friction": 0.8,
+      "vertex_count": 15,
+      "goal_angle_deg": 150.85658010298832,
+      "diameter_m": 1.274883334144826,
+      "perimeter_m": 4.350297980060474,
+      "domain_eligible": false,
+      "finite_time_eligible": false,
+      "theorem_eligible": false,
+      "rejection_reasons": [
+        "contact_force_capacity",
+        "goal_wrench_feasibility"
+      ],
+      "termination": "SUCCESS_HOLD",
+      "task_success": false,
+      "success_given_eligible": false,
+      "failure_class": "WRENCH_INFEASIBLE",
+      "contract_failure_reasons": [
+        "C3: |cargo rotation|=37.1484 deg > 30.0000 deg"
+      ],
+      "frame": 432,
+      "wall_seconds": 29.969814100011718,
+      "fps": 14.414503825695439,
+      "J_m": 0.08189761362661749,
+      "efficiency": 0.8255626023235195,
+      "max_cross_track_error_m": 0.05630861394002429,
+      "max_abs_rotation_deg": 39.63346499235554,
+      "max_penetration_m": 0.019234355164333333,
+      "operational_enclosure_maintained": true,
+      "fallbacks": 0,
+      "infeasible": 0,
+      "rho_relaxations": 0,
+      "phase_frames": {
+        "first_detection": 58,
+        "first_map_complete": 268,
+        "first_enclosure": 240,
+        "first_contact": 223,
+        "first_transport": 282,
+        "first_brake": 421,
+        "first_hold": 432
+      }
+    },
+    {
+      "case_id": "high_aspect__seed_002",
+      "shape": "high_aspect",
+      "seed": 2,
+      "position_class": "center",
+      "center": [
+        4.0,
+        4.0
+      ],
+      "yaw_deg": 219.89281769988543,
+      "surface_density": 1.5,
+      "ground_friction": 0.45,
+      "contact_friction": 0.4,
+      "vertex_count": null,
+      "goal_angle_deg": 150.85658010298832,
+      "diameter_m": 1.619413474070165,
+      "perimeter_m": 3.6999999999999997,
+      "domain_eligible": false,
+      "finite_time_eligible": false,
+      "theorem_eligible": false,
+      "rejection_reasons": [
+        "contact_force_capacity",
+        "goal_wrench_feasibility"
+      ],
+      "termination": "SUCCESS_HOLD",
+      "task_success": false,
+      "success_given_eligible": false,
+      "failure_class": "WRENCH_INFEASIBLE",
+      "contract_failure_reasons": [
+        "C3: directional progress J=0.0723 m < J_min=0.0750 m"
+      ],
+      "frame": 327,
+      "wall_seconds": 13.291836500051431,
+      "fps": 24.6015665328666,
+      "J_m": 0.07225171504993558,
+      "efficiency": 0.9079858987254023,
+      "max_cross_track_error_m": 0.033697270267729854,
+      "max_abs_rotation_deg": 4.863559306276184,
+      "max_penetration_m": 0.012507879945564016,
+      "operational_enclosure_maintained": true,
+      "fallbacks": 0,
+      "infeasible": 0,
+      "rho_relaxations": 0,
+      "phase_frames": {
+        "first_detection": 136,
+        "first_map_complete": 268,
+        "first_enclosure": 230,
+        "first_contact": 224,
+        "first_transport": 282,
+        "first_brake": 307,
+        "first_hold": 327
+      }
+    },
+    {
+      "case_id": "polygon32__seed_002",
+      "shape": "polygon32",
+      "seed": 2,
+      "position_class": "edge",
+      "center": [
+        1.2016714585800092,
+        5.2047395474612745
+      ],
+      "yaw_deg": 99.43800797792899,
+      "surface_density": 0.8,
+      "ground_friction": 0.15,
+      "contact_friction": 0.6,
+      "vertex_count": 32,
+      "goal_angle_deg": 150.85658010298832,
+      "diameter_m": 1.279203797207768,
+      "perimeter_m": 4.105785475087661,
+      "domain_eligible": false,
+      "finite_time_eligible": false,
+      "theorem_eligible": false,
+      "rejection_reasons": [
+        "boundary_map_epsilon"
+      ],
+      "termination": "SUCCESS_HOLD",
+      "task_success": false,
+      "success_given_eligible": false,
+      "failure_class": "MAP_INCOMPLETE",
+      "contract_failure_reasons": [
+        "C3: |cargo rotation|=30.4875 deg > 30.0000 deg",
+        "phase gate: enclosure threshold was never reached"
+      ],
+      "frame": 345,
+      "wall_seconds": 14.796530299994629,
+      "fps": 23.316277059908106,
+      "J_m": 0.17367846352770727,
+      "efficiency": 0.9877406700523215,
+      "max_cross_track_error_m": 0.046542262897155934,
+      "max_abs_rotation_deg": 31.077526533209586,
+      "max_penetration_m": 0.006034087083614387,
+      "operational_enclosure_maintained": false,
+      "fallbacks": 0,
+      "infeasible": 0,
+      "rho_relaxations": 0,
+      "phase_frames": {
+        "first_detection": 0,
+        "first_map_complete": 268,
+        "first_enclosure": null,
+        "first_contact": null,
+        "first_transport": 282,
+        "first_brake": 316,
+        "first_hold": 345
+      }
+    },
+    {
+      "case_id": "circle__seed_003",
+      "shape": "circle",
+      "seed": 3,
+      "position_class": "random",
+      "center": [
+        6.082673678513471,
+        5.149039385665354
+      ],
+      "yaw_deg": 229.42038685889761,
+      "surface_density": 0.8,
+      "ground_friction": 0.15,
+      "contact_friction": 0.4,
+      "vertex_count": 96,
+      "goal_angle_deg": -72.63351417479517,
+      "diameter_m": 1.1600000000000008,
+      "perimeter_m": 3.642784142067513,
+      "domain_eligible": true,
+      "finite_time_eligible": false,
+      "theorem_eligible": false,
+      "rejection_reasons": [],
+      "termination": "SUCCESS_HOLD",
+      "task_success": false,
+      "success_given_eligible": false,
+      "failure_class": "CONTRACT_FAILURE",
+      "contract_failure_reasons": [
+        "C3: directional progress J=0.5962 m > J_max=0.2500 m",
+        "phase gate: transport started at frame 282 before enclosure at frame 294"
+      ],
+      "frame": 459,
+      "wall_seconds": 16.405804400041234,
+      "fps": 27.977902747569413,
+      "J_m": 0.5962184850563189,
+      "efficiency": 0.7996620112274576,
+      "max_cross_track_error_m": 0.4476886676319199,
+      "max_abs_rotation_deg": 14.73893068041965,
+      "max_penetration_m": 0.011200204140117076,
+      "operational_enclosure_maintained": false,
+      "fallbacks": 0,
+      "infeasible": 0,
+      "rho_relaxations": 0,
+      "phase_frames": {
+        "first_detection": 0,
+        "first_map_complete": 268,
+        "first_enclosure": 294,
+        "first_contact": 266,
+        "first_transport": 282,
+        "first_brake": 394,
+        "first_hold": 459
+      }
+    },
+    {
+      "case_id": "rectangle__seed_003",
+      "shape": "rectangle",
+      "seed": 3,
+      "position_class": "center",
+      "center": [
+        4.0,
+        4.0
+      ],
+      "yaw_deg": 204.00947278697308,
+      "surface_density": 2.2,
+      "ground_friction": 0.3,
+      "contact_friction": 0.6,
+      "vertex_count": null,
+      "goal_angle_deg": -72.63351417479517,
+      "diameter_m": 1.3567977004697498,
+      "perimeter_m": 3.740000000000001,
+      "domain_eligible": false,
+      "finite_time_eligible": false,
+      "theorem_eligible": false,
+      "rejection_reasons": [
+        "contact_force_capacity",
+        "goal_wrench_feasibility"
+      ],
+      "termination": "SUCCESS_HOLD",
+      "task_success": true,
+      "success_given_eligible": false,
+      "failure_class": "WRENCH_INFEASIBLE",
+      "contract_failure_reasons": [],
+      "frame": 333,
+      "wall_seconds": 5.7688014000304975,
+      "fps": 57.72429607270577,
+      "J_m": 0.07786047678577655,
+      "efficiency": 0.9995066036007606,
+      "max_cross_track_error_m": 0.0028794137110351274,
+      "max_abs_rotation_deg": 11.10606343877895,
+      "max_penetration_m": 0.01339252961645887,
+      "operational_enclosure_maintained": true,
+      "fallbacks": 0,
+      "infeasible": 0,
+      "rho_relaxations": 0,
+      "phase_frames": {
+        "first_detection": 133,
+        "first_map_complete": 268,
+        "first_enclosure": 230,
+        "first_contact": 200,
+        "first_transport": 282,
+        "first_brake": 313,
+        "first_hold": 333
+      }
+    },
+    {
+      "case_id": "ellipse24__seed_003",
+      "shape": "ellipse24",
+      "seed": 3,
+      "position_class": "edge",
+      "center": [
+        1.27,
+        5.415027408547415
+      ],
+      "yaw_deg": 28.3743237270002,
+      "surface_density": 1.5,
+      "ground_friction": 0.45,
+      "contact_friction": 0.8,
+      "vertex_count": 24,
+      "goal_angle_deg": -72.63351417479517,
+      "diameter_m": 1.4399999999999995,
+      "perimeter_m": 3.633297191859828,
+      "domain_eligible": false,
+      "finite_time_eligible": false,
+      "theorem_eligible": false,
+      "rejection_reasons": [
+        "contact_force_capacity",
+        "boundary_map_epsilon"
+      ],
+      "termination": "SUCCESS_HOLD",
+      "task_success": false,
+      "success_given_eligible": false,
+      "failure_class": "MAP_INCOMPLETE",
+      "contract_failure_reasons": [
+        "phase gate: transport started at frame 282 before enclosure at frame 287"
+      ],
+      "frame": 369,
+      "wall_seconds": 6.95953809999628,
+      "fps": 53.020760099035485,
+      "J_m": 0.09128527358723805,
+      "efficiency": 0.9792546889749778,
+      "max_cross_track_error_m": 0.019043371613739375,
+      "max_abs_rotation_deg": 7.847168777182511,
+      "max_penetration_m": 0.011645566978955774,
+      "operational_enclosure_maintained": false,
+      "fallbacks": 0,
+      "infeasible": 0,
+      "rho_relaxations": 0,
+      "phase_frames": {
+        "first_detection": 0,
+        "first_map_complete": 268,
+        "first_enclosure": 287,
+        "first_contact": 134,
+        "first_transport": 282,
+        "first_brake": 355,
+        "first_hold": 369
+      }
+    },
+    {
+      "case_id": "l_shape__seed_003",
+      "shape": "l_shape",
+      "seed": 3,
+      "position_class": "corner",
+      "center": [
+        1.5,
+        1.5
+      ],
+      "yaw_deg": 49.39068689768056,
+      "surface_density": 0.8,
+      "ground_friction": 0.15,
+      "contact_friction": 0.4,
+      "vertex_count": null,
+      "goal_angle_deg": -72.63351417479517,
+      "diameter_m": 1.6122034611053282,
+      "perimeter_m": 4.56,
+      "domain_eligible": false,
+      "finite_time_eligible": false,
+      "theorem_eligible": false,
+      "rejection_reasons": [
+        "boundary_map_epsilon"
+      ],
+      "termination": "SUCCESS_HOLD",
+      "task_success": false,
+      "success_given_eligible": false,
+      "failure_class": "MAP_INCOMPLETE",
+      "contract_failure_reasons": [
+        "phase gate: enclosure threshold was never reached"
+      ],
+      "frame": 327,
+      "wall_seconds": 13.673112699994817,
+      "fps": 23.91554923701638,
+      "J_m": 0.14939191686088737,
+      "efficiency": 0.9487490263875914,
+      "max_cross_track_error_m": 0.04976279580673929,
+      "max_abs_rotation_deg": 7.675976309152853,
+      "max_penetration_m": 0.004807355557528037,
+      "operational_enclosure_maintained": false,
+      "fallbacks": 0,
+      "infeasible": 0,
+      "rho_relaxations": 0,
+      "phase_frames": {
+        "first_detection": 0,
+        "first_map_complete": 268,
+        "first_enclosure": null,
+        "first_contact": null,
+        "first_transport": 282,
+        "first_brake": 304,
+        "first_hold": 327
+      }
+    },
+    {
+      "case_id": "u_shape__seed_003",
+      "shape": "u_shape",
+      "seed": 3,
+      "position_class": "random",
+      "center": [
+        1.9340958855572767,
+        3.4952753970610972
+      ],
+      "yaw_deg": 133.9239128179114,
+      "surface_density": 2.2,
+      "ground_friction": 0.3,
+      "contact_friction": 0.6,
+      "vertex_count": 8,
+      "goal_angle_deg": -72.63351417479517,
+      "diameter_m": 1.7029386365926402,
+      "perimeter_m": 6.300000000000001,
+      "domain_eligible": false,
+      "finite_time_eligible": false,
+      "theorem_eligible": false,
+      "rejection_reasons": [
+        "contact_force_capacity",
+        "goal_wrench_feasibility"
+      ],
+      "termination": "SUCCESS_HOLD",
+      "task_success": false,
+      "success_given_eligible": false,
+      "failure_class": "WRENCH_INFEASIBLE",
+      "contract_failure_reasons": [
+        "C3: directional progress J=0.0735 m < J_min=0.0750 m",
+        "C3: |cargo rotation|=33.6510 deg > 30.0000 deg",
+        "phase gate: enclosure threshold was never reached"
+      ],
+      "frame": 348,
+      "wall_seconds": 26.0281030999613,
+      "fps": 13.370163728931804,
+      "J_m": 0.0734622439280838,
+      "efficiency": 0.9916944505443355,
+      "max_cross_track_error_m": 0.010809047293113896,
+      "max_abs_rotation_deg": 34.52099305622911,
+      "max_penetration_m": 0.011205418724252098,
+      "operational_enclosure_maintained": false,
+      "fallbacks": 0,
+      "infeasible": 0,
+      "rho_relaxations": 0,
+      "phase_frames": {
+        "first_detection": 0,
+        "first_map_complete": 268,
+        "first_enclosure": null,
+        "first_contact": 192,
+        "first_transport": 282,
+        "first_brake": 334,
+        "first_hold": 348
+      }
+    },
+    {
+      "case_id": "c_shape__seed_003",
+      "shape": "c_shape",
+      "seed": 3,
+      "position_class": "center",
+      "center": [
+        4.0,
+        4.0
+      ],
+      "yaw_deg": 0.2989584279922042,
+      "surface_density": 1.5,
+      "ground_friction": 0.45,
+      "contact_friction": 0.8,
+      "vertex_count": 8,
+      "goal_angle_deg": -72.63351417479517,
+      "diameter_m": 1.7029386365926404,
+      "perimeter_m": 6.6000000000000005,
+      "domain_eligible": false,
+      "finite_time_eligible": false,
+      "theorem_eligible": false,
+      "rejection_reasons": [
+        "cage_offset_self_clearance",
+        "contact_force_capacity",
+        "goal_wrench_feasibility"
+      ],
+      "termination": "SUCCESS_HOLD",
+      "task_success": false,
+      "success_given_eligible": false,
+      "failure_class": "CAGE_INFEASIBLE",
+      "contract_failure_reasons": [
+        "phase gate: enclosure threshold was never reached"
+      ],
+      "frame": 327,
+      "wall_seconds": 18.749625399999786,
+      "fps": 17.44034843490813,
+      "J_m": 0.08567150840497524,
+      "efficiency": 0.9996731158771051,
+      "max_cross_track_error_m": 0.002353124986270415,
+      "max_abs_rotation_deg": 0.9741016578490738,
+      "max_penetration_m": 0.017329815015198563,
+      "operational_enclosure_maintained": false,
+      "fallbacks": 0,
+      "infeasible": 0,
+      "rho_relaxations": 0,
+      "phase_frames": {
+        "first_detection": 133,
+        "first_map_complete": 268,
+        "first_enclosure": null,
+        "first_contact": 200,
+        "first_transport": 282,
+        "first_brake": 304,
+        "first_hold": 327
+      }
+    },
+    {
+      "case_id": "star10__seed_003",
+      "shape": "star10",
+      "seed": 3,
+      "position_class": "edge",
+      "center": [
+        1.25,
+        5.775040387889408
+      ],
+      "yaw_deg": 320.84579223322913,
+      "surface_density": 0.8,
+      "ground_friction": 0.15,
+      "contact_friction": 0.4,
+      "vertex_count": 10,
+      "goal_angle_deg": -72.63351417479517,
+      "diameter_m": 1.331479122813215,
+      "perimeter_m": 4.69582698443549,
+      "domain_eligible": false,
+      "finite_time_eligible": false,
+      "theorem_eligible": false,
+      "rejection_reasons": [
+        "boundary_map_epsilon"
+      ],
+      "termination": "SUCCESS_HOLD",
+      "task_success": false,
+      "success_given_eligible": false,
+      "failure_class": "MAP_INCOMPLETE",
+      "contract_failure_reasons": [
+        "phase gate: transport started at frame 282 before enclosure at frame 333"
+      ],
+      "frame": 351,
+      "wall_seconds": 17.107301699987147,
+      "fps": 20.517554793592243,
+      "J_m": 0.20527341569732194,
+      "efficiency": 0.9768937098946133,
+      "max_cross_track_error_m": 0.04490990809683012,
+      "max_abs_rotation_deg": 23.332757154959186,
+      "max_penetration_m": 0.004590643457531296,
+      "operational_enclosure_maintained": false,
+      "fallbacks": 0,
+      "infeasible": 0,
+      "rho_relaxations": 0,
+      "phase_frames": {
+        "first_detection": 0,
+        "first_map_complete": 268,
+        "first_enclosure": 333,
+        "first_contact": 221,
+        "first_transport": 282,
+        "first_brake": 310,
+        "first_hold": 351
+      }
+    },
+    {
+      "case_id": "convex_random__seed_003",
+      "shape": "convex_random",
+      "seed": 3,
+      "position_class": "corner",
+      "center": [
+        1.503389873327221,
+        1.503389873327221
+      ],
+      "yaw_deg": 162.18228796349496,
+      "surface_density": 2.2,
+      "ground_friction": 0.3,
+      "contact_friction": 0.6,
+      "vertex_count": 9,
+      "goal_angle_deg": -72.63351417479517,
+      "diameter_m": 1.7427955483989468,
+      "perimeter_m": 4.821555143076761,
+      "domain_eligible": false,
+      "finite_time_eligible": false,
+      "theorem_eligible": false,
+      "rejection_reasons": [
+        "contact_force_capacity",
+        "goal_wrench_feasibility",
+        "boundary_map_epsilon"
+      ],
+      "termination": "SUCCESS_HOLD",
+      "task_success": false,
+      "success_given_eligible": false,
+      "failure_class": "MAP_INCOMPLETE",
+      "contract_failure_reasons": [
+        "phase gate: transport started at frame 282 before enclosure at frame 340"
+      ],
+      "frame": 441,
+      "wall_seconds": 21.66670379997231,
+      "fps": 20.353811270571004,
+      "J_m": 0.08353592972436763,
+      "efficiency": 0.9955798566295765,
+      "max_cross_track_error_m": 0.007880430502606416,
+      "max_abs_rotation_deg": 0.36714310245934567,
+      "max_penetration_m": 0.011686524633939044,
+      "operational_enclosure_maintained": false,
+      "fallbacks": 0,
+      "infeasible": 0,
+      "rho_relaxations": 0,
+      "phase_frames": {
+        "first_detection": 0,
+        "first_map_complete": 268,
+        "first_enclosure": 340,
+        "first_contact": 380,
+        "first_transport": 282,
+        "first_brake": 427,
+        "first_hold": 441
+      }
+    },
+    {
+      "case_id": "concave_random7__seed_003",
+      "shape": "concave_random7",
+      "seed": 3,
+      "position_class": "random",
+      "center": [
+        3.012861082160808,
+        3.401770227243932
+      ],
+      "yaw_deg": 177.39049882168976,
+      "surface_density": 1.5,
+      "ground_friction": 0.45,
+      "contact_friction": 0.8,
+      "vertex_count": 7,
+      "goal_angle_deg": -72.63351417479517,
+      "diameter_m": 1.215687915854175,
+      "perimeter_m": 3.0968223284757443,
+      "domain_eligible": false,
+      "finite_time_eligible": false,
+      "theorem_eligible": false,
+      "rejection_reasons": [
+        "contact_force_capacity",
+        "goal_wrench_feasibility"
+      ],
+      "termination": "SUCCESS_HOLD",
+      "task_success": false,
+      "success_given_eligible": false,
+      "failure_class": "WRENCH_INFEASIBLE",
+      "contract_failure_reasons": [
+        "C3: |cargo rotation|=41.6638 deg > 30.0000 deg"
+      ],
+      "frame": 327,
+      "wall_seconds": 11.057226300006732,
+      "fps": 29.57342023467503,
+      "J_m": 0.07595001244155897,
+      "efficiency": 0.7567508001912093,
+      "max_cross_track_error_m": 0.06560784164453504,
+      "max_abs_rotation_deg": 42.08128789802106,
+      "max_penetration_m": 0.015504530329261718,
+      "operational_enclosure_maintained": true,
+      "fallbacks": 0,
+      "infeasible": 0,
+      "rho_relaxations": 0,
+      "phase_frames": {
+        "first_detection": 79,
+        "first_map_complete": 268,
+        "first_enclosure": 233,
+        "first_contact": 213,
+        "first_transport": 282,
+        "first_brake": 313,
+        "first_hold": 327
+      }
+    },
+    {
+      "case_id": "concave_random15__seed_003",
+      "shape": "concave_random15",
+      "seed": 3,
+      "position_class": "center",
+      "center": [
+        4.0,
+        4.0
+      ],
+      "yaw_deg": 52.70992015071057,
+      "surface_density": 0.8,
+      "ground_friction": 0.15,
+      "contact_friction": 0.4,
+      "vertex_count": 15,
+      "goal_angle_deg": -72.63351417479517,
+      "diameter_m": 1.3179960617596749,
+      "perimeter_m": 4.3205862830026724,
+      "domain_eligible": false,
+      "finite_time_eligible": false,
+      "theorem_eligible": false,
+      "rejection_reasons": [
+        "boundary_map_epsilon"
+      ],
+      "termination": "SOLVER_FAILURE",
+      "task_success": false,
+      "success_given_eligible": false,
+      "failure_class": "SOLVER_FAILURE",
+      "contract_failure_reasons": [
+        "C3: directional progress J=0.0400 m < J_min=0.0750 m",
+        "C3: progress efficiency J/||dx||=0.2804 < 0.55 (||dx||=0.1428 m)",
+        "C3: 1 solver fallback(s) occurred (violates C2)",
+        "phase gate: transport phase never activated",
+        "phase gate: feedback transport never entered BRAKE"
+      ],
+      "frame": 237,
+      "wall_seconds": 1.9066454999847338,
+      "fps": 124.30207922862306,
+      "J_m": 0.04002077976125302,
+      "efficiency": 0.28035559090206513,
+      "max_cross_track_error_m": 0.14259353874581693,
+      "max_abs_rotation_deg": 4.799898693455059,
+      "max_penetration_m": 0.027374007769583042,
+      "operational_enclosure_maintained": null,
+      "fallbacks": 1,
+      "infeasible": 1,
+      "rho_relaxations": 5,
+      "phase_frames": {
+        "first_detection": 136,
+        "first_map_complete": null,
+        "first_enclosure": 236,
+        "first_contact": 214,
+        "first_transport": null,
+        "first_brake": null,
+        "first_hold": null
+      }
+    },
+    {
+      "case_id": "high_aspect__seed_003",
+      "shape": "high_aspect",
+      "seed": 3,
+      "position_class": "edge",
+      "center": [
+        1.3597067370350824,
+        3.5319944760492903
+      ],
+      "yaw_deg": 278.4163831644996,
+      "surface_density": 2.2,
+      "ground_friction": 0.3,
+      "contact_friction": 0.6,
+      "vertex_count": null,
+      "goal_angle_deg": -72.63351417479517,
+      "diameter_m": 1.6194134740701651,
+      "perimeter_m": 3.700000000000001,
+      "domain_eligible": false,
+      "finite_time_eligible": false,
+      "theorem_eligible": false,
+      "rejection_reasons": [
+        "contact_force_capacity",
+        "goal_wrench_feasibility",
+        "boundary_map_epsilon"
+      ],
+      "termination": "SUCCESS_HOLD",
+      "task_success": false,
+      "success_given_eligible": false,
+      "failure_class": "MAP_INCOMPLETE",
+      "contract_failure_reasons": [
+        "C3: directional progress J=0.0570 m < J_min=0.0750 m",
+        "C3: progress efficiency J/||dx||=0.4500 < 0.55 (||dx||=0.1266 m)",
+        "C3: |cargo rotation|=65.5878 deg > 30.0000 deg",
+        "phase gate: transport started at frame 282 before enclosure at frame 299"
+      ],
+      "frame": 330,
+      "wall_seconds": 13.55799110000953,
+      "fps": 24.33988911526635,
+      "J_m": 0.056972152395848394,
+      "efficiency": 0.4500485988890609,
+      "max_cross_track_error_m": 0.11304637712468128,
+      "max_abs_rotation_deg": 70.41059289461029,
+      "max_penetration_m": 0.008678279725964383,
+      "operational_enclosure_maintained": false,
+      "fallbacks": 0,
+      "infeasible": 0,
+      "rho_relaxations": 0,
+      "phase_frames": {
+        "first_detection": 0,
+        "first_map_complete": 268,
+        "first_enclosure": 299,
+        "first_contact": 281,
+        "first_transport": 282,
+        "first_brake": 319,
+        "first_hold": 330
+      }
+    },
+    {
+      "case_id": "polygon32__seed_003",
+      "shape": "polygon32",
+      "seed": 3,
+      "position_class": "corner",
+      "center": [
+        1.2092867662959141,
+        1.2092867662959141
+      ],
+      "yaw_deg": 153.61302037434476,
+      "surface_density": 1.5,
+      "ground_friction": 0.45,
+      "contact_friction": 0.8,
+      "vertex_count": 32,
+      "goal_angle_deg": -72.63351417479517,
+      "diameter_m": 1.2802758701476231,
+      "perimeter_m": 4.300314069982093,
+      "domain_eligible": false,
+      "finite_time_eligible": false,
+      "theorem_eligible": false,
+      "rejection_reasons": [
+        "contact_force_capacity",
+        "boundary_map_epsilon"
+      ],
+      "termination": "SUCCESS_HOLD",
+      "task_success": false,
+      "success_given_eligible": false,
+      "failure_class": "MAP_INCOMPLETE",
+      "contract_failure_reasons": [
+        "phase gate: enclosure threshold was never reached"
+      ],
+      "frame": 351,
+      "wall_seconds": 15.33640650002053,
+      "fps": 22.886717302356985,
+      "J_m": 0.10159084121418233,
+      "efficiency": 0.9985585990203116,
+      "max_cross_track_error_m": 0.008467295258013225,
+      "max_abs_rotation_deg": 12.090158370911444,
+      "max_penetration_m": 0.012584103477409847,
+      "operational_enclosure_maintained": false,
+      "fallbacks": 0,
+      "infeasible": 0,
+      "rho_relaxations": 0,
+      "phase_frames": {
+        "first_detection": 0,
+        "first_map_complete": 268,
+        "first_enclosure": null,
+        "first_contact": 133,
+        "first_transport": 282,
+        "first_brake": 337,
+        "first_hold": 351
+      }
+    },
+    {
+      "case_id": "circle__seed_004",
+      "shape": "circle",
+      "seed": 4,
+      "position_class": "center",
+      "center": [
+        4.0,
+        4.0
+      ],
+      "yaw_deg": 183.91347533479401,
+      "surface_density": 1.5,
+      "ground_friction": 0.45,
+      "contact_friction": 0.6,
+      "vertex_count": 96,
+      "goal_angle_deg": -127.68996037846841,
+      "diameter_m": 1.1600000000000006,
+      "perimeter_m": 3.642784142067513,
+      "domain_eligible": false,
+      "finite_time_eligible": false,
+      "theorem_eligible": false,
+      "rejection_reasons": [
+        "contact_force_capacity"
+      ],
+      "termination": "SUCCESS_HOLD",
+      "task_success": true,
+      "success_given_eligible": false,
+      "failure_class": "WRENCH_INFEASIBLE",
+      "contract_failure_reasons": [],
+      "frame": 372,
+      "wall_seconds": 25.42327309999382,
+      "fps": 14.632262279402978,
+      "J_m": 0.07860352424439329,
+      "efficiency": 0.9975692328626986,
+      "max_cross_track_error_m": 0.007485933403630754,
+      "max_abs_rotation_deg": 0.05412539434542435,
+      "max_penetration_m": 0.01235027748262077,
+      "operational_enclosure_maintained": true,
+      "fallbacks": 0,
+      "infeasible": 0,
+      "rho_relaxations": 0,
+      "phase_frames": {
+        "first_detection": 136,
+        "first_map_complete": 268,
+        "first_enclosure": 233,
+        "first_contact": 205,
+        "first_transport": 282,
+        "first_brake": 361,
+        "first_hold": 372
+      }
+    },
+    {
+      "case_id": "rectangle__seed_004",
+      "shape": "rectangle",
+      "seed": 4,
+      "position_class": "edge",
+      "center": [
+        1.2283988502348748,
+        4.336451428054454
+      ],
+      "yaw_deg": 272.70288371273796,
+      "surface_density": 0.8,
+      "ground_friction": 0.15,
+      "contact_friction": 0.8,
+      "vertex_count": null,
+      "goal_angle_deg": -127.68996037846841,
+      "diameter_m": 1.3567977004697498,
+      "perimeter_m": 3.7400000000000007,
+      "domain_eligible": true,
+      "finite_time_eligible": false,
+      "theorem_eligible": false,
+      "rejection_reasons": [],
+      "termination": "SUCCESS_HOLD",
+      "task_success": false,
+      "success_given_eligible": false,
+      "failure_class": "CONTRACT_FAILURE",
+      "contract_failure_reasons": [
+        "C3: |cargo rotation|=68.6080 deg > 30.0000 deg",
+        "phase gate: transport started at frame 282 before enclosure at frame 310"
+      ],
+      "frame": 324,
+      "wall_seconds": 26.54099639999913,
+      "fps": 12.207529631404894,
+      "J_m": 0.16629984866972705,
+      "efficiency": 0.9720641740692746,
+      "max_cross_track_error_m": 0.052360552791804744,
+      "max_abs_rotation_deg": 69.07745033275242,
+      "max_penetration_m": 0.01687843644640291,
+      "operational_enclosure_maintained": false,
+      "fallbacks": 0,
+      "infeasible": 0,
+      "rho_relaxations": 0,
+      "phase_frames": {
+        "first_detection": 0,
+        "first_map_complete": 268,
+        "first_enclosure": 310,
+        "first_contact": 76,
+        "first_transport": 282,
+        "first_brake": 304,
+        "first_hold": 324
+      }
+    },
+    {
+      "case_id": "ellipse24__seed_004",
+      "shape": "ellipse24",
+      "seed": 4,
+      "position_class": "corner",
+      "center": [
+        1.27,
+        1.27
+      ],
+      "yaw_deg": 287.55895913548756,
+      "surface_density": 2.2,
+      "ground_friction": 0.3,
+      "contact_friction": 0.4,
+      "vertex_count": 24,
+      "goal_angle_deg": -127.68996037846841,
+      "diameter_m": 1.4399999999999997,
+      "perimeter_m": 3.6332971918598282,
+      "domain_eligible": false,
+      "finite_time_eligible": false,
+      "theorem_eligible": false,
+      "rejection_reasons": [
+        "contact_force_capacity",
+        "goal_wrench_feasibility",
+        "boundary_map_epsilon"
+      ],
+      "termination": "SUCCESS_HOLD",
+      "task_success": false,
+      "success_given_eligible": false,
+      "failure_class": "MAP_INCOMPLETE",
+      "contract_failure_reasons": [
+        "phase gate: transport started at frame 282 before enclosure at frame 358"
+      ],
+      "frame": 360,
+      "wall_seconds": 14.771311199991032,
+      "fps": 24.37156696016387,
+      "J_m": 0.10061451439442147,
+      "efficiency": 0.9931675748239828,
+      "max_cross_track_error_m": 0.011822176860587792,
+      "max_abs_rotation_deg": 0.6607143739904018,
+      "max_penetration_m": 0.011319259626274475,
+      "operational_enclosure_maintained": false,
+      "fallbacks": 0,
+      "infeasible": 0,
+      "rho_relaxations": 0,
+      "phase_frames": {
+        "first_detection": 0,
+        "first_map_complete": 268,
+        "first_enclosure": 358,
+        "first_contact": 219,
+        "first_transport": 282,
+        "first_brake": 346,
+        "first_hold": 360
+      }
+    },
+    {
+      "case_id": "l_shape__seed_004",
+      "shape": "l_shape",
+      "seed": 4,
+      "position_class": "random",
+      "center": [
+        1.987771756740007,
+        5.848845311956271
+      ],
+      "yaw_deg": 170.3263491370353,
+      "surface_density": 1.5,
+      "ground_friction": 0.45,
+      "contact_friction": 0.6,
+      "vertex_count": null,
+      "goal_angle_deg": -127.68996037846841,
+      "diameter_m": 1.6122034611053286,
+      "perimeter_m": 4.56,
+      "domain_eligible": false,
+      "finite_time_eligible": false,
+      "theorem_eligible": false,
+      "rejection_reasons": [
+        "contact_force_capacity",
+        "goal_wrench_feasibility"
+      ],
+      "termination": "SUCCESS_HOLD",
+      "task_success": false,
+      "success_given_eligible": false,
+      "failure_class": "WRENCH_INFEASIBLE",
+      "contract_failure_reasons": [
+        "phase gate: transport started at frame 282 before enclosure at frame 307"
+      ],
+      "frame": 366,
+      "wall_seconds": 20.95571310003288,
+      "fps": 17.46540421950259,
+      "J_m": 0.0830801659303633,
+      "efficiency": 0.8507506032920481,
+      "max_cross_track_error_m": 0.05132457141377581,
+      "max_abs_rotation_deg": 21.87200044084539,
+      "max_penetration_m": 0.011402073085729603,
+      "operational_enclosure_maintained": false,
+      "fallbacks": 0,
+      "infeasible": 0,
+      "rho_relaxations": 0,
+      "phase_frames": {
+        "first_detection": 10,
+        "first_map_complete": 268,
+        "first_enclosure": 307,
+        "first_contact": 202,
+        "first_transport": 282,
+        "first_brake": 355,
+        "first_hold": 366
+      }
+    },
+    {
+      "case_id": "u_shape__seed_004",
+      "shape": "u_shape",
+      "seed": 4,
+      "position_class": "center",
+      "center": [
+        4.0,
+        4.0
+      ],
+      "yaw_deg": 288.33655922770885,
+      "surface_density": 0.8,
+      "ground_friction": 0.15,
+      "contact_friction": 0.8,
+      "vertex_count": 8,
+      "goal_angle_deg": -127.68996037846841,
+      "diameter_m": 1.7029386365926402,
+      "perimeter_m": 6.300000000000001,
+      "domain_eligible": true,
+      "finite_time_eligible": false,
+      "theorem_eligible": false,
+      "rejection_reasons": [],
+      "termination": "SUCCESS_HOLD",
+      "task_success": true,
+      "success_given_eligible": true,
+      "failure_class": "SUCCESS",
+      "contract_failure_reasons": [],
+      "frame": 336,
+      "wall_seconds": 26.354076599993277,
+      "fps": 12.749450686505392,
+      "J_m": 0.08503315731548823,
+      "efficiency": 0.9959071623505708,
+      "max_cross_track_error_m": 0.016664938954711155,
+      "max_abs_rotation_deg": 10.39824663305097,
+      "max_penetration_m": 0.019305535813717578,
+      "operational_enclosure_maintained": true,
+      "fallbacks": 0,
+      "infeasible": 0,
+      "rho_relaxations": 0,
+      "phase_frames": {
+        "first_detection": 133,
+        "first_map_complete": 268,
+        "first_enclosure": 249,
+        "first_contact": 207,
+        "first_transport": 282,
+        "first_brake": 298,
+        "first_hold": 336
+      }
+    },
+    {
+      "case_id": "c_shape__seed_004",
+      "shape": "c_shape",
+      "seed": 4,
+      "position_class": "edge",
+      "center": [
+        1.40146931829632,
+        4.137627847350327
+      ],
+      "yaw_deg": 285.07608131650414,
+      "surface_density": 2.2,
+      "ground_friction": 0.3,
+      "contact_friction": 0.4,
+      "vertex_count": 8,
+      "goal_angle_deg": -127.68996037846841,
+      "diameter_m": 1.7029386365926404,
+      "perimeter_m": 6.6,
+      "domain_eligible": false,
+      "finite_time_eligible": false,
+      "theorem_eligible": false,
+      "rejection_reasons": [
+        "cage_offset_self_clearance",
+        "contact_force_capacity",
+        "goal_wrench_feasibility",
+        "boundary_map_epsilon"
+      ],
+      "termination": "SUCCESS_HOLD",
+      "task_success": false,
+      "success_given_eligible": false,
+      "failure_class": "MAP_INCOMPLETE",
+      "contract_failure_reasons": [
+        "phase gate: enclosure threshold was never reached"
+      ],
+      "frame": 423,
+      "wall_seconds": 40.92236219998449,
+      "fps": 10.336646695340582,
+      "J_m": 0.11519043965659206,
+      "efficiency": 0.8544696255195171,
+      "max_cross_track_error_m": 0.07031274074070876,
+      "max_abs_rotation_deg": 5.745290455652281,
+      "max_penetration_m": 0.012230197139627474,
+      "operational_enclosure_maintained": false,
+      "fallbacks": 0,
+      "infeasible": 0,
+      "rho_relaxations": 0,
+      "phase_frames": {
+        "first_detection": 0,
+        "first_map_complete": 268,
+        "first_enclosure": null,
+        "first_contact": 68,
+        "first_transport": 282,
+        "first_brake": 412,
+        "first_hold": 423
+      }
+    },
+    {
+      "case_id": "star10__seed_004",
+      "shape": "star10",
+      "seed": 4,
+      "position_class": "corner",
+      "center": [
+        1.25,
+        1.25
+      ],
+      "yaw_deg": 233.03288211806444,
+      "surface_density": 1.5,
+      "ground_friction": 0.45,
+      "contact_friction": 0.6,
+      "vertex_count": 10,
+      "goal_angle_deg": -127.68996037846841,
+      "diameter_m": 1.331479122813215,
+      "perimeter_m": 4.695826984435489,
+      "domain_eligible": false,
+      "finite_time_eligible": false,
+      "theorem_eligible": false,
+      "rejection_reasons": [
+        "contact_force_capacity",
+        "goal_wrench_feasibility",
+        "boundary_map_epsilon"
+      ],
+      "termination": "SUCCESS_HOLD",
+      "task_success": false,
+      "success_given_eligible": false,
+      "failure_class": "MAP_INCOMPLETE",
+      "contract_failure_reasons": [
+        "C3: |cargo rotation|=68.7627 deg > 30.0000 deg",
+        "phase gate: enclosure threshold was never reached"
+      ],
+      "frame": 495,
+      "wall_seconds": 37.75158310000552,
+      "fps": 13.112032909685519,
+      "J_m": 0.19431114710478548,
+      "efficiency": 0.9841962071832758,
+      "max_cross_track_error_m": 0.03505316166128644,
+      "max_abs_rotation_deg": 68.9230314605057,
+      "max_penetration_m": 0.010265204530539446,
+      "operational_enclosure_maintained": false,
+      "fallbacks": 0,
+      "infeasible": 0,
+      "rho_relaxations": 0,
+      "phase_frames": {
+        "first_detection": 0,
+        "first_map_complete": 268,
+        "first_enclosure": null,
+        "first_contact": 82,
+        "first_transport": 282,
+        "first_brake": 481,
+        "first_hold": 495
+      }
+    },
+    {
+      "case_id": "convex_random__seed_004",
+      "shape": "convex_random",
+      "seed": 4,
+      "position_class": "random",
+      "center": [
+        2.6098714810641725,
+        3.5038151119810843
+      ],
+      "yaw_deg": 167.04533658209192,
+      "surface_density": 0.8,
+      "ground_friction": 0.15,
+      "contact_friction": 0.8,
+      "vertex_count": 8,
+      "goal_angle_deg": -127.68996037846841,
+      "diameter_m": 1.508806413778887,
+      "perimeter_m": 4.256818529370691,
+      "domain_eligible": false,
+      "finite_time_eligible": false,
+      "theorem_eligible": false,
+      "rejection_reasons": [
+        "contact_force_capacity"
+      ],
+      "termination": "SUCCESS_HOLD",
+      "task_success": false,
+      "success_given_eligible": false,
+      "failure_class": "WRENCH_INFEASIBLE",
+      "contract_failure_reasons": [
+        "C3: directional progress J=0.0733 m < J_min=0.0750 m",
+        "C3: |cargo rotation|=37.7432 deg > 30.0000 deg"
+      ],
+      "frame": 324,
+      "wall_seconds": 22.124116699968,
+      "fps": 14.644652457490817,
+      "J_m": 0.07330790095146847,
+      "efficiency": 0.78821877151256,
+      "max_cross_track_error_m": 0.057234522949724455,
+      "max_abs_rotation_deg": 39.47080320403396,
+      "max_penetration_m": 0.020156363894357182,
+      "operational_enclosure_maintained": true,
+      "fallbacks": 0,
+      "infeasible": 0,
+      "rho_relaxations": 6,
+      "phase_frames": {
+        "first_detection": 43,
+        "first_map_complete": 268,
+        "first_enclosure": 262,
+        "first_contact": 235,
+        "first_transport": 282,
+        "first_brake": 304,
+        "first_hold": 324
+      }
+    },
+    {
+      "case_id": "concave_random7__seed_004",
+      "shape": "concave_random7",
+      "seed": 4,
+      "position_class": "center",
+      "center": [
+        4.0,
+        4.0
+      ],
+      "yaw_deg": 221.15948094066687,
+      "surface_density": 2.2,
+      "ground_friction": 0.3,
+      "contact_friction": 0.4,
+      "vertex_count": 7,
+      "goal_angle_deg": -127.68996037846841,
+      "diameter_m": 1.1818525853125128,
+      "perimeter_m": 3.3787293656578608,
+      "domain_eligible": false,
+      "finite_time_eligible": false,
+      "theorem_eligible": false,
+      "rejection_reasons": [
+        "contact_force_capacity",
+        "goal_wrench_feasibility"
+      ],
+      "termination": "SUCCESS_HOLD",
+      "task_success": true,
+      "success_given_eligible": false,
+      "failure_class": "WRENCH_INFEASIBLE",
+      "contract_failure_reasons": [],
+      "frame": 333,
+      "wall_seconds": 14.704963300027885,
+      "fps": 22.645415238769658,
+      "J_m": 0.07707938914661011,
+      "efficiency": 0.9947454901036281,
+      "max_cross_track_error_m": 0.008103166356327837,
+      "max_abs_rotation_deg": 2.12470848462058,
+      "max_penetration_m": 0.012973545484818688,
+      "operational_enclosure_maintained": true,
+      "fallbacks": 0,
+      "infeasible": 0,
+      "rho_relaxations": 0,
+      "phase_frames": {
+        "first_detection": 139,
+        "first_map_complete": 268,
+        "first_enclosure": 238,
+        "first_contact": 209,
+        "first_transport": 282,
+        "first_brake": 316,
+        "first_hold": 333
+      }
+    },
+    {
+      "case_id": "concave_random15__seed_004",
+      "shape": "concave_random15",
+      "seed": 4,
+      "position_class": "edge",
+      "center": [
+        1.2634524492646997,
+        3.703531540160989
+      ],
+      "yaw_deg": 222.59369283622593,
+      "surface_density": 1.5,
+      "ground_friction": 0.45,
+      "contact_friction": 0.6,
+      "vertex_count": 15,
+      "goal_angle_deg": -127.68996037846841,
+      "diameter_m": 1.3070961684389781,
+      "perimeter_m": 4.70024553826814,
+      "domain_eligible": false,
+      "finite_time_eligible": false,
+      "theorem_eligible": false,
+      "rejection_reasons": [
+        "contact_force_capacity",
+        "goal_wrench_feasibility",
+        "boundary_map_epsilon"
+      ],
+      "termination": "SUCCESS_HOLD",
+      "task_success": false,
+      "success_given_eligible": false,
+      "failure_class": "MAP_INCOMPLETE",
+      "contract_failure_reasons": [
+        "C3: |cargo rotation|=91.4544 deg > 30.0000 deg",
+        "phase gate: transport started at frame 282 before enclosure at frame 381"
+      ],
+      "frame": 429,
+      "wall_seconds": 38.59642429999076,
+      "fps": 11.11501927395131,
+      "J_m": 0.119663029473483,
+      "efficiency": 0.7272606042280231,
+      "max_cross_track_error_m": 0.11293541603192037,
+      "max_abs_rotation_deg": 98.99159756430818,
+      "max_penetration_m": 0.01864057561636409,
+      "operational_enclosure_maintained": false,
+      "fallbacks": 0,
+      "infeasible": 0,
+      "rho_relaxations": 0,
+      "phase_frames": {
+        "first_detection": 0,
+        "first_map_complete": 268,
+        "first_enclosure": 381,
+        "first_contact": 321,
+        "first_transport": 282,
+        "first_brake": 385,
+        "first_hold": 429
+      }
+    },
+    {
+      "case_id": "high_aspect__seed_004",
+      "shape": "high_aspect",
+      "seed": 4,
+      "position_class": "corner",
+      "center": [
+        1.3597067370350824,
+        1.3597067370350824
+      ],
+      "yaw_deg": 150.39487108065967,
+      "surface_density": 0.8,
+      "ground_friction": 0.15,
+      "contact_friction": 0.8,
+      "vertex_count": null,
+      "goal_angle_deg": -127.68996037846841,
+      "diameter_m": 1.619413474070165,
+      "perimeter_m": 3.6999999999999997,
+      "domain_eligible": true,
+      "finite_time_eligible": false,
+      "theorem_eligible": false,
+      "rejection_reasons": [],
+      "termination": "SUCCESS_HOLD",
+      "task_success": false,
+      "success_given_eligible": false,
+      "failure_class": "CONTRACT_FAILURE",
+      "contract_failure_reasons": [
+        "C3: directional progress J=0.6028 m > J_max=0.2500 m"
+      ],
+      "frame": 384,
+      "wall_seconds": 20.92563060001703,
+      "fps": 18.350701459849315,
+      "J_m": 0.6028433815925828,
+      "efficiency": 0.9797251324898956,
+      "max_cross_track_error_m": 0.12660093728405694,
+      "max_abs_rotation_deg": 11.265152666996597,
+      "max_penetration_m": 0.005877532512610445,
+      "operational_enclosure_maintained": true,
+      "fallbacks": 0,
+      "infeasible": 0,
+      "rho_relaxations": 0,
+      "phase_frames": {
+        "first_detection": 0,
+        "first_map_complete": 268,
+        "first_enclosure": 143,
+        "first_contact": 153,
+        "first_transport": 282,
+        "first_brake": 364,
+        "first_hold": 384
+      }
+    },
+    {
+      "case_id": "polygon32__seed_004",
+      "shape": "polygon32",
+      "seed": 4,
+      "position_class": "random",
+      "center": [
+        6.4898751967517185,
+        1.5713863623608373
+      ],
+      "yaw_deg": 75.86887098618719,
+      "surface_density": 2.2,
+      "ground_friction": 0.3,
+      "contact_friction": 0.4,
+      "vertex_count": 32,
+      "goal_angle_deg": -127.68996037846841,
+      "diameter_m": 1.2651297207804584,
+      "perimeter_m": 3.984139826199489,
+      "domain_eligible": false,
+      "finite_time_eligible": false,
+      "theorem_eligible": false,
+      "rejection_reasons": [
+        "contact_force_capacity",
+        "boundary_map_epsilon"
+      ],
+      "termination": "SUCCESS_HOLD",
+      "task_success": false,
+      "success_given_eligible": false,
+      "failure_class": "MAP_INCOMPLETE",
+      "contract_failure_reasons": [
+        "phase gate: transport started at frame 282 before enclosure at frame 340"
+      ],
+      "frame": 354,
+      "wall_seconds": 15.335142500000075,
+      "fps": 23.084232833180277,
+      "J_m": 0.0815429195126127,
+      "efficiency": 0.9990429964824981,
+      "max_cross_track_error_m": 0.004557591360121273,
+      "max_abs_rotation_deg": 0.3726638825998301,
+      "max_penetration_m": 0.012886258234944353,
+      "operational_enclosure_maintained": false,
+      "fallbacks": 0,
+      "infeasible": 0,
+      "rho_relaxations": 0,
+      "phase_frames": {
+        "first_detection": 0,
+        "first_map_complete": 268,
+        "first_enclosure": 340,
+        "first_contact": 240,
+        "first_transport": 282,
+        "first_brake": 343,
+        "first_hold": 354
+      }
+    }
+  ]
+}

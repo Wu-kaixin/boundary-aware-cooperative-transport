@@ -155,6 +155,42 @@ def test_object_row_count_is_capped():
     assert result.object_rows == 4
 
 
+def test_point_distance_rows_activate_only_the_nearest_boundary_set():
+    f = make_filter(
+        object_barrier_geometry="point_distance",
+        object_active_tolerance=0.01,
+        max_object_rows=4,
+    )
+    points = np.array([[0.0, 0.0], [0.10, 0.0], [0.20, 0.0], [0.30, 0.0]])
+    # Supplied normals are deliberately wrong: point-distance geometry derives
+    # the CBF gradient from p-b and is not allowed to consume them.
+    normals = np.tile(np.array([0.0, -1.0]), (len(points), 1))
+    result = f.filter_velocity(
+        np.array([0.0, 0.12]),
+        np.array([0.0, -0.1]),
+        (),
+        points,
+        normals,
+    )
+    assert result.object_rows == 1
+    assert result.velocity[1] > -0.1
+
+
+def test_polyline_distance_does_not_bridge_a_normal_discontinuity():
+    f = make_filter(
+        object_barrier_geometry="polyline_distance",
+        object_polyline_max_gap=2.0,
+        object_polyline_max_normal_angle_deg=20.0,
+        object_row_range=1.0,
+        max_object_rows=1,
+    )
+    points = np.array([[0.0, 0.0], [1.0, 1.0]])
+    normals = np.array([[0.0, -1.0], [1.0, 0.0]])
+    _, _, _, h = f._object_rows(np.array([0.5, 0.5]), points, normals, np.zeros(2))
+    # Joining the points would put the query on a fictitious chord (h=-r_safe).
+    assert h[0] > 0.5
+
+
 def test_moving_object_velocity_enters_the_row():
     """The ISSf form feeds forward the estimated object velocity, so a boundary
     advancing towards the robot demands more retreat than a static one."""
@@ -167,6 +203,24 @@ def test_moving_object_velocity_enters_the_row():
         np.array([0.0, 0.12]), np.zeros(2), (), points, normals, object_velocity=np.array([0.0, 0.25])
     )
     assert advancing.velocity[1] > static.velocity[1]
+
+
+def test_rigid_point_velocities_are_admitted_per_boundary_sample():
+    f = make_filter(object_barrier_geometry="point_distance", max_object_rows=1)
+    points, normals = flat_boundary(0.0)
+    velocities = np.zeros_like(points)
+    nearest = len(points) // 2
+    velocities[nearest, 1] = 0.25
+    result = f.filter_velocity(
+        np.array([0.0, 0.12]),
+        np.zeros(2),
+        (),
+        points,
+        normals,
+        object_velocity=velocities,
+    )
+    assert result.velocity[1] > 0.0
+    assert result.max_object_velocity_projection == pytest.approx(0.25)
 
 
 # --------------------------------------------------------------------------- #
@@ -191,6 +245,19 @@ def test_margin_relaxation_is_counted_rather_than_hidden():
     assert stats["margin_relaxations"] == 1
     assert stats["infeasible"] == 0
     assert stats["fallbacks"] == 0
+
+
+def test_recovery_cap_does_not_turn_a_positive_barrier_rhs_negative():
+    """Regression: subtracting rho *after* capping the full RHS changed a
+    positive recovery constraint into a negative margin-free constraint."""
+    f = make_filter(rho=0.20, gamma_obj=1.0, max_speed=0.05, recovery_fraction=0.6)
+    points, normals = flat_boundary(0.0)
+    position = np.array([0.0, 0.0])  # h = -r_safe, so recovery must be positive
+    neighbours = [position + np.array([0.0, f.params.d_min])]
+    result = f.filter_velocity(position, np.zeros(2), neighbours, points, normals)
+    assert result.status == "fallback_projection"
+    assert result.max_barrier_deficit > 0.0
+    assert f.stats.zero_input_feasible_failures == 1
 
 
 def test_projection_backend_is_reported_as_projection():

@@ -1,7 +1,9 @@
 from __future__ import annotations
 
+import os
 from pathlib import Path
 
+import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib import animation
@@ -22,8 +24,32 @@ MODE_COLORS = {
     "cage": "#10b981",
     "push": "#dc2626",
     "convoy": "#8b5cf6",
+    "brake": "#ea580c",
     "hold": "#374151",
 }
+
+
+def _configure_ffmpeg_writer() -> None:
+    """Resolve the Conda/Python-bundled ffmpeg binary for Matplotlib."""
+    if animation.FFMpegWriter.isAvailable():
+        return
+    configured_path = os.environ.get("IMAGEIO_FFMPEG_EXE")
+    if configured_path:
+        ffmpeg_path = Path(configured_path)
+    else:
+        try:
+            import imageio_ffmpeg
+        except ImportError as exc:
+            raise RuntimeError(
+                "MP4 export requires ffmpeg or the optional imageio-ffmpeg package; "
+                "install the project's 'media' extra or recreate environment.yml"
+            ) from exc
+        ffmpeg_path = Path(imageio_ffmpeg.get_ffmpeg_exe())
+    if not ffmpeg_path.is_file():
+        raise RuntimeError(f"imageio-ffmpeg binary does not exist: {ffmpeg_path}")
+    matplotlib.rcParams["animation.ffmpeg_path"] = str(ffmpeg_path)
+    if not animation.FFMpegWriter.isAvailable():
+        raise RuntimeError(f"Matplotlib cannot execute ffmpeg at {ffmpeg_path}")
 
 
 def plot_snapshot(env: SimulationEnvironment, path: str | Path, title: str = "DBACT final snapshot") -> None:
@@ -247,7 +273,9 @@ def animate_simulation(
         time_s = env.log.times[frame_index]
         min_dist = env.log.min_distances[frame_index]
         modes = env.log.mode_counts[frame_index] if frame_index < len(env.log.mode_counts) else {}
-        if modes.get("push", 0) + modes.get("convoy", 0) > 0:
+        if modes.get("brake", 0) > 0:
+            phase = "BRAKE"
+        elif modes.get("push", 0) + modes.get("convoy", 0) > 0:
             phase = "TRANSPORT"
         elif modes.get("hold", 0) > 0:
             phase = "HOLD"
@@ -257,7 +285,7 @@ def animate_simulation(
             phase = "SEARCH"
         final_frame = len(env.log.times) - 1
         ax.set_title(
-            f"DBACT v3 · {phase} · frame {frame_index:03d}/{final_frame}\n"
+            f"DBACT closed loop · {phase} · frame {frame_index:03d}/{final_frame}\n"
             f"t={time_s:.1f}s · min robot distance={min_dist:.2f} m",
             fontsize=10,
         )
@@ -274,7 +302,7 @@ def animate_simulation(
         ax.text(
             0.02,
             0.02,
-            "blue search  ·  amber approach  ·  green enclose  ·  red push  ·  purple convoy  ·  gray hold",
+            "blue search  ·  green enclose  ·  red push  ·  purple convoy  ·  orange brake  ·  gray hold",
             transform=ax.transAxes,
             ha="left",
             va="bottom",
@@ -285,7 +313,17 @@ def animate_simulation(
 
     ani = animation.FuncAnimation(fig, draw, frames=frames, interval=1000 / fps, blit=False)
     try:
-        ani.save(path, writer=animation.PillowWriter(fps=fps), dpi=140)
+        if path.suffix.lower() == ".mp4":
+            _configure_ffmpeg_writer()
+            writer = animation.FFMpegWriter(
+                fps=fps,
+                codec="h264",
+                bitrate=2200,
+                extra_args=["-pix_fmt", "yuv420p"],
+            )
+        else:
+            writer = animation.PillowWriter(fps=fps)
+        ani.save(path, writer=writer, dpi=140)
     finally:
         plt.close(fig)
 

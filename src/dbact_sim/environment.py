@@ -13,24 +13,30 @@ from __future__ import annotations
 
 import json
 import copy
+import math
 from collections.abc import Callable
-from dataclasses import dataclass, field, replace
+from dataclasses import asdict, dataclass, field, replace
 from pathlib import Path
 
 import numpy as np
 
 from dbact.contracts import DirectionalProgressContract
 from dbact.controller import DBACTController
-from dbact.guarantees import boundary_map_gap_upper_bound, build_admissibility_certificate
+from dbact.guarantees import (
+    boundary_map_gap_upper_bound,
+    build_admissibility_certificate,
+    minimum_facing_cage_clearance,
+)
 from dbact.metrics import (
     boundary_coverage,
     directional_progress,
     min_inter_agent_distance,
+    operational_enclosure_certificate,
     path_lengths,
     penetration_report,
     recruited_agents_count,
-    strict_boundary_coverage,
 )
+from dbact.perception import normal_errors_deg
 from dbact.provenance import run_provenance
 from dbact.transport_dynamics import build_engine
 
@@ -68,6 +74,25 @@ class SimulationLog:
     detection_counts: dict[str, list[int]] = field(default_factory=dict)
     mode_counts: list[dict[str, int]] = field(default_factory=list)
     agent_modes: dict[str, list[str]] = field(default_factory=dict)
+    normal_error_deg: dict[str, list[float]] = field(default_factory=dict)
+    normal_error_norm: dict[str, list[float]] = field(default_factory=dict)
+    boundary_point_error: dict[str, list[float]] = field(default_factory=dict)
+    map_point_error: dict[str, list[float]] = field(default_factory=dict)
+    object_velocity_error: dict[str, list[float]] = field(default_factory=dict)
+    object_velocity_projection_error: dict[str, list[float]] = field(default_factory=dict)
+    boundary_velocity_error: dict[str, list[float]] = field(default_factory=dict)
+    cbf_velocity_projection_error: dict[str, list[float]] = field(default_factory=dict)
+    relaxation_events: list[dict] = field(default_factory=list)
+    operational_enclosure: dict[str, list[dict]] = field(default_factory=dict)
+
+
+@dataclass(frozen=True)
+class EpisodeTermination:
+    status: str
+    frame: int
+    time: float
+    success: bool
+    detail: str
 
 
 class SimulationEnvironment:
@@ -126,8 +151,32 @@ class SimulationEnvironment:
             discrete_overshoot=0.0,
         )
         evaluation = config.get("evaluation", {})
+        enclosure = evaluation.get("operational_enclosure", {}) or {}
+        self.enclosure_samples = int(enclosure.get("samples", 360))
+        self.enclosure_strict_coverage_min = float(
+            enclosure.get("strict_coverage_min", 0.99)
+        )
+        self.enclosure_max_uncovered_arc = float(
+            enclosure.get("max_uncovered_arc_m", 0.10)
+        )
+        self.enclosure_min_engaged_agents = int(
+            enclosure.get("min_engaged_agents", params.min_push_agents)
+        )
+        self.enclosure_engaged_radius = float(
+            enclosure.get("engaged_radius_m", self.evaluation_contact_radius)
+        )
+        self.enclosure_facing_clearance = {
+            cargo.object_id: minimum_facing_cage_clearance(
+                cargo.local_vertices,
+                params.cage_offset,
+            )
+            for cargo in self.cargoes
+        }
         self.require_initially_unobserved = bool(evaluation.get("require_initially_unobserved", False))
         self.require_guarantee_certificate = bool(evaluation.get("require_guarantee_certificate", False))
+        self.require_measured_error_bounds = bool(evaluation.get("require_measured_error_bounds", False))
+        self.measured_error_bounds = dict(evaluation.get("measured_error_bounds", {}) or {})
+        self.online_truth_audit = bool(evaluation.get("online_truth_audit", False))
         self.frame_budget = evaluation.get("frame_budget")
         self.phase_deadlines = {
             "first_detection": evaluation.get("detection_deadline"),
@@ -160,9 +209,19 @@ class SimulationEnvironment:
                 self.log.net_torque,
                 self.log.cargo_speed,
                 self.log.detection_counts,
+                self.log.normal_error_deg,
+                self.log.normal_error_norm,
+                self.log.boundary_point_error,
+                self.log.map_point_error,
+                self.log.object_velocity_error,
+                self.log.object_velocity_projection_error,
+                self.log.boundary_velocity_error,
+                self.log.cbf_velocity_projection_error,
+                self.log.operational_enclosure,
             ):
                 store[c.object_id] = []
         self._last_statuses = {}
+        self.last_termination: EpisodeTermination | None = None
 
     # ------------------------------------------------------------------ #
 
@@ -184,8 +243,66 @@ class SimulationEnvironment:
                 on_frame(step_index, self)
         return self.log
 
+    def run_until(
+        self,
+        max_steps: int,
+        on_frame: Callable[[int, "SimulationEnvironment"], None] | None = None,
+    ) -> EpisodeTermination:
+        """Run until closed-loop HOLD, a hard failure, or an explicit timeout.
+
+        ``max_steps`` is a safety timeout, not a success deadline. Historical
+        fixed-horizon experiments continue to use :meth:`run` unchanged.
+        """
+        if max_steps < 1:
+            raise ValueError("max_steps must be positive")
+        if not self.log.times:
+            self._record()
+            if on_frame is not None:
+                on_frame(0, self)
+        for frame in range(1, int(max_steps) + 1):
+            self.step()
+            if on_frame is not None:
+                on_frame(frame, self)
+            stats = self.controller.safety.stats
+            if stats.fallbacks or stats.infeasible:
+                return self._terminate(
+                    "SOLVER_FAILURE",
+                    frame,
+                    False,
+                    f"fallbacks={stats.fallbacks}, infeasible={stats.infeasible}",
+                )
+            phases = self.controller._transport_phase
+            feedback_hold = (
+                self.controller.params.progress_feedback
+                and len(phases) == len(self.agents)
+                and all(value == "hold" for value in phases.values())
+            )
+            legacy_hold = (
+                not self.controller.params.progress_feedback
+                and self.controller.mode_counts().get("hold", 0) == len(self.agents)
+            )
+            if feedback_hold or legacy_hold:
+                return self._terminate(
+                    "SUCCESS_HOLD",
+                    frame,
+                    True,
+                    "all local progress supervisors completed BRAKE and entered HOLD",
+                )
+        return self._terminate(
+            "TIMEOUT",
+            int(max_steps),
+            False,
+            "episode did not reach a terminal success/failure condition before max_steps",
+        )
+
+    def _terminate(self, status: str, frame: int, success: bool, detail: str) -> EpisodeTermination:
+        result = EpisodeTermination(status, int(frame), float(self.t), bool(success), detail)
+        self.last_termination = result
+        return result
+
     def _record(self) -> None:
         self.log.times.append(self.t)
+        frame = len(self.log.times) - 1
         for a in self.agents:
             self.log.agent_positions[a.agent_id].append(a.position.copy())
         mode_by_agent = {diag.agent_id: diag.mode for diag in self.controller.diagnostics}
@@ -194,6 +311,30 @@ class SimulationEnvironment:
             self.log.agent_modes[a.agent_id].append(mode_by_agent.get(a.agent_id, initial_mode))
         self.log.min_distances.append(min_inter_agent_distance(self.agents))
         self.log.mode_counts.append(self.controller.mode_counts())
+        for diag in self.controller.diagnostics:
+            if diag.solver_status == "relaxed_margin":
+                agent = next(a for a in self.agents if a.agent_id == diag.agent_id)
+                true_clearance = min(
+                    (
+                        float(c.signed_distance(agent.position[None, :])[0][0])
+                        for c in self.cargoes
+                    ),
+                    default=float("inf"),
+                )
+                self.log.relaxation_events.append(
+                    {
+                        "frame": frame,
+                        "time": float(self.t),
+                        "agent_id": diag.agent_id,
+                        "mode": diag.mode,
+                        "max_full_margin_deficit": diag.max_full_margin_deficit,
+                        "max_barrier_deficit": diag.max_barrier_deficit,
+                        "max_object_margin_deficit": diag.max_object_margin_deficit,
+                        "min_object_h": diag.min_object_h,
+                        "max_object_velocity_projection": diag.max_object_velocity_projection,
+                        "true_surface_clearance": true_clearance,
+                    }
+                )
 
         robot_radius = self.contact_params.robot_radius
         for c in self.cargoes:
@@ -203,9 +344,21 @@ class SimulationEnvironment:
             self.log.coverage[c.object_id].append(
                 boundary_coverage(c, self.agents, contact_radius=self.evaluation_contact_radius)
             )
-            self.log.strict_coverage[c.object_id].append(
-                strict_boundary_coverage(c, self.agents, contact_radius=self.evaluation_contact_radius)
+            enclosure = operational_enclosure_certificate(
+                c,
+                self.agents,
+                contact_radius=self.evaluation_contact_radius,
+                strict_coverage_min=self.enclosure_strict_coverage_min,
+                max_uncovered_arc_m=self.enclosure_max_uncovered_arc,
+                d_min=self.controller.params.d_min,
+                cage_offset=self.controller.params.cage_offset,
+                min_engaged_agents=self.enclosure_min_engaged_agents,
+                engaged_radius=self.enclosure_engaged_radius,
+                facing_clearance_m=self.enclosure_facing_clearance[c.object_id],
+                samples=self.enclosure_samples,
             )
+            self.log.operational_enclosure[c.object_id].append(enclosure)
+            self.log.strict_coverage[c.object_id].append(enclosure["strict_boundary_coverage"])
             report = penetration_report(c, self.agents, robot_radius)
             self.log.min_clearance[c.object_id].append(report["min_signed_clearance"])
             self.log.max_penetration[c.object_id].append(report["max_penetration"])
@@ -222,6 +375,92 @@ class SimulationEnvironment:
                 else self.controller.last_detection_counts.get(c.object_id, 0)
             )
             self.log.detection_counts[c.object_id].append(int(detections))
+            fresh_perception = (
+                self.controller.last_perception_timestamp is not None
+                and abs(self.controller.last_perception_timestamp - (self.t - self.dt)) <= 1e-9
+            )
+            if fresh_perception and self.online_truth_audit:
+                observations = [
+                    obs
+                    for items in self.controller.last_sensed_observations.values()
+                    for obs in items
+                    if obs.object_id == c.object_id
+                ]
+                if observations:
+                    normal_angles = normal_errors_deg(observations, [c])
+                    self.log.normal_error_deg[c.object_id].extend(normal_angles.tolist())
+                    self.log.normal_error_norm[c.object_id].extend(
+                        (2.0 * np.sin(0.5 * np.radians(normal_angles))).tolist()
+                    )
+                    points = np.vstack([obs.point for obs in observations])
+                    signed, _, _ = c.signed_distance(points)
+                    self.log.boundary_point_error[c.object_id].extend(np.abs(signed).tolist())
+                map_points = [
+                    record.point
+                    for boundary_map in self.controller.maps.values()
+                    for record in boundary_map.records.values()
+                    if record.object_id == c.object_id
+                ]
+                if map_points:
+                    signed_map, _, _ = c.signed_distance(np.vstack(map_points))
+                    self.log.map_point_error[c.object_id].extend(np.abs(signed_map).tolist())
+            if self.online_truth_audit:
+                for agent_id, estimates in self.controller.object_velocity.items():
+                    if c.object_id in estimates:
+                        velocity_error = np.asarray(estimates[c.object_id]) - c.linear_velocity
+                        self.log.object_velocity_error[c.object_id].append(
+                            float(np.linalg.norm(velocity_error))
+                        )
+                        normals = [
+                            obs.normal
+                            for obs in self.controller._safety_observation_cache.get(agent_id, [])
+                            if obs.object_id == c.object_id
+                        ]
+                        if normals:
+                            projections = np.abs(np.vstack(normals) @ velocity_error)
+                            self.log.object_velocity_projection_error[c.object_id].extend(
+                                projections.tolist()
+                            )
+                        agent = next(a for a in self.agents if a.agent_id == agent_id)
+                        safety_observations = [
+                            obs
+                            for obs in self.controller._safety_observation_cache.get(agent_id, [])
+                            if obs.object_id == c.object_id
+                        ]
+                        for obs in safety_observations:
+                            true_point_velocity = c.point_velocity(np.asarray(obs.point, dtype=float))
+                            estimated_centroid = np.asarray(
+                                self.controller._object_centroid.get(agent_id, {}).get(
+                                    c.object_id,
+                                    c.position,
+                                ),
+                                dtype=float,
+                            )
+                            estimated_omega = float(
+                                self.controller.object_angular_velocity.get(agent_id, {}).get(
+                                    c.object_id,
+                                    0.0,
+                                )
+                            )
+                            lever = np.asarray(obs.point, dtype=float) - estimated_centroid
+                            estimated_point_velocity = np.asarray(
+                                estimates[c.object_id],
+                                dtype=float,
+                            ) + estimated_omega * np.array([-lever[1], lever[0]], dtype=float)
+                            point_velocity_error = (
+                                estimated_point_velocity - true_point_velocity
+                            )
+                            self.log.boundary_velocity_error[c.object_id].append(
+                                float(np.linalg.norm(point_velocity_error))
+                            )
+                            radial = np.asarray(agent.position, dtype=float) - np.asarray(
+                                obs.point, dtype=float
+                            )
+                            radial_norm = float(np.linalg.norm(radial))
+                            if radial_norm > 1e-12:
+                                self.log.cbf_velocity_projection_error[c.object_id].append(
+                                    abs(float(np.dot(radial / radial_norm, point_velocity_error)))
+                                )
         if self.t + 1e-12 >= self.guarantee_release_time and not self.boundary_map_witnesses:
             self._capture_boundary_map_witnesses()
 
@@ -277,6 +516,7 @@ class SimulationEnvironment:
         min_distance = min(self.log.min_distances) if self.log.min_distances else float("inf")
 
         cargo_summaries: dict[str, dict] = {}
+        error_audit: dict[str, dict] = {}
         for cargo in self.cargoes:
             cid = cargo.object_id
             centers = self.log.cargo_centers[cid]
@@ -290,11 +530,26 @@ class SimulationEnvironment:
                 if len(self.log.cargo_angles[cid]) >= 2
                 else 0.0
             )
+            max_abs_rotation_deg = (
+                float(
+                    np.max(
+                        np.abs(
+                            np.degrees(
+                                np.asarray(self.log.cargo_angles[cid], dtype=float)
+                                - self.log.cargo_angles[cid][0]
+                            )
+                        )
+                    )
+                )
+                if self.log.cargo_angles[cid]
+                else 0.0
+            )
 
             entry = {
                 "displacement_vector": (centers[-1] - centers[0]).tolist() if len(centers) >= 2 else [0.0, 0.0],
                 "displacement": float(np.linalg.norm(centers[-1] - centers[0])) if len(centers) >= 2 else 0.0,
                 "rotation_deg": rotation_deg,
+                "max_abs_rotation_deg": max_abs_rotation_deg,
                 "final_coverage_legacy": self.log.coverage[cid][-1] if self.log.coverage[cid] else 0.0,
                 "final_strict_coverage": self.log.strict_coverage[cid][-1] if self.log.strict_coverage[cid] else 0.0,
                 "max_strict_coverage": max(self.log.strict_coverage[cid], default=0.0),
@@ -305,15 +560,44 @@ class SimulationEnvironment:
                 "max_cargo_speed": max(self.log.cargo_speed[cid], default=0.0),
                 "max_contacts": int(np.max(contacts)) if contacts else 0,
                 "peak_net_force": float(np.max(np.linalg.norm(forces, axis=1))),
+                "peak_abs_net_torque": max(
+                    (abs(value) for value in self.log.net_torque[cid]),
+                    default=0.0,
+                ),
                 "recruited_agents": recruited_agents_count(cargo, self.agents, self.evaluation_contact_radius),
                 "initial_detection_count": self.initial_detection_counts.get(cid, 0),
+                "final_operational_enclosure": (
+                    self.log.operational_enclosure[cid][-1]
+                    if self.log.operational_enclosure[cid]
+                    else None
+                ),
             }
             first_detection = next(
                 (k for k, count in enumerate(self.log.detection_counts[cid]) if count > 0),
                 None,
             )
+            error_audit[cid] = {
+                "normal_error_deg": self._distribution(self.log.normal_error_deg[cid]),
+                "normal_error_norm": self._distribution(self.log.normal_error_norm[cid]),
+                "boundary_point_error_m": self._distribution(self.log.boundary_point_error[cid]),
+                "map_point_error_m": self._distribution(self.log.map_point_error[cid]),
+                "object_velocity_error_mps": self._distribution(self.log.object_velocity_error[cid]),
+                "object_velocity_projection_error_mps": self._distribution(
+                    self.log.object_velocity_projection_error[cid]
+                ),
+                "boundary_velocity_error_mps": self._distribution(
+                    self.log.boundary_velocity_error[cid]
+                ),
+                "cbf_velocity_projection_error_mps": self._distribution(
+                    self.log.cbf_velocity_projection_error[cid]
+                ),
+            }
             first_enclosure = next(
-                (k for k, value in enumerate(self.log.strict_coverage[cid]) if value >= self.success_contract.coverage_min),
+                (
+                    k
+                    for k, certificate in enumerate(self.log.operational_enclosure[cid])
+                    if certificate["passed"]
+                ),
                 None,
             )
             first_transport = next(
@@ -324,24 +608,85 @@ class SimulationEnvironment:
                 ),
                 None,
             )
+            first_contact = next(
+                (k for k, count in enumerate(self.log.contact_counts[cid]) if count >= params.min_push_agents),
+                None,
+            )
+            first_brake = next(
+                (k for k, modes in enumerate(self.log.mode_counts) if modes.get("brake", 0) > 0),
+                None,
+            )
             first_hold = next(
                 (k for k, modes in enumerate(self.log.mode_counts) if modes.get("hold", 0) > 0),
                 None,
             )
             entry["phase_frames"] = {
                 "first_detection": first_detection,
+                "first_map_complete": (self.boundary_map_witnesses.get(cid) or {}).get("frame"),
                 "first_enclosure": first_enclosure,
+                "first_contact": first_contact,
                 "first_transport": first_transport,
+                "first_brake": first_brake,
                 "first_hold": first_hold,
             }
+            if first_transport is not None:
+                entry["min_strict_coverage_during_transport"] = min(
+                    self.log.strict_coverage[cid][first_transport:],
+                    default=0.0,
+                )
+                entry["min_contact_count_during_transport"] = min(
+                    self.log.contact_counts[cid][first_transport:],
+                    default=0,
+                )
+                entry["max_uncovered_arc_during_transport_m"] = max(
+                    (
+                        certificate["max_uncovered_arc_upper_m"]
+                        for certificate in self.log.operational_enclosure[cid][first_transport:]
+                    ),
+                    default=float("inf"),
+                )
+                entry["operational_enclosure_maintained_during_transport"] = all(
+                    certificate["passed"]
+                    for certificate in self.log.operational_enclosure[cid][first_transport:]
+                )
+            else:
+                entry["min_strict_coverage_during_transport"] = None
+                entry["min_contact_count_during_transport"] = None
+                entry["max_uncovered_arc_during_transport_m"] = None
+                entry["operational_enclosure_maintained_during_transport"] = None
             if goal is not None and len(centers) >= 2:
                 entry["goal_direction"] = np.asarray(goal, dtype=float).tolist()
                 entry["goal_angle_deg"] = float(np.degrees(np.arctan2(goal[1], goal[0])))
                 if cid in self.goal_targets:
                     entry["goal_target"] = self.goal_targets[cid].tolist()
-                entry.update(directional_progress(centers[0], centers[-1], goal))
+                episode_progress = directional_progress(centers[0], centers[-1], goal)
+                entry["episode_total_J"] = episode_progress["J"]
+                entry["episode_total_displacement"] = episode_progress["displacement"]
+                entry["episode_total_efficiency"] = episode_progress["efficiency"]
+                # Task progress is defined from controller activation, not from
+                # the beginning of SEARCH.  Search/enclosure contacts can move
+                # the cargo passively; counting that displacement toward the
+                # requested transport length makes the estimator, HOLD latch and
+                # success contract refer to different physical tasks.
+                transport_origin_index = first_transport if first_transport is not None else 0
+                transport_origin = np.asarray(centers[transport_origin_index], dtype=float)
+                entry["transport_activation_center"] = transport_origin.tolist()
+                entry["transport_goal_target"] = (
+                    transport_origin + params.transport_distance * np.asarray(goal, dtype=float)
+                ).tolist()
+                entry.update(directional_progress(transport_origin, centers[-1], goal))
+                center_array = np.vstack(centers)
+                displacement_history = center_array[transport_origin_index:] - transport_origin
+                unit_goal = np.asarray(goal, dtype=float)
+                unit_goal = unit_goal / max(float(np.linalg.norm(unit_goal)), 1e-12)
+                cross_track = np.abs(
+                    unit_goal[0] * displacement_history[:, 1]
+                    - unit_goal[1] * displacement_history[:, 0]
+                )
+                entry["final_cross_track_error"] = float(cross_track[-1])
+                entry["max_cross_track_error"] = float(np.max(cross_track))
                 verdict = self.success_contract.evaluate(
-                    centers[0],
+                    transport_origin,
                     centers[-1],
                     goal,
                     min_signed_clearance=min_clearance,
@@ -395,6 +740,45 @@ class SimulationEnvironment:
                     phase_reasons.append(
                         f"phase gate: HOLD started at frame {first_hold} before transport at frame {first_transport}"
                     )
+                if params.progress_feedback:
+                    if first_brake is None:
+                        phase_reasons.append("phase gate: feedback transport never entered BRAKE")
+                    elif first_transport is not None and first_brake < first_transport:
+                        phase_reasons.append(
+                            f"phase gate: BRAKE started at frame {first_brake} before transport at frame {first_transport}"
+                        )
+                    if first_hold is not None and first_brake is not None and first_hold < first_brake:
+                        phase_reasons.append(
+                            f"phase gate: HOLD started at frame {first_hold} before BRAKE at frame {first_brake}"
+                        )
+                if self.require_measured_error_bounds:
+                    observed = error_audit[cid]
+                    for key, audit_key in (
+                        ("normal_error_deg", "normal_error_deg"),
+                        ("normal_error_norm", "normal_error_norm"),
+                        ("boundary_point_error_m", "boundary_point_error_m"),
+                        ("map_point_error_m", "map_point_error_m"),
+                        ("object_velocity_error_mps", "object_velocity_error_mps"),
+                        (
+                            "object_velocity_projection_error_mps",
+                            "object_velocity_projection_error_mps",
+                        ),
+                        ("boundary_velocity_error_mps", "boundary_velocity_error_mps"),
+                        (
+                            "cbf_velocity_projection_error_mps",
+                            "cbf_velocity_projection_error_mps",
+                        ),
+                    ):
+                        bound = self.measured_error_bounds.get(key)
+                        if bound is None:
+                            continue
+                        maximum = (observed.get(audit_key) or {}).get("max")
+                        if maximum is None:
+                            phase_reasons.append(f"error-bound gate: {key} bound/measurement is missing")
+                        elif maximum > float(bound):
+                            phase_reasons.append(
+                                f"error-bound gate: measured {key}={maximum:.6g} exceeds {float(bound):.6g}"
+                            )
                 for phase_name, frame in entry["phase_frames"].items():
                     deadline = self.phase_deadlines.get(phase_name)
                     if deadline is None:
@@ -422,10 +806,18 @@ class SimulationEnvironment:
                     and witness["max_boundary_gap"] <= required_gap
                 )
                 certificate["runtime_eligible"] = bool(certificate.get("eligible")) and map_ok
+                certificate["runtime_domain_eligible"] = bool(
+                    certificate.get("domain_eligible")
+                ) and map_ok
                 runtime_failures = list(certificate.get("failure_reasons") or [])
+                runtime_domain_failures = list(
+                    certificate.get("domain_failure_reasons") or []
+                )
                 if not map_ok:
                     runtime_failures.append("boundary_map_epsilon")
+                    runtime_domain_failures.append("boundary_map_epsilon")
                 certificate["runtime_failure_reasons"] = runtime_failures
+                certificate["runtime_domain_failure_reasons"] = runtime_domain_failures
             cargo_summaries[cid] = entry
             entry["guarantee_certificate"] = certificate
 
@@ -437,6 +829,7 @@ class SimulationEnvironment:
             "density_mode": params.density_mode,
             "steps": len(self.log.times) - 1,
             "final_time": self.log.times[-1] if self.log.times else 0.0,
+            "termination": asdict(self.last_termination) if self.last_termination is not None else None,
             "contracts": {
                 "C1": params.contact_contract().as_dict() if params.task_mode != "coverage" else None,
                 "coverage": {"local_radius": params.local_radius, "comm_range": params.comm_range},
@@ -447,18 +840,52 @@ class SimulationEnvironment:
                 "phase_deadlines": self.phase_deadlines,
                 "frame_budget": self.frame_budget,
                 "require_guarantee_certificate": self.require_guarantee_certificate,
+                "online_truth_audit": self.online_truth_audit,
+                "measured_error_bounds": self.measured_error_bounds,
+                "operational_enclosure": {
+                    "certificate_type": "operational_boundary_enclosure",
+                    "formal_caging": False,
+                    "samples": self.enclosure_samples,
+                    "strict_coverage_min": self.enclosure_strict_coverage_min,
+                    "max_uncovered_arc_m": self.enclosure_max_uncovered_arc,
+                    "min_engaged_agents": self.enclosure_min_engaged_agents,
+                    "engaged_radius_m": self.enclosure_engaged_radius,
+                },
             },
             "solver": solver_stats,
+            "relaxation_events": self.log.relaxation_events,
+            "measured_error_audit": error_audit,
             "transport_progress_estimates": self.controller.transport_progress_summary(),
+            "transport_feedback": self.controller.transport_feedback_summary(),
             "goal_targets": {key: value.tolist() for key, value in self.goal_targets.items()},
             "multi_rate": {
                 "perception_every": params.perception_every,
                 "planning_every": params.planning_every,
+                "map_gossip_every": params.map_gossip_every,
                 "safety_every": 1,
+            },
+            "communication": {
+                "dropout_probability": params.communication_dropout_prob,
+                "measured_delivery_rate": self.controller.communication_delivery_rate,
             },
             "min_inter_agent_distance": min_distance,
             "mean_path_length": float(np.mean(list(lengths.values()))) if lengths else 0.0,
             "cargoes": cargo_summaries,
+        }
+
+    @staticmethod
+    def _distribution(values: list[float]) -> dict:
+        data = np.asarray(values, dtype=float)
+        data = data[np.isfinite(data)]
+        if len(data) == 0:
+            return {"n": 0, "mean": None, "p50": None, "p95": None, "p99": None, "max": None}
+        return {
+            "n": int(len(data)),
+            "mean": float(np.mean(data)),
+            "p50": float(np.quantile(data, 0.50)),
+            "p95": float(np.quantile(data, 0.95)),
+            "p99": float(np.quantile(data, 0.99)),
+            "max": float(np.max(data)),
         }
 
     # ------------------------------------------------------------------ #
@@ -470,6 +897,8 @@ class SimulationEnvironment:
         (out / "summary.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
         self._save_trajectories(out / "trajectories.csv")
         self._save_safety_timeseries(out / "safety_timeseries.csv")
+        self._save_cargo_timeseries(out / "cargo_timeseries.csv", summary)
+        self._save_perception_errors(out / "perception_errors.csv")
         return summary
 
     def _save_trajectories(self, path: Path) -> None:
@@ -503,5 +932,68 @@ class SimulationEnvironment:
                 )
         path.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
+    def _save_cargo_timeseries(self, path: Path, summary: dict) -> None:
+        """Save publication metrics without requiring simulator object access."""
+        lines = [
+            "iteration,time,cargo_id,x,y,yaw_deg,J,cross_track,cargo_speed,"
+            "strict_coverage,contacts,net_force_parallel,net_force_cross,net_torque,"
+            "min_inter_agent_distance,min_signed_clearance,max_penetration"
+        ]
+        for cargo_id, centers in self.log.cargo_centers.items():
+            entry = summary["cargoes"][cargo_id]
+            direction = np.asarray(entry.get("goal_direction", [0.0, 0.0]), dtype=float)
+            direction_norm = float(np.linalg.norm(direction))
+            if direction_norm > 1e-12:
+                direction = direction / direction_norm
+            cross_direction = np.array([-direction[1], direction[0]], dtype=float)
+            origin = np.asarray(
+                entry.get("transport_activation_center", centers[0]),
+                dtype=float,
+            )
+            activation_frame = (entry.get("phase_frames") or {}).get("first_transport")
+            for ti, (t, center) in enumerate(zip(self.log.times, centers)):
+                displacement = np.asarray(center, dtype=float) - origin
+                force = np.asarray(self.log.net_force[cargo_id][ti], dtype=float)
+                task_active = activation_frame is not None and ti >= int(activation_frame)
+                task_progress = float(np.dot(displacement, direction)) if task_active else math.nan
+                cross_track = (
+                    float(np.dot(displacement, cross_direction)) if task_active else math.nan
+                )
+                lines.append(
+                    f"{ti},{t:.6f},{cargo_id},{center[0]:.9f},{center[1]:.9f},"
+                    f"{math.degrees(self.log.cargo_angles[cargo_id][ti]):.9f},"
+                    f"{task_progress:.9f},{cross_track:.9f},"
+                    f"{self.log.cargo_speed[cargo_id][ti]:.9f},"
+                    f"{self.log.strict_coverage[cargo_id][ti]:.9f},"
+                    f"{self.log.contact_counts[cargo_id][ti]},"
+                    f"{float(np.dot(force, direction)):.9f},"
+                    f"{float(np.dot(force, cross_direction)):.9f},"
+                    f"{self.log.net_torque[cargo_id][ti]:.9f},"
+                    f"{self.log.min_distances[ti]:.9f},"
+                    f"{self.log.min_clearance[cargo_id][ti]:.9f},"
+                    f"{self.log.max_penetration[cargo_id][ti]:.9f}"
+                )
+        path.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
-__all__ = ["SimulationEnvironment", "SimulationLog"]
+    def _save_perception_errors(self, path: Path) -> None:
+        stores = {
+            "normal_error_deg": self.log.normal_error_deg,
+            "normal_error_norm": self.log.normal_error_norm,
+            "boundary_point_error_m": self.log.boundary_point_error,
+            "map_point_error_m": self.log.map_point_error,
+            "object_velocity_error_mps": self.log.object_velocity_error,
+            "object_velocity_projection_error_mps": self.log.object_velocity_projection_error,
+            "boundary_velocity_error_mps": self.log.boundary_velocity_error,
+            "cbf_velocity_projection_error_mps": self.log.cbf_velocity_projection_error,
+        }
+        lines = ["cargo_id,error_type,value"]
+        for error_type, by_cargo in stores.items():
+            for cargo_id, values in by_cargo.items():
+                lines.extend(
+                    f"{cargo_id},{error_type},{float(value):.12g}"
+                    for value in values
+                )
+        path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+
+__all__ = ["SimulationEnvironment", "SimulationLog", "EpisodeTermination"]

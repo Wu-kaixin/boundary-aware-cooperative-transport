@@ -59,6 +59,33 @@ def test_relay_from_many_neighbours_adds_no_mass():
     assert relayed.total_arc_length() == pytest.approx(single.total_arc_length())
 
 
+def test_batched_gossip_matches_sequential_gossip_and_deferred_pruning():
+    """The optimized controller batches neighbours and prunes once per frame."""
+    first = wall_observations(agent_id="a0", timestamp=1.0)
+    second = [
+        BoundaryObservation(
+            o.object_id,
+            "a1",
+            o.point + np.array([0.0, 0.12]),
+            o.normal,
+            o.timestamp,
+            o.confidence,
+            arc_length=o.arc_length,
+        )
+        for o in first
+    ]
+    sequential = LocalBoundaryMap(voxel_size=0.06, age_decay=0.0)
+    sequential.merge_observations(first, 1.0)
+    sequential.merge_observations(second, 1.0)
+
+    batched = LocalBoundaryMap(voxel_size=0.06, age_decay=0.0)
+    batched.merge_observations(first + second, 1.0, prune=False)
+    batched.prune(1.0)
+
+    assert set(batched.records) == set(sequential.records)
+    assert batched.total_arc_length() == pytest.approx(sequential.total_arc_length())
+
+
 def test_the_same_packet_arriving_several_times_in_one_update_counts_once():
     """Regression: a packet relayed over several paths arrives as several identical
     copies inside a single update. Summing arc length over them inflated each cell up
@@ -126,6 +153,18 @@ def test_position_and_normal_are_confidence_weighted_averages():
     assert np.linalg.norm(fused.normal) == pytest.approx(1.0)
 
 
+def test_fused_read_preserves_unit_normal_and_returns_independent_arrays():
+    m = LocalBoundaryMap(voxel_size=0.20, age_decay=0.0)
+    m.update(wall_observations(count=1), 0.0)
+    fused = m.all_observations(0.0)[0]
+    assert np.linalg.norm(fused.normal) == pytest.approx(1.0, abs=1e-12)
+    fused.point[:] = 99.0
+    fused.normal[:] = 0.0
+    reread = m.all_observations(0.0)[0]
+    assert not np.all(reread.point == 99.0)
+    assert np.linalg.norm(reread.normal) == pytest.approx(1.0, abs=1e-12)
+
+
 def test_age_decay_fades_confidence_at_read_time():
     m = LocalBoundaryMap(voxel_size=0.06, age_decay=0.5, min_weight=1e-9)
     m.update(wall_observations(), 0.0)
@@ -140,6 +179,16 @@ def test_faded_cells_are_eventually_dropped():
     m.update(wall_observations(), 0.0)
     assert len(m) > 0
     m.prune(30.0)
+    assert len(m) == 0
+
+
+def test_cached_expiration_matches_exponential_threshold_strictly():
+    m = LocalBoundaryMap(voxel_size=0.06, age_decay=0.5, min_weight=1e-3)
+    m.update(wall_observations(count=1, timestamp=2.0), 2.0)
+    expiration = 2.0 + np.log(0.8 / 1e-3) / 0.5
+    m.prune(expiration - 1e-8)
+    assert len(m) == 1
+    m.prune(expiration + 1e-8)
     assert len(m) == 0
 
 

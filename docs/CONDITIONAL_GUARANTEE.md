@@ -8,11 +8,11 @@ unconditional success for every mathematical subset of the plane.
 > In a bounded rectangular workspace containing one stationary, initially
 > unknown simple-polygon cargo, the paired-lane policy detects every cargo in the
 > admissible class from every collision-free, physically contained initial pose.
-> If the runtime
-> boundary map is epsilon-dense and the geometry, cage corridor, contact wrench,
-> bounded-error, safety, and finite-time certificates below pass, the
-> decentralised controller encloses and transports the cargo along the feasible
-> task direction within the declared 500-frame horizon.
+> If the runtime boundary map is epsilon-dense and the geometry, operational
+> enclosure, cage corridor, contact wrench, bounded-error, safety, and
+> contraction/progress certificates below pass, the decentralised controller
+> encloses and transports the cargo along the feasible task direction within a
+> derived finite-time bound. No fixed 500-frame premise is used.
 
 The theorem domain is defined by predicates, not shape names. A circle, L, U,
 star, rectangle, or a previously unseen concave polygon is treated identically.
@@ -45,19 +45,22 @@ certificate requires all of the following:
     is the sampled maximum plus `P/(2n)`, a Lipschitz upper bound between `n`
     uniform boundary samples, rather than an optimistic sampled maximum. Ground
     truth is used only for this witness and never reaches the controller.
-11. The declared search, enclosure, transport, and hold bounds sum to no more
-    than 500 frames. The finished-run validator independently checks the actual
-    event frames, solver provenance, safety, progress, and map witness.
+11. The enclosure error has a certified contraction rate, transport has a
+    certified positive lower progress rate, and BRAKE has a certified
+    contraction rate to the terminal tolerance. These premises produce a finite
+    analytic phase sum. Without them the finite-time certificate fails closed.
+12. The finished-run validator independently checks actual event frames, the
+    operational enclosure certificate, solver provenance, safety, progress and
+    the map witness. Observed times are not substituted for analytic premises.
 
 An object that fails any predicate remains simulatable, but its output is
 labelled ineligible and the strict validator rejects the theoretical claim.
 
 The guarantee has two proof levels. Full-workspace discovery is an a-priori
-geometric/finite-time result. Global convergence of the post-search Local-CVT
-controller on every admissible nonconvex polygon is **not** asserted; finite-time
-enclosure and transport are declared conditional premises and are checked
-fail-closed on the completed trajectory. This distinction prevents a
-post-search heuristic from being presented as an unconditional global theorem.
+geometric/finite-time result. Post-search enclosure and transport are conditional
+theorems over shapes and episodes satisfying explicit contraction, geometry,
+wrench and bounded-error premises. Global convergence of the unqualified
+Local-CVT heuristic on every simple polygon is **not** asserted.
 
 ## Full-workspace discovery bound
 
@@ -121,40 +124,93 @@ counted in the output. A run with margin relaxations supports nominal safety but
 must not be described as maintaining the full configured robustness margin at
 every frame.
 
-## 500-frame accounting
+## Operational boundary enclosure, not formal caging
 
-For the reference configuration the static bounds are:
+An enclosure frame is certified only if all of the following pass together:
 
-| Component | Bound (frames) |
-| --- | ---: |
-| Full half-workspace lane sweep | 204 |
-| Rendezvous | 37 |
-| Finite-hop map gossip | 27 |
-| Post-release enclosure premise | 1 |
-| Transport premise | 210 |
-| Hold premise | 20 |
-| Total | 499 |
+- strict exterior-only boundary coverage exceeds its threshold;
+- the conservative sampled upper bound on the longest cyclic uncovered arc is
+  below `max_uncovered_arc_m`;
+- every robot centre is outside the object;
+- inter-agent distance is at least `d_min`;
+- mutually facing cage-offset edges admit the required separation; and
+- the configured engaged quorum is present.
 
-Several activities overlap: informed robots map and may enclose while the courier
-finishes the search. The 499-frame sum is deliberately conservative and does not
-credit that overlap.
+This is an **operational boundary-enclosure certificate**. It is not a
+configuration-space escape proof. The implementation serialises
+`formal_caging: false`, and the paper must not call this a formal caging theorem.
+
+## Conditional finite-time bound
+
+Let `E` be the maximum assigned cage-target error after map completion. Assume a
+certified Dini-derivative inequality
+
+```text
+D+ E <= -lambda_e E,       E > E_tol,
+```
+
+including the effect of the hard safety filter and communication schedule. Then
+
+```text
+T_enclose <= log(E0 / E_tol) / lambda_e.
+```
+
+During TRANSPORT, assume the admissible contact allocation and closed-loop
+pressure controller guarantee
+
+```text
+dot J >= v_progress_min > 0
+```
+
+outside the BRAKE band. If that band starts `e_brake` before the target, the
+drive part satisfies
+
+```text
+T_drive <= max(0, L - e_brake) / v_progress_min.
+```
+
+Assume BRAKE satisfies
+
+```text
+D+ |e_J| <= -lambda_b |e_J|
+```
+
+from `e_brake,0` to the HOLD tolerance `e_hold`. Then
+
+```text
+T_brake <= log(e_brake,0 / e_hold) / lambda_b.
+```
+
+The executable bound is therefore
+
+```text
+T_total <= T_search + T_map + T_enclose + T_drive + T_brake + T_hold.
+```
+
+`derive_conditional_finite_time_bound` computes the corresponding ceiling in
+control frames and labels it `provable_sufficient_conditional`. It never reads
+episode completion times. A future Monte Carlo upper confidence bound is an
+empirical statistic and must be reported under a separate label.
 
 ## Reproduction
 
-```bash
-python scripts/run_500_closed_loop.py --seed 0
+```powershell
+python scripts/run_publication_representative.py `
+  --max-steps 1500 --output artifacts/publication/representative
 
-python scripts/run_batch.py \
-  --configs configs/sim/v3/arbitrary_shape_full_workspace_500.yaml \
-  --seeds 0..9 --steps 500 --out runs/full_workspace_sweep
+python scripts/run_arbitrary_shape_monte_carlo.py `
+  --seeds 0..4 --max-steps 1500 `
+  --output runs/arbitrary_shape_final_se2_60
 
-python scripts/run_shape_workspace_matrix.py \
-  --steps 500 --out runs/full_workspace_shape_matrix
+python scripts/generate_publication_artifacts.py `
+  --monte-carlo runs/arbitrary_shape_final_se2_60/monte_carlo.json `
+  --output artifacts/publication
 ```
 
-`scripts/validate_run.py` is fail-closed: missing certificates, a non-dense map,
-QP fallback/infeasibility, safety violation, missed deadline, insufficient goal
-progress, or failed coverage rejects the run.
+The frame count is a safety timeout, not a success premise. Each episode stops at
+HOLD, an explicit failure classification, or timeout. Missing certificates, a
+non-dense map, QP fallback/infeasibility, safety violation, insufficient goal
+progress, or failed enclosure rejects the theoretical claim.
 
 ## Explicit non-claims
 

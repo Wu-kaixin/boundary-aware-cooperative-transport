@@ -49,6 +49,20 @@ def test_summary_is_json_serialisable_and_carries_provenance():
     assert summary["engine"] == "penalty"
 
 
+def test_saved_outputs_include_publication_timeseries(tmp_path):
+    env = SimulationEnvironment(load_yaml(PAPER), seed=0)
+    env.run(steps=2)
+    env.save_outputs(tmp_path)
+
+    cargo_lines = (tmp_path / "cargo_timeseries.csv").read_text(encoding="utf-8").splitlines()
+    cargo_header = cargo_lines[0]
+    error_header = (tmp_path / "perception_errors.csv").read_text(encoding="utf-8").splitlines()[0]
+    assert "J,cross_track,cargo_speed" in cargo_header
+    assert "net_force_parallel,net_force_cross,net_torque" in cargo_header
+    assert cargo_lines[1].split(",")[6:8] == ["nan", "nan"]
+    assert error_header == "cargo_id,error_type,value"
+
+
 def test_config_hash_distinguishes_configurations():
     from dbact.provenance import config_hash
 
@@ -122,6 +136,34 @@ def test_frame_callback_receives_step_then_environment():
     assert seen == [(0, 1), (1, 2), (2, 3)]
 
 
+def test_run_until_uses_timeout_as_failure_not_as_success_deadline():
+    env = SimulationEnvironment(load_yaml(PAPER), seed=0)
+    termination = env.run_until(max_steps=2)
+    assert termination.status == "TIMEOUT"
+    assert termination.success is False
+    assert termination.frame == 2
+    assert env.summary()["termination"]["status"] == "TIMEOUT"
+
+
+def test_summary_progress_is_relative_to_transport_activation():
+    cfg = load_yaml("configs/sim/research/adaptive_progress_closed_loop.yaml")
+    env = SimulationEnvironment(cfg, seed=0)
+    env.run(steps=2)
+    cargo_id = env.cargoes[0].object_id
+    goal = env.goal_directions[cargo_id]
+    start = env.log.cargo_centers[cargo_id][0].copy()
+    activation = start + 0.20 * goal
+    end = activation + 0.10 * goal
+    env.log.cargo_centers[cargo_id] = [start, activation, end]
+    env.log.mode_counts = [{"search": len(env.agents)}, {"convoy": 1}, {"hold": len(env.agents)}]
+
+    entry = env.summary()["cargoes"][cargo_id]
+
+    assert entry["J"] == pytest.approx(0.10)
+    assert entry["episode_total_J"] == pytest.approx(0.30)
+    assert entry["transport_activation_center"] == pytest.approx(activation)
+
+
 def test_v3_starts_unobserved_and_serialises_the_deadline_contract():
     env = SimulationEnvironment(load_yaml("configs/sim/v3/l_shape_search_closed_loop_500.yaml"), seed=0)
     assert env.initial_detection_counts == {"cargo_0": 0}
@@ -135,7 +177,12 @@ def test_v3_starts_unobserved_and_serialises_the_deadline_contract():
         "first_transport": 350,
         "first_hold": 500,
     }
-    assert summary["multi_rate"] == {"perception_every": 3, "planning_every": 3, "safety_every": 1}
+    assert summary["multi_rate"] == {
+        "perception_every": 3,
+        "planning_every": 3,
+        "map_gossip_every": 1,
+        "safety_every": 1,
+    }
     assert all(len(modes) == 4 for modes in env.log.agent_modes.values())
 
 

@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "date": "2026-08-09",
+  "branch": "Codex-boundary-aware-closed-loop-v1",
+  "operational_enclosure": {
+    "certificate_type": "operational_boundary_enclosure",
+    "formal_caging": false,
+    "seed": 0,
+    "distance_m": 0.10,
+    "first_certified_frame": 240,
+    "maintained_during_transport": true,
+    "final_strict_coverage": 1.0,
+    "max_uncovered_arc_during_transport_m": 0.0,
+    "final_engaged_agents": 10,
+    "final_min_signed_clearance_m": 0.17910440737644956,
+    "final_min_inter_agent_distance_m": 0.3521196207401163,
+    "hold_frame": 339,
+    "fallbacks": 0,
+    "infeasible": 0,
+    "rho_relaxations": 0
+  },
+  "analytic_finite_time": {
+    "bound_id": "DBACT-CONDITIONAL-FINITE-TIME-v1",
+    "classification": "provable_sufficient_conditional",
+    "empirical": false,
+    "eligible_for_current_research_config": false,
+    "failure_reasons": [
+      "positive_enclosure_contraction",
+      "positive_transport_progress_rate",
+      "positive_brake_contraction"
+    ],
+    "search_bound_frames": 204,
+    "conservative_map_bound_frames": 124,
+    "formulas": {
+      "enclose": "log(E0/E_tol)/lambda_enclose",
+      "transport_drive": "max(0,L-e_brake)/v_progress_min",
+      "brake": "log(e_brake0/e_hold)/lambda_brake",
+      "total": "T_search+T_map+T_enclose+T_transport+T_hold"
+    }
+  },
+  "unsupported": [
+    "formal caging",
+    "global Local-CVT contraction rate",
+    "domain-wide positive transport progress rate",
+    "domain-wide BRAKE contraction rate",
+    "empirical upper confidence bound before Stage 5"
+  ]
+}

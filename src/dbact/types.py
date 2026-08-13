@@ -54,6 +54,39 @@ class BoundaryObservation:
         if norm > 1e-9:
             self.normal = self.normal / norm
 
+    @classmethod
+    def from_unit_normal(
+        cls,
+        object_id: str,
+        agent_id: str,
+        point: np.ndarray,
+        normal: np.ndarray,
+        timestamp: float,
+        confidence: float = 1.0,
+        arc_length: float = 0.0,
+        residual: float = 0.0,
+    ) -> "BoundaryObservation":
+        """Construct from an already-normalized internal map record.
+
+        Public sensor inputs continue through ``__post_init__``.  Boundary-map
+        records maintain the unit-normal invariant at every fusion and rigid
+        transform, so renormalizing hundreds of thousands of read-only copies
+        adds allocations without adding validation.
+        """
+        observation = cls.__new__(cls)
+        observation.object_id = object_id
+        observation.agent_id = agent_id
+        # This internal constructor's contract guarantees two-vectors, and the
+        # caller already decides whether to copy.  Re-entering ``asvec2`` here
+        # accounted for millions of tiny array conversions in dense maps.
+        observation.point = point
+        observation.normal = normal
+        observation.timestamp = float(timestamp)
+        observation.confidence = float(confidence)
+        observation.arc_length = float(arc_length)
+        observation.residual = float(residual)
+        return observation
+
 
 @dataclass
 class ControlCommand:

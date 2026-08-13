@@ -1,0 +1,57 @@
+{
+  "date": "2026-08-09",
+  "branch": "Codex-boundary-aware-closed-loop-v1",
+  "config": "configs/sim/research/adaptive_progress_closed_loop.yaml",
+  "seed": 0,
+  "timeout_steps": 900,
+  "variants": [
+    {
+      "name": "fixed_feedforward",
+      "termination": "TIMEOUT",
+      "executed_steps": 900,
+      "success": false,
+      "J_m": -0.28606183479496666,
+      "efficiency": -0.8408176301014239,
+      "rotation_deg": -4.661492642312483,
+      "coverage": 1.0,
+      "margin_relaxations": 522,
+      "fallbacks": 0,
+      "infeasible": 0
+    },
+    {
+      "name": "pi_only",
+      "termination": "TIMEOUT",
+      "executed_steps": 900,
+      "success": false,
+      "J_m": -0.339104757834929,
+      "efficiency": -0.8148656208416922,
+      "rotation_deg": 5.589622641063014,
+      "coverage": 0.975,
+      "margin_relaxations": 797,
+      "fallbacks": 0,
+      "infeasible": 0
+    },
+    {
+      "name": "pi_wrench_release",
+      "termination": "SUCCESS_HOLD",
+      "executed_steps": 765,
+      "success": true,
+      "J_m": 0.07907895457829844,
+      "efficiency": 0.9954210831353828,
+      "rotation_deg": -9.206470434775154,
+      "coverage": 1.0,
+      "phase_frames": {
+        "detection": 127,
+        "map_complete": 268,
+        "enclosure": 234,
+        "contact": 271,
+        "transport": 282,
+        "brake": 739,
+        "hold": 759
+      },
+      "margin_relaxations": 134,
+      "fallbacks": 0,
+      "infeasible": 0
+    }
+  ]
+}

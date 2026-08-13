@@ -45,6 +45,7 @@ class VoxelRecord:
     timestamp: float
     weight_sum: float = 0.0
     observations: int = 0
+    expires_at: float = math.inf
 
 
 @dataclass
@@ -63,6 +64,7 @@ class LocalBoundaryMap:
     records: dict[tuple[str, int, int], VoxelRecord] = field(default_factory=dict)
     last_motion: dict[str, np.ndarray] = field(default_factory=dict)
     last_rotation: dict[str, float] = field(default_factory=dict)
+    _next_expiry: float = field(default=math.inf, init=False, repr=False)
 
     # ------------------------------------------------------------------ #
 
@@ -70,13 +72,30 @@ class LocalBoundaryMap:
         cell = np.round(np.asarray(point, dtype=float) / self.voxel_size).astype(int)
         return (object_id, int(cell[0]), int(cell[1]))
 
+    def _expiry(self, confidence: float, timestamp: float) -> float:
+        """Return the time strictly after which a cell is stale."""
+        if confidence < self.min_weight:
+            return -math.inf
+        if self.age_decay <= 0.0:
+            return math.inf
+        if confidence == self.min_weight:
+            return float(timestamp)
+        return float(timestamp) + math.log(float(confidence) / self.min_weight) / self.age_decay
+
     @property
     def voxel_diagonal(self) -> float:
         return self.voxel_size * math.sqrt(2.0)
 
-    def update(self, new_observations: list[BoundaryObservation], timestamp: float) -> None:
+    def update(
+        self,
+        new_observations: list[BoundaryObservation],
+        timestamp: float,
+        *,
+        prune: bool = True,
+    ) -> None:
         if not new_observations:
-            self.prune(timestamp)
+            if prune:
+                self.prune(timestamp)
             return
 
         if self.motion_compensation:
@@ -101,7 +120,8 @@ class LocalBoundaryMap:
         # packet dominated long closed-loop runs even though every packet is
         # headed for the same fixed voxel grid.
         cells = np.rint(
-            np.vstack([obs.point for obs in observations]) / float(self.voxel_size)
+            np.asarray([obs.point for obs in observations], dtype=float)
+            / float(self.voxel_size)
         ).astype(int)
         voxel_keys = [
             (obs.object_id, int(cell[0]), int(cell[1]))
@@ -116,12 +136,13 @@ class LocalBoundaryMap:
             key = (voxel_key, obs.agent_id)
             batch[key] = batch.get(key, 0.0) + float(obs.arc_length)
 
+        voxel_diagonal = self.voxel_size * math.sqrt(2.0)
         for obs, key in zip(observations, voxel_keys):
-            scan_arc = min(batch[(key, obs.agent_id)], self.voxel_diagonal)
+            scan_arc = min(batch[(key, obs.agent_id)], voxel_diagonal)
             weight = max(float(obs.confidence), 1e-6)
             record = self.records.get(key)
             if record is None:
-                self.records[key] = VoxelRecord(
+                record = VoxelRecord(
                     object_id=obs.object_id,
                     point=np.asarray(obs.point, dtype=float).copy(),
                     normal=np.asarray(obs.normal, dtype=float).copy(),
@@ -130,7 +151,10 @@ class LocalBoundaryMap:
                     timestamp=float(obs.timestamp),
                     weight_sum=weight,
                     observations=1,
+                    expires_at=self._expiry(float(obs.confidence), float(obs.timestamp)),
                 )
+                self.records[key] = record
+                self._next_expiry = min(self._next_expiry, record.expires_at)
                 continue
 
             total = record.weight_sum + weight
@@ -140,12 +164,103 @@ class LocalBoundaryMap:
             if norm > 1e-9:
                 record.normal = fused_normal / norm
             record.weight_sum = total
-            record.confidence = max(record.confidence, float(obs.confidence))
+            previous_confidence = record.confidence
+            previous_timestamp = record.timestamp
+            record.confidence = max(previous_confidence, float(obs.confidence))
             record.arc_length = max(record.arc_length, scan_arc)
-            record.timestamp = max(record.timestamp, float(obs.timestamp))
+            record.timestamp = max(previous_timestamp, float(obs.timestamp))
             record.observations += 1
+            if (
+                record.confidence != previous_confidence
+                or record.timestamp != previous_timestamp
+            ):
+                record.expires_at = self._expiry(record.confidence, record.timestamp)
+                self._next_expiry = min(self._next_expiry, record.expires_at)
 
-        self.prune(timestamp)
+        if prune:
+            self.prune(timestamp)
+
+    def merge_observations(
+        self,
+        observations: list[BoundaryObservation],
+        timestamp: float,
+        *,
+        prune: bool = True,
+    ) -> None:
+        """Idempotently merge a relayed voxel map without re-running ICP.
+
+        Relayed records are historical state, not a new scan.  Feeding them to
+        :meth:`update` made point-to-plane registration interpret gossip traffic
+        as object motion and rebuilt arrays containing several complete neighbour
+        maps every perception frame.  This merge keeps at most one record per
+        target voxel and selects the freshest geometry, so replaying the same
+        packet cannot add mass or change the motion estimate.
+        """
+        if not observations:
+            if prune:
+                self.prune(timestamp)
+            return
+
+        # Gossip relays complete maps and therefore contains hundreds of cells.
+        # Quantising each point through ``_key`` created one small NumPy array per
+        # cell and dominated the controller profile.  Keep exactly the same
+        # nearest-voxel rule, but do it in one contiguous operation.
+        cells = np.rint(
+            np.asarray([obs.point for obs in observations], dtype=float)
+            / float(self.voxel_size)
+        ).astype(int)
+        voxel_diagonal = self.voxel_size * math.sqrt(2.0)
+        for obs, cell in zip(observations, cells):
+            key = (obs.object_id, int(cell[0]), int(cell[1]))
+            incumbent = self.records.get(key)
+            if incumbent is None:
+                weight = max(float(obs.confidence), 1e-6)
+                record = VoxelRecord(
+                    object_id=obs.object_id,
+                    point=np.asarray(obs.point, dtype=float).copy(),
+                    normal=np.asarray(obs.normal, dtype=float).copy(),
+                    confidence=float(obs.confidence),
+                    arc_length=min(float(obs.arc_length), voxel_diagonal),
+                    timestamp=float(obs.timestamp),
+                    weight_sum=weight,
+                    observations=1,
+                    expires_at=self._expiry(float(obs.confidence), float(obs.timestamp)),
+                )
+                self.records[key] = record
+                self._next_expiry = min(self._next_expiry, record.expires_at)
+                continue
+            relay_arc = min(float(obs.arc_length), voxel_diagonal)
+            relay_confidence = float(obs.confidence)
+            relay_weight = max(relay_confidence, 1e-6)
+            if (
+                float(obs.timestamp) <= incumbent.timestamp + 1e-12
+                and relay_confidence <= incumbent.confidence
+                and relay_arc <= incumbent.arc_length
+                and relay_weight <= incumbent.weight_sum
+            ):
+                continue
+            expiry_changed = False
+            if float(obs.timestamp) > incumbent.timestamp + 1e-12:
+                incumbent.point = np.asarray(obs.point, dtype=float).copy()
+                incumbent.normal = np.asarray(obs.normal, dtype=float).copy()
+                incumbent.timestamp = float(obs.timestamp)
+                expiry_changed = True
+            previous_confidence = incumbent.confidence
+            incumbent.confidence = max(previous_confidence, relay_confidence)
+            expiry_changed = expiry_changed or incumbent.confidence != previous_confidence
+            incumbent.arc_length = max(
+                incumbent.arc_length,
+                relay_arc,
+            )
+            incumbent.weight_sum = max(incumbent.weight_sum, relay_weight)
+            if expiry_changed:
+                incumbent.expires_at = self._expiry(
+                    incumbent.confidence,
+                    incumbent.timestamp,
+                )
+                self._next_expiry = min(self._next_expiry, incumbent.expires_at)
+        if prune:
+            self.prune(timestamp)
 
     def _compensate_translation(
         self,
@@ -177,10 +292,10 @@ class LocalBoundaryMap:
         if latest_new <= latest_old + 1e-12:
             return
 
-        old_points = np.vstack([rec.point for rec in old])
-        old_normals = np.vstack([rec.normal for rec in old])
-        new_points = np.vstack([obs.point for obs in observations])
-        new_normals = np.vstack([obs.normal for obs in observations])
+        old_points = np.asarray([rec.point for rec in old], dtype=float)
+        old_normals = np.asarray([rec.normal for rec in old], dtype=float)
+        new_points = np.asarray([obs.point for obs in observations], dtype=float)
+        new_normals = np.asarray([obs.normal for obs in observations], dtype=float)
         dist2 = np.sum((new_points[:, None, :] - old_points[None, :, :]) ** 2, axis=2)
         alignment = new_normals @ old_normals.T
         admissible = alignment >= 0.70
@@ -216,16 +331,29 @@ class LocalBoundaryMap:
         translation = np.asarray(twist[:2], dtype=float)
         rotation = float(twist[2])
         magnitude = float(np.linalg.norm(translation))
-        if magnitude > self.max_translation_per_update or abs(rotation) > self.max_rotation_per_update:
-            return
+        # Reject implausible components independently.  A corner can make the
+        # angular column ill-conditioned while the two translational columns are
+        # still well observed; discarding the complete twist then freezes task
+        # progress under range noise.  Clipping is deliberately avoided because
+        # it would turn an outlier into a plausible-looking motion increment.
+        if magnitude > self.max_translation_per_update:
+            translation = np.zeros(2, dtype=float)
+        if abs(rotation) > self.max_rotation_per_update:
+            rotation = 0.0
+        magnitude = float(np.linalg.norm(translation))
         if magnitude <= 1e-6 and abs(rotation) <= 1e-6:
             return
-        # Translate the world-frame voxel map, but keep its accumulated outline
-        # orientation.  Rotating a partially observed map about its sample mean
-        # moves unseen-side proxies and destabilises the coverage density.  The
-        # SE(2) solve is still essential: separating rotation keeps the reported
-        # translational task progress from being polluted by spin.
-        self._shift_object_records(object_id, translation)
+        # Apply the complete estimated rigid increment to the world-frame map.
+        # Historical code discarded rotation, so a perfectly rigid outline
+        # accumulated 0.2--0.3 m point error after only a few degrees of cargo
+        # yaw.  The translation component remains separately exposed through
+        # ``last_motion`` and therefore does not pollute task progress with spin.
+        self._shift_object_records(
+            object_id,
+            translation,
+            rotation=rotation,
+            center=center,
+        )
         self.last_motion[object_id] = np.asarray(translation, dtype=float).copy()
         self.last_rotation[object_id] = rotation
 
@@ -240,12 +368,31 @@ class LocalBoundaryMap:
         pivot = np.zeros(2) if center is None else np.asarray(center, dtype=float).reshape(2)
         c, s = math.cos(rotation), math.sin(rotation)
         matrix = np.array([[c, -s], [s, c]], dtype=float)
+        items = list(self.records.items())
+        target_indices = [
+            index
+            for index, (_, record) in enumerate(items)
+            if record.object_id == object_id
+        ]
+        transformed: dict[int, tuple[np.ndarray, np.ndarray, tuple[str, int, int]]] = {}
+        if target_indices:
+            points = np.asarray([items[index][1].point for index in target_indices], dtype=float)
+            normals = np.asarray([items[index][1].normal for index in target_indices], dtype=float)
+            moved_points = (points - pivot[None, :]) @ matrix.T + pivot[None, :] + translation
+            moved_normals = normals @ matrix.T
+            cells = np.rint(moved_points / float(self.voxel_size)).astype(int)
+            for row, index in enumerate(target_indices):
+                transformed[index] = (
+                    moved_points[row].copy(),
+                    moved_normals[row].copy(),
+                    (object_id, int(cells[row, 0]), int(cells[row, 1])),
+                )
+
         rebuilt: dict[tuple[str, int, int], VoxelRecord] = {}
-        for key, record in self.records.items():
-            if record.object_id == object_id:
-                record.point = (record.point - pivot) @ matrix.T + pivot + translation
-                record.normal = record.normal @ matrix.T
-                key = self._key(record.object_id, record.point)
+        for index, (key, record) in enumerate(items):
+            moved = transformed.get(index)
+            if moved is not None:
+                record.point, record.normal, key = moved
             incumbent = rebuilt.get(key)
             if incumbent is None:
                 rebuilt[key] = record
@@ -255,10 +402,16 @@ class LocalBoundaryMap:
             if record.weight_sum > incumbent.weight_sum:
                 record.arc_length = max(record.arc_length, incumbent.arc_length)
                 record.confidence = max(record.confidence, incumbent.confidence)
+                record.expires_at = self._expiry(record.confidence, record.timestamp)
+                self._next_expiry = min(self._next_expiry, record.expires_at)
                 rebuilt[key] = record
             else:
                 incumbent.arc_length = max(incumbent.arc_length, record.arc_length)
                 incumbent.confidence = max(incumbent.confidence, record.confidence)
+                incumbent.expires_at = self._expiry(
+                    incumbent.confidence,
+                    incumbent.timestamp,
+                )
         self.records = rebuilt
 
     def prune(self, timestamp: float) -> None:
@@ -268,9 +421,27 @@ class LocalBoundaryMap:
         its update rate. When it binds, the cells kept are the ones with the
         largest current (decayed) weight.
         """
-        stale = [key for key, rec in self.records.items() if self._decay(rec, timestamp) < self.min_weight]
-        for key in stale:
-            del self.records[key]
+        # Confidence/timestamp updates refresh this deadline.  The usual fresh
+        # path therefore avoids evaluating an exponential for every cell at
+        # every neighbour merge; read-time confidence still decays exactly.
+        if float(timestamp) > self._next_expiry:
+            stale = [
+                key
+                for key, rec in self.records.items()
+                if float(timestamp) > rec.expires_at
+            ]
+            for key in stale:
+                del self.records[key]
+            self._next_expiry = min(
+                (rec.expires_at for rec in self.records.values()),
+                default=math.inf,
+            )
+
+        # If the total number of cells fits one object's allowance, every
+        # per-object count necessarily fits too; avoid rebuilding groups after
+        # each neighbour relay in this overwhelmingly common case.
+        if len(self.records) <= self.max_voxels_per_object:
+            return
 
         by_object: dict[str, list[tuple[str, int, int]]] = {}
         for key, rec in self.records.items():
@@ -300,7 +471,7 @@ class LocalBoundaryMap:
         out: list[BoundaryObservation] = []
         for record in self.records.values():
             out.append(
-                BoundaryObservation(
+                BoundaryObservation.from_unit_normal(
                     object_id=record.object_id,
                     agent_id="map",
                     point=record.point.copy(),
