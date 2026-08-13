@@ -120,3 +120,47 @@ def test_frame_callback_receives_step_then_environment():
     seen: list[tuple[int, int]] = []
     env.run(steps=2, on_frame=lambda i, e: seen.append((i, len(e.log.times))))
     assert seen == [(0, 1), (1, 2), (2, 3)]
+
+
+def test_v3_starts_unobserved_and_serialises_the_deadline_contract():
+    env = SimulationEnvironment(load_yaml("configs/sim/v3/l_shape_search_closed_loop_500.yaml"), seed=0)
+    assert env.initial_detection_counts == {"cargo_0": 0}
+    env.run(steps=3)
+    summary = env.summary()
+
+    assert summary["contracts"]["require_initially_unobserved"] is True
+    assert summary["contracts"]["phase_deadlines"] == {
+        "first_detection": 150,
+        "first_enclosure": 300,
+        "first_transport": 350,
+        "first_hold": 500,
+    }
+    assert summary["multi_rate"] == {"perception_every": 3, "planning_every": 3, "safety_every": 1}
+    assert all(len(modes) == 4 for modes in env.log.agent_modes.values())
+
+
+def test_multirate_controller_keeps_safety_fast_and_decimates_expensive_loops(monkeypatch):
+    cfg = load_yaml("configs/sim/v3/l_shape_search_closed_loop_500.yaml")
+    cfg["controller"]["perception_every"] = 3
+    cfg["controller"]["planning_every"] = 2
+    env = SimulationEnvironment(cfg, seed=0)
+
+    calls = {"sense": 0, "plan": 0}
+    original_sense = env.controller.sensor.sense
+    original_plan = env.controller._nominal_command
+
+    def counted_sense(*args, **kwargs):
+        calls["sense"] += 1
+        return original_sense(*args, **kwargs)
+
+    def counted_plan(*args, **kwargs):
+        calls["plan"] += 1
+        return original_plan(*args, **kwargs)
+
+    monkeypatch.setattr(env.controller.sensor, "sense", counted_sense)
+    monkeypatch.setattr(env.controller, "_nominal_command", counted_plan)
+    env.run(steps=7)
+
+    assert calls["sense"] == 3 * len(env.agents)  # controller frames 0, 3, 6
+    assert calls["plan"] == 4 * len(env.agents)  # controller frames 0, 2, 4, 6
+    assert env.controller.safety.stats.solves == 7 * len(env.agents)

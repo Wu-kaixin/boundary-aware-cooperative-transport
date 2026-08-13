@@ -65,6 +65,11 @@ def validate(summary: dict) -> list[str]:
     # continuous-time condition can be overshot by one step of relative motion.
     overshoot = contracts.get("discrete_overshoot") or 0.0
     c1 = contracts.get("C1")
+    frame_budget = contracts.get("frame_budget")
+    if frame_budget is not None and summary.get("steps") != int(frame_budget):
+        reasons.append(
+            f"frame budget violated: recorded steps={summary.get('steps')} != {int(frame_budget)}"
+        )
     if c1 is None and summary.get("task_mode") != "coverage":
         reasons.append("missing C1 contract record")
     elif isinstance(c1, dict):
@@ -89,6 +94,58 @@ def validate(summary: dict) -> list[str]:
 
     for cargo_id, entry in cargoes.items():
         prefix = f"cargo {cargo_id}"
+        if contracts.get("require_guarantee_certificate"):
+            certificate = entry.get("guarantee_certificate")
+            if not isinstance(certificate, dict):
+                reasons.append(f"{prefix}: admissibility guarantee certificate is missing")
+            elif certificate.get("eligible") is not True:
+                failed = ", ".join(certificate.get("failure_reasons") or []) or "unspecified check"
+                reasons.append(f"{prefix}: admissibility guarantee certificate failed ({failed})")
+            else:
+                checks = certificate.get("checks") or {}
+                failed_checks = [name for name, check in checks.items() if check.get("passed") is not True]
+                if failed_checks:
+                    reasons.append(
+                        f"{prefix}: certificate says eligible but failed checks remain ({', '.join(failed_checks)})"
+                    )
+                mapping = certificate.get("mapping") or {}
+                required_gap = mapping.get("required_max_boundary_gap")
+                witness = certificate.get("runtime_map_witness")
+                if required_gap is None:
+                    reasons.append(f"{prefix}: certificate boundary-map resolution is missing")
+                elif not isinstance(witness, dict):
+                    reasons.append(f"{prefix}: runtime boundary-map witness is missing")
+                elif witness.get("max_boundary_gap") is None:
+                    reasons.append(f"{prefix}: runtime boundary-map gap is missing")
+                elif witness["max_boundary_gap"] > required_gap:
+                    reasons.append(
+                        f"{prefix}: boundary map is not epsilon-dense: max gap "
+                        f"{witness['max_boundary_gap']:.4f} > {required_gap:.4f} m"
+                    )
+                elif certificate.get("runtime_eligible") is not True:
+                    reasons.append(f"{prefix}: runtime admissibility certificate is not eligible")
+                for phase_name, bound in (certificate.get("time_bounds") or {}).items():
+                    frame = (entry.get("phase_frames") or {}).get(phase_name)
+                    if frame is None:
+                        reasons.append(f"{prefix}: theorem bound {phase_name}<={int(bound)} has no event")
+                    elif frame > int(bound):
+                        reasons.append(
+                            f"{prefix}: theorem bound violated: {phase_name}={frame} > {int(bound)}"
+                        )
+        if contracts.get("require_initially_unobserved"):
+            initial = entry.get("initial_detection_count")
+            if initial is None:
+                reasons.append(f"{prefix}: initial_detection_count is missing")
+            elif initial != 0:
+                reasons.append(f"{prefix}: {initial} boundary return(s) existed at frame 0")
+        for phase_name, deadline in (contracts.get("phase_deadlines") or {}).items():
+            if deadline is None:
+                continue
+            frame = (entry.get("phase_frames") or {}).get(phase_name)
+            if frame is None:
+                reasons.append(f"{prefix}: {phase_name} was not reached by frame {int(deadline)}")
+            elif frame > int(deadline):
+                reasons.append(f"{prefix}: {phase_name}={frame} exceeded frame {int(deadline)}")
         clearance = entry.get("min_signed_clearance")
         if clearance is None:
             reasons.append(f"{prefix}: min_signed_clearance not recorded")

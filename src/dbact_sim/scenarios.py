@@ -30,14 +30,14 @@ from dbact.provenance import frame_rng
 from dbact.transport_dynamics import ScriptedParams
 from dbact.types import AgentState
 
-PAPER_CONFIG_MARKERS = ("configs/sim/v2", "configs\\sim\\v2")
+PAPER_CONFIG_MARKERS = ("configs/sim/v2", "configs/sim/v3", "configs\\sim\\v2", "configs\\sim\\v3")
 
 
 def load_yaml(path: str | Path) -> dict:
     with Path(path).open("r", encoding="utf-8") as f:
         cfg = yaml.safe_load(f) or {}
     cfg.setdefault("_source", str(path))
-    if any(marker in str(path).replace("\\", "/") for marker in ("configs/sim/v2",)):
+    if any(marker in str(path).replace("\\", "/") for marker in ("configs/sim/v2", "configs/sim/v3")):
         cfg.setdefault("paper", True)
     return cfg
 
@@ -78,6 +78,14 @@ def validate_config(cfg: dict) -> None:
             "configuration; use 'qp'"
         )
 
+    evaluation = cfg.get("evaluation", {}) or {}
+    if bool(evaluation.get("require_guarantee_certificate", False)) and not bool(
+        (cfg.get("guarantee", {}) or {}).get("enabled", False)
+    ):
+        problems.append(
+            "evaluation.require_guarantee_certificate=true requires guarantee.enabled=true"
+        )
+
     if problems:
         raise ContractViolation("configuration rejected:\n  - " + "\n  - ".join(problems))
 
@@ -97,7 +105,8 @@ def build_agents(cfg: dict, seed: int = 0) -> list[AgentState]:
 
     ``grid``     a compact block, all robots arriving from one side
     ``ring``     evenly spaced on a circle around the work area
-    ``scatter``  rejection-sampled in an annulus with a guaranteed separation
+    ``scatter``       rejection-sampled in an annulus with a guaranteed separation
+    ``paired_sweep``  two connected lane teams deployed on opposite domain edges
 
     ``scatter`` uses rejection sampling rather than plain Gaussian jitter because
     an unconstrained draw regularly places two robots closer than ``d_min``, and a
@@ -151,8 +160,25 @@ def build_agents(cfg: dict, seed: int = 0) -> list[AgentState]:
                 f"annulus [{radius_min}, {radius_max}] after {attempts} attempts; widen the annulus or "
                 "reduce the robot count rather than accepting an overlapping start"
             )
+    elif layout == "paired_sweep":
+        if count < 2 or count % 2:
+            raise ContractViolation("paired_sweep requires a positive even agent count")
+        xmin, xmax, ymin, ymax = domain
+        edge_padding = float(a.get("edge_padding", cfg.get("controller", {}).get("robot_radius", 0.16)))
+        if not (0.0 <= edge_padding < 0.5 * (xmax - xmin)):
+            raise ContractViolation("paired_sweep edge_padding must lie inside the domain")
+        per_side = count // 2
+        lane_spacing = (ymax - ymin) / per_side
+        for idx in range(count):
+            side = -1.0 if idx < per_side else 1.0
+            lane = idx % per_side
+            x = xmin + edge_padding if side < 0.0 else xmax - edge_padding
+            y = ymin + (lane + 0.5) * lane_spacing
+            positions.append(np.array([x, y], dtype=float))
     else:
-        raise ContractViolation(f"unknown agents.layout {layout!r}; expected 'grid', 'ring' or 'scatter'")
+        raise ContractViolation(
+            f"unknown agents.layout {layout!r}; expected 'grid', 'ring', 'scatter' or 'paired_sweep'"
+        )
 
     return [AgentState(agent_id=f"agent_{i:02d}", position=p) for i, p in enumerate(positions)]
 
@@ -187,11 +213,114 @@ def assert_initial_state_valid(agents: list[AgentState], cargoes: list, d_min: f
         raise ContractViolation("invalid initial state:\n  - " + "\n  - ".join(problems))
 
 
-def build_cargoes(cfg: dict) -> list[Cargo]:
-    return [Cargo.from_config(item) for item in cfg.get("cargoes", [])]
+def _materialize_seeded_outline(item: dict, seed: int) -> dict:
+    """Turn a seeded radial outline into an ordinary local-frame polygon.
+
+    Sorting one vertex inside each angular sector yields a star-shaped simple
+    polygon for every seed.  Shape generation belongs to episode construction;
+    downstream perception and control still receive only ray observations.
+    """
+    if str(item.get("shape", "")) != "random_simple_polygon":
+        return dict(item)
+    count = int(item.get("vertex_count", 9))
+    if count < 3:
+        raise ContractViolation("random_simple_polygon vertex_count must be at least 3")
+    radius_min = float(item.get("radius_min", 0.35))
+    radius_max = float(item.get("radius_max", 0.70))
+    if not (0.0 < radius_min <= radius_max):
+        raise ContractViolation("random_simple_polygon requires 0 < radius_min <= radius_max")
+    jitter = float(item.get("angle_jitter", 0.30))
+    if not (0.0 <= jitter < 0.5):
+        raise ContractViolation("random_simple_polygon angle_jitter must lie in [0, 0.5)")
+    object_id = str(item.get("id", "cargo"))
+    rng = frame_rng("random_simple_polygon", object_id, base=seed)
+    step = 2.0 * np.pi / count
+    angles = step * np.arange(count) + rng.uniform(-jitter * step, jitter * step, size=count)
+    angles = np.mod(angles, 2.0 * np.pi)
+    angles.sort()
+    radii = rng.uniform(radius_min, radius_max, size=count)
+    local = np.column_stack([radii * np.cos(angles), radii * np.sin(angles)])
+    item_cfg = dict(item)
+    item_cfg["shape"] = "polygon"
+    item_cfg["vertices"] = local.tolist()
+    item_cfg["vertices_frame"] = "local"
+    return item_cfg
 
 
-def goal_directions_from_config(cfg: dict, seed: int = 0) -> dict[str, np.ndarray]:
+def build_cargoes(
+    cfg: dict,
+    seed: int = 0,
+    agents: list[AgentState] | None = None,
+) -> list[Cargo]:
+    """Build cargoes, optionally sampling a reproducible unknown start pose.
+
+    ``random_center`` is deliberately attached to the scenario rather than the
+    controller.  The sampler may use ground-truth geometry to construct a valid
+    episode, but the controller receives only ray observations once the episode
+    starts.  ``initial_sensor_gap`` makes the discovery claim executable: every
+    robot must begin outside the object's sensing horizon.
+    """
+    domain = domain_from_config(cfg)
+    positions = np.vstack([agent.position for agent in agents]) if agents else np.empty((0, 2))
+    cargoes: list[Cargo] = []
+    for item in cfg.get("cargoes", []):
+        item_cfg = _materialize_seeded_outline(dict(item), seed)
+        random_cfg = item_cfg.get("random_center", {}) or {}
+        if not bool(random_cfg.get("enabled", False)):
+            cargoes.append(Cargo.from_config(item_cfg))
+            continue
+
+        object_id = str(item_cfg.get("id", "cargo"))
+        margin = float(random_cfg.get("domain_margin", 0.0))
+        xmin = float(random_cfg.get("xmin", domain[0] + margin))
+        xmax = float(random_cfg.get("xmax", domain[1] - margin))
+        ymin = float(random_cfg.get("ymin", domain[2] + margin))
+        ymax = float(random_cfg.get("ymax", domain[3] - margin))
+        if xmax <= xmin or ymax <= ymin:
+            raise ContractViolation(f"cargo {object_id!r} random_center bounds are empty")
+        initial_sensor_gap = float(random_cfg.get("initial_sensor_gap", 0.0))
+        max_attempts = int(random_cfg.get("max_attempts", 512))
+        yaw_min = float(random_cfg.get("yaw_min_deg", np.degrees(float(item_cfg.get("yaw", 0.0)))))
+        yaw_max = float(random_cfg.get("yaw_max_deg", yaw_min))
+        if yaw_max < yaw_min:
+            raise ContractViolation(f"cargo {object_id!r} random_center yaw_max_deg < yaw_min_deg")
+
+        rng = frame_rng("random_cargo_center", object_id, base=seed)
+        accepted: Cargo | None = None
+        for _ in range(max_attempts):
+            candidate_cfg = dict(item_cfg)
+            candidate_cfg["center"] = [float(rng.uniform(xmin, xmax)), float(rng.uniform(ymin, ymax))]
+            candidate_cfg["yaw"] = float(np.deg2rad(rng.uniform(yaw_min, yaw_max)))
+            cargo = Cargo.from_config(candidate_cfg)
+            vertices = cargo.vertices
+            inside = (
+                np.min(vertices[:, 0]) >= domain[0] + margin
+                and np.max(vertices[:, 0]) <= domain[1] - margin
+                and np.min(vertices[:, 1]) >= domain[2] + margin
+                and np.max(vertices[:, 1]) <= domain[3] - margin
+            )
+            if not inside:
+                continue
+            if len(positions) and initial_sensor_gap > 0.0:
+                clearances = signed_distance_to_polygon(positions, vertices)
+                if float(np.min(clearances)) <= initial_sensor_gap:
+                    continue
+            accepted = cargo
+            break
+        if accepted is None:
+            raise ContractViolation(
+                f"cargo {object_id!r} random_center could not satisfy the domain and initial_sensor_gap "
+                f"contracts after {max_attempts} attempts"
+            )
+        cargoes.append(accepted)
+    return cargoes
+
+
+def goal_directions_from_config(
+    cfg: dict,
+    seed: int = 0,
+    cargoes: list[Cargo] | None = None,
+) -> dict[str, np.ndarray]:
     """Task goal directions, keyed by cargo id.
 
     Held by the task, never by the body. ``transport_direction`` is still read
@@ -217,6 +346,7 @@ def goal_directions_from_config(cfg: dict, seed: int = 0) -> dict[str, np.ndarra
         wall_margin = float(random_cfg.get("wall_margin", 0.50))
         max_attempts = int(random_cfg.get("max_attempts", 256))
         xmin, xmax, ymin, ymax = domain_from_config(cfg)
+        cargo_by_id = {cargo.object_id: cargo for cargo in (cargoes or [])}
         for item in cfg.get("cargoes", []):
             object_id = str(item.get("id", "cargo"))
             # An explicit task goal remains authoritative.  The random mode fills
@@ -224,17 +354,30 @@ def goal_directions_from_config(cfg: dict, seed: int = 0) -> dict[str, np.ndarra
             # silently randomising the others.
             if object_id in goals:
                 continue
-            center = np.asarray(item.get("center", [0.0, 0.0]), dtype=float).reshape(2)
+            cargo = cargo_by_id.get(object_id)
+            center = cargo.center.copy() if cargo is not None else np.asarray(item.get("center", [0.0, 0.0]), dtype=float).reshape(2)
             rng = frame_rng("random_goal", object_id, base=seed)
             accepted = None
             for _ in range(max_attempts):
                 angle = np.deg2rad(rng.uniform(angle_min, angle_max))
                 direction = np.array([np.cos(angle), np.sin(angle)], dtype=float)
                 target = center + distance * direction
-                if (
+                center_inside = (
                     xmin + wall_margin <= target[0] <= xmax - wall_margin
                     and ymin + wall_margin <= target[1] <= ymax - wall_margin
-                ):
+                )
+                footprint_margin = random_cfg.get("footprint_margin")
+                footprint_inside = True
+                if cargo is not None and footprint_margin is not None:
+                    shifted = cargo.vertices + distance * direction
+                    fm = float(footprint_margin)
+                    footprint_inside = bool(
+                        np.min(shifted[:, 0]) >= xmin + fm
+                        and np.max(shifted[:, 0]) <= xmax - fm
+                        and np.min(shifted[:, 1]) >= ymin + fm
+                        and np.max(shifted[:, 1]) <= ymax - fm
+                    )
+                if center_inside and footprint_inside:
                     accepted = direction
                     break
             if accepted is None:
@@ -244,6 +387,24 @@ def goal_directions_from_config(cfg: dict, seed: int = 0) -> dict[str, np.ndarra
                 )
             goals[object_id] = accepted
     return goals
+
+
+def goal_targets_from_config(
+    cfg: dict,
+    cargoes: list[Cargo],
+    goal_directions: dict[str, np.ndarray],
+) -> dict[str, np.ndarray]:
+    """Return the bounded target point used for provenance and rendering."""
+    random_cfg = cfg.get("task", {}).get("random_goal", {}) or {}
+    distance = float(random_cfg.get("target_distance", cfg.get("task", {}).get("target_distance", 0.0)))
+    explicit = cfg.get("task", {}).get("goal_positions", {}) or {}
+    targets: dict[str, np.ndarray] = {}
+    for cargo in cargoes:
+        if cargo.object_id in explicit:
+            targets[cargo.object_id] = np.asarray(explicit[cargo.object_id], dtype=float).reshape(2)
+        elif cargo.object_id in goal_directions and distance > 0.0:
+            targets[cargo.object_id] = cargo.center + distance * goal_directions[cargo.object_id]
+    return targets
 
 
 def controller_params_from_config(cfg: dict) -> DBACTParams:
@@ -260,10 +421,14 @@ def contact_params_from_config(cfg: dict) -> ContactParams:
     return ContactParams(**fields)
 
 
-def scripted_params_from_config(cfg: dict) -> ScriptedParams:
+def scripted_params_from_config(
+    cfg: dict,
+    seed: int = 0,
+    cargoes: list[Cargo] | None = None,
+) -> ScriptedParams:
     transport = cfg.get("transport", {})
     fields = {k: v for k, v in transport.items() if k in ScriptedParams.__dataclass_fields__ and k != "goal_directions"}
-    return ScriptedParams(goal_directions=goal_directions_from_config(cfg), **fields)
+    return ScriptedParams(goal_directions=goal_directions_from_config(cfg, seed=seed, cargoes=cargoes), **fields)
 
 
 __all__ = [
@@ -275,6 +440,7 @@ __all__ = [
     "assert_initial_state_valid",
     "build_cargoes",
     "goal_directions_from_config",
+    "goal_targets_from_config",
     "controller_params_from_config",
     "contact_params_from_config",
     "scripted_params_from_config",

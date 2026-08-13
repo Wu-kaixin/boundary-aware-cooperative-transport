@@ -8,7 +8,7 @@ Reproducible decentralized multi-robot caging and transport experiments with met
 
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
 ![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg)
-![Tests](https://img.shields.io/badge/Tests-204%20passed-brightgreen.svg)
+![Tests](https://img.shields.io/badge/Tests-207%20passed-brightgreen.svg)
 ![Version](https://img.shields.io/badge/Version-0.2.0-informational.svg)
 ![Visualization](https://img.shields.io/badge/Visualization-Matplotlib-orange.svg)
 ![Platform](https://img.shields.io/badge/Platform-MAS%20%7C%20RoboMaster%20S1-lightgrey.svg)
@@ -21,7 +21,7 @@ The repository combines a standalone simulation stack, boundary-aware local cont
 
 > This repository is a research prototype, not a completed physical transport product. Simulation and dry-run paths are working; full physical transport remains a staged validation target.
 
-> **Current status (branch `A-boundary-aware`).** The research pipeline was rebuilt
+> **Historical status (branch `A-boundary-aware`).** The research pipeline was rebuilt
 > around a cross-layer contract layer (C1–C3) plus stages S1–S7. Read
 > [`docs/REFACTOR_2026-08-08.md`](docs/REFACTOR_2026-08-08.md) before using any
 > number from this repository.
@@ -41,22 +41,28 @@ The repository combines a standalone simulation stack, boundary-aware local cont
 > the barrier disabled, 9 of 16 robots end up inside the object while the old metric
 > still reports 1.000.
 
-> **500-frame closed-loop branch.** `A-boundary-aware-closed-loop-v2` adds a
-> bounded SEARCH → ENCLOSE → TRANSPORT → HOLD loop for an unknown L-shaped
-> cargo.  In the current constrained random-direction benchmark, 12/12 seeds
-> pass within 500 frames with zero QP fallback.  This is a narrow engineering
-> result, not yet a general arbitrary-shape theorem.  See
-> [`docs/CLOSED_LOOP_500.md`](docs/CLOSED_LOOP_500.md) for commands, metrics,
-> acceptance gates, and the remaining paper-grade work.
+> **Certificate-backed 500-frame closed loop.** `A-boundary-aware-closed-loop-v3`
+> covers the complete rectangular workspace with a deterministic paired-lane
+> search and accepts shapes by executable simple-polygon, sensing, map-density,
+> cage-corridor, boundary-covering, wrench, and timing predicates -- not by an
+> L-shape whitelist. It executes SEARCH -> MAP -> ENCLOSE -> TRANSPORT -> HOLD
+> under per-step hard-QP safety. See
+> [`docs/CONDITIONAL_GUARANTEE.md`](docs/CONDITIONAL_GUARANTEE.md) for the theorem
+> and non-claims, and [`docs/CLOSED_LOOP_500.md`](docs/CLOSED_LOOP_500.md) for the
+> reproducible experiment protocol.
+> Historical baseline: the earlier central-region L-shape configuration remains
+> available as `configs/sim/v3/l_shape_search_closed_loop_500.yaml`.
 
 ---
 
 ## Visual Showcase
 
-![DBACT 500-frame closed-loop demo](docs/assets/dbact-closed-loop-500.gif)
+![DBACT v3 full-workspace 500-frame closed-loop demo](docs/assets/dbact-full-workspace-v3-500.gif)
 
-> New branch result: local discovery, enclosure, constrained-direction contact
-> transport, and bounded hold within one 500-frame run.
+> V3 release artifact: complete-domain paired search, a previously unseen random
+> simple polygon, a sampled 360-degree feasible task direction, local enclosure,
+> contact transport, and bounded hold within one 500-step run. The guarantee is
+> certificate-conditional; this animation is evidence, not the theorem.
 
 ![DBACT moving cargo demo](docs/assets/dbact-moving-cargo.gif)
 

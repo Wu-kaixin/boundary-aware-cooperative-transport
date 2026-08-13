@@ -79,11 +79,22 @@ def main() -> int:
             env.run(args.steps)
             summary = env.save_outputs(run_dir)
             reasons = validate(summary)
+            certificates = [
+                entry.get("guarantee_certificate")
+                for entry in summary["cargoes"].values()
+                if entry.get("guarantee_certificate") is not None
+            ]
+            guarantee_eligible = (
+                all(cert.get("runtime_eligible") is True for cert in certificates)
+                if certificates
+                else None
+            )
             record = {
                 "config": config_file.name,
                 "seed": seed,
                 "run_dir": str(run_dir),
                 "valid": not reasons,
+                "guarantee_eligible": guarantee_eligible,
                 "reasons": reasons,
                 "wall_seconds": time.time() - started,
                 "cargoes": summary["cargoes"],
@@ -102,6 +113,8 @@ def main() -> int:
     for config_file in configs:
         subset = [r for r in records if r["config"] == config_file.name]
         valid = [r for r in subset if r["valid"]]
+        eligible = [r for r in subset if r.get("guarantee_eligible") is True]
+        valid_eligible = [r for r in eligible if r["valid"]]
         metrics: dict[str, list[float]] = {}
         for record in valid:
             for entry in record["cargoes"].values():
@@ -115,6 +128,9 @@ def main() -> int:
             "valid": len(valid),
             "rejected": len(subset) - len(valid),
             "rejection_rate": (len(subset) - len(valid)) / len(subset) if subset else None,
+            "guarantee_eligible": len(eligible),
+            "valid_of_eligible": len(valid_eligible),
+            "eligible_success_rate": len(valid_eligible) / len(eligible) if eligible else None,
             "metrics": {k: summarise(v) for k, v in metrics.items()},
             "rejection_reasons": sorted({reason for r in subset for reason in r["reasons"]}),
         }
@@ -126,6 +142,11 @@ def main() -> int:
     for name, stats in per_config.items():
         print(f"{name}: {stats['valid']}/{stats['runs']} valid, {stats['rejected']} rejected "
               f"({(stats['rejection_rate'] or 0):.1%})")
+        if stats["guarantee_eligible"]:
+            print(
+                f"    conditional domain: {stats['valid_of_eligible']}/{stats['guarantee_eligible']} valid "
+                f"({stats['eligible_success_rate']:.1%})"
+            )
         for key, s in stats["metrics"].items():
             if s.get("n"):
                 print(f"    {key:24s} mean={s['mean']:+.4f}  std={s['std']:.4f}  n={s['n']}")

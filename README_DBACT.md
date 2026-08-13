@@ -10,12 +10,12 @@
 > 目前**未**达成——闭环产生方向正确、效率 0.82–0.91 的正进度，但在低于任务阈值处
 > 停在准静态 caging 平衡上。三条贡献均不依赖搬运，且都已被验证。
 
-> **后续闭环实现。** 分支 `A-boundary-aware-closed-loop-v2` 已加入
-> SEARCH → ENCLOSE → TRANSPORT → HOLD 的 500-frame 闭环、受约束随机任务方向、
-> 移动物体的局部边界地图补偿，以及更严格的 C3 验收门。当前 L 型物体实验为
-> 12/12 seeds 通过、72,000 次 QP 零 fallback；该结果仍只覆盖一个凹物体与
-> `[-10°, 60°]` 的可行方向范围，不能直接表述为任意形状/任意方向的理论结论。
-> 复现方式、实测统计和论文缺口见
+> **条件保证闭环。** 分支 `A-boundary-aware-closed-loop-v3` 采用双侧分区扫描覆盖完整矩形
+> 工作区，并按简单多边形、有限射线可观测性、边界地图密度、包围走廊、机器人覆盖数、
+> 接触扳手与500帧时间预算逐项签发证书，而不是限定 L 型名称。闭环执行
+> SEARCH → MAP → ENCLOSE → TRANSPORT → HOLD，硬安全 QP 仍在每个物理步运行。
+> 严格定理、前提和反例边界见
+> [`docs/CONDITIONAL_GUARANTEE.md`](docs/CONDITIONAL_GUARANTEE.md)，复现实验见
 > [`docs/CLOSED_LOOP_500.md`](docs/CLOSED_LOOP_500.md)。
 
 > 面向未知任意形状物体的去中心化边界感知协同搬运算法  

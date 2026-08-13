@@ -212,3 +212,50 @@ def test_point_to_plane_motion_compensation_moves_the_map_once_per_scan():
     # Same-frame relay is a duplicate, not a second body motion.
     m.update(moved * 4, 1.0)
     assert np.mean(np.vstack([o.point for o in m.all_observations(1.0)]), axis=0) == pytest.approx(after)
+
+
+def test_se2_registration_separates_translation_from_rotation_for_progress():
+    m = LocalBoundaryMap(
+        voxel_size=0.025,
+        age_decay=0.0,
+        motion_match_radius=0.20,
+        motion_min_matches=5,
+        max_translation_per_update=0.08,
+        max_rotation_per_update=0.12,
+    )
+    horizontal = wall_observations(timestamp=0.0, count=17, spacing=0.05)
+    vertical = [
+        BoundaryObservation(
+            "obj",
+            "a1",
+            np.array([0.0, (k - 8) * 0.05]),
+            np.array([1.0, 0.0]),
+            0.0,
+            0.9,
+            arc_length=0.05,
+        )
+        for k in range(17)
+    ]
+    original = horizontal + vertical
+    m.update(original, 0.0)
+
+    theta = 0.035
+    shift = np.array([0.025, -0.015])
+    c, s = np.cos(theta), np.sin(theta)
+    rotation = np.array([[c, -s], [s, c]])
+    moved = [
+        BoundaryObservation(
+            o.object_id,
+            o.agent_id,
+            o.point @ rotation.T + shift,
+            o.normal @ rotation.T,
+            1.0,
+            o.confidence,
+            arc_length=o.arc_length,
+        )
+        for o in original
+    ]
+    m.update(moved, 1.0)
+
+    assert m.last_motion["obj"] == pytest.approx(shift, abs=4e-3)
+    assert m.last_rotation["obj"] == pytest.approx(theta, abs=5e-3)

@@ -12,6 +12,7 @@ trusting whoever reports it.
 from __future__ import annotations
 
 import json
+import copy
 from collections.abc import Callable
 from dataclasses import dataclass, field, replace
 from pathlib import Path
@@ -20,6 +21,7 @@ import numpy as np
 
 from dbact.contracts import DirectionalProgressContract
 from dbact.controller import DBACTController
+from dbact.guarantees import boundary_map_gap_upper_bound, build_admissibility_certificate
 from dbact.metrics import (
     boundary_coverage,
     directional_progress,
@@ -40,6 +42,7 @@ from .scenarios import (
     controller_params_from_config,
     domain_from_config,
     goal_directions_from_config,
+    goal_targets_from_config,
     scripted_params_from_config,
     validate_config,
 )
@@ -62,7 +65,9 @@ class SimulationLog:
     net_force: dict[str, list[np.ndarray]] = field(default_factory=dict)
     net_torque: dict[str, list[float]] = field(default_factory=dict)
     cargo_speed: dict[str, list[float]] = field(default_factory=dict)
+    detection_counts: dict[str, list[int]] = field(default_factory=dict)
     mode_counts: list[dict[str, int]] = field(default_factory=list)
+    agent_modes: dict[str, list[str]] = field(default_factory=dict)
 
 
 class SimulationEnvironment:
@@ -73,18 +78,39 @@ class SimulationEnvironment:
         self.dt = float(config.get("dt", 0.05))
         self.domain = domain_from_config(config)
         self.agents = build_agents(config, seed=self.seed)
-        self.cargoes = build_cargoes(config)
-        self.goal_directions = goal_directions_from_config(config, seed=self.seed)
+        self.cargoes = build_cargoes(config, seed=self.seed, agents=self.agents)
+        self.goal_directions = goal_directions_from_config(config, seed=self.seed, cargoes=self.cargoes)
+        self.goal_targets = goal_targets_from_config(config, self.cargoes, self.goal_directions)
 
         params = controller_params_from_config(config)
         assert_initial_state_valid(self.agents, self.cargoes, params.d_min, params.robot_radius)
         self.controller = DBACTController(params, self.domain, self.goal_directions, seed=self.seed)
         self.contact_params = contact_params_from_config(config)
+        self.guarantee_certificates = {
+            cargo.object_id: build_admissibility_certificate(
+                cargo=cargo,
+                agents=self.agents,
+                domain=self.domain,
+                goal_direction=self.goal_directions.get(cargo.object_id),
+                config=config,
+                controller=params,
+                contact=self.contact_params,
+                dt=self.dt,
+            )
+            for cargo in self.cargoes
+        }
+        self.boundary_map_witnesses: dict[str, dict] = {}
+        self.guarantee_release_time = max(
+            (cert.get("search", {}).get("release_bound_frames", 0) for cert in self.guarantee_certificates.values()),
+            default=0,
+        ) * self.dt
         self.engine_name = str(config["transport"]["engine"])
         self.engine = build_engine(
             self.engine_name,
             self.contact_params,
-            scripted_params_from_config(config) if self.engine_name == "scripted" else None,
+            scripted_params_from_config(config, seed=self.seed, cargoes=self.cargoes)
+            if self.engine_name == "scripted"
+            else None,
         )
 
         self.evaluation_contact_radius = float(config.get("evaluation", {}).get("contact_radius", 0.42))
@@ -99,11 +125,26 @@ class SimulationEnvironment:
             # `_discrete_overshoot`.
             discrete_overshoot=0.0,
         )
+        evaluation = config.get("evaluation", {})
+        self.require_initially_unobserved = bool(evaluation.get("require_initially_unobserved", False))
+        self.require_guarantee_certificate = bool(evaluation.get("require_guarantee_certificate", False))
+        self.frame_budget = evaluation.get("frame_budget")
+        self.phase_deadlines = {
+            "first_detection": evaluation.get("detection_deadline"),
+            "first_enclosure": evaluation.get("enclosure_deadline"),
+            "first_transport": evaluation.get("transport_deadline"),
+            "first_hold": evaluation.get("hold_deadline"),
+        }
+        self.initial_detection_counts = {cargo.object_id: 0 for cargo in self.cargoes}
+        for agent in self.agents:
+            for observation in self.controller.sensor.sense(agent, self.cargoes, 0.0):
+                self.initial_detection_counts[observation.object_id] += 1
 
         self.t = 0.0
         self.log = SimulationLog()
         for a in self.agents:
             self.log.agent_positions[a.agent_id] = []
+            self.log.agent_modes[a.agent_id] = []
         for c in self.cargoes:
             for store in (
                 self.log.cargo_centers,
@@ -118,6 +159,7 @@ class SimulationEnvironment:
                 self.log.net_force,
                 self.log.net_torque,
                 self.log.cargo_speed,
+                self.log.detection_counts,
             ):
                 store[c.object_id] = []
         self._last_statuses = {}
@@ -146,6 +188,10 @@ class SimulationEnvironment:
         self.log.times.append(self.t)
         for a in self.agents:
             self.log.agent_positions[a.agent_id].append(a.position.copy())
+        mode_by_agent = {diag.agent_id: diag.mode for diag in self.controller.diagnostics}
+        for a in self.agents:
+            initial_mode = "explore" if self.controller.params.task_mode != "coverage" else "search"
+            self.log.agent_modes[a.agent_id].append(mode_by_agent.get(a.agent_id, initial_mode))
         self.log.min_distances.append(min_inter_agent_distance(self.agents))
         self.log.mode_counts.append(self.controller.mode_counts())
 
@@ -170,6 +216,42 @@ class SimulationEnvironment:
             self.log.net_force[c.object_id].append(status.net_force.copy() if status else np.zeros(2))
             self.log.net_torque[c.object_id].append(status.net_torque if status else 0.0)
             self.log.cargo_speed[c.object_id].append(float(np.linalg.norm(c.linear_velocity)))
+            detections = (
+                self.initial_detection_counts.get(c.object_id, 0)
+                if abs(self.t) <= 1e-12
+                else self.controller.last_detection_counts.get(c.object_id, 0)
+            )
+            self.log.detection_counts[c.object_id].append(int(detections))
+        if self.t + 1e-12 >= self.guarantee_release_time and not self.boundary_map_witnesses:
+            self._capture_boundary_map_witnesses()
+
+    def _capture_boundary_map_witnesses(self) -> None:
+        """Measure the theorem's map-completeness premise at rendezvous release.
+
+        Ground-truth boundary samples are used only by this independent witness;
+        neither the controller nor the map receives them.
+        """
+        all_observations = [
+            obs
+            for boundary_map in self.controller.maps.values()
+            for obs in boundary_map.all_observations(self.t)
+        ]
+        for cargo in self.cargoes:
+            mapped = [obs.point for obs in all_observations if obs.object_id == cargo.object_id]
+            if not mapped:
+                self.boundary_map_witnesses[cargo.object_id] = {
+                    "frame": int(round(self.t / self.dt)),
+                    "points": 0,
+                    "max_boundary_gap": float("inf"),
+                    "p95_boundary_gap": float("inf"),
+                }
+                continue
+            gap_witness = boundary_map_gap_upper_bound(cargo.vertices, np.vstack(mapped), sample_count=1024)
+            self.boundary_map_witnesses[cargo.object_id] = {
+                "frame": int(round(self.t / self.dt)),
+                "points": int(len(mapped)),
+                **gap_witness,
+            }
 
     # ------------------------------------------------------------------ #
 
@@ -224,13 +306,10 @@ class SimulationEnvironment:
                 "max_contacts": int(np.max(contacts)) if contacts else 0,
                 "peak_net_force": float(np.max(np.linalg.norm(forces, axis=1))),
                 "recruited_agents": recruited_agents_count(cargo, self.agents, self.evaluation_contact_radius),
+                "initial_detection_count": self.initial_detection_counts.get(cid, 0),
             }
             first_detection = next(
-                (
-                    k
-                    for k, modes in enumerate(self.log.mode_counts)
-                    if any(name not in {"explore", "search"} and count > 0 for name, count in modes.items())
-                ),
+                (k for k, count in enumerate(self.log.detection_counts[cid]) if count > 0),
                 None,
             )
             first_enclosure = next(
@@ -245,13 +324,21 @@ class SimulationEnvironment:
                 ),
                 None,
             )
+            first_hold = next(
+                (k for k, modes in enumerate(self.log.mode_counts) if modes.get("hold", 0) > 0),
+                None,
+            )
             entry["phase_frames"] = {
                 "first_detection": first_detection,
                 "first_enclosure": first_enclosure,
                 "first_transport": first_transport,
+                "first_hold": first_hold,
             }
             if goal is not None and len(centers) >= 2:
                 entry["goal_direction"] = np.asarray(goal, dtype=float).tolist()
+                entry["goal_angle_deg"] = float(np.degrees(np.arctan2(goal[1], goal[0])))
+                if cid in self.goal_targets:
+                    entry["goal_target"] = self.goal_targets[cid].tolist()
                 entry.update(directional_progress(centers[0], centers[-1], goal))
                 verdict = self.success_contract.evaluate(
                     centers[0],
@@ -267,8 +354,31 @@ class SimulationEnvironment:
                     rotation_deg=rotation_deg,
                 )
                 phase_reasons: list[str] = []
+                if self.require_initially_unobserved and self.initial_detection_counts.get(cid, 0) > 0:
+                    phase_reasons.append(
+                        f"phase gate: {self.initial_detection_counts[cid]} boundary returns existed at frame 0; "
+                        "the episode did not start from an unknown object"
+                    )
                 if first_detection is None:
                     phase_reasons.append("phase gate: cargo was never detected")
+                certificate = self.guarantee_certificates.get(cid)
+                if self.require_guarantee_certificate and not bool((certificate or {}).get("eligible")):
+                    failed = ", ".join((certificate or {}).get("failure_reasons", [])) or "missing certificate"
+                    phase_reasons.append(f"guarantee gate: admissibility certificate failed ({failed})")
+                elif self.require_guarantee_certificate:
+                    witness = self.boundary_map_witnesses.get(cid)
+                    required_gap = ((certificate or {}).get("mapping") or {}).get("required_max_boundary_gap")
+                    if (
+                        not isinstance(witness, dict)
+                        or required_gap is None
+                        or witness.get("max_boundary_gap") is None
+                        or witness["max_boundary_gap"] > required_gap
+                    ):
+                        measured = (witness or {}).get("max_boundary_gap", float("inf"))
+                        phase_reasons.append(
+                            f"guarantee gate: boundary map max gap {measured:.4f} m exceeds "
+                            f"epsilon {float(required_gap or 0.0):.4f} m"
+                        )
                 if first_enclosure is None:
                     phase_reasons.append("phase gate: enclosure threshold was never reached")
                 if first_transport is None:
@@ -281,12 +391,43 @@ class SimulationEnvironment:
                     phase_reasons.append(
                         f"phase gate: transport started at frame {first_transport} before enclosure at frame {first_enclosure}"
                     )
+                if first_hold is not None and first_transport is not None and first_hold < first_transport:
+                    phase_reasons.append(
+                        f"phase gate: HOLD started at frame {first_hold} before transport at frame {first_transport}"
+                    )
+                for phase_name, frame in entry["phase_frames"].items():
+                    deadline = self.phase_deadlines.get(phase_name)
+                    if deadline is None:
+                        continue
+                    if frame is None:
+                        phase_reasons.append(f"phase deadline: {phase_name} was not reached by frame {int(deadline)}")
+                    elif frame > int(deadline):
+                        phase_reasons.append(
+                            f"phase deadline: {phase_name}={frame} exceeded frame {int(deadline)}"
+                        )
                 entry["success"] = verdict.success and not phase_reasons
                 entry["failure_reasons"] = verdict.reasons + phase_reasons
             else:
                 entry["success"] = None
                 entry["failure_reasons"] = ["no goal direction configured for this cargo"]
+            certificate = copy.deepcopy(self.guarantee_certificates.get(cid))
+            if isinstance(certificate, dict):
+                witness = self.boundary_map_witnesses.get(cid)
+                certificate["runtime_map_witness"] = witness
+                required_gap = (certificate.get("mapping") or {}).get("required_max_boundary_gap")
+                map_ok = bool(
+                    isinstance(witness, dict)
+                    and required_gap is not None
+                    and witness.get("max_boundary_gap") is not None
+                    and witness["max_boundary_gap"] <= required_gap
+                )
+                certificate["runtime_eligible"] = bool(certificate.get("eligible")) and map_ok
+                runtime_failures = list(certificate.get("failure_reasons") or [])
+                if not map_ok:
+                    runtime_failures.append("boundary_map_epsilon")
+                certificate["runtime_failure_reasons"] = runtime_failures
             cargo_summaries[cid] = entry
+            entry["guarantee_certificate"] = certificate
 
         lengths = path_lengths(self.log.agent_positions)
         return {
@@ -302,9 +443,19 @@ class SimulationEnvironment:
                 "d_min": params.d_min,
                 "delta_max": params.delta_max,
                 "discrete_overshoot": self.success_contract.discrete_overshoot,
+                "require_initially_unobserved": self.require_initially_unobserved,
+                "phase_deadlines": self.phase_deadlines,
+                "frame_budget": self.frame_budget,
+                "require_guarantee_certificate": self.require_guarantee_certificate,
             },
             "solver": solver_stats,
             "transport_progress_estimates": self.controller.transport_progress_summary(),
+            "goal_targets": {key: value.tolist() for key, value in self.goal_targets.items()},
+            "multi_rate": {
+                "perception_every": params.perception_every,
+                "planning_every": params.planning_every,
+                "safety_every": 1,
+            },
             "min_inter_agent_distance": min_distance,
             "mean_path_length": float(np.mean(list(lengths.values()))) if lengths else 0.0,
             "cargoes": cargo_summaries,
