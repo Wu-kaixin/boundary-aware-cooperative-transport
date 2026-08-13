@@ -154,12 +154,17 @@ def run_seed(config: dict, seed: int, alpha: float, diameter: float, max_frames:
     }
 
 
+#: Fields summarised with ``describe``. ``target_distance_m`` is deliberately absent: it is
+#: constant within an arm and is already recorded as a scalar beside the distributions.
+#: Listing it here overwrote that scalar with a dict and crashed the report *after* the 60
+#: episodes had been paid for -- the JSON and CSV are written first precisely so that a
+#: reporting bug cannot cost a run, but the fix belongs here rather than in the formatter.
 NUMERIC = [
     "J", "J_over_diameter", "J_over_target", "efficiency", "direction_error_deg",
     "max_cross_track", "max_cross_track_over_diameter", "implied_direction_gate_deg",
     "rotation_deg", "max_strict_coverage", "final_strict_coverage",
     "min_signed_clearance", "max_penetration", "barrier_scalings", "frames_run",
-    "completion_time_s", "fps", "target_distance_m",
+    "completion_time_s", "fps",
 ]
 
 
@@ -213,9 +218,11 @@ def main() -> int:
             "separation_held": all(
                 r["min_inter_agent_distance"] >= r["d_min"] - 1e-6 for r in sub
             ),
-            "solver_fallbacks": sum(r["solver_fallbacks"] for r in sub),
-            "solver_infeasible": sum(r["solver_infeasible"] for r in sub),
-            "barrier_scalings": sum(r["barrier_scalings"] for r in sub),
+            # ``_total`` suffixes so a per-arm sum can never be shadowed by the
+            # distribution of the same name when the two dicts are merged below.
+            "solver_fallbacks_total": sum(r["solver_fallbacks"] for r in sub),
+            "solver_infeasible_total": sum(r["solver_infeasible"] for r in sub),
+            "barrier_scalings_total": sum(r["barrier_scalings"] for r in sub),
             "over_cross_track_gate": sum(1 for r in sub if r["max_cross_track"] > CROSS_TRACK_GATE),
             **{field: describe([r.get(field) for r in sub]) for field in NUMERIC},
         }
@@ -270,7 +277,7 @@ def main() -> int:
             f"{s['max_cross_track_over_diameter']['mean']:>8.4f} "
             f"{s['direction_error_deg']['mean']:>7.2f} "
             f"{s['implied_direction_gate_deg']['mean']:>7.2f} "
-            f"{s['max_strict_coverage']['mean']:>8.3f} {s['barrier_scalings']:>5} "
+            f"{s['max_strict_coverage']['mean']:>8.3f} {s['barrier_scalings_total']:>5} "
             f"{'ok' if s['separation_held'] else 'BAD':>4}"
         )
     print("=" * 104)

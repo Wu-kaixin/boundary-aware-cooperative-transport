@@ -510,6 +510,58 @@ its own evidence.
 
 ---
 
+## 7a. The distance ablation settles the cross-track gate argument
+
+`scripts/run_distance_ablation.py`, five alpha levels at 12 seeds each on the baseline
+l_shape (diameter 2.546 m), 60 episodes. CODEX's fixed metric distances are deliberately not
+inherited — see the script's own header for why — and `alpha = 1.0` is included past the
+matrix's 0.8 because the point of a sweep is to find where the method stops.
+
+| alpha | L (m) | pass | J/diam | **J/L** | cross/diam | direction error | **gate's implied direction limit** | peak coverage | over the 0.15 m gate | efficiency |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 0.2 | 0.509 | 9/12 | 0.253 | 1.266 | 0.031 | 6.39° | 13.52° | 0.984 | 1/12 | 0.991 |
+| 0.4 | 1.018 | 8/12 | 0.497 | 1.243 | 0.060 | 6.04° | 6.83° | 0.979 | 7/12 | 0.993 |
+| 0.6 | 1.527 | 8/12 | 0.741 | 1.236 | 0.081 | 5.09° | 4.57° | 0.979 | 7/12 | 0.994 |
+| 0.8 | 2.036 | 5/12 | 0.986 | 1.233 | 0.118 | 5.83° | 3.44° | 0.969 | 7/12 | 0.992 |
+| 1.0 | 2.546 | 4/12 | 1.278 | 1.278 | 0.197 | 7.81° | **2.65°** | 0.976 | **12/12** | 0.989 |
+
+Separation held on all 60 episodes and there were **zero** fallbacks and zero infeasible
+solves at every alpha.
+
+**Displacement tracks demand almost exactly**: `corr(alpha, J/diameter) = +0.992`. That is
+the matrix's alpha finding, reproduced on one shape with 12 seeds instead of 12 shapes with 5.
+
+**The overshoot is a scale-invariant multiplicative bias.** `J/L` sits at 1.23–1.28 at
+*every* alpha, and `corr(alpha, J/L) = +0.029` — no distance dependence at all. So the team
+consistently travels about **24% further than asked**, whether asked for 0.5 m or 2.5 m. v1
+recorded the on-board progress estimate as "biased low by roughly 10–15%"; this measures it
+at ~24% and, more usefully, establishes that it is a *gain* error rather than an offset. A
+scale-invariant multiplicative bias is a fixable thing — it is one constant — and an
+alpha-dependent one would not have been.
+
+**And the gate, not the controller, is what fails as alpha rises.** Success falls 9 → 8 → 8
+→ 5 → 4 while nothing about the control degrades: peak coverage stays flat at 0.969–0.984,
+efficiency stays 0.989–0.994, separation holds, and the solver never falls back. What changes
+is the *gate*. Because `max cross-track = J sin(direction error)`, an absolute 0.15 m
+cross-track limit demands
+
+```
+direction error  <=  arcsin(0.15 / J)
+```
+
+which falls from 13.52° at alpha = 0.2 to **2.65°** at alpha = 1.0 purely as arithmetic. The
+controller's measured direction error stays in a 5–8° band across the whole sweep. At
+alpha = 1.0 all twelve episodes exceed the gate, and they do so while travelling 1.28
+diameters at 0.989 efficiency.
+
+This is the empirical case for §3.2's conclusion, and it is stronger than the correlation
+that motivated it: **an absolute cross-track gate becomes arbitrarily strict as the task
+lengthens, for reasons that have nothing to do with the team's ability to aim.** A gate
+stated on the reachable cone, or at minimum on `cross-track / diameter`, measures the
+controller. The one currently in `g500` measures the task length.
+
+---
+
 ## 8. Negative results carried forward from v1, unchanged
 
 These four are reproduced verbatim in substance from `CLOSED_LOOP_D.md`. None has been
@@ -556,21 +608,55 @@ progress estimate is biased low by roughly 10–15%.
 
 ---
 
-## 10. Not done in this phase
+## 10. The artefact pipeline, and what is still not done
 
-Stated so the gap is visible rather than inferred from an absent section.
+### 10.1 What the pipeline produces
 
-* **The robustness ablation (12-seed noise / slow-update / dropout variants) has not been
-  run.** The plan called for `nominal / range_noise_005 / range_noise_010 /
-  slow_updates_5 / comm_dropout_10 / combined`, with the 10 mm variant rejected as
-  out-of-domain rather than reported as a survivor, and a specific measurement of the
-  noise-induced pseudo-frontier problem. None of that exists yet. Note for whoever picks it
-  up: §6.3 already shows the *nominal* runs violate the declared perception premise, so a
-  noise ablation on top of that is measuring a system already outside its stated error
-  budget, and the out-of-domain rejection should probably apply to the nominal arm too.
-* **The distance ablation and the publication-artifact pipeline have not been ported.**
-  `run_distance_ablation.py`, `generate_publication_artifacts.py`, the manifest mechanism,
-  `derive_finite_time_bound.py`, and the thirteen chart families are not in the tree. The
-  committed evidence in `docs/results/` is JSON and CSV, not figures.
+`scripts/generate_publication_artifacts.py` reads only files already committed under
+`docs/results/` and runs no episodes — the same separation `render_closed_loop.py` enforces
+for the animation, so that "the numbers in the paper" cannot become a different set from "the
+numbers in the repository". Every figure is written as **PNG and PDF from one call** so the
+two cannot drift, and every proportion carries a Wilson interval. A missing source **skips
+the figure and records the skip with the path it wanted**: a missing panel that leaves no
+trace is how a figure set comes to describe a different experiment than the one that ran.
+
+Fifteen figure families: success by shape; `J/diameter` and normalised cross-track against
+alpha; phase durations; directional progress; the cross-track identity; the reachable cone
+observational-vs-controlled pair; cargo rotation; net wrench and contact count; safety
+distances; perception error against the declared premises; failure composition; the
+conditional-domain comparison; runtime; the robustness arms with the pseudo-frontier rate; and
+the distance ablation.
+
+Closed-loop frames are **not** drawn there. They go through v1's `dbact_sim.replay` via
+`scripts/render_closed_loop.py`, which keeps the v1 phase palette and draws one robot's own
+map beside the true outline rather than reconstructing a surface from ground truth.
+`docs/results/representative/figures/frame_0233.png` shows exactly that, with every panel
+quantity tied to a written gate.
+
+`scripts/derive_finite_time_bound.py` reproduces the bound's *unavailability* in one line:
+`available: false` with the three uncertified contraction rates named, and a banner saying the
+phase totals are what the bound would be rather than a bound.
+
+### 10.2 Still not done
+
+Stated so the gaps are visible rather than inferred from absent sections.
+
 * **`enclosure_bound_frames`, `transport_bound_frames` and `hold_bound_frames` remain
-  premises**, not measurements.
+  premises**, not measurements. They exist so the `frame_budget` check has something to add
+  up, and the derived analytic bound still reports itself unavailable regardless.
+* **The three contraction rates are still uncertified**, which is the reason the finite-time
+  bound is unavailable. Certifying any one of them is a proof obligation, not a measurement,
+  and nothing here attempts it.
+* **The ISSf constant has not been re-derived against a moving boundary.** §3.1 rewrites the
+  S1 *criterion* with its reason; it does not re-derive the constant. §6.3 shows the premise
+  that constant rests on is violated by 60.4% of measured cells, which makes the re-derivation
+  the larger of the two outstanding items.
+* **The ~24% progress overshoot measured in §7a is not corrected.** It is now known to be a
+  scale-invariant gain error rather than an offset, which is what makes it fixable, but
+  changing the transport loop's gain would invalidate every number on this branch and was out
+  of scope for a verification phase.
+* **The cross-track gate is not changed.** §3.2 and §7a make the case for restating it on the
+  reachable cone and give the form; the `g500` gate still reads `cross_track_max: 0.15`,
+  deliberately, so that every result here is scored by the gate the earlier results were
+  scored by.
+* **No hardware.** See `CONDITIONAL_GUARANTEE_V2.md` §6.6.

@@ -1,9 +1,14 @@
-# SE(2) diff audit — every deleted line under `src/`, and why
+# Diff audit — every deleted line under `src/`, and why
 
 The v2 acceptance rule is that the `v1 → v2` diff under `src/dbact` and `src/dbact_sim`
 contains no deleted lines, **except** for additions and the SE(2)-directed modification,
 and that the modification is justified segment by segment. This file is that
 justification.
+
+There are **28** deleted lines in total: 23 for the SE(2) work (T2, §§1–3 below) and 6 more
+for the three degradation mechanisms the robustness ablation needed (T5, §4). Every one is a
+signature change or a single expression replaced in place; none removes a behaviour, and each
+is covered by a test asserting the pre-existing path is bit-identical.
 
 Baseline: `origin/Claude-boundary-aware-closed-loop-v1` at `92ee6f6`.
 
@@ -16,12 +21,13 @@ git diff origin/Claude-boundary-aware-closed-loop-v1 -- src/dbact src/dbact_sim 
 | `src/dbact/geometry.py` | 94 | 0 | pure addition (v2 certificate helpers) |
 | `src/dbact/guarantees.py` | 911 | 0 | new file (T1) |
 | `src/dbact/metrics.py` | 139 | 0 | pure addition (T1 audit measures) |
+| `src/dbact/error_audit.py` | 347 | 0 | new file (T2) |
 | `src/dbact_sim/environment.py` | 77 | 0 | pure addition (T2 audit hook) |
-| `src/dbact/boundary_map.py` | 250 | 11 | **SE(2) modification** |
-| `src/dbact/controller.py` | 31 | 5 | **SE(2) modification** |
-| `src/dbact/safety_filter.py` | 79 | 7 | **SE(2) modification** |
+| `src/dbact/boundary_map.py` | 250 | 11 | **SE(2) modification** (T2) |
+| `src/dbact/safety_filter.py` | 79 | 7 | **SE(2) modification** (T2) |
+| `src/dbact/controller.py` | 111 | 11 | **5 SE(2) (T2) + 6 degradation (T5)** |
 
-Four of the seven files have zero deleted lines. The 23 deletions in the other three are
+Five of the eight files have zero deleted lines. The 28 deletions in the other three are
 enumerated below. There are no others.
 
 ---
@@ -173,6 +179,82 @@ same three lines as in v1; the third return value is `None`.
 ### 7. The `_aggregate_face` call site
 
 Folded into the change above: the call now passes and receives the velocity.
+
+---
+
+## 4. `src/dbact/controller.py` — 6 further deletions, for T5's degradation mechanisms
+
+The robustness ablation needed three mechanisms v1 did not have. All three default to exact
+no-ops, and `tests/test_degradation.py::test_explicit_no_op_values_reproduce_the_baseline_exactly`
+asserts that literally — identical agent positions, identical cargo pose, identical map
+sizes, identical solver counters — rather than to a tolerance.
+
+### 1. The scan call
+
+```
+-        scans = [self.sensor.sense_view(agent, cargoes, timestamp) for agent in agents]
+```
+
+**Why.** `perception_every = k` has to be able to *not* sense. The replacement wraps the same
+expression in the stride test and supplies empty views otherwise. Frame 0 always senses, so a
+run never starts blind.
+
+**Behaviour at the default:** `stride = 1` makes `frame % 1 == 0` true on every frame, so the
+same list comprehension runs with the same arguments every frame.
+
+### 2–3. The two `dt` arguments to registration and fusion
+
+```
+-            local_map.register(scans[i], dt)
+-            local_map.update(batch, timestamp, agent_codes=codes, dt=dt)
+```
+
+**Why.** Both now take `interval`, the time accumulated since the sensor last fired. A 4 Hz
+sensor in a 20 Hz world that divided by `dt` would report a fifth of the object's true speed,
+and the transport controller closes its loop on that estimate — so the arm would be measuring
+a broken estimator rather than a slow sensor.
+
+**Behaviour at the default:** `interval == dt` exactly on every frame, because the accumulator
+is incremented by `dt` and reset on every sensing frame, and every frame is a sensing frame.
+`tests/test_degradation.py::test_perception_stride_gives_registration_the_whole_elapsed_interval`
+pins the accumulator's value frame by frame.
+
+### 4–5. The nominal-command call
+
+```
+-            u_nom, mode, cell_mass, push_side, effort = self._nominal_command(
+-                i, agents, neighbors[i], view, contact_ready, dt
+```
+
+**Why.** `planning_every = k` holds the previous nominal command on the frames it does not
+plan. The safety filter still runs every frame, so a held command is re-projected against the
+*current* barrier rows; holding the filtered output instead would let a stale command drive
+through a constraint that became active after it was computed.
+
+**Behaviour at the default:** `plan_stride = 1` makes `planning` true on every frame, so
+`_nominal_command` is called with the same arguments as before and the hold dict is written
+but never read.
+
+### 6. The neighbour-set construction
+
+```
+-        return [list(np.flatnonzero(row <= self.params.comm_range)) for row in d]
+```
+
+**Why.** `communication_dropout_prob` masks individual directed links. Applying it here rather
+than at each consumer is deliberate: one change degrades the scan relay, the object-token
+flood, the progress consensus and the local contact-ready quorum together, which is what a
+dropped packet actually costs.
+
+**Behaviour at the default:** the `if dropout > 0.0` branch is skipped entirely, so `within`
+is exactly `d <= comm_range` and the returned lists are the same. The RNG is not even
+constructed, so the default path draws no random numbers and cannot perturb any other
+stream's state.
+
+The loss is **directed** — robot i losing j does not imply j loses i — and keyed on the frame
+index, so the pattern moves rather than latching one subgraph. A latched subgraph is a
+partitioned team, which is a different experiment from a lossy link;
+`test_dropout_pattern_changes_between_frames` and `test_dropout_is_directional` pin both.
 
 ---
 

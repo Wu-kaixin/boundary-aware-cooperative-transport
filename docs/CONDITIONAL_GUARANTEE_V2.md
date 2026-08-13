@@ -183,7 +183,38 @@ transport armed once (frame 2890, at α = 0.10) and never otherwise. α = 0.40 a
 are bit-identical across every metric, which confirms the target distance never entered
 the run.
 
-### 4.7 Runtime performance
+### 4.7 The overshoot is a scale-invariant gain error, and the gate is what fails with alpha
+
+`scripts/run_distance_ablation.py`, five alpha levels x 12 seeds on the baseline l_shape
+(diameter 2.546 m), 60 episodes, zero fallbacks and separation held throughout.
+
+| alpha | L (m) | pass | J/diam | **J/L** | direction error | **gate's implied limit** | peak coverage | over the gate |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 0.2 | 0.509 | 9/12 | 0.253 | 1.266 | 6.39° | 13.52° | 0.984 | 1/12 |
+| 0.4 | 1.018 | 8/12 | 0.497 | 1.243 | 6.04° | 6.83° | 0.979 | 7/12 |
+| 0.6 | 1.527 | 8/12 | 0.741 | 1.236 | 5.09° | 4.57° | 0.979 | 7/12 |
+| 0.8 | 2.036 | 5/12 | 0.986 | 1.233 | 5.83° | 3.44° | 0.969 | 7/12 |
+| 1.0 | 2.546 | 4/12 | 1.278 | 1.278 | 7.81° | **2.65°** | 0.976 | **12/12** |
+
+Two results, both new:
+
+**The overshoot is one constant.** `J/L` is 1.23–1.28 at every alpha and
+`corr(alpha, J/L) = +0.029`. The team travels about **24% further than asked**, whether asked
+for 0.5 m or 2.5 m. v1 recorded the on-board progress estimate as biased low by 10–15%; this
+measures ~24% and, more usefully, shows it is a scale-invariant *gain* error rather than an
+offset — which is a fixable thing, being one constant.
+
+**Success falls with alpha because the gate tightens, not because the control degrades.**
+Peak coverage (0.969–0.984), efficiency (0.989–0.994), separation and solver behaviour are all
+flat across the sweep. What moves is `arcsin(0.15 / J)`, the direction accuracy an absolute
+0.15 m cross-track gate implies, which falls from 13.52° to 2.65° purely as arithmetic while
+the measured direction error stays in a 5–8° band. At alpha = 1.0 all twelve episodes exceed
+the gate while travelling 1.28 diameters at 0.989 efficiency.
+
+`corr(alpha, J/diameter) = +0.992`: displacement tracks demand almost exactly, which is the
+matrix's alpha finding reproduced on one shape at 12 seeds.
+
+### 4.8 Runtime performance
 
 22.0–23.2 fps at 16 robots on the baseline over full until-settled episodes. On a fixed
 400-frame budget with the machine otherwise quiet, `explore_gain: 0` runs at 28.77 ± 0.88 fps

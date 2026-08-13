@@ -20,6 +20,21 @@ Phase-2 verification evidence, added after the matrix:
 | `t3/push_arc_ablation.json` | the controlled test of the dispersion reading: push-set membership threshold at 0.35 / 0.55 / 0.75 | `scripts/run_push_arc_ablation.py` |
 | `t4/FINDINGS.txt`, `t4/t4_traces.json` | the two unexplained cases, per-frame. Both located. | `scripts/diagnose_unexplained_cases.py` |
 | `t7/explore_gain_profile.json` | `explore_gain` frame-rate cost. Machine-dependent empirical evidence, **not** a runtime bound. | `scripts/profile_explore_gain.py` |
+| `t5/robustness_ablation.json` | eight degradation arms x 12 seeds, with out-of-domain reported twice — as the plan declares it and as the audit measures it — plus the pseudo-frontier rate | `scripts/run_robustness_ablation.py` |
+| `t6/distance_ablation.json`, `t6/distance_episodes.csv` | task distance swept **scale-relative**, alpha in {0.2 … 1.0} x 12 seeds | `scripts/run_distance_ablation.py` |
+| `representative/` | one ordinary episode (seed 5) with `summary.json`, `safety_timeseries.csv`, `trajectories.csv`, `replay.npz`, and stills rendered by v1's replay pipeline | `scripts/run_publication_representative.py`, then `scripts/render_closed_loop.py` |
+
+The figure set is built from these files and nothing else by
+`scripts/generate_publication_artifacts.py`, which runs no episodes and writes
+`artifacts/publication/publication_manifest.json` alongside PNG+PDF for every figure. A
+missing source **skips a figure and records the skip** rather than omitting it silently.
+
+`closed_loop.gif` is deliberately not committed — 3 MB, no information the stills and
+`replay.npz` lack, and one command to regenerate:
+
+```bash
+python scripts/render_closed_loop.py docs/results/representative
+```
 
 The two v2 write-ups that read these files are `docs/CLOSED_LOOP_V2.md` (what was ported
 and what it cost) and `docs/CONDITIONAL_GUARANTEE_V2.md` (the claim ledger). Deleted lines
