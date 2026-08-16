@@ -19,17 +19,34 @@ The claim this branch supports is in `docs/CONDITIONAL_GUARANTEE_V2.md`. It is a
 Branch `Claude-boundary-aware-closed-loop-v2`, from
 `Claude-boundary-aware-closed-loop-v1` at `92ee6f6`.
 
-Commit **`ab8f750`** carries the message `checkpoint before checking out main`. It is the
-commit that introduced `src/dbact/guarantees.py`, `configs/sim/v2/shape_matrix.yaml` and
-`scripts/run_arbitrary_shape_monte_carlo.py` — the whole CODEX port that the decisive
-matrix was run on. The message was generated automatically by an external process
-operating on the shared repository, not written for this branch, and it does not meet the
-`port(codex):` convention every other commit here follows. **The content is correct and
-has been verified; only the message is non-conforming.** It has not been amended, because
-the branch is pushed and rewriting it needs `--force-with-lease`. That is left as the
-user's decision, recorded here rather than quietly fixed.
+The commit that introduced `src/dbact/guarantees.py` and its geometry support originally
+carried the message `checkpoint before checking out main`, generated automatically by an
+external process operating on the shared repository rather than written for this branch. It
+did not meet the `port(codex):` convention every other commit here follows. The content was
+correct and has since been verified by `tests/test_guarantees.py`; only the message was
+non-conforming.
 
-Test count: 301 at `d5ce40a`, 433 now. `scripts/verify_refactor.py` reports all requested
+**It has now been rewritten**, as `6774d62 port(codex): the conditional-guarantee
+certificate, on v1's search premises`, and the eight commits that followed were rebased onto
+it. The rewrite preserved content exactly: every commit's tree hash is unchanged and
+`git diff` against the pre-rewrite tip is empty.
+
+Two consequences, recorded rather than left to be discovered:
+
+* The old commit `ab8f750` is an ancestor of
+  `origin/Claude-Codex-boundary-aware-closed-loop-v3`, which was **not** rewritten. The two
+  branches diverge at that point and the same 964 lines now exist under two SHAs. A future
+  merge between them will see the duplicate. Rewriting v3 as well was considered and
+  declined: it is not this branch's history to rewrite.
+* The `git_sha` fields inside `docs/results/**/manifest.json`, `monte_carlo.json` and the
+  ablation JSONs still name **pre-rewrite** SHAs. They are deliberately left alone — they
+  record which commit was checked out when each run executed, and rewriting them to name
+  commits that did not exist at run time would falsify the provenance rather than repair it.
+  The mapping is `ab8f750 → 6774d62`, `742b251 → 27fca06`, `d5ce40a → 592f68e`,
+  `a75430e → 4a6fdab`, `e6b9cdf → 2d8fc37`, `75f2666 → 1f07bf8`, `7df9d01 → a44c771`,
+  `1cf8772 → 4ae646f`, `e5d976a → 38491ca`.
+
+Test count: 301 at `592f68e` (was `d5ce40a`), 448 now. `scripts/verify_refactor.py` reports all requested
 stages PASS. `src/dbact/phase.py` is byte-identical to v1 and the seven-phase machine is
 unchanged, with no MAP phase.
 
