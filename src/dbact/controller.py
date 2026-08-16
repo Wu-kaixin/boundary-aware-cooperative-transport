@@ -117,11 +117,18 @@ class DBACTParams:
     # integrated estimate reading 79% of the true displacement at a fusion cap of 4, and
     # 1 / 0.79 = 1.266 -- the measured J/L to within the spread of the sweep.
     #
-    # Left at 1.0 deliberately. The honest repair is in the estimator, counting the fused
-    # share where it is absorbed rather than dividing it out afterwards, and turning this up
-    # changes every J on this branch. It exists so the size of the effect can be measured
-    # against the same gates; ``scripts/run_progress_gain_ablation.py`` is that measurement.
-    progress_estimate_gain: float = 1.0
+    # Now 1.24, and the two numbers agree: 1.24 is the mean J/L over the 60-episode distance
+    # sweep and 1/0.79 = 1.266 is the fusion share ``_commit_motion`` measured independently.
+    # Measured effect at 1.24: J/L 1.233 -> 1.001, overshoot 280 mm -> -1 mm, cross-track
+    # -12%, barrier scalings 68 -> 36, episodes 37 frames shorter, coverage and separation
+    # unchanged, zero fallbacks.
+    #
+    # This is still a scalar in front of the estimate rather than a repair of it. The honest
+    # fix counts the fused share where it is absorbed, inside ``_commit_motion``; that work is
+    # listed as outstanding. What this does is stop the *transport loop* closing on a number
+    # known to be 24% low, which was producing a systematic overshoot the arrival gate then
+    # rewarded -- see ``ClosedLoopContract.arrival_tolerance``.
+    progress_estimate_gain: float = 1.24
 
     # --- communication ---
     comm_range: float = 1.6

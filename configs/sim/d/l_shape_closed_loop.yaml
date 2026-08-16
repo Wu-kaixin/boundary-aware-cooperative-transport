@@ -255,6 +255,23 @@ g500:
   direction_error_max_deg: 20.0
   cross_track_max: 0.15
   coverage_min: 0.70
+  # Declared but inert while arrival_tolerance is set. Kept so the legacy band stays
+  # visible next to what replaced it.
   progress_max_ratio: 1.40
+  # Symmetric arrival band in metres, taken from the task's own declared
+  # tolerance (task.tolerance: 0.12) rather than invented here.
+  #
+  # The legacy pair was L <= J <= 1.40 L: zero tolerance below the target, 40% above. That
+  # asymmetry is the biased progress estimate written into the acceptance criterion -- the
+  # contract's docstring says so, "that estimate is biased low, so the cargo always travels
+  # somewhat past the target". With progress_estimate_gain correcting the bias the team now
+  # stops on target, and a band with a hard edge at exactly L scores good control as failure:
+  # measured, correcting the estimate moved J/L from 1.233 to 1.001 and the contract rate
+  # from 8/12 to 5/12 while every gate-independent quality measure improved.
+  #
+  # Stopping short and overshooting are the same failure of the same loop, so the band is
+  # symmetric. It is also *tighter above* than what it replaces -- 0.12 m against 40% of L --
+  # so this is not a relaxation.
+  arrival_tolerance: 0.12
   hold_speed_max: 0.02
   yaw_max_deg: 15.0

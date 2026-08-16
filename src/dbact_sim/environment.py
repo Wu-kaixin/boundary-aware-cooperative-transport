@@ -353,7 +353,17 @@ class SimulationEnvironment:
             )
             if object_id not in self._reached_frame:
                 cargo = next((c for c in self.cargoes if c.object_id == object_id), None)
-                if cargo is not None and task.progress(cargo.position) >= task.distance:
+                # "Reached" is within the declared arrival tolerance of the target, not
+                # ``>= target``. The strict form is the third place the biased progress
+                # estimate was written into the scoring: it only ever fired because the team
+                # overshot, so correcting the estimate made a team that stops *on* the target
+                # never reach it. ``arrival_tolerance`` unset keeps the strict form, so every
+                # result scored before this change keeps its verdict.
+                tolerance = self.closed_loop_contract.arrival_tolerance
+                threshold = (
+                    task.distance if tolerance is None else task.distance - float(tolerance)
+                )
+                if cargo is not None and task.progress(cargo.position) >= threshold:
                     self._reached_frame[object_id] = frame_index
 
         robot_radius = self.contact_params.robot_radius

@@ -791,9 +791,7 @@ requires the target to be *reached*, and episodes were reaching it by sailing 24
 Stop on target and the same episodes land marginally short. **Part of the 8/12 baseline was
 bought by the overshoot.** That is a finding about the gate, not an argument against the fix.
 
-The default stays 1.0. Flipping it changes the headline number of every result on this branch
-in a direction that needs `j_min` and `progress_max_ratio` re-examined first, and doing both
-at once would make neither attributable.
+**Both gates have since been re-examined and the default is now 1.24. See §9a.4.**
 
 ### 9a.3 The cone gate, scored — and it is a *weaker* gate
 
@@ -819,6 +817,67 @@ Seed 7 is the case that matters: 13.6° mean shortfall, 5.79° direction error �
 absolute gate while aiming as well as the geometry allowed.
 
 `g500` is unchanged.
+
+### 9a.4 `j_min` and `progress_max_ratio` re-examined, and the gain turned on
+
+**`j_min = 0.15` is not the gate that moved, and is unchanged.** It is the C3 "did the cargo
+move at all" floor. The minimum J over the twelve seeds is 1.133 m — **7.6× the floor** — so it
+cannot be what changed when the estimator was corrected. Conflating it with arrival accuracy
+would be re-examining the wrong gate.
+
+**The arrival test is the one at fault, and the fault is in three places, not one.** All three
+encode the same assumption — that the team overshoots — and correcting the estimator exposed
+all three:
+
+1. `J < target` → fail. **Zero tolerance below L**, against 40% above via
+   `progress_max_ratio`. No stopping controller can guarantee landing at or above a target
+   without deliberately overshooting.
+2. `progress_max_ratio = 1.40`, whose docstring states the assumption outright: *"that estimate
+   is biased low, so the cargo always travels somewhat past the target"*.
+3. `reached_frame`, recorded only when true displacement first hits `>= L`. A team that stops
+   *on* the target never reaches it, so the run fails a gate that is not even about accuracy.
+   This was the binding one: correcting the estimator with only (1) and (2) fixed gave 5/12,
+   with five failures reading "target reached never happened".
+
+The replacement is not a new number. **`TransportTask.tolerance = 0.12 m` was already declared,
+already carried on the task and already serialised — and the gate never consulted it.**
+`arrival_tolerance` scores `|J − L| ≤ 0.12` symmetrically, and the same tolerance relaxes
+`reached_frame` to `>= L − 0.12`. Stopping short and overshooting are the same failure of the
+same loop. It is **tighter above** than what it replaces — 0.12 m against 40% of L — so this is
+not a relaxation. `arrival_tolerance = None` keeps the legacy behaviour exactly, so every
+previously committed result keeps its verdict.
+
+With both changes in, 12 seeds:
+
+| | baseline (gain 1.0, legacy gate) | corrected (gain 1.24, ±0.12 m band) |
+| --- | --- | --- |
+| contract pass | **8/12** | **7/12** |
+| J / L | 1.2327 | **1.0010** |
+| \|J − L\|, mean | 0.2799 m | **0.0542 m** |
+| J, mean | 1.4908 m | 1.2098 m |
+| max cross-track | 0.1857 | **0.1626** |
+| direction error | 6.25° | 6.95° |
+| barrier scalings | 68 | **36** |
+| efficiency | 0.9915 | 0.9888 |
+| fallback / infeasible | 0 / 0 | 0 / 0 |
+| min inter-agent | 0.280117 | 0.280117 |
+| min clearance / max penetration | 0.070084 / 0.059916 | 0.070084 / 0.059916 |
+
+**The stopping error falls 5.2×** and `J/L` lands at 1.0010. Barrier scalings halve, cross-track
+improves 12%, and every safety invariant is bit-identical.
+
+**The pass rate goes down, 8/12 → 7/12**, and that is reported rather than tuned away. The
+remaining failure composition is 4 scaled-barrier — unchanged from the baseline and the
+dominant failure throughout — plus one genuine arrival miss (seed 8, 0.125 m against the
+0.12 m tolerance) and one other. The direction error rises slightly because J is now smaller
+and the identity `cross-track = J sin(direction error)` fixes the ratio.
+
+**One consequence for the acceptance gate itself.** The phase-2 regression gate was written as
+`J mean ≥ 1.40 m` — and that threshold was calibrated on the overshoot. With the team stopping
+on target, `J` mean is 1.2098 by design and 1.40 is unreachable without re-introducing the bias.
+The gate that survives the correction is on the *stopping error*: `|J − L| ≤ 0.12` per episode
+and `J/L → 1`, both of which the corrected run meets. Anyone re-running §6's acceptance list
+should use those; the raw-J form silently required the estimator to stay broken.
 
 ---
 

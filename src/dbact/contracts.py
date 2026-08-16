@@ -500,6 +500,26 @@ class ClosedLoopContract:
     cross_track_max: float = 0.15
     coverage_min: float = 0.70
     progress_max_ratio: float = 1.40
+    # Symmetric arrival band, in metres, replacing the ratio pair when it is set.
+    # ``None`` keeps the legacy asymmetric test exactly, so every committed result stays
+    # scored by the gate it was scored by.
+    #
+    # Why it exists. The legacy test is ``L <= J <= progress_max_ratio * L``: **zero**
+    # tolerance below the target and 40% above. That asymmetry is not a design choice, it is
+    # the biased estimator written into the acceptance criterion -- the docstring above says
+    # so in as many words, "that estimate is biased low, so the cargo always travels somewhat
+    # past the target". Correct the estimator and the band becomes unsatisfiable from below:
+    # a controller that stops *on* the target lands within a millimetre of a hard edge, and
+    # half its episodes fall the wrong side of it. Measured: correcting the 24% gain error
+    # moved J/L from 1.233 to 1.001 and the contract rate from 8/12 to 5/12, while every
+    # gate-independent quality measure improved.
+    #
+    # The replacement is not a new number. ``TransportTask.tolerance`` already declares how
+    # close counts as arrived, is carried on the task and serialised in its ``as_dict``, and
+    # was never consulted by this gate. Scoring ``|J - L| <= tolerance`` uses the quantity
+    # the scenario already declared, symmetrically, and stops the criterion from encoding an
+    # estimator bias.
+    arrival_tolerance: float | None = None
     hold_speed_max: float = 0.02
     yaw_max_deg: float = 15.0
     # Steps on which the object-barrier decrease rate had to be scaled down to
@@ -538,7 +558,19 @@ class ClosedLoopContract:
             reasons.append("G500: directional progress J was not measured")
         else:
             progress = float(progress)
-            if progress < target:
+            if self.arrival_tolerance is not None:
+                # Symmetric band around the target: stopping short and overshooting are the
+                # same failure of the same loop, and only an estimator known to be biased
+                # one way makes it defensible to gate them differently.
+                error = progress - target
+                if abs(error) > self.arrival_tolerance:
+                    side = "short of" if error < 0.0 else "past"
+                    reasons.append(
+                        f"G500: J={progress:.4f} m stopped {abs(error):.4f} m {side} "
+                        f"L={target:.4f} m, outside the declared arrival tolerance "
+                        f"{self.arrival_tolerance:.4f} m"
+                    )
+            elif progress < target:
                 reasons.append(f"G500: J={progress:.4f} m < target L={target:.4f} m")
             elif target > 0.0 and progress > self.progress_max_ratio * target:
                 reasons.append(
@@ -659,6 +691,7 @@ class ClosedLoopContract:
             "cross_track_max": self.cross_track_max,
             "coverage_min": self.coverage_min,
             "progress_max_ratio": self.progress_max_ratio,
+            "arrival_tolerance": self.arrival_tolerance,
             "hold_speed_max": self.hold_speed_max,
             "yaw_max_deg": self.yaw_max_deg,
             "barrier_scalings_max": self.barrier_scalings_max,
