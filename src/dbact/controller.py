@@ -103,6 +103,25 @@ class DBACTParams:
     # costs. Directed rather than symmetric: robot i losing j does not imply j loses
     # i, and nothing downstream assumes a symmetric neighbour set.
     communication_dropout_prob: float = 0.0
+    # Calibration on the on-board progress estimate, applied where the transport loop reads
+    # it and nowhere else. 1.0 is an exact no-op and is the default.
+    #
+    # Why it exists. The distance sweep measured J/L = 1.23-1.28 at every alpha from 0.2 to
+    # 1.0, with corr(alpha, J/L) = +0.029 -- the team travels about 24% further than asked
+    # whether asked for 0.5 m or 2.5 m. A bias that does not vary with the distance is a
+    # *gain* error on the estimate rather than an offset, and a gain error is one constant.
+    #
+    # The mechanism is already named in ``LocalBoundaryMap._commit_motion``: registration
+    # moves the map rigidly and fusion pulls each cell towards the latest return, and the
+    # fused share is motion the estimate never sees as a shift. That docstring records the
+    # integrated estimate reading 79% of the true displacement at a fusion cap of 4, and
+    # 1 / 0.79 = 1.266 -- the measured J/L to within the spread of the sweep.
+    #
+    # Left at 1.0 deliberately. The honest repair is in the estimator, counting the fused
+    # share where it is absorbed rather than dividing it out afterwards, and turning this up
+    # changes every J on this branch. It exists so the size of the effect can be measured
+    # against the same gates; ``scripts/run_progress_gain_ablation.py`` is that measurement.
+    progress_estimate_gain: float = 1.0
 
     # --- communication ---
     comm_range: float = 1.6
@@ -712,7 +731,14 @@ class DBACTController:
             own[agent.agent_id] = {}
             for object_id, task in self.tasks.items():
                 displacement = local_map.object_displacement(object_id)
-                own[agent.agent_id][object_id] = float(np.dot(displacement, task.direction))
+                # The calibration enters here and nowhere else: this is the transport loop's
+                # feedback. It deliberately does NOT scale ``object_velocity``, which feeds
+                # the barrier rows -- inflating a safety input to correct a transport
+                # estimate would be fixing one loop by lying to another.
+                own[agent.agent_id][object_id] = (
+                    float(np.dot(displacement, task.direction))
+                    * self.params.progress_estimate_gain
+                )
                 registration = local_map.last_registration.get(object_id)
                 if registration is not None and registration.matches > 0:
                     informed.setdefault(object_id, []).append(i)

@@ -733,6 +733,95 @@ progress estimate is biased low by roughly 10–15%.
 
 ---
 
+## 9a. The three outstanding fixes, resolved
+
+§10.2 previously listed these as not done. Each is now derived and measured. **None of the
+three changes a default**, and the reasons differ.
+
+### 9a.1 The ISSf constant, re-derived — and unsatisfiable at the declared yaw bound
+
+`h_k` differentiates to `n_k^T (u_i − v_{b_k}) + (dn_k/dt)^T (p_i − b_k)`, and ρ is the price
+of dropping the second term. For a rigid body `dn_k/dt = ω R90 n_k`, so that term is ω times
+the robot's *tangential* offset — which the tangential window `W` bounds by construction.
+Hence **|dropped term| ≤ ω_max · W**. This is what makes the window part of the barrier
+construction: without it the term is unbounded and no ρ exists.
+
+Three results (`scripts/derive_issf_margin.py`):
+
+* **ρ is double-booked.** The certificate checks `velocity_error ≤ ρ`, but `velocity_error`
+  is the error in the **kept** term while ρ was sized for the **dropped** one — two
+  independent disturbances, one budget. The requirement is their sum, `ρ ≥ ω_max·W + e_v`.
+  This is why the measured breach is 36.7% even with a perfect sensor: `e_v` is compared
+  against a budget never sized for it.
+* **At the declared yaw bound no ρ works.** ρ is bounded above too, by `_cap_to_reachable` at
+  `recovery_fraction · max_speed` — a larger margin is an infeasible problem, not a stronger
+  guarantee. The rotation term alone is `0.80 × 0.28 = 0.2240` m/s against a **0.2100 m/s**
+  cap: 11.2× the configured `ρ = 0.02` and 1.07× what the actuator can deliver, before `e_v`.
+  With the measured `e_v ≈ 0.65` m/s the requirement is 0.872 m/s, four times the cap.
+* **And ρ = 0.02 is right for this object.** Inverted, it covers rotation to **4.09 °/s**,
+  and the baseline cargo turns at roughly 0.003 °/s. Correct for a near-stationary boundary,
+  wrong as a general bound — which is why `issf_margin_budget` returns the regime.
+
+Reported in the certificate, deliberately not gated: gating would make every run on this
+branch ineligible at a stroke, a true statement but a different experiment from the committed
+ones.
+
+### 9a.2 The 24% overshoot, corrected — and the gate was rewarding it
+
+`progress_estimate_gain` enters where the transport loop reads its feedback and nowhere else;
+it does **not** scale `object_velocity`, because inflating a safety input to correct a
+transport estimate would be fixing one loop by lying to another. Default 1.0, exact no-op.
+Arms chosen from the mechanism, not fitted: `1/0.79 = 1.266` is the fusion-absorbed share
+`_commit_motion` already measured, and `1.24` is the mean `J/L` from the 60-episode distance
+sweep. The two agree to within 2%.
+
+| gain | pass | J/L | overshoot | cross-track | peak coverage | barrier scalings | frames |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 1.000 | **8/12** | 1.233 | +0.280 m | 0.1857 | 0.982 | 68 | 336 |
+| 1.240 | 5/12 | **1.001** | **−0.001 m** | 0.1626 | 0.979 | **36** | 299 |
+| 1.266 | 3/12 | 0.980 | −0.026 m | 0.1592 | 0.981 | 62 | 307 |
+
+**The correction is exact.** At 1.240 the overshoot goes from 280 mm to −1 mm, confirming a
+pure gain error. Every gate-independent quality measure improves: cross-track falls 12%,
+barrier scalings nearly halve, episodes finish 37 frames sooner, coverage and separation hold,
+zero fallbacks throughout.
+
+**And the contract pass rate falls, 8/12 → 5/12.** The reason is worth stating plainly: g500
+requires the target to be *reached*, and episodes were reaching it by sailing 24% past it.
+Stop on target and the same episodes land marginally short. **Part of the 8/12 baseline was
+bought by the overshoot.** That is a finding about the gate, not an argument against the fix.
+
+The default stays 1.0. Flipping it changes the headline number of every result on this branch
+in a direction that needs `j_min` and `progress_max_ratio` re-examined first, and doing both
+at once would make neither attributable.
+
+### 9a.3 The cone gate, scored — and it is a *weaker* gate
+
+`scripts/score_reachable_cone_gate.py` applies `direction error ≤ shortfall + ε_control` to
+the committed 12-seed lateral-authority run, sweeping the declared budget ε.
+
+| ε_control | absolute gate | cone gate | passes absolute but not cone | passes cone but not absolute |
+| --- | --- | --- | --- | --- |
+| 2° | 5/12 | 6/12 | **none** | seed 7 |
+| 4° | 5/12 | 6/12 | **none** | seed 7 |
+| 6° | 5/12 | 8/12 | **none** | 1, 3, 7 |
+| 8–10° | 5/12 | 11/12 | **none** | 1, 3, 4, 7, 9, 11 |
+
+**The "passes absolute but not cone" column is empty at every ε.** The cone gate is uniformly
+weaker: adopting it can only raise the pass rate, never lower it. That makes switching to it
+indistinguishable from loosening a gate to improve a number, which this branch does not do.
+
+So the recommendation changes. §3.2 and §7a's argument that an absolute cross-track gate
+becomes arbitrarily strict with task length still stands — it is arithmetic. But the fix is
+**not** to swap in the cone gate as a pass criterion. It is to *report the shortfall beside the
+direction error*, so a reader can see how much of a failure was geometrically unavoidable.
+Seed 7 is the case that matters: 13.6° mean shortfall, 5.79° direction error — it fails the
+absolute gate while aiming as well as the geometry allowed.
+
+`g500` is unchanged.
+
+---
+
 ## 10. The artefact pipeline, and what is still not done
 
 ### 10.1 What the pipeline produces
@@ -772,16 +861,13 @@ Stated so the gaps are visible rather than inferred from absent sections.
 * **The three contraction rates are still uncertified**, which is the reason the finite-time
   bound is unavailable. Certifying any one of them is a proof obligation, not a measurement,
   and nothing here attempts it.
-* **The ISSf constant has not been re-derived against a moving boundary.** §3.1 rewrites the
-  S1 *criterion* with its reason; it does not re-derive the constant. §6.3 shows the premise
-  that constant rests on is violated by 60.4% of measured cells, which makes the re-derivation
-  the larger of the two outstanding items.
-* **The ~24% progress overshoot measured in §7a is not corrected.** It is now known to be a
-  scale-invariant gain error rather than an offset, which is what makes it fixable, but
-  changing the transport loop's gain would invalidate every number on this branch and was out
-  of scope for a verification phase.
-* **The cross-track gate is not changed.** §3.2 and §7a make the case for restating it on the
-  reachable cone and give the form; the `g500` gate still reads `cross_track_max: 0.15`,
-  deliberately, so that every result here is scored by the gate the earlier results were
-  scored by.
+* **The estimator itself is not repaired.** §9a.2 shows the overshoot is a pure gain error and
+  that dividing it out works exactly, but the honest fix counts the fused share where it is
+  absorbed, inside `_commit_motion`, rather than applying a scalar in front of the result.
+* **`j_min` and `progress_max_ratio` have not been re-examined**, and §9a.2 shows they need to
+  be: part of the 8/12 baseline was bought by the overshoot, so correcting the estimator and
+  keeping the gate scores good control as failure.
+* **A ρ that is both sufficient and deliverable does not exist at the declared yaw bound**
+  (§9a.1). Closing that needs either a tighter yaw bound, a smaller tangential window, or more
+  actuator authority — all three are design changes, not tuning.
 * **No hardware.** See `CONDITIONAL_GUARANTEE_V2.md` §6.6.
