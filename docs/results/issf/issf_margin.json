@@ -1,0 +1,41 @@
+{
+  "config": "configs/sim/d/l_shape_closed_loop.yaml",
+  "constants": {
+    "rho_configured": 0.02,
+    "tangential_window_W": 0.28,
+    "omega_max_rad_s": 0.8,
+    "recovery_fraction": 0.6,
+    "max_speed": 0.35,
+    "reachable_cap": 0.21
+  },
+  "derivation": {
+    "rotation_term_omega_max_times_W": 0.22400000000000003,
+    "required_rho_rotation_only": 0.22400000000000003,
+    "required_rho_with_measured_velocity_error": {
+      "nominal": 0.8719682569099707,
+      "range_noise_000": 0.8848627678225891
+    },
+    "satisfiable_rotation_only": false
+  },
+  "measured_velocity_error": {
+    "nominal": {
+      "max": 0.6479682569099706,
+      "mean": null,
+      "p99": null,
+      "breach_fraction": 0.6032277487798718
+    },
+    "range_noise_000": {
+      "max": 0.6608627678225891,
+      "mean": null,
+      "p99": null,
+      "breach_fraction": 0.3672166963901064
+    }
+  },
+  "regimes": {
+    "omega_max_covered_by_configured_rho_rad_s": 0.07142857142857142,
+    "omega_max_covered_by_configured_rho_deg_s": 4.09255567950588,
+    "omega_max_at_the_reachable_cap_rad_s": 0.7499999999999999,
+    "velocity_error_budget_left_at_the_cap": 0.0
+  },
+  "structural_finding": "guarantees.build_admissibility_certificate checks velocity_error <= rho, but velocity_error is the error in the KEPT term n^T v while rho is the price of the DROPPED d/dt(n) term. One budget, two independent disturbances."
+}

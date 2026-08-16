@@ -322,6 +322,78 @@ def boundary_map_gap_upper_bound(
     }
 
 
+def issf_margin_budget(
+    *,
+    rho: float,
+    tangential_window: float,
+    omega_max: float,
+    recovery_fraction: float,
+    max_speed: float,
+    velocity_error: float = 0.0,
+) -> dict:
+    """What ``rho`` has to pay for on a *moving* boundary, and whether it can.
+
+    The object row keeps ``n_k^T (u_i - v_{b_k})`` and drops
+    ``(dn_k/dt)^T (p_i - b_k)``; ``rho`` is the price of the drop. For a rigid body
+    ``dn_k/dt = omega R90 n_k``, so the dropped term is ``omega`` times the robot's
+    *tangential* offset from its boundary point -- and that offset is bounded by the
+    tangential window ``W``, because the window is exactly the filter that admits a row only
+    while ``|t_k| <= W``. Hence
+
+        | dropped term |  <=  omega_max * W.
+
+    This is what makes the window part of the barrier construction rather than an
+    implementation detail: without it the dropped term is unbounded and no ``rho`` exists.
+
+    **The budget is double-booked, and this function separates it.**
+    ``bounded_perception_and_motion_error`` checks ``velocity_error <= rho``. But
+    ``velocity_error`` is the error in the *kept* term -- a different and independent
+    disturbance from the *dropped* one ``rho`` was sized for. Asking one margin to cover both
+    is how a premise comes to look satisfied while neither error is bounded. The honest
+    requirement is the sum:
+
+        rho  >=  omega_max * W  +  e_v.
+
+    And ``rho`` is bounded from *above* as well. ``_cap_to_reachable`` limits every row to
+    ``recovery_fraction * max_speed`` along the common retreat direction, so a margin larger
+    than that is not a stronger guarantee but an infeasible problem:
+
+        omega_max * W + e_v   <=   rho   <=   recovery_fraction * max_speed.
+
+    When the left exceeds the right **no value of rho works** -- a statement about the
+    actuator rather than about tuning, reported as ``satisfiable``.
+
+    Measured on the baseline (``scripts/derive_issf_margin.py``): the rotation term at the
+    declared 0.80 rad/s yaw bound is 0.2240 m/s, 11.2x the configured ``rho = 0.02`` and
+    1.07x the 0.2100 m/s cap -- unsatisfiable before the velocity error is even added.
+    Inverted, ``rho = 0.02`` covers rotation up to 4.09 deg/s and the baseline cargo turns at
+    roughly 0.003 deg/s. So the configured value is defensible *for that object* and
+    indefensible as a general bound, which is why this returns the regime and not just a
+    verdict.
+    """
+    rotation_term = float(omega_max) * float(tangential_window)
+    cap = float(recovery_fraction) * float(max_speed)
+    required = rotation_term + float(velocity_error)
+    return {
+        "rho_configured": float(rho),
+        "tangential_window": float(tangential_window),
+        "omega_max": float(omega_max),
+        "reachable_cap": cap,
+        # The two independent disturbances, kept apart.
+        "dropped_normal_rate_term": rotation_term,
+        "kept_velocity_error_term": float(velocity_error),
+        "required_rho": required,
+        "sufficient": bool(float(rho) + 1e-12 >= required),
+        "within_reachable_cap": bool(required <= cap + 1e-12),
+        # The field to gate on: a margin both large enough and deliverable.
+        "satisfiable": bool(required <= cap + 1e-12 and float(rho) + 1e-12 >= required),
+        # Inverted regimes, so a reader gets the condition and not only the verdict.
+        "omega_max_covered_by_rho": float(rho) / max(float(tangential_window), 1e-12),
+        "omega_max_covered_by_cap": cap / max(float(tangential_window), 1e-12),
+        "velocity_error_budget_at_cap": max(0.0, cap - rotation_term),
+    }
+
+
 def _domain_margin(points: np.ndarray, domain: tuple[float, float, float, float]) -> float:
     xmin, xmax, ymin, ymax = domain
     p = np.asarray(points, dtype=float).reshape(-1, 2)
@@ -850,6 +922,22 @@ def build_admissibility_certificate(
             "required_boundary_agents": required_agents if math.isfinite(required_agents) else None,
         },
         "mapping": {"required_max_boundary_gap": map_epsilon},
+        # Reported, not gated. The decomposition shows the configured rho is insufficient
+        # for the declared yaw bound -- and in fact unsatisfiable, because the rotation term
+        # alone exceeds the reachability cap. Adding it to ``domain_eligible`` would make
+        # every run on this branch ineligible at a stroke, which is a true statement but a
+        # different experiment from the ones already committed; it is surfaced here so a
+        # reader sees it beside the checks rather than only in the analysis script.
+        # ``velocity_error`` is the *declared* premise, not a measurement: the measured value
+        # is 30x larger and lives in the error audit.
+        "issf_margin": issf_margin_budget(
+            rho=p["rho"],
+            tangential_window=float(controller.object_row_window),
+            omega_max=float(controller.max_object_yaw_rate),
+            recovery_fraction=float(controller.recovery_fraction),
+            max_speed=float(controller.max_speed),
+            velocity_error=velocity_error,
+        ),
         "task": {
             "transport_distance": distance,
             "cargo_corridor_margin": cargo_margin,
@@ -905,6 +993,7 @@ __all__ = [
     "boundary_map_gap_upper_bound",
     "guaranteed_detection_radius",
     "minimum_facing_cage_clearance",
+    "issf_margin_budget",
     "derive_conditional_finite_time_bound",
     "build_admissibility_certificate",
     "evaluate_runtime_map_completeness",
