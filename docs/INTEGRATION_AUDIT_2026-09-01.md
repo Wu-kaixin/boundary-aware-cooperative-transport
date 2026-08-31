@@ -71,17 +71,23 @@ Hybrid commits:
 
 | Source SHA | Integrated SHA | Content |
 | --- | --- | --- |
-| `3fb7f240906390ea98cf34f59f2ae568d4acd1bd` | `d18dbf1` | immutable trace schema, renderer, HUD/overlays, offline animation, Figures A–G, tests |
-| `093e1630afa3a36d8ad3773d532fed1a9c68fc96` | `c88cb79` | predeclared success/failure selection, manifest and hashes, paired Figure H, replay/package tests |
+| `3fb7f240906390ea98cf34f59f2ae568d4acd1bd` | `c96cd9b` | immutable trace schema, renderer, HUD/overlays, offline animation, Figures A–G, tests |
+| `093e1630afa3a36d8ad3773d532fed1a9c68fc96` | `c96cd9b` | predeclared success/failure selection, manifest and hashes, paired Figure H, replay/package tests |
 
 Those commits consolidate the useful `Codex-v2` V2-2 through V2-8 publication
 capabilities without importing that branch's controller or stale README/results.
 The V2-9 binaries were not copied: they were produced by a different controller
 history and do not establish provenance for the current source of truth.
 
+The GitHub object write consolidates both selected source commits into one
+auditable publication commit because the host's Git credential store was not
+available to the sandbox.  The final tree is identical to the locally tested
+selective integration; `b16d019` only normalizes line endings in that remote
+tree.
+
 The first full package build exposed a missing runtime contract: MP4 was
 mandatory, but no dependency file declared an encoder.  Publication commit
-`1c9afd9` adds `imageio-ffmpeg>=0.6`, performs the encoder check before paying
+`c96cd9b` adds `imageio-ffmpeg>=0.6`, performs the encoder check before paying
 for a rerun, documents the dependency, and tests the preflight.
 
 ## 4. Conflicts and rejected whole-branch merges
@@ -162,7 +168,10 @@ cannot replace that denominator.
 
 ## 6. Branch and PR policy
 
-- Push all nine archive tags before moving any integration ref.
+- All nine archive tags exist in the local audit clone.  The available GitHub
+  connector can write branches and commits but not tag refs, and the host Git
+  credential store was inaccessible; the exact tag-to-SHA mapping above is the
+  remote recovery record until those local tags can be pushed.
 - Push `DBACT-research-v3` and `DBACT-publication-v3` as new branches; do not
   rewrite or delete old branches.
 - Open `DBACT-research-v3 -> main` as a pull request with the final head SHA,
