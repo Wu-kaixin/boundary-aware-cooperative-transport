@@ -1,0 +1,90 @@
+# B0 baseline: the pre-refactor pipeline, kept so it can be re-run under the same
+# fail-closed criteria as everything else.
+#
+# NOT a paper configuration (`paper` is absent), because the scripted engine and
+# the projection filter are both banned from those. It exists for exactly one
+# purpose: to show what the old numbers were measuring. Under this engine the net
+# displacement direction agrees with `transport_direction` to 0.000000 degrees --
+# the cargo is translated along a direction no robot ever observed -- and
+# `scripts/validate_run.py` rejects the resulting summary for that reason.
+#
+# Comparing a legacy coverage number against a strict one is not meaningful, so
+# this config is run to be rejected, and the rejection is the result.
+
+dt: 0.05
+
+domain:
+  xmin: 0.0
+  xmax: 8.0
+  ymin: 0.0
+  ymax: 8.0
+
+agents:
+  count: 16
+  layout: scatter
+  center: [2.60, 2.60]
+  radius_min: 1.50
+  radius_max: 2.30
+  min_separation: 0.40
+
+cargoes:
+  - id: cargo_0
+    shape: l_shape
+    center: [2.60, 2.60]
+    scale: 1.50
+    surface_density: 2.0
+    transport_direction: [1.0, 0.4]
+
+controller:
+  task_mode: transport
+
+  sensor_range: 1.20
+  ray_count: 96
+  range_noise_std: 0.010
+  residual_tolerance: 0.030
+  min_confidence: 0.15
+
+  comm_range: 1.60
+
+  voxel_size: 0.06
+  age_decay: 0.30
+
+  density_mode: offset
+  cage_offset: 0.135
+  lead_offset: 0.22
+  sigma: 0.20
+  gap_gain: 0.6
+
+  local_radius: 0.80
+  grid_resolution: 24
+
+  robot_radius: 0.16
+  delta_max: 0.05
+  d_min: 0.34
+  gamma_agent: 6.0
+  gamma_obj: 8.0
+  rho: 0.05
+  max_speed: 0.30
+
+  # The pre-refactor filter: inter-robot rows only, and the inexact iterative
+  # projection instead of the QP. Both are stated rather than defaulted.
+  backend: projection
+  use_object_barrier: false
+
+  kp_explore: 0.25
+  kp_cage: 0.90
+  kp_transport: 0.60
+
+transport:
+  engine: scripted
+  contact_radius: 0.42
+  coverage_threshold: 0.42
+  min_contact_agents: 3
+  speed: 0.16
+  boundary_samples: 120
+
+evaluation:
+  contact_radius: 0.42
+  j_min: 0.15
+  efficiency_min: 0.7
+  displacement_gate: 0.1

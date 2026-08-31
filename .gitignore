@@ -34,3 +34,27 @@ data/experiments/
 # OS
 .DS_Store
 Thumbs.db
+
+# Local git worktrees
+.worktrees/
+
+# Committed evidence. docs/results is the curated home for run products a reader
+# is meant to check, so the blanket *.csv rule above must not silently drop them:
+# a number in a table that nobody can trace back to a file is exactly the problem
+# this directory exists to solve.
+!docs/results/**/*.csv
+!docs/INTEGRATION_COMMIT_DECISIONS_2026-09-01.csv
+
+# Same rule, extended to the figure formats (T6). Without these the blanket *.png
+# rule above dropped every rendered still while *.pdf -- which is not in that rule --
+# was committed, so a publication figure set would have arrived half present with no
+# sign that half was missing. Figures are evidence here for the same reason the CSVs
+# are: a claim in a caption has to be traceable to the file that drew it.
+!docs/results/**/*.png
+!artifacts/publication/**/*.png
+!artifacts/publication/**/*.pdf
+
+# The animation is deliberately NOT excepted. closed_loop.gif is 3 MB, it carries no
+# information the committed stills and replay.npz do not, and it is one command to
+# regenerate:
+#     python scripts/render_closed_loop.py docs/results/representative

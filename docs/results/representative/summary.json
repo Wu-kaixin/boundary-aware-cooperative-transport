@@ -1,0 +1,295 @@
+{
+  "provenance": {
+    "git_sha": "75f26668fae57a3de4ac804a1bb76f898d09604e-dirty",
+    "config_hash": "91e381af98be246c",
+    "seed": 5,
+    "backend": "qp"
+  },
+  "engine": "penalty",
+  "task_mode": "transport",
+  "density_mode": "offset",
+  "steps": 584,
+  "final_time": 29.20000000000028,
+  "contracts": {
+    "C1": {
+      "robot_radius": 0.13,
+      "cage_offset": 0.105,
+      "delta_max": 0.065,
+      "gamma_obj": 8.0,
+      "rho": 0.02,
+      "d_min": 0.28,
+      "lead_offset": 0.26,
+      "r_safe": 0.065,
+      "barrier_margin": 0.29999999999999993
+    },
+    "coverage": {
+      "local_radius": 0.8,
+      "comm_range": 1.6
+    },
+    "d_min": 0.28,
+    "delta_max": 0.065,
+    "discrete_overshoot": 0.031728945649520286
+  },
+  "solver": {
+    "solves": 9344,
+    "fallbacks": 0,
+    "infeasible": 0,
+    "margin_relaxations": 0,
+    "barrier_scalings": 0,
+    "min_barrier_scale": 1.0,
+    "zero_input_feasible": false,
+    "zero_input_feasible_checks": 9344,
+    "zero_input_feasible_failures": 507,
+    "inside_margin_band": 40,
+    "max_slack": 0.0,
+    "max_modification_norm": 0.5599956711563527,
+    "statuses": {
+      "optimal": 9344
+    }
+  },
+  "error_audit": {
+    "audited_frames": 59,
+    "declared_bounds": {
+      "normal_error_deg": 30.0,
+      "velocity_error": 0.02
+    },
+    "breach_frames": {
+      "normal_error_deg": 909,
+      "velocity_error": 750
+    },
+    "within_declared_bounds": false,
+    "fail_closed_reasons": [
+      "normal_error_deg",
+      "velocity_error"
+    ],
+    "terms": {
+      "normal_error_deg": {
+        "n": 151414,
+        "mean": 12.492714565173644,
+        "max": 179.99972632326055,
+        "p50": 1.2070915488763552,
+        "p95": 89.84368188303179,
+        "p99": 179.68594370372548,
+        "p999": 179.97057883420158,
+        "sampled": 20000,
+        "breach_fraction": 0.09638474645673452,
+        "breaches": 14594
+      },
+      "boundary_point_error_m": {
+        "n": 151414,
+        "mean": 0.06648788709800953,
+        "max": 1.1832172979821225,
+        "p50": 0.009901659142515944,
+        "p95": 0.345629474116349,
+        "p99": 0.6342280229211066,
+        "p999": 0.8617729699988346,
+        "sampled": 20000,
+        "breach_fraction": null,
+        "breaches": null
+      },
+      "map_gap_m": {
+        "n": 58,
+        "mean": 0.07177325839903871,
+        "max": 0.7531955845683549,
+        "p50": 0.0378083628287425,
+        "p95": 0.21966945403488686,
+        "p99": 0.6876464712200043,
+        "p999": 0.7466406732335196,
+        "sampled": 58,
+        "breach_fraction": null,
+        "breaches": null
+      },
+      "object_velocity_error_mps": {
+        "n": 151414,
+        "mean": 0.05312431464109708,
+        "max": 0.4127336783290134,
+        "p50": 0.04649533185027843,
+        "p95": 0.1306078017021381,
+        "p99": 0.16411533985114218,
+        "p999": 0.23413153545912954,
+        "sampled": 20000,
+        "breach_fraction": null,
+        "breaches": null
+      },
+      "point_velocity_error_mps": {
+        "n": 151414,
+        "mean": 0.05312431464109708,
+        "max": 0.4127336783290134,
+        "p50": 0.04649533185027843,
+        "p95": 0.1306078017021381,
+        "p99": 0.16411533985114218,
+        "p999": 0.23413153545912954,
+        "sampled": 20000,
+        "breach_fraction": null,
+        "breaches": null
+      },
+      "normal_projection_error_mps": {
+        "n": 151414,
+        "mean": 0.038996631857427876,
+        "max": 0.4992681888748908,
+        "p50": 0.021242044077736874,
+        "p95": 0.12503784863353004,
+        "p99": 0.2330181392458038,
+        "p999": 0.423305671905074,
+        "sampled": 20000,
+        "breach_fraction": 0.5110029455664602,
+        "breaches": 77373
+      }
+    },
+    "measured_bounds": {
+      "normal_error_deg": 179.99972632326055,
+      "velocity_error": 0.4992681888748908
+    },
+    "breach_fractions": {
+      "normal_error_deg": 0.09638474645673452,
+      "velocity_error": 0.5110029455664602
+    },
+    "p999_not_a_bound": {
+      "normal_error_deg": 179.97057883420158,
+      "velocity_error": 0.423305671905074
+    },
+    "audit_stride": 10
+  },
+  "phases": {
+    "final_phase": "HOLD",
+    "entered": {
+      "SEARCH": 0,
+      "DISCOVER": 0,
+      "ENCLOSE": 18,
+      "CONTACT_READY": 73,
+      "TRANSPORT": 223,
+      "BRAKE": 381,
+      "HOLD": 435
+    },
+    "first_detection_frame": 0,
+    "enclosure_frame": 18,
+    "contact_ready_frame": 73,
+    "transport_frame": 223,
+    "brake_frame": 381,
+    "hold_frame": 435
+  },
+  "tasks": {
+    "cargo_0": {
+      "object_id": "cargo_0",
+      "direction": [
+        -0.10625411423413605,
+        0.9943390081900233
+      ],
+      "angle_deg": 96.09942625178446,
+      "target_distance": 1.352955555454011,
+      "start": [
+        3.7848360655737823,
+        3.8063524590164044
+      ],
+      "goal_point": [
+        3.6410789714308627,
+        5.151648944151727
+      ],
+      "tolerance": 0.12,
+      "clearance": 1.9050471192360838,
+      "sampling_attempts": 1
+    }
+  },
+  "min_inter_agent_distance": 0.28067837550651015,
+  "mean_path_length": 3.473377072176059,
+  "cargoes": {
+    "cargo_0": {
+      "displacement_vector": [
+        -0.1338333245472687,
+        1.6756570121669365
+      ],
+      "displacement": 1.6809930937346529,
+      "rotation_deg": 0.032720162551813245,
+      "final_coverage_legacy": 1.0,
+      "final_strict_coverage": 1.0,
+      "max_strict_coverage": 1.0,
+      "min_signed_clearance": 0.07281541440004416,
+      "max_penetration": 0.057184585599955845,
+      "max_agents_inside": 0,
+      "mean_contacts": 2.483760683760684,
+      "max_cargo_speed": 0.2845789129904057,
+      "max_contacts": 5,
+      "peak_net_force": 37.633444702534916,
+      "recruited_agents": 15,
+      "J": 1.680391472899509,
+      "efficiency": 0.999642103922148,
+      "angle_deg": 1.5329537539879399,
+      "success": true,
+      "failure_reasons": [],
+      "task": {
+        "object_id": "cargo_0",
+        "direction": [
+          -0.10625411423413605,
+          0.9943390081900233
+        ],
+        "angle_deg": 96.09942625178446,
+        "target_distance": 1.352955555454011,
+        "start": [
+          3.7848360655737823,
+          3.8063524590164044
+        ],
+        "goal_point": [
+          3.6410789714308627,
+          5.151648944151727
+        ],
+        "tolerance": 0.12,
+        "clearance": 1.9050471192360838,
+        "sampling_attempts": 1
+      },
+      "g500": {
+        "success": true,
+        "failure_reasons": [],
+        "metrics": {
+          "engine": "penalty",
+          "target_distance": 1.352955555454011,
+          "goal_angle_deg": 96.09942625178446,
+          "J": 1.680391472899509,
+          "displacement": 1.6809930937346529,
+          "efficiency": 0.999642103922148,
+          "direction_error_deg": 1.5329537539879399,
+          "max_cross_track": 0.06962150082939088,
+          "max_strict_coverage": 1.0,
+          "final_strict_coverage": 1.0,
+          "rotation_deg": 0.032720162551813245,
+          "final_cargo_speed": 0.0,
+          "holding": true,
+          "final_phase": "HOLD",
+          "first_detection_frame": 0,
+          "enclosure_frame": 18,
+          "contact_ready_frame": 73,
+          "transport_frame": 223,
+          "brake_frame": 381,
+          "hold_frame": 435,
+          "reached_frame": 402,
+          "frames_run": 584,
+          "progress_estimate_final": 1.3883191269759436,
+          "progress_estimate_ratio": 0.8261879147603649,
+          "solver_fallbacks": 0,
+          "solver_infeasible": 0,
+          "margin_relaxations": 0,
+          "barrier_scalings": 0,
+          "min_barrier_scale": 1.0,
+          "min_inter_agent_distance": 0.28067837550651015,
+          "d_min": 0.28,
+          "min_signed_clearance": 0.07281541440004416,
+          "max_penetration": 0.057184585599955845,
+          "penetration_budget": 0.09672894564952028
+        },
+        "gates": {
+          "detect_by": null,
+          "contact_ready_by": null,
+          "transport_by": null,
+          "reach_by": null,
+          "efficiency_min": 0.8,
+          "direction_error_max_deg": 20.0,
+          "cross_track_max": 0.15,
+          "coverage_min": 0.7,
+          "progress_max_ratio": 1.4,
+          "hold_speed_max": 0.02,
+          "yaw_max_deg": 15.0,
+          "barrier_scalings_max": 0
+        }
+      }
+    }
+  }
+}

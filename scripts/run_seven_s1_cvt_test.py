@@ -117,8 +117,11 @@ class VirtualBoxDBACTPolicy:
                 max_speed=args.max_speed,
                 kp_explore=args.kp_explore,
                 kp_cage=args.kp_cage,
-                grid_spacing=args.grid_spacing,
-                cbf_use_qp=False,
+                grid_resolution=args.grid_resolution,
+                local_radius=min(args.local_radius, 0.5 * args.comm_range),
+                robot_radius=args.robot_radius,
+                delta_max=args.delta_max,
+                backend=args.backend,
             ),
             (args.world_x_min, args.world_x_max, args.world_y_min, args.world_y_max),
         )
@@ -128,7 +131,6 @@ class VirtualBoxDBACTPolicy:
             width=args.box_width,
             height=args.box_height,
             yaw=args.box_yaw,
-            transport_direction=[0.0, 1.0],
         )
         self._last_timestamp: float | None = None
 
@@ -285,13 +287,21 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--box-yaw", type=float, default=0.0, help="Virtual box yaw in radians.")
     parser.add_argument("--sensor-range", type=float, default=0.90, help="DBACT virtual local boundary sensor range.")
     parser.add_argument("--comm-range", type=float, default=0.75, help="DBACT neighbor communication range.")
-    parser.add_argument("--cage-offset", type=float, default=0.28, help="Desired offset from box boundary.")
-    parser.add_argument("--sigma", type=float, default=0.25, help="Boundary density smoothing.")
-    parser.add_argument("--d-min", type=float, default=0.25, help="Minimum robot-robot distance for local safety.")
+    # The C1 contract ties these together: r_safe = robot_radius - delta_max must be
+    # below cage_offset, cage_offset below robot_radius, and d_min at least twice the
+    # robot radius. The controller refuses to start otherwise, so the defaults here
+    # are a consistent set for a 0.16 m chassis rather than independent knobs.
+    parser.add_argument("--robot-radius", type=float, default=0.16, help="Physical chassis radius.")
+    parser.add_argument("--delta-max", type=float, default=0.05, help="Penetration budget the object CBF leaves open.")
+    parser.add_argument("--cage-offset", type=float, default=0.135, help="Desired offset from box boundary.")
+    parser.add_argument("--sigma", type=float, default=0.20, help="Boundary density smoothing.")
+    parser.add_argument("--d-min", type=float, default=0.34, help="Minimum robot-robot distance for local safety.")
     parser.add_argument("--kp-cage", type=float, default=0.25, help="DBACT cage gain.")
     parser.add_argument("--kp-explore", type=float, default=0.05, help="DBACT explore gain.")
     parser.add_argument("--grid-resolution", type=int, default=28, help="CVT grid resolution.")
-    parser.add_argument("--grid-spacing", type=float, default=0.08, help="DBACT local-CVT grid spacing in meters.")
+    parser.add_argument("--local-radius", type=float, default=0.35, help="CVT disk radius; capped at comm_range/2.")
+    parser.add_argument("--backend", default="qp", choices=["qp", "cvxpy", "projection"],
+                        help="Safety-filter backend. There is no 'auto'.")
     return parser.parse_args()
 
 

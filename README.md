@@ -2,335 +2,399 @@
 
 # DBACT: Decentralized Boundary-Aware Cooperative Transport
 
-Reproducible decentralized multi-robot caging and transport experiments with metrics, reports, MAS dry-runs, and visualizations.
+Search, enclose and transport an object of unknown shape — with every claim attached to a measurement.
 
 [English](README.md) | [繁體中文](README.zh-TW.md) | [日本語](README.ja.md)
 
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
-![Python](https://img.shields.io/badge/Python-3.10-blue.svg)
-![Tests](https://img.shields.io/badge/Tests-33%20passed-brightgreen.svg)
-![Version](https://img.shields.io/badge/Version-0.1.0-informational.svg)
+![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg)
+![Tests](https://img.shields.io/badge/Tests-287%20passed-brightgreen.svg)
+![Branch](https://img.shields.io/badge/Branch-Claude--boundary--aware--closed--loop--v1-informational.svg)
 ![Visualization](https://img.shields.io/badge/Visualization-Matplotlib-orange.svg)
 ![Platform](https://img.shields.io/badge/Platform-MAS%20%7C%20RoboMaster%20S1-lightgrey.svg)
 
 </div>
 
-DBACT is a research prototype for **Decentralized Boundary-Aware Cooperative Transport**. It studies how multiple mobile robots can form a useful caging and transport structure around an object whose complete shape, center, radius, and required team size are not given to the controller.
+A team of mobile robots is dropped into a workspace. Nobody tells them where the
+object is, what shape it is, how big it is, or how many of them it takes to move
+it. They sweep the workspace until somebody sees it, relay that fact, gather, form
+a cage around a boundary they are estimating as they go, press on it, move it a
+sampled distance in a sampled direction, brake, and stop.
 
-The repository combines a standalone simulation stack, boundary-aware local control, metrics, GitHub-renderable visual artifacts, a MAS-compatible controller adapter, OptiTrack read-only tooling, and conservative RoboMaster S1 command smoke tests.
+**Nothing in the control path reads the simulator.** Not the barrier rows, not the
+velocity estimate, not the stopping condition — every robot acts on its own range
+returns, its own voxel map, and one hop of neighbour messages.
 
-> This repository is a research prototype, not a completed physical transport product. Simulation and dry-run paths are working; full physical transport remains a staged validation target.
-
----
-
-## Visual Showcase
-
-![DBACT moving cargo demo](docs/assets/dbact-moving-cargo.gif)
-
-> A tracked GIF artifact generated from simulation replay. Unlike local `runs/*.gif` files, this file is committed under `docs/assets/`, so it renders directly on GitHub.
-
-![DBACT density and local CVT frame](docs/assets/dbact-density-cvt-frame.png)
-
-> Paper-style frame showing unknown cargo, local CVT / Voronoi structure, robot safety regions, and boundary-aware density surface.
+> **Branch `Claude-boundary-aware-closed-loop-v1`.** The closed loop runs end to
+> end and is measured seed by seed. This README reports what is demonstrated and,
+> in equal detail, what is not. The full derivations, the failed attempts and the
+> retractions are in [`docs/CLOSED_LOOP_D.md`](docs/CLOSED_LOOP_D.md).
 
 ---
 
-## Media Gallery
+## The loop
 
-All inline media below points to committed repository files under `docs/assets/`, so GitHub can render them without local run artifacts.
+```text
+SEARCH ──▶ DISCOVER ──▶ ENCLOSE ──▶ CONTACT_READY ──▶ TRANSPORT ──▶ BRAKE ──▶ HOLD
+   │           │            │             │               │           │        │
+ lane        object      boundary-      quorum in       press on    stop on   release
+ sweep       token       aware CVT      the band       own speed    own est.  the ring
+             relay       coverage       for a dwell    estimate
+```
 
-| Animation | Density + Local CVT |
+Every transition is a guard on a measured quantity, never a frame number. The
+supervisor is monotone: enclosure quality dips every time the cargo breaks loose,
+and a machine that fell back would chatter at the stick-slip frequency.
+
+---
+
+## Visual showcase
+
+| Near-field closed loop (seed 2) | Far-field search (seed 7) |
 | --- | --- |
-| <img src="docs/assets/dbact-moving-cargo.gif" alt="DBACT moving cargo animation" width="100%"> | <img src="docs/assets/dbact-density-cvt-frame.png" alt="DBACT density and local CVT frame" width="100%"> |
+| <img src="docs/assets/closed_loop_d_seed2.gif" alt="Closed-loop transport, seed 2" width="100%"> | <img src="docs/assets/search_d_seed7.gif" alt="Far-field lane sweep and discovery, seed 7" width="100%"> |
+| Discovery, enclosure, directional transport and stop. The panel draws **one robot's own boundary map**, not the true outline — the true outline is drawn beside it so the estimation gap is visible rather than hidden. | Sixteen robots sweep a static lane partition until one of them sees the object, then relay a token and converge. |
 
-| Trajectory | Coverage Curve |
+| Closed loop, seed 4 | Closed loop, seed 8 |
 | --- | --- |
-| <img src="docs/assets/dbact-trajectory.png" alt="DBACT trajectory" width="100%"> | <img src="docs/assets/dbact-coverage-curve.png" alt="DBACT coverage curve" width="100%"> |
+| <img src="docs/assets/closed_loop_d_seed4.gif" alt="Closed-loop transport, seed 4" width="100%"> | <img src="docs/assets/closed_loop_d_seed8.gif" alt="Closed-loop transport, seed 8" width="100%"> |
 
-| Final Snapshot | Asset Manifest |
+| Density and local CVT | Agent trajectories |
 | --- | --- |
-| <img src="docs/assets/dbact-final-snapshot.png" alt="DBACT final snapshot" width="100%"> | [`docs/assets/README.md`](docs/assets/README.md) |
+| <img src="docs/assets/dbact-density-cvt-frame.png" alt="Boundary-aware density and local CVT" width="100%"> | <img src="docs/assets/dbact-trajectory.png" alt="Agent trajectories" width="100%"> |
 
-Generated PNG, GIF, CSV, and MP4 artifacts are still produced under `runs/` or `platforms/mas_public/data/` by default and are intentionally ignored by Git. For GitHub display, copy selected figures into `docs/assets/`, or publish larger videos through GitHub Releases.
+Simulation and rendering are separate. A run writes `replay.npz` and never draws;
+the pictures are made from that file afterwards, so the frame rate a run reports
+is the frame rate of the control loop rather than of Matplotlib.
 
 ---
 
-## Project Snapshot
+## What is demonstrated
 
-| Item | Details |
+### Near-field: enclosure and directional transport, 12 seeds, run to completion
+
+`configs/sim/d/l_shape_closed_loop.yaml`. The team starts distributed around the
+object. Each episode samples its own task: direction `θ ~ U(0, 2π)`, distance
+`L ~ U(0.90, 1.60)` m, rejected unless the object and its ring still fit in the
+workspace at the end. **All twelve settled; none reached the watchdog.**
+
+| quantity | mean ± sd | min–max | gate |
+| --- | --- | --- | --- |
+| directional progress `J` | 1.474 ± 0.231 m | 1.110 – 1.853 | `>= L`, 12/12 |
+| efficiency `J/‖dx‖` | 0.993 ± 0.008 | 0.975 – 1.000 | `>= 0.80`, pass |
+| direction error | 5.8 ± 3.9° | 1.3 – 12.9 | `<= 20°`, pass |
+| cross-track | 0.161 ± 0.122 m | 0.037 – 0.387 | `<= 0.15`, **5 over** |
+| strict coverage (peak) | 0.981 ± 0.027 | 0.938 – 1.000 | `>= 0.70`, pass |
+| min inter-robot distance | 0.281 ± 0.002 m | 0.280 – 0.285 | `>= 0.28`, pass |
+| min signed clearance | 0.085 ± 0.005 m | 0.077 – 0.092 | `>= 0`, pass |
+| contact-ready frame | 75.5 ± 8.4 | 57 – 89 | derived |
+| HOLD frame | 274.0 ± 102.0 | 169 – 530 | derived |
+
+Solver: **0 fallbacks and 0 infeasible on every seed.** The composite gate
+(`G500`, all criteria at once) passes on **2 / 12**; of the ten failures, five are
+the scaled barrier alone and one is cross-track alone. Every other criterion
+passes on all twelve.
+
+### Far-field: the team finds an object it was never told about, 8 seeds
+
+`configs/sim/d/l_shape_search.yaml`. The cargo centre is sampled anywhere the
+workspace admits and `require_initial_ignorance` refuses any draw in which a robot
+starts inside its own sensor range of it — so the detection time measures the
+search rather than the layout.
+
+Robot `i` of `N` owns one vertical lane and walks it end to end. Sixteen lanes
+across 7.1 m against a 1.20 m sensor range means every point of the workspace lies
+inside some robot's swath, so a single traversal covers it:
+
+```text
+T_cover  <=  ( d_to_lane + H ) / v_search  =  ( <=4 + 7.1 ) / 0.28  ~  510 frames
+```
+
+That is a coverage *bound*, independent of where the object is — which the earlier
+outward spiral could not offer.
+
+| quantity | measured |
 | --- | --- |
-| Project name | DBACT: Decentralized Boundary-Aware Cooperative Transport |
-| Purpose | Test local boundary-aware caging and transport around unknown-shaped objects. |
-| Core stack | Python 3.10, NumPy, CVXPY/OSQP, PyMunk, PyYAML, Matplotlib, pytest |
-| Main scenarios | `paper_like_irregular_moving_cargo.yaml`, `l_shape.yaml`, `nonconvex.yaml`, `multi_object.yaml` |
-| Output types | CSV trajectories, coverage metrics, JSON summaries, PNG figures, GIF animations |
-| Integration path | DBACT simulation -> MAS dry-run -> OptiTrack read-only -> RoboMaster S1 smoke test |
-| Current status | Simulation and dry-runs working; full physical experiment not yet complete |
+| `T_detect` | **74.6 ± 80.3 frames** against the ~510-frame bound |
+| `T_contact_ready` | 344 ± 135 frames |
+| peak strict coverage | 0.783 ± 0.214 |
+| `d_min` breaches / watchdogs / solver fallbacks | **0 / 0 / 0** |
+
+Detection lands in about a seventh of its worst case: the object is usually not in
+the last lane visited. Every seed detected, and every episode terminated by
+settling rather than by the watchdog.
 
 ---
 
-## Features
+## The part worth reading: how the far-field gap was closed
 
-- **Decentralized boundary-aware control**: robots use local boundary observations and neighbor states rather than global object geometry.
-- **Unknown-object caging**: the controller avoids direct use of `cargo.center`, `cargo.radius`, `cargo.vertices`, and closest-boundary queries.
-- **Local CVT allocation**: each robot computes a local weighted centroid using itself and nearby neighbors.
-- **Hard distributed CBF filtering**: slack-free responsibility-split constraints protect inter-agent separation and estimated object-boundary clearance.
-- **Contact-only transport**: paper scenarios move convex and concave rigid cargoes through PyMunk contact impulses, never scripted translation.
-- **Reproducible experiments**: stable seeded sensing, config-driven multi-seed batches, CSV/JSON/optional Parquet results, and one-command comparison plots.
-- **Visualization-first workflow**: simulations export trajectories, coverage curves, final snapshots, paper-style frames, and optional GIF animations.
-- **Hardware-oriented staging**: MAS adapter, OptiTrack read-only logging, and RoboMaster S1 smoke tests prepare a safe path toward real experiments.
-- **Optional performance acceleration**: boundary-sample caching, vectorized / optional Numba density–CVT kernels, `--workers` for in-step agent threads, and `--jobs` for batch scenario processes.
+Arriving from one wall used to take **591 ± 234** frames to reach contact-ready
+against **75 ± 8** from a ring start. Three mechanisms were built and measured —
+ring bearings, extent-corrected ring bearings, and wall-following at two scout
+densities — and **none beat a plain go-to-point recall.** They all changed *where
+the robots go on the way in*, and the frames are spent by a team that has already
+arrived.
+
+So the next step was instrumentation, not a fourth heuristic.
+
+<img src="docs/assets/d10-post-detection-stages.png" alt="Post-detection stage durations per seed" width="100%">
+
+Every frame between detection and contact-ready, labelled by an exclusive cascade
+on measured state. The stage the pipeline was designed around — *a quorum has
+arrived and the boundary is mapped* — **never occurs: 0 frames of 4128.**
+
+<img src="docs/assets/d10-coverage-and-gap.png" alt="Union map coverage, strict coverage, and the largest unobserved arc" width="100%">
+
+The reason, in one measurement: **4.34 ± 0.79 m of a 7.2 m perimeter sits in
+nobody's map throughout, and never once falls below 0.72 m.** 84.5% of the
+redeploy rule's requests returned no candidate — not because the boundary was
+owned, but because it was not there.
+
+That agrees with something readable off the source. For a robot with a non-empty
+map, *every* target in the post-arrival path — the CVT centroid, the approach
+target, the redeploy target — is an affine function of its own map points, so the
+reachable target set is contained in the offset ring over **observed** boundary.
+Nothing in the controller could ask for boundary nobody had seen.
+
+**The fix is one term in the same density**, not a new navigation law:
+
+```text
+φ  =  φ_boundary  +  λ_e · φ_explore
+```
+
+`φ_explore` places demand one tangent step past the ends of what has been
+observed. It needs no object radius, no shape prior and no truth polygon; it
+switches itself off (on a fully mapped outline it adds exactly zero targets); and
+it is a *density* term, so the existing limited-range CVT decides which robot
+goes — nobody enters a new mode and the safety layer never sees it.
+
+| A/B, 8 seeds, one parameter apart | `λ_e = 0` | `λ_e = 6` |
+| --- | --- | --- |
+| far-side discovery | 281 ± 284 | **82 ± 42** |
+| contact-ready | 591 ± 234 | **344 ± 135** |
+| HOLD | 1131 ± 646 | **642 ± 284** |
+| peak strict coverage | 0.689 ± 0.256 | **0.783 ± 0.214** |
+| min inter-agent / watchdog / fallbacks | 0.280 / 0 / 0 | 0.280 / 0 / 0 |
+| scaled-barrier events | 1415 | **975** |
+
+Seven of eight seeds improve; **one gets worse by 128 frames**, and it is recorded
+rather than averaged away.
+
+**The gain is chosen by the solver, not the clock.** Contact-ready keeps improving
+up to `λ_e = 60`, but at `λ_e = 20` the inter-agent barrier breaks on two of three
+seeds (0.207 and 0.213 m against `d_min = 0.28`) with **589 infeasible solves**
+against zero at `λ_e = 6`. Exploration demand pulls robots off the ring; past some
+weight it pulls harder than the separation terms can hold them apart.
+
+### A negative result, kept
+
+<img src="docs/assets/d10-gate-tradeoff.png" alt="Enclosure gate: transition delay against the enclosure it certifies" width="100%">
+
+The `DISCOVER → ENCLOSE` guard reads the *best single robot's* own map. That looks
+like the wrong quantity for a team-level claim, and four families of replacement
+were built — including a reference-free enclosure certificate based on
+max-consensus over observed boundary **normals**, which is the quantity that
+actually means "for every direction, somebody is on a face opposing it".
+
+Because nothing in the control path reads `ENCLOSE`, the counterfactual is exact
+rather than a screen:
+
+```text
+T_contact_ready  =  max( T_gate, T_streak20 )  -  1        (residual 0 on all 8 seeds)
+```
+
+which puts a hard ceiling on the whole exercise: **an oracle gate firing at frame 0
+saves 38.6 frames of 343.8 — 11.2%.** Every candidate with real enclosure content
+fails to fire on at least one seed, which under a monotone machine is a deadlock
+rather than a delay. The gate is **kept unchanged**, and the certificate stays in
+the tree, tested and unused, because the honest measurement is that adopting it
+today would deadlock two runs in eight.
+
+The lower-right of that figure — earlier *and* certifying a real enclosure — is
+empty. That is the result.
 
 ---
 
-## Results & Visualizations
+## What is **not** demonstrated
 
-### Paper-driven 2026 refactor
+Stated as plainly as the results, because a README that only lists wins is not
+evidence of anything.
 
-The current `boundary-aware` branch follows a risk-first research route: scoped literature audit, L-shape PyMunk spike, paper/venue decision, then sensing-map-density-CVT-CBF-physics refactoring. The implementation route and evidence are documented in:
+- **The far-field composite gate passes on 0 of 8 seeds.** Discovery and enclosure
+  improved; the quality criteria (cross-track above all) did not, and nothing in
+  D10 was aimed at them.
+- **Cross-track is the leading near-field failure.** Measured over twelve seeds,
+  `max cross-track = J · sin(direction error)` with correlation 0.968 — so
+  "cross-track ≤ 0.15 m at `J ≈ 1.5 m`" *is* "hold the net force direction to
+  within 5.7° for the whole push". The measured direction error is 5.71°: the loop
+  is sitting exactly on its own requirement, which is the signature of a loop at
+  the limit of its authority rather than a badly tuned one.
+- **Some goal directions never form a pushing quorum**, because the trailing arc
+  for those directions is the concave notch of the L.
+- **The on-board progress estimate is biased low** by 10–15%, so the cargo travels
+  past the target before the team's own estimate says it has arrived.
+- **Only translation is estimated. Yaw is not.** That is a stated limitation, not
+  an approximation: the estimate goes into a safety constraint, so claiming SE(2)
+  without an error bound would put an unmeasured quantity inside a barrier.
+- **One shape.** Everything here is the L at scale 1.5.
+- **No physical transport.** Simulation and MAS dry-run paths work; hardware
+  remains a staged validation target.
 
-- [`docs/LITERATURE_AUDIT_2026-08-08.md`](docs/LITERATURE_AUDIT_2026-08-08.md)
-- [`docs/REFACTOR_ROUTE_2026-08-08.md`](docs/REFACTOR_ROUTE_2026-08-08.md)
+### Retracted
 
-The 300-step end-to-end L-shape validation achieved 0.623 m contact-driven cargo displacement, maintained a 0.3056 m minimum inter-agent distance for `d_min=0.28 m`, and recorded zero hard-QP infeasible calls. These are engineering validation results, not yet a statistically sufficient paper table.
+An earlier version of this document reported that four of eight far-field seeds
+violated `d_min`. That was wrong: the gate compared floats exactly against a
+barrier that is *exactly binding by design*, so it reported the last bit of the
+QP's arithmetic as a collision. The measured deficits were 1e-16 to 3e-8 m.
+Thirty-five nanometres is not a collision. The cost of that mistake was a round of
+work aimed at a safety problem that had never happened, so the lesson is recorded
+rather than quietly patched: **a gate on a quantity the controller drives *to* its
+limit needs a tolerance sized against the arithmetic.**
 
-### Stage 1 Unknown Polygon Caging
-
-Stage 1 validates that caging can be formed around arbitrary polygonal cargo without direct complete-cargo access inside the controller.
-
-| Scenario | Cargo Type | Agents | Steps | Final Coverage | Recruited Agents | Min Inter-Agent Distance |
-| --- | --- | ---: | ---: | ---: | ---: | ---: |
-| `baseline_unknown_polygon_caging` | arbitrary polygon | 12 | 900 | 0.7625 | 6 / 12 | 0.3446 m |
-| `one_rectangle_polygon_caging` | rectangle polygon | 12 | 900 | 0.7000 | 6 / 12 | 0.3446 m |
-| `one_nonconvex_polygon_caging` | nonconvex polygon | 14 | 1000 | 0.90625 | 9 / 14 | 0.3393 m |
-
-### Tight Baseline Results
-
-The tight baseline improves caging compactness by reducing cage offset and narrowing the density field.
-
-| Scenario | Cargo Type | Agents | Steps | Final Coverage | Recruited Agents | Min Inter-Agent Distance |
-| --- | --- | ---: | ---: | ---: | ---: | ---: |
-| `baseline_unknown_polygon_caging_tight` | arbitrary polygon | 12 | 900 | 0.95625 | 11 / 12 | 0.3450 m |
-| `one_rectangle_polygon_caging_tight` | rectangle polygon | 12 | 900 | 0.99375 | 9 / 12 | 0.3450 m |
-| `one_nonconvex_polygon_caging_tight` | nonconvex polygon | 14 | 1000 | 0.9750 | 13 / 14 | 0.3370 m |
-
-### Moving Irregular Cargo Demo
-
-| Metric | Value |
-| --- | ---: |
-| Final time | 25.95 s |
-| Final coverage | 0.83125 |
-| Cargo displacement | 1.539 m |
-| Recruited agents | 6 |
-| Minimum inter-agent distance | 0.3571 m |
-| Mean path length | 4.6999 m |
-
-**Interpretation**
-
-- Tight caging improves boundary coverage while maintaining minimum inter-agent distance above 0.33 m in the reported Stage 1 benchmarks.
-- The moving-cargo demo shows caging and transport-like displacement, but physical contact dynamics are still simplified.
-- Current results are simulation evidence and MAS dry-run evidence, not a final claim of full real-world transport.
+Every coverage number measured before the object-boundary barrier existed is also
+withdrawn, because robots standing *inside* the cargo counted as covering its
+boundary. With the barrier disabled, 9 of 16 robots end up inside the object while
+the old metric still reports 1.000. All coverage figures above are **strict**
+coverage, which counts only robots whose centre is outside the cargo.
 
 ---
 
-## Quick Start
-
-### 1. Clone
+## Quick start
 
 ```bash
 git clone https://github.com/Wu-kaixin/boundary-aware-cooperative-transport.git
 cd boundary-aware-cooperative-transport
+python -m venv .venv && source .venv/bin/activate      # PowerShell: .\.venv\Scripts\Activate.ps1
+python -m pip install -U pip && python -m pip install -e ".[dev]"
+export PYTHONPATH=src                                   # PowerShell: $env:PYTHONPATH = "src"
 ```
 
-### 2. Create an Environment
-
-Conda:
+One closed-loop episode, then render it:
 
 ```bash
-conda env update -n dbact -f environment.yml
-conda run -n dbact python -m pytest -q
+python scripts/run_closed_loop.py --seed 2 --until-settled --out runs/d_seed2
 ```
-
-Windows PowerShell virtual environment:
-
-```powershell
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-python -m pip install -U pip
-python -m pip install -e ".[dev]"
-```
-
-macOS / Linux virtual environment:
 
 ```bash
-python -m venv .venv
-source .venv/bin/activate
-python -m pip install -U pip
-python -m pip install -e ".[dev]"
+python scripts/render_closed_loop.py runs/d_seed2 --stride 2 --fps 25
 ```
 
-### 3. One-line Smoke Experiment
+The far-field search scenario:
 
 ```bash
-python -m dbact_sim.run_sim --config configs/sim/paper_like_irregular_moving_cargo.yaml --steps 520 --output runs/paper_like_irregular_moving_cargo --animate
+python scripts/run_closed_loop.py --config configs/sim/d/l_shape_search.yaml --seed 7 --until-settled --out runs/search_seed7
 ```
 
-### Optional performance acceleration
-
-Logic and CLI entry points stay the same. Speedups are opt-in or automatic fallbacks:
+Tests:
 
 ```bash
-# Optional Numba hot kernels (NumPy fallback if not installed)
-python -m pip install -e ".[accel]"
-
-# Single-run worker threads (0/1=serial default; >=2 explicit thread pool)
-python -m dbact_sim.run_sim --config configs/sim/circle.yaml --steps 200 --output runs/circle --workers 1
-
-# Batch scenarios in parallel processes (main multi-core lever; 1 = legacy serial)
-python scripts/run_all_scenarios.py --steps 200 --jobs 0
+python -m pytest tests -q
 ```
-
-Optional Numba installs OpenMP-style `prange` kernels for density / Voronoi ownership. Environment overrides: `DBACT_WORKERS`, `DBACT_FORCE_NUMPY=1`.
-
-Important outputs:
-
-- `runs/paper_like_irregular_moving_cargo/animation.gif`
-- `runs/paper_like_irregular_moving_cargo/trajectory.png`
-- `runs/paper_like_irregular_moving_cargo/final_snapshot.png`
-- `runs/paper_like_irregular_moving_cargo/coverage_rate_curve.png`
-- `runs/paper_like_irregular_moving_cargo/metrics.json`
-- `runs/paper_like_irregular_moving_cargo/figures/FIG_520.png`
 
 ---
 
-## How It Works
+## Reproducing the numbers in this README
 
-1. **Load scenario configuration**
-   YAML files define domain size, cargo geometry, robot initial states, sensing range, communication range, transport direction, and controller parameters.
+Each table above is one command. Runs write to `runs/`, which is Git-ignored.
 
-2. **Generate local boundary observations**
-   The simulator uses cargo geometry to generate local boundary observations, but the controller does not directly consume full cargo shape.
-
-3. **Create cage targets**
-   Each observed boundary point `b` is shifted outward by a cage offset:
-
-```text
-q_target = b + d_cage * n_out
+```bash
+python scripts/evaluate_closed_loop.py --seeds 0..11 --until-settled --out runs/d_sweep
 ```
 
-4. **Build boundary-aware density**
-   Cage targets become Gaussian density peaks that attract robots toward useful boundary-adjacent locations.
-
-5. **Run local CVT allocation**
-   Each robot computes a local weighted centroid using itself and neighbors within communication range.
-
-6. **Apply safety filtering**
-   The CBF-style filter keeps inter-agent distance above the configured minimum:
-
-```text
-h_ij = ||p_i - p_j||^2 - d_min^2 >= 0
+```bash
+python scripts/diagnose_redeployment.py --seeds 0..7 --out runs/d10_diag
 ```
 
-7. **Save replay, metrics, and figures**
-   Simulation runs write CSV logs, metrics, final snapshots, trajectory plots, coverage curves, paper-style frames, and optional animations.
+```bash
+python scripts/ab_explore.py --seeds 0..7 --gains 0,6 --out runs/d10_ab
+```
+
+```bash
+python scripts/diagnose_enclosure_gate.py --seeds 0..7 --out runs/d10_enc
+```
+
+```bash
+python scripts/analyse_enclosure_gate.py --run runs/d10_enc --figure
+```
+
+Contract checks, which refuse a configuration the controller could not satisfy:
+
+```bash
+python scripts/check_contracts.py --config configs/sim/d/l_shape_search.yaml
+```
 
 ---
 
-## Repository Structure
+## How it works
+
+1. **Ray-cast scan.** The simulator generates local boundary returns with normals
+   and a confidence derived from the local plane-fit residual. The controller
+   never receives the polygon.
+2. **Map registration.** `LocalBoundaryMap.register` estimates a translation from
+   the robot's own consecutive scans by point-to-plane least squares and shifts
+   the map rigidly. A world-frame map of a moving body is wrong the moment the
+   body moves; the normal matrix is rank deficient exactly when every visible
+   normal is parallel, which is the honest statement that a robot looking at one
+   flat face cannot observe motion along it.
+3. **Free-space carving.** Cells the current scan sees *through* are dropped.
+   Without it a ghost trail sits 0.06 m inside the true surface and the pushing
+   robots press against a boundary that is no longer there.
+4. **Boundary-aware density.** Each observation contributes
+   `ds · c · (1 + κ·g) · K_σ(q − ξ)` at the cage target `ξ = b + d_c·n`, where
+   `ds` is the arc length the return stands for — which makes `φ` a measure on the
+   boundary rather than a sum over however many samples the sensor produced. Since
+   D10 it also carries the exploration term described above.
+5. **Limited-range CVT.** Move-to-centroid on a truncated cost `f(r) = min(r², R_l²)`
+   over the strict disk `B(p_i, R_l)`. The truncation is load-bearing: without it
+   the flux term does not cancel and "move-to-centroid is a descent direction" is
+   simply false. `R_l ≤ R_comm/2` makes the cell computed from communication
+   neighbours *equal* to the true Voronoi cell restricted to the disk.
+6. **Transport outer loop.** A PI law on the object's speed along the task
+   direction, integrating against a static-friction dead zone, with the integral
+   bounded by the actuator limit rather than by tuning.
+7. **CBF-QP safety filter.** Inter-robot rows stay hard; object rows are filtered
+   to the face the robot's own nearest return names, aggregated into one smooth
+   plane per face, and capped at what a speed-limited robot can deliver against an
+   explicit witness — so the object family is feasible by construction and the
+   point that proves it is named.
+
+---
+
+## Repository structure
 
 ```text
 boundary-aware-cooperative-transport/
-|-- configs/                         # Simulation and MAS configuration
-|   |-- sim/
-|   `-- mas/
-|-- src/
-|   |-- dbact/                       # Core controller, sensing, density, CVT, safety, metrics
-|   |-- dbact_sim/                   # Simulation environment, scenarios, visualization, CLI
-|   `-- mas_adapter/                 # MAS-compatible controller adapter
-|-- scripts/                         # Batch runs, mock MAS pipeline, RoboMaster S1 smoke tests
-|-- docs/                            # Architecture, algorithm notes, reports, staged validation
-|   |-- assets/                      # Tracked GitHub-renderable README media
-|   |-- ARCHITECTURE.md
-|   |-- ALGORITHM.md
-|   |-- MAS_INTEGRATION.md
-|   `-- stage1_results.md
-|-- platforms/mas_public/            # Vendored MAS platform code
-|-- runs/                            # Local generated runs, ignored by Git
-|-- tests/                           # Unit and smoke tests
-|-- README.md
-|-- README.en.md
-|-- README.zh-TW.md
-`-- README.ja.md
+├── configs/sim/d/                  # Closed-loop and far-field search scenarios
+├── src/
+│   ├── dbact/                      # Controller, perception, map, density, CVT, safety, contracts
+│   │   ├── controller.py           # S7: the decentralised controller
+│   │   ├── boundary_map.py         # Registration, fusion, carving
+│   │   ├── boundary_density.py     # Boundary measure + D10 exploration term
+│   │   ├── safety_filter.py        # CBF-QP, four solver tiers
+│   │   ├── phase.py                # Monotone supervisor with a dwell
+│   │   ├── diagnosis.py            # D10-DIAG: post-detection stage segmentation
+│   │   └── enclosure_gate.py       # D10-ENC: consensus enclosure certificate (unused)
+│   ├── dbact_sim/                  # Environment, scenarios, replay, rendering
+│   └── mas_adapter/                # MAS-compatible controller adapter
+├── scripts/                        # Runs, sweeps, diagnoses, A/Bs, contract checks
+├── docs/
+│   ├── CLOSED_LOOP_D.md            # The full account: derivations, failures, retractions
+│   ├── ALGORITHM.md · ARCHITECTURE.md · MAS_INTEGRATION.md
+│   └── assets/                     # Git-tracked, GitHub-renderable media
+├── platforms/mas_public/           # Vendored MAS platform code
+├── tests/                          # 287 tests
+└── runs/                           # Local outputs, Git-ignored
 ```
 
 ---
 
-## Useful Commands
+## Hardware staging and safety
 
-Run standard scenarios:
+The path to a physical run is deliberately staged: DBACT simulation → MAS dry-run
+→ OptiTrack read-only logging → RoboMaster S1 command smoke test. See
+[`docs/MAS_INTEGRATION.md`](docs/MAS_INTEGRATION.md).
 
-```bash
-python scripts/run_all_scenarios.py --steps 400 --animate
-```
-
-Run an L-shape scenario:
-
-```bash
-python -m dbact_sim.run_sim --config configs/sim/l_shape.yaml --steps 400 --output runs/l_shape
-```
-
-Run the mock MAS pipeline:
-
-```bash
-python scripts/run_mock_mas_pipeline.py --steps 80 --dt 0.05 --print-every 20 --output runs/mock_mas_pipeline
-```
-
-Run MAS dry-run:
-
-```bash
-cd platforms/mas_public
-python apps/dbact/run_dtransport_dry_run.py --steps 80 --dt 0.05 --print-every 20 --output data/dry_runs/dtransport_auto_init --clamp-to-world-bounds
-```
-
-Run OptiTrack read-only check:
-
-```bash
-cd platforms/mas_public
-python apps/dbact/log_optitrack_world_state.py --mock --frames 50 --hz 100 --print-every 10 --output data/optitrack_readonly/mock_world_states.csv
-```
-
-Run RoboMaster S1 mock command smoke test:
-
-```bash
-python scripts/run_seven_s1_cvt_test.py --duration 3
-```
-
-Run tests:
-
-```bash
-python -m pytest -q tests
-python -m compileall -q src tests scripts platforms/mas_public/src platforms/mas_public/apps
-python -m pytest -q --rootdir platforms/mas_public platforms/mas_public/apps/pytest_tests
-```
-
----
-
-## Current Research Direction
-
-The next useful work is staged validation, not broad feature expansion. Priority items are:
-
-- preserve `docs/assets/` as the stable GitHub media surface;
-- add side-by-side scenario comparison figures;
-- improve moving-cargo transport metrics and dashboard summaries;
-- replace virtual-object assumptions with a real boundary-observation pipeline;
-- validate Motive rigid bodies until robot poses are stable;
-- run low-speed caging-only physical experiments only after read-only logging and dry-runs pass.
-
----
-
-## Safety Notes
-
-- Run read-only OptiTrack logging before enabling controller output.
+- Run read-only OptiTrack logging before enabling any controller output.
 - Verify robot ID to rigid-body mapping one robot at a time.
 - Use very low speed limits for the first physical run.
 - Keep a physical emergency stop available during hardware tests.
@@ -338,8 +402,22 @@ The next useful work is staged validation, not broad feature expansion. Priority
 
 ---
 
-## Contributing & License
+## Further reading
 
-Contributions are welcome through Issues and Pull Requests. New scenarios, clearer visualizations, stronger metrics, and better staged hardware validation are especially useful.
+| Document | What it covers |
+| --- | --- |
+| [`docs/CLOSED_LOOP_D.md`](docs/CLOSED_LOOP_D.md) | The complete account of this branch, including every measured-and-rejected mechanism |
+| [`docs/ALGORITHM.md`](docs/ALGORITHM.md) | Density, CVT and safety derivations |
+| [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) | Module boundaries and data flow |
+| [`docs/MAS_INTEGRATION.md`](docs/MAS_INTEGRATION.md) | Adapter, dry-run and hardware staging |
 
-This project is released under the [MIT License](LICENSE).
+---
+
+## Contributing & license
+
+Contributions are welcome through Issues and Pull Requests. The most useful
+contributions here are **measurements**: a scenario that breaks a stated claim, a
+gate whose tolerance is wrong, or a mechanism tried and reported honestly when it
+did not pay.
+
+Released under the [MIT License](LICENSE).

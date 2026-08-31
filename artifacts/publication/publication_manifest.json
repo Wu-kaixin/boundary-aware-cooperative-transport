@@ -1,0 +1,228 @@
+{
+  "generator": "scripts/generate_publication_artifacts.py",
+  "git_sha": "1cf8772ef9bd5af60746a1e288d9f2e25c1648bc-dirty",
+  "figure_formats": [
+    "png",
+    "pdf"
+  ],
+  "figures": [
+    {
+      "name": "01_success_by_shape",
+      "caption": "Contract success rate per shape family, 5 seeds x 3 alpha each, with Wilson intervals. Two families score 0/15. The interval on 0/15 is not [0,0].",
+      "files": [
+        "artifacts\\publication\\01_success_by_shape.png",
+        "artifacts\\publication\\01_success_by_shape.pdf"
+      ],
+      "sources": [
+        "docs\\results\\v2_shape_matrix\\episodes.csv"
+      ]
+    },
+    {
+      "name": "02_j_over_diameter_by_alpha",
+      "caption": "Displacement generalises with scale-relative task distance; lateral error degrades with it. Enclosure timeouts are identically zero across all three alpha.",
+      "files": [
+        "artifacts\\publication\\02_j_over_diameter_by_alpha.png",
+        "artifacts\\publication\\02_j_over_diameter_by_alpha.pdf"
+      ],
+      "sources": [
+        "docs\\results\\v2_shape_matrix\\episodes.csv"
+      ]
+    },
+    {
+      "name": "03_phase_durations",
+      "caption": "Per-phase frame counts. Each box contains only the episodes that reached that phase, so the sample shrinks left to right and these are censored durations, not a completion-time distribution.",
+      "files": [
+        "artifacts\\publication\\03_phase_durations.png",
+        "artifacts\\publication\\03_phase_durations.pdf"
+      ],
+      "sources": [
+        "docs\\results\\v2_shape_matrix\\episodes.csv"
+      ]
+    },
+    {
+      "name": "04_direction_progress",
+      "caption": "Almost every episode is inside the explicit 20 degree direction gate; the binding gate is cross-track, which the identity makes a 5.9 degree requirement.",
+      "files": [
+        "artifacts\\publication\\04_direction_progress.png",
+        "artifacts\\publication\\04_direction_progress.pdf"
+      ],
+      "sources": [
+        "docs\\results\\v2_shape_matrix\\episodes.csv"
+      ]
+    },
+    {
+      "name": "07_cargo_rotation",
+      "caption": "Cargo net rotation. The distribution is tight around zero, which is why the SE(2) boundary-point velocity term had nothing to capture on this baseline.",
+      "files": [
+        "artifacts\\publication\\07_cargo_rotation.png",
+        "artifacts\\publication\\07_cargo_rotation.pdf"
+      ],
+      "sources": [
+        "docs\\results\\v2_shape_matrix\\episodes.csv"
+      ]
+    },
+    {
+      "name": "09_safety_distances",
+      "caption": "Clearance, penetration and inter-agent separation over all 180 episodes. One episode breaches d_min by 76 mm and is reported as SOLVER_FAILURE, because classify returns on its first match.",
+      "files": [
+        "artifacts\\publication\\09_safety_distances.png",
+        "artifacts\\publication\\09_safety_distances.pdf"
+      ],
+      "sources": [
+        "docs\\results\\v2_shape_matrix\\episodes.csv"
+      ]
+    },
+    {
+      "name": "11_failure_composition",
+      "caption": "One label per episode, assigned by the first match in classify's ordering. An episode that failed two ways appears once, so this is 'the most structural cause found' rather than a partition of failure modes.",
+      "files": [
+        "artifacts\\publication\\11_failure_composition.png",
+        "artifacts\\publication\\11_failure_composition.pdf"
+      ],
+      "sources": [
+        "docs\\results\\v2_shape_matrix\\episodes.csv",
+        "docs\\results\\v2_control_explore_gain0\\episodes.csv"
+      ]
+    },
+    {
+      "name": "12_conditional_domain",
+      "caption": "P(success | eligible) = 0.275 sits below the unconditional 0.300, and 13 of the 31 rejected episodes succeeded. Fisher's exact gives p = 0.13, so the predicate is not shown to be informative rather than shown to be anti-informative.",
+      "files": [
+        "artifacts\\publication\\12_conditional_domain.png",
+        "artifacts\\publication\\12_conditional_domain.pdf"
+      ],
+      "sources": [
+        "docs\\results\\v2_shape_matrix\\episodes.csv"
+      ]
+    },
+    {
+      "name": "13_runtime",
+      "caption": "Machine-dependent empirical runtime. Not a bound, not a complexity result, and not transferable: one machine, one Python, one BLAS.",
+      "files": [
+        "artifacts\\publication\\13_runtime.png",
+        "artifacts\\publication\\13_runtime.pdf"
+      ],
+      "sources": [
+        "docs\\results\\v2_shape_matrix\\episodes.csv",
+        "docs\\results\\t7\\explore_gain_profile.json"
+      ]
+    },
+    {
+      "name": "05_cross_track_identity",
+      "caption": "max cross-track = J sin(direction error), correlation 0.981 over 12 seeds. An absolute 0.15 m cross-track gate is therefore a direction-error gate whose threshold depends on how far the object travelled.",
+      "files": [
+        "artifacts\\publication\\05_cross_track_identity.png",
+        "artifacts\\publication\\05_cross_track_identity.pdf"
+      ],
+      "sources": [
+        "docs\\results\\t3\\lateral_authority.json"
+      ]
+    },
+    {
+      "name": "06_reachable_cone",
+      "caption": "Left: observationally, a wider reachable cone accompanies worse aim, which would refute authority saturation. Right: the controlled test narrows the cone directly and every measure degrades, so the correlation is a confound with the sampled goal direction and v1's explanation stands.",
+      "files": [
+        "artifacts\\publication\\06_reachable_cone.png",
+        "artifacts\\publication\\06_reachable_cone.pdf"
+      ],
+      "sources": [
+        "docs\\results\\t3\\lateral_authority.json",
+        "docs\\results\\t3\\push_arc_ablation.json"
+      ]
+    },
+    {
+      "name": "10_perception_error",
+      "caption": "The six-term audit against the two declared error premises. The barrier-visible velocity error exceeds its declared bound -- which is also rho -- for the majority of measured cells, so the ISSf premise does not hold on these runs.",
+      "files": [
+        "artifacts\\publication\\10_perception_error.png",
+        "artifacts\\publication\\10_perception_error.pdf"
+      ],
+      "sources": [
+        "docs\\results\\se2\\se2_ablation.json"
+      ]
+    },
+    {
+      "name": "08_net_wrench_and_contacts",
+      "caption": "Net contact force magnitude, net torque magnitude and contact count over one episode. The torque trace is the quantity a transport claim has to keep small: a team that spins the object into its displacement is not transporting it.",
+      "files": [
+        "artifacts\\publication\\08_net_wrench_and_contacts.png",
+        "artifacts\\publication\\08_net_wrench_and_contacts.pdf"
+      ],
+      "sources": [
+        "docs\\results\\representative\\safety_timeseries.csv"
+      ]
+    },
+    {
+      "name": "14_robustness",
+      "caption": "Six degradation arms over 12 seeds. Bars are red where the six-term audit measured a breach of the declared error premise -- including the nominal arm, because the baseline config already runs at the 10 mm noise the plan designates out-of-domain. Right: frontier targets emitted after the pooled map already satisfies epsilon, every one of which is provably spurious.",
+      "files": [
+        "artifacts\\publication\\14_robustness.png",
+        "artifacts\\publication\\14_robustness.pdf"
+      ],
+      "sources": [
+        "docs\\results\\t5\\robustness_ablation.json"
+      ]
+    },
+    {
+      "name": "15_distance_ablation",
+      "caption": "Task distance swept scale-relative on one shape at 12 seeds per level, extending the matrix's three alpha levels to five. CODEX's fixed metric distances are deliberately not inherited.",
+      "files": [
+        "artifacts\\publication\\15_distance_ablation.png",
+        "artifacts\\publication\\15_distance_ablation.pdf"
+      ],
+      "sources": [
+        "docs\\results\\t6\\distance_ablation.json"
+      ]
+    }
+  ],
+  "skipped": [],
+  "closed_loop_frames": {
+    "run": "docs/results/representative",
+    "renderer": "scripts/render_closed_loop.py via dbact_sim.replay",
+    "note": "Rendered by v1's replay pipeline, not by this script: it keeps the v1 phase palette and draws one robot's own map beside the true outline rather than reconstructing a surface from ground truth."
+  },
+  "sources": {
+    "matrix": {
+      "path": "docs\\results\\v2_shape_matrix\\episodes.csv",
+      "present": true
+    },
+    "explore_gain_control": {
+      "path": "docs\\results\\v2_control_explore_gain0\\episodes.csv",
+      "present": true
+    },
+    "baseline_12seed": {
+      "path": "docs\\results\\v2_baseline_12seed\\g500_sweep.json",
+      "present": true
+    },
+    "se2": {
+      "path": "docs\\results\\se2\\se2_ablation.json",
+      "present": true
+    },
+    "lateral_authority": {
+      "path": "docs\\results\\t3\\lateral_authority.json",
+      "present": true
+    },
+    "push_arc": {
+      "path": "docs\\results\\t3\\push_arc_ablation.json",
+      "present": true
+    },
+    "robustness": {
+      "path": "docs\\results\\t5\\robustness_ablation.json",
+      "present": true
+    },
+    "distance": {
+      "path": "docs\\results\\t6\\distance_ablation.json",
+      "present": true
+    },
+    "explore_gain_profile": {
+      "path": "docs\\results\\t7\\explore_gain_profile.json",
+      "present": true
+    }
+  },
+  "non_claims": [
+    "No figure here is a bound. The finite-time bound reports available=false; see scripts/derive_finite_time_bound.py.",
+    "Completion times are right-censored (42 of 180 matrix episodes hit the watchdog), so no completion-time distribution in these figures may be read as a bound.",
+    "Runtime figures are machine-dependent stopwatch readings.",
+    "Eligibility is a conservative filter, not an operational envelope: see figure 12."
+  ]
+}

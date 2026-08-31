@@ -23,5 +23,13 @@ class ObjectObserver:
         if not self.enabled:
             return []
         vertices = np.asarray(self.virtual["vertices"], dtype=float)
-        direction = np.asarray(self.virtual.get("transport_direction", [1.0, 0.0]), dtype=float)
-        return [Cargo(str(self.virtual.get("id", "cargo_0")), vertices, direction)]
+        return [Cargo(str(self.virtual.get("id", "cargo_0")), vertices)]
+
+    def goal_directions(self) -> dict[str, np.ndarray]:
+        """Task goal direction, kept apart from the body it acts on."""
+        if not self.enabled:
+            return {}
+        direction = self.virtual.get("transport_direction")
+        if direction is None:
+            return {}
+        return {str(self.virtual.get("id", "cargo_0")): np.asarray(direction, dtype=float)}

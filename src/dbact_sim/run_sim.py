@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 from contextlib import contextmanager
 from pathlib import Path
 
@@ -21,7 +22,9 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Run a DBACT simulation scenario.")
     parser.add_argument("--config", required=True, help="Path to scenario YAML file.")
     parser.add_argument("--steps", type=int, default=400, help="Number of simulation steps.")
-    parser.add_argument("--output", default="runs/demo", help="Output directory.")
+    parser.add_argument("--seed", type=int, default=0, help="Run seed; recorded in summary.json.")
+    parser.add_argument("--output", default="", help="Output directory. Defaults to runs/<config stem>_seed<seed>.")
+    parser.add_argument("--no-figures", action="store_true", help="Skip figure rendering (faster batch runs).")
     parser.add_argument("--animate", action="store_true", help="Write an animated GIF of the run.")
     parser.add_argument("--animation-stride", type=int, default=6, help="Simulation frames skipped between GIF frames.")
     parser.add_argument("--animation-fps", type=int, default=12, help="Animated GIF frames per second.")
@@ -38,43 +41,49 @@ def main() -> None:
         default="",
         help="Comma-separated iteration indices for paper-style FIG outputs. Defaults to 0/25/50/75/100 percent.",
     )
-    parser.add_argument(
-        "--workers",
-        type=int,
-        default=None,
-        help="Controller worker threads (0/1=serial, >=2=thread pool). Overrides controller.workers / DBACT_WORKERS.",
-    )
     args = parser.parse_args()
 
     cfg = load_yaml(args.config)
-    if args.workers is not None:
-        cfg.setdefault("controller", {})
-        cfg["controller"]["workers"] = int(args.workers)
-    env = SimulationEnvironment(cfg)
+    env = SimulationEnvironment(cfg, seed=args.seed)
     live_viewer = LivePaperViewer(env, update_stride=args.live_stride, pause_s=args.live_pause) if args.live else None
-    env.run(
-        args.steps,
-        on_frame=live_viewer.update if live_viewer is not None else None,
-    )
+    env.run(args.steps, on_frame=live_viewer.update if live_viewer is not None else None)
     if live_viewer is not None:
         live_viewer.update(args.steps, env, force=True)
-    out = Path(args.output)
-    with _noninteractive_output_figures():
-        env.save_outputs(out)
-        plot_snapshot(env, out / "final_snapshot.png")
-        plot_trajectories(env, out / "trajectory.png")
-        figure_frames = [int(item) for item in args.figure_frames.split(",") if item.strip()] if args.figure_frames else None
-        write_paper_figures(env, out, figure_frames)
-        if args.animate:
-            animate_simulation(
-                env,
-                out / "animation.gif",
-                frame_stride=args.animation_stride,
-                fps=args.animation_fps,
-            )
+
+    out = Path(args.output) if args.output else Path("runs") / f"{Path(args.config).stem}_seed{args.seed}"
+    summary = env.save_outputs(out)
+    if not args.no_figures:
+        with _noninteractive_output_figures():
+            plot_snapshot(env, out / "final_snapshot.png")
+            plot_trajectories(env, out / "trajectory.png")
+            frames = [int(i) for i in args.figure_frames.split(",") if i.strip()] if args.figure_frames else None
+            write_paper_figures(env, out, frames)
+            if args.animate:
+                animate_simulation(env, out / "animation.gif", frame_stride=args.animation_stride, fps=args.animation_fps)
+
     print(f"Saved DBACT simulation outputs to {out}")
+    print(_headline(summary))
     if live_viewer is not None:
         live_viewer.finish(block=not args.live_close_at_end)
+
+
+def _headline(summary: dict) -> str:
+    lines = [
+        f"  engine={summary['engine']}  backend={summary['provenance']['backend']}  "
+        f"git={summary['provenance']['git_sha']}  seed={summary['provenance']['seed']}",
+        f"  solver: {json.dumps(summary['solver']['statuses'])}  fallbacks={summary['solver']['fallbacks']}",
+    ]
+    for cargo_id, entry in summary["cargoes"].items():
+        verdict = "SUCCESS" if entry.get("success") else "FAIL"
+        lines.append(
+            f"  {cargo_id}: {verdict}  J={entry.get('J', float('nan')):.4f} m  "
+            f"|dx|={entry['displacement']:.4f} m  rot={entry['rotation_deg']:+.2f} deg  "
+            f"strict_cov={entry['final_strict_coverage']:.3f}  "
+            f"min_clearance={entry['min_signed_clearance']:+.4f} m  inside={entry['max_agents_inside']}"
+        )
+        for reason in entry.get("failure_reasons", []):
+            lines.append(f"      - {reason}")
+    return "\n".join(lines)
 
 
 @contextmanager

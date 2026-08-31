@@ -1,0 +1,164 @@
+{
+  "experiment": "reachable-cone gate, scored over the committed 12-seed lateral-authority run",
+  "source": "lateral_authority.json",
+  "absolute_gate_m": 0.15,
+  "identity": {
+    "form": "max cross-track = J * sin(direction error)",
+    "correlation": 0.9810794448925634,
+    "mean_absolute_residual_m": 0.01740946805964702
+  },
+  "note": "Reported, not adopted. g500 still scores cross_track_max <= 0.15 so the committed results stay comparable; this is what a cone gate would have said.",
+  "sweeps": {
+    "shortfall_mean_deg": [
+      {
+        "eps_control_deg": 2.0,
+        "shortfall_key": "shortfall_mean_deg",
+        "absolute_pass": 5,
+        "cone_pass": 6,
+        "agree": 11,
+        "absolute_only": [],
+        "cone_only": [
+          7
+        ]
+      },
+      {
+        "eps_control_deg": 4.0,
+        "shortfall_key": "shortfall_mean_deg",
+        "absolute_pass": 5,
+        "cone_pass": 6,
+        "agree": 11,
+        "absolute_only": [],
+        "cone_only": [
+          7
+        ]
+      },
+      {
+        "eps_control_deg": 6.0,
+        "shortfall_key": "shortfall_mean_deg",
+        "absolute_pass": 5,
+        "cone_pass": 8,
+        "agree": 9,
+        "absolute_only": [],
+        "cone_only": [
+          1,
+          3,
+          7
+        ]
+      },
+      {
+        "eps_control_deg": 8.0,
+        "shortfall_key": "shortfall_mean_deg",
+        "absolute_pass": 5,
+        "cone_pass": 11,
+        "agree": 6,
+        "absolute_only": [],
+        "cone_only": [
+          1,
+          3,
+          4,
+          7,
+          9,
+          11
+        ]
+      },
+      {
+        "eps_control_deg": 10.0,
+        "shortfall_key": "shortfall_mean_deg",
+        "absolute_pass": 5,
+        "cone_pass": 11,
+        "agree": 6,
+        "absolute_only": [],
+        "cone_only": [
+          1,
+          3,
+          4,
+          7,
+          9,
+          11
+        ]
+      }
+    ],
+    "shortfall_max_deg": [
+      {
+        "eps_control_deg": 2.0,
+        "shortfall_key": "shortfall_max_deg",
+        "absolute_pass": 5,
+        "cone_pass": 11,
+        "agree": 6,
+        "absolute_only": [],
+        "cone_only": [
+          1,
+          3,
+          4,
+          7,
+          9,
+          11
+        ]
+      },
+      {
+        "eps_control_deg": 4.0,
+        "shortfall_key": "shortfall_max_deg",
+        "absolute_pass": 5,
+        "cone_pass": 11,
+        "agree": 6,
+        "absolute_only": [],
+        "cone_only": [
+          1,
+          3,
+          4,
+          7,
+          9,
+          11
+        ]
+      },
+      {
+        "eps_control_deg": 6.0,
+        "shortfall_key": "shortfall_max_deg",
+        "absolute_pass": 5,
+        "cone_pass": 11,
+        "agree": 6,
+        "absolute_only": [],
+        "cone_only": [
+          1,
+          3,
+          4,
+          7,
+          9,
+          11
+        ]
+      },
+      {
+        "eps_control_deg": 8.0,
+        "shortfall_key": "shortfall_max_deg",
+        "absolute_pass": 5,
+        "cone_pass": 11,
+        "agree": 6,
+        "absolute_only": [],
+        "cone_only": [
+          1,
+          3,
+          4,
+          7,
+          9,
+          11
+        ]
+      },
+      {
+        "eps_control_deg": 10.0,
+        "shortfall_key": "shortfall_max_deg",
+        "absolute_pass": 5,
+        "cone_pass": 11,
+        "agree": 6,
+        "absolute_only": [],
+        "cone_only": [
+          1,
+          3,
+          4,
+          7,
+          9,
+          11
+        ]
+      }
+    ]
+  }
+}

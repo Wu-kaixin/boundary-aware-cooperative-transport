@@ -36,15 +36,15 @@ def plot_trajectories(env: SimulationEnvironment, path: str | Path, title: str =
     plt.close(fig)
 
 
-def plot_coverage_curve(env: SimulationEnvironment, path: str | Path, title: str = "Coverage Rate over Time") -> None:
+def plot_coverage_curve(env: SimulationEnvironment, path: str | Path, title: str = "Strict Boundary Coverage over Time") -> None:
     fig, ax = plt.subplots(figsize=(7, 5))
-    for cargo_id, values in env.log.cargo_coverages.items():
+    for cargo_id, values in env.log.strict_coverage.items():
         ax.plot(range(len(values)), values, label=f"{cargo_id} coverage")
     ax.set_title(title)
     ax.set_xlabel("Iteration")
     ax.set_ylabel("Coverage Rate")
     ax.grid(True, linewidth=0.4, alpha=0.5)
-    if env.log.cargo_coverages:
+    if env.log.strict_coverage:
         ax.legend()
     fig.tight_layout()
     fig.savefig(path, dpi=160)
@@ -55,7 +55,7 @@ def plot_paper_frame(
     env: SimulationEnvironment,
     frame_index: int,
     path: str | Path,
-    title: str = "Unknown Cargo + Local CVT Density + Local Agent CBF",
+    title: str = "Unknown cargo + ideal cage density + local CBF-QP",
 ) -> None:
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -99,7 +99,7 @@ class LivePaperViewer:
         env: SimulationEnvironment,
         update_stride: int = 5,
         pause_s: float = 0.001,
-        title: str = "Unknown Cargo + Local CVT Density + Local Agent CBF",
+        title: str = "Unknown cargo + ideal cage density + local CBF-QP",
     ):
         self.update_stride = max(1, int(update_stride))
         self.pause_s = max(0.0, float(pause_s))
@@ -182,7 +182,7 @@ def animate_simulation(
             ax.add_patch(patch)
             artists.append(patch)
             center = env.log.cargo_centers[cargo_id][frame_index]
-            direction = next(c.transport_direction for c in env.cargoes if c.object_id == cargo_id)
+            direction = env.goal_directions.get(cargo_id, np.zeros(2))
             arrow = ax.arrow(
                 center[0],
                 center[1],
@@ -193,7 +193,7 @@ def animate_simulation(
                 color="tab:red",
             )
             artists.append(arrow)
-            coverage = env.log.cargo_coverages[cargo_id][frame_index]
+            coverage = env.log.strict_coverage[cargo_id][frame_index]
             text = ax.text(center[0], center[1], f"{cargo_id}\ncoverage={coverage:.2f}", ha="center", va="center", fontsize=8)
             artists.append(text)
 
@@ -268,11 +268,20 @@ def _draw_density_surface(ax, env: SimulationEnvironment, frame_index: int) -> N
     ax.set_zlim(0.0, 1.0)
     ax.set_xlabel("x(m)", labelpad=8)
     ax.set_ylabel("y(m)", labelpad=8)
-    ax.set_zlabel(r"$\Phi$", labelpad=5)
+    ax.set_zlabel(r"$\Phi_{\mathrm{ideal}}$", labelpad=5)
     ax.view_init(elev=28, azim=-55)
 
 
 def _density_for_frame(env: SimulationEnvironment, frame_index: int) -> BoundaryAwareDensity:
+    """The *idealised* cage density, built from the true outline.
+
+    This is a reference surface for the figures, not the field any robot actually
+    used: each robot's density comes from its own voxel map, is restricted to its
+    own disk, and carries arc-length, confidence, age and gap weights that this
+    reconstruction does not have. Captioning it as the controller's density would
+    overstate what the controller sees, so the axis is labelled
+    ``ideal`` accordingly.
+    """
     params = env.controller.params
     targets = []
     for cargo_id, vertices_history in env.log.cargo_vertices.items():
@@ -337,7 +346,9 @@ def _draw_world(ax, env: SimulationEnvironment) -> None:
         ax.add_patch(patch)
         c = cargo.center
         ax.text(c[0], c[1], cargo.object_id, ha="center", va="center", fontsize=8)
-        ax.arrow(c[0], c[1], 0.45*cargo.transport_direction[0], 0.45*cargo.transport_direction[1], width=0.02, length_includes_head=True)
+        goal = env.goal_directions.get(cargo.object_id)
+        if goal is not None:
+            ax.arrow(c[0], c[1], 0.45 * goal[0], 0.45 * goal[1], width=0.02, length_includes_head=True)
     if env.agents:
         pts = np.vstack([a.position for a in env.agents])
         ax.scatter(pts[:, 0], pts[:, 1], s=25, marker="o")

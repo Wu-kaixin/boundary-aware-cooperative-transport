@@ -106,7 +106,7 @@ def test_dbact_policy_can_replace_centralized_cvt_policy():
     policy = DecentralizedDBACTPolicy(
         ["robot_1", "robot_2"],
         domain=(-1.0, 1.0, -1.0, 1.0),
-        params=DBACTParams(task_mode="coverage", target_center=[0.0, 0.0], cbf_use_qp=False),
+        params=DBACTParams(task_mode="coverage", target_center=[0.0, 0.0], comm_range=2.0, local_radius=1.0),
     )
     snapshot = WorldSnapshot(
         timestamp=0.0,
@@ -119,4 +119,5 @@ def test_dbact_policy_can_replace_centralized_cvt_policy():
     commands = policy.compute(snapshot)
 
     assert set(commands) == {"robot_1", "robot_2"}
-    assert all(command.mode.startswith("dbact_") for command in commands.values())
+    known_modes = {"region_coverage", "search", "explore", "approach", "redeploy", "cage", "push", "dbact_untracked"}
+    assert {command.mode for command in commands.values()} <= known_modes
