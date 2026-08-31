@@ -31,5 +31,10 @@ shapely>=2.0
 # --- analysis ---
 pandas>=2.2
 
+# --- publication rendering ---
+# The traceable publication package always emits H.264 MP4 files.  Matplotlib
+# does not bundle an encoder; imageio-ffmpeg supplies a pinned executable path.
+imageio-ffmpeg>=0.6
+
 # --- development ---
 pytest>=8.0

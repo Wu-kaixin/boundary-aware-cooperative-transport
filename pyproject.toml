@@ -26,6 +26,7 @@ dependencies = [
 qp = ["cvxpy>=1.4", "osqp>=0.6"]
 sim = ["pymunk>=6.6", "shapely>=2.0"]
 analysis = ["pandas>=2.2"]
+publication = ["imageio-ffmpeg>=0.6"]
 dev = ["pytest>=8.0"]
 
 [tool.setuptools.packages.find]

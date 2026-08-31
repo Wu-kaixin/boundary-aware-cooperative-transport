@@ -1,0 +1,444 @@
+"""Reusable-artist world renderer for offline demos and static figures."""
+
+from __future__ import annotations
+
+import matplotlib.pyplot as plt
+import numpy as np
+from matplotlib.collections import LineCollection
+from matplotlib.lines import Line2D
+from matplotlib.patches import Circle, FancyArrowPatch, Polygon
+
+from dbact_sim.trace import SimulationTrace
+
+from .debug_overlays import fused_boundary_polyline, sensor_segments, voronoi_segments
+from .hud import PhaseHUD
+from .styles import MODE_COLORS, PHASE_COLORS, VisualStyle, get_style
+
+
+class ResearchVisualizer:
+    """Render a saved trace without touching controller or physics state."""
+
+    def __init__(
+        self,
+        trace: SimulationTrace,
+        view_mode: str = "demo",
+        *,
+        show_ids: bool | None = None,
+        show_sensor: bool | None = None,
+        show_map: bool | None = None,
+        show_cage: bool | None = None,
+        show_truth_debug: bool | None = None,
+        figure=None,
+        world_ax=None,
+        hud_ax=None,
+    ) -> None:
+        self.trace = trace
+        self.style = get_style(view_mode)
+        self.show_ids = self.style.show_ids if show_ids is None else bool(show_ids)
+        self.show_sensor = self.style.show_sensor if show_sensor is None else bool(show_sensor)
+        self.show_map = self.style.show_map if show_map is None else bool(show_map)
+        self.show_cage = self.style.show_cage if show_cage is None else bool(show_cage)
+        self.show_truth_debug = (
+            self.style.show_truth_debug if show_truth_debug is None else bool(show_truth_debug)
+        )
+        self._overlay_cache: dict[int, tuple[np.ndarray, np.ndarray]] = {}
+        self._voronoi_cache: dict[int, np.ndarray] = {}
+        if figure is None:
+            if self.style.show_hud:
+                figure = plt.figure(figsize=(13.4, 7.6), facecolor=self.style.figure_face)
+                grid = figure.add_gridspec(1, 2, width_ratios=(4.15, 1.0), wspace=0.035)
+                world_ax = figure.add_subplot(grid[0, 0])
+                hud_ax = figure.add_subplot(grid[0, 1])
+            else:
+                figure, world_ax = plt.subplots(
+                    figsize=(7.5, 7.0),
+                    facecolor=self.style.figure_face,
+                )
+        if world_ax is None:
+            raise ValueError("world_ax is required when a figure is supplied")
+        self.fig = figure
+        self.world_ax = world_ax
+        self.hud = PhaseHUD(hud_ax, trace, self.style) if hud_ax is not None else None
+        self._setup_world()
+        self.update(0)
+
+    def _setup_world(self) -> None:
+        trace, style, ax = self.trace, self.style, self.world_ax
+        xmin, xmax, ymin, ymax = trace.domain
+        ax.set_xlim(xmin, xmax)
+        ax.set_ylim(ymin, ymax)
+        ax.set_aspect("equal", adjustable="box")
+        ax.set_facecolor(style.world_face)
+        ax.set_xlabel("x [m]")
+        ax.set_ylabel("y [m]")
+        ax.grid(True, color=style.grid, linewidth=0.55, alpha=0.55)
+        for spine in ax.spines.values():
+            spine.set_color(style.grid)
+        ax.tick_params(colors="#475569", labelsize=8.5)
+
+        self.cargo_patches: dict[str, Polygon] = {}
+        self.truth_lines: dict[str, Line2D] = {}
+        self.cargo_orientation: dict[str, Line2D] = {}
+        self.cargo_trails: dict[str, Line2D] = {}
+        self.goal_arrows: dict[str, FancyArrowPatch] = {}
+        for cargo_id in trace.cargo_ids:
+            patch = Polygon(
+                trace.cargo_vertices[cargo_id][0],
+                closed=True,
+                facecolor=style.cargo_face,
+                edgecolor=style.cargo_edge,
+                linewidth=1.3,
+                alpha=0.62,
+                zorder=4,
+            )
+            ax.add_patch(patch)
+            self.cargo_patches[cargo_id] = patch
+            truth_vertices = np.vstack([trace.cargo_vertices[cargo_id][0], trace.cargo_vertices[cargo_id][0][0]])
+            self.truth_lines[cargo_id] = ax.plot(
+                truth_vertices[:, 0],
+                truth_vertices[:, 1],
+                color="#111827",
+                linestyle="--",
+                linewidth=1.0,
+                alpha=0.65,
+                zorder=6,
+                visible=self.show_truth_debug,
+            )[0]
+            self.cargo_orientation[cargo_id] = ax.plot(
+                [], [], color=style.cargo_edge, linewidth=2.2, zorder=5
+            )[0]
+            self.cargo_trails[cargo_id] = ax.plot(
+                [], [], color=style.goal, linewidth=2.1, alpha=0.75, zorder=2
+            )[0]
+            arrow = FancyArrowPatch(
+                (0, 0),
+                (0, 0),
+                arrowstyle="-|>",
+                mutation_scale=16,
+                color=style.goal,
+                linewidth=2.2,
+                zorder=7,
+            )
+            ax.add_patch(arrow)
+            self.goal_arrows[cargo_id] = arrow
+            if cargo_id in trace.goal_targets:
+                target = trace.goal_targets[cargo_id]
+                start = trace.cargo_centers[cargo_id][0]
+                ax.plot(
+                    [start[0], target[0]],
+                    [start[1], target[1]],
+                    linestyle="--",
+                    color=style.goal,
+                    linewidth=1.4,
+                    alpha=0.6,
+                    zorder=1,
+                )
+                ax.scatter(
+                    target[0],
+                    target[1],
+                    marker="X",
+                    s=125,
+                    color=style.target,
+                    edgecolor="#ffffff",
+                    linewidth=1.2,
+                    zorder=8,
+                    label="target",
+                )
+
+        radius = float(trace.settings.get("robot_radius", 0.12))
+        d_min = float(trace.settings.get("d_min", np.nan))
+        comm_range = float(trace.settings.get("comm_range", np.nan))
+        self.agent_patches: list[Circle] = []
+        self.agent_cores: list[Circle] = []
+        self.safety_rings: list[Circle] = []
+        self.communication_rings: list[Circle] = []
+        self.contact_rings: list[Circle] = []
+        self.push_arrows: list[FancyArrowPatch] = []
+        self.agent_labels = []
+        self.agent_trails: list[Line2D] = []
+        for index, agent_id in enumerate(trace.agent_ids):
+            point = trace.agent_positions[0, index]
+            circle = Circle(
+                point,
+                radius,
+                facecolor=style.agent_face,
+                edgecolor="none",
+                linewidth=0.0,
+                alpha=0.78,
+                zorder=9,
+            )
+            ax.add_patch(circle)
+            self.agent_patches.append(circle)
+            core = Circle(
+                point,
+                0.22 * radius,
+                facecolor=style.agent_core,
+                edgecolor="none",
+                zorder=10,
+            )
+            ax.add_patch(core)
+            self.agent_cores.append(core)
+            safety = Circle(
+                point,
+                d_min if np.isfinite(d_min) and d_min > 0.0 else radius,
+                facecolor="none",
+                edgecolor=style.safety_ring,
+                linewidth=1.0,
+                alpha=0.45,
+                zorder=5,
+                visible=style.show_safety and np.isfinite(d_min) and d_min > 0.0,
+            )
+            ax.add_patch(safety)
+            self.safety_rings.append(safety)
+            communication = Circle(
+                point,
+                comm_range if np.isfinite(comm_range) and comm_range > 0.0 else radius,
+                facecolor="none",
+                edgecolor=style.communication_ring,
+                linestyle=":",
+                linewidth=0.7,
+                alpha=0.45,
+                zorder=2,
+                visible=style.show_communication
+                and np.isfinite(comm_range)
+                and comm_range > 0.0,
+            )
+            ax.add_patch(communication)
+            self.communication_rings.append(communication)
+            ring = Circle(
+                point,
+                1.45 * radius,
+                facecolor="none",
+                edgecolor=PHASE_COLORS["CONTACT_READY"],
+                linewidth=2.1,
+                alpha=0.95,
+                zorder=8,
+                visible=False,
+            )
+            ax.add_patch(ring)
+            self.contact_rings.append(ring)
+            push_arrow = FancyArrowPatch(
+                point,
+                point,
+                arrowstyle="-|>",
+                mutation_scale=11,
+                color=PHASE_COLORS["TRANSPORT"],
+                linewidth=1.7,
+                zorder=12,
+                visible=False,
+            )
+            ax.add_patch(push_arrow)
+            self.push_arrows.append(push_arrow)
+            trail = ax.plot([], [], color=style.trajectory, linewidth=0.9, alpha=0.28, zorder=1)[0]
+            self.agent_trails.append(trail)
+            label = ax.text(
+                point[0],
+                point[1],
+                agent_id.split("_")[-1],
+                ha="center",
+                va="center",
+                color="#ffffff",
+                fontsize=6.4,
+                fontweight="bold",
+                zorder=10,
+                visible=self.show_ids,
+            )
+            self.agent_labels.append(label)
+
+        self.voronoi_collection = LineCollection(
+            [],
+            colors=style.voronoi,
+            linewidths=0.8,
+            alpha=0.82,
+            zorder=2,
+        )
+        self.voronoi_collection.set_visible(style.show_voronoi)
+        ax.add_collection(self.voronoi_collection)
+        self.sensor_collection = LineCollection(
+            [], colors=style.detected, linewidths=0.55, alpha=0.22, zorder=2
+        )
+        ax.add_collection(self.sensor_collection)
+        self.detected_points = ax.scatter(
+            [], [], s=10, color=style.detected, edgecolor="none", alpha=0.8, zorder=6
+        )
+        self.map_points = ax.scatter(
+            [], [], s=8, color=style.mapped, edgecolor="none", alpha=0.55, zorder=3
+        )
+        self.map_line = ax.plot(
+            [], [], linestyle=":", color=style.mapped, linewidth=1.0, alpha=0.8, zorder=3
+        )[0]
+        self.cage_points = ax.scatter(
+            [], [], s=9, facecolor="none", edgecolor=style.cage, linewidth=0.65, alpha=0.65, zorder=3
+        )
+
+        handles = [
+            Line2D([], [], color=style.cargo_face, linewidth=7, label="cargo"),
+            Line2D([], [], marker="o", linestyle="", color=style.agent_face, label="guide agent"),
+            Line2D([], [], color=PHASE_COLORS["CONTACT_READY"], linewidth=2, label="contact-ready"),
+            Line2D([], [], color=PHASE_COLORS["TRANSPORT"], linewidth=2, label="active push"),
+            Line2D([], [], color=style.detected, linewidth=1.2, label="detected boundary"),
+            Line2D([], [], color=style.mapped, linestyle=":", label="estimated boundary"),
+        ]
+        if self.show_truth_debug:
+            handles.append(
+                Line2D([], [], color="#111827", linestyle="--", label="ground truth (evaluation only)")
+            )
+        ax.legend(
+            handles=handles,
+            loc="upper center",
+            bbox_to_anchor=(0.5, -0.085),
+            ncol=4,
+            frameon=False,
+            fontsize=7.5,
+        )
+        self.phase_banner = ax.text(
+            0.025,
+            0.96,
+            "",
+            transform=ax.transAxes,
+            ha="left",
+            va="top",
+            fontsize=11.5,
+            fontweight="bold",
+            color="#ffffff",
+            bbox={"boxstyle": "round,pad=0.4", "edgecolor": "none", "facecolor": PHASE_COLORS["SEARCH"], "alpha": 0.92},
+            zorder=20,
+        )
+        self.fig.subplots_adjust(bottom=0.13, top=0.97, left=0.07, right=0.985)
+
+    def update(self, frame: int, rendering_fps: float | None = None) -> list:
+        trace, style = self.trace, self.style
+        frame = int(np.clip(frame, 0, trace.frame_count - 1))
+        trail_start = 0 if style.trail_frames is None else max(0, frame - style.trail_frames)
+        artists: list = []
+
+        for cargo_id in trace.cargo_ids:
+            vertices = trace.cargo_vertices[cargo_id][frame]
+            truth_vertices = np.vstack([vertices, vertices[0]])
+            center = trace.cargo_centers[cargo_id][frame]
+            angle = float(trace.cargo_angles[cargo_id][frame])
+            span = max(float(np.ptp(vertices[:, 0])), float(np.ptp(vertices[:, 1])))
+            direction = np.array([np.cos(angle), np.sin(angle)])
+            self.cargo_patches[cargo_id].set_xy(vertices)
+            self.truth_lines[cargo_id].set_data(truth_vertices[:, 0], truth_vertices[:, 1])
+            self.cargo_orientation[cargo_id].set_data(
+                [center[0], center[0] + 0.28 * span * direction[0]],
+                [center[1], center[1] + 0.28 * span * direction[1]],
+            )
+            centers = trace.cargo_centers[cargo_id][trail_start : frame + 1]
+            self.cargo_trails[cargo_id].set_data(centers[:, 0], centers[:, 1])
+            goal = trace.goal_directions[cargo_id]
+            goal_length = max(0.55, 0.32 * span)
+            self.goal_arrows[cargo_id].set_positions(center, center + goal_length * goal)
+            artists.extend(
+                [
+                    self.cargo_patches[cargo_id],
+                    self.truth_lines[cargo_id],
+                    self.cargo_orientation[cargo_id],
+                    self.cargo_trails[cargo_id],
+                    self.goal_arrows[cargo_id],
+                ]
+            )
+
+        contacts = set(trace.contact_ready_agents[frame])
+        pushers = set(trace.push_agents[frame])
+        push_goal = (
+            trace.goal_directions[trace.cargo_ids[0]] if trace.cargo_ids else np.array([1.0, 0.0])
+        )
+        for index, agent_id in enumerate(trace.agent_ids):
+            point = trace.agent_positions[frame, index]
+            mode = trace.agent_modes[frame][index]
+            color = (
+                MODE_COLORS.get(mode, style.agent_face)
+                if style.color_agents_by_mode
+                else style.agent_face
+            )
+            circle = self.agent_patches[index]
+            circle.center = point
+            circle.set_facecolor(color)
+            self.agent_cores[index].center = point
+            self.safety_rings[index].center = point
+            self.communication_rings[index].center = point
+            ring = self.contact_rings[index]
+            ring.center = point
+            ring.set_edgecolor(
+                PHASE_COLORS["TRANSPORT"] if agent_id in pushers else PHASE_COLORS["CONTACT_READY"]
+            )
+            ring.set_visible(agent_id in contacts or agent_id in pushers)
+            push_arrow = self.push_arrows[index]
+            push_arrow.set_positions(point, point + 0.30 * push_goal)
+            push_arrow.set_visible(agent_id in pushers)
+            history = trace.agent_positions[trail_start : frame + 1, index]
+            self.agent_trails[index].set_data(history[:, 0], history[:, 1])
+            self.agent_labels[index].set_position(point)
+            artists.extend(
+                [
+                    self.communication_rings[index],
+                    self.safety_rings[index],
+                    circle,
+                    self.agent_cores[index],
+                    ring,
+                    push_arrow,
+                    self.agent_trails[index],
+                    self.agent_labels[index],
+                ]
+            )
+
+        if style.show_voronoi:
+            segments = self._voronoi_cache.get(frame)
+            if segments is None:
+                segments = voronoi_segments(trace.agent_positions[frame], trace.domain)
+                self._voronoi_cache[frame] = segments
+            self.voronoi_collection.set_segments(segments)
+        else:
+            self.voronoi_collection.set_segments([])
+        artists.append(self.voronoi_collection)
+
+        snapshot = trace.visual_snapshot(frame)
+        overlay = self._overlay_cache.get(snapshot.frame)
+        if overlay is None:
+            overlay = (sensor_segments(trace, frame), fused_boundary_polyline(trace, frame))
+            self._overlay_cache[snapshot.frame] = overlay
+        ray_segments, map_polyline = overlay
+        if self.show_sensor:
+            self.sensor_collection.set_segments(ray_segments)
+            self.detected_points.set_offsets(snapshot.detected_points)
+        else:
+            self.sensor_collection.set_segments([])
+            self.detected_points.set_offsets(np.empty((0, 2)))
+        if self.show_map:
+            self.map_points.set_offsets(snapshot.mapped_points)
+            if len(map_polyline):
+                self.map_line.set_data(map_polyline[:, 0], map_polyline[:, 1])
+            else:
+                self.map_line.set_data([], [])
+        else:
+            self.map_points.set_offsets(np.empty((0, 2)))
+            self.map_line.set_data([], [])
+        self.cage_points.set_offsets(snapshot.cage_targets if self.show_cage else np.empty((0, 2)))
+        artists.extend([self.sensor_collection, self.detected_points, self.map_points, self.map_line, self.cage_points])
+
+        phase = trace.phase_labels[frame]
+        self.phase_banner.set_text(phase.replace("_", " "))
+        self.phase_banner.set_bbox(
+            {"boxstyle": "round,pad=0.4", "edgecolor": "none", "facecolor": PHASE_COLORS.get(phase, "#475569"), "alpha": 0.92}
+        )
+        self.phase_banner.set_visible(style.name != "paper")
+        artists.append(self.phase_banner)
+
+        if self.hud is not None:
+            artists.extend(self.hud.update(frame, rendering_fps))
+        return artists
+
+    def save_frame(self, frame: int, path, *, dpi: int = 180) -> None:
+        self.update(frame)
+        self.fig.savefig(path, dpi=dpi, bbox_inches="tight", facecolor=self.fig.get_facecolor())
+
+    def close(self) -> None:
+        plt.close(self.fig)
+
+
+DemoVisualizer = ResearchVisualizer
+
+
+__all__ = ["DemoVisualizer", "ResearchVisualizer", "VisualStyle"]
