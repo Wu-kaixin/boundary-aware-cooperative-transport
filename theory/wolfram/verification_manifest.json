@@ -1,0 +1,134 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-09-02T11:52:52.1215570Z",
+  "connector": {
+    "name": "Wolfram",
+    "status": "connected",
+    "version": "not exposed"
+  },
+  "local_runtime": {
+    "name": "WolframScript",
+    "version": "1.14.0",
+    "status": "all 9 included scripts executed with exit code 0"
+  },
+  "checks": [
+    {
+      "id": "W-L1-01",
+      "target": "Lemma 1 / kernel L1",
+      "script": "scripts/01_kernel_constants.wl",
+      "result": "results/W-L1_kernel_and_measure.md",
+      "evidence_class": "EXACT",
+      "verdict": "PASS"
+    },
+    {
+      "id": "W-L1-02",
+      "target": "Lemma 1 / gradient L1",
+      "script": "scripts/01_kernel_constants.wl",
+      "result": "results/W-L1_kernel_and_measure.md",
+      "evidence_class": "EXACT",
+      "verdict": "PASS"
+    },
+    {
+      "id": "W-L1-03",
+      "target": "Lemma 1 / gradient Linf",
+      "script": "scripts/01_kernel_constants.wl",
+      "result": "results/W-L1_kernel_and_measure.md",
+      "evidence_class": "SYMBOLIC",
+      "verdict": "PASS"
+    },
+    {
+      "id": "W-L1-04",
+      "target": "Lemma 1 / normal-angle identity",
+      "script": "scripts/02_target_and_measure_bounds.wl",
+      "result": "results/W-L1_kernel_and_measure.md",
+      "evidence_class": "SYMBOLIC",
+      "verdict": "PASS"
+    },
+    {
+      "id": "W-L1-05",
+      "target": "Lemma 1 / bounded-step sum",
+      "script": "scripts/02_target_and_measure_bounds.wl",
+      "result": "results/W-L1_kernel_and_measure.md",
+      "evidence_class": "SYMBOLIC",
+      "verdict": "PASS"
+    },
+    {
+      "id": "W-L2-01",
+      "target": "Lemma 2 / ratio and monotonicity",
+      "script": "scripts/03_quadrature_and_centroid.wl",
+      "result": "results/W-L2_centroid.md",
+      "evidence_class": "SYMBOLIC",
+      "verdict": "PASS"
+    },
+    {
+      "id": "W-L2-02",
+      "target": "Lemma 2 / mass positivity and units",
+      "script": "scripts/04_mass_bounds_sanity.wl",
+      "result": "results/W-L2_centroid.md",
+      "evidence_class": "SYMBOLIC",
+      "verdict": "PASS"
+    },
+    {
+      "id": "W-P1-01",
+      "target": "Proposition 1 / integrand derivative and fixed-cell check",
+      "script": "scripts/05_local_cvt_gradient_sanity.wl",
+      "result": "results/W-P1_P3_T1.md",
+      "evidence_class": "SYMBOLIC",
+      "verdict": "PASS"
+    },
+    {
+      "id": "W-P3-01",
+      "target": "Proposition 3 / reference-rate algebra",
+      "script": "scripts/06_reference_rate.wl",
+      "result": "results/W-P1_P3_T1.md",
+      "evidence_class": "SYMBOLIC",
+      "verdict": "PASS"
+    },
+    {
+      "id": "W-T1-01",
+      "target": "Theorem 1 / Young and comparison",
+      "script": "scripts/07_lyapunov_chain.wl",
+      "result": "results/W-P1_P3_T1.md",
+      "evidence_class": "SYMBOLIC",
+      "verdict": "PASS"
+    },
+    {
+      "id": "W-C1-01",
+      "target": "Sampled-data corollary / descent expansion",
+      "script": "scripts/08_sampled_data_corollary.wl",
+      "result": "results/W-C1_sampled_data.md",
+      "evidence_class": "SYMBOLIC",
+      "verdict": "PASS"
+    },
+    {
+      "id": "W-M5-01",
+      "target": "Proposition 3 / generic strong-convexity implication",
+      "script": "scripts/09_reduced_hessian_certificate.wl",
+      "result": "results/W-M5_reduced_hessian.md",
+      "evidence_class": "SYMBOLIC",
+      "verdict": "PASS"
+    },
+    {
+      "id": "W-M5-02",
+      "target": "Proposition 3 / actual branch uniform Hessian lower bound",
+      "script": "scripts/09_reduced_hessian_certificate.wl",
+      "result": "results/W-M5_reduced_hessian.md",
+      "evidence_class": "INTERVAL",
+      "verdict": "CONDITIONAL"
+    }
+  ],
+  "interval_certificates": [],
+  "numeric_sanity_only": [],
+  "claim_policy": "No numeric sanity result is used as proof; no global PL, formal caging, or unconditional transport-success claim is made.",
+  "independent_reruns": [
+    {
+      "rerun_utc": "2026-09-02T12:15:36Z",
+      "route": "Wolfram MCP connector, session s3jj5PPq",
+      "result": "results/W-RERUN_connector_session.md",
+      "scope": "11 kernel/algebra obligations re-derived through the connector rather than replayed from the archived script output",
+      "local_cross_check": "wolframscript 1.14.0: all 9 scripts/*.wl re-executed, exit 0, outputs identical to the archived results",
+      "verdict": "PASS for every re-run entry; W-M5-02 remains CONDITIONAL",
+      "note": "A longer manifest is not a stronger theorem: the re-run adds confidence in the archived algebra, not new evidence for A8."
+    }
+  ]
+}
