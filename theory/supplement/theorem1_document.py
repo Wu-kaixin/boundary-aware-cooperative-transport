@@ -923,9 +923,10 @@ def document(cert: dict) -> list[tuple]:
          r"+ \frac{L_H}{2}\delta^2\Delta t + \nu_H\right]",
          "expand the square and collect powers of $x$"),
         (r"\le \Delta t\left[-\frac{\bar a}{2}x^2 + \frac{C_\delta^2}{2\bar a} "
-         r"+ \frac{L_H}{2}\delta^2\Delta t + \nu_H\right] "
-         r"= \Delta t\left[-\frac{\bar a}{2}x^2 + B_d\right]",
+         r"+ \frac{L_H}{2}\delta^2\Delta t + \nu_H\right]",
          "Young, with $\\bar a > 0$"),
+        (r"= \Delta t\left[-\frac{\bar a}{2}x^2 + B_d\right]",
+         "definition of $B_d$"),
         (r"\le \Delta t\bigl[-\bar a\mu V_k + B_d\bigr]",
          "local PL: $\\tfrac12 x^2 \\ge \\mu V_k$"),
     ]))

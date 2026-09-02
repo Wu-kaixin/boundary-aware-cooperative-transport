@@ -47,6 +47,9 @@
 
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0.55em}
+% A little slack for the occasional line holding a long symbol run or a DOI,
+% rather than letting it stick out into the margin.
+\setlength{\emergencystretch}{3em}
 
 \begin{document}
 
@@ -58,7 +61,7 @@
 {\color{dbmuted}\large Boundary-measure-induced Local-CVT practical stability near a selected nondegenerate local branch}\par
 \vspace{1.5cm}
 \rowcolors{1}{dbpale}{dbpale}
-\begin{tabular}{>{\bfseries\color{dbnavy}}p{3cm} p{10cm}}
+\begin{tabular}{>{\bfseries\color{dbnavy}}p{3cm} >{\RaggedRight\arraybackslash}p{10cm}}
 Branch & DBACT-research-v3 \\
 Baseline HEAD & 64e1905e092d19fd9dcbf0e77fbd39f55f0562ba \\
 Proof status & Conditional local theorem; A8 interval certificate not supplied \\
@@ -74,7 +77,7 @@ Regression & 477 passed, 3 skipped \\
 \tableofcontents
 \newpage
 
-\section{1. Scope and frozen claim}
+\section{Scope and frozen claim}
 
 Bounded local-map disagreement and bounded reference variation imply practical stability of the boundary-induced Local-CVT allocation dynamics around a nondegenerate local CVT branch.
 
@@ -86,7 +89,7 @@ F_R(r) = \min\{r^2,\ R_\ell^2\},\qquad H^*(P,t) = \int_D \min_i F_R\bigl(\|q-p_i
 
 Saturation is not cosmetic. With the unsaturated truncated cost $\int_{V_i^\ell}\|q-p_i\|^2\phi^*\,dq$ the integration domain moves with $p_i$, and the Reynolds boundary term on the circle $\|q-p_i\| = R_\ell$ does not cancel; the standard CVT gradient identity is then false. Section 5 shows the cancellation that saturation buys.
 
-\subsection{1.1 Deliberate exclusions}
+\subsection{Deliberate exclusions}
 
 This supplement does not prove any of the following.
 
@@ -103,7 +106,7 @@ Collision safety is a separate result and is deliberately not a dependency of Th
 
 \newpage
 
-\section{2. Notation}
+\section{Notation}
 
 $D \subset \mathbb{R}^2$ is a fixed compact rectangle of width $W_D$ and height $H_D$; $P = (p_1,\dots,p_N) \in \mathbb{R}^{2N}$ stacks the agent positions. All spatial norms are Euclidean, and the stacked norm is the Euclidean product norm
 
@@ -129,26 +132,26 @@ $\widehat\phi_i$ is agent $i$'s mapped density, $\widehat c_i$ its numerically c
 V(P,t) = H^*(P,t) - H^*_{\min}(t) \ \ge\ 0,\qquad H^*_{\min}(t) = \min_{P\in X} H^*(P,t)
 \]
 
-\subsection{2.1 Kernel constants}
+\subsection{Kernel constants}
 
 These three constants are used throughout; all are Wolfram-verified (entries W-RR-01 to W-RR-03) and derived in Step 1 of Lemma 1.
 
-\begin{equation}
+\begin{equation*}
 \|K_\sigma\|_1 = 2\pi\sigma^2,\qquad \|\nabla K_\sigma\|_1 = \sqrt{2}\,\pi^{3/2}\sigma,\qquad \|\nabla K_\sigma\|_\infty = \frac{e^{-1/2}}{\sigma}
 \tag{K}
-\end{equation}
+\end{equation*}
 
-\subsection{2.2 Units}
+\subsection{Units}
 
 Arc length is in metres and $K_\sigma$ is dimensionless, so $\phi$ has units of m, an $L^1$ density error and a cell mass have units $\mathrm{m}^3$, a shifted first moment $\mathrm{m}^4$, $H^*$ has $\mathrm{m}^5$, $\nabla H^*$ has $\mathrm{m}^4$, and a command disturbance has $\mathrm{m}/\mathrm{s}$. The ledger in Appendix A carries the unit of every constant so that geometric length and density mass are never silently added.
 
 \newpage
 
-\section{3. Assumptions A1-A10}
+\section{Assumptions A1-A10}
 
 \begin{center}
 \small
-\begin{longtable}{>{\bfseries}p{0.9cm} p{8.4cm} p{4.6cm}}
+\begin{longtable}{>{\bfseries}p{0.9cm} >{\RaggedRight\arraybackslash}p{8.4cm} >{\RaggedRight\arraybackslash}p{4.6cm}}
 \toprule
 \textbf{ID} & \textbf{Assumption} & \textbf{How it is discharged} \\
 \midrule
@@ -173,9 +176,9 @@ The implication A1-A10 $\Rightarrow$ Theorem 1 is proved. A5, A8, A9 and A10 are
 
 \newpage
 
-\section{4. Lemma 1 - boundary and map to density consistency}
+\section{Lemma 1 - boundary and map to density consistency}
 
-\subsection{4.1 Statement}
+\subsection{Statement}
 
 Assume A3-A5, let the arc partition satisfy $0 \le \Delta s_k \le h_s$, and suppose every source discarded by the restriction step is at least $s_\sigma\sigma$ away from every query point in $B(p_i,R_\ell)\cap D$. Define the target, weight and tail errors
 
@@ -189,10 +192,10 @@ E_{w,i} = L_{\mathrm{miss},i} + M_{\mathrm{spur},i} + \sum_{k\,\in\,\mathrm{matc
 
 Then
 
-\begin{equation}
+\begin{equation*}
 \bigl\|\widehat\phi_i - \phi^*\bigr\|_{L^1(B(p_i,R_\ell)\cap D)} \ \le\ \varepsilon_{\phi,i} \ :=\ L_{K,1} P_{\max}\!\left(\varepsilon_{\xi,i} + \sqrt{2}\,v + \frac{L_T h_s}{2}\right) + 2\pi\sigma^2 E_{w,i} + \varepsilon_{\mathrm{tail},i}
 \tag{L1}
-\end{equation}
+\end{equation*}
 
 with $L_{K,1} := \|\nabla K_\sigma\|_1$ and
 
@@ -208,9 +211,9 @@ The comparison is made after convolution, through an exact discrete intermediate
 \nu_t^*\ \longrightarrow\ \nu_{h,t}^* = \sum_k \Delta s_k\,\delta_{\xi_k^*}\ \longrightarrow\ \widehat\nu_{i,t} = \sum_k \widehat w_{ik}\,\delta_{\widehat\xi_{ik}}
 \]
 
-\subsection{4.2 Proof}
+\subsection{Proof}
 
-\subsubsection{Step 1. The three kernel constants}
+\subsubsection*{Step 1. The three kernel constants}
 
 The mass separates into one-dimensional Gaussians:
 
@@ -236,7 +239,7 @@ and $g(0) = 0$, $g(r)\to 0$ as $r\to\infty$, so the interior stationary point is
 \|\nabla K_\sigma\|_\infty = g(\sigma) = \frac{\sigma}{\sigma^2}e^{-1/2} = \frac{e^{-1/2}}{\sigma}
 \]
 
-\subsubsection{Step 2. Translation inequality in $L^1$}
+\subsubsection*{Step 2. Translation inequality in $L^1$}
 
 This is the workhorse of the whole lemma: moving a source by a distance costs at most $\|\nabla K_\sigma\|_1$ times that distance, in $L^1$. For $a,b \in \mathbb{R}^2$ the fundamental theorem of calculus along the segment $\tau \mapsto b + \tau(a-b)$ gives
 
@@ -246,14 +249,14 @@ K_\sigma(x-a) - K_\sigma(x-b) = -\int_0^1 \nabla K_\sigma\bigl(x - b - \tau(a-b)
 
 Taking absolute values, integrating in $x$ and exchanging the order of integration by Tonelli (the integrand is nonnegative),
 
-\begin{equation}
+\begin{equation*}
 \bigl\|K_\sigma(\cdot-a)-K_\sigma(\cdot-b)\bigr\|_1 \le \|a-b\|\int_0^1\!\!\int_{\mathbb{R}^2}\bigl\|\nabla K_\sigma\bigl(x-b-\tau(a-b)\bigr)\bigr\|\,dx\,d\tau = \|\nabla K_\sigma\|_1\,\|a-b\|
 \tag{T}
-\end{equation}
+\end{equation*}
 
 the inner integral being translation-invariant and therefore equal to $\|\nabla K_\sigma\|_1$ for every $\tau$.
 
-\subsubsection{Step 3. Target error}
+\subsubsection*{Step 3. Target error}
 
 With $\xi = b + d\,n$ and the observed $\widehat\xi = \widehat b + \widehat d\,\widehat n$, the triangle inequality gives
 
@@ -273,7 +276,7 @@ which is monotone in $\theta$; substituting $\theta \le \varepsilon_n$ yields $\
 $\sqrt2\,v$ is valid only while the fused representative stays inside its own voxel. If the fusion law can move it outside, the bound must be re-derived from that law; it must not be reused as written.
 \end{dbcallout}
 
-\subsubsection{Step 4. Curve quadrature}
+\subsubsection*{Step 4. Curve quadrature}
 
 Compare the exact discrete measure with the continuous one. On arc $k$, of length $\Delta s_k$ and with representative $\xi_k^*$,
 
@@ -295,7 +298,7 @@ Because $0 \le \Delta s_k \le h_s$ we have $\Delta s_k^2 \le h_s\Delta s_k$, so 
 
 Choosing the arc midpoint would give the sharper factor $\Delta s_k^2/4$; the certificate uses the conservative $1/2$ so that it stays valid for any registered representative inside the arc.
 
-\subsubsection{Step 5. Map displacement and weight mismatch}
+\subsubsection*{Step 5. Map displacement and weight mismatch}
 
 Match the observed atoms to the exact ones and split the difference into a displacement part, a matched-weight part, and missing/spurious mass:
 
@@ -315,7 +318,7 @@ The remaining three groups are bounded by their total variation times the kernel
 \bigl\|K_\sigma * (\text{weight} + \text{missed} + \text{spurious})\bigr\|_1 \le \|K_\sigma\|_1\Bigl(L_{\mathrm{miss}} + M_{\mathrm{spur}} + \sum_{\mathrm{matched}}|\widehat w_k - \Delta s_k|\Bigr) = 2\pi\sigma^2 E_w
 \]
 
-\subsubsection{Step 6. Restriction tail}
+\subsubsection*{Step 6. Restriction tail}
 
 The restriction step discards far sources. It does not do so for free: the Gaussian has no compact support. A discarded atom of weight $\widehat w_k$ lies at distance at least $s_\sigma\sigma$ from every query $q$ in the disk, so pointwise
 
@@ -329,27 +332,27 @@ Summing the discarded weights and integrating over an area no larger than $\pi R
 \varepsilon_{\mathrm{tail},i} = \int_{B(p_i,R_\ell)\cap D}\sum_{\mathrm{dropped}}\widehat w_k K_\sigma(q-\widehat\xi_k)\,dq \le \pi R_\ell^2 M_{\mathrm{drop},i}\,e^{-s_\sigma^2/2}
 \]
 
-\subsubsection{Step 7. Assembly}
+\subsubsection*{Step 7. Assembly}
 
 The common base density $\phi_0$ appears in both $\widehat\phi_i$ and $\phi^*$ and cancels. Adding Steps 4, 5 and 6 by the triangle inequality and restricting the global $L^1$ estimate to $B(p_i,R_\ell)\cap D$,
 
 \begin{align*}
-  \bigl\|\widehat\phi_i-\phi^*\bigr\|_{L^1} \le \bigl\|K_\sigma*\widehat\nu_i - K_\sigma*\nu_h^*\bigr\|_1 + \bigl\|K_\sigma*\nu_h^* - K_\sigma*\nu^*\bigr\|_1 + \varepsilon_{\mathrm{tail},i} && \text{\footnotesize triangle inequality} \\
-  \le L_{K,1}P_{\max}\varepsilon_{x,i} + 2\pi\sigma^2 E_{w,i} + \tfrac12 L_{K,1}L_T P_{\max}h_s + \varepsilon_{\mathrm{tail},i} && \text{\footnotesize Steps 4-6} \\
-  = L_{K,1}P_{\max}\!\left(\varepsilon_{\xi,i}+\sqrt2\,v + \frac{L_T h_s}{2}\right) + 2\pi\sigma^2 E_{w,i} + \varepsilon_{\mathrm{tail},i} \;=\; \varepsilon_{\phi,i} && \text{\footnotesize definition of $\varepsilon_{x,i}$} \\
+  \bigl\|\widehat\phi_i-\phi^*\bigr\|_{L^1} &\le \bigl\|K_\sigma*\widehat\nu_i - K_\sigma*\nu_h^*\bigr\|_1 + \bigl\|K_\sigma*\nu_h^* - K_\sigma*\nu^*\bigr\|_1 + \varepsilon_{\mathrm{tail},i} && \text{\scriptsize triangle inequality} \\
+   &\le L_{K,1}P_{\max}\varepsilon_{x,i} + 2\pi\sigma^2 E_{w,i} + \tfrac12 L_{K,1}L_T P_{\max}h_s + \varepsilon_{\mathrm{tail},i} && \text{\scriptsize Steps 4-6} \\
+   &= L_{K,1}P_{\max}\!\left(\varepsilon_{\xi,i}+\sqrt2\,v + \frac{L_T h_s}{2}\right) + 2\pi\sigma^2 E_{w,i} + \varepsilon_{\mathrm{tail},i} \;=\; \varepsilon_{\phi,i} && \text{\scriptsize definition of $\varepsilon_{x,i}$}
 \end{align*}
 
 which is (L1). $\qquad\blacksquare$
 
-\subsection{4.3 Evidence boundary}
+\subsection{Evidence boundary}
 
 Wolfram checked the two kernel integrals exactly, and the sup-norm, the normal-angle identity and the bounded-step inequality symbolically. The pushforward construction, the translation inequality (T), the curve quadrature, the atom matching of Step 5 and the tail decomposition are the analytic argument above; no computer-algebra output is offered in their place.
 
 \newpage
 
-\section{5. Lemma 2 - mass, quadrature and centroid perturbation}
+\section{Lemma 2 - mass, quadrature and centroid perturbation}
 
-\subsection{5.1 Statement}
+\subsection{Statement}
 
 Assume A1-A6 and the exact-cell contract $R_{\mathrm{comm}} \ge 2R_\ell$. Put
 
@@ -379,16 +382,16 @@ If the gate $\eta_m < m_{\min}$ holds, set
 
 Then the implementation centroid obeys
 
-\begin{equation}
+\begin{equation*}
 \bigl\|\widehat c_i - c_i^*\bigr\| \ \le\ \varepsilon_{c,i} \ :=\ \frac{2R_\ell\,\varepsilon_{\phi,i}}{m_{\min}} + \varepsilon_{q,i} + \varepsilon_{G,i}
 \tag{L2}
-\end{equation}
+\end{equation*}
 
 In strict synchronised theorem mode $\varepsilon_{G,i}=0$. Delayed or missing neighbour positions require a separate geometric cell-error certificate; that error must not be hidden inside $\varepsilon_{\phi,i}$.
 
-\subsection{5.2 Proof}
+\subsection{Proof}
 
-\subsubsection{Step 1. Mass floor}
+\subsubsection*{Step 1. Mass floor}
 
 First, separation alone puts a whole disk inside agent $i$'s Voronoi cell. Let $\|q-p_i\| < d_s/2$. For any $j \ne i$,
 
@@ -406,7 +409,7 @@ m_i^* = \int_{V_i^\ell}\phi^*\,dq \ \ge\ \phi_0\cdot\frac{\pi r_0^2}{4} \ =\ m_{
 The quarter-disk constant is specific to a rectangle. For another workspace, replace it with a uniform interior-cone constant; the quarter-disk value must not be carried over.
 \end{dbcallout}
 
-\subsubsection{Step 2. Mass ceiling and mapped-density bounds}
+\subsubsection*{Step 2. Mass ceiling and mapped-density bounds}
 
 Since $K_\sigma \le 1$ pointwise and $P_\Gamma \le P_{\max}$,
 
@@ -422,7 +425,7 @@ m_i^* \ \le\ \pi R_\ell^2\bigl(\phi_0+P_{\max}\bigr) \ =\ m_{\max}
 
 The measure decomposition of Lemma 1 bounds the mapped total weight by $P_{\max}+E_w$, which gives $\widehat\phi_{\max}$ by the same argument. Differentiating under the integral sign and using $\|\nabla K_\sigma\|_\infty = e^{-1/2}/\sigma$ gives the Lipschitz constant $\widehat L_\phi$.
 
-\subsubsection{Step 3. Midpoint mass error}
+\subsubsection*{Step 3. Midpoint mass error}
 
 Split the midpoint cells into those lying wholly inside $V_i^\ell$ and those cut by its boundary. For an interior cell $Q$ with midpoint $q_Q$, Lipschitz continuity gives
 
@@ -434,7 +437,7 @@ because the farthest point of a cell from its midpoint is a corner, at distance 
 
 The cut cells all lie within distance $r_h$ of $\partial V_i^\ell$. $V_i^\ell$ is convex, being an intersection of half-planes, a disk and a rectangle, so the inner and outer parallel sets of that width have combined area at most $2P_V r_h + \pi r_h^2$. Bounding the density there by $\widehat\phi_{\max}$ and adding the two groups gives $\eta_m$. Convexity also justifies $P_V \le 2\pi R_\ell$, the perimeter of the enclosing disk.
 
-\subsubsection{Step 4. First-moment error}
+\subsubsection*{Step 4. First-moment error}
 
 Repeat Step 3 for the \emph{shifted} first moment, which is what the centroid actually needs:
 
@@ -450,7 +453,7 @@ Its integrand $f(q) = (q-p_i)\phi(q)$ satisfies, on the cell,
 
 since $\|q-p_i\| \le R_\ell$ there. Substituting these two constants for $\widehat L_\phi$ and $\widehat\phi_{\max}$ in Step 3 yields $\|\widehat a - a\| \le \eta_a$.
 
-\subsubsection{Step 5. Ratio perturbation}
+\subsubsection*{Step 5. Ratio perturbation}
 
 The centroid is a ratio, so the two errors must be combined through a quotient bound rather than added. Write $\widehat c - p_i = \widehat a/\widehat m$ and $c - p_i = a/m$. Then
 
@@ -461,12 +464,12 @@ The centroid is a ratio, so the two errors must be combined through a quotient b
 The gate $\eta_m < m_{\min}$ makes the denominator safely positive, $\widehat m \ge m - \eta_m \ge m_{\min}-\eta_m > 0$, and $\|a\| \le R_\ell m$ because $\|q-p_i\|\le R_\ell$ on the cell. Therefore
 
 \begin{align*}
-  \left\|\frac{\widehat a}{\widehat m}-\frac{a}{m}\right\| \le \frac{\|\widehat a-a\|}{\widehat m} + \frac{\|a\|}{m}\cdot\frac{|m-\widehat m|}{\widehat m} && \text{\footnotesize triangle inequality} \\
-  \le \frac{\eta_a}{m_{\min}-\eta_m} + R_\ell\,\frac{\eta_m}{m_{\min}-\eta_m} && \text{\footnotesize Steps 3-4 and $\|a\|\le R_\ell m$} \\
-  = \frac{\eta_a + R_\ell \eta_m}{m_{\min}-\eta_m} = \varepsilon_q && \text{\footnotesize definition} \\
+  \left\|\frac{\widehat a}{\widehat m}-\frac{a}{m}\right\| &\le \frac{\|\widehat a-a\|}{\widehat m} + \frac{\|a\|}{m}\cdot\frac{|m-\widehat m|}{\widehat m} && \text{\scriptsize triangle inequality} \\
+   &\le \frac{\eta_a}{m_{\min}-\eta_m} + R_\ell\,\frac{\eta_m}{m_{\min}-\eta_m} && \text{\scriptsize Steps 3-4 and $\|a\|\le R_\ell m$} \\
+   &= \frac{\eta_a + R_\ell \eta_m}{m_{\min}-\eta_m} = \varepsilon_q && \text{\scriptsize definition}
 \end{align*}
 
-\subsubsection{Step 6. Density perturbation on the same cell}
+\subsubsection*{Step 6. Density perturbation on the same cell}
 
 Now hold the cell fixed and change only the density. Lemma 1 gives
 
@@ -480,7 +483,7 @@ Both densities keep the base-density floor, so both masses are at least $m_{\min
 \bigl\|\widetilde c - c^*\bigr\| \le \frac{R_\ell\varepsilon_\phi}{m_{\min}} + R_\ell\cdot\frac{\varepsilon_\phi}{m_{\min}} = \frac{2R_\ell\,\varepsilon_\phi}{m_{\min}}
 \]
 
-\subsubsection{Step 7. Assembly}
+\subsubsection*{Step 7. Assembly}
 
 Adding the density error of Step 6, the midpoint error of Step 5 and the separately certified geometric cell error gives (L2). $\qquad\blacksquare$
 
@@ -488,16 +491,16 @@ The denominator gate is fail-closed in the certificate generator: a configuratio
 
 \newpage
 
-\section{6. Proposition 1 - ideal Local-CVT gradient and descent}
+\section{Proposition 1 - ideal Local-CVT gradient and descent}
 
-\subsection{6.1 Statement}
+\subsection{Statement}
 
 At every regular configuration covered by A1-A4 and A9,
 
-\begin{equation}
+\begin{equation*}
 \nabla_{p_i}H^*(P,t) = 2\,m_i^*\,\bigl(p_i - c_i^*\bigr)
 \tag{P1-a}
-\end{equation}
+\end{equation*}
 
 so the ideal Lloyd command is a scaled gradient step,
 
@@ -507,16 +510,16 @@ u_i^* = -k_c\bigl(p_i-c_i^*\bigr) = -\frac{k_c}{2m_i^*}\,\nabla_{p_i}H^*
 
 and, with $A(P,t) = \mathrm{diag}_i\bigl(\tfrac{k_c}{2m_i^*}I_2\bigr)$,
 
-\begin{equation}
+\begin{equation*}
 A(P,t) \succeq a_0 I,\quad a_0 = \frac{k_c}{2m_{\max}},\qquad \dot H^* = -\nabla H^{*\top}A\,\nabla H^* \le -a_0\bigl\|\nabla H^*\bigr\|^2
 \tag{P1-b}
-\end{equation}
+\end{equation*}
 
 the last identity holding with the reference frozen.
 
-\subsection{6.2 Proof}
+\subsection{Proof}
 
-\subsubsection{Step 1. Partition the integral}
+\subsubsection*{Step 1. Partition the integral}
 
 Away from the zero-measure tie and threshold sets of A9, the domain splits into the local cells and the saturated remainder $U = D\setminus\bigcup_j B(p_j,R_\ell)$, on which the running minimum equals $R_\ell^2$:
 
@@ -524,7 +527,7 @@ Away from the zero-measure tie and threshold sets of A9, the domain splits into 
 H^* = \sum_j \int_{V_j^\ell}\|q-p_j\|^2\,\phi^*\,dq \;+\; R_\ell^2\int_U \phi^*\,dq
 \]
 
-\subsubsection{Step 2. Volume term}
+\subsubsection*{Step 2. Volume term}
 
 Differentiating the integrand of the $j=i$ term with respect to $p_i$,
 
@@ -534,7 +537,7 @@ Differentiating the integrand of the $j=i$ term with respect to $p_i$,
 
 No other volume term depends on $p_i$: for $j\ne i$ the integrand $\|q-p_j\|^2$ does not involve $p_i$, and the $U$ integrand is the constant $R_\ell^2$.
 
-\subsubsection{Step 3. The moving-boundary terms cancel}
+\subsubsection*{Step 3. The moving-boundary terms cancel}
 
 This is the step that the saturated cost exists to make work. Moving $p_i$ deforms $\partial V_i^\ell$, so Reynolds' transport theorem contributes a flux for each moving piece of boundary. There are three kinds, and each vanishes for its own reason.
 
@@ -546,7 +549,7 @@ This is the step that the saturated cost exists to make work. Moving $p_i$ defor
 
 Only the volume derivative survives, which is (P1-a).
 
-\subsubsection{Step 4. Descent}
+\subsubsection*{Step 4. Descent}
 
 By Lemma 2, $m_i^* \le m_{\max}$, so every diagonal block satisfies $\tfrac{k_c}{2m_i^*} \ge \tfrac{k_c}{2m_{\max}} = a_0$, i.e. $A \succeq a_0 I$. Substituting $\dot P = -A\nabla H^*$ with the reference frozen,
 
@@ -554,7 +557,7 @@ By Lemma 2, $m_i^* \le m_{\max}$, so every diagonal block satisfies $\tfrac{k_c}
 \dot H^* = \nabla H^{*\top}\dot P = -\nabla H^{*\top}A\nabla H^* \le -a_0\|\nabla H^*\|^2 \ \le\ 0
 \]
 
-\subsubsection{Step 5. The implemented cell is exact, not approximate}
+\subsubsection*{Step 5. The implemented cell is exact, not approximate}
 
 Suppose $q \in B(p_i,R_\ell)$ and agent $j$ beats agent $i$ at $q$, i.e. $\|q-p_j\| \le \|q-p_i\| \le R_\ell$. Then
 
@@ -572,9 +575,9 @@ Wolfram checked the integrand derivative and one exact fixed-square example. Tho
 
 \newpage
 
-\section{7. Proposition 2 - aggregate implementation disturbance}
+\section{Proposition 2 - aggregate implementation disturbance}
 
-\subsection{7.1 Statement}
+\subsection{Statement}
 
 Write the realised stacked dynamics as an ideal field plus a disturbance:
 
@@ -582,14 +585,14 @@ Write the realised stacked dynamics as an ideal field plus a disturbance:
 \dot P = -A(P,t)\,\nabla H^*(P,t) + d(t),\qquad \|d(t)\|\le\delta
 \]
 
-\begin{equation}
+\begin{equation*}
 \delta = k_c\sqrt{\sum_{i=1}^N \varepsilon_{c,i}^2} + \varepsilon_{\mathrm{zoh}} + \varepsilon_{\mathrm{num}} + \varepsilon_{\mathrm{trk}} + \varepsilon_{\mathrm{sf}}
 \tag{P2}
-\end{equation}
+\end{equation*}
 
-\subsection{7.2 Proof}
+\subsection{Proof}
 
-\subsubsection{Step 1. Centroid component}
+\subsubsection*{Step 1. Centroid component}
 
 The nominal law and the ideal field differ only through the centroid each uses, so the gain multiplies the Lemma 2 error directly:
 
@@ -603,11 +606,11 @@ Stacking over the $N$ agents in the frozen product norm,
 \Bigl\|\bigl(k_c(\widehat c_i-c_i^*)\bigr)_{i=1}^N\Bigr\| = k_c\sqrt{\sum_i\bigl\|\widehat c_i-c_i^*\bigr\|^2} \le k_c\sqrt{\sum_i \varepsilon_{c,i}^2}
 \]
 
-\subsubsection{Step 2. Remaining deviations}
+\subsubsection*{Step 2. Remaining deviations}
 
 Sample-and-hold, solver/integration, low-level tracking and safety-projection deviations are each bounded in the same stacked norm and added by the triangle inequality, which gives (P2).
 
-\subsubsection{Step 3. Analytic ceiling for the safety filter}
+\subsubsection*{Step 3. Analytic ceiling for the safety filter}
 
 The safety term admits a bound that needs no model of the filter at all, only the speed cap that both the nominal and the filtered command respect. If $\|u_i\| \le u_{\max}$ for both, then
 
@@ -623,9 +626,9 @@ $2\sqrt N u_{\max}$ assumes the filter may reverse every command. A measured tig
 
 \newpage
 
-\section{8. Proposition 3 - reference rate and local regularity}
+\section{Proposition 3 - reference rate and local regularity}
 
-\subsection{8.1 Target and density rate}
+\subsection{Target and density rate}
 
 Differentiating the offset target $\xi = b + d\,n$ by the product rule,
 
@@ -641,12 +644,12 @@ Under the rigid-body certificate A3, a point of the boundary at radius at most $
 
 with $L_d = 0$ for the constant offset used in version 1. Differentiating the density under the integral sign and applying (T),
 
-\begin{equation}
+\begin{equation*}
 \partial_t\phi^*(q,t) = -\int_{\Gamma(t)}\nabla K_\sigma\bigl(q-\xi(s,t)\bigr)\cdot\dot\xi(s,t)\,ds \quad\Longrightarrow\quad \nu_\phi := \bigl\|\partial_t\phi^*\bigr\|_1 \le L_{K,1}P_{\max}\,v_{\xi,\max}
 \tag{P3-a}
-\end{equation}
+\end{equation*}
 
-\subsection{8.2 Cost and optimal-value rate}
+\subsection{Cost and optimal-value rate}
 
 Because the saturated integrand is bounded, $0 \le \min_i F_R \le R_\ell^2$, the cost rate inherits the density rate:
 
@@ -662,16 +665,16 @@ The optimal value inherits it too. For a fixed compact $X$ and any two times, th
 
 so $H^*_{\min}$ is Lipschitz and, being Lipschitz, differentiable almost everywhere with $\bigl|\dot H^*_{\min}\bigr| \le R_\ell^2\nu_\phi$. Adding the two contributions bounds the drift of $V = H^*-H^*_{\min}$:
 
-\begin{equation}
+\begin{equation*}
 \bigl|\partial_t H^* - \dot H^*_{\min}\bigr| \le \nu_H := 2R_\ell^2\,\nu_\phi
 \tag{P3-b}
-\end{equation}
+\end{equation*}
 
 \begin{dbcallout}{RIGID BOUNDARIES ONLY}
 This derivation uses a rigid twist. Deformation, a time-varying perimeter, or split/merge events break it; those cases need a direct measure-rate assumption on $\partial_t\nu_t^*$ instead.
 \end{dbcallout}
 
-\subsection{8.3 Local PL and quadratic growth (M5)}
+\subsection{Local PL and quadratic growth (M5)}
 
 Suppose A8 holds: on a convex, symmetry-reduced chart of the selected branch, $\nabla^2 H^*_{\mathrm{red}}(z,t) \succeq m_H I$ with $m_H>0$. Write $f$ for $H^*$ in those coordinates and $z^*$ for a minimiser. Integrating the Hessian twice along the segment from $z^*$ to $z$ gives the standard strong-convexity inequality
 
@@ -681,16 +684,16 @@ f(y) \ \ge\ f(z) + \nabla f(z)^\top(y-z) + \frac{m_H}{2}\|y-z\|^2 \qquad \forall
 
 Putting $y = z^*$ gives quadratic growth,
 
-\begin{equation}
+\begin{equation*}
 H^* - H^*_{\min} \ \ge\ \frac{\alpha}{2}\,\operatorname{dist}^2\bigl(P,\mathcal{C}^*(t)\bigr),\qquad \alpha = m_H
 \tag{QG}
-\end{equation}
+\end{equation*}
 
 and minimising the right-hand side over $y$ instead, at $y = z - \nabla f(z)/m_H$, gives
 
 \begin{align*}
-  H^*_{\min} \ \ge\ H^*(z) - \frac{\|\nabla f(z)\|^2}{2m_H} && \text{\footnotesize minimise the quadratic lower bound over $y$} \\
-  \tfrac12\bigl\|\nabla H^*\bigr\|^2 \ \ge\ \mu\bigl[H^*-H^*_{\min}\bigr],\qquad \mu = m_H && \text{\footnotesize rearrange} \\
+  H^*_{\min} \ &\ge\ H^*(z) - \frac{\|\nabla f(z)\|^2}{2m_H} && \text{\scriptsize minimise the quadratic lower bound over $y$} \\
+  \tfrac12\bigl\|\nabla H^*\bigr\|^2 \ &\ge\ \mu\bigl[H^*-H^*_{\min}\bigr],\qquad \mu = m_H && \text{\scriptsize rearrange}
 \end{align*}
 
 which is the local Polyak-Lojasiewicz inequality used in Theorem 1. $\qquad\blacksquare$
@@ -701,9 +704,9 @@ The implication above is proved. Its premise is not established here: no specifi
 
 \newpage
 
-\section{9. Theorem 1 - local practical stability}
+\section{Theorem 1 - local practical stability}
 
-\subsection{9.1 Statement}
+\subsection{Statement}
 
 Assume A1-A10, Lemmas 1-2 and Propositions 1-3, on an interval throughout which the solution remains in the regular tube $X$. Define
 
@@ -713,30 +716,30 @@ V(P,t) = H^*(P,t)-H^*_{\min}(t)\ \ge\ 0,\qquad a_0 = \frac{k_c}{2m_{\max}},\qqua
 
 Then for every $t \ge t_0$ in that interval
 
-\begin{equation}
+\begin{equation*}
 V(t)\ \le\ e^{-\lambda_H(t-t_0)}V(t_0) + \frac{B}{\lambda_H}\Bigl(1-e^{-\lambda_H(t-t_0)}\Bigr)
 \tag{T1-a}
-\end{equation}
+\end{equation*}
 
 and, if the regular-tube hypotheses persist for all future time,
 
-\begin{equation}
+\begin{equation*}
 \limsup_{t\to\infty}\operatorname{dist}\bigl(P(t),\mathcal{C}^*(t)\bigr) \ \le\ \sqrt{\frac{2B}{\alpha\,\lambda_H}}
 \tag{T1-b}
-\end{equation}
+\end{equation*}
 
-\subsection{9.2 Proof - every inequality named}
+\subsection{Proof - every inequality named}
 
 Differentiate $V$ along the solution at an almost-every regular time and bound each term by the result that produces it.
 
 \begin{align*}
-  \dot V = \nabla H^{*\top}\dot P + \partial_t H^* - \dot H^*_{\min} && \text{\footnotesize chain rule; $H^*_{\min}$ differentiable a.e. by Prop. 3} \\
-  = \nabla H^{*\top}\bigl(-A\nabla H^* + d\bigr) + \partial_t H^* - \dot H^*_{\min} && \text{\footnotesize substitute the dynamics} \\
-  \le -\nabla H^{*\top}A\,\nabla H^* + \bigl\|\nabla H^*\bigr\|\,\|d\| + \nu_H && \text{\footnotesize Cauchy-Schwarz, and (P3-b)} \\
-  \le -a_0\bigl\|\nabla H^*\bigr\|^2 + \delta\bigl\|\nabla H^*\bigr\| + \nu_H && \text{\footnotesize $A \succeq a_0 I$ by (P1-b); $\|d\|\le\delta$ by (P2)} \\
-  \le -a_0\bigl\|\nabla H^*\bigr\|^2 + \frac{a_0}{2}\bigl\|\nabla H^*\bigr\|^2 + \frac{\delta^2}{2a_0} + \nu_H && \text{\footnotesize Young: $\delta x \le \tfrac{a_0}{2}x^2 + \tfrac{\delta^2}{2a_0}$} \\
-  = -\frac{a_0}{2}\bigl\|\nabla H^*\bigr\|^2 + B && \text{\footnotesize definition of $B$} \\
-  \le -a_0\mu\,V + B \;=\; -\lambda_H V + B && \text{\footnotesize local PL: $\tfrac12\|\nabla H^*\|^2 \ge \mu V$} \\
+  \dot V &= \nabla H^{*\top}\dot P + \partial_t H^* - \dot H^*_{\min} && \text{\scriptsize chain rule; $H^*_{\min}$ differentiable a.e. by Prop. 3} \\
+   &= \nabla H^{*\top}\bigl(-A\nabla H^* + d\bigr) + \partial_t H^* - \dot H^*_{\min} && \text{\scriptsize substitute the dynamics} \\
+   &\le -\nabla H^{*\top}A\,\nabla H^* + \bigl\|\nabla H^*\bigr\|\,\|d\| + \nu_H && \text{\scriptsize Cauchy-Schwarz, and (P3-b)} \\
+   &\le -a_0\bigl\|\nabla H^*\bigr\|^2 + \delta\bigl\|\nabla H^*\bigr\| + \nu_H && \text{\scriptsize $A \succeq a_0 I$ by (P1-b); $\|d\|\le\delta$ by (P2)} \\
+   &\le -a_0\bigl\|\nabla H^*\bigr\|^2 + \frac{a_0}{2}\bigl\|\nabla H^*\bigr\|^2 + \frac{\delta^2}{2a_0} + \nu_H && \text{\scriptsize Young: $\delta x \le \tfrac{a_0}{2}x^2 + \tfrac{\delta^2}{2a_0}$} \\
+   &= -\frac{a_0}{2}\bigl\|\nabla H^*\bigr\|^2 + B && \text{\scriptsize definition of $B$} \\
+   &\le -a_0\mu\,V + B \;=\; -\lambda_H V + B && \text{\scriptsize local PL: $\tfrac12\|\nabla H^*\|^2 \ge \mu V$}
 \end{align*}
 
 The scalar comparison lemma applied to $\dot V \le -\lambda_H V + B$ integrates this to (T1-a): the solution of the corresponding equality is exactly the right-hand side of (T1-a), and a differential inequality is dominated by it. Letting $t\to\infty$ in (T1-a), the exponential terms vanish and
@@ -753,15 +756,15 @@ Finally, quadratic growth (QG) converts the Lyapunov level into a distance,
 
 which is (T1-b). $\qquad\blacksquare$
 
-\subsection{9.3 Status}
+\subsection{Status}
 
 The implication is analytically complete and its scalar algebra is Wolfram-verified (Young, the comparison solution, and the strong convexity to PL step). The theorem remains CONDITIONAL on A5 and A8-A10 and on the run/tube certificates. It is local. It is not a global PL theorem, and it says nothing about caging or transport success.
 
 \newpage
 
-\section{10. Corollaries}
+\section{Corollaries}
 
-\subsection{10.1 Frozen perfect information}
+\subsection{Frozen perfect information}
 
 If every implementation error vanishes and the reference is frozen, then $\delta = 0$ and $\nu_H = 0$, so $B = 0$ and (T1-a) collapses to pure exponential decay:
 
@@ -771,7 +774,7 @@ If every implementation error vanishes and the reference is frozen, then $\delta
 
 This is a sanity gate, not a decoration: the constant generator and the unit tests require exactly $B = 0$ and a zero ultimate radius in this case. If they did not, the formulas or their wiring would be wrong and Theorem 1 could not be marked complete.
 
-\subsection{10.2 Sampled-data corollary (M7)}
+\subsection{Sampled-data corollary (M7)}
 
 Let the implementation take explicit steps of size $\Delta t$,
 
@@ -787,28 +790,29 @@ with $\|d_k\| \le \delta$ and $\nabla H^*$ spatially $L_H$-Lipschitz on $X$. Def
 
 Then, under the step gates
 
-\begin{equation}
+\begin{equation*}
 \Delta t < \frac{2a_0}{L_H a_1^2},\qquad 0 < \bar a\,\mu\,\Delta t \le 1
 \tag{M7-gate}
-\end{equation}
+\end{equation*}
 
 the Lyapunov level contracts geometrically,
 
-\begin{equation}
+\begin{equation*}
 V_{k+1} \le \bigl(1-\bar a\mu\Delta t\bigr)V_k + B_d\,\Delta t,\qquad \limsup_{k\to\infty}\operatorname{dist}\bigl(P_k,\mathcal{C}_k^*\bigr) \le \sqrt{\frac{2B_d}{\alpha\,\bar a\,\mu}}
 \tag{M7}
-\end{equation}
+\end{equation*}
 
-\subsubsection{Proof}
+\subsubsection*{Proof}
 
 Apply the descent lemma to the $L_H$-Lipschitz gradient, add the reference drift over one step, and write $x = \|g_k\|$:
 
 \begin{align*}
-  V_{k+1}-V_k \le g_k^\top\bigl(P_{k+1}-P_k\bigr) + \frac{L_H}{2}\bigl\|P_{k+1}-P_k\bigr\|^2 + \nu_H\Delta t && \text{\footnotesize descent lemma and (P3-b)} \\
-  \le -a_0\Delta t\,x^2 + \delta\Delta t\,x + \frac{L_H}{2}\Delta t^2\bigl(a_1 x + \delta\bigr)^2 + \nu_H\Delta t && \text{\footnotesize $a_0 I \preceq A_k \preceq a_1 I$, $\|d_k\|\le\delta$} \\
-  = \Delta t\left[-\bar a\,x^2 + C_\delta\,x + \frac{L_H}{2}\delta^2\Delta t + \nu_H\right] && \text{\footnotesize expand the square and collect powers of $x$} \\
-  \le \Delta t\left[-\frac{\bar a}{2}x^2 + \frac{C_\delta^2}{2\bar a} + \frac{L_H}{2}\delta^2\Delta t + \nu_H\right] = \Delta t\left[-\frac{\bar a}{2}x^2 + B_d\right] && \text{\footnotesize Young, with $\bar a > 0$} \\
-  \le \Delta t\bigl[-\bar a\mu V_k + B_d\bigr] && \text{\footnotesize local PL: $\tfrac12 x^2 \ge \mu V_k$} \\
+  V_{k+1}-V_k &\le g_k^\top\bigl(P_{k+1}-P_k\bigr) + \frac{L_H}{2}\bigl\|P_{k+1}-P_k\bigr\|^2 + \nu_H\Delta t && \text{\scriptsize descent lemma and (P3-b)} \\
+   &\le -a_0\Delta t\,x^2 + \delta\Delta t\,x + \frac{L_H}{2}\Delta t^2\bigl(a_1 x + \delta\bigr)^2 + \nu_H\Delta t && \text{\scriptsize $a_0 I \preceq A_k \preceq a_1 I$, $\|d_k\|\le\delta$} \\
+   &= \Delta t\left[-\bar a\,x^2 + C_\delta\,x + \frac{L_H}{2}\delta^2\Delta t + \nu_H\right] && \text{\scriptsize expand the square and collect powers of $x$} \\
+   &\le \Delta t\left[-\frac{\bar a}{2}x^2 + \frac{C_\delta^2}{2\bar a} + \frac{L_H}{2}\delta^2\Delta t + \nu_H\right] && \text{\scriptsize Young, with $\bar a > 0$} \\
+   &= \Delta t\left[-\frac{\bar a}{2}x^2 + B_d\right] && \text{\scriptsize definition of $B_d$} \\
+   &\le \Delta t\bigl[-\bar a\mu V_k + B_d\bigr] && \text{\scriptsize local PL: $\tfrac12 x^2 \ge \mu V_k$}
 \end{align*}
 
 Rearranging gives the recursion in (M7). The first gate is exactly the condition $\bar a > 0$ needed for the Young step; the second keeps the contraction factor in $[0,1)$. Summing the resulting geometric series,
@@ -823,11 +827,11 @@ Wolfram expanded the descent algebra and checked the coefficient collection; a r
 
 \newpage
 
-\section{11. Limits and evidence status}
+\section{Limits and evidence status}
 
 \begin{center}
 \small
-\begin{longtable}{p{3.1cm} p{2.6cm} p{8.2cm}}
+\begin{longtable}{>{\RaggedRight\arraybackslash}p{3.1cm} >{\RaggedRight\arraybackslash}p{2.6cm} >{\RaggedRight\arraybackslash}p{8.2cm}}
 \toprule
 \textbf{Result} & \textbf{Status} & \textbf{Limiting condition} \\
 \midrule
@@ -843,7 +847,7 @@ Sampled corollary & PROVED & explicit step gates \\
 \end{longtable}
 \end{center}
 
-\subsection{11.1 Evidence classes}
+\subsection{Evidence classes}
 
 \begin{itemize}[leftmargin=1.2em,itemsep=2pt]
   \item PROVED: the analytic implication is written out in this supplement.
@@ -852,7 +856,7 @@ Sampled corollary & PROVED & explicit step gates \\
   \item NUMERIC-SANITY: debugging evidence only. No such result is used as proof anywhere in this package, and there are no such entries.
 \end{itemize}
 
-\subsection{11.2 Fail-closed runtime gates}
+\subsection{Fail-closed runtime gates}
 
 Each of these refuses to emit a certificate rather than emitting a degraded one, and each is covered by a test that feeds it a deliberately invalid configuration:
 
@@ -865,13 +869,15 @@ Each of these refuses to emit a certificate rather than emitting a degraded one,
   \item sampled step: $\Delta t$ violating (M7-gate) is rejected.
 \end{itemize}
 
-\subsection{11.3 Claim audit}
+\subsection{Claim audit}
 
 This supplement contains no global PL statement, no formal caging claim, no finite-time phase-completion result, and no unconditional transport or safety guarantee. The numeric certificate in Appendix A validates the dependency wiring and the gates; its ultimate radius is deliberately conservative and may be numerically vacuous. It is not experimental evidence and is not used to claim transport performance.
 
 \newpage
 
-\section{Appendix A. Constant ledger}
+\appendix
+
+\section{Constant ledger}
 
 Every value below is produced by one code path from the frozen formulas; none is entered by hand. The chain from raw sensing bounds to the ultimate radius is
 
@@ -913,13 +919,13 @@ sampled\_ultimate\_radius & 308.792 & m & conditional \\
 
 \newpage
 
-\section{Appendix B. Wolfram verification manifest}
+\section{Wolfram verification manifest}
 
 Connector: Wolfram (version not exposed). Local runtime: WolframScript 1.14.0; all nine committed scripts executed with exit code 0. Exact inputs, assumptions and outputs are archived under theory/wolfram/results.
 
 \begin{center}
 \small
-\begin{longtable}{p{2.4cm} p{6.2cm} p{2.3cm} p{2.6cm}}
+\begin{longtable}{>{\RaggedRight\arraybackslash}p{2.4cm} >{\RaggedRight\arraybackslash}p{6.2cm} >{\RaggedRight\arraybackslash}p{2.3cm} >{\RaggedRight\arraybackslash}p{2.6cm}}
 \toprule
 \textbf{ID} & \textbf{Target} & \textbf{Evidence} & \textbf{Verdict} \\
 \midrule
@@ -950,6 +956,6 @@ Evidence rule: an exact or symbolic output supports only the stated integral or 
 
 \subsection{Reference}
 
-J. Cortes, S. Martinez and F. Bullo, "Spatially-distributed coverage optimization and control with limited-range interactions", ESAIM: COCV, 11(4):691-719, 2005. DOI 10.1051/cocv:2005024.
+J. Cortes, S. Martinez and F. Bullo, ``Spatially-distributed coverage optimization and control with limited-range interactions'', ESAIM: COCV, 11(4):691-719, 2005. DOI 10.1051/cocv:2005024.
 
 \end{document}
