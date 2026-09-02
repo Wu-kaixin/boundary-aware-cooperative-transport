@@ -1,0 +1,57 @@
+theorem_mode: true
+scope: enclose_local_cvt_only
+n_agents: 8
+domain:
+  width: 8.0
+  height: 8.0
+geometry:
+  local_radius: 0.8
+  communication_radius: 1.6
+  separation: 1.6
+  perimeter_max: 7.2
+  object_radius: 0.9
+  offset_max: 0.15
+  offset_variation_length: 0.0
+density:
+  sigma: 0.2
+  base_density: 10.0
+  influence_sigmas: 4.0
+  gap_gain: 0.0
+  explore_gain: 0.0
+map_error:
+  boundary_position: 0.002
+  offset_distance: 0.001
+  normal_angle: 0.01
+  voxel_size: 0.002
+  arc_step: 0.002
+  target_lipschitz: 2.0
+  weight_mismatch: 0.001
+  dropped_mass: 0.001
+  tail_sigmas: 4.0
+quadrature:
+  rule: midpoint
+  grid_resolution: 4096
+  geometric_cell_error: 0.0
+reference:
+  object_speed_max: 0.02
+  object_yaw_rate_max: 0.02
+controller:
+  centroid_gain: 0.9
+  max_speed: 0.3
+  speed_norm: euclidean_per_agent
+disturbance:
+  zoh: 0.001
+  numerical: 0.001
+  tracking: 0.005
+  safety_filter: 0.01
+  use_analytic_safety_ceiling: false
+regularity:
+  mu: 0.05
+  alpha: 0.05
+  status: conditional
+sampled_data:
+  dt: 0.01
+  gradient_lipschitz: 1.0
+notes: >-
+  Conservative illustrative theorem-mode certificate. It validates formula
+  wiring and fail-closed gates; it is not an experimental success certificate.

@@ -1,0 +1,44 @@
+head_sha: 64e1905e092d19fd9dcbf0e77fbd39f55f0562ba
+claim_scope: local_enclose_cvt_practical_stability
+obligations:
+  - id: M1
+    result: Lemma 1 density consistency
+    status: proved
+    cas: verified
+    caveat: conditional on the A5 map-error bounds and Gaussian tail contract
+  - id: M2
+    result: midpoint quadrature and centroid ratio
+    status: proved
+    cas: verified
+    caveat: certificate fails closed unless eta_m < m_min
+  - id: M3
+    result: mass floor and ceiling
+    status: proved
+    caveat: rectangular D, separation d_s, and phi_0 > 0
+  - id: M4
+    result: rigid-reference density rate
+    status: proved
+    caveat: non-rigid deformation or topology change needs a measure-rate assumption
+  - id: M5
+    result: local PL and quadratic growth
+    status: conditional
+    caveat: no selected branch/gauge/parameter-tube interval certificate supplied
+  - id: M6
+    result: optimal-value Lipschitz bound on fixed compact X
+    status: proved
+  - id: M7
+    result: sampled-data corollary
+    status: proved
+    cas: verified
+    caveat: explicit step-size gates must pass
+  - id: M8
+    result: stacked safety-filter deviation ceiling
+    status: proved
+    caveat: depends on the implemented Euclidean per-agent speed cap
+claims_deliberately_not_made:
+  - global_PL
+  - global_CVT_optimality
+  - formal_caging
+  - finite_time_search_to_hold
+  - unconditional_transport_success
+  - unconditional_safety
