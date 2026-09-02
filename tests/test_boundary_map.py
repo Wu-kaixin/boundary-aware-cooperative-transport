@@ -3,8 +3,8 @@
 import numpy as np
 import pytest
 
-from dbact.boundary_map import LocalBoundaryMap
-from dbact.types import BoundaryObservation
+from dbact.boundary_map import LocalBoundaryMap, boundary_measure_error_certificate
+from dbact.types import BoundaryObservation, BoundaryView
 
 
 def wall_observations(agent_id: str = "a0", timestamp: float = 0.0, count: int = 21, spacing: float = 0.06):
@@ -106,6 +106,26 @@ def test_total_arc_length_tracks_the_scanned_boundary_length():
     m.update(observations, 0.0)
     expected = sum(o.arc_length for o in observations)
     assert m.total_arc_length() == pytest.approx(expected, rel=0.35)
+
+
+def test_measure_error_certificate_exposes_missing_spurious_and_matched_terms():
+    reference = BoundaryView.from_observations([
+        BoundaryObservation("obj", "truth", np.array([0.0, 0.0]), np.array([0.0, 1.0]), 0.0, 1.0, arc_length=0.2),
+        BoundaryObservation("obj", "truth", np.array([1.0, 0.0]), np.array([0.0, 1.0]), 0.0, 1.0, arc_length=0.3),
+    ])
+    estimate = BoundaryView.from_observations([
+        BoundaryObservation("obj", "map", np.array([0.01, 0.0]), np.array([0.0, 1.0]), 0.0, 0.5, arc_length=0.2),
+        BoundaryObservation("obj", "map", np.array([2.0, 0.0]), np.array([0.0, 1.0]), 0.0, 0.5, arc_length=0.4),
+    ])
+    cert = boundary_measure_error_certificate(
+        reference, estimate, match_radius=0.05, voxel_bound=0.02 * np.sqrt(2.0)
+    )
+    assert cert.matched_count == 1
+    assert cert.missing_length == pytest.approx(0.3)
+    assert cert.spurious_mass == pytest.approx(0.2)
+    assert cert.matched_weight_error == pytest.approx(0.1)
+    assert cert.weight_mismatch == pytest.approx(0.6)
+    assert cert.max_matched_displacement == pytest.approx(0.01)
 
 
 def test_confidence_is_fused_by_maximum_not_by_sum():

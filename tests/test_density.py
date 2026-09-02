@@ -213,6 +213,32 @@ def test_observations_without_arc_length_still_produce_a_usable_field():
     assert density(np.array([0.0, 0.135])) > density(np.array([0.0, 2.0]))
 
 
+def test_theorem_mode_requires_arc_length_and_fails_closed():
+    obs = [BoundaryObservation("obj", "m", np.array([0.0, 0.0]), np.array([0.0, 1.0]), 0.0, 1.0)]
+    with pytest.raises(ValueError, match="positive arc_length"):
+        BoundaryAwareDensity.from_observations(obs, params(theorem_mode=True))
+
+
+def test_theorem_mode_rejects_unbudgeted_density_biases():
+    with pytest.raises(ValueError, match="gap_gain=explore_gain=0"):
+        params(theorem_mode=True, gap_gain=0.1)
+    with pytest.raises(ValueError, match="lead_offset"):
+        params(theorem_mode=True, lead_offset=0.22)
+
+
+@pytest.mark.parametrize(
+    ("override", "message"),
+    [
+        ({"sigma": 0.0}, "sigma"),
+        ({"base_density": 0.0}, "base_density"),
+        ({"influence_sigmas": 0.0}, "influence_sigmas"),
+    ],
+)
+def test_theorem_mode_requires_positive_analytic_density_parameters(override, message):
+    with pytest.raises(ValueError, match=message):
+        params(theorem_mode=True, **override)
+
+
 # --------------------------------------------------------------------------- #
 # D10 - exploration demand past the ends of what has been observed
 # --------------------------------------------------------------------------- #

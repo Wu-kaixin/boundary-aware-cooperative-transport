@@ -6,6 +6,7 @@ import numpy as np
 import pytest
 
 from dbact.boundary_density import BoundaryAwareDensity, DensityParams
+from dbact.contracts import ContractViolation
 from dbact.local_cvt import LocalCVT, coverage_cost, empty_cell_threshold
 from dbact.types import AgentState, BoundaryObservation
 
@@ -66,6 +67,22 @@ def test_neighbour_completeness_at_the_bound_does_not_warn():
         warnings.simplefilter("always")
         LocalCVT(local_radius=0.8, comm_range=1.6)
     assert not any(issubclass(w.category, RuntimeWarning) for w in caught)
+
+
+def test_theorem_mode_locality_gate_fails_closed():
+    with pytest.raises(ContractViolation, match="neighbour completeness"):
+        LocalCVT(local_radius=0.81, comm_range=1.6, theorem_mode=True)
+
+
+def test_cell_samples_are_midpoints_not_linspace_endpoints():
+    cvt = LocalCVT(local_radius=1.0, grid_resolution=4, comm_range=2.0)
+    agents = [AgentState("a0", np.array([4.0, 4.0]))]
+    samples, cell_area = cvt.cell_samples(0, agents, [], DOMAIN)
+    assert cell_area == pytest.approx(0.25)
+    assert np.min(samples[:, 0]) == pytest.approx(3.25)
+    assert np.max(samples[:, 0]) == pytest.approx(4.75)
+    assert not np.any(np.isclose(samples[:, 0], 3.0))
+    assert not np.any(np.isclose(samples[:, 0], 5.0))
 
 
 # --------------------------------------------------------------------------- #
