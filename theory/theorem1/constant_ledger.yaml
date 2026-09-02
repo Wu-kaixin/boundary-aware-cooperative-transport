@@ -1,0 +1,25 @@
+conventions:
+  spatial_norm: euclidean
+  stacked_norm: euclidean_product
+  gaussian: unnormalized
+  density_unit: m
+constants:
+  - {name: K_L1, value: '2*pi*sigma^2', unit: m^2, formula: K1, source_class: wolfram_symbolic, source_ref: W-L1-01, status: verified, conservative: false}
+  - {name: grad_K_L1, value: 'sqrt(2)*pi^(3/2)*sigma', unit: m, formula: K2, source_class: wolfram_symbolic, source_ref: W-L1-02, status: verified, conservative: false}
+  - {name: grad_K_Linf, value: 'exp(-1/2)/sigma', unit: 1/m, formula: K3, source_class: wolfram_symbolic, source_ref: W-L1-03, status: verified, conservative: false}
+  - {name: epsilon_xi_i, value: 'epsilon_b_i+epsilon_d_i+2*d_max*sin(epsilon_n_i/2)', unit: m, formula: L1-xi, source_class: analytic, source_ref: 04_lemma1_density_consistency.md, status: proved, conservative: true}
+  - {name: epsilon_phi_i, value: 'grad_K_L1*P_max*(epsilon_xi_i+sqrt(2)*v+L_T*h_s/2)+K_L1*E_w_i+epsilon_tail_i', unit: m^3, formula: L1, source_class: analytic, source_ref: 04_lemma1_density_consistency.md, status: proved, conservative: true}
+  - {name: m_min, value: 'phi_0*pi*r_0^2/4', unit: m^3, formula: L2-mass-floor, source_class: analytic, source_ref: 05_lemma2_centroid_perturbation.md, status: proved, conservative: true}
+  - {name: m_max, value: 'pi*R_l^2*(phi_0+P_max)', unit: m^3, formula: L2-mass-ceiling, source_class: analytic, source_ref: 05_lemma2_centroid_perturbation.md, status: proved, conservative: true}
+  - {name: phihat_max, value: 'phi_0+P_max+E_w_i', unit: m, formula: L2-density-ceiling, source_class: analytic, source_ref: 05_lemma2_centroid_perturbation.md, status: proved, conservative: true}
+  - {name: epsilon_q, value: '(eta_a+R_l*eta_m)/(m_min-eta_m)', unit: m, formula: L2-quadrature, source_class: analytic, source_ref: 05_lemma2_centroid_perturbation.md, status: proved, conservative: true}
+  - {name: epsilon_c_i, value: '2*R_l*epsilon_phi_i/m_min+epsilon_q_i+epsilon_G_i', unit: m, formula: L2, source_class: analytic, source_ref: 05_lemma2_centroid_perturbation.md, status: proved, conservative: true}
+  - {name: a_0, value: 'k_c/(2*m_max)', unit: '1/(s*m^3)', formula: P1, source_class: analytic, source_ref: 06_proposition1_ideal_local_cvt.md, status: proved, conservative: true}
+  - {name: epsilon_sf, value: '2*sqrt(N)*u_max', unit: m/s, formula: P2-safety, source_class: analytic, source_ref: 07_proposition2_disturbance_bound.md, status: proved, conservative: true}
+  - {name: delta, value: 'k_c*sqrt(sum_i epsilon_c_i^2)+epsilon_zoh+epsilon_num+epsilon_trk+epsilon_sf', unit: m/s, formula: P2, source_class: analytic, source_ref: 07_proposition2_disturbance_bound.md, status: proved, conservative: true}
+  - {name: nu_phi, value: 'grad_K_L1*P_max*v_xi_max', unit: m^3/s, formula: P3-a, source_class: analytic, source_ref: 08_proposition3_rate_and_regularity.md, status: proved, conservative: true}
+  - {name: nu_H, value: '2*R_l^2*nu_phi', unit: m^5/s, formula: P3-b, source_class: analytic, source_ref: 08_proposition3_rate_and_regularity.md, status: proved, conservative: true}
+  - {name: mu, value: m_H, unit: m^3, formula: A8-PL, source_class: assumption, source_ref: A8, status: conditional, conservative: true}
+  - {name: alpha, value: m_H, unit: m^3, formula: A8-QG, source_class: assumption, source_ref: A8, status: conditional, conservative: true}
+  - {name: B, value: 'delta^2/(2*a_0)+nu_H', unit: m^5/s, formula: T1, source_class: analytic, source_ref: 09_theorem1_practical_stability.md, status: proved, conservative: true}
+  - {name: ultimate_radius, value: 'sqrt(2*B/(alpha*a_0*mu))', unit: m, formula: T1-b, source_class: analytic, source_ref: 09_theorem1_practical_stability.md, status: conditional, conservative: true}

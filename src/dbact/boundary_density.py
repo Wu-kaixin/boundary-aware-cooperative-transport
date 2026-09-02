@@ -65,12 +65,28 @@ class DensityParams:
     explore_gain: float = 0.0
     explore_step: float = 0.25
     explore_window: float = 0.18
+    # Strict mode used only by the Theorem 1 certificate path.  Ordinary
+    # simulations retain the backwards-compatible unit-weight fallback.
+    theorem_mode: bool = False
 
     def __post_init__(self) -> None:
         if self.mode not in ("offset", "distance_field"):
             raise ValueError(f"density mode must be 'offset' or 'distance_field', got {self.mode!r}")
         if self.explore_gain < 0.0:
             raise ValueError("explore_gain must be non-negative")
+        if self.theorem_mode:
+            if self.sigma <= 0.0:
+                raise ValueError("theorem_mode requires sigma > 0")
+            if self.base_density <= 0.0:
+                raise ValueError("theorem_mode requires base_density > 0")
+            if self.influence_sigmas <= 0.0:
+                raise ValueError("theorem_mode requires influence_sigmas > 0")
+            if self.mode != "offset":
+                raise ValueError("theorem_mode covers only the offset boundary-measure density")
+            if self.gap_gain != 0.0 or self.explore_gain != 0.0:
+                raise ValueError("theorem_mode requires gap_gain=explore_gain=0 or an explicit disturbance bound")
+            if self.lead_offset is not None and not np.isclose(self.lead_offset, self.cage_offset):
+                raise ValueError("theorem_mode forbids direction-dependent lead_offset bias")
 
     def offsets_for(self, normals: np.ndarray, goal_direction: np.ndarray | None) -> np.ndarray:
         """Per-observation cage offset, graded by how much that face would resist.
@@ -170,6 +186,12 @@ class BoundaryAwareDensity:
         normals = view.normals
         offsets = params.offsets_for(normals, goal_direction)
         arc = np.maximum(view.arc_length, 0.0)
+
+        if params.theorem_mode and np.any(arc <= _EPS):
+            raise ValueError(
+                "theorem_mode requires a positive arc_length for every boundary observation; "
+                "unit-weight fallback is not a valid boundary-measure certificate"
+            )
 
         # A map that never had arc lengths (e.g. a hand-built observation) still
         # has to produce a usable density, so fall back to unit weight per point.

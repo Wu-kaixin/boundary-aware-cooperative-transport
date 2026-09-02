@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/dbact/theorem1-runtime-certificate.schema.json",
+  "title": "DBACT Theorem 1 runtime certificate",
+  "type": "object",
+  "required": ["schema_version", "generated_utc", "scope", "evidence_status", "gates", "constants", "claims_deliberately_not_made"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "generated_utc": {"type": "string"},
+    "scope": {"const": "enclose_local_cvt_only"},
+    "evidence_status": {"enum": ["proved", "verified", "conditional", "blocked"]},
+    "gates": {
+      "type": "object",
+      "additionalProperties": {"type": "boolean"}
+    },
+    "constants": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["value", "unit", "source_class", "formula", "source_ref", "status", "conservative", "notes"],
+        "properties": {
+          "value": {"type": "number"},
+          "unit": {"type": "string"},
+          "source_class": {"enum": ["analytic", "assumption", "runtime", "wolfram_symbolic", "interval"]},
+          "formula": {"type": "string"},
+          "source_ref": {"type": "string"},
+          "status": {"enum": ["proved", "verified", "conditional", "pending", "blocked"]},
+          "conservative": {"type": "boolean"},
+          "notes": {"type": "string"}
+        },
+        "additionalProperties": false
+      }
+    },
+    "claims_deliberately_not_made": {"type": "array", "items": {"type": "string"}}
+  },
+  "additionalProperties": true
+}

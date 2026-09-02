@@ -1,0 +1,283 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-09-02T12:02:46.396481+00:00",
+  "scope": "enclose_local_cvt_only",
+  "evidence_status": "conditional",
+  "notes": "Conservative illustrative theorem-mode certificate. It validates formula wiring and fail-closed gates; it is not an experimental success certificate.",
+  "gates": {
+    "locality": true,
+    "arc_length_required": true,
+    "midpoint_rule": true,
+    "quadrature_denominator_positive": true,
+    "sampled_step": true,
+    "biases_disabled": true
+  },
+  "constants": {
+    "kernel_l1": {
+      "value": 0.25132741228718347,
+      "unit": "m^2",
+      "source_class": "wolfram_symbolic",
+      "formula": "K1",
+      "source_ref": "W-L1-01",
+      "status": "verified",
+      "conservative": false,
+      "notes": ""
+    },
+    "kernel_grad_l1": {
+      "value": 1.5749609945722423,
+      "unit": "m",
+      "source_class": "wolfram_symbolic",
+      "formula": "K2",
+      "source_ref": "W-L1-02",
+      "status": "verified",
+      "conservative": false,
+      "notes": ""
+    },
+    "kernel_grad_linf": {
+      "value": 3.032653298563167,
+      "unit": "1/m",
+      "source_class": "wolfram_symbolic",
+      "formula": "K3",
+      "source_ref": "W-L1-03",
+      "status": "verified",
+      "conservative": false,
+      "notes": ""
+    },
+    "epsilon_xi": {
+      "value": 0.004499993750007813,
+      "unit": "m",
+      "source_class": "runtime",
+      "formula": "L1-xi",
+      "source_ref": "map_error",
+      "status": "conditional",
+      "conservative": true,
+      "notes": ""
+    },
+    "epsilon_tail": {
+      "value": 6.744876335183729e-07,
+      "unit": "m^3",
+      "source_class": "analytic",
+      "formula": "L1-tail",
+      "source_ref": "04_lemma1_density_consistency.md",
+      "status": "proved",
+      "conservative": true,
+      "notes": ""
+    },
+    "epsilon_phi": {
+      "value": 0.10603367483449613,
+      "unit": "m^3",
+      "source_class": "analytic",
+      "formula": "L1",
+      "source_ref": "04_lemma1_density_consistency.md",
+      "status": "proved",
+      "conservative": true,
+      "notes": ""
+    },
+    "m_min": {
+      "value": 5.02654824574367,
+      "unit": "m^3",
+      "source_class": "analytic",
+      "formula": "L2-mass-floor",
+      "source_ref": "05_lemma2_centroid_perturbation.md",
+      "status": "proved",
+      "conservative": true,
+      "notes": ""
+    },
+    "m_max": {
+      "value": 34.582651930716445,
+      "unit": "m^3",
+      "source_class": "analytic",
+      "formula": "L2-mass-ceiling",
+      "source_ref": "05_lemma2_centroid_perturbation.md",
+      "status": "proved",
+      "conservative": true,
+      "notes": ""
+    },
+    "grid_spacing": {
+      "value": 0.000390625,
+      "unit": "m",
+      "source_class": "runtime",
+      "formula": "midpoint-h",
+      "source_ref": "LocalCVT.grid_resolution",
+      "status": "verified",
+      "conservative": true,
+      "notes": ""
+    },
+    "eta_m": {
+      "value": 0.05989592665332281,
+      "unit": "m^3",
+      "source_class": "analytic",
+      "formula": "L2-eta-m",
+      "source_ref": "05_lemma2_centroid_perturbation.md",
+      "status": "proved",
+      "conservative": true,
+      "notes": ""
+    },
+    "eta_a": {
+      "value": 0.057469495000066005,
+      "unit": "m^4",
+      "source_class": "analytic",
+      "formula": "L2-eta-a",
+      "source_ref": "05_lemma2_centroid_perturbation.md",
+      "status": "proved",
+      "conservative": true,
+      "notes": ""
+    },
+    "epsilon_q": {
+      "value": 0.02121876659609344,
+      "unit": "m",
+      "source_class": "analytic",
+      "formula": "L2-quadrature",
+      "source_ref": "05_lemma2_centroid_perturbation.md",
+      "status": "proved",
+      "conservative": true,
+      "notes": ""
+    },
+    "epsilon_c": {
+      "value": 0.05497033356431097,
+      "unit": "m",
+      "source_class": "analytic",
+      "formula": "L2",
+      "source_ref": "05_lemma2_centroid_perturbation.md",
+      "status": "proved",
+      "conservative": true,
+      "notes": ""
+    },
+    "safety_per_agent_ceiling": {
+      "value": 0.6,
+      "unit": "m/s",
+      "source_class": "analytic",
+      "formula": "P2-safety-agent",
+      "source_ref": "07_proposition2_disturbance_bound.md",
+      "status": "proved",
+      "conservative": true,
+      "notes": ""
+    },
+    "safety_stacked_ceiling": {
+      "value": 1.697056274847714,
+      "unit": "m/s",
+      "source_class": "analytic",
+      "formula": "P2-safety-stacked",
+      "source_ref": "07_proposition2_disturbance_bound.md",
+      "status": "proved",
+      "conservative": true,
+      "notes": ""
+    },
+    "delta": {
+      "value": 0.15693162425867874,
+      "unit": "m/s",
+      "source_class": "runtime",
+      "formula": "P2",
+      "source_ref": "disturbance",
+      "status": "conditional",
+      "conservative": true,
+      "notes": ""
+    },
+    "v_xi_max": {
+      "value": 0.041,
+      "unit": "m/s",
+      "source_class": "runtime",
+      "formula": "P3-target-rate",
+      "source_ref": "reference",
+      "status": "conditional",
+      "conservative": true,
+      "notes": ""
+    },
+    "nu_phi": {
+      "value": 0.464928485597726,
+      "unit": "m^3/s",
+      "source_class": "analytic",
+      "formula": "P3-a",
+      "source_ref": "08_proposition3_rate_and_regularity.md",
+      "status": "proved",
+      "conservative": true,
+      "notes": ""
+    },
+    "nu_H": {
+      "value": 0.5951084615650893,
+      "unit": "m^5/s",
+      "source_class": "analytic",
+      "formula": "P3-b",
+      "source_ref": "08_proposition3_rate_and_regularity.md",
+      "status": "proved",
+      "conservative": true,
+      "notes": ""
+    },
+    "a0": {
+      "value": 0.013012304576917315,
+      "unit": "1/(s*m^3)",
+      "source_class": "analytic",
+      "formula": "P1-a0",
+      "source_ref": "06_proposition1_ideal_local_cvt.md",
+      "status": "proved",
+      "conservative": true,
+      "notes": ""
+    },
+    "lambda_H": {
+      "value": 0.0006506152288458658,
+      "unit": "1/s",
+      "source_class": "analytic",
+      "formula": "T1-lambda",
+      "source_ref": "09_theorem1_practical_stability.md",
+      "status": "conditional",
+      "conservative": true,
+      "notes": ""
+    },
+    "B": {
+      "value": 1.5414256395442387,
+      "unit": "m^5/s",
+      "source_class": "analytic",
+      "formula": "T1-B",
+      "source_ref": "09_theorem1_practical_stability.md",
+      "status": "proved",
+      "conservative": true,
+      "notes": ""
+    },
+    "ultimate_radius": {
+      "value": 307.842922050813,
+      "unit": "m",
+      "source_class": "analytic",
+      "formula": "T1-b",
+      "source_ref": "09_theorem1_practical_stability.md",
+      "status": "conditional",
+      "conservative": true,
+      "notes": ""
+    },
+    "sampled_abar": {
+      "value": 0.012972231257215023,
+      "unit": "1/(s*m^3)",
+      "source_class": "analytic",
+      "formula": "M7-abar",
+      "source_ref": "10_corollaries.md",
+      "status": "proved",
+      "conservative": true,
+      "notes": ""
+    },
+    "sampled_Bd": {
+      "value": 1.546172473348557,
+      "unit": "m^5/s",
+      "source_class": "analytic",
+      "formula": "M7-Bd",
+      "source_ref": "10_corollaries.md",
+      "status": "proved",
+      "conservative": true,
+      "notes": ""
+    },
+    "sampled_ultimate_radius": {
+      "value": 308.7924128183675,
+      "unit": "m",
+      "source_class": "analytic",
+      "formula": "M7-radius",
+      "source_ref": "10_corollaries.md",
+      "status": "conditional",
+      "conservative": true,
+      "notes": ""
+    }
+  },
+  "claims_deliberately_not_made": [
+    "global PL",
+    "formal caging",
+    "unconditional transport success",
+    "unconditional safety"
+  ]
+}

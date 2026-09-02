@@ -90,6 +90,90 @@ import numpy as np
 
 from .types import BoundaryObservation, BoundaryView
 
+
+@dataclass(frozen=True)
+class BoundaryMeasureErrorCertificate:
+    """Offline/runtime-audit decomposition of the measure-weight error.
+
+    A live robot cannot know missing true boundary from its local map alone.
+    Therefore this certificate requires an exact or independently audited
+    discrete reference view.  Unmatched reference weight is ``L_miss``;
+    unmatched estimated weight is ``M_spur``; paired weight differences form
+    the third term in ``E_w``.  The greedy matching is deliberately
+    conservative: every unpaired atom is charged in full.
+    """
+
+    missing_length: float
+    spurious_mass: float
+    matched_weight_error: float
+    voxel_bound: float
+    max_matched_displacement: float
+    matched_count: int
+    status: str = "available"
+
+    @property
+    def weight_mismatch(self) -> float:
+        return self.missing_length + self.spurious_mass + self.matched_weight_error
+
+
+def boundary_measure_error_certificate(
+    reference: BoundaryView,
+    estimate: BoundaryView,
+    *,
+    match_radius: float,
+    voxel_bound: float,
+) -> BoundaryMeasureErrorCertificate:
+    """Compare two discrete boundary measures without hiding unmatched mass.
+
+    ``reference.arc_length`` carries the exact discrete weights.  The mapped
+    density uses ``estimate.arc_length * estimate.confidence``. Object ids must
+    agree and matched points must lie within ``match_radius``.
+    """
+    radius = float(match_radius)
+    if radius < 0.0:
+        raise ValueError("match_radius must be non-negative")
+    voxel = float(voxel_bound)
+    if voxel < 0.0:
+        raise ValueError("voxel_bound must be non-negative")
+
+    ref_weight = np.maximum(np.asarray(reference.arc_length, dtype=float), 0.0)
+    est_weight = np.maximum(np.asarray(estimate.arc_length, dtype=float), 0.0) * np.maximum(
+        np.asarray(estimate.confidence, dtype=float), 0.0
+    )
+    candidates: list[tuple[float, int, int]] = []
+    for i in range(len(reference)):
+        compatible = np.flatnonzero(estimate.object_ids == reference.object_ids[i])
+        if len(compatible) == 0:
+            continue
+        distances = np.linalg.norm(estimate.points[compatible] - reference.points[i], axis=1)
+        for j, distance in zip(compatible, distances):
+            if float(distance) <= radius:
+                candidates.append((float(distance), i, int(j)))
+    candidates.sort()
+
+    used_ref: set[int] = set()
+    used_est: set[int] = set()
+    pairs: list[tuple[float, int, int]] = []
+    for distance, i, j in candidates:
+        if i in used_ref or j in used_est:
+            continue
+        used_ref.add(i)
+        used_est.add(j)
+        pairs.append((distance, i, j))
+
+    missing = float(np.sum([ref_weight[i] for i in range(len(reference)) if i not in used_ref]))
+    spurious = float(np.sum([est_weight[j] for j in range(len(estimate)) if j not in used_est]))
+    matched_error = float(np.sum([abs(est_weight[j] - ref_weight[i]) for _, i, j in pairs]))
+    max_displacement = max((distance for distance, _, _ in pairs), default=0.0)
+    return BoundaryMeasureErrorCertificate(
+        missing_length=missing,
+        spurious_mass=spurious,
+        matched_weight_error=matched_error,
+        voxel_bound=voxel,
+        max_matched_displacement=max_displacement,
+        matched_count=len(pairs),
+    )
+
 _CELL_BIAS = 1 << 20
 _CELL_STRIDE = 1 << 21
 _OBJECT_STRIDE = 1 << 42
@@ -889,8 +973,33 @@ class LocalBoundaryMap:
             return float(np.sum(self._arc))
         return float(np.sum(self._arc[self._objects == str(object_id)]))
 
+    def theorem_measure_error_certificate(
+        self,
+        reference: BoundaryView,
+        *,
+        timestamp: float | None = None,
+        match_radius: float | None = None,
+    ) -> BoundaryMeasureErrorCertificate:
+        """Build A5's ``E_w`` terms against an independent reference view.
+
+        This is an audit hook, not an on-board oracle. If no independently
+        audited reference exists, A5 remains conditional and callers must not
+        label ``E_w`` as measured or verified.
+        """
+        return boundary_measure_error_certificate(
+            reference,
+            self.view(timestamp),
+            match_radius=self.voxel_diagonal if match_radius is None else match_radius,
+            voxel_bound=self.voxel_diagonal,
+        )
+
     def __len__(self) -> int:
         return len(self._keys)
 
 
-__all__ = ["LocalBoundaryMap", "RegistrationResult"]
+__all__ = [
+    "BoundaryMeasureErrorCertificate",
+    "LocalBoundaryMap",
+    "RegistrationResult",
+    "boundary_measure_error_certificate",
+]

@@ -59,18 +59,35 @@ class CVTResult:
 
 @dataclass
 class LocalCVT:
-    """Grid-quadrature limited-range Voronoi centroid over a strict disk."""
+    """Midpoint-grid limited-range Voronoi centroid over a strict disk.
+
+    ``grid_resolution`` is the number of rectangular midpoint cells on each
+    axis of the clipped local bounding box.  The old implementation sampled
+    ``linspace`` endpoints while multiplying every node by a full cell area;
+    that rule double-counted boundary strips and did not satisfy the midpoint
+    certificate used by the theorem package.
+    """
 
     local_radius: float = 0.8
     grid_resolution: int = 24
     comm_range: float | None = None
     warn_on_contract: bool = True
+    theorem_mode: bool = False
 
     def __post_init__(self) -> None:
-        if self.comm_range is not None and self.warn_on_contract:
-            problems = CoverageContract(self.local_radius, self.comm_range).violations()
-            for problem in problems:
-                warnings.warn(problem, RuntimeWarning, stacklevel=2)
+        if self.local_radius <= 0.0:
+            raise ValueError("local_radius must be positive")
+        if int(self.grid_resolution) < 1:
+            raise ValueError("grid_resolution must be positive")
+        if self.theorem_mode and self.comm_range is None:
+            raise ValueError("theorem_mode requires an explicit comm_range")
+        if self.comm_range is not None:
+            contract = CoverageContract(self.local_radius, self.comm_range)
+            if self.theorem_mode:
+                contract.assert_valid()
+            elif self.warn_on_contract:
+                for problem in contract.violations():
+                    warnings.warn(problem, RuntimeWarning, stacklevel=2)
 
     # ------------------------------------------------------------------ #
 
@@ -89,10 +106,12 @@ class LocalCVT:
         if hi[0] <= lo[0] or hi[1] <= lo[1]:
             return np.empty((0, 2)), 0.0
 
-        n = max(4, int(self.grid_resolution))
-        xs = np.linspace(lo[0], hi[0], n)
-        ys = np.linspace(lo[1], hi[1], n)
-        cell_area = ((hi[0] - lo[0]) / (n - 1)) * ((hi[1] - lo[1]) / (n - 1))
+        n = max(1, int(self.grid_resolution))
+        dx = (hi[0] - lo[0]) / n
+        dy = (hi[1] - lo[1]) / n
+        xs = lo[0] + (np.arange(n, dtype=float) + 0.5) * dx
+        ys = lo[1] + (np.arange(n, dtype=float) + 0.5) * dy
+        cell_area = dx * dy
         xx, yy = np.meshgrid(xs, ys)
         samples = np.column_stack([xx.ravel(), yy.ravel()])
 
@@ -173,9 +192,12 @@ def coverage_cost(
     """
     p = np.asarray(positions, dtype=float).reshape(-1, 2)
     xmin, xmax, ymin, ymax = domain
-    xs = np.linspace(xmin, xmax, resolution)
-    ys = np.linspace(ymin, ymax, resolution)
-    cell_area = ((xmax - xmin) / (resolution - 1)) * ((ymax - ymin) / (resolution - 1))
+    n = max(1, int(resolution))
+    dx = (xmax - xmin) / n
+    dy = (ymax - ymin) / n
+    xs = xmin + (np.arange(n, dtype=float) + 0.5) * dx
+    ys = ymin + (np.arange(n, dtype=float) + 0.5) * dy
+    cell_area = dx * dy
     xx, yy = np.meshgrid(xs, ys)
     q = np.column_stack([xx.ravel(), yy.ravel()])
 
