@@ -1,0 +1,321 @@
+\documentclass[11pt]{article}
+\usepackage[letterpaper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb,mathtools,booktabs,array,enumitem,microtype,xcolor,hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue!45!black,urlcolor=blue!45!black}
+\setlist{nosep,leftmargin=1.5em}
+\newcommand{\R}{\mathbb R}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\dist}{\operatorname{dist}}
+\title{DBACT Theorem 1\\Proofs and Supporting Results}
+\author{Boundary-aware cooperative transport project}
+\date{Branch \texttt{DBACT-research-v3}\\Baseline HEAD
+\texttt{64e1905e092d19fd9dcbf0e77fbd39f55f0562ba}}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+This supplement proves a local, conditional practical-stability result for the
+boundary-measure-induced limited-range CVT allocation dynamics during ENCLOSE.
+It traces the final ultimate radius to boundary/map, convolution, quadrature,
+sampling, tracking, and safety-filter constants. It does not claim global PL,
+formal caging, finite-time phase completion, unconditional safety, or
+unconditional cooperative-transport success.
+\end{abstract}
+\tableofcontents
+
+\section{Scope and frozen claim}
+For first-order robots $\dot p_i=u_i$, the nominal ENCLOSE command is
+$u_i^{\rm nom}=-k_c(p_i-\widehat c_i)$. The ideal saturated limited-range cost is
+\begin{equation}
+H^*(P,t)=\int_D\min_i\min\{\norm{q-p_i}^2,R_l^2\}\phi^*(q,t)\,dq.
+\end{equation}
+The claim is practical stability near a selected nondegenerate local minimizer
+branch $C^*(t)$ in a fixed compact regular tube $X$.
+
+\paragraph{Exclusions.} No global CVT optimality, arbitrary-shape global
+convergence, finite-time SEARCH-to-HOLD guarantee, formal caging, contact
+transport theorem, unconditional CBF guarantee, or unconditional transport
+success is asserted.
+
+\section{Notation}
+Let $P=(p_1,\ldots,p_N)\in\R^{2N}$, with the Euclidean product norm. The
+workspace $D$ is a fixed rectangle. The true boundary $\Gamma(t)$ has perimeter
+at most $P_{\max}$. For the true offset target $\xi(s,t)$ define
+\begin{align}
+\nu_t^*&=\xi(\cdot,t)_\#ds,\\
+K_\sigma(x)&=\exp[-\norm{x}^2/(2\sigma^2)],\\
+\phi^*(q,t)&=\phi_0+(K_\sigma*\nu_t^*)(q).
+\end{align}
+The exact limited cell is
+$V_i^l=\operatorname{Vor}_i(P)\cap D\cap B(p_i,R_l)$, with mass $m_i^*$ and
+centroid $c_i^*$. The implementation produces $\widehat c_i$.
+
+The exact kernel constants are
+\begin{equation}
+\norm{K_\sigma}_1=2\pi\sigma^2,\quad
+\norm{\nabla K_\sigma}_1=\sqrt2\pi^{3/2}\sigma,\quad
+\norm{\nabla K_\sigma}_\infty=e^{-1/2}/\sigma.
+\end{equation}
+
+\section{Assumptions}
+\begin{enumerate}[label=A\arabic*.]
+\item $D$ is a fixed rectangle and the solution remains in compact $X$.
+\item Pairwise separation is at least $d_s>0$ and $R_{\rm comm}\ge2R_l$.
+\item $\Gamma(t)$ is piecewise $C^2$, closed, $P_\Gamma\le P_{\max}$, and is
+rigid in version 1.
+\item $\phi_0>0$, $\sigma>0$, and the stated unnormalized Gaussian is used.
+\item A map certificate supplies conservative boundary, normal, offset, voxel,
+arc-step, weight-mismatch, dropped-mass, and tail-separation bounds.
+\item LocalCVT uses midpoint cells of side at most $h$, and $\eta_m<m_{\min}$.
+\item Density biases are disabled or included in the disturbance ledger.
+\item In a symmetry-reduced convex chart, the selected branch satisfies
+$\nabla^2H^*_{\rm red}\succeq m_HI$ uniformly. This is conditional here.
+\item Tie/threshold degeneracies have measure zero and the solution remains on
+the same regular branch tube.
+\item ZOH, numerical, tracking, and safety deviations have stacked-norm bounds.
+\end{enumerate}
+
+\section{Lemma 1: density consistency}
+Insert the exact discrete intermediate measure
+\begin{equation}
+\nu_t^*\longrightarrow\nu_{h,t}^*=\sum_k\Delta s_k\delta_{\xi_k^*}
+\longrightarrow\widehat\nu_{i,t}=\sum_k\widehat w_{ik}\delta_{\widehat\xi_{ik}}.
+\end{equation}
+Define
+\begin{align}
+\epsilon_{\xi,i}&=\epsilon_{b,i}+\epsilon_{d,i}
++2d_{\max}\sin(\epsilon_{n,i}/2),\\
+E_{w,i}&=L_{\rm miss,i}+M_{\rm spur,i}
++\sum_{\rm matched}|\widehat w_{ik}-\Delta s_k|.
+\end{align}
+Then
+\begin{equation}
+\boxed{\norm{\widehat\phi_i-\phi^*}_{L^1(B(p_i,R_l)\cap D)}
+\le\epsilon_{\phi,i}}
+\end{equation}
+with
+\begin{equation}
+\epsilon_{\phi,i}=L_{K,1}P_{\max}
+\left(\epsilon_{\xi,i}+\sqrt2v+\frac{L_Th_s}{2}\right)
++2\pi\sigma^2E_{w,i}+\epsilon_{\rm tail,i},
+\tag{L1}
+\end{equation}
+\begin{equation}
+\epsilon_{\rm tail,i}\le\pi R_l^2M_{\rm drop,i}e^{-s_\sigma^2/2}.
+\end{equation}
+
+\paragraph{Proof.}
+Unit normals separated by angle $\theta$ differ by $2\sin(\theta/2)$; the
+triangle inequality gives $\epsilon_\xi$, and a square voxel adds at most
+$\sqrt2v$. For translations,
+\begin{equation}
+\norm{K_\sigma(\cdot-a)-K_\sigma(\cdot-b)}_1
+\le\norm{\nabla K_\sigma}_1\norm{a-b},
+\end{equation}
+by the fundamental theorem of calculus and Tonelli. On an arc of length
+$\Delta s_k$, the curve-quadrature error is at most
+$L_{K,1}L_T\Delta s_k^2/2$. Summation uses
+$\sum\Delta s_k^2\le h_s\sum\Delta s_k\le h_sP_{\max}$. Matched-atom
+translations contribute $L_{K,1}P_{\max}(\epsilon_\xi+\sqrt2v)$, while the
+weight discrepancy contributes $\norm{K_\sigma}_1E_w$. A dropped source at
+least $s_\sigma\sigma$ from every query contributes at most
+$e^{-s_\sigma^2/2}$ pointwise; integrate over area at most $\pi R_l^2$.
+Triangle inequality proves (L1). This is a post-convolution $L^1$ statement,
+not total-variation convergence of continuous and discrete measures.\qed
+
+\section{Lemma 2: mass, quadrature, and centroid perturbation}
+Let
+\begin{align}
+r_0&=\min\{R_l,d_s/2,W_D/2,H_D/2\},\\
+m_{\min}&=\phi_0\pi r_0^2/4>0,\\
+m_{\max}&=\pi R_l^2(\phi_0+P_{\max}),\\
+\widehat\phi_{\max}&=\phi_0+P_{\max}+E_{w,i},\qquad
+\widehat L_\phi\le (P_{\max}+E_{w,i})e^{-1/2}/\sigma.
+\end{align}
+For $r_h=h/\sqrt2$, $A_V\le\pi R_l^2$, and $P_V\le2\pi R_l$, put
+\begin{align}
+\eta_m&=\widehat L_\phi r_hA_V+\widehat\phi_{\max}(2P_Vr_h+\pi r_h^2),\\
+\eta_a&=(\widehat\phi_{\max}+R_l\widehat L_\phi)r_hA_V
++R_l\widehat\phi_{\max}(2P_Vr_h+\pi r_h^2),\\
+\epsilon_q&=\frac{\eta_a+R_l\eta_m}{m_{\min}-\eta_m}.
+\end{align}
+If $\eta_m<m_{\min}$, then
+\begin{equation}
+\boxed{\norm{\widehat c_i-c_i^*}\le
+\epsilon_{c,i}:=\frac{2R_l\epsilon_{\phi,i}}{m_{\min}}
++\epsilon_{q,i}+\epsilon_{G,i}.}
+\tag{L2}
+\end{equation}
+
+\paragraph{Proof.}
+Separation puts $B(p_i,d_s/2)$ in robot $i$'s Voronoi cell. Intersecting with
+the local disk and rectangle leaves at least a quarter disk of radius $r_0$,
+giving $m_{\min}$. Since $K_\sigma\le1$, ideal cell area gives $m_{\max}$.
+Lemma~1 bounds the mapped total weight by $P_{\max}+E_w$; differentiating its
+convolution gives the displayed mapped-density bounds.
+
+For midpoint cells wholly inside the exact convex cell, Lipschitz error is at
+most $\widehat L_\phi r_h$ times area. Boundary-cut cells lie in a parallel strip of area
+at most $2P_Vr_h+\pi r_h^2$, which proves $\eta_m$. Apply the same argument to
+the shifted first moment $a=\int(q-p_i)\phi(q)dq$, whose Lipschitz constant is at
+most $\widehat\phi_{\max}+R_l\widehat L_\phi$ and magnitude at most
+$R_l\widehat\phi_{\max}$, to obtain
+$\eta_a$. Since $\widehat m\ge m_{\min}-\eta_m>0$,
+\begin{equation}
+\norm{\widehat a/\widehat m-a/m}
+\le\frac{\eta_a+R_l\eta_m}{m_{\min}-\eta_m}.
+\end{equation}
+Lemma 1 changes mass by at most $\epsilon_\phi$ and shifted moment by at most
+$R_l\epsilon_\phi$; both continuum densities keep the base-density mass floor,
+so their centroid difference is at most $2R_l\epsilon_\phi/m_{\min}$. Add the
+separate geometric-cell error $\epsilon_G$.\qed
+
+\section{Proposition 1: ideal gradient and descent}
+At regular configurations,
+\begin{equation}
+\nabla_{p_i}H^*=2m_i^*(p_i-c_i^*).
+\tag{P1}
+\end{equation}
+Indeed, the active quadratic integrand has derivative $2(p_i-q)$ inside
+$V_i^l$ and zero in the saturated region. On shared Voronoi faces, competing
+values agree and fluxes cancel. On the moving circle $r=R_l$, the inner and
+outer costs both equal $R_l^2$, so its flux cancels. Tie and threshold sets have
+measure zero. Thus only the volume derivative remains.
+
+If $A=\operatorname{diag}_i(k_c/(2m_i^*)I_2)$ and
+$a_0=k_c/(2m_{\max})$, then $A\succeq a_0I$ and, for frozen reference,
+\begin{equation}
+\dot H^*=-\nabla H^{*T}A\nabla H^*\le-a_0\norm{\nabla H^*}^2.
+\end{equation}
+Moreover $R_{\rm comm}\ge2R_l$ includes every robot that can beat $i$ at a
+query in $B(p_i,R_l)$, so the implemented competitor set is exact.
+
+\section{Proposition 2: aggregate disturbance}
+In the stacked Euclidean norm,
+\begin{equation}
+\boxed{\norm{d}\le\delta:=k_c\sqrt{\sum_i\epsilon_{c,i}^2}
++\epsilon_{\rm zoh}+\epsilon_{\rm num}+\epsilon_{\rm trk}
++\epsilon_{\rm sf}.}
+\tag{P2}
+\end{equation}
+This follows from Lemma 2 and the triangle inequality. The implementation uses
+a Euclidean speed cap per robot; if nominal and filtered speeds are both at most
+$u_{\max}$, then $\norm{u_i^{sf}-u_i^{nom}}\le2u_{\max}$ and
+$\epsilon_{sf}\le2\sqrt N u_{\max}$. A componentwise box convention would give
+$2\sqrt{2N}u_{\max}$ instead.
+
+\section{Proposition 3: reference rate and local regularity}
+For $\xi=b+dn$,
+$\dot\xi=\dot b+\dot d\,n+d\dot n$. Under the rigid A3 certificate,
+\begin{align}
+v_{\xi,\max}&=\bar v_O+\bar\omega_O(R_O+d_{\max}+L_d),\\
+\nu_\phi:=\norm{\partial_t\phi^*}_1
+&\le L_{K,1}P_{\max}v_{\xi,\max},\\
+\nu_H&=2R_l^2\nu_\phi.
+\tag{P3}
+\end{align}
+The first inequality is again the convolution translation bound. Since the
+saturated integrand is between zero and $R_l^2$,
+$|\partial_tH^*|\le R_l^2\nu_\phi$. For fixed compact $X$,
+$|\min f-\min g|\le\sup|f-g|$ gives the same bound on
+$|\dot H^*_{\min}|$ almost everywhere, proving (P3).
+
+Under A8, integration of the uniform reduced Hessian bound gives local PL and
+quadratic growth:
+\begin{equation}
+\tfrac12\norm{\nabla H^*}^2\ge\mu(H^*-H^*_{\min}),\qquad
+H^*-H^*_{\min}\ge\tfrac\alpha2\dist^2(P,C^*(t)).
+\end{equation}
+The implication is proved, but A8 is conditional because no actual branch/tube
+interval certificate is available.
+
+\section{Theorem 1: practical stability}
+Define
+\begin{equation}
+V=H^*-H^*_{\min},\quad \lambda_H=a_0\mu,\quad
+B=\frac{\delta^2}{2a_0}+\nu_H.
+\end{equation}
+Then, while the regular-tube assumptions hold,
+\begin{align}
+V(t)&\le e^{-\lambda_H(t-t_0)}V(t_0)
++\frac{B}{\lambda_H}(1-e^{-\lambda_H(t-t_0)}),\tag{T1-a}\\
+\limsup_{t\to\infty}\dist(P(t),C^*(t))
+&\le\sqrt{\frac{2B}{\alpha\lambda_H}}.\tag{T1-b}
+\end{align}
+
+\paragraph{Proof.}
+At almost every regular time,
+\begin{align*}
+\dot V
+&=\nabla H^{*T}\dot P+\partial_tH^*-\dot H^*_{\min}\\
+&\le-\nabla H^{*T}A\nabla H^*+\norm{\nabla H^*}\norm d+\nu_H
+&&\text{(Propositions 1 and 3)}\\
+&\le-a_0\norm{\nabla H^*}^2+\delta\norm{\nabla H^*}+\nu_H
+&&\text{(Proposition 2)}\\
+&\le-\tfrac{a_0}{2}\norm{\nabla H^*}^2+\frac{\delta^2}{2a_0}+\nu_H
+&&\text{(Young)}\\
+&\le-a_0\mu V+B=-\lambda_HV+B
+&&\text{(local PL).}
+\end{align*}
+The comparison lemma yields (T1-a). Taking the limit superior and applying
+local quadratic growth yields (T1-b).\qed
+
+\section{Corollaries}
+\subsection{Frozen perfect information}
+If $\delta=\nu_H=0$, then $B=0$ and
+$V(t)\le e^{-\lambda_H(t-t_0)}V(t_0)$, hence
+$\dist(P(t),C^*)\to0$ within the regular tube.
+
+\subsection{Sampled data}
+For $P_{k+1}=P_k+\Delta t[-A_kg_k+d_k]$, let
+$a_0I\preceq A_k\preceq a_1I$, $a_1=k_c/(2m_{\min})$, and let the spatial
+gradient be $L_H$-Lipschitz. Define
+\begin{align}
+\bar a&=a_0-L_Ha_1^2\Delta t/2,\\
+C_\delta&=\delta(1+L_Ha_1\Delta t),\\
+B_d&=C_\delta^2/(2\bar a)+(L_H/2)\delta^2\Delta t+\nu_H.
+\end{align}
+If $\Delta t<2a_0/(L_Ha_1^2)$ and
+$0<\bar a\mu\Delta t\le1$, the descent lemma, expansion, Young, and local PL
+give
+\begin{equation}
+V_{k+1}\le(1-\bar a\mu\Delta t)V_k+B_d\Delta t,
+\end{equation}
+and the geometric series plus quadratic growth gives
+\begin{equation}
+\limsup_k\dist(P_k,C_k^*)\le\sqrt{2B_d/(\alpha\bar a\mu)}.
+\end{equation}
+
+\section{Limits and evidence status}
+Lemmas 1--2, Propositions 1--2, the rigid-reference part of Proposition 3, the
+conditional implication in Theorem 1, and both corollary derivations are
+analytic. Wolfram exactly or symbolically checked their integral and algebraic
+subclaims. M5/A8 remains conditional; there is no interval Hessian certificate
+and no numeric eigenvalue is used as proof. Runtime map and disturbance bounds
+must be supplied for a particular run.
+
+\appendix
+\section{Constant ledger and units}
+The machine-readable ledger is \texttt{theory/theorem1/constant\_ledger.yaml};
+the generated numerical certificate is
+\texttt{theory/certificates/analytic\_constants.json}. The dependency chain is
+\[
+(\epsilon_b,\epsilon_n,\epsilon_d,v,h_s,E_w,M_{\rm drop})
+\to\epsilon_\phi\to\epsilon_c\to\delta\to B
+\to\sqrt{2B/(\alpha\lambda_H)}.
+\]
+The illustrative numeric certificate is conservative and may be vacuous; it is
+a wiring/gate certificate, not experimental evidence.
+
+\section{Wolfram verification manifest}
+Nine included scripts cover kernel constants, target identities, centroid
+algebra, mass/units, a fixed-cell gradient check, reference-rate algebra,
+continuous Lyapunov algebra, sampled-data coefficients, and the generic
+strong-convex quadratic implication. All scripts ran locally under
+WolframScript 1.14.0; connector outputs are archived under
+\texttt{theory/wolfram/results}. No interval or numeric-sanity result is claimed
+for the actual reduced Hessian.
+
+\bibliographystyle{plain}
+\bibliography{references}
+\end{document}
