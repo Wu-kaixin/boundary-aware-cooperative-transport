@@ -64,25 +64,57 @@ rather than transcribed.
   (`results/W-RERUN_connector_session.md`), plus all nine `.wl` scripts
   re-executed locally under WolframScript 1.14.0 with exit code 0 and outputs
   identical to the archived ones.  `W-M5-02` is still CONDITIONAL.
-- The PDF was rebuilt and is byte-identical to the previous one once the
-  embedded `CreationDate`/`ID` are normalised, so the build is deterministic.
-- PDF and DOCX were both rendered at 2x and inspected page by page (12 pages
-  each, no clipping or overlap).  The DOCX render used the locally installed
-  Word; LibreOffice is still absent.
+- The then-current PDF was rebuilt and came out byte-identical once the
+  embedded `CreationDate`/`ID` were normalised, so that build was
+  deterministic. (That ASCII-formula PDF has since been replaced; see the
+  rewrite below.)
+- Both documents were rendered at 2x and inspected page by page, with no
+  clipping or overlap. The DOCX render used the locally installed Word;
+  LibreOffice is still absent. Current sizes: PDF 26 pages (A4, from LaTeX),
+  DOCX 22 pages (US Letter).
 
-### Supplement now has two renderers
+## Supplement rewrite: real mathematics, one LaTeX source
 
-The supplement prose was extracted into `supplement/supplement_content.py`.
-`build_supplement.py` (PDF) and `build_supplement_docx.py` (Word) both drive
-`compose()`, so the two files cannot state different things about what is
-proved versus assumed.  The extraction was verified by rebuilding the PDF and
-confirming it is unchanged.  `tests/theory/test_supplement_content.py` pins the
-claim boundary, the ledger-to-certificate link, and the requirement that
-Proposition 3 and Theorem 1 stay CONDITIONAL.
+The first supplement typeset its formulas as monospace ASCII (`grad H*^T`,
+`sqrt(2B/(alpha lambda_H))`) and compressed each proof into a few sentences.
+It was rewritten.
 
-Re-run environment: Python 3.13.13, reportlab 5.0.1, python-docx 1.2.0,
-pypdfium2 5.13.0 (added for page rendering; none of these are runtime
-dependencies of `dbact`).
+- Every formula is now authored in **LaTeX**, once, in
+  `supplement/theorem1_document.py`.
+- `render_latex.py` emits `theorem1_supplement.tex` and typesets it with
+  Tectonic to produce the PDF.
+- `build_supplement_docx.py` converts the same LaTeX to **native Word equation
+  objects** (LaTeX -> MathML -> OMML via Office's `MML2OMML.XSL`), so the
+  .docx contains real, editable mathematics rather than pictures or ASCII.
+- Each lemma, proposition and the theorem now carries a numbered, step-by-step
+  derivation; every inequality in the Lyapunov chain and the sampled-data
+  expansion names the result that justifies it.
+
+### The conversion needs a guard, and the guard found real bugs
+
+`MML2OMML.XSL` drops constructs **silently**: the formula still renders, and
+still looks plausible. `latex_to_omml` therefore compares the significant
+characters of the MathML against those of the OMML and fails the build on any
+loss. Running it over all 283 equations caught four classes of corruption:
+
+| Construct | Silent result | Fix |
+|---|---|---|
+| `\|d\|^2` | the `d` vanished | group the fence body |
+| `\|\nabla H^*\|` | the gradient vanished | group `\nabla` |
+| `\pi^{3/2}` | became `\pi^{32}` | group the slash |
+| `\left(a+b+c\right)` | became `(abc)` | group the fence body |
+
+`\bigl\|` also survived as literal backslash-pipe, `\qquad`/`\quad`/`\;` were
+dropped so equations ran together, and MathML accents arrived as OMML *limits*
+(a hat drawn high and detached) rather than accents. All are normalised or
+post-processed, and `tests/theory/test_supplement_content.py` checks both that
+the traps are neutralised and that the guard still detects the raw ones -- a
+regression in the guard would otherwise make those tests pass vacuously.
+
+Re-run environment: Python 3.13.13, python-docx 1.2.0, latex2mathml 3.81.0,
+lxml 6.1.2, Tectonic 0.15.0, pypdfium2 5.13.0 for page rendering. None is a
+runtime dependency of `dbact`. Word 2016 was used to render the .docx for
+visual QA; the build itself does not need Word, only its stylesheet.
 
 ## Package map
 
@@ -92,8 +124,9 @@ dependencies of `dbact`).
   connector results, and a verification manifest.
 - `python/`: the single numerical constant/certificate implementation.
 - `certificates/`: generated analytic constants and the certificate schema.
-- `supplement/`: standalone professor-facing source, PDF, and Word document.
-  `supplement_content.py` holds the frozen text both renderers share.
+- `supplement/`: standalone professor-facing document. `theorem1_document.py`
+  holds the frozen prose and every LaTeX formula; `render_latex.py` produces
+  the .tex and the PDF, `build_supplement_docx.py` the Word file.
 
 ## Evidence policy
 
@@ -111,12 +144,11 @@ python theory/python/generate_certificate.py --config theory/theorem1/theorem_mo
 python -m pytest tests/theory -q
 python -m pytest tests -q
 wolframscript -file theory/wolfram/scripts/01_kernel_constants.wl
-python theory/supplement/build_supplement.py        # PDF  (needs reportlab)
-python theory/supplement/build_supplement_docx.py   # DOCX (needs python-docx)
+python theory/supplement/render_latex.py            # .tex + PDF (needs tectonic)
+python theory/supplement/build_supplement_docx.py   # .docx with Word equations
 ```
 
-The LaTeX source is included for inspection. No TeX engine was found on this
-host; the included PDF is built deterministically by
-`theory/supplement/build_supplement.py` from the same frozen statements and
-proof text. Page rendering for visual QA used Poppler on the first pass and
-pypdfium2 on the re-run, since Poppler is not on this host's PATH.
+`theorem1_supplement.tex` is generated, not hand-edited: change
+`theorem1_document.py` and re-run the two builders. The PDF is typeset from
+that .tex by Tectonic. Page rendering for visual QA used pypdfium2, since
+Poppler is not on this host's PATH.
