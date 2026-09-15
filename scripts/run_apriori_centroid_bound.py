@@ -413,7 +413,7 @@ def make_figures(rows: list[dict], out_dir: Path) -> list[str]:
         ax.set_title(shape)
         ax.set_xlabel("controller grid n")
         ax.set_ylabel(r"$\bar E$")
-        ax.set_yscale("log")
+        ax.set_yscale("symlog", linthresh=1e-12)
         ax.grid(alpha=0.25)
         ax.legend(fontsize=7)
     fig.suptitle("Mass-weighted centroid error vs controller resolution (eval grid fixed)")
@@ -439,7 +439,7 @@ def make_figures(rows: list[dict], out_dir: Path) -> list[str]:
         ax.scatter(x, [r["B_J_prior_numerical_a_priori"] for r in sub], marker="d", label="prior (num.)")
         ax.scatter(x, [r["B_J_geom"] for r in sub], marker="_", s=120, label="geom M u_max²")
         ax.set_xticks(x, labels, rotation=75, fontsize=7)
-        ax.set_yscale("log")
+        ax.set_yscale("symlog", linthresh=1e-6)
         ax.set_title(shape)
         ax.grid(alpha=0.25)
         ax.legend(fontsize=6)
@@ -467,7 +467,7 @@ def make_figures(rows: list[dict], out_dir: Path) -> list[str]:
             axes[i, 0].set_title(f"{shape} seed {seed} n={grid}  E_k")
             axes[i, 1].set_title(f"{shape} seed {seed} n={grid}  J_k")
             for ax in axes[i]:
-                ax.set_yscale("log")
+                ax.set_yscale("symlog", linthresh=1e-12)
                 ax.grid(alpha=0.25)
         fname = f"timeseries_{shape}_seed{seed}"
         fig.savefig(fig_dir / f"{fname}.png", dpi=150)

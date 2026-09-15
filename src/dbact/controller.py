@@ -343,6 +343,8 @@ class DBACTParams:
     theorem_forbid_fallback: bool = True
     # Keep object rows but do not silently rename scaled-barrier events.
     theorem_allow_object_barrier_scaling: bool = True
+    # Keep 0 in F_rho whenever the hard barrier already admits 0 (margin clamp).
+    theorem_clamp_margin_to_keep_zero: bool = True
     # Soft separation bias in the nominal law is off in theorem_mode so the
     # only robot-robot effect on U_k is the hard QP half-constraint.
     theorem_disable_soft_separation: bool = True
@@ -541,6 +543,9 @@ class DBACTController:
                     True
                     if not params.theorem_mode
                     else bool(params.theorem_allow_object_barrier_scaling)
+                ),
+                clamp_margin_to_keep_zero=bool(
+                    params.theorem_mode and params.theorem_clamp_margin_to_keep_zero
                 ),
             ),
             contract=contract,

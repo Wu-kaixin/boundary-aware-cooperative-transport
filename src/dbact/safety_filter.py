@@ -112,6 +112,11 @@ class SafetyFilterParams:
     domain: tuple[float, float, float, float] | None = None
     forbid_fallback: bool = False
     allow_object_barrier_scaling: bool = True
+    # Theorem-mode option: if the hard (rho-free) object barrier admits u=0 but the
+    # ISSf margin does not, clamp those object RHS entries up to 0 so that the
+    # projection set used by the QP contains 0.  This is a per-row margin
+    # relaxation, not a global rho reduction; agent/wall rows are untouched.
+    clamp_margin_to_keep_zero: bool = False
 
 
 @dataclass
@@ -522,6 +527,20 @@ class SafetyFilter:
         b_no_margin = (
             np.concatenate([b_agent, b_wall, b_obj_free]) if len(b) else b
         )
+
+        if (
+            self.params.clamp_margin_to_keep_zero
+            and len(b_obj)
+            and len(b_obj_free) == len(b_obj)
+        ):
+            n_pre = len(b_agent) + len(b_wall)
+            clamped = False
+            for i in range(len(b_obj)):
+                if float(b_obj_free[i]) >= -1e-9 and float(b[n_pre + i]) < 0.0:
+                    b[n_pre + i] = 0.0
+                    clamped = True
+            if clamped:
+                self.stats.margin_relaxations += 1
 
         # The certificate is about the barrier, so it is evaluated against the
         # margin-free right-hand side. Evaluating it with rho included would report

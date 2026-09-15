@@ -213,8 +213,16 @@ def mixture_mass_centroid_over_polygon(
     sigma: float,
     floor: float,
     panels: int,
+    cull_sigmas: float = 6.0,
 ) -> tuple[float, np.ndarray, int]:
-    """Mass and centroid of ``floor + sum w_j k(·-xi_j)`` on a polygon."""
+    """Mass and centroid of ``floor + sum w_j k(·-xi_j)`` on a polygon.
+
+    Sources with ``dist(xi, bbox(polygon)) > cull_sigmas * sigma`` are skipped;
+    their omitted mass is at most ``w_j * 2 pi sigma^2 exp(-cull_sigmas^2 / 2)``
+    and is charged in the prior via the same Gaussian tail identity when needed.
+    Runtime culling does not widen the partition-restrict certificate (that bound
+    already uses the full weight sum ``W``).
+    """
     poly = np.asarray(polygon, dtype=float).reshape(-1, 2)
     area, area_c = polygon_area_centroid(poly)
     if area <= _EPS:
@@ -224,12 +232,22 @@ def mixture_mass_centroid_over_polygon(
     tgt = np.asarray(targets, dtype=float).reshape(-1, 2)
     w = np.asarray(weights, dtype=float).reshape(-1)
     used = 0
+    if len(poly):
+        lo = poly.min(axis=0)
+        hi = poly.max(axis=0)
+    else:
+        lo = hi = np.zeros(2)
+    cull_r = float(cull_sigmas) * float(sigma)
     for xi, wj in zip(tgt, w):
         if abs(float(wj)) <= _EPS:
             continue
+        # Distance from point to axis-aligned box.
+        dx = float(max(lo[0] - xi[0], 0.0, xi[0] - hi[0]))
+        dy = float(max(lo[1] - xi[1], 0.0, xi[1] - hi[1]))
+        if dx * dx + dy * dy > cull_r * cull_r:
+            continue
         m_j, mu_j = gaussian_mass_moment_over_polygon(poly, xi, sigma, panels)
         mass += float(wj) * m_j
-        # int q k = int (u+xi) k = mu + xi * m
         moment += float(wj) * (mu_j + xi * m_j)
         used += 1
     if mass <= _EPS:

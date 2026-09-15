@@ -49,3 +49,27 @@ Label fixes: geom comparator uses `M_plane` (not scipy.quad); mesh `φ_max` diag
 ## Round 2 — stage-3 closed loop (in progress)
 
 Target: `artifacts/apriori_closure_2026-09-15/` with L-shape seed2 and C-shape seed5, `edge_green`, frames=600.
+
+
+## Round 2 results (stage-3 closed loop)
+
+Command: python scripts/run_apriori_centroid_bound.py --out artifacts/apriori_closure_2026-09-15 --shapes l_shape c_shape --seeds 2 5 --grids 20 --frames 600 --integration-method edge_green --edge-n-gon 256 --edge-panels 48
+
+| case | K0 | priorJ | geom | beat |
+| L2 | True | 0.1129 | 0.2295 | yes |
+| L5 | True | 0.1123 | 0.2295 | yes |
+| C2 | True | 0.1232 | 0.2295 | yes |
+| C5 | False (5 frames, agent 14) | 0.1235 | 0.2295 | constants yes / theorem inapplicable |
+
+Wall ~20 min/case. E_bar ~1e-7. No abort. Figures initially failed on log-scale (fixed to symlog).
+
+## Round 3 — K0 route C (partial)
+
+Observed C5 failures: frames 227-228 hard zero_input_feasible=False; 229-231 margin-only.
+Implemented 	heorem_clamp_margin_to_keep_zero (default on in theorem_mode): clamps object RHS to 0 when hard barrier admits 0. Does **not** weaken hard barrier. Hard-barrier frames remain open (route B needs a priori ||Pi(0)||).
+
+## Next
+
+- Finish stage-4 rectangle + seed8 matrix.
+- Re-run C5 with margin clamp; report remaining hard frames.
+- Independent seeds 11/17/23 only after method freeze if K0 story is accepted as PARTIAL.
