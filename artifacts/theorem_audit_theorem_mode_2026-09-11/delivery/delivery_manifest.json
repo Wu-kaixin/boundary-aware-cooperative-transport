@@ -1,0 +1,77 @@
+{
+  "frozen_baseline": "98ba28e835a8c45fa8375b2a5ae6130c17e547ad",
+  "branch": "feat/sampled-theorem-mode",
+  "head": "98ba28e835a8c45fa8375b2a5ae6130c17e547ad",
+  "worktree": "E:\\dbact-sampled-theorem-mode",
+  "os": "Windows-11-10.0.26200-SP0",
+  "python": "3.13.13 | packaged by Anaconda, Inc. | (main, Apr 14 2026, 06:12:50) [MSC v.1942 64 bit (AMD64)]",
+  "packages": {
+    "numpy": "2.5.1",
+    "scipy": "1.18.0",
+    "matplotlib": "3.11.1",
+    "PyYAML": "6.0.3"
+  },
+  "patch_file": "feat_sampled_theorem_mode_vs_98ba28e.patch",
+  "patch_bytes": 231309,
+  "patch_sha256": "29f93d8b5c4cb12394417e5e2a0ac5f0d6f4d88fdddb953a5c2efea1fa582691",
+  "paths_included": [
+    "src/dbact/controller.py",
+    "src/dbact/safety_filter.py",
+    "src/dbact_sim/environment.py",
+    "src/dbact/theorem_mode.py",
+    "configs/sim/theorem",
+    "scripts/audit_n16_static_performance.py",
+    "scripts/audit_discrete_dissipation.py",
+    "scripts/audit_JE_and_bounds.py",
+    "scripts/audit_projection_margin_band.py",
+    "scripts/run_multi_shape_static.py",
+    "scripts/finalize_advisor_delivery.py",
+    "scripts/validate_theorem_mode.py",
+    "scripts/diagnose_seed8_fork.py",
+    "scripts/export_delivery_bundle.py",
+    "tests/test_theorem_mode.py",
+    "BRANCH_NOTE_feat_sampled_theorem_mode.md"
+  ],
+  "paths_missing": [],
+  "pytest_returncode": 0,
+  "assumption_code_table": "assumption_code_table.json",
+  "two_theorem_modes": {
+    "sampled_execution_mode": {
+      "where": "feat/sampled-theorem-mode: src/dbact/theorem_mode.py + controller/safety/environment patches",
+      "meaning": "Static sample-and-hold cover: wall rows, no clipping, mode freeze, abort-on-illegal, hold-segment pair/object checks"
+    },
+    "certificate_mode_on_research_v3": {
+      "where": "DBACT-research-v3 @ 795105f: density/CVT fail-closed gates + theory/certificates",
+      "meaning": "Proof-certificate wiring for density/locality constants; does NOT implement the sampled execution fix"
+    },
+    "warning": "Same flag name theorem_mode, different responsibility. Do not merge blindly."
+  },
+  "reproduce": {
+    "env": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 PYTHONPATH=src",
+    "unit_tests": "python -m pytest tests/test_theorem_mode.py -q",
+    "validation": "python scripts/validate_theorem_mode.py --out <out>/validation --frames 80",
+    "n16_static_audit": "python scripts/audit_n16_static_performance.py --config configs/sim/theorem/static_l_shape_n16_oracle.yaml --seeds 2 5 8 --frames 600 --observer-stride 5 --out <out>/n16_static_audit",
+    "discrete_dissipation": "python scripts/audit_discrete_dissipation.py --config configs/sim/theorem/static_l_shape_n16_oracle.yaml --seeds 2 5 8 --frames 600 --ntheta 128 --nradial 12 --out <out>/n16_discrete_dissipation",
+    "je_bounds_audit": "python scripts/audit_JE_and_bounds.py --config configs/sim/theorem/static_l_shape_n16_oracle.yaml --dissipation-dir <out>/n16_discrete_dissipation --static-audit-dir <out>/n16_static_audit --seeds 2 5 8 --out <out>/n16_JE_bounds",
+    "multi_shape": "python scripts/run_multi_shape_static.py --seeds 2 5 8 --frames 600 --ntheta 128 --nradial 12 --out <out>/n16_multi_shape",
+    "finalize_advisor_delivery": "python scripts/finalize_advisor_delivery.py --seeds 2 5 8 --ntheta 128 --nradial 12 --out <out>/final_advisor_delivery  # offline; reuses nine-case step_records, fixed three_command_hyp (same-observer H,g,m), per-robot lambda finite-time J bound, nine_case_summary.json + figures + CSV",
+    "compile_report": "cd <out>/final_advisor_delivery/latex && tectonic main.tex   # or pdflatex/latexmk/xelatex; produces main.pdf",
+    "artifact_root": "E:\\boundary-aware-cooperative-transport\\artifacts\\theorem_audit_theorem_mode_2026-09-11"
+  },
+  "advisor_documents": {
+    "english_review": "DBACT_discrete_dissipation_advisor_review_2026-09-11.md",
+    "derivation_md": "discrete_dissipation_derivation.md",
+    "final_bundle": "final_advisor_delivery/",
+    "compiled_pdf": "final_advisor_delivery/latex/main.pdf",
+    "nine_case_summary": "final_advisor_delivery/nine_case_summary.json",
+    "a_priori_JE_verdict": "n16_JE_bounds/a_priori_conclusion.json"
+  },
+  "a_priori_centroid_error_sufficient": false,
+  "hessian_certificate": false,
+  "merge_status": "not_merged",
+  "notes": [
+    "C-shape seed5 frames 241-246: full-horizon J bound inapplicable; failures retained",
+    "Primary J geometric bound: M_total * u_max^2",
+    "strict_numerical_certificate always false (no rigorous quadrature error bound)"
+  ]
+}

@@ -1,0 +1,111 @@
+[
+  {
+    "assumption": "Sample-and-hold execution without clipping (U applied as P + Delta U)",
+    "status": "implemented",
+    "code": [
+      "src/dbact/theorem_mode.py::apply_theorem_commands",
+      "src/dbact/theorem_mode.py::theorem_step",
+      "configs/sim/theorem/*.yaml:theorem_disable_clipping=true"
+    ]
+  },
+  {
+    "assumption": "Abort on illegal state instead of silent fallback",
+    "status": "implemented",
+    "code": [
+      "src/dbact/theorem_mode.py::TheoremModeAbort",
+      "src/dbact/theorem_mode.py::_abort",
+      "configs/sim/theorem/*.yaml:theorem_forbid_fallback=true"
+    ]
+  },
+  {
+    "assumption": "Wall half-plane rows in the hold QP (domain containment)",
+    "status": "implemented",
+    "code": [
+      "src/dbact/theorem_mode.py::wall_halfplanes",
+      "src/dbact/theorem_mode.py::point_in_domain",
+      "src/dbact/safety_filter.py (wall rows + rho margin)"
+    ]
+  },
+  {
+    "assumption": "Hold-segment pairwise and object clearance over the whole step",
+    "status": "implemented",
+    "code": [
+      "src/dbact/theorem_mode.py::hold_segment_min_distance",
+      "src/dbact/theorem_mode.py::team_hold_min_distance",
+      "src/dbact/theorem_mode.py::hold_segment_object_clearance",
+      "src/dbact/theorem_mode.py::omitted_neighbor_certificate"
+    ]
+  },
+  {
+    "assumption": "Assumption 2 -- true object motion bound (frozen cargo => v_obj = 0)",
+    "status": "satisfied_by_construction",
+    "code": [
+      "src/dbact/theorem_mode.py::freeze_cargoes",
+      "configs/sim/theorem/*.yaml:cargoes[].movable=false",
+      "configs/sim/theorem/*.yaml:max_object_speed=0.0"
+    ]
+  },
+  {
+    "assumption": "Assumption 3 -- same Gaussian offset kernel (uniform cage, no lead/explore)",
+    "status": "structurally_aligned",
+    "code": [
+      "configs/sim/theorem/*.yaml:density_mode=offset, cage_offset, lead_offset=null, gap_gain=0, explore_gain=0",
+      "src/dbact/theorem_mode.py::oracle_boundary_view",
+      "src/dbact/theorem_mode.py::reference_offset_note"
+    ]
+  },
+  {
+    "assumption": "Assumption 5 -- local Lipschitz continuous-time feedback",
+    "status": "not_claimed",
+    "code": [
+      "hard Voronoi/grid membership retained; sampled model used instead"
+    ]
+  },
+  {
+    "assumption": "Theorem parameter guard (gamma_agent*Delta<=1, theorem params valid)",
+    "status": "checked_at_runtime",
+    "code": [
+      "src/dbact/theorem_mode.py::assert_theorem_params"
+    ]
+  },
+  {
+    "assumption": "Fine-grid mass certificate (29): eta_m floor >= m_-",
+    "status": "fails_as_documented",
+    "code": [
+      "scripts/audit_n16_static_performance.py::theoretical_constants (eta_m_floor vs m_minus)"
+    ]
+  },
+  {
+    "assumption": "Discrete descent inequality on the hold map (three command stages)",
+    "status": "numerically_consistent_not_certified",
+    "code": [
+      "scripts/audit_JE_and_bounds.py::three_command_hyp (same-observer H,g,m on refinement)",
+      "scripts/audit_discrete_dissipation.py::dissipation_rhs"
+    ],
+    "note": "strict_numerical_certificate always false (reason=no_rigorous_quadrature_error_bound); layers coarse/refined/unresolved_quadrature_error recorded per stage."
+  },
+  {
+    "assumption": "Finite-time J bound with per-robot effective gain lambda_i and qualifying step set K_0 (full-horizon only)",
+    "status": "conditional_full_horizon_else_inapplicable",
+    "code": [
+      "scripts/finalize_advisor_delivery.py::finite_time_bound",
+      "scripts/finalize_advisor_delivery.py::main (c_shape seed 5 inapplicable)"
+    ],
+    "note": "a_i=2/lambda_i-Delta>=a=2/k_c-Delta>0; geometric J ceiling M_total*u_max^2; c_shape seed 5 full-horizon bound inapplicable (frames 241-246, agent 14)."
+  },
+  {
+    "assumption": "J/E post-hoc bound J_bar <= 2H0/(aKD)+4E_bar/a^2 (E_bar post-hoc)",
+    "status": "post_hoc_only",
+    "code": [
+      "scripts/audit_JE_and_bounds.py::compute_bounds",
+      "scripts/audit_JE_and_bounds.py::a_priori_conclusion (a_priori_error_bound_sufficient=false)"
+    ]
+  },
+  {
+    "assumption": "Theorem 1 coarse asymptotic bound as a quantitative certificate",
+    "status": "not_established",
+    "code": [
+      "reported as diagnostic scale only; assumptions incomplete"
+    ]
+  }
+]

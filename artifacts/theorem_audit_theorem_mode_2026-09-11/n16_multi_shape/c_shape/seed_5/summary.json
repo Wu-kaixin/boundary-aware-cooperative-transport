@@ -1,0 +1,37 @@
+{
+  "seed": 5,
+  "frames_requested": 600,
+  "frames_completed": 600,
+  "physical_seconds_completed": 30.0,
+  "complete_30s": true,
+  "abort": null,
+  "wall_seconds": 159.77486509998562,
+  "n_positions": 601,
+  "n_control_steps": 600,
+  "n_qp_solves": 9600,
+  "expected_qp_solves": 9600,
+  "solver_status_counts": {
+    "optimal": 9600
+  },
+  "barrier_scalings": 0,
+  "min_barrier_scale": 1.0,
+  "hold_min_pair": 0.3436331524277716,
+  "hold_min_object_clearance_lb": 0.06704427211969607,
+  "hold_min_object_clearance_margin": 0.0020442721196960723,
+  "H0": 1.0883969736651578,
+  "H_final": 0.15770398179148337,
+  "dissipation_u_command": {
+    "max_slack": 4.962205304999607e-05,
+    "mean_slack": -3.4563112638648626e-05,
+    "fraction_positive": 0.36666666666666664,
+    "n_violations": 190,
+    "n_anomalies_refined": 190
+  },
+  "dissipation_u_saturated_max_slack": 0.003194094147046196,
+  "dissipation_u_cvt_max_slack": 0.005049932253971549,
+  "observer_quadrature": {
+    "ntheta": 128,
+    "nradial": 12
+  },
+  "zero_input_infeasible_count": 2
+}

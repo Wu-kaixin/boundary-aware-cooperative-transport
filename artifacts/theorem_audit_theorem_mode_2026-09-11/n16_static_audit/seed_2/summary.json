@@ -1,0 +1,78 @@
+{
+  "seed": 2,
+  "frames_requested": 600,
+  "frames_completed": 600,
+  "physical_seconds_completed": 30.0,
+  "complete_30s": true,
+  "abort": null,
+  "wall_seconds": 66.85529629996745,
+  "modes_seen": [
+    "theorem_cvt"
+  ],
+  "solver_status_counts": {
+    "optimal": 1936
+  },
+  "barrier_scalings": 0,
+  "hold_min_pair": 0.3579291367055128,
+  "hold_min_object_clearance": 0.067499999999999,
+  "agent_residual_min": 0.1221310878929078,
+  "wall_residual_min": 26.376352393899055,
+  "gradient2_time_average": 0.012163456553788468,
+  "centroid2_time_average": 0.16793709177952035,
+  "gradient2_final": 0.0006978780260841105,
+  "centroid2_final": 0.008740215122320079,
+  "H0": 0.9753887284348663,
+  "refinement": [
+    {
+      "frame": 0,
+      "gradient2_coarse": 0.09395599649192832,
+      "gradient2_fine": 0.09396533901972462,
+      "centroid2_coarse": 2.915313102009871,
+      "centroid2_fine": 2.9155356823104137,
+      "gradient2_rel": 9.942525503303995e-05,
+      "centroid2_rel": 7.634284906651888e-05,
+      "centroid_max_diff": 0.00020363753497779484
+    },
+    {
+      "frame": 150,
+      "gradient2_coarse": 0.002648384430640929,
+      "gradient2_fine": 0.002648686097138947,
+      "centroid2_coarse": 0.09158424711207608,
+      "centroid2_fine": 0.09159556684994813,
+      "gradient2_rel": 0.00011389288385058091,
+      "centroid2_rel": 0.00012358390543720167,
+      "centroid_max_diff": 2.1396311045238258e-05
+    },
+    {
+      "frame": 300,
+      "gradient2_coarse": 0.0010354759758227443,
+      "gradient2_fine": 0.0010354624541624698,
+      "centroid2_coarse": 0.01165635846065601,
+      "centroid2_fine": 0.011656582279479211,
+      "gradient2_rel": 1.3058571288779718e-05,
+      "centroid2_rel": 1.9201067502849516e-05,
+      "centroid_max_diff": 1.1085960196247894e-05
+    },
+    {
+      "frame": 450,
+      "gradient2_coarse": 0.0009178587424981748,
+      "gradient2_fine": 0.0009177453579637291,
+      "centroid2_coarse": 0.010708165622459076,
+      "centroid2_fine": 0.010706467721991613,
+      "gradient2_rel": 0.00012354683514537667,
+      "centroid2_rel": 0.00015858642752691746,
+      "centroid_max_diff": 1.5562462556471737e-05
+    },
+    {
+      "frame": 599,
+      "gradient2_coarse": 0.0006978780260841105,
+      "gradient2_fine": 0.0006977904216848004,
+      "centroid2_coarse": 0.008740215122320079,
+      "centroid2_fine": 0.008739845099555634,
+      "gradient2_rel": 0.00012554543110331585,
+      "centroid2_rel": 4.2337451090888755e-05,
+      "centroid_max_diff": 1.0712084682650715e-05
+    }
+  ],
+  "n_observer_samples": 121
+}

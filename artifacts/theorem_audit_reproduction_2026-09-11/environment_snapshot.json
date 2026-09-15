@@ -1,0 +1,54 @@
+{
+  "reproduction_date": "2026-09-11",
+  "host": "Windows-10-10.0.26200-SP0",
+  "cpu": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+  "python": "3.10.20 | packaged by Anaconda, Inc. | MSC v.1942 64 bit (AMD64)",
+  "conda_env": "D:\\miniconda\\envs\\dbact",
+  "packages": {
+    "numpy": "2.2.6",
+    "scipy": "1.15.3",
+    "matplotlib": "3.10.9",
+    "PyYAML": "6.0.3",
+    "pymunk": "7.3.0",
+    "shapely": "2.1.2",
+    "cvxpy": "1.7.5",
+    "osqp": "1.1.3"
+  },
+  "numpy_blas": "scipy-openblas 0.3.29 (MSVC 19.29.30159, OpenBLAS DYNAMIC_ARCH Haswell)",
+  "thread_env": {
+    "OPENBLAS_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "NUMEXPR_NUM_THREADS": "1"
+  },
+  "frozen_repo": {
+    "path": "E:\\dbact-proof-audit-source",
+    "method": "git worktree --detach",
+    "commit": "98ba28e835a8c45fa8375b2a5ae6130c17e547ad",
+    "dirty": false,
+    "config_path": "configs/sim/d/l_shape_closed_loop.yaml",
+    "config_blob_sha256": "19a094a22b74314b484278b98b65df85155ac3018a600d7bf9da508c39d0c3b5",
+    "config_worktree_sha256_crlf": "a23a66fe8e831c005bd0cfe1b968218bfc95d6b1ccfb50510cd259381f6f85d4",
+    "script_sha256": "499071ea1f895ea706ad63c34d8f709ef01845f5b2711566c839c933464eab3b",
+    "core_blobs": {
+      "src/dbact/local_cvt.py": "d7538ad51b41e2647fb81db7c5aab201baadf53e",
+      "src/dbact/boundary_density.py": "2b9d6d6d2c5b0940993cbca3bc0145d1639d5dbd",
+      "src/dbact/controller.py": "e135004224397a30d23ab3d5e13206606cdc4cac",
+      "src/dbact/safety_filter.py": "e08a6ec9aa0fc811fbbb059356149bd8becf9cc3",
+      "src/dbact_sim/environment.py": "2ab6bf5f6d2fc6ca8e92c363c91ed2ffc927137b",
+      "configs/sim/d/l_shape_closed_loop.yaml": "a6c720ddf526d97b217b33d728fdfbe7c1d91584"
+    }
+  },
+  "live_workspace_left_untouched": {
+    "path": "E:\\boundary-aware-cooperative-transport",
+    "branch": "DBACT-research-v3",
+    "commit": "795105f2d524105bdac21bd449e2ed718e418a3f"
+  },
+  "code_loading": "Did not pip install -e into the existing conda env (it already points at the live workspace). Loaded frozen src via PYTHONPATH plus audit_theorem.py sys.path.insert. SimulationEnvironment.summary provenance git_sha equals 98ba28e.",
+  "run": {
+    "frames": 600,
+    "seeds": [2, 5, 8],
+    "observer_stride": 5,
+    "algorithm_or_parameters_changed": false
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "total_agent_steps": 28800,
+  "status_optimal": 28800,
+  "status_relaxed_margin": 0,
+  "status_scaled_barrier": 0,
+  "fraction_optimal": 1.0,
+  "fraction_relaxed_margin": 0.0,
+  "fraction_scaled_barrier": 0.0,
+  "zero_input_infeasible_agent_steps": 0,
+  "rho_margin_parameter": 0.02,
+  "speed_violations_steps": 0,
+  "agent_residual_violations_steps": 0,
+  "wall_residual_violations_steps": 0,
+  "object_residual_violations_steps": 0,
+  "verdict": "U = Pi_F(u_nom) on intended set (all optimal, residuals ok)",
+  "zero_input_vs_rho": "zero_barrier = margin-free object RHS; zero_with_rho = full final constraint set including rho",
+  "zero_input_infeasible_with_rho_agent_steps": 0,
+  "inside_margin_band_agent_steps": 0,
+  "fraction_inside_margin_band": 0.0,
+  "projection_optimality_obstacle": null,
+  "margin_band_audit": {
+    "rho": 0.02,
+    "per_seed": [
+      {
+        "seed": 2,
+        "optimal": 9600,
+        "relaxed_margin": 0,
+        "scaled_barrier": 0,
+        "zero_barrier_false": 0,
+        "zero_with_rho_false": 0,
+        "inside_margin_band": 0,
+        "object_rows_active_sum": 1516,
+        "modification_gt_1e-9": 1516,
+        "agent_steps": 9600
+      },
+      {
+        "seed": 5,
+        "optimal": 9600,
+        "relaxed_margin": 0,
+        "scaled_barrier": 0,
+        "zero_barrier_false": 0,
+        "zero_with_rho_false": 0,
+        "inside_margin_band": 0,
+        "object_rows_active_sum": 1991,
+        "modification_gt_1e-9": 1991,
+        "agent_steps": 9600
+      },
+      {
+        "seed": 8,
+        "optimal": 9600,
+        "relaxed_margin": 0,
+        "scaled_barrier": 0,
+        "zero_barrier_false": 0,
+        "zero_with_rho_false": 0,
+        "inside_margin_band": 0,
+        "object_rows_active_sum": 1013,
+        "modification_gt_1e-9": 1013,
+        "agent_steps": 9600
+      }
+    ],
+    "aggregate": {
+      "agent_steps": 28800,
+      "optimal": 28800,
+      "relaxed_margin": 0,
+      "scaled_barrier": 0,
+      "zero_barrier_false": 0,
+      "zero_with_rho_false": 0,
+      "inside_margin_band": 0,
+      "object_rows_active_sum": 4520,
+      "modification_gt_1e-9": 4520
+    },
+    "fraction_inside_margin_band": 0.0,
+    "projection_optimality_obstacle": null,
+    "note": "zero_barrier = margin-free object RHS; zero_with_rho = full final constraint set including rho"
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "gradient_residual_block": {
+    "definition": "||g*||^2 = sum over agents of gradient_star . gradient_star (observer truncated-cell gradient); matches prior n16_static_audit.",
+    "theorem1_static_formula": 18963.034085226063,
+    "geometric_bound": 8.986156065125614,
+    "geometric_bound_note": "4 R^2 M^2 (total-mass gradient geometry ceiling).",
+    "measured_time_average_per_seed": [
+      {
+        "seed": 2,
+        "gradient_residual_bar_sum": 0.012230059025341402,
+        "gradient_residual_bar_per_agent": 0.0007643786890838376,
+        "prior_trapezoid_time_average": 0.012163456553788468
+      },
+      {
+        "seed": 5,
+        "gradient_residual_bar_sum": 0.013344643207872466,
+        "gradient_residual_bar_per_agent": 0.0008340402004920291,
+        "prior_trapezoid_time_average": 0.013257062682051481
+      },
+      {
+        "seed": 8,
+        "gradient_residual_bar_sum": 0.011280728715453407,
+        "gradient_residual_bar_per_agent": 0.0007050455447158379,
+        "prior_trapezoid_time_average": 0.011216716000882598
+      }
+    ],
+    "formula_is_certificate": false
+  },
+  "J_block": {
+    "definition": "J_k = sum_i m*_i ||U_i||^2 with U = final QP command; J_bar = (1/K) sum_k J_k.",
+    "analytic_bound_formula": "2 H0 / (a K Delta) + 4 E_bar / a^2",
+    "analytic_bound_uses": "E_bar (post_hoc_trajectory estimate)",
+    "geometric_bound_cellwise": {
+      "formula": "N * m_plus * u_max^2",
+      "value": 28.377800351398534
+    },
+    "geometric_bound_totalmass": {
+      "formula": "M_total * u_max^2",
+      "value": 0.22951077763729585
+    },
+    "per_seed": [
+      {
+        "seed": 2,
+        "H0": 0.9753948396589078,
+        "J_bar_measured": 0.011079003412227678,
+        "posthoc_J_bound": 0.030058640044240664,
+        "posthoc_J_bound_terms": {
+          "term_2H0_over_aKD": 0.029935391498483104,
+          "term_4Ebar_over_a2": 0.0001232485457575612
+        },
+        "E_bar_estimate_type": "post_hoc_trajectory",
+        "posthoc_J_bound_below_geom_cellwise": true
+      },
+      {
+        "seed": 5,
+        "H0": 0.9554571918060512,
+        "J_bar_measured": 0.01070690245392158,
+        "posthoc_J_bound": 0.029446595134916403,
+        "posthoc_J_bound_terms": {
+          "term_2H0_over_aKD": 0.029323494377679317,
+          "term_4Ebar_over_a2": 0.000123100757237085
+        },
+        "E_bar_estimate_type": "post_hoc_trajectory",
+        "posthoc_J_bound_below_geom_cellwise": true
+      },
+      {
+        "seed": 8,
+        "H0": 1.0296566246262293,
+        "J_bar_measured": 0.011517787118348012,
+        "posthoc_J_bound": 0.0316908131098226,
+        "posthoc_J_bound_terms": {
+          "term_2H0_over_aKD": 0.031600714822288364,
+          "term_4Ebar_over_a2": 9.009828753423704e-05
+        },
+        "E_bar_estimate_type": "post_hoc_trajectory",
+        "posthoc_J_bound_below_geom_cellwise": true
+      }
+    ]
+  },
+  "centroid_residual_block": {
+    "definition": "E_k = sum_i m*_i ||chat_i - c*_i||^2 (controller grid centroid vs observer centroid); E_bar = (1/K) sum_k E_k.",
+    "estimate_type": "post_hoc_trajectory",
+    "per_seed": [
+      {
+        "seed": 2,
+        "E_bar": 0.00014538858737624783
+      },
+      {
+        "seed": 5,
+        "E_bar": 0.00014521425051823144
+      },
+      {
+        "seed": 8,
+        "E_bar": 0.00010628330475711184
+      }
+    ]
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "seed": 2,
+  "frames": 600,
+  "T": 30.00000000000029,
+  "goal_direction": [
+    0.19706172910618755,
+    0.9803910826408406
+  ],
+  "gradient2_initial": 0.0818150669611475,
+  "gradient2_final": 0.0028522398449347397,
+  "gradient2_average": 0.01378592372520712,
+  "centroid2_initial": 2.801104036503623,
+  "centroid2_final": 0.0666854515456992,
+  "centroid2_average": 0.2318308200593918,
+  "max_gradient2": 0.11550389501803887,
+  "max_centroid2": 2.801104036503623,
+  "clip_events": 0,
+  "min_continuous_hold_distance": 0.28010899992644117,
+  "min_pair_halfrow": -4.5102810375396984e-17,
+  "saturation_fraction": 0.08708333333333333,
+  "max_reference_centroid_refinement_error": 0.0002036375285821014,
+  "observer_stride_frames": 5,
+  "observer_period_seconds": 0.25,
+  "solver": {
+    "solves": 9600,
+    "fallbacks": 0,
+    "infeasible": 0,
+    "margin_relaxations": 0,
+    "barrier_scalings": 3,
+    "min_barrier_scale": 0.67578125,
+    "zero_input_feasible": false,
+    "zero_input_feasible_checks": 9600,
+    "zero_input_feasible_failures": 404,
+    "inside_margin_band": 21,
+    "max_slack": 0.0,
+    "max_modification_norm": 0.6243024270051452,
+    "statuses": {
+      "optimal": 9597,
+      "scaled_barrier": 3
+    }
+  },
+  "final_phase": {
+    "final_phase": "HOLD",
+    "entered": {
+      "SEARCH": 0,
+      "DISCOVER": 0,
+      "ENCLOSE": 21,
+      "CONTACT_READY": 81,
+      "TRANSPORT": 146,
+      "BRAKE": 291,
+      "HOLD": 371
+    },
+    "first_detection_frame": 0,
+    "enclosure_frame": 21,
+    "contact_ready_frame": 81,
+    "transport_frame": 146,
+    "brake_frame": 291,
+    "hold_frame": 371
+  },
+  "wall_seconds": 33.84722989995498
+}

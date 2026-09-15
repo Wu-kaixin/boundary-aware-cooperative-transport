@@ -1,0 +1,91 @@
+{
+  "description": "Hypothetical-next-state discrete dissipation delta_H_hyp - rhs for U in {u_cvt,u_saturated,u_command}; P_next_hyp = P + dt U per stage.",
+  "per_seed": {
+    "2": {
+      "u_cvt": {
+        "max_slack_coarse": 2.6881204083613265e-05,
+        "max_slack_refined": 8.192064965548747e-07,
+        "n_anomalies": 150,
+        "numerical_consistency": false,
+        "strict_numerical_certificate": false
+      },
+      "u_saturated": {
+        "max_slack_coarse": 2.6881204083613265e-05,
+        "max_slack_refined": 8.192064965548747e-07,
+        "n_anomalies": 150,
+        "numerical_consistency": false,
+        "strict_numerical_certificate": false
+      },
+      "u_command": {
+        "max_slack_coarse": 2.767045279806525e-05,
+        "max_slack_refined": 9.961986100858994e-07,
+        "n_anomalies": 90,
+        "numerical_consistency": false,
+        "strict_numerical_certificate": false
+      }
+    },
+    "5": {
+      "u_cvt": {
+        "max_slack_coarse": 1.3801143859505064e-05,
+        "max_slack_refined": 9.878252055850532e-07,
+        "n_anomalies": 42,
+        "numerical_consistency": false,
+        "strict_numerical_certificate": false
+      },
+      "u_saturated": {
+        "max_slack_coarse": 1.3801143859505064e-05,
+        "max_slack_refined": 9.878252055850532e-07,
+        "n_anomalies": 42,
+        "numerical_consistency": false,
+        "strict_numerical_certificate": false
+      },
+      "u_command": {
+        "max_slack_coarse": 1.4804858031818636e-05,
+        "max_slack_refined": 9.554226983749291e-07,
+        "n_anomalies": 88,
+        "numerical_consistency": false,
+        "strict_numerical_certificate": false
+      }
+    },
+    "8": {
+      "u_cvt": {
+        "max_slack_coarse": 9.197792418311809e-06,
+        "max_slack_refined": 9.961173883697109e-07,
+        "n_anomalies": 90,
+        "numerical_consistency": false,
+        "strict_numerical_certificate": false
+      },
+      "u_saturated": {
+        "max_slack_coarse": 9.197792418311809e-06,
+        "max_slack_refined": 9.961173883697109e-07,
+        "n_anomalies": 90,
+        "numerical_consistency": false,
+        "strict_numerical_certificate": false
+      },
+      "u_command": {
+        "max_slack_coarse": 1.3290088759507993e-05,
+        "max_slack_refined": 9.986737431157e-07,
+        "n_anomalies": 76,
+        "numerical_consistency": false,
+        "strict_numerical_certificate": false
+      }
+    }
+  },
+  "rollup": {
+    "u_cvt": {
+      "max_slack_refined_over_seeds": 9.961173883697109e-07,
+      "all_numerical_consistency": false,
+      "all_strict_numerical_certificate": false
+    },
+    "u_saturated": {
+      "max_slack_refined_over_seeds": 9.961173883697109e-07,
+      "all_numerical_consistency": false,
+      "all_strict_numerical_certificate": false
+    },
+    "u_command": {
+      "max_slack_refined_over_seeds": 9.986737431157e-07,
+      "all_numerical_consistency": false,
+      "all_strict_numerical_certificate": false
+    }
+  }
+}
