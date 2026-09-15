@@ -1,7 +1,7 @@
 {
   "schema": "apriori_constant_ledger_v1",
   "branch": "feat/apriori-centroid-bound",
-  "code_snapshot_commit": "175fd67",
+  "code_snapshot_commit": "14d81a2",
   "base_commit": "a531515",
   "integration_method": "edge_green",
   "edge_n_gon": 256,
@@ -66,9 +66,24 @@
     }
   },
   "constant_level_screen": {
-    "l_shape": {"B_E": 0.0979, "B_J_prior": 0.120, "B_J_geom": 0.230, "beats": true},
-    "rectangle": {"B_E": 0.0733, "B_J_prior": 0.091, "B_J_geom": 0.180, "beats": true},
-    "c_shape": {"B_E": 0.106, "B_J_prior": 0.127, "B_J_geom": 0.230, "beats": true}
+    "l_shape": {
+      "B_E": 0.0979,
+      "B_J_prior": 0.12,
+      "B_J_geom": 0.23,
+      "beats": true
+    },
+    "rectangle": {
+      "B_E": 0.0733,
+      "B_J_prior": 0.091,
+      "B_J_geom": 0.18,
+      "beats": true
+    },
+    "c_shape": {
+      "B_E": 0.106,
+      "B_J_prior": 0.127,
+      "B_J_geom": 0.23,
+      "beats": true
+    }
   },
   "not_certificate": [
     "scipy.quad requested epsabs",
@@ -76,5 +91,10 @@
     "grid-to-grid polar differences as quadrature remainder",
     "trajectory E_bar",
     "N-fold Lip covering remainders (recorded but unused)"
+  ],
+  "commits": [
+    "175fd67",
+    "6df60f1",
+    "14d81a2"
   ]
 }

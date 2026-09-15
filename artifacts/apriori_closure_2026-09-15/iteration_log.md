@@ -73,3 +73,12 @@ Implemented 	heorem_clamp_margin_to_keep_zero (default on in theorem_mode): clam
 - Finish stage-4 rectangle + seed8 matrix.
 - Re-run C5 with margin clamp; report remaining hard frames.
 - Independent seeds 11/17/23 only after method freeze if K0 story is accepted as PARTIAL.
+
+
+## Round 4 — nine-case matrix + clamp fix
+
+Completed 3 shapes x seeds {2,5,8} at edge_green 256/48. All priorJ < geom. Only C5 lacks full-horizon K0.
+
+Clamp bug: first implementation used <= orientation; rows are a^T u >= b. Fix in 830ea86. Re-run C5 (priori_closure_2026-09-15_c5_clamp_v2): failures reduced 5 -> 2 (frames 227-228 hard barrier only).
+
+Status frozen as PARTIAL. Independent seeds 11/17/23 deferred until K0 hard frames addressed or accepted as scope carve-out.

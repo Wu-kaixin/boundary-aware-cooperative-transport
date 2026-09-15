@@ -2,63 +2,60 @@
 
 ## Status: **PARTIAL**
 
-The mass-weighted centroid-error budget is closed for static sampled coverage under
-`integration_method=edge_green` with declared constants
-(`edge_n_gon=256`, `edge_panels=48`), and the resulting prior \(B_{J}\) **strictly
-beats** \(M_{\mathrm{plane}} u_{\max}^2\) whenever the full horizon lies in
-\(\mathcal{K}_0\).
+Static sampled coverage only. Not claimed: unknown-object transport or global convergence.
 
-Full **CLOSED** is blocked by C-shape seed 5: five frames leave \(\mathcal{K}_0\)
-(agent 14; mix of hard zero-input infeasibility and rho-margin infeasibility).
-Those steps are retained; \(\rho\) is not reduced; failures are not deleted.
+### Closed
 
-### What is proved
+- **Partition restrict lemma** (disjoint truncated Voronoi cells) — proved; Wolfram-checked plane tail.
+- **Edge-Green cell integrator** with explicit disk–polygon and trapezoid remainders.
+- **Label hygiene**: plane mass for geom/`B_H0`; mesh `φ_max` and `scipy.quad` not certificates.
+- **Constant-level and closed-loop prior** \(B_{J,\mathrm{prior}} < M_{\mathrm{plane}} u_{\max}^2\) on the 9-case matrix below under `edge_green` (`n_gon=256`, `panels=48`).
 
-- Partition restrict tail (disjoint \(\Omega_i\)): see `theorem_and_proof.md`.
-- Oracle midpoint \(L^1\) floor; plane mass \(M_{\mathrm{plane}}\); \(B_{H0}=R^2 M_{\mathrm{plane}}\).
-- Edge-Green geometric + trapezoid remainders with explicit \(M_2\) majorant.
-- Moment-form \(B_E\) and \(B_{J,\mathrm{prior}}\) under full-horizon \(\mathcal{K}_0\).
+### Not closed (blocks FULL CLOSED)
 
-### What is numerical / open
+- **C-shape seed 5 \(\mathcal{K}_0\)**: after correcting margin clamp (`aᵀu≥b` orientation), **2 frames** (227–228) still have hard `zero_input_feasible=False` (agent 14). Margin-only frames cleared. Route B needs an *a priori* \(\|\Pi_F(0)\|\) bound; trajectory residuals are forbidden as priors. See `k0_diagnosis.json` and `artifacts/apriori_closure_2026-09-15_c5_clamp_v2/`.
 
-- Polar observer remainder (diagnostic only).
-- Mesh \(\phi_{\max}\) (diagnostic only; not a global upper bound).
-- `scipy.quad` observer mass (not used in the geometric comparator).
-- C-shape seed 5 \(\mathcal{K}_0\) gap: margin clamp (route C, partial) implemented as
-  `theorem_clamp_margin_to_keep_zero`; hard-barrier frames still need route B
-  with a design-level bound on \(\|\Pi_F(0)\|\) (not available from trajectory
-  residuals).
+### 9-case matrix (`edge_green`, grid label n=20, 600 steps)
 
-### Stage-3 evidence (`edge_green`, n_gon=256, panels=48, frames=600)
-
-| case | complete | full-horizon K0 | priorJ | geom | prior beats geom |
+| shape | seed | full-horizon K0 | priorJ | geom | prior beats geom |
 |---|---|---|---|---|---|
-| L seed2 | yes | yes | 0.113 | 0.230 | yes |
-| L seed5 | yes | yes | 0.112 | 0.230 | yes |
-| C seed2 | yes | yes | 0.123 | 0.230 | yes |
-| C seed5 | yes | **no** (5 frames) | 0.123 | 0.230 | yes (constants); theorem **inapplicable** |
+| L | 2 | yes | 0.1129 | 0.2295 | yes |
+| L | 5 | yes | 0.1123 | 0.2295 | yes |
+| L | 8 | yes | 0.1146 | 0.2295 | yes |
+| rectangle | 2 | yes | 0.0871 | 0.1803 | yes |
+| rectangle | 5 | yes | 0.0875 | 0.1803 | yes |
+| rectangle | 8 | yes | 0.0882 | 0.1803 | yes |
+| C | 2 | yes | 0.1232 | 0.2295 | yes |
+| C | 5 | **no** (5 zr in this matrix; 2 with clamp_v2) | 0.1235 | 0.2295 | constants yes / theorem inapplicable |
+| C | 8 | yes | 0.1242 | 0.2295 | yes |
 
-Measured \(\bar E\sim 10^{-7}\)–\(10^{-8}\); coverage residuals / centroid² reported in summaries.
+Measured \(\bar E \sim 10^{-7}\)–\(10^{-8}\). `gradient_residual_bar` / `centroid2_bar` in `summary.csv`. No aborts; no rho reduction; failures retained.
+
+### Code versions
+
+| commit | role |
+|---|---|
+| `a531515` | baseline sampled theorem_mode |
+| `175fd67` | recovered prior-session snapshot |
+| `6df60f1` | partition restrict + edge-Green |
+| `14d81a2` | PARTIAL docs + clamp (wrong inequality once) |
+| `830ea86` | clamp direction fix |
 
 ### Reproduce
 
-```bash
-python scripts/run_apriori_centroid_bound.py \
-  --out artifacts/apriori_closure_2026-09-15 \
-  --shapes l_shape rectangle c_shape \
-  --seeds 2 5 8 \
-  --grids 20 \
-  --frames 600 \
-  --integration-method edge_green \
-  --edge-n-gon 256 \
-  --edge-panels 48
+```bat
+artifacts\apriori_closure_2026-09-15\reproduce.cmd
 ```
 
-Code commits: `175fd67` (recovery snapshot), `6df60f1` (partition restrict + edge-Green).
+or
+
+```bash
+python scripts/run_apriori_centroid_bound.py --out artifacts/apriori_closure_2026-09-15 \
+  --shapes l_shape rectangle c_shape --seeds 2 5 8 --grids 20 --frames 600 \
+  --integration-method edge_green --edge-n-gon 256 --edge-panels 48
+python -m pytest tests/test_edge_green_and_restrict.py tests/test_apriori_centroid_bound.py tests/test_local_cvt.py -q
+```
 
 ### Worth continuing?
 
-Yes for the E-budget / integrator line — it already beats geometry on K0-valid runs.
-K0 for C-seed5 needs either a proveable control change that keeps the hard barrier
-satisfied at standstill, or a new dissipation inequality with an *a priori*
-\(\|\Pi_F(0)\|\) majorant. Do not treat trajectory residuals as priors.
+Yes: E-budget line already beats geometry on all K0-valid runs. Next bottleneck is the **2 hard standstill-infeasible frames** on C-seed5 (design-level CBF / route-B residual), not further grid refinement.

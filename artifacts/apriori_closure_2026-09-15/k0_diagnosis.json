@@ -1,0 +1,23 @@
+{
+  "c5_without_clamp_or_wrong_clamp": {
+    "fail_frames": [
+      227,
+      228,
+      229,
+      230,
+      231
+    ],
+    "zr": 5
+  },
+  "c5_clamp_v2_fixed_direction": {
+    "artifact": "artifacts/apriori_closure_2026-09-15_c5_clamp_v2",
+    "fail_frames": [
+      227,
+      228
+    ],
+    "zr": 2,
+    "note": "frames 229-231 cleared (margin-only). 227-228 remain hard zero_input_feasible=False."
+  },
+  "matrix_9_cases_edge_green": "artifacts/apriori_closure_2026-09-15/summary.csv",
+  "status": "PARTIAL"
+}
