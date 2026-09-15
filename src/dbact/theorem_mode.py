@@ -48,6 +48,8 @@ is **not** assumed negative.
 
 from __future__ import annotations
 
+import os
+from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass, field
 
 import numpy as np
@@ -521,11 +523,24 @@ def theorem_step(
     cell_centroids = np.zeros((len(agents), 2))
     modes: list[str] = []
 
-    for i, agent in enumerate(agents):
+    def _nominal_i(i: int):
+        agent = agents[i]
         view = controller._views[agent.agent_id]
-        u_nom, u_cvt, u_sat, mode, cell_mass, centroid = controller._theorem_nominal(
-            i, agents, neighbors[i], view
-        )
+        return controller._theorem_nominal(i, agents, neighbors[i], view)
+
+    cvt_workers = max(1, int(os.environ.get("DBACT_CVT_WORKERS", "1") or "1"))
+    cvt_workers = min(cvt_workers, max(1, len(agents)))
+    if cvt_workers <= 1:
+        nominal_pack = [_nominal_i(i) for i in range(len(agents))]
+    else:
+        # Same frozen (P_k, map) snapshot for every agent.  Do not advance time
+        # inside this pool; adjacent steps remain sequential.
+        with ThreadPoolExecutor(max_workers=cvt_workers) as pool:
+            nominal_pack = list(pool.map(_nominal_i, range(len(agents))))
+
+    for i, agent in enumerate(agents):
+        u_nom, u_cvt, u_sat, mode, cell_mass, centroid = nominal_pack[i]
+        view = controller._views[agent.agent_id]
         nominals[i] = u_nom
         u_cvt_all[i] = u_cvt
         u_saturated_all[i] = u_sat

@@ -195,6 +195,8 @@ class DBACTParams:
     integration_method: str = "endpoint_grid"
     edge_n_gon: int = 256
     edge_panels: int = 48
+    edge_h_max: float = 0.004
+    edge_cull_sigmas: float = 6.0
     approach_mass_ratio: float = 3.0
     redeploy_gap_ratio: float = 0.15
 
@@ -516,6 +518,8 @@ class DBACTController:
             integration_method=str(getattr(params, "integration_method", "endpoint_grid")),
             edge_n_gon=int(getattr(params, "edge_n_gon", 128)),
             edge_panels=int(getattr(params, "edge_panels", 32)),
+            edge_h_max=float(getattr(params, "edge_h_max", 0.004)),
+            edge_cull_sigmas=float(getattr(params, "edge_cull_sigmas", 6.0)),
         )
         self.safety = SafetyFilter(
             SafetyFilterParams(

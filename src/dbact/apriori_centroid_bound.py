@@ -322,9 +322,32 @@ def moment_form_E_bound(
     first moment mu_hat = m_hat chat:
         m* e = (mu_hat - mu*) - chat (m_hat - m*),
     hence ||m* e|| <= ||dmu'|| + R |dm|. No division by m_minus.
+
+    ``sum_abs_dmu`` must be the *robot-centred* first-moment error.  Kernel-centred
+    Green remainders are converted by ``||δμ_p|| ≤ ||δμ_xi|| + ||xi-p|| |δm|``.
     """
     r = float(local_radius)
     return 2.0 * r * (float(sum_abs_dmu) + r * float(sum_abs_dm))
+
+
+def moment_form_E_bound_with_mass_fallback(
+    local_radius: float,
+    sum_abs_dm: float,
+    sum_abs_dmu: float,
+    n_agents: int,
+    mass_floor: float = 1e-12,
+) -> float:
+    """Moment form plus cells whose numerical mass falls below ``mass_floor``.
+
+    If ``m_hat ≤ mass_floor`` the implementation uses the site ``p_i``.  Then
+    ``m* ≤ |δm| + mass_floor`` (otherwise ``m_hat ≥ m* - |δm| > mass_floor``),
+    and ``E_i ≤ R^2 m*``.  Summing fallback cells costs at most
+    ``R^2 (sum |δm_i| + N mass_floor)`` on top of the Green moment form.
+    """
+    r = float(local_radius)
+    base = moment_form_E_bound(r, sum_abs_dm, sum_abs_dmu)
+    extra = r * r * (float(sum_abs_dm) + int(n_agents) * float(mass_floor))
+    return base + extra
 
 
 def diameter_E_bound(local_radius: float, mass_upper: float) -> BoundTerm:
@@ -343,13 +366,34 @@ def diameter_E_bound(local_radius: float, mass_upper: float) -> BoundTerm:
     )
 
 
-def prior_J_bound(b_h0: float, b_e: float, a: float, k_steps: int, dt: float) -> dict[str, Any]:
-    """B_J_prior = 2 B_H0 / (a K Delta) + 4 B_E / a^2. Requires a>0 and full-horizon K_0."""
+def prior_J_bound(
+    b_h0: float,
+    b_e: float,
+    a: float,
+    k_steps: int,
+    dt: float,
+    h0_status: str = "rigorous",
+    e_status: str = "rigorous",
+    k0_holds: bool | None = None,
+) -> dict[str, Any]:
+    """B_J_prior = 2 B_H0 / (a K Delta) + 4 B_E / a^2.
+
+    ``rigorous_on_K0`` is issued only when both ``B_H0`` and ``B_E`` are
+    rigorous *and* the caller has not marked K0 as failed.  A numerical
+    observer H0 cannot produce ``rigorous_on_K0``.  If K0 is known to fail,
+    a comparison against the geometric bound is labelled ``constants_only``.
+    """
     a = float(a)
     k_steps = int(k_steps)
     dt = float(dt)
     term_h = 2.0 * float(b_h0) / (a * k_steps * dt)
     term_e = 4.0 * float(b_e) / (a * a)
+    if str(h0_status) == "rigorous" and str(e_status) == "rigorous":
+        status = "constants_only" if k0_holds is False else "rigorous_on_K0"
+    elif str(h0_status).startswith("numerical") or str(e_status).startswith("numerical"):
+        status = "constants_only" if k0_holds is False else "numerical_a_priori"
+    else:
+        status = "constants_only"
     return {
         "B_J_prior": term_h + term_e,
         "term_2BH0_over_aKD": term_h,
@@ -358,7 +402,10 @@ def prior_J_bound(b_h0: float, b_e: float, a: float, k_steps: int, dt: float) ->
         "K": k_steps,
         "dt": dt,
         "formula": "2 B_H0 / (a K Delta) + 4 B_E / a^2",
-        "status": "rigorous_on_K0",
+        "status": status,
+        "h0_status": str(h0_status),
+        "e_status": str(e_status),
+        "k0_holds": k0_holds,
         "domain": "full window in K_0, a>0, sat+QP cascade of Theorem C",
     }
 
@@ -718,36 +765,62 @@ def assemble_prior(
     method = str(ctrl.get("integration_method", "endpoint_grid"))
     n_gon = int(ctrl.get("edge_n_gon", 256))
     panels = int(ctrl.get("edge_panels", 48))
+    h_max = float(ctrl.get("edge_h_max", 0.004))
+    cull_sigmas = float(ctrl.get("edge_cull_sigmas", 6.0))
     n_sources = int(math.ceil(L / max(spacing, 1e-9))) + n_edges
 
     from dbact.edge_green_integral import (
+        cull_partition_mass_bound,
+        discrete_mixture_phi_max,
         inscribed_disk_area_deficit,
         partition_edge_mass_moment_remainder,
     )
 
+    phi_disc = discrete_mixture_phi_max(phi0, weight_sum, n_edges, spacing, sigma)
+    phi_max_discrete = float(phi_disc["phi_max_used"])
+
     if method == "edge_green":
         deficit = inscribed_disk_area_deficit(r, n_gon)
-        # Missing sets Omega_i \\ P_i are disjoint => sum areas <= N * deficit
-        # still holds; using phi_max_line (proved), not mesh max.
-        dm_grid = n_agents * phi_max_line * deficit
-        dmu_grid = r * dm_grid
+        # Omega_i \ P_i subset disk \ n-gon, so area <= deficit.  Density bound is
+        # the discrete mixture majorant, not the continuous infinite-line bound.
+        dm_geom = n_agents * phi_max_discrete * deficit
+        dmu_geom = r * dm_geom
         edge_rem = partition_edge_mass_moment_remainder(
-            n_agents, n_gon, n_sources, sigma, r, panels
+            n_agents,
+            n_gon,
+            n_sources,
+            sigma,
+            r,
+            panels,
+            weight_sum=weight_sum,
+            h_max=h_max,
+            cull_sigmas=cull_sigmas,
         )
-        dm_grid += float(edge_rem["sum_abs_dm"])
-        dmu_grid += float(edge_rem["sum_abs_dmu"])
+        dm_cull = cull_partition_mass_bound(weight_sum, sigma, cull_sigmas)
+        dmu_cull = (r + cull_sigmas * sigma) * dm_cull
+        dm_trap = float(edge_rem["sum_abs_dm"]) + float(edge_rem["float_sum_abs_dm"])
+        dmu_trap = float(edge_rem["sum_abs_dmu_robot"]) + float(edge_rem["float_sum_abs_dmu"])
+        dm_grid = dm_geom + dm_trap + dm_cull
+        dmu_grid = dmu_geom + dmu_trap + dmu_cull
         dm_grid_mesh = dm_grid
         dmu_grid_mesh = dmu_grid
         grid_note = {
             "method": "edge_green",
             "n_gon": n_gon,
-            "panels": panels,
+            "panels_min": panels,
+            "h_max": h_max,
+            "cull_sigmas": cull_sigmas,
             "area_deficit_one_disk": deficit,
-            "phi_max_line_edges": phi_max_line,
+            "phi_max_continuous_line_not_used_for_mixture": phi_max_line,
+            "phi_max_discrete_mixture": phi_disc,
             "n_edges": n_edges,
             "n_sources_majorant": n_sources,
+            "weight_sum_W": weight_sum,
             "edge_remainder": edge_rem,
+            "cull_tail_mass": dm_cull,
+            "geom_gap_dm": dm_geom,
             "status": "rigorous",
+            "m2_status": "analytic",
         }
     else:
         dm_grid = grid_m.value
@@ -774,16 +847,16 @@ def assemble_prior(
 
     dm_rig = dm_den + dm_restrict_rig + dm_grid
     dmu_rig = dmu_den + dmu_restrict_rig + dmu_grid
-    b_e_moment = moment_form_E_bound(r, dm_rig, dmu_rig)
+    b_e_moment = moment_form_E_bound_with_mass_fallback(r, dm_rig, dmu_rig, n_agents)
     b_e_diameter = diameter_E_bound(r, m_plane)
     b_e_rigorous = min(b_e_moment, float(b_e_diameter.value))
     b_e_active = (
-        "diameter_4R2M" if float(b_e_diameter.value) <= b_e_moment + 1e-15 else "moment_form"
+        "diameter_4R2M" if float(b_e_diameter.value) <= b_e_moment + 1e-15 else "moment_form_with_fallback"
     )
 
     dm_num = dm_den + dm_restrict_num + dm_grid_mesh + dm_obs_num
     dmu_num = dmu_den + dmu_restrict_num + dmu_grid_mesh + dmu_obs_num
-    b_e_moment_num = moment_form_E_bound(r, dm_num, dmu_num)
+    b_e_moment_num = moment_form_E_bound_with_mass_fallback(r, dm_num, dmu_num, n_agents)
     b_e_numerical = min(b_e_moment_num, float(b_e_diameter.value))
 
     # Geometric J uses the analytic plane mass (strict), not scipy.quad.
@@ -795,9 +868,27 @@ def assemble_prior(
         "scipy.quad observer mass is recorded but not used in the certificate comparator."
     )
     b_h0_cert = b_h0_crude  # only the proved R^2 M_plane term
-    j_cert = prior_J_bound(b_h0_crude, b_e_rigorous, a, k_steps, dt)
-    j_p0h = prior_J_bound(b_h0_p0, b_e_rigorous, a, k_steps, dt)
-    j_num = prior_J_bound(b_h0_p0, b_e_numerical, a, k_steps, dt)
+    j_cert = prior_J_bound(
+        b_h0_crude, b_e_rigorous, a, k_steps, dt, h0_status="rigorous", e_status="rigorous"
+    )
+    j_p0h = prior_J_bound(
+        b_h0_p0,
+        b_e_rigorous,
+        a,
+        k_steps,
+        dt,
+        h0_status=b_h0_p0_status,
+        e_status="rigorous",
+    )
+    j_num = prior_J_bound(
+        b_h0_p0,
+        b_e_numerical,
+        a,
+        k_steps,
+        dt,
+        h0_status=b_h0_p0_status,
+        e_status="numerical_a_priori",
+    )
 
     e_star = (geom["B_J_geom"] - j_cert["term_2BH0_over_aKD"]) * a * a / 4.0
 
@@ -808,10 +899,15 @@ def assemble_prior(
             "B_E_diameter": "rigorous",
             "B_H0_crude": "rigorous",
             "B_H0_P0": b_h0_p0_status,
+            "B_J_prior_certificate": j_cert["status"],
+            "B_J_prior_P0H": j_p0h["status"],
+            "B_J_prior_numerical": j_num["status"],
             "B_J_geom": "rigorous",
             "M_observer_quad": "numerical_a_priori_not_certificate",
             "phi_max_mesh": "diagnostic_not_global_upper_bound",
+            "phi_max_continuous_line": "not_a_discrete_mixture_bound",
             "E_bar_from_trajectory": "post_hoc",
+            "H0_numerical_cannot_be_rigorous_on_K0": True,
         },
         "parameters": {
             "N": n_agents,
@@ -836,8 +932,11 @@ def assemble_prior(
             "integration_method": method,
             "edge_n_gon": n_gon,
             "edge_panels": panels,
+            "edge_h_max": h_max if method == "edge_green" else None,
+            "edge_cull_sigmas": cull_sigmas if method == "edge_green" else None,
             "n_edges": n_edges,
             "weight_sum_W": weight_sum,
+            "phi_max_discrete_mixture": phi_max_discrete if method == "edge_green" else None,
         },
         "mass": mass_info,
         "H0": {
@@ -898,10 +997,11 @@ def assemble_prior(
             "moment_numerical_a_priori": b_e_numerical,
             "active_rigorous_bound": b_e_active,
             "E_star_to_meet_geometry_using_crude_H": e_star,
-            "formula_moment": "2 R (sum ||dmu|| + R sum |dm|)",
+            "formula_moment": "2 R (sum ||dmu_robot|| + R sum |dm|) + R^2 (sum |dm| + N mass_floor)",
             "note": (
-                "Certificate uses min(moment form, 4 R^2 M_plane). "
-                "With edge_green + partition restrict, moment form is intended to be active."
+                "Certificate uses min(moment form with mass-fallback, 4 R^2 M_plane). "
+                "Robot-centred dmu includes ||xi-p|| |dm|. Continuous line phi_max is "
+                "not used as a discrete-mixture bound."
             ),
         },
         "B_J": {
@@ -912,8 +1012,15 @@ def assemble_prior(
         },
         "beats_geometry": {
             "certificate_crudeH_rigorousE": bool(j_cert["B_J_prior"] < geom["B_J_geom"]),
+            "certificate_level": j_cert["status"],
             "P0H_rigorousE": bool(j_p0h["B_J_prior"] < geom["B_J_geom"]),
+            "P0H_level": j_p0h["status"],
             "numerical_a_priori": bool(j_num["B_J_prior"] < geom["B_J_geom"]),
+            "numerical_level": j_num["status"],
+            "note": (
+                "P0H uses numerical observer H0 and is never rigorous_on_K0. "
+                "A true comparison beating geometry is the crude-H certificate column."
+            ),
         },
         "grid_refinement_narrative": {
             "decreases": [
@@ -940,6 +1047,7 @@ __all__ = [
     "kernel_lipschitz",
     "line_edge_phi_max",
     "moment_form_E_bound",
+    "moment_form_E_bound_with_mass_fallback",
     "observer_resolution_envelope",
     "overlay_grid_resolution",
     "plane_mass_upper",

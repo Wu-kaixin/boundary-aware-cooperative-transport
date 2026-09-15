@@ -192,6 +192,19 @@ class FilterResult:
     # robot is inside the intended margin band (active retreat demanded).
     zero_input_feasible_with_rho: bool = True
     inside_margin_band: bool = False
+    # Original (unclamped) object-inclusive RHS vs the RHS actually sent to the QP.
+    b_original: np.ndarray | None = None
+    b_effective: np.ndarray | None = None
+    b_no_margin: np.ndarray | None = None
+    A_rows: np.ndarray | None = None
+    u_nominal: np.ndarray | None = None
+    row_kinds: list[str] | None = None
+    h_object: np.ndarray | None = None
+    clamp_applied: bool = False
+    original_zero_input_feasible_with_rho: bool = True
+    empty_feasible_set: bool = False
+    zero_not_in_F: bool = False
+
 
 
 class SafetyFilter:
@@ -527,7 +540,12 @@ class SafetyFilter:
         b_no_margin = (
             np.concatenate([b_agent, b_wall, b_obj_free]) if len(b) else b
         )
+        b_original = np.asarray(b, dtype=float).copy()
+        row_kinds = (
+            ["agent"] * len(A_agent) + ["wall"] * len(A_wall) + ["object"] * len(A_obj)
+        )
 
+        clamped = False
         if (
             self.params.clamp_margin_to_keep_zero
             and len(b_obj)
@@ -537,8 +555,9 @@ class SafetyFilter:
             # (rho-free) RHS already satisfies b_free <= 0 but the margin pushes
             # b > 0, clamp b down to 0 so the projection set contains 0 without
             # weakening the barrier below the rho-free level.
+            # This *relaxes* the rho-margin rows.  It is not a proof that the
+            # original a^T u >= b (with rho) still holds.
             n_pre = len(b_agent) + len(b_wall)
-            clamped = False
             for i in range(len(b_obj)):
                 if float(b_obj_free[i]) <= 1e-9 and float(b[n_pre + i]) > 0.0:
                     b[n_pre + i] = 0.0
@@ -552,8 +571,12 @@ class SafetyFilter:
         # the intended operating point at the cage ring, not a violation.
         zero_feasible = bool(len(b_no_margin) == 0 or np.all(b_no_margin <= 1e-9))
         # Full QP right-hand side including ISSf margin ``rho`` on object rows.
+        # Use the *original* (unclamped) b for the comparison baseline.
+        original_zero_feasible_with_rho = bool(
+            len(b_original) == 0 or np.all(b_original <= 1e-9)
+        )
         zero_feasible_with_rho = bool(len(b) == 0 or np.all(b <= 1e-9))
-        inside_margin = bool(zero_feasible and not zero_feasible_with_rho)
+        inside_margin = bool(zero_feasible and not original_zero_feasible_with_rho)
         self.stats.zero_input_feasible_checks += 1
         if not zero_feasible:
             self.stats.zero_input_feasible_failures += 1
@@ -596,8 +619,19 @@ class SafetyFilter:
             wall_residual_min=wall_res,
             object_residual_min=object_res,
             feasible=status not in ("infeasible", "fallback_projection"),
-            zero_input_feasible_with_rho=zero_feasible_with_rho,
+            zero_input_feasible_with_rho=original_zero_feasible_with_rho,
             inside_margin_band=inside_margin,
+            b_original=b_original,
+            b_effective=np.asarray(b, dtype=float).copy(),
+            b_no_margin=np.asarray(b_no_margin, dtype=float).copy(),
+            A_rows=np.asarray(A, dtype=float).copy() if len(A) else np.empty((0, 2)),
+            u_nominal=np.asarray(u_nom, dtype=float).copy(),
+            row_kinds=list(row_kinds),
+            h_object=np.asarray(h_obj, dtype=float).copy() if len(h_obj) else np.empty(0),
+            clamp_applied=bool(clamped),
+            original_zero_input_feasible_with_rho=original_zero_feasible_with_rho,
+            empty_feasible_set=bool(status in ("infeasible", "fallback_projection")),
+            zero_not_in_F=bool(not original_zero_feasible_with_rho),
         )
 
     def _solve(

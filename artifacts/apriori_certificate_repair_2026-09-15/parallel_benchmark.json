@@ -1,0 +1,51 @@
+{
+  "hardware": {
+    "cpu": "Intel Core Ultra 9 285H",
+    "physical_cpus": 16,
+    "logical_cpus": 16,
+    "usable_cpus": 16,
+    "affinity": null,
+    "memory_bytes": 33820106752,
+    "python": "3.14.6",
+    "numpy": "2.4.4",
+    "scipy": "1.18.0",
+    "blas": "scipy-openblas 0.3.31",
+    "blas_threads_per_worker": 1
+  },
+  "small_batch_8_frames_l_shape_seeds_2_5": {
+    "serial_wall_seconds": 27.777,
+    "serial_outer_workers": 1,
+    "serial_inner_cvt_workers": 1,
+    "parallel_wall_seconds": 17.373,
+    "parallel_outer_workers": 2,
+    "parallel_inner_cvt_workers": 8,
+    "speedup_wall": 1.6,
+    "metrics_identical": true,
+    "J_bar_seed2": 0.10055999269669338,
+    "J_bar_seed5": 0.11071494990667477,
+    "K0_both": true
+  },
+  "stage_C_l2_c5_600_frames": {
+    "outer_workers": 2,
+    "inner_cvt_workers": 8,
+    "wall_seconds": 1827.34,
+    "per_worker_cpu_over_wall": 1.2,
+    "note": "Polar observer and per-anomaly JSON dumps dominate after CVT; did not revert to one worker."
+  },
+  "stage_D_9_cases_resume_2": {
+    "outer_workers": 9,
+    "inner_cvt_workers": 2,
+    "n_resumed": 2,
+    "n_run": 7,
+    "wall_seconds": 1881.73
+  },
+  "stage_E_seeds_11_17_23": {
+    "outer_workers": 9,
+    "inner_cvt_workers": 2,
+    "n_resumed": 0,
+    "n_run": 9,
+    "wall_seconds": 2020.421,
+    "usable_cpus": 16,
+    "note": "Independent validation seeds. Method not retuned on them."
+  }
+}

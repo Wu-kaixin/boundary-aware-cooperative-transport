@@ -1,0 +1,53 @@
+{
+  "c_shape_seed5_unclamped": {
+    "split": "development",
+    "fail_frames": [228, 229, 230, 231, 232],
+    "agent": 14,
+    "qp_all_optimal": true,
+    "empty_feasible_set": false,
+    "classification": {
+      "228": {"zero_in_F_hard": false, "zero_in_F_rho": false, "kind": "0_not_in_F_hard", "object_b": 0.04251500455732414, "h_object": -0.002814375569665517},
+      "229": {"zero_in_F_hard": false, "zero_in_F_rho": false, "kind": "0_not_in_F_hard", "object_b": 0.02550900273438204, "h_object": -0.000688625341797755},
+      "230": {"zero_in_F_hard": true, "zero_in_F_rho": false, "kind": "0_not_in_F_rho_margin_only", "object_b": 0.015305401640632415},
+      "231": {"zero_in_F_hard": true, "zero_in_F_rho": false, "kind": "0_not_in_F_rho_margin_only", "object_b": 0.009183240984385482},
+      "232": {"zero_in_F_hard": true, "zero_in_F_rho": false, "kind": "0_not_in_F_rho_margin_only", "object_b": 0.0033873694696362304}
+    },
+    "row": "single object row with b>0; F nonempty",
+    "clamp": false,
+    "note": "Clamp would hide 230-232 (margin-only) but not 228-229 (hard barrier). Clamp is not the original-rho baseline."
+  },
+  "l_shape_seed11_unclamped": {
+    "split": "validation",
+    "fail_frames": [238, 239, 240],
+    "agent": 15,
+    "qp_all_optimal": true,
+    "empty_feasible_set": false,
+    "kind": "0_not_in_F_rho_margin_only",
+    "classification": {
+      "238": {"zero_in_F_hard": true, "zero_in_F_rho": false, "object_row": 10, "object_b": 0.008916090815305627, "h_object": 0.0013854886480867967},
+      "239": {"zero_in_F_hard": true, "zero_in_F_rho": false, "object_row": 10, "object_b": 0.005150215191378909, "h_object": 0.0018562231010776364},
+      "240": {"zero_in_F_hard": true, "zero_in_F_rho": false, "object_row": 10, "object_b": 0.0015063186743917538, "h_object": 0.002311710165701031}
+    }
+  },
+  "l_shape_seed17_unclamped": {
+    "split": "validation",
+    "fail_frames": [318, 319, 320, 321, 322],
+    "agent": 14,
+    "qp_all_optimal": true,
+    "empty_feasible_set": false,
+    "kind": "0_not_in_F_rho_margin_only",
+    "classification": {
+      "318": {"zero_in_F_hard": true, "zero_in_F_rho": false, "object_row": 10, "object_b": 0.010358398890262226, "h_object": 0.0012052001387172218},
+      "319": {"zero_in_F_hard": true, "zero_in_F_rho": false, "object_row": 10, "object_b": 0.006215039334169763, "h_object": 0.0017231200832287796},
+      "320": {"zero_in_F_hard": true, "zero_in_F_rho": false, "object_row": 10, "object_b": 0.003729023600496522, "h_object": 0.002033872049937935},
+      "321": {"zero_in_F_hard": true, "zero_in_F_rho": false, "object_row": 10, "object_b": 0.0021324980026173716, "h_object": 0.0022334377496728286},
+      "322": {"zero_in_F_hard": true, "zero_in_F_rho": false, "object_row": 10, "object_b": 0.0005336353089164629, "h_object": 0.002433295586385442}
+    }
+  },
+  "route_B": {
+    "applies_to": "0 not in F_rho but F nonempty (all failing frames; C5 228-229 also 0 not in F_hard)",
+    "coarse_prior_on_Pi_F_0": "u_max = 0.35 m/s",
+    "effect": "substituting ||Pi_F(0)||<=u_max recovers a bound of geometric order M u_max^2 and removes the prior's advantage",
+    "tighter_bound_blocked_by": "a uniform lower bound on object CBF h along the trajectory would require an invariant set that is not proved from P0 without circularity; measured b or measured ||u|| are forbidden as priors"
+  }
+}

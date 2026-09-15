@@ -74,6 +74,8 @@ class LocalCVT:
     integration_method: str = "endpoint_grid"
     edge_n_gon: int = 256
     edge_panels: int = 48
+    edge_h_max: float = 0.004
+    edge_cull_sigmas: float = 6.0
 
     def __post_init__(self) -> None:
         method = str(self.integration_method)
@@ -179,7 +181,11 @@ class LocalCVT:
             local_density.weights,
             float(local_density.params.sigma),
             float(local_density.params.base_density),
-            self.edge_panels,
+            panels=self.edge_panels,
+            cull_sigmas=float(self.edge_cull_sigmas),
+            h_max=float(self.edge_h_max),
+            site=position,
+            radius=float(self.local_radius),
         )
         # Unheld mass: same polygon integral with unheld weights (gap field).
         unheld = 0.0

@@ -1,0 +1,25 @@
+{
+  "status": "PARTIAL",
+  "closed": false,
+  "blocker": "full-horizon K0 (0 in F_rho every sample on unclamped rows) fails; Route B with ||Pi_F(0)||<=u_max cancels B_J,prior < B_J,geom",
+  "completed": [
+    "reproduce clipped long-edge remainder bug",
+    "analytic M2 + h_max remainder + robot-centred moments",
+    "label rules; unclamped K0 dumps",
+    "frozen priors beating geometry at constant level",
+    "parallel ProcessPool with BLAS=1, resume hashes",
+    "regression tests 55 passed 2 skipped",
+    "Stage C L2/C5",
+    "Stage D seeds 2/5/8",
+    "Stage E seeds 11/17/23",
+    "Route B evaluation"
+  ],
+  "not_started_on_purpose": [
+    "recursive feasibility redesign",
+    "dynamic transport",
+    "N=16 Hessian",
+    "identical-config reruns"
+  ],
+  "live_workers": [],
+  "artifact_root": "artifacts/apriori_certificate_repair_2026-09-15"
+}

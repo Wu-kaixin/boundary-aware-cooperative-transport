@@ -14,9 +14,15 @@ First-moment identities (shifted to the kernel centre ``xi``) use
     int u_y k dA = oint  sigma^2 k dx.
 
 Disk cells are replaced by an inscribed regular ``n_gon`` clipped by the domain
-and by Voronoi half-planes; the symmetric-difference area is charged explicitly
-in ``apriori_centroid_bound``.  Edge integrals use composite trapezoid with an
-explicit second-derivative majorant (not a requested ``epsabs``).
+and by Voronoi half-planes.  The symmetric-difference area is charged in
+``apriori_centroid_bound``.  Edge integrals use composite trapezoid with an
+*analytic* second-derivative majorant; panels are allocated from a frozen
+maximum step ``h_max`` so that every *clipped* edge, including wall/Voronoi
+chords up to length ``2 R``, meets a run-before budget.
+
+Remainder identities use only a priori geometry of convex subsets of a disk:
+perimeter ``<= 2 pi R``, diameter ``<= 2 R``.  They do not use trajectory
+maxima.  Non-negative source weights enter as the factor ``W = sum w_j``.
 """
 
 from __future__ import annotations
@@ -28,6 +34,10 @@ import numpy as np
 from scipy.special import erf
 
 _EPS = 1e-15
+_GOLDEN = 0.5 * (1.0 + math.sqrt(5.0))
+# Analytic |d^2 F1 / ds^2| majorant at sigma = 1: golden/sqrt(e) + sqrt(2 pi).
+# See theorem_and_proof.md §F1.  Valid for every unit direction and every (x,y).
+_F1_M2_UNIT = _GOLDEN / math.sqrt(math.e) + math.sqrt(2.0 * math.pi)
 
 
 def _f1(x: np.ndarray, y: np.ndarray, sigma: float) -> np.ndarray:
@@ -133,20 +143,101 @@ def polygon_area_centroid(polygon: np.ndarray) -> tuple[float, np.ndarray]:
     return abs(area), np.array([cx, cy], dtype=float)
 
 
-@dataclass(frozen=True)
-class EdgeQuadratureCertificate:
-    """Composite-trapezoid remainder majorant for one scalar edge integrand."""
+def polygon_edge_lengths(polygon: np.ndarray) -> np.ndarray:
+    poly = np.asarray(polygon, dtype=float).reshape(-1, 2)
+    if len(poly) < 2:
+        return np.zeros(0)
+    edges = np.roll(poly, -1, axis=0) - poly
+    return np.linalg.norm(edges, axis=1)
 
-    panels: int
-    m2_bound: float
-    max_edge_length: float
 
-    @property
-    def one_edge_remainder(self) -> float:
-        # |E| <= (b-a) * h^2 * M2 / 12 with h=(b-a)/m, so (b-a)^3 M2 / (12 m^2).
-        L = float(self.max_edge_length)
-        m = max(1, int(self.panels))
-        return (L**3) * float(self.m2_bound) / (12.0 * m * m)
+def unclipped_regular_chord(radius: float, n_gon: int) -> float:
+    """Edge length of the *unclipped* inscribed regular n-gon. Not a clipped bound."""
+    n = max(4, int(n_gon))
+    return 2.0 * float(radius) * math.sin(math.pi / n)
+
+
+def a_priori_max_edge_length(radius: float) -> float:
+    """Any chord of a convex subset of the closed disk has length at most ``2 R``."""
+    return 2.0 * float(radius)
+
+
+def convex_disk_perimeter_bound(radius: float) -> float:
+    """Perimeter of a convex subset of a disk of radius ``R`` is at most ``2 pi R``."""
+    return 2.0 * math.pi * float(radius)
+
+
+def analytic_m2_kernel(sigma: float) -> float:
+    """Uniform majorant of ``|d^2 k / ds^2|`` along any unit-speed line.
+
+    Let ``z = (u·τ)/σ``. Then ``d²k/ds² = k/σ² (z² - 1)`` and
+    ``|d²k/ds²| ≤ exp(-z²/2) |z²-1| / σ²``. The 1-D function
+    ``exp(-z²/2)|z²-1|`` attains maximum ``1`` at ``z=0`` (the only larger
+    critical value is ``2 e^{-3/2} < 1``). Hence ``|d²k/ds²| ≤ 1/σ²``.
+    Domain: ``σ > 0``, all positions, all unit directions. Units: 1/m².
+    """
+    s = float(sigma)
+    if s <= 0.0:
+        raise ValueError("sigma must be positive")
+    return 1.0 / (s * s)
+
+
+def analytic_m2_sigma2_kernel(sigma: float) -> float:
+    """Uniform majorant of ``|d²(σ² k)/ds²|``. Equals 1, independent of σ.
+
+    Follows from ``analytic_m2_kernel`` by multiplying by ``σ²``.
+    Domain: ``σ > 0``. Dimensionless.
+    """
+    if float(sigma) <= 0.0:
+        raise ValueError("sigma must be positive")
+    return 1.0
+
+
+def analytic_m2_f1(sigma: float) -> float:
+    """Uniform majorant of ``|d² F1 / ds²|`` along any unit-speed line.
+
+    Scaling: ``F1_σ(x,y) = σ F1_1(x/σ, y/σ)``, so the bound is ``C / σ`` with
+    ``C = φ/√e + √(2π)`` and ``φ = (1+√5)/2``. Proof of ``C`` is in
+    ``theorem_and_proof.md`` (Hessian of ``F1`` at ``σ=1``, Cauchy on the
+    first-derivative term, Gaussian 1-D bound on ``|y²-1| e^{-y²/2}``).
+    Domain: ``σ > 0``, all positions, all unit directions. Units: 1/m.
+    """
+    s = float(sigma)
+    if s <= 0.0:
+        raise ValueError("sigma must be positive")
+    return _F1_M2_UNIT / s
+
+
+def f1_second_derivative_majorant_constant() -> float:
+    return float(_F1_M2_UNIT)
+
+
+def edge_second_derivative_majorant(sigma: float) -> float:
+    """Analytic uniform majorant covering both ``F1`` and ``σ² k`` second derivatives.
+
+    This is *not* an NMaximize numerical envelope.  Because the two integrands
+    have different scaling in ``σ``, callers that need a tight remainder should
+    use ``analytic_m2_f1`` and ``analytic_m2_sigma2_kernel`` separately.
+    """
+    return max(analytic_m2_f1(sigma), analytic_m2_sigma2_kernel(sigma))
+
+
+def panels_for_edge(length: float, h_max: float, min_panels: int = 2) -> int:
+    """Number of trapezoid panels so the physical step is at most ``h_max``.
+
+    ``h = length / panels ≤ h_max`` whenever ``panels = ceil(length / h_max)``.
+    This rule is frozen before the run; it does not inspect future trajectories.
+    The a priori remainder uses ``h_max`` itself, which dominates the realized
+    ``h`` on every edge.
+    """
+    L = float(length)
+    h = float(h_max)
+    m0 = max(1, int(min_panels))
+    if L <= _EPS:
+        return m0
+    if h <= 0.0:
+        return m0
+    return max(m0, int(math.ceil(L / h)))
 
 
 def trapezoid_edge_integral(
@@ -161,28 +252,64 @@ def trapezoid_edge_integral(
     return float(length) * float(trap(v, dx=1.0 / (len(v) - 1)))
 
 
+def trapezoid_remainder_majorant(length: float, h_max: float, m2: float) -> float:
+    """``|E| ≤ length * h_max² * M2 / 12`` for composite trapezoid with ``h ≤ h_max``."""
+    return float(length) * float(h_max) ** 2 * float(m2) / 12.0
+
+
+@dataclass(frozen=True)
+class EdgeQuadratureCertificate:
+    """Composite-trapezoid remainder majorant with a frozen maximum step."""
+
+    h_max: float
+    m2_f1: float
+    m2_sigma2_k: float
+    max_edge_length: float
+    perimeter_bound: float
+
+    @property
+    def one_unit_mass_remainder_over_cell(self) -> float:
+        """Mass remainder of one unit-weight kernel on one cell (∮ F1 dy)."""
+        return trapezoid_remainder_majorant(self.perimeter_bound, self.h_max, self.m2_f1)
+
+    @property
+    def one_unit_moment_xi_l1_remainder_over_cell(self) -> float:
+        """``|δμ_x|+|δμ_y|`` for kernel-centred first moments of one unit kernel."""
+        one = trapezoid_remainder_majorant(self.perimeter_bound, self.h_max, self.m2_sigma2_k)
+        return 2.0 * one
+
+
+def _orient_ccw(poly: np.ndarray) -> np.ndarray:
+    x, y = poly[:, 0], poly[:, 1]
+    signed = 0.5 * float(np.sum(x * np.roll(y, -1) - np.roll(x, -1) * y))
+    if signed < 0.0:
+        return poly[::-1]
+    return poly
+
+
 def gaussian_mass_moment_over_polygon(
     polygon: np.ndarray,
     xi: np.ndarray,
     sigma: float,
-    panels: int,
+    panels: int | None = None,
+    h_max: float | None = None,
+    min_panels: int = 2,
 ) -> tuple[float, np.ndarray]:
-    """Return ``(int k dA, int (q-xi) k dA)`` over a positively oriented polygon."""
+    """Return ``(int k dA, int (q-xi) k dA)`` over a positively oriented polygon.
+
+    If ``h_max`` is set, each clipped edge receives ``ceil(length / h_max)``
+    panels (at least ``min_panels``).  A fixed ``panels`` value is used only
+    when ``h_max`` is omitted (legacy tests).
+    """
     poly = np.asarray(polygon, dtype=float).reshape(-1, 2)
     center = np.asarray(xi, dtype=float).reshape(2)
     if len(poly) < 3:
         return 0.0, np.zeros(2)
-    # Orient CCW.
     area, _ = polygon_area_centroid(poly)
     if area == 0.0:
         return 0.0, np.zeros(2)
-    # shoelace sign
-    x, y = poly[:, 0], poly[:, 1]
-    signed = 0.5 * float(np.sum(x * np.roll(y, -1) - np.roll(x, -1) * y))
-    if signed < 0.0:
-        poly = poly[::-1]
+    poly = _orient_ccw(poly)
 
-    m = max(2, int(panels))
     mass = 0.0
     moment = np.zeros(2, dtype=float)
     for i in range(len(poly)):
@@ -192,6 +319,10 @@ def gaussian_mass_moment_over_polygon(
         length = float(np.linalg.norm(edge))
         if length <= _EPS:
             continue
+        if h_max is not None:
+            m = panels_for_edge(length, float(h_max), min_panels=min_panels)
+        else:
+            m = max(2, int(panels if panels is not None else min_panels))
         ts = np.linspace(0.0, 1.0, m + 1)
         pts = a[None, :] + ts[:, None] * edge[None, :]
         u = pts - center[None, :]
@@ -199,11 +330,24 @@ def gaussian_mass_moment_over_polygon(
         kk = _kernel(u[:, 0], u[:, 1], sigma)
         dy = edge[1]
         dx = edge[0]
-        # int k = oint F1 dy, with dy constant * dt on the parameter interval.
         mass += trapezoid_edge_integral(f1, length) * (dy / length)
         moment[0] += trapezoid_edge_integral(-(sigma**2) * kk, length) * (dy / length)
         moment[1] += trapezoid_edge_integral((sigma**2) * kk, length) * (dx / length)
     return float(mass), moment
+
+
+def project_to_disk(point: np.ndarray, center: np.ndarray, radius: float) -> tuple[np.ndarray, bool]:
+    """Euclidean projection onto the closed disk ``B(center, radius)``."""
+    p = np.asarray(point, dtype=float).reshape(2)
+    c = np.asarray(center, dtype=float).reshape(2)
+    r = float(radius)
+    rel = p - c
+    dist = float(np.linalg.norm(rel))
+    if dist <= r + 1e-15:
+        return p, False
+    if dist <= _EPS:
+        return c.copy(), False
+    return c + rel * (r / dist), True
 
 
 def mixture_mass_centroid_over_polygon(
@@ -212,60 +356,99 @@ def mixture_mass_centroid_over_polygon(
     weights: np.ndarray,
     sigma: float,
     floor: float,
-    panels: int,
+    panels: int | None = None,
     cull_sigmas: float = 6.0,
+    h_max: float | None = None,
+    site: np.ndarray | None = None,
+    radius: float | None = None,
+    min_panels: int = 2,
+    mass_floor: float = 1e-12,
 ) -> tuple[float, np.ndarray, int]:
     """Mass and centroid of ``floor + sum w_j k(·-xi_j)`` on a polygon.
 
     Sources with ``dist(xi, bbox(polygon)) > cull_sigmas * sigma`` are skipped;
-    their omitted mass is at most ``w_j * 2 pi sigma^2 exp(-cull_sigmas^2 / 2)``
-    and is charged in the prior via the same Gaussian tail identity when needed.
-    Runtime culling does not widen the partition-restrict certificate (that bound
-    already uses the full weight sum ``W``).
+    omitted mass is at most ``w_j * 2 pi sigma^2 exp(-cull_sigmas^2 / 2)`` and
+    is charged in the prior via the Gaussian tail identity.  Runtime culling
+    does not widen the partition-restrict certificate (that bound already uses
+    the full weight sum ``W``).
+
+    If ``site`` and ``radius`` are supplied, a non-positive numerical mass falls
+    back to the site, and a finite-mass centroid is projected onto
+    ``B(site, radius)``.  Projection onto a closed convex set containing the
+    exact positive-density centroid is non-expansive, so it cannot increase
+    ``||ĉ - c*||``.
     """
     poly = np.asarray(polygon, dtype=float).reshape(-1, 2)
     area, area_c = polygon_area_centroid(poly)
+    site_arr = None if site is None else np.asarray(site, dtype=float).reshape(2)
+    fallback = area_c if site_arr is None else site_arr.copy()
     if area <= _EPS:
-        return 0.0, np.zeros(2), 0
+        return 0.0, fallback.copy(), 0
     mass = float(floor) * area
     moment = float(floor) * area * area_c
     tgt = np.asarray(targets, dtype=float).reshape(-1, 2)
     w = np.asarray(weights, dtype=float).reshape(-1)
     used = 0
-    if len(poly):
-        lo = poly.min(axis=0)
-        hi = poly.max(axis=0)
-    else:
-        lo = hi = np.zeros(2)
+    lo = poly.min(axis=0)
+    hi = poly.max(axis=0)
     cull_r = float(cull_sigmas) * float(sigma)
     for xi, wj in zip(tgt, w):
-        if abs(float(wj)) <= _EPS:
+        if float(wj) <= _EPS:
             continue
-        # Distance from point to axis-aligned box.
         dx = float(max(lo[0] - xi[0], 0.0, xi[0] - hi[0]))
         dy = float(max(lo[1] - xi[1], 0.0, xi[1] - hi[1]))
         if dx * dx + dy * dy > cull_r * cull_r:
             continue
-        m_j, mu_j = gaussian_mass_moment_over_polygon(poly, xi, sigma, panels)
+        m_j, mu_j = gaussian_mass_moment_over_polygon(
+            poly, xi, sigma, panels=panels, h_max=h_max, min_panels=min_panels
+        )
         mass += float(wj) * m_j
+        # World-frame first moment: μ = μ_xi + xi m.  Robot-centred conversion
+        # μ' = μ - p m is applied by the caller via (centroid - p); the prior
+        # charges ||xi - p|| |δm| explicitly (see partition remainder).
         moment += float(wj) * (mu_j + xi * m_j)
         used += 1
-    if mass <= _EPS:
-        return float(mass), area_c, used
-    return float(mass), moment / mass, used
+    if mass <= float(mass_floor):
+        return float(mass), fallback.copy(), used
+    centroid = moment / mass
+    if site_arr is not None and radius is not None:
+        centroid, _projected = project_to_disk(centroid, site_arr, float(radius))
+    return float(mass), centroid, used
 
 
-def edge_second_derivative_majorant(sigma: float) -> float:
-    """Uniform majorant for ``|d^2/ds^2|`` of F1 and of ``sigma^2 k`` along unit-speed edges.
+def discrete_mixture_phi_max(
+    phi0: float,
+    weight_sum: float,
+    n_edges: int,
+    spacing: float,
+    sigma: float,
+) -> dict[str, float]:
+    """Pointwise majorants of the *discrete* controller mixture.
 
-    Wolfram ``NMaximize`` on the closed form at ``sigma=0.2`` over a padded
-    laboratory window gave ``max |g''| ≈ 12.53``.  Scaling by ``(0.2/sigma)^4``
-    (two length derivatives on a Gaussian of width ``sigma``) and a safety factor
-    ``15/12.53`` yields the majorant below.  Valid for ``sigma`` in the paper
-    range near ``0.2``; outside that range re-run the maximisation.
+    ``k ≤ 1`` gives ``φ ≤ φ0 + W``.  Sampling each of ``n_edges`` lines with
+    spacing ``δ`` and weights ``δ`` additionally yields
+    ``φ ≤ φ0 + n_edges (δ + σ √(2π))`` by comparing the discrete Gaussian ridge
+    to ``1 + ∫_0^∞ exp(-x² λ) dx`` (see theorem_and_proof.md).  The continuous
+    infinite-line bound ``σ √(2π)`` is *not* used alone: a discrete comb can
+    overshoot it by up to ``δ``.
     """
-    s = max(float(sigma), 1e-6)
-    return 15.0 * (0.2 / s) ** 4
+    k1 = float(phi0) + float(weight_sum)
+    line = float(phi0) + int(n_edges) * (float(spacing) + float(sigma) * math.sqrt(2.0 * math.pi))
+    return {
+        "phi_max_k_le_1": k1,
+        "phi_max_discrete_lines": line,
+        "phi_max_used": min(k1, line),
+    }
+
+
+def cull_partition_mass_bound(weight_sum: float, sigma: float, cull_sigmas: float) -> float:
+    """Mass omitted by bbox culling on a truncated Voronoi partition.
+
+    Same Gaussian plane-tail identity as restrict, with radius ``cull_sigmas``.
+    Cells are disjoint, so there is no ``N`` factor.
+    """
+    s = float(cull_sigmas)
+    return 2.0 * math.pi * float(sigma) ** 2 * math.exp(-0.5 * s * s) * float(weight_sum)
 
 
 def partition_edge_mass_moment_remainder(
@@ -275,44 +458,116 @@ def partition_edge_mass_moment_remainder(
     sigma: float,
     radius: float,
     panels: int,
+    weight_sum: float | None = None,
+    h_max: float | None = None,
+    cull_sigmas: float = 6.0,
 ) -> dict[str, float]:
-    """A priori sum of edge-trapezoid remainders over agents/sources/edges.
+    """A priori sum of edge-trapezoid remainders over agents and sources.
 
-    Mass uses ``oint F1 dy`` (one scalar per edge).  The two moment components
-    use ``oint k ds`` forms (two scalars).  Floor (constant) polygon integrals
-    are exact by shoelace and contribute no edge remainder.
+    The unclipped regular-n-gon chord ``2 R sin(π/n)`` is *not* a bound on
+    clipped Voronoi/wall edges.  Those edges have length at most ``2 R``.
+    The remainder is formed from:
+
+    * analytic ``M2`` for ``F1`` and ``σ² k`` (not NMaximize);
+    * perimeter ``≤ 2 π R`` per convex cell;
+    * frozen ``h_max`` (or, if omitted, ``h_max = 2 R / panels``, which is the
+      unique step that makes a diameter-length edge use ``panels`` panels);
+    * non-negative weights through ``W = sum w_j``.  If ``weight_sum`` is
+      omitted, ``W = n_sources`` (unit-weight majorant, conservative when
+      true weights are arc lengths ``≪ 1``).
+
+    Robot-centred first-moment error includes the missing conversion term
+    ``||xi - p_i|| |δm|`` with ``||xi - p_i|| ≤ R + cull_sigmas σ`` for every
+    source the integrator actually evaluates.
     """
+    r = float(radius)
     n = max(4, int(n_gon))
-    chord = 2.0 * float(radius) * math.sin(math.pi / n)
+    legacy_chord = unclipped_regular_chord(r, n)
+    max_edge = a_priori_max_edge_length(r)
+    perim = convex_disk_perimeter_bound(r)
+    if h_max is None:
+        h = max_edge / float(max(1, int(panels)))
+    else:
+        h = float(h_max)
+        if h <= 0.0:
+            raise ValueError("h_max must be positive")
+    w = float(n_sources) if weight_sum is None else float(weight_sum)
+    if w < 0.0:
+        raise ValueError("weight_sum must be nonnegative")
+    m2_f1 = analytic_m2_f1(sigma)
+    m2_s2 = analytic_m2_sigma2_kernel(sigma)
     cert = EdgeQuadratureCertificate(
-        panels=int(panels),
-        m2_bound=edge_second_derivative_majorant(sigma),
-        max_edge_length=chord,
+        h_max=h,
+        m2_f1=m2_f1,
+        m2_sigma2_k=m2_s2,
+        max_edge_length=max_edge,
+        perimeter_bound=perim,
     )
-    one = cert.one_edge_remainder
-    # Worst case: every agent polygon has n edges; every source touches every agent.
-    n_edge_evals = int(n_agents) * n * int(n_sources)
-    dm = n_edge_evals * one
-    dmu = n_edge_evals * 2.0 * one  # two moment components
+    n_ag = int(n_agents)
+    dm_unit = n_ag * w * cert.one_unit_mass_remainder_over_cell
+    dmu_xi = n_ag * w * cert.one_unit_moment_xi_l1_remainder_over_cell
+    reach_xi = r + float(cull_sigmas) * float(sigma)
+    dmu_robot = dmu_xi + reach_xi * dm_unit
+    # Floating-point envelope: each edge sum has O(panels) addends of size
+    # O(max|F1|) ≤ σ √(2π).  Charged separately from analytic truncation.
+    panels_diam = panels_for_edge(max_edge, h, min_panels=2)
+    n_edges_cell = n + 4 + max(0, n_ag - 1)
+    float_one = float(n_edges_cell) * (panels_diam + 1) * 256.0 * np.finfo(float).eps * (
+        float(sigma) * math.sqrt(2.0 * math.pi) + 1.0
+    ) * max_edge
+    float_dm = n_ag * w * float_one
     return {
-        "panels": float(cert.panels),
-        "m2_bound": float(cert.m2_bound),
-        "max_edge_length": float(cert.max_edge_length),
-        "one_edge_remainder": float(one),
-        "sum_abs_dm": float(dm),
-        "sum_abs_dmu": float(dmu),
-        "n_edge_evals": float(n_edge_evals),
+        "panels_requested": float(panels),
+        "h_max": float(h),
+        "m2_f1": float(m2_f1),
+        "m2_sigma2_k": float(m2_s2),
+        "m2_bound": float(max(m2_f1, m2_s2)),
+        "max_edge_length": float(max_edge),
+        "legacy_unclipped_chord": float(legacy_chord),
+        "perimeter_bound": float(perim),
+        "weight_sum_W": float(w),
+        "n_sources_majorant": float(n_sources),
+        "used_unit_source_weights": float(1.0 if weight_sum is None else 0.0),
+        "one_cell_unit_mass_remainder": float(cert.one_unit_mass_remainder_over_cell),
+        "sum_abs_dm": float(dm_unit),
+        "sum_abs_dmu_xi": float(dmu_xi),
+        "xi_to_site_reach": float(reach_xi),
+        "sum_abs_dmu": float(dmu_robot),
+        "sum_abs_dmu_robot": float(dmu_robot),
+        "float_sum_abs_dm": float(float_dm),
+        "float_sum_abs_dmu": float(reach_xi * float_dm + n_ag * w * 2.0 * float_one),
+        "cull_sigmas": float(cull_sigmas),
+        "n_edge_evals": float(n_ag * n_edges_cell * max(int(n_sources), 1)),
+        "certificate_status": "rigorous",
+        "m2_status": "analytic",
+        "note": (
+            "Clipped-edge remainder uses diameter 2R and perimeter 2 pi R, "
+            "not the unclipped regular-n-gon chord. M2 is analytic. "
+            "Robot-centred moments include ||xi-p|| |dm|."
+        ),
     }
 
 
 __all__ = [
     "EdgeQuadratureCertificate",
+    "a_priori_max_edge_length",
+    "analytic_m2_f1",
+    "analytic_m2_kernel",
+    "analytic_m2_sigma2_kernel",
     "clip_cell_polygon",
+    "convex_disk_perimeter_bound",
+    "cull_partition_mass_bound",
+    "discrete_mixture_phi_max",
     "edge_second_derivative_majorant",
+    "f1_second_derivative_majorant_constant",
     "gaussian_mass_moment_over_polygon",
     "inscribed_disk_area_deficit",
     "mixture_mass_centroid_over_polygon",
+    "panels_for_edge",
     "partition_edge_mass_moment_remainder",
     "polygon_area_centroid",
+    "polygon_edge_lengths",
+    "project_to_disk",
     "regular_inscribed_polygon",
+    "unclipped_regular_chord",
 ]

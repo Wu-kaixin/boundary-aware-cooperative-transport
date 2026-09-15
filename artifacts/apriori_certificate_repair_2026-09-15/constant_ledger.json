@@ -1,0 +1,79 @@
+{
+  "schema": "apriori_constant_ledger_v2",
+  "branch": "feat/apriori-certificate-repair",
+  "code_snapshot_base": "7b9fb36d94ffba572881c11b8050d1d4cee2811d",
+  "integration_method": "edge_green",
+  "edge_n_gon": 256,
+  "edge_h_max_m": 0.004,
+  "edge_cull_sigmas": 6.0,
+  "clamp_margin_baseline": false,
+  "constants": {
+    "a": {
+      "formula": "2/k_c - Delta",
+      "typical_value": 2.1722222222222225,
+      "status": "rigorous",
+      "domain": "k_c=0.9, Delta=0.05"
+    },
+    "M_plane": {
+      "formula": "phi0*|D| + 2*pi*sigma^2*L",
+      "status": "rigorous"
+    },
+    "B_H0": {
+      "formula": "R^2 * M_plane",
+      "status": "rigorous",
+      "note": "H(P0) polar value is numerical_a_priori only and cannot issue rigorous_on_K0"
+    },
+    "M2_F1": {
+      "formula": "(golden/sqrt(e) + sqrt(2 pi)) / sigma",
+      "value_at_sigma_0p2": 17.440077486324686,
+      "status": "rigorous",
+      "domain": "sigma>0, all unit directions"
+    },
+    "M2_sigma2_k": {
+      "formula": "1",
+      "status": "rigorous",
+      "domain": "sigma>0"
+    },
+    "max_edge": {
+      "formula": "2 R",
+      "status": "rigorous",
+      "not_used": "2 R sin(pi/n_gon)"
+    },
+    "dm_trap": {
+      "formula": "N * W * 2 pi R * h_max^2 * M2_F1 / 12",
+      "status": "rigorous"
+    },
+    "dmu_robot": {
+      "formula": "dmu_xi + (R + cull_sigmas sigma) dm_trap",
+      "status": "rigorous"
+    },
+    "B_E": {
+      "formula": "min(2R(dmu_robot + R dm) + R^2(dm + N eps), 4 R^2 M_plane)",
+      "status": "rigorous"
+    },
+    "B_J_prior": {
+      "formula": "2 B_H0 / (a K Delta) + 4 B_E / a^2",
+      "status": "rigorous_on_K0",
+      "requires": "full-horizon K0 on original unclamped rho rows"
+    },
+    "B_J_geom": {
+      "formula": "M_plane * u_max^2",
+      "status": "rigorous"
+    }
+  },
+  "constant_level_screen": {
+    "l_shape": {"B_E": 0.1786734123833937, "B_J_prior": 0.18826500477830582, "B_J_geom": 0.22951077763729585, "beats": true},
+    "rectangle": {"B_E": 0.13524073132695896, "B_J_prior": 0.14354783808912766, "B_J_geom": 0.18025060482900776, "beats": true},
+    "c_shape": {"B_E": 0.18986273738010534, "B_J_prior": 0.19775039877477252, "B_J_geom": 0.22951077763729574, "beats": true}
+  },
+  "not_certificate": [
+    "scipy.quad requested epsabs",
+    "mesh density maxima",
+    "grid-to-grid polar differences",
+    "trajectory E_bar",
+    "NMaximize / finite-window numerical maxima",
+    "numerical observer H0 as rigorous_on_K0",
+    "unclipped regular-n-gon chord as clipped-edge bound",
+    "continuous infinite-line phi_max on the discrete mixture"
+  ]
+}
