@@ -1,0 +1,80 @@
+{
+  "schema": "apriori_constant_ledger_v1",
+  "branch": "feat/apriori-centroid-bound",
+  "code_snapshot_commit": "175fd67",
+  "base_commit": "a531515",
+  "integration_method": "edge_green",
+  "edge_n_gon": 256,
+  "edge_panels": 48,
+  "constants": {
+    "a": {
+      "formula": "2/k_c - Delta",
+      "typical_value": 2.1722222222222225,
+      "status": "rigorous",
+      "domain": "k_c=0.9, Delta=0.05"
+    },
+    "M_plane": {
+      "formula": "phi0*|D| + 2*pi*sigma^2*L",
+      "status": "rigorous",
+      "source": "plane Gaussian mass of perimeter measure"
+    },
+    "B_H0": {
+      "formula": "R^2 * M_plane",
+      "status": "rigorous",
+      "note": "H(P0) polar value is numerical_a_priori only"
+    },
+    "dm_oracle": {
+      "formula": "sqrt(2*pi/e)*L*delta^2/6",
+      "status": "rigorous",
+      "source": "midpoint Taylor + int |d2k/ds2|"
+    },
+    "dm_restrict_partition": {
+      "formula": "2*pi*sigma^2*exp(-s^2/2)*W",
+      "status": "rigorous",
+      "W": "perimeter L for static oracle",
+      "source": "theorem_and_proof.md Lemma partition restrict",
+      "replaces": "N * L * exp(-s^2/2) * pi * R^2"
+    },
+    "phi_max_line": {
+      "formula": "phi0 + n_edges * sigma * sqrt(2*pi)",
+      "status": "rigorous",
+      "note": "mesh maxima are diagnostic only"
+    },
+    "dm_disk_polygon": {
+      "formula": "N * phi_max_line * (pi*R^2 - n_gon/2*R^2*sin(2*pi/n_gon))",
+      "status": "rigorous"
+    },
+    "dm_edge_trapezoid": {
+      "formula": "N * n_gon * n_sources * (ell^3 * M2) / (12 * panels^2)",
+      "M2": "15*(0.2/sigma)^4",
+      "ell": "2*R*sin(pi/n_gon)",
+      "status": "rigorous",
+      "wolfram_max_gpp_sigma0p2": 12.533
+    },
+    "B_E": {
+      "formula": "min(2*R*(sum||dmu||+R*sum|dm|), 4*R^2*M_plane)",
+      "status": "rigorous"
+    },
+    "B_J_prior": {
+      "formula": "2*B_H0/(a*K*Delta) + 4*B_E/a^2",
+      "status": "rigorous_on_K0"
+    },
+    "B_J_geom": {
+      "formula": "M_plane * u_max^2",
+      "status": "rigorous",
+      "note": "does not use scipy.quad observer mass"
+    }
+  },
+  "constant_level_screen": {
+    "l_shape": {"B_E": 0.0979, "B_J_prior": 0.120, "B_J_geom": 0.230, "beats": true},
+    "rectangle": {"B_E": 0.0733, "B_J_prior": 0.091, "B_J_geom": 0.180, "beats": true},
+    "c_shape": {"B_E": 0.106, "B_J_prior": 0.127, "B_J_geom": 0.230, "beats": true}
+  },
+  "not_certificate": [
+    "scipy.quad requested epsabs",
+    "mesh density maxima",
+    "grid-to-grid polar differences as quadrature remainder",
+    "trajectory E_bar",
+    "N-fold Lip covering remainders (recorded but unused)"
+  ]
+}

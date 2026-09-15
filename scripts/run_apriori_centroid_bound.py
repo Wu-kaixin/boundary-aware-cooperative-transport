@@ -70,8 +70,19 @@ def load_yaml(path: Path) -> dict:
     return yaml.safe_load(path.read_text(encoding="utf-8"))
 
 
-def write_overlay_config(base: dict, grid: int, dest: Path) -> dict:
+def write_overlay_config(
+    base: dict,
+    grid: int,
+    dest: Path,
+    integration_method: str = "endpoint_grid",
+    edge_n_gon: int = 256,
+    edge_panels: int = 48,
+) -> dict:
     cfg = overlay_grid_resolution(base, grid)
+    cfg.setdefault("controller", {})
+    cfg["controller"]["integration_method"] = str(integration_method)
+    cfg["controller"]["edge_n_gon"] = int(edge_n_gon)
+    cfg["controller"]["edge_panels"] = int(edge_panels)
     dest.parent.mkdir(parents=True, exist_ok=True)
     dest.write_text(yaml.safe_dump(cfg, sort_keys=False), encoding="utf-8")
     return cfg
@@ -270,8 +281,9 @@ def run_fresh_case(
         "B_J_prior_P0H_rigorousE": prior["B_J"]["prior_P0H_rigorousE"]["B_J_prior"],
         "B_J_prior_numerical_a_priori": prior["B_J"]["prior_numerical_a_priori"]["B_J_prior"],
         "B_J_geom": geom,
-        "prior_beats_geom_certificate": prior["beats_geometry"]["P0H_rigorousE"],
-        "prior_beats_geom_numerical": prior["beats_geometry"]["numerical_a_priori"],
+            "prior_beats_geom_certificate": prior["beats_geometry"]["certificate_crudeH_rigorousE"],
+            "prior_beats_geom_P0H": prior["beats_geometry"]["P0H_rigorousE"],
+            "prior_beats_geom_numerical": prior["beats_geometry"]["numerical_a_priori"],
         "dissipation_u_command_max_slack": float(max(slacks)) if slacks else None,
         "dissipation_anomaly_frames": anomalies,
         "observer_quadrature": {
@@ -530,6 +542,13 @@ def main() -> None:
     parser.add_argument("--density-mesh", type=int, default=160)
     parser.add_argument("--restrict-site-grid", type=int, default=8)
     parser.add_argument("--restrict-local-mesh", type=int, default=24)
+    parser.add_argument(
+        "--integration-method",
+        choices=["endpoint_grid", "edge_green"],
+        default="edge_green",
+    )
+    parser.add_argument("--edge-n-gon", type=int, default=256)
+    parser.add_argument("--edge-panels", type=int, default=48)
     args = parser.parse_args()
 
     stamp = time.strftime("%Y-%m-%d")
@@ -560,7 +579,13 @@ def main() -> None:
             "grids": grids,
             "frames": frames,
             "observer": {"ntheta": args.ntheta, "nradial": args.nradial},
-            "controller_grid_vs_eval_grid": "controller LocalCVT n in {20,40,80}; observer polar grid fixed",
+            "integration_method": args.integration_method,
+            "edge_n_gon": args.edge_n_gon,
+            "edge_panels": args.edge_panels,
+            "controller_grid_vs_eval_grid": (
+                "endpoint_grid uses LocalCVT n; edge_green uses n_gon/panels "
+                "(grid_resolution kept for baseline comparison only)"
+            ),
             "reads_old_artifacts": False,
         },
     )
@@ -584,7 +609,14 @@ def main() -> None:
         case_dir = out / "runs" / shape / f"n{grid}" / f"seed_{seed}"
         cfg_path = out / "configs" / f"{shape}_n{grid}.yaml"
         base = load_yaml(SHAPES[shape])
-        cfg = write_overlay_config(base, grid, cfg_path)
+        cfg = write_overlay_config(
+            base,
+            grid,
+            cfg_path,
+            integration_method=args.integration_method,
+            edge_n_gon=args.edge_n_gon,
+            edge_panels=args.edge_panels,
+        )
         if shape not in observers:
             observers[shape] = make_observer(cfg, args.ntheta, args.nradial)
             observers_fine[shape] = {

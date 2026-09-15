@@ -174,6 +174,9 @@ def restrict_pointwise_bound(perimeter: float, influence_sigmas: float) -> Bound
     Every dropped kernel then satisfies ||q - xi_k|| > n_sig sigma on the CVT disk,
     so k < exp(-n_sig^2 / 2). Summing ds_k <= L gives a uniform pointwise bound.
     Independent of grid spacing; forms a floor unless influence_sigmas -> inf.
+
+    Prefer ``restrict_partition_mass_bound`` for mass sums over a truncated Voronoi
+    partition (no N-fold disk factor).
     """
     tail = math.exp(-0.5 * float(influence_sigmas) ** 2)
     value = float(perimeter) * tail
@@ -188,8 +191,57 @@ def restrict_pointwise_bound(perimeter: float, influence_sigmas: float) -> Bound
         decreases_with_controller_grid=False,
         decreases_with_oracle_spacing=False,
         forms_floor=True,
-        notes="Does not use a global mass lower bound. Over-counts far sources at the 3-sigma value.",
+        notes="Pointwise only. Over-counts when used as N * value * area(disk).",
     )
+
+
+def restrict_partition_mass_bound(
+    weight_sum: float,
+    sigma: float,
+    influence_sigmas: float,
+) -> BoundTerm:
+    """Mass-sum restrict error on a truncated Voronoi partition.
+
+    Hypotheses (checked against ``boundary_density.restrict``):
+      1. Weights ``w_j >= 0`` and ``sum_j w_j = W`` (oracle: arc lengths, conf=1).
+      2. Deletion uses raw boundary points ``b_j`` with
+         ``||b_j - p_i|| > R + max_offset + s sigma`` (``s=influence_sigmas``).
+      3. Kernel centres are ``xi_j = b_j + offset_j n_j``, so on ``q in B(p_i,R)``
+         every dropped source satisfies ``||q - xi_j|| >= s sigma``.
+      4. Cells ``Omega_i = V_i cap B(p_i,R)`` are pairwise disjoint up to null sets.
+
+    Then for each dropped index ``j`` and each ``i`` that drops it,
+    ``int_{Omega_i} k(q, xi_j) dq <= int_{||u||>= s sigma} k = 2 pi sigma^2 exp(-s^2/2)``,
+    and summing over the disjoint cells that drop ``j`` cannot exceed that plane
+    tail. Hence
+
+        sum_i int_{Omega_i} |phi_full - phi_restrict,i| dq
+            <= 2 pi sigma^2 exp(-s^2/2) * W.
+
+    Wolfram check: ``Integrate[r Exp[-r^2/(2 sigma^2)],{r,s sigma,inf}]*2 pi``
+    equals ``2 pi sigma^2 Exp[-s^2/2]``.
+    """
+    s = float(influence_sigmas)
+    tail = math.exp(-0.5 * s * s)
+    value = 2.0 * math.pi * float(sigma) ** 2 * tail * float(weight_sum)
+    return BoundTerm(
+        name="restrict_partition_tail_mass",
+        value=value,
+        formula="2 pi sigma^2 * exp(-s^2/2) * W",
+        source="disjoint truncated Voronoi cells + Gaussian plane tail (Wolfram)",
+        domain="static oracle/offset density; restrict by raw b_j; Omega_i partition",
+        units="mass (mixed)",
+        status="rigorous",
+        decreases_with_controller_grid=False,
+        decreases_with_oracle_spacing=False,
+        forms_floor=True,
+        notes="No N factor. Requires non-negative weights and the delete-vs-xi distance relation.",
+    )
+
+
+def line_edge_phi_max(phi0: float, sigma: float, n_edges: int) -> float:
+    """Pointwise majorant: each infinite line contributes at most sigma*sqrt(2 pi)."""
+    return float(phi0) + int(n_edges) * float(sigma) * math.sqrt(2.0 * math.pi)
 
 
 def convex_cell_area_error(local_radius: float, h: float) -> float:
@@ -636,6 +688,9 @@ def assemble_prior(
             geometry_cache["mismatch"] = mismatch
             geometry_cache["restrict"] = restrict_num
     phi_max_loose = phi0 + L
+    n_edges = int(len(np.asarray(vertices, dtype=float).reshape(-1, 2)))
+    phi_max_line = line_edge_phi_max(phi0, sigma, n_edges)
+    # Mesh maxima are diagnostic only — never promoted to a global phi upper bound.
     phi_max_mesh = max(
         float(mismatch["phi_star_max_mesh"]),
         float(mismatch["phi_ctrl_max_mesh"]),
@@ -643,20 +698,68 @@ def assemble_prior(
     )
     lip_phi = kernel_lipschitz(sigma) * L
     grid_m, grid_mu = grid_mass_moment_errors(phi_max_loose, lip_phi, r, h, n_agents)
-    grid_m_mesh, grid_mu_mesh = grid_mass_moment_errors(phi_max_mesh, lip_phi, r, h, n_agents)
+    grid_m_mesh, grid_mu_mesh = grid_mass_moment_errors(phi_max_line, lip_phi, r, h, n_agents)
 
     oracle_l1 = oracle_midpoint_l1_bound(L, spacing, sigma)
     dm_den = oracle_l1.value
     dmu_den = r * oracle_l1.value
-    dm_restrict_num = n_agents * float(restrict_num["max_disk_L1"])
-    dm_restrict_rig = n_agents * float(restrict_num["crude_one_cell_mass"])
-    dmu_restrict_num = r * dm_restrict_num
-    dmu_restrict_rig = r * dm_restrict_rig
 
-    dm_grid = grid_m.value
-    dmu_grid = grid_mu.value
-    dm_grid_mesh = grid_m_mesh.value
-    dmu_grid_mesh = grid_mu_mesh.value
+    # Restrict: partition-tail (rigorous) replaces N-fold disk tube.
+    # W = L for static oracle (arc weights, confidence 1, no explore/gap).
+    weight_sum = float(L)
+    restrict_part = restrict_partition_mass_bound(weight_sum, sigma, influence)
+    dm_restrict_rig = float(restrict_part.value)
+    dmu_restrict_rig = r * dm_restrict_rig
+    dm_restrict_num = min(
+        dm_restrict_rig, n_agents * float(restrict_num["max_disk_L1"])
+    )
+    dmu_restrict_num = r * dm_restrict_num
+
+    method = str(ctrl.get("integration_method", "endpoint_grid"))
+    n_gon = int(ctrl.get("edge_n_gon", 256))
+    panels = int(ctrl.get("edge_panels", 48))
+    n_sources = int(math.ceil(L / max(spacing, 1e-9))) + n_edges
+
+    from dbact.edge_green_integral import (
+        inscribed_disk_area_deficit,
+        partition_edge_mass_moment_remainder,
+    )
+
+    if method == "edge_green":
+        deficit = inscribed_disk_area_deficit(r, n_gon)
+        # Missing sets Omega_i \\ P_i are disjoint => sum areas <= N * deficit
+        # still holds; using phi_max_line (proved), not mesh max.
+        dm_grid = n_agents * phi_max_line * deficit
+        dmu_grid = r * dm_grid
+        edge_rem = partition_edge_mass_moment_remainder(
+            n_agents, n_gon, n_sources, sigma, r, panels
+        )
+        dm_grid += float(edge_rem["sum_abs_dm"])
+        dmu_grid += float(edge_rem["sum_abs_dmu"])
+        dm_grid_mesh = dm_grid
+        dmu_grid_mesh = dmu_grid
+        grid_note = {
+            "method": "edge_green",
+            "n_gon": n_gon,
+            "panels": panels,
+            "area_deficit_one_disk": deficit,
+            "phi_max_line_edges": phi_max_line,
+            "n_edges": n_edges,
+            "n_sources_majorant": n_sources,
+            "edge_remainder": edge_rem,
+            "status": "rigorous",
+        }
+    else:
+        dm_grid = grid_m.value
+        dmu_grid = grid_mu.value
+        dm_grid_mesh = grid_m_mesh.value
+        dmu_grid_mesh = grid_mu_mesh.value
+        edge_rem = None
+        grid_note = {
+            "method": "endpoint_grid",
+            "status": "rigorous",
+            "note": "N-fold Davenport tube; typically inactive vs diameter at n<=80",
+        }
 
     dm_obs_num = 0.0
     dmu_obs_num = 0.0
@@ -674,22 +777,29 @@ def assemble_prior(
     b_e_moment = moment_form_E_bound(r, dm_rig, dmu_rig)
     b_e_diameter = diameter_E_bound(r, m_plane)
     b_e_rigorous = min(b_e_moment, float(b_e_diameter.value))
-    b_e_active = "diameter_4R2M" if b_e_rigorous < b_e_moment - 1e-15 else "moment_form"
-    if float(b_e_diameter.value) <= b_e_moment:
-        b_e_active = "diameter_4R2M"
+    b_e_active = (
+        "diameter_4R2M" if float(b_e_diameter.value) <= b_e_moment + 1e-15 else "moment_form"
+    )
 
     dm_num = dm_den + dm_restrict_num + dm_grid_mesh + dm_obs_num
     dmu_num = dmu_den + dmu_restrict_num + dmu_grid_mesh + dmu_obs_num
     b_e_moment_num = moment_form_E_bound(r, dm_num, dmu_num)
     b_e_numerical = min(b_e_moment_num, float(b_e_diameter.value))
 
-    geom = geometric_J_bound(mass_info["M_observer"], mass_info["eps_M_used"], umax)
-    b_h0_cert = max(b_h0_crude, b_h0_p0)
+    # Geometric J uses the analytic plane mass (strict), not scipy.quad.
+    geom = geometric_J_bound(m_plane, 0.0, umax)
+    geom["M_observer_quad"] = mass_info["M_observer"]
+    geom["M_plane_used"] = m_plane
+    geom["note"] = (
+        "B_J_geom = M_plane * u_max^2 with M_plane = phi0|D| + 2 pi sigma^2 L. "
+        "scipy.quad observer mass is recorded but not used in the certificate comparator."
+    )
+    b_h0_cert = b_h0_crude  # only the proved R^2 M_plane term
     j_cert = prior_J_bound(b_h0_crude, b_e_rigorous, a, k_steps, dt)
     j_p0h = prior_J_bound(b_h0_p0, b_e_rigorous, a, k_steps, dt)
     j_num = prior_J_bound(b_h0_p0, b_e_numerical, a, k_steps, dt)
 
-    e_star = (geom["B_J_geom"] - j_p0h["term_2BH0_over_aKD"]) * a * a / 4.0
+    e_star = (geom["B_J_geom"] - j_cert["term_2BH0_over_aKD"]) * a * a / 4.0
 
     return {
         "labels": {
@@ -698,6 +808,9 @@ def assemble_prior(
             "B_E_diameter": "rigorous",
             "B_H0_crude": "rigorous",
             "B_H0_P0": b_h0_p0_status,
+            "B_J_geom": "rigorous",
+            "M_observer_quad": "numerical_a_priori_not_certificate",
+            "phi_max_mesh": "diagnostic_not_global_upper_bound",
             "E_bar_from_trajectory": "post_hoc",
         },
         "parameters": {
@@ -717,8 +830,14 @@ def assemble_prior(
             "perimeter_L": L,
             "domain_area": area,
             "phi_max_loose_phi0_plus_L": phi_max_loose,
-            "phi_max_mesh": phi_max_mesh,
+            "phi_max_line_edges": phi_max_line,
+            "phi_max_mesh_diagnostic": phi_max_mesh,
             "Lip_phi": lip_phi,
+            "integration_method": method,
+            "edge_n_gon": n_gon,
+            "edge_panels": panels,
+            "n_edges": n_edges,
+            "weight_sum_W": weight_sum,
         },
         "mass": mass_info,
         "H0": {
@@ -727,7 +846,7 @@ def assemble_prior(
             "B_H0_P0": b_h0_p0,
             "B_H0_certificate": b_h0_cert,
             "observer_envelope": envelope,
-            "note": "H*(P0) uses the initial condition only; not a trajectory mean.",
+            "note": "Certificate B_H0 uses R^2 M_plane only. H*(P0)+polar envelope is numerical_a_priori.",
         },
         "density_mismatch": {
             "analytic": oracle_l1.as_dict(),
@@ -735,15 +854,18 @@ def assemble_prior(
         },
         "restrict": {
             "pointwise": restrict_pointwise_bound(L, influence).as_dict(),
+            "partition_mass": restrict_part.as_dict(),
             "numerical_site_grid": restrict_num,
+            "legacy_N_fold_disk_mass": n_agents * float(restrict_num["crude_one_cell_mass"]),
         },
         "grid": {
             "h": h,
             "mass_loose_phimax": grid_m.as_dict(),
             "moment_loose_phimax": grid_mu.as_dict(),
-            "mass_mesh_phimax": grid_m_mesh.as_dict(),
-            "moment_mesh_phimax": grid_mu_mesh.as_dict(),
+            "mass_line_phimax": grid_m_mesh.as_dict(),
+            "moment_line_phimax": grid_mu_mesh.as_dict(),
             "e_area_one_cell": convex_cell_area_error(r, h),
+            "integration": grid_note,
         },
         "error_budget_rigorous": {
             "sum_abs_dm": dm_rig,
@@ -775,9 +897,12 @@ def assemble_prior(
             "moment_rigorous": b_e_rigorous,
             "moment_numerical_a_priori": b_e_numerical,
             "active_rigorous_bound": b_e_active,
-            "E_star_to_meet_geometry_using_P0_H": e_star,
+            "E_star_to_meet_geometry_using_crude_H": e_star,
             "formula_moment": "2 R (sum ||dmu|| + R sum |dm|)",
-            "note": "Certificate uses min(moment form, 4 R^2 M). The moment form is grid-dependent but currently looser than the diameter at n<=80 because of N-fold Lip-over-disk tubes.",
+            "note": (
+                "Certificate uses min(moment form, 4 R^2 M_plane). "
+                "With edge_green + partition restrict, moment form is intended to be active."
+            ),
         },
         "B_J": {
             "geometric": geom,
@@ -792,12 +917,13 @@ def assemble_prior(
         },
         "grid_refinement_narrative": {
             "decreases": [
-                "LocalCVT endpoint-grid mass/moment O(h) tube (h = 2R/(n-1))",
+                "edge_green: inscribed n-gon deficit O(1/n_gon^2) and trapezoid panels",
+                "endpoint_grid baseline: LocalCVT O(h) tube (usually inactive vs diameter)",
                 "observer polar remainder if the evaluation grid is refined (not the controller grid)",
             ],
             "floors": [
                 "oracle midpoint vs continuous edge measure (depends on theorem_oracle_spacing)",
-                "density.restrict Gaussian tail at influence_sigmas",
+                "density.restrict partition Gaussian tail at influence_sigmas (no N factor)",
                 "controller discrete mixture vs observer erf line density: same kernel, different edge discretisation",
             ],
         },
@@ -812,11 +938,14 @@ __all__ = [
     "controller_grid_spacing",
     "geometric_J_bound",
     "kernel_lipschitz",
+    "line_edge_phi_max",
     "moment_form_E_bound",
     "observer_resolution_envelope",
     "overlay_grid_resolution",
     "plane_mass_upper",
     "prior_J_bound",
+    "restrict_partition_mass_bound",
+    "restrict_pointwise_bound",
     "sampling_period_a",
     "step_in_k0",
 ]

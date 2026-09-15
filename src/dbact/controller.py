@@ -191,6 +191,10 @@ class DBACTParams:
     # --- coverage (S5) ---
     local_radius: float = 0.80
     grid_resolution: int = 24
+    # Cell integrator: endpoint_grid (legacy baseline) or edge_green (Green edges).
+    integration_method: str = "endpoint_grid"
+    edge_n_gon: int = 256
+    edge_panels: int = 48
     approach_mass_ratio: float = 3.0
     redeploy_gap_ratio: float = 0.15
 
@@ -507,6 +511,9 @@ class DBACTController:
             local_radius=params.local_radius,
             grid_resolution=params.grid_resolution,
             comm_range=params.comm_range,
+            integration_method=str(getattr(params, "integration_method", "endpoint_grid")),
+            edge_n_gon=int(getattr(params, "edge_n_gon", 128)),
+            edge_panels=int(getattr(params, "edge_panels", 32)),
         )
         self.safety = SafetyFilter(
             SafetyFilterParams(
