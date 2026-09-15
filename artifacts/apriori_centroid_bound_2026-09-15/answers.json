@@ -1,0 +1,26 @@
+{
+  "valid_prior": "Conditional: B_E = min(moment form, 4 R^2 M) is rigorous; (star) still needs full-horizon K0 and a>0. Polar H/g/m/c remainder is not enclosed. Active B_E is the diameter on every case.",
+  "unconditional": false,
+  "prior_beats_geometry_cases": [],
+  "posthoc_beats_geometry_applicable": 24,
+  "n_complete": 27,
+  "n_k0_applicable": 24,
+  "n_total": 27,
+  "inapplicable": {
+    "c_shape_seed5_n20": {"frames": [241, 242, 243, 244, 245, 246], "agents": [14], "zero_rho_count": 6},
+    "c_shape_seed5_n40": {"frames": [224, 225, 226, 227, 228], "agents": [14], "zero_rho_count": 5},
+    "c_shape_seed5_n80": {"frames": [232, 233, 234, 235, 236], "agents": [14], "zero_rho_count": 5}
+  },
+  "prior_over_geom": {
+    "l_shape_or_c": {"B_J_prior": 4.10, "B_J_geom": 0.230, "ratio": 17.8},
+    "rectangle": {"B_J_prior": 3.22, "B_J_geom": 0.180, "ratio": 17.9}
+  },
+  "E_bar_mean_by_n": {
+    "l_shape": {"20": 1.323e-4, "40": 2.106e-5, "80": 4.211e-6},
+    "rectangle": {"20": 1.396e-4, "40": 1.483e-5, "80": 1.730e-6},
+    "c_shape": {"20": 2.095e-4, "40": 3.244e-5, "80": 5.785e-6}
+  },
+  "active_B_E": "diameter_4R2M",
+  "bottleneck": "CVT endpoint-grid Lip-over-disk analysis (certificate collapses to 4 R^2 M). Measured E is grid-dominated and small. H0 term is not deciding. K0 fails on C-shape seed 5 at all n, with n-dependent frames.",
+  "next_step": "Tighten or replace LocalCVT endpoint quadrature / its analysis. Do not promote trajectory E_bar. No dynamic transport or N=16 Hessian this round."
+}
