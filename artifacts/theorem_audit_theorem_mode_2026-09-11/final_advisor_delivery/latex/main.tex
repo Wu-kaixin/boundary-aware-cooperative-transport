@@ -1,0 +1,212 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
+\graphicspath{{../figures/}}
+
+\title{DBACT sampled discrete-dissipation: advisor delivery report\\
+\large Static uniform-offset theorem\_mode, $N=16$, nine cases}
+\author{Branch \texttt{feat/sampled-theorem-mode} on frozen baseline \texttt{98ba28e} (not merged)}
+\date{2026-09-11}
+
+\newcommand{\gstar}{g^\star}
+\newcommand{\Hstar}{H^\star}
+\newcommand{\umax}{u_{\max}}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We repaired the sample-and-hold execution interface of the sampled
+\texttt{theorem\_mode} controller and derived a discrete truncated-coverage
+inequality with a mass-weighted command-energy indicator $J$. This report
+delivers the honest verdict: the post-hoc numbers are informative and the
+conditional dissipation structure is sound, but there is \emph{no} a priori
+centroid-error bound that turns the new estimate into a certified quantitative
+improvement over a model-free geometric ceiling, the $N=16$ Hessian / local
+stability question remains open, and the static-oracle runs are theory
+baselines --- \textbf{not} a certificate for unknown-object transport. All nine
+cases (L-shape, rectangle, C-channel $\times$ seeds 2/5/8) complete 30\,s with
+zero aborts; the C-channel seed~5 full-horizon $J$ bound is explicitly
+\emph{inapplicable}. The corrected derivation is in \S\ref{sec:derivation}.
+\end{abstract}
+
+\section{One-line verdict}
+Original coarse Theorem~1 bound: \emph{no quantitative value} (it loses to a
+model-free geometry ceiling a priori). New discrete results: \emph{conditional
+dissipation} plus \emph{post-hoc explanatory value}. \textbf{No} a priori
+guarantee beating geometry. Static oracle $\neq$ unknown-object transport
+proved.
+
+\section{Point-by-point responses}
+
+\paragraph{A5 and hard switching.} Assumption~5 (locally Lipschitz
+continuous-time feedback) is still incompatible with the endpoint-grid CVT path:
+hard disk / Voronoi membership on a finite $20\times20$ lattice produces finite
+centroid jumps under arbitrarily small site moves. The present branch does
+\emph{not} claim the production CVT satisfies A5; it isolates a different
+interface: static sample-and-hold cover with wall rows, no position clipping,
+abort-on-illegal, and a Lipschitz-certified object-hold clearance.
+
+\paragraph{Why the original Theorem~1 bound lacks quantitative value.} Under the
+default static parameters the printed asymptotic formula evaluates to
+$\approx 1.90\times10^{4}$ for the gradient-squared residual, while a direct
+total-mass geometric ceiling is $\approx 8.99$, and measured 30\,s time averages
+are $\approx 0.011$--$0.013$. The formula is therefore worse than a model-free
+geometry bound by $\sim 2\times10^{3}$ and orders of magnitude above
+observation. Replacing the printed number by $\min(\text{formula},\text{geometry})$
+would hide the missing information, not create theory.
+
+\paragraph{What the new discrete results establish.}
+\begin{enumerate}
+\item \textbf{Proved (fixed $\phi^\star$).} The frozen truncated-partition
+majorant (Lemma~A) gives the discrete inequality~\eqref{eq:discrete-ineq}
+without assuming dissipation.
+\item \textbf{Proved ($a=2/k_c-\Delta>0$).} The exact-centroid / unsaturated
+pairing structure for a discrete decrease along centroid-aligned commands
+(Theorem~B).
+\item \textbf{Conditional.} Projection comparison against $0$ holds only on
+steps in $\mathcal{K}_0$ (final QP set with the $\rho$ margin); this is not
+promoted from ``true on some L-runs'' to a global fact --- the C-channel seed~5
+already exhibits six agent-steps with $0\notin F_\rho$.
+\item \textbf{Post-hoc.} With mass-weighted $J_k,E_k$, the finite-horizon form
+$(\star)$ matches L-shape measurements when $\bar E$ is taken from the
+trajectory.
+\item \textbf{$J$ is not the gradient residual.} Vanishing command speed does
+not imply vanishing $\gstar$.
+\end{enumerate}
+
+\paragraph{$N=16$ Hessian.} No Hessian / curvature / invariant-neighborhood
+certificate was computed or claimed. This remains an open item, out of scope for
+this round by design.
+
+\paragraph{A3 --- same Gaussian kernel.} The offset density and the continuous
+observer share the same unnormalized Gaussian edge kernel $K_\sigma$ with a
+single $\sigma$ and nonnegative weights; the manuscript should state this
+interface explicitly so Lemma-type constants have a clear domain.
+
+\section{Quantitative summary (static oracle, $N=16$, 30\,s)}
+
+\begin{center}
+\begin{tabular}{lccc}
+\toprule
+Block & Theorem-1 / analytic & Geometric & Measured \\
+\midrule
+$\|\gstar\|^2$ avg & $\approx1.90\times10^4$ (\emph{not a cert.}) & $\approx8.99$ & $\approx0.011$--$0.013$ (L) \\
+Mass-weighted $J$ & post-hoc $(\star)\approx0.025$--$0.034$ & $M\umax^2\approx0.18$--$0.23$ (preferred) & $\bar J\approx0.009$--$0.012$ \\
+Centroid $E$ & --- & diameter $4R^2M\approx4.80$ (loose) & $\bar E\sim10^{-4}$ (\emph{post-hoc}) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent\textbf{A priori error bound sufficient to beat geometry?} \textbf{No.}
+Against the preferred geometric $J$ ceiling $M\umax^2$, one needs $\bar E\le
+E^\star$; the only model-only bound is the resolution-independent diameter bound
+$\approx4.8>E^\star$, which does not control grid/oracle centroid error. We
+refuse to treat trajectory $\max E$ as a uniform prior. Post-hoc, measured
+$\bar E\sim10^{-4}$ makes $(\star)$ look useful --- explanatory, not certified.
+
+\subsection{Nine-case table}
+All nine cases complete 30\,s with zero aborts. The C-channel seed~5 records six
+zero-input-with-$\rho$ failures (frames 241--246, agent~14) and is the only case
+with an \emph{inapplicable} full-horizon $J$ bound. The primary geometric $J$
+ceiling is $M_{\mathrm{tot}}\umax^2$ (\emph{not} $N m_+\umax^2$).
+
+\begingroup
+\small
+\begin{longtable}{llccccc}
+\toprule
+shape & seed & full-horizon & $H_0$ & $\bar J$ & post-hoc $J$ bd. & $M\umax^2$ \\
+\midrule
+\endhead
+l\_shape & 2 & yes & 0.9754 & 0.01108 & 0.03006 & 0.2295 \\
+l\_shape & 5 & yes & 0.9555 & 0.01071 & 0.02945 & 0.2295 \\
+l\_shape & 8 & yes & 1.0297 & 0.01152 & 0.03169 & 0.2295 \\
+rectangle & 2 & yes & 0.8140 & 0.00894 & 0.02507 & 0.1803 \\
+rectangle & 5 & yes & 0.8262 & 0.00910 & 0.02551 & 0.1803 \\
+rectangle & 8 & yes & 0.8495 & 0.00930 & 0.02618 & 0.1803 \\
+c\_shape & 2 & yes & 1.0789 & 0.01201 & 0.03330 & 0.2295 \\
+c\_shape & 5 & \textbf{no} & 1.0884 & 0.01234$^{\dagger}$ & inapplicable & 0.2295 \\
+c\_shape & 8 & yes & 1.1109 & 0.01251 & 0.03432 & 0.2295 \\
+\bottomrule
+\end{longtable}
+\endgroup
+\noindent{\footnotesize $^{\dagger}$ descriptive statistic tagged
+\texttt{not\_covered\_by\_theorem}; the post-hoc bound is not applied because
+$\mathcal{K}_0\neq[0,K)$. Exact machine values are in
+\texttt{nine\_case\_summary.json} and \texttt{nine\_case\_comparison.csv};
+$M\umax^2$ values are recomputed offline from
+\texttt{observer.total\_mass(vertices)}.}
+
+\paragraph{Three-command check (fixed).} Each stage uses its own hypothetical
+next pose $P+\Delta u$; on refinement $H$, $g$ and $m$ are all taken from the
+same fine observer. Refined max slacks stay $O(10^{-6})$--$O(10^{-7})$:
+numerical consistency at quadrature tolerance, \textbf{not} a strict numerical
+certificate (\texttt{no\_rigorous\_quadrature\_error\_bound}). Per-case values
+are in \texttt{three\_command\_hyp/}.
+
+\section{Figures}
+Discrete-average lines are the horizontal dashes; C-channel seed~5 condition
+failures are shaded. The discrete average $(1/K)\sum_k$ and the trapezoidal
+continuous-time approximation differ by $O(\Delta/T)$ (both reported in
+\texttt{j\_bound/*.json}); the discrete mean is primary.
+
+\begin{figure}[htbp]\centering
+\includegraphics[width=0.9\textwidth]{nine_case_J.pdf}
+\caption{$J_k=\sum_i m_i^\star\|U_i\|^2$ per case with discrete-average lines.}
+\end{figure}
+
+\begin{figure}[htbp]\centering
+\includegraphics[width=0.9\textwidth]{nine_case_E.pdf}
+\caption{$E_k=\sum_i m_i^\star\|\hat c_i-c_i^\star\|^2$ (post-hoc) per case.}
+\end{figure}
+
+\begin{figure}[htbp]\centering
+\includegraphics[width=0.9\textwidth]{nine_case_grad_residual.pdf}
+\caption{Gradient residual $\sum_i\|\gstar_i\|^2$ per case (the original
+paper indicator; distinct from $J$).}
+\end{figure}
+
+\begin{figure}[htbp]\centering
+\includegraphics[width=0.9\textwidth]{nine_case_centroid_residual.pdf}
+\caption{Centroid residual $\sum_i\|c_i^\star-p_i\|^2$ per case.}
+\end{figure}
+
+\section{Suggested paper revisions}
+\begin{enumerate}
+\item Split interfaces: continuous A5-style claims vs.\ sampled hold + abort.
+\item Retire the coarse Theorem~1 formula as the main quantitative claim; report
+geometry alongside any analytic bound.
+\item Introduce the discrete candidate as Theorem~1$'$ (sampled, fixed density)
+with Lemma~A, $a>0$, and explicit $\mathcal{K}_0$ conditioning.
+\item Keep $e_i=\hat c_i-c_i^\star$ and mass weights visible; separate $J$ from
+$\|\gstar\|^2$; mark post-hoc substitutions.
+\item Write A3 with a single $K_\sigma$.
+\item State the $N=16$ Hessian as open.
+\item Safety subsection: wall rows + no clip + abort; object hold via a Lipschitz
+clearance lower bound, not QP feasibility alone.
+\end{enumerate}
+
+\section{Open problems}
+\begin{enumerate}
+\item A resolution-dependent a priori bound on $\|\hat c_{\mathrm{grid}}-c^\star\|$
+tight enough that $(\star)$ beats $M\umax^2$ without trajectory $E$: \emph{not
+available}.
+\item Closing dissipation for final QP commands outside $\mathcal{K}_0$ without
+deleting $\rho$.
+\item $N=16$ Hessian / conditional local-stability certificate.
+\item Extending beyond static oracle to unknown moving objects with map-error
+bounds.
+\item Replacing hard-grid CVT if a continuous A5 statement is still desired.
+\end{enumerate}
+
+% ---- Corrected derivation appendix ----
+\appendix
+\input{derivation.tex}
+
+\end{document}

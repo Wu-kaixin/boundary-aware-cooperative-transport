@@ -1,0 +1,32 @@
+{
+  "frames": 80,
+  "map_source": "oracle",
+  "sampling_order": [
+    "sense_or_inject_map",
+    "form_M_k",
+    "cvt_nominal",
+    "qp_with_agent_wall_object_speed",
+    "hold_P_plus_tau_U"
+  ],
+  "aborted": false,
+  "abort": null,
+  "solver_statuses": {
+    "optimal": 480
+  },
+  "barrier_scalings": 0,
+  "min_barrier_scale": 1.0,
+  "hold_min_pair_distance": 0.5638616428541846,
+  "modes_seen": [
+    "theorem_cvt"
+  ],
+  "abort_runtime": null,
+  "config": "configs\\sim\\theorem\\wall_corner_oracle.yaml",
+  "seed": 0,
+  "frames_requested": 80,
+  "modes_forbidden_present": [],
+  "cost_delta_negative": 79,
+  "cost_delta_positive": 0,
+  "cost_delta_zeroish": 0,
+  "agent_residual_min": 0.6437972858073686,
+  "wall_residual_min": 1.3388772054899942
+}

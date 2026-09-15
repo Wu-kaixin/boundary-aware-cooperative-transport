@@ -1,0 +1,97 @@
+{
+  "config": "E:\\dbact-sampled-theorem-mode\\configs\\sim\\theorem\\static_l_shape_n16_oracle.yaml",
+  "K": 600,
+  "dt": 0.05,
+  "k_c": 0.9,
+  "a": 2.1722222222222225,
+  "N": 16,
+  "per_seed_bounds": [
+    {
+      "K": 600,
+      "dt": 0.05,
+      "k_c": 0.9,
+      "a": 2.1722222222222225,
+      "H0": 0.9753948396589078,
+      "J_bar": 0.011079003412227678,
+      "E_bar": 0.00014538858737624783,
+      "gradient_residual_bar_sum": 0.012230059025341402,
+      "gradient_residual_bar_per_agent": 0.0007643786890838376,
+      "posthoc_J_bound": 0.030058640044240664,
+      "posthoc_J_bound_terms": {
+        "term_2H0_over_aKD": 0.029935391498483104,
+        "term_4Ebar_over_a2": 0.0001232485457575612
+      },
+      "J_geom_bound_cellwise_Nmplus_umax2": 28.377800351398534,
+      "J_geom_bound_totalmass_umax2": 0.22951077763729585,
+      "E_star_threshold_cellwise": 33.440200176963586,
+      "E_star_threshold_totalmass": 0.23542657876765308,
+      "E_trivial_diameter_bound_4R2M": 4.796306863277367,
+      "posthoc_J_bound_below_geom_cellwise": true,
+      "J_bar_below_geom_cellwise": true
+    },
+    {
+      "K": 600,
+      "dt": 0.05,
+      "k_c": 0.9,
+      "a": 2.1722222222222225,
+      "H0": 0.9554571918060512,
+      "J_bar": 0.01070690245392158,
+      "E_bar": 0.00014521425051823144,
+      "gradient_residual_bar_sum": 0.013344643207872466,
+      "gradient_residual_bar_per_agent": 0.0008340402004920291,
+      "posthoc_J_bound": 0.029446595134916403,
+      "posthoc_J_bound_terms": {
+        "term_2H0_over_aKD": 0.029323494377679317,
+        "term_4Ebar_over_a2": 0.000123100757237085
+      },
+      "J_geom_bound_cellwise_Nmplus_umax2": 28.377800351398534,
+      "J_geom_bound_totalmass_umax2": 0.22951077763729585,
+      "E_star_threshold_cellwise": 33.440921993659,
+      "E_star_threshold_totalmass": 0.23614839546306668,
+      "E_trivial_diameter_bound_4R2M": 4.796306863277367,
+      "posthoc_J_bound_below_geom_cellwise": true,
+      "J_bar_below_geom_cellwise": true
+    },
+    {
+      "K": 600,
+      "dt": 0.05,
+      "k_c": 0.9,
+      "a": 2.1722222222222225,
+      "H0": 1.0296566246262293,
+      "J_bar": 0.011517787118348012,
+      "E_bar": 0.00010628330475711184,
+      "gradient_residual_bar_sum": 0.011280728715453407,
+      "gradient_residual_bar_per_agent": 0.0007050455447158379,
+      "posthoc_J_bound": 0.0316908131098226,
+      "posthoc_J_bound_terms": {
+        "term_2H0_over_aKD": 0.031600714822288364,
+        "term_4Ebar_over_a2": 9.009828753423704e-05
+      },
+      "J_geom_bound_cellwise_Nmplus_umax2": 28.377800351398534,
+      "J_geom_bound_totalmass_umax2": 0.22951077763729585,
+      "E_star_threshold_cellwise": 33.4382356993782,
+      "E_star_threshold_totalmass": 0.2334621011822621,
+      "E_trivial_diameter_bound_4R2M": 4.796306863277367,
+      "posthoc_J_bound_below_geom_cellwise": true,
+      "J_bar_below_geom_cellwise": true
+    }
+  ],
+  "a_priori_conclusion": {
+    "a_priori_error_bound_sufficient": false,
+    "E_star_threshold_cellwise": 33.440200176963586,
+    "only_model_derivable_E_bound": {
+      "value": 4.796306863277367,
+      "derivation": "chat and c* both lie in the reach disk (radius <= R) of agent i, so ||chat-c*|| <= 2R; sum m*_i <= M_total; hence E <= 4 R^2 M.",
+      "resolution_dependent": false,
+      "numerically_below_E_star": true
+    },
+    "reason": "No resolution-dependent a priori bound on the grid-truncation centroid error ||chat_grid - c*_continuous|| was derived from the 20x20 grid, the Gaussian offset kernel, or R. The only model-derivable bound is the trivial reach-diameter bound E <= 4 R^2 M, which (i) is independent of the grid resolution and so certifies nothing about the oracle/CVT sampling accuracy, and (ii) reuses the same loose geometric mass ceiling. It is therefore not accepted as a genuine a priori centroid-error certificate. Trajectory-measured E is explicitly NOT used as a uniform a priori bound.",
+    "estimate_type_of_E_bar": "post_hoc_trajectory"
+  },
+  "labels": {
+    "experiment_class": "static_oracle_theory_baseline",
+    "E_bar_estimate_type": "post_hoc_trajectory",
+    "posthoc_J_bound_estimate_type": "post_hoc_trajectory",
+    "warning": "post-hoc bound; NOT a certificate for unknown-object transport."
+  }
+}

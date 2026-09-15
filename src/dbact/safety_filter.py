@@ -106,6 +106,12 @@ class SafetyFilterParams:
     # Control period, used only to check that the sampled barrier condition is a
     # valid discrete-time CBF: ``gamma_obj * dt <= 1``.
     dt: float = 0.05
+    # Sampled theorem_mode: wall rows keep P+ΔU inside D; forbidden fallback means
+    # an empty feasible set aborts rather than projecting through the constraints.
+    enable_wall_rows: bool = False
+    domain: tuple[float, float, float, float] | None = None
+    forbid_fallback: bool = False
+    allow_object_barrier_scaling: bool = True
 
 
 @dataclass
@@ -168,6 +174,19 @@ class FilterResult:
     # passed the nominal input through". Diagnostic output, not a control signal.
     agent_rows_active: int = 0
     object_rows_active: int = 0
+    wall_rows: int = 0
+    wall_rows_active: int = 0
+    barrier_scale: float = 1.0
+    agent_residual_min: float = 0.0
+    wall_residual_min: float = 0.0
+    object_residual_min: float = 0.0
+    feasible: bool = True
+    # ``zero_input_feasible`` is the barrier certificate (margin-free RHS).
+    # ``zero_input_feasible_with_rho`` asks whether u=0 lies in the *final* QP set
+    # including object ISSf rows with ``rho``. False + barrier-feasible means the
+    # robot is inside the intended margin band (active retreat demanded).
+    zero_input_feasible_with_rho: bool = True
+    inside_margin_band: bool = False
 
 
 class SafetyFilter:
@@ -452,6 +471,15 @@ class SafetyFilter:
     # solve
     # ------------------------------------------------------------------ #
 
+    def _wall_rows(self, position: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
+        if not self.params.enable_wall_rows:
+            return np.empty((0, 2)), np.empty(0)
+        if self.params.domain is None:
+            raise ValueError("enable_wall_rows requires an explicit rectangular domain")
+        from .theorem_mode import wall_halfplanes
+
+        return wall_halfplanes(position, self.params.domain, self.params.dt)
+
     def filter_velocity(
         self,
         position: np.ndarray,
@@ -468,6 +496,7 @@ class SafetyFilter:
             u_nom = u_nom * (self.params.max_speed / speed)
 
         A_agent, b_agent = self._agent_rows(position, list(neighbor_positions))
+        A_wall, b_wall = self._wall_rows(position)
         if not self.params.enable_object_rows or boundary_points is None or len(boundary_points) == 0:
             A_obj, b_obj, b_obj_free, h_obj = np.empty((0, 2)), np.empty(0), np.empty(0), np.empty(0)
         else:
@@ -479,36 +508,55 @@ class SafetyFilter:
                 boundary_point_velocities,
             )
 
+        # Stack order matters for active-row accounting and for the scaled-barrier
+        # split: agent | wall | object. Walls are hard domain constraints and are
+        # never scaled; only object rows may be scaled when allowed.
         self._agent_row_count = len(A_agent)
-        A = np.vstack([A_agent, A_obj]) if len(A_agent) or len(A_obj) else np.empty((0, 2))
-        b = np.concatenate([b_agent, b_obj]) if len(b_agent) or len(b_obj) else np.empty(0)
+        self._wall_row_count = len(A_wall)
+        blocks_A = [block for block in (A_agent, A_wall, A_obj) if len(block)]
+        blocks_b = [block for block in (b_agent, b_wall, b_obj) if len(block)]
+        A = np.vstack(blocks_A) if blocks_A else np.empty((0, 2))
+        b = np.concatenate(blocks_b) if blocks_b else np.empty(0)
         # Same rows with the ISSf robustness margin removed. Used only when the
         # margin itself is what makes the problem infeasible.
-        b_no_margin = np.concatenate([b_agent, b_obj_free]) if len(b) else b
+        b_no_margin = (
+            np.concatenate([b_agent, b_wall, b_obj_free]) if len(b) else b
+        )
 
         # The certificate is about the barrier, so it is evaluated against the
         # margin-free right-hand side. Evaluating it with rho included would report
         # a certificate failure every time a robot sits in the ISSf band, which is
         # the intended operating point at the cage ring, not a violation.
         zero_feasible = bool(len(b_no_margin) == 0 or np.all(b_no_margin <= 1e-9))
+        # Full QP right-hand side including ISSf margin ``rho`` on object rows.
+        zero_feasible_with_rho = bool(len(b) == 0 or np.all(b <= 1e-9))
+        inside_margin = bool(zero_feasible and not zero_feasible_with_rho)
         self.stats.zero_input_feasible_checks += 1
         if not zero_feasible:
             self.stats.zero_input_feasible_failures += 1
-        elif len(b) and np.any(b > 1e-9):
+        elif inside_margin:
             self.stats.inside_margin_band += 1
 
         self.stats.solves += 1
-        u, status = self._solve(u_nom, A, b, b_no_margin)
+        u, status, scale = self._solve(u_nom, A, b, b_no_margin)
         self.stats.record_status(status)
 
         modification = float(np.linalg.norm(u - u_nom))
         self.stats.max_modification = max(self.stats.max_modification, modification)
-        agent_active = object_active = 0
-        if len(b):
-            residual = A @ u - b
-            active = np.abs(residual) <= _ACTIVE_ROW_TOLERANCE
-            agent_active = int(np.count_nonzero(active[: len(A_agent)]))
-            object_active = int(np.count_nonzero(active[len(A_agent) :]))
+        agent_active = wall_active = object_active = 0
+        agent_res = wall_res = object_res = 0.0
+        if len(A_agent):
+            agent_residual = A_agent @ u - b_agent
+            agent_active = int(np.count_nonzero(np.abs(agent_residual) <= _ACTIVE_ROW_TOLERANCE))
+            agent_res = float(np.min(agent_residual))
+        if len(A_wall):
+            wall_residual = A_wall @ u - b_wall
+            wall_active = int(np.count_nonzero(np.abs(wall_residual) <= _ACTIVE_ROW_TOLERANCE))
+            wall_res = float(np.min(wall_residual))
+        if len(A_obj):
+            object_residual = A_obj @ u - b_obj
+            object_active = int(np.count_nonzero(np.abs(object_residual) <= _ACTIVE_ROW_TOLERANCE))
+            object_res = float(np.min(object_residual))
         return FilterResult(
             velocity=u,
             status=status,
@@ -518,11 +566,20 @@ class SafetyFilter:
             zero_input_feasible=zero_feasible,
             agent_rows_active=agent_active,
             object_rows_active=object_active,
+            wall_rows=len(A_wall),
+            wall_rows_active=wall_active,
+            barrier_scale=float(scale),
+            agent_residual_min=agent_res,
+            wall_residual_min=wall_res,
+            object_residual_min=object_res,
+            feasible=status not in ("infeasible", "fallback_projection"),
+            zero_input_feasible_with_rho=zero_feasible_with_rho,
+            inside_margin_band=inside_margin,
         )
 
     def _solve(
         self, u_nom: np.ndarray, A: np.ndarray, b: np.ndarray, b_no_margin: np.ndarray
-    ) -> tuple[np.ndarray, str]:
+    ) -> tuple[np.ndarray, str, float]:
         """Two-tier solve, then fail.
 
         Tier 1 asks for the full constraint set including the ISSf margin ``rho``.
@@ -550,30 +607,42 @@ class SafetyFilter:
         inter-robot rows alone have no solution, which is a modelling failure
         rather than a solver failure. It is counted as a fallback, and the success
         contracts reject any run whose fallback count is non-zero.
+
+        Under ``forbid_fallback`` (theorem_mode) tier 4 returns an explicit
+        infeasible status with a zero command instead of projecting. The caller
+        must abort; continuing would no longer be a certified hold update.
         """
         backend = self.params.backend
         if backend == "projection":
-            return self._project(u_nom, A, b), "projection"
+            if self.params.forbid_fallback:
+                self.stats.infeasible += 1
+                return np.zeros(2), "infeasible", 1.0
+            return self._project(u_nom, A, b), "projection", 1.0
 
         for rhs, relaxed in ((b, False), (b_no_margin, True)):
             solution = self._attempt(u_nom, A, rhs)
             if solution is None:
+                if self.params.forbid_fallback:
+                    self.stats.infeasible += 1
+                    self.stats.fallbacks += 1
+                    return np.zeros(2), "infeasible", 1.0
                 self.stats.fallbacks += 1
-                return self._project(u_nom, A, b), "fallback_projection"
+                return self._project(u_nom, A, b), "fallback_projection", 1.0
             if solution.feasible:
                 if relaxed:
                     self.stats.margin_relaxations += 1
-                    return solution.u, "relaxed_margin"
-                return solution.u, "optimal"
+                    return solution.u, "relaxed_margin", 1.0
+                return solution.u, "optimal", 1.0
             if self.params.rho <= 0.0:
                 break
 
-        scaled = self._scaled_barrier_solve(u_nom, A, b_no_margin)
-        if scaled is not None:
-            u, scale = scaled
-            self.stats.barrier_scalings += 1
-            self.stats.min_barrier_scale = min(self.stats.min_barrier_scale, scale)
-            return u, "scaled_barrier"
+        if self.params.allow_object_barrier_scaling:
+            scaled = self._scaled_barrier_solve(u_nom, A, b_no_margin)
+            if scaled is not None:
+                u, scale = scaled
+                self.stats.barrier_scalings += 1
+                self.stats.min_barrier_scale = min(self.stats.min_barrier_scale, scale)
+                return u, "scaled_barrier", float(scale)
 
         # ``infeasible`` means no admissible input existed at all, which is what
         # the word has to mean for the gate on it to be worth anything. Steps that
@@ -581,8 +650,10 @@ class SafetyFilter:
         # ``margin_relaxations`` or ``barrier_scalings`` -- and both are gated
         # separately, so nothing gets through by being renamed.
         self.stats.infeasible += 1
+        if self.params.forbid_fallback:
+            return np.zeros(2), "infeasible", 1.0
         self.stats.fallbacks += 1
-        return self._project(u_nom, A, b), "fallback_projection"
+        return self._project(u_nom, A, b), "fallback_projection", 1.0
 
     def _attempt(self, u_nom: np.ndarray, A: np.ndarray, rhs: np.ndarray):
         if self.params.backend == "cvxpy":
@@ -595,7 +666,9 @@ class SafetyFilter:
 
     def _scaled_barrier_solve(self, u_nom: np.ndarray, A: np.ndarray, b: np.ndarray):
         """Largest ``s`` in [0, 1] for which scaling the object rows is feasible."""
-        split = getattr(self, "_agent_row_count", len(A))
+        agent_n = getattr(self, "_agent_row_count", 0)
+        wall_n = getattr(self, "_wall_row_count", 0)
+        split = agent_n + wall_n
         if split >= len(A):
             return None
         b_zero = b.copy()

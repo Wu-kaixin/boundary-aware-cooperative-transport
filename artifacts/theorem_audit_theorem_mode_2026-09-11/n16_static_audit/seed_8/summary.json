@@ -1,0 +1,78 @@
+{
+  "seed": 8,
+  "frames_requested": 600,
+  "frames_completed": 600,
+  "physical_seconds_completed": 30.0,
+  "complete_30s": true,
+  "abort": null,
+  "wall_seconds": 65.91142459999537,
+  "modes_seen": [
+    "theorem_cvt"
+  ],
+  "solver_status_counts": {
+    "optimal": 1936
+  },
+  "barrier_scalings": 0,
+  "hold_min_pair": 0.35375830449312584,
+  "hold_min_object_clearance": 0.06749999999999945,
+  "agent_residual_min": 0.11047144691458571,
+  "wall_residual_min": 31.39744990172336,
+  "gradient2_time_average": 0.011216716000882598,
+  "centroid2_time_average": 0.22428790020362227,
+  "gradient2_final": 0.001084891487676863,
+  "centroid2_final": 0.01243026131844395,
+  "H0": 1.0296633672119062,
+  "refinement": [
+    {
+      "frame": 0,
+      "gradient2_coarse": 0.07854814753367388,
+      "gradient2_fine": 0.07855067559303677,
+      "centroid2_coarse": 4.134232635899112,
+      "centroid2_fine": 4.135383487672134,
+      "gradient2_rel": 3.218380165167347e-05,
+      "centroid2_rel": 0.0002782938454082061,
+      "centroid_max_diff": 0.0004692385549356921
+    },
+    {
+      "frame": 150,
+      "gradient2_coarse": 0.0011817658191409868,
+      "gradient2_fine": 0.0011819660721924,
+      "centroid2_coarse": 0.011685499761506835,
+      "centroid2_fine": 0.0116864261142777,
+      "gradient2_rel": 0.00016942368831435737,
+      "centroid2_rel": 7.926741347664012e-05,
+      "centroid_max_diff": 1.8402106151418565e-05
+    },
+    {
+      "frame": 300,
+      "gradient2_coarse": 0.001047075992400948,
+      "gradient2_fine": 0.0010471063166158422,
+      "centroid2_coarse": 0.012204805462459013,
+      "centroid2_fine": 0.012204961672231401,
+      "gradient2_rel": 2.8960015246708756e-05,
+      "centroid2_rel": 1.2798874472791093e-05,
+      "centroid_max_diff": 1.0270731431466318e-05
+    },
+    {
+      "frame": 450,
+      "gradient2_coarse": 0.001063679164784719,
+      "gradient2_fine": 0.0010637817520292654,
+      "centroid2_coarse": 0.011712398216359748,
+      "centroid2_fine": 0.011713208738708042,
+      "gradient2_rel": 9.64363642737681e-05,
+      "centroid2_rel": 6.919729395882731e-05,
+      "centroid_max_diff": 1.1406005938607511e-05
+    },
+    {
+      "frame": 599,
+      "gradient2_coarse": 0.001084891487676863,
+      "gradient2_fine": 0.001085022741656796,
+      "centroid2_coarse": 0.01243026131844395,
+      "centroid2_fine": 0.012431558246037953,
+      "gradient2_rel": 0.00012096887456256154,
+      "centroid2_rel": 0.00010432542472431208,
+      "centroid_max_diff": 1.2719332353406872e-05
+    }
+  ],
+  "n_observer_samples": 121
+}

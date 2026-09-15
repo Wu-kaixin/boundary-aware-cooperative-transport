@@ -1,0 +1,42 @@
+[
+  {
+    "item": "Assumption 3 same Gaussian kernel (offset)",
+    "status": "structurally_aligned_in_static_theorem_mode",
+    "detail": "density_mode=offset, uniform cage_offset, gap/explore=0, lead_offset=null"
+  },
+  {
+    "item": "Assumption 5 local Lipschitz continuous-time feedback",
+    "status": "not_claimed",
+    "detail": "Hard Voronoi/grid membership retained; sampled model used instead"
+  },
+  {
+    "item": "Sample-and-hold execution without clipping",
+    "status": "implemented_in_theorem_mode",
+    "detail": "Wall rows + abort; clipping disabled"
+  },
+  {
+    "item": "Assumption 2 true object motion bound",
+    "status": "satisfied_as_zero_by_construction",
+    "detail": "Cargo frozen movable=false; v_obj forced to 0"
+  },
+  {
+    "item": "Fine-grid mass certificate (29)",
+    "status": "fails_as_before",
+    "detail": "eta_m_floor=6.098e-04 vs m_-=1.539e-05"
+  },
+  {
+    "item": "Theorem 1 coarse asymptotic bound as quantitative claim",
+    "status": "not_established",
+    "detail": "Formula value reported only as diagnostic scale; assumptions incomplete"
+  },
+  {
+    "item": "SEARCH/APPROACH/REDEPLOY/TRANSPORT modes",
+    "status": "excluded",
+    "detail": "Only theorem_cvt executed"
+  },
+  {
+    "item": "gamma_agent * Delta <= 1",
+    "status": "ok",
+    "detail": "gamma_agent*dt=0.30000000000000004"
+  }
+]

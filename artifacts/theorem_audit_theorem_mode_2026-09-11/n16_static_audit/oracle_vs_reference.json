@@ -1,0 +1,6 @@
+{
+  "oracle_map": "Discrete boundary samples along true polygon edges, outward normals, arc_length per sample, confidence=1, offset applied in density as uniform d_c=0.105 (no lead). Spacing≈0.04 m.",
+  "continuous_reference_density": "Analytic Gaussian line integrals on the same uniform-offset edge measure plus floor density; independent of oracle sample spacing.",
+  "difference": "Controller CVT uses the oracle discrete atomic mixture on a 20x20 local grid. Observer uses continuous edge measure + polar quadrature. They share geometry and offset law but are not the same numerical object.",
+  "vs_old_transport_reference": "Old audit seeds used transport with lead_offset and moving cargo. This audit uses static uniform cage_offset only; old residual numbers must not be reused."
+}

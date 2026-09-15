@@ -1,0 +1,4220 @@
+{
+  "dt": 0.05,
+  "observer_quadrature": {
+    "ntheta": 128,
+    "nradial": 12
+  },
+  "stages": {
+    "u_cvt": {
+      "n_steps": 600,
+      "coarse_verification": {
+        "observer": "coarse (H, g, m as stored / coarse observer)",
+        "max_slack": 9.197792418311809e-06,
+        "mean_slack": -5.075812225420613e-05,
+        "fraction_positive": 0.195,
+        "n_anomalies": 90
+      },
+      "refined_verification": {
+        "observer": "fine (H, g and m ALL re-evaluated on the same fine observer)",
+        "note": "Anomalous frames (coarse slack > tol) are re-evaluated with one fine observer so that H, g and m come from the same quadrature.",
+        "n_refined": 90,
+        "max_fine_slack_over_anomalies": -1.5840849133632912e-06,
+        "max_slack_refined_full_horizon": 9.961173883697109e-07,
+        "refinements": [
+          {
+            "frame": 68,
+            "coarse_slack": 6.382789958370508e-06,
+            "fine_delta_H_hyp": -0.003219022131750182,
+            "fine_rhs": -0.003191826473030849,
+            "fine_slack": -2.7195658719333243e-05,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 83,
+            "coarse_slack": 1.5187595180019258e-06,
+            "fine_delta_H_hyp": -0.0013004354994139433,
+            "fine_rhs": -0.0012872680601818908,
+            "fine_slack": -1.3167439232052549e-05,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 84,
+            "coarse_slack": 1.8481510066145884e-06,
+            "fine_delta_H_hyp": -0.0012235245066227751,
+            "fine_rhs": -0.001210427739547687,
+            "fine_slack": -1.3096767075088112e-05,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 91,
+            "coarse_slack": 8.256790013788e-06,
+            "fine_delta_H_hyp": -0.000865590190376242,
+            "fine_rhs": -0.0008557986749773085,
+            "fine_slack": -9.79151539893348e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 98,
+            "coarse_slack": 7.0301521525851195e-06,
+            "fine_delta_H_hyp": -0.0006401647149856249,
+            "fine_rhs": -0.0006324801432590849,
+            "fine_slack": -7.684571726540015e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 102,
+            "coarse_slack": 8.852944308619529e-06,
+            "fine_delta_H_hyp": -0.0005391413563251568,
+            "fine_rhs": -0.000532346474890025,
+            "fine_slack": -6.794881435131768e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 104,
+            "coarse_slack": 9.197792418311809e-06,
+            "fine_delta_H_hyp": -0.000508808301197039,
+            "fine_rhs": -0.0005017320752439642,
+            "fine_slack": -7.076225953074784e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 111,
+            "coarse_slack": 5.6274667142638805e-06,
+            "fine_delta_H_hyp": -0.0003915574852106918,
+            "fine_rhs": -0.00038537606426117255,
+            "fine_slack": -6.181420949519234e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 112,
+            "coarse_slack": 2.6641139752854137e-06,
+            "fine_delta_H_hyp": -0.00037190761725458543,
+            "fine_rhs": -0.0003663343744140279,
+            "fine_slack": -5.573242840557541e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 117,
+            "coarse_slack": 8.349508232446468e-06,
+            "fine_delta_H_hyp": -0.0003136109156010036,
+            "fine_rhs": -0.00030898857173319974,
+            "fine_slack": -4.622343867803885e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 119,
+            "coarse_slack": 3.499910304215106e-06,
+            "fine_delta_H_hyp": -0.0002936370837711699,
+            "fine_rhs": -0.0002887728944717709,
+            "fine_slack": -4.864189299399004e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 127,
+            "coarse_slack": 1.0064565702175429e-06,
+            "fine_delta_H_hyp": -0.00022992042823344327,
+            "fine_rhs": -0.00022627316194156994,
+            "fine_slack": -3.647266291873332e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 129,
+            "coarse_slack": 2.70338717551103e-06,
+            "fine_delta_H_hyp": -0.0002206275281959602,
+            "fine_rhs": -0.00021674184015846543,
+            "fine_slack": -3.885688037494784e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 130,
+            "coarse_slack": 4.78254775359107e-06,
+            "fine_delta_H_hyp": -0.0002154257122497505,
+            "fine_rhs": -0.00021155223964686572,
+            "fine_slack": -3.873472602884773e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 131,
+            "coarse_slack": 3.512442258700205e-06,
+            "fine_delta_H_hyp": -0.00021030716555214823,
+            "fine_rhs": -0.00020706749852110608,
+            "fine_slack": -3.23966703104215e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 138,
+            "coarse_slack": 4.138109357243577e-06,
+            "fine_delta_H_hyp": -0.00018508543031336977,
+            "fine_rhs": -0.00018188375103984583,
+            "fine_slack": -3.201679273523943e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 145,
+            "coarse_slack": 1.66039546429359e-06,
+            "fine_delta_H_hyp": -0.00016387970828746212,
+            "fine_rhs": -0.00016130226179755227,
+            "fine_slack": -2.5774464899098494e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 150,
+            "coarse_slack": 4.941953417823564e-06,
+            "fine_delta_H_hyp": -0.00015245643585704016,
+            "fine_rhs": -0.00014966346467227174,
+            "fine_slack": -2.7929711847684256e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 151,
+            "coarse_slack": 2.4087812800177805e-06,
+            "fine_delta_H_hyp": -0.00014982459701862183,
+            "fine_rhs": -0.00014759388157613607,
+            "fine_slack": -2.230715442485756e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 155,
+            "coarse_slack": 4.7004727899449224e-06,
+            "fine_delta_H_hyp": -0.0001429356814091065,
+            "fine_rhs": -0.00014041128189068002,
+            "fine_slack": -2.5243995184264846e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 156,
+            "coarse_slack": 6.200971207216823e-06,
+            "fine_delta_H_hyp": -0.00014138472318991901,
+            "fine_rhs": -0.00013915900812225986,
+            "fine_slack": -2.225715067659151e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 157,
+            "coarse_slack": 5.204302132922467e-06,
+            "fine_delta_H_hyp": -0.00014080652498948965,
+            "fine_rhs": -0.00013793667642613943,
+            "fine_slack": -2.8698485633502178e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 158,
+            "coarse_slack": 3.164917398644653e-06,
+            "fine_delta_H_hyp": -0.00014055494572540184,
+            "fine_rhs": -0.00013808773702466147,
+            "fine_slack": -2.4672087007403666e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 159,
+            "coarse_slack": 3.1080224867171982e-06,
+            "fine_delta_H_hyp": -0.00014211518185502925,
+            "fine_rhs": -0.00013989909609418523,
+            "fine_slack": -2.2160857608440174e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 160,
+            "coarse_slack": 5.716009416579208e-06,
+            "fine_delta_H_hyp": -0.00014499958893576803,
+            "fine_rhs": -0.00014238356005651315,
+            "fine_slack": -2.61602887925488e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 161,
+            "coarse_slack": 4.169150717224041e-06,
+            "fine_delta_H_hyp": -0.0001451684879327786,
+            "fine_rhs": -0.00014263419366839506,
+            "fine_slack": -2.5342942643835306e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 162,
+            "coarse_slack": 6.425397984965059e-06,
+            "fine_delta_H_hyp": -0.00014532927007948615,
+            "fine_rhs": -0.00014260094752765803,
+            "fine_slack": -2.7283225518281203e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 163,
+            "coarse_slack": 3.749101391204373e-06,
+            "fine_delta_H_hyp": -0.00014472655136255064,
+            "fine_rhs": -0.00014242797518188675,
+            "fine_slack": -2.2985761806638874e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 164,
+            "coarse_slack": 1.5656237716318703e-06,
+            "fine_delta_H_hyp": -0.00014411413290771335,
+            "fine_rhs": -0.00014179110470260162,
+            "fine_slack": -2.323028205111733e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 229,
+            "coarse_slack": 1.2409169323033414e-06,
+            "fine_delta_H_hyp": -0.00014439162726698207,
+            "fine_rhs": -0.00014242990691521858,
+            "fine_slack": -1.961720351763486e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 230,
+            "coarse_slack": 1.513209128922293e-06,
+            "fine_delta_H_hyp": -0.00014339068111213216,
+            "fine_rhs": -0.00014149109732549558,
+            "fine_slack": -1.8995837866365756e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 231,
+            "coarse_slack": 2.5541994516000007e-06,
+            "fine_delta_H_hyp": -0.00014431607492371157,
+            "fine_rhs": -0.0001424704580400461,
+            "fine_slack": -1.8456168836654809e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 232,
+            "coarse_slack": 2.4036133205673717e-06,
+            "fine_delta_H_hyp": -0.0001456843334872726,
+            "fine_rhs": -0.00014387374065492846,
+            "fine_slack": -1.8105928323441532e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 233,
+            "coarse_slack": 1.5446156815404155e-06,
+            "fine_delta_H_hyp": -0.0001446539869345287,
+            "fine_rhs": -0.00014303582078574426,
+            "fine_slack": -1.618166148784425e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 234,
+            "coarse_slack": 1.366262673011963e-06,
+            "fine_delta_H_hyp": -0.00014562597809142375,
+            "fine_rhs": -0.00014399450322179108,
+            "fine_slack": -1.631474869632669e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 249,
+            "coarse_slack": 1.4432771224346796e-06,
+            "fine_delta_H_hyp": -0.00014838281160689526,
+            "fine_rhs": -0.0001465956416524389,
+            "fine_slack": -1.787169954456353e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 250,
+            "coarse_slack": 1.359049888605547e-06,
+            "fine_delta_H_hyp": -0.00014946022214656907,
+            "fine_rhs": -0.0001475790670375265,
+            "fine_slack": -1.8811551090425714e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 251,
+            "coarse_slack": 1.2095372371880941e-06,
+            "fine_delta_H_hyp": -0.00014897773804545267,
+            "fine_rhs": -0.00014672071768213966,
+            "fine_slack": -2.2570203633130075e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 257,
+            "coarse_slack": 1.2760543198317876e-06,
+            "fine_delta_H_hyp": -0.00015021457526098736,
+            "fine_rhs": -0.00014816909169109606,
+            "fine_slack": -2.045483569891295e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 258,
+            "coarse_slack": 1.7660118849948292e-06,
+            "fine_delta_H_hyp": -0.00014918092142024442,
+            "fine_rhs": -0.00014728026742470904,
+            "fine_slack": -1.9006539955353718e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 259,
+            "coarse_slack": 1.6436744973520796e-06,
+            "fine_delta_H_hyp": -0.00015009756411266117,
+            "fine_rhs": -0.00014830517547155655,
+            "fine_slack": -1.7923886411046219e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 263,
+            "coarse_slack": 1.408834916653037e-06,
+            "fine_delta_H_hyp": -0.000149558361387081,
+            "fine_rhs": -0.00014778405000931262,
+            "fine_slack": -1.7743113777683912e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 264,
+            "coarse_slack": 2.0006420617929685e-06,
+            "fine_delta_H_hyp": -0.00015053459238401068,
+            "fine_rhs": -0.0001487444074788767,
+            "fine_slack": -1.7901849051339778e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 265,
+            "coarse_slack": 3.4358536419462843e-06,
+            "fine_delta_H_hyp": -0.00015240185119691496,
+            "fine_rhs": -0.00015040338972560627,
+            "fine_slack": -1.998461471308693e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 266,
+            "coarse_slack": 3.4380521936878245e-06,
+            "fine_delta_H_hyp": -0.00015340114409956307,
+            "fine_rhs": -0.00015143261413007376,
+            "fine_slack": -1.968529969489306e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 267,
+            "coarse_slack": 3.5605053921440957e-06,
+            "fine_delta_H_hyp": -0.00015290120222832826,
+            "fine_rhs": -0.00015083806251232557,
+            "fine_slack": -2.063139716002694e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 268,
+            "coarse_slack": 4.195034812373412e-06,
+            "fine_delta_H_hyp": -0.00015284645410718056,
+            "fine_rhs": -0.00015076023818888496,
+            "fine_slack": -2.086215918295606e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 269,
+            "coarse_slack": 3.7003080983197332e-06,
+            "fine_delta_H_hyp": -0.00015377796240945152,
+            "fine_rhs": -0.00015179074908658864,
+            "fine_slack": -1.98721332286288e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 270,
+            "coarse_slack": 3.670312796821292e-06,
+            "fine_delta_H_hyp": -0.00015270222099306174,
+            "fine_rhs": -0.0001508592618741372,
+            "fine_slack": -1.8429591189245544e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 271,
+            "coarse_slack": 3.5255195734423665e-06,
+            "fine_delta_H_hyp": -0.00015363182989935886,
+            "fine_rhs": -0.00015187538336582776,
+            "fine_slack": -1.7564465335310998e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 272,
+            "coarse_slack": 3.5582526723480193e-06,
+            "fine_delta_H_hyp": -0.0001526090135106628,
+            "fine_rhs": -0.00015075053601559823,
+            "fine_slack": -1.8584774950645738e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 273,
+            "coarse_slack": 3.364139048763203e-06,
+            "fine_delta_H_hyp": -0.00015260405011496836,
+            "fine_rhs": -0.00015080079441781653,
+            "fine_slack": -1.8032556971518297e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 274,
+            "coarse_slack": 3.215100379978786e-06,
+            "fine_delta_H_hyp": -0.00015323504796205256,
+            "fine_rhs": -0.00015135416259937586,
+            "fine_slack": -1.8808853626767024e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 275,
+            "coarse_slack": 2.9700229251859267e-06,
+            "fine_delta_H_hyp": -0.00015319596100304977,
+            "fine_rhs": -0.00015122985278869078,
+            "fine_slack": -1.966108214358997e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 276,
+            "coarse_slack": 2.8059278592065795e-06,
+            "fine_delta_H_hyp": -0.0001531634356093381,
+            "fine_rhs": -0.0001512707849640578,
+            "fine_slack": -1.8926506452803036e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 277,
+            "coarse_slack": 3.9845940472151e-06,
+            "fine_delta_H_hyp": -0.0001531137605939037,
+            "fine_rhs": -0.0001513213765074323,
+            "fine_slack": -1.7923840864713942e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 278,
+            "coarse_slack": 4.0208930031163375e-06,
+            "fine_delta_H_hyp": -0.0001532493753471087,
+            "fine_rhs": -0.00015158500883461306,
+            "fine_slack": -1.6643665124956356e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 279,
+            "coarse_slack": 3.7144049118486102e-06,
+            "fine_delta_H_hyp": -0.0001531280215401054,
+            "fine_rhs": -0.0001514369596143939,
+            "fine_slack": -1.6910619257115014e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 280,
+            "coarse_slack": 3.5561916580975595e-06,
+            "fine_delta_H_hyp": -0.0001532809914113198,
+            "fine_rhs": -0.00015148181305247734,
+            "fine_slack": -1.7991783588424532e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 281,
+            "coarse_slack": 3.40884001764395e-06,
+            "fine_delta_H_hyp": -0.00015311184647792686,
+            "fine_rhs": -0.00015152776156456357,
+            "fine_slack": -1.5840849133632912e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 282,
+            "coarse_slack": 3.3951628858882395e-06,
+            "fine_delta_H_hyp": -0.00015360018261745267,
+            "fine_rhs": -0.00015183136997210311,
+            "fine_slack": -1.7688126453495594e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 283,
+            "coarse_slack": 3.3519110057747667e-06,
+            "fine_delta_H_hyp": -0.00015465197196107283,
+            "fine_rhs": -0.0001528239342597602,
+            "fine_slack": -1.828037701312636e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 284,
+            "coarse_slack": 3.25429718697889e-06,
+            "fine_delta_H_hyp": -0.00015461542686123764,
+            "fine_rhs": -0.00015285326084906074,
+            "fine_slack": -1.7621660121768933e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 285,
+            "coarse_slack": 3.2687259914926815e-06,
+            "fine_delta_H_hyp": -0.00015515898878737389,
+            "fine_rhs": -0.00015315587936062314,
+            "fine_slack": -2.0031094267507427e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 286,
+            "coarse_slack": 2.8112026315678807e-06,
+            "fine_delta_H_hyp": -0.00015463393932102498,
+            "fine_rhs": -0.00015295496548370003,
+            "fine_slack": -1.678973837324955e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 287,
+            "coarse_slack": 2.6127443432581265e-06,
+            "fine_delta_H_hyp": -0.00015479362156201049,
+            "fine_rhs": -0.00015297633148958774,
+            "fine_slack": -1.8172900724227465e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 288,
+            "coarse_slack": 2.4297951182618673e-06,
+            "fine_delta_H_hyp": -0.00015490732776268779,
+            "fine_rhs": -0.00015301374755096475,
+            "fine_slack": -1.893580211723031e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 289,
+            "coarse_slack": 2.4788101856445513e-06,
+            "fine_delta_H_hyp": -0.0001552502339694506,
+            "fine_rhs": -0.00015335022909364644,
+            "fine_slack": -1.9000048758041523e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 290,
+            "coarse_slack": 2.0302311476218552e-06,
+            "fine_delta_H_hyp": -0.00015500977495275237,
+            "fine_rhs": -0.00015312875543830597,
+            "fine_slack": -1.881019514446392e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 291,
+            "coarse_slack": 2.1090444904811807e-06,
+            "fine_delta_H_hyp": -0.00015494675005189862,
+            "fine_rhs": -0.00015317931465001224,
+            "fine_slack": -1.7674354018863778e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 292,
+            "coarse_slack": 2.727454525126307e-06,
+            "fine_delta_H_hyp": -0.00015539728113767026,
+            "fine_rhs": -0.00015354864719709576,
+            "fine_slack": -1.8486339405745004e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 293,
+            "coarse_slack": 2.8830340908517433e-06,
+            "fine_delta_H_hyp": -0.00015514797263693758,
+            "fine_rhs": -0.00015330609108982202,
+            "fine_slack": -1.8418815471155634e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 294,
+            "coarse_slack": 3.611359752548677e-06,
+            "fine_delta_H_hyp": -0.0001550991765020271,
+            "fine_rhs": -0.00015335789816326543,
+            "fine_slack": -1.741278338761662e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 295,
+            "coarse_slack": 3.2720019970789533e-06,
+            "fine_delta_H_hyp": -0.0001551598514395458,
+            "fine_rhs": -0.00015339130284284012,
+            "fine_slack": -1.7685485967056883e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 296,
+            "coarse_slack": 3.4935543622024393e-06,
+            "fine_delta_H_hyp": -0.00015565827161001522,
+            "fine_rhs": -0.00015377975645728968,
+            "fine_slack": -1.8785151527255428e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 297,
+            "coarse_slack": 2.8033878663717043e-06,
+            "fine_delta_H_hyp": -0.00015522654374389155,
+            "fine_rhs": -0.00015351363019761106,
+            "fine_slack": -1.7129135462804932e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 298,
+            "coarse_slack": 2.6623424236454918e-06,
+            "fine_delta_H_hyp": -0.00015528129114672495,
+            "fine_rhs": -0.00015356688243229846,
+            "fine_slack": -1.7144087144264973e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 299,
+            "coarse_slack": 3.888133588368409e-06,
+            "fine_delta_H_hyp": -0.0001558752857895307,
+            "fine_rhs": -0.00015394787766081263,
+            "fine_slack": -1.9274081287180605e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 300,
+            "coarse_slack": 3.4575886160238736e-06,
+            "fine_delta_H_hyp": -0.00015633282118798775,
+            "fine_rhs": -0.0001543986454372914,
+            "fine_slack": -1.9341757506963436e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 301,
+            "coarse_slack": 3.268554626228526e-06,
+            "fine_delta_H_hyp": -0.00015785093534304018,
+            "fine_rhs": -0.00015593269250513246,
+            "fine_slack": -1.9182428379077186e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 302,
+            "coarse_slack": 2.9275700038433952e-06,
+            "fine_delta_H_hyp": -0.0001578671771056417,
+            "fine_rhs": -0.00015592703015836025,
+            "fine_slack": -1.9401469472814356e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 303,
+            "coarse_slack": 1.931584049717056e-06,
+            "fine_delta_H_hyp": -0.00015805908931620927,
+            "fine_rhs": -0.00015594929041069414,
+            "fine_slack": -2.1097989055151234e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 346,
+            "coarse_slack": 3.583159559407905e-06,
+            "fine_delta_H_hyp": -0.00015852304915187077,
+            "fine_rhs": -0.00015672984462822818,
+            "fine_slack": -1.7932045236425842e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 347,
+            "coarse_slack": 1.0778245699210134e-06,
+            "fine_delta_H_hyp": -0.00015829523167631976,
+            "fine_rhs": -0.00015631159491907767,
+            "fine_slack": -1.9836367572420924e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 392,
+            "coarse_slack": 1.4769569468754847e-06,
+            "fine_delta_H_hyp": -0.00014696623610954695,
+            "fine_rhs": -0.00014497419248399245,
+            "fine_slack": -1.9920436255545075e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 393,
+            "coarse_slack": 1.6102708701920055e-06,
+            "fine_delta_H_hyp": -0.00014722666517674732,
+            "fine_rhs": -0.0001451952834718745,
+            "fine_slack": -2.0313817048728093e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 394,
+            "coarse_slack": 2.0416197941251378e-06,
+            "fine_delta_H_hyp": -0.00014739352136583506,
+            "fine_rhs": -0.00014545171561876013,
+            "fine_slack": -1.941805747074924e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 395,
+            "coarse_slack": 2.0815148137892235e-06,
+            "fine_delta_H_hyp": -0.00014720186905869959,
+            "fine_rhs": -0.00014539550174110026,
+            "fine_slack": -1.8063673175993267e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 397,
+            "coarse_slack": 1.4861408664729246e-06,
+            "fine_delta_H_hyp": -0.0001469009739734073,
+            "fine_rhs": -0.00014508838753204444,
+            "fine_slack": -1.8125864413628533e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 398,
+            "coarse_slack": 1.123449759815392e-06,
+            "fine_delta_H_hyp": -0.00014658543551115955,
+            "fine_rhs": -0.00014497176945961113,
+            "fine_slack": -1.6136660515484141e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          }
+        ]
+      },
+      "unresolved_quadrature_error": {
+        "strict_numerical_certificate": false,
+        "reason": "no_rigorous_quadrature_error_bound",
+        "note": "Without a rigorous integration (quadrature) error bound on H*, a positive or near-zero refined slack cannot be promoted to a strict numerical certificate of the discrete inequality."
+      },
+      "proof_status": "not_established: numerical evaluation of the discrete descent inequality on the hypothetical hold map; assumptions for Theorem 1 (Lipschitz feedback, fine-grid mass certificate) remain unmet",
+      "numerical_consistency": false,
+      "max_slack_coarse": 9.197792418311809e-06,
+      "mean_slack_coarse": -5.075812225420613e-05,
+      "fraction_positive": 0.195,
+      "n_anomalies": 90,
+      "max_slack_refined": 9.961173883697109e-07,
+      "refinements": [
+        {
+          "frame": 68,
+          "coarse_slack": 6.382789958370508e-06,
+          "fine_delta_H_hyp": -0.003219022131750182,
+          "fine_rhs": -0.003191826473030849,
+          "fine_slack": -2.7195658719333243e-05,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 83,
+          "coarse_slack": 1.5187595180019258e-06,
+          "fine_delta_H_hyp": -0.0013004354994139433,
+          "fine_rhs": -0.0012872680601818908,
+          "fine_slack": -1.3167439232052549e-05,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 84,
+          "coarse_slack": 1.8481510066145884e-06,
+          "fine_delta_H_hyp": -0.0012235245066227751,
+          "fine_rhs": -0.001210427739547687,
+          "fine_slack": -1.3096767075088112e-05,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 91,
+          "coarse_slack": 8.256790013788e-06,
+          "fine_delta_H_hyp": -0.000865590190376242,
+          "fine_rhs": -0.0008557986749773085,
+          "fine_slack": -9.79151539893348e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 98,
+          "coarse_slack": 7.0301521525851195e-06,
+          "fine_delta_H_hyp": -0.0006401647149856249,
+          "fine_rhs": -0.0006324801432590849,
+          "fine_slack": -7.684571726540015e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 102,
+          "coarse_slack": 8.852944308619529e-06,
+          "fine_delta_H_hyp": -0.0005391413563251568,
+          "fine_rhs": -0.000532346474890025,
+          "fine_slack": -6.794881435131768e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 104,
+          "coarse_slack": 9.197792418311809e-06,
+          "fine_delta_H_hyp": -0.000508808301197039,
+          "fine_rhs": -0.0005017320752439642,
+          "fine_slack": -7.076225953074784e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 111,
+          "coarse_slack": 5.6274667142638805e-06,
+          "fine_delta_H_hyp": -0.0003915574852106918,
+          "fine_rhs": -0.00038537606426117255,
+          "fine_slack": -6.181420949519234e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 112,
+          "coarse_slack": 2.6641139752854137e-06,
+          "fine_delta_H_hyp": -0.00037190761725458543,
+          "fine_rhs": -0.0003663343744140279,
+          "fine_slack": -5.573242840557541e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 117,
+          "coarse_slack": 8.349508232446468e-06,
+          "fine_delta_H_hyp": -0.0003136109156010036,
+          "fine_rhs": -0.00030898857173319974,
+          "fine_slack": -4.622343867803885e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 119,
+          "coarse_slack": 3.499910304215106e-06,
+          "fine_delta_H_hyp": -0.0002936370837711699,
+          "fine_rhs": -0.0002887728944717709,
+          "fine_slack": -4.864189299399004e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 127,
+          "coarse_slack": 1.0064565702175429e-06,
+          "fine_delta_H_hyp": -0.00022992042823344327,
+          "fine_rhs": -0.00022627316194156994,
+          "fine_slack": -3.647266291873332e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 129,
+          "coarse_slack": 2.70338717551103e-06,
+          "fine_delta_H_hyp": -0.0002206275281959602,
+          "fine_rhs": -0.00021674184015846543,
+          "fine_slack": -3.885688037494784e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 130,
+          "coarse_slack": 4.78254775359107e-06,
+          "fine_delta_H_hyp": -0.0002154257122497505,
+          "fine_rhs": -0.00021155223964686572,
+          "fine_slack": -3.873472602884773e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 131,
+          "coarse_slack": 3.512442258700205e-06,
+          "fine_delta_H_hyp": -0.00021030716555214823,
+          "fine_rhs": -0.00020706749852110608,
+          "fine_slack": -3.23966703104215e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 138,
+          "coarse_slack": 4.138109357243577e-06,
+          "fine_delta_H_hyp": -0.00018508543031336977,
+          "fine_rhs": -0.00018188375103984583,
+          "fine_slack": -3.201679273523943e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 145,
+          "coarse_slack": 1.66039546429359e-06,
+          "fine_delta_H_hyp": -0.00016387970828746212,
+          "fine_rhs": -0.00016130226179755227,
+          "fine_slack": -2.5774464899098494e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 150,
+          "coarse_slack": 4.941953417823564e-06,
+          "fine_delta_H_hyp": -0.00015245643585704016,
+          "fine_rhs": -0.00014966346467227174,
+          "fine_slack": -2.7929711847684256e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 151,
+          "coarse_slack": 2.4087812800177805e-06,
+          "fine_delta_H_hyp": -0.00014982459701862183,
+          "fine_rhs": -0.00014759388157613607,
+          "fine_slack": -2.230715442485756e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 155,
+          "coarse_slack": 4.7004727899449224e-06,
+          "fine_delta_H_hyp": -0.0001429356814091065,
+          "fine_rhs": -0.00014041128189068002,
+          "fine_slack": -2.5243995184264846e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 156,
+          "coarse_slack": 6.200971207216823e-06,
+          "fine_delta_H_hyp": -0.00014138472318991901,
+          "fine_rhs": -0.00013915900812225986,
+          "fine_slack": -2.225715067659151e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 157,
+          "coarse_slack": 5.204302132922467e-06,
+          "fine_delta_H_hyp": -0.00014080652498948965,
+          "fine_rhs": -0.00013793667642613943,
+          "fine_slack": -2.8698485633502178e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 158,
+          "coarse_slack": 3.164917398644653e-06,
+          "fine_delta_H_hyp": -0.00014055494572540184,
+          "fine_rhs": -0.00013808773702466147,
+          "fine_slack": -2.4672087007403666e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 159,
+          "coarse_slack": 3.1080224867171982e-06,
+          "fine_delta_H_hyp": -0.00014211518185502925,
+          "fine_rhs": -0.00013989909609418523,
+          "fine_slack": -2.2160857608440174e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 160,
+          "coarse_slack": 5.716009416579208e-06,
+          "fine_delta_H_hyp": -0.00014499958893576803,
+          "fine_rhs": -0.00014238356005651315,
+          "fine_slack": -2.61602887925488e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 161,
+          "coarse_slack": 4.169150717224041e-06,
+          "fine_delta_H_hyp": -0.0001451684879327786,
+          "fine_rhs": -0.00014263419366839506,
+          "fine_slack": -2.5342942643835306e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 162,
+          "coarse_slack": 6.425397984965059e-06,
+          "fine_delta_H_hyp": -0.00014532927007948615,
+          "fine_rhs": -0.00014260094752765803,
+          "fine_slack": -2.7283225518281203e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 163,
+          "coarse_slack": 3.749101391204373e-06,
+          "fine_delta_H_hyp": -0.00014472655136255064,
+          "fine_rhs": -0.00014242797518188675,
+          "fine_slack": -2.2985761806638874e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 164,
+          "coarse_slack": 1.5656237716318703e-06,
+          "fine_delta_H_hyp": -0.00014411413290771335,
+          "fine_rhs": -0.00014179110470260162,
+          "fine_slack": -2.323028205111733e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 229,
+          "coarse_slack": 1.2409169323033414e-06,
+          "fine_delta_H_hyp": -0.00014439162726698207,
+          "fine_rhs": -0.00014242990691521858,
+          "fine_slack": -1.961720351763486e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 230,
+          "coarse_slack": 1.513209128922293e-06,
+          "fine_delta_H_hyp": -0.00014339068111213216,
+          "fine_rhs": -0.00014149109732549558,
+          "fine_slack": -1.8995837866365756e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 231,
+          "coarse_slack": 2.5541994516000007e-06,
+          "fine_delta_H_hyp": -0.00014431607492371157,
+          "fine_rhs": -0.0001424704580400461,
+          "fine_slack": -1.8456168836654809e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 232,
+          "coarse_slack": 2.4036133205673717e-06,
+          "fine_delta_H_hyp": -0.0001456843334872726,
+          "fine_rhs": -0.00014387374065492846,
+          "fine_slack": -1.8105928323441532e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 233,
+          "coarse_slack": 1.5446156815404155e-06,
+          "fine_delta_H_hyp": -0.0001446539869345287,
+          "fine_rhs": -0.00014303582078574426,
+          "fine_slack": -1.618166148784425e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 234,
+          "coarse_slack": 1.366262673011963e-06,
+          "fine_delta_H_hyp": -0.00014562597809142375,
+          "fine_rhs": -0.00014399450322179108,
+          "fine_slack": -1.631474869632669e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 249,
+          "coarse_slack": 1.4432771224346796e-06,
+          "fine_delta_H_hyp": -0.00014838281160689526,
+          "fine_rhs": -0.0001465956416524389,
+          "fine_slack": -1.787169954456353e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 250,
+          "coarse_slack": 1.359049888605547e-06,
+          "fine_delta_H_hyp": -0.00014946022214656907,
+          "fine_rhs": -0.0001475790670375265,
+          "fine_slack": -1.8811551090425714e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 251,
+          "coarse_slack": 1.2095372371880941e-06,
+          "fine_delta_H_hyp": -0.00014897773804545267,
+          "fine_rhs": -0.00014672071768213966,
+          "fine_slack": -2.2570203633130075e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 257,
+          "coarse_slack": 1.2760543198317876e-06,
+          "fine_delta_H_hyp": -0.00015021457526098736,
+          "fine_rhs": -0.00014816909169109606,
+          "fine_slack": -2.045483569891295e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 258,
+          "coarse_slack": 1.7660118849948292e-06,
+          "fine_delta_H_hyp": -0.00014918092142024442,
+          "fine_rhs": -0.00014728026742470904,
+          "fine_slack": -1.9006539955353718e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 259,
+          "coarse_slack": 1.6436744973520796e-06,
+          "fine_delta_H_hyp": -0.00015009756411266117,
+          "fine_rhs": -0.00014830517547155655,
+          "fine_slack": -1.7923886411046219e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 263,
+          "coarse_slack": 1.408834916653037e-06,
+          "fine_delta_H_hyp": -0.000149558361387081,
+          "fine_rhs": -0.00014778405000931262,
+          "fine_slack": -1.7743113777683912e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 264,
+          "coarse_slack": 2.0006420617929685e-06,
+          "fine_delta_H_hyp": -0.00015053459238401068,
+          "fine_rhs": -0.0001487444074788767,
+          "fine_slack": -1.7901849051339778e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 265,
+          "coarse_slack": 3.4358536419462843e-06,
+          "fine_delta_H_hyp": -0.00015240185119691496,
+          "fine_rhs": -0.00015040338972560627,
+          "fine_slack": -1.998461471308693e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 266,
+          "coarse_slack": 3.4380521936878245e-06,
+          "fine_delta_H_hyp": -0.00015340114409956307,
+          "fine_rhs": -0.00015143261413007376,
+          "fine_slack": -1.968529969489306e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 267,
+          "coarse_slack": 3.5605053921440957e-06,
+          "fine_delta_H_hyp": -0.00015290120222832826,
+          "fine_rhs": -0.00015083806251232557,
+          "fine_slack": -2.063139716002694e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 268,
+          "coarse_slack": 4.195034812373412e-06,
+          "fine_delta_H_hyp": -0.00015284645410718056,
+          "fine_rhs": -0.00015076023818888496,
+          "fine_slack": -2.086215918295606e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 269,
+          "coarse_slack": 3.7003080983197332e-06,
+          "fine_delta_H_hyp": -0.00015377796240945152,
+          "fine_rhs": -0.00015179074908658864,
+          "fine_slack": -1.98721332286288e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 270,
+          "coarse_slack": 3.670312796821292e-06,
+          "fine_delta_H_hyp": -0.00015270222099306174,
+          "fine_rhs": -0.0001508592618741372,
+          "fine_slack": -1.8429591189245544e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 271,
+          "coarse_slack": 3.5255195734423665e-06,
+          "fine_delta_H_hyp": -0.00015363182989935886,
+          "fine_rhs": -0.00015187538336582776,
+          "fine_slack": -1.7564465335310998e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 272,
+          "coarse_slack": 3.5582526723480193e-06,
+          "fine_delta_H_hyp": -0.0001526090135106628,
+          "fine_rhs": -0.00015075053601559823,
+          "fine_slack": -1.8584774950645738e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 273,
+          "coarse_slack": 3.364139048763203e-06,
+          "fine_delta_H_hyp": -0.00015260405011496836,
+          "fine_rhs": -0.00015080079441781653,
+          "fine_slack": -1.8032556971518297e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 274,
+          "coarse_slack": 3.215100379978786e-06,
+          "fine_delta_H_hyp": -0.00015323504796205256,
+          "fine_rhs": -0.00015135416259937586,
+          "fine_slack": -1.8808853626767024e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 275,
+          "coarse_slack": 2.9700229251859267e-06,
+          "fine_delta_H_hyp": -0.00015319596100304977,
+          "fine_rhs": -0.00015122985278869078,
+          "fine_slack": -1.966108214358997e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 276,
+          "coarse_slack": 2.8059278592065795e-06,
+          "fine_delta_H_hyp": -0.0001531634356093381,
+          "fine_rhs": -0.0001512707849640578,
+          "fine_slack": -1.8926506452803036e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 277,
+          "coarse_slack": 3.9845940472151e-06,
+          "fine_delta_H_hyp": -0.0001531137605939037,
+          "fine_rhs": -0.0001513213765074323,
+          "fine_slack": -1.7923840864713942e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 278,
+          "coarse_slack": 4.0208930031163375e-06,
+          "fine_delta_H_hyp": -0.0001532493753471087,
+          "fine_rhs": -0.00015158500883461306,
+          "fine_slack": -1.6643665124956356e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 279,
+          "coarse_slack": 3.7144049118486102e-06,
+          "fine_delta_H_hyp": -0.0001531280215401054,
+          "fine_rhs": -0.0001514369596143939,
+          "fine_slack": -1.6910619257115014e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 280,
+          "coarse_slack": 3.5561916580975595e-06,
+          "fine_delta_H_hyp": -0.0001532809914113198,
+          "fine_rhs": -0.00015148181305247734,
+          "fine_slack": -1.7991783588424532e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 281,
+          "coarse_slack": 3.40884001764395e-06,
+          "fine_delta_H_hyp": -0.00015311184647792686,
+          "fine_rhs": -0.00015152776156456357,
+          "fine_slack": -1.5840849133632912e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 282,
+          "coarse_slack": 3.3951628858882395e-06,
+          "fine_delta_H_hyp": -0.00015360018261745267,
+          "fine_rhs": -0.00015183136997210311,
+          "fine_slack": -1.7688126453495594e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 283,
+          "coarse_slack": 3.3519110057747667e-06,
+          "fine_delta_H_hyp": -0.00015465197196107283,
+          "fine_rhs": -0.0001528239342597602,
+          "fine_slack": -1.828037701312636e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 284,
+          "coarse_slack": 3.25429718697889e-06,
+          "fine_delta_H_hyp": -0.00015461542686123764,
+          "fine_rhs": -0.00015285326084906074,
+          "fine_slack": -1.7621660121768933e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 285,
+          "coarse_slack": 3.2687259914926815e-06,
+          "fine_delta_H_hyp": -0.00015515898878737389,
+          "fine_rhs": -0.00015315587936062314,
+          "fine_slack": -2.0031094267507427e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 286,
+          "coarse_slack": 2.8112026315678807e-06,
+          "fine_delta_H_hyp": -0.00015463393932102498,
+          "fine_rhs": -0.00015295496548370003,
+          "fine_slack": -1.678973837324955e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 287,
+          "coarse_slack": 2.6127443432581265e-06,
+          "fine_delta_H_hyp": -0.00015479362156201049,
+          "fine_rhs": -0.00015297633148958774,
+          "fine_slack": -1.8172900724227465e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 288,
+          "coarse_slack": 2.4297951182618673e-06,
+          "fine_delta_H_hyp": -0.00015490732776268779,
+          "fine_rhs": -0.00015301374755096475,
+          "fine_slack": -1.893580211723031e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 289,
+          "coarse_slack": 2.4788101856445513e-06,
+          "fine_delta_H_hyp": -0.0001552502339694506,
+          "fine_rhs": -0.00015335022909364644,
+          "fine_slack": -1.9000048758041523e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 290,
+          "coarse_slack": 2.0302311476218552e-06,
+          "fine_delta_H_hyp": -0.00015500977495275237,
+          "fine_rhs": -0.00015312875543830597,
+          "fine_slack": -1.881019514446392e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 291,
+          "coarse_slack": 2.1090444904811807e-06,
+          "fine_delta_H_hyp": -0.00015494675005189862,
+          "fine_rhs": -0.00015317931465001224,
+          "fine_slack": -1.7674354018863778e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 292,
+          "coarse_slack": 2.727454525126307e-06,
+          "fine_delta_H_hyp": -0.00015539728113767026,
+          "fine_rhs": -0.00015354864719709576,
+          "fine_slack": -1.8486339405745004e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 293,
+          "coarse_slack": 2.8830340908517433e-06,
+          "fine_delta_H_hyp": -0.00015514797263693758,
+          "fine_rhs": -0.00015330609108982202,
+          "fine_slack": -1.8418815471155634e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 294,
+          "coarse_slack": 3.611359752548677e-06,
+          "fine_delta_H_hyp": -0.0001550991765020271,
+          "fine_rhs": -0.00015335789816326543,
+          "fine_slack": -1.741278338761662e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 295,
+          "coarse_slack": 3.2720019970789533e-06,
+          "fine_delta_H_hyp": -0.0001551598514395458,
+          "fine_rhs": -0.00015339130284284012,
+          "fine_slack": -1.7685485967056883e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 296,
+          "coarse_slack": 3.4935543622024393e-06,
+          "fine_delta_H_hyp": -0.00015565827161001522,
+          "fine_rhs": -0.00015377975645728968,
+          "fine_slack": -1.8785151527255428e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 297,
+          "coarse_slack": 2.8033878663717043e-06,
+          "fine_delta_H_hyp": -0.00015522654374389155,
+          "fine_rhs": -0.00015351363019761106,
+          "fine_slack": -1.7129135462804932e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 298,
+          "coarse_slack": 2.6623424236454918e-06,
+          "fine_delta_H_hyp": -0.00015528129114672495,
+          "fine_rhs": -0.00015356688243229846,
+          "fine_slack": -1.7144087144264973e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 299,
+          "coarse_slack": 3.888133588368409e-06,
+          "fine_delta_H_hyp": -0.0001558752857895307,
+          "fine_rhs": -0.00015394787766081263,
+          "fine_slack": -1.9274081287180605e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 300,
+          "coarse_slack": 3.4575886160238736e-06,
+          "fine_delta_H_hyp": -0.00015633282118798775,
+          "fine_rhs": -0.0001543986454372914,
+          "fine_slack": -1.9341757506963436e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 301,
+          "coarse_slack": 3.268554626228526e-06,
+          "fine_delta_H_hyp": -0.00015785093534304018,
+          "fine_rhs": -0.00015593269250513246,
+          "fine_slack": -1.9182428379077186e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 302,
+          "coarse_slack": 2.9275700038433952e-06,
+          "fine_delta_H_hyp": -0.0001578671771056417,
+          "fine_rhs": -0.00015592703015836025,
+          "fine_slack": -1.9401469472814356e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 303,
+          "coarse_slack": 1.931584049717056e-06,
+          "fine_delta_H_hyp": -0.00015805908931620927,
+          "fine_rhs": -0.00015594929041069414,
+          "fine_slack": -2.1097989055151234e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 346,
+          "coarse_slack": 3.583159559407905e-06,
+          "fine_delta_H_hyp": -0.00015852304915187077,
+          "fine_rhs": -0.00015672984462822818,
+          "fine_slack": -1.7932045236425842e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 347,
+          "coarse_slack": 1.0778245699210134e-06,
+          "fine_delta_H_hyp": -0.00015829523167631976,
+          "fine_rhs": -0.00015631159491907767,
+          "fine_slack": -1.9836367572420924e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 392,
+          "coarse_slack": 1.4769569468754847e-06,
+          "fine_delta_H_hyp": -0.00014696623610954695,
+          "fine_rhs": -0.00014497419248399245,
+          "fine_slack": -1.9920436255545075e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 393,
+          "coarse_slack": 1.6102708701920055e-06,
+          "fine_delta_H_hyp": -0.00014722666517674732,
+          "fine_rhs": -0.0001451952834718745,
+          "fine_slack": -2.0313817048728093e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 394,
+          "coarse_slack": 2.0416197941251378e-06,
+          "fine_delta_H_hyp": -0.00014739352136583506,
+          "fine_rhs": -0.00014545171561876013,
+          "fine_slack": -1.941805747074924e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 395,
+          "coarse_slack": 2.0815148137892235e-06,
+          "fine_delta_H_hyp": -0.00014720186905869959,
+          "fine_rhs": -0.00014539550174110026,
+          "fine_slack": -1.8063673175993267e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 397,
+          "coarse_slack": 1.4861408664729246e-06,
+          "fine_delta_H_hyp": -0.0001469009739734073,
+          "fine_rhs": -0.00014508838753204444,
+          "fine_slack": -1.8125864413628533e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 398,
+          "coarse_slack": 1.123449759815392e-06,
+          "fine_delta_H_hyp": -0.00014658543551115955,
+          "fine_rhs": -0.00014497176945961113,
+          "fine_slack": -1.6136660515484141e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        }
+      ],
+      "strict_numerical_certificate": false,
+      "strict_numerical_certificate_reason": "no_rigorous_quadrature_error_bound"
+    },
+    "u_saturated": {
+      "n_steps": 600,
+      "coarse_verification": {
+        "observer": "coarse (H, g, m as stored / coarse observer)",
+        "max_slack": 9.197792418311809e-06,
+        "mean_slack": -3.1397152905082616e-05,
+        "fraction_positive": 0.195,
+        "n_anomalies": 90
+      },
+      "refined_verification": {
+        "observer": "fine (H, g and m ALL re-evaluated on the same fine observer)",
+        "note": "Anomalous frames (coarse slack > tol) are re-evaluated with one fine observer so that H, g and m come from the same quadrature.",
+        "n_refined": 90,
+        "max_fine_slack_over_anomalies": -1.5840849133632912e-06,
+        "max_slack_refined_full_horizon": 9.961173883697109e-07,
+        "refinements": [
+          {
+            "frame": 68,
+            "coarse_slack": 6.382789958370508e-06,
+            "fine_delta_H_hyp": -0.003219022131750182,
+            "fine_rhs": -0.003191826473030849,
+            "fine_slack": -2.7195658719333243e-05,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 83,
+            "coarse_slack": 1.5187595180019258e-06,
+            "fine_delta_H_hyp": -0.0013004354994139433,
+            "fine_rhs": -0.0012872680601818908,
+            "fine_slack": -1.3167439232052549e-05,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 84,
+            "coarse_slack": 1.8481510066145884e-06,
+            "fine_delta_H_hyp": -0.0012235245066227751,
+            "fine_rhs": -0.001210427739547687,
+            "fine_slack": -1.3096767075088112e-05,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 91,
+            "coarse_slack": 8.256790013788e-06,
+            "fine_delta_H_hyp": -0.000865590190376242,
+            "fine_rhs": -0.0008557986749773085,
+            "fine_slack": -9.79151539893348e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 98,
+            "coarse_slack": 7.0301521525851195e-06,
+            "fine_delta_H_hyp": -0.0006401647149856249,
+            "fine_rhs": -0.0006324801432590849,
+            "fine_slack": -7.684571726540015e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 102,
+            "coarse_slack": 8.852944308619529e-06,
+            "fine_delta_H_hyp": -0.0005391413563251568,
+            "fine_rhs": -0.000532346474890025,
+            "fine_slack": -6.794881435131768e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 104,
+            "coarse_slack": 9.197792418311809e-06,
+            "fine_delta_H_hyp": -0.000508808301197039,
+            "fine_rhs": -0.0005017320752439642,
+            "fine_slack": -7.076225953074784e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 111,
+            "coarse_slack": 5.6274667142638805e-06,
+            "fine_delta_H_hyp": -0.0003915574852106918,
+            "fine_rhs": -0.00038537606426117255,
+            "fine_slack": -6.181420949519234e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 112,
+            "coarse_slack": 2.6641139752854137e-06,
+            "fine_delta_H_hyp": -0.00037190761725458543,
+            "fine_rhs": -0.0003663343744140279,
+            "fine_slack": -5.573242840557541e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 117,
+            "coarse_slack": 8.349508232446468e-06,
+            "fine_delta_H_hyp": -0.0003136109156010036,
+            "fine_rhs": -0.00030898857173319974,
+            "fine_slack": -4.622343867803885e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 119,
+            "coarse_slack": 3.499910304215106e-06,
+            "fine_delta_H_hyp": -0.0002936370837711699,
+            "fine_rhs": -0.0002887728944717709,
+            "fine_slack": -4.864189299399004e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 127,
+            "coarse_slack": 1.0064565702175429e-06,
+            "fine_delta_H_hyp": -0.00022992042823344327,
+            "fine_rhs": -0.00022627316194156994,
+            "fine_slack": -3.647266291873332e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 129,
+            "coarse_slack": 2.70338717551103e-06,
+            "fine_delta_H_hyp": -0.0002206275281959602,
+            "fine_rhs": -0.00021674184015846543,
+            "fine_slack": -3.885688037494784e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 130,
+            "coarse_slack": 4.78254775359107e-06,
+            "fine_delta_H_hyp": -0.0002154257122497505,
+            "fine_rhs": -0.00021155223964686572,
+            "fine_slack": -3.873472602884773e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 131,
+            "coarse_slack": 3.512442258700205e-06,
+            "fine_delta_H_hyp": -0.00021030716555214823,
+            "fine_rhs": -0.00020706749852110608,
+            "fine_slack": -3.23966703104215e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 138,
+            "coarse_slack": 4.138109357243577e-06,
+            "fine_delta_H_hyp": -0.00018508543031336977,
+            "fine_rhs": -0.00018188375103984583,
+            "fine_slack": -3.201679273523943e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 145,
+            "coarse_slack": 1.66039546429359e-06,
+            "fine_delta_H_hyp": -0.00016387970828746212,
+            "fine_rhs": -0.00016130226179755227,
+            "fine_slack": -2.5774464899098494e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 150,
+            "coarse_slack": 4.941953417823564e-06,
+            "fine_delta_H_hyp": -0.00015245643585704016,
+            "fine_rhs": -0.00014966346467227174,
+            "fine_slack": -2.7929711847684256e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 151,
+            "coarse_slack": 2.4087812800177805e-06,
+            "fine_delta_H_hyp": -0.00014982459701862183,
+            "fine_rhs": -0.00014759388157613607,
+            "fine_slack": -2.230715442485756e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 155,
+            "coarse_slack": 4.7004727899449224e-06,
+            "fine_delta_H_hyp": -0.0001429356814091065,
+            "fine_rhs": -0.00014041128189068002,
+            "fine_slack": -2.5243995184264846e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 156,
+            "coarse_slack": 6.200971207216823e-06,
+            "fine_delta_H_hyp": -0.00014138472318991901,
+            "fine_rhs": -0.00013915900812225986,
+            "fine_slack": -2.225715067659151e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 157,
+            "coarse_slack": 5.204302132922467e-06,
+            "fine_delta_H_hyp": -0.00014080652498948965,
+            "fine_rhs": -0.00013793667642613943,
+            "fine_slack": -2.8698485633502178e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 158,
+            "coarse_slack": 3.164917398644653e-06,
+            "fine_delta_H_hyp": -0.00014055494572540184,
+            "fine_rhs": -0.00013808773702466147,
+            "fine_slack": -2.4672087007403666e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 159,
+            "coarse_slack": 3.1080224867171982e-06,
+            "fine_delta_H_hyp": -0.00014211518185502925,
+            "fine_rhs": -0.00013989909609418523,
+            "fine_slack": -2.2160857608440174e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 160,
+            "coarse_slack": 5.716009416579208e-06,
+            "fine_delta_H_hyp": -0.00014499958893576803,
+            "fine_rhs": -0.00014238356005651315,
+            "fine_slack": -2.61602887925488e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 161,
+            "coarse_slack": 4.169150717224041e-06,
+            "fine_delta_H_hyp": -0.0001451684879327786,
+            "fine_rhs": -0.00014263419366839506,
+            "fine_slack": -2.5342942643835306e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 162,
+            "coarse_slack": 6.425397984965059e-06,
+            "fine_delta_H_hyp": -0.00014532927007948615,
+            "fine_rhs": -0.00014260094752765803,
+            "fine_slack": -2.7283225518281203e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 163,
+            "coarse_slack": 3.749101391204373e-06,
+            "fine_delta_H_hyp": -0.00014472655136255064,
+            "fine_rhs": -0.00014242797518188675,
+            "fine_slack": -2.2985761806638874e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 164,
+            "coarse_slack": 1.5656237716318703e-06,
+            "fine_delta_H_hyp": -0.00014411413290771335,
+            "fine_rhs": -0.00014179110470260162,
+            "fine_slack": -2.323028205111733e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 229,
+            "coarse_slack": 1.2409169323033414e-06,
+            "fine_delta_H_hyp": -0.00014439162726698207,
+            "fine_rhs": -0.00014242990691521858,
+            "fine_slack": -1.961720351763486e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 230,
+            "coarse_slack": 1.513209128922293e-06,
+            "fine_delta_H_hyp": -0.00014339068111213216,
+            "fine_rhs": -0.00014149109732549558,
+            "fine_slack": -1.8995837866365756e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 231,
+            "coarse_slack": 2.5541994516000007e-06,
+            "fine_delta_H_hyp": -0.00014431607492371157,
+            "fine_rhs": -0.0001424704580400461,
+            "fine_slack": -1.8456168836654809e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 232,
+            "coarse_slack": 2.4036133205673717e-06,
+            "fine_delta_H_hyp": -0.0001456843334872726,
+            "fine_rhs": -0.00014387374065492846,
+            "fine_slack": -1.8105928323441532e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 233,
+            "coarse_slack": 1.5446156815404155e-06,
+            "fine_delta_H_hyp": -0.0001446539869345287,
+            "fine_rhs": -0.00014303582078574426,
+            "fine_slack": -1.618166148784425e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 234,
+            "coarse_slack": 1.366262673011963e-06,
+            "fine_delta_H_hyp": -0.00014562597809142375,
+            "fine_rhs": -0.00014399450322179108,
+            "fine_slack": -1.631474869632669e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 249,
+            "coarse_slack": 1.4432771224346796e-06,
+            "fine_delta_H_hyp": -0.00014838281160689526,
+            "fine_rhs": -0.0001465956416524389,
+            "fine_slack": -1.787169954456353e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 250,
+            "coarse_slack": 1.359049888605547e-06,
+            "fine_delta_H_hyp": -0.00014946022214656907,
+            "fine_rhs": -0.0001475790670375265,
+            "fine_slack": -1.8811551090425714e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 251,
+            "coarse_slack": 1.2095372371880941e-06,
+            "fine_delta_H_hyp": -0.00014897773804545267,
+            "fine_rhs": -0.00014672071768213966,
+            "fine_slack": -2.2570203633130075e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 257,
+            "coarse_slack": 1.2760543198317876e-06,
+            "fine_delta_H_hyp": -0.00015021457526098736,
+            "fine_rhs": -0.00014816909169109606,
+            "fine_slack": -2.045483569891295e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 258,
+            "coarse_slack": 1.7660118849948292e-06,
+            "fine_delta_H_hyp": -0.00014918092142024442,
+            "fine_rhs": -0.00014728026742470904,
+            "fine_slack": -1.9006539955353718e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 259,
+            "coarse_slack": 1.6436744973520796e-06,
+            "fine_delta_H_hyp": -0.00015009756411266117,
+            "fine_rhs": -0.00014830517547155655,
+            "fine_slack": -1.7923886411046219e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 263,
+            "coarse_slack": 1.408834916653037e-06,
+            "fine_delta_H_hyp": -0.000149558361387081,
+            "fine_rhs": -0.00014778405000931262,
+            "fine_slack": -1.7743113777683912e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 264,
+            "coarse_slack": 2.0006420617929685e-06,
+            "fine_delta_H_hyp": -0.00015053459238401068,
+            "fine_rhs": -0.0001487444074788767,
+            "fine_slack": -1.7901849051339778e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 265,
+            "coarse_slack": 3.4358536419462843e-06,
+            "fine_delta_H_hyp": -0.00015240185119691496,
+            "fine_rhs": -0.00015040338972560627,
+            "fine_slack": -1.998461471308693e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 266,
+            "coarse_slack": 3.4380521936878245e-06,
+            "fine_delta_H_hyp": -0.00015340114409956307,
+            "fine_rhs": -0.00015143261413007376,
+            "fine_slack": -1.968529969489306e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 267,
+            "coarse_slack": 3.5605053921440957e-06,
+            "fine_delta_H_hyp": -0.00015290120222832826,
+            "fine_rhs": -0.00015083806251232557,
+            "fine_slack": -2.063139716002694e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 268,
+            "coarse_slack": 4.195034812373412e-06,
+            "fine_delta_H_hyp": -0.00015284645410718056,
+            "fine_rhs": -0.00015076023818888496,
+            "fine_slack": -2.086215918295606e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 269,
+            "coarse_slack": 3.7003080983197332e-06,
+            "fine_delta_H_hyp": -0.00015377796240945152,
+            "fine_rhs": -0.00015179074908658864,
+            "fine_slack": -1.98721332286288e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 270,
+            "coarse_slack": 3.670312796821292e-06,
+            "fine_delta_H_hyp": -0.00015270222099306174,
+            "fine_rhs": -0.0001508592618741372,
+            "fine_slack": -1.8429591189245544e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 271,
+            "coarse_slack": 3.5255195734423665e-06,
+            "fine_delta_H_hyp": -0.00015363182989935886,
+            "fine_rhs": -0.00015187538336582776,
+            "fine_slack": -1.7564465335310998e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 272,
+            "coarse_slack": 3.5582526723480193e-06,
+            "fine_delta_H_hyp": -0.0001526090135106628,
+            "fine_rhs": -0.00015075053601559823,
+            "fine_slack": -1.8584774950645738e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 273,
+            "coarse_slack": 3.364139048763203e-06,
+            "fine_delta_H_hyp": -0.00015260405011496836,
+            "fine_rhs": -0.00015080079441781653,
+            "fine_slack": -1.8032556971518297e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 274,
+            "coarse_slack": 3.215100379978786e-06,
+            "fine_delta_H_hyp": -0.00015323504796205256,
+            "fine_rhs": -0.00015135416259937586,
+            "fine_slack": -1.8808853626767024e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 275,
+            "coarse_slack": 2.9700229251859267e-06,
+            "fine_delta_H_hyp": -0.00015319596100304977,
+            "fine_rhs": -0.00015122985278869078,
+            "fine_slack": -1.966108214358997e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 276,
+            "coarse_slack": 2.8059278592065795e-06,
+            "fine_delta_H_hyp": -0.0001531634356093381,
+            "fine_rhs": -0.0001512707849640578,
+            "fine_slack": -1.8926506452803036e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 277,
+            "coarse_slack": 3.9845940472151e-06,
+            "fine_delta_H_hyp": -0.0001531137605939037,
+            "fine_rhs": -0.0001513213765074323,
+            "fine_slack": -1.7923840864713942e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 278,
+            "coarse_slack": 4.0208930031163375e-06,
+            "fine_delta_H_hyp": -0.0001532493753471087,
+            "fine_rhs": -0.00015158500883461306,
+            "fine_slack": -1.6643665124956356e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 279,
+            "coarse_slack": 3.7144049118486102e-06,
+            "fine_delta_H_hyp": -0.0001531280215401054,
+            "fine_rhs": -0.0001514369596143939,
+            "fine_slack": -1.6910619257115014e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 280,
+            "coarse_slack": 3.5561916580975595e-06,
+            "fine_delta_H_hyp": -0.0001532809914113198,
+            "fine_rhs": -0.00015148181305247734,
+            "fine_slack": -1.7991783588424532e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 281,
+            "coarse_slack": 3.40884001764395e-06,
+            "fine_delta_H_hyp": -0.00015311184647792686,
+            "fine_rhs": -0.00015152776156456357,
+            "fine_slack": -1.5840849133632912e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 282,
+            "coarse_slack": 3.3951628858882395e-06,
+            "fine_delta_H_hyp": -0.00015360018261745267,
+            "fine_rhs": -0.00015183136997210311,
+            "fine_slack": -1.7688126453495594e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 283,
+            "coarse_slack": 3.3519110057747667e-06,
+            "fine_delta_H_hyp": -0.00015465197196107283,
+            "fine_rhs": -0.0001528239342597602,
+            "fine_slack": -1.828037701312636e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 284,
+            "coarse_slack": 3.25429718697889e-06,
+            "fine_delta_H_hyp": -0.00015461542686123764,
+            "fine_rhs": -0.00015285326084906074,
+            "fine_slack": -1.7621660121768933e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 285,
+            "coarse_slack": 3.2687259914926815e-06,
+            "fine_delta_H_hyp": -0.00015515898878737389,
+            "fine_rhs": -0.00015315587936062314,
+            "fine_slack": -2.0031094267507427e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 286,
+            "coarse_slack": 2.8112026315678807e-06,
+            "fine_delta_H_hyp": -0.00015463393932102498,
+            "fine_rhs": -0.00015295496548370003,
+            "fine_slack": -1.678973837324955e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 287,
+            "coarse_slack": 2.6127443432581265e-06,
+            "fine_delta_H_hyp": -0.00015479362156201049,
+            "fine_rhs": -0.00015297633148958774,
+            "fine_slack": -1.8172900724227465e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 288,
+            "coarse_slack": 2.4297951182618673e-06,
+            "fine_delta_H_hyp": -0.00015490732776268779,
+            "fine_rhs": -0.00015301374755096475,
+            "fine_slack": -1.893580211723031e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 289,
+            "coarse_slack": 2.4788101856445513e-06,
+            "fine_delta_H_hyp": -0.0001552502339694506,
+            "fine_rhs": -0.00015335022909364644,
+            "fine_slack": -1.9000048758041523e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 290,
+            "coarse_slack": 2.0302311476218552e-06,
+            "fine_delta_H_hyp": -0.00015500977495275237,
+            "fine_rhs": -0.00015312875543830597,
+            "fine_slack": -1.881019514446392e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 291,
+            "coarse_slack": 2.1090444904811807e-06,
+            "fine_delta_H_hyp": -0.00015494675005189862,
+            "fine_rhs": -0.00015317931465001224,
+            "fine_slack": -1.7674354018863778e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 292,
+            "coarse_slack": 2.727454525126307e-06,
+            "fine_delta_H_hyp": -0.00015539728113767026,
+            "fine_rhs": -0.00015354864719709576,
+            "fine_slack": -1.8486339405745004e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 293,
+            "coarse_slack": 2.8830340908517433e-06,
+            "fine_delta_H_hyp": -0.00015514797263693758,
+            "fine_rhs": -0.00015330609108982202,
+            "fine_slack": -1.8418815471155634e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 294,
+            "coarse_slack": 3.611359752548677e-06,
+            "fine_delta_H_hyp": -0.0001550991765020271,
+            "fine_rhs": -0.00015335789816326543,
+            "fine_slack": -1.741278338761662e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 295,
+            "coarse_slack": 3.2720019970789533e-06,
+            "fine_delta_H_hyp": -0.0001551598514395458,
+            "fine_rhs": -0.00015339130284284012,
+            "fine_slack": -1.7685485967056883e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 296,
+            "coarse_slack": 3.4935543622024393e-06,
+            "fine_delta_H_hyp": -0.00015565827161001522,
+            "fine_rhs": -0.00015377975645728968,
+            "fine_slack": -1.8785151527255428e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 297,
+            "coarse_slack": 2.8033878663717043e-06,
+            "fine_delta_H_hyp": -0.00015522654374389155,
+            "fine_rhs": -0.00015351363019761106,
+            "fine_slack": -1.7129135462804932e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 298,
+            "coarse_slack": 2.6623424236454918e-06,
+            "fine_delta_H_hyp": -0.00015528129114672495,
+            "fine_rhs": -0.00015356688243229846,
+            "fine_slack": -1.7144087144264973e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 299,
+            "coarse_slack": 3.888133588368409e-06,
+            "fine_delta_H_hyp": -0.0001558752857895307,
+            "fine_rhs": -0.00015394787766081263,
+            "fine_slack": -1.9274081287180605e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 300,
+            "coarse_slack": 3.4575886160238736e-06,
+            "fine_delta_H_hyp": -0.00015633282118798775,
+            "fine_rhs": -0.0001543986454372914,
+            "fine_slack": -1.9341757506963436e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 301,
+            "coarse_slack": 3.268554626228526e-06,
+            "fine_delta_H_hyp": -0.00015785093534304018,
+            "fine_rhs": -0.00015593269250513246,
+            "fine_slack": -1.9182428379077186e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 302,
+            "coarse_slack": 2.9275700038433952e-06,
+            "fine_delta_H_hyp": -0.0001578671771056417,
+            "fine_rhs": -0.00015592703015836025,
+            "fine_slack": -1.9401469472814356e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 303,
+            "coarse_slack": 1.931584049717056e-06,
+            "fine_delta_H_hyp": -0.00015805908931620927,
+            "fine_rhs": -0.00015594929041069414,
+            "fine_slack": -2.1097989055151234e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 346,
+            "coarse_slack": 3.583159559407905e-06,
+            "fine_delta_H_hyp": -0.00015852304915187077,
+            "fine_rhs": -0.00015672984462822818,
+            "fine_slack": -1.7932045236425842e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 347,
+            "coarse_slack": 1.0778245699210134e-06,
+            "fine_delta_H_hyp": -0.00015829523167631976,
+            "fine_rhs": -0.00015631159491907767,
+            "fine_slack": -1.9836367572420924e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 392,
+            "coarse_slack": 1.4769569468754847e-06,
+            "fine_delta_H_hyp": -0.00014696623610954695,
+            "fine_rhs": -0.00014497419248399245,
+            "fine_slack": -1.9920436255545075e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 393,
+            "coarse_slack": 1.6102708701920055e-06,
+            "fine_delta_H_hyp": -0.00014722666517674732,
+            "fine_rhs": -0.0001451952834718745,
+            "fine_slack": -2.0313817048728093e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 394,
+            "coarse_slack": 2.0416197941251378e-06,
+            "fine_delta_H_hyp": -0.00014739352136583506,
+            "fine_rhs": -0.00014545171561876013,
+            "fine_slack": -1.941805747074924e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 395,
+            "coarse_slack": 2.0815148137892235e-06,
+            "fine_delta_H_hyp": -0.00014720186905869959,
+            "fine_rhs": -0.00014539550174110026,
+            "fine_slack": -1.8063673175993267e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 397,
+            "coarse_slack": 1.4861408664729246e-06,
+            "fine_delta_H_hyp": -0.0001469009739734073,
+            "fine_rhs": -0.00014508838753204444,
+            "fine_slack": -1.8125864413628533e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 398,
+            "coarse_slack": 1.123449759815392e-06,
+            "fine_delta_H_hyp": -0.00014658543551115955,
+            "fine_rhs": -0.00014497176945961113,
+            "fine_slack": -1.6136660515484141e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          }
+        ]
+      },
+      "unresolved_quadrature_error": {
+        "strict_numerical_certificate": false,
+        "reason": "no_rigorous_quadrature_error_bound",
+        "note": "Without a rigorous integration (quadrature) error bound on H*, a positive or near-zero refined slack cannot be promoted to a strict numerical certificate of the discrete inequality."
+      },
+      "proof_status": "not_established: numerical evaluation of the discrete descent inequality on the hypothetical hold map; assumptions for Theorem 1 (Lipschitz feedback, fine-grid mass certificate) remain unmet",
+      "numerical_consistency": false,
+      "max_slack_coarse": 9.197792418311809e-06,
+      "mean_slack_coarse": -3.1397152905082616e-05,
+      "fraction_positive": 0.195,
+      "n_anomalies": 90,
+      "max_slack_refined": 9.961173883697109e-07,
+      "refinements": [
+        {
+          "frame": 68,
+          "coarse_slack": 6.382789958370508e-06,
+          "fine_delta_H_hyp": -0.003219022131750182,
+          "fine_rhs": -0.003191826473030849,
+          "fine_slack": -2.7195658719333243e-05,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 83,
+          "coarse_slack": 1.5187595180019258e-06,
+          "fine_delta_H_hyp": -0.0013004354994139433,
+          "fine_rhs": -0.0012872680601818908,
+          "fine_slack": -1.3167439232052549e-05,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 84,
+          "coarse_slack": 1.8481510066145884e-06,
+          "fine_delta_H_hyp": -0.0012235245066227751,
+          "fine_rhs": -0.001210427739547687,
+          "fine_slack": -1.3096767075088112e-05,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 91,
+          "coarse_slack": 8.256790013788e-06,
+          "fine_delta_H_hyp": -0.000865590190376242,
+          "fine_rhs": -0.0008557986749773085,
+          "fine_slack": -9.79151539893348e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 98,
+          "coarse_slack": 7.0301521525851195e-06,
+          "fine_delta_H_hyp": -0.0006401647149856249,
+          "fine_rhs": -0.0006324801432590849,
+          "fine_slack": -7.684571726540015e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 102,
+          "coarse_slack": 8.852944308619529e-06,
+          "fine_delta_H_hyp": -0.0005391413563251568,
+          "fine_rhs": -0.000532346474890025,
+          "fine_slack": -6.794881435131768e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 104,
+          "coarse_slack": 9.197792418311809e-06,
+          "fine_delta_H_hyp": -0.000508808301197039,
+          "fine_rhs": -0.0005017320752439642,
+          "fine_slack": -7.076225953074784e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 111,
+          "coarse_slack": 5.6274667142638805e-06,
+          "fine_delta_H_hyp": -0.0003915574852106918,
+          "fine_rhs": -0.00038537606426117255,
+          "fine_slack": -6.181420949519234e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 112,
+          "coarse_slack": 2.6641139752854137e-06,
+          "fine_delta_H_hyp": -0.00037190761725458543,
+          "fine_rhs": -0.0003663343744140279,
+          "fine_slack": -5.573242840557541e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 117,
+          "coarse_slack": 8.349508232446468e-06,
+          "fine_delta_H_hyp": -0.0003136109156010036,
+          "fine_rhs": -0.00030898857173319974,
+          "fine_slack": -4.622343867803885e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 119,
+          "coarse_slack": 3.499910304215106e-06,
+          "fine_delta_H_hyp": -0.0002936370837711699,
+          "fine_rhs": -0.0002887728944717709,
+          "fine_slack": -4.864189299399004e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 127,
+          "coarse_slack": 1.0064565702175429e-06,
+          "fine_delta_H_hyp": -0.00022992042823344327,
+          "fine_rhs": -0.00022627316194156994,
+          "fine_slack": -3.647266291873332e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 129,
+          "coarse_slack": 2.70338717551103e-06,
+          "fine_delta_H_hyp": -0.0002206275281959602,
+          "fine_rhs": -0.00021674184015846543,
+          "fine_slack": -3.885688037494784e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 130,
+          "coarse_slack": 4.78254775359107e-06,
+          "fine_delta_H_hyp": -0.0002154257122497505,
+          "fine_rhs": -0.00021155223964686572,
+          "fine_slack": -3.873472602884773e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 131,
+          "coarse_slack": 3.512442258700205e-06,
+          "fine_delta_H_hyp": -0.00021030716555214823,
+          "fine_rhs": -0.00020706749852110608,
+          "fine_slack": -3.23966703104215e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 138,
+          "coarse_slack": 4.138109357243577e-06,
+          "fine_delta_H_hyp": -0.00018508543031336977,
+          "fine_rhs": -0.00018188375103984583,
+          "fine_slack": -3.201679273523943e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 145,
+          "coarse_slack": 1.66039546429359e-06,
+          "fine_delta_H_hyp": -0.00016387970828746212,
+          "fine_rhs": -0.00016130226179755227,
+          "fine_slack": -2.5774464899098494e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 150,
+          "coarse_slack": 4.941953417823564e-06,
+          "fine_delta_H_hyp": -0.00015245643585704016,
+          "fine_rhs": -0.00014966346467227174,
+          "fine_slack": -2.7929711847684256e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 151,
+          "coarse_slack": 2.4087812800177805e-06,
+          "fine_delta_H_hyp": -0.00014982459701862183,
+          "fine_rhs": -0.00014759388157613607,
+          "fine_slack": -2.230715442485756e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 155,
+          "coarse_slack": 4.7004727899449224e-06,
+          "fine_delta_H_hyp": -0.0001429356814091065,
+          "fine_rhs": -0.00014041128189068002,
+          "fine_slack": -2.5243995184264846e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 156,
+          "coarse_slack": 6.200971207216823e-06,
+          "fine_delta_H_hyp": -0.00014138472318991901,
+          "fine_rhs": -0.00013915900812225986,
+          "fine_slack": -2.225715067659151e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 157,
+          "coarse_slack": 5.204302132922467e-06,
+          "fine_delta_H_hyp": -0.00014080652498948965,
+          "fine_rhs": -0.00013793667642613943,
+          "fine_slack": -2.8698485633502178e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 158,
+          "coarse_slack": 3.164917398644653e-06,
+          "fine_delta_H_hyp": -0.00014055494572540184,
+          "fine_rhs": -0.00013808773702466147,
+          "fine_slack": -2.4672087007403666e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 159,
+          "coarse_slack": 3.1080224867171982e-06,
+          "fine_delta_H_hyp": -0.00014211518185502925,
+          "fine_rhs": -0.00013989909609418523,
+          "fine_slack": -2.2160857608440174e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 160,
+          "coarse_slack": 5.716009416579208e-06,
+          "fine_delta_H_hyp": -0.00014499958893576803,
+          "fine_rhs": -0.00014238356005651315,
+          "fine_slack": -2.61602887925488e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 161,
+          "coarse_slack": 4.169150717224041e-06,
+          "fine_delta_H_hyp": -0.0001451684879327786,
+          "fine_rhs": -0.00014263419366839506,
+          "fine_slack": -2.5342942643835306e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 162,
+          "coarse_slack": 6.425397984965059e-06,
+          "fine_delta_H_hyp": -0.00014532927007948615,
+          "fine_rhs": -0.00014260094752765803,
+          "fine_slack": -2.7283225518281203e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 163,
+          "coarse_slack": 3.749101391204373e-06,
+          "fine_delta_H_hyp": -0.00014472655136255064,
+          "fine_rhs": -0.00014242797518188675,
+          "fine_slack": -2.2985761806638874e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 164,
+          "coarse_slack": 1.5656237716318703e-06,
+          "fine_delta_H_hyp": -0.00014411413290771335,
+          "fine_rhs": -0.00014179110470260162,
+          "fine_slack": -2.323028205111733e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 229,
+          "coarse_slack": 1.2409169323033414e-06,
+          "fine_delta_H_hyp": -0.00014439162726698207,
+          "fine_rhs": -0.00014242990691521858,
+          "fine_slack": -1.961720351763486e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 230,
+          "coarse_slack": 1.513209128922293e-06,
+          "fine_delta_H_hyp": -0.00014339068111213216,
+          "fine_rhs": -0.00014149109732549558,
+          "fine_slack": -1.8995837866365756e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 231,
+          "coarse_slack": 2.5541994516000007e-06,
+          "fine_delta_H_hyp": -0.00014431607492371157,
+          "fine_rhs": -0.0001424704580400461,
+          "fine_slack": -1.8456168836654809e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 232,
+          "coarse_slack": 2.4036133205673717e-06,
+          "fine_delta_H_hyp": -0.0001456843334872726,
+          "fine_rhs": -0.00014387374065492846,
+          "fine_slack": -1.8105928323441532e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 233,
+          "coarse_slack": 1.5446156815404155e-06,
+          "fine_delta_H_hyp": -0.0001446539869345287,
+          "fine_rhs": -0.00014303582078574426,
+          "fine_slack": -1.618166148784425e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 234,
+          "coarse_slack": 1.366262673011963e-06,
+          "fine_delta_H_hyp": -0.00014562597809142375,
+          "fine_rhs": -0.00014399450322179108,
+          "fine_slack": -1.631474869632669e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 249,
+          "coarse_slack": 1.4432771224346796e-06,
+          "fine_delta_H_hyp": -0.00014838281160689526,
+          "fine_rhs": -0.0001465956416524389,
+          "fine_slack": -1.787169954456353e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 250,
+          "coarse_slack": 1.359049888605547e-06,
+          "fine_delta_H_hyp": -0.00014946022214656907,
+          "fine_rhs": -0.0001475790670375265,
+          "fine_slack": -1.8811551090425714e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 251,
+          "coarse_slack": 1.2095372371880941e-06,
+          "fine_delta_H_hyp": -0.00014897773804545267,
+          "fine_rhs": -0.00014672071768213966,
+          "fine_slack": -2.2570203633130075e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 257,
+          "coarse_slack": 1.2760543198317876e-06,
+          "fine_delta_H_hyp": -0.00015021457526098736,
+          "fine_rhs": -0.00014816909169109606,
+          "fine_slack": -2.045483569891295e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 258,
+          "coarse_slack": 1.7660118849948292e-06,
+          "fine_delta_H_hyp": -0.00014918092142024442,
+          "fine_rhs": -0.00014728026742470904,
+          "fine_slack": -1.9006539955353718e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 259,
+          "coarse_slack": 1.6436744973520796e-06,
+          "fine_delta_H_hyp": -0.00015009756411266117,
+          "fine_rhs": -0.00014830517547155655,
+          "fine_slack": -1.7923886411046219e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 263,
+          "coarse_slack": 1.408834916653037e-06,
+          "fine_delta_H_hyp": -0.000149558361387081,
+          "fine_rhs": -0.00014778405000931262,
+          "fine_slack": -1.7743113777683912e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 264,
+          "coarse_slack": 2.0006420617929685e-06,
+          "fine_delta_H_hyp": -0.00015053459238401068,
+          "fine_rhs": -0.0001487444074788767,
+          "fine_slack": -1.7901849051339778e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 265,
+          "coarse_slack": 3.4358536419462843e-06,
+          "fine_delta_H_hyp": -0.00015240185119691496,
+          "fine_rhs": -0.00015040338972560627,
+          "fine_slack": -1.998461471308693e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 266,
+          "coarse_slack": 3.4380521936878245e-06,
+          "fine_delta_H_hyp": -0.00015340114409956307,
+          "fine_rhs": -0.00015143261413007376,
+          "fine_slack": -1.968529969489306e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 267,
+          "coarse_slack": 3.5605053921440957e-06,
+          "fine_delta_H_hyp": -0.00015290120222832826,
+          "fine_rhs": -0.00015083806251232557,
+          "fine_slack": -2.063139716002694e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 268,
+          "coarse_slack": 4.195034812373412e-06,
+          "fine_delta_H_hyp": -0.00015284645410718056,
+          "fine_rhs": -0.00015076023818888496,
+          "fine_slack": -2.086215918295606e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 269,
+          "coarse_slack": 3.7003080983197332e-06,
+          "fine_delta_H_hyp": -0.00015377796240945152,
+          "fine_rhs": -0.00015179074908658864,
+          "fine_slack": -1.98721332286288e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 270,
+          "coarse_slack": 3.670312796821292e-06,
+          "fine_delta_H_hyp": -0.00015270222099306174,
+          "fine_rhs": -0.0001508592618741372,
+          "fine_slack": -1.8429591189245544e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 271,
+          "coarse_slack": 3.5255195734423665e-06,
+          "fine_delta_H_hyp": -0.00015363182989935886,
+          "fine_rhs": -0.00015187538336582776,
+          "fine_slack": -1.7564465335310998e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 272,
+          "coarse_slack": 3.5582526723480193e-06,
+          "fine_delta_H_hyp": -0.0001526090135106628,
+          "fine_rhs": -0.00015075053601559823,
+          "fine_slack": -1.8584774950645738e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 273,
+          "coarse_slack": 3.364139048763203e-06,
+          "fine_delta_H_hyp": -0.00015260405011496836,
+          "fine_rhs": -0.00015080079441781653,
+          "fine_slack": -1.8032556971518297e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 274,
+          "coarse_slack": 3.215100379978786e-06,
+          "fine_delta_H_hyp": -0.00015323504796205256,
+          "fine_rhs": -0.00015135416259937586,
+          "fine_slack": -1.8808853626767024e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 275,
+          "coarse_slack": 2.9700229251859267e-06,
+          "fine_delta_H_hyp": -0.00015319596100304977,
+          "fine_rhs": -0.00015122985278869078,
+          "fine_slack": -1.966108214358997e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 276,
+          "coarse_slack": 2.8059278592065795e-06,
+          "fine_delta_H_hyp": -0.0001531634356093381,
+          "fine_rhs": -0.0001512707849640578,
+          "fine_slack": -1.8926506452803036e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 277,
+          "coarse_slack": 3.9845940472151e-06,
+          "fine_delta_H_hyp": -0.0001531137605939037,
+          "fine_rhs": -0.0001513213765074323,
+          "fine_slack": -1.7923840864713942e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 278,
+          "coarse_slack": 4.0208930031163375e-06,
+          "fine_delta_H_hyp": -0.0001532493753471087,
+          "fine_rhs": -0.00015158500883461306,
+          "fine_slack": -1.6643665124956356e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 279,
+          "coarse_slack": 3.7144049118486102e-06,
+          "fine_delta_H_hyp": -0.0001531280215401054,
+          "fine_rhs": -0.0001514369596143939,
+          "fine_slack": -1.6910619257115014e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 280,
+          "coarse_slack": 3.5561916580975595e-06,
+          "fine_delta_H_hyp": -0.0001532809914113198,
+          "fine_rhs": -0.00015148181305247734,
+          "fine_slack": -1.7991783588424532e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 281,
+          "coarse_slack": 3.40884001764395e-06,
+          "fine_delta_H_hyp": -0.00015311184647792686,
+          "fine_rhs": -0.00015152776156456357,
+          "fine_slack": -1.5840849133632912e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 282,
+          "coarse_slack": 3.3951628858882395e-06,
+          "fine_delta_H_hyp": -0.00015360018261745267,
+          "fine_rhs": -0.00015183136997210311,
+          "fine_slack": -1.7688126453495594e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 283,
+          "coarse_slack": 3.3519110057747667e-06,
+          "fine_delta_H_hyp": -0.00015465197196107283,
+          "fine_rhs": -0.0001528239342597602,
+          "fine_slack": -1.828037701312636e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 284,
+          "coarse_slack": 3.25429718697889e-06,
+          "fine_delta_H_hyp": -0.00015461542686123764,
+          "fine_rhs": -0.00015285326084906074,
+          "fine_slack": -1.7621660121768933e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 285,
+          "coarse_slack": 3.2687259914926815e-06,
+          "fine_delta_H_hyp": -0.00015515898878737389,
+          "fine_rhs": -0.00015315587936062314,
+          "fine_slack": -2.0031094267507427e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 286,
+          "coarse_slack": 2.8112026315678807e-06,
+          "fine_delta_H_hyp": -0.00015463393932102498,
+          "fine_rhs": -0.00015295496548370003,
+          "fine_slack": -1.678973837324955e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 287,
+          "coarse_slack": 2.6127443432581265e-06,
+          "fine_delta_H_hyp": -0.00015479362156201049,
+          "fine_rhs": -0.00015297633148958774,
+          "fine_slack": -1.8172900724227465e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 288,
+          "coarse_slack": 2.4297951182618673e-06,
+          "fine_delta_H_hyp": -0.00015490732776268779,
+          "fine_rhs": -0.00015301374755096475,
+          "fine_slack": -1.893580211723031e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 289,
+          "coarse_slack": 2.4788101856445513e-06,
+          "fine_delta_H_hyp": -0.0001552502339694506,
+          "fine_rhs": -0.00015335022909364644,
+          "fine_slack": -1.9000048758041523e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 290,
+          "coarse_slack": 2.0302311476218552e-06,
+          "fine_delta_H_hyp": -0.00015500977495275237,
+          "fine_rhs": -0.00015312875543830597,
+          "fine_slack": -1.881019514446392e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 291,
+          "coarse_slack": 2.1090444904811807e-06,
+          "fine_delta_H_hyp": -0.00015494675005189862,
+          "fine_rhs": -0.00015317931465001224,
+          "fine_slack": -1.7674354018863778e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 292,
+          "coarse_slack": 2.727454525126307e-06,
+          "fine_delta_H_hyp": -0.00015539728113767026,
+          "fine_rhs": -0.00015354864719709576,
+          "fine_slack": -1.8486339405745004e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 293,
+          "coarse_slack": 2.8830340908517433e-06,
+          "fine_delta_H_hyp": -0.00015514797263693758,
+          "fine_rhs": -0.00015330609108982202,
+          "fine_slack": -1.8418815471155634e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 294,
+          "coarse_slack": 3.611359752548677e-06,
+          "fine_delta_H_hyp": -0.0001550991765020271,
+          "fine_rhs": -0.00015335789816326543,
+          "fine_slack": -1.741278338761662e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 295,
+          "coarse_slack": 3.2720019970789533e-06,
+          "fine_delta_H_hyp": -0.0001551598514395458,
+          "fine_rhs": -0.00015339130284284012,
+          "fine_slack": -1.7685485967056883e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 296,
+          "coarse_slack": 3.4935543622024393e-06,
+          "fine_delta_H_hyp": -0.00015565827161001522,
+          "fine_rhs": -0.00015377975645728968,
+          "fine_slack": -1.8785151527255428e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 297,
+          "coarse_slack": 2.8033878663717043e-06,
+          "fine_delta_H_hyp": -0.00015522654374389155,
+          "fine_rhs": -0.00015351363019761106,
+          "fine_slack": -1.7129135462804932e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 298,
+          "coarse_slack": 2.6623424236454918e-06,
+          "fine_delta_H_hyp": -0.00015528129114672495,
+          "fine_rhs": -0.00015356688243229846,
+          "fine_slack": -1.7144087144264973e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 299,
+          "coarse_slack": 3.888133588368409e-06,
+          "fine_delta_H_hyp": -0.0001558752857895307,
+          "fine_rhs": -0.00015394787766081263,
+          "fine_slack": -1.9274081287180605e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 300,
+          "coarse_slack": 3.4575886160238736e-06,
+          "fine_delta_H_hyp": -0.00015633282118798775,
+          "fine_rhs": -0.0001543986454372914,
+          "fine_slack": -1.9341757506963436e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 301,
+          "coarse_slack": 3.268554626228526e-06,
+          "fine_delta_H_hyp": -0.00015785093534304018,
+          "fine_rhs": -0.00015593269250513246,
+          "fine_slack": -1.9182428379077186e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 302,
+          "coarse_slack": 2.9275700038433952e-06,
+          "fine_delta_H_hyp": -0.0001578671771056417,
+          "fine_rhs": -0.00015592703015836025,
+          "fine_slack": -1.9401469472814356e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 303,
+          "coarse_slack": 1.931584049717056e-06,
+          "fine_delta_H_hyp": -0.00015805908931620927,
+          "fine_rhs": -0.00015594929041069414,
+          "fine_slack": -2.1097989055151234e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 346,
+          "coarse_slack": 3.583159559407905e-06,
+          "fine_delta_H_hyp": -0.00015852304915187077,
+          "fine_rhs": -0.00015672984462822818,
+          "fine_slack": -1.7932045236425842e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 347,
+          "coarse_slack": 1.0778245699210134e-06,
+          "fine_delta_H_hyp": -0.00015829523167631976,
+          "fine_rhs": -0.00015631159491907767,
+          "fine_slack": -1.9836367572420924e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 392,
+          "coarse_slack": 1.4769569468754847e-06,
+          "fine_delta_H_hyp": -0.00014696623610954695,
+          "fine_rhs": -0.00014497419248399245,
+          "fine_slack": -1.9920436255545075e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 393,
+          "coarse_slack": 1.6102708701920055e-06,
+          "fine_delta_H_hyp": -0.00014722666517674732,
+          "fine_rhs": -0.0001451952834718745,
+          "fine_slack": -2.0313817048728093e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 394,
+          "coarse_slack": 2.0416197941251378e-06,
+          "fine_delta_H_hyp": -0.00014739352136583506,
+          "fine_rhs": -0.00014545171561876013,
+          "fine_slack": -1.941805747074924e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 395,
+          "coarse_slack": 2.0815148137892235e-06,
+          "fine_delta_H_hyp": -0.00014720186905869959,
+          "fine_rhs": -0.00014539550174110026,
+          "fine_slack": -1.8063673175993267e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 397,
+          "coarse_slack": 1.4861408664729246e-06,
+          "fine_delta_H_hyp": -0.0001469009739734073,
+          "fine_rhs": -0.00014508838753204444,
+          "fine_slack": -1.8125864413628533e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 398,
+          "coarse_slack": 1.123449759815392e-06,
+          "fine_delta_H_hyp": -0.00014658543551115955,
+          "fine_rhs": -0.00014497176945961113,
+          "fine_slack": -1.6136660515484141e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        }
+      ],
+      "strict_numerical_certificate": false,
+      "strict_numerical_certificate_reason": "no_rigorous_quadrature_error_bound"
+    },
+    "u_command": {
+      "n_steps": 600,
+      "coarse_verification": {
+        "observer": "coarse (H, g, m as stored / coarse observer)",
+        "max_slack": 1.3290088759507993e-05,
+        "mean_slack": -2.9415084656124167e-05,
+        "fraction_positive": 0.35833333333333334,
+        "n_anomalies": 76
+      },
+      "refined_verification": {
+        "observer": "fine (H, g and m ALL re-evaluated on the same fine observer)",
+        "note": "Anomalous frames (coarse slack > tol) are re-evaluated with one fine observer so that H, g and m come from the same quadrature.",
+        "n_refined": 76,
+        "max_fine_slack_over_anomalies": 7.626088214403435e-08,
+        "max_slack_refined_full_horizon": 9.986737431157e-07,
+        "refinements": [
+          {
+            "frame": 68,
+            "coarse_slack": 1.3290088759507993e-05,
+            "fine_delta_H_hyp": -0.0031873946313518697,
+            "fine_rhs": -0.0031592829333753204,
+            "fine_slack": -2.8111697976549322e-05,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 83,
+            "coarse_slack": 4.227942981193441e-06,
+            "fine_delta_H_hyp": -0.0012885689656940702,
+            "fine_rhs": -0.0012748616235965305,
+            "fine_slack": -1.3707342097539705e-05,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 91,
+            "coarse_slack": 1.1723215969883303e-05,
+            "fine_delta_H_hyp": -0.0008575841531819339,
+            "fine_rhs": -0.0008474802823627861,
+            "fine_slack": -1.0103870819147824e-05,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 98,
+            "coarse_slack": 6.090718731283952e-06,
+            "fine_delta_H_hyp": -0.0006365151782872225,
+            "fine_rhs": -0.0006287807299235461,
+            "fine_slack": -7.73444836367639e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 102,
+            "coarse_slack": 1.2278798311556515e-05,
+            "fine_delta_H_hyp": -0.000530780893939431,
+            "fine_rhs": -0.0005239638819167323,
+            "fine_slack": -6.8170120226987e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 104,
+            "coarse_slack": 9.536418823413001e-06,
+            "fine_delta_H_hyp": -0.000497553449272381,
+            "fine_rhs": -0.0004909302628629535,
+            "fine_slack": -6.6231864094274794e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 111,
+            "coarse_slack": 8.303178785399603e-06,
+            "fine_delta_H_hyp": -0.000374262351299004,
+            "fine_rhs": -0.0003689439508104608,
+            "fine_slack": -5.318400488543186e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 112,
+            "coarse_slack": 5.308197314282572e-06,
+            "fine_delta_H_hyp": -0.00035408691093818945,
+            "fine_rhs": -0.00034916671883551985,
+            "fine_slack": -4.920192102669601e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 117,
+            "coarse_slack": 1.1195762457726923e-05,
+            "fine_delta_H_hyp": -0.00028910171233320625,
+            "fine_rhs": -0.0002853451543701328,
+            "fine_slack": -3.7565579630734723e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 118,
+            "coarse_slack": 2.632520034955715e-06,
+            "fine_delta_H_hyp": -0.0002779606957461489,
+            "fine_rhs": -0.00027416072128960537,
+            "fine_slack": -3.799974456543528e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 119,
+            "coarse_slack": 4.066719902430472e-06,
+            "fine_delta_H_hyp": -0.00026581262322311616,
+            "fine_rhs": -0.0002620931230458928,
+            "fine_slack": -3.7195001772233794e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 126,
+            "coarse_slack": 3.436648212388116e-06,
+            "fine_delta_H_hyp": -0.00019362925887267401,
+            "fine_rhs": -0.00019098684289527943,
+            "fine_slack": -2.6424159773945854e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 127,
+            "coarse_slack": 3.0156842706971086e-06,
+            "fine_delta_H_hyp": -0.00018933829817280312,
+            "fine_rhs": -0.00018673347218075724,
+            "fine_slack": -2.6048259920458832e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 129,
+            "coarse_slack": 1.7780803988208971e-06,
+            "fine_delta_H_hyp": -0.00017771976776947973,
+            "fine_rhs": -0.0001754527540816499,
+            "fine_slack": -2.267013687829838e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 130,
+            "coarse_slack": 3.7677862008800398e-06,
+            "fine_delta_H_hyp": -0.00017204027137296407,
+            "fine_rhs": -0.00016940164944082356,
+            "fine_slack": -2.63862193214051e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 131,
+            "coarse_slack": 2.7028023090789168e-06,
+            "fine_delta_H_hyp": -0.0001663716567608109,
+            "fine_rhs": -0.00016406258027858585,
+            "fine_slack": -2.309076482225048e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 138,
+            "coarse_slack": 4.747574731889183e-06,
+            "fine_delta_H_hyp": -0.00013454917757704798,
+            "fine_rhs": -0.0001325460009206778,
+            "fine_slack": -2.0031766563701836e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 150,
+            "coarse_slack": 2.7427714445172165e-06,
+            "fine_delta_H_hyp": -8.666502056264846e-05,
+            "fine_rhs": -8.505376492783438e-05,
+            "fine_slack": -1.61125563481408e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 156,
+            "coarse_slack": 1.9041787710782503e-06,
+            "fine_delta_H_hyp": -7.114452518997005e-05,
+            "fine_rhs": -7.044257805618801e-05,
+            "fine_slack": -7.019471337820399e-07,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 160,
+            "coarse_slack": 1.1641187126538608e-06,
+            "fine_delta_H_hyp": -6.637794566866084e-05,
+            "fine_rhs": -6.527068801353371e-05,
+            "fine_slack": -1.1072576551271343e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 162,
+            "coarse_slack": 2.5023561275188836e-06,
+            "fine_delta_H_hyp": -6.53238758407948e-05,
+            "fine_rhs": -6.400702977649765e-05,
+            "fine_slack": -1.3168460642971528e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 171,
+            "coarse_slack": 2.143599628848158e-06,
+            "fine_delta_H_hyp": -5.5805557837684816e-05,
+            "fine_rhs": -5.4883710352059756e-05,
+            "fine_slack": -9.218474856250599e-07,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 172,
+            "coarse_slack": 3.256213047271784e-06,
+            "fine_delta_H_hyp": -5.2379686509951284e-05,
+            "fine_rhs": -5.1385854279566185e-05,
+            "fine_slack": -9.938322303850992e-07,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 173,
+            "coarse_slack": 3.897235142048499e-06,
+            "fine_delta_H_hyp": -5.2093496921035154e-05,
+            "fine_rhs": -5.0881580547042476e-05,
+            "fine_slack": -1.211916373992678e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 174,
+            "coarse_slack": 1.6387469401653727e-06,
+            "fine_delta_H_hyp": -5.019462273825326e-05,
+            "fine_rhs": -4.9746829299940684e-05,
+            "fine_slack": -4.477934383125741e-07,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 175,
+            "coarse_slack": 1.1665693499957606e-06,
+            "fine_delta_H_hyp": -5.1213817913842163e-05,
+            "fine_rhs": -4.9907579184117836e-05,
+            "fine_slack": -1.3062387297243272e-06,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 198,
+            "coarse_slack": 1.1351122994147304e-06,
+            "fine_delta_H_hyp": -2.0790678375348648e-05,
+            "fine_rhs": -2.0585482753869578e-05,
+            "fine_slack": -2.0519562147907025e-07,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 199,
+            "coarse_slack": 1.2187150221681804e-06,
+            "fine_delta_H_hyp": -2.163479129535517e-05,
+            "fine_rhs": -2.127514988757776e-05,
+            "fine_slack": -3.596414077774101e-07,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 209,
+            "coarse_slack": 2.6542736280638974e-06,
+            "fine_delta_H_hyp": -1.7670469399710953e-05,
+            "fine_rhs": -1.712501452897449e-05,
+            "fine_slack": -5.454548707364639e-07,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 210,
+            "coarse_slack": 1.9326693442566238e-06,
+            "fine_delta_H_hyp": -1.7683781760924333e-05,
+            "fine_rhs": -1.7519962643859916e-05,
+            "fine_slack": -1.638191170644175e-07,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 230,
+            "coarse_slack": 1.1191927310744087e-06,
+            "fine_delta_H_hyp": -1.2150543261979507e-05,
+            "fine_rhs": -1.181872437672902e-05,
+            "fine_slack": -3.318188852504877e-07,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 231,
+            "coarse_slack": 3.08385803519802e-06,
+            "fine_delta_H_hyp": -1.2745713478423681e-05,
+            "fine_rhs": -1.2441213265606431e-05,
+            "fine_slack": -3.0450021281725014e-07,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 232,
+            "coarse_slack": 2.7975945625270727e-06,
+            "fine_delta_H_hyp": -1.3906382587691724e-05,
+            "fine_rhs": -1.3528685145783127e-05,
+            "fine_slack": -3.776974419085963e-07,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 233,
+            "coarse_slack": 1.982828795458555e-06,
+            "fine_delta_H_hyp": -1.2541707829605286e-05,
+            "fine_rhs": -1.2378933999134745e-05,
+            "fine_slack": -1.6277383047054172e-07,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 234,
+            "coarse_slack": 1.621353469091853e-06,
+            "fine_delta_H_hyp": -1.316343231239081e-05,
+            "fine_rhs": -1.2987942039893583e-05,
+            "fine_slack": -1.7549027249722753e-07,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 235,
+            "coarse_slack": 1.098224387566147e-06,
+            "fine_delta_H_hyp": -1.2109450595820803e-05,
+            "fine_rhs": -1.1860087532909918e-05,
+            "fine_slack": -2.493630629108854e-07,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 299,
+            "coarse_slack": 1.5948242362011515e-06,
+            "fine_delta_H_hyp": -5.943349874693027e-06,
+            "fine_rhs": -5.794861812629998e-06,
+            "fine_slack": -1.4848806206302903e-07,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 300,
+            "coarse_slack": 1.3050146674029922e-06,
+            "fine_delta_H_hyp": -6.108215408140438e-06,
+            "fine_rhs": -5.9737139472943354e-06,
+            "fine_slack": -1.3450146084610285e-07,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 301,
+            "coarse_slack": 1.147912269647261e-06,
+            "fine_delta_H_hyp": -5.9905570719553936e-06,
+            "fine_rhs": -5.936902035103032e-06,
+            "fine_slack": -5.365503685236159e-08,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 302,
+            "coarse_slack": 1.6044356515235639e-06,
+            "fine_delta_H_hyp": -5.7826944230843225e-06,
+            "fine_rhs": -5.820180562002019e-06,
+            "fine_slack": 3.7486138917696214e-08,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 303,
+            "coarse_slack": 1.7974549384705293e-06,
+            "fine_delta_H_hyp": -5.852024667296618e-06,
+            "fine_rhs": -5.723555270201205e-06,
+            "fine_slack": -1.2846939709541272e-07,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 304,
+            "coarse_slack": 1.5695827198054537e-06,
+            "fine_delta_H_hyp": -5.9516765271716565e-06,
+            "fine_rhs": -5.84143348662892e-06,
+            "fine_slack": -1.1024304054273687e-07,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 305,
+            "coarse_slack": 1.3505141462432987e-06,
+            "fine_delta_H_hyp": -5.921921027773891e-06,
+            "fine_rhs": -5.749239379307055e-06,
+            "fine_slack": -1.7268164846683583e-07,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 306,
+            "coarse_slack": 1.1284934019255118e-06,
+            "fine_delta_H_hyp": -5.741601956321674e-06,
+            "fine_rhs": -5.6543572747909545e-06,
+            "fine_slack": -8.724468153071905e-08,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 346,
+            "coarse_slack": 7.377834464495784e-06,
+            "fine_delta_H_hyp": -2.5928098743577266e-05,
+            "fine_rhs": -2.5529417287882832e-05,
+            "fine_slack": -3.9868145569443345e-07,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 347,
+            "coarse_slack": 4.998167605795472e-06,
+            "fine_delta_H_hyp": -2.5541445073606894e-05,
+            "fine_rhs": -2.49408191794691e-05,
+            "fine_slack": -6.006258941377952e-07,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 348,
+            "coarse_slack": 2.808010412528076e-06,
+            "fine_delta_H_hyp": -2.465987355093624e-05,
+            "fine_rhs": -2.423040109032292e-05,
+            "fine_slack": -4.2947246061331826e-07,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 357,
+            "coarse_slack": 1.9154890114888826e-06,
+            "fine_delta_H_hyp": -2.068974561120207e-05,
+            "fine_rhs": -2.024053986844104e-05,
+            "fine_slack": -4.492057427610292e-07,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 358,
+            "coarse_slack": 3.7412026611174548e-06,
+            "fine_delta_H_hyp": -1.9204904760927732e-05,
+            "fine_rhs": -1.896989923225561e-05,
+            "fine_slack": -2.350055286721215e-07,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 359,
+            "coarse_slack": 1.0024554232352243e-06,
+            "fine_delta_H_hyp": -1.8530639898539647e-05,
+            "fine_rhs": -1.7963101064383696e-05,
+            "fine_slack": -5.675388341559507e-07,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 364,
+            "coarse_slack": 1.253731682759292e-06,
+            "fine_delta_H_hyp": -1.6043862915982032e-05,
+            "fine_rhs": -1.5790444486080893e-05,
+            "fine_slack": -2.5341842990113953e-07,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 366,
+            "coarse_slack": 1.7211106540683897e-06,
+            "fine_delta_H_hyp": -1.6274278309191814e-05,
+            "fine_rhs": -1.5962160403299083e-05,
+            "fine_slack": -3.121179058927312e-07,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 376,
+            "coarse_slack": 1.0832624822022007e-06,
+            "fine_delta_H_hyp": -1.3998606212428655e-05,
+            "fine_rhs": -1.3881785783936356e-05,
+            "fine_slack": -1.1682042849229923e-07,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 377,
+            "coarse_slack": 1.0043298269178536e-06,
+            "fine_delta_H_hyp": -1.2805557635386933e-05,
+            "fine_rhs": -1.2517483461979852e-05,
+            "fine_slack": -2.880741734070807e-07,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 379,
+            "coarse_slack": 1.2477701229882198e-06,
+            "fine_delta_H_hyp": -1.2931709366004185e-05,
+            "fine_rhs": -1.2942326791931456e-05,
+            "fine_slack": 1.0617425927271056e-08,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 394,
+            "coarse_slack": 1.0962167601883416e-06,
+            "fine_delta_H_hyp": -1.022288467567023e-05,
+            "fine_rhs": -9.963222114560325e-06,
+            "fine_slack": -2.596625611099045e-07,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 395,
+            "coarse_slack": 1.1491205273115982e-06,
+            "fine_delta_H_hyp": -1.0037089535064325e-05,
+            "fine_rhs": -9.832285261308129e-06,
+            "fine_slack": -2.0480427375619615e-07,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 433,
+            "coarse_slack": 1.5894050574018617e-06,
+            "fine_delta_H_hyp": -7.156340100067382e-06,
+            "fine_rhs": -7.006065524714395e-06,
+            "fine_slack": -1.5027457535298728e-07,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 434,
+            "coarse_slack": 1.3681809344182839e-06,
+            "fine_delta_H_hyp": -6.818295948507469e-06,
+            "fine_rhs": -6.737846029435466e-06,
+            "fine_slack": -8.044991907200334e-08,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 435,
+            "coarse_slack": 1.407101028913162e-06,
+            "fine_delta_H_hyp": -6.937622936797894e-06,
+            "fine_rhs": -6.8394334167525195e-06,
+            "fine_slack": -9.818952004537414e-08,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 436,
+            "coarse_slack": 1.3375887601468107e-06,
+            "fine_delta_H_hyp": -6.922545252585621e-06,
+            "fine_rhs": -6.745487906075607e-06,
+            "fine_slack": -1.7705734651001424e-07,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 438,
+            "coarse_slack": 1.106979989594291e-06,
+            "fine_delta_H_hyp": -6.729702781704816e-06,
+            "fine_rhs": -6.588433184467944e-06,
+            "fine_slack": -1.412695972368723e-07,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 439,
+            "coarse_slack": 1.0432312895394608e-06,
+            "fine_delta_H_hyp": -6.549828769797372e-06,
+            "fine_rhs": -6.497286249169273e-06,
+            "fine_slack": -5.2542520628099496e-08,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 472,
+            "coarse_slack": 1.083775282936729e-06,
+            "fine_delta_H_hyp": -5.169037347707572e-06,
+            "fine_rhs": -4.985481344307178e-06,
+            "fine_slack": -1.8355600340039416e-07,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 483,
+            "coarse_slack": 1.6969458185539085e-06,
+            "fine_delta_H_hyp": -5.0258136972125556e-06,
+            "fine_rhs": -4.833389642759225e-06,
+            "fine_slack": -1.9242405445333062e-07,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 484,
+            "coarse_slack": 1.671649610935284e-06,
+            "fine_delta_H_hyp": -4.6219944711545224e-06,
+            "fine_rhs": -4.435783239356848e-06,
+            "fine_slack": -1.8621123179767442e-07,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 485,
+            "coarse_slack": 1.7231365842587967e-06,
+            "fine_delta_H_hyp": -4.677765593541494e-06,
+            "fine_rhs": -4.580065202039766e-06,
+            "fine_slack": -9.770039150172829e-08,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 486,
+            "coarse_slack": 1.7525926595859652e-06,
+            "fine_delta_H_hyp": -4.427489185054867e-06,
+            "fine_rhs": -4.488339330597781e-06,
+            "fine_slack": 6.085014554291383e-08,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 487,
+            "coarse_slack": 1.6465413771189707e-06,
+            "fine_delta_H_hyp": -4.448706803605873e-06,
+            "fine_rhs": -4.401587524435932e-06,
+            "fine_slack": -4.7119279169941166e-08,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 488,
+            "coarse_slack": 1.974930243853762e-06,
+            "fine_delta_H_hyp": -5.746113893367877e-06,
+            "fine_rhs": -5.621820150761458e-06,
+            "fine_slack": -1.2429374260641903e-07,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 489,
+            "coarse_slack": 2.4253944310353716e-06,
+            "fine_delta_H_hyp": -5.712986428374478e-06,
+            "fine_rhs": -5.495043238462574e-06,
+            "fine_slack": -2.1794318991190374e-07,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 490,
+            "coarse_slack": 2.1034701915655193e-06,
+            "fine_delta_H_hyp": -5.282558844577068e-06,
+            "fine_rhs": -5.358819726721102e-06,
+            "fine_slack": 7.626088214403435e-08,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 491,
+            "coarse_slack": 1.8429302902143528e-06,
+            "fine_delta_H_hyp": -5.5887621632777496e-06,
+            "fine_rhs": -5.545015698006863e-06,
+            "fine_slack": -4.3746465270886635e-08,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 492,
+            "coarse_slack": 1.4816032160660814e-06,
+            "fine_delta_H_hyp": -5.15937777123554e-06,
+            "fine_rhs": -5.05224471628511e-06,
+            "fine_slack": -1.0713305495043031e-07,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 494,
+            "coarse_slack": 1.1947129471888344e-06,
+            "fine_delta_H_hyp": -5.3036663174577114e-06,
+            "fine_rhs": -5.10371609138455e-06,
+            "fine_slack": -1.9995022607316105e-07,
+            "observer": "fine (H,g,m all from same fine observer)"
+          },
+          {
+            "frame": 559,
+            "coarse_slack": 1.0935933705290296e-06,
+            "fine_delta_H_hyp": -2.7418014405533597e-06,
+            "fine_rhs": -2.653989144312921e-06,
+            "fine_slack": -8.781229624043873e-08,
+            "observer": "fine (H,g,m all from same fine observer)"
+          }
+        ]
+      },
+      "unresolved_quadrature_error": {
+        "strict_numerical_certificate": false,
+        "reason": "no_rigorous_quadrature_error_bound",
+        "note": "Without a rigorous integration (quadrature) error bound on H*, a positive or near-zero refined slack cannot be promoted to a strict numerical certificate of the discrete inequality."
+      },
+      "proof_status": "not_established: numerical evaluation of the discrete descent inequality on the hypothetical hold map; assumptions for Theorem 1 (Lipschitz feedback, fine-grid mass certificate) remain unmet",
+      "numerical_consistency": false,
+      "max_slack_coarse": 1.3290088759507993e-05,
+      "mean_slack_coarse": -2.9415084656124167e-05,
+      "fraction_positive": 0.35833333333333334,
+      "n_anomalies": 76,
+      "max_slack_refined": 9.986737431157e-07,
+      "refinements": [
+        {
+          "frame": 68,
+          "coarse_slack": 1.3290088759507993e-05,
+          "fine_delta_H_hyp": -0.0031873946313518697,
+          "fine_rhs": -0.0031592829333753204,
+          "fine_slack": -2.8111697976549322e-05,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 83,
+          "coarse_slack": 4.227942981193441e-06,
+          "fine_delta_H_hyp": -0.0012885689656940702,
+          "fine_rhs": -0.0012748616235965305,
+          "fine_slack": -1.3707342097539705e-05,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 91,
+          "coarse_slack": 1.1723215969883303e-05,
+          "fine_delta_H_hyp": -0.0008575841531819339,
+          "fine_rhs": -0.0008474802823627861,
+          "fine_slack": -1.0103870819147824e-05,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 98,
+          "coarse_slack": 6.090718731283952e-06,
+          "fine_delta_H_hyp": -0.0006365151782872225,
+          "fine_rhs": -0.0006287807299235461,
+          "fine_slack": -7.73444836367639e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 102,
+          "coarse_slack": 1.2278798311556515e-05,
+          "fine_delta_H_hyp": -0.000530780893939431,
+          "fine_rhs": -0.0005239638819167323,
+          "fine_slack": -6.8170120226987e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 104,
+          "coarse_slack": 9.536418823413001e-06,
+          "fine_delta_H_hyp": -0.000497553449272381,
+          "fine_rhs": -0.0004909302628629535,
+          "fine_slack": -6.6231864094274794e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 111,
+          "coarse_slack": 8.303178785399603e-06,
+          "fine_delta_H_hyp": -0.000374262351299004,
+          "fine_rhs": -0.0003689439508104608,
+          "fine_slack": -5.318400488543186e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 112,
+          "coarse_slack": 5.308197314282572e-06,
+          "fine_delta_H_hyp": -0.00035408691093818945,
+          "fine_rhs": -0.00034916671883551985,
+          "fine_slack": -4.920192102669601e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 117,
+          "coarse_slack": 1.1195762457726923e-05,
+          "fine_delta_H_hyp": -0.00028910171233320625,
+          "fine_rhs": -0.0002853451543701328,
+          "fine_slack": -3.7565579630734723e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 118,
+          "coarse_slack": 2.632520034955715e-06,
+          "fine_delta_H_hyp": -0.0002779606957461489,
+          "fine_rhs": -0.00027416072128960537,
+          "fine_slack": -3.799974456543528e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 119,
+          "coarse_slack": 4.066719902430472e-06,
+          "fine_delta_H_hyp": -0.00026581262322311616,
+          "fine_rhs": -0.0002620931230458928,
+          "fine_slack": -3.7195001772233794e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 126,
+          "coarse_slack": 3.436648212388116e-06,
+          "fine_delta_H_hyp": -0.00019362925887267401,
+          "fine_rhs": -0.00019098684289527943,
+          "fine_slack": -2.6424159773945854e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 127,
+          "coarse_slack": 3.0156842706971086e-06,
+          "fine_delta_H_hyp": -0.00018933829817280312,
+          "fine_rhs": -0.00018673347218075724,
+          "fine_slack": -2.6048259920458832e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 129,
+          "coarse_slack": 1.7780803988208971e-06,
+          "fine_delta_H_hyp": -0.00017771976776947973,
+          "fine_rhs": -0.0001754527540816499,
+          "fine_slack": -2.267013687829838e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 130,
+          "coarse_slack": 3.7677862008800398e-06,
+          "fine_delta_H_hyp": -0.00017204027137296407,
+          "fine_rhs": -0.00016940164944082356,
+          "fine_slack": -2.63862193214051e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 131,
+          "coarse_slack": 2.7028023090789168e-06,
+          "fine_delta_H_hyp": -0.0001663716567608109,
+          "fine_rhs": -0.00016406258027858585,
+          "fine_slack": -2.309076482225048e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 138,
+          "coarse_slack": 4.747574731889183e-06,
+          "fine_delta_H_hyp": -0.00013454917757704798,
+          "fine_rhs": -0.0001325460009206778,
+          "fine_slack": -2.0031766563701836e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 150,
+          "coarse_slack": 2.7427714445172165e-06,
+          "fine_delta_H_hyp": -8.666502056264846e-05,
+          "fine_rhs": -8.505376492783438e-05,
+          "fine_slack": -1.61125563481408e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 156,
+          "coarse_slack": 1.9041787710782503e-06,
+          "fine_delta_H_hyp": -7.114452518997005e-05,
+          "fine_rhs": -7.044257805618801e-05,
+          "fine_slack": -7.019471337820399e-07,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 160,
+          "coarse_slack": 1.1641187126538608e-06,
+          "fine_delta_H_hyp": -6.637794566866084e-05,
+          "fine_rhs": -6.527068801353371e-05,
+          "fine_slack": -1.1072576551271343e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 162,
+          "coarse_slack": 2.5023561275188836e-06,
+          "fine_delta_H_hyp": -6.53238758407948e-05,
+          "fine_rhs": -6.400702977649765e-05,
+          "fine_slack": -1.3168460642971528e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 171,
+          "coarse_slack": 2.143599628848158e-06,
+          "fine_delta_H_hyp": -5.5805557837684816e-05,
+          "fine_rhs": -5.4883710352059756e-05,
+          "fine_slack": -9.218474856250599e-07,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 172,
+          "coarse_slack": 3.256213047271784e-06,
+          "fine_delta_H_hyp": -5.2379686509951284e-05,
+          "fine_rhs": -5.1385854279566185e-05,
+          "fine_slack": -9.938322303850992e-07,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 173,
+          "coarse_slack": 3.897235142048499e-06,
+          "fine_delta_H_hyp": -5.2093496921035154e-05,
+          "fine_rhs": -5.0881580547042476e-05,
+          "fine_slack": -1.211916373992678e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 174,
+          "coarse_slack": 1.6387469401653727e-06,
+          "fine_delta_H_hyp": -5.019462273825326e-05,
+          "fine_rhs": -4.9746829299940684e-05,
+          "fine_slack": -4.477934383125741e-07,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 175,
+          "coarse_slack": 1.1665693499957606e-06,
+          "fine_delta_H_hyp": -5.1213817913842163e-05,
+          "fine_rhs": -4.9907579184117836e-05,
+          "fine_slack": -1.3062387297243272e-06,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 198,
+          "coarse_slack": 1.1351122994147304e-06,
+          "fine_delta_H_hyp": -2.0790678375348648e-05,
+          "fine_rhs": -2.0585482753869578e-05,
+          "fine_slack": -2.0519562147907025e-07,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 199,
+          "coarse_slack": 1.2187150221681804e-06,
+          "fine_delta_H_hyp": -2.163479129535517e-05,
+          "fine_rhs": -2.127514988757776e-05,
+          "fine_slack": -3.596414077774101e-07,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 209,
+          "coarse_slack": 2.6542736280638974e-06,
+          "fine_delta_H_hyp": -1.7670469399710953e-05,
+          "fine_rhs": -1.712501452897449e-05,
+          "fine_slack": -5.454548707364639e-07,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 210,
+          "coarse_slack": 1.9326693442566238e-06,
+          "fine_delta_H_hyp": -1.7683781760924333e-05,
+          "fine_rhs": -1.7519962643859916e-05,
+          "fine_slack": -1.638191170644175e-07,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 230,
+          "coarse_slack": 1.1191927310744087e-06,
+          "fine_delta_H_hyp": -1.2150543261979507e-05,
+          "fine_rhs": -1.181872437672902e-05,
+          "fine_slack": -3.318188852504877e-07,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 231,
+          "coarse_slack": 3.08385803519802e-06,
+          "fine_delta_H_hyp": -1.2745713478423681e-05,
+          "fine_rhs": -1.2441213265606431e-05,
+          "fine_slack": -3.0450021281725014e-07,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 232,
+          "coarse_slack": 2.7975945625270727e-06,
+          "fine_delta_H_hyp": -1.3906382587691724e-05,
+          "fine_rhs": -1.3528685145783127e-05,
+          "fine_slack": -3.776974419085963e-07,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 233,
+          "coarse_slack": 1.982828795458555e-06,
+          "fine_delta_H_hyp": -1.2541707829605286e-05,
+          "fine_rhs": -1.2378933999134745e-05,
+          "fine_slack": -1.6277383047054172e-07,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 234,
+          "coarse_slack": 1.621353469091853e-06,
+          "fine_delta_H_hyp": -1.316343231239081e-05,
+          "fine_rhs": -1.2987942039893583e-05,
+          "fine_slack": -1.7549027249722753e-07,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 235,
+          "coarse_slack": 1.098224387566147e-06,
+          "fine_delta_H_hyp": -1.2109450595820803e-05,
+          "fine_rhs": -1.1860087532909918e-05,
+          "fine_slack": -2.493630629108854e-07,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 299,
+          "coarse_slack": 1.5948242362011515e-06,
+          "fine_delta_H_hyp": -5.943349874693027e-06,
+          "fine_rhs": -5.794861812629998e-06,
+          "fine_slack": -1.4848806206302903e-07,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 300,
+          "coarse_slack": 1.3050146674029922e-06,
+          "fine_delta_H_hyp": -6.108215408140438e-06,
+          "fine_rhs": -5.9737139472943354e-06,
+          "fine_slack": -1.3450146084610285e-07,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 301,
+          "coarse_slack": 1.147912269647261e-06,
+          "fine_delta_H_hyp": -5.9905570719553936e-06,
+          "fine_rhs": -5.936902035103032e-06,
+          "fine_slack": -5.365503685236159e-08,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 302,
+          "coarse_slack": 1.6044356515235639e-06,
+          "fine_delta_H_hyp": -5.7826944230843225e-06,
+          "fine_rhs": -5.820180562002019e-06,
+          "fine_slack": 3.7486138917696214e-08,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 303,
+          "coarse_slack": 1.7974549384705293e-06,
+          "fine_delta_H_hyp": -5.852024667296618e-06,
+          "fine_rhs": -5.723555270201205e-06,
+          "fine_slack": -1.2846939709541272e-07,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 304,
+          "coarse_slack": 1.5695827198054537e-06,
+          "fine_delta_H_hyp": -5.9516765271716565e-06,
+          "fine_rhs": -5.84143348662892e-06,
+          "fine_slack": -1.1024304054273687e-07,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 305,
+          "coarse_slack": 1.3505141462432987e-06,
+          "fine_delta_H_hyp": -5.921921027773891e-06,
+          "fine_rhs": -5.749239379307055e-06,
+          "fine_slack": -1.7268164846683583e-07,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 306,
+          "coarse_slack": 1.1284934019255118e-06,
+          "fine_delta_H_hyp": -5.741601956321674e-06,
+          "fine_rhs": -5.6543572747909545e-06,
+          "fine_slack": -8.724468153071905e-08,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 346,
+          "coarse_slack": 7.377834464495784e-06,
+          "fine_delta_H_hyp": -2.5928098743577266e-05,
+          "fine_rhs": -2.5529417287882832e-05,
+          "fine_slack": -3.9868145569443345e-07,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 347,
+          "coarse_slack": 4.998167605795472e-06,
+          "fine_delta_H_hyp": -2.5541445073606894e-05,
+          "fine_rhs": -2.49408191794691e-05,
+          "fine_slack": -6.006258941377952e-07,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 348,
+          "coarse_slack": 2.808010412528076e-06,
+          "fine_delta_H_hyp": -2.465987355093624e-05,
+          "fine_rhs": -2.423040109032292e-05,
+          "fine_slack": -4.2947246061331826e-07,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 357,
+          "coarse_slack": 1.9154890114888826e-06,
+          "fine_delta_H_hyp": -2.068974561120207e-05,
+          "fine_rhs": -2.024053986844104e-05,
+          "fine_slack": -4.492057427610292e-07,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 358,
+          "coarse_slack": 3.7412026611174548e-06,
+          "fine_delta_H_hyp": -1.9204904760927732e-05,
+          "fine_rhs": -1.896989923225561e-05,
+          "fine_slack": -2.350055286721215e-07,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 359,
+          "coarse_slack": 1.0024554232352243e-06,
+          "fine_delta_H_hyp": -1.8530639898539647e-05,
+          "fine_rhs": -1.7963101064383696e-05,
+          "fine_slack": -5.675388341559507e-07,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 364,
+          "coarse_slack": 1.253731682759292e-06,
+          "fine_delta_H_hyp": -1.6043862915982032e-05,
+          "fine_rhs": -1.5790444486080893e-05,
+          "fine_slack": -2.5341842990113953e-07,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 366,
+          "coarse_slack": 1.7211106540683897e-06,
+          "fine_delta_H_hyp": -1.6274278309191814e-05,
+          "fine_rhs": -1.5962160403299083e-05,
+          "fine_slack": -3.121179058927312e-07,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 376,
+          "coarse_slack": 1.0832624822022007e-06,
+          "fine_delta_H_hyp": -1.3998606212428655e-05,
+          "fine_rhs": -1.3881785783936356e-05,
+          "fine_slack": -1.1682042849229923e-07,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 377,
+          "coarse_slack": 1.0043298269178536e-06,
+          "fine_delta_H_hyp": -1.2805557635386933e-05,
+          "fine_rhs": -1.2517483461979852e-05,
+          "fine_slack": -2.880741734070807e-07,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 379,
+          "coarse_slack": 1.2477701229882198e-06,
+          "fine_delta_H_hyp": -1.2931709366004185e-05,
+          "fine_rhs": -1.2942326791931456e-05,
+          "fine_slack": 1.0617425927271056e-08,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 394,
+          "coarse_slack": 1.0962167601883416e-06,
+          "fine_delta_H_hyp": -1.022288467567023e-05,
+          "fine_rhs": -9.963222114560325e-06,
+          "fine_slack": -2.596625611099045e-07,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 395,
+          "coarse_slack": 1.1491205273115982e-06,
+          "fine_delta_H_hyp": -1.0037089535064325e-05,
+          "fine_rhs": -9.832285261308129e-06,
+          "fine_slack": -2.0480427375619615e-07,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 433,
+          "coarse_slack": 1.5894050574018617e-06,
+          "fine_delta_H_hyp": -7.156340100067382e-06,
+          "fine_rhs": -7.006065524714395e-06,
+          "fine_slack": -1.5027457535298728e-07,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 434,
+          "coarse_slack": 1.3681809344182839e-06,
+          "fine_delta_H_hyp": -6.818295948507469e-06,
+          "fine_rhs": -6.737846029435466e-06,
+          "fine_slack": -8.044991907200334e-08,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 435,
+          "coarse_slack": 1.407101028913162e-06,
+          "fine_delta_H_hyp": -6.937622936797894e-06,
+          "fine_rhs": -6.8394334167525195e-06,
+          "fine_slack": -9.818952004537414e-08,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 436,
+          "coarse_slack": 1.3375887601468107e-06,
+          "fine_delta_H_hyp": -6.922545252585621e-06,
+          "fine_rhs": -6.745487906075607e-06,
+          "fine_slack": -1.7705734651001424e-07,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 438,
+          "coarse_slack": 1.106979989594291e-06,
+          "fine_delta_H_hyp": -6.729702781704816e-06,
+          "fine_rhs": -6.588433184467944e-06,
+          "fine_slack": -1.412695972368723e-07,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 439,
+          "coarse_slack": 1.0432312895394608e-06,
+          "fine_delta_H_hyp": -6.549828769797372e-06,
+          "fine_rhs": -6.497286249169273e-06,
+          "fine_slack": -5.2542520628099496e-08,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 472,
+          "coarse_slack": 1.083775282936729e-06,
+          "fine_delta_H_hyp": -5.169037347707572e-06,
+          "fine_rhs": -4.985481344307178e-06,
+          "fine_slack": -1.8355600340039416e-07,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 483,
+          "coarse_slack": 1.6969458185539085e-06,
+          "fine_delta_H_hyp": -5.0258136972125556e-06,
+          "fine_rhs": -4.833389642759225e-06,
+          "fine_slack": -1.9242405445333062e-07,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 484,
+          "coarse_slack": 1.671649610935284e-06,
+          "fine_delta_H_hyp": -4.6219944711545224e-06,
+          "fine_rhs": -4.435783239356848e-06,
+          "fine_slack": -1.8621123179767442e-07,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 485,
+          "coarse_slack": 1.7231365842587967e-06,
+          "fine_delta_H_hyp": -4.677765593541494e-06,
+          "fine_rhs": -4.580065202039766e-06,
+          "fine_slack": -9.770039150172829e-08,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 486,
+          "coarse_slack": 1.7525926595859652e-06,
+          "fine_delta_H_hyp": -4.427489185054867e-06,
+          "fine_rhs": -4.488339330597781e-06,
+          "fine_slack": 6.085014554291383e-08,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 487,
+          "coarse_slack": 1.6465413771189707e-06,
+          "fine_delta_H_hyp": -4.448706803605873e-06,
+          "fine_rhs": -4.401587524435932e-06,
+          "fine_slack": -4.7119279169941166e-08,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 488,
+          "coarse_slack": 1.974930243853762e-06,
+          "fine_delta_H_hyp": -5.746113893367877e-06,
+          "fine_rhs": -5.621820150761458e-06,
+          "fine_slack": -1.2429374260641903e-07,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 489,
+          "coarse_slack": 2.4253944310353716e-06,
+          "fine_delta_H_hyp": -5.712986428374478e-06,
+          "fine_rhs": -5.495043238462574e-06,
+          "fine_slack": -2.1794318991190374e-07,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 490,
+          "coarse_slack": 2.1034701915655193e-06,
+          "fine_delta_H_hyp": -5.282558844577068e-06,
+          "fine_rhs": -5.358819726721102e-06,
+          "fine_slack": 7.626088214403435e-08,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 491,
+          "coarse_slack": 1.8429302902143528e-06,
+          "fine_delta_H_hyp": -5.5887621632777496e-06,
+          "fine_rhs": -5.545015698006863e-06,
+          "fine_slack": -4.3746465270886635e-08,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 492,
+          "coarse_slack": 1.4816032160660814e-06,
+          "fine_delta_H_hyp": -5.15937777123554e-06,
+          "fine_rhs": -5.05224471628511e-06,
+          "fine_slack": -1.0713305495043031e-07,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 494,
+          "coarse_slack": 1.1947129471888344e-06,
+          "fine_delta_H_hyp": -5.3036663174577114e-06,
+          "fine_rhs": -5.10371609138455e-06,
+          "fine_slack": -1.9995022607316105e-07,
+          "observer": "fine (H,g,m all from same fine observer)"
+        },
+        {
+          "frame": 559,
+          "coarse_slack": 1.0935933705290296e-06,
+          "fine_delta_H_hyp": -2.7418014405533597e-06,
+          "fine_rhs": -2.653989144312921e-06,
+          "fine_slack": -8.781229624043873e-08,
+          "observer": "fine (H,g,m all from same fine observer)"
+        }
+      ],
+      "strict_numerical_certificate": false,
+      "strict_numerical_certificate_reason": "no_rigorous_quadrature_error_bound"
+    }
+  },
+  "command_hold_map_consistency": {
+    "max_abs_H_diff_vs_stored_next": 0.0,
+    "note": "H*(P + dt u_command) compared with the stored applied H*_next; a small value confirms the applied hold map equals P + dt U (no clipping)."
+  },
+  "tolerances": {
+    "abs": 1e-06,
+    "rel": 1e-06,
+    "strict_certificate_abs": 1e-09,
+    "strict_certificate_note": "strict_certificate_abs is retained only as a legacy anomaly-detection scale; it is NOT used to grant a strict numerical certificate. strict_numerical_certificate is always false (reason=no_rigorous_quadrature_error_bound)."
+  }
+}

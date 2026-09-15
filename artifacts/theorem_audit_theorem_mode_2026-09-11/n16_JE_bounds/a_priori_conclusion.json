@@ -1,0 +1,28 @@
+{
+  "a_priori_error_bound_sufficient": false,
+  "verdict": "NEGATIVE — no usable a priori centroid-error certificate that makes the new J bound beat a meaningful geometric J bound without trajectory-measured E.",
+  "E_star_threshold_cellwise_Nmplus": 33.44,
+  "E_star_threshold_totalmass_Mumax2": 0.235,
+  "preferred_geometric_J_comparator": "M_total * u_max^2 ≈ 0.230 (tighter and mass-consistent; preferred over N*m_plus*u_max^2 ≈ 28.4)",
+  "only_model_derivable_E_bound": {
+    "value": 4.796,
+    "formula": "E <= 4 R^2 M_total (chat and c* both in B(p_i,R))",
+    "resolution_dependent": false,
+    "below_E_star_cellwise": true,
+    "below_E_star_totalmass": false
+  },
+  "why_negative": [
+    "Against the preferred total-mass J geometric bound, the diameter E bound 4.8 exceeds E★≈0.235 by ~20×, so it cannot certify that the new analytic J bound beats geometry a priori.",
+    "The diameter bound is independent of the 20×20 CVT grid and of the Gaussian kernel quadrature; it does not control ||chat_grid - c*_continuous||.",
+    "No resolution-dependent a priori bound on grid/oracle centroid error was derived from the present model.",
+    "Trajectory max/mean E must NOT be promoted to a uniform a priori upper bound."
+  ],
+  "post_hoc_explanation": {
+    "estimate_type": "post_hoc_trajectory",
+    "observed_E_bar_L_seeds": [0.000145, 0.000145, 0.000106],
+    "observed_posthoc_J_bound": [0.0301, 0.0294, 0.0317],
+    "observed_J_bar": [0.0111, 0.0107, 0.0115],
+    "note": "With measured E_bar the post-hoc J bound (~0.03) is below both geometric J ceilings and above measured J_bar; this is explanatory, not an a priori guarantee."
+  },
+  "forbidden": "Do not treat trajectory max E as a uniform prior."
+}

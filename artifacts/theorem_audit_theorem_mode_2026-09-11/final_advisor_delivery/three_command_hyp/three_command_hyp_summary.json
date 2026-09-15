@@ -1,0 +1,259 @@
+{
+  "description": "Fixed hypothetical-next-state discrete dissipation delta_H_hyp - rhs for U in {u_cvt,u_saturated,u_command}; P_next_hyp = P + dt U per stage. On refinement H, g AND m all come from the same fine observer. strict_numerical_certificate is always false (reason=no_rigorous_quadrature_error_bound).",
+  "per_case": {
+    "l_shape_seed_2": {
+      "u_cvt": {
+        "n_anomalies": 150,
+        "max_slack_coarse": 2.6881204083613265e-05,
+        "max_fine_slack_over_anomalies": -1.178166987146151e-06,
+        "max_slack_refined_full_horizon": 8.192064965548747e-07,
+        "strict_numerical_certificate": false,
+        "numerical_consistency": false
+      },
+      "u_saturated": {
+        "n_anomalies": 150,
+        "max_slack_coarse": 2.6881204083613265e-05,
+        "max_fine_slack_over_anomalies": -1.178166987146151e-06,
+        "max_slack_refined_full_horizon": 8.192064965548747e-07,
+        "strict_numerical_certificate": false,
+        "numerical_consistency": false
+      },
+      "u_command": {
+        "n_anomalies": 90,
+        "max_slack_coarse": 2.767045279806525e-05,
+        "max_fine_slack_over_anomalies": 8.008894299237596e-08,
+        "max_slack_refined_full_horizon": 9.961986100858994e-07,
+        "strict_numerical_certificate": false,
+        "numerical_consistency": false
+      }
+    },
+    "l_shape_seed_5": {
+      "u_cvt": {
+        "n_anomalies": 42,
+        "max_slack_coarse": 1.3801143859505064e-05,
+        "max_fine_slack_over_anomalies": -2.2765618826522255e-06,
+        "max_slack_refined_full_horizon": 9.878252055850532e-07,
+        "strict_numerical_certificate": false,
+        "numerical_consistency": false
+      },
+      "u_saturated": {
+        "n_anomalies": 42,
+        "max_slack_coarse": 1.3801143859505064e-05,
+        "max_fine_slack_over_anomalies": -2.2765618826522255e-06,
+        "max_slack_refined_full_horizon": 9.878252055850532e-07,
+        "strict_numerical_certificate": false,
+        "numerical_consistency": false
+      },
+      "u_command": {
+        "n_anomalies": 88,
+        "max_slack_coarse": 1.4804858031818636e-05,
+        "max_fine_slack_over_anomalies": 7.741655332532048e-08,
+        "max_slack_refined_full_horizon": 9.554226983749291e-07,
+        "strict_numerical_certificate": false,
+        "numerical_consistency": false
+      }
+    },
+    "l_shape_seed_8": {
+      "u_cvt": {
+        "n_anomalies": 90,
+        "max_slack_coarse": 9.197792418311809e-06,
+        "max_fine_slack_over_anomalies": -1.5840849133632912e-06,
+        "max_slack_refined_full_horizon": 9.961173883697109e-07,
+        "strict_numerical_certificate": false,
+        "numerical_consistency": false
+      },
+      "u_saturated": {
+        "n_anomalies": 90,
+        "max_slack_coarse": 9.197792418311809e-06,
+        "max_fine_slack_over_anomalies": -1.5840849133632912e-06,
+        "max_slack_refined_full_horizon": 9.961173883697109e-07,
+        "strict_numerical_certificate": false,
+        "numerical_consistency": false
+      },
+      "u_command": {
+        "n_anomalies": 76,
+        "max_slack_coarse": 1.3290088759507993e-05,
+        "max_fine_slack_over_anomalies": 7.626088214403435e-08,
+        "max_slack_refined_full_horizon": 9.986737431157e-07,
+        "strict_numerical_certificate": false,
+        "numerical_consistency": false
+      }
+    },
+    "rectangle_seed_2": {
+      "u_cvt": {
+        "n_anomalies": 86,
+        "max_slack_coarse": 6.8844363740052056e-06,
+        "max_fine_slack_over_anomalies": -7.116970745007494e-08,
+        "max_slack_refined_full_horizon": 9.744962065991993e-07,
+        "strict_numerical_certificate": false,
+        "numerical_consistency": false
+      },
+      "u_saturated": {
+        "n_anomalies": 86,
+        "max_slack_coarse": 6.8844363740052056e-06,
+        "max_fine_slack_over_anomalies": -7.116970745007494e-08,
+        "max_slack_refined_full_horizon": 9.744962065991993e-07,
+        "strict_numerical_certificate": false,
+        "numerical_consistency": false
+      },
+      "u_command": {
+        "n_anomalies": 11,
+        "max_slack_coarse": 6.546489323095133e-06,
+        "max_fine_slack_over_anomalies": -2.411421993502087e-07,
+        "max_slack_refined_full_horizon": 9.274317457416714e-07,
+        "strict_numerical_certificate": false,
+        "numerical_consistency": false
+      }
+    },
+    "rectangle_seed_5": {
+      "u_cvt": {
+        "n_anomalies": 105,
+        "max_slack_coarse": 9.174790038749296e-06,
+        "max_fine_slack_over_anomalies": 1.7099777415944062e-07,
+        "max_slack_refined_full_horizon": 9.996434647093696e-07,
+        "strict_numerical_certificate": false,
+        "numerical_consistency": false
+      },
+      "u_saturated": {
+        "n_anomalies": 105,
+        "max_slack_coarse": 9.174790038749296e-06,
+        "max_fine_slack_over_anomalies": 1.7099777415944062e-07,
+        "max_slack_refined_full_horizon": 9.996434647093696e-07,
+        "strict_numerical_certificate": false,
+        "numerical_consistency": false
+      },
+      "u_command": {
+        "n_anomalies": 124,
+        "max_slack_coarse": 9.156877923482791e-06,
+        "max_fine_slack_over_anomalies": 1.7099777415944062e-07,
+        "max_slack_refined_full_horizon": 9.996434647093696e-07,
+        "strict_numerical_certificate": false,
+        "numerical_consistency": false
+      }
+    },
+    "rectangle_seed_8": {
+      "u_cvt": {
+        "n_anomalies": 136,
+        "max_slack_coarse": 1.016525124857662e-05,
+        "max_fine_slack_over_anomalies": 1.8803591416196983e-07,
+        "max_slack_refined_full_horizon": 9.937656931779418e-07,
+        "strict_numerical_certificate": false,
+        "numerical_consistency": false
+      },
+      "u_saturated": {
+        "n_anomalies": 136,
+        "max_slack_coarse": 1.016525124857662e-05,
+        "max_fine_slack_over_anomalies": 1.8803591416196983e-07,
+        "max_slack_refined_full_horizon": 9.937656931779418e-07,
+        "strict_numerical_certificate": false,
+        "numerical_consistency": false
+      },
+      "u_command": {
+        "n_anomalies": 148,
+        "max_slack_coarse": 1.3183282571550249e-05,
+        "max_fine_slack_over_anomalies": 2.2449137630707335e-07,
+        "max_slack_refined_full_horizon": 9.904435915753329e-07,
+        "strict_numerical_certificate": false,
+        "numerical_consistency": false
+      }
+    },
+    "c_shape_seed_2": {
+      "u_cvt": {
+        "n_anomalies": 212,
+        "max_slack_coarse": 5.507831013372845e-05,
+        "max_fine_slack_over_anomalies": 6.308937919568611e-07,
+        "max_slack_refined_full_horizon": 8.4286314225399e-07,
+        "strict_numerical_certificate": false,
+        "numerical_consistency": false
+      },
+      "u_saturated": {
+        "n_anomalies": 212,
+        "max_slack_coarse": 5.507831013372845e-05,
+        "max_fine_slack_over_anomalies": 6.308937919568611e-07,
+        "max_slack_refined_full_horizon": 8.4286314225399e-07,
+        "strict_numerical_certificate": false,
+        "numerical_consistency": false
+      },
+      "u_command": {
+        "n_anomalies": 166,
+        "max_slack_coarse": 8.46662851832988e-05,
+        "max_fine_slack_over_anomalies": 5.798238403426786e-07,
+        "max_slack_refined_full_horizon": 9.962405661706982e-07,
+        "strict_numerical_certificate": false,
+        "numerical_consistency": false
+      }
+    },
+    "c_shape_seed_5": {
+      "u_cvt": {
+        "n_anomalies": 199,
+        "max_slack_coarse": 6.838271287299032e-05,
+        "max_fine_slack_over_anomalies": 3.158939296905886e-07,
+        "max_slack_refined_full_horizon": 8.977299889591478e-07,
+        "strict_numerical_certificate": false,
+        "numerical_consistency": false
+      },
+      "u_saturated": {
+        "n_anomalies": 199,
+        "max_slack_coarse": 6.838271287299032e-05,
+        "max_fine_slack_over_anomalies": 3.158939296905886e-07,
+        "max_slack_refined_full_horizon": 8.977299889591478e-07,
+        "strict_numerical_certificate": false,
+        "numerical_consistency": false
+      },
+      "u_command": {
+        "n_anomalies": 190,
+        "max_slack_coarse": 4.962205304999607e-05,
+        "max_fine_slack_over_anomalies": 5.802523427228193e-07,
+        "max_slack_refined_full_horizon": 9.086544781574453e-07,
+        "strict_numerical_certificate": false,
+        "numerical_consistency": false
+      }
+    },
+    "c_shape_seed_8": {
+      "u_cvt": {
+        "n_anomalies": 191,
+        "max_slack_coarse": 0.00011468115024545816,
+        "max_fine_slack_over_anomalies": -6.370516960708462e-07,
+        "max_slack_refined_full_horizon": 9.56763353266525e-07,
+        "strict_numerical_certificate": false,
+        "numerical_consistency": false
+      },
+      "u_saturated": {
+        "n_anomalies": 191,
+        "max_slack_coarse": 0.00011468115024545816,
+        "max_fine_slack_over_anomalies": -6.370516960708462e-07,
+        "max_slack_refined_full_horizon": 9.56763353266525e-07,
+        "strict_numerical_certificate": false,
+        "numerical_consistency": false
+      },
+      "u_command": {
+        "n_anomalies": 179,
+        "max_slack_coarse": 9.809662624254273e-05,
+        "max_fine_slack_over_anomalies": 6.870197527122616e-07,
+        "max_slack_refined_full_horizon": 9.728172690783439e-07,
+        "strict_numerical_certificate": false,
+        "numerical_consistency": false
+      }
+    }
+  },
+  "rollup": {
+    "u_cvt": {
+      "max_fine_slack_over_all_anomalies": 6.308937919568611e-07,
+      "max_slack_refined_full_horizon_over_cases": 9.996434647093696e-07,
+      "all_numerical_consistency": false,
+      "all_strict_numerical_certificate": false
+    },
+    "u_saturated": {
+      "max_fine_slack_over_all_anomalies": 6.308937919568611e-07,
+      "max_slack_refined_full_horizon_over_cases": 9.996434647093696e-07,
+      "all_numerical_consistency": false,
+      "all_strict_numerical_certificate": false
+    },
+    "u_command": {
+      "max_fine_slack_over_all_anomalies": 6.870197527122616e-07,
+      "max_slack_refined_full_horizon_over_cases": 9.996434647093696e-07,
+      "all_numerical_consistency": false,
+      "all_strict_numerical_certificate": false
+    }
+  }
+}
