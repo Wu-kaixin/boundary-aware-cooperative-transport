@@ -1,0 +1,98 @@
+paper: false
+dt: 0.05
+domain:
+  xmin: 0.0
+  xmax: 8.0
+  ymin: 0.0
+  ymax: 8.0
+agents:
+  count: 16
+  layout: scatter
+  center:
+  - 4.0
+  - 4.0
+  radius_min: 1.5
+  radius_max: 2.3
+  min_separation: 0.34
+cargoes:
+- id: cargo_0
+  shape: l_shape
+  center:
+  - 4.0
+  - 4.0
+  scale: 1.5
+  surface_density: 2.0
+  movable: false
+task:
+  mode: fixed
+  goal_directions:
+    cargo_0:
+    - 1.0
+    - 0.0
+controller:
+  task_mode: caging
+  theorem_mode: true
+  theorem_map_source: oracle
+  theorem_oracle_spacing: 0.04
+  theorem_disable_clipping: true
+  theorem_forbid_fallback: true
+  theorem_allow_object_barrier_scaling: true
+  theorem_disable_soft_separation: true
+  sensor_range: 1.2
+  ray_count: 72
+  range_noise_std: 0.0
+  pca_neighbors: 5
+  residual_tolerance: 0.03
+  min_confidence: 0.15
+  comm_range: 1.6
+  voxel_size: 0.06
+  age_decay: 0.3
+  max_voxels_per_object: 320
+  motion_compensation: false
+  max_object_speed: 0.0
+  carve_enabled: false
+  density_mode: offset
+  cage_offset: 0.105
+  lead_offset: null
+  lead_threshold: 0.25
+  sigma: 0.2
+  base_density: 0.001
+  gap_gain: 0.0
+  explore_gain: 0.0
+  local_radius: 0.8
+  grid_resolution: 20
+  approach_mass_ratio: 3.0
+  redeploy_gap_ratio: 0.15
+  robot_radius: 0.13
+  delta_max: 0.065
+  d_min: 0.28
+  gamma_agent: 6.0
+  gamma_obj: 8.0
+  rho: 0.02
+  max_speed: 0.35
+  backend: qp
+  object_row_range: 0.6
+  object_row_window: 0.28
+  max_object_rows: 8
+  object_velocity_bound: 0.0
+  kp_cage: 0.9
+  kp_separate: 0.0
+  integration_method: edge_green
+  edge_n_gon: 256
+  edge_panels: 48
+transport:
+  engine: penalty
+  stiffness: 500.0
+  damping: 12.0
+  friction: 0.6
+  tangential_stiffness: 60.0
+  ground_friction: 0.6
+  gravity: 9.81
+  substeps: 4
+render:
+  map_agent: agent_00
+evaluation:
+  contact_radius: 0.42
+  j_min: 0.0
+  efficiency_min: 0.0
+  displacement_gate: 0.0

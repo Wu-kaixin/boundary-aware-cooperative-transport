@@ -1,0 +1,29 @@
+{
+  "branch": "feat/apriori-centroid-bound",
+  "code_sha": "14d81a2d358284696e4bdf977093fac4dac7afa9",
+  "base_sampled_theorem_mode": "a531515",
+  "main_frozen": "98ba28e",
+  "created": "2026-09-15",
+  "smoke": false,
+  "baseline_only": false,
+  "shapes": [
+    "rectangle"
+  ],
+  "seeds": [
+    2,
+    5
+  ],
+  "grids": [
+    20
+  ],
+  "frames": 600,
+  "observer": {
+    "ntheta": 128,
+    "nradial": 12
+  },
+  "integration_method": "edge_green",
+  "edge_n_gon": 256,
+  "edge_panels": 48,
+  "controller_grid_vs_eval_grid": "endpoint_grid uses LocalCVT n; edge_green uses n_gon/panels (grid_resolution kept for baseline comparison only)",
+  "reads_old_artifacts": false
+}

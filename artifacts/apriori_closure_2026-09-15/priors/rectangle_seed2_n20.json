@@ -1,0 +1,410 @@
+{
+  "labels": {
+    "B_E_rigorous": "rigorous",
+    "B_E_numerical_a_priori": "numerical_a_priori",
+    "B_E_diameter": "rigorous",
+    "B_H0_crude": "rigorous",
+    "B_H0_P0": "numerical_a_priori",
+    "B_J_geom": "rigorous",
+    "M_observer_quad": "numerical_a_priori_not_certificate",
+    "phi_max_mesh": "diagnostic_not_global_upper_bound",
+    "E_bar_from_trajectory": "post_hoc"
+  },
+  "parameters": {
+    "N": 16,
+    "R": 0.8,
+    "k_c": 0.9,
+    "dt": 0.05,
+    "a": 2.1722222222222225,
+    "K": 600,
+    "u_max": 0.35,
+    "sigma": 0.2,
+    "phi0": 0.001,
+    "grid_resolution": 20,
+    "h_controller": 0.08421052631578947,
+    "oracle_spacing": 0.04,
+    "influence_sigmas": 3.0,
+    "perimeter_L": 5.599999999999998,
+    "domain_area": 64.0,
+    "phi_max_loose_phi0_plus_L": 5.600999999999998,
+    "phi_max_line_edges": 2.0063026197048,
+    "phi_max_mesh_diagnostic": 0.48953908800974183,
+    "Lip_phi": 16.98285847195373,
+    "integration_method": "edge_green",
+    "edge_n_gon": 256,
+    "edge_panels": 48,
+    "n_edges": 4,
+    "weight_sum_W": 5.599999999999998
+  },
+  "mass": {
+    "M_observer": 1.471433508808227,
+    "M_plane_upper": 1.4714335088082269,
+    "quad_epsabs_requested": 1e-11,
+    "eps_M_used": 1e-10,
+    "M_for_geometric_J": 1.471433508908227,
+    "M_observer_le_plane": true,
+    "note": "M_geom = observer.total_mass + 1e-10; plane majorant is a coarser envelope",
+    "status": "numerical_a_priori",
+    "strict_certificate": false,
+    "reason": "scipy.quad remainder is requested, not a proved enclosure"
+  },
+  "H0": {
+    "H_observer_P0": 0.8140302496679026,
+    "B_H0_crude_R2M": 0.9417174456372653,
+    "B_H0_P0": 0.8140314612205762,
+    "B_H0_certificate": 0.9417174456372653,
+    "observer_envelope": {
+      "status": "numerical_a_priori",
+      "strict_certificate": false,
+      "reason": "no_rigorous_quadrature_error_bound",
+      "H": {
+        "eval": 0.8140302496679026,
+        "fine256": 0.814029038115229
+      },
+      "mass_sum": {
+        "eval": 0.5312054672966878,
+        "fine256": 0.530951755373932
+      },
+      "comparisons": {
+        "fine256_vs_eval": {
+          "abs_dH": 1.2115526736300453e-06,
+          "abs_d_mass_sum": 0.000253711922755806,
+          "max_centroid_shift": 0.0017122119241800595,
+          "gradient_l2": 0.00032419367807838334
+        }
+      },
+      "note": "H, g, m, c taken from the same observer.evaluate per resolution."
+    },
+    "note": "Certificate B_H0 uses R^2 M_plane only. H*(P0)+polar envelope is numerical_a_priori."
+  },
+  "density_mismatch": {
+    "analytic": {
+      "name": "oracle_midpoint_L1",
+      "value": 0.002270384705592312,
+      "formula": "sqrt(2 pi / e) * L * delta^2 / 6",
+      "source": "midpoint Taylor remainder + int |d^2 k/ds^2| dA = 4 sqrt(2 pi / e) (Wolfram)",
+      "domain": "static oracle, uniform cage offset, frozen polygon, ds = theorem_oracle_spacing",
+      "units": "same mixed mass units as int |phi_ctrl - phi*| dA",
+      "status": "rigorous",
+      "decreases_with_controller_grid": false,
+      "decreases_with_oracle_spacing": true,
+      "forms_floor": true,
+      "notes": "Floor w.r.t. CVT grid refinement: controller vs continuous edge measure does not vanish as n -> inf. Not a trajectory statistic."
+    },
+    "numerical_mesh": {
+      "status": "numerical_a_priori",
+      "strict_certificate": false,
+      "reason": "mesh Lipschitz remainder is an estimate, not a closed quadrature certificate",
+      "mesh": 80,
+      "h_mesh": 0.10126582278481013,
+      "L1_mesh": 0.0004164991092662877,
+      "L1_remainder_lipschitz": 155.65700069362896,
+      "L1_mesh_plus_remainder": 155.65741719273822,
+      "Linf_mesh": 0.0003741533467626901,
+      "analytic_L1_bound": 0.002270384705592312,
+      "analytic_covers_mesh": true,
+      "phi_ctrl_max_mesh": 0.48953908800974183,
+      "phi_star_max_mesh": 0.48951390972777264,
+      "mean_abs_diff": 6.346120461257084e-06
+    }
+  },
+  "restrict": {
+    "pointwise": {
+      "name": "restrict_pointwise_tail",
+      "value": 0.06221038061415689,
+      "formula": "L * exp(-influence_sigmas^2 / 2)",
+      "source": "src/dbact/boundary_density.py restrict(); Gaussian tail on the CVT disk",
+      "domain": "any site p in D, queries q in B(p, R)",
+      "units": "same as phi (mixed)",
+      "status": "rigorous",
+      "decreases_with_controller_grid": false,
+      "decreases_with_oracle_spacing": false,
+      "forms_floor": true,
+      "notes": "Pointwise only. Over-counts when used as N * value * area(disk)."
+    },
+    "partition_mass": {
+      "name": "restrict_partition_tail_mass",
+      "value": 0.015635173977156813,
+      "formula": "2 pi sigma^2 * exp(-s^2/2) * W",
+      "source": "disjoint truncated Voronoi cells + Gaussian plane tail (Wolfram)",
+      "domain": "static oracle/offset density; restrict by raw b_j; Omega_i partition",
+      "units": "mass (mixed)",
+      "status": "rigorous",
+      "decreases_with_controller_grid": false,
+      "decreases_with_oracle_spacing": false,
+      "forms_floor": true,
+      "notes": "No N factor. Requires non-negative weights and the delete-vs-xi distance relation."
+    },
+    "numerical_site_grid": {
+      "status": "numerical_a_priori",
+      "strict_certificate": false,
+      "site_grid": 4,
+      "local_mesh": 12,
+      "max_disk_L1": 2.2008179882011104e-06,
+      "worst_site": [
+        2.9333333333333336,
+        5.066666666666666
+      ],
+      "lipschitz_site_remainder": 72.8449343657916,
+      "max_disk_L1_plus_remainder": 72.84493656660959,
+      "crude_one_cell_mass": 0.1250813918172545,
+      "pointwise_phi_bound": 0.06221038061415689
+    },
+    "legacy_N_fold_disk_mass": 2.001302269076072
+  },
+  "grid": {
+    "h": 0.08421052631578947,
+    "mass_loose_phimax": {
+      "name": "cvt_endpoint_grid_mass_sum",
+      "value": 125.24512305498277,
+      "formula": "N * (phi_max * e_area(h) + Lip(phi) * sqrt(2) h * pi R^2)",
+      "source": "LocalCVT endpoint linspace + Davenport tube on convex V_i cap disk",
+      "domain": "any legal configuration in D^N; h = 2R/(n_grid-1) = 0.0842105 m",
+      "units": "mass (mixed)",
+      "status": "rigorous",
+      "decreases_with_controller_grid": true,
+      "decreases_with_oracle_spacing": false,
+      "forms_floor": false,
+      "notes": "O(h) from the cell boundary; interior Lip is also O(h). Overlap forces the N factor."
+    },
+    "moment_loose_phimax": {
+      "name": "cvt_endpoint_grid_moment_sum",
+      "value": 107.36314667217209,
+      "formula": "N * ((R+sqrt(2)h) phi_max e_area + Lip(phi) sqrt(2) h pi R^3)",
+      "source": "same as mass term, first moment relative to the site",
+      "domain": "any legal configuration in D^N; h = 2R/(n_grid-1) = 0.0842105 m",
+      "units": "mass * metre",
+      "status": "rigorous",
+      "decreases_with_controller_grid": true,
+      "decreases_with_oracle_spacing": false,
+      "forms_floor": false,
+      "notes": "Grid centroids lie in conv(disk cap grid) subset B(p,R)."
+    },
+    "mass_line_phimax": {
+      "name": "cvt_endpoint_grid_mass_sum",
+      "value": 86.62125988507665,
+      "formula": "N * (phi_max * e_area(h) + Lip(phi) * sqrt(2) h * pi R^2)",
+      "source": "LocalCVT endpoint linspace + Davenport tube on convex V_i cap disk",
+      "domain": "any legal configuration in D^N; h = 2R/(n_grid-1) = 0.0842105 m",
+      "units": "mass (mixed)",
+      "status": "rigorous",
+      "decreases_with_controller_grid": true,
+      "decreases_with_oracle_spacing": false,
+      "forms_floor": false,
+      "notes": "O(h) from the cell boundary; interior Lip is also O(h). Overlap forces the N factor."
+    },
+    "moment_line_phimax": {
+      "name": "cvt_endpoint_grid_moment_sum",
+      "value": 71.86427583088938,
+      "formula": "N * ((R+sqrt(2)h) phi_max e_area + Lip(phi) sqrt(2) h pi R^3)",
+      "source": "same as mass term, first moment relative to the site",
+      "domain": "any legal configuration in D^N; h = 2R/(n_grid-1) = 0.0842105 m",
+      "units": "mass * metre",
+      "status": "rigorous",
+      "decreases_with_controller_grid": true,
+      "decreases_with_oracle_spacing": false,
+      "forms_floor": false,
+      "notes": "Grid centroids lie in conv(disk cap grid) subset B(p,R)."
+    },
+    "e_area_one_cell": 0.6715423282504229,
+    "integration": {
+      "method": "edge_green",
+      "n_gon": 256,
+      "panels": 48,
+      "area_deficit_one_disk": 0.00020185770049252483,
+      "phi_max_line_edges": 2.0063026197048,
+      "n_edges": 4,
+      "n_sources_majorant": 144,
+      "edge_remainder": {
+        "panels": 48.0,
+        "m2_bound": 15.0,
+        "max_edge_length": 0.019634461257151882,
+        "one_edge_remainder": 4.106619889414396e-09,
+        "sum_abs_dm": 0.002422182969653957,
+        "sum_abs_dmu": 0.004844365939307914,
+        "n_edge_evals": 589824.0
+      },
+      "status": "rigorous"
+    }
+  },
+  "error_budget_rigorous": {
+    "sum_abs_dm": 0.026807543785294912,
+    "sum_abs_dmu": 0.02435265459182068,
+    "oracle_dm": 0.002270384705592312,
+    "restrict_dm": 0.015635173977156813,
+    "grid_dm": 0.008901985102545789,
+    "observer_dm": 0.0,
+    "observer_dm_note": "polar observer remainder not rigorously closed; excluded from the certificate budget"
+  },
+  "error_budget_numerical_a_priori": {
+    "sum_abs_dm": 0.011461294818705125,
+    "sum_abs_dmu": 0.01298519175384388,
+    "oracle_dm": 0.002270384705592312,
+    "restrict_dm": 3.5213087811217766e-05,
+    "grid_dm": 0.008901985102545789,
+    "observer_dm": 0.000253711922755806,
+    "observer_dmu": 0.0011125058734996742,
+    "lipschitz_covering_remainders_not_used": {
+      "density_L1_remainder": 155.65700069362896,
+      "restrict_site_remainder": 72.8449343657916,
+      "reason": "global Lip times domain area is too loose to be a useful majorant; recorded but not added to B_E"
+    }
+  },
+  "B_E": {
+    "diameter": {
+      "name": "E_diameter_4R2M",
+      "value": 3.7668697825490614,
+      "formula": "4 R^2 M_upper",
+      "source": "chat, c* in B(p_i,R) so ||e||<=2R; sum m* <= M",
+      "domain": "any truncated partition of D",
+      "units": "mass * metre^2",
+      "status": "rigorous",
+      "decreases_with_controller_grid": false,
+      "decreases_with_oracle_spacing": false,
+      "forms_floor": true,
+      "notes": "Resolution-independent; kept as a baseline, not the proposed bound."
+    },
+    "moment_rigorous_uncapped": 0.07327790339209057,
+    "moment_numerical_uncapped": 0.035446764174092774,
+    "moment_rigorous": 0.07327790339209057,
+    "moment_numerical_a_priori": 0.035446764174092774,
+    "active_rigorous_bound": "moment_form",
+    "E_star_to_meet_geometry_using_crude_H": 0.17853668566306707,
+    "formula_moment": "2 R (sum ||dmu|| + R sum |dm|)",
+    "note": "Certificate uses min(moment form, 4 R^2 M_plane). With edge_green + partition restrict, moment form is intended to be active."
+  },
+  "B_J": {
+    "geometric": {
+      "B_J_geom": 0.18025060482900776,
+      "M_used": 1.4714335088082269,
+      "eps_M": 0.0,
+      "M_upper_for_bound": 1.4714335088082269,
+      "u_max": 0.35,
+      "formula": "(M_total + eps_M) * u_max^2",
+      "not_used": "N * m_plus * u_max^2",
+      "status": "rigorous",
+      "domain": "J_k = sum m*_i ||u_i||^2 <= (sum m*_i) u_max^2 <= M_total u_max^2",
+      "M_observer_quad": 1.471433508808227,
+      "M_plane_used": 1.4714335088082269,
+      "note": "B_J_geom = M_plane * u_max^2 with M_plane = phi0|D| + 2 pi sigma^2 L. scipy.quad observer mass is recorded but not used in the certificate comparator."
+    },
+    "prior_certificate_crudeH_rigorousE": {
+      "B_J_prior": 0.09102082361146896,
+      "term_2BH0_over_aKD": 0.028901814188355968,
+      "term_4BE_over_a2": 0.062119009423112985,
+      "a": 2.1722222222222225,
+      "K": 600,
+      "dt": 0.05,
+      "formula": "2 B_H0 / (a K Delta) + 4 B_E / a^2",
+      "status": "rigorous_on_K0",
+      "domain": "full window in K_0, a>0, sat+QP cascade of Theorem C"
+    },
+    "prior_P0H_rigorousE": {
+      "B_J_prior": 0.08710207217157057,
+      "term_2BH0_over_aKD": 0.02498306274845758,
+      "term_4BE_over_a2": 0.062119009423112985,
+      "a": 2.1722222222222225,
+      "K": 600,
+      "dt": 0.05,
+      "formula": "2 B_H0 / (a K Delta) + 4 B_E / a^2",
+      "status": "rigorous_on_K0",
+      "domain": "full window in K_0, a>0, sat+QP cascade of Theorem C"
+    },
+    "prior_numerical_a_priori": {
+      "B_J_prior": 0.05503192844767738,
+      "term_2BH0_over_aKD": 0.02498306274845758,
+      "term_4BE_over_a2": 0.0300488656992198,
+      "a": 2.1722222222222225,
+      "K": 600,
+      "dt": 0.05,
+      "formula": "2 B_H0 / (a K Delta) + 4 B_E / a^2",
+      "status": "rigorous_on_K0",
+      "domain": "full window in K_0, a>0, sat+QP cascade of Theorem C"
+    }
+  },
+  "beats_geometry": {
+    "certificate_crudeH_rigorousE": true,
+    "P0H_rigorousE": true,
+    "numerical_a_priori": true
+  },
+  "grid_refinement_narrative": {
+    "decreases": [
+      "edge_green: inscribed n-gon deficit O(1/n_gon^2) and trapezoid panels",
+      "endpoint_grid baseline: LocalCVT O(h) tube (usually inactive vs diameter)",
+      "observer polar remainder if the evaluation grid is refined (not the controller grid)"
+    ],
+    "floors": [
+      "oracle midpoint vs continuous edge measure (depends on theorem_oracle_spacing)",
+      "density.restrict partition Gaussian tail at influence_sigmas (no N factor)",
+      "controller discrete mixture vs observer erf line density: same kernel, different edge discretisation"
+    ]
+  },
+  "forbidden": "Do not substitute trajectory max/mean E for B_E.",
+  "P0": [
+    [
+      5.68853855052069,
+      2.8593553037831345
+    ],
+    [
+      5.045234339248267,
+      5.978346486261876
+    ],
+    [
+      6.228598104511707,
+      3.5466449676660297
+    ],
+    [
+      3.733950373498778,
+      2.1947737880023372
+    ],
+    [
+      2.931723021268379,
+      5.8056211396091495
+    ],
+    [
+      4.57139638817957,
+      5.684051126706276
+    ],
+    [
+      3.442093649363066,
+      5.437491606607821
+    ],
+    [
+      2.3498405069364523,
+      5.414219680104636
+    ],
+    [
+      2.544912938994609,
+      2.70287924016343
+    ],
+    [
+      3.3523879920313826,
+      6.0692940332681
+    ],
+    [
+      5.49689962857304,
+      4.398978812741224
+    ],
+    [
+      2.326793445920537,
+      3.0177699067690957
+    ],
+    [
+      5.299976517350722,
+      5.1598882737458505
+    ],
+    [
+      3.980790178075212,
+      6.076923693848011
+    ],
+    [
+      2.898630696383894,
+      2.8949777164168395
+    ],
+    [
+      3.06889033228492,
+      2.5801366084185293
+    ]
+  ],
+  "config_sha256": "74c1634d7d055c4d00208f9743c4fc4ab919d112c9a189940fd7a930b864921e"
+}
