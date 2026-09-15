@@ -533,10 +533,14 @@ class SafetyFilter:
             and len(b_obj)
             and len(b_obj_free) == len(b_obj)
         ):
+            # Rows are a^T u >= b.  u=0 is feasible iff b <= 0.  When the hard
+            # (rho-free) RHS already satisfies b_free <= 0 but the margin pushes
+            # b > 0, clamp b down to 0 so the projection set contains 0 without
+            # weakening the barrier below the rho-free level.
             n_pre = len(b_agent) + len(b_wall)
             clamped = False
             for i in range(len(b_obj)):
-                if float(b_obj_free[i]) >= -1e-9 and float(b[n_pre + i]) < 0.0:
+                if float(b_obj_free[i]) <= 1e-9 and float(b[n_pre + i]) > 0.0:
                     b[n_pre + i] = 0.0
                     clamped = True
             if clamped:
