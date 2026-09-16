@@ -531,12 +531,14 @@ class DBACTController:
                 max_speed=params.max_speed,
                 backend=params.backend,
                 enable_object_rows=params.use_object_barrier,
-                max_object_rows=params.max_object_rows,
+                max_object_rows=(
+                    max(int(params.max_object_rows), 64) if params.theorem_mode else params.max_object_rows
+                ),
                 object_row_range=params.object_row_range,
                 object_row_window=params.object_row_window,
                 object_row_inner_limit=params.robot_radius,
                 object_row_face_cosine=params.object_row_face_cosine,
-                object_row_mode=params.object_row_mode,
+                object_row_mode=("nearest_feature" if params.theorem_mode else params.object_row_mode),
                 dt=params.dt,
                 object_velocity_bound=params.object_velocity_bound,
                 recovery_fraction=params.recovery_fraction,

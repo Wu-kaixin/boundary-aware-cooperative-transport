@@ -336,18 +336,32 @@ def moment_form_E_bound_with_mass_fallback(
     sum_abs_dmu: float,
     n_agents: int,
     mass_floor: float = 1e-12,
+    quadrature_dm: float = 0.0,
+    quadrature_dmu: float = 0.0,
 ) -> float:
-    """Moment form plus cells whose numerical mass falls below ``mass_floor``.
+    """Moment form plus mass-fallback plus unprojected-centroid protrusion.
 
-    If ``m_hat ≤ mass_floor`` the implementation uses the site ``p_i``.  Then
-    ``m* ≤ |δm| + mass_floor`` (otherwise ``m_hat ≥ m* - |δm| > mass_floor``),
-    and ``E_i ≤ R^2 m*``.  Summing fallback cells costs at most
-    ``R^2 (sum |δm_i| + N mass_floor)`` on top of the Green moment form.
+    Exact nonnegative density on ``Ω ⊂ B(p,R)`` has centroid in the disk, so
+    the identity ``m* e = (μ̂ - μ*) - ĉ (m̂ - m*)`` with ``||ĉ-p|| ≤ R`` applies
+    to *exact* cell integrals (oracle / restrict / geometric disk-vs-n-gon gap).
+
+    The trapezoid/float integrator can place the *numerical* centroid outside
+    the disk.  The implementation then projects.  Projection onto the closed
+    disk containing ``c*`` is non-expansive, but the moment identity must use
+    ``μ̂_proj = m̂ ĉ_proj``, which differs from the Green moment by the
+    protrusion ``m̂ max(||ĉ_raw-p|| - R, 0)``.  That protrusion is at most the
+    quadrature remainder ``||δμ_quad|| + R |δm_quad|``.  Charging it once more
+    yields the extra ``2 R (||δμ_quad|| + R |δm_quad|)`` term.  Oracle/restrict
+    and the n-gon area gap are not doubled: their exact integrals stay in the
+    disk.
+
+    Fallback cells (``m̂ ≤ mass_floor``) still cost ``R^2 (sum |δm| + N ε)``.
     """
     r = float(local_radius)
     base = moment_form_E_bound(r, sum_abs_dm, sum_abs_dmu)
-    extra = r * r * (float(sum_abs_dm) + int(n_agents) * float(mass_floor))
-    return base + extra
+    extra_fallback = r * r * (float(sum_abs_dm) + int(n_agents) * float(mass_floor))
+    extra_proj = moment_form_E_bound(r, float(quadrature_dm), float(quadrature_dmu))
+    return base + extra_fallback + extra_proj
 
 
 def diameter_E_bound(local_radius: float, mass_upper: float) -> BoundTerm:
@@ -772,6 +786,7 @@ def assemble_prior(
     from dbact.edge_green_integral import (
         cull_partition_mass_bound,
         discrete_mixture_phi_max,
+        evaluated_source_reach,
         inscribed_disk_area_deficit,
         partition_edge_mass_moment_remainder,
     )
@@ -779,6 +794,7 @@ def assemble_prior(
     phi_disc = discrete_mixture_phi_max(phi0, weight_sum, n_edges, spacing, sigma)
     phi_max_discrete = float(phi_disc["phi_max_used"])
 
+    cage_offset = float(ctrl["cage_offset"])
     if method == "edge_green":
         deficit = inscribed_disk_area_deficit(r, n_gon)
         # Omega_i \ P_i subset disk \ n-gon, so area <= deficit.  Density bound is
@@ -795,13 +811,24 @@ def assemble_prior(
             weight_sum=weight_sum,
             h_max=h_max,
             cull_sigmas=cull_sigmas,
+            max_offset=cage_offset,
+            influence_sigmas=influence,
         )
         dm_cull = cull_partition_mass_bound(weight_sum, sigma, cull_sigmas)
-        dmu_cull = (r + cull_sigmas * sigma) * dm_cull
+        reach_info = evaluated_source_reach(
+            r,
+            cull_sigmas,
+            sigma,
+            max_offset=cage_offset,
+            influence_sigmas=influence,
+        )
+        dmu_cull = float(reach_info["used"]) * dm_cull
         dm_trap = float(edge_rem["sum_abs_dm"]) + float(edge_rem["float_sum_abs_dm"])
         dmu_trap = float(edge_rem["sum_abs_dmu_robot"]) + float(edge_rem["float_sum_abs_dmu"])
         dm_grid = dm_geom + dm_trap + dm_cull
         dmu_grid = dmu_geom + dmu_trap + dmu_cull
+        dm_quad = dm_trap
+        dmu_quad = dmu_trap
         dm_grid_mesh = dm_grid
         dmu_grid_mesh = dmu_grid
         grid_note = {
@@ -818,7 +845,11 @@ def assemble_prior(
             "weight_sum_W": weight_sum,
             "edge_remainder": edge_rem,
             "cull_tail_mass": dm_cull,
+            "cull_dmu_reach": float(reach_info["used"]),
+            "cull_dmu_reach_rule": reach_info["rule"],
             "geom_gap_dm": dm_geom,
+            "quadrature_dm_for_projection": dm_quad,
+            "quadrature_dmu_for_projection": dmu_quad,
             "status": "rigorous",
             "m2_status": "analytic",
         }
@@ -828,6 +859,8 @@ def assemble_prior(
         dm_grid_mesh = grid_m_mesh.value
         dmu_grid_mesh = grid_mu_mesh.value
         edge_rem = None
+        dm_quad = 0.0
+        dmu_quad = 0.0
         grid_note = {
             "method": "endpoint_grid",
             "status": "rigorous",
@@ -847,7 +880,9 @@ def assemble_prior(
 
     dm_rig = dm_den + dm_restrict_rig + dm_grid
     dmu_rig = dmu_den + dmu_restrict_rig + dmu_grid
-    b_e_moment = moment_form_E_bound_with_mass_fallback(r, dm_rig, dmu_rig, n_agents)
+    b_e_moment = moment_form_E_bound_with_mass_fallback(
+        r, dm_rig, dmu_rig, n_agents, quadrature_dm=dm_quad, quadrature_dmu=dmu_quad
+    )
     b_e_diameter = diameter_E_bound(r, m_plane)
     b_e_rigorous = min(b_e_moment, float(b_e_diameter.value))
     b_e_active = (
@@ -856,7 +891,9 @@ def assemble_prior(
 
     dm_num = dm_den + dm_restrict_num + dm_grid_mesh + dm_obs_num
     dmu_num = dmu_den + dmu_restrict_num + dmu_grid_mesh + dmu_obs_num
-    b_e_moment_num = moment_form_E_bound_with_mass_fallback(r, dm_num, dmu_num, n_agents)
+    b_e_moment_num = moment_form_E_bound_with_mass_fallback(
+        r, dm_num, dmu_num, n_agents, quadrature_dm=dm_quad, quadrature_dmu=dmu_quad
+    )
     b_e_numerical = min(b_e_moment_num, float(b_e_diameter.value))
 
     # Geometric J uses the analytic plane mass (strict), not scipy.quad.
@@ -997,11 +1034,18 @@ def assemble_prior(
             "moment_numerical_a_priori": b_e_numerical,
             "active_rigorous_bound": b_e_active,
             "E_star_to_meet_geometry_using_crude_H": e_star,
-            "formula_moment": "2 R (sum ||dmu_robot|| + R sum |dm|) + R^2 (sum |dm| + N mass_floor)",
+            "formula_moment": (
+                "2 R (sum ||dmu|| + R sum |dm|) + R^2 (sum |dm| + N mass_floor) "
+                "+ 2 R (||dmu_quad|| + R |dm_quad|) for trapezoid/float protrusion"
+            ),
+            "quadrature_dm_for_projection": dm_quad,
+            "quadrature_dmu_for_projection": dmu_quad,
             "note": (
-                "Certificate uses min(moment form with mass-fallback, 4 R^2 M_plane). "
-                "Robot-centred dmu includes ||xi-p|| |dm|. Continuous line phi_max is "
-                "not used as a discrete-mixture bound."
+                "Certificate uses min(moment form with mass-fallback and projection "
+                "protrusion, 4 R^2 M_plane).  ||xi-p|| reach is min(√2 R + sσ, "
+                "R + 2 d_c + n_σ σ), not R + sσ.  Continuous line phi_max is not "
+                "used as a discrete-mixture bound.  Projection extra applies only "
+                "to trapezoid/float remainder."
             ),
         },
         "B_J": {

@@ -1,0 +1,58 @@
+{
+  "date": "2026-09-16",
+  "scope": "static sampled theorem_mode, N=16, frozen object, oracle, original rho/r_safe/u_max",
+  "parameters": {
+    "Delta": 0.05,
+    "k_c": 0.9,
+    "a": 2.1722222222222225,
+    "gamma_obj": 8.0,
+    "gamma_agent": 6.0,
+    "rho": 0.02,
+    "r_safe": 0.065,
+    "rho_over_gamma": 0.0025,
+    "d_min": 0.28,
+    "u_max": 0.35,
+    "R": 0.8,
+    "sigma": 0.2,
+    "d_c": 0.105,
+    "oracle_spacing": 0.04,
+    "h_star": 0.004,
+    "n_gon": 256,
+    "cull_sigmas": 6.0,
+    "restrict_n_sigma": 3.0,
+    "N": 16,
+    "K": 600,
+    "object_row_range": 0.60,
+    "cover_radius": 0.035,
+    "cover_radius_rule": "2 * u_max * Delta"
+  },
+  "reach": {
+    "invalid_R_plus_s_sigma": 2.0,
+    "bbox_sqrt2_R_plus_s_sigma": 2.3313708498984766,
+    "restrict_R_plus_2dc_plus_n_sigma": 1.61,
+    "used": 1.61,
+    "rule": "min(sqrt(2) R + s sigma, R + 2 d_c + n_sig sigma)"
+  },
+  "B_J": {
+    "rectangle": {"B_J_prior": 0.1738779574145439, "B_J_geom": 0.18025060482900776, "beats_geometry_certificate": true},
+    "l_shape": {"B_J_prior": 0.22726087248241236, "B_J_geom": 0.22951077763729585, "beats_geometry_certificate": true},
+    "c_shape": {"B_J_prior": 0.23674626647887903, "B_J_geom": 0.22951077763729574, "beats_geometry_certificate": false, "E_star": 0.22732846639925205, "B_E": 0.2358637192510275}
+  },
+  "c_shape_block": {
+    "B_E": 0.2358637192510275,
+    "E_star": 0.22732846639925205,
+    "gap": 0.00853525285177545,
+    "trap_charged_in_base_and_projection_extra": 0.1088,
+    "h_star_frozen": 0.004,
+    "note": "Trapezoid remainder scales as h_max^2. Frozen h_star=0.004 plus doubling the trap remainder as projection extra is what keeps C-shape above E_star. Raising panel count without lowering h_max does nothing. Lowering h_max would change the frozen integrator and is not used."
+  },
+  "withdrawn": {
+    "old_C_shape_B_J_prior_approx": 0.1978,
+    "reason": "used invalid R + s sigma source reach"
+  },
+  "notes": [
+    "Priors are geometry/P0 constants; JSON status rigorous_on_K0 is a template until K0 is proved.",
+    "Polar H0 is numerical_a_priori.",
+    "Projection extra applies to trapezoid/float remainder only."
+  ]
+}

@@ -558,6 +558,7 @@ def theorem_step(
             boundary_normals=normals,
             object_velocity=np.zeros(2),
             boundary_point_velocities=None,
+            obstacle_vertices=cargoes[0].vertices if cargoes else None,
         )
         filter_results.append(result)
         if not result.feasible or result.status == "infeasible":

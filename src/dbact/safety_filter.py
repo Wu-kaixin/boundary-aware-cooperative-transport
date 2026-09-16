@@ -102,6 +102,11 @@ class SafetyFilterParams:
     barrier_scale_steps: int = 8
     # "aggregate" represents a face by one smooth weighted plane; "pointwise" keeps
     # one row per map sample, which is the pre-T4 construction and the ablation.
+    # "nearest_feature" uses Euclidean distance to every polygon *segment* in the
+    # one-step cover Φ(p) = {edges : dist(p,edge) ≤ sd(p)+2 u_max Δ} ∩ range.
+    # Dist-to-segment is convex, so a discrete CBF row per covered edge proves
+    # invariance of true signed distance, including feature switches.  Infinite
+    # planes of non-nearest edges are forbidden (C5/L11/L17).
     object_row_mode: str = "aggregate"
     # Control period, used only to check that the sampled barrier condition is a
     # valid discrete-time CBF: ``gamma_obj * dt <= 1``.
@@ -223,9 +228,10 @@ class SafetyFilter:
                     f"safety filter r_safe={params.r_safe:.6f} disagrees with the C1 contract "
                     f"r_safe={contract.r_safe:.6f} (robot_radius - delta_max)"
                 )
-        if params.object_row_mode not in ("aggregate", "pointwise"):
+        if params.object_row_mode not in ("aggregate", "pointwise", "nearest_feature"):
             raise ContractViolation(
-                f"object_row_mode must be 'aggregate' or 'pointwise', got {params.object_row_mode!r}"
+                f"object_row_mode must be 'aggregate', 'pointwise' or 'nearest_feature', "
+                f"got {params.object_row_mode!r}"
             )
         # Discrete-time admissibility. ``h_{t+1} >= (1 - alpha) h_t`` with
         # ``alpha = gamma_obj * dt`` is the discrete-time CBF condition the sampled
@@ -268,8 +274,13 @@ class SafetyFilter:
         boundary_normals: np.ndarray,
         object_velocity: np.ndarray,
         point_velocities: np.ndarray | None = None,
+        trace: dict | None = None,
+        obstacle_vertices: np.ndarray | None = None,
     ) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
         """Assemble the object-boundary rows.
+
+        ``trace``, if provided, is filled with selection/aggregation internals.
+        It is diagnostic only and is not read by the control path.
 
         ``point_velocities`` (T2) is the estimated velocity of the material point at
         each ``boundary_points`` entry. When it is ``None`` every row is built from
@@ -282,7 +293,18 @@ class SafetyFilter:
         object -- where the pushing robots stand.
         """
         pts = np.asarray(boundary_points, dtype=float).reshape(-1, 2)
+        if self.params.object_row_mode == "nearest_feature":
+            verts = None if obstacle_vertices is None else np.asarray(obstacle_vertices, dtype=float).reshape(-1, 2)
+            if verts is not None and len(verts) >= 3:
+                return self._nearest_feature_rows(position, verts, object_velocity, trace=trace)
+            if len(pts) == 0:
+                if trace is not None:
+                    trace.update({"n_raw": 0, "dropped_empty": True, "mode": "nearest_feature_no_samples"})
+                return np.empty((0, 2)), np.empty(0), np.empty(0), np.empty(0)
+            return self._nearest_sample_rows(position, pts, object_velocity, trace=trace)
         if len(pts) == 0:
+            if trace is not None:
+                trace.update({"n_raw": 0, "n_near": 0, "n_same_face": 0, "dropped_empty": True})
             return np.empty((0, 2)), np.empty(0), np.empty(0), np.empty(0)
         normals = np.asarray(boundary_normals, dtype=float).reshape(-1, 2)
         p = np.asarray(position, dtype=float).reshape(2)
@@ -331,7 +353,18 @@ class SafetyFilter:
             & (normal_offset >= -self.params.object_row_inner_limit)
         )
         if not np.any(near):
+            if trace is not None:
+                trace.update(
+                    {
+                        "n_raw": int(len(pts)),
+                        "n_near": 0,
+                        "n_same_face": 0,
+                        "dropped_empty": True,
+                        "near_mask": near.astype(bool).tolist(),
+                    }
+                )
             return np.empty((0, 2)), np.empty(0), np.empty(0), np.empty(0)
+        near_pts = pts[near]
         normals, normal_offset = normals[near], normal_offset[near]
         distance = np.linalg.norm(rel[near], axis=1)
         if row_velocity is not None:
@@ -345,18 +378,32 @@ class SafetyFilter:
         # measured at 0.20 m of true clearance. The robot's own nearest return
         # names the face it is standing off; rows whose normal disagrees with it by
         # more than the face angle belong to a different face and are dropped.
-        anchor = normals[int(np.argmin(distance))]
+        anchor_index = int(np.argmin(distance))
+        anchor = normals[anchor_index]
         same_face = normals @ anchor >= self.params.object_row_face_cosine
+        face_pts = near_pts[same_face]
+        face_distance = distance[same_face]
         normals, normal_offset = normals[same_face], normal_offset[same_face]
         if len(normals) == 0:
+            if trace is not None:
+                trace.update(
+                    {
+                        "n_raw": int(len(pts)),
+                        "n_near": int(np.count_nonzero(near)),
+                        "n_same_face": 0,
+                        "dropped_empty": True,
+                        "anchor": anchor.tolist(),
+                    }
+                )
             return np.empty((0, 2)), np.empty(0), np.empty(0), np.empty(0)
         if row_velocity is not None:
             row_velocity = row_velocity[same_face]
 
         h = normal_offset - self.params.r_safe
+        aggregate_trace: dict = {}
         if self.params.object_row_mode == "aggregate":
             normals, h, row_velocity = self._aggregate_face(
-                p, pts[near][same_face], normals, distance[same_face], row_velocity
+                p, face_pts, normals, face_distance, row_velocity, trace=aggregate_trace
             )
         elif len(h) > self.params.max_object_rows:
             keep = np.argsort(h)[: self.params.max_object_rows]
@@ -377,9 +424,269 @@ class SafetyFilter:
             else np.einsum("ij,ij->i", normals, row_velocity)
         )
         demand = normal_velocity - self.params.gamma_obj * h
-        rhs = self._cap_to_reachable(normals, demand + self.params.rho)
+        rhs_uncapped = demand + self.params.rho
+        rhs = self._cap_to_reachable(normals, rhs_uncapped)
         rhs_no_margin = self._cap_to_reachable(normals, demand)
+        if trace is not None:
+            witness = normals.sum(axis=0) if len(normals) else np.zeros(2)
+            wnorm = float(np.linalg.norm(witness))
+            witness_u = witness / wnorm if wnorm > 1e-9 else witness
+            reachable = (
+                self.params.recovery_fraction * self.params.max_speed * (normals @ witness_u)
+                if len(normals)
+                else np.empty(0)
+            )
+            trace.update(
+                {
+                    "n_raw": int(len(pts)),
+                    "n_near": int(np.count_nonzero(near)),
+                    "n_same_face": int(len(face_pts)),
+                    "dropped_empty": False,
+                    "anchor_index_in_near": int(anchor_index),
+                    "anchor": np.asarray(anchor, dtype=float).tolist(),
+                    "same_face_mask": np.asarray(same_face, dtype=bool).tolist(),
+                    "near_points": np.asarray(near_pts, dtype=float).tolist(),
+                    "h": np.asarray(h, dtype=float).tolist(),
+                    "A": np.asarray(normals, dtype=float).tolist(),
+                    "demand": np.asarray(demand, dtype=float).tolist(),
+                    "rhs_uncapped": np.asarray(rhs_uncapped, dtype=float).tolist(),
+                    "rhs_capped": np.asarray(rhs, dtype=float).tolist(),
+                    "rhs_no_margin_uncapped": np.asarray(demand, dtype=float).tolist(),
+                    "rhs_no_margin_capped": np.asarray(rhs_no_margin, dtype=float).tolist(),
+                    "reachable": np.asarray(np.maximum(reachable, 0.0), dtype=float).tolist(),
+                    "cap_active": np.asarray(rhs < np.asarray(rhs_uncapped) - 1e-15, dtype=bool).tolist(),
+                    "aggregate": aggregate_trace,
+                    "r_safe": float(self.params.r_safe),
+                    "gamma_obj": float(self.params.gamma_obj),
+                    "rho": float(self.params.rho),
+                    "object_row_window": float(self.params.object_row_window),
+                    "object_row_range": float(self.params.object_row_range),
+                    "object_row_face_cosine": float(self.params.object_row_face_cosine),
+                }
+            )
+            if aggregate_trace:
+                for key, value in aggregate_trace.items():
+                    trace.setdefault(key, value)
         return normals, rhs, rhs_no_margin, h
+
+    def _vertex_is_reflex(self, vertices: np.ndarray, index: int) -> bool:
+        """True if vertex ``index`` of a CCW polygon is a reflex (inner) corner."""
+        v = np.asarray(vertices, dtype=float).reshape(-1, 2)
+        n = len(v)
+        prev_pt = v[(index - 1) % n]
+        cur = v[index % n]
+        nxt = v[(index + 1) % n]
+        e0 = cur - prev_pt
+        e1 = nxt - cur
+        cross = float(e0[0] * e1[1] - e0[1] * e1[0])
+        return bool(cross < -1e-12)
+
+    def _edge_plane_row(self, position: np.ndarray, a: np.ndarray, b: np.ndarray) -> tuple[np.ndarray, float]:
+        edge = np.asarray(b, dtype=float).reshape(2) - np.asarray(a, dtype=float).reshape(2)
+        n = np.array([edge[1], -edge[0]], dtype=float)
+        nrm = float(np.linalg.norm(n))
+        if nrm <= 1e-15:
+            n = np.array([1.0, 0.0])
+            nrm = 1.0
+        n = n / nrm
+        h = float(np.dot(n, np.asarray(position, dtype=float).reshape(2) - np.asarray(a, dtype=float).reshape(2)))
+        h -= self.params.r_safe
+        return n, h
+
+    def _finish_object_rows(
+        self,
+        normals: np.ndarray,
+        h: np.ndarray,
+        v_obj: np.ndarray,
+        trace: dict | None,
+        extra: dict | None = None,
+    ) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
+        if len(normals) == 0:
+            if trace is not None:
+                trace.update({"dropped_empty": True, **(extra or {})})
+            return np.empty((0, 2)), np.empty(0), np.empty(0), np.empty(0)
+        normals = np.asarray(normals, dtype=float).reshape(-1, 2)
+        h = np.asarray(h, dtype=float).reshape(-1)
+        normal_velocity = normals @ np.asarray(v_obj, dtype=float).reshape(2)
+        demand = normal_velocity - self.params.gamma_obj * h
+        rhs_uncapped = demand + self.params.rho
+        rhs = self._cap_to_reachable(normals, rhs_uncapped)
+        rhs_no_margin = self._cap_to_reachable(normals, demand)
+        if trace is not None:
+            trace.update(
+                {
+                    "mode": self.params.object_row_mode,
+                    "h": h.tolist(),
+                    "A": normals.tolist(),
+                    "demand": np.asarray(demand, dtype=float).tolist(),
+                    "rhs_uncapped": np.asarray(rhs_uncapped, dtype=float).tolist(),
+                    "rhs_capped": np.asarray(rhs, dtype=float).tolist(),
+                    "rhs_no_margin_uncapped": np.asarray(demand, dtype=float).tolist(),
+                    "rhs_no_margin_capped": np.asarray(rhs_no_margin, dtype=float).tolist(),
+                    "cap_active": np.asarray(rhs < np.asarray(rhs_uncapped) - 1e-15, dtype=bool).tolist(),
+                    "r_safe": float(self.params.r_safe),
+                    "gamma_obj": float(self.params.gamma_obj),
+                    "rho": float(self.params.rho),
+                    "dropped_empty": False,
+                    **(extra or {}),
+                }
+            )
+        return normals, rhs, rhs_no_margin, h
+
+    def _feature_cover_reach(self) -> float:
+        """Radius of the one-step feature cover: ``2 u_max Δ``.
+
+        Any feature that can become nearest during a hold of length ``Δ`` at
+        speed at most ``u_max`` currently satisfies
+        ``dist(p, F) ≤ sd(p) + 2 u_max Δ``.  This is geometry, not a margin
+        that replaces ``rho``.
+        """
+        return 2.0 * float(self.params.max_speed) * float(self.params.dt)
+
+    def _nearest_feature_rows(
+        self,
+        position: np.ndarray,
+        vertices: np.ndarray,
+        object_velocity: np.ndarray,
+        trace: dict | None = None,
+    ) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
+        """Segment-distance CBF rows on the one-step feature cover Φ(p).
+
+        Infinite-line extrapolation of one incident edge is the C5/L11/L17
+        failure: a convex-corner robot is assigned the supporting plane of an
+        adjacent edge, which cuts free space and can make ``h`` negative while
+        the true signed distance stays above ``r_safe``.
+
+        Each edge ``F`` contributes the Euclidean barrier
+        ``h_F = dist(p, F) - r_safe`` with ``n_F = ∇ dist(p, F)`` (radial at an
+        endpoint, outward normal on an edge interior).  Dist-to-segment is
+        convex, so the sampled row is a discrete CBF for that edge.  Covering
+        every edge with ``dist(p,F) ≤ sd(p) + 2 u_max Δ`` (and within
+        ``object_row_range``) makes the minimizer — true unsigned distance to
+        ``∂S`` — invariant as well, including during a hold that switches
+        features.  A single nearest-feature row is not sufficient for that
+        argument.
+
+        Reflex two-plane infinite supporting planes are not used: in a concave
+        crook they under-estimate true ``sd`` and can destroy ``0 ∈ F_ρ``.
+        """
+        from .geometry import closest_point_on_segment, ensure_ccw, signed_distance_and_gradient
+
+        p = np.asarray(position, dtype=float).reshape(2)
+        v = ensure_ccw(vertices)
+        v_obj = np.asarray(object_velocity, dtype=float).reshape(2)
+        nvert = len(v)
+        sd, grad, _foot = signed_distance_and_gradient(p[None, :], v)
+        sd0 = float(sd[0])
+        h_true = sd0 - self.params.r_safe
+        cover_reach = self._feature_cover_reach()
+        # Outside: unsigned distance is sd.  Inside: include every in-range edge
+        # so the recovery rows are still the true nearest segments.
+        unsigned = sd0 if sd0 >= 0.0 else 0.0
+        cover = unsigned + cover_reach
+        rows_n: list[np.ndarray] = []
+        rows_h: list[float] = []
+        metas: list[dict] = []
+        best_d = float("inf")
+        best_i = 0
+        best_t = 0.0
+        best_q = v[0]
+        for i in range(nvert):
+            q, t = closest_point_on_segment(p, v[i], v[(i + 1) % nvert])
+            d = float(np.linalg.norm(p - q))
+            if d < best_d:
+                best_d, best_i, best_t, best_q = d, i, t, q
+            if d > self.params.object_row_range + 1e-15:
+                continue
+            if d > cover + 1e-15:
+                continue
+            h = d - self.params.r_safe
+            if d <= 1e-15:
+                n, _h_plane = self._edge_plane_row(p, v[i], v[(i + 1) % nvert])
+            else:
+                n = (p - q) / d
+            duplicate = False
+            for n_old, h_old in zip(rows_n, rows_h):
+                if abs(h - h_old) <= 1e-12 and float(np.dot(n, n_old)) >= 1.0 - 1e-9:
+                    duplicate = True
+                    break
+            if duplicate:
+                continue
+            rows_n.append(np.asarray(n, dtype=float).reshape(2))
+            rows_h.append(float(h))
+            metas.append(
+                {
+                    "edge_index": int(i),
+                    "t": float(t),
+                    "foot": np.asarray(q, dtype=float).tolist(),
+                    "distance": d,
+                    "h": float(h),
+                    "n": np.asarray(n, dtype=float).reshape(2).tolist(),
+                    "at_vertex": bool(t <= 1e-9 or t >= 1.0 - 1e-9),
+                }
+            )
+        extra = {
+            "feature_kind": "cover",
+            "cover_reach": cover_reach,
+            "cover_threshold": cover,
+            "n_cover_rows": len(rows_h),
+            "edge_index": int(best_i),
+            "t": float(best_t),
+            "foot": np.asarray(best_q, dtype=float).tolist(),
+            "distance": float(best_d),
+            "h_true": h_true,
+            "sd_gradient": grad[0].tolist(),
+            "n_bar": None if not rows_n else rows_n[0].tolist(),
+            "offset_from_n_k": (
+                None
+                if not rows_n
+                else float(np.dot(rows_n[0], p) - rows_h[0] - self.params.r_safe)
+            ),
+            "h_bar": float(min(rows_h)) if rows_h else h_true,
+            "covered_edges": metas,
+        }
+        if best_d > self.params.object_row_range:
+            extra["reason"] = "out_of_range"
+            return self._finish_object_rows(np.empty((0, 2)), np.empty(0), v_obj, trace, extra=extra)
+        if not rows_n:
+            extra["reason"] = "empty_cover"
+            return self._finish_object_rows(np.empty((0, 2)), np.empty(0), v_obj, trace, extra=extra)
+        return self._finish_object_rows(
+            np.vstack(rows_n), np.asarray(rows_h, dtype=float), v_obj, trace, extra=extra
+        )
+
+    def _nearest_sample_rows(
+        self,
+        position: np.ndarray,
+        points: np.ndarray,
+        object_velocity: np.ndarray,
+        trace: dict | None = None,
+    ) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
+        """Map-only fallback: disk barrier about the nearest sample, not its infinite plane."""
+        p = np.asarray(position, dtype=float).reshape(2)
+        pts = np.asarray(points, dtype=float).reshape(-1, 2)
+        d = np.linalg.norm(pts - p[None, :], axis=1)
+        k = int(np.argmin(d))
+        dist = float(d[k])
+        if dist > self.params.object_row_range:
+            return self._finish_object_rows(
+                np.empty((0, 2)), np.empty(0), object_velocity, trace, extra={"reason": "out_of_range"}
+            )
+        q = pts[k]
+        if dist <= 1e-12:
+            n = np.array([1.0, 0.0])
+            h = -self.params.r_safe
+        else:
+            n = (p - q) / dist
+            h = dist - self.params.r_safe
+        extra = {
+            "feature_kind": "sample_disk",
+            "n_bar": n.tolist(),
+            "offset_from_n_k": float(np.dot(n, q)),
+            "h_bar": float(h),
+            "foot": q.tolist(),
+        }
+        return self._finish_object_rows(n.reshape(1, 2), np.array([h]), object_velocity, trace, extra=extra)
 
     def _aggregate_face(
         self,
@@ -388,6 +695,7 @@ class SafetyFilter:
         normals: np.ndarray,
         distance: np.ndarray,
         point_velocities: np.ndarray | None = None,
+        trace: dict | None = None,
     ) -> tuple[np.ndarray, np.ndarray, np.ndarray | None]:
         """One smooth plane for the face, instead of one row per map sample.
 
@@ -445,15 +753,39 @@ class SafetyFilter:
         stacked = weight @ normals
         norm = float(np.linalg.norm(stacked))
         if norm <= 1e-9:
+            if trace is not None:
+                trace.update({"degenerate_normal_sum": True, "weight_sum": total})
             return np.empty((0, 2)), np.empty(0), None
         n_bar = stacked / norm
         offset = float(np.sum(weight * np.einsum("ij,ij->i", normals, points)) / total)
         h_bar = float(np.dot(n_bar, position)) - offset - self.params.r_safe
+        alignment = float(norm / total) if total > 0.0 else 0.0
 
         aggregated_velocity = None
         if point_velocities is not None and len(point_velocities):
             worst = int(np.argmax(point_velocities @ n_bar))
             aggregated_velocity = point_velocities[worst].reshape(1, 2)
+        if trace is not None:
+            b_bar = np.sum(weight[:, None] * points, axis=0) / total
+            n_bar_b = float(np.dot(n_bar, b_bar))
+            trace.update(
+                {
+                    "weights": np.asarray(weight, dtype=float).tolist(),
+                    "weight_sum": total,
+                    "stacked_norm": norm,
+                    "alignment_sum_gn_over_G": alignment,
+                    "translation_defect": float(1.0 - alignment),
+                    "n_bar": n_bar.tolist(),
+                    "offset_from_n_k": offset,
+                    "b_bar": np.asarray(b_bar, dtype=float).tolist(),
+                    "offset_if_n_bar_times_b_bar": n_bar_b,
+                    "offset_mismatch": float(offset - n_bar_b),
+                    "h_bar": h_bar,
+                    "face_points": np.asarray(points, dtype=float).tolist(),
+                    "face_normals": np.asarray(normals, dtype=float).tolist(),
+                    "face_distance": np.asarray(distance, dtype=float).tolist(),
+                }
+            )
         return n_bar.reshape(1, 2), np.array([h_bar]), aggregated_velocity
 
     def _cap_to_reachable(self, normals: np.ndarray, rhs: np.ndarray) -> np.ndarray:
@@ -476,7 +808,7 @@ class SafetyFilter:
         said in the constraint than discovered in the solver.
         """
         if len(normals) == 0:
-            return rhs
+            return np.asarray(rhs, dtype=float)
         witness = normals.sum(axis=0)
         norm = float(np.linalg.norm(witness))
         if norm <= 1e-9:
@@ -507,6 +839,7 @@ class SafetyFilter:
         boundary_normals: np.ndarray | None = None,
         object_velocity: np.ndarray | None = None,
         boundary_point_velocities: np.ndarray | None = None,
+        obstacle_vertices: np.ndarray | None = None,
     ) -> FilterResult:
         u_nom = np.asarray(nominal_velocity, dtype=float).reshape(2)
         speed = float(np.linalg.norm(u_nom))
@@ -515,15 +848,31 @@ class SafetyFilter:
 
         A_agent, b_agent = self._agent_rows(position, list(neighbor_positions))
         A_wall, b_wall = self._wall_rows(position)
-        if not self.params.enable_object_rows or boundary_points is None or len(boundary_points) == 0:
+        have_map = boundary_points is not None and len(boundary_points) > 0
+        have_poly = (
+            obstacle_vertices is not None
+            and len(np.asarray(obstacle_vertices, dtype=float).reshape(-1, 2)) >= 3
+        )
+        if not self.params.enable_object_rows or not (have_map or have_poly):
             A_obj, b_obj, b_obj_free, h_obj = np.empty((0, 2)), np.empty(0), np.empty(0), np.empty(0)
         else:
+            pts = (
+                np.asarray(boundary_points, dtype=float)
+                if have_map
+                else np.empty((0, 2))
+            )
+            nrm = (
+                np.asarray(boundary_normals, dtype=float)
+                if boundary_normals is not None and have_map
+                else np.zeros_like(pts)
+            )
             A_obj, b_obj, b_obj_free, h_obj = self._object_rows(
                 position,
-                boundary_points,
-                boundary_normals if boundary_normals is not None else np.zeros_like(boundary_points),
+                pts,
+                nrm,
                 object_velocity if object_velocity is not None else np.zeros(2),
                 boundary_point_velocities,
+                obstacle_vertices=obstacle_vertices,
             )
 
         # Stack order matters for active-row accounting and for the scaled-barrier

@@ -176,14 +176,66 @@ def test_robot_centered_moment_includes_xi_shift():
         16, 256, 200, 0.2, 0.8, 48, weight_sum=7.2, h_max=0.004, cull_sigmas=6.0
     )
     assert rem["sum_abs_dmu_robot"] > rem["sum_abs_dmu_xi"]
-    assert rem["xi_to_site_reach"] == pytest.approx(0.8 + 6.0 * 0.2)
+    # Universal AABB bound, not the invalid R + sσ.
+    assert rem["xi_to_site_reach"] == pytest.approx(math.sqrt(2.0) * 0.8 + 6.0 * 0.2)
+    assert rem["xi_to_site_reach"] > rem["xi_to_site_reach_invalid_old"]
+    rem_restrict = partition_edge_mass_moment_remainder(
+        16,
+        256,
+        200,
+        0.2,
+        0.8,
+        48,
+        weight_sum=7.2,
+        h_max=0.004,
+        cull_sigmas=6.0,
+        max_offset=0.105,
+        influence_sigmas=3.0,
+    )
+    # Restrict centres: R + 2 d_c + nσ σ = 0.8 + 0.21 + 0.6 = 1.61 < √2 R + 6σ.
+    assert rem_restrict["xi_to_site_reach"] == pytest.approx(1.61)
+    assert rem_restrict["xi_to_site_reach"] < rem["xi_to_site_reach"]
     assert rem["weight_sum_W"] == pytest.approx(7.2)
-    # Using W=7.2 is much tighter than 200 unit-weight sources.
     rem_unit = partition_edge_mass_moment_remainder(16, 256, 200, 0.2, 0.8, 48, h_max=0.004)
     assert rem["sum_abs_dm"] < rem_unit["sum_abs_dm"] / 10.0
 
 
-def test_projected_centroid_stays_in_disk():
+def test_bbox_cull_does_not_imply_r_plus_s_sigma():
+    """dist(xi, bbox(P)) ≤ sσ and P ⊂ disk does not give ||xi-p|| ≤ R + sσ."""
+    from dbact.edge_green_integral import aabb_disk_corner_reach
+
+    r, s, sigma = 0.8, 6.0, 0.2
+    p = np.array([0.0, 0.0])
+    # Two points on the circle: AABB contains the square corner (R, R).
+    poly = np.array([[r, 0.0], [0.0, r], [r * 0.5, r * 0.5]])
+    lo, hi = poly.min(axis=0), poly.max(axis=0)
+    corner = np.array([hi[0], hi[1]])
+    assert np.linalg.norm(corner - p) == pytest.approx(math.sqrt(2.0) * r, abs=1e-12)
+    xi = corner + np.array([s * sigma, 0.0])
+    dx = float(max(lo[0] - xi[0], 0.0, xi[0] - hi[0]))
+    dy = float(max(lo[1] - xi[1], 0.0, xi[1] - hi[1]))
+    dist_bbox = math.hypot(dx, dy)
+    assert dist_bbox == pytest.approx(s * sigma)
+    reach_old = r + s * sigma
+    assert np.linalg.norm(xi - p) > reach_old + 1e-9
+    assert np.linalg.norm(xi - p) <= aabb_disk_corner_reach(r) + s * sigma + 1e-12
+
+
+def test_projected_centroid_moment_identity_charges_quadrature_once_more():
+    from dbact.apriori_centroid_bound import moment_form_E_bound, moment_form_E_bound_with_mass_fallback
+
+    r = 0.8
+    dm, dmu = 0.05, 0.06
+    base = moment_form_E_bound(r, dm, dmu)
+    fallback = r * r * (dm + 16 * 1e-12)
+    no_quad = moment_form_E_bound_with_mass_fallback(r, dm, dmu, 16, quadrature_dm=0.0, quadrature_dmu=0.0)
+    assert no_quad == pytest.approx(base + fallback)
+    qdm, qdmu = 0.013, 0.023
+    with_quad = moment_form_E_bound_with_mass_fallback(
+        r, dm, dmu, 16, quadrature_dm=qdm, quadrature_dmu=qdmu
+    )
+    assert with_quad == pytest.approx(no_quad + moment_form_E_bound(r, qdm, qdmu))
+
     from dbact.edge_green_integral import project_to_disk
 
     c = np.array([4.0, 4.0])

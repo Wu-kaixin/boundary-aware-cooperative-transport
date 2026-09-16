@@ -1,0 +1,3528 @@
+[
+  {
+    "frame": 0,
+    "in_K0": true,
+    "position": [
+      2.0085400029306855,
+      4.9452637902562335
+    ],
+    "u": [
+      -0.17792927677334044,
+      0.17413352586490652
+    ],
+    "u_nom": [
+      -0.17792927677334044,
+      0.17413352586490652
+    ],
+    "h_aggregate": null,
+    "h_true": 1.027398158141485,
+    "h_gap": null,
+    "feature": {
+      "edge_index": 5,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.1,
+        4.9
+      ],
+      "distance": 1.092398158141485,
+      "edge_normal": [
+        -1.0,
+        -0.0
+      ],
+      "vertex_index": 5,
+      "edge_length": 1.8000000000000003,
+      "signed_distance": 1.092398158141485,
+      "sd_gradient": [
+        -0.9991411912724509,
+        0.041435249518583225
+      ],
+      "sd_foot": [
+        3.1,
+        4.9
+      ],
+      "h_true": 1.027398158141485
+    },
+    "support": null,
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": null,
+    "alignment": null,
+    "n_bar": null,
+    "offset": null,
+    "anchor": null,
+    "n_near": null,
+    "n_same_face": null,
+    "cap_active": null,
+    "rhs_uncapped": null,
+    "rhs_capped": null,
+    "rhs_no_margin_uncapped": null,
+    "decompose": {
+      "delta_p": [
+        -0.008896463838667046,
+        0.008706676293245508
+      ],
+      "delta_p_minus_dt_u": [
+        -2.2551405187698492e-17,
+        1.8214596497756474e-16
+      ],
+      "h_k": null,
+      "h_kplus": 1.027398158141485,
+      "delta_h": null,
+      "match": {
+        "matched": false,
+        "reason": "no_previous_object_row",
+        "new_activation": true
+      },
+      "unmatched_new_row": true
+    },
+    "hold_true": {
+      "sampled_min_sd": 1.092398158141485,
+      "lipschitz_lower_bound": 1.0917757569828501,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.24896046345399514
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 1,
+    "in_K0": true,
+    "position": [
+      1.9996435390920184,
+      4.953970466549479
+    ],
+    "u": [
+      -0.1692753352229982,
+      0.17959480837472305
+    ],
+    "u_nom": [
+      -0.1692753352229982,
+      0.17959480837472305
+    ],
+    "h_aggregate": null,
+    "h_true": 1.0366792420307769,
+    "h_gap": null,
+    "feature": {
+      "edge_index": 5,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.1,
+        4.9
+      ],
+      "distance": 1.1016792420307768,
+      "edge_normal": [
+        -1.0,
+        -0.0
+      ],
+      "vertex_index": 5,
+      "edge_length": 1.8000000000000003,
+      "signed_distance": 1.1016792420307768,
+      "sd_gradient": [
+        -0.9987993046684289,
+        0.04898927427369185
+      ],
+      "sd_foot": [
+        3.1,
+        4.9
+      ],
+      "h_true": 1.0366792420307769
+    },
+    "support": null,
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": null,
+    "alignment": null,
+    "n_bar": null,
+    "offset": null,
+    "anchor": null,
+    "n_near": null,
+    "n_same_face": null,
+    "cap_active": null,
+    "rhs_uncapped": null,
+    "rhs_capped": null,
+    "rhs_no_margin_uncapped": null,
+    "decompose": {
+      "delta_p": [
+        -0.008463766761150016,
+        0.00897974041873617
+      ],
+      "delta_p_minus_dt_u": [
+        -1.0581813203458523e-16,
+        1.734723475976807e-17
+      ],
+      "h_k": 1.027398158141485,
+      "h_kplus": 1.0366792420307769,
+      "delta_h": 0.00928108388929183,
+      "match": {
+        "matched": false,
+        "reason": "no_object_row_either_frame",
+        "new_activation": false
+      },
+      "unmatched_new_row": false
+    },
+    "hold_true": {
+      "sampled_min_sd": 1.1016792420307768,
+      "lipschitz_lower_bound": 1.101062251176357,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.24679634176788745
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 2,
+    "in_K0": true,
+    "position": [
+      1.9911797723308684,
+      4.962950206968215
+    ],
+    "u": [
+      -0.1618669463697958,
+      0.17353819658350328
+    ],
+    "u_nom": [
+      -0.1618669463697958,
+      0.17353819658350328
+    ],
+    "h_aggregate": null,
+    "h_true": 1.0456057022389027,
+    "h_gap": null,
+    "feature": {
+      "edge_index": 5,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.1,
+        4.9
+      ],
+      "distance": 1.1106057022389026,
+      "edge_normal": [
+        -1.0,
+        -0.0
+      ],
+      "vertex_index": 5,
+      "edge_length": 1.8000000000000003,
+      "signed_distance": 1.1106057022389026,
+      "sd_gradient": [
+        -0.998392341614876,
+        0.056680968629380955
+      ],
+      "sd_foot": [
+        3.1,
+        4.9
+      ],
+      "h_true": 1.0456057022389027
+    },
+    "support": null,
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": null,
+    "alignment": null,
+    "n_bar": null,
+    "offset": null,
+    "anchor": null,
+    "n_near": null,
+    "n_same_face": null,
+    "cap_active": null,
+    "rhs_uncapped": null,
+    "rhs_capped": null,
+    "rhs_no_margin_uncapped": null,
+    "decompose": {
+      "delta_p": [
+        -0.008093347318489874,
+        0.008676909829175017
+      ],
+      "delta_p_minus_dt_u": [
+        -8.500145032286355e-17,
+        -1.474514954580286e-16
+      ],
+      "h_k": 1.0366792420307769,
+      "h_kplus": 1.0456057022389027,
+      "delta_h": 0.00892646020812582,
+      "match": {
+        "matched": false,
+        "reason": "no_object_row_either_frame",
+        "new_activation": false
+      },
+      "unmatched_new_row": false
+    },
+    "hold_true": {
+      "sampled_min_sd": 1.1106057022389026,
+      "lipschitz_lower_bound": 1.1100124252483634,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.23731079621571577
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 3,
+    "in_K0": true,
+    "position": [
+      1.9830864250123785,
+      4.97162711679739
+    ],
+    "u": [
+      -0.15582205278205338,
+      0.1760402111534689
+    ],
+    "u_nom": [
+      -0.15582205278205338,
+      0.1760402111534689
+    ],
+    "h_aggregate": null,
+    "h_true": 1.0542079243162712,
+    "h_gap": null,
+    "feature": {
+      "edge_index": 5,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.1,
+        4.9
+      ],
+      "distance": 1.1192079243162711,
+      "edge_normal": [
+        -1.0,
+        -0.0
+      ],
+      "vertex_index": 5,
+      "edge_length": 1.8000000000000003,
+      "signed_distance": 1.1192079243162711,
+      "sd_gradient": [
+        -0.9979500240493283,
+        0.06399804293839965
+      ],
+      "sd_foot": [
+        3.1,
+        4.9
+      ],
+      "h_true": 1.0542079243162712
+    },
+    "support": null,
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": null,
+    "alignment": null,
+    "n_bar": null,
+    "offset": null,
+    "anchor": null,
+    "n_near": null,
+    "n_same_face": null,
+    "cap_active": null,
+    "rhs_uncapped": null,
+    "rhs_capped": null,
+    "rhs_no_margin_uncapped": null,
+    "decompose": {
+      "delta_p": [
+        -0.007791102639102654,
+        0.008802010557673157
+      ],
+      "delta_p_minus_dt_u": [
+        1.5612511283791264e-17,
+        -2.896988204881268e-16
+      ],
+      "h_k": 1.0456057022389027,
+      "h_kplus": 1.0542079243162712,
+      "delta_h": 0.008602222077368493,
+      "match": {
+        "matched": false,
+        "reason": "no_object_row_either_frame",
+        "new_activation": false
+      },
+      "unmatched_new_row": false
+    },
+    "hold_true": {
+      "sampled_min_sd": 1.1192079243162711,
+      "lipschitz_lower_bound": 1.1186201814511711,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.235097146040038
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 4,
+    "in_K0": true,
+    "position": [
+      1.9752953223732759,
+      4.980429127355063
+    ],
+    "u": [
+      -0.14708319634689848,
+      0.17274464323680122
+    ],
+    "u_nom": [
+      -0.14708319634689848,
+      0.17274464323680122
+    ],
+    "h_aggregate": null,
+    "h_true": 1.0625768073184774,
+    "h_gap": null,
+    "feature": {
+      "edge_index": 5,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.1,
+        4.9
+      ],
+      "distance": 1.1275768073184773,
+      "edge_normal": [
+        -1.0,
+        -0.0
+      ],
+      "vertex_index": 5,
+      "edge_length": 1.8000000000000003,
+      "signed_distance": 1.1275768073184773,
+      "sd_gradient": [
+        -0.997452830110453,
+        0.07132917849413188
+      ],
+      "sd_foot": [
+        3.1,
+        4.9
+      ],
+      "h_true": 1.0625768073184774
+    },
+    "support": null,
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": null,
+    "alignment": null,
+    "n_bar": null,
+    "offset": null,
+    "anchor": null,
+    "n_near": null,
+    "n_same_face": null,
+    "cap_active": null,
+    "rhs_uncapped": null,
+    "rhs_capped": null,
+    "rhs_no_margin_uncapped": null,
+    "decompose": {
+      "delta_p": [
+        -0.007354159817344996,
+        0.008637232161840203
+      ],
+      "delta_p_minus_dt_u": [
+        -7.19910242530375e-17,
+        1.4051260155412137e-16
+      ],
+      "h_k": 1.0542079243162712,
+      "h_kplus": 1.0625768073184774,
+      "delta_h": 0.008368883002206173,
+      "match": {
+        "matched": false,
+        "reason": "no_object_row_either_frame",
+        "new_activation": false
+      },
+      "unmatched_new_row": false
+    },
+    "hold_true": {
+      "sampled_min_sd": 1.1275768073184773,
+      "lipschitz_lower_bound": 1.1270096092797894,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.2268792154751731
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 5,
+    "in_K0": true,
+    "position": [
+      1.9679411625559309,
+      4.989066359516904
+    ],
+    "u": [
+      -0.14108883862026486,
+      0.1724263795609316
+    ],
+    "u_nom": [
+      -0.14108883862026486,
+      0.1724263795609316
+    ],
+    "h_aggregate": null,
+    "h_true": 1.070557144239255,
+    "h_gap": null,
+    "feature": {
+      "edge_index": 5,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.1,
+        4.9
+      ],
+      "distance": 1.135557144239255,
+      "edge_normal": [
+        -1.0,
+        -0.0
+      ],
+      "vertex_index": 5,
+      "edge_length": 1.8000000000000003,
+      "signed_distance": 1.135557144239255,
+      "sd_gradient": [
+        -0.9969193036097453,
+        0.07843406205380492
+      ],
+      "sd_foot": [
+        3.1,
+        4.9
+      ],
+      "h_true": 1.070557144239255
+    },
+    "support": null,
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": null,
+    "alignment": null,
+    "n_bar": null,
+    "offset": null,
+    "anchor": null,
+    "n_near": null,
+    "n_same_face": null,
+    "cap_active": null,
+    "rhs_uncapped": null,
+    "rhs_capped": null,
+    "rhs_no_margin_uncapped": null,
+    "decompose": {
+      "delta_p": [
+        -0.007054441931013233,
+        0.00862131897804641
+      ],
+      "delta_p_minus_dt_u": [
+        1.0408340855860843e-17,
+        -1.700029006457271e-16
+      ],
+      "h_k": 1.0625768073184774,
+      "h_kplus": 1.070557144239255,
+      "delta_h": 0.007980336920777598,
+      "match": {
+        "matched": false,
+        "reason": "no_object_row_either_frame",
+        "new_activation": false
+      },
+      "unmatched_new_row": false
+    },
+    "hold_true": {
+      "sampled_min_sd": 1.135557144239255,
+      "lipschitz_lower_bound": 1.1350001606401263,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.22279343965140802
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 6,
+    "in_K0": true,
+    "position": [
+      1.9608867206249176,
+      4.99768767849495
+    ],
+    "u": [
+      -0.13487220081237822,
+      0.1757590898702496
+    ],
+    "u_nom": [
+      -0.13487220081237822,
+      0.1757590898702496
+    ],
+    "h_aggregate": null,
+    "h_true": 1.0782943390826298,
+    "h_gap": null,
+    "feature": {
+      "edge_index": 5,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.1,
+        4.9
+      ],
+      "distance": 1.1432943390826298,
+      "edge_normal": [
+        -1.0,
+        -0.0
+      ],
+      "vertex_index": 5,
+      "edge_length": 1.8000000000000003,
+      "signed_distance": 1.1432943390826298,
+      "sd_gradient": [
+        -0.9963429717399789,
+        0.08544403235070108
+      ],
+      "sd_foot": [
+        3.1,
+        4.9
+      ],
+      "h_true": 1.0782943390826298
+    },
+    "support": null,
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": null,
+    "alignment": null,
+    "n_bar": null,
+    "offset": null,
+    "anchor": null,
+    "n_near": null,
+    "n_same_face": null,
+    "cap_active": null,
+    "rhs_uncapped": null,
+    "rhs_capped": null,
+    "rhs_no_margin_uncapped": null,
+    "decompose": {
+      "delta_p": [
+        -0.006743610040618853,
+        0.008787954493512551
+      ],
+      "delta_p_minus_dt_u": [
+        5.898059818321144e-17,
+        7.112366251504909e-17
+      ],
+      "h_k": 1.070557144239255,
+      "h_kplus": 1.0782943390826298,
+      "delta_h": 0.007737194843374873,
+      "match": {
+        "matched": false,
+        "reason": "no_object_row_either_frame",
+        "new_activation": false
+      },
+      "unmatched_new_row": false
+    },
+    "hold_true": {
+      "sampled_min_sd": 1.1432943390826298,
+      "lipschitz_lower_bound": 1.1427404789455915,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.2215440548152736
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 7,
+    "in_K0": true,
+    "position": [
+      1.9541431105842988,
+      5.0064756329884625
+    ],
+    "u": [
+      -0.12721276801188774,
+      0.17001525545385557
+    ],
+    "u_nom": [
+      -0.12721276801188774,
+      0.17001525545385557
+    ],
+    "h_aggregate": null,
+    "h_true": 1.0857932357472913,
+    "h_gap": null,
+    "feature": {
+      "edge_index": 5,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.1,
+        4.9
+      ],
+      "distance": 1.1507932357472912,
+      "edge_normal": [
+        -1.0,
+        -0.0
+      ],
+      "vertex_index": 5,
+      "edge_length": 1.8000000000000003,
+      "signed_distance": 1.1507932357472912,
+      "sd_gradient": [
+        -0.9957104837096262,
+        0.09252368686310539
+      ],
+      "sd_foot": [
+        3.1,
+        4.9
+      ],
+      "h_true": 1.0857932357472913
+    },
+    "support": null,
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": null,
+    "alignment": null,
+    "n_bar": null,
+    "offset": null,
+    "anchor": null,
+    "n_near": null,
+    "n_same_face": null,
+    "cap_active": null,
+    "rhs_uncapped": null,
+    "rhs_capped": null,
+    "rhs_no_margin_uncapped": null,
+    "decompose": {
+      "delta_p": [
+        -0.0063606384005943095,
+        0.008500762772692738
+      ],
+      "delta_p_minus_dt_u": [
+        7.806255641895632e-17,
+        -3.9898639947466563e-17
+      ],
+      "h_k": 1.0782943390826298,
+      "h_kplus": 1.0857932357472913,
+      "delta_h": 0.007498896664661414,
+      "match": {
+        "matched": false,
+        "reason": "no_object_row_either_frame",
+        "new_activation": false
+      },
+      "unmatched_new_row": false
+    },
+    "hold_true": {
+      "sampled_min_sd": 1.1507932357472912,
+      "lipschitz_lower_bound": 1.1502623857482785,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.2123399996050818
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 8,
+    "in_K0": true,
+    "position": [
+      1.9477824721837045,
+      5.014976395761155
+    ],
+    "u": [
+      -0.1179991387330627,
+      0.16856350591400507
+    ],
+    "u_nom": [
+      -0.1179991387330627,
+      0.16856350591400507
+    ],
+    "h_aggregate": null,
+    "h_true": 1.0929398961039911,
+    "h_gap": null,
+    "feature": {
+      "edge_index": 5,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.1,
+        4.9
+      ],
+      "distance": 1.157939896103991,
+      "edge_normal": [
+        -1.0,
+        -0.0
+      ],
+      "vertex_index": 5,
+      "edge_length": 1.8000000000000003,
+      "signed_distance": 1.157939896103991,
+      "sd_gradient": [
+        -0.995058147398713,
+        0.09929392375891438
+      ],
+      "sd_foot": [
+        3.1,
+        4.9
+      ],
+      "h_true": 1.0929398961039911
+    },
+    "support": null,
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": null,
+    "alignment": null,
+    "n_bar": null,
+    "offset": null,
+    "anchor": null,
+    "n_near": null,
+    "n_same_face": null,
+    "cap_active": null,
+    "rhs_uncapped": null,
+    "rhs_capped": null,
+    "rhs_no_margin_uncapped": null,
+    "decompose": {
+      "delta_p": [
+        -0.005899956936653128,
+        0.008428175295700058
+      ],
+      "delta_p_minus_dt_u": [
+        6.938893903907228e-18,
+        -1.960237527853792e-16
+      ],
+      "h_k": 1.0857932357472913,
+      "h_kplus": 1.0929398961039911,
+      "delta_h": 0.007146660356699863,
+      "match": {
+        "matched": false,
+        "reason": "no_object_row_either_frame",
+        "new_activation": false
+      },
+      "unmatched_new_row": false
+    },
+    "hold_true": {
+      "sampled_min_sd": 1.157939896103991,
+      "lipschitz_lower_bound": 1.1574254944353763,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.20576066744585905
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 9,
+    "in_K0": true,
+    "position": [
+      1.9418825152470514,
+      5.023404571056855
+    ],
+    "u": [
+      -0.11160330183171734,
+      0.16883094706175114
+    ],
+    "u_nom": [
+      -0.11160330183171734,
+      0.16883094706175114
+    ],
+    "h_aggregate": null,
+    "h_true": 1.0996736867673378,
+    "h_gap": null,
+    "feature": {
+      "edge_index": 5,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.1,
+        4.9
+      ],
+      "distance": 1.1646736867673377,
+      "edge_normal": [
+        -1.0,
+        -0.0
+      ],
+      "vertex_index": 5,
+      "edge_length": 1.8000000000000003,
+      "signed_distance": 1.1646736867673377,
+      "sd_gradient": [
+        -0.9943707820577742,
+        0.10595634851112339
+      ],
+      "sd_foot": [
+        3.1,
+        4.9
+      ],
+      "h_true": 1.0996736867673378
+    },
+    "support": null,
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": null,
+    "alignment": null,
+    "n_bar": null,
+    "offset": null,
+    "anchor": null,
+    "n_near": null,
+    "n_same_face": null,
+    "cap_active": null,
+    "rhs_uncapped": null,
+    "rhs_capped": null,
+    "rhs_no_margin_uncapped": null,
+    "decompose": {
+      "delta_p": [
+        -0.005580165091585876,
+        0.008441547353087664
+      ],
+      "delta_p_minus_dt_u": [
+        -8.673617379884035e-18,
+        1.0581813203458523e-16
+      ],
+      "h_k": 1.0929398961039911,
+      "h_kplus": 1.0996736867673378,
+      "delta_h": 0.006733790663346673,
+      "match": {
+        "matched": false,
+        "reason": "no_object_row_either_frame",
+        "new_activation": false
+      },
+      "unmatched_new_row": false
+    },
+    "hold_true": {
+      "sampled_min_sd": 1.1646736867673377,
+      "lipschitz_lower_bound": 1.1641677273713291,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.2023837584034579
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 10,
+    "in_K0": true,
+    "position": [
+      1.9363023501554655,
+      5.031846118409943
+    ],
+    "u": [
+      -0.10793889045646325,
+      0.16618303502379464
+    ],
+    "u_nom": [
+      -0.10793889045646325,
+      0.16618303502379464
+    ],
+    "h_aggregate": null,
+    "h_true": 1.1061428688223576,
+    "h_gap": null,
+    "feature": {
+      "edge_index": 5,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.1,
+        4.9
+      ],
+      "distance": 1.1711428688223575,
+      "edge_normal": [
+        -1.0,
+        -0.0
+      ],
+      "vertex_index": 5,
+      "edge_length": 1.8000000000000003,
+      "signed_distance": 1.1711428688223575,
+      "sd_gradient": [
+        -0.9936427747834818,
+        0.11257902167181404
+      ],
+      "sd_foot": [
+        3.1,
+        4.9
+      ],
+      "h_true": 1.1061428688223576
+    },
+    "support": null,
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": null,
+    "alignment": null,
+    "n_bar": null,
+    "offset": null,
+    "anchor": null,
+    "n_near": null,
+    "n_same_face": null,
+    "cap_active": null,
+    "rhs_uncapped": null,
+    "rhs_capped": null,
+    "rhs_no_margin_uncapped": null,
+    "decompose": {
+      "delta_p": [
+        -0.005396944522823244,
+        0.008309151751189958
+      ],
+      "delta_p_minus_dt_u": [
+        -8.066464163292153e-17,
+        2.255140518769849e-16
+      ],
+      "h_k": 1.0996736867673378,
+      "h_kplus": 1.1061428688223576,
+      "delta_h": 0.006469182055019784,
+      "match": {
+        "matched": false,
+        "reason": "no_object_row_either_frame",
+        "new_activation": false
+      },
+      "unmatched_new_row": false
+    },
+    "hold_true": {
+      "sampled_min_sd": 1.1711428688223575,
+      "lipschitz_lower_bound": 1.1706474674370981,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.19816055410371694
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 11,
+    "in_K0": true,
+    "position": [
+      1.9309054056326422,
+      5.040155270161133
+    ],
+    "u": [
+      -0.09515197362325108,
+      0.16335442811090414
+    ],
+    "u_nom": [
+      -0.09515197362325108,
+      0.16335442811090414
+    ],
+    "h_aggregate": null,
+    "h_true": 1.1124657830837028,
+    "h_gap": null,
+    "feature": {
+      "edge_index": 5,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.1,
+        4.9
+      ],
+      "distance": 1.1774657830837028,
+      "edge_normal": [
+        -1.0,
+        -0.0
+      ],
+      "vertex_index": 5,
+      "edge_length": 1.8000000000000003,
+      "signed_distance": 1.1774657830837028,
+      "sd_gradient": [
+        -0.9928905036251489,
+        0.11903128921001466
+      ],
+      "sd_foot": [
+        3.1,
+        4.9
+      ],
+      "h_true": 1.1124657830837028
+    },
+    "support": null,
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": null,
+    "alignment": null,
+    "n_bar": null,
+    "offset": null,
+    "anchor": null,
+    "n_near": null,
+    "n_same_face": null,
+    "cap_active": null,
+    "rhs_uncapped": null,
+    "rhs_capped": null,
+    "rhs_no_margin_uncapped": null,
+    "decompose": {
+      "delta_p": [
+        -0.004757598681162545,
+        0.008167721405545336
+      ],
+      "delta_p_minus_dt_u": [
+        9.540979117872439e-18,
+        1.2836953722228372e-16
+      ],
+      "h_k": 1.1061428688223576,
+      "h_kplus": 1.1124657830837028,
+      "delta_h": 0.006322914261345236,
+      "match": {
+        "matched": false,
+        "reason": "no_object_row_either_frame",
+        "new_activation": false
+      },
+      "unmatched_new_row": false
+    },
+    "hold_true": {
+      "sampled_min_sd": 1.1774657830837028,
+      "lipschitz_lower_bound": 1.1769931669123501,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.18904646854104526
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 12,
+    "in_K0": true,
+    "position": [
+      1.9261478069514797,
+      5.048322991566678
+    ],
+    "u": [
+      -0.09642094598778987,
+      0.16081321922197533
+    ],
+    "u_nom": [
+      -0.09642094598778987,
+      0.16081321922197533
+    ],
+    "h_aggregate": null,
+    "h_true": 1.1181858184377083,
+    "h_gap": null,
+    "feature": {
+      "edge_index": 5,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.1,
+        4.9
+      ],
+      "distance": 1.1831858184377082,
+      "edge_normal": [
+        -1.0,
+        -0.0
+      ],
+      "vertex_index": 5,
+      "edge_length": 1.8000000000000003,
+      "signed_distance": 1.1831858184377082,
+      "sd_gradient": [
+        -0.9921114458576659,
+        0.125359000467505
+      ],
+      "sd_foot": [
+        3.1,
+        4.9
+      ],
+      "h_true": 1.1181858184377083
+    },
+    "support": null,
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": null,
+    "alignment": null,
+    "n_bar": null,
+    "offset": null,
+    "anchor": null,
+    "n_near": null,
+    "n_same_face": null,
+    "cap_active": null,
+    "rhs_uncapped": null,
+    "rhs_capped": null,
+    "rhs_no_margin_uncapped": null,
+    "decompose": {
+      "delta_p": [
+        -0.00482104729938948,
+        0.008040660961098567
+      ],
+      "delta_p_minus_dt_u": [
+        1.3877787807814457e-17,
+        -1.9949319973733282e-16
+      ],
+      "h_k": 1.1124657830837028,
+      "h_kplus": 1.1181858184377083,
+      "delta_h": 0.005720035354005448,
+      "match": {
+        "matched": false,
+        "reason": "no_object_row_either_frame",
+        "new_activation": false
+      },
+      "unmatched_new_row": false
+    },
+    "hold_true": {
+      "sampled_min_sd": 1.1831858184377082,
+      "lipschitz_lower_bound": 1.182717057502491,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.18750437408688733
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 13,
+    "in_K0": true,
+    "position": [
+      1.9213267596520902,
+      5.056363652527777
+    ],
+    "u": [
+      -0.08895497963890682,
+      0.15715487170440143
+    ],
+    "u_nom": [
+      -0.08895497963890682,
+      0.15715487170440143
+    ],
+    "h_aggregate": null,
+    "h_true": 1.123999663306962,
+    "h_gap": null,
+    "feature": {
+      "edge_index": 5,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.1,
+        4.9
+      ],
+      "distance": 1.188999663306962,
+      "edge_normal": [
+        -1.0,
+        -0.0
+      ],
+      "vertex_index": 5,
+      "edge_length": 1.8000000000000003,
+      "signed_distance": 1.188999663306962,
+      "sd_gradient": [
+        -0.9913150328988898,
+        0.13150857595105003
+      ],
+      "sd_foot": [
+        3.1,
+        4.9
+      ],
+      "h_true": 1.123999663306962
+    },
+    "support": null,
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": null,
+    "alignment": null,
+    "n_bar": null,
+    "offset": null,
+    "anchor": null,
+    "n_near": null,
+    "n_same_face": null,
+    "cap_active": null,
+    "rhs_uncapped": null,
+    "rhs_capped": null,
+    "rhs_no_margin_uncapped": null,
+    "decompose": {
+      "delta_p": [
+        -0.004447748981945443,
+        0.007857743585220511
+      ],
+      "delta_p_minus_dt_u": [
+        -1.0148132334464322e-16,
+        4.388850394221322e-16
+      ],
+      "h_k": 1.1181858184377083,
+      "h_kplus": 1.123999663306962,
+      "delta_h": 0.005813844869253737,
+      "match": {
+        "matched": false,
+        "reason": "no_object_row_either_frame",
+        "new_activation": false
+      },
+      "unmatched_new_row": false
+    },
+    "hold_true": {
+      "sampled_min_sd": 1.188999663306962,
+      "lipschitz_lower_bound": 1.1885482028843957,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.1805841690264825
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 14,
+    "in_K0": true,
+    "position": [
+      1.9168790106701448,
+      5.064221396112997
+    ],
+    "u": [
+      -0.08221531259773314,
+      0.15179754095216272
+    ],
+    "u_nom": [
+      -0.08221531259773314,
+      0.15179754095216272
+    ],
+    "h_aggregate": null,
+    "h_true": 1.1294638723436374,
+    "h_gap": null,
+    "feature": {
+      "edge_index": 5,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.1,
+        4.9
+      ],
+      "distance": 1.1944638723436374,
+      "edge_normal": [
+        -1.0,
+        -0.0
+      ],
+      "vertex_index": 5,
+      "edge_length": 1.8000000000000003,
+      "signed_distance": 1.1944638723436374,
+      "sd_gradient": [
+        -0.9905037872836402,
+        0.1374854442359826
+      ],
+      "sd_foot": [
+        3.1,
+        4.9
+      ],
+      "h_true": 1.1294638723436374
+    },
+    "support": null,
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": null,
+    "alignment": null,
+    "n_bar": null,
+    "offset": null,
+    "anchor": null,
+    "n_near": null,
+    "n_same_face": null,
+    "cap_active": null,
+    "rhs_uncapped": null,
+    "rhs_capped": null,
+    "rhs_no_margin_uncapped": null,
+    "decompose": {
+      "delta_p": [
+        -0.004110765629886659,
+        0.007589877047608162
+      ],
+      "delta_p_minus_dt_u": [
+        -1.734723475976807e-18,
+        2.6020852139652106e-17
+      ],
+      "h_k": 1.123999663306962,
+      "h_kplus": 1.1294638723436374,
+      "delta_h": 0.005464209036675438,
+      "match": {
+        "matched": false,
+        "reason": "no_object_row_either_frame",
+        "new_activation": false
+      },
+      "unmatched_new_row": false
+    },
+    "hold_true": {
+      "sampled_min_sd": 1.1944638723436374,
+      "lipschitz_lower_bound": 1.1940322920276425,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.17263212639791728
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 15,
+    "in_K0": true,
+    "position": [
+      1.912768245040258,
+      5.0718112731606055
+    ],
+    "u": [
+      -0.07607476815946682,
+      0.14997024699654568
+    ],
+    "u_nom": [
+      -0.07607476815946682,
+      0.14997024699654568
+    ],
+    "h_aggregate": null,
+    "h_true": 1.1345992470695607,
+    "h_gap": null,
+    "feature": {
+      "edge_index": 5,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.1,
+        4.9
+      ],
+      "distance": 1.1995992470695607,
+      "edge_normal": [
+        -1.0,
+        -0.0
+      ],
+      "vertex_index": 5,
+      "edge_length": 1.8000000000000003,
+      "signed_distance": 1.1995992470695607,
+      "sd_gradient": [
+        -0.9896903135442685,
+        0.14322389212923742
+      ],
+      "sd_foot": [
+        3.1,
+        4.9
+      ],
+      "h_true": 1.1345992470695607
+    },
+    "support": null,
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": null,
+    "alignment": null,
+    "n_bar": null,
+    "offset": null,
+    "anchor": null,
+    "n_near": null,
+    "n_same_face": null,
+    "cap_active": null,
+    "rhs_uncapped": null,
+    "rhs_capped": null,
+    "rhs_no_margin_uncapped": null,
+    "decompose": {
+      "delta_p": [
+        -0.0038037384079734338,
+        0.0074985123498274575
+      ],
+      "delta_p_minus_dt_u": [
+        -9.280770596475918e-17,
+        1.734723475976807e-16
+      ],
+      "h_k": 1.1294638723436374,
+      "h_kplus": 1.1345992470695607,
+      "delta_h": 0.005135374725923292,
+      "match": {
+        "matched": false,
+        "reason": "no_object_row_either_frame",
+        "new_activation": false
+      },
+      "unmatched_new_row": false
+    },
+    "hold_true": {
+      "sampled_min_sd": 1.1995992470695607,
+      "lipschitz_lower_bound": 1.1991788421655194,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.16816196161653665
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 16,
+    "in_K0": true,
+    "position": [
+      1.9089645066322847,
+      5.079309785510433
+    ],
+    "u": [
+      -0.06845914155763726,
+      0.1448945421617551
+    ],
+    "u_nom": [
+      -0.06845914155763726,
+      0.1448945421617551
+    ],
+    "h_aggregate": null,
+    "h_true": 1.1394573656387654,
+    "h_gap": null,
+    "feature": {
+      "edge_index": 5,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.1,
+        4.9
+      ],
+      "distance": 1.2044573656387654,
+      "edge_normal": [
+        -1.0,
+        -0.0
+      ],
+      "vertex_index": 5,
+      "edge_length": 1.8000000000000003,
+      "signed_distance": 1.2044573656387654,
+      "sd_gradient": [
+        -0.9888564986574416,
+        0.1488718410678974
+      ],
+      "sd_foot": [
+        3.1,
+        4.9
+      ],
+      "h_true": 1.1394573656387654
+    },
+    "support": null,
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": null,
+    "alignment": null,
+    "n_bar": null,
+    "offset": null,
+    "anchor": null,
+    "n_near": null,
+    "n_same_face": null,
+    "cap_active": null,
+    "rhs_uncapped": null,
+    "rhs_capped": null,
+    "rhs_no_margin_uncapped": null,
+    "decompose": {
+      "delta_p": [
+        -0.003422957077881872,
+        0.007244727108087545
+      ],
+      "delta_p_minus_dt_u": [
+        -8.673617379884035e-18,
+        -2.0990154059319366e-16
+      ],
+      "h_k": 1.1345992470695607,
+      "h_kplus": 1.1394573656387654,
+      "delta_h": 0.004858118569204706,
+      "match": {
+        "matched": false,
+        "reason": "no_object_row_either_frame",
+        "new_activation": false
+      },
+      "unmatched_new_row": false
+    },
+    "hold_true": {
+      "sampled_min_sd": 1.2044573656387654,
+      "lipschitz_lower_bound": 1.2040567326832197,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.1602531822182425
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 17,
+    "in_K0": true,
+    "position": [
+      1.9055415495544028,
+      5.0865545126185205
+    ],
+    "u": [
+      -0.06564225118187887,
+      0.1463087645379682
+    ],
+    "u_nom": [
+      -0.06564225118187887,
+      0.1463087645379682
+    ],
+    "h_aggregate": null,
+    "h_true": 1.1439390290743496,
+    "h_gap": null,
+    "feature": {
+      "edge_index": 5,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.1,
+        4.9
+      ],
+      "distance": 1.2089390290743496,
+      "edge_normal": [
+        -1.0,
+        -0.0
+      ],
+      "vertex_index": 5,
+      "edge_length": 1.8000000000000003,
+      "signed_distance": 1.2089390290743496,
+      "sd_gradient": [
+        -0.9880220769778277,
+        0.15431258990898797
+      ],
+      "sd_foot": [
+        3.1,
+        4.9
+      ],
+      "h_true": 1.1439390290743496
+    },
+    "support": null,
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": null,
+    "alignment": null,
+    "n_bar": null,
+    "offset": null,
+    "anchor": null,
+    "n_near": null,
+    "n_same_face": null,
+    "cap_active": null,
+    "rhs_uncapped": null,
+    "rhs_capped": null,
+    "rhs_no_margin_uncapped": null,
+    "decompose": {
+      "delta_p": [
+        -0.0032821125590940525,
+        0.007315438226898507
+      ],
+      "delta_p_minus_dt_u": [
+        -1.0885389811754465e-16,
+        9.71445146547012e-17
+      ],
+      "h_k": 1.1394573656387654,
+      "h_kplus": 1.1439390290743496,
+      "delta_h": 0.0044816634355842044,
+      "match": {
+        "matched": false,
+        "reason": "no_object_row_either_frame",
+        "new_activation": false
+      },
+      "unmatched_new_row": false
+    },
+    "hold_true": {
+      "sampled_min_sd": 1.2089390290743496,
+      "lipschitz_lower_bound": 1.2085381303985532,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.1603594703185674
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 18,
+    "in_K0": true,
+    "position": [
+      1.9022594369953088,
+      5.093869950845419
+    ],
+    "u": [
+      -0.06157031578371006,
+      0.13913055523442744
+    ],
+    "u_nom": [
+      -0.06157031578371006,
+      0.13913055523442744
+    ],
+    "h_aggregate": null,
+    "h_true": 1.1483293098362044,
+    "h_gap": null,
+    "feature": {
+      "edge_index": 5,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.1,
+        4.9
+      ],
+      "distance": 1.2133293098362044,
+      "edge_normal": [
+        -1.0,
+        -0.0
+      ],
+      "vertex_index": 5,
+      "edge_length": 1.8000000000000003,
+      "signed_distance": 1.2133293098362044,
+      "sd_gradient": [
+        -0.9871520891277097,
+        0.15978345637392583
+      ],
+      "sd_foot": [
+        3.1,
+        4.9
+      ],
+      "h_true": 1.1483293098362044
+    },
+    "support": null,
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": null,
+    "alignment": null,
+    "n_bar": null,
+    "offset": null,
+    "anchor": null,
+    "n_near": null,
+    "n_same_face": null,
+    "cap_active": null,
+    "rhs_uncapped": null,
+    "rhs_capped": null,
+    "rhs_no_margin_uncapped": null,
+    "decompose": {
+      "delta_p": [
+        -0.0030785157891854986,
+        0.006956527761721176
+      ],
+      "delta_p_minus_dt_u": [
+        4.7704895589362195e-18,
+        -1.960237527853792e-16
+      ],
+      "h_k": 1.1439390290743496,
+      "h_kplus": 1.1483293098362044,
+      "delta_h": 0.00439028076185477,
+      "match": {
+        "matched": false,
+        "reason": "no_object_row_either_frame",
+        "new_activation": false
+      },
+      "unmatched_new_row": false
+    },
+    "hold_true": {
+      "sampled_min_sd": 1.2133293098362044,
+      "lipschitz_lower_bound": 1.2129489463982799,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.15214537516975613
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 19,
+    "in_K0": true,
+    "position": [
+      1.8991809212061233,
+      5.10082647860714
+    ],
+    "u": [
+      -0.057287721783079504,
+      0.13642750875797702
+    ],
+    "u_nom": [
+      -0.057287721783079504,
+      0.13642750875797702
+    ],
+    "h_aggregate": null,
+    "h_true": 1.152496502871823,
+    "h_gap": null,
+    "feature": {
+      "edge_index": 5,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.1,
+        4.9
+      ],
+      "distance": 1.217496502871823,
+      "edge_normal": [
+        -1.0,
+        -0.0
+      ],
+      "vertex_index": 5,
+      "edge_length": 1.8000000000000003,
+      "signed_distance": 1.217496502871823,
+      "sd_gradient": [
+        -0.986301871061964,
+        0.1649503535603032
+      ],
+      "sd_foot": [
+        3.1,
+        4.9
+      ],
+      "h_true": 1.152496502871823
+    },
+    "support": null,
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": null,
+    "alignment": null,
+    "n_bar": null,
+    "offset": null,
+    "anchor": null,
+    "n_near": null,
+    "n_same_face": null,
+    "cap_active": null,
+    "rhs_uncapped": null,
+    "rhs_capped": null,
+    "rhs_no_margin_uncapped": null,
+    "decompose": {
+      "delta_p": [
+        -0.0028643860891539585,
+        0.006821375437898958
+      ],
+      "delta_p_minus_dt_u": [
+        1.691355389077387e-17,
+        1.0668549377257364e-16
+      ],
+      "h_k": 1.1483293098362044,
+      "h_kplus": 1.152496502871823,
+      "delta_h": 0.004167193035618633,
+      "match": {
+        "matched": false,
+        "reason": "no_object_row_either_frame",
+        "new_activation": false
+      },
+      "unmatched_new_row": false
+    },
+    "hold_true": {
+      "sampled_min_sd": 1.217496502871823,
+      "lipschitz_lower_bound": 1.2171265843992762,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.14796738901867337
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 20,
+    "in_K0": true,
+    "position": [
+      1.8963165351169693,
+      5.107647854045039
+    ],
+    "u": [
+      -0.05125705041424664,
+      0.13451921433725111
+    ],
+    "u_nom": [
+      -0.05125705041424664,
+      0.13451921433725111
+    ],
+    "h_aggregate": null,
+    "h_true": 1.1564628585930594,
+    "h_gap": null,
+    "feature": {
+      "edge_index": 5,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.1,
+        4.9
+      ],
+      "distance": 1.2214628585930594,
+      "edge_normal": [
+        -1.0,
+        -0.0
+      ],
+      "vertex_index": 5,
+      "edge_length": 1.8000000000000003,
+      "signed_distance": 1.2214628585930594,
+      "sd_gradient": [
+        -0.9854441798332634,
+        0.16999931891847925
+      ],
+      "sd_foot": [
+        3.1,
+        4.9
+      ],
+      "h_true": 1.1564628585930594
+    },
+    "support": null,
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": null,
+    "alignment": null,
+    "n_bar": null,
+    "offset": null,
+    "anchor": null,
+    "n_near": null,
+    "n_same_face": null,
+    "cap_active": null,
+    "rhs_uncapped": null,
+    "rhs_capped": null,
+    "rhs_no_margin_uncapped": null,
+    "decompose": {
+      "delta_p": [
+        -0.002562852520712422,
+        0.006725960716862822
+      ],
+      "delta_p_minus_dt_u": [
+        -8.977193988179977e-17,
+        2.662800535624399e-16
+      ],
+      "h_k": 1.152496502871823,
+      "h_kplus": 1.1564628585930594,
+      "delta_h": 0.003966355721236381,
+      "match": {
+        "matched": false,
+        "reason": "no_object_row_either_frame",
+        "new_activation": false
+      },
+      "unmatched_new_row": false
+    },
+    "hold_true": {
+      "sampled_min_sd": 1.2214628585930594,
+      "lipschitz_lower_bound": 1.2211029740261226,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.1439538267746986
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 21,
+    "in_K0": true,
+    "position": [
+      1.8937536825962569,
+      5.114373814761902
+    ],
+    "u": [
+      -0.047601291978874576,
+      0.13227103088567846
+    ],
+    "u_nom": [
+      -0.047601291978874576,
+      0.13227103088567846
+    ],
+    "h_aggregate": null,
+    "h_true": 1.1601474648815393,
+    "h_gap": null,
+    "feature": {
+      "edge_index": 5,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.1,
+        4.9
+      ],
+      "distance": 1.2251474648815392,
+      "edge_normal": [
+        -1.0,
+        -0.0
+      ],
+      "vertex_index": 5,
+      "edge_length": 1.8000000000000003,
+      "signed_distance": 1.2251474648815392,
+      "sd_gradient": [
+        -0.9845723490276955,
+        0.17497796869916363
+      ],
+      "sd_foot": [
+        3.1,
+        4.9
+      ],
+      "h_true": 1.1601474648815393
+    },
+    "support": null,
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": null,
+    "alignment": null,
+    "n_bar": null,
+    "offset": null,
+    "anchor": null,
+    "n_near": null,
+    "n_same_face": null,
+    "cap_active": null,
+    "rhs_uncapped": null,
+    "rhs_capped": null,
+    "rhs_no_margin_uncapped": null,
+    "decompose": {
+      "delta_p": [
+        -0.0023800645989437985,
+        0.00661355154428378
+      ],
+      "delta_p_minus_dt_u": [
+        -6.938893903907228e-17,
+        -1.4311468676808659e-16
+      ],
+      "h_k": 1.1564628585930594,
+      "h_kplus": 1.1601474648815393,
+      "delta_h": 0.003684606288479886,
+      "match": {
+        "matched": false,
+        "reason": "no_object_row_either_frame",
+        "new_activation": false
+      },
+      "unmatched_new_row": false
+    },
+    "hold_true": {
+      "sampled_min_sd": 1.2251474648815392,
+      "lipschitz_lower_bound": 1.2247960257988946,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.14057563305786025
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 22,
+    "in_K0": true,
+    "position": [
+      1.891373617997313,
+      5.120987366306186
+    ],
+    "u": [
+      -0.039835668327314465,
+      0.12725355410343148
+    ],
+    "u_nom": [
+      -0.039835668327314465,
+      0.12725355410343148
+    ],
+    "h_aggregate": null,
+    "h_true": 1.163663154546375,
+    "h_gap": null,
+    "feature": {
+      "edge_index": 5,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.1,
+        4.9
+      ],
+      "distance": 1.2286631545463749,
+      "edge_normal": [
+        -1.0,
+        -0.0
+      ],
+      "vertex_index": 5,
+      "edge_length": 1.8000000000000003,
+      "signed_distance": 1.2286631545463749,
+      "sd_gradient": [
+        -0.9836922166424975,
+        0.1798600092209768
+      ],
+      "sd_foot": [
+        3.1,
+        4.9
+      ],
+      "h_true": 1.163663154546375
+    },
+    "support": null,
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": null,
+    "alignment": null,
+    "n_bar": null,
+    "offset": null,
+    "anchor": null,
+    "n_near": null,
+    "n_same_face": null,
+    "cap_active": null,
+    "rhs_uncapped": null,
+    "rhs_capped": null,
+    "rhs_no_margin_uncapped": null,
+    "decompose": {
+      "delta_p": [
+        -0.0019917834163656334,
+        0.0063626777051712935
+      ],
+      "delta_p_minus_dt_u": [
+        8.977193988179977e-17,
+        -2.8102520310824275e-16
+      ],
+      "h_k": 1.1601474648815393,
+      "h_kplus": 1.163663154546375,
+      "delta_h": 0.0035156896648356195,
+      "match": {
+        "matched": false,
+        "reason": "no_object_row_either_frame",
+        "new_activation": false
+      },
+      "unmatched_new_row": false
+    },
+    "hold_true": {
+      "sampled_min_sd": 1.2286631545463749,
+      "lipschitz_lower_bound": 1.2283297971227378,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.1333429694548564
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 23,
+    "in_K0": true,
+    "position": [
+      1.8893818345809474,
+      5.127350044011357
+    ],
+    "u": [
+      -0.0411125563658973,
+      0.1275043135575519
+    ],
+    "u_nom": [
+      -0.0411125563658973,
+      0.1275043135575519
+    ],
+    "h_aggregate": null,
+    "h_true": 1.1667809809193186,
+    "h_gap": null,
+    "feature": {
+      "edge_index": 5,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.1,
+        4.9
+      ],
+      "distance": 1.2317809809193185,
+      "edge_normal": [
+        -1.0,
+        -0.0
+      ],
+      "vertex_index": 5,
+      "edge_length": 1.8000000000000003,
+      "signed_distance": 1.2317809809193185,
+      "sd_gradient": [
+        -0.9828193357195113,
+        0.18457018539259953
+      ],
+      "sd_foot": [
+        3.1,
+        4.9
+      ],
+      "h_true": 1.1667809809193186
+    },
+    "support": null,
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": null,
+    "alignment": null,
+    "n_bar": null,
+    "offset": null,
+    "anchor": null,
+    "n_near": null,
+    "n_same_face": null,
+    "cap_active": null,
+    "rhs_uncapped": null,
+    "rhs_capped": null,
+    "rhs_no_margin_uncapped": null,
+    "decompose": {
+      "delta_p": [
+        -0.002055627818294825,
+        0.006375215677877577
+      ],
+      "delta_p_minus_dt_u": [
+        3.9898639947466563e-17,
+        -1.8214596497756474e-17
+      ],
+      "h_k": 1.163663154546375,
+      "h_kplus": 1.1667809809193186,
+      "delta_h": 0.003117826372943666,
+      "match": {
+        "matched": false,
+        "reason": "no_object_row_either_frame",
+        "new_activation": false
+      },
+      "unmatched_new_row": false
+    },
+    "hold_true": {
+      "sampled_min_sd": 1.2317809809193185,
+      "lipschitz_lower_bound": 1.2314460593588494,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.13396862418761193
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 24,
+    "in_K0": true,
+    "position": [
+      1.8873262067626526,
+      5.133725259689235
+    ],
+    "u": [
+      -0.039605250086417645,
+      0.1244345191950548
+    ],
+    "u_nom": [
+      -0.039605250086417645,
+      0.1244345191950548
+    ],
+    "h_aggregate": null,
+    "h_true": 1.1699919942337509,
+    "h_gap": null,
+    "feature": {
+      "edge_index": 5,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.1,
+        4.9
+      ],
+      "distance": 1.2349919942337508,
+      "edge_normal": [
+        -1.0,
+        -0.0
+      ],
+      "vertex_index": 5,
+      "edge_length": 1.8000000000000003,
+      "signed_distance": 1.2349919942337508,
+      "sd_gradient": [
+        -0.981928465042196,
+        0.1892524492308542
+      ],
+      "sd_foot": [
+        3.1,
+        4.9
+      ],
+      "h_true": 1.1699919942337509
+    },
+    "support": null,
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": null,
+    "alignment": null,
+    "n_bar": null,
+    "offset": null,
+    "anchor": null,
+    "n_near": null,
+    "n_same_face": null,
+    "cap_active": null,
+    "rhs_uncapped": null,
+    "rhs_capped": null,
+    "rhs_no_margin_uncapped": null,
+    "decompose": {
+      "delta_p": [
+        -0.0019802625043208177,
+        0.0062217259597527885
+      ],
+      "delta_p_minus_dt_u": [
+        6.461844948013606e-17,
+        4.85722573273506e-17
+      ],
+      "h_k": 1.1667809809193186,
+      "h_kplus": 1.1699919942337509,
+      "delta_h": 0.0032110133144322983,
+      "match": {
+        "matched": false,
+        "reason": "no_object_row_either_frame",
+        "new_activation": false
+      },
+      "unmatched_new_row": false
+    },
+    "hold_true": {
+      "sampled_min_sd": 1.2349919942337508,
+      "lipschitz_lower_bound": 1.2346655309375585,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.1305853184768952
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 25,
+    "in_K0": true,
+    "position": [
+      1.8853459442583318,
+      5.139946985648987
+    ],
+    "u": [
+      -0.034772740700567066,
+      0.11579448330954359
+    ],
+    "u_nom": [
+      -0.034772740700567066,
+      0.11579448330954359
+    ],
+    "h_aggregate": null,
+    "h_true": 1.1731272273283224,
+    "h_gap": null,
+    "feature": {
+      "edge_index": 5,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.1,
+        4.9
+      ],
+      "distance": 1.2381272273283224,
+      "edge_normal": [
+        -1.0,
+        -0.0
+      ],
+      "vertex_index": 5,
+      "edge_length": 1.8000000000000003,
+      "signed_distance": 1.2381272273283224,
+      "sd_gradient": [
+        -0.9810413897146052,
+        0.19379832730659977
+      ],
+      "sd_foot": [
+        3.1,
+        4.9
+      ],
+      "h_true": 1.1731272273283224
+    },
+    "support": null,
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": null,
+    "alignment": null,
+    "n_bar": null,
+    "offset": null,
+    "anchor": null,
+    "n_near": null,
+    "n_same_face": null,
+    "cap_active": null,
+    "rhs_uncapped": null,
+    "rhs_capped": null,
+    "rhs_no_margin_uncapped": null,
+    "decompose": {
+      "delta_p": [
+        -0.001738637035028301,
+        0.0057897241654769616
+      ],
+      "delta_p_minus_dt_u": [
+        5.2475385148298415e-17,
+        -2.185751579730777e-16
+      ],
+      "h_k": 1.1699919942337509,
+      "h_kplus": 1.1731272273283224,
+      "delta_h": 0.0031352330945715323,
+      "match": {
+        "matched": false,
+        "reason": "no_object_row_either_frame",
+        "new_activation": false
+      },
+      "unmatched_new_row": false
+    },
+    "hold_true": {
+      "sampled_min_sd": 1.2381272273283224,
+      "lipschitz_lower_bound": 1.237824970133818,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.1209028778017837
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 26,
+    "in_K0": true,
+    "position": [
+      1.8836073072233035,
+      5.145736709814464
+    ],
+    "u": [
+      -0.021006159459529505,
+      0.11326069900773428
+    ],
+    "u_nom": [
+      -0.021006159459529505,
+      0.11326069900773428
+    ],
+    "h_aggregate": null,
+    "h_true": 1.1759664433782975,
+    "h_gap": null,
+    "feature": {
+      "edge_index": 5,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.1,
+        4.9
+      ],
+      "distance": 1.2409664433782974,
+      "edge_normal": [
+        -1.0,
+        -0.0
+      ],
+      "vertex_index": 5,
+      "edge_length": 1.8000000000000003,
+      "signed_distance": 1.2409664433782974,
+      "sd_gradient": [
+        -0.9801978927530841,
+        0.19802043087119434
+      ],
+      "sd_foot": [
+        3.1,
+        4.9
+      ],
+      "h_true": 1.1759664433782975
+    },
+    "support": null,
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": null,
+    "alignment": null,
+    "n_bar": null,
+    "offset": null,
+    "anchor": null,
+    "n_near": null,
+    "n_same_face": null,
+    "cap_active": null,
+    "rhs_uncapped": null,
+    "rhs_capped": null,
+    "rhs_no_margin_uncapped": null,
+    "decompose": {
+      "delta_p": [
+        -0.0010503079729764497,
+        0.0056630349503867805
+      ],
+      "delta_p_minus_dt_u": [
+        2.5587171270657905e-17,
+        6.591949208711867e-17
+      ],
+      "h_k": 1.1731272273283224,
+      "h_kplus": 1.1759664433782975,
+      "delta_h": 0.0028392160499750574,
+      "match": {
+        "matched": false,
+        "reason": "no_object_row_either_frame",
+        "new_activation": false
+      },
+      "unmatched_new_row": false
+    },
+    "hold_true": {
+      "sampled_min_sd": 1.2409664433782974,
+      "lipschitz_lower_bound": 1.2406784628594798,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.11519220752707086
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 27,
+    "in_K0": true,
+    "position": [
+      1.882556999250327,
+      5.151399744764851
+    ],
+    "u": [
+      -0.02233741314414255,
+      0.11350719713730069
+    ],
+    "u_nom": [
+      -0.02233741314414255,
+      0.11350719713730069
+    ],
+    "h_aggregate": null,
+    "h_true": 1.178128831514337,
+    "h_gap": null,
+    "feature": {
+      "edge_index": 5,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.1,
+        4.9
+      ],
+      "distance": 1.243128831514337,
+      "edge_normal": [
+        -1.0,
+        -0.0
+      ],
+      "vertex_index": 5,
+      "edge_length": 1.8000000000000003,
+      "signed_distance": 1.243128831514337,
+      "sd_gradient": [
+        -0.9793377563825189,
+        0.20223144889866665
+      ],
+      "sd_foot": [
+        3.1,
+        4.9
+      ],
+      "h_true": 1.178128831514337
+    },
+    "support": null,
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": null,
+    "alignment": null,
+    "n_bar": null,
+    "offset": null,
+    "anchor": null,
+    "n_near": null,
+    "n_same_face": null,
+    "cap_active": null,
+    "rhs_uncapped": null,
+    "rhs_capped": null,
+    "rhs_no_margin_uncapped": null,
+    "decompose": {
+      "delta_p": [
+        -0.001116870657207114,
+        0.005675359856865292
+      ],
+      "delta_p_minus_dt_u": [
+        1.3444106938820255e-17,
+        2.5673907444456745e-16
+      ],
+      "h_k": 1.1759664433782975,
+      "h_kplus": 1.178128831514337,
+      "delta_h": 0.002162388136039528,
+      "match": {
+        "matched": false,
+        "reason": "no_object_row_either_frame",
+        "new_activation": false
+      },
+      "unmatched_new_row": false
+    },
+    "hold_true": {
+      "sampled_min_sd": 1.243128831514337,
+      "lipschitz_lower_bound": 1.2428396209095443,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.11568424191711744
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 28,
+    "in_K0": true,
+    "position": [
+      1.88144012859312,
+      5.1570751046217165
+    ],
+    "u": [
+      -0.022654205812260766,
+      0.11099494053684254
+    ],
+    "u_nom": [
+      -0.022654205812260766,
+      0.11099494053684254
+    ],
+    "h_aggregate": null,
+    "h_true": 1.1803817766530145,
+    "h_gap": null,
+    "feature": {
+      "edge_index": 5,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.1,
+        4.9
+      ],
+      "distance": 1.2453817766530144,
+      "edge_normal": [
+        -1.0,
+        -0.0
+      ],
+      "vertex_index": 5,
+      "edge_length": 1.8000000000000003,
+      "signed_distance": 1.2453817766530144,
+      "sd_gradient": [
+        -0.9784629053122822,
+        0.2064227287094324
+      ],
+      "sd_foot": [
+        3.1,
+        4.9
+      ],
+      "h_true": 1.1803817766530145
+    },
+    "support": null,
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": null,
+    "alignment": null,
+    "n_bar": null,
+    "offset": null,
+    "anchor": null,
+    "n_near": null,
+    "n_same_face": null,
+    "cap_active": null,
+    "rhs_uncapped": null,
+    "rhs_capped": null,
+    "rhs_no_margin_uncapped": null,
+    "decompose": {
+      "delta_p": [
+        -0.001132710290613126,
+        0.005549747026842411
+      ],
+      "delta_p_minus_dt_u": [
+        -8.760353553682876e-17,
+        2.8362728832220796e-16
+      ],
+      "h_k": 1.178128831514337,
+      "h_kplus": 1.1803817766530145,
+      "delta_h": 0.0022529451386774646,
+      "match": {
+        "matched": false,
+        "reason": "no_object_row_either_frame",
+        "new_activation": false
+      },
+      "unmatched_new_row": false
+    },
+    "hold_true": {
+      "sampled_min_sd": 1.2453817766530144,
+      "lipschitz_lower_bound": 1.245098568581694,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.11328322852815187
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 29,
+    "in_K0": true,
+    "position": [
+      1.8803074183025068,
+      5.162624851648559
+    ],
+    "u": [
+      -0.02459434063837036,
+      0.1088709002834296
+    ],
+    "u_nom": [
+      -0.02459434063837036,
+      0.1088709002834296
+    ],
+    "h_aggregate": null,
+    "h_true": 1.1826465070489012,
+    "h_gap": null,
+    "feature": {
+      "edge_index": 5,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.1,
+        4.9
+      ],
+      "distance": 1.2476465070489011,
+      "edge_normal": [
+        -1.0,
+        -0.0
+      ],
+      "vertex_index": 5,
+      "edge_length": 1.8000000000000003,
+      "signed_distance": 1.2476465070489011,
+      "sd_gradient": [
+        -0.9775946750994974,
+        0.21049620238167752
+      ],
+      "sd_foot": [
+        3.1,
+        4.9
+      ],
+      "h_true": 1.1826465070489012
+    },
+    "support": null,
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": null,
+    "alignment": null,
+    "n_bar": null,
+    "offset": null,
+    "anchor": null,
+    "n_near": null,
+    "n_same_face": null,
+    "cap_active": null,
+    "rhs_uncapped": null,
+    "rhs_capped": null,
+    "rhs_no_margin_uncapped": null,
+    "decompose": {
+      "delta_p": [
+        -0.0012297170319184314,
+        0.005443545014171214
+      ],
+      "delta_p_minus_dt_u": [
+        8.673617379884035e-17,
+        -2.671474153004283e-16
+      ],
+      "h_k": 1.1803817766530145,
+      "h_kplus": 1.1826465070489012,
+      "delta_h": 0.002264730395886705,
+      "match": {
+        "matched": false,
+        "reason": "no_object_row_either_frame",
+        "new_activation": false
+      },
+      "unmatched_new_row": false
+    },
+    "hold_true": {
+      "sampled_min_sd": 1.2476465070489011,
+      "lipschitz_lower_bound": 1.2473674712702816,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.11161431144777388
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 30,
+    "in_K0": true,
+    "position": [
+      1.8790777012705884,
+      5.16806839666273
+    ],
+    "u": [
+      -0.02574003654238528,
+      0.10910425852533967
+    ],
+    "u_nom": [
+      -0.02574003654238528,
+      0.10910425852533967
+    ],
+    "h_aggregate": null,
+    "h_true": 1.1850047699205142,
+    "h_gap": null,
+    "feature": {
+      "edge_index": 5,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.1,
+        4.9
+      ],
+      "distance": 1.2500047699205141,
+      "edge_normal": [
+        -1.0,
+        -0.0
+      ],
+      "vertex_index": 5,
+      "edge_length": 1.8000000000000003,
+      "signed_distance": 1.2500047699205141,
+      "sd_gradient": [
+        -0.9767341118282679,
+        0.21445389898774211
+      ],
+      "sd_foot": [
+        3.1,
+        4.9
+      ],
+      "h_true": 1.1850047699205142
+    },
+    "support": null,
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": null,
+    "alignment": null,
+    "n_bar": null,
+    "offset": null,
+    "anchor": null,
+    "n_near": null,
+    "n_same_face": null,
+    "cap_active": null,
+    "rhs_uncapped": null,
+    "rhs_capped": null,
+    "rhs_no_margin_uncapped": null,
+    "decompose": {
+      "delta_p": [
+        -0.0012870018271191608,
+        0.005455212926267272
+      ],
+      "delta_p_minus_dt_u": [
+        1.0321604682062002e-16,
+        2.8796409701215e-16
+      ],
+      "h_k": 1.1826465070489012,
+      "h_kplus": 1.1850047699205142,
+      "delta_h": 0.002358262871613004,
+      "match": {
+        "matched": false,
+        "reason": "no_object_row_either_frame",
+        "new_activation": false
+      },
+      "unmatched_new_row": false
+    },
+    "hold_true": {
+      "sampled_min_sd": 1.2500047699205141,
+      "lipschitz_lower_bound": 1.2497245212729977,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.1120994590065781
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 31,
+    "in_K0": true,
+    "position": [
+      1.8777906994434692,
+      5.173523609588997
+    ],
+    "u": [
+      -0.001969275127858805,
+      0.09479747084392658
+    ],
+    "u_nom": [
+      -0.001969275127858805,
+      0.09479747084392658
+    ],
+    "h_aggregate": null,
+    "h_true": 1.1874419105768852,
+    "h_gap": null,
+    "feature": {
+      "edge_index": 5,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.1,
+        4.9
+      ],
+      "distance": 1.2524419105768851,
+      "edge_normal": [
+        -1.0,
+        -0.0
+      ],
+      "vertex_index": 5,
+      "edge_length": 1.8000000000000003,
+      "signed_distance": 1.2524419105768851,
+      "sd_gradient": [
+        -0.9758610680742639,
+        0.21839225219077008
+      ],
+      "sd_foot": [
+        3.1,
+        4.9
+      ],
+      "h_true": 1.1874419105768852
+    },
+    "support": null,
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": null,
+    "alignment": null,
+    "n_bar": null,
+    "offset": null,
+    "anchor": null,
+    "n_near": null,
+    "n_same_face": null,
+    "cap_active": null,
+    "rhs_uncapped": null,
+    "rhs_capped": null,
+    "rhs_no_margin_uncapped": null,
+    "decompose": {
+      "delta_p": [
+        -9.846375639299687e-05,
+        0.0047398735421966265
+      ],
+      "delta_p_minus_dt_u": [
+        -5.66089059308994e-17,
+        2.975050761300224e-16
+      ],
+      "h_k": 1.1850047699205142,
+      "h_kplus": 1.1874419105768852,
+      "delta_h": 0.0024371406563710174,
+      "match": {
+        "matched": false,
+        "reason": "no_object_row_either_frame",
+        "new_activation": false
+      },
+      "unmatched_new_row": false
+    },
+    "hold_true": {
+      "sampled_min_sd": 1.2524419105768851,
+      "lipschitz_lower_bound": 1.2522048657693732,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.09481792300474796
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 32,
+    "in_K0": true,
+    "position": [
+      1.8776922356870762,
+      5.178263483131194
+    ],
+    "u": [
+      -0.0030949075176643025,
+      0.09497787466041521
+    ],
+    "u_nom": [
+      -0.0030949075176643025,
+      0.09497787466041521
+    ],
+    "h_aggregate": null,
+    "h_true": 1.1885816035440064,
+    "h_gap": null,
+    "feature": {
+      "edge_index": 5,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.1,
+        4.9
+      ],
+      "distance": 1.2535816035440064,
+      "edge_normal": [
+        -1.0,
+        -0.0
+      ],
+      "vertex_index": 5,
+      "edge_length": 1.8000000000000003,
+      "signed_distance": 1.2535816035440064,
+      "sd_gradient": [
+        -0.975052410515065,
+        0.22197476601803476
+      ],
+      "sd_foot": [
+        3.1,
+        4.9
+      ],
+      "h_true": 1.1885816035440064
+    },
+    "support": null,
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": null,
+    "alignment": null,
+    "n_bar": null,
+    "offset": null,
+    "anchor": null,
+    "n_near": null,
+    "n_same_face": null,
+    "cap_active": null,
+    "rhs_uncapped": null,
+    "rhs_capped": null,
+    "rhs_no_margin_uncapped": null,
+    "decompose": {
+      "delta_p": [
+        -0.00015474537588322512,
+        0.00474889373302112
+      ],
+      "delta_p_minus_dt_u": [
+        -9.974659986866641e-18,
+        3.5908775952719907e-16
+      ],
+      "h_k": 1.1874419105768852,
+      "h_kplus": 1.1885816035440064,
+      "delta_h": 0.001139692967121242,
+      "match": {
+        "matched": false,
+        "reason": "no_object_row_either_frame",
+        "new_activation": false
+      },
+      "unmatched_new_row": false
+    },
+    "hold_true": {
+      "sampled_min_sd": 1.2535816035440064,
+      "lipschitz_lower_bound": 1.2533440328291714,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.09502828593399146
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 33,
+    "in_K0": true,
+    "position": [
+      1.877537490311193,
+      5.183012376864215
+    ],
+    "u": [
+      -0.004247377380499895,
+      0.09516673204051376
+    ],
+    "u_nom": [
+      -0.004247377380499895,
+      0.09516673204051376
+    ],
+    "h_aggregate": null,
+    "h_true": 1.18979504025677,
+    "h_gap": null,
+    "feature": {
+      "edge_index": 5,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.1,
+        4.9
+      ],
+      "distance": 1.25479504025677,
+      "edge_normal": [
+        -1.0,
+        -0.0
+      ],
+      "vertex_index": 5,
+      "edge_length": 1.8000000000000003,
+      "signed_distance": 1.25479504025677,
+      "sd_gradient": [
+        -0.9742328192807116,
+        0.22554470474022725
+      ],
+      "sd_foot": [
+        3.1,
+        4.9
+      ],
+      "h_true": 1.18979504025677
+    },
+    "support": null,
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": null,
+    "alignment": null,
+    "n_bar": null,
+    "offset": null,
+    "anchor": null,
+    "n_near": null,
+    "n_same_face": null,
+    "cap_active": null,
+    "rhs_uncapped": null,
+    "rhs_capped": null,
+    "rhs_no_margin_uncapped": null,
+    "decompose": {
+      "delta_p": [
+        -0.00021236886902498142,
+        0.00475833660202607
+      ],
+      "delta_p_minus_dt_u": [
+        1.3335686721571705e-17,
+        3.8163916471489756e-16
+      ],
+      "h_k": 1.1885816035440064,
+      "h_kplus": 1.18979504025677,
+      "delta_h": 0.001213436712763638,
+      "match": {
+        "matched": false,
+        "reason": "no_object_row_either_frame",
+        "new_activation": false
+      },
+      "unmatched_new_row": false
+    },
+    "hold_true": {
+      "sampled_min_sd": 1.25479504025677,
+      "lipschitz_lower_bound": 1.2545568865891796,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.09526146703617014
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 34,
+    "in_K0": true,
+    "position": [
+      1.877325121442168,
+      5.187770713466241
+    ],
+    "u": [
+      -0.006456239220050697,
+      0.09319582800948122
+    ],
+    "u_nom": [
+      -0.006456239220050697,
+      0.09319582800948122
+    ],
+    "h_aggregate": null,
+    "h_true": 1.191083533124003,
+    "h_gap": null,
+    "feature": {
+      "edge_index": 5,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.1,
+        4.9
+      ],
+      "distance": 1.256083533124003,
+      "edge_normal": [
+        -1.0,
+        -0.0
+      ],
+      "vertex_index": 5,
+      "edge_length": 1.8000000000000003,
+      "signed_distance": 1.256083533124003,
+      "sd_gradient": [
+        -0.973402521659463,
+        0.22910157316570087
+      ],
+      "sd_foot": [
+        3.1,
+        4.9
+      ],
+      "h_true": 1.191083533124003
+    },
+    "support": null,
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": null,
+    "alignment": null,
+    "n_bar": null,
+    "offset": null,
+    "anchor": null,
+    "n_near": null,
+    "n_same_face": null,
+    "cap_active": null,
+    "rhs_uncapped": null,
+    "rhs_capped": null,
+    "rhs_no_margin_uncapped": null,
+    "decompose": {
+      "delta_p": [
+        -0.00032281196100258924,
+        0.004659791400474234
+      ],
+      "delta_p_minus_dt_u": [
+        -5.437273895014805e-17,
+        1.726049858596923e-16
+      ],
+      "h_k": 1.18979504025677,
+      "h_kplus": 1.191083533124003,
+      "delta_h": 0.001288492867232982,
+      "match": {
+        "matched": false,
+        "reason": "no_object_row_either_frame",
+        "new_activation": false
+      },
+      "unmatched_new_row": false
+    },
+    "hold_true": {
+      "sampled_min_sd": 1.256083533124003,
+      "lipschitz_lower_bound": 1.2558499851446814,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.09341919172867706
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 35,
+    "in_K0": true,
+    "position": [
+      1.8770023094811654,
+      5.192430504866715
+    ],
+    "u": [
+      -0.007356022927920792,
+      0.09092409409578331
+    ],
+    "u_nom": [
+      -0.007356022927920792,
+      0.09092409409578331
+    ],
+    "h_aggregate": null,
+    "h_true": 1.1924732407455059,
+    "h_gap": null,
+    "feature": {
+      "edge_index": 5,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.1,
+        4.9
+      ],
+      "distance": 1.2574732407455058,
+      "edge_normal": [
+        -1.0,
+        -0.0
+      ],
+      "vertex_index": 5,
+      "edge_length": 1.8000000000000003,
+      "signed_distance": 1.2574732407455058,
+      "sd_gradient": [
+        -0.9725834720695671,
+        0.23255405792440137
+      ],
+      "sd_foot": [
+        3.1,
+        4.9
+      ],
+      "h_true": 1.1924732407455059
+    },
+    "support": null,
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": null,
+    "alignment": null,
+    "n_bar": null,
+    "offset": null,
+    "anchor": null,
+    "n_near": null,
+    "n_same_face": null,
+    "cap_active": null,
+    "rhs_uncapped": null,
+    "rhs_capped": null,
+    "rhs_no_margin_uncapped": null,
+    "decompose": {
+      "delta_p": [
+        -0.0003678011463961184,
+        0.004546204704789503
+      ],
+      "delta_p_minus_dt_u": [
+        -7.87672878310719e-17,
+        3.37403716077489e-16
+      ],
+      "h_k": 1.191083533124003,
+      "h_kplus": 1.1924732407455059,
+      "delta_h": 0.0013897076215028115,
+      "match": {
+        "matched": false,
+        "reason": "no_object_row_either_frame",
+        "new_activation": false
+      },
+      "unmatched_new_row": false
+    },
+    "hold_true": {
+      "sampled_min_sd": 1.2574732407455058,
+      "lipschitz_lower_bound": 1.2572451878190767,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.09122117057161103
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 36,
+    "in_K0": true,
+    "position": [
+      1.8766345083347693,
+      5.196976709571505
+    ],
+    "u": [
+      -0.0084016106043044,
+      0.09112745603499484
+    ],
+    "u_nom": [
+      -0.0084016106043044,
+      0.09112745603499484
+    ],
+    "h_aggregate": null,
+    "h_true": 1.1938956637566236,
+    "h_gap": null,
+    "feature": {
+      "edge_index": 5,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.1,
+        4.9
+      ],
+      "distance": 1.2588956637566235,
+      "edge_normal": [
+        -1.0,
+        -0.0
+      ],
+      "vertex_index": 5,
+      "edge_length": 1.8000000000000003,
+      "signed_distance": 1.2588956637566235,
+      "sd_gradient": [
+        -0.9717767142152445,
+        0.23590255977632607
+      ],
+      "sd_foot": [
+        3.1,
+        4.9
+      ],
+      "h_true": 1.1938956637566236
+    },
+    "support": null,
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": null,
+    "alignment": null,
+    "n_bar": null,
+    "offset": null,
+    "anchor": null,
+    "n_near": null,
+    "n_same_face": null,
+    "cap_active": null,
+    "rhs_uncapped": null,
+    "rhs_capped": null,
+    "rhs_no_margin_uncapped": null,
+    "decompose": {
+      "delta_p": [
+        -0.00042008053021524994,
+        0.004556372801749475
+      ],
+      "delta_p_minus_dt_u": [
+        -2.992397996059992e-17,
+        -2.662800535624399e-16
+      ],
+      "h_k": 1.1924732407455059,
+      "h_kplus": 1.1938956637566236,
+      "delta_h": 0.0014224230111177238,
+      "match": {
+        "matched": false,
+        "reason": "no_object_row_either_frame",
+        "new_activation": false
+      },
+      "unmatched_new_row": false
+    },
+    "hold_true": {
+      "sampled_min_sd": 1.2588956637566235,
+      "lipschitz_lower_bound": 1.2586668789190556,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.09151393502716554
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 37,
+    "in_K0": true,
+    "position": [
+      1.876214427804554,
+      5.201533082373254
+    ],
+    "u": [
+      -0.001775503983733584,
+      0.09159906311481673
+    ],
+    "u_nom": [
+      -0.001775503983733584,
+      0.09159906311481673
+    ],
+    "h_aggregate": null,
+    "h_true": 1.1953861814853617,
+    "h_gap": null,
+    "feature": {
+      "edge_index": 5,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.1,
+        4.9
+      ],
+      "distance": 1.2603861814853616,
+      "edge_normal": [
+        -1.0,
+        -0.0
+      ],
+      "vertex_index": 5,
+      "edge_length": 1.8000000000000003,
+      "signed_distance": 1.2603861814853616,
+      "sd_gradient": [
+        -0.9709607977082215,
+        0.23923864510946807
+      ],
+      "sd_foot": [
+        3.1,
+        4.9
+      ],
+      "h_true": 1.1953861814853617
+    },
+    "support": null,
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": null,
+    "alignment": null,
+    "n_bar": null,
+    "offset": null,
+    "anchor": null,
+    "n_near": null,
+    "n_same_face": null,
+    "cap_active": null,
+    "rhs_uncapped": null,
+    "rhs_capped": null,
+    "rhs_no_margin_uncapped": null,
+    "decompose": {
+      "delta_p": [
+        -8.877519918670806e-05,
+        0.004579953155740668
+      ],
+      "delta_p_minus_dt_u": [
+        -2.8853330315270487e-17,
+        -1.691355389077387e-16
+      ],
+      "h_k": 1.1938956637566236,
+      "h_kplus": 1.1953861814853617,
+      "delta_h": 0.0014905177287380944,
+      "match": {
+        "matched": false,
+        "reason": "no_object_row_either_frame",
+        "new_activation": false
+      },
+      "unmatched_new_row": false
+    },
+    "hold_true": {
+      "sampled_min_sd": 1.2603861814853616,
+      "lipschitz_lower_bound": 1.2601571408124193,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.0916162691769777
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 38,
+    "in_K0": true,
+    "position": [
+      1.8761256526053673,
+      5.206113035528995
+    ],
+    "u": [
+      0.006439743983844748,
+      0.08963869300676608
+    ],
+    "u_nom": [
+      0.006439743983844748,
+      0.08963869300676608
+    ],
+    "h_aggregate": null,
+    "h_true": 1.1965758434320997,
+    "h_gap": null,
+    "feature": {
+      "edge_index": 5,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.1,
+        4.9
+      ],
+      "distance": 1.2615758434320996,
+      "edge_normal": [
+        -1.0,
+        -0.0
+      ],
+      "vertex_index": 5,
+      "edge_length": 1.8000000000000003,
+      "signed_distance": 1.2615758434320996,
+      "sd_gradient": [
+        -0.97011555331077,
+        0.24264338693757678
+      ],
+      "sd_foot": [
+        3.1,
+        4.9
+      ],
+      "h_true": 1.1965758434320997
+    },
+    "support": null,
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": null,
+    "alignment": null,
+    "n_bar": null,
+    "offset": null,
+    "anchor": null,
+    "n_near": null,
+    "n_same_face": null,
+    "cap_active": null,
+    "rhs_uncapped": null,
+    "rhs_capped": null,
+    "rhs_no_margin_uncapped": null,
+    "decompose": {
+      "delta_p": [
+        0.0003219871991921863,
+        0.004481934650338637
+      ],
+      "delta_p_minus_dt_u": [
+        -5.1120132432691534e-17,
+        3.3306690738754696e-16
+      ],
+      "h_k": 1.1953861814853617,
+      "h_kplus": 1.1965758434320997,
+      "delta_h": 0.0011896619467379743,
+      "match": {
+        "matched": false,
+        "reason": "no_object_row_either_frame",
+        "new_activation": false
+      },
+      "unmatched_new_row": false
+    },
+    "hold_true": {
+      "sampled_min_sd": 1.2615758434320996,
+      "lipschitz_lower_bound": 1.2613511691458186,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.08986971451239133
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 39,
+    "in_K0": true,
+    "position": [
+      1.8764476398045595,
+      5.210594970179334
+    ],
+    "u": [
+      0.011433509801945818,
+      0.0834495530427759
+    ],
+    "u_nom": [
+      0.011433509801945818,
+      0.0834495530427759
+    ],
+    "h_aggregate": null,
+    "h_true": 1.1973587499758278,
+    "h_gap": null,
+    "feature": {
+      "edge_index": 5,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.1,
+        4.9
+      ],
+      "distance": 1.2623587499758278,
+      "edge_normal": [
+        -1.0,
+        -0.0
+      ],
+      "vertex_index": 5,
+      "edge_length": 1.8000000000000003,
+      "signed_distance": 1.2623587499758278,
+      "sd_gradient": [
+        -0.9692588261608435,
+        0.2460433455903726
+      ],
+      "sd_foot": [
+        3.1,
+        4.9
+      ],
+      "h_true": 1.1973587499758278
+    },
+    "support": null,
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": null,
+    "alignment": null,
+    "n_bar": null,
+    "offset": null,
+    "anchor": null,
+    "n_near": null,
+    "n_same_face": null,
+    "cap_active": null,
+    "rhs_uncapped": null,
+    "rhs_capped": null,
+    "rhs_no_margin_uncapped": null,
+    "decompose": {
+      "delta_p": [
+        0.0005716754900972898,
+        0.004172477652138795
+      ],
+      "delta_p_minus_dt_u": [
+        -1.1926223897340549e-18,
+        0.0
+      ],
+      "h_k": 1.1965758434320997,
+      "h_kplus": 1.1973587499758278,
+      "delta_h": 0.0007829065437281457,
+      "match": {
+        "matched": false,
+        "reason": "no_object_row_either_frame",
+        "new_activation": false
+      },
+      "unmatched_new_row": false
+    },
+    "hold_true": {
+      "sampled_min_sd": 1.2623587499758278,
+      "lipschitz_lower_bound": 1.262148177051265,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.08422916982512804
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 40,
+    "in_K0": true,
+    "position": [
+      1.8770193152946568,
+      5.2147674478314725
+    ],
+    "u": [
+      0.010325948196141299,
+      0.08123627019465607
+    ],
+    "u_nom": [
+      0.010325948196141299,
+      0.08123627019465607
+    ],
+    "h_aggregate": null,
+    "h_true": 1.1978381928721862,
+    "h_gap": null,
+    "feature": {
+      "edge_index": 5,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.1,
+        4.9
+      ],
+      "distance": 1.2628381928721861,
+      "edge_normal": [
+        -1.0,
+        -0.0
+      ],
+      "vertex_index": 5,
+      "edge_length": 1.8000000000000003,
+      "signed_distance": 1.2628381928721861,
+      "sd_gradient": [
+        -0.9684381511488884,
+        0.24925398171207375
+      ],
+      "sd_foot": [
+        3.1,
+        4.9
+      ],
+      "h_true": 1.1978381928721862
+    },
+    "support": null,
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": null,
+    "alignment": null,
+    "n_bar": null,
+    "offset": null,
+    "anchor": null,
+    "n_near": null,
+    "n_same_face": null,
+    "cap_active": null,
+    "rhs_uncapped": null,
+    "rhs_capped": null,
+    "rhs_no_margin_uncapped": null,
+    "decompose": {
+      "delta_p": [
+        0.000516297409806965,
+        0.004061813509732559
+      ],
+      "delta_p_minus_dt_u": [
+        -9.996344030316351e-17,
+        -2.445960101127298e-16
+      ],
+      "h_k": 1.1973587499758278,
+      "h_kplus": 1.1978381928721862,
+      "delta_h": 0.000479442896358373,
+      "match": {
+        "matched": false,
+        "reason": "no_object_row_either_frame",
+        "new_activation": false
+      },
+      "unmatched_new_row": false
+    },
+    "hold_true": {
+      "sampled_min_sd": 1.2628381928721861,
+      "lipschitz_lower_bound": 1.2626334681057116,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.0818899065898146
+    },
+    "status": "optimal"
+  }
+]

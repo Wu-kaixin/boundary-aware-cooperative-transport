@@ -1,0 +1,6518 @@
+[
+  {
+    "frame": 0,
+    "in_K0": true,
+    "k0_bad_agents": [],
+    "solver_status": [
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal"
+    ],
+    "hold_min_pair": 0.34624919628347994,
+    "hold_min_object_clearance": 0.808581250458891,
+    "agents": {
+      "0": {
+        "position": [
+          4.130629795374544,
+          2.1105995767884353
+        ],
+        "position_next": [
+          4.127354405004347,
+          2.1277903248211074
+        ],
+        "u": [
+          -0.06550780740393099,
+          0.3438149606534443
+        ],
+        "u_nom": [
+          -0.06550780740393099,
+          0.3438149606534443
+        ],
+        "status": "optimal",
+        "zero_input_feasible": true,
+        "zero_input_feasible_with_rho": true,
+        "row_kinds": [
+          "agent",
+          "wall",
+          "wall",
+          "wall",
+          "wall"
+        ],
+        "b_original": [
+          -0.6527725638174848,
+          -82.61259590749087,
+          -77.38740409250912,
+          -42.2119915357687,
+          -117.78800846423128
+        ],
+        "b_effective": [
+          -0.6527725638174848,
+          -82.61259590749087,
+          -77.38740409250912,
+          -42.2119915357687,
+          -117.78800846423128
+        ],
+        "residual_original": [
+          0.7766820042090489,
+          82.54708810008694,
+          77.45291189991305,
+          42.55580649642215,
+          117.44419350357784
+        ],
+        "h_object_qp": [],
+        "explain": {
+          "trace": {
+            "dropped_empty": true,
+            "reason": "out_of_range",
+            "distance": 1.2894004232115646
+          },
+          "A": [],
+          "rhs": [],
+          "rhs_no_margin": [],
+          "h_object": [],
+          "feature": {
+            "edge_index": 0,
+            "kind": "edge",
+            "t": 0.5816436221090899,
+            "foot": [
+              4.130629795374544,
+              3.4
+            ],
+            "distance": 1.2894004232115646,
+            "edge_normal": [
+              0.0,
+              -1.0
+            ],
+            "vertex_index": 1,
+            "edge_length": 1.5999999999999996,
+            "signed_distance": 1.2894004232115646,
+            "sd_gradient": [
+              0.0,
+              -1.0
+            ],
+            "sd_foot": [
+              4.130629795374544,
+              3.4
+            ],
+            "h_true": 1.2244004232115646
+          },
+          "support": null,
+          "h_aggregate": null,
+          "h_true": 1.2244004232115646,
+          "h_agg_minus_h_true": null,
+          "plane_more_conservative_than_sd": null,
+          "zero_in_F_hard": true,
+          "zero_in_F_rho": true,
+          "rho_over_gamma": 0.0025
+        },
+        "decompose": {
+          "delta_p": [
+            -0.0032753903701969733,
+            0.017190748032672065
+          ],
+          "delta_p_minus_dt_u": [
+            -4.2370620900733513e-16,
+            -1.491862189340054e-16
+          ],
+          "h_k": null,
+          "h_kplus": null,
+          "delta_h": null,
+          "match": {
+            "matched": false,
+            "reason": "no_previous_object_row",
+            "new_activation": true
+          },
+          "unmatched_new_row": true
+        },
+        "hold_true": {
+          "sampled_min_sd": 1.2722096751788925,
+          "lipschitz_lower_bound": 1.2713346751788925,
+          "n_samples": 21,
+          "h": 0.0025,
+          "speed": 0.35
+        },
+        "true_clearance_minus_r_safe": 1.2244004232115646,
+        "qp_object_residual_min": 0.0,
+        "qp_agent_residual_min": 0.7766820042090489,
+        "qp_wall_residual_min": 42.55580649642215
+      }
+    }
+  },
+  {
+    "frame": 1,
+    "in_K0": true,
+    "k0_bad_agents": [],
+    "solver_status": [
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal"
+    ],
+    "hold_min_pair": 0.3491017002072686,
+    "hold_min_object_clearance": 0.7913522290412869,
+    "agents": {
+      "0": {
+        "position": [
+          4.127354405004347,
+          2.1277903248211074
+        ],
+        "position_next": [
+          4.124795999958781,
+          2.145102302282473
+        ],
+        "u": [
+          -0.051168100911318994,
+          0.3462395492273075
+        ],
+        "u_nom": [
+          -0.051168100911318994,
+          0.3462395492273075
+        ],
+        "status": "optimal",
+        "zero_input_feasible": true,
+        "zero_input_feasible_with_rho": true,
+        "row_kinds": [
+          "agent",
+          "wall",
+          "wall",
+          "wall",
+          "wall"
+        ],
+        "b_original": [
+          -0.6922720001130463,
+          -82.54708810008694,
+          -77.45291189991306,
+          -42.55580649642214,
+          -117.44419350357784
+        ],
+        "b_effective": [
+          -0.6922720001130463,
+          -82.54708810008694,
+          -77.45291189991306,
+          -42.55580649642214,
+          -117.44419350357784
+        ],
+        "residual_original": [
+          0.8098141230726952,
+          82.49591999917561,
+          77.50408000082439,
+          42.90204604564945,
+          117.09795395435053
+        ],
+        "h_object_qp": [],
+        "explain": {
+          "trace": {
+            "dropped_empty": true,
+            "reason": "out_of_range",
+            "distance": 1.2722096751788925
+          },
+          "A": [],
+          "rhs": [],
+          "rhs_no_margin": [],
+          "h_object": [],
+          "feature": {
+            "edge_index": 0,
+            "kind": "edge",
+            "t": 0.5795965031277169,
+            "foot": [
+              4.127354405004347,
+              3.4
+            ],
+            "distance": 1.2722096751788925,
+            "edge_normal": [
+              0.0,
+              -1.0
+            ],
+            "vertex_index": 1,
+            "edge_length": 1.5999999999999996,
+            "signed_distance": 1.2722096751788925,
+            "sd_gradient": [
+              0.0,
+              -1.0
+            ],
+            "sd_foot": [
+              4.127354405004347,
+              3.4
+            ],
+            "h_true": 1.2072096751788925
+          },
+          "support": null,
+          "h_aggregate": null,
+          "h_true": 1.2072096751788925,
+          "h_agg_minus_h_true": null,
+          "plane_more_conservative_than_sd": null,
+          "zero_in_F_hard": true,
+          "zero_in_F_rho": true,
+          "rho_over_gamma": 0.0025
+        },
+        "decompose": {
+          "delta_p": [
+            -0.0025584050455655927,
+            0.01731197746136548
+          ],
+          "delta_p_minus_dt_u": [
+            3.5735303605122226e-16,
+            1.0408340855860843e-16
+          ],
+          "h_k": null,
+          "h_kplus": null,
+          "delta_h": null,
+          "match": {
+            "matched": false,
+            "reason": "no_object_row_either_frame",
+            "new_activation": false
+          },
+          "unmatched_new_row": false
+        },
+        "hold_true": {
+          "sampled_min_sd": 1.254897697717527,
+          "lipschitz_lower_bound": 1.254022697717527,
+          "n_samples": 21,
+          "h": 0.0025,
+          "speed": 0.35
+        },
+        "true_clearance_minus_r_safe": 1.2072096751788925,
+        "qp_object_residual_min": 0.0,
+        "qp_agent_residual_min": 0.8098141230726952,
+        "qp_wall_residual_min": 42.90204604564945
+      }
+    }
+  },
+  {
+    "frame": 2,
+    "in_K0": true,
+    "k0_bad_agents": [],
+    "solver_status": [
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal"
+    ],
+    "hold_min_pair": 0.3520025188767428,
+    "hold_min_object_clearance": 0.7741260110470793,
+    "agents": {
+      "0": {
+        "position": [
+          4.124795999958781,
+          2.145102302282473
+        ],
+        "position_next": [
+          4.12264328718782,
+          2.1624693926468876
+        ],
+        "u": [
+          -0.04305425541922443,
+          0.34734180728829084
+        ],
+        "u_nom": [
+          -0.04305425541922443,
+          0.34734180728829084
+        ],
+        "status": "optimal",
+        "zero_input_feasible": true,
+        "zero_input_feasible_with_rho": true,
+        "row_kinds": [
+          "agent",
+          "wall",
+          "wall",
+          "wall",
+          "wall"
+        ],
+        "b_original": [
+          -0.7297375699855072,
+          -82.49591999917563,
+          -77.50408000082437,
+          -42.902046045649456,
+          -117.09795395435054
+        ],
+        "b_effective": [
+          -0.7297375699855072,
+          -82.49591999917563,
+          -77.50408000082437,
+          -42.902046045649456,
+          -117.09795395435054
+        ],
+        "residual_original": [
+          0.8469670097970659,
+          82.4528657437564,
+          77.5471342562436,
+          43.249387852937744,
+          116.75061214706226
+        ],
+        "h_object_qp": [],
+        "explain": {
+          "trace": {
+            "dropped_empty": true,
+            "reason": "out_of_range",
+            "distance": 1.254897697717527
+          },
+          "A": [],
+          "rhs": [],
+          "rhs_no_margin": [],
+          "h_object": [],
+          "feature": {
+            "edge_index": 0,
+            "kind": "edge",
+            "t": 0.5779974999742384,
+            "foot": [
+              4.124795999958781,
+              3.4
+            ],
+            "distance": 1.254897697717527,
+            "edge_normal": [
+              0.0,
+              -1.0
+            ],
+            "vertex_index": 1,
+            "edge_length": 1.5999999999999996,
+            "signed_distance": 1.254897697717527,
+            "sd_gradient": [
+              0.0,
+              -1.0
+            ],
+            "sd_foot": [
+              4.124795999958781,
+              3.4
+            ],
+            "h_true": 1.189897697717527
+          },
+          "support": null,
+          "h_aggregate": null,
+          "h_true": 1.189897697717527,
+          "h_agg_minus_h_true": null,
+          "plane_more_conservative_than_sd": null,
+          "zero_in_F_hard": true,
+          "zero_in_F_rho": true,
+          "rho_over_gamma": 0.0025
+        },
+        "decompose": {
+          "delta_p": [
+            -0.002152712770961074,
+            0.01736709036441475
+          ],
+          "delta_p_minus_dt_u": [
+            1.478851763270228e-16,
+            2.0816681711721685e-16
+          ],
+          "h_k": null,
+          "h_kplus": null,
+          "delta_h": null,
+          "match": {
+            "matched": false,
+            "reason": "no_object_row_either_frame",
+            "new_activation": false
+          },
+          "unmatched_new_row": false
+        },
+        "hold_true": {
+          "sampled_min_sd": 1.2375306073531123,
+          "lipschitz_lower_bound": 1.2366556073531123,
+          "n_samples": 21,
+          "h": 0.0025,
+          "speed": 0.35
+        },
+        "true_clearance_minus_r_safe": 1.189897697717527,
+        "qp_object_residual_min": 0.0,
+        "qp_agent_residual_min": 0.8469670097970659,
+        "qp_wall_residual_min": 43.249387852937744
+      }
+    }
+  },
+  {
+    "frame": 3,
+    "in_K0": true,
+    "k0_bad_agents": [],
+    "solver_status": [
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal"
+    ],
+    "hold_min_pair": 0.35484462723139604,
+    "hold_min_object_clearance": 0.7569026584631329,
+    "agents": {
+      "0": {
+        "position": [
+          4.12264328718782,
+          2.1624693926468876
+        ],
+        "position_next": [
+          4.120760722699192,
+          2.1798678394438333
+        ],
+        "u": [
+          -0.03765128977256313,
+          0.3479689359389175
+        ],
+        "u_nom": [
+          -0.03765128977256313,
+          0.3479689359389175
+        ],
+        "status": "optimal",
+        "zero_input_feasible": true,
+        "zero_input_feasible_with_rho": true,
+        "row_kinds": [
+          "agent",
+          "wall",
+          "wall",
+          "wall",
+          "wall"
+        ],
+        "b_original": [
+          -0.7659554082623683,
+          -82.4528657437564,
+          -77.5471342562436,
+          -43.24938785293775,
+          -116.75061214706226
+        ],
+        "b_effective": [
+          -0.7659554082623683,
+          -82.4528657437564,
+          -77.5471342562436,
+          -43.24938785293775,
+          -116.75061214706226
+        ],
+        "residual_original": [
+          0.8853709975648013,
+          82.41521445398384,
+          77.58478554601616,
+          43.59735678887667,
+          116.40264321112333
+        ],
+        "h_object_qp": [],
+        "explain": {
+          "trace": {
+            "dropped_empty": true,
+            "reason": "out_of_range",
+            "distance": 1.2375306073531123
+          },
+          "A": [],
+          "rhs": [],
+          "rhs_no_margin": [],
+          "h_object": [],
+          "feature": {
+            "edge_index": 0,
+            "kind": "edge",
+            "t": 0.5766520544923877,
+            "foot": [
+              4.12264328718782,
+              3.4
+            ],
+            "distance": 1.2375306073531123,
+            "edge_normal": [
+              0.0,
+              -1.0
+            ],
+            "vertex_index": 1,
+            "edge_length": 1.5999999999999996,
+            "signed_distance": 1.2375306073531123,
+            "sd_gradient": [
+              0.0,
+              -1.0
+            ],
+            "sd_foot": [
+              4.12264328718782,
+              3.4
+            ],
+            "h_true": 1.1725306073531123
+          },
+          "support": null,
+          "h_aggregate": null,
+          "h_true": 1.1725306073531123,
+          "h_agg_minus_h_true": null,
+          "plane_more_conservative_than_sd": null,
+          "zero_in_F_hard": true,
+          "zero_in_F_rho": true,
+          "rho_over_gamma": 0.0025
+        },
+        "decompose": {
+          "delta_p": [
+            -0.0018825644886284465,
+            0.017398446796945688
+          ],
+          "delta_p_minus_dt_u": [
+            -2.899156609226239e-16,
+            -1.8735013540549517e-16
+          ],
+          "h_k": null,
+          "h_kplus": null,
+          "delta_h": null,
+          "match": {
+            "matched": false,
+            "reason": "no_object_row_either_frame",
+            "new_activation": false
+          },
+          "unmatched_new_row": false
+        },
+        "hold_true": {
+          "sampled_min_sd": 1.2201321605561666,
+          "lipschitz_lower_bound": 1.2192571605561666,
+          "n_samples": 21,
+          "h": 0.0025,
+          "speed": 0.35
+        },
+        "true_clearance_minus_r_safe": 1.1725306073531123,
+        "qp_object_residual_min": 0.0,
+        "qp_agent_residual_min": 0.8853709975648013,
+        "qp_wall_residual_min": 43.59735678887667
+      }
+    }
+  },
+  {
+    "frame": 4,
+    "in_K0": true,
+    "k0_bad_agents": [],
+    "solver_status": [
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal"
+    ],
+    "hold_min_pair": 0.3572077371727836,
+    "hold_min_object_clearance": 0.7396822140708916,
+    "agents": {
+      "0": {
+        "position": [
+          4.120760722699192,
+          2.1798678394438333
+        ],
+        "position_next": [
+          4.119059409043026,
+          2.1972849440207525
+        ],
+        "u": [
+          -0.03402627312330891,
+          0.34834209153838697
+        ],
+        "u_nom": [
+          -0.03402627312330891,
+          0.34834209153838697
+        ],
+        "status": "optimal",
+        "zero_input_feasible": true,
+        "zero_input_feasible_with_rho": true,
+        "row_kinds": [
+          "agent",
+          "wall",
+          "wall",
+          "wall",
+          "wall"
+        ],
+        "b_original": [
+          -0.8014045161971093,
+          -82.41521445398384,
+          -77.58478554601616,
+          -43.59735678887667,
+          -116.40264321112333
+        ],
+        "b_effective": [
+          -0.8014045161971093,
+          -82.41521445398384,
+          -77.58478554601616,
+          -43.59735678887667,
+          -116.40264321112333
+        ],
+        "residual_original": [
+          0.9245589706243317,
+          82.38118818086053,
+          77.61881181913947,
+          43.94569888041505,
+          116.05430111958495
+        ],
+        "h_object_qp": [],
+        "explain": {
+          "trace": {
+            "dropped_empty": true,
+            "reason": "out_of_range",
+            "distance": 1.2201321605561666
+          },
+          "A": [],
+          "rhs": [],
+          "rhs_no_margin": [],
+          "h_object": [],
+          "feature": {
+            "edge_index": 0,
+            "kind": "edge",
+            "t": 0.5754754516869949,
+            "foot": [
+              4.120760722699192,
+              3.4
+            ],
+            "distance": 1.2201321605561666,
+            "edge_normal": [
+              0.0,
+              -1.0
+            ],
+            "vertex_index": 1,
+            "edge_length": 1.5999999999999996,
+            "signed_distance": 1.2201321605561666,
+            "sd_gradient": [
+              0.0,
+              -1.0
+            ],
+            "sd_foot": [
+              4.120760722699192,
+              3.4
+            ],
+            "h_true": 1.1551321605561666
+          },
+          "support": null,
+          "h_aggregate": null,
+          "h_true": 1.1551321605561666,
+          "h_agg_minus_h_true": null,
+          "plane_more_conservative_than_sd": null,
+          "zero_in_F_hard": true,
+          "zero_in_F_rho": true,
+          "rho_over_gamma": 0.0025
+        },
+        "decompose": {
+          "delta_p": [
+            -0.0017013136561656594,
+            0.01741710457691914
+          ],
+          "delta_p_minus_dt_u": [
+            -2.1402150884863858e-16,
+            -2.0816681711721685e-16
+          ],
+          "h_k": null,
+          "h_kplus": null,
+          "delta_h": null,
+          "match": {
+            "matched": false,
+            "reason": "no_object_row_either_frame",
+            "new_activation": false
+          },
+          "unmatched_new_row": false
+        },
+        "hold_true": {
+          "sampled_min_sd": 1.2027150559792474,
+          "lipschitz_lower_bound": 1.2018400559792475,
+          "n_samples": 21,
+          "h": 0.0025,
+          "speed": 0.35
+        },
+        "true_clearance_minus_r_safe": 1.1551321605561666,
+        "qp_object_residual_min": 0.0,
+        "qp_agent_residual_min": 0.9245589706243317,
+        "qp_wall_residual_min": 43.94569888041505
+      }
+    }
+  },
+  {
+    "frame": 5,
+    "in_K0": true,
+    "k0_bad_agents": [],
+    "solver_status": [
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal"
+    ],
+    "hold_min_pair": 0.3594389290734262,
+    "hold_min_object_clearance": 0.7224632865826413,
+    "agents": {
+      "0": {
+        "position": [
+          4.119059409043026,
+          2.1972849440207525
+        ],
+        "position_next": [
+          4.1174872459014,
+          2.2147141810395126
+        ],
+        "u": [
+          -0.031443262832511615,
+          0.34858474037519993
+        ],
+        "u_nom": [
+          -0.031443262832511615,
+          0.34858474037519993
+        ],
+        "status": "optimal",
+        "zero_input_feasible": true,
+        "zero_input_feasible_with_rho": true,
+        "row_kinds": [
+          "agent",
+          "wall",
+          "wall",
+          "wall",
+          "wall"
+        ],
+        "b_original": [
+          -0.8361943927994562,
+          -82.38118818086052,
+          -77.61881181913947,
+          -43.945698880415044,
+          -116.05430111958493
+        ],
+        "b_effective": [
+          -0.8361943927994562,
+          -82.38118818086052,
+          -77.61881181913947,
+          -43.945698880415044,
+          -116.05430111958493
+        ],
+        "residual_original": [
+          0.9638547204291904,
+          82.34974491802801,
+          77.65025508197198,
+          44.294283620790246,
+          115.70571637920973
+        ],
+        "h_object_qp": [],
+        "explain": {
+          "trace": {
+            "dropped_empty": true,
+            "reason": "out_of_range",
+            "distance": 1.2027150559792474
+          },
+          "A": [],
+          "rhs": [],
+          "rhs_no_margin": [],
+          "h_object": [],
+          "feature": {
+            "edge_index": 0,
+            "kind": "edge",
+            "t": 0.5744121306518915,
+            "foot": [
+              4.119059409043026,
+              3.4
+            ],
+            "distance": 1.2027150559792474,
+            "edge_normal": [
+              0.0,
+              -1.0
+            ],
+            "vertex_index": 1,
+            "edge_length": 1.5999999999999996,
+            "signed_distance": 1.2027150559792474,
+            "sd_gradient": [
+              0.0,
+              -1.0
+            ],
+            "sd_foot": [
+              4.119059409043026,
+              3.4
+            ],
+            "h_true": 1.1377150559792475
+          },
+          "support": null,
+          "h_aggregate": null,
+          "h_true": 1.1377150559792475,
+          "h_agg_minus_h_true": null,
+          "plane_more_conservative_than_sd": null,
+          "zero_in_F_hard": true,
+          "zero_in_F_rho": true,
+          "rho_over_gamma": 0.0025
+        },
+        "decompose": {
+          "delta_p": [
+            -0.001572163141625893,
+            0.01742923701876009
+          ],
+          "delta_p_minus_dt_u": [
+            -3.122502256758253e-16,
+            9.367506770274758e-17
+          ],
+          "h_k": null,
+          "h_kplus": null,
+          "delta_h": null,
+          "match": {
+            "matched": false,
+            "reason": "no_object_row_either_frame",
+            "new_activation": false
+          },
+          "unmatched_new_row": false
+        },
+        "hold_true": {
+          "sampled_min_sd": 1.1852858189604873,
+          "lipschitz_lower_bound": 1.1844108189604874,
+          "n_samples": 21,
+          "h": 0.0025,
+          "speed": 0.3499999999999999
+        },
+        "true_clearance_minus_r_safe": 1.1377150559792475,
+        "qp_object_residual_min": 0.0,
+        "qp_agent_residual_min": 0.9638547204291903,
+        "qp_wall_residual_min": 44.294283620790246
+      }
+    }
+  },
+  {
+    "frame": 6,
+    "in_K0": true,
+    "k0_bad_agents": [],
+    "solver_status": [
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal"
+    ],
+    "hold_min_pair": 0.3616245831079693,
+    "hold_min_object_clearance": 0.7052455449474404,
+    "agents": {
+      "0": {
+        "position": [
+          4.1174872459014,
+          2.2147141810395126
+        ],
+        "position_next": [
+          4.116021105849285,
+          2.2321526566996037
+        ],
+        "u": [
+          -0.029322801042300183,
+          0.34876951320181876
+        ],
+        "u_nom": [
+          -0.029322801042300183,
+          0.34876951320181876
+        ],
+        "status": "optimal",
+        "zero_input_feasible": true,
+        "zero_input_feasible_with_rho": true,
+        "row_kinds": [
+          "agent",
+          "agent",
+          "wall",
+          "wall",
+          "wall",
+          "wall"
+        ],
+        "b_original": [
+          -7.4436289871979024,
+          -0.8702959333983866,
+          -82.349744918028,
+          -77.65025508197199,
+          -44.294283620790246,
+          -115.70571637920973
+        ],
+        "b_effective": [
+          -7.4436289871979024,
+          -0.8702959333983866,
+          -82.349744918028,
+          -77.65025508197199,
+          -44.294283620790246,
+          -115.70571637920973
+        ],
+        "residual_original": [
+          6.947293959884432,
+          1.0025282177981927,
+          82.3204221169857,
+          77.67957788301429,
+          44.64305313399206,
+          115.35694686600792
+        ],
+        "h_object_qp": [],
+        "explain": {
+          "trace": {
+            "dropped_empty": true,
+            "reason": "out_of_range",
+            "distance": 1.1852858189604873
+          },
+          "A": [],
+          "rhs": [],
+          "rhs_no_margin": [],
+          "h_object": [],
+          "feature": {
+            "edge_index": 0,
+            "kind": "edge",
+            "t": 0.5734295286883752,
+            "foot": [
+              4.1174872459014,
+              3.4
+            ],
+            "distance": 1.1852858189604873,
+            "edge_normal": [
+              0.0,
+              -1.0
+            ],
+            "vertex_index": 1,
+            "edge_length": 1.5999999999999996,
+            "signed_distance": 1.1852858189604873,
+            "sd_gradient": [
+              0.0,
+              -1.0
+            ],
+            "sd_foot": [
+              4.1174872459014,
+              3.4
+            ],
+            "h_true": 1.1202858189604874
+          },
+          "support": null,
+          "h_aggregate": null,
+          "h_true": 1.1202858189604874,
+          "h_agg_minus_h_true": null,
+          "plane_more_conservative_than_sd": null,
+          "zero_in_F_hard": true,
+          "zero_in_F_rho": true,
+          "rho_over_gamma": 0.0025
+        },
+        "decompose": {
+          "delta_p": [
+            -0.0014661400521154277,
+            0.017438475660091157
+          ],
+          "delta_p_minus_dt_u": [
+            -4.185020385794047e-16,
+            2.185751579730777e-16
+          ],
+          "h_k": null,
+          "h_kplus": null,
+          "delta_h": null,
+          "match": {
+            "matched": false,
+            "reason": "no_object_row_either_frame",
+            "new_activation": false
+          },
+          "unmatched_new_row": false
+        },
+        "hold_true": {
+          "sampled_min_sd": 1.1678473433003962,
+          "lipschitz_lower_bound": 1.1669723433003962,
+          "n_samples": 21,
+          "h": 0.0025,
+          "speed": 0.3499999999999999
+        },
+        "true_clearance_minus_r_safe": 1.1202858189604874,
+        "qp_object_residual_min": 0.0,
+        "qp_agent_residual_min": 1.0025282177981927,
+        "qp_wall_residual_min": 44.64305313399206
+      }
+    }
+  },
+  {
+    "frame": 7,
+    "in_K0": true,
+    "k0_bad_agents": [],
+    "solver_status": [
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal"
+    ],
+    "hold_min_pair": 0.36368103820104514,
+    "hold_min_object_clearance": 0.6880278586898647,
+    "agents": {
+      "0": {
+        "position": [
+          4.116021105849285,
+          2.2321526566996037
+        ],
+        "position_next": [
+          4.114959324487646,
+          2.2496204161535256
+        ],
+        "u": [
+          -0.021235627232773373,
+          0.3493551890784373
+        ],
+        "u_nom": [
+          -0.021235627232773373,
+          0.3493551890784373
+        ],
+        "status": "optimal",
+        "zero_input_feasible": true,
+        "zero_input_feasible_with_rho": true,
+        "row_kinds": [
+          "agent",
+          "agent",
+          "wall",
+          "wall",
+          "wall",
+          "wall"
+        ],
+        "b_original": [
+          -7.271517479571102,
+          -0.9035610758961368,
+          -82.3204221169857,
+          -77.6795778830143,
+          -44.64305313399207,
+          -115.35694686600792
+        ],
+        "b_effective": [
+          -7.271517479571102,
+          -0.9035610758961368,
+          -82.3204221169857,
+          -77.6795778830143,
+          -44.64305313399207,
+          -115.35694686600792
+        ],
+        "residual_original": [
+          6.804868151452446,
+          1.0328922301815493,
+          82.29918648975293,
+          77.70081351024707,
+          44.99240832307051,
+          115.00759167692948
+        ],
+        "h_object_qp": [],
+        "explain": {
+          "trace": {
+            "dropped_empty": true,
+            "reason": "out_of_range",
+            "distance": 1.1678473433003962
+          },
+          "A": [],
+          "rhs": [],
+          "rhs_no_margin": [],
+          "h_object": [],
+          "feature": {
+            "edge_index": 0,
+            "kind": "edge",
+            "t": 0.572513191155803,
+            "foot": [
+              4.116021105849285,
+              3.4
+            ],
+            "distance": 1.1678473433003962,
+            "edge_normal": [
+              0.0,
+              -1.0
+            ],
+            "vertex_index": 1,
+            "edge_length": 1.5999999999999996,
+            "signed_distance": 1.1678473433003962,
+            "sd_gradient": [
+              0.0,
+              -1.0
+            ],
+            "sd_foot": [
+              4.116021105849285,
+              3.4
+            ],
+            "h_true": 1.1028473433003962
+          },
+          "support": null,
+          "h_aggregate": null,
+          "h_true": 1.1028473433003962,
+          "h_agg_minus_h_true": null,
+          "plane_more_conservative_than_sd": null,
+          "zero_in_F_hard": true,
+          "zero_in_F_rho": true,
+          "rho_over_gamma": 0.0025
+        },
+        "decompose": {
+          "delta_p": [
+            -0.0010617813616384808,
+            0.01746775945392187
+          ],
+          "delta_p_minus_dt_u": [
+            1.8800065670898647e-16,
+            3.469446951953614e-18
+          ],
+          "h_k": null,
+          "h_kplus": null,
+          "delta_h": null,
+          "match": {
+            "matched": false,
+            "reason": "no_object_row_either_frame",
+            "new_activation": false
+          },
+          "unmatched_new_row": false
+        },
+        "hold_true": {
+          "sampled_min_sd": 1.1503795838464743,
+          "lipschitz_lower_bound": 1.1495045838464744,
+          "n_samples": 21,
+          "h": 0.0025,
+          "speed": 0.35
+        },
+        "true_clearance_minus_r_safe": 1.1028473433003962,
+        "qp_object_residual_min": 0.0,
+        "qp_agent_residual_min": 1.0328922301815493,
+        "qp_wall_residual_min": 44.99240832307051
+      }
+    }
+  },
+  {
+    "frame": 8,
+    "in_K0": true,
+    "k0_bad_agents": [],
+    "solver_status": [
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal"
+    ],
+    "hold_min_pair": 0.36574209065263447,
+    "hold_min_object_clearance": 0.6708097196838867,
+    "agents": {
+      "0": {
+        "position": [
+          4.114959324487646,
+          2.2496204161535256
+        ],
+        "position_next": [
+          4.114076258247483,
+          2.2670981217814243
+        ],
+        "u": [
+          -0.01766132480327747,
+          0.34955411255797453
+        ],
+        "u_nom": [
+          -0.01766132480327747,
+          0.34955411255797453
+        ],
+        "status": "optimal",
+        "zero_input_feasible": true,
+        "zero_input_feasible_with_rho": true,
+        "row_kinds": [
+          "agent",
+          "agent",
+          "wall",
+          "wall",
+          "wall",
+          "wall"
+        ],
+        "b_original": [
+          -7.104582900113487,
+          -0.9346929339044474,
+          -82.29918648975293,
+          -77.70081351024707,
+          -44.99240832307051,
+          -115.00759167692948
+        ],
+        "b_effective": [
+          -7.104582900113487,
+          -0.9346929339044474,
+          -82.29918648975293,
+          -77.70081351024707,
+          -44.99240832307051,
+          -115.00759167692948
+        ],
+        "residual_original": [
+          6.654436131327025,
+          1.0658404340470107,
+          82.28152516494966,
+          77.71847483505034,
+          45.34196243562848,
+          114.65803756437151
+        ],
+        "h_object_qp": [],
+        "explain": {
+          "trace": {
+            "dropped_empty": true,
+            "reason": "out_of_range",
+            "distance": 1.1503795838464743
+          },
+          "A": [],
+          "rhs": [],
+          "rhs_no_margin": [],
+          "h_object": [],
+          "feature": {
+            "edge_index": 0,
+            "kind": "edge",
+            "t": 0.571849577804779,
+            "foot": [
+              4.114959324487646,
+              3.4
+            ],
+            "distance": 1.1503795838464743,
+            "edge_normal": [
+              0.0,
+              -1.0
+            ],
+            "vertex_index": 1,
+            "edge_length": 1.5999999999999996,
+            "signed_distance": 1.1503795838464743,
+            "sd_gradient": [
+              0.0,
+              -1.0
+            ],
+            "sd_foot": [
+              4.114959324487646,
+              3.4
+            ],
+            "h_true": 1.0853795838464744
+          },
+          "support": null,
+          "h_aggregate": null,
+          "h_true": 1.0853795838464744,
+          "h_agg_minus_h_true": null,
+          "plane_more_conservative_than_sd": null,
+          "zero_in_F_hard": true,
+          "zero_in_F_rho": true,
+          "rho_over_gamma": 0.0025
+        },
+        "decompose": {
+          "delta_p": [
+            -0.0008830662401635436,
+            0.017477705627898743
+          ],
+          "delta_p_minus_dt_u": [
+            3.3003114130458755e-16,
+            1.734723475976807e-17
+          ],
+          "h_k": null,
+          "h_kplus": null,
+          "delta_h": null,
+          "match": {
+            "matched": false,
+            "reason": "no_object_row_either_frame",
+            "new_activation": false
+          },
+          "unmatched_new_row": false
+        },
+        "hold_true": {
+          "sampled_min_sd": 1.1329018782185756,
+          "lipschitz_lower_bound": 1.1320268782185756,
+          "n_samples": 21,
+          "h": 0.0025,
+          "speed": 0.35
+        },
+        "true_clearance_minus_r_safe": 1.0853795838464744,
+        "qp_object_residual_min": 0.0,
+        "qp_agent_residual_min": 1.0658404340470107,
+        "qp_wall_residual_min": 45.34196243562848
+      }
+    }
+  },
+  {
+    "frame": 9,
+    "in_K0": true,
+    "k0_bad_agents": [],
+    "solver_status": [
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal"
+    ],
+    "hold_min_pair": 0.3678309367654242,
+    "hold_min_object_clearance": 0.6535901435725593,
+    "agents": {
+      "0": {
+        "position": [
+          4.114076258247483,
+          2.2670981217814243
+        ],
+        "position_next": [
+          4.113246442317255,
+          2.2845784365818487
+        ],
+        "u": [
+          -0.01659631860455076,
+          0.3496062960084904
+        ],
+        "u_nom": [
+          -0.01659631860455076,
+          0.3496062960084904
+        ],
+        "status": "optimal",
+        "zero_input_feasible": true,
+        "zero_input_feasible_with_rho": true,
+        "row_kinds": [
+          "agent",
+          "agent",
+          "wall",
+          "wall",
+          "wall",
+          "wall"
+        ],
+        "b_original": [
+          -6.940809069640476,
+          -0.9642214950552465,
+          -82.28152516494966,
+          -77.71847483505034,
+          -45.34196243562848,
+          -114.6580375643715
+        ],
+        "b_effective": [
+          -6.940809069640476,
+          -0.9642214950552465,
+          -82.28152516494966,
+          -77.71847483505034,
+          -45.34196243562848,
+          -114.6580375643715
+        ],
+        "residual_original": [
+          6.499900906454074,
+          1.0996439855632973,
+          82.2649288463451,
+          77.7350711536549,
+          45.69156873163697,
+          114.30843126836301
+        ],
+        "h_object_qp": [],
+        "explain": {
+          "trace": {
+            "dropped_empty": true,
+            "reason": "out_of_range",
+            "distance": 1.1329018782185756
+          },
+          "A": [],
+          "rhs": [],
+          "rhs_no_margin": [],
+          "h_object": [],
+          "feature": {
+            "edge_index": 0,
+            "kind": "edge",
+            "t": 0.5712976614046769,
+            "foot": [
+              4.114076258247483,
+              3.4
+            ],
+            "distance": 1.1329018782185756,
+            "edge_normal": [
+              0.0,
+              -1.0
+            ],
+            "vertex_index": 1,
+            "edge_length": 1.5999999999999996,
+            "signed_distance": 1.1329018782185756,
+            "sd_gradient": [
+              0.0,
+              -1.0
+            ],
+            "sd_foot": [
+              4.114076258247483,
+              3.4
+            ],
+            "h_true": 1.0679018782185756
+          },
+          "support": null,
+          "h_aggregate": null,
+          "h_true": 1.0679018782185756,
+          "h_agg_minus_h_true": null,
+          "plane_more_conservative_than_sd": null,
+          "zero_in_F_hard": true,
+          "zero_in_F_rho": true,
+          "rho_over_gamma": 0.0025
+        },
+        "decompose": {
+          "delta_p": [
+            -0.0008298159302277952,
+            0.017480314800424335
+          ],
+          "delta_p_minus_dt_u": [
+            -2.5717275531356165e-16,
+            -1.8735013540549517e-16
+          ],
+          "h_k": null,
+          "h_kplus": null,
+          "delta_h": null,
+          "match": {
+            "matched": false,
+            "reason": "no_object_row_either_frame",
+            "new_activation": false
+          },
+          "unmatched_new_row": false
+        },
+        "hold_true": {
+          "sampled_min_sd": 1.1154215634181512,
+          "lipschitz_lower_bound": 1.1145465634181513,
+          "n_samples": 21,
+          "h": 0.0025,
+          "speed": 0.35
+        },
+        "true_clearance_minus_r_safe": 1.0679018782185756,
+        "qp_object_residual_min": 0.0,
+        "qp_agent_residual_min": 1.0996439855632973,
+        "qp_wall_residual_min": 45.69156873163697
+      }
+    }
+  },
+  {
+    "frame": 10,
+    "in_K0": true,
+    "k0_bad_agents": [],
+    "solver_status": [
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal"
+    ],
+    "hold_min_pair": 0.36995113773468574,
+    "hold_min_object_clearance": 0.6363675582303496,
+    "agents": {
+      "0": {
+        "position": [
+          4.113246442317255,
+          2.2845784365818487
+        ],
+        "position_next": [
+          4.11244204530684,
+          2.30205993953353
+        ],
+        "u": [
+          -0.016087940208304244,
+          0.34963005903362204
+        ],
+        "u_nom": [
+          -0.016087940208304244,
+          0.34963005903362204
+        ],
+        "status": "optimal",
+        "zero_input_feasible": true,
+        "zero_input_feasible_with_rho": true,
+        "row_kinds": [
+          "agent",
+          "agent",
+          "wall",
+          "wall",
+          "wall",
+          "wall"
+        ],
+        "b_original": [
+          -6.779097563194511,
+          -0.9923482407650137,
+          -82.2649288463451,
+          -77.7350711536549,
+          -45.69156873163697,
+          -114.30843126836302
+        ],
+        "b_effective": [
+          -6.779097563194511,
+          -0.9923482407650137,
+          -82.2649288463451,
+          -77.7350711536549,
+          -45.69156873163697,
+          -114.30843126836302
+        ],
+        "residual_original": [
+          6.345828849201466,
+          1.1321389451047352,
+          82.24884090613679,
+          77.75115909386321,
+          46.04119879067059,
+          113.9588012093294
+        ],
+        "h_object_qp": [],
+        "explain": {
+          "trace": {
+            "dropped_empty": true,
+            "reason": "out_of_range",
+            "distance": 1.1154215634181512
+          },
+          "A": [],
+          "rhs": [],
+          "rhs_no_margin": [],
+          "h_object": [],
+          "feature": {
+            "edge_index": 0,
+            "kind": "edge",
+            "t": 0.5707790264482845,
+            "foot": [
+              4.113246442317255,
+              3.4
+            ],
+            "distance": 1.1154215634181512,
+            "edge_normal": [
+              0.0,
+              -1.0
+            ],
+            "vertex_index": 1,
+            "edge_length": 1.5999999999999996,
+            "signed_distance": 1.1154215634181512,
+            "sd_gradient": [
+              0.0,
+              -1.0
+            ],
+            "sd_foot": [
+              4.113246442317255,
+              3.4
+            ],
+            "h_true": 1.0504215634181513
+          },
+          "support": null,
+          "h_aggregate": null,
+          "h_true": 1.0504215634181513,
+          "h_agg_minus_h_true": null,
+          "plane_more_conservative_than_sd": null,
+          "zero_in_F_hard": true,
+          "zero_in_F_rho": true,
+          "rho_over_gamma": 0.0025
+        },
+        "decompose": {
+          "delta_p": [
+            -0.0008043970104152365,
+            0.01748150295168127
+          ],
+          "delta_p_minus_dt_u": [
+            -2.42861286636753e-17,
+            1.700029006457271e-16
+          ],
+          "h_k": null,
+          "h_kplus": null,
+          "delta_h": null,
+          "match": {
+            "matched": false,
+            "reason": "no_object_row_either_frame",
+            "new_activation": false
+          },
+          "unmatched_new_row": false
+        },
+        "hold_true": {
+          "sampled_min_sd": 1.09794006046647,
+          "lipschitz_lower_bound": 1.09706506046647,
+          "n_samples": 21,
+          "h": 0.0025,
+          "speed": 0.35000000000000003
+        },
+        "true_clearance_minus_r_safe": 1.0504215634181513,
+        "qp_object_residual_min": 0.0,
+        "qp_agent_residual_min": 1.1321389451047352,
+        "qp_wall_residual_min": 46.04119879067059
+      }
+    }
+  },
+  {
+    "frame": 11,
+    "in_K0": true,
+    "k0_bad_agents": [],
+    "solver_status": [
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal"
+    ],
+    "hold_min_pair": 0.37183520057716085,
+    "hold_min_object_clearance": 0.6191412649358925,
+    "agents": {
+      "0": {
+        "position": [
+          4.11244204530684,
+          2.30205993953353
+        ],
+        "position_next": [
+          4.111772469633393,
+          2.3195471253682354
+        ],
+        "u": [
+          -0.013391513468934331,
+          0.3497437166941121
+        ],
+        "u_nom": [
+          -0.013391513468934331,
+          0.3497437166941121
+        ],
+        "status": "optimal",
+        "zero_input_feasible": true,
+        "zero_input_feasible_with_rho": true,
+        "row_kinds": [
+          "agent",
+          "agent",
+          "wall",
+          "wall",
+          "wall",
+          "wall"
+        ],
+        "b_original": [
+          -6.619170028054839,
+          -1.0189048043448745,
+          -82.24884090613679,
+          -77.7511590938632,
+          -46.0411987906706,
+          -113.9588012093294
+        ],
+        "b_effective": [
+          -6.619170028054839,
+          -1.0189048043448745,
+          -82.24884090613679,
+          -77.7511590938632,
+          -46.0411987906706,
+          -113.9588012093294
+        ],
+        "residual_original": [
+          6.199604429354007,
+          1.159714807916011,
+          82.23544939266786,
+          77.76455060733213,
+          46.39094250736471,
+          113.60905749263529
+        ],
+        "h_object_qp": [],
+        "explain": {
+          "trace": {
+            "dropped_empty": true,
+            "reason": "out_of_range",
+            "distance": 1.09794006046647
+          },
+          "A": [],
+          "rhs": [],
+          "rhs_no_margin": [],
+          "h_object": [],
+          "feature": {
+            "edge_index": 0,
+            "kind": "edge",
+            "t": 0.5702762783167749,
+            "foot": [
+              4.11244204530684,
+              3.4
+            ],
+            "distance": 1.09794006046647,
+            "edge_normal": [
+              0.0,
+              -1.0
+            ],
+            "vertex_index": 1,
+            "edge_length": 1.5999999999999996,
+            "signed_distance": 1.09794006046647,
+            "sd_gradient": [
+              0.0,
+              -1.0
+            ],
+            "sd_foot": [
+              4.11244204530684,
+              3.4
+            ],
+            "h_true": 1.03294006046647
+          },
+          "support": null,
+          "h_aggregate": null,
+          "h_true": 1.03294006046647,
+          "h_agg_minus_h_true": null,
+          "plane_more_conservative_than_sd": null,
+          "zero_in_F_hard": true,
+          "zero_in_F_rho": true,
+          "rho_over_gamma": 0.0025
+        },
+        "decompose": {
+          "delta_p": [
+            -0.0006695756734469427,
+            0.017487185834705432
+          ],
+          "delta_p_minus_dt_u": [
+            -2.2605615296322767e-16,
+            -1.734723475976807e-16
+          ],
+          "h_k": null,
+          "h_kplus": null,
+          "delta_h": null,
+          "match": {
+            "matched": false,
+            "reason": "no_object_row_either_frame",
+            "new_activation": false
+          },
+          "unmatched_new_row": false
+        },
+        "hold_true": {
+          "sampled_min_sd": 1.0804528746317645,
+          "lipschitz_lower_bound": 1.0795778746317646,
+          "n_samples": 21,
+          "h": 0.0025,
+          "speed": 0.35
+        },
+        "true_clearance_minus_r_safe": 1.03294006046647,
+        "qp_object_residual_min": 0.0,
+        "qp_agent_residual_min": 1.159714807916011,
+        "qp_wall_residual_min": 46.39094250736471
+      }
+    }
+  },
+  {
+    "frame": 12,
+    "in_K0": true,
+    "k0_bad_agents": [],
+    "solver_status": [
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal"
+    ],
+    "hold_min_pair": 0.3737557489685056,
+    "hold_min_object_clearance": 0.6019102389679467,
+    "agents": {
+      "0": {
+        "position": [
+          4.111772469633393,
+          2.3195471253682354
+        ],
+        "position_next": [
+          4.111112321580167,
+          2.3370346696368807
+        ],
+        "u": [
+          -0.013202961064504925,
+          0.34975088537290244
+        ],
+        "u_nom": [
+          -0.013202961064504925,
+          0.34975088537290244
+        ],
+        "status": "optimal",
+        "zero_input_feasible": true,
+        "zero_input_feasible_with_rho": true,
+        "row_kinds": [
+          "agent",
+          "agent",
+          "wall",
+          "wall",
+          "wall",
+          "wall"
+        ],
+        "b_original": [
+          -6.461920538226437,
+          -1.0432045111990045,
+          -82.23544939266785,
+          -77.76455060733214,
+          -46.390942507364706,
+          -113.6090574926353
+        ],
+        "b_effective": [
+          -6.461920538226437,
+          -1.0432045111990045,
+          -82.23544939266785,
+          -77.76455060733214,
+          -46.390942507364706,
+          -113.6090574926353
+        ],
+        "residual_original": [
+          6.0490418610742775,
+          1.1874184806003365,
+          82.22224643160334,
+          77.77775356839665,
+          46.74069339273761,
+          113.2593066072624
+        ],
+        "h_object_qp": [],
+        "explain": {
+          "trace": {
+            "dropped_empty": true,
+            "reason": "out_of_range",
+            "distance": 1.0804528746317645
+          },
+          "A": [],
+          "rhs": [],
+          "rhs_no_margin": [],
+          "h_object": [],
+          "feature": {
+            "edge_index": 0,
+            "kind": "edge",
+            "t": 0.5698577935208705,
+            "foot": [
+              4.111772469633393,
+              3.4
+            ],
+            "distance": 1.0804528746317645,
+            "edge_normal": [
+              0.0,
+              -1.0
+            ],
+            "vertex_index": 1,
+            "edge_length": 1.5999999999999996,
+            "signed_distance": 1.0804528746317645,
+            "sd_gradient": [
+              0.0,
+              -1.0
+            ],
+            "sd_foot": [
+              4.111772469633393,
+              3.4
+            ],
+            "h_true": 1.0154528746317646
+          },
+          "support": null,
+          "h_aggregate": null,
+          "h_true": 1.0154528746317646,
+          "h_agg_minus_h_true": null,
+          "plane_more_conservative_than_sd": null,
+          "zero_in_F_hard": true,
+          "zero_in_F_rho": true,
+          "rho_over_gamma": 0.0025
+        },
+        "decompose": {
+          "delta_p": [
+            -0.0006601480532255621,
+            0.017487544268645294
+          ],
+          "delta_p_minus_dt_u": [
+            -3.1582809284502744e-16,
+            1.700029006457271e-16
+          ],
+          "h_k": null,
+          "h_kplus": null,
+          "delta_h": null,
+          "match": {
+            "matched": false,
+            "reason": "no_object_row_either_frame",
+            "new_activation": false
+          },
+          "unmatched_new_row": false
+        },
+        "hold_true": {
+          "sampled_min_sd": 1.0629653303631192,
+          "lipschitz_lower_bound": 1.0620903303631193,
+          "n_samples": 21,
+          "h": 0.0025,
+          "speed": 0.35
+        },
+        "true_clearance_minus_r_safe": 1.0154528746317646,
+        "qp_object_residual_min": 0.0,
+        "qp_agent_residual_min": 1.1874184806003365,
+        "qp_wall_residual_min": 46.74069339273761
+      }
+    }
+  },
+  {
+    "frame": 13,
+    "in_K0": true,
+    "k0_bad_agents": [],
+    "solver_status": [
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal"
+    ],
+    "hold_min_pair": 0.37555209526285227,
+    "hold_min_object_clearance": 0.5846729436071179,
+    "agents": {
+      "0": {
+        "position": [
+          4.111112321580167,
+          2.3370346696368807
+        ],
+        "position_next": [
+          4.110462618345743,
+          2.354522605069835
+        ],
+        "u": [
+          -0.01299406468849413,
+          0.3497587086590857
+        ],
+        "u_nom": [
+          -0.01299406468849413,
+          0.3497587086590857
+        ],
+        "status": "optimal",
+        "zero_input_feasible": true,
+        "zero_input_feasible_with_rho": true,
+        "row_kinds": [
+          "agent",
+          "agent",
+          "wall",
+          "wall",
+          "wall",
+          "wall"
+        ],
+        "b_original": [
+          -6.306268155118641,
+          -1.0656054943049595,
+          -82.22224643160334,
+          -77.77775356839665,
+          -46.74069339273761,
+          -113.25930660726239
+        ],
+        "b_effective": [
+          -6.306268155118641,
+          -1.0656054943049595,
+          -82.22224643160334,
+          -77.77775356839665,
+          -46.74069339273761,
+          -113.25930660726239
+        ],
+        "residual_original": [
+          5.900148753952993,
+          1.2124106557006111,
+          82.20925236691484,
+          77.79074763308515,
+          47.0904521013967,
+          112.90954789860331
+        ],
+        "h_object_qp": [],
+        "explain": {
+          "trace": {
+            "dropped_empty": true,
+            "reason": "out_of_range",
+            "distance": 1.0629653303631192
+          },
+          "A": [],
+          "rhs": [],
+          "rhs_no_margin": [],
+          "h_object": [],
+          "feature": {
+            "edge_index": 0,
+            "kind": "edge",
+            "t": 0.5694452009876045,
+            "foot": [
+              4.111112321580167,
+              3.4
+            ],
+            "distance": 1.0629653303631192,
+            "edge_normal": [
+              0.0,
+              -1.0
+            ],
+            "vertex_index": 1,
+            "edge_length": 1.5999999999999996,
+            "signed_distance": 1.0629653303631192,
+            "sd_gradient": [
+              0.0,
+              -1.0
+            ],
+            "sd_foot": [
+              4.111112321580167,
+              3.4
+            ],
+            "h_true": 0.9979653303631193
+          },
+          "support": null,
+          "h_aggregate": null,
+          "h_true": 0.9979653303631193,
+          "h_agg_minus_h_true": null,
+          "plane_more_conservative_than_sd": null,
+          "zero_in_F_hard": true,
+          "zero_in_F_rho": true,
+          "rho_over_gamma": 0.0025
+        },
+        "decompose": {
+          "delta_p": [
+            -0.0006497032344245923,
+            0.017487935432954238
+          ],
+          "delta_p_minus_dt_u": [
+            1.1416648876272362e-16,
+            -4.85722573273506e-17
+          ],
+          "h_k": null,
+          "h_kplus": null,
+          "delta_h": null,
+          "match": {
+            "matched": false,
+            "reason": "no_object_row_either_frame",
+            "new_activation": false
+          },
+          "unmatched_new_row": false
+        },
+        "hold_true": {
+          "sampled_min_sd": 1.045477394930165,
+          "lipschitz_lower_bound": 1.044602394930165,
+          "n_samples": 21,
+          "h": 0.0025,
+          "speed": 0.35
+        },
+        "true_clearance_minus_r_safe": 0.9979653303631193,
+        "qp_object_residual_min": 0.0,
+        "qp_agent_residual_min": 1.2124106557006111,
+        "qp_wall_residual_min": 47.0904521013967
+      }
+    }
+  },
+  {
+    "frame": 14,
+    "in_K0": true,
+    "k0_bad_agents": [],
+    "solver_status": [
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal"
+    ],
+    "hold_min_pair": 0.37713233119375456,
+    "hold_min_object_clearance": 0.5674278248085407,
+    "agents": {
+      "0": {
+        "position": [
+          4.110462618345743,
+          2.354522605069835
+        ],
+        "position_next": [
+          4.109807658659369,
+          2.3720103444265734
+        ],
+        "u": [
+          -0.013099193727468995,
+          0.34975478713477276
+        ],
+        "u_nom": [
+          -0.013099193727468995,
+          0.34975478713477276
+        ],
+        "status": "optimal",
+        "zero_input_feasible": true,
+        "zero_input_feasible_with_rho": true,
+        "row_kinds": [
+          "agent",
+          "agent",
+          "wall",
+          "wall",
+          "wall",
+          "wall"
+        ],
+        "b_original": [
+          -6.1522645408560415,
+          -1.0857085303815157,
+          -82.20925236691485,
+          -77.79074763308515,
+          -47.09045210139669,
+          -112.9095478986033
+        ],
+        "b_effective": [
+          -6.1522645408560415,
+          -1.0857085303815157,
+          -82.20925236691485,
+          -77.79074763308515,
+          -47.09045210139669,
+          -112.9095478986033
+        ],
+        "residual_original": [
+          5.752073537637438,
+          1.2346849761492475,
+          82.19615317318738,
+          77.80384682681262,
+          47.44020688853146,
+          112.55979311146852
+        ],
+        "h_object_qp": [],
+        "explain": {
+          "trace": {
+            "dropped_empty": true,
+            "reason": "out_of_range",
+            "distance": 1.045477394930165
+          },
+          "A": [],
+          "rhs": [],
+          "rhs_no_margin": [],
+          "h_object": [],
+          "feature": {
+            "edge_index": 0,
+            "kind": "edge",
+            "t": 0.5690391364660893,
+            "foot": [
+              4.110462618345743,
+              3.4
+            ],
+            "distance": 1.045477394930165,
+            "edge_normal": [
+              0.0,
+              -1.0
+            ],
+            "vertex_index": 1,
+            "edge_length": 1.5999999999999996,
+            "signed_distance": 1.045477394930165,
+            "sd_gradient": [
+              0.0,
+              -1.0
+            ],
+            "sd_foot": [
+              4.110462618345743,
+              3.4
+            ],
+            "h_true": 0.9804773949301651
+          },
+          "support": null,
+          "h_aggregate": null,
+          "h_true": 0.9804773949301651,
+          "h_agg_minus_h_true": null,
+          "plane_more_conservative_than_sd": null,
+          "zero_in_F_hard": true,
+          "zero_in_F_rho": true,
+          "rho_over_gamma": 0.0025
+        },
+        "decompose": {
+          "delta_p": [
+            -0.0006549596863738572,
+            0.01748773935673853
+          ],
+          "delta_p_minus_dt_u": [
+            -4.07334756202804e-16,
+            -1.0755285551056204e-16
+          ],
+          "h_k": null,
+          "h_kplus": null,
+          "delta_h": null,
+          "match": {
+            "matched": false,
+            "reason": "no_object_row_either_frame",
+            "new_activation": false
+          },
+          "unmatched_new_row": false
+        },
+        "hold_true": {
+          "sampled_min_sd": 1.0279896555734265,
+          "lipschitz_lower_bound": 1.0271146555734265,
+          "n_samples": 21,
+          "h": 0.0025,
+          "speed": 0.35
+        },
+        "true_clearance_minus_r_safe": 0.9804773949301651,
+        "qp_object_residual_min": 0.0,
+        "qp_agent_residual_min": 1.2346849761492475,
+        "qp_wall_residual_min": 47.44020688853146
+      }
+    }
+  },
+  {
+    "frame": 15,
+    "in_K0": true,
+    "k0_bad_agents": [],
+    "solver_status": [
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal"
+    ],
+    "hold_min_pair": 0.3787596990276041,
+    "hold_min_object_clearance": 0.5501743042540832,
+    "agents": {
+      "0": {
+        "position": [
+          4.109807658659369,
+          2.3720103444265734
+        ],
+        "position_next": [
+          4.109177577348203,
+          2.389498997820741
+        ],
+        "u": [
+          -0.012601626223318455,
+          0.34977306788334595
+        ],
+        "u_nom": [
+          -0.012601626223318455,
+          0.34977306788334595
+        ],
+        "status": "optimal",
+        "zero_input_feasible": true,
+        "zero_input_feasible_with_rho": true,
+        "row_kinds": [
+          "agent",
+          "agent",
+          "wall",
+          "wall",
+          "wall",
+          "wall"
+        ],
+        "b_original": [
+          -5.999703454830762,
+          -1.1035040223455903,
+          -82.19615317318737,
+          -77.80384682681262,
+          -47.44020688853146,
+          -112.55979311146852
+        ],
+        "b_effective": [
+          -5.999703454830762,
+          -1.1035040223455903,
+          -82.19615317318737,
+          -77.80384682681262,
+          -47.44020688853146,
+          -112.55979311146852
+        ],
+        "residual_original": [
+          5.607082317806622,
+          1.2529972398521239,
+          82.18355154696405,
+          77.81644845303593,
+          47.78997995641481,
+          112.21002004358517
+        ],
+        "h_object_qp": [],
+        "explain": {
+          "trace": {
+            "dropped_empty": true,
+            "reason": "out_of_range",
+            "distance": 1.0279896555734265
+          },
+          "A": [],
+          "rhs": [],
+          "rhs_no_margin": [],
+          "h_object": [],
+          "feature": {
+            "edge_index": 0,
+            "kind": "edge",
+            "t": 0.5686297866621055,
+            "foot": [
+              4.109807658659369,
+              3.4
+            ],
+            "distance": 1.0279896555734265,
+            "edge_normal": [
+              0.0,
+              -1.0
+            ],
+            "vertex_index": 1,
+            "edge_length": 1.5999999999999996,
+            "signed_distance": 1.0279896555734265,
+            "sd_gradient": [
+              0.0,
+              -1.0
+            ],
+            "sd_foot": [
+              4.109807658659369,
+              3.4
+            ],
+            "h_true": 0.9629896555734265
+          },
+          "support": null,
+          "h_aggregate": null,
+          "h_true": 0.9629896555734265,
+          "h_agg_minus_h_true": null,
+          "plane_more_conservative_than_sd": null,
+          "zero_in_F_hard": true,
+          "zero_in_F_rho": true,
+          "rho_over_gamma": 0.0025
+        },
+        "decompose": {
+          "delta_p": [
+            -0.0006300813111659309,
+            0.017488653394167386
+          ],
+          "delta_p_minus_dt_u": [
+            -8.131516293641283e-18,
+            8.673617379884035e-17
+          ],
+          "h_k": null,
+          "h_kplus": null,
+          "delta_h": null,
+          "match": {
+            "matched": false,
+            "reason": "no_object_row_either_frame",
+            "new_activation": false
+          },
+          "unmatched_new_row": false
+        },
+        "hold_true": {
+          "sampled_min_sd": 1.010501002179259,
+          "lipschitz_lower_bound": 1.0096260021792591,
+          "n_samples": 21,
+          "h": 0.0025,
+          "speed": 0.3499999999999999
+        },
+        "true_clearance_minus_r_safe": 0.9629896555734265,
+        "qp_object_residual_min": 0.0,
+        "qp_agent_residual_min": 1.2529972398521239,
+        "qp_wall_residual_min": 47.78997995641481
+      }
+    }
+  },
+  {
+    "frame": 16,
+    "in_K0": true,
+    "k0_bad_agents": [],
+    "solver_status": [
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal"
+    ],
+    "hold_min_pair": 0.3804393708803339,
+    "hold_min_object_clearance": 0.5329103410295681,
+    "agents": {
+      "0": {
+        "position": [
+          4.109177577348203,
+          2.389498997820741
+        ],
+        "position_next": [
+          4.108538028051006,
+          2.4069873075359896
+        ],
+        "u": [
+          -0.012790985943925528,
+          0.34976619430497036
+        ],
+        "u_nom": [
+          -0.012790985943925528,
+          0.34976619430497036
+        ],
+        "status": "optimal",
+        "zero_input_feasible": true,
+        "zero_input_feasible_with_rho": true,
+        "row_kinds": [
+          "agent",
+          "agent",
+          "wall",
+          "wall",
+          "wall",
+          "wall"
+        ],
+        "b_original": [
+          -5.848856162962299,
+          -1.1184572054203046,
+          -82.18355154696405,
+          -77.81644845303593,
+          -47.78997995641481,
+          -112.21002004358517
+        ],
+        "b_effective": [
+          -5.848856162962299,
+          -1.1184572054203046,
+          -82.18355154696405,
+          -77.81644845303593,
+          -47.78997995641481,
+          -112.21002004358517
+        ],
+        "residual_original": [
+          5.462002438799885,
+          1.2684818347470548,
+          82.17076056102013,
+          77.82923943897985,
+          48.13974615071978,
+          111.8602538492802
+        ],
+        "h_object_qp": [],
+        "explain": {
+          "trace": {
+            "dropped_empty": true,
+            "reason": "out_of_range",
+            "distance": 1.010501002179259
+          },
+          "A": [],
+          "rhs": [],
+          "rhs_no_margin": [],
+          "h_object": [],
+          "feature": {
+            "edge_index": 0,
+            "kind": "edge",
+            "t": 0.5682359858426268,
+            "foot": [
+              4.109177577348203,
+              3.4
+            ],
+            "distance": 1.010501002179259,
+            "edge_normal": [
+              0.0,
+              -1.0
+            ],
+            "vertex_index": 1,
+            "edge_length": 1.5999999999999996,
+            "signed_distance": 1.010501002179259,
+            "sd_gradient": [
+              0.0,
+              -1.0
+            ],
+            "sd_foot": [
+              4.109177577348203,
+              3.4
+            ],
+            "h_true": 0.9455010021792591
+          },
+          "support": null,
+          "h_aggregate": null,
+          "h_true": 0.9455010021792591,
+          "h_agg_minus_h_true": null,
+          "plane_more_conservative_than_sd": null,
+          "zero_in_F_hard": true,
+          "zero_in_F_rho": true,
+          "rho_over_gamma": 0.0025
+        },
+        "decompose": {
+          "delta_p": [
+            -0.0006395492971966732,
+            0.01748830971524873
+          ],
+          "delta_p_minus_dt_u": [
+            -3.968179951296946e-16,
+            2.1163626406917047e-16
+          ],
+          "h_k": null,
+          "h_kplus": null,
+          "delta_h": null,
+          "match": {
+            "matched": false,
+            "reason": "no_object_row_either_frame",
+            "new_activation": false
+          },
+          "unmatched_new_row": false
+        },
+        "hold_true": {
+          "sampled_min_sd": 0.9930126924640104,
+          "lipschitz_lower_bound": 0.9921376924640104,
+          "n_samples": 21,
+          "h": 0.0025,
+          "speed": 0.35
+        },
+        "true_clearance_minus_r_safe": 0.9455010021792591,
+        "qp_object_residual_min": 0.0,
+        "qp_agent_residual_min": 1.2684818347470548,
+        "qp_wall_residual_min": 48.13974615071978
+      }
+    }
+  },
+  {
+    "frame": 17,
+    "in_K0": true,
+    "k0_bad_agents": [],
+    "solver_status": [
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal"
+    ],
+    "hold_min_pair": 0.3821776791470798,
+    "hold_min_object_clearance": 0.5156346476873297,
+    "agents": {
+      "0": {
+        "position": [
+          4.108538028051006,
+          2.4069873075359896
+        ],
+        "position_next": [
+          4.1081322874011725,
+          2.4244826033187157
+        ],
+        "u": [
+          -0.00811481299666924,
+          0.3499059156545214
+        ],
+        "u_nom": [
+          -0.00811481299666924,
+          0.3499059156545214
+        ],
+        "status": "optimal",
+        "zero_input_feasible": true,
+        "zero_input_feasible_with_rho": true,
+        "row_kinds": [
+          "agent",
+          "agent",
+          "wall",
+          "wall",
+          "wall",
+          "wall"
+        ],
+        "b_original": [
+          -5.699380844230609,
+          -1.1315966506353035,
+          -82.17076056102012,
+          -77.82923943897987,
+          -48.13974615071979,
+          -111.8602538492802
+        ],
+        "b_effective": [
+          -5.699380844230609,
+          -1.1315966506353035,
+          -82.17076056102012,
+          -77.82923943897987,
+          -48.13974615071979,
+          -111.8602538492802
+        ],
+        "residual_original": [
+          5.331008481666914,
+          1.2758433346821854,
+          82.16264574802345,
+          77.83735425197654,
+          48.48965206637431,
+          111.51034793362568
+        ],
+        "h_object_qp": [],
+        "explain": {
+          "trace": {
+            "dropped_empty": true,
+            "reason": "out_of_range",
+            "distance": 0.9930126924640104
+          },
+          "A": [],
+          "rhs": [],
+          "rhs_no_margin": [],
+          "h_object": [],
+          "feature": {
+            "edge_index": 0,
+            "kind": "edge",
+            "t": 0.5678362675318789,
+            "foot": [
+              4.108538028051006,
+              3.4
+            ],
+            "distance": 0.9930126924640104,
+            "edge_normal": [
+              0.0,
+              -1.0
+            ],
+            "vertex_index": 1,
+            "edge_length": 1.5999999999999996,
+            "signed_distance": 0.9930126924640104,
+            "sd_gradient": [
+              0.0,
+              -1.0
+            ],
+            "sd_foot": [
+              4.108538028051006,
+              3.4
+            ],
+            "h_true": 0.9280126924640104
+          },
+          "support": null,
+          "h_aggregate": null,
+          "h_true": 0.9280126924640104,
+          "h_agg_minus_h_true": null,
+          "plane_more_conservative_than_sd": null,
+          "zero_in_F_hard": true,
+          "zero_in_F_rho": true,
+          "rho_over_gamma": 0.0025
+        },
+        "decompose": {
+          "delta_p": [
+            -0.00040574064983367464,
+            0.017495295782726128
+          ],
+          "delta_p_minus_dt_u": [
+            -2.126662561330317e-16,
+            5.898059818321144e-17
+          ],
+          "h_k": null,
+          "h_kplus": null,
+          "delta_h": null,
+          "match": {
+            "matched": false,
+            "reason": "no_object_row_either_frame",
+            "new_activation": false
+          },
+          "unmatched_new_row": false
+        },
+        "hold_true": {
+          "sampled_min_sd": 0.9755173966812842,
+          "lipschitz_lower_bound": 0.9746423966812843,
+          "n_samples": 21,
+          "h": 0.0025,
+          "speed": 0.3499999999999999
+        },
+        "true_clearance_minus_r_safe": 0.9280126924640104,
+        "qp_object_residual_min": 0.0,
+        "qp_agent_residual_min": 1.2758433346821854,
+        "qp_wall_residual_min": 48.48965206637431
+      }
+    }
+  },
+  {
+    "frame": 18,
+    "in_K0": true,
+    "k0_bad_agents": [],
+    "solver_status": [
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal"
+    ],
+    "hold_min_pair": 0.38398114433240704,
+    "hold_min_object_clearance": 0.4983489513232457,
+    "agents": {
+      "0": {
+        "position": [
+          4.1081322874011725,
+          2.4244826033187157
+        ],
+        "position_next": [
+          4.1077329045883015,
+          2.441978045392833
+        ],
+        "u": [
+          -0.007987656257423209,
+          0.34990884148233986
+        ],
+        "u_nom": [
+          -0.007987656257423209,
+          0.34990884148233986
+        ],
+        "status": "optimal",
+        "zero_input_feasible": true,
+        "zero_input_feasible_with_rho": true,
+        "row_kinds": [
+          "agent",
+          "agent",
+          "wall",
+          "wall",
+          "wall",
+          "wall"
+        ],
+        "b_original": [
+          -5.553203877829807,
+          -1.1422296886046464,
+          -82.16264574802345,
+          -77.83735425197655,
+          -48.48965206637431,
+          -111.5103479336257
+        ],
+        "b_effective": [
+          -5.553203877829807,
+          -1.1422296886046464,
+          -82.16264574802345,
+          -77.83735425197655,
+          -48.48965206637431,
+          -111.5103479336257
+        ],
+        "residual_original": [
+          5.191364598659497,
+          1.28645722629362,
+          82.15465809176602,
+          77.84534190823398,
+          48.83956090785665,
+          111.16043909214335
+        ],
+        "h_object_qp": [],
+        "explain": {
+          "trace": {
+            "dropped_empty": true,
+            "reason": "out_of_range",
+            "distance": 0.9755173966812842
+          },
+          "A": [],
+          "rhs": [],
+          "rhs_no_margin": [],
+          "h_object": [],
+          "feature": {
+            "edge_index": 0,
+            "kind": "edge",
+            "t": 0.5675826796257328,
+            "foot": [
+              4.1081322874011725,
+              3.4
+            ],
+            "distance": 0.9755173966812842,
+            "edge_normal": [
+              0.0,
+              -1.0
+            ],
+            "vertex_index": 1,
+            "edge_length": 1.5999999999999996,
+            "signed_distance": 0.9755173966812842,
+            "sd_gradient": [
+              0.0,
+              -1.0
+            ],
+            "sd_foot": [
+              4.1081322874011725,
+              3.4
+            ],
+            "h_true": 0.9105173966812843
+          },
+          "support": null,
+          "h_aggregate": null,
+          "h_true": 0.9105173966812843,
+          "h_agg_minus_h_true": null,
+          "plane_more_conservative_than_sd": null,
+          "zero_in_F_hard": true,
+          "zero_in_F_rho": true,
+          "rho_over_gamma": 0.0025
+        },
+        "decompose": {
+          "delta_p": [
+            -0.0003993828128709964,
+            0.01749544207411713
+          ],
+          "delta_p_minus_dt_u": [
+            1.6403978869705682e-16,
+            1.3530843112619095e-16
+          ],
+          "h_k": null,
+          "h_kplus": null,
+          "delta_h": null,
+          "match": {
+            "matched": false,
+            "reason": "no_object_row_either_frame",
+            "new_activation": false
+          },
+          "unmatched_new_row": false
+        },
+        "hold_true": {
+          "sampled_min_sd": 0.9580219546071671,
+          "lipschitz_lower_bound": 0.9571469546071671,
+          "n_samples": 21,
+          "h": 0.0025,
+          "speed": 0.35
+        },
+        "true_clearance_minus_r_safe": 0.9105173966812843,
+        "qp_object_residual_min": 0.0,
+        "qp_agent_residual_min": 1.28645722629362,
+        "qp_wall_residual_min": 48.83956090785665
+      }
+    }
+  },
+  {
+    "frame": 19,
+    "in_K0": true,
+    "k0_bad_agents": [],
+    "solver_status": [
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal"
+    ],
+    "hold_min_pair": 0.3858519385270251,
+    "hold_min_object_clearance": 0.4810493860440565,
+    "agents": {
+      "0": {
+        "position": [
+          4.1077329045883015,
+          2.441978045392833
+        ],
+        "position_next": [
+          4.1073212089956685,
+          2.4594732020580077
+        ],
+        "u": [
+          -0.008233911852661632,
+          0.3499031333034938
+        ],
+        "u_nom": [
+          -0.008233911852661632,
+          0.3499031333034938
+        ],
+        "status": "optimal",
+        "zero_input_feasible": true,
+        "zero_input_feasible_with_rho": true,
+        "row_kinds": [
+          "agent",
+          "agent",
+          "wall",
+          "wall",
+          "wall",
+          "wall"
+        ],
+        "b_original": [
+          -5.407601977199359,
+          -1.1516221990518833,
+          -82.15465809176602,
+          -77.84534190823396,
+          -48.83956090785665,
+          -111.16043909214333
+        ],
+        "b_effective": [
+          -5.407601977199359,
+          -1.1516221990518833,
+          -82.15465809176602,
+          -77.84534190823396,
+          -48.83956090785665,
+          -111.16043909214333
+        ],
+        "residual_original": [
+          5.05146396762283,
+          1.2962816653094604,
+          82.14642417991337,
+          77.85357582008662,
+          49.18946404116014,
+          110.81053595883984
+        ],
+        "h_object_qp": [],
+        "explain": {
+          "trace": {
+            "dropped_empty": true,
+            "reason": "out_of_range",
+            "distance": 0.9580219546071671
+          },
+          "A": [],
+          "rhs": [],
+          "rhs_no_margin": [],
+          "h_object": [],
+          "feature": {
+            "edge_index": 0,
+            "kind": "edge",
+            "t": 0.5673330653676886,
+            "foot": [
+              4.1077329045883015,
+              3.4
+            ],
+            "distance": 0.9580219546071671,
+            "edge_normal": [
+              0.0,
+              -1.0
+            ],
+            "vertex_index": 1,
+            "edge_length": 1.5999999999999996,
+            "signed_distance": 0.9580219546071671,
+            "sd_gradient": [
+              0.0,
+              -1.0
+            ],
+            "sd_foot": [
+              4.1077329045883015,
+              3.4
+            ],
+            "h_true": 0.8930219546071672
+          },
+          "support": null,
+          "h_aggregate": null,
+          "h_true": 0.8930219546071672,
+          "h_agg_minus_h_true": null,
+          "plane_more_conservative_than_sd": null,
+          "zero_in_F_hard": true,
+          "zero_in_F_rho": true,
+          "rho_over_gamma": 0.0025
+        },
+        "decompose": {
+          "delta_p": [
+            -0.00041169559263298794,
+            0.01749515666517487
+          ],
+          "delta_p_minus_dt_u": [
+            9.367506770274758e-17,
+            1.8041124150158794e-16
+          ],
+          "h_k": null,
+          "h_kplus": null,
+          "delta_h": null,
+          "match": {
+            "matched": false,
+            "reason": "no_object_row_either_frame",
+            "new_activation": false
+          },
+          "unmatched_new_row": false
+        },
+        "hold_true": {
+          "sampled_min_sd": 0.9405267979419922,
+          "lipschitz_lower_bound": 0.9396517979419923,
+          "n_samples": 21,
+          "h": 0.0025,
+          "speed": 0.35
+        },
+        "true_clearance_minus_r_safe": 0.8930219546071672,
+        "qp_object_residual_min": 0.0,
+        "qp_agent_residual_min": 1.2962816653094604,
+        "qp_wall_residual_min": 49.18946404116014
+      }
+    }
+  },
+  {
+    "frame": 20,
+    "in_K0": true,
+    "k0_bad_agents": [],
+    "solver_status": [
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal"
+    ],
+    "hold_min_pair": 0.38741514220836526,
+    "hold_min_object_clearance": 0.4637350444643908,
+    "agents": {
+      "0": {
+        "position": [
+          4.1073212089956685,
+          2.4594732020580077
+        ],
+        "position_next": [
+          4.106896400092714,
+          2.4769680452238085
+        ],
+        "u": [
+          -0.008496178059083702,
+          0.3498968633160182
+        ],
+        "u_nom": [
+          -0.008496178059083702,
+          0.3498968633160182
+        ],
+        "status": "optimal",
+        "zero_input_feasible": true,
+        "zero_input_feasible_with_rho": true,
+        "row_kinds": [
+          "agent",
+          "agent",
+          "wall",
+          "wall",
+          "wall",
+          "wall"
+        ],
+        "b_original": [
+          -5.263328102748251,
+          -1.1600782514165098,
+          -82.14642417991337,
+          -77.85357582008662,
+          -49.18946404116015,
+          -110.81053595883984
+        ],
+        "b_effective": [
+          -5.263328102748251,
+          -1.1600782514165098,
+          -82.14642417991337,
+          -77.85357582008662,
+          -49.18946404116015,
+          -110.81053595883984
+        ],
+        "residual_original": [
+          4.912913189831874,
+          1.3051697916667448,
+          82.13792800185428,
+          77.86207199814571,
+          49.53936090447617,
+          110.46063909552382
+        ],
+        "h_object_qp": [],
+        "explain": {
+          "trace": {
+            "dropped_empty": true,
+            "reason": "out_of_range",
+            "distance": 0.9405267979419922
+          },
+          "A": [],
+          "rhs": [],
+          "rhs_no_margin": [],
+          "h_object": [],
+          "feature": {
+            "edge_index": 0,
+            "kind": "edge",
+            "t": 0.567075755622293,
+            "foot": [
+              4.1073212089956685,
+              3.4
+            ],
+            "distance": 0.9405267979419922,
+            "edge_normal": [
+              0.0,
+              -1.0
+            ],
+            "vertex_index": 1,
+            "edge_length": 1.5999999999999996,
+            "signed_distance": 0.9405267979419922,
+            "sd_gradient": [
+              0.0,
+              -1.0
+            ],
+            "sd_foot": [
+              4.1073212089956685,
+              3.4
+            ],
+            "h_true": 0.8755267979419923
+          },
+          "support": null,
+          "h_aggregate": null,
+          "h_true": 0.8755267979419923,
+          "h_agg_minus_h_true": null,
+          "plane_more_conservative_than_sd": null,
+          "zero_in_F_hard": true,
+          "zero_in_F_rho": true,
+          "rho_over_gamma": 0.0025
+        },
+        "decompose": {
+          "delta_p": [
+            -0.00042480890295415463,
+            0.017494843165800855
+          ],
+          "delta_p_minus_dt_u": [
+            3.0466081046842675e-17,
+            -5.551115123125783e-17
+          ],
+          "h_k": null,
+          "h_kplus": null,
+          "delta_h": null,
+          "match": {
+            "matched": false,
+            "reason": "no_object_row_either_frame",
+            "new_activation": false
+          },
+          "unmatched_new_row": false
+        },
+        "hold_true": {
+          "sampled_min_sd": 0.9230319547761914,
+          "lipschitz_lower_bound": 0.9221569547761914,
+          "n_samples": 21,
+          "h": 0.0025,
+          "speed": 0.35
+        },
+        "true_clearance_minus_r_safe": 0.8755267979419923,
+        "qp_object_residual_min": 0.0,
+        "qp_agent_residual_min": 1.3051697916667448,
+        "qp_wall_residual_min": 49.53936090447617
+      }
+    }
+  },
+  {
+    "frame": 21,
+    "in_K0": true,
+    "k0_bad_agents": [],
+    "solver_status": [
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal"
+    ],
+    "hold_min_pair": 0.38905758759552617,
+    "hold_min_object_clearance": 0.44640522426603874,
+    "agents": {
+      "0": {
+        "position": [
+          4.106896400092714,
+          2.4769680452238085
+        ],
+        "position_next": [
+          4.106587292536937,
+          2.4944653150828167
+        ],
+        "u": [
+          -0.006182151115542982,
+          0.34994539718016665
+        ],
+        "u_nom": [
+          -0.006182151115542982,
+          0.34994539718016665
+        ],
+        "status": "optimal",
+        "zero_input_feasible": true,
+        "zero_input_feasible_with_rho": true,
+        "row_kinds": [
+          "agent",
+          "agent",
+          "wall",
+          "wall",
+          "wall",
+          "wall"
+        ],
+        "b_original": [
+          -5.120790716561773,
+          -1.1677874122634657,
+          -82.13792800185428,
+          -77.86207199814571,
+          -49.53936090447617,
+          -110.46063909552383
+        ],
+        "b_effective": [
+          -5.120790716561773,
+          -1.1677874122634657,
+          -82.13792800185428,
+          -77.86207199814571,
+          -49.53936090447617,
+          -110.46063909552383
+        ],
+        "residual_original": [
+          4.782534218299155,
+          1.3099347570748745,
+          82.13174585073874,
+          77.86825414926125,
+          49.88930630165633,
+          110.11069369834367
+        ],
+        "h_object_qp": [],
+        "explain": {
+          "trace": {
+            "dropped_empty": true,
+            "reason": "out_of_range",
+            "distance": 0.9230319547761914
+          },
+          "A": [],
+          "rhs": [],
+          "rhs_no_margin": [],
+          "h_object": [],
+          "feature": {
+            "edge_index": 0,
+            "kind": "edge",
+            "t": 0.5668102500579466,
+            "foot": [
+              4.106896400092714,
+              3.4
+            ],
+            "distance": 0.9230319547761914,
+            "edge_normal": [
+              0.0,
+              -1.0
+            ],
+            "vertex_index": 1,
+            "edge_length": 1.5999999999999996,
+            "signed_distance": 0.9230319547761914,
+            "sd_gradient": [
+              0.0,
+              -1.0
+            ],
+            "sd_foot": [
+              4.106896400092714,
+              3.4
+            ],
+            "h_true": 0.8580319547761914
+          },
+          "support": null,
+          "h_aggregate": null,
+          "h_true": 0.8580319547761914,
+          "h_agg_minus_h_true": null,
+          "plane_more_conservative_than_sd": null,
+          "zero_in_F_hard": true,
+          "zero_in_F_rho": true,
+          "rho_over_gamma": 0.0025
+        },
+        "decompose": {
+          "delta_p": [
+            -0.0003091075557772882,
+            0.017497269859008124
+          ],
+          "delta_p_minus_dt_u": [
+            -1.3910313872989022e-16,
+            -2.0816681711721685e-16
+          ],
+          "h_k": null,
+          "h_kplus": null,
+          "delta_h": null,
+          "match": {
+            "matched": false,
+            "reason": "no_object_row_either_frame",
+            "new_activation": false
+          },
+          "unmatched_new_row": false
+        },
+        "hold_true": {
+          "sampled_min_sd": 0.9055346849171833,
+          "lipschitz_lower_bound": 0.9046596849171833,
+          "n_samples": 21,
+          "h": 0.0025,
+          "speed": 0.35
+        },
+        "true_clearance_minus_r_safe": 0.8580319547761914,
+        "qp_object_residual_min": 0.0,
+        "qp_agent_residual_min": 1.3099347570748745,
+        "qp_wall_residual_min": 49.88930630165633
+      }
+    }
+  },
+  {
+    "frame": 22,
+    "in_K0": true,
+    "k0_bad_agents": [],
+    "solver_status": [
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal"
+    ],
+    "hold_min_pair": 0.39050686892330344,
+    "hold_min_object_clearance": 0.4290677045298252,
+    "agents": {
+      "0": {
+        "position": [
+          4.106587292536937,
+          2.4944653150828167
+        ],
+        "position_next": [
+          4.106274885550615,
+          2.5119625263427547
+        ],
+        "u": [
+          -0.006248139726443888,
+          0.3499442251987577
+        ],
+        "u_nom": [
+          -0.006248139726443888,
+          0.3499442251987577
+        ],
+        "status": "optimal",
+        "zero_input_feasible": true,
+        "zero_input_feasible_with_rho": true,
+        "row_kinds": [
+          "agent",
+          "agent",
+          "wall",
+          "wall",
+          "wall",
+          "wall"
+        ],
+        "b_original": [
+          -4.980563160157211,
+          -1.1743527061905181,
+          -82.13174585073874,
+          -77.86825414926125,
+          -49.88930630165633,
+          -110.11069369834367
+        ],
+        "b_effective": [
+          -4.980563160157211,
+          -1.1743527061905181,
+          -82.13174585073874,
+          -77.86825414926125,
+          -49.88930630165633,
+          -110.11069369834367
+        ],
+        "residual_original": [
+          4.648519505522689,
+          1.3166409897980942,
+          82.1254977110123,
+          77.87450228898769,
+          50.23925052685509,
+          109.76074947314491
+        ],
+        "h_object_qp": [],
+        "explain": {
+          "trace": {
+            "dropped_empty": true,
+            "reason": "out_of_range",
+            "distance": 0.9055346849171833
+          },
+          "A": [],
+          "rhs": [],
+          "rhs_no_margin": [],
+          "h_object": [],
+          "feature": {
+            "edge_index": 0,
+            "kind": "edge",
+            "t": 0.5666170578355857,
+            "foot": [
+              4.106587292536937,
+              3.4
+            ],
+            "distance": 0.9055346849171833,
+            "edge_normal": [
+              0.0,
+              -1.0
+            ],
+            "vertex_index": 1,
+            "edge_length": 1.5999999999999996,
+            "signed_distance": 0.9055346849171833,
+            "sd_gradient": [
+              0.0,
+              -1.0
+            ],
+            "sd_foot": [
+              4.106587292536937,
+              3.4
+            ],
+            "h_true": 0.8405346849171833
+          },
+          "support": null,
+          "h_aggregate": null,
+          "h_true": 0.8405346849171833,
+          "h_agg_minus_h_true": null,
+          "plane_more_conservative_than_sd": null,
+          "zero_in_F_hard": true,
+          "zero_in_F_rho": true,
+          "rho_over_gamma": 0.0025
+        },
+        "decompose": {
+          "delta_p": [
+            -0.00031240698632206687,
+            0.017497211259938084
+          ],
+          "delta_p_minus_dt_u": [
+            1.275563855929196e-16,
+            1.97758476261356e-16
+          ],
+          "h_k": null,
+          "h_kplus": null,
+          "delta_h": null,
+          "match": {
+            "matched": false,
+            "reason": "no_object_row_either_frame",
+            "new_activation": false
+          },
+          "unmatched_new_row": false
+        },
+        "hold_true": {
+          "sampled_min_sd": 0.8880374736572452,
+          "lipschitz_lower_bound": 0.8871624736572452,
+          "n_samples": 21,
+          "h": 0.0025,
+          "speed": 0.35
+        },
+        "true_clearance_minus_r_safe": 0.8405346849171833,
+        "qp_object_residual_min": 0.0,
+        "qp_agent_residual_min": 1.3166409897980942,
+        "qp_wall_residual_min": 50.23925052685509
+      }
+    }
+  },
+  {
+    "frame": 23,
+    "in_K0": true,
+    "k0_bad_agents": [],
+    "solver_status": [
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal"
+    ],
+    "hold_min_pair": 0.39161011207074115,
+    "hold_min_object_clearance": 0.41207867966963435,
+    "agents": {
+      "0": {
+        "position": [
+          4.106274885550615,
+          2.5119625263427547
+        ],
+        "position_next": [
+          4.106313330800166,
+          2.5294624841130693
+        ],
+        "u": [
+          0.0007689049910233624,
+          0.3499991554062878
+        ],
+        "u_nom": [
+          0.0007689049910233624,
+          0.3499991554062878
+        ],
+        "status": "optimal",
+        "zero_input_feasible": true,
+        "zero_input_feasible_with_rho": true,
+        "row_kinds": [
+          "agent",
+          "agent",
+          "wall",
+          "wall",
+          "wall",
+          "wall"
+        ],
+        "b_original": [
+          -4.840300253095039,
+          -1.1804102722531413,
+          -82.1254977110123,
+          -77.8745022889877,
+          -50.239250526855095,
+          -109.7607494731449
+        ],
+        "b_effective": [
+          -4.840300253095039,
+          -1.1804102722531413,
+          -82.1254977110123,
+          -77.8745022889877,
+          -50.239250526855095,
+          -109.7607494731449
+        ],
+        "residual_original": [
+          4.531948540179346,
+          1.3135080379607613,
+          82.12626661600332,
+          77.87373338399668,
+          50.58924968226138,
+          109.4107503177386
+        ],
+        "h_object_qp": [],
+        "explain": {
+          "trace": {
+            "dropped_empty": true,
+            "reason": "out_of_range",
+            "distance": 0.8880374736572452
+          },
+          "A": [],
+          "rhs": [],
+          "rhs_no_margin": [],
+          "h_object": [],
+          "feature": {
+            "edge_index": 0,
+            "kind": "edge",
+            "t": 0.5664218034691344,
+            "foot": [
+              4.106274885550615,
+              3.4
+            ],
+            "distance": 0.8880374736572452,
+            "edge_normal": [
+              0.0,
+              -1.0
+            ],
+            "vertex_index": 1,
+            "edge_length": 1.5999999999999996,
+            "signed_distance": 0.8880374736572452,
+            "sd_gradient": [
+              0.0,
+              -1.0
+            ],
+            "sd_foot": [
+              4.106274885550615,
+              3.4
+            ],
+            "h_true": 0.8230374736572452
+          },
+          "support": null,
+          "h_aggregate": null,
+          "h_true": 0.8230374736572452,
+          "h_agg_minus_h_true": null,
+          "plane_more_conservative_than_sd": null,
+          "zero_in_F_hard": true,
+          "zero_in_F_rho": true,
+          "rho_over_gamma": 0.0025
+        },
+        "decompose": {
+          "delta_p": [
+            3.844524955098905e-05,
+            0.017499957770314545
+          ],
+          "delta_p_minus_dt_u": [
+            -1.7907631757671516e-16,
+            1.5612511283791264e-16
+          ],
+          "h_k": null,
+          "h_kplus": null,
+          "delta_h": null,
+          "match": {
+            "matched": false,
+            "reason": "no_object_row_either_frame",
+            "new_activation": false
+          },
+          "unmatched_new_row": false
+        },
+        "hold_true": {
+          "sampled_min_sd": 0.8705375158869306,
+          "lipschitz_lower_bound": 0.8696625158869307,
+          "n_samples": 21,
+          "h": 0.0025,
+          "speed": 0.35
+        },
+        "true_clearance_minus_r_safe": 0.8230374736572452,
+        "qp_object_residual_min": 0.0,
+        "qp_agent_residual_min": 1.3135080379607613,
+        "qp_wall_residual_min": 50.58924968226138
+      }
+    }
+  },
+  {
+    "frame": 24,
+    "in_K0": true,
+    "k0_bad_agents": [],
+    "solver_status": [
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal"
+    ],
+    "hold_min_pair": 0.39217484976864664,
+    "hold_min_object_clearance": 0.3954382212373801,
+    "agents": {
+      "0": {
+        "position": [
+          4.106313330800166,
+          2.5294624841130693
+        ],
+        "position_next": [
+          4.106413064255854,
+          2.5469621999175565
+        ],
+        "u": [
+          0.0019946691137552874,
+          0.3499943160897425
+        ],
+        "u_nom": [
+          0.0019946691137552874,
+          0.3499943160897425
+        ],
+        "status": "optimal",
+        "zero_input_feasible": true,
+        "zero_input_feasible_with_rho": true,
+        "row_kinds": [
+          "agent",
+          "agent",
+          "wall",
+          "wall",
+          "wall",
+          "wall"
+        ],
+        "b_original": [
+          -4.704870799903671,
+          -1.1846594195313136,
+          -82.12626661600332,
+          -77.87373338399668,
+          -50.58924968226138,
+          -109.4107503177386
+        ],
+        "b_effective": [
+          -4.704870799903671,
+          -1.1846594195313136,
+          -82.12626661600332,
+          -77.87373338399668,
+          -50.58924968226138,
+          -109.4107503177386
+        ],
+        "residual_original": [
+          4.405811255935292,
+          1.3161581355662448,
+          82.12826128511708,
+          77.87173871488292,
+          50.939243998351124,
+          109.06075600164885
+        ],
+        "h_object_qp": [],
+        "explain": {
+          "trace": {
+            "dropped_empty": true,
+            "reason": "out_of_range",
+            "distance": 0.8705375158869306
+          },
+          "A": [],
+          "rhs": [],
+          "rhs_no_margin": [],
+          "h_object": [],
+          "feature": {
+            "edge_index": 0,
+            "kind": "edge",
+            "t": 0.5664458317501039,
+            "foot": [
+              4.106313330800166,
+              3.4
+            ],
+            "distance": 0.8705375158869306,
+            "edge_normal": [
+              0.0,
+              -1.0
+            ],
+            "vertex_index": 1,
+            "edge_length": 1.5999999999999996,
+            "signed_distance": 0.8705375158869306,
+            "sd_gradient": [
+              0.0,
+              -1.0
+            ],
+            "sd_foot": [
+              4.106313330800166,
+              3.4
+            ],
+            "h_true": 0.8055375158869307
+          },
+          "support": null,
+          "h_aggregate": null,
+          "h_true": 0.8055375158869307,
+          "h_agg_minus_h_true": null,
+          "plane_more_conservative_than_sd": null,
+          "zero_in_F_hard": true,
+          "zero_in_F_rho": true,
+          "rho_over_gamma": 0.0025
+        },
+        "decompose": {
+          "delta_p": [
+            9.973345568781156e-05,
+            0.01749971580448717
+          ],
+          "delta_p_minus_dt_u": [
+            4.717634703027551e-17,
+            4.5102810375396984e-17
+          ],
+          "h_k": null,
+          "h_kplus": null,
+          "delta_h": null,
+          "match": {
+            "matched": false,
+            "reason": "no_object_row_either_frame",
+            "new_activation": false
+          },
+          "unmatched_new_row": false
+        },
+        "hold_true": {
+          "sampled_min_sd": 0.8530378000824435,
+          "lipschitz_lower_bound": 0.8521628000824435,
+          "n_samples": 21,
+          "h": 0.0025,
+          "speed": 0.35
+        },
+        "true_clearance_minus_r_safe": 0.8055375158869307,
+        "qp_object_residual_min": 0.0,
+        "qp_agent_residual_min": 1.3161581355662448,
+        "qp_wall_residual_min": 50.939243998351124
+      }
+    }
+  },
+  {
+    "frame": 25,
+    "in_K0": true,
+    "k0_bad_agents": [],
+    "solver_status": [
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal"
+    ],
+    "hold_min_pair": 0.39259802591732473,
+    "hold_min_object_clearance": 0.37911105988376465,
+    "agents": {
+      "0": {
+        "position": [
+          4.106413064255854,
+          2.5469621999175565
+        ],
+        "position_next": [
+          4.106500295241554,
+          2.5644619825092096
+        ],
+        "u": [
+          0.0017446197140124939,
+          0.34999565183306697
+        ],
+        "u_nom": [
+          0.0017446197140124939,
+          0.34999565183306697
+        ],
+        "status": "optimal",
+        "zero_input_feasible": true,
+        "zero_input_feasible_with_rho": true,
+        "row_kinds": [
+          "agent",
+          "agent",
+          "wall",
+          "wall",
+          "wall",
+          "wall"
+        ],
+        "b_original": [
+          -4.571376675338405,
+          -1.1883209062833822,
+          -82.12826128511708,
+          -77.87173871488292,
+          -50.939243998351124,
+          -109.06075600164885
+        ],
+        "b_effective": [
+          -4.571376675338405,
+          -1.1883209062833822,
+          -82.12826128511708,
+          -77.87173871488292,
+          -50.939243998351124,
+          -109.06075600164885
+        ],
+        "residual_original": [
+          4.278053188723363,
+          1.3201677665172873,
+          82.1300059048311,
+          77.8699940951689,
+          51.28923965018419,
+          108.71076034981579
+        ],
+        "h_object_qp": [],
+        "explain": {
+          "trace": {
+            "dropped_empty": true,
+            "reason": "out_of_range",
+            "distance": 0.8530378000824435
+          },
+          "A": [],
+          "rhs": [],
+          "rhs_no_margin": [],
+          "h_object": [],
+          "feature": {
+            "edge_index": 0,
+            "kind": "edge",
+            "t": 0.5665081651599088,
+            "foot": [
+              4.106413064255854,
+              3.4
+            ],
+            "distance": 0.8530378000824435,
+            "edge_normal": [
+              0.0,
+              -1.0
+            ],
+            "vertex_index": 1,
+            "edge_length": 1.5999999999999996,
+            "signed_distance": 0.8530378000824435,
+            "sd_gradient": [
+              0.0,
+              -1.0
+            ],
+            "sd_foot": [
+              4.106413064255854,
+              3.4
+            ],
+            "h_true": 0.7880378000824435
+          },
+          "support": null,
+          "h_aggregate": null,
+          "h_true": 0.7880378000824435,
+          "h_agg_minus_h_true": null,
+          "plane_more_conservative_than_sd": null,
+          "zero_in_F_hard": true,
+          "zero_in_F_rho": true,
+          "rho_over_gamma": 0.0025
+        },
+        "decompose": {
+          "delta_p": [
+            8.723098570051491e-05,
+            0.01749978259165319
+          ],
+          "delta_p_minus_dt_u": [
+            -1.0978902249131339e-16,
+            -1.5959455978986625e-16
+          ],
+          "h_k": null,
+          "h_kplus": null,
+          "delta_h": null,
+          "match": {
+            "matched": false,
+            "reason": "no_object_row_either_frame",
+            "new_activation": false
+          },
+          "unmatched_new_row": false
+        },
+        "hold_true": {
+          "sampled_min_sd": 0.8355380174907903,
+          "lipschitz_lower_bound": 0.8346630174907903,
+          "n_samples": 21,
+          "h": 0.0025,
+          "speed": 0.3499999999999999
+        },
+        "true_clearance_minus_r_safe": 0.7880378000824435,
+        "qp_object_residual_min": 0.0,
+        "qp_agent_residual_min": 1.3201677665172873,
+        "qp_wall_residual_min": 51.28923965018419
+      }
+    }
+  },
+  {
+    "frame": 26,
+    "in_K0": true,
+    "k0_bad_agents": [],
+    "solver_status": [
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal"
+    ],
+    "hold_min_pair": 0.39278636386153026,
+    "hold_min_object_clearance": 0.3630641761372719,
+    "agents": {
+      "0": {
+        "position": [
+          4.106500295241554,
+          2.5644619825092096
+        ],
+        "position_next": [
+          4.106568277230017,
+          2.581961850464404
+        ],
+        "u": [
+          0.0013596397692540042,
+          0.3499973591038907
+        ],
+        "u_nom": [
+          0.0013596397692540042,
+          0.3499973591038907
+        ],
+        "status": "optimal",
+        "zero_input_feasible": true,
+        "zero_input_feasible_with_rho": true,
+        "row_kinds": [
+          "agent",
+          "agent",
+          "wall",
+          "wall",
+          "wall",
+          "wall"
+        ],
+        "b_original": [
+          -4.439502080088751,
+          -1.1917550339381204,
+          -82.13000590483108,
+          -77.8699940951689,
+          -51.28923965018419,
+          -108.7107603498158
+        ],
+        "b_effective": [
+          -4.439502080088751,
+          -1.1917550339381204,
+          -82.13000590483108,
+          -77.8699940951689,
+          -51.28923965018419,
+          -108.7107603498158
+        ],
+        "residual_original": [
+          4.151633239746454,
+          1.3241273573720864,
+          82.13136554460033,
+          77.86863445539966,
+          51.63923700928808,
+          108.3607629907119
+        ],
+        "h_object_qp": [],
+        "explain": {
+          "trace": {
+            "dropped_empty": true,
+            "reason": "out_of_range",
+            "distance": 0.8355380174907903
+          },
+          "A": [],
+          "rhs": [],
+          "rhs_no_margin": [],
+          "h_object": [],
+          "feature": {
+            "edge_index": 0,
+            "kind": "edge",
+            "t": 0.5665626845259715,
+            "foot": [
+              4.106500295241554,
+              3.4
+            ],
+            "distance": 0.8355380174907903,
+            "edge_normal": [
+              0.0,
+              -1.0
+            ],
+            "vertex_index": 1,
+            "edge_length": 1.5999999999999996,
+            "signed_distance": 0.8355380174907903,
+            "sd_gradient": [
+              0.0,
+              -1.0
+            ],
+            "sd_foot": [
+              4.106500295241554,
+              3.4
+            ],
+            "h_true": 0.7705380174907903
+          },
+          "support": null,
+          "h_aggregate": null,
+          "h_true": 0.7705380174907903,
+          "h_agg_minus_h_true": null,
+          "plane_more_conservative_than_sd": null,
+          "zero_in_F_hard": true,
+          "zero_in_F_rho": true,
+          "rho_over_gamma": 0.0025
+        },
+        "decompose": {
+          "delta_p": [
+            6.79819884625843e-05,
+            0.017499867955194315
+          ],
+          "delta_p_minus_dt_u": [
+            -1.159147647658565e-16,
+            -2.185751579730777e-16
+          ],
+          "h_k": null,
+          "h_kplus": null,
+          "delta_h": null,
+          "match": {
+            "matched": false,
+            "reason": "no_object_row_either_frame",
+            "new_activation": false
+          },
+          "unmatched_new_row": false
+        },
+        "hold_true": {
+          "sampled_min_sd": 0.818038149535596,
+          "lipschitz_lower_bound": 0.817163149535596,
+          "n_samples": 21,
+          "h": 0.0025,
+          "speed": 0.3499999999999999
+        },
+        "true_clearance_minus_r_safe": 0.7705380174907903,
+        "qp_object_residual_min": 0.0,
+        "qp_agent_residual_min": 1.3241273573720864,
+        "qp_wall_residual_min": 51.63923700928808
+      }
+    }
+  },
+  {
+    "frame": 27,
+    "in_K0": true,
+    "k0_bad_agents": [],
+    "solver_status": [
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal"
+    ],
+    "hold_min_pair": 0.3927003572934714,
+    "hold_min_object_clearance": 0.3472967730557831,
+    "agents": {
+      "0": {
+        "position": [
+          4.106568277230017,
+          2.581961850464404
+        ],
+        "position_next": [
+          4.106891787056337,
+          2.599458859962952
+        ],
+        "u": [
+          0.006470196526395885,
+          0.3499401899709575
+        ],
+        "u_nom": [
+          0.006470196526395885,
+          0.3499401899709575
+        ],
+        "status": "optimal",
+        "zero_input_feasible": true,
+        "zero_input_feasible_with_rho": true,
+        "row_kinds": [
+          "agent",
+          "agent",
+          "agent",
+          "wall",
+          "wall",
+          "wall",
+          "wall"
+        ],
+        "b_original": [
+          -4.3089912258207015,
+          -1.194866514491013,
+          -7.374018019291698,
+          -82.13136554460033,
+          -77.86863445539966,
+          -51.639237009288074,
+          -108.3607629907119
+        ],
+        "b_effective": [
+          -4.3089912258207015,
+          -1.194866514491013,
+          -7.374018019291698,
+          -82.13136554460033,
+          -77.86863445539966,
+          -51.639237009288074,
+          -108.3607629907119
+        ],
+        "residual_original": [
+          4.039462600485693,
+          1.3204495238795395,
+          6.827379380285642,
+          82.13783574112672,
+          77.86216425887326,
+          51.98917719925903,
+          108.01082280074095
+        ],
+        "h_object_qp": [],
+        "explain": {
+          "trace": {
+            "dropped_empty": true,
+            "reason": "out_of_range",
+            "distance": 0.818038149535596
+          },
+          "A": [],
+          "rhs": [],
+          "rhs_no_margin": [],
+          "h_object": [],
+          "feature": {
+            "edge_index": 0,
+            "kind": "edge",
+            "t": 0.5666051732687606,
+            "foot": [
+              4.106568277230017,
+              3.4
+            ],
+            "distance": 0.818038149535596,
+            "edge_normal": [
+              0.0,
+              -1.0
+            ],
+            "vertex_index": 1,
+            "edge_length": 1.5999999999999996,
+            "signed_distance": 0.818038149535596,
+            "sd_gradient": [
+              0.0,
+              -1.0
+            ],
+            "sd_foot": [
+              4.106568277230017,
+              3.4
+            ],
+            "h_true": 0.753038149535596
+          },
+          "support": null,
+          "h_aggregate": null,
+          "h_true": 0.753038149535596,
+          "h_agg_minus_h_true": null,
+          "plane_more_conservative_than_sd": null,
+          "zero_in_F_hard": true,
+          "zero_in_F_rho": true,
+          "rho_over_gamma": 0.0025
+        },
+        "decompose": {
+          "delta_p": [
+            0.00032350982631967895,
+            0.017497009498547822
+          ],
+          "delta_p_minus_dt_u": [
+            -1.1535911115245767e-16,
+            -5.204170427930421e-17
+          ],
+          "h_k": null,
+          "h_kplus": null,
+          "delta_h": null,
+          "match": {
+            "matched": false,
+            "reason": "no_object_row_either_frame",
+            "new_activation": false
+          },
+          "unmatched_new_row": false
+        },
+        "hold_true": {
+          "sampled_min_sd": 0.8005411400370481,
+          "lipschitz_lower_bound": 0.7996661400370482,
+          "n_samples": 21,
+          "h": 0.0025,
+          "speed": 0.35
+        },
+        "true_clearance_minus_r_safe": 0.753038149535596,
+        "qp_object_residual_min": 0.0,
+        "qp_agent_residual_min": 1.3204495238795395,
+        "qp_wall_residual_min": 51.98917719925903
+      }
+    }
+  },
+  {
+    "frame": 28,
+    "in_K0": true,
+    "k0_bad_agents": [],
+    "solver_status": [
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal"
+    ],
+    "hold_min_pair": 0.392670353615175,
+    "hold_min_object_clearance": 0.33198960569187996,
+    "agents": {
+      "0": {
+        "position": [
+          4.106891787056337,
+          2.599458859962952
+        ],
+        "position_next": [
+          4.107254903264502,
+          2.6169550923179297
+        ],
+        "u": [
+          0.007262324163304854,
+          0.3499246470995535
+        ],
+        "u_nom": [
+          0.007262324163304854,
+          0.3499246470995535
+        ],
+        "status": "optimal",
+        "zero_input_feasible": true,
+        "zero_input_feasible_with_rho": true,
+        "row_kinds": [
+          "agent",
+          "agent",
+          "agent",
+          "wall",
+          "wall",
+          "wall",
+          "wall"
+        ],
+        "b_original": [
+          -4.181825418292345,
+          -1.1967801458612066,
+          -7.187036438855934,
+          -82.13783574112672,
+          -77.86216425887326,
+          -51.98917719925903,
+          -108.01082280074095
+        ],
+        "b_effective": [
+          -4.181825418292345,
+          -1.1967801458612066,
+          -7.187036438855934,
+          -82.13783574112672,
+          -77.86216425887326,
+          -51.98917719925903,
+          -108.01082280074095
+        ],
+        "residual_original": [
+          3.92042877891353,
+          1.3213101773236173,
+          6.650386754795046,
+          82.14509806529003,
+          77.85490193470996,
+          52.33910184635859,
+          107.6608981536414
+        ],
+        "h_object_qp": [],
+        "explain": {
+          "trace": {
+            "dropped_empty": true,
+            "reason": "out_of_range",
+            "distance": 0.8005411400370481
+          },
+          "A": [],
+          "rhs": [],
+          "rhs_no_margin": [],
+          "h_object": [],
+          "feature": {
+            "edge_index": 0,
+            "kind": "edge",
+            "t": 0.5668073669102105,
+            "foot": [
+              4.106891787056337,
+              3.4
+            ],
+            "distance": 0.8005411400370481,
+            "edge_normal": [
+              0.0,
+              -1.0
+            ],
+            "vertex_index": 1,
+            "edge_length": 1.5999999999999996,
+            "signed_distance": 0.8005411400370481,
+            "sd_gradient": [
+              0.0,
+              -1.0
+            ],
+            "sd_foot": [
+              4.106891787056337,
+              3.4
+            ],
+            "h_true": 0.7355411400370482
+          },
+          "support": null,
+          "h_aggregate": null,
+          "h_true": 0.7355411400370482,
+          "h_agg_minus_h_true": null,
+          "plane_more_conservative_than_sd": null,
+          "zero_in_F_hard": true,
+          "zero_in_F_rho": true,
+          "rho_over_gamma": 0.0025
+        },
+        "decompose": {
+          "delta_p": [
+            0.0003631162081649819,
+            0.01749623235497788
+          ],
+          "delta_p_minus_dt_u": [
+            -2.608048325913881e-16,
+            2.0469737016526324e-16
+          ],
+          "h_k": null,
+          "h_kplus": null,
+          "delta_h": null,
+          "match": {
+            "matched": false,
+            "reason": "no_object_row_either_frame",
+            "new_activation": false
+          },
+          "unmatched_new_row": false
+        },
+        "hold_true": {
+          "sampled_min_sd": 0.7830449076820702,
+          "lipschitz_lower_bound": 0.7821699076820703,
+          "n_samples": 21,
+          "h": 0.0025,
+          "speed": 0.35
+        },
+        "true_clearance_minus_r_safe": 0.7355411400370482,
+        "qp_object_residual_min": 0.0,
+        "qp_agent_residual_min": 1.3213101773236173,
+        "qp_wall_residual_min": 52.33910184635859
+      }
+    }
+  },
+  {
+    "frame": 29,
+    "in_K0": true,
+    "k0_bad_agents": [],
+    "solver_status": [
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal"
+    ],
+    "hold_min_pair": 0.39267035361517527,
+    "hold_min_object_clearance": 0.31691016562281815,
+    "agents": {
+      "0": {
+        "position": [
+          4.107254903264502,
+          2.6169550923179297
+        ],
+        "position_next": [
+          4.107597219849354,
+          2.6344517439791972
+        ],
+        "u": [
+          0.00684633169704121,
+          0.34993303322535024
+        ],
+        "u_nom": [
+          0.00684633169704121,
+          0.34993303322535024
+        ],
+        "status": "optimal",
+        "zero_input_feasible": true,
+        "zero_input_feasible_with_rho": true,
+        "row_kinds": [
+          "agent",
+          "agent",
+          "agent",
+          "wall",
+          "wall",
+          "wall",
+          "wall"
+        ],
+        "b_original": [
+          -4.057952300345653,
+          -1.1975114366816457,
+          -6.997036980822319,
+          -82.14509806529003,
+          -77.85490193470996,
+          -52.33910184635859,
+          -107.6608981536414
+        ],
+        "b_effective": [
+          -4.057952300345653,
+          -1.1975114366816457,
+          -6.997036980822319,
+          -82.14509806529003,
+          -77.85490193470996,
+          -52.33910184635859,
+          -107.6608981536414
+        ],
+        "residual_original": [
+          3.8017560900173493,
+          1.3225977352118061,
+          6.4675772492724715,
+          82.15194439698708,
+          77.84805560301291,
+          52.689034879583936,
+          107.31096512041604
+        ],
+        "h_object_qp": [],
+        "explain": {
+          "trace": {
+            "dropped_empty": true,
+            "reason": "out_of_range",
+            "distance": 0.7830449076820702
+          },
+          "A": [],
+          "rhs": [],
+          "rhs_no_margin": [],
+          "h_object": [],
+          "feature": {
+            "edge_index": 0,
+            "kind": "edge",
+            "t": 0.5670343145403135,
+            "foot": [
+              4.107254903264502,
+              3.4
+            ],
+            "distance": 0.7830449076820702,
+            "edge_normal": [
+              0.0,
+              -1.0
+            ],
+            "vertex_index": 1,
+            "edge_length": 1.5999999999999996,
+            "signed_distance": 0.7830449076820702,
+            "sd_gradient": [
+              0.0,
+              -1.0
+            ],
+            "sd_foot": [
+              4.107254903264502,
+              3.4
+            ],
+            "h_true": 0.7180449076820703
+          },
+          "support": null,
+          "h_aggregate": null,
+          "h_true": 0.7180449076820703,
+          "h_agg_minus_h_true": null,
+          "plane_more_conservative_than_sd": null,
+          "zero_in_F_hard": true,
+          "zero_in_F_rho": true,
+          "rho_over_gamma": 0.0025
+        },
+        "decompose": {
+          "delta_p": [
+            0.0003423165848523979,
+            0.01749665166126757
+          ],
+          "delta_p_minus_dt_u": [
+            3.37403716077489e-16,
+            5.898059818321144e-17
+          ],
+          "h_k": null,
+          "h_kplus": null,
+          "delta_h": null,
+          "match": {
+            "matched": false,
+            "reason": "no_object_row_either_frame",
+            "new_activation": false
+          },
+          "unmatched_new_row": false
+        },
+        "hold_true": {
+          "sampled_min_sd": 0.7655482560208027,
+          "lipschitz_lower_bound": 0.7646732560208027,
+          "n_samples": 21,
+          "h": 0.0025,
+          "speed": 0.35
+        },
+        "true_clearance_minus_r_safe": 0.7180449076820703,
+        "qp_object_residual_min": 0.0,
+        "qp_agent_residual_min": 1.3225977352118061,
+        "qp_wall_residual_min": 52.689034879583936
+      }
+    }
+  },
+  {
+    "frame": 30,
+    "in_K0": true,
+    "k0_bad_agents": [],
+    "solver_status": [
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal"
+    ],
+    "hold_min_pair": 0.3928972374859758,
+    "hold_min_object_clearance": 0.30214624107253296,
+    "agents": {
+      "0": {
+        "position": [
+          4.107597219849354,
+          2.6344517439791972
+        ],
+        "position_next": [
+          4.107914065630231,
+          2.651948875422698
+        ],
+        "u": [
+          0.006336915617542418,
+          0.3499426288700137
+        ],
+        "u_nom": [
+          0.006336915617542418,
+          0.3499426288700137
+        ],
+        "status": "optimal",
+        "zero_input_feasible": true,
+        "zero_input_feasible_with_rho": true,
+        "row_kinds": [
+          "agent",
+          "agent",
+          "agent",
+          "wall",
+          "wall",
+          "wall",
+          "wall"
+        ],
+        "b_original": [
+          -3.9354047986076717,
+          -1.1982240019136254,
+          -6.817167340063802,
+          -82.15194439698708,
+          -77.84805560301291,
+          -52.68903487958394,
+          -107.31096512041606
+        ],
+        "b_effective": [
+          -3.9354047986076717,
+          -1.1982240019136254,
+          -6.817167340063802,
+          -82.15194439698708,
+          -77.84805560301291,
+          -52.68903487958394,
+          -107.31096512041606
+        ],
+        "residual_original": [
+          3.684269060293526,
+          1.323991233877397,
+          6.294969607717114,
+          82.15828131260461,
+          77.84171868739537,
+          53.038977508453954,
+          106.96102249154605
+        ],
+        "h_object_qp": [],
+        "explain": {
+          "trace": {
+            "dropped_empty": true,
+            "reason": "out_of_range",
+            "distance": 0.7655482560208027
+          },
+          "A": [],
+          "rhs": [],
+          "rhs_no_margin": [],
+          "h_object": [],
+          "feature": {
+            "edge_index": 0,
+            "kind": "edge",
+            "t": 0.5672482624058462,
+            "foot": [
+              4.107597219849354,
+              3.4
+            ],
+            "distance": 0.7655482560208027,
+            "edge_normal": [
+              0.0,
+              -1.0
+            ],
+            "vertex_index": 1,
+            "edge_length": 1.5999999999999996,
+            "signed_distance": 0.7655482560208027,
+            "sd_gradient": [
+              0.0,
+              -1.0
+            ],
+            "sd_foot": [
+              4.107597219849354,
+              3.4
+            ],
+            "h_true": 0.7005482560208027
+          },
+          "support": null,
+          "h_aggregate": null,
+          "h_true": 0.7005482560208027,
+          "h_agg_minus_h_true": null,
+          "plane_more_conservative_than_sd": null,
+          "zero_in_F_hard": true,
+          "zero_in_F_rho": true,
+          "rho_over_gamma": 0.0025
+        },
+        "decompose": {
+          "delta_p": [
+            0.00031684578087709525,
+            0.017497131443500624
+          ],
+          "delta_p_minus_dt_u": [
+            -2.564138137928218e-17,
+            -6.245004513516506e-17
+          ],
+          "h_k": null,
+          "h_kplus": null,
+          "delta_h": null,
+          "match": {
+            "matched": false,
+            "reason": "no_object_row_either_frame",
+            "new_activation": false
+          },
+          "unmatched_new_row": false
+        },
+        "hold_true": {
+          "sampled_min_sd": 0.748051124577302,
+          "lipschitz_lower_bound": 0.7471761245773021,
+          "n_samples": 21,
+          "h": 0.0025,
+          "speed": 0.35
+        },
+        "true_clearance_minus_r_safe": 0.7005482560208027,
+        "qp_object_residual_min": 0.0,
+        "qp_agent_residual_min": 1.323991233877397,
+        "qp_wall_residual_min": 53.038977508453954
+      }
+    }
+  },
+  {
+    "frame": 31,
+    "in_K0": true,
+    "k0_bad_agents": [],
+    "solver_status": [
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal"
+    ],
+    "hold_min_pair": 0.39317978294867695,
+    "hold_min_object_clearance": 0.2877189105483499,
+    "agents": {
+      "0": {
+        "position": [
+          4.107914065630231,
+          2.651948875422698
+        ],
+        "position_next": [
+          4.108469126396485,
+          2.669440070566134
+        ],
+        "u": [
+          0.011101215325069481,
+          0.34982390286872395
+        ],
+        "u_nom": [
+          0.011101215325069481,
+          0.34982390286872395
+        ],
+        "status": "optimal",
+        "zero_input_feasible": true,
+        "zero_input_feasible_with_rho": true,
+        "row_kinds": [
+          "agent",
+          "agent",
+          "agent",
+          "wall",
+          "wall",
+          "wall",
+          "wall"
+        ],
+        "b_original": [
+          -3.8141705820362386,
+          -1.1985892546472894,
+          -6.646526727372191,
+          -82.15828131260461,
+          -77.84171868739537,
+          -53.038977508453954,
+          -106.96102249154603
+        ],
+        "b_effective": [
+          -3.8141705820362386,
+          -1.1985892546472894,
+          -6.646526727372191,
+          -82.15828131260461,
+          -77.84171868739537,
+          -53.038977508453954,
+          -106.96102249154603
+        ],
+        "residual_original": [
+          3.5798834123182264,
+          1.3179821621914847,
+          6.146041265832842,
+          82.16938252792968,
+          77.8306174720703,
+          53.388801411322675,
+          106.61119858867731
+        ],
+        "h_object_qp": [],
+        "explain": {
+          "trace": {
+            "dropped_empty": true,
+            "reason": "out_of_range",
+            "distance": 0.748051124577302
+          },
+          "A": [],
+          "rhs": [],
+          "rhs_no_margin": [],
+          "h_object": [],
+          "feature": {
+            "edge_index": 0,
+            "kind": "edge",
+            "t": 0.5674462910188945,
+            "foot": [
+              4.107914065630231,
+              3.4
+            ],
+            "distance": 0.748051124577302,
+            "edge_normal": [
+              0.0,
+              -1.0
+            ],
+            "vertex_index": 1,
+            "edge_length": 1.5999999999999996,
+            "signed_distance": 0.748051124577302,
+            "sd_gradient": [
+              0.0,
+              -1.0
+            ],
+            "sd_foot": [
+              4.107914065630231,
+              3.4
+            ],
+            "h_true": 0.6830511245773021
+          },
+          "support": null,
+          "h_aggregate": null,
+          "h_true": 0.6830511245773021,
+          "h_agg_minus_h_true": null,
+          "plane_more_conservative_than_sd": null,
+          "zero_in_F_hard": true,
+          "zero_in_F_rho": true,
+          "rho_over_gamma": 0.0025
+        },
+        "decompose": {
+          "delta_p": [
+            0.0005550607662536677,
+            0.017491195143436222
+          ],
+          "delta_p_minus_dt_u": [
+            1.936385080059111e-16,
+            2.42861286636753e-17
+          ],
+          "h_k": null,
+          "h_kplus": null,
+          "delta_h": null,
+          "match": {
+            "matched": false,
+            "reason": "no_object_row_either_frame",
+            "new_activation": false
+          },
+          "unmatched_new_row": false
+        },
+        "hold_true": {
+          "sampled_min_sd": 0.7305599294338658,
+          "lipschitz_lower_bound": 0.7296849294338659,
+          "n_samples": 21,
+          "h": 0.0025,
+          "speed": 0.35
+        },
+        "true_clearance_minus_r_safe": 0.6830511245773021,
+        "qp_object_residual_min": 0.0,
+        "qp_agent_residual_min": 1.3179821621914847,
+        "qp_wall_residual_min": 53.388801411322675
+      }
+    }
+  },
+  {
+    "frame": 32,
+    "in_K0": true,
+    "k0_bad_agents": [],
+    "solver_status": [
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal"
+    ],
+    "hold_min_pair": 0.39330710351522863,
+    "hold_min_object_clearance": 0.27366369106769317,
+    "agents": {
+      "0": {
+        "position": [
+          4.108469126396485,
+          2.669440070566134
+        ],
+        "position_next": [
+          4.109004066805561,
+          2.6869318926198464
+        ],
+        "u": [
+          0.010698808181518306,
+          0.34983644107424694
+        ],
+        "u_nom": [
+          0.010698808181518306,
+          0.34983644107424694
+        ],
+        "status": "optimal",
+        "zero_input_feasible": true,
+        "zero_input_feasible_with_rho": true,
+        "row_kinds": [
+          "agent",
+          "agent",
+          "agent",
+          "wall",
+          "wall",
+          "wall",
+          "wall"
+        ],
+        "b_original": [
+          -3.6983710849641227,
+          -1.1969311269167853,
+          -6.48670885679938,
+          -82.16938252792968,
+          -77.8306174720703,
+          -53.38880141132268,
+          -106.61119858867731
+        ],
+        "b_effective": [
+          -3.6983710849641227,
+          -1.1969311269167853,
+          -6.48670885679938,
+          -82.16938252792968,
+          -77.8306174720703,
+          -53.38880141132268,
+          -106.61119858867731
+        ],
+        "residual_original": [
+          3.469083910224071,
+          1.3168664987609793,
+          5.994084391845947,
+          82.1800813361112,
+          77.81991866388879,
+          53.73863785239693,
+          106.26136214760307
+        ],
+        "h_object_qp": [],
+        "explain": {
+          "trace": {
+            "dropped_empty": true,
+            "reason": "out_of_range",
+            "distance": 0.7305599294338658
+          },
+          "A": [],
+          "rhs": [],
+          "rhs_no_margin": [],
+          "h_object": [],
+          "feature": {
+            "edge_index": 0,
+            "kind": "edge",
+            "t": 0.567793203997803,
+            "foot": [
+              4.108469126396485,
+              3.4
+            ],
+            "distance": 0.7305599294338658,
+            "edge_normal": [
+              0.0,
+              -1.0
+            ],
+            "vertex_index": 1,
+            "edge_length": 1.5999999999999996,
+            "signed_distance": 0.7305599294338658,
+            "sd_gradient": [
+              0.0,
+              -1.0
+            ],
+            "sd_foot": [
+              4.108469126396485,
+              3.4
+            ],
+            "h_true": 0.6655599294338659
+          },
+          "support": null,
+          "h_aggregate": null,
+          "h_true": 0.6655599294338659,
+          "h_agg_minus_h_true": null,
+          "plane_more_conservative_than_sd": null,
+          "zero_in_F_hard": true,
+          "zero_in_F_rho": true,
+          "rho_over_gamma": 0.0025
+        },
+        "decompose": {
+          "delta_p": [
+            0.0005349404090759791,
+            0.017491822053712358
+          ],
+          "delta_p_minus_dt_u": [
+            6.375108774214766e-17,
+            1.0408340855860843e-17
+          ],
+          "h_k": null,
+          "h_kplus": null,
+          "delta_h": null,
+          "match": {
+            "matched": false,
+            "reason": "no_object_row_either_frame",
+            "new_activation": false
+          },
+          "unmatched_new_row": false
+        },
+        "hold_true": {
+          "sampled_min_sd": 0.7130681073801535,
+          "lipschitz_lower_bound": 0.7121931073801535,
+          "n_samples": 21,
+          "h": 0.0025,
+          "speed": 0.35
+        },
+        "true_clearance_minus_r_safe": 0.6655599294338659,
+        "qp_object_residual_min": 0.0,
+        "qp_agent_residual_min": 1.3168664987609793,
+        "qp_wall_residual_min": 53.73863785239693
+      }
+    }
+  },
+  {
+    "frame": 33,
+    "in_K0": true,
+    "k0_bad_agents": [],
+    "solver_status": [
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal"
+    ],
+    "hold_min_pair": 0.39348652261537265,
+    "hold_min_object_clearance": 0.25978112716246915,
+    "agents": {
+      "0": {
+        "position": [
+          4.109004066805561,
+          2.6869318926198464
+        ],
+        "position_next": [
+          4.1095133913715625,
+          2.7044244792921046
+        ],
+        "u": [
+          0.010186491320035036,
+          0.34985173344516507
+        ],
+        "u_nom": [
+          0.010186491320035036,
+          0.34985173344516507
+        ],
+        "status": "optimal",
+        "zero_input_feasible": true,
+        "zero_input_feasible_with_rho": true,
+        "row_kinds": [
+          "agent",
+          "agent",
+          "agent",
+          "wall",
+          "wall",
+          "wall",
+          "wall"
+        ],
+        "b_original": [
+          -3.5837715131509125,
+          -1.1951863879239428,
+          -6.333770493587009,
+          -82.18008133611121,
+          -77.81991866388879,
+          -53.73863785239693,
+          -106.26136214760308
+        ],
+        "b_effective": [
+          -3.5837715131509125,
+          -1.1951863879239428,
+          -6.333770493587009,
+          -82.18008133611121,
+          -77.81991866388879,
+          -53.73863785239693,
+          -106.26136214760308
+        ],
+        "residual_original": [
+          3.359323027901138,
+          1.3158111236511054,
+          5.84865497737913,
+          82.19026782743126,
+          77.80973217256874,
+          54.08848958584209,
+          105.91151041415792
+        ],
+        "h_object_qp": [],
+        "explain": {
+          "trace": {
+            "dropped_empty": true,
+            "reason": "out_of_range",
+            "distance": 0.7130681073801535
+          },
+          "A": [],
+          "rhs": [],
+          "rhs_no_margin": [],
+          "h_object": [],
+          "feature": {
+            "edge_index": 0,
+            "kind": "edge",
+            "t": 0.5681275417534755,
+            "foot": [
+              4.109004066805561,
+              3.4
+            ],
+            "distance": 0.7130681073801535,
+            "edge_normal": [
+              0.0,
+              -1.0
+            ],
+            "vertex_index": 1,
+            "edge_length": 1.5999999999999996,
+            "signed_distance": 0.7130681073801535,
+            "sd_gradient": [
+              0.0,
+              -1.0
+            ],
+            "sd_foot": [
+              4.109004066805561,
+              3.4
+            ],
+            "h_true": 0.6480681073801535
+          },
+          "support": null,
+          "h_aggregate": null,
+          "h_true": 0.6480681073801535,
+          "h_agg_minus_h_true": null,
+          "plane_more_conservative_than_sd": null,
+          "zero_in_F_hard": true,
+          "zero_in_F_rho": true,
+          "rho_over_gamma": 0.0025
+        },
+        "decompose": {
+          "delta_p": [
+            0.0005093245660017232,
+            0.01749258667225817
+          ],
+          "delta_p_minus_dt_u": [
+            -2.862293735361732e-17,
+            -8.326672684688674e-17
+          ],
+          "h_k": null,
+          "h_kplus": null,
+          "delta_h": null,
+          "match": {
+            "matched": false,
+            "reason": "no_object_row_either_frame",
+            "new_activation": false
+          },
+          "unmatched_new_row": false
+        },
+        "hold_true": {
+          "sampled_min_sd": 0.6955755207078953,
+          "lipschitz_lower_bound": 0.6947005207078953,
+          "n_samples": 21,
+          "h": 0.0025,
+          "speed": 0.35
+        },
+        "true_clearance_minus_r_safe": 0.6480681073801535,
+        "qp_object_residual_min": 0.0,
+        "qp_agent_residual_min": 1.3158111236511054,
+        "qp_wall_residual_min": 54.08848958584209
+      }
+    }
+  },
+  {
+    "frame": 34,
+    "in_K0": true,
+    "k0_bad_agents": [],
+    "solver_status": [
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal"
+    ],
+    "hold_min_pair": 0.3937133100375864,
+    "hold_min_object_clearance": 0.2463427755201435,
+    "agents": {
+      "0": {
+        "position": [
+          4.1095133913715625,
+          2.7044244792921046
+        ],
+        "position_next": [
+          4.110199034354432,
+          2.721911042525057
+        ],
+        "u": [
+          0.013712859657389862,
+          0.34973126465904747
+        ],
+        "u_nom": [
+          0.013712859657389862,
+          0.34973126465904747
+        ],
+        "status": "optimal",
+        "zero_input_feasible": true,
+        "zero_input_feasible_with_rho": true,
+        "row_kinds": [
+          "agent",
+          "agent",
+          "agent",
+          "wall",
+          "wall",
+          "wall",
+          "wall"
+        ],
+        "b_original": [
+          -3.471330953891003,
+          -1.1929122736587763,
+          -6.185194498108249,
+          -82.19026782743124,
+          -77.80973217256874,
+          -54.08848958584209,
+          -105.91151041415792
+        ],
+        "b_effective": [
+          -3.471330953891003,
+          -1.1929122736587763,
+          -6.185194498108249,
+          -82.19026782743124,
+          -77.80973217256874,
+          -54.08848958584209,
+          -105.91151041415792
+        ],
+        "residual_original": [
+          3.2603189944099085,
+          1.3088228394818069,
+          5.718192177329608,
+          82.20398068708863,
+          77.79601931291135,
+          54.43822085050114,
+          105.56177914949888
+        ],
+        "h_object_qp": [],
+        "explain": {
+          "trace": {
+            "dropped_empty": true,
+            "reason": "out_of_range",
+            "distance": 0.6955755207078953
+          },
+          "A": [],
+          "rhs": [],
+          "rhs_no_margin": [],
+          "h_object": [],
+          "feature": {
+            "edge_index": 0,
+            "kind": "edge",
+            "t": 0.5684458696072265,
+            "foot": [
+              4.1095133913715625,
+              3.4
+            ],
+            "distance": 0.6955755207078953,
+            "edge_normal": [
+              0.0,
+              -1.0
+            ],
+            "vertex_index": 1,
+            "edge_length": 1.5999999999999996,
+            "signed_distance": 0.6955755207078953,
+            "sd_gradient": [
+              0.0,
+              -1.0
+            ],
+            "sd_foot": [
+              4.1095133913715625,
+              3.4
+            ],
+            "h_true": 0.6305755207078954
+          },
+          "support": null,
+          "h_aggregate": null,
+          "h_true": 0.6305755207078954,
+          "h_agg_minus_h_true": null,
+          "plane_more_conservative_than_sd": null,
+          "zero_in_F_hard": true,
+          "zero_in_F_rho": true,
+          "rho_over_gamma": 0.0025
+        },
+        "decompose": {
+          "delta_p": [
+            0.0006856429828694388,
+            0.017486563232952168
+          ],
+          "delta_p_minus_dt_u": [
+            -5.431852884152377e-17,
+            -2.0469737016526324e-16
+          ],
+          "h_k": null,
+          "h_kplus": null,
+          "delta_h": null,
+          "match": {
+            "matched": false,
+            "reason": "no_object_row_either_frame",
+            "new_activation": false
+          },
+          "unmatched_new_row": false
+        },
+        "hold_true": {
+          "sampled_min_sd": 0.6780889574749431,
+          "lipschitz_lower_bound": 0.6772139574749432,
+          "n_samples": 21,
+          "h": 0.0025,
+          "speed": 0.35
+        },
+        "true_clearance_minus_r_safe": 0.6305755207078954,
+        "qp_object_residual_min": 0.0,
+        "qp_agent_residual_min": 1.3088228394818069,
+        "qp_wall_residual_min": 54.43822085050114
+      }
+    }
+  },
+  {
+    "frame": 35,
+    "in_K0": true,
+    "k0_bad_agents": [],
+    "solver_status": [
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal"
+    ],
+    "hold_min_pair": 0.3938889554595285,
+    "hold_min_object_clearance": 0.23325168978855595,
+    "agents": {
+      "0": {
+        "position": [
+          4.110199034354432,
+          2.721911042525057
+        ],
+        "position_next": [
+          4.111132882060612,
+          2.739386108432276
+        ],
+        "u": [
+          0.018676954123601132,
+          0.34950131814438823
+        ],
+        "u_nom": [
+          0.018676954123601132,
+          0.34950131814438823
+        ],
+        "status": "optimal",
+        "zero_input_feasible": true,
+        "zero_input_feasible_with_rho": true,
+        "row_kinds": [
+          "agent",
+          "agent",
+          "agent",
+          "wall",
+          "wall",
+          "wall",
+          "wall"
+        ],
+        "b_original": [
+          -3.3627290954780342,
+          -1.1889483224287387,
+          -6.042380018326572,
+          -82.20398068708863,
+          -77.79601931291135,
+          -54.43822085050113,
+          -105.56177914949886
+        ],
+        "b_effective": [
+          -3.3627290954780342,
+          -1.1889483224287387,
+          -6.042380018326572,
+          -82.20398068708863,
+          -77.79601931291135,
+          -54.43822085050113,
+          -105.56177914949886
+        ],
+        "residual_original": [
+          3.167899791740436,
+          1.2982200995138142,
+          5.597193382271726,
+          82.22265764121224,
+          77.77734235878775,
+          54.78772216864552,
+          105.21227783135447
+        ],
+        "h_object_qp": [],
+        "explain": {
+          "trace": {
+            "dropped_empty": true,
+            "reason": "out_of_range",
+            "distance": 0.6780889574749431
+          },
+          "A": [],
+          "rhs": [],
+          "rhs_no_margin": [],
+          "h_object": [],
+          "feature": {
+            "edge_index": 0,
+            "kind": "edge",
+            "t": 0.5688743964715199,
+            "foot": [
+              4.110199034354432,
+              3.4
+            ],
+            "distance": 0.6780889574749431,
+            "edge_normal": [
+              0.0,
+              -1.0
+            ],
+            "vertex_index": 1,
+            "edge_length": 1.5999999999999996,
+            "signed_distance": 0.6780889574749431,
+            "sd_gradient": [
+              0.0,
+              -1.0
+            ],
+            "sd_foot": [
+              4.110199034354432,
+              3.4
+            ],
+            "h_true": 0.6130889574749432
+          },
+          "support": null,
+          "h_aggregate": null,
+          "h_true": 0.6130889574749432,
+          "h_agg_minus_h_true": null,
+          "plane_more_conservative_than_sd": null,
+          "zero_in_F_hard": true,
+          "zero_in_F_rho": true,
+          "rho_over_gamma": 0.0025
+        },
+        "decompose": {
+          "delta_p": [
+            0.000933847706179769,
+            0.017475065907219367
+          ],
+          "delta_p_minus_dt_u": [
+            -2.8763883636040433e-16,
+            -4.5102810375396984e-17
+          ],
+          "h_k": null,
+          "h_kplus": null,
+          "delta_h": null,
+          "match": {
+            "matched": false,
+            "reason": "no_object_row_either_frame",
+            "new_activation": false
+          },
+          "unmatched_new_row": false
+        },
+        "hold_true": {
+          "sampled_min_sd": 0.6606138915677238,
+          "lipschitz_lower_bound": 0.6597388915677238,
+          "n_samples": 21,
+          "h": 0.0025,
+          "speed": 0.35
+        },
+        "true_clearance_minus_r_safe": 0.6130889574749432,
+        "qp_object_residual_min": 0.0,
+        "qp_agent_residual_min": 1.2982200995138142,
+        "qp_wall_residual_min": 54.78772216864552
+      }
+    }
+  },
+  {
+    "frame": 36,
+    "in_K0": true,
+    "k0_bad_agents": [],
+    "solver_status": [
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal"
+    ],
+    "hold_min_pair": 0.39416954665445214,
+    "hold_min_object_clearance": 0.22030024016691097,
+    "agents": {
+      "0": {
+        "position": [
+          4.111132882060612,
+          2.739386108432276
+        ],
+        "position_next": [
+          4.112028020660092,
+          2.7568631999204993
+        ],
+        "u": [
+          0.0179027719896002,
+          0.34954182976446235
+        ],
+        "u_nom": [
+          0.0179027719896002,
+          0.34954182976446235
+        ],
+        "status": "optimal",
+        "zero_input_feasible": true,
+        "zero_input_feasible_with_rho": true,
+        "row_kinds": [
+          "agent",
+          "agent",
+          "agent",
+          "wall",
+          "wall",
+          "wall",
+          "wall"
+        ],
+        "b_original": [
+          -3.256806313730253,
+          -1.1837619226354212,
+          -5.906303912149712,
+          -82.22265764121222,
+          -77.77734235878776,
+          -54.78772216864552,
+          -105.21227783135447
+        ],
+        "b_effective": [
+          -3.256806313730253,
+          -1.1837619226354212,
+          -5.906303912149712,
+          -82.22265764121222,
+          -77.77734235878776,
+          -54.78772216864552,
+          -105.21227783135447
+        ],
+        "residual_original": [
+          3.065958483548653,
+          1.2941057897389825,
+          5.46786793012737,
+          82.24056041320182,
+          77.75943958679817,
+          55.137263998409985,
+          104.86273600159001
+        ],
+        "h_object_qp": [],
+        "explain": {
+          "trace": {
+            "dropped_empty": true,
+            "reason": "out_of_range",
+            "distance": 0.6606138915677238
+          },
+          "A": [],
+          "rhs": [],
+          "rhs_no_margin": [],
+          "h_object": [],
+          "feature": {
+            "edge_index": 0,
+            "kind": "edge",
+            "t": 0.5694580512878823,
+            "foot": [
+              4.111132882060612,
+              3.4
+            ],
+            "distance": 0.6606138915677238,
+            "edge_normal": [
+              0.0,
+              -1.0
+            ],
+            "vertex_index": 1,
+            "edge_length": 1.5999999999999996,
+            "signed_distance": 0.6606138915677238,
+            "sd_gradient": [
+              0.0,
+              -1.0
+            ],
+            "sd_foot": [
+              4.111132882060612,
+              3.4
+            ],
+            "h_true": 0.5956138915677238
+          },
+          "support": null,
+          "h_aggregate": null,
+          "h_true": 0.5956138915677238,
+          "h_agg_minus_h_true": null,
+          "plane_more_conservative_than_sd": null,
+          "zero_in_F_hard": true,
+          "zero_in_F_rho": true,
+          "rho_over_gamma": 0.0025
+        },
+        "decompose": {
+          "delta_p": [
+            0.0008951385994802052,
+            0.017477091488223184
+          ],
+          "delta_p_minus_dt_u": [
+            1.9526481126463935e-16,
+            6.591949208711867e-17
+          ],
+          "h_k": null,
+          "h_kplus": null,
+          "delta_h": null,
+          "match": {
+            "matched": false,
+            "reason": "no_object_row_either_frame",
+            "new_activation": false
+          },
+          "unmatched_new_row": false
+        },
+        "hold_true": {
+          "sampled_min_sd": 0.6431368000795006,
+          "lipschitz_lower_bound": 0.6422618000795006,
+          "n_samples": 21,
+          "h": 0.0025,
+          "speed": 0.35
+        },
+        "true_clearance_minus_r_safe": 0.5956138915677238,
+        "qp_object_residual_min": 0.0,
+        "qp_agent_residual_min": 1.2941057897389825,
+        "qp_wall_residual_min": 55.137263998409985
+      }
+    }
+  },
+  {
+    "frame": 37,
+    "in_K0": true,
+    "k0_bad_agents": [],
+    "solver_status": [
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal"
+    ],
+    "hold_min_pair": 0.3944896405977726,
+    "hold_min_object_clearance": 0.20744138767339296,
+    "agents": {
+      "0": {
+        "position": [
+          4.112028020660092,
+          2.7568631999204993
+        ],
+        "position_next": [
+          4.112894548059143,
+          2.774341733333423
+        ],
+        "u": [
+          0.01733054798101344,
+          0.34957066825847644
+        ],
+        "u_nom": [
+          0.01733054798101344,
+          0.34957066825847644
+        ],
+        "status": "optimal",
+        "zero_input_feasible": true,
+        "zero_input_feasible_with_rho": true,
+        "row_kinds": [
+          "agent",
+          "agent",
+          "agent",
+          "agent",
+          "wall",
+          "wall",
+          "wall",
+          "wall"
+        ],
+        "b_original": [
+          -3.152967934189281,
+          -1.1779131369152365,
+          -5.777370453753172,
+          -7.2862099360517245,
+          -82.24056041320183,
+          -77.75943958679815,
+          -55.137263998409985,
+          -104.86273600159002
+        ],
+        "b_effective": [
+          -3.152967934189281,
+          -1.1779131369152365,
+          -5.777370453753172,
+          -7.2862099360517245,
+          -82.24056041320183,
+          -77.75943958679815,
+          -55.137263998409985,
+          -104.86273600159002
+        ],
+        "residual_original": [
+          2.9664836638013172,
+          1.2890657064258826,
+          5.346365862284298,
+          6.626307528456197,
+          82.25789096118285,
+          77.74210903881713,
+          55.486834666668464,
+          104.51316533333154
+        ],
+        "h_object_qp": [],
+        "explain": {
+          "trace": {
+            "dropped_empty": true,
+            "reason": "out_of_range",
+            "distance": 0.6431368000795006
+          },
+          "A": [],
+          "rhs": [],
+          "rhs_no_margin": [],
+          "h_object": [],
+          "feature": {
+            "edge_index": 0,
+            "kind": "edge",
+            "t": 0.5700175129125575,
+            "foot": [
+              4.112028020660092,
+              3.4
+            ],
+            "distance": 0.6431368000795006,
+            "edge_normal": [
+              0.0,
+              -1.0
+            ],
+            "vertex_index": 1,
+            "edge_length": 1.5999999999999996,
+            "signed_distance": 0.6431368000795006,
+            "sd_gradient": [
+              0.0,
+              -1.0
+            ],
+            "sd_foot": [
+              4.112028020660092,
+              3.4
+            ],
+            "h_true": 0.5781368000795006
+          },
+          "support": null,
+          "h_aggregate": null,
+          "h_true": 0.5781368000795006,
+          "h_agg_minus_h_true": null,
+          "plane_more_conservative_than_sd": null,
+          "zero_in_F_hard": true,
+          "zero_in_F_rho": true,
+          "rho_over_gamma": 0.0025
+        },
+        "decompose": {
+          "delta_p": [
+            0.0008665273990509093,
+            0.017478533412923714
+          ],
+          "delta_p_minus_dt_u": [
+            2.3722343533982837e-16,
+            -1.0755285551056204e-16
+          ],
+          "h_k": null,
+          "h_kplus": null,
+          "delta_h": null,
+          "match": {
+            "matched": false,
+            "reason": "no_object_row_either_frame",
+            "new_activation": false
+          },
+          "unmatched_new_row": false
+        },
+        "hold_true": {
+          "sampled_min_sd": 0.6256582666665769,
+          "lipschitz_lower_bound": 0.6247832666665769,
+          "n_samples": 21,
+          "h": 0.0025,
+          "speed": 0.35
+        },
+        "true_clearance_minus_r_safe": 0.5781368000795006,
+        "qp_object_residual_min": 0.0,
+        "qp_agent_residual_min": 1.2890657064258826,
+        "qp_wall_residual_min": 55.486834666668464
+      }
+    }
+  },
+  {
+    "frame": 38,
+    "in_K0": true,
+    "k0_bad_agents": [],
+    "solver_status": [
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal"
+    ],
+    "hold_min_pair": 0.3946751878591129,
+    "hold_min_object_clearance": 0.19520619533088593,
+    "agents": {
+      "0": {
+        "position": [
+          4.112894548059143,
+          2.774341733333423
+        ],
+        "position_next": [
+          4.1141490055800505,
+          2.7917967136063493
+        ],
+        "u": [
+          0.025089150418154477,
+          0.34909960545852126
+        ],
+        "u_nom": [
+          0.025089150418154477,
+          0.34909960545852126
+        ],
+        "status": "optimal",
+        "zero_input_feasible": true,
+        "zero_input_feasible_with_rho": true,
+        "row_kinds": [
+          "agent",
+          "agent",
+          "agent",
+          "agent",
+          "wall",
+          "wall",
+          "wall",
+          "wall"
+        ],
+        "b_original": [
+          -3.0516495194527025,
+          -1.1714844160880449,
+          -5.652018384131524,
+          -7.03451066360558,
+          -82.25789096118285,
+          -77.74210903881713,
+          -55.48683466666846,
+          -104.51316533333153
+        ],
+        "b_effective": [
+          -3.0516495194527025,
+          -1.1714844160880449,
+          -5.652018384131524,
+          -7.03451066360558,
+          -82.25789096118285,
+          -77.74210903881713,
+          -55.48683466666846,
+          -104.51316533333153
+        ],
+        "residual_original": [
+          2.8864062956231327,
+          1.2723084396877031,
+          5.249755372763846,
+          6.3707510312841045,
+          82.282980111601,
+          77.71701988839898,
+          55.83593427212698,
+          104.16406572787301
+        ],
+        "h_object_qp": [],
+        "explain": {
+          "trace": {
+            "dropped_empty": true,
+            "reason": "out_of_range",
+            "distance": 0.6256582666665769
+          },
+          "A": [],
+          "rhs": [],
+          "rhs_no_margin": [],
+          "h_object": [],
+          "feature": {
+            "edge_index": 0,
+            "kind": "edge",
+            "t": 0.5705590925369644,
+            "foot": [
+              4.112894548059143,
+              3.4
+            ],
+            "distance": 0.6256582666665769,
+            "edge_normal": [
+              0.0,
+              -1.0
+            ],
+            "vertex_index": 1,
+            "edge_length": 1.5999999999999996,
+            "signed_distance": 0.6256582666665769,
+            "sd_gradient": [
+              0.0,
+              -1.0
+            ],
+            "sd_foot": [
+              4.112894548059143,
+              3.4
+            ],
+            "h_true": 0.5606582666665769
+          },
+          "support": null,
+          "h_aggregate": null,
+          "h_true": 0.5606582666665769,
+          "h_agg_minus_h_true": null,
+          "plane_more_conservative_than_sd": null,
+          "zero_in_F_hard": true,
+          "zero_in_F_rho": true,
+          "rho_over_gamma": 0.0025
+        },
+        "decompose": {
+          "delta_p": [
+            0.0012544575209076925,
+            0.017454980272926246
+          ],
+          "delta_p_minus_dt_u": [
+            -3.144186300207963e-17,
+            1.8388068845354155e-16
+          ],
+          "h_k": null,
+          "h_kplus": null,
+          "delta_h": null,
+          "match": {
+            "matched": false,
+            "reason": "no_object_row_either_frame",
+            "new_activation": false
+          },
+          "unmatched_new_row": false
+        },
+        "hold_true": {
+          "sampled_min_sd": 0.6082032863936506,
+          "lipschitz_lower_bound": 0.6073282863936507,
+          "n_samples": 21,
+          "h": 0.0025,
+          "speed": 0.35
+        },
+        "true_clearance_minus_r_safe": 0.5606582666665769,
+        "qp_object_residual_min": 0.0,
+        "qp_agent_residual_min": 1.2723084396877031,
+        "qp_wall_residual_min": 55.83593427212698
+      }
+    }
+  },
+  {
+    "frame": 39,
+    "in_K0": true,
+    "k0_bad_agents": [],
+    "solver_status": [
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal"
+    ],
+    "hold_min_pair": 0.39488840688642507,
+    "hold_min_object_clearance": 0.18308914426546619,
+    "agents": {
+      "0": {
+        "position": [
+          4.1141490055800505,
+          2.7917967136063493
+        ],
+        "position_next": [
+          4.115352197271192,
+          2.8092553026030114
+        ],
+        "u": [
+          0.024063833822826165,
+          0.3491717799332406
+        ],
+        "u_nom": [
+          0.024063833822826165,
+          0.3491717799332406
+        ],
+        "status": "optimal",
+        "zero_input_feasible": true,
+        "zero_input_feasible_with_rho": true,
+        "row_kinds": [
+          "agent",
+          "agent",
+          "agent",
+          "agent",
+          "wall",
+          "wall",
+          "wall",
+          "wall"
+        ],
+        "b_original": [
+          -2.9552450983324534,
+          -1.1630658188200376,
+          -5.540288764486798,
+          -6.785293818335589,
+          -82.282980111601,
+          -77.71701988839898,
+          -55.835934272126984,
+          -104.16406572787302
+        ],
+        "b_effective": [
+          -2.9552450983324534,
+          -1.1630658188200376,
+          -5.540288764486798,
+          -6.785293818335589,
+          -82.282980111601,
+          -77.71701988839898,
+          -55.835934272126984,
+          -104.16406572787302
+        ],
+        "residual_original": [
+          2.7931609014038377,
+          1.2653520443981354,
+          5.144415887429533,
+          6.139656237863388,
+          82.30704394542383,
+          77.69295605457616,
+          56.18510605206023,
+          103.81489394793978
+        ],
+        "h_object_qp": [],
+        "explain": {
+          "trace": {
+            "dropped_empty": true,
+            "reason": "out_of_range",
+            "distance": 0.6082032863936506
+          },
+          "A": [],
+          "rhs": [],
+          "rhs_no_margin": [],
+          "h_object": [],
+          "feature": {
+            "edge_index": 0,
+            "kind": "edge",
+            "t": 0.5713431284875315,
+            "foot": [
+              4.1141490055800505,
+              3.4
+            ],
+            "distance": 0.6082032863936506,
+            "edge_normal": [
+              0.0,
+              -1.0
+            ],
+            "vertex_index": 1,
+            "edge_length": 1.5999999999999996,
+            "signed_distance": 0.6082032863936506,
+            "sd_gradient": [
+              0.0,
+              -1.0
+            ],
+            "sd_foot": [
+              4.1141490055800505,
+              3.4
+            ],
+            "h_true": 0.5432032863936507
+          },
+          "support": null,
+          "h_aggregate": null,
+          "h_true": 0.5432032863936507,
+          "h_agg_minus_h_true": null,
+          "plane_more_conservative_than_sd": null,
+          "zero_in_F_hard": true,
+          "zero_in_F_rho": true,
+          "rho_over_gamma": 0.0025
+        },
+        "decompose": {
+          "delta_p": [
+            0.0012031916911414697,
+            0.017458588996662083
+          ],
+          "delta_p_minus_dt_u": [
+            1.6132928326584306e-16,
+            5.204170427930421e-17
+          ],
+          "h_k": null,
+          "h_kplus": null,
+          "delta_h": null,
+          "match": {
+            "matched": false,
+            "reason": "no_object_row_either_frame",
+            "new_activation": false
+          },
+          "unmatched_new_row": false
+        },
+        "hold_true": {
+          "sampled_min_sd": 0.5907446973969885,
+          "lipschitz_lower_bound": 0.5898696973969886,
+          "n_samples": 21,
+          "h": 0.0025,
+          "speed": 0.35
+        },
+        "true_clearance_minus_r_safe": 0.5432032863936507,
+        "qp_object_residual_min": 0.0,
+        "qp_agent_residual_min": 1.2653520443981354,
+        "qp_wall_residual_min": 56.18510605206023
+      }
+    }
+  },
+  {
+    "frame": 40,
+    "in_K0": true,
+    "k0_bad_agents": [],
+    "solver_status": [
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal",
+      "optimal"
+    ],
+    "hold_min_pair": 0.3953762862879477,
+    "hold_min_object_clearance": 0.17092507737171966,
+    "agents": {
+      "0": {
+        "position": [
+          4.115352197271192,
+          2.8092553026030114
+        ],
+        "position_next": [
+          4.116505420457701,
+          2.826717263440274
+        ],
+        "u": [
+          0.023064463730170025,
+          0.34923921674525565
+        ],
+        "u_nom": [
+          0.023064463730170025,
+          0.34923921674525565
+        ],
+        "status": "optimal",
+        "zero_input_feasible": true,
+        "zero_input_feasible_with_rho": true,
+        "row_kinds": [
+          "agent",
+          "agent",
+          "agent",
+          "agent",
+          "wall",
+          "wall",
+          "wall",
+          "wall",
+          "object"
+        ],
+        "b_original": [
+          -2.8629556622091457,
+          -1.1541132893904673,
+          -5.431446556864286,
+          -6.541888880932573,
+          -82.30704394542383,
+          -77.69295605457616,
+          -56.18510605206023,
+          -103.81489394793977,
+          -4.185957579175909
+        ],
+        "b_effective": [
+          -2.8629556622091457,
+          -1.1541132893904673,
+          -5.431446556864286,
+          -6.541888880932573,
+          -82.30704394542383,
+          -77.69295605457616,
+          -56.18510605206023,
+          -103.81489394793977,
+          -4.185957579175909
+        ],
+        "residual_original": [
+          2.7044475370076535,
+          1.2578343448826932,
+          5.042144695842768,
+          5.914091075332211,
+          82.330108409154,
+          77.66989159084599,
+          56.53434526880548,
+          103.4656547311945,
+          3.8367183624306533
+        ],
+        "h_object_qp": [
+          0.5257446973969886
+        ],
+        "explain": {
+          "trace": {
+            "mode": "nearest_feature",
+            "h": [
+              0.5257446973969886
+            ],
+            "A": [
+              [
+                0.0,
+                -1.0
+              ]
+            ],
+            "demand": [
+              -4.205957579175909
+            ],
+            "rhs_uncapped": [
+              -4.185957579175909
+            ],
+            "rhs_capped": [
+              -4.185957579175909
+            ],
+            "rhs_no_margin_uncapped": [
+              -4.205957579175909
+            ],
+            "rhs_no_margin_capped": [
+              -4.205957579175909
+            ],
+            "cap_active": [
+              false
+            ],
+            "r_safe": 0.065,
+            "gamma_obj": 8.0,
+            "rho": 0.02,
+            "dropped_empty": false,
+            "feature_kind": "edge",
+            "edge_index": 0,
+            "t": 0.572095123294495,
+            "foot": [
+              4.115352197271192,
+              3.4
+            ],
+            "distance": 0.5907446973969885,
+            "h_true": 0.5257446973969886,
+            "sd_gradient": [
+              0.0,
+              -1.0
+            ],
+            "n_bar": [
+              0.0,
+              -1.0
+            ],
+            "offset_from_n_k": -3.4,
+            "h_bar": 0.5257446973969886
+          },
+          "A": [
+            [
+              0.0,
+              -1.0
+            ]
+          ],
+          "rhs": [
+            -4.185957579175909
+          ],
+          "rhs_no_margin": [
+            -4.205957579175909
+          ],
+          "h_object": [
+            0.5257446973969886
+          ],
+          "feature": {
+            "edge_index": 0,
+            "kind": "edge",
+            "t": 0.572095123294495,
+            "foot": [
+              4.115352197271192,
+              3.4
+            ],
+            "distance": 0.5907446973969885,
+            "edge_normal": [
+              0.0,
+              -1.0
+            ],
+            "vertex_index": 1,
+            "edge_length": 1.5999999999999996,
+            "signed_distance": 0.5907446973969885,
+            "sd_gradient": [
+              0.0,
+              -1.0
+            ],
+            "sd_foot": [
+              4.115352197271192,
+              3.4
+            ],
+            "h_true": 0.5257446973969886
+          },
+          "support": {
+            "max_n_dot_vertex": -3.4,
+            "min_n_dot_vertex": -4.6,
+            "offset": -3.4,
+            "cuts_object": false,
+            "support_gap": 0.0,
+            "all_vertices_on_inner_side": true
+          },
+          "h_aggregate": 0.5257446973969886,
+          "h_true": 0.5257446973969886,
+          "h_agg_minus_h_true": 0.0,
+          "plane_more_conservative_than_sd": false,
+          "zero_in_F_hard": true,
+          "zero_in_F_rho": true,
+          "rho_over_gamma": 0.0025
+        },
+        "decompose": {
+          "delta_p": [
+            0.0011532231865087894,
+            0.01746196083726259
+          ],
+          "delta_p_minus_dt_u": [
+            2.881809374466471e-16,
+            -1.9081958235744878e-16
+          ],
+          "h_k": null,
+          "h_kplus": 0.5257446973969886,
+          "delta_h": null,
+          "match": {
+            "matched": false,
+            "reason": "new_object_row",
+            "new_activation": true
+          },
+          "unmatched_new_row": true
+        },
+        "hold_true": {
+          "sampled_min_sd": 0.573282736559726,
+          "lipschitz_lower_bound": 0.572407736559726,
+          "n_samples": 21,
+          "h": 0.0025,
+          "speed": 0.35
+        },
+        "true_clearance_minus_r_safe": 0.5257446973969886,
+        "qp_object_residual_min": 3.8367183624306533,
+        "qp_agent_residual_min": 1.2578343448826932,
+        "qp_wall_residual_min": 56.53434526880548
+      }
+    }
+  }
+]

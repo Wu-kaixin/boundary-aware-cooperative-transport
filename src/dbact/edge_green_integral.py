@@ -451,6 +451,54 @@ def cull_partition_mass_bound(weight_sum: float, sigma: float, cull_sigmas: floa
     return 2.0 * math.pi * float(sigma) ** 2 * math.exp(-0.5 * s * s) * float(weight_sum)
 
 
+def aabb_disk_corner_reach(radius: float) -> float:
+    """Farthest a point of ``bbox(P)`` can lie from ``p`` when ``P ⊂ B(p,R)``.
+
+    The axis-aligned bounding box of the disk is the square of half-width ``R``,
+    whose corners are at distance ``√2 R``.  ``bbox(P)`` is contained in that
+    square, even if ``P`` itself never reaches the corner.
+    """
+    return math.sqrt(2.0) * float(radius)
+
+
+def evaluated_source_reach(
+    radius: float,
+    cull_sigmas: float,
+    sigma: float,
+    *,
+    max_offset: float | None = None,
+    influence_sigmas: float | None = None,
+) -> dict[str, float]:
+    """A priori ``||xi - p||`` bound for sources the integrator actually evaluates.
+
+    Counterexample to ``R + sσ``: take ``P`` with points near ``p+(R,0)`` and
+    ``p+(0,R)``. Then ``bbox(P)`` contains the square corner at distance ``√2 R``,
+    and a source with ``dist(xi, bbox(P)) = sσ`` just beyond that corner has
+    ``||xi-p|| = √2 R + sσ > R + sσ``.
+
+    ``density.restrict`` (when applied first) keeps raw boundary points with
+    ``||b-p|| ≤ R + d_c + n_σ σ``. Kernel centres ``xi = b + offset n`` then
+    satisfy ``||xi-p|| ≤ R + 2 d_c + n_σ σ``.
+    """
+    bbox_reach = aabb_disk_corner_reach(radius) + float(cull_sigmas) * float(sigma)
+    invalid_old = float(radius) + float(cull_sigmas) * float(sigma)
+    out: dict[str, float | str] = {
+        "bbox_aabb_reach": float(bbox_reach),
+        "invalid_R_plus_s_sigma": float(invalid_old),
+        "used": float(bbox_reach),
+        "rule": "sqrt(2) R + s sigma",
+    }
+    if max_offset is not None and influence_sigmas is not None:
+        restrict_xi = (
+            float(radius) + 2.0 * float(max_offset) + float(influence_sigmas) * float(sigma)
+        )
+        out["restrict_xi_reach"] = float(restrict_xi)
+        if restrict_xi < bbox_reach:
+            out["used"] = float(restrict_xi)
+            out["rule"] = "min(sqrt(2) R + s sigma, R + 2 d_c + n_sig sigma)"
+    return out  # type: ignore[return-value]
+
+
 def partition_edge_mass_moment_remainder(
     n_agents: int,
     n_gon: int,
@@ -461,6 +509,8 @@ def partition_edge_mass_moment_remainder(
     weight_sum: float | None = None,
     h_max: float | None = None,
     cull_sigmas: float = 6.0,
+    max_offset: float | None = None,
+    influence_sigmas: float | None = None,
 ) -> dict[str, float]:
     """A priori sum of edge-trapezoid remainders over agents and sources.
 
@@ -477,8 +527,12 @@ def partition_edge_mass_moment_remainder(
       true weights are arc lengths ``≪ 1``).
 
     Robot-centred first-moment error includes the missing conversion term
-    ``||xi - p_i|| |δm|`` with ``||xi - p_i|| ≤ R + cull_sigmas σ`` for every
-    source the integrator actually evaluates.
+    ``||xi - p_i|| |δm|``.  ``P ⊂ B(p,R)`` and ``dist(xi, bbox(P)) ≤ sσ`` do
+    **not** imply ``||xi-p|| ≤ R + sσ``: ``bbox(P)`` is an axis-aligned box and
+    may contain the square corner at distance ``√2 R``.  The universal bound
+    is ``||xi-p|| ≤ √2 R + sσ``.  If ``density.restrict`` ran first, kernel
+    centres also satisfy ``||xi-p|| ≤ R + 2 d_c + n_σ σ``, and the certificate
+    uses the minimum of the two.
     """
     r = float(radius)
     n = max(4, int(n_gon))
@@ -506,7 +560,14 @@ def partition_edge_mass_moment_remainder(
     n_ag = int(n_agents)
     dm_unit = n_ag * w * cert.one_unit_mass_remainder_over_cell
     dmu_xi = n_ag * w * cert.one_unit_moment_xi_l1_remainder_over_cell
-    reach_xi = r + float(cull_sigmas) * float(sigma)
+    reach_info = evaluated_source_reach(
+        r,
+        float(cull_sigmas),
+        float(sigma),
+        max_offset=max_offset,
+        influence_sigmas=influence_sigmas,
+    )
+    reach_xi = float(reach_info["used"])
     dmu_robot = dmu_xi + reach_xi * dm_unit
     # Floating-point envelope: each edge sum has O(panels) addends of size
     # O(max|F1|) ≤ σ √(2π).  Charged separately from analytic truncation.
@@ -532,6 +593,9 @@ def partition_edge_mass_moment_remainder(
         "sum_abs_dm": float(dm_unit),
         "sum_abs_dmu_xi": float(dmu_xi),
         "xi_to_site_reach": float(reach_xi),
+        "xi_to_site_reach_rule": str(reach_info["rule"]),
+        "xi_to_site_reach_bbox": float(reach_info["bbox_aabb_reach"]),
+        "xi_to_site_reach_invalid_old": float(reach_info["invalid_R_plus_s_sigma"]),
         "sum_abs_dmu": float(dmu_robot),
         "sum_abs_dmu_robot": float(dmu_robot),
         "float_sum_abs_dm": float(float_dm),
@@ -543,8 +607,10 @@ def partition_edge_mass_moment_remainder(
         "note": (
             "Clipped-edge remainder uses diameter 2R and perimeter 2 pi R, "
             "not the unclipped regular-n-gon chord. M2 is analytic. "
-            "Robot-centred moments include ||xi-p|| |dm|."
+            "Robot-centred moments include ||xi-p|| |dm| with a proved "
+            "||xi-p|| reach (not R+sσ)."
         ),
+        "reach_info": {k: (float(v) if isinstance(v, (int, float)) else v) for k, v in reach_info.items()},
     }
 
 
@@ -557,6 +623,8 @@ __all__ = [
     "clip_cell_polygon",
     "convex_disk_perimeter_bound",
     "cull_partition_mass_bound",
+    "aabb_disk_corner_reach",
+    "evaluated_source_reach",
     "discrete_mixture_phi_max",
     "edge_second_derivative_majorant",
     "f1_second_derivative_majorant_constant",

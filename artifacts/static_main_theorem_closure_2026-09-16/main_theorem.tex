@@ -1,0 +1,35 @@
+\documentclass{article}
+\usepackage{amsmath,amssymb}
+\title{Static sampled DBACT: feature-cover CBF-QP (working)}
+\author{}
+\date{2026-09-16}
+\begin{document}
+\maketitle
+\noindent\textit{Status: PARTIAL. Object-hold invariance is proved for the feature-cover rows. Rigorous $B_{J,\mathrm{prior}}$ beats geometry on rectangle and L-shape, not on C-shape, after the legal reach repair.}
+
+\section{Model}
+Sampling period $\Delta=0.05$. Oracle polyline of a frozen polygon $S$. Nominal $u_{\mathrm{nom},i}=k_c(\hat c_i-p_i)$ speed-saturated to $u_{\max}$. QP Euclidean projection onto agent, wall, and object rows intersected with $\|u\|\le u_{\max}$. Hold $p_i(t_k+\tau)=p_i(t_k)+\tau U_{k,i}$. Object rows are Euclidean distances to every edge in
+\[
+\Phi(p)=\{F:\mathrm{dist}(p,F)\le \mathrm{sd}(p,S)+2u_{\max}\Delta\}\cap\{\mathrm{dist}\le R_{\mathrm{row}}\}.
+\]
+P0: $p_i\in D$, $\|p_i-p_j\|\ge d_{\min}$, $\mathrm{sd}(p_i,S)\ge r_{\mathrm{safe}}+\rho/\gamma_{\mathrm{obj}}$, $\gamma\Delta\le 1$, $a=2/k_c-\Delta>0$.
+
+\section{Integral error}
+$\mathrm{dist}(\xi,\mathrm{bbox}(P))\le s\sigma$ and $P\subset B(p,R)$ do not imply $\|\xi-p\|\le R+s\sigma$. Used reach: $\min(\sqrt{2}R+s\sigma,\,R+2d_c+n_\sigma\sigma)$. Projection extra $2R(\|\delta\mu_{\mathrm{quad}}\|+R|\delta m_{\mathrm{quad}}|)$ on trapezoid/float only. Certificate $B_{H0}=R^2 M_{\mathrm{plane}}$. Polar $H$ is numerical.
+
+\section{Object invariance}
+$\mathrm{dist}(\cdot,F)$ is convex. Uncapped $n_F^\top u\ge -\gamma h_F+\rho$ and $v_{\mathrm{obj}}=0$ give $h_F(p+\tau u)\ge(1-\gamma\tau)h_F(p)+\rho\tau$. Cover $\Phi$ contains every edge that can become nearest in one hold. Hence $h_{\mathrm{true}}(p+\tau u)\ge(1-\gamma\tau)h_{\mathrm{true}}(p)+\rho\tau$. Cap inactive when $h\ge\rho/\gamma$. Then $0\in F_\rho^{\mathrm{object}}$ iff $h_{\mathrm{true}}\ge\rho/\gamma$. Aggregate infinite planes are not this barrier.
+
+\section{Joint feasibility}
+$0\in F_\rho$ iff agent $h_{ij}\ge 0$, $p\in D$, and $h_{\mathrm{true}}\ge\rho/\gamma$. The set is nonempty, closed, convex, subset of the speed ball, so the QP attains a minimizer.
+
+\section{Dissipation}
+On the sat-then-QP cascade, full window in $\mathcal K_0$ and $a>0$:
+\[
+\bar J\le \frac{2B_{H0}}{aK\Delta}+\frac{4B_E}{a^2}.
+\]
+Rectangle $B_{J,\mathrm{prior}}\approx0.1739<0.1803$; L-shape $0.2273<0.2295$; C-shape $0.2367>0.2295$ (does not beat). Route $B$ ($\|\Pi_F(0)\|\le u_{\max}$) is not used.
+
+\section{Not claimed}
+Global convergence, coverage stationarity, unknown-object transport, $J$ small $\Rightarrow$ coverage success, or C-shape quantitative advantage at the rigorous level.
+\end{document}

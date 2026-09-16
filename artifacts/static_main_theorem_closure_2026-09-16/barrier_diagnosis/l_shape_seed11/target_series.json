@@ -1,0 +1,6574 @@
+[
+  {
+    "frame": 208,
+    "in_K0": true,
+    "position": [
+      3.9028626970872655,
+      4.967499999999999
+    ],
+    "u": [
+      0.011540728883242623,
+      0.0
+    ],
+    "u_nom": [
+      0.011540728883242623,
+      -0.13631246767772548
+    ],
+    "h_aggregate": 0.002499999999999003,
+    "h_true": 0.020736309363885305,
+    "h_gap": -0.018236309363886302,
+    "feature": {
+      "edge_index": 4,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.85,
+        4.9
+      ],
+      "distance": 0.08573630936388531,
+      "edge_normal": [
+        0.0,
+        1.0
+      ],
+      "vertex_index": 4,
+      "edge_length": 0.75,
+      "signed_distance": 0.08573630936388531,
+      "sd_gradient": [
+        0.6165730421507131,
+        0.7872977096962844
+      ],
+      "sd_foot": [
+        3.85,
+        4.9
+      ],
+      "h_true": 0.020736309363885305
+    },
+    "support": {
+      "max_n_dot_vertex": 4.9,
+      "min_n_dot_vertex": 3.1,
+      "offset": 4.9,
+      "cuts_object": false,
+      "support_gap": 0.0,
+      "all_vertices_on_inner_side": true
+    },
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": 0.0,
+    "alignment": 1.0,
+    "n_bar": [
+      0.0,
+      1.0
+    ],
+    "offset": 4.9,
+    "anchor": [
+      0.0,
+      1.0
+    ],
+    "n_near": 11,
+    "n_same_face": 6,
+    "cap_active": [
+      false
+    ],
+    "rhs_uncapped": [
+      7.976258542541359e-15
+    ],
+    "rhs_capped": [
+      7.976258542541359e-15
+    ],
+    "rhs_no_margin_uncapped": [
+      -0.019999999999992024
+    ],
+    "decompose": {
+      "delta_p": [
+        0.0005770364441621822,
+        0.0
+      ],
+      "delta_p_minus_dt_u": [
+        5.106592232406726e-17,
+        0.0
+      ],
+      "h_k": 0.002499999999999003,
+      "h_kplus": 0.002499999999999003,
+      "delta_h": 0.0,
+      "match": {
+        "matched": true,
+        "new_activation": false,
+        "normal_cosine": 1.0,
+        "offset_delta": 0.0,
+        "face_switch": false,
+        "angle_deg": 0.0
+      },
+      "h_k_at_p_{k+1}": 0.002499999999999003,
+      "h_{k+1}_at_p_{k+1}": 0.002499999999999003,
+      "motion_term": 0.0,
+      "barrier_update_term": 0.0,
+      "sum_check": 0.0,
+      "predicted_motion_n_k_dot_dt_u": 0.0,
+      "motion_minus_predicted": 0.0,
+      "normal_delta": [
+        0.0,
+        0.0
+      ],
+      "offset_delta": 0.0,
+      "face_switch": false,
+      "numerical_rebuild_h0": 0.0,
+      "numerical_rebuild_h1": 0.0
+    },
+    "hold_true": {
+      "sampled_min_sd": 0.08573630936388531,
+      "lipschitz_lower_bound": 0.0857074575416772,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.011540728883242623
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 209,
+    "in_K0": true,
+    "position": [
+      3.9034397335314277,
+      4.967499999999999
+    ],
+    "u": [
+      0.011273665573651703,
+      0.0
+    ],
+    "u_nom": [
+      0.011273665573651703,
+      -0.13646654619576015
+    ],
+    "h_aggregate": 0.002499999999998115,
+    "h_true": 0.02109329311804639,
+    "h_gap": -0.018593293118048276,
+    "feature": {
+      "edge_index": 4,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.85,
+        4.9
+      ],
+      "distance": 0.0860932931180464,
+      "edge_normal": [
+        0.0,
+        1.0
+      ],
+      "vertex_index": 4,
+      "edge_length": 0.75,
+      "signed_distance": 0.0860932931180464,
+      "sd_gradient": [
+        0.6207188922156106,
+        0.7840331988166223
+      ],
+      "sd_foot": [
+        3.85,
+        4.9
+      ],
+      "h_true": 0.02109329311804639
+    },
+    "support": {
+      "max_n_dot_vertex": 4.9,
+      "min_n_dot_vertex": 3.1,
+      "offset": 4.900000000000001,
+      "cuts_object": false,
+      "support_gap": -8.881784197001252e-16,
+      "all_vertices_on_inner_side": true
+    },
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": 0.0,
+    "alignment": 1.0,
+    "n_bar": [
+      0.0,
+      1.0
+    ],
+    "offset": 4.900000000000001,
+    "anchor": [
+      0.0,
+      1.0
+    ],
+    "n_near": 11,
+    "n_same_face": 6,
+    "cap_active": [
+      false
+    ],
+    "rhs_uncapped": [
+      1.508168590014236e-14
+    ],
+    "rhs_capped": [
+      1.508168590014236e-14
+    ],
+    "rhs_no_margin_uncapped": [
+      -0.01999999999998492
+    ],
+    "decompose": {
+      "delta_p": [
+        0.000563683278682614,
+        0.0
+      ],
+      "delta_p_minus_dt_u": [
+        2.883977778811442e-17,
+        0.0
+      ],
+      "h_k": 0.002499999999999003,
+      "h_kplus": 0.002499999999998115,
+      "delta_h": -8.881784197001252e-16,
+      "match": {
+        "matched": true,
+        "new_activation": false,
+        "normal_cosine": 1.0,
+        "offset_delta": 8.881784197001252e-16,
+        "face_switch": false,
+        "angle_deg": 0.0
+      },
+      "h_k_at_p_{k+1}": 0.002499999999999003,
+      "h_{k+1}_at_p_{k+1}": 0.002499999999998115,
+      "motion_term": 0.0,
+      "barrier_update_term": -8.881784197001252e-16,
+      "sum_check": 0.0,
+      "predicted_motion_n_k_dot_dt_u": 0.0,
+      "motion_minus_predicted": 0.0,
+      "normal_delta": [
+        0.0,
+        0.0
+      ],
+      "offset_delta": 8.881784197001252e-16,
+      "face_switch": false,
+      "numerical_rebuild_h0": 0.0,
+      "numerical_rebuild_h1": 0.0
+    },
+    "hold_true": {
+      "sampled_min_sd": 0.0860932931180464,
+      "lipschitz_lower_bound": 0.08606510895411226,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.011273665573651703
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 210,
+    "in_K0": true,
+    "position": [
+      3.9040034168101103,
+      4.967499999999999
+    ],
+    "u": [
+      0.011012794111716984,
+      0.0
+    ],
+    "u_nom": [
+      0.011012794111716984,
+      -0.1366170740854371
+    ],
+    "h_aggregate": 0.002499999999999891,
+    "h_true": 0.021444311710871772,
+    "h_gap": -0.01894431171087188,
+    "feature": {
+      "edge_index": 4,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.85,
+        4.9
+      ],
+      "distance": 0.08644431171087177,
+      "edge_normal": [
+        0.0,
+        1.0
+      ],
+      "vertex_index": 4,
+      "edge_length": 0.75,
+      "signed_distance": 0.08644431171087177,
+      "sd_gradient": [
+        0.6247191485627668,
+        0.7808495280263743
+      ],
+      "sd_foot": [
+        3.85,
+        4.9
+      ],
+      "h_true": 0.021444311710871772
+    },
+    "support": {
+      "max_n_dot_vertex": 4.9,
+      "min_n_dot_vertex": 3.1,
+      "offset": 4.8999999999999995,
+      "cuts_object": false,
+      "support_gap": 8.881784197001252e-16,
+      "all_vertices_on_inner_side": true
+    },
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": 0.0,
+    "alignment": 1.0,
+    "n_bar": [
+      0.0,
+      1.0
+    ],
+    "offset": 4.8999999999999995,
+    "anchor": [
+      0.0,
+      1.0
+    ],
+    "n_near": 11,
+    "n_same_face": 6,
+    "cap_active": [
+      false
+    ],
+    "rhs_uncapped": [
+      8.708311849403572e-16
+    ],
+    "rhs_capped": [
+      8.708311849403572e-16
+    ],
+    "rhs_no_margin_uncapped": [
+      -0.01999999999999913
+    ],
+    "decompose": {
+      "delta_p": [
+        0.0005506397055858869,
+        0.0
+      ],
+      "delta_p_minus_dt_u": [
+        3.7730235602495554e-17,
+        0.0
+      ],
+      "h_k": 0.002499999999998115,
+      "h_kplus": 0.002499999999999891,
+      "delta_h": 1.7763568394002505e-15,
+      "match": {
+        "matched": true,
+        "new_activation": false,
+        "normal_cosine": 1.0,
+        "offset_delta": -1.7763568394002505e-15,
+        "face_switch": false,
+        "angle_deg": 0.0
+      },
+      "h_k_at_p_{k+1}": 0.002499999999998115,
+      "h_{k+1}_at_p_{k+1}": 0.002499999999999891,
+      "motion_term": 0.0,
+      "barrier_update_term": 1.7763568394002505e-15,
+      "sum_check": 0.0,
+      "predicted_motion_n_k_dot_dt_u": 0.0,
+      "motion_minus_predicted": 0.0,
+      "normal_delta": [
+        0.0,
+        0.0
+      ],
+      "offset_delta": -1.7763568394002505e-15,
+      "face_switch": false,
+      "numerical_rebuild_h0": 0.0,
+      "numerical_rebuild_h1": 0.0
+    },
+    "hold_true": {
+      "sampled_min_sd": 0.08644431171087177,
+      "lipschitz_lower_bound": 0.08641677972559249,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.011012794111716984
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 211,
+    "in_K0": true,
+    "position": [
+      3.904554056515696,
+      4.967499999999999
+    ],
+    "u": [
+      0.010757970865654798,
+      0.0
+    ],
+    "u_nom": [
+      0.010757970865654798,
+      -0.13676413242000204
+    ],
+    "h_aggregate": 0.002499999999999891,
+    "h_true": 0.021789371943329736,
+    "h_gap": -0.019289371943329844,
+    "feature": {
+      "edge_index": 4,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.85,
+        4.9
+      ],
+      "distance": 0.08678937194332974,
+      "edge_normal": [
+        0.0,
+        1.0
+      ],
+      "vertex_index": 4,
+      "edge_length": 0.75,
+      "signed_distance": 0.08678937194332974,
+      "sd_gradient": [
+        0.628579920492084,
+        0.7777449990544236
+      ],
+      "sd_foot": [
+        3.85,
+        4.9
+      ],
+      "h_true": 0.021789371943329736
+    },
+    "support": {
+      "max_n_dot_vertex": 4.9,
+      "min_n_dot_vertex": 3.1,
+      "offset": 4.8999999999999995,
+      "cuts_object": false,
+      "support_gap": 8.881784197001252e-16,
+      "all_vertices_on_inner_side": true
+    },
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": 2.220446049250313e-16,
+    "alignment": 0.9999999999999998,
+    "n_bar": [
+      0.0,
+      1.0
+    ],
+    "offset": 4.8999999999999995,
+    "anchor": [
+      0.0,
+      1.0
+    ],
+    "n_near": 11,
+    "n_same_face": 6,
+    "cap_active": [
+      false
+    ],
+    "rhs_uncapped": [
+      8.708311849403572e-16
+    ],
+    "rhs_capped": [
+      8.708311849403572e-16
+    ],
+    "rhs_no_margin_uncapped": [
+      -0.01999999999999913
+    ],
+    "decompose": {
+      "delta_p": [
+        0.0005378985432828998,
+        0.0
+      ],
+      "delta_p_minus_dt_u": [
+        1.5981140022436335e-16,
+        0.0
+      ],
+      "h_k": 0.002499999999999891,
+      "h_kplus": 0.002499999999999891,
+      "delta_h": 0.0,
+      "match": {
+        "matched": true,
+        "new_activation": false,
+        "normal_cosine": 1.0,
+        "offset_delta": 0.0,
+        "face_switch": false,
+        "angle_deg": 0.0
+      },
+      "h_k_at_p_{k+1}": 0.002499999999999891,
+      "h_{k+1}_at_p_{k+1}": 0.002499999999999891,
+      "motion_term": 0.0,
+      "barrier_update_term": 0.0,
+      "sum_check": 0.0,
+      "predicted_motion_n_k_dot_dt_u": 0.0,
+      "motion_minus_predicted": 0.0,
+      "normal_delta": [
+        0.0,
+        0.0
+      ],
+      "offset_delta": 0.0,
+      "face_switch": false,
+      "numerical_rebuild_h0": 0.0,
+      "numerical_rebuild_h1": 0.0
+    },
+    "hold_true": {
+      "sampled_min_sd": 0.08678937194332974,
+      "lipschitz_lower_bound": 0.0867624770161656,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.010757970865654798
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 212,
+    "in_K0": true,
+    "position": [
+      3.905091955058979,
+      4.967499999999999
+    ],
+    "u": [
+      0.010509055507525478,
+      0.0
+    ],
+    "u_nom": [
+      0.010509055507525478,
+      -0.13690780048834403
+    ],
+    "h_aggregate": 0.002499999999999003,
+    "h_true": 0.022128488522528772,
+    "h_gap": -0.01962848852252977,
+    "feature": {
+      "edge_index": 4,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.85,
+        4.9
+      ],
+      "distance": 0.08712848852252877,
+      "edge_normal": [
+        0.0,
+        1.0
+      ],
+      "vertex_index": 4,
+      "edge_length": 0.75,
+      "signed_distance": 0.08712848852252877,
+      "sd_gradient": [
+        0.6323070214254195,
+        0.7747179039212365
+      ],
+      "sd_foot": [
+        3.85,
+        4.9
+      ],
+      "h_true": 0.022128488522528772
+    },
+    "support": {
+      "max_n_dot_vertex": 4.9,
+      "min_n_dot_vertex": 3.1,
+      "offset": 4.9,
+      "cuts_object": false,
+      "support_gap": 0.0,
+      "all_vertices_on_inner_side": true
+    },
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": 0.0,
+    "alignment": 1.0,
+    "n_bar": [
+      0.0,
+      1.0
+    ],
+    "offset": 4.9,
+    "anchor": [
+      0.0,
+      1.0
+    ],
+    "n_near": 11,
+    "n_same_face": 6,
+    "cap_active": [
+      false
+    ],
+    "rhs_uncapped": [
+      7.976258542541359e-15
+    ],
+    "rhs_capped": [
+      7.976258542541359e-15
+    ],
+    "rhs_no_margin_uncapped": [
+      -0.019999999999992024
+    ],
+    "decompose": {
+      "delta_p": [
+        0.0005254527753764116,
+        0.0
+      ],
+      "delta_p_minus_dt_u": [
+        1.3758525568841051e-16,
+        0.0
+      ],
+      "h_k": 0.002499999999999891,
+      "h_kplus": 0.002499999999999003,
+      "delta_h": -8.881784197001252e-16,
+      "match": {
+        "matched": true,
+        "new_activation": false,
+        "normal_cosine": 1.0,
+        "offset_delta": 8.881784197001252e-16,
+        "face_switch": false,
+        "angle_deg": 0.0
+      },
+      "h_k_at_p_{k+1}": 0.002499999999999891,
+      "h_{k+1}_at_p_{k+1}": 0.002499999999999003,
+      "motion_term": 0.0,
+      "barrier_update_term": -8.881784197001252e-16,
+      "sum_check": 0.0,
+      "predicted_motion_n_k_dot_dt_u": 0.0,
+      "motion_minus_predicted": 0.0,
+      "normal_delta": [
+        0.0,
+        0.0
+      ],
+      "offset_delta": 8.881784197001252e-16,
+      "face_switch": false,
+      "numerical_rebuild_h0": 0.0,
+      "numerical_rebuild_h1": 0.0
+    },
+    "hold_true": {
+      "sampled_min_sd": 0.08712848852252877,
+      "lipschitz_lower_bound": 0.08710221588375996,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.010509055507525478
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 213,
+    "in_K0": true,
+    "position": [
+      3.9056174078343555,
+      4.967499999999999
+    ],
+    "u": [
+      0.010265910940674994,
+      0.0
+    ],
+    "u_nom": [
+      0.010265910940674994,
+      -0.13704815582884358
+    ],
+    "h_aggregate": 0.002499999999999003,
+    "h_true": 0.022461683348840744,
+    "h_gap": -0.01996168334884174,
+    "feature": {
+      "edge_index": 4,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.85,
+        4.9
+      ],
+      "distance": 0.08746168334884075,
+      "edge_normal": [
+        0.0,
+        1.0
+      ],
+      "vertex_index": 4,
+      "edge_length": 0.75,
+      "signed_distance": 0.08746168334884075,
+      "sd_gradient": [
+        0.6359059842528472,
+        0.7717665315310179
+      ],
+      "sd_foot": [
+        3.85,
+        4.9
+      ],
+      "h_true": 0.022461683348840744
+    },
+    "support": {
+      "max_n_dot_vertex": 4.9,
+      "min_n_dot_vertex": 3.1,
+      "offset": 4.9,
+      "cuts_object": false,
+      "support_gap": 0.0,
+      "all_vertices_on_inner_side": true
+    },
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": -2.220446049250313e-16,
+    "alignment": 1.0000000000000002,
+    "n_bar": [
+      0.0,
+      1.0
+    ],
+    "offset": 4.9,
+    "anchor": [
+      0.0,
+      1.0
+    ],
+    "n_near": 11,
+    "n_same_face": 6,
+    "cap_active": [
+      false
+    ],
+    "rhs_uncapped": [
+      7.976258542541359e-15
+    ],
+    "rhs_capped": [
+      7.976258542541359e-15
+    ],
+    "rhs_no_margin_uncapped": [
+      -0.019999999999992024
+    ],
+    "decompose": {
+      "delta_p": [
+        0.0005132955470337208,
+        0.0
+      ],
+      "delta_p_minus_dt_u": [
+        -2.894819800536297e-17,
+        0.0
+      ],
+      "h_k": 0.002499999999999003,
+      "h_kplus": 0.002499999999999003,
+      "delta_h": 0.0,
+      "match": {
+        "matched": true,
+        "new_activation": false,
+        "normal_cosine": 1.0,
+        "offset_delta": 0.0,
+        "face_switch": false,
+        "angle_deg": 0.0
+      },
+      "h_k_at_p_{k+1}": 0.002499999999999003,
+      "h_{k+1}_at_p_{k+1}": 0.002499999999999003,
+      "motion_term": 0.0,
+      "barrier_update_term": 0.0,
+      "sum_check": 0.0,
+      "predicted_motion_n_k_dot_dt_u": 0.0,
+      "motion_minus_predicted": 0.0,
+      "normal_delta": [
+        0.0,
+        0.0
+      ],
+      "offset_delta": 0.0,
+      "face_switch": false,
+      "numerical_rebuild_h0": 0.0,
+      "numerical_rebuild_h1": 0.0
+    },
+    "hold_true": {
+      "sampled_min_sd": 0.08746168334884075,
+      "lipschitz_lower_bound": 0.08743601857148905,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.010265910940674994
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 214,
+    "in_K0": true,
+    "position": [
+      3.9061307033813892,
+      4.967499999999999
+    ],
+    "u": [
+      0.010028403228413208,
+      0.0
+    ],
+    "u_nom": [
+      0.010028403228413208,
+      -0.1371852742630873
+    ],
+    "h_aggregate": 0.002499999999999003,
+    "h_true": 0.022788984856241257,
+    "h_gap": -0.020288984856242254,
+    "feature": {
+      "edge_index": 4,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.85,
+        4.9
+      ],
+      "distance": 0.08778898485624126,
+      "edge_normal": [
+        0.0,
+        1.0
+      ],
+      "vertex_index": 4,
+      "edge_length": 0.75,
+      "signed_distance": 0.08778898485624126,
+      "sd_gradient": [
+        0.6393820759324864,
+        0.768889173402945
+      ],
+      "sd_foot": [
+        3.85,
+        4.9
+      ],
+      "h_true": 0.022788984856241257
+    },
+    "support": {
+      "max_n_dot_vertex": 4.9,
+      "min_n_dot_vertex": 3.1,
+      "offset": 4.9,
+      "cuts_object": false,
+      "support_gap": 0.0,
+      "all_vertices_on_inner_side": true
+    },
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": 0.0,
+    "alignment": 1.0,
+    "n_bar": [
+      0.0,
+      1.0
+    ],
+    "offset": 4.9,
+    "anchor": [
+      0.0,
+      1.0
+    ],
+    "n_near": 11,
+    "n_same_face": 6,
+    "cap_active": [
+      false
+    ],
+    "rhs_uncapped": [
+      7.976258542541359e-15
+    ],
+    "rhs_capped": [
+      7.976258542541359e-15
+    ],
+    "rhs_no_margin_uncapped": [
+      -0.019999999999992024
+    ],
+    "decompose": {
+      "delta_p": [
+        0.0005014201614206293,
+        0.0
+      ],
+      "delta_p_minus_dt_u": [
+        -3.111660235033398e-17,
+        0.0
+      ],
+      "h_k": 0.002499999999999003,
+      "h_kplus": 0.002499999999999003,
+      "delta_h": 0.0,
+      "match": {
+        "matched": true,
+        "new_activation": false,
+        "normal_cosine": 1.0,
+        "offset_delta": 0.0,
+        "face_switch": false,
+        "angle_deg": 0.0
+      },
+      "h_k_at_p_{k+1}": 0.002499999999999003,
+      "h_{k+1}_at_p_{k+1}": 0.002499999999999003,
+      "motion_term": 0.0,
+      "barrier_update_term": 0.0,
+      "sum_check": 0.0,
+      "predicted_motion_n_k_dot_dt_u": 0.0,
+      "motion_minus_predicted": 0.0,
+      "normal_delta": [
+        0.0,
+        0.0
+      ],
+      "offset_delta": 0.0,
+      "face_switch": false,
+      "numerical_rebuild_h0": 0.0,
+      "numerical_rebuild_h1": 0.0
+    },
+    "hold_true": {
+      "sampled_min_sd": 0.08778898485624126,
+      "lipschitz_lower_bound": 0.08776391384817023,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.010028403228413208
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 215,
+    "in_K0": true,
+    "position": [
+      3.90663212354281,
+      4.967499999999999
+    ],
+    "u": [
+      0.009593699761097163,
+      0.0
+    ],
+    "u_nom": [
+      0.009593699761097163,
+      -0.1364095366767466
+    ],
+    "h_aggregate": 0.002499999999998115,
+    "h_true": 0.023110427402027373,
+    "h_gap": -0.020610427402029258,
+    "feature": {
+      "edge_index": 4,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.85,
+        4.9
+      ],
+      "distance": 0.08811042740202737,
+      "edge_normal": [
+        0.0,
+        1.0
+      ],
+      "vertex_index": 4,
+      "edge_length": 0.75,
+      "signed_distance": 0.08811042740202737,
+      "sd_gradient": [
+        0.6427403113641769,
+        0.7660841286356745
+      ],
+      "sd_foot": [
+        3.85,
+        4.9
+      ],
+      "h_true": 0.023110427402027373
+    },
+    "support": {
+      "max_n_dot_vertex": 4.9,
+      "min_n_dot_vertex": 3.1,
+      "offset": 4.900000000000001,
+      "cuts_object": false,
+      "support_gap": -8.881784197001252e-16,
+      "all_vertices_on_inner_side": true
+    },
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": 0.0,
+    "alignment": 1.0,
+    "n_bar": [
+      0.0,
+      1.0
+    ],
+    "offset": 4.900000000000001,
+    "anchor": [
+      0.0,
+      1.0
+    ],
+    "n_near": 11,
+    "n_same_face": 6,
+    "cap_active": [
+      false
+    ],
+    "rhs_uncapped": [
+      1.508168590014236e-14
+    ],
+    "rhs_capped": [
+      1.508168590014236e-14
+    ],
+    "rhs_no_margin_uncapped": [
+      -0.01999999999998492
+    ],
+    "decompose": {
+      "delta_p": [
+        0.00047968498805506243,
+        0.0
+      ],
+      "delta_p_minus_dt_u": [
+        2.0426368929626904e-16,
+        0.0
+      ],
+      "h_k": 0.002499999999999003,
+      "h_kplus": 0.002499999999998115,
+      "delta_h": -8.881784197001252e-16,
+      "match": {
+        "matched": true,
+        "new_activation": false,
+        "normal_cosine": 1.0,
+        "offset_delta": 8.881784197001252e-16,
+        "face_switch": false,
+        "angle_deg": 0.0
+      },
+      "h_k_at_p_{k+1}": 0.002499999999999003,
+      "h_{k+1}_at_p_{k+1}": 0.002499999999998115,
+      "motion_term": 0.0,
+      "barrier_update_term": -8.881784197001252e-16,
+      "sum_check": 0.0,
+      "predicted_motion_n_k_dot_dt_u": 0.0,
+      "motion_minus_predicted": 0.0,
+      "normal_delta": [
+        0.0,
+        0.0
+      ],
+      "offset_delta": 8.881784197001252e-16,
+      "face_switch": false,
+      "numerical_rebuild_h0": 0.0,
+      "numerical_rebuild_h1": 0.0
+    },
+    "hold_true": {
+      "sampled_min_sd": 0.08811042740202737,
+      "lipschitz_lower_bound": 0.08808644315262464,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.009593699761097163
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 216,
+    "in_K0": true,
+    "position": [
+      3.907111808530865,
+      4.967499999999999
+    ],
+    "u": [
+      0.0093722428909496,
+      0.0
+    ],
+    "u_nom": [
+      0.0093722428909496,
+      -0.13653799319112495
+    ],
+    "h_aggregate": 0.002499999999999891,
+    "h_true": 0.023419503921171328,
+    "h_gap": -0.020919503921171437,
+    "feature": {
+      "edge_index": 4,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.85,
+        4.9
+      ],
+      "distance": 0.08841950392117133,
+      "edge_normal": [
+        0.0,
+        1.0
+      ],
+      "vertex_index": 4,
+      "edge_length": 0.75,
+      "signed_distance": 0.08841950392117133,
+      "sd_gradient": [
+        0.6459186717647923,
+        0.763406228338233
+      ],
+      "sd_foot": [
+        3.85,
+        4.9
+      ],
+      "h_true": 0.023419503921171328
+    },
+    "support": {
+      "max_n_dot_vertex": 4.9,
+      "min_n_dot_vertex": 3.1,
+      "offset": 4.8999999999999995,
+      "cuts_object": false,
+      "support_gap": 8.881784197001252e-16,
+      "all_vertices_on_inner_side": true
+    },
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": 0.0,
+    "alignment": 1.0,
+    "n_bar": [
+      0.0,
+      1.0
+    ],
+    "offset": 4.8999999999999995,
+    "anchor": [
+      0.0,
+      1.0
+    ],
+    "n_near": 11,
+    "n_same_face": 6,
+    "cap_active": [
+      false
+    ],
+    "rhs_uncapped": [
+      8.708311849403572e-16
+    ],
+    "rhs_capped": [
+      8.708311849403572e-16
+    ],
+    "rhs_no_margin_uncapped": [
+      -0.01999999999999913
+    ],
+    "decompose": {
+      "delta_p": [
+        0.000468612144547631,
+        0.0
+      ],
+      "delta_p_minus_dt_u": [
+        1.509751525186065e-16,
+        0.0
+      ],
+      "h_k": 0.002499999999998115,
+      "h_kplus": 0.002499999999999891,
+      "delta_h": 1.7763568394002505e-15,
+      "match": {
+        "matched": true,
+        "new_activation": false,
+        "normal_cosine": 1.0,
+        "offset_delta": -1.7763568394002505e-15,
+        "face_switch": false,
+        "angle_deg": 0.0
+      },
+      "h_k_at_p_{k+1}": 0.002499999999998115,
+      "h_{k+1}_at_p_{k+1}": 0.002499999999999891,
+      "motion_term": 0.0,
+      "barrier_update_term": 1.7763568394002505e-15,
+      "sum_check": 0.0,
+      "predicted_motion_n_k_dot_dt_u": 0.0,
+      "motion_minus_predicted": 0.0,
+      "normal_delta": [
+        0.0,
+        0.0
+      ],
+      "offset_delta": -1.7763568394002505e-15,
+      "face_switch": false,
+      "numerical_rebuild_h0": 0.0,
+      "numerical_rebuild_h1": 0.0
+    },
+    "hold_true": {
+      "sampled_min_sd": 0.08841950392117133,
+      "lipschitz_lower_bound": 0.08839607331394396,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.0093722428909496
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 217,
+    "in_K0": true,
+    "position": [
+      3.9075804206754126,
+      4.967499999999999
+    ],
+    "u": [
+      0.009155908263677093,
+      0.0
+    ],
+    "u_nom": [
+      0.009155908263677093,
+      -0.13666349380881027
+    ],
+    "h_aggregate": 0.002499999999999003,
+    "h_true": 0.023722910486284957,
+    "h_gap": -0.021222910486285954,
+    "feature": {
+      "edge_index": 4,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.85,
+        4.9
+      ],
+      "distance": 0.08872291048628496,
+      "edge_normal": [
+        0.0,
+        1.0
+      ],
+      "vertex_index": 4,
+      "edge_length": 0.75,
+      "signed_distance": 0.08872291048628496,
+      "sd_gradient": [
+        0.6489915666631948,
+        0.7607956009336884
+      ],
+      "sd_foot": [
+        3.85,
+        4.9
+      ],
+      "h_true": 0.023722910486284957
+    },
+    "support": {
+      "max_n_dot_vertex": 4.9,
+      "min_n_dot_vertex": 3.1,
+      "offset": 4.9,
+      "cuts_object": false,
+      "support_gap": 0.0,
+      "all_vertices_on_inner_side": true
+    },
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": -2.220446049250313e-16,
+    "alignment": 1.0000000000000002,
+    "n_bar": [
+      0.0,
+      1.0
+    ],
+    "offset": 4.9,
+    "anchor": [
+      0.0,
+      1.0
+    ],
+    "n_near": 11,
+    "n_same_face": 6,
+    "cap_active": [
+      false
+    ],
+    "rhs_uncapped": [
+      7.976258542541359e-15
+    ],
+    "rhs_capped": [
+      7.976258542541359e-15
+    ],
+    "rhs_no_margin_uncapped": [
+      -0.019999999999992024
+    ],
+    "decompose": {
+      "delta_p": [
+        0.00045779541318369255,
+        0.0
+      ],
+      "delta_p_minus_dt_u": [
+        -1.621424348952072e-16,
+        0.0
+      ],
+      "h_k": 0.002499999999999891,
+      "h_kplus": 0.002499999999999003,
+      "delta_h": -8.881784197001252e-16,
+      "match": {
+        "matched": true,
+        "new_activation": false,
+        "normal_cosine": 1.0,
+        "offset_delta": 8.881784197001252e-16,
+        "face_switch": false,
+        "angle_deg": 0.0
+      },
+      "h_k_at_p_{k+1}": 0.002499999999999891,
+      "h_{k+1}_at_p_{k+1}": 0.002499999999999003,
+      "motion_term": 0.0,
+      "barrier_update_term": -8.881784197001252e-16,
+      "sum_check": 0.0,
+      "predicted_motion_n_k_dot_dt_u": 0.0,
+      "motion_minus_predicted": 0.0,
+      "normal_delta": [
+        0.0,
+        0.0
+      ],
+      "offset_delta": 8.881784197001252e-16,
+      "face_switch": false,
+      "numerical_rebuild_h0": 0.0,
+      "numerical_rebuild_h1": 0.0
+    },
+    "hold_true": {
+      "sampled_min_sd": 0.08872291048628496,
+      "lipschitz_lower_bound": 0.08870002071562577,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.009155908263677093
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 218,
+    "in_K0": true,
+    "position": [
+      3.9080382160885963,
+      4.967499999999999
+    ],
+    "u": [
+      0.008944577200173899,
+      0.0
+    ],
+    "u_nom": [
+      0.008944577200173899,
+      -0.13678610614911033
+    ],
+    "h_aggregate": 0.002499999999999891,
+    "h_true": 0.0240206971818714,
+    "h_gap": -0.02152069718187151,
+    "feature": {
+      "edge_index": 4,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.85,
+        4.9
+      ],
+      "distance": 0.0890206971818714,
+      "edge_normal": [
+        0.0,
+        1.0
+      ],
+      "vertex_index": 4,
+      "edge_length": 0.75,
+      "signed_distance": 0.0890206971818714,
+      "sd_gradient": [
+        0.651963171778162,
+        0.758250633131921
+      ],
+      "sd_foot": [
+        3.85,
+        4.9
+      ],
+      "h_true": 0.0240206971818714
+    },
+    "support": {
+      "max_n_dot_vertex": 4.9,
+      "min_n_dot_vertex": 3.1,
+      "offset": 4.8999999999999995,
+      "cuts_object": false,
+      "support_gap": 8.881784197001252e-16,
+      "all_vertices_on_inner_side": true
+    },
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": 0.0,
+    "alignment": 1.0,
+    "n_bar": [
+      0.0,
+      1.0
+    ],
+    "offset": 4.8999999999999995,
+    "anchor": [
+      0.0,
+      1.0
+    ],
+    "n_near": 11,
+    "n_same_face": 6,
+    "cap_active": [
+      false
+    ],
+    "rhs_uncapped": [
+      8.708311849403572e-16
+    ],
+    "rhs_capped": [
+      8.708311849403572e-16
+    ],
+    "rhs_no_margin_uncapped": [
+      -0.01999999999999913
+    ],
+    "decompose": {
+      "delta_p": [
+        0.0004472288600085861,
+        0.0
+      ],
+      "delta_p_minus_dt_u": [
+        -1.0885389811754465e-16,
+        0.0
+      ],
+      "h_k": 0.002499999999999003,
+      "h_kplus": 0.002499999999999891,
+      "delta_h": 8.881784197001252e-16,
+      "match": {
+        "matched": true,
+        "new_activation": false,
+        "normal_cosine": 1.0,
+        "offset_delta": -8.881784197001252e-16,
+        "face_switch": false,
+        "angle_deg": 0.0
+      },
+      "h_k_at_p_{k+1}": 0.002499999999999003,
+      "h_{k+1}_at_p_{k+1}": 0.002499999999999891,
+      "motion_term": 0.0,
+      "barrier_update_term": 8.881784197001252e-16,
+      "sum_check": 0.0,
+      "predicted_motion_n_k_dot_dt_u": 0.0,
+      "motion_minus_predicted": 0.0,
+      "normal_delta": [
+        0.0,
+        0.0
+      ],
+      "offset_delta": -8.881784197001252e-16,
+      "face_switch": false,
+      "numerical_rebuild_h0": 0.0,
+      "numerical_rebuild_h1": 0.0
+    },
+    "hold_true": {
+      "sampled_min_sd": 0.0890206971818714,
+      "lipschitz_lower_bound": 0.08899833573887096,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.008944577200173899
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 219,
+    "in_K0": true,
+    "position": [
+      3.908485444948605,
+      4.967499999999999
+    ],
+    "u": [
+      0.008738133762523947,
+      0.0
+    ],
+    "u_nom": [
+      0.008738133762523947,
+      -0.13690589632112893
+    ],
+    "h_aggregate": 0.002499999999999891,
+    "h_true": 0.024312917715390653,
+    "h_gap": -0.02181291771539076,
+    "feature": {
+      "edge_index": 4,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.85,
+        4.9
+      ],
+      "distance": 0.08931291771539066,
+      "edge_normal": [
+        0.0,
+        1.0
+      ],
+      "vertex_index": 4,
+      "edge_length": 0.75,
+      "signed_distance": 0.08931291771539066,
+      "sd_gradient": [
+        0.6548374685840811,
+        0.7557697332775325
+      ],
+      "sd_foot": [
+        3.85,
+        4.9
+      ],
+      "h_true": 0.024312917715390653
+    },
+    "support": {
+      "max_n_dot_vertex": 4.9,
+      "min_n_dot_vertex": 3.1,
+      "offset": 4.8999999999999995,
+      "cuts_object": false,
+      "support_gap": 8.881784197001252e-16,
+      "all_vertices_on_inner_side": true
+    },
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": -2.220446049250313e-16,
+    "alignment": 1.0000000000000002,
+    "n_bar": [
+      0.0,
+      1.0
+    ],
+    "offset": 4.8999999999999995,
+    "anchor": [
+      0.0,
+      1.0
+    ],
+    "n_near": 11,
+    "n_same_face": 6,
+    "cap_active": [
+      false
+    ],
+    "rhs_uncapped": [
+      8.708311849403572e-16
+    ],
+    "rhs_capped": [
+      8.708311849403572e-16
+    ],
+    "rhs_no_margin_uncapped": [
+      -0.01999999999999913
+    ],
+    "decompose": {
+      "delta_p": [
+        0.0004369066881260153,
+        0.0
+      ],
+      "delta_p_minus_dt_u": [
+        -1.8209175486894047e-16,
+        0.0
+      ],
+      "h_k": 0.002499999999999891,
+      "h_kplus": 0.002499999999999891,
+      "delta_h": 0.0,
+      "match": {
+        "matched": true,
+        "new_activation": false,
+        "normal_cosine": 1.0,
+        "offset_delta": 0.0,
+        "face_switch": false,
+        "angle_deg": 0.0
+      },
+      "h_k_at_p_{k+1}": 0.002499999999999891,
+      "h_{k+1}_at_p_{k+1}": 0.002499999999999891,
+      "motion_term": 0.0,
+      "barrier_update_term": 0.0,
+      "sum_check": 0.0,
+      "predicted_motion_n_k_dot_dt_u": 0.0,
+      "motion_minus_predicted": 0.0,
+      "normal_delta": [
+        0.0,
+        0.0
+      ],
+      "offset_delta": 0.0,
+      "face_switch": false,
+      "numerical_rebuild_h0": 0.0,
+      "numerical_rebuild_h1": 0.0
+    },
+    "hold_true": {
+      "sampled_min_sd": 0.08931291771539066,
+      "lipschitz_lower_bound": 0.08929107238098434,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.008738133762523947
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 220,
+    "in_K0": true,
+    "position": [
+      3.908922351636731,
+      4.967499999999999
+    ],
+    "u": [
+      0.008536464692287415,
+      -6.2450045135165055e-15
+    ],
+    "u_nom": [
+      0.008536464692287415,
+      -0.1370229289544845
+    ],
+    "h_aggregate": 0.0025000000000007794,
+    "h_true": 0.024599629030495507,
+    "h_gap": -0.022099629030494727,
+    "feature": {
+      "edge_index": 4,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.85,
+        4.9
+      ],
+      "distance": 0.08959962903049551,
+      "edge_normal": [
+        0.0,
+        1.0
+      ],
+      "vertex_index": 4,
+      "edge_length": 0.75,
+      "signed_distance": 0.08959962903049551,
+      "sd_gradient": [
+        0.6576182543867046,
+        0.7533513333746635
+      ],
+      "sd_foot": [
+        3.85,
+        4.9
+      ],
+      "h_true": 0.024599629030495507
+    },
+    "support": {
+      "max_n_dot_vertex": 4.9,
+      "min_n_dot_vertex": 3.1,
+      "offset": 4.899999999999999,
+      "cuts_object": false,
+      "support_gap": 1.7763568394002505e-15,
+      "all_vertices_on_inner_side": true
+    },
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": 2.220446049250313e-16,
+    "alignment": 0.9999999999999998,
+    "n_bar": [
+      0.0,
+      1.0
+    ],
+    "offset": 4.899999999999999,
+    "anchor": [
+      0.0,
+      1.0
+    ],
+    "n_near": 11,
+    "n_same_face": 6,
+    "cap_active": [
+      false
+    ],
+    "rhs_uncapped": [
+      -6.234596172660645e-15
+    ],
+    "rhs_capped": [
+      -6.234596172660645e-15
+    ],
+    "rhs_no_margin_uncapped": [
+      -0.020000000000006235
+    ],
+    "decompose": {
+      "delta_p": [
+        0.00042682323461429306,
+        0.0
+      ],
+      "delta_p_minus_dt_u": [
+        -7.773729576721067e-17,
+        3.122502256758253e-16
+      ],
+      "h_k": 0.002499999999999891,
+      "h_kplus": 0.0025000000000007794,
+      "delta_h": 8.881784197001252e-16,
+      "match": {
+        "matched": true,
+        "new_activation": false,
+        "normal_cosine": 1.0,
+        "offset_delta": -8.881784197001252e-16,
+        "face_switch": false,
+        "angle_deg": 0.0
+      },
+      "h_k_at_p_{k+1}": 0.002499999999999891,
+      "h_{k+1}_at_p_{k+1}": 0.0025000000000007794,
+      "motion_term": 0.0,
+      "barrier_update_term": 8.881784197001252e-16,
+      "sum_check": 0.0,
+      "predicted_motion_n_k_dot_dt_u": -3.122502256758253e-16,
+      "motion_minus_predicted": 3.122502256758253e-16,
+      "normal_delta": [
+        0.0,
+        0.0
+      ],
+      "offset_delta": -8.881784197001252e-16,
+      "face_switch": false,
+      "numerical_rebuild_h0": 0.0,
+      "numerical_rebuild_h1": 0.0
+    },
+    "hold_true": {
+      "sampled_min_sd": 0.08959962903049551,
+      "lipschitz_lower_bound": 0.08957828786876479,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.008536464692287415
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 221,
+    "in_K0": true,
+    "position": [
+      3.909349174871345,
+      4.967499999999999
+    ],
+    "u": [
+      0.008339459350020695,
+      0.0
+    ],
+    "u_nom": [
+      0.008339459350020695,
+      -0.13713726722967873
+    ],
+    "h_aggregate": 0.002499999999999891,
+    "h_true": 0.024880890949686083,
+    "h_gap": -0.02238089094968619,
+    "feature": {
+      "edge_index": 4,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.85,
+        4.9
+      ],
+      "distance": 0.08988089094968608,
+      "edge_normal": [
+        0.0,
+        1.0
+      ],
+      "vertex_index": 4,
+      "edge_length": 0.75,
+      "signed_distance": 0.08988089094968608,
+      "sd_gradient": [
+        0.6603091518592956,
+        0.7509938907679993
+      ],
+      "sd_foot": [
+        3.85,
+        4.9
+      ],
+      "h_true": 0.024880890949686083
+    },
+    "support": {
+      "max_n_dot_vertex": 4.9,
+      "min_n_dot_vertex": 3.1,
+      "offset": 4.8999999999999995,
+      "cuts_object": false,
+      "support_gap": 8.881784197001252e-16,
+      "all_vertices_on_inner_side": true
+    },
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": 0.0,
+    "alignment": 1.0,
+    "n_bar": [
+      0.0,
+      1.0
+    ],
+    "offset": 4.8999999999999995,
+    "anchor": [
+      0.0,
+      1.0
+    ],
+    "n_near": 11,
+    "n_same_face": 6,
+    "cap_active": [
+      false
+    ],
+    "rhs_uncapped": [
+      8.708311849403572e-16
+    ],
+    "rhs_capped": [
+      8.708311849403572e-16
+    ],
+    "rhs_no_margin_uncapped": [
+      -0.01999999999999913
+    ],
+    "decompose": {
+      "delta_p": [
+        0.0004169729675012057,
+        0.0
+      ],
+      "delta_p_minus_dt_u": [
+        1.7092447249233977e-16,
+        0.0
+      ],
+      "h_k": 0.0025000000000007794,
+      "h_kplus": 0.002499999999999891,
+      "delta_h": -8.881784197001252e-16,
+      "match": {
+        "matched": true,
+        "new_activation": false,
+        "normal_cosine": 1.0,
+        "offset_delta": 8.881784197001252e-16,
+        "face_switch": false,
+        "angle_deg": 0.0
+      },
+      "h_k_at_p_{k+1}": 0.0025000000000007794,
+      "h_{k+1}_at_p_{k+1}": 0.002499999999999891,
+      "motion_term": 0.0,
+      "barrier_update_term": -8.881784197001252e-16,
+      "sum_check": 0.0,
+      "predicted_motion_n_k_dot_dt_u": 0.0,
+      "motion_minus_predicted": 0.0,
+      "normal_delta": [
+        0.0,
+        0.0
+      ],
+      "offset_delta": 8.881784197001252e-16,
+      "face_switch": false,
+      "numerical_rebuild_h0": 0.0,
+      "numerical_rebuild_h1": 0.0
+    },
+    "hold_true": {
+      "sampled_min_sd": 0.08988089094968608,
+      "lipschitz_lower_bound": 0.08986004230131103,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.008339459350020695
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 222,
+    "in_K0": true,
+    "position": [
+      3.9097661478388464,
+      4.967499999999999
+    ],
+    "u": [
+      0.00814700965599462,
+      0.0
+    ],
+    "u_nom": [
+      0.00814700965599462,
+      -0.13724897290808755
+    ],
+    "h_aggregate": 0.002499999999999891,
+    "h_true": 0.025156765844248724,
+    "h_gap": -0.022656765844248833,
+    "feature": {
+      "edge_index": 4,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.85,
+        4.9
+      ],
+      "distance": 0.09015676584424873,
+      "edge_normal": [
+        0.0,
+        1.0
+      ],
+      "vertex_index": 4,
+      "edge_length": 0.75,
+      "signed_distance": 0.09015676584424873,
+      "sd_gradient": [
+        0.6629136180649592,
+        0.7486958895199207
+      ],
+      "sd_foot": [
+        3.85,
+        4.9
+      ],
+      "h_true": 0.025156765844248724
+    },
+    "support": {
+      "max_n_dot_vertex": 4.9,
+      "min_n_dot_vertex": 3.1,
+      "offset": 4.8999999999999995,
+      "cuts_object": false,
+      "support_gap": 8.881784197001252e-16,
+      "all_vertices_on_inner_side": true
+    },
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": 0.0,
+    "alignment": 1.0,
+    "n_bar": [
+      0.0,
+      1.0
+    ],
+    "offset": 4.8999999999999995,
+    "anchor": [
+      0.0,
+      1.0
+    ],
+    "n_near": 11,
+    "n_same_face": 6,
+    "cap_active": [
+      false
+    ],
+    "rhs_uncapped": [
+      8.708311849403572e-16
+    ],
+    "rhs_capped": [
+      8.708311849403572e-16
+    ],
+    "rhs_no_margin_uncapped": [
+      -0.01999999999999913
+    ],
+    "decompose": {
+      "delta_p": [
+        0.00040735048279971764,
+        0.0
+      ],
+      "delta_p_minus_dt_u": [
+        -1.338989683019598e-17,
+        0.0
+      ],
+      "h_k": 0.002499999999999891,
+      "h_kplus": 0.002499999999999891,
+      "delta_h": 0.0,
+      "match": {
+        "matched": true,
+        "new_activation": false,
+        "normal_cosine": 1.0,
+        "offset_delta": 0.0,
+        "face_switch": false,
+        "angle_deg": 0.0
+      },
+      "h_k_at_p_{k+1}": 0.002499999999999891,
+      "h_{k+1}_at_p_{k+1}": 0.002499999999999891,
+      "motion_term": 0.0,
+      "barrier_update_term": 0.0,
+      "sum_check": 0.0,
+      "predicted_motion_n_k_dot_dt_u": 0.0,
+      "motion_minus_predicted": 0.0,
+      "normal_delta": [
+        0.0,
+        0.0
+      ],
+      "offset_delta": 0.0,
+      "face_switch": false,
+      "numerical_rebuild_h0": 0.0,
+      "numerical_rebuild_h1": 0.0
+    },
+    "hold_true": {
+      "sampled_min_sd": 0.09015676584424873,
+      "lipschitz_lower_bound": 0.09013639832010874,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.00814700965599462
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 223,
+    "in_K0": true,
+    "position": [
+      3.910173498321646,
+      4.967499999999999
+    ],
+    "u": [
+      0.011799288749073211,
+      0.0
+    ],
+    "u_nom": [
+      0.011799288749073211,
+      -0.13662559499187354
+    ],
+    "h_aggregate": 0.002499999999999003,
+    "h_true": 0.0254273183295015,
+    "h_gap": -0.022927318329502497,
+    "feature": {
+      "edge_index": 4,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.85,
+        4.9
+      ],
+      "distance": 0.0904273183295015,
+      "edge_normal": [
+        0.0,
+        1.0
+      ],
+      "vertex_index": 4,
+      "edge_length": 0.75,
+      "signed_distance": 0.0904273183295015,
+      "sd_gradient": [
+        0.6654349529904687,
+        0.7464558415194917
+      ],
+      "sd_foot": [
+        3.85,
+        4.9
+      ],
+      "h_true": 0.0254273183295015
+    },
+    "support": {
+      "max_n_dot_vertex": 4.9,
+      "min_n_dot_vertex": 3.1,
+      "offset": 4.9,
+      "cuts_object": false,
+      "support_gap": 0.0,
+      "all_vertices_on_inner_side": true
+    },
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": 0.0,
+    "alignment": 1.0,
+    "n_bar": [
+      0.0,
+      1.0
+    ],
+    "offset": 4.9,
+    "anchor": [
+      0.0,
+      1.0
+    ],
+    "n_near": 11,
+    "n_same_face": 6,
+    "cap_active": [
+      false
+    ],
+    "rhs_uncapped": [
+      7.976258542541359e-15
+    ],
+    "rhs_capped": [
+      7.976258542541359e-15
+    ],
+    "rhs_no_margin_uncapped": [
+      -0.019999999999992024
+    ],
+    "decompose": {
+      "delta_p": [
+        0.0005899644374536273,
+        0.0
+      ],
+      "delta_p_minus_dt_u": [
+        -3.3393426912553537e-17,
+        0.0
+      ],
+      "h_k": 0.002499999999999891,
+      "h_kplus": 0.002499999999999003,
+      "delta_h": -8.881784197001252e-16,
+      "match": {
+        "matched": true,
+        "new_activation": false,
+        "normal_cosine": 1.0,
+        "offset_delta": 8.881784197001252e-16,
+        "face_switch": false,
+        "angle_deg": 0.0
+      },
+      "h_k_at_p_{k+1}": 0.002499999999999891,
+      "h_{k+1}_at_p_{k+1}": 0.002499999999999003,
+      "motion_term": 0.0,
+      "barrier_update_term": -8.881784197001252e-16,
+      "sum_check": 0.0,
+      "predicted_motion_n_k_dot_dt_u": 0.0,
+      "motion_minus_predicted": 0.0,
+      "normal_delta": [
+        0.0,
+        0.0
+      ],
+      "offset_delta": 8.881784197001252e-16,
+      "face_switch": false,
+      "numerical_rebuild_h0": 0.0,
+      "numerical_rebuild_h1": 0.0
+    },
+    "hold_true": {
+      "sampled_min_sd": 0.0904273183295015,
+      "lipschitz_lower_bound": 0.09039782010762881,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.011799288749073211
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 224,
+    "in_K0": true,
+    "position": [
+      3.9107634627590997,
+      4.967499999999999
+    ],
+    "u": [
+      0.011530379785134538,
+      0.0
+    ],
+    "u_nom": [
+      0.011530379785134538,
+      -0.13678451675422662
+    ],
+    "h_aggregate": 0.002499999999999003,
+    "h_true": 0.025820968980056314,
+    "h_gap": -0.02332096898005731,
+    "feature": {
+      "edge_index": 4,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.85,
+        4.9
+      ],
+      "distance": 0.09082096898005632,
+      "edge_normal": [
+        0.0,
+        1.0
+      ],
+      "vertex_index": 4,
+      "edge_length": 0.75,
+      "signed_distance": 0.09082096898005632,
+      "sd_gradient": [
+        0.6690466248212223,
+        0.743220434201947
+      ],
+      "sd_foot": [
+        3.85,
+        4.9
+      ],
+      "h_true": 0.025820968980056314
+    },
+    "support": {
+      "max_n_dot_vertex": 4.9,
+      "min_n_dot_vertex": 3.1,
+      "offset": 4.9,
+      "cuts_object": false,
+      "support_gap": 0.0,
+      "all_vertices_on_inner_side": true
+    },
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": 0.0,
+    "alignment": 1.0,
+    "n_bar": [
+      0.0,
+      1.0
+    ],
+    "offset": 4.9,
+    "anchor": [
+      0.0,
+      1.0
+    ],
+    "n_near": 11,
+    "n_same_face": 6,
+    "cap_active": [
+      false
+    ],
+    "rhs_uncapped": [
+      7.976258542541359e-15
+    ],
+    "rhs_capped": [
+      7.976258542541359e-15
+    ],
+    "rhs_no_margin_uncapped": [
+      -0.019999999999992024
+    ],
+    "decompose": {
+      "delta_p": [
+        0.0005765189892565914,
+        0.0
+      ],
+      "delta_p_minus_dt_u": [
+        -1.3552527156068805e-16,
+        0.0
+      ],
+      "h_k": 0.002499999999999003,
+      "h_kplus": 0.002499999999999003,
+      "delta_h": 0.0,
+      "match": {
+        "matched": true,
+        "new_activation": false,
+        "normal_cosine": 1.0,
+        "offset_delta": 0.0,
+        "face_switch": false,
+        "angle_deg": 0.0
+      },
+      "h_k_at_p_{k+1}": 0.002499999999999003,
+      "h_{k+1}_at_p_{k+1}": 0.002499999999999003,
+      "motion_term": 0.0,
+      "barrier_update_term": 0.0,
+      "sum_check": 0.0,
+      "predicted_motion_n_k_dot_dt_u": 0.0,
+      "motion_minus_predicted": 0.0,
+      "normal_delta": [
+        0.0,
+        0.0
+      ],
+      "offset_delta": 0.0,
+      "face_switch": false,
+      "numerical_rebuild_h0": 0.0,
+      "numerical_rebuild_h1": 0.0
+    },
+    "hold_true": {
+      "sampled_min_sd": 0.09082096898005632,
+      "lipschitz_lower_bound": 0.09079214303059348,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.011530379785134538
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 225,
+    "in_K0": true,
+    "position": [
+      3.9113399817483563,
+      4.967499999999999
+    ],
+    "u": [
+      0.011267632737174927,
+      0.0
+    ],
+    "u_nom": [
+      0.011267632737174927,
+      -0.13693982960211565
+    ],
+    "h_aggregate": 0.002499999999999003,
+    "h_true": 0.026207693540010846,
+    "h_gap": -0.023707693540011843,
+    "feature": {
+      "edge_index": 4,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.85,
+        4.9
+      ],
+      "distance": 0.09120769354001085,
+      "edge_normal": [
+        0.0,
+        1.0
+      ],
+      "vertex_index": 4,
+      "edge_length": 0.75,
+      "signed_distance": 0.09120769354001085,
+      "sd_gradient": [
+        0.6725307851518871,
+        0.7400691474605507
+      ],
+      "sd_foot": [
+        3.85,
+        4.9
+      ],
+      "h_true": 0.026207693540010846
+    },
+    "support": {
+      "max_n_dot_vertex": 4.9,
+      "min_n_dot_vertex": 3.1,
+      "offset": 4.9,
+      "cuts_object": false,
+      "support_gap": 0.0,
+      "all_vertices_on_inner_side": true
+    },
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": 0.0,
+    "alignment": 1.0,
+    "n_bar": [
+      0.0,
+      1.0
+    ],
+    "offset": 4.9,
+    "anchor": [
+      0.0,
+      1.0
+    ],
+    "n_near": 11,
+    "n_same_face": 6,
+    "cap_active": [
+      false
+    ],
+    "rhs_uncapped": [
+      7.976258542541359e-15
+    ],
+    "rhs_capped": [
+      7.976258542541359e-15
+    ],
+    "rhs_no_margin_uncapped": [
+      -0.019999999999992024
+    ],
+    "decompose": {
+      "delta_p": [
+        0.0005633816368586508,
+        0.0
+      ],
+      "delta_p_minus_dt_u": [
+        -9.551821139597294e-17,
+        0.0
+      ],
+      "h_k": 0.002499999999999003,
+      "h_kplus": 0.002499999999999003,
+      "delta_h": 0.0,
+      "match": {
+        "matched": true,
+        "new_activation": false,
+        "normal_cosine": 1.0,
+        "offset_delta": 0.0,
+        "face_switch": false,
+        "angle_deg": 0.0
+      },
+      "h_k_at_p_{k+1}": 0.002499999999999003,
+      "h_{k+1}_at_p_{k+1}": 0.002499999999999003,
+      "motion_term": 0.0,
+      "barrier_update_term": 0.0,
+      "sum_check": 0.0,
+      "predicted_motion_n_k_dot_dt_u": 0.0,
+      "motion_minus_predicted": 0.0,
+      "normal_delta": [
+        0.0,
+        0.0
+      ],
+      "offset_delta": 0.0,
+      "face_switch": false,
+      "numerical_rebuild_h0": 0.0,
+      "numerical_rebuild_h1": 0.0
+    },
+    "hold_true": {
+      "sampled_min_sd": 0.09120769354001085,
+      "lipschitz_lower_bound": 0.0911795244581679,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.011267632737174927
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 226,
+    "in_K0": true,
+    "position": [
+      3.911903363385215,
+      4.967499999999999
+    ],
+    "u": [
+      0.011010905387600679,
+      0.0
+    ],
+    "u_nom": [
+      0.011010905387600679,
+      -0.1370916150783323
+    ],
+    "h_aggregate": 0.002499999999999003,
+    "h_true": 0.026587534077525107,
+    "h_gap": -0.024087534077526104,
+    "feature": {
+      "edge_index": 4,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.85,
+        4.9
+      ],
+      "distance": 0.09158753407752511,
+      "edge_normal": [
+        0.0,
+        1.0
+      ],
+      "vertex_index": 4,
+      "edge_length": 0.75,
+      "signed_distance": 0.09158753407752511,
+      "sd_gradient": [
+        0.6758928931618159,
+        0.7369998622614188
+      ],
+      "sd_foot": [
+        3.85,
+        4.9
+      ],
+      "h_true": 0.026587534077525107
+    },
+    "support": {
+      "max_n_dot_vertex": 4.9,
+      "min_n_dot_vertex": 3.1,
+      "offset": 4.9,
+      "cuts_object": false,
+      "support_gap": 0.0,
+      "all_vertices_on_inner_side": true
+    },
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": 0.0,
+    "alignment": 1.0,
+    "n_bar": [
+      0.0,
+      1.0
+    ],
+    "offset": 4.9,
+    "anchor": [
+      0.0,
+      1.0
+    ],
+    "n_near": 11,
+    "n_same_face": 6,
+    "cap_active": [
+      false
+    ],
+    "rhs_uncapped": [
+      7.976258542541359e-15
+    ],
+    "rhs_capped": [
+      7.976258542541359e-15
+    ],
+    "rhs_no_margin_uncapped": [
+      -0.019999999999992024
+    ],
+    "decompose": {
+      "delta_p": [
+        0.0005505452693799207,
+        0.0
+      ],
+      "delta_p_minus_dt_u": [
+        -1.1329912702473521e-16,
+        0.0
+      ],
+      "h_k": 0.002499999999999003,
+      "h_kplus": 0.002499999999999003,
+      "delta_h": 0.0,
+      "match": {
+        "matched": true,
+        "new_activation": false,
+        "normal_cosine": 1.0,
+        "offset_delta": 0.0,
+        "face_switch": false,
+        "angle_deg": 0.0
+      },
+      "h_k_at_p_{k+1}": 0.002499999999999003,
+      "h_{k+1}_at_p_{k+1}": 0.002499999999999003,
+      "motion_term": 0.0,
+      "barrier_update_term": 0.0,
+      "sum_check": 0.0,
+      "predicted_motion_n_k_dot_dt_u": 0.0,
+      "motion_minus_predicted": 0.0,
+      "normal_delta": [
+        0.0,
+        0.0
+      ],
+      "offset_delta": 0.0,
+      "face_switch": false,
+      "numerical_rebuild_h0": 0.0,
+      "numerical_rebuild_h1": 0.0
+    },
+    "hold_true": {
+      "sampled_min_sd": 0.09158753407752511,
+      "lipschitz_lower_bound": 0.09156000681405611,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.011010905387600679
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 227,
+    "in_K0": true,
+    "position": [
+      3.912453908654595,
+      4.967499999999999
+    ],
+    "u": [
+      0.010760058814970242,
+      0.0
+    ],
+    "u_nom": [
+      0.010760058814970242,
+      -0.13723995293455388
+    ],
+    "h_aggregate": 0.002499999999999003,
+    "h_true": 0.026960538853555732,
+    "h_gap": -0.02446053885355673,
+    "feature": {
+      "edge_index": 4,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.85,
+        4.9
+      ],
+      "distance": 0.09196053885355573,
+      "edge_normal": [
+        0.0,
+        1.0
+      ],
+      "vertex_index": 4,
+      "edge_length": 0.75,
+      "signed_distance": 0.09196053885355573,
+      "sd_gradient": [
+        0.6791381328686064,
+        0.7340104879930144
+      ],
+      "sd_foot": [
+        3.85,
+        4.9
+      ],
+      "h_true": 0.026960538853555732
+    },
+    "support": {
+      "max_n_dot_vertex": 4.9,
+      "min_n_dot_vertex": 3.1,
+      "offset": 4.9,
+      "cuts_object": false,
+      "support_gap": 0.0,
+      "all_vertices_on_inner_side": true
+    },
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": 0.0,
+    "alignment": 1.0,
+    "n_bar": [
+      0.0,
+      1.0
+    ],
+    "offset": 4.9,
+    "anchor": [
+      0.0,
+      1.0
+    ],
+    "n_near": 11,
+    "n_same_face": 6,
+    "cap_active": [
+      false
+    ],
+    "rhs_uncapped": [
+      7.976258542541359e-15
+    ],
+    "rhs_capped": [
+      7.976258542541359e-15
+    ],
+    "rhs_no_margin_uncapped": [
+      -0.019999999999992024
+    ],
+    "decompose": {
+      "delta_p": [
+        0.000538002940748683,
+        0.0
+      ],
+      "delta_p_minus_dt_u": [
+        1.7097868260096405e-16,
+        0.0
+      ],
+      "h_k": 0.002499999999999003,
+      "h_kplus": 0.002499999999999003,
+      "delta_h": 0.0,
+      "match": {
+        "matched": true,
+        "new_activation": false,
+        "normal_cosine": 1.0,
+        "offset_delta": 0.0,
+        "face_switch": false,
+        "angle_deg": 0.0
+      },
+      "h_k_at_p_{k+1}": 0.002499999999999003,
+      "h_{k+1}_at_p_{k+1}": 0.002499999999999003,
+      "motion_term": 0.0,
+      "barrier_update_term": 0.0,
+      "sum_check": 0.0,
+      "predicted_motion_n_k_dot_dt_u": 0.0,
+      "motion_minus_predicted": 0.0,
+      "normal_delta": [
+        0.0,
+        0.0
+      ],
+      "offset_delta": 0.0,
+      "face_switch": false,
+      "numerical_rebuild_h0": 0.0,
+      "numerical_rebuild_h1": 0.0
+    },
+    "hold_true": {
+      "sampled_min_sd": 0.09196053885355573,
+      "lipschitz_lower_bound": 0.09193363870651831,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.010760058814970242
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 228,
+    "in_K0": true,
+    "position": [
+      3.9129919115953435,
+      4.967499999999999
+    ],
+    "u": [
+      0.010514957319161277,
+      0.0
+    ],
+    "u_nom": [
+      0.010514957319161277,
+      -0.13738492116600823
+    ],
+    "h_aggregate": 0.002499999999998115,
+    "h_true": 0.02732676170231159,
+    "h_gap": -0.024826761702313474,
+    "feature": {
+      "edge_index": 4,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.85,
+        4.9
+      ],
+      "distance": 0.09232676170231159,
+      "edge_normal": [
+        0.0,
+        1.0
+      ],
+      "vertex_index": 4,
+      "edge_length": 0.75,
+      "signed_distance": 0.09232676170231159,
+      "sd_gradient": [
+        0.6822714284992226,
+        0.7310989658408977
+      ],
+      "sd_foot": [
+        3.85,
+        4.9
+      ],
+      "h_true": 0.02732676170231159
+    },
+    "support": {
+      "max_n_dot_vertex": 4.9,
+      "min_n_dot_vertex": 3.1,
+      "offset": 4.900000000000001,
+      "cuts_object": false,
+      "support_gap": -8.881784197001252e-16,
+      "all_vertices_on_inner_side": true
+    },
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": 0.0,
+    "alignment": 1.0,
+    "n_bar": [
+      0.0,
+      1.0
+    ],
+    "offset": 4.900000000000001,
+    "anchor": [
+      0.0,
+      1.0
+    ],
+    "n_near": 10,
+    "n_same_face": 5,
+    "cap_active": [
+      false
+    ],
+    "rhs_uncapped": [
+      1.508168590014236e-14
+    ],
+    "rhs_capped": [
+      1.508168590014236e-14
+    ],
+    "rhs_no_margin_uncapped": [
+      -0.01999999999998492
+    ],
+    "decompose": {
+      "delta_p": [
+        0.0005257478659581594,
+        0.0
+      ],
+      "delta_p_minus_dt_u": [
+        9.551821139597294e-17,
+        0.0
+      ],
+      "h_k": 0.002499999999999003,
+      "h_kplus": 0.002499999999998115,
+      "delta_h": -8.881784197001252e-16,
+      "match": {
+        "matched": true,
+        "new_activation": false,
+        "normal_cosine": 1.0,
+        "offset_delta": 8.881784197001252e-16,
+        "face_switch": false,
+        "angle_deg": 0.0
+      },
+      "h_k_at_p_{k+1}": 0.002499999999999003,
+      "h_{k+1}_at_p_{k+1}": 0.002499999999998115,
+      "motion_term": 0.0,
+      "barrier_update_term": -8.881784197001252e-16,
+      "sum_check": 0.0,
+      "predicted_motion_n_k_dot_dt_u": 0.0,
+      "motion_minus_predicted": 0.0,
+      "normal_delta": [
+        0.0,
+        0.0
+      ],
+      "offset_delta": 8.881784197001252e-16,
+      "face_switch": false,
+      "numerical_rebuild_h0": 0.0,
+      "numerical_rebuild_h1": 0.0
+    },
+    "hold_true": {
+      "sampled_min_sd": 0.09232676170231159,
+      "lipschitz_lower_bound": 0.09230047430901368,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.010514957319161277
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 229,
+    "in_K0": true,
+    "position": [
+      3.9135176594613017,
+      4.967499999999999
+    ],
+    "u": [
+      0.010275468347954985,
+      0.0
+    ],
+    "u_nom": [
+      0.010275468347954985,
+      -0.13752659604597348
+    ],
+    "h_aggregate": 0.002499999999999003,
+    "h_true": 0.02768626146005536,
+    "h_gap": -0.025186261460056356,
+    "feature": {
+      "edge_index": 4,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.85,
+        4.9
+      ],
+      "distance": 0.09268626146005536,
+      "edge_normal": [
+        0.0,
+        1.0
+      ],
+      "vertex_index": 4,
+      "edge_length": 0.75,
+      "signed_distance": 0.09268626146005536,
+      "sd_gradient": [
+        0.6852974589839894,
+        0.7282632715646775
+      ],
+      "sd_foot": [
+        3.85,
+        4.9
+      ],
+      "h_true": 0.02768626146005536
+    },
+    "support": {
+      "max_n_dot_vertex": 4.9,
+      "min_n_dot_vertex": 3.1,
+      "offset": 4.9,
+      "cuts_object": false,
+      "support_gap": 0.0,
+      "all_vertices_on_inner_side": true
+    },
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": 0.0,
+    "alignment": 1.0,
+    "n_bar": [
+      0.0,
+      1.0
+    ],
+    "offset": 4.9,
+    "anchor": [
+      0.0,
+      1.0
+    ],
+    "n_near": 10,
+    "n_same_face": 5,
+    "cap_active": [
+      false
+    ],
+    "rhs_uncapped": [
+      7.976258542541359e-15
+    ],
+    "rhs_capped": [
+      7.976258542541359e-15
+    ],
+    "rhs_no_margin_uncapped": [
+      -0.019999999999992024
+    ],
+    "decompose": {
+      "delta_p": [
+        0.0005137734173978892,
+        0.0
+      ],
+      "delta_p_minus_dt_u": [
+        1.3986208025063007e-16,
+        0.0
+      ],
+      "h_k": 0.002499999999998115,
+      "h_kplus": 0.002499999999999003,
+      "delta_h": 8.881784197001252e-16,
+      "match": {
+        "matched": true,
+        "new_activation": false,
+        "normal_cosine": 1.0,
+        "offset_delta": -8.881784197001252e-16,
+        "face_switch": false,
+        "angle_deg": 0.0
+      },
+      "h_k_at_p_{k+1}": 0.002499999999998115,
+      "h_{k+1}_at_p_{k+1}": 0.002499999999999003,
+      "motion_term": 0.0,
+      "barrier_update_term": 8.881784197001252e-16,
+      "sum_check": 0.0,
+      "predicted_motion_n_k_dot_dt_u": 0.0,
+      "motion_minus_predicted": 0.0,
+      "normal_delta": [
+        0.0,
+        0.0
+      ],
+      "offset_delta": -8.881784197001252e-16,
+      "face_switch": false,
+      "numerical_rebuild_h0": 0.0,
+      "numerical_rebuild_h1": 0.0
+    },
+    "hold_true": {
+      "sampled_min_sd": 0.09268626146005536,
+      "lipschitz_lower_bound": 0.09266057278918548,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.010275468347954985
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 230,
+    "in_K0": true,
+    "position": [
+      3.9140314328786996,
+      4.967499999999999
+    ],
+    "u": [
+      0.01004146242516919,
+      0.0
+    ],
+    "u_nom": [
+      0.01004146242516919,
+      -0.13766505215985464
+    ],
+    "h_aggregate": 0.002499999999999003,
+    "h_true": 0.028039101438584763,
+    "h_gap": -0.02553910143858576,
+    "feature": {
+      "edge_index": 4,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.85,
+        4.9
+      ],
+      "distance": 0.09303910143858476,
+      "edge_normal": [
+        0.0,
+        1.0
+      ],
+      "vertex_index": 4,
+      "edge_length": 0.75,
+      "signed_distance": 0.09303910143858476,
+      "sd_gradient": [
+        0.6882206716169409,
+        0.7255014177512865
+      ],
+      "sd_foot": [
+        3.85,
+        4.9
+      ],
+      "h_true": 0.028039101438584763
+    },
+    "support": {
+      "max_n_dot_vertex": 4.9,
+      "min_n_dot_vertex": 3.1,
+      "offset": 4.9,
+      "cuts_object": false,
+      "support_gap": 0.0,
+      "all_vertices_on_inner_side": true
+    },
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": 0.0,
+    "alignment": 1.0,
+    "n_bar": [
+      0.0,
+      1.0
+    ],
+    "offset": 4.9,
+    "anchor": [
+      0.0,
+      1.0
+    ],
+    "n_near": 10,
+    "n_same_face": 5,
+    "cap_active": [
+      false
+    ],
+    "rhs_uncapped": [
+      7.976258542541359e-15
+    ],
+    "rhs_capped": [
+      7.976258542541359e-15
+    ],
+    "rhs_no_margin_uncapped": [
+      -0.019999999999992024
+    ],
+    "decompose": {
+      "delta_p": [
+        0.000502073121258384,
+        0.0
+      ],
+      "delta_p_minus_dt_u": [
+        -7.556889142223966e-17,
+        0.0
+      ],
+      "h_k": 0.002499999999999003,
+      "h_kplus": 0.002499999999999003,
+      "delta_h": 0.0,
+      "match": {
+        "matched": true,
+        "new_activation": false,
+        "normal_cosine": 1.0,
+        "offset_delta": 0.0,
+        "face_switch": false,
+        "angle_deg": 0.0
+      },
+      "h_k_at_p_{k+1}": 0.002499999999999003,
+      "h_{k+1}_at_p_{k+1}": 0.002499999999999003,
+      "motion_term": 0.0,
+      "barrier_update_term": 0.0,
+      "sum_check": 0.0,
+      "predicted_motion_n_k_dot_dt_u": 0.0,
+      "motion_minus_predicted": 0.0,
+      "normal_delta": [
+        0.0,
+        0.0
+      ],
+      "offset_delta": 0.0,
+      "face_switch": false,
+      "numerical_rebuild_h0": 0.0,
+      "numerical_rebuild_h1": 0.0
+    },
+    "hold_true": {
+      "sampled_min_sd": 0.09303910143858476,
+      "lipschitz_lower_bound": 0.09301399778252184,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.01004146242516919
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 231,
+    "in_K0": true,
+    "position": [
+      3.914533505999958,
+      4.967499999999999
+    ],
+    "u": [
+      0.009812813080172322,
+      0.0
+    ],
+    "u_nom": [
+      0.009812813080172322,
+      -0.13780036243897992
+    ],
+    "h_aggregate": 0.002499999999998115,
+    "h_true": 0.028385348940004856,
+    "h_gap": -0.02588534894000674,
+    "feature": {
+      "edge_index": 4,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.85,
+        4.9
+      ],
+      "distance": 0.09338534894000486,
+      "edge_normal": [
+        0.0,
+        1.0
+      ],
+      "vertex_index": 4,
+      "edge_length": 0.75,
+      "signed_distance": 0.09338534894000486,
+      "sd_gradient": [
+        0.691045294925409,
+        0.7228114556102819
+      ],
+      "sd_foot": [
+        3.85,
+        4.9
+      ],
+      "h_true": 0.028385348940004856
+    },
+    "support": {
+      "max_n_dot_vertex": 4.9,
+      "min_n_dot_vertex": 3.1,
+      "offset": 4.900000000000001,
+      "cuts_object": false,
+      "support_gap": -8.881784197001252e-16,
+      "all_vertices_on_inner_side": true
+    },
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": 0.0,
+    "alignment": 1.0,
+    "n_bar": [
+      0.0,
+      1.0
+    ],
+    "offset": 4.900000000000001,
+    "anchor": [
+      0.0,
+      1.0
+    ],
+    "n_near": 10,
+    "n_same_face": 5,
+    "cap_active": [
+      false
+    ],
+    "rhs_uncapped": [
+      1.508168590014236e-14
+    ],
+    "rhs_capped": [
+      1.508168590014236e-14
+    ],
+    "rhs_no_margin_uncapped": [
+      -0.01999999999998492
+    ],
+    "decompose": {
+      "delta_p": [
+        0.0004906406540086117,
+        0.0
+      ],
+      "delta_p_minus_dt_u": [
+        -4.445228907190568e-18,
+        0.0
+      ],
+      "h_k": 0.002499999999999003,
+      "h_kplus": 0.002499999999998115,
+      "delta_h": -8.881784197001252e-16,
+      "match": {
+        "matched": true,
+        "new_activation": false,
+        "normal_cosine": 1.0,
+        "offset_delta": 8.881784197001252e-16,
+        "face_switch": false,
+        "angle_deg": 0.0
+      },
+      "h_k_at_p_{k+1}": 0.002499999999999003,
+      "h_{k+1}_at_p_{k+1}": 0.002499999999998115,
+      "motion_term": 0.0,
+      "barrier_update_term": -8.881784197001252e-16,
+      "sum_check": 0.0,
+      "predicted_motion_n_k_dot_dt_u": 0.0,
+      "motion_minus_predicted": 0.0,
+      "normal_delta": [
+        0.0,
+        0.0
+      ],
+      "offset_delta": 8.881784197001252e-16,
+      "face_switch": false,
+      "numerical_rebuild_h0": 0.0,
+      "numerical_rebuild_h1": 0.0
+    },
+    "hold_true": {
+      "sampled_min_sd": 0.09338534894000486,
+      "lipschitz_lower_bound": 0.09336081690730443,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.009812813080172322
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 232,
+    "in_K0": true,
+    "position": [
+      3.9150241466539666,
+      4.967499999999999
+    ],
+    "u": [
+      0.00951077981885784,
+      0.0
+    ],
+    "u_nom": [
+      0.00951077981885784,
+      -0.13753045989506693
+    ],
+    "h_aggregate": 0.002499999999999891,
+    "h_true": 0.028725074809660245,
+    "h_gap": -0.026225074809660354,
+    "feature": {
+      "edge_index": 4,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.85,
+        4.9
+      ],
+      "distance": 0.09372507480966025,
+      "edge_normal": [
+        0.0,
+        1.0
+      ],
+      "vertex_index": 4,
+      "edge_length": 0.75,
+      "signed_distance": 0.09372507480966025,
+      "sd_gradient": [
+        0.6937753507908052,
+        0.7201914763693715
+      ],
+      "sd_foot": [
+        3.85,
+        4.9
+      ],
+      "h_true": 0.028725074809660245
+    },
+    "support": {
+      "max_n_dot_vertex": 4.9,
+      "min_n_dot_vertex": 3.1,
+      "offset": 4.8999999999999995,
+      "cuts_object": false,
+      "support_gap": 8.881784197001252e-16,
+      "all_vertices_on_inner_side": true
+    },
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": 0.0,
+    "alignment": 1.0,
+    "n_bar": [
+      0.0,
+      1.0
+    ],
+    "offset": 4.8999999999999995,
+    "anchor": [
+      0.0,
+      1.0
+    ],
+    "n_near": 10,
+    "n_same_face": 5,
+    "cap_active": [
+      false
+    ],
+    "rhs_uncapped": [
+      8.708311849403572e-16
+    ],
+    "rhs_capped": [
+      8.708311849403572e-16
+    ],
+    "rhs_no_margin_uncapped": [
+      -0.01999999999999913
+    ],
+    "decompose": {
+      "delta_p": [
+        0.00047553899094276986,
+        0.0
+      ],
+      "delta_p_minus_dt_u": [
+        -1.2213537473049207e-16,
+        0.0
+      ],
+      "h_k": 0.002499999999998115,
+      "h_kplus": 0.002499999999999891,
+      "delta_h": 1.7763568394002505e-15,
+      "match": {
+        "matched": true,
+        "new_activation": false,
+        "normal_cosine": 1.0,
+        "offset_delta": -1.7763568394002505e-15,
+        "face_switch": false,
+        "angle_deg": 0.0
+      },
+      "h_k_at_p_{k+1}": 0.002499999999998115,
+      "h_{k+1}_at_p_{k+1}": 0.002499999999999891,
+      "motion_term": 0.0,
+      "barrier_update_term": 1.7763568394002505e-15,
+      "sum_check": 0.0,
+      "predicted_motion_n_k_dot_dt_u": 0.0,
+      "motion_minus_predicted": 0.0,
+      "normal_delta": [
+        0.0,
+        0.0
+      ],
+      "offset_delta": -1.7763568394002505e-15,
+      "face_switch": false,
+      "numerical_rebuild_h0": 0.0,
+      "numerical_rebuild_h1": 0.0
+    },
+    "hold_true": {
+      "sampled_min_sd": 0.09372507480966025,
+      "lipschitz_lower_bound": 0.09370129786011311,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.00951077981885784
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 233,
+    "in_K0": true,
+    "position": [
+      3.9154996856449094,
+      4.967499999999999
+    ],
+    "u": [
+      0.009294446412459934,
+      0.0
+    ],
+    "u_nom": [
+      0.009294446412459934,
+      -0.13765876903700863
+    ],
+    "h_aggregate": 0.002499999999998115,
+    "h_true": 0.029055615566439194,
+    "h_gap": -0.02655561556644108,
+    "feature": {
+      "edge_index": 4,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.85,
+        4.9
+      ],
+      "distance": 0.0940556155664392,
+      "edge_normal": [
+        0.0,
+        1.0
+      ],
+      "vertex_index": 4,
+      "edge_length": 0.75,
+      "signed_distance": 0.0940556155664392,
+      "sd_gradient": [
+        0.6963931419771685,
+        0.7176604989876252
+      ],
+      "sd_foot": [
+        3.85,
+        4.9
+      ],
+      "h_true": 0.029055615566439194
+    },
+    "support": {
+      "max_n_dot_vertex": 4.9,
+      "min_n_dot_vertex": 3.1,
+      "offset": 4.900000000000001,
+      "cuts_object": false,
+      "support_gap": -8.881784197001252e-16,
+      "all_vertices_on_inner_side": true
+    },
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": 0.0,
+    "alignment": 1.0,
+    "n_bar": [
+      0.0,
+      1.0
+    ],
+    "offset": 4.900000000000001,
+    "anchor": [
+      0.0,
+      1.0
+    ],
+    "n_near": 10,
+    "n_same_face": 5,
+    "cap_active": [
+      false
+    ],
+    "rhs_uncapped": [
+      1.508168590014236e-14
+    ],
+    "rhs_capped": [
+      1.508168590014236e-14
+    ],
+    "rhs_no_margin_uncapped": [
+      -0.01999999999998492
+    ],
+    "decompose": {
+      "delta_p": [
+        0.0004647223206228901,
+        0.0
+      ],
+      "delta_p_minus_dt_u": [
+        -1.0663128366394936e-16,
+        0.0
+      ],
+      "h_k": 0.002499999999999891,
+      "h_kplus": 0.002499999999998115,
+      "delta_h": -1.7763568394002505e-15,
+      "match": {
+        "matched": true,
+        "new_activation": false,
+        "normal_cosine": 1.0,
+        "offset_delta": 1.7763568394002505e-15,
+        "face_switch": false,
+        "angle_deg": 0.0
+      },
+      "h_k_at_p_{k+1}": 0.002499999999999891,
+      "h_{k+1}_at_p_{k+1}": 0.002499999999998115,
+      "motion_term": 0.0,
+      "barrier_update_term": -1.7763568394002505e-15,
+      "sum_check": 0.0,
+      "predicted_motion_n_k_dot_dt_u": 0.0,
+      "motion_minus_predicted": 0.0,
+      "normal_delta": [
+        0.0,
+        0.0
+      ],
+      "offset_delta": 1.7763568394002505e-15,
+      "face_switch": false,
+      "numerical_rebuild_h0": 0.0,
+      "numerical_rebuild_h1": 0.0
+    },
+    "hold_true": {
+      "sampled_min_sd": 0.0940556155664392,
+      "lipschitz_lower_bound": 0.09403237945040804,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.009294446412459934
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 234,
+    "in_K0": true,
+    "position": [
+      3.9159644079655322,
+      4.967499999999999
+    ],
+    "u": [
+      0.009083058097218988,
+      0.0
+    ],
+    "u_nom": [
+      0.009083058097218988,
+      -0.13778416555039838
+    ],
+    "h_aggregate": 0.002499999999999003,
+    "h_true": 0.029379834277471734,
+    "h_gap": -0.02687983427747273,
+    "feature": {
+      "edge_index": 4,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.85,
+        4.9
+      ],
+      "distance": 0.09437983427747174,
+      "edge_normal": [
+        0.0,
+        1.0
+      ],
+      "vertex_index": 4,
+      "edge_length": 0.75,
+      "signed_distance": 0.09437983427747174,
+      "sd_gradient": [
+        0.698924812387361,
+        0.7151951528284375
+      ],
+      "sd_foot": [
+        3.85,
+        4.9
+      ],
+      "h_true": 0.029379834277471734
+    },
+    "support": {
+      "max_n_dot_vertex": 4.9,
+      "min_n_dot_vertex": 3.1,
+      "offset": 4.9,
+      "cuts_object": false,
+      "support_gap": 0.0,
+      "all_vertices_on_inner_side": true
+    },
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": 0.0,
+    "alignment": 1.0,
+    "n_bar": [
+      0.0,
+      1.0
+    ],
+    "offset": 4.9,
+    "anchor": [
+      0.0,
+      1.0
+    ],
+    "n_near": 10,
+    "n_same_face": 5,
+    "cap_active": [
+      false
+    ],
+    "rhs_uncapped": [
+      7.976258542541359e-15
+    ],
+    "rhs_capped": [
+      7.976258542541359e-15
+    ],
+    "rhs_no_margin_uncapped": [
+      -0.019999999999992024
+    ],
+    "decompose": {
+      "delta_p": [
+        0.00045415290486072735,
+        0.0
+      ],
+      "delta_p_minus_dt_u": [
+        -2.220446049250313e-16,
+        0.0
+      ],
+      "h_k": 0.002499999999998115,
+      "h_kplus": 0.002499999999999003,
+      "delta_h": 8.881784197001252e-16,
+      "match": {
+        "matched": true,
+        "new_activation": false,
+        "normal_cosine": 1.0,
+        "offset_delta": -8.881784197001252e-16,
+        "face_switch": false,
+        "angle_deg": 0.0
+      },
+      "h_k_at_p_{k+1}": 0.002499999999998115,
+      "h_{k+1}_at_p_{k+1}": 0.002499999999999003,
+      "motion_term": 0.0,
+      "barrier_update_term": 8.881784197001252e-16,
+      "sum_check": 0.0,
+      "predicted_motion_n_k_dot_dt_u": 0.0,
+      "motion_minus_predicted": 0.0,
+      "normal_delta": [
+        0.0,
+        0.0
+      ],
+      "offset_delta": -8.881784197001252e-16,
+      "face_switch": false,
+      "numerical_rebuild_h0": 0.0,
+      "numerical_rebuild_h1": 0.0
+    },
+    "hold_true": {
+      "sampled_min_sd": 0.09437983427747174,
+      "lipschitz_lower_bound": 0.09435712663222869,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.009083058097218988
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 235,
+    "in_K0": false,
+    "position": [
+      3.916418560870393,
+      4.967499999999999
+    ],
+    "u": [
+      0.008876500993355796,
+      -0.13790671545308736
+    ],
+    "u_nom": [
+      0.008876500993355796,
+      -0.13790671545308736
+    ],
+    "h_aggregate": 0.0014185608703937702,
+    "h_true": 0.02969781004909222,
+    "h_gap": -0.02827924917869845,
+    "feature": {
+      "edge_index": 4,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.85,
+        4.9
+      ],
+      "distance": 0.09469781004909222,
+      "edge_normal": [
+        0.0,
+        1.0
+      ],
+      "vertex_index": 4,
+      "edge_length": 0.75,
+      "signed_distance": 0.09469781004909222,
+      "sd_gradient": [
+        0.7013737787173842,
+        0.7127936745845166
+      ],
+      "sd_foot": [
+        3.85,
+        4.9
+      ],
+      "h_true": 0.02969781004909222
+    },
+    "support": {
+      "max_n_dot_vertex": 4.9,
+      "min_n_dot_vertex": 3.1,
+      "offset": 3.849999999999999,
+      "cuts_object": true,
+      "support_gap": 1.0500000000000012,
+      "all_vertices_on_inner_side": false
+    },
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": false,
+    "translation_defect": 0.0,
+    "alignment": 1.0,
+    "n_bar": [
+      1.0,
+      0.0
+    ],
+    "offset": 3.849999999999999,
+    "anchor": [
+      1.0,
+      -0.0
+    ],
+    "n_near": 10,
+    "n_same_face": 5,
+    "cap_active": [
+      false
+    ],
+    "rhs_uncapped": [
+      0.008651513036849839
+    ],
+    "rhs_capped": [
+      0.008651513036849839
+    ],
+    "rhs_no_margin_uncapped": [
+      -0.011348486963150162
+    ],
+    "decompose": {
+      "delta_p": [
+        0.0004438250496678897,
+        -0.006895335772654221
+      ],
+      "delta_p_minus_dt_u": [
+        9.990923019453923e-17,
+        1.474514954580286e-16
+      ],
+      "h_k": 0.002499999999999003,
+      "h_kplus": 0.0014185608703937702,
+      "delta_h": -0.0010814391296052328,
+      "match": {
+        "matched": true,
+        "new_activation": false,
+        "normal_cosine": 0.0,
+        "offset_delta": -1.0500000000000012,
+        "face_switch": true,
+        "angle_deg": 90.0
+      },
+      "h_k_at_p_{k+1}": -0.004395335772655218,
+      "h_{k+1}_at_p_{k+1}": 0.00186238592006166,
+      "motion_term": -0.006895335772654221,
+      "barrier_update_term": 0.006257721692716878,
+      "sum_check": 0.0004438250496678897,
+      "predicted_motion_n_k_dot_dt_u": -0.006895335772654368,
+      "motion_minus_predicted": 1.474514954580286e-16,
+      "normal_delta": [
+        1.0,
+        -1.0
+      ],
+      "offset_delta": -1.0500000000000012,
+      "face_switch": true,
+      "numerical_rebuild_h0": 0.0,
+      "numerical_rebuild_h1": 0.0004438250496678897
+    },
+    "hold_true": {
+      "sampled_min_sd": 0.09024136511064283,
+      "lipschitz_lower_bound": 0.08989588487932576,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.13819209252682965
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 236,
+    "in_K0": false,
+    "position": [
+      3.916862385920061,
+      4.960604664227345
+    ],
+    "u": [
+      0.009607395460972556,
+      -0.1355591193739575
+    ],
+    "u_nom": [
+      0.009607395460972556,
+      -0.1355591193739575
+    ],
+    "h_aggregate": 0.0018623859200607717,
+    "h_true": 0.02524136511064283,
+    "h_gap": -0.023378979190582058,
+    "feature": {
+      "edge_index": 4,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.85,
+        4.9
+      ],
+      "distance": 0.09024136511064283,
+      "edge_normal": [
+        0.0,
+        1.0
+      ],
+      "vertex_index": 4,
+      "edge_length": 0.75,
+      "signed_distance": 0.09024136511064283,
+      "sd_gradient": [
+        0.7409283518493139,
+        0.6715840806822772
+      ],
+      "sd_foot": [
+        3.85,
+        4.9
+      ],
+      "h_true": 0.02524136511064283
+    },
+    "support": {
+      "max_n_dot_vertex": 4.9,
+      "min_n_dot_vertex": 3.1,
+      "offset": 3.85,
+      "cuts_object": true,
+      "support_gap": 1.0500000000000003,
+      "all_vertices_on_inner_side": false
+    },
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": false,
+    "translation_defect": 0.0,
+    "alignment": 1.0,
+    "n_bar": [
+      1.0,
+      0.0
+    ],
+    "offset": 3.85,
+    "anchor": [
+      1.0,
+      -0.0
+    ],
+    "n_near": 11,
+    "n_same_face": 6,
+    "cap_active": [
+      false
+    ],
+    "rhs_uncapped": [
+      0.005100912639513826
+    ],
+    "rhs_capped": [
+      0.005100912639513826
+    ],
+    "rhs_no_margin_uncapped": [
+      -0.014899087360486174
+    ],
+    "decompose": {
+      "delta_p": [
+        0.00048036977304866113,
+        -0.006777955968697569
+      ],
+      "delta_p_minus_dt_u": [
+        3.3285006695304986e-17,
+        3.0704605524789486e-16
+      ],
+      "h_k": 0.0014185608703937702,
+      "h_kplus": 0.0018623859200607717,
+      "delta_h": 0.00044382504966700154,
+      "match": {
+        "matched": true,
+        "new_activation": false,
+        "normal_cosine": 1.0,
+        "offset_delta": 8.881784197001252e-16,
+        "face_switch": false,
+        "angle_deg": 0.0
+      },
+      "h_k_at_p_{k+1}": 0.002342755693110321,
+      "h_{k+1}_at_p_{k+1}": 0.002342755693109433,
+      "motion_term": 0.0009241948227165508,
+      "barrier_update_term": -8.881784197001252e-16,
+      "sum_check": 0.00048036977304866113,
+      "predicted_motion_n_k_dot_dt_u": 0.00048036977304862785,
+      "motion_minus_predicted": 0.000443825049667923,
+      "normal_delta": [
+        0.0,
+        0.0
+      ],
+      "offset_delta": 8.881784197001252e-16,
+      "face_switch": false,
+      "numerical_rebuild_h0": 0.0004438250496678897,
+      "numerical_rebuild_h1": 0.00048036977304866113
+    },
+    "hold_true": {
+      "sampled_min_sd": 0.08621114351580858,
+      "lipschitz_lower_bound": 0.0858713956599196,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.1358991423555954
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 237,
+    "in_K0": false,
+    "position": [
+      3.9173427556931095,
+      4.953826708258648
+    ],
+    "u": [
+      0.010381699735884898,
+      -0.13373177890456525
+    ],
+    "u_nom": [
+      0.010381699735884898,
+      -0.13373177890456525
+    ],
+    "h_aggregate": 0.002342755693109433,
+    "h_true": 0.021211143515808578,
+    "h_gap": -0.018868387822699145,
+    "feature": {
+      "edge_index": 4,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.85,
+        4.9
+      ],
+      "distance": 0.08621114351580858,
+      "edge_normal": [
+        0.0,
+        1.0
+      ],
+      "vertex_index": 4,
+      "edge_length": 0.75,
+      "signed_distance": 0.08621114351580858,
+      "sd_gradient": [
+        0.7811374834711566,
+        0.6243590568866191
+      ],
+      "sd_foot": [
+        3.85,
+        4.9
+      ],
+      "h_true": 0.021211143515808578
+    },
+    "support": {
+      "max_n_dot_vertex": 4.9,
+      "min_n_dot_vertex": 3.1,
+      "offset": 3.85,
+      "cuts_object": true,
+      "support_gap": 1.0500000000000003,
+      "all_vertices_on_inner_side": false
+    },
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": false,
+    "translation_defect": 0.0,
+    "alignment": 1.0,
+    "n_bar": [
+      1.0,
+      0.0
+    ],
+    "offset": 3.85,
+    "anchor": [
+      1.0,
+      -0.0
+    ],
+    "n_near": 11,
+    "n_same_face": 6,
+    "cap_active": [
+      false
+    ],
+    "rhs_uncapped": [
+      0.0012579544551245374
+    ],
+    "rhs_capped": [
+      0.0012579544551245374
+    ],
+    "rhs_no_margin_uncapped": [
+      -0.018742045544875463
+    ],
+    "decompose": {
+      "delta_p": [
+        0.0005190849867942049,
+        -0.006686588945227889
+      ],
+      "delta_p_minus_dt_u": [
+        -4.0007060164715114e-17,
+        3.7383290907300193e-16
+      ],
+      "h_k": 0.0018623859200607717,
+      "h_kplus": 0.002342755693109433,
+      "delta_h": 0.00048036977304866113,
+      "match": {
+        "matched": true,
+        "new_activation": false,
+        "normal_cosine": 1.0,
+        "offset_delta": 0.0,
+        "face_switch": false,
+        "angle_deg": 0.0
+      },
+      "h_k_at_p_{k+1}": 0.0028618406799036378,
+      "h_{k+1}_at_p_{k+1}": 0.0028618406799036378,
+      "motion_term": 0.000999454759842866,
+      "barrier_update_term": 0.0,
+      "sum_check": 0.0005190849867942049,
+      "predicted_motion_n_k_dot_dt_u": 0.0005190849867942449,
+      "motion_minus_predicted": 0.0004803697730486211,
+      "normal_delta": [
+        0.0,
+        0.0
+      ],
+      "offset_delta": 0.0,
+      "face_switch": false,
+      "numerical_rebuild_h0": 0.00048036977304866113,
+      "numerical_rebuild_h1": 0.0005190849867942049
+    },
+    "hold_true": {
+      "sampled_min_sd": 0.08262820504735677,
+      "lipschitz_lower_bound": 0.08229286968929725,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.1341341432238101
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 238,
+    "in_K0": true,
+    "position": [
+      3.9178618406799037,
+      4.94714011931342
+    ],
+    "u": [
+      0.004996700981300561,
+      -0.1261465284354137
+    ],
+    "u_nom": [
+      0.004996700981300561,
+      -0.1261465284354137
+    ],
+    "h_aggregate": 0.002861840679904526,
+    "h_true": 0.017628205047356765,
+    "h_gap": -0.01476636436745224,
+    "feature": {
+      "edge_index": 4,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.85,
+        4.9
+      ],
+      "distance": 0.08262820504735677,
+      "edge_normal": [
+        0.0,
+        1.0
+      ],
+      "vertex_index": 4,
+      "edge_length": 0.75,
+      "signed_distance": 0.08262820504735677,
+      "sd_gradient": [
+        0.8212914783881597,
+        0.570508814591844
+      ],
+      "sd_foot": [
+        3.85,
+        4.9
+      ],
+      "h_true": 0.017628205047356765
+    },
+    "support": {
+      "max_n_dot_vertex": 4.9,
+      "min_n_dot_vertex": 3.1,
+      "offset": 3.849999999999999,
+      "cuts_object": true,
+      "support_gap": 1.0500000000000012,
+      "all_vertices_on_inner_side": false
+    },
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": 0.0,
+    "alignment": 1.0,
+    "n_bar": [
+      1.0,
+      0.0
+    ],
+    "offset": 3.849999999999999,
+    "anchor": [
+      1.0,
+      -0.0
+    ],
+    "n_near": 11,
+    "n_same_face": 6,
+    "cap_active": [
+      false
+    ],
+    "rhs_uncapped": [
+      -0.002894725439236207
+    ],
+    "rhs_capped": [
+      -0.002894725439236207
+    ],
+    "rhs_no_margin_uncapped": [
+      -0.022894725439236208
+    ],
+    "decompose": {
+      "delta_p": [
+        0.0002498350490651724,
+        -0.006307326421771009
+      ],
+      "delta_p_minus_dt_u": [
+        1.4430730915782064e-16,
+        -3.226585665316861e-16
+      ],
+      "h_k": 0.002342755693109433,
+      "h_kplus": 0.002861840679904526,
+      "delta_h": 0.0005190849867950931,
+      "match": {
+        "matched": true,
+        "new_activation": false,
+        "normal_cosine": 1.0,
+        "offset_delta": -8.881784197001252e-16,
+        "face_switch": false,
+        "angle_deg": 0.0
+      },
+      "h_k_at_p_{k+1}": 0.00311167572896881,
+      "h_{k+1}_at_p_{k+1}": 0.0031116757289696984,
+      "motion_term": 0.0007689200358593773,
+      "barrier_update_term": 8.881784197001252e-16,
+      "sum_check": 0.0002498350490651724,
+      "predicted_motion_n_k_dot_dt_u": 0.0002498350490650281,
+      "motion_minus_predicted": 0.0005190849867943492,
+      "normal_delta": [
+        0.0,
+        0.0
+      ],
+      "offset_delta": -8.881784197001252e-16,
+      "face_switch": false,
+      "numerical_rebuild_h0": 0.0005190849867942049,
+      "numerical_rebuild_h1": 0.0002498350490651724
+    },
+    "hold_true": {
+      "sampled_min_sd": 0.07941358413987146,
+      "lipschitz_lower_bound": 0.07909797051475957,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.12624545004475674
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 239,
+    "in_K0": true,
+    "position": [
+      3.918111675728969,
+      4.940832792891649
+    ],
+    "u": [
+      0.005830164027247209,
+      -0.12400559612695564
+    ],
+    "u_nom": [
+      0.005830164027247209,
+      -0.12400559612695564
+    ],
+    "h_aggregate": 0.00311167572896881,
+    "h_true": 0.014413584139871455,
+    "h_gap": -0.011301908410902645,
+    "feature": {
+      "edge_index": 4,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.85,
+        4.9
+      ],
+      "distance": 0.07941358413987146,
+      "edge_normal": [
+        0.0,
+        1.0
+      ],
+      "vertex_index": 4,
+      "edge_length": 0.75,
+      "signed_distance": 0.07941358413987146,
+      "sd_gradient": [
+        0.8576829325446822,
+        0.5141789447474044
+      ],
+      "sd_foot": [
+        3.85,
+        4.9
+      ],
+      "h_true": 0.014413584139871455
+    },
+    "support": {
+      "max_n_dot_vertex": 4.9,
+      "min_n_dot_vertex": 3.1,
+      "offset": 3.85,
+      "cuts_object": true,
+      "support_gap": 1.0500000000000003,
+      "all_vertices_on_inner_side": false
+    },
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": -2.220446049250313e-16,
+    "alignment": 1.0000000000000002,
+    "n_bar": [
+      1.0,
+      0.0
+    ],
+    "offset": 3.85,
+    "anchor": [
+      1.0,
+      -0.0
+    ],
+    "n_near": 11,
+    "n_same_face": 6,
+    "cap_active": [
+      false
+    ],
+    "rhs_uncapped": [
+      -0.004893405831750481
+    ],
+    "rhs_capped": [
+      -0.004893405831750481
+    ],
+    "rhs_no_margin_uncapped": [
+      -0.02489340583175048
+    ],
+    "decompose": {
+      "delta_p": [
+        0.00029150820136214506,
+        -0.0062002798063476305
+      ],
+      "delta_p_minus_dt_u": [
+        -2.1543097167286973e-16,
+        1.5178830414797062e-16
+      ],
+      "h_k": 0.002861840679904526,
+      "h_kplus": 0.00311167572896881,
+      "delta_h": 0.0002498350490642842,
+      "match": {
+        "matched": true,
+        "new_activation": false,
+        "normal_cosine": 1.0,
+        "offset_delta": 8.881784197001252e-16,
+        "face_switch": false,
+        "angle_deg": 0.0
+      },
+      "h_k_at_p_{k+1}": 0.0034031839303318434,
+      "h_{k+1}_at_p_{k+1}": 0.0034031839303309552,
+      "motion_term": 0.0005413432504273175,
+      "barrier_update_term": -8.881784197001252e-16,
+      "sum_check": 0.00029150820136214506,
+      "predicted_motion_n_k_dot_dt_u": 0.0002915082013623605,
+      "motion_minus_predicted": 0.00024983504906495697,
+      "normal_delta": [
+        0.0,
+        0.0
+      ],
+      "offset_delta": 8.881784197001252e-16,
+      "face_switch": false,
+      "numerical_rebuild_h0": 0.0002498350490651724,
+      "numerical_rebuild_h1": 0.00029150820136214506
+    },
+    "hold_true": {
+      "sampled_min_sd": 0.07667076714374398,
+      "lipschitz_lower_bound": 0.0763604107087033,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.1241425740162747
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 240,
+    "in_K0": true,
+    "position": [
+      3.918403183930331,
+      4.934632513085301
+    ],
+    "u": [
+      0.006614999757307905,
+      -0.12192183589714727
+    ],
+    "u_nom": [
+      0.006614999757307905,
+      -0.12192183589714727
+    ],
+    "h_aggregate": 0.0034031839303309552,
+    "h_true": 0.011670767143743974,
+    "h_gap": -0.008267583213413018,
+    "feature": {
+      "edge_index": 4,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.85,
+        4.9
+      ],
+      "distance": 0.07667076714374398,
+      "edge_normal": [
+        0.0,
+        1.0
+      ],
+      "vertex_index": 4,
+      "edge_length": 0.75,
+      "signed_distance": 0.07667076714374398,
+      "sd_gradient": [
+        0.8921677254394392,
+        0.45170427237764454
+      ],
+      "sd_foot": [
+        3.85,
+        4.9
+      ],
+      "h_true": 0.011670767143743974
+    },
+    "support": {
+      "max_n_dot_vertex": 4.9,
+      "min_n_dot_vertex": 3.1,
+      "offset": 3.85,
+      "cuts_object": true,
+      "support_gap": 1.0500000000000003,
+      "all_vertices_on_inner_side": false
+    },
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": 2.220446049250313e-16,
+    "alignment": 0.9999999999999998,
+    "n_bar": [
+      1.0,
+      0.0
+    ],
+    "offset": 3.85,
+    "anchor": [
+      1.0,
+      -0.0
+    ],
+    "n_near": 11,
+    "n_same_face": 6,
+    "cap_active": [
+      false
+    ],
+    "rhs_uncapped": [
+      -0.0072254714426476414
+    ],
+    "rhs_capped": [
+      -0.0072254714426476414
+    ],
+    "rhs_no_margin_uncapped": [
+      -0.027225471442647642
+    ],
+    "decompose": {
+      "delta_p": [
+        0.00033074998786553067,
+        -0.006096091794857372
+      ],
+      "delta_p_minus_dt_u": [
+        1.354168513434395e-16,
+        -8.673617379884035e-18
+      ],
+      "h_k": 0.00311167572896881,
+      "h_kplus": 0.0034031839303309552,
+      "delta_h": 0.00029150820136214506,
+      "match": {
+        "matched": true,
+        "new_activation": false,
+        "normal_cosine": 1.0,
+        "offset_delta": 0.0,
+        "face_switch": false,
+        "angle_deg": 0.0
+      },
+      "h_k_at_p_{k+1}": 0.003733933918196486,
+      "h_{k+1}_at_p_{k+1}": 0.003733933918196486,
+      "motion_term": 0.0006222581892276757,
+      "barrier_update_term": 0.0,
+      "sum_check": 0.00033074998786553067,
+      "predicted_motion_n_k_dot_dt_u": 0.00033074998786539525,
+      "motion_minus_predicted": 0.0002915082013622805,
+      "normal_delta": [
+        0.0,
+        0.0
+      ],
+      "offset_delta": 0.0,
+      "face_switch": false,
+      "numerical_rebuild_h0": 0.00029150820136214506,
+      "numerical_rebuild_h1": 0.00033074998786553067
+    },
+    "hold_true": {
+      "sampled_min_sd": 0.07442231528202188,
+      "lipschitz_lower_bound": 0.07411706239208551,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.1221011559745447
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 241,
+    "in_K0": true,
+    "position": [
+      3.9187339339181966,
+      4.928536421290444
+    ],
+    "u": [
+      0.00763820118274654,
+      -0.12115083225456039
+    ],
+    "u_nom": [
+      0.00763820118274654,
+      -0.12115083225456039
+    ],
+    "h_aggregate": 0.00373393391819693,
+    "h_true": 0.009422315282021879,
+    "h_gap": -0.005688381363824949,
+    "feature": {
+      "edge_index": 4,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.85,
+        4.9
+      ],
+      "distance": 0.07442231528202188,
+      "edge_normal": [
+        0.0,
+        1.0
+      ],
+      "vertex_index": 4,
+      "edge_length": 0.75,
+      "signed_distance": 0.07442231528202188,
+      "sd_gradient": [
+        0.9235661865359955,
+        0.3834390422053535
+      ],
+      "sd_foot": [
+        3.85,
+        4.9
+      ],
+      "h_true": 0.009422315282021879
+    },
+    "support": {
+      "max_n_dot_vertex": 4.9,
+      "min_n_dot_vertex": 3.1,
+      "offset": 3.8499999999999996,
+      "cuts_object": true,
+      "support_gap": 1.0500000000000007,
+      "all_vertices_on_inner_side": false
+    },
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": 0.0,
+    "alignment": 1.0,
+    "n_bar": [
+      1.0,
+      0.0
+    ],
+    "offset": 3.8499999999999996,
+    "anchor": [
+      1.0,
+      -0.0
+    ],
+    "n_near": 11,
+    "n_same_face": 6,
+    "cap_active": [
+      false
+    ],
+    "rhs_uncapped": [
+      -0.00987147134557544
+    ],
+    "rhs_capped": [
+      -0.00987147134557544
+    ],
+    "rhs_no_margin_uncapped": [
+      -0.02987147134557544
+    ],
+    "decompose": {
+      "delta_p": [
+        0.000381910059137347,
+        -0.006057541612728201
+      ],
+      "delta_p_minus_dt_u": [
+        1.9949319973733282e-17,
+        -1.8127860323957634e-16
+      ],
+      "h_k": 0.0034031839303309552,
+      "h_kplus": 0.00373393391819693,
+      "delta_h": 0.00033074998786597476,
+      "match": {
+        "matched": true,
+        "new_activation": false,
+        "normal_cosine": 1.0,
+        "offset_delta": -4.440892098500626e-16,
+        "face_switch": false,
+        "angle_deg": 0.0
+      },
+      "h_k_at_p_{k+1}": 0.004115843977333833,
+      "h_{k+1}_at_p_{k+1}": 0.004115843977334277,
+      "motion_term": 0.0007126600470028777,
+      "barrier_update_term": 4.440892098500626e-16,
+      "sum_check": 0.000381910059137347,
+      "predicted_motion_n_k_dot_dt_u": 0.00038191005913732704,
+      "motion_minus_predicted": 0.0003307499878655506,
+      "normal_delta": [
+        0.0,
+        0.0
+      ],
+      "offset_delta": -4.440892098500626e-16,
+      "face_switch": false,
+      "numerical_rebuild_h0": 0.00033074998786553067,
+      "numerical_rebuild_h1": 0.000381910059137347
+    },
+    "hold_true": {
+      "sampled_min_sd": 0.07267943258078138,
+      "lipschitz_lower_bound": 0.07237595413968877,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.12139137643704655
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 242,
+    "in_K0": true,
+    "position": [
+      3.919115843977334,
+      4.9224788796777155
+    ],
+    "u": [
+      0.007654574027542882,
+      -0.11220508347701337
+    ],
+    "u_nom": [
+      0.007654574027542882,
+      -0.11220508347701337
+    ],
+    "h_aggregate": 0.004115843977333833,
+    "h_true": 0.007679432580781381,
+    "h_gap": -0.0035635886034475484,
+    "feature": {
+      "edge_index": 4,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.85,
+        4.9
+      ],
+      "distance": 0.07267943258078138,
+      "edge_normal": [
+        0.0,
+        1.0
+      ],
+      "vertex_index": 4,
+      "edge_length": 0.75,
+      "signed_distance": 0.07267943258078138,
+      "sd_gradient": [
+        0.9509684036197351,
+        0.3092880458681402
+      ],
+      "sd_foot": [
+        3.85,
+        4.9
+      ],
+      "h_true": 0.007679432580781381
+    },
+    "support": {
+      "max_n_dot_vertex": 4.9,
+      "min_n_dot_vertex": 3.1,
+      "offset": 3.85,
+      "cuts_object": true,
+      "support_gap": 1.0500000000000003,
+      "all_vertices_on_inner_side": false
+    },
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": 0.0,
+    "alignment": 1.0,
+    "n_bar": [
+      1.0,
+      0.0
+    ],
+    "offset": 3.85,
+    "anchor": [
+      1.0,
+      -0.0
+    ],
+    "n_near": 12,
+    "n_same_face": 7,
+    "cap_active": [
+      false
+    ],
+    "rhs_uncapped": [
+      -0.012926751818670663
+    ],
+    "rhs_capped": [
+      -0.012926751818670663
+    ],
+    "rhs_no_margin_uncapped": [
+      -0.03292675181867066
+    ],
+    "decompose": {
+      "delta_p": [
+        0.0003827287013771219,
+        -0.005610254173850748
+      ],
+      "delta_p_minus_dt_u": [
+        -2.222614453595284e-17,
+        -7.979727989493313e-17
+      ],
+      "h_k": 0.00373393391819693,
+      "h_kplus": 0.004115843977333833,
+      "delta_h": 0.0003819100591369029,
+      "match": {
+        "matched": true,
+        "new_activation": false,
+        "normal_cosine": 1.0,
+        "offset_delta": 4.440892098500626e-16,
+        "face_switch": false,
+        "angle_deg": 0.0
+      },
+      "h_k_at_p_{k+1}": 0.004498572678711399,
+      "h_{k+1}_at_p_{k+1}": 0.004498572678710955,
+      "motion_term": 0.0007646387605144689,
+      "barrier_update_term": -4.440892098500626e-16,
+      "sum_check": 0.0003827287013771219,
+      "predicted_motion_n_k_dot_dt_u": 0.0003827287013771441,
+      "motion_minus_predicted": 0.00038191005913732476,
+      "normal_delta": [
+        0.0,
+        0.0
+      ],
+      "offset_delta": 4.440892098500626e-16,
+      "face_switch": false,
+      "numerical_rebuild_h0": 0.000381910059137347,
+      "numerical_rebuild_h1": 0.0003827287013771219
+    },
+    "hold_true": {
+      "sampled_min_sd": 0.0715164465753696,
+      "lipschitz_lower_bound": 0.07123528188540094,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.11246587598745975
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 243,
+    "in_K0": true,
+    "position": [
+      3.919498572678711,
+      4.916868625503865
+    ],
+    "u": [
+      0.007823786874459282,
+      -0.1101959515304669
+    ],
+    "u_nom": [
+      0.007823786874459282,
+      -0.1101959515304669
+    ],
+    "h_aggregate": 0.004498572678711399,
+    "h_true": 0.006516446575369594,
+    "h_gap": -0.0020178738966581955,
+    "feature": {
+      "edge_index": 4,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.85,
+        4.9
+      ],
+      "distance": 0.0715164465753696,
+      "edge_normal": [
+        0.0,
+        1.0
+      ],
+      "vertex_index": 4,
+      "edge_length": 0.75,
+      "signed_distance": 0.0715164465753696,
+      "sd_gradient": [
+        0.9717844776511365,
+        0.2358705767922473
+      ],
+      "sd_foot": [
+        3.85,
+        4.9
+      ],
+      "h_true": 0.006516446575369594
+    },
+    "support": {
+      "max_n_dot_vertex": 4.9,
+      "min_n_dot_vertex": 3.1,
+      "offset": 3.8499999999999996,
+      "cuts_object": true,
+      "support_gap": 1.0500000000000007,
+      "all_vertices_on_inner_side": false
+    },
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": 0.0,
+    "alignment": 1.0,
+    "n_bar": [
+      1.0,
+      0.0
+    ],
+    "offset": 3.8499999999999996,
+    "anchor": [
+      1.0,
+      -0.0
+    ],
+    "n_near": 12,
+    "n_same_face": 7,
+    "cap_active": [
+      false
+    ],
+    "rhs_uncapped": [
+      -0.01598858142969119
+    ],
+    "rhs_capped": [
+      -0.01598858142969119
+    ],
+    "rhs_no_margin_uncapped": [
+      -0.03598858142969119
+    ],
+    "decompose": {
+      "delta_p": [
+        0.000391189343722953,
+        -0.0055097975765230345
+      ],
+      "delta_p_minus_dt_u": [
+        -1.111307226797642e-17,
+        3.1138286393783687e-16
+      ],
+      "h_k": 0.004115843977333833,
+      "h_kplus": 0.004498572678711399,
+      "delta_h": 0.000382728701377566,
+      "match": {
+        "matched": true,
+        "new_activation": false,
+        "normal_cosine": 1.0,
+        "offset_delta": -4.440892098500626e-16,
+        "face_switch": false,
+        "angle_deg": 0.0
+      },
+      "h_k_at_p_{k+1}": 0.004889762022433908,
+      "h_{k+1}_at_p_{k+1}": 0.004889762022434352,
+      "motion_term": 0.0007739180451000749,
+      "barrier_update_term": 4.440892098500626e-16,
+      "sum_check": 0.000391189343722953,
+      "predicted_motion_n_k_dot_dt_u": 0.0003911893437229641,
+      "motion_minus_predicted": 0.0003827287013771108,
+      "normal_delta": [
+        0.0,
+        0.0
+      ],
+      "offset_delta": -4.440892098500626e-16,
+      "face_switch": false,
+      "numerical_rebuild_h0": 0.0003827287013771219,
+      "numerical_rebuild_h1": 0.000391189343722953
+    },
+    "hold_true": {
+      "sampled_min_sd": 0.0708067920995959,
+      "lipschitz_lower_bound": 0.07053060874366679,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.11047334237164173
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 244,
+    "in_K0": true,
+    "position": [
+      3.919889762022434,
+      4.911358827927342
+    ],
+    "u": [
+      0.004304767137365451,
+      -0.10863705680780873
+    ],
+    "u_nom": [
+      0.004304767137365451,
+      -0.10863705680780873
+    ],
+    "h_aggregate": 0.004889762022434352,
+    "h_true": 0.005806792099595892,
+    "h_gap": -0.0009170300771615403,
+    "feature": {
+      "edge_index": 4,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.85,
+        4.9
+      ],
+      "distance": 0.0708067920995959,
+      "edge_normal": [
+        0.0,
+        1.0
+      ],
+      "vertex_index": 4,
+      "edge_length": 0.75,
+      "signed_distance": 0.0708067920995959,
+      "sd_gradient": [
+        0.9870488402317097,
+        0.16042003302965843
+      ],
+      "sd_foot": [
+        3.85,
+        4.9
+      ],
+      "h_true": 0.005806792099595892
+    },
+    "support": {
+      "max_n_dot_vertex": 4.9,
+      "min_n_dot_vertex": 3.1,
+      "offset": 3.8499999999999996,
+      "cuts_object": true,
+      "support_gap": 1.0500000000000007,
+      "all_vertices_on_inner_side": false
+    },
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": 0.0,
+    "alignment": 1.0,
+    "n_bar": [
+      1.0,
+      0.0
+    ],
+    "offset": 3.8499999999999996,
+    "anchor": [
+      1.0,
+      -0.0
+    ],
+    "n_near": 12,
+    "n_same_face": 7,
+    "cap_active": [
+      false
+    ],
+    "rhs_uncapped": [
+      -0.019118096179474815
+    ],
+    "rhs_capped": [
+      -0.019118096179474815
+    ],
+    "rhs_no_margin_uncapped": [
+      -0.039118096179474815
+    ],
+    "decompose": {
+      "delta_p": [
+        0.00021523835686831916,
+        -0.00543185284039005
+      ],
+      "delta_p_minus_dt_u": [
+        4.662069341687669e-17,
+        3.86843335142828e-16
+      ],
+      "h_k": 0.004498572678711399,
+      "h_kplus": 0.004889762022434352,
+      "delta_h": 0.000391189343722953,
+      "match": {
+        "matched": true,
+        "new_activation": false,
+        "normal_cosine": 1.0,
+        "offset_delta": 0.0,
+        "face_switch": false,
+        "angle_deg": 0.0
+      },
+      "h_k_at_p_{k+1}": 0.005105000379302671,
+      "h_{k+1}_at_p_{k+1}": 0.005105000379302671,
+      "motion_term": 0.0006064277005912722,
+      "barrier_update_term": 0.0,
+      "sum_check": 0.00021523835686831916,
+      "predicted_motion_n_k_dot_dt_u": 0.00021523835686827254,
+      "motion_minus_predicted": 0.0003911893437229996,
+      "normal_delta": [
+        0.0,
+        0.0
+      ],
+      "offset_delta": 0.0,
+      "face_switch": false,
+      "numerical_rebuild_h0": 0.000391189343722953,
+      "numerical_rebuild_h1": 0.00021523835686831916
+    },
+    "hold_true": {
+      "sampled_min_sd": 0.07035510011266637,
+      "lipschitz_lower_bound": 0.07008329433260492,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.10872231202457941
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 245,
+    "in_K0": true,
+    "position": [
+      3.9201050003793023,
+      4.905926975086952
+    ],
+    "u": [
+      0.00508292369178478,
+      -0.10691225366948878
+    ],
+    "u_nom": [
+      0.00508292369178478,
+      -0.10691225366948878
+    ],
+    "h_aggregate": 0.005105000379302227,
+    "h_true": 0.005355100112666364,
+    "h_gap": -0.00025009973336413693,
+    "feature": {
+      "edge_index": 4,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.85,
+        4.9
+      ],
+      "distance": 0.07035510011266637,
+      "edge_normal": [
+        0.0,
+        1.0
+      ],
+      "vertex_index": 4,
+      "edge_length": 0.75,
+      "signed_distance": 0.07035510011266637,
+      "sd_gradient": [
+        0.996445179767158,
+        0.0842437161976864
+      ],
+      "sd_foot": [
+        3.85,
+        4.9
+      ],
+      "h_true": 0.005355100112666364
+    },
+    "support": {
+      "max_n_dot_vertex": 4.9,
+      "min_n_dot_vertex": 3.1,
+      "offset": 3.85,
+      "cuts_object": true,
+      "support_gap": 1.0500000000000003,
+      "all_vertices_on_inner_side": false
+    },
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": 0.0,
+    "alignment": 1.0,
+    "n_bar": [
+      1.0,
+      0.0
+    ],
+    "offset": 3.85,
+    "anchor": [
+      1.0,
+      -0.0
+    ],
+    "n_near": 12,
+    "n_same_face": 7,
+    "cap_active": [
+      false
+    ],
+    "rhs_uncapped": [
+      -0.020840003034417815
+    ],
+    "rhs_capped": [
+      -0.020840003034417815
+    ],
+    "rhs_no_margin_uncapped": [
+      -0.040840003034417816
+    ],
+    "decompose": {
+      "delta_p": [
+        0.00025414618458929894,
+        -0.005345612683474776
+      ],
+      "delta_p_minus_dt_u": [
+        5.990217002982412e-17,
+        -3.365363543395006e-16
+      ],
+      "h_k": 0.004889762022434352,
+      "h_kplus": 0.005105000379302227,
+      "delta_h": 0.00021523835686787507,
+      "match": {
+        "matched": true,
+        "new_activation": false,
+        "normal_cosine": 1.0,
+        "offset_delta": 4.440892098500626e-16,
+        "face_switch": false,
+        "angle_deg": 0.0
+      },
+      "h_k_at_p_{k+1}": 0.00535914656389197,
+      "h_{k+1}_at_p_{k+1}": 0.005359146563891526,
+      "motion_term": 0.0004693845414576181,
+      "barrier_update_term": -4.440892098500626e-16,
+      "sum_check": 0.00025414618458929894,
+      "predicted_motion_n_k_dot_dt_u": 0.00025414618458923904,
+      "motion_minus_predicted": 0.00021523835686837906,
+      "normal_delta": [
+        0.0,
+        0.0
+      ],
+      "offset_delta": 4.440892098500626e-16,
+      "face_switch": false,
+      "numerical_rebuild_h0": 0.00021523835686831916,
+      "numerical_rebuild_h1": 0.00025414618458929894
+    },
+    "hold_true": {
+      "sampled_min_sd": 0.07030742320937441,
+      "lipschitz_lower_bound": 0.07003984067423402,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.10703301405615757
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 246,
+    "in_K0": true,
+    "position": [
+      3.9203591465638916,
+      4.900581362403477
+    ],
+    "u": [
+      0.004337124764484779,
+      -0.10624111046731866
+    ],
+    "u_nom": [
+      0.004337124764484779,
+      -0.10624111046731866
+    ],
+    "h_aggregate": 0.005359146563891082,
+    "h_true": 0.005361548358768689,
+    "h_gap": -2.4017948776072773e-06,
+    "feature": {
+      "edge_index": 4,
+      "kind": "vertex",
+      "t": 0.0,
+      "foot": [
+        3.85,
+        4.9
+      ],
+      "distance": 0.07036154835876869,
+      "edge_normal": [
+        0.0,
+        1.0
+      ],
+      "vertex_index": 4,
+      "edge_length": 0.75,
+      "signed_distance": 0.07036154835876869,
+      "sd_gradient": [
+        0.999965864951338,
+        0.008262501565658806
+      ],
+      "sd_foot": [
+        3.85,
+        4.9
+      ],
+      "h_true": 0.005361548358768689
+    },
+    "support": {
+      "max_n_dot_vertex": 4.9,
+      "min_n_dot_vertex": 3.1,
+      "offset": 3.8500000000000005,
+      "cuts_object": true,
+      "support_gap": 1.0499999999999998,
+      "all_vertices_on_inner_side": false
+    },
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": 0.0,
+    "alignment": 1.0,
+    "n_bar": [
+      1.0,
+      0.0
+    ],
+    "offset": 3.8500000000000005,
+    "anchor": [
+      1.0,
+      -0.0
+    ],
+    "n_near": 12,
+    "n_same_face": 7,
+    "cap_active": [
+      false
+    ],
+    "rhs_uncapped": [
+      -0.022873172511128654
+    ],
+    "rhs_capped": [
+      -0.022873172511128654
+    ],
+    "rhs_no_margin_uncapped": [
+      -0.042873172511128654
+    ],
+    "decompose": {
+      "delta_p": [
+        0.00021685623822431666,
+        -0.0053120555233663325
+      ],
+      "delta_p_minus_dt_u": [
+        7.771019071289853e-17,
+        -3.9898639947466563e-16
+      ],
+      "h_k": 0.005105000379302227,
+      "h_kplus": 0.005359146563891082,
+      "delta_h": 0.00025414618458885485,
+      "match": {
+        "matched": true,
+        "new_activation": false,
+        "normal_cosine": 1.0,
+        "offset_delta": 4.440892098500626e-16,
+        "face_switch": false,
+        "angle_deg": 0.0
+      },
+      "h_k_at_p_{k+1}": 0.0055760028021158425,
+      "h_{k+1}_at_p_{k+1}": 0.0055760028021153984,
+      "motion_term": 0.0004710024228136156,
+      "barrier_update_term": -4.440892098500626e-16,
+      "sum_check": 0.00021685623822431666,
+      "predicted_motion_n_k_dot_dt_u": 0.00021685623822423895,
+      "motion_minus_predicted": 0.0002541461845893767,
+      "normal_delta": [
+        0.0,
+        0.0
+      ],
+      "offset_delta": 4.440892098500626e-16,
+      "face_switch": false,
+      "numerical_rebuild_h0": 0.00025414618458929894,
+      "numerical_rebuild_h1": 0.00021685623822431666
+    },
+    "hold_true": {
+      "sampled_min_sd": 0.07036154835876869,
+      "lipschitz_lower_bound": 0.07009572435443792,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.10632960173231024
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 247,
+    "in_K0": true,
+    "position": [
+      3.920576002802116,
+      4.8952693068801105
+    ],
+    "u": [
+      0.005102718407240747,
+      -0.10455725707157155
+    ],
+    "u_nom": [
+      0.005102718407240747,
+      -0.10455725707157155
+    ],
+    "h_aggregate": 0.005576002802116287,
+    "h_true": 0.0055760028021158425,
+    "h_gap": 4.440892098500626e-16,
+    "feature": {
+      "edge_index": 3,
+      "kind": "edge",
+      "t": 0.9957949394489868,
+      "foot": [
+        3.85,
+        4.8952693068801105
+      ],
+      "distance": 0.07057600280211584,
+      "edge_normal": [
+        1.0,
+        -0.0
+      ],
+      "vertex_index": 4,
+      "edge_length": 1.1250000000000004,
+      "signed_distance": 0.07057600280211584,
+      "sd_gradient": [
+        1.0,
+        0.0
+      ],
+      "sd_foot": [
+        3.85,
+        4.8952693068801105
+      ],
+      "h_true": 0.0055760028021158425
+    },
+    "support": {
+      "max_n_dot_vertex": 4.9,
+      "min_n_dot_vertex": 3.1,
+      "offset": 3.8499999999999996,
+      "cuts_object": true,
+      "support_gap": 1.0500000000000007,
+      "all_vertices_on_inner_side": false
+    },
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": 0.0,
+    "alignment": 1.0,
+    "n_bar": [
+      1.0,
+      0.0
+    ],
+    "offset": 3.8499999999999996,
+    "anchor": [
+      1.0,
+      -0.0
+    ],
+    "n_near": 12,
+    "n_same_face": 7,
+    "cap_active": [
+      false
+    ],
+    "rhs_uncapped": [
+      -0.024608022416930293
+    ],
+    "rhs_capped": [
+      -0.024608022416930293
+    ],
+    "rhs_no_margin_uncapped": [
+      -0.04460802241693029
+    ],
+    "decompose": {
+      "delta_p": [
+        0.0002551359203621928,
+        -0.005227862853578458
+      ],
+      "delta_p_minus_dt_u": [
+        1.5542038142579706e-16,
+        1.205632815803881e-16
+      ],
+      "h_k": 0.005359146563891082,
+      "h_kplus": 0.005576002802116287,
+      "delta_h": 0.00021685623822520483,
+      "match": {
+        "matched": true,
+        "new_activation": false,
+        "normal_cosine": 1.0,
+        "offset_delta": -8.881784197001252e-16,
+        "face_switch": false,
+        "angle_deg": 0.0
+      },
+      "h_k_at_p_{k+1}": 0.005831138722477591,
+      "h_{k+1}_at_p_{k+1}": 0.005831138722478479,
+      "motion_term": 0.00047199215858650945,
+      "barrier_update_term": 8.881784197001252e-16,
+      "sum_check": 0.0002551359203621928,
+      "predicted_motion_n_k_dot_dt_u": 0.00025513592036203737,
+      "motion_minus_predicted": 0.00021685623822447208,
+      "normal_delta": [
+        0.0,
+        0.0
+      ],
+      "offset_delta": -8.881784197001252e-16,
+      "face_switch": false,
+      "numerical_rebuild_h0": 0.00021685623822431666,
+      "numerical_rebuild_h1": 0.0002551359203621928
+    },
+    "hold_true": {
+      "sampled_min_sd": 0.07057600280211584,
+      "lipschitz_lower_bound": 0.07031429855896298,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.10468169726114633
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 248,
+    "in_K0": true,
+    "position": [
+      3.920831138722478,
+      4.890041444026532
+    ],
+    "u": [
+      0.005765705211798355,
+      -0.09559939088075896
+    ],
+    "u_nom": [
+      0.005765705211798355,
+      -0.09559939088075896
+    ],
+    "h_aggregate": 0.005831138722478479,
+    "h_true": 0.005831138722478035,
+    "h_gap": 4.440892098500626e-16,
+    "feature": {
+      "edge_index": 3,
+      "kind": "edge",
+      "t": 0.9911479502458059,
+      "foot": [
+        3.85,
+        4.890041444026532
+      ],
+      "distance": 0.07083113872247804,
+      "edge_normal": [
+        1.0,
+        -0.0
+      ],
+      "vertex_index": 4,
+      "edge_length": 1.1250000000000004,
+      "signed_distance": 0.07083113872247804,
+      "sd_gradient": [
+        1.0,
+        0.0
+      ],
+      "sd_foot": [
+        3.85,
+        4.890041444026532
+      ],
+      "h_true": 0.005831138722478035
+    },
+    "support": {
+      "max_n_dot_vertex": 4.9,
+      "min_n_dot_vertex": 3.1,
+      "offset": 3.8499999999999996,
+      "cuts_object": true,
+      "support_gap": 1.0500000000000007,
+      "all_vertices_on_inner_side": false
+    },
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": 3.3306690738754696e-16,
+    "alignment": 0.9999999999999997,
+    "n_bar": [
+      1.0,
+      0.0
+    ],
+    "offset": 3.8499999999999996,
+    "anchor": [
+      1.0,
+      -0.0
+    ],
+    "n_near": 12,
+    "n_same_face": 7,
+    "cap_active": [
+      false
+    ],
+    "rhs_uncapped": [
+      -0.026649109779827835
+    ],
+    "rhs_capped": [
+      -0.026649109779827835
+    ],
+    "rhs_no_margin_uncapped": [
+      -0.046649109779827835
+    ],
+    "decompose": {
+      "delta_p": [
+        0.0002882852605901043,
+        -0.004779969544038032
+      ],
+      "delta_p_minus_dt_u": [
+        1.8653698377613104e-16,
+        -8.326672684688674e-17
+      ],
+      "h_k": 0.005576002802116287,
+      "h_kplus": 0.005831138722478479,
+      "delta_h": 0.0002551359203621928,
+      "match": {
+        "matched": true,
+        "new_activation": false,
+        "normal_cosine": 1.0,
+        "offset_delta": 0.0,
+        "face_switch": false,
+        "angle_deg": 0.0
+      },
+      "h_k_at_p_{k+1}": 0.006119423983068584,
+      "h_{k+1}_at_p_{k+1}": 0.006119423983068584,
+      "motion_term": 0.0005434211809522971,
+      "barrier_update_term": 0.0,
+      "sum_check": 0.0002882852605901043,
+      "predicted_motion_n_k_dot_dt_u": 0.00028828526058991775,
+      "motion_minus_predicted": 0.00025513592036237933,
+      "normal_delta": [
+        0.0,
+        0.0
+      ],
+      "offset_delta": 0.0,
+      "face_switch": false,
+      "numerical_rebuild_h0": 0.0002551359203621928,
+      "numerical_rebuild_h1": 0.0002882852605901043
+    },
+    "hold_true": {
+      "sampled_min_sd": 0.07083113872247804,
+      "lipschitz_lower_bound": 0.07059170596974043,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.09577310109504389
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 249,
+    "in_K0": true,
+    "position": [
+      3.9211194239830682,
+      4.885261474482494
+    ],
+    "u": [
+      0.006421629783040217,
+      -0.09441009006708799
+    ],
+    "u_nom": [
+      0.006421629783040217,
+      -0.09441009006708799
+    ],
+    "h_aggregate": 0.00611942398306814,
+    "h_true": 0.00611942398306814,
+    "h_gap": 0.0,
+    "feature": {
+      "edge_index": 3,
+      "kind": "edge",
+      "t": 0.9868990884288831,
+      "foot": [
+        3.85,
+        4.885261474482494
+      ],
+      "distance": 0.07111942398306814,
+      "edge_normal": [
+        1.0,
+        -0.0
+      ],
+      "vertex_index": 4,
+      "edge_length": 1.1250000000000004,
+      "signed_distance": 0.07111942398306814,
+      "sd_gradient": [
+        1.0,
+        0.0
+      ],
+      "sd_foot": [
+        3.85,
+        4.885261474482494
+      ],
+      "h_true": 0.00611942398306814
+    },
+    "support": {
+      "max_n_dot_vertex": 4.9,
+      "min_n_dot_vertex": 3.1,
+      "offset": 3.85,
+      "cuts_object": true,
+      "support_gap": 1.0500000000000003,
+      "all_vertices_on_inner_side": false
+    },
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": 0.0,
+    "alignment": 1.0,
+    "n_bar": [
+      1.0,
+      0.0
+    ],
+    "offset": 3.85,
+    "anchor": [
+      1.0,
+      -0.0
+    ],
+    "n_near": 13,
+    "n_same_face": 8,
+    "cap_active": [
+      false
+    ],
+    "rhs_uncapped": [
+      -0.028955391864545117
+    ],
+    "rhs_capped": [
+      -0.028955391864545117
+    ],
+    "rhs_no_margin_uncapped": [
+      -0.04895539186454512
+    ],
+    "decompose": {
+      "delta_p": [
+        0.0003210814891518865,
+        -0.0047205045033544835
+      ],
+      "delta_p_minus_dt_u": [
+        -1.2435798918408736e-16,
+        -8.326672684688674e-17
+      ],
+      "h_k": 0.005831138722478479,
+      "h_kplus": 0.00611942398306814,
+      "delta_h": 0.0002882852605896602,
+      "match": {
+        "matched": true,
+        "new_activation": false,
+        "normal_cosine": 1.0,
+        "offset_delta": 4.440892098500626e-16,
+        "face_switch": false,
+        "angle_deg": 0.0
+      },
+      "h_k_at_p_{k+1}": 0.00644050547222047,
+      "h_{k+1}_at_p_{k+1}": 0.006440505472220026,
+      "motion_term": 0.0006093667497419908,
+      "barrier_update_term": -4.440892098500626e-16,
+      "sum_check": 0.0003210814891518865,
+      "predicted_motion_n_k_dot_dt_u": 0.00032108148915201086,
+      "motion_minus_predicted": 0.00028828526058997993,
+      "normal_delta": [
+        0.0,
+        0.0
+      ],
+      "offset_delta": 4.440892098500626e-16,
+      "face_switch": false,
+      "numerical_rebuild_h0": 0.0002882852605901043,
+      "numerical_rebuild_h1": 0.0003210814891518865
+    },
+    "hold_true": {
+      "sampled_min_sd": 0.07111942398306814,
+      "lipschitz_lower_bound": 0.07088285340116464,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.09462823276140211
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 250,
+    "in_K0": true,
+    "position": [
+      3.92144050547222,
+      4.8805409699791396
+    ],
+    "u": [
+      0.007023597281374805,
+      -0.09297560376386409
+    ],
+    "u_nom": [
+      0.007023597281374805,
+      -0.09297560376386409
+    ],
+    "h_aggregate": 0.00644050547222047,
+    "h_true": 0.006440505472220026,
+    "h_gap": 4.440892098500626e-16,
+    "feature": {
+      "edge_index": 3,
+      "kind": "edge",
+      "t": 0.9827030844259015,
+      "foot": [
+        3.85,
+        4.8805409699791396
+      ],
+      "distance": 0.07144050547222003,
+      "edge_normal": [
+        1.0,
+        -0.0
+      ],
+      "vertex_index": 4,
+      "edge_length": 1.1250000000000004,
+      "signed_distance": 0.07144050547222003,
+      "sd_gradient": [
+        1.0,
+        0.0
+      ],
+      "sd_foot": [
+        3.85,
+        4.8805409699791396
+      ],
+      "h_true": 0.006440505472220026
+    },
+    "support": {
+      "max_n_dot_vertex": 4.9,
+      "min_n_dot_vertex": 3.1,
+      "offset": 3.8499999999999996,
+      "cuts_object": true,
+      "support_gap": 1.0500000000000007,
+      "all_vertices_on_inner_side": false
+    },
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": 0.0,
+    "alignment": 1.0,
+    "n_bar": [
+      1.0,
+      0.0
+    ],
+    "offset": 3.8499999999999996,
+    "anchor": [
+      1.0,
+      -0.0
+    ],
+    "n_near": 13,
+    "n_same_face": 8,
+    "cap_active": [
+      false
+    ],
+    "rhs_uncapped": [
+      -0.03152404377776376
+    ],
+    "rhs_capped": [
+      -0.03152404377776376
+    ],
+    "rhs_no_margin_uncapped": [
+      -0.05152404377776376
+    ],
+    "decompose": {
+      "delta_p": [
+        0.00035117986406874024,
+        -0.004648780188193591
+      ],
+      "delta_p_minus_dt_u": [
+        0.0,
+        -3.859759734048396e-16
+      ],
+      "h_k": 0.00611942398306814,
+      "h_kplus": 0.00644050547222047,
+      "delta_h": 0.0003210814891523306,
+      "match": {
+        "matched": true,
+        "new_activation": false,
+        "normal_cosine": 1.0,
+        "offset_delta": -4.440892098500626e-16,
+        "face_switch": false,
+        "angle_deg": 0.0
+      },
+      "h_k_at_p_{k+1}": 0.006791685336288766,
+      "h_{k+1}_at_p_{k+1}": 0.0067916853362892105,
+      "motion_term": 0.0006722613532206267,
+      "barrier_update_term": 4.440892098500626e-16,
+      "sum_check": 0.00035117986406874024,
+      "predicted_motion_n_k_dot_dt_u": 0.00035117986406874024,
+      "motion_minus_predicted": 0.0003210814891518865,
+      "normal_delta": [
+        0.0,
+        0.0
+      ],
+      "offset_delta": -4.440892098500626e-16,
+      "face_switch": false,
+      "numerical_rebuild_h0": 0.0003210814891518865,
+      "numerical_rebuild_h1": 0.00035117986406874024
+    },
+    "hold_true": {
+      "sampled_min_sd": 0.07144050547222003,
+      "lipschitz_lower_bound": 0.07120740418235302,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.09324051594680284
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 251,
+    "in_K0": true,
+    "position": [
+      3.921791685336289,
+      4.875892189790946
+    ],
+    "u": [
+      0.005757067791083293,
+      -0.0924936055023271
+    ],
+    "u_nom": [
+      0.005757067791083293,
+      -0.0924936055023271
+    ],
+    "h_aggregate": 0.0067916853362892105,
+    "h_true": 0.006791685336288766,
+    "h_gap": 4.440892098500626e-16,
+    "feature": {
+      "edge_index": 3,
+      "kind": "edge",
+      "t": 0.9785708353697292,
+      "foot": [
+        3.85,
+        4.875892189790946
+      ],
+      "distance": 0.07179168533628877,
+      "edge_normal": [
+        1.0,
+        -0.0
+      ],
+      "vertex_index": 4,
+      "edge_length": 1.1250000000000004,
+      "signed_distance": 0.07179168533628877,
+      "sd_gradient": [
+        1.0,
+        0.0
+      ],
+      "sd_foot": [
+        3.85,
+        4.875892189790946
+      ],
+      "h_true": 0.006791685336288766
+    },
+    "support": {
+      "max_n_dot_vertex": 4.9,
+      "min_n_dot_vertex": 3.1,
+      "offset": 3.8499999999999996,
+      "cuts_object": true,
+      "support_gap": 1.0500000000000007,
+      "all_vertices_on_inner_side": false
+    },
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": 0.0,
+    "alignment": 1.0,
+    "n_bar": [
+      1.0,
+      0.0
+    ],
+    "offset": 3.8499999999999996,
+    "anchor": [
+      1.0,
+      -0.0
+    ],
+    "n_near": 13,
+    "n_same_face": 8,
+    "cap_active": [
+      false
+    ],
+    "rhs_uncapped": [
+      -0.03433348269031368
+    ],
+    "rhs_capped": [
+      -0.03433348269031368
+    ],
+    "rhs_no_margin_uncapped": [
+      -0.054333482690313684
+    ],
+    "decompose": {
+      "delta_p": [
+        0.0002878533895542823,
+        -0.004624680275115978
+      ],
+      "delta_p_minus_dt_u": [
+        1.1763593571467723e-16,
+        3.7730235602495554e-16
+      ],
+      "h_k": 0.00644050547222047,
+      "h_kplus": 0.0067916853362892105,
+      "delta_h": 0.00035117986406874024,
+      "match": {
+        "matched": true,
+        "new_activation": false,
+        "normal_cosine": 1.0,
+        "offset_delta": 0.0,
+        "face_switch": false,
+        "angle_deg": 0.0
+      },
+      "h_k_at_p_{k+1}": 0.007079538725843493,
+      "h_{k+1}_at_p_{k+1}": 0.007079538725843493,
+      "motion_term": 0.0006390332536230225,
+      "barrier_update_term": 0.0,
+      "sum_check": 0.0002878533895542823,
+      "predicted_motion_n_k_dot_dt_u": 0.00028785338955416467,
+      "motion_minus_predicted": 0.0003511798640688579,
+      "normal_delta": [
+        0.0,
+        0.0
+      ],
+      "offset_delta": 0.0,
+      "face_switch": false,
+      "numerical_rebuild_h0": 0.00035117986406874024,
+      "numerical_rebuild_h1": 0.0002878533895542823
+    },
+    "hold_true": {
+      "sampled_min_sd": 0.07179168533628877,
+      "lipschitz_lower_bound": 0.07156000383497216,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.09267260052664565
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 252,
+    "in_K0": true,
+    "position": [
+      3.922079538725843,
+      4.87126750951583
+    ],
+    "u": [
+      0.007234814648974908,
+      -0.09415182171489943
+    ],
+    "u_nom": [
+      0.007234814648974908,
+      -0.09415182171489943
+    ],
+    "h_aggregate": 0.007079538725843493,
+    "h_true": 0.007079538725843049,
+    "h_gap": 4.440892098500626e-16,
+    "feature": {
+      "edge_index": 3,
+      "kind": "edge",
+      "t": 0.9744600084585151,
+      "foot": [
+        3.85,
+        4.87126750951583
+      ],
+      "distance": 0.07207953872584305,
+      "edge_normal": [
+        1.0,
+        -0.0
+      ],
+      "vertex_index": 4,
+      "edge_length": 1.1250000000000004,
+      "signed_distance": 0.07207953872584305,
+      "sd_gradient": [
+        1.0,
+        0.0
+      ],
+      "sd_foot": [
+        3.85,
+        4.87126750951583
+      ],
+      "h_true": 0.007079538725843049
+    },
+    "support": {
+      "max_n_dot_vertex": 4.9,
+      "min_n_dot_vertex": 3.1,
+      "offset": 3.8499999999999996,
+      "cuts_object": true,
+      "support_gap": 1.0500000000000007,
+      "all_vertices_on_inner_side": false
+    },
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": 0.0,
+    "alignment": 1.0,
+    "n_bar": [
+      1.0,
+      0.0
+    ],
+    "offset": 3.8499999999999996,
+    "anchor": [
+      1.0,
+      -0.0
+    ],
+    "n_near": 13,
+    "n_same_face": 8,
+    "cap_active": [
+      false
+    ],
+    "rhs_uncapped": [
+      -0.03663630980674794
+    ],
+    "rhs_capped": [
+      -0.03663630980674794
+    ],
+    "rhs_no_margin_uncapped": [
+      -0.05663630980674794
+    ],
+    "decompose": {
+      "delta_p": [
+        0.00036174073244854554,
+        -0.004707591085744589
+      ],
+      "delta_p_minus_dt_u": [
+        -1.9987267049770274e-16,
+        3.8250652645288596e-16
+      ],
+      "h_k": 0.0067916853362892105,
+      "h_kplus": 0.007079538725843493,
+      "delta_h": 0.0002878533895542823,
+      "match": {
+        "matched": true,
+        "new_activation": false,
+        "normal_cosine": 1.0,
+        "offset_delta": 0.0,
+        "face_switch": false,
+        "angle_deg": 0.0
+      },
+      "h_k_at_p_{k+1}": 0.007441279458292038,
+      "h_{k+1}_at_p_{k+1}": 0.007441279458292038,
+      "motion_term": 0.0006495941220028278,
+      "barrier_update_term": 0.0,
+      "sum_check": 0.00036174073244854554,
+      "predicted_motion_n_k_dot_dt_u": 0.0003617407324487454,
+      "motion_minus_predicted": 0.00028785338955408243,
+      "normal_delta": [
+        0.0,
+        0.0
+      ],
+      "offset_delta": 0.0,
+      "face_switch": false,
+      "numerical_rebuild_h0": 0.0002878533895542823,
+      "numerical_rebuild_h1": 0.00036174073244854554
+    },
+    "hold_true": {
+      "sampled_min_sd": 0.07207953872584305,
+      "lipschitz_lower_bound": 0.0718434652722947,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.09442938141934018
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 253,
+    "in_K0": true,
+    "position": [
+      3.9224412794582917,
+      4.866559918430085
+    ],
+    "u": [
+      0.007850570520485923,
+      -0.092811782444618
+    ],
+    "u_nom": [
+      0.007850570520485923,
+      -0.092811782444618
+    ],
+    "h_aggregate": 0.007441279458291594,
+    "h_true": 0.007441279458291594,
+    "h_gap": 0.0,
+    "feature": {
+      "edge_index": 3,
+      "kind": "edge",
+      "t": 0.9702754830489644,
+      "foot": [
+        3.85,
+        4.866559918430085
+      ],
+      "distance": 0.0724412794582916,
+      "edge_normal": [
+        1.0,
+        -0.0
+      ],
+      "vertex_index": 4,
+      "edge_length": 1.1250000000000004,
+      "signed_distance": 0.0724412794582916,
+      "sd_gradient": [
+        1.0,
+        0.0
+      ],
+      "sd_foot": [
+        3.85,
+        4.866559918430085
+      ],
+      "h_true": 0.007441279458291594
+    },
+    "support": {
+      "max_n_dot_vertex": 4.9,
+      "min_n_dot_vertex": 3.1,
+      "offset": 3.85,
+      "cuts_object": true,
+      "support_gap": 1.0500000000000003,
+      "all_vertices_on_inner_side": false
+    },
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": 0.0,
+    "alignment": 1.0,
+    "n_bar": [
+      1.0,
+      0.0
+    ],
+    "offset": 3.85,
+    "anchor": [
+      1.0,
+      -0.0
+    ],
+    "n_near": 13,
+    "n_same_face": 8,
+    "cap_active": [
+      false
+    ],
+    "rhs_uncapped": [
+      -0.03953023566633275
+    ],
+    "rhs_capped": [
+      -0.03953023566633275
+    ],
+    "rhs_no_margin_uncapped": [
+      -0.059530235666332754
+    ],
+    "decompose": {
+      "delta_p": [
+        0.0003925285260244493,
+        -0.004640589122231198
+      ],
+      "delta_p_minus_dt_u": [
+        1.531435568635775e-16,
+        -2.975050761300224e-16
+      ],
+      "h_k": 0.007079538725843493,
+      "h_kplus": 0.007441279458291594,
+      "delta_h": 0.00036174073244810145,
+      "match": {
+        "matched": true,
+        "new_activation": false,
+        "normal_cosine": 1.0,
+        "offset_delta": 4.440892098500626e-16,
+        "face_switch": false,
+        "angle_deg": 0.0
+      },
+      "h_k_at_p_{k+1}": 0.007833807984316488,
+      "h_{k+1}_at_p_{k+1}": 0.007833807984316044,
+      "motion_term": 0.0007542692584729949,
+      "barrier_update_term": -4.440892098500626e-16,
+      "sum_check": 0.0003925285260244493,
+      "predicted_motion_n_k_dot_dt_u": 0.0003925285260242962,
+      "motion_minus_predicted": 0.0003617407324486987,
+      "normal_delta": [
+        0.0,
+        0.0
+      ],
+      "offset_delta": 4.440892098500626e-16,
+      "face_switch": false,
+      "numerical_rebuild_h0": 0.00036174073244854554,
+      "numerical_rebuild_h1": 0.0003925285260244493
+    },
+    "hold_true": {
+      "sampled_min_sd": 0.0724412794582916,
+      "lipschitz_lower_bound": 0.07220842142189865,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.09314321455717654
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 254,
+    "in_K0": true,
+    "position": [
+      3.922833807984316,
+      4.861919329307854
+    ],
+    "u": [
+      0.008756063714065832,
+      -0.08467647566017682
+    ],
+    "u_nom": [
+      0.008756063714065832,
+      -0.08467647566017682
+    ],
+    "h_aggregate": 0.0078338079843156,
+    "h_true": 0.007833807984316044,
+    "h_gap": -4.440892098500626e-16,
+    "feature": {
+      "edge_index": 3,
+      "kind": "edge",
+      "t": 0.9661505149403143,
+      "foot": [
+        3.85,
+        4.861919329307854
+      ],
+      "distance": 0.07283380798431605,
+      "edge_normal": [
+        1.0,
+        -0.0
+      ],
+      "vertex_index": 4,
+      "edge_length": 1.1250000000000004,
+      "signed_distance": 0.07283380798431605,
+      "sd_gradient": [
+        1.0,
+        0.0
+      ],
+      "sd_foot": [
+        3.85,
+        4.861919329307854
+      ],
+      "h_true": 0.007833807984316044
+    },
+    "support": {
+      "max_n_dot_vertex": 4.9,
+      "min_n_dot_vertex": 3.1,
+      "offset": 3.8500000000000005,
+      "cuts_object": true,
+      "support_gap": 1.0499999999999998,
+      "all_vertices_on_inner_side": false
+    },
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": 0.0,
+    "alignment": 1.0,
+    "n_bar": [
+      1.0,
+      0.0
+    ],
+    "offset": 3.8500000000000005,
+    "anchor": [
+      1.0,
+      -0.0
+    ],
+    "n_near": 13,
+    "n_same_face": 8,
+    "cap_active": [
+      false
+    ],
+    "rhs_uncapped": [
+      -0.04267046387452479
+    ],
+    "rhs_capped": [
+      -0.04267046387452479
+    ],
+    "rhs_no_margin_uncapped": [
+      -0.0626704638745248
+    ],
+    "decompose": {
+      "delta_p": [
+        0.0004378031857030784,
+        -0.004233823783009072
+      ],
+      "delta_p_minus_dt_u": [
+        -2.1320835721927445e-16,
+        -2.3071822230491534e-16
+      ],
+      "h_k": 0.007441279458291594,
+      "h_kplus": 0.0078338079843156,
+      "delta_h": 0.00039252852602400523,
+      "match": {
+        "matched": true,
+        "new_activation": false,
+        "normal_cosine": 1.0,
+        "offset_delta": 4.440892098500626e-16,
+        "face_switch": false,
+        "angle_deg": 0.0
+      },
+      "h_k_at_p_{k+1}": 0.008271611170019122,
+      "h_{k+1}_at_p_{k+1}": 0.008271611170018678,
+      "motion_term": 0.0008303317117275277,
+      "barrier_update_term": -4.440892098500626e-16,
+      "sum_check": 0.0004378031857030784,
+      "predicted_motion_n_k_dot_dt_u": 0.0004378031857032916,
+      "motion_minus_predicted": 0.0003925285260242361,
+      "normal_delta": [
+        0.0,
+        0.0
+      ],
+      "offset_delta": 4.440892098500626e-16,
+      "face_switch": false,
+      "numerical_rebuild_h0": 0.0003925285260244493,
+      "numerical_rebuild_h1": 0.0004378031857030784
+    },
+    "hold_true": {
+      "sampled_min_sd": 0.07283380798431605,
+      "lipschitz_lower_bound": 0.0726209880166498,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.08512798706649474
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 255,
+    "in_K0": true,
+    "position": [
+      3.923271611170019,
+      4.857685505524845
+    ],
+    "u": [
+      0.009246774627541133,
+      -0.08350660115401487
+    ],
+    "u_nom": [
+      0.009246774627541133,
+      -0.08350660115401487
+    ],
+    "h_aggregate": 0.008271611170019566,
+    "h_true": 0.008271611170019122,
+    "h_gap": 4.440892098500626e-16,
+    "feature": {
+      "edge_index": 3,
+      "kind": "edge",
+      "t": 0.962387116022084,
+      "foot": [
+        3.85,
+        4.857685505524845
+      ],
+      "distance": 0.07327161117001912,
+      "edge_normal": [
+        1.0,
+        -0.0
+      ],
+      "vertex_index": 4,
+      "edge_length": 1.1250000000000004,
+      "signed_distance": 0.07327161117001912,
+      "sd_gradient": [
+        1.0,
+        0.0
+      ],
+      "sd_foot": [
+        3.85,
+        4.857685505524845
+      ],
+      "h_true": 0.008271611170019122
+    },
+    "support": {
+      "max_n_dot_vertex": 4.9,
+      "min_n_dot_vertex": 3.1,
+      "offset": 3.8499999999999996,
+      "cuts_object": true,
+      "support_gap": 1.0500000000000007,
+      "all_vertices_on_inner_side": false
+    },
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": 0.0,
+    "alignment": 1.0,
+    "n_bar": [
+      1.0,
+      0.0
+    ],
+    "offset": 3.8499999999999996,
+    "anchor": [
+      1.0,
+      -0.0
+    ],
+    "n_near": 13,
+    "n_same_face": 8,
+    "cap_active": [
+      false
+    ],
+    "rhs_uncapped": [
+      -0.046172889360156524
+    ],
+    "rhs_capped": [
+      -0.046172889360156524
+    ],
+    "rhs_no_margin_uncapped": [
+      -0.06617288936015653
+    ],
+    "decompose": {
+      "delta_p": [
+        0.00046233873137691006,
+        -0.004175330057700322
+      ],
+      "delta_p_minus_dt_u": [
+        -1.465841337200402e-16,
+        4.2240516640035253e-16
+      ],
+      "h_k": 0.0078338079843156,
+      "h_kplus": 0.008271611170019566,
+      "delta_h": 0.0004378031857039666,
+      "match": {
+        "matched": true,
+        "new_activation": false,
+        "normal_cosine": 1.0,
+        "offset_delta": -8.881784197001252e-16,
+        "face_switch": false,
+        "angle_deg": 0.0
+      },
+      "h_k_at_p_{k+1}": 0.008733949901395588,
+      "h_{k+1}_at_p_{k+1}": 0.008733949901396476,
+      "motion_term": 0.0009001419170799885,
+      "barrier_update_term": 8.881784197001252e-16,
+      "sum_check": 0.00046233873137691006,
+      "predicted_motion_n_k_dot_dt_u": 0.00046233873137705665,
+      "motion_minus_predicted": 0.00043780318570293183,
+      "normal_delta": [
+        0.0,
+        0.0
+      ],
+      "offset_delta": -8.881784197001252e-16,
+      "face_switch": false,
+      "numerical_rebuild_h0": 0.0004378031857030784,
+      "numerical_rebuild_h1": 0.00046233873137691006
+    },
+    "hold_true": {
+      "sampled_min_sd": 0.07327161117001912,
+      "lipschitz_lower_bound": 0.07306156868507102,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.0840169939792436
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 256,
+    "in_K0": true,
+    "position": [
+      3.923733949901396,
+      4.853510175467145
+    ],
+    "u": [
+      0.005292360748170433,
+      -0.08165482219870848
+    ],
+    "u_nom": [
+      0.005292360748170433,
+      -0.08165482219870848
+    ],
+    "h_aggregate": 0.008733949901396476,
+    "h_true": 0.008733949901396032,
+    "h_gap": 4.440892098500626e-16,
+    "feature": {
+      "edge_index": 3,
+      "kind": "edge",
+      "t": 0.9586757115263504,
+      "foot": [
+        3.85,
+        4.853510175467145
+      ],
+      "distance": 0.07373394990139603,
+      "edge_normal": [
+        1.0,
+        -0.0
+      ],
+      "vertex_index": 4,
+      "edge_length": 1.1250000000000004,
+      "signed_distance": 0.07373394990139603,
+      "sd_gradient": [
+        1.0,
+        0.0
+      ],
+      "sd_foot": [
+        3.85,
+        4.853510175467145
+      ],
+      "h_true": 0.008733949901396032
+    },
+    "support": {
+      "max_n_dot_vertex": 4.9,
+      "min_n_dot_vertex": 3.1,
+      "offset": 3.8499999999999996,
+      "cuts_object": true,
+      "support_gap": 1.0500000000000007,
+      "all_vertices_on_inner_side": false
+    },
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": 0.0,
+    "alignment": 1.0,
+    "n_bar": [
+      1.0,
+      0.0
+    ],
+    "offset": 3.8499999999999996,
+    "anchor": [
+      1.0,
+      -0.0
+    ],
+    "n_near": 13,
+    "n_same_face": 8,
+    "cap_active": [
+      false
+    ],
+    "rhs_uncapped": [
+      -0.049871599211171805
+    ],
+    "rhs_capped": [
+      -0.049871599211171805
+    ],
+    "rhs_no_margin_uncapped": [
+      -0.06987159921117181
+    ],
+    "decompose": {
+      "delta_p": [
+        0.00026461803740840395,
+        -0.0040827411099355615
+      ],
+      "delta_p_minus_dt_u": [
+        -1.176901458233015e-16,
+        -1.3704315460216776e-16
+      ],
+      "h_k": 0.008271611170019566,
+      "h_kplus": 0.008733949901396476,
+      "delta_h": 0.00046233873137691006,
+      "match": {
+        "matched": true,
+        "new_activation": false,
+        "normal_cosine": 1.0,
+        "offset_delta": 0.0,
+        "face_switch": false,
+        "angle_deg": 0.0
+      },
+      "h_k_at_p_{k+1}": 0.00899856793880488,
+      "h_{k+1}_at_p_{k+1}": 0.00899856793880488,
+      "motion_term": 0.000726956768785314,
+      "barrier_update_term": 0.0,
+      "sum_check": 0.00026461803740840395,
+      "predicted_motion_n_k_dot_dt_u": 0.00026461803740852164,
+      "motion_minus_predicted": 0.00046233873137679237,
+      "normal_delta": [
+        0.0,
+        0.0
+      ],
+      "offset_delta": 0.0,
+      "face_switch": false,
+      "numerical_rebuild_h0": 0.00046233873137691006,
+      "numerical_rebuild_h1": 0.00026461803740840395
+    },
+    "hold_true": {
+      "sampled_min_sd": 0.07373394990139603,
+      "lipschitz_lower_bound": 0.07352938452262632,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.08182615150788573
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 257,
+    "in_K0": true,
+    "position": [
+      3.9239985679388045,
+      4.849427434357209
+    ],
+    "u": [
+      0.005893826019170501,
+      -0.08052139631643121
+    ],
+    "u_nom": [
+      0.005893826019170501,
+      -0.08052139631643121
+    ],
+    "h_aggregate": 0.008998567938804436,
+    "h_true": 0.008998567938804436,
+    "h_gap": 0.0,
+    "feature": {
+      "edge_index": 3,
+      "kind": "edge",
+      "t": 0.955046608317519,
+      "foot": [
+        3.85,
+        4.849427434357209
+      ],
+      "distance": 0.07399856793880444,
+      "edge_normal": [
+        1.0,
+        -0.0
+      ],
+      "vertex_index": 4,
+      "edge_length": 1.1250000000000004,
+      "signed_distance": 0.07399856793880444,
+      "sd_gradient": [
+        1.0,
+        0.0
+      ],
+      "sd_foot": [
+        3.85,
+        4.849427434357209
+      ],
+      "h_true": 0.008998567938804436
+    },
+    "support": {
+      "max_n_dot_vertex": 4.9,
+      "min_n_dot_vertex": 3.1,
+      "offset": 3.85,
+      "cuts_object": true,
+      "support_gap": 1.0500000000000003,
+      "all_vertices_on_inner_side": false
+    },
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": 0.0,
+    "alignment": 1.0,
+    "n_bar": [
+      1.0,
+      0.0
+    ],
+    "offset": 3.85,
+    "anchor": [
+      1.0,
+      -0.0
+    ],
+    "n_near": 14,
+    "n_same_face": 9,
+    "cap_active": [
+      false
+    ],
+    "rhs_uncapped": [
+      -0.051988543510435484
+    ],
+    "rhs_capped": [
+      -0.051988543510435484
+    ],
+    "rhs_no_margin_uncapped": [
+      -0.07198854351043549
+    ],
+    "decompose": {
+      "delta_p": [
+        0.00029469130095849394,
+        -0.004026069815821209
+      ],
+      "delta_p_minus_dt_u": [
+        -3.111660235033398e-17,
+        3.5128150388530344e-16
+      ],
+      "h_k": 0.008733949901396476,
+      "h_kplus": 0.008998567938804436,
+      "delta_h": 0.00026461803740795986,
+      "match": {
+        "matched": true,
+        "new_activation": false,
+        "normal_cosine": 1.0,
+        "offset_delta": 4.440892098500626e-16,
+        "face_switch": false,
+        "angle_deg": 0.0
+      },
+      "h_k_at_p_{k+1}": 0.009293259239763374,
+      "h_{k+1}_at_p_{k+1}": 0.00929325923976293,
+      "motion_term": 0.0005593093383668979,
+      "barrier_update_term": -4.440892098500626e-16,
+      "sum_check": 0.00029469130095849394,
+      "predicted_motion_n_k_dot_dt_u": 0.00029469130095852506,
+      "motion_minus_predicted": 0.00026461803740837283,
+      "normal_delta": [
+        0.0,
+        0.0
+      ],
+      "offset_delta": 4.440892098500626e-16,
+      "face_switch": false,
+      "numerical_rebuild_h0": 0.00026461803740840395,
+      "numerical_rebuild_h1": 0.00029469130095849394
+    },
+    "hold_true": {
+      "sampled_min_sd": 0.07399856793880444,
+      "lipschitz_lower_bound": 0.07379672591440956,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.08073680975795386
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 258,
+    "in_K0": true,
+    "position": [
+      3.924293259239763,
+      4.845401364541388
+    ],
+    "u": [
+      0.006462218154034405,
+      -0.07941888597069911
+    ],
+    "u_nom": [
+      0.006462218154034405,
+      -0.07941888597069911
+    ],
+    "h_aggregate": 0.009293259239762486,
+    "h_true": 0.00929325923976293,
+    "h_gap": -4.440892098500626e-16,
+    "feature": {
+      "edge_index": 3,
+      "kind": "edge",
+      "t": 0.9514678795923445,
+      "foot": [
+        3.85,
+        4.845401364541388
+      ],
+      "distance": 0.07429325923976293,
+      "edge_normal": [
+        1.0,
+        -0.0
+      ],
+      "vertex_index": 4,
+      "edge_length": 1.1250000000000004,
+      "signed_distance": 0.07429325923976293,
+      "sd_gradient": [
+        1.0,
+        0.0
+      ],
+      "sd_foot": [
+        3.85,
+        4.845401364541388
+      ],
+      "h_true": 0.00929325923976293
+    },
+    "support": {
+      "max_n_dot_vertex": 4.9,
+      "min_n_dot_vertex": 3.1,
+      "offset": 3.8500000000000005,
+      "cuts_object": true,
+      "support_gap": 1.0499999999999998,
+      "all_vertices_on_inner_side": false
+    },
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": -2.220446049250313e-16,
+    "alignment": 1.0000000000000002,
+    "n_bar": [
+      1.0,
+      0.0
+    ],
+    "offset": 3.8500000000000005,
+    "anchor": [
+      1.0,
+      -0.0
+    ],
+    "n_near": 14,
+    "n_same_face": 9,
+    "cap_active": [
+      false
+    ],
+    "rhs_uncapped": [
+      -0.05434607391809988
+    ],
+    "rhs_capped": [
+      -0.05434607391809988
+    ],
+    "rhs_no_margin_uncapped": [
+      -0.07434607391809989
+    ],
+    "decompose": {
+      "delta_p": [
+        0.0003231109077015404,
+        -0.003970944298535173
+      ],
+      "delta_p_minus_dt_u": [
+        -1.7986914041534519e-16,
+        -2.1684043449710089e-16
+      ],
+      "h_k": 0.008998567938804436,
+      "h_kplus": 0.009293259239762486,
+      "delta_h": 0.00029469130095804985,
+      "match": {
+        "matched": true,
+        "new_activation": false,
+        "normal_cosine": 1.0,
+        "offset_delta": 4.440892098500626e-16,
+        "face_switch": false,
+        "angle_deg": 0.0
+      },
+      "h_k_at_p_{k+1}": 0.00961637014746447,
+      "h_{k+1}_at_p_{k+1}": 0.009616370147464026,
+      "motion_term": 0.0006178022086600343,
+      "barrier_update_term": -4.440892098500626e-16,
+      "sum_check": 0.0003231109077015404,
+      "predicted_motion_n_k_dot_dt_u": 0.00032311090770172025,
+      "motion_minus_predicted": 0.00029469130095831407,
+      "normal_delta": [
+        0.0,
+        0.0
+      ],
+      "offset_delta": 4.440892098500626e-16,
+      "face_switch": false,
+      "numerical_rebuild_h0": 0.00029469130095849394,
+      "numerical_rebuild_h1": 0.0003231109077015404
+    },
+    "hold_true": {
+      "sampled_min_sd": 0.07429325923976293,
+      "lipschitz_lower_bound": 0.0740940558306509,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.07968136364481496
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 259,
+    "in_K0": true,
+    "position": [
+      3.9246163701474646,
+      4.841430420242853
+    ],
+    "u": [
+      0.007075650944943135,
+      -0.07932289332733937
+    ],
+    "u_nom": [
+      0.007075650944943135,
+      -0.07932289332733937
+    ],
+    "h_aggregate": 0.009616370147464026,
+    "h_true": 0.00961637014746447,
+    "h_gap": -4.440892098500626e-16,
+    "feature": {
+      "edge_index": 3,
+      "kind": "edge",
+      "t": 0.9479381513269799,
+      "foot": [
+        3.85,
+        4.841430420242853
+      ],
+      "distance": 0.07461637014746447,
+      "edge_normal": [
+        1.0,
+        -0.0
+      ],
+      "vertex_index": 4,
+      "edge_length": 1.1250000000000004,
+      "signed_distance": 0.07461637014746447,
+      "sd_gradient": [
+        1.0,
+        0.0
+      ],
+      "sd_foot": [
+        3.85,
+        4.841430420242853
+      ],
+      "h_true": 0.00961637014746447
+    },
+    "support": {
+      "max_n_dot_vertex": 4.9,
+      "min_n_dot_vertex": 3.1,
+      "offset": 3.8500000000000005,
+      "cuts_object": true,
+      "support_gap": 1.0499999999999998,
+      "all_vertices_on_inner_side": false
+    },
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": 1.1102230246251565e-16,
+    "alignment": 0.9999999999999999,
+    "n_bar": [
+      1.0,
+      0.0
+    ],
+    "offset": 3.8500000000000005,
+    "anchor": [
+      1.0,
+      -0.0
+    ],
+    "n_near": 14,
+    "n_same_face": 9,
+    "cap_active": [
+      false
+    ],
+    "rhs_uncapped": [
+      -0.056930961179712206
+    ],
+    "rhs_capped": [
+      -0.056930961179712206
+    ],
+    "rhs_no_margin_uncapped": [
+      -0.07693096117971221
+    ],
+    "decompose": {
+      "delta_p": [
+        0.00035378254724705016,
+        -0.003966144666367022
+      ],
+      "delta_p_minus_dt_u": [
+        -1.0663128366394936e-16,
+        -5.2909066017292616e-17
+      ],
+      "h_k": 0.009293259239762486,
+      "h_kplus": 0.009616370147464026,
+      "delta_h": 0.0003231109077015404,
+      "match": {
+        "matched": true,
+        "new_activation": false,
+        "normal_cosine": 1.0,
+        "offset_delta": 0.0,
+        "face_switch": false,
+        "angle_deg": 0.0
+      },
+      "h_k_at_p_{k+1}": 0.009970152694711076,
+      "h_{k+1}_at_p_{k+1}": 0.009970152694711076,
+      "motion_term": 0.0006768934549485905,
+      "barrier_update_term": 0.0,
+      "sum_check": 0.00035378254724705016,
+      "predicted_motion_n_k_dot_dt_u": 0.0003537825472471568,
+      "motion_minus_predicted": 0.00032311090770143375,
+      "normal_delta": [
+        0.0,
+        0.0
+      ],
+      "offset_delta": 0.0,
+      "face_switch": false,
+      "numerical_rebuild_h0": 0.0003231109077015404,
+      "numerical_rebuild_h1": 0.00035378254724705016
+    },
+    "hold_true": {
+      "sampled_min_sd": 0.07461637014746447,
+      "lipschitz_lower_bound": 0.07441727553675584,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.07963784428345067
+    },
+    "status": "optimal"
+  },
+  {
+    "frame": 260,
+    "in_K0": true,
+    "position": [
+      3.9249701526947116,
+      4.837464275576486
+    ],
+    "u": [
+      0.00538747077345274,
+      -0.07900091164153543
+    ],
+    "u_nom": [
+      0.00538747077345274,
+      -0.07900091164153543
+    ],
+    "h_aggregate": 0.009970152694711076,
+    "h_true": 0.00997015269471152,
+    "h_gap": -4.440892098500626e-16,
+    "feature": {
+      "edge_index": 3,
+      "kind": "edge",
+      "t": 0.9444126894013204,
+      "foot": [
+        3.85,
+        4.837464275576486
+      ],
+      "distance": 0.07497015269471152,
+      "edge_normal": [
+        1.0,
+        -0.0
+      ],
+      "vertex_index": 4,
+      "edge_length": 1.1250000000000004,
+      "signed_distance": 0.07497015269471152,
+      "sd_gradient": [
+        1.0,
+        0.0
+      ],
+      "sd_foot": [
+        3.85,
+        4.837464275576486
+      ],
+      "h_true": 0.00997015269471152
+    },
+    "support": {
+      "max_n_dot_vertex": 4.9,
+      "min_n_dot_vertex": 3.1,
+      "offset": 3.8500000000000005,
+      "cuts_object": true,
+      "support_gap": 1.0499999999999998,
+      "all_vertices_on_inner_side": false
+    },
+    "zero_in_F_hard": true,
+    "zero_in_F_rho": true,
+    "translation_defect": -2.220446049250313e-16,
+    "alignment": 1.0000000000000002,
+    "n_bar": [
+      1.0,
+      0.0
+    ],
+    "offset": 3.8500000000000005,
+    "anchor": [
+      1.0,
+      -0.0
+    ],
+    "n_near": 14,
+    "n_same_face": 9,
+    "cap_active": [
+      false
+    ],
+    "rhs_uncapped": [
+      -0.05976122155768861
+    ],
+    "rhs_capped": [
+      -0.05976122155768861
+    ],
+    "rhs_no_margin_uncapped": [
+      -0.07976122155768861
+    ],
+    "decompose": {
+      "delta_p": [
+        0.0002693735386727347,
+        -0.003950045582076456
+      ],
+      "delta_p_minus_dt_u": [
+        9.768661574094395e-17,
+        3.157196726277789e-16
+      ],
+      "h_k": 0.009616370147464026,
+      "h_kplus": 0.009970152694711076,
+      "delta_h": 0.00035378254724705016,
+      "match": {
+        "matched": true,
+        "new_activation": false,
+        "normal_cosine": 1.0,
+        "offset_delta": 0.0,
+        "face_switch": false,
+        "angle_deg": 0.0
+      },
+      "h_k_at_p_{k+1}": 0.010239526233383811,
+      "h_{k+1}_at_p_{k+1}": 0.010239526233383811,
+      "motion_term": 0.0006231560859197849,
+      "barrier_update_term": 0.0,
+      "sum_check": 0.0002693735386727347,
+      "predicted_motion_n_k_dot_dt_u": 0.00026937353867263704,
+      "motion_minus_predicted": 0.00035378254724714785,
+      "normal_delta": [
+        0.0,
+        0.0
+      ],
+      "offset_delta": 0.0,
+      "face_switch": false,
+      "numerical_rebuild_h0": 0.00035378254724705016,
+      "numerical_rebuild_h1": 0.0002693735386727347
+    },
+    "hold_true": {
+      "sampled_min_sd": 0.07497015269471152,
+      "lipschitz_lower_bound": 0.07477219169979193,
+      "n_samples": 21,
+      "h": 0.0025,
+      "speed": 0.07918439796783515
+    },
+    "status": "optimal"
+  }
+]
