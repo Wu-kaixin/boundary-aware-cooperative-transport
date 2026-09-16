@@ -27,6 +27,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 from audit_discrete_dissipation import (  # noqa: E402
     DISSIPATION_TOL_ABS,
     DISSIPATION_TOL_REL,
+    OBSERVER_SLACK_DUMP,
     check_projection_step,
     dissipation_rhs,
 )
@@ -211,10 +212,7 @@ def run_fresh_case(
                     "hold_object_clearance_margin": rec.hold_object_clearance_margin,
             }
             step_rows.append(row)
-            if (not in_k0) or slack > max(
-                DISSIPATION_TOL_ABS,
-                DISSIPATION_TOL_REL * max(abs(rhs), abs(delta_h), 1e-30),
-            ):
+            if (not in_k0) or slack > OBSERVER_SLACK_DUMP:
                 _dump_filter_traces(
                     out_dir / "constraint_dumps",
                     k,
@@ -305,6 +303,12 @@ def run_fresh_case(
             "prior_beats_geom_numerical": prior["beats_geometry"]["numerical_a_priori"],
         "dissipation_u_command_max_slack": float(max(slacks)) if slacks else None,
         "dissipation_anomaly_frames": anomalies,
+        "dissipation_anomaly_note": (
+            "Frames with slack > 1e-6 relative/absolute. Polar-observer slacks of "
+            "size ~1e-5 are a numerical envelope, not theorem counterexamples. "
+            "Constraint dumps are written only on K0 failure or slack > 1e-3."
+        ),
+        "observer_slack_dump_threshold": OBSERVER_SLACK_DUMP,
         "observer_quadrature": {
             "ntheta": len(observer.unit),
             "nradial": len(observer.radial_nodes),

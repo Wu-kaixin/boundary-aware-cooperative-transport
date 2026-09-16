@@ -221,8 +221,14 @@ def test_bbox_cull_does_not_imply_r_plus_s_sigma():
     assert np.linalg.norm(xi - p) <= aabb_disk_corner_reach(r) + s * sigma + 1e-12
 
 
-def test_projected_centroid_moment_identity_charges_quadrature_once_more():
-    from dbact.apriori_centroid_bound import moment_form_E_bound, moment_form_E_bound_with_mass_fallback
+def test_projected_centroid_uses_raw_moments_and_disk_projection_optimality():
+    """Out-of-disk raw centroid: identity + ⟨x-y, c*-y⟩≤0; no extra protrusion charge."""
+    from dbact.apriori_centroid_bound import (
+        moment_form_E_bound,
+        moment_form_E_bound_with_mass_fallback,
+        projected_centroid_error_identity,
+    )
+    from dbact.edge_green_integral import project_to_disk
 
     r = 0.8
     dm, dmu = 0.05, 0.06
@@ -231,21 +237,47 @@ def test_projected_centroid_moment_identity_charges_quadrature_once_more():
     no_quad = moment_form_E_bound_with_mass_fallback(r, dm, dmu, 16, quadrature_dm=0.0, quadrature_dmu=0.0)
     assert no_quad == pytest.approx(base + fallback)
     qdm, qdmu = 0.013, 0.023
-    with_quad = moment_form_E_bound_with_mass_fallback(
+    with_quad_args = moment_form_E_bound_with_mass_fallback(
         r, dm, dmu, 16, quadrature_dm=qdm, quadrature_dmu=qdmu
     )
-    assert with_quad == pytest.approx(no_quad + moment_form_E_bound(r, qdm, qdmu))
+    # Quadrature must already sit in sum_abs_*; the leftover kwargs are ignored.
+    assert with_quad_args == pytest.approx(no_quad)
 
-    from dbact.edge_green_integral import project_to_disk
-
-    c = np.array([4.0, 4.0])
-    q = np.array([6.0, 4.0])
-    p, hit = project_to_disk(q, c, 0.8)
+    origin = np.zeros(2)
+    x_out = np.array([1.3, 0.0])
+    y, hit = project_to_disk(x_out, origin, r)
     assert hit
-    assert np.linalg.norm(p - c) == pytest.approx(0.8)
-    inside, hit2 = project_to_disk(c + np.array([0.1, 0.0]), c, 0.8)
+    assert np.linalg.norm(y - origin) == pytest.approx(r)
+    m_hat = 0.4
+    mu_hat = m_hat * x_out
+    m_star = 0.35
+    c_star = np.array([0.2, 0.1])
+    mu_star = m_star * c_star
+    ident = projected_centroid_error_identity(m_star, mu_star, m_hat, mu_hat, y)
+    assert ident["inner_x_minus_y_cstar_minus_y"] <= 1e-12
+    assert ident["inner_y_minus_x_e"] <= 1e-12
+    assert np.linalg.norm(ident["residual"]) <= 1e-12
+    e = ident["e"]
+    bound = (np.linalg.norm(ident["delta_mu"]) + r * abs(ident["delta_m"])) / m_star
+    assert np.linalg.norm(e) <= bound + 1e-12
+    moment_cell = 2.0 * r * (np.linalg.norm(ident["delta_mu"]) + r * abs(ident["delta_m"]))
+    assert m_star * float(np.dot(e, e)) <= moment_cell + 1e-12
+
+    inside, hit2 = project_to_disk(origin + np.array([0.1, 0.0]), origin, r)
     assert not hit2
-    assert np.linalg.norm(inside - c) == pytest.approx(0.1)
+    assert np.linalg.norm(inside - origin) == pytest.approx(0.1)
+
+    with pytest.raises(ValueError, match="m\\* = 0"):
+        projected_centroid_error_identity(0.0, np.zeros(2), 0.2, np.array([0.1, 0.0]), y)
+
+
+def test_world_to_robot_centred_moment_shift_is_explicit():
+    """μ_world = μ_robot + p m; the bound uses robot-centred moments, not mixed frames."""
+    p = np.array([4.0, 3.0])
+    m = 0.5
+    mu_robot = np.array([0.1, -0.2])
+    mu_world = mu_robot + p * m
+    assert np.allclose(mu_world - p * m, mu_robot)
 
 
 def test_small_mass_fallback_bound_covers_site_centroid():

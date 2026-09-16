@@ -318,16 +318,70 @@ def moment_form_E_bound(
 
     Proof. Both centroids lie in B(p_i, R), so ||e_i|| <= 2 R and
         m*_i ||e_i||^2 <= 2 R * ||m*_i e_i||.
-    Write m* (chat - c*) = (m* chat - mu*) and compare with the discrete
-    first moment mu_hat = m_hat chat:
-        m* e = (mu_hat - mu*) - chat (m_hat - m*),
-    hence ||m* e|| <= ||dmu'|| + R |dm|. No division by m_minus.
+    Write m* e = δμ - y δm + m̂ (y - x) with raw Green μ̂ (not y m̂) and
+    y = Π(x).  Projection optimality ⟨y - x, e⟩ ≤ 0 then gives
+        ||m* e|| ≤ ||δμ|| + R |δm|.
+    No division by m_minus.  See ``projected_centroid_error_identity``.
 
     ``sum_abs_dmu`` must be the *robot-centred* first-moment error.  Kernel-centred
     Green remainders are converted by ``||δμ_p|| ≤ ||δμ_xi|| + ||xi-p|| |δm|``.
     """
     r = float(local_radius)
     return 2.0 * r * (float(sum_abs_dmu) + r * float(sum_abs_dm))
+
+
+def projected_centroid_error_identity(
+    m_star: float,
+    mu_star: np.ndarray,
+    m_hat: float,
+    mu_hat: np.ndarray,
+    y: np.ndarray,
+) -> dict:
+    """Robot-centred identity used by the projection-optimality lemma.
+
+    Coordinates: origin at the robot site, so the local disk is ``B(0,R)``.
+    ``μ*``, ``μ̂`` are first moments in that frame; ``x = μ̂/m̂`` is the raw
+    numerical centroid; ``y`` is the centroid actually used (Euclidean
+    projection of ``x`` onto the disk, or a fallback site).  ``c* = μ*/m*``,
+    ``e = y - c*``, ``δm = m̂ - m*``, ``δμ = μ̂ - μ*`` (raw Green moment).
+
+    Algebra, requiring ``m* > 0`` and ``m̂ > 0``:
+
+        m* e = δμ - y δm + m̂ (y - x).
+
+    If ``m* = 0`` the mass-weighted cell contribution is defined to be 0 and
+    this identity is not formed (no division).  If ``m̂ ≤ mass_floor`` the
+    implementation uses the site fallback; that branch is bounded separately.
+    """
+    m_star_f = float(m_star)
+    m_hat_f = float(m_hat)
+    if m_star_f <= 0.0:
+        raise ValueError("m* = 0: mass-weighted centroid error is 0; do not divide")
+    if m_hat_f <= 0.0:
+        raise ValueError("m_hat <= 0: use the mass-fallback bound, not this identity")
+    mu_star_v = np.asarray(mu_star, dtype=float).reshape(2)
+    mu_hat_v = np.asarray(mu_hat, dtype=float).reshape(2)
+    y_v = np.asarray(y, dtype=float).reshape(2)
+    c_star = mu_star_v / m_star_f
+    x = mu_hat_v / m_hat_f
+    e = y_v - c_star
+    delta_m = m_hat_f - m_star_f
+    delta_mu = mu_hat_v - mu_star_v
+    lhs = m_star_f * e
+    rhs = delta_mu - y_v * delta_m + m_hat_f * (y_v - x)
+    return {
+        "x": x,
+        "y": y_v,
+        "c_star": c_star,
+        "e": e,
+        "delta_m": delta_m,
+        "delta_mu": delta_mu,
+        "lhs": lhs,
+        "rhs": rhs,
+        "residual": lhs - rhs,
+        "inner_x_minus_y_cstar_minus_y": float(np.dot(x - y_v, c_star - y_v)),
+        "inner_y_minus_x_e": float(np.dot(y_v - x, e)),
+    }
 
 
 def moment_form_E_bound_with_mass_fallback(
@@ -339,29 +393,32 @@ def moment_form_E_bound_with_mass_fallback(
     quadrature_dm: float = 0.0,
     quadrature_dmu: float = 0.0,
 ) -> float:
-    """Moment form plus mass-fallback plus unprojected-centroid protrusion.
+    """Moment form plus mass-fallback. Projection protrusion is not recharged.
 
-    Exact nonnegative density on ``Ω ⊂ B(p,R)`` has centroid in the disk, so
-    the identity ``m* e = (μ̂ - μ*) - ĉ (m̂ - m*)`` with ``||ĉ-p|| ≤ R`` applies
-    to *exact* cell integrals (oracle / restrict / geometric disk-vs-n-gon gap).
+    Robot-centred exact-arithmetic argument (see ``projection_error_lemma``):
+    ``c* ∈ B(0,R)``, ``x = μ̂/m̂`` for ``m̂ > mass_floor``, ``y = Π_{B(0,R)}(x)``,
+    ``e = y - c*``.  Euclidean projection onto the closed disk gives
+    ``⟨x - y, c* - y⟩ ≤ 0``, equivalently ``⟨y - x, e⟩ ≤ 0``.  The identity
+    ``m* e = δμ - y δm + m̂ (y - x)`` with raw Green ``δμ = μ̂ - μ*`` then yields
+    ``m* ||e||² ≤ ||e|| (||δμ|| + R |δm|) ≤ 2R (||δμ|| + R |δm|)``.  The former
+    extra ``2R(||δμ_quad|| + R |δm_quad|)`` charged the protrusion a second
+    time and is not added.  Quadrature remainders belong in ``sum_abs_dm`` /
+    ``sum_abs_dmu`` once.
 
-    The trapezoid/float integrator can place the *numerical* centroid outside
-    the disk.  The implementation then projects.  Projection onto the closed
-    disk containing ``c*`` is non-expansive, but the moment identity must use
-    ``μ̂_proj = m̂ ĉ_proj``, which differs from the Green moment by the
-    protrusion ``m̂ max(||ĉ_raw-p|| - R, 0)``.  That protrusion is at most the
-    quadrature remainder ``||δμ_quad|| + R |δm_quad|``.  Charging it once more
-    yields the extra ``2 R (||δμ_quad|| + R |δm_quad|)`` term.  Oracle/restrict
-    and the n-gon area gap are not doubled: their exact integrals stay in the
-    disk.
+    ``quadrature_dm`` / ``quadrature_dmu`` are kept in the signature so existing
+    callers do not break; they are ignored.  Callers must already include
+    trapezoid/float remainders in the summed budgets.
 
-    Fallback cells (``m̂ ≤ mass_floor``) still cost ``R^2 (sum |δm| + N ε)``.
+    Fallback cells (``m̂ ≤ mass_floor``) still cost ``R² (sum |δm| + N ε)``.
+    Cells with ``m* = 0`` contribute 0 to ``E``; they are not divided.
+    Floating-point ``project_to_disk`` is not identified with exact Euclidean
+    projection; that gap is an implementation remainder, not this bound.
     """
     r = float(local_radius)
     base = moment_form_E_bound(r, sum_abs_dm, sum_abs_dmu)
     extra_fallback = r * r * (float(sum_abs_dm) + int(n_agents) * float(mass_floor))
-    extra_proj = moment_form_E_bound(r, float(quadrature_dm), float(quadrature_dmu))
-    return base + extra_fallback + extra_proj
+    _ = (float(quadrature_dm), float(quadrature_dmu))
+    return base + extra_fallback
 
 
 def diameter_E_bound(local_radius: float, mass_upper: float) -> BoundTerm:
@@ -392,10 +449,11 @@ def prior_J_bound(
 ) -> dict[str, Any]:
     """B_J_prior = 2 B_H0 / (a K Delta) + 4 B_E / a^2.
 
-    ``rigorous_on_K0`` is issued only when both ``B_H0`` and ``B_E`` are
-    rigorous *and* the caller has not marked K0 as failed.  A numerical
-    observer H0 cannot produce ``rigorous_on_K0``.  If K0 is known to fail,
-    a comparison against the geometric bound is labelled ``constants_only``.
+    status 'rigorous' requires both B_H0 and B_E rigorous. Feature-cover
+    recursive feasibility from P0 implies the full-horizon K0 used by the
+    dissipation identity, so K0 is not an extra trajectory hypothesis.
+    A numerical observer H0 cannot produce status 'rigorous'. If K0 is known
+    to fail, a comparison against the geometric bound is labelled constants_only.
     """
     a = float(a)
     k_steps = int(k_steps)
@@ -403,7 +461,7 @@ def prior_J_bound(
     term_h = 2.0 * float(b_h0) / (a * k_steps * dt)
     term_e = 4.0 * float(b_e) / (a * a)
     if str(h0_status) == "rigorous" and str(e_status) == "rigorous":
-        status = "constants_only" if k0_holds is False else "rigorous_on_K0"
+        status = "constants_only" if k0_holds is False else "rigorous"
     elif str(h0_status).startswith("numerical") or str(e_status).startswith("numerical"):
         status = "constants_only" if k0_holds is False else "numerical_a_priori"
     else:
@@ -420,7 +478,7 @@ def prior_J_bound(
         "h0_status": str(h0_status),
         "e_status": str(e_status),
         "k0_holds": k0_holds,
-        "domain": "full window in K_0, a>0, sat+QP cascade of Theorem C",
+        "domain": "P0+feature-cover implies K_0; a>0; sat+QP cascade of Theorem C",
     }
 
 
@@ -1035,17 +1093,20 @@ def assemble_prior(
             "active_rigorous_bound": b_e_active,
             "E_star_to_meet_geometry_using_crude_H": e_star,
             "formula_moment": (
-                "2 R (sum ||dmu|| + R sum |dm|) + R^2 (sum |dm| + N mass_floor) "
-                "+ 2 R (||dmu_quad|| + R |dm_quad|) for trapezoid/float protrusion"
+                "2 R (sum ||dmu|| + R sum |dm|) + R^2 (sum |dm| + N mass_floor); "
+                "raw Green moments; projection optimality drops the duplicate "
+                "2 R (||dmu_quad|| + R |dm_quad|) protrusion term"
             ),
             "quadrature_dm_for_projection": dm_quad,
             "quadrature_dmu_for_projection": dmu_quad,
             "note": (
-                "Certificate uses min(moment form with mass-fallback and projection "
-                "protrusion, 4 R^2 M_plane).  ||xi-p|| reach is min(√2 R + sσ, "
-                "R + 2 d_c + n_σ σ), not R + sσ.  Continuous line phi_max is not "
-                "used as a discrete-mixture bound.  Projection extra applies only "
-                "to trapezoid/float remainder."
+                "Certificate uses min(moment form with mass-fallback, 4 R^2 M_plane). "
+                "Raw Green moments in robot-centred coordinates; Euclidean projection "
+                "onto B(0,R) is absorbed by ⟨x-y,c*-y⟩≤0 (no duplicate protrusion). "
+                "||xi-p|| reach is min(√2 R + sσ, R + 2 d_c + n_σ σ), not R + sσ. "
+                "Continuous line phi_max is not used as a discrete-mixture bound. "
+                "quadrature_dm/dmu are recorded for audit and are already inside the "
+                "summed remainder; they are not added again."
             ),
         },
         "B_J": {
@@ -1062,8 +1123,8 @@ def assemble_prior(
             "numerical_a_priori": bool(j_num["B_J_prior"] < geom["B_J_geom"]),
             "numerical_level": j_num["status"],
             "note": (
-                "P0H uses numerical observer H0 and is never rigorous_on_K0. "
-                "A true comparison beating geometry is the crude-H certificate column."
+                "P0H uses numerical observer H0 and is never the rigorous certificate. "
+                "A comparison beating geometry at the theorem level is the crude-H column."
             ),
         },
         "grid_refinement_narrative": {
@@ -1092,6 +1153,7 @@ __all__ = [
     "line_edge_phi_max",
     "moment_form_E_bound",
     "moment_form_E_bound_with_mass_fallback",
+    "projected_centroid_error_identity",
     "observer_resolution_envelope",
     "overlay_grid_resolution",
     "plane_mass_upper",

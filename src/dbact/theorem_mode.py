@@ -28,19 +28,15 @@ Wall / domain ``D``. Four linear velocity rows enforce ``P_k + Δ U_k ∈ D``.
 ``D``. Coordinate clipping is off. An out-of-domain or infeasible step is a
 recorded failure, not a projected continuation.
 
-Object. Object-boundary rows stay in the QP when enabled. The object is static,
-so ``v_obj = 0``. Object-row *scaling* is recorded under its original name and
-is **not** a certificate of the unscaled barrier. Fallback projection is
-forbidden: an infeasible QP aborts. This mode does not claim that a scaled
-object row keeps the original safe set invariant.
-
-**Object QP feasibility ≠ hold-segment object safety.** A feasible object row at
-``τ = 0`` does not certify clearance along ``p + τ u`` for ``τ ∈ [0, Δ]``. A
-separate hold-segment gate samples ``p + τ u`` densely, then applies a
-1-Lipschitz lower bound on signed polygon clearance (signed distance can drop by
-at most ``‖u_i‖ h`` between samples spaced by ``h = Δ/(n-1)``). Abort uses the
-certified lower bound, not raw samples alone; violation aborts with
-``hold_segment_object_clearance``.
+Object. Feature-cover segment-distance rows on ``Φ(p)`` (see
+``barrier_invariance_derivation.md``) keep ``h_true ≥ ρ/γ`` on each hold under
+P0 and the range-truncation condition ``R_row - u_max Δ ≥ r_safe + ρ/γ``.
+The hold-segment clearance sampler remains a fault detector; it is not the
+invariance proof. Fallback projection is forbidden: an infeasible QP aborts.
+Abort stops the case; it is not a safety certificate of a continued trajectory.
+On the proved invariant set the original-ρ QP contains 0, so abort does not
+fire. Object-row scaling and margin clamp, if enabled in YAML, are idle on that
+set and are not part of the theorem cascade.
 
 Cost. The safety filter may change ``u_nom``. ``H_{k+1} - H_k`` is recorded and
 is **not** assumed negative.
@@ -336,6 +332,30 @@ def assert_theorem_params(params) -> None:
         raise ValueError("theorem_mode excludes transport; set task_mode to caging")
     if float(params.gamma_agent) * float(params.dt) > 1.0 + 1e-9:
         raise ValueError("theorem_mode requires gamma_agent * dt ≤ 1")
+    if float(getattr(params, "communication_dropout_prob", 0.0)) != 0.0:
+        raise ValueError("theorem_mode forbids communication dropout (neighbour symmetry)")
+    from .safety_filter import range_truncation_holds, range_truncation_numbers
+
+    if not range_truncation_holds(
+        float(params.object_row_range),
+        float(params.max_speed),
+        float(params.dt),
+        float(params.r_safe),
+        float(params.rho),
+        float(params.gamma_obj),
+    ):
+        nums = range_truncation_numbers(
+            float(params.object_row_range),
+            float(params.max_speed),
+            float(params.dt),
+            float(params.r_safe),
+            float(params.rho),
+            float(params.gamma_obj),
+        )
+        raise ValueError(
+            "theorem_mode requires R_row - u_max Δ ≥ r_safe + ρ/γ; "
+            f"got {nums['R_row_minus_u_max_Delta']:.6f} < {nums['r_safe_plus_rho_over_gamma']:.6f}"
+        )
     if float(params.comm_range) + 1e-12 < 2.0 * float(params.local_radius):
         raise ValueError("theorem_mode requires comm_range ≥ 2 local_radius")
 

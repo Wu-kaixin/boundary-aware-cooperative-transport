@@ -1,0 +1,89 @@
+{
+  "date": "2026-09-16",
+  "package": "static_main_theorem_finalization_2026-09-16",
+  "base_commit": "c178f766e0394c345db5122cd765a5abba96bc8f",
+  "branch": "feat/static-main-theorem-finalization",
+  "scope": "static sampled theorem_mode, N=16, frozen object, oracle, original rho/r_safe/u_max, feature-cover",
+  "controller_mapping_unchanged_from": "c178f766e0394c345db5122cd765a5abba96bc8f",
+  "analysis_change": "drop duplicate projection extra via Euclidean projection optimality on raw Green moments; range-truncation contract R_row - u_max Delta >= r_safe + rho/gamma",
+  "h_star_frozen": 0.004,
+  "n_gon_frozen": 256,
+  "parameters": {
+    "Delta": 0.05,
+    "k_c": 0.9,
+    "a": 2.1722222222222225,
+    "gamma_obj": 8.0,
+    "gamma_agent": 6.0,
+    "rho": 0.02,
+    "r_safe": 0.065,
+    "rho_over_gamma": 0.0025,
+    "d_min": 0.28,
+    "u_max": 0.35,
+    "R": 0.8,
+    "sigma": 0.2,
+    "d_c": 0.105,
+    "oracle_spacing": 0.04,
+    "h_star": 0.004,
+    "n_gon": 256,
+    "cull_sigmas": 6.0,
+    "restrict_n_sigma": 3.0,
+    "N": 16,
+    "K": 600,
+    "object_row_range": 0.60,
+    "cover_radius": 0.035,
+    "cover_radius_rule": "2 * u_max * Delta",
+    "R_row_minus_u_max_Delta": 0.5825,
+    "r_safe_plus_rho_over_gamma": 0.0675,
+    "range_truncation_holds": true
+  },
+  "reach": {
+    "invalid_R_plus_s_sigma": 2.0,
+    "bbox_sqrt2_R_plus_s_sigma": 2.3313708498984766,
+    "restrict_R_plus_2dc_plus_n_sigma": 1.61,
+    "used": 1.61,
+    "rule": "min(sqrt(2) R + s sigma, R + 2 d_c + n_sig sigma)"
+  },
+  "B_J": {
+    "rectangle": {
+      "B_E": 0.12870481574827167,
+      "B_J_prior": 0.1380072237616581,
+      "B_J_geom": 0.18025060482900776,
+      "beats_geometry_certificate": true
+    },
+    "l_shape": {
+      "B_E": 0.1702700923536529,
+      "B_J_prior": 0.18114135778584495,
+      "B_J_geom": 0.22951077763729585,
+      "beats_geometry_certificate": true
+    },
+    "c_shape": {
+      "B_E": 0.18145941735036453,
+      "B_J_prior": 0.19062675178231164,
+      "B_J_geom": 0.22951077763729574,
+      "beats_geometry_certificate": true,
+      "E_star_previous_package": 0.22732846639925205
+    }
+  },
+  "projection_optimality": {
+    "removed_duplicate_extra_on_C": 0.05440430190066297,
+    "previous_C_B_E_with_duplicate": 0.2358637192510275,
+    "new_C_B_E": 0.18145941735036453,
+    "cross_check_C_B_E": 0.1814594174,
+    "cross_check_C_B_J_prior": 0.1906267518,
+    "cross_check_C_B_J_geom": 0.2295107776,
+    "match_cross_check": true,
+    "fallback_kept": true,
+    "float_projection_not_identified_with_exact_Pi": true
+  },
+  "withdrawn": {
+    "old_C_shape_B_J_prior_approx": 0.1978,
+    "reason": "used invalid R + s sigma source reach"
+  },
+  "notes": [
+    "Priors are geometry/P0 constants written before the JEH closed-loop matrix of this package.",
+    "K0 is a proved corollary of P0 + feature-cover; certificate status is rigorous (crude H, rigorous E).",
+    "Polar H0 is numerical_a_priori.",
+    "Control mapping unchanged; analysis budget only.",
+    "J is mass-weighted ||U||^2; J_proxy_speed2 is not J."
+  ]
+}

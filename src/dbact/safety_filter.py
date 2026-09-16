@@ -75,6 +75,65 @@ from .qp2d import solve_min_norm_2d, solve_min_norm_2d_cvxpy
 _ACTIVE_ROW_TOLERANCE = 1e-6
 
 
+def range_truncation_holds(
+    object_row_range: float,
+    max_speed: float,
+    dt: float,
+    r_safe: float,
+    rho: float,
+    gamma_obj: float,
+) -> bool:
+    """Sufficient hold-safety condition for edges excluded by ``R_row``.
+
+    ``dist(p+τu, F) ≥ dist(p,F) - τ u_max > R_row - u_max Δ`` for every
+    range-excluded segment.  The inequality
+
+        R_row - u_max Δ ≥ r_safe + ρ/γ
+
+    then yields ``h_F(p+τu) > ρ/γ`` on the whole hold, without placing those
+    edges in Φ.  A non-finite range (no truncation) is vacuously sufficient.
+    Numerical slack between the two sides is not itself a proof; this predicate
+    is the theorem's hypothesis, checked against the same scalars the filter uses.
+    """
+    r_row = float(object_row_range)
+    if not np.isfinite(r_row):
+        return True
+    gamma = float(gamma_obj)
+    if gamma <= 0.0:
+        return False
+    return r_row - float(max_speed) * float(dt) >= float(r_safe) + float(rho) / gamma
+
+
+def range_truncation_numbers(
+    object_row_range: float,
+    max_speed: float,
+    dt: float,
+    r_safe: float,
+    rho: float,
+    gamma_obj: float,
+) -> dict:
+    """Diagnostics for ``range_truncation_holds`` (same scalars, no extra margin)."""
+    r_row = float(object_row_range)
+    umax = float(max_speed)
+    delta = float(dt)
+    rsf = float(r_safe)
+    rho_f = float(rho)
+    gamma = float(gamma_obj)
+    lhs = r_row - umax * delta
+    rhs = rsf + rho_f / gamma if gamma > 0.0 else float("inf")
+    return {
+        "R_row": r_row,
+        "u_max": umax,
+        "Delta": delta,
+        "r_safe": rsf,
+        "rho": rho_f,
+        "gamma_obj": gamma,
+        "R_row_minus_u_max_Delta": lhs,
+        "r_safe_plus_rho_over_gamma": rhs,
+        "holds": bool(range_truncation_holds(r_row, umax, delta, rsf, rho_f, gamma)),
+    }
+
+
 @dataclass
 class SafetyFilterParams:
     d_min: float = 0.30
@@ -245,6 +304,33 @@ class SafetyFilter:
                 f"{params.gamma_obj * params.dt:.4f} > 1 (gamma_obj={params.gamma_obj:.4f}, "
                 f"dt={params.dt:.4f}). The sampled object row demands more decrease than a single "
                 "step can deliver; lower gamma_obj or the control period"
+            )
+        if params.gamma_agent * params.dt > 1.0 + 1e-9:
+            raise ContractViolation(
+                f"discrete-time CBF admissibility violated: gamma_agent * dt = "
+                f"{params.gamma_agent * params.dt:.4f} > 1 (gamma_agent={params.gamma_agent:.4f}, "
+                f"dt={params.dt:.4f})"
+            )
+        if params.object_row_mode == "nearest_feature" and not range_truncation_holds(
+            params.object_row_range,
+            params.max_speed,
+            params.dt,
+            params.r_safe,
+            params.rho,
+            params.gamma_obj,
+        ):
+            nums = range_truncation_numbers(
+                params.object_row_range,
+                params.max_speed,
+                params.dt,
+                params.r_safe,
+                params.rho,
+                params.gamma_obj,
+            )
+            raise ContractViolation(
+                "nearest_feature range truncation is insufficient for hold safety: "
+                f"R_row - u_max Δ = {nums['R_row_minus_u_max_Delta']:.6f} < "
+                f"r_safe + ρ/γ = {nums['r_safe_plus_rho_over_gamma']:.6f}"
             )
         self.stats = SafetyFilterStats()
 
@@ -566,6 +652,12 @@ class SafetyFilter:
         ``∂S`` — invariant as well, including during a hold that switches
         features.  A single nearest-feature row is not sufficient for that
         argument.
+
+        Edges with ``dist(p,F) > object_row_range`` are not treated as
+        cover-distance exclusions.  They use the Lipschitz bound
+        ``dist(p+τu,F) > R_row - u_max Δ``, which keeps the hold-safety margin
+        iff ``range_truncation_holds`` (enforced at construction).  That bound
+        does not by itself give the strong discrete contraction on those edges.
 
         Reflex two-plane infinite supporting planes are not used: in a concave
         crook they under-estimate true ``sd`` and can destroy ``0 ∈ F_ρ``.
@@ -1120,4 +1212,11 @@ class SafetyFilter:
         return u * (self.params.max_speed / speed)
 
 
-__all__ = ["SafetyFilter", "SafetyFilterParams", "SafetyFilterStats", "FilterResult"]
+__all__ = [
+    "SafetyFilter",
+    "SafetyFilterParams",
+    "SafetyFilterStats",
+    "FilterResult",
+    "range_truncation_holds",
+    "range_truncation_numbers",
+]

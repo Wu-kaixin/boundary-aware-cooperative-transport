@@ -458,3 +458,35 @@ def test_zero_in_F_rho_iff_true_h_meets_rho_over_gamma():
     assert ok.zero_input_feasible_with_rho
     assert not bad.zero_input_feasible_with_rho
 
+
+def test_paper_range_truncation_numbers_hold_and_are_the_filter_contract():
+    from dbact.safety_filter import range_truncation_holds, range_truncation_numbers
+
+    nums = range_truncation_numbers(0.60, 0.35, 0.05, 0.065, 0.02, 8.0)
+    assert nums["R_row_minus_u_max_Delta"] == pytest.approx(0.5825)
+    assert nums["r_safe_plus_rho_over_gamma"] == pytest.approx(0.0675)
+    assert nums["holds"]
+    assert range_truncation_holds(0.60, 0.35, 0.05, 0.065, 0.02, 8.0)
+    f = make_filter(
+        object_row_mode="nearest_feature",
+        r_safe=0.065,
+        gamma_obj=8.0,
+        rho=0.02,
+        max_speed=0.35,
+        dt=0.05,
+        object_row_range=0.60,
+    )
+    assert f.params.object_row_range == pytest.approx(0.60)
+    assert f.params.max_speed == pytest.approx(0.35)
+    assert f.params.dt == pytest.approx(0.05)
+    with pytest.raises(ContractViolation, match="range truncation is insufficient"):
+        make_filter(
+            object_row_mode="nearest_feature",
+            r_safe=0.065,
+            gamma_obj=8.0,
+            rho=0.02,
+            max_speed=0.35,
+            dt=0.05,
+            object_row_range=0.05,
+        )
+

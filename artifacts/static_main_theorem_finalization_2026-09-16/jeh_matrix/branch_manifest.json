@@ -1,0 +1,50 @@
+{
+  "branch": "feat/apriori-certificate-repair",
+  "code_sha": "c178f766e0394c345db5122cd765a5abba96bc8f",
+  "source_fingerprint": "51f0009e04107fec8dfdd74f9b4fa33399a8201bbdd2127529d7926c1a4e1685",
+  "prior_rule_fingerprint": "9010b56d217945f1d4173eb4ae07f76a98da203e2beed5f55416b05056e0c345",
+  "base_commit": "7b9fb36d94ffba572881c11b8050d1d4cee2811d",
+  "created": "2026-09-16",
+  "smoke": false,
+  "baseline_only": false,
+  "shapes": [
+    "l_shape",
+    "rectangle",
+    "c_shape"
+  ],
+  "seeds": [
+    2,
+    5,
+    8,
+    11,
+    17,
+    23,
+    29,
+    31,
+    37
+  ],
+  "grids": [
+    20
+  ],
+  "frames": 600,
+  "observer": {
+    "ntheta": 128,
+    "nradial": 12
+  },
+  "integration_method": "edge_green",
+  "edge_n_gon": 256,
+  "edge_panels": 48,
+  "edge_h_max": 0.004,
+  "edge_cull_sigmas": 6.0,
+  "clamp_margin": false,
+  "cpu_plan": {
+    "outer_workers": 16,
+    "inner_cvt_workers": 1,
+    "usable_cpus": 16,
+    "n_tasks": 27,
+    "reason": "full_logical_cpus",
+    "blas_threads_per_worker": 1
+  },
+  "controller_grid_vs_eval_grid": "endpoint_grid uses LocalCVT n; edge_green uses n_gon + frozen h_max (grid_resolution kept for baseline comparison only)",
+  "reads_old_artifacts": false
+}

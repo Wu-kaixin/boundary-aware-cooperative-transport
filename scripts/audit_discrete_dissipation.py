@@ -32,6 +32,9 @@ from audit_n16_static_performance import (  # noqa: E402
 
 DISSIPATION_TOL_ABS = 1e-6
 DISSIPATION_TOL_REL = 1e-6
+# Polar-observer slack of size ~1e-5 is a known numerical envelope, not a
+# theorem counterexample and not a reason to dump multi-megabyte traces.
+OBSERVER_SLACK_DUMP = 1e-3
 PROJECTION_RESIDUAL_TOL = 1e-6
 
 

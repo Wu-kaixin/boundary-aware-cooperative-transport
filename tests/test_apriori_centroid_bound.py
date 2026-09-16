@@ -95,7 +95,7 @@ def test_prior_j_splits_h0_and_e_terms():
     out = prior_J_bound(b_h0=1.0, b_e=0.001, a=2.1722222222222225, k_steps=600, dt=0.05)
     assert out["B_J_prior"] == pytest.approx(out["term_2BH0_over_aKD"] + out["term_4BE_over_a2"])
     assert out["term_2BH0_over_aKD"] < 0.04
-    assert out["status"] == "rigorous_on_K0"
+    assert out["status"] == "rigorous"
     num = prior_J_bound(
         b_h0=1.0,
         b_e=0.001,
@@ -215,6 +215,7 @@ def test_assemble_prior_does_not_consume_trajectory_e():
     assert geom < cellwise / 5.0
     assert prior["parameters"]["h_controller"] == pytest.approx(controller_grid_spacing(0.8, 20))
     assert prior["labels"]["E_bar_from_trajectory"] == "post_hoc"
-    assert prior["B_J"]["prior_P0H_rigorousE"]["status"] != "rigorous_on_K0"
+    assert prior["B_J"]["prior_P0H_rigorousE"]["status"] != "rigorous"
+    assert prior["B_J"]["prior_certificate_crudeH_rigorousE"]["status"] == "rigorous"
     assert prior["B_J"]["prior_certificate_crudeH_rigorousE"]["h0_status"] == "rigorous"
     assert prior["labels"]["H0_numerical_cannot_be_rigorous_on_K0"] is True
