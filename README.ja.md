@@ -8,12 +8,30 @@
 
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
 ![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg)
-![Tests](https://img.shields.io/badge/Tests-287%20passed-brightgreen.svg)
-![Branch](https://img.shields.io/badge/Branch-Claude--boundary--aware--closed--loop--v1-informational.svg)
+[![Tests](https://github.com/Wu-kaixin/boundary-aware-cooperative-transport/actions/workflows/tests.yml/badge.svg)](https://github.com/Wu-kaixin/boundary-aware-cooperative-transport/actions/workflows/tests.yml)
 ![Visualization](https://img.shields.io/badge/Visualization-Matplotlib-orange.svg)
 ![Platform](https://img.shields.io/badge/Platform-MAS%20%7C%20RoboMaster%20S1-lightgrey.svg)
 
 </div>
+
+## Static safe deployment: current paper scope
+
+**Static oracle-map theory validation.** The static theorem mode receives exact
+object geometry, including in its safety filter. Selecting local centroids alone
+does **not** make it a safety experiment without a priori geometry. Local-boundary
+safety (Gate 5) and the effect of deployment on transport (Gate 6) remain research
+acceptance requirements. The end-to-end pipeline remains the baseline context.
+
+Current proofs and archived evidence: [theory/static_deployment](theory/static_deployment/).
+The September 16 tables/figures are explicitly archived evidence, not fresh runs.
+The older numerical tables and animations below remain historical until replaced
+by the generated consolidation results. Settled and G500 pass are separate outcomes.
+
+<!-- CONSOLIDATION_RESULTS_START -->
+Fresh acceptance runs are pending; no new success rate is claimed.
+<!-- CONSOLIDATION_RESULTS_END -->
+
+
 
 移動ロボットのチームが作業空間に置かれる。物体がどこにあるか、どんな形か、
 どれくらいの大きさか、動かすのに何台必要か —— 誰も教えない。ロボットたちは誰かが
@@ -25,7 +43,7 @@
 各ロボットは自分自身の測距リターン、自分自身のボクセル地図、そして 1 ホップ分の
 近傍メッセージだけで動作する。
 
-> **ブランチ `Claude-boundary-aware-closed-loop-v1`。** 閉ループは端から端まで動作し、
+> **ブランチ `main`。** 閉ループは端から端まで動作し、
 > シードごとに測定されている。本書は「実証されたこと」と「実証されていないこと」を
 > 同じ詳しさで報告する。完全な導出、失敗した試み、撤回は
 > [`docs/CLOSED_LOOP_D.md`](docs/CLOSED_LOOP_D.md) にある。
@@ -58,9 +76,9 @@ SEARCH ──▶ DISCOVER ──▶ ENCLOSE ──▶ CONTACT_READY ──▶ TR
 | --- | --- |
 | <img src="docs/assets/closed_loop_d_seed4.gif" alt="閉ループ搬送 seed 4" width="100%"> | <img src="docs/assets/closed_loop_d_seed8.gif" alt="閉ループ搬送 seed 8" width="100%"> |
 
-| 密度と局所 CVT | ロボット軌跡 |
-| --- | --- |
-| <img src="docs/assets/dbact-density-cvt-frame.png" alt="境界認識密度と局所 CVT" width="100%"> | <img src="docs/assets/dbact-trajectory.png" alt="ロボット軌跡" width="100%"> |
+
+
+
 
 シミュレーションと描画は分離されている。実行は `replay.npz` を書くだけで一切描画せず、
 図は後からそのファイルから作られる。したがって実行が報告するフレームレートは

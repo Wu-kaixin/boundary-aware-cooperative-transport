@@ -1,3 +1,21 @@
+
+## Static safe deployment: current paper scope
+
+**Static oracle-map theory validation.** The static theorem mode receives exact
+object geometry, including in its safety filter. Selecting local centroids alone
+does **not** make it a safety experiment without a priori geometry. Local-boundary
+safety (Gate 5) and the effect of deployment on transport (Gate 6) remain research
+acceptance requirements. The end-to-end pipeline remains the baseline context.
+
+Current proofs and archived evidence: [theory/static_deployment](theory/static_deployment/).
+The September 16 tables/figures are explicitly archived evidence, not fresh runs.
+The older numerical tables and animations below remain historical until replaced
+by the generated consolidation results. Settled and G500 pass are separate outcomes.
+
+<!-- CONSOLIDATION_RESULTS_START -->
+Fresh acceptance runs are pending; no new success rate is claimed.
+<!-- CONSOLIDATION_RESULTS_END -->
+
 # DBACT: Decentralized Boundary-Aware Cooperative Transportation
 
 > **设计文档 / design document.** 这是原始设计与规划文档，保留其历史价值。

@@ -177,7 +177,7 @@ def test_the_two_zero_of_fifteen_families_are_not_the_two_most_concave(matrix_ru
 def test_concavity_ratio_separates_convex_families_from_notched_ones(matrix_runner):
     """The five convex families measure zero to numerical precision, and the gap is wide.
 
-    ``circle``, ``rectangle``, ``ellipse24`` and ``high_aspect`` are exactly zero --
+    ``circle``, ``rectangle``, ``ellipse24`` and ``high_aspect`` are zero to floating-point precision --
     the outline *is* its own hull vertex list. ``convex_random`` is a ``ConvexHull``
     result compared against its own polygon area, so it lands at float noise rather
     than at zero. Both are fine; what would not be fine is a convex family measuring
@@ -190,7 +190,7 @@ def test_concavity_ratio_separates_convex_families_from_notched_ones(matrix_runn
     notched = set(matrix_runner.SHAPE_NAMES) - convex
     assert max(ratios[n] for n in convex) < 1e-12, ratios
     assert min(ratios[n] for n in notched) > 0.05, ratios
-    assert {n for n, r in ratios.items() if r == 0.0} == convex - {"convex_random"}, ratios
+    assert {n for n, r in ratios.items() if abs(r) < 1e-12} == convex, ratios
 
 
 # --------------------------------------------------------------------------- #

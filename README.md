@@ -8,12 +8,30 @@ Search, enclose and transport an object of unknown shape — with every claim at
 
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
 ![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg)
-![Tests](https://img.shields.io/badge/Tests-287%20passed-brightgreen.svg)
-![Branch](https://img.shields.io/badge/Branch-Claude--boundary--aware--closed--loop--v1-informational.svg)
+[![Tests](https://github.com/Wu-kaixin/boundary-aware-cooperative-transport/actions/workflows/tests.yml/badge.svg)](https://github.com/Wu-kaixin/boundary-aware-cooperative-transport/actions/workflows/tests.yml)
 ![Visualization](https://img.shields.io/badge/Visualization-Matplotlib-orange.svg)
 ![Platform](https://img.shields.io/badge/Platform-MAS%20%7C%20RoboMaster%20S1-lightgrey.svg)
 
 </div>
+
+## Static safe deployment: current paper scope
+
+**Static oracle-map theory validation.** The static theorem mode receives exact
+object geometry, including in its safety filter. Selecting local centroids alone
+does **not** make it a safety experiment without a priori geometry. Local-boundary
+safety (Gate 5) and the effect of deployment on transport (Gate 6) remain research
+acceptance requirements. The end-to-end pipeline remains the baseline context.
+
+Current proofs and archived evidence: [theory/static_deployment](theory/static_deployment/).
+The September 16 tables/figures are explicitly archived evidence, not fresh runs.
+The older numerical tables and animations below remain historical until replaced
+by the generated consolidation results. Settled and G500 pass are separate outcomes.
+
+<!-- CONSOLIDATION_RESULTS_START -->
+Fresh acceptance runs are pending; no new success rate is claimed.
+<!-- CONSOLIDATION_RESULTS_END -->
+
+
 
 A team of mobile robots is dropped into a workspace. Nobody tells them where the
 object is, what shape it is, how big it is, or how many of them it takes to move
@@ -21,11 +39,11 @@ it. They sweep the workspace until somebody sees it, relay that fact, gather, fo
 a cage around a boundary they are estimating as they go, press on it, move it a
 sampled distance in a sampled direction, brake, and stop.
 
-**Nothing in the control path reads the simulator.** Not the barrier rows, not the
+**In the end-to-end closed-loop mode, the control path uses local sensing.** Not the barrier rows, not the
 velocity estimate, not the stopping condition — every robot acts on its own range
 returns, its own voxel map, and one hop of neighbour messages.
 
-> **Branch `Claude-boundary-aware-closed-loop-v1`.** The closed loop runs end to
+> **Branch `main`.** The closed loop runs end to
 > end and is measured seed by seed. This README reports what is demonstrated and,
 > in equal detail, what is not. The full derivations, the failed attempts and the
 > retractions are in [`docs/CLOSED_LOOP_D.md`](docs/CLOSED_LOOP_D.md).
@@ -59,9 +77,9 @@ and a machine that fell back would chatter at the stick-slip frequency.
 | --- | --- |
 | <img src="docs/assets/closed_loop_d_seed4.gif" alt="Closed-loop transport, seed 4" width="100%"> | <img src="docs/assets/closed_loop_d_seed8.gif" alt="Closed-loop transport, seed 8" width="100%"> |
 
-| Density and local CVT | Agent trajectories |
-| --- | --- |
-| <img src="docs/assets/dbact-density-cvt-frame.png" alt="Boundary-aware density and local CVT" width="100%"> | <img src="docs/assets/dbact-trajectory.png" alt="Agent trajectories" width="100%"> |
+
+
+
 
 Simulation and rendering are separate. A run writes `replay.npz` and never draws;
 the pictures are made from that file afterwards, so the frame rate a run reports

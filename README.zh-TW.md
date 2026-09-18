@@ -8,12 +8,30 @@
 
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
 ![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg)
-![Tests](https://img.shields.io/badge/Tests-287%20passed-brightgreen.svg)
-![Branch](https://img.shields.io/badge/Branch-Claude--boundary--aware--closed--loop--v1-informational.svg)
+[![Tests](https://github.com/Wu-kaixin/boundary-aware-cooperative-transport/actions/workflows/tests.yml/badge.svg)](https://github.com/Wu-kaixin/boundary-aware-cooperative-transport/actions/workflows/tests.yml)
 ![Visualization](https://img.shields.io/badge/Visualization-Matplotlib-orange.svg)
 ![Platform](https://img.shields.io/badge/Platform-MAS%20%7C%20RoboMaster%20S1-lightgrey.svg)
 
 </div>
+
+## Static safe deployment: current paper scope
+
+**Static oracle-map theory validation.** The static theorem mode receives exact
+object geometry, including in its safety filter. Selecting local centroids alone
+does **not** make it a safety experiment without a priori geometry. Local-boundary
+safety (Gate 5) and the effect of deployment on transport (Gate 6) remain research
+acceptance requirements. The end-to-end pipeline remains the baseline context.
+
+Current proofs and archived evidence: [theory/static_deployment](theory/static_deployment/).
+The September 16 tables/figures are explicitly archived evidence, not fresh runs.
+The older numerical tables and animations below remain historical until replaced
+by the generated consolidation results. Settled and G500 pass are separate outcomes.
+
+<!-- CONSOLIDATION_RESULTS_START -->
+Fresh acceptance runs are pending; no new success rate is claimed.
+<!-- CONSOLIDATION_RESULTS_END -->
+
+
 
 一群移動機器人被放進一個工作空間。沒有人告訴它們物體在哪裡、是什麼形狀、多大，
 也沒有人告訴它們需要幾台機器人才推得動。它們掃描整個工作空間直到有人看見物體、
@@ -23,7 +41,7 @@
 **控制路徑上沒有任何一處讀取模擬器。** 障壁列沒有、速度估測沒有、停止條件也沒有 ——
 每台機器人只依據自己的距離回波、自己的體素地圖，以及一跳的鄰居訊息行動。
 
-> **分支 `Claude-boundary-aware-closed-loop-v1`。** 閉環已端到端運作，並逐個種子量測。
+> **分支 `main`。** 閉環已端到端運作，並逐個種子量測。
 > 本文件同等詳細地報告「已被證實的」與「尚未被證實的」。完整推導、失敗的嘗試與撤回，
 > 都在 [`docs/CLOSED_LOOP_D.md`](docs/CLOSED_LOOP_D.md)。
 
@@ -54,9 +72,9 @@ SEARCH ──▶ DISCOVER ──▶ ENCLOSE ──▶ CONTACT_READY ──▶ TR
 | --- | --- |
 | <img src="docs/assets/closed_loop_d_seed4.gif" alt="閉環搬運 seed 4" width="100%"> | <img src="docs/assets/closed_loop_d_seed8.gif" alt="閉環搬運 seed 8" width="100%"> |
 
-| 密度與局部 CVT | 機器人軌跡 |
-| --- | --- |
-| <img src="docs/assets/dbact-density-cvt-frame.png" alt="邊界感知密度與局部 CVT" width="100%"> | <img src="docs/assets/dbact-trajectory.png" alt="機器人軌跡" width="100%"> |
+
+
+
 
 模擬與繪圖是分離的。一次執行只寫出 `replay.npz` 而完全不繪圖；圖片事後由該檔產生，
 所以執行所回報的幀率是**控制迴路**的幀率，而不是 Matplotlib 的幀率。

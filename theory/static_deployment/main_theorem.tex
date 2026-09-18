@@ -1,0 +1,81 @@
+% 精确算术下的静态采样安全和先验界在所声明的 oracle-map 范围内闭合；控制残差与有意义部署驻点的联系、局部未知边界接口以及部署对搬运的作用仍是当前论文需要补齐的内容。
+
+\documentclass{article}
+\usepackage{amsmath,amssymb}
+\usepackage[margin=1in]{geometry}
+\title{Static sampled DBACT: feature-cover CBF-QP}
+\author{}
+\date{2026-09-16}
+\begin{document}
+\maketitle
+\noindent\textit{Exact-arithmetic theorem: closed for the declared static sampled scope.
+Certificate \(B_{J,\mathrm{prior}}\) beats geometry on rectangle, L-shape, and C-shape.
+IEEE-754 QP calls and polar observers are not identified with the exact theorem.}
+
+\section{Model and P0}
+Sampling period \(\Delta=0.05\). Frozen polygon \(S\), oracle polyline, \(v_{\mathrm{obj}}=0\).
+Nominal \(u_i^{\mathrm{cvt}}=k_c(\hat c_i-p_i)\), Euclidean saturation, then
+\(U_{k,i}=\Pi_{F_{\rho,i,k}}(u_i^{\mathrm{sat}})\) onto the unclamped original-\(\rho\) set
+(agent, wall, feature-cover object rows, and \(\|u\|\le u_{\max}\)).
+Hold \(p_i(t_k+\tau)=p_i(t_k)+\tau U_{k,i}\). No coordinate clipping.
+\[
+\Phi(p)=\{F:\mathrm{dist}(p,F)\le d_\partial(p)+2u_{\max}\Delta\}
+\cap\{\mathrm{dist}\le R_{\mathrm{row}}\}.
+\]
+Indicators \(J_k=\sum_i m_{i,k}^\star\|U_{k,i}\|^2\) and
+\(E_k=\sum_i m_{i,k}^\star\|\hat c_{i,k}-c_{i,k}^\star\|^2\)
+(zero-mass cells contribute \(0\)). \(\sum_i\|U_{k,i}\|^2\) is not \(J_k\).
+
+P0: \(p_i\in D\), \(\|p_i-p_j\|\ge d_{\min}\),
+\(\mathrm{sd}(p_i,S)\ge r_{\mathrm{safe}}+\rho/\gamma_{\mathrm{obj}}\),
+\(\gamma\Delta\le 1\) for both families, \(a=2/k_c-\Delta>0\), dropout \(0\),
+\(\mathrm{comm\_range}\ge 2R\), and
+\[
+R_{\mathrm{row}}-u_{\max}\Delta\ge r_{\mathrm{safe}}+\rho/\gamma_{\mathrm{obj}}.
+\tag{RT}
+\]
+Paper numbers: \(0.5825\ge 0.0675\).
+
+\section{Integral error}
+Source reach is \(\min(\sqrt{2}R+s\sigma,\,R+2d_c+n_\sigma\sigma)\), not \(R+s\sigma\).
+Robot-centred raw Green moments \(\delta\mu=\hat\mu-\mu^\star\), \(x=\hat\mu/\hat m\),
+\(y=\Pi_{B(0,R)}(x)\), \(e=y-c^\star\). Exact projection gives \(\langle x-y,c^\star-y\rangle\le 0\), hence
+\[
+m^\star\|e\|^2\le 2R\bigl(\|\delta\mu\|+R|\delta m|\bigr)
+\]
+when \(\hat m>\mathtt{mass\_floor}\). The duplicate extra
+\(2R(\|\delta\mu_{\mathrm{quad}}\|+R|\delta m_{\mathrm{quad}}|)\) is not added.
+Fallback cells keep \(R^2(\sum|\delta m|+N\varepsilon)\). Certificate \(B_{H0}=R^2M_{\mathrm{plane}}\).
+
+Certificate constants (\(h^\star=0.004\)): rectangle
+\(B_{J,\mathrm{prior}}=0.1380072238<0.1802506048\);
+L-shape \(0.1811413578<0.2295107776\);
+C-shape \(B_E=0.1814594174\), \(B_{J,\mathrm{prior}}=0.1906267518<0.2295107776\).
+
+\section{Object invariance}
+For \(F\in\Phi\), convexity and the uncapped row give
+\(h_F(p+\tau u)\ge(1-\gamma\tau)h_F(p)+\rho\tau\) when \(p\notin F\) and \(0\le\gamma\tau\le 1\).
+Cap is inactive if \(h_F\ge\rho/\gamma\).
+Cover-excluded in-range edges satisfy \(\mathrm{dist}(p+\tau u,F)>d_\partial(p)+u_{\max}\Delta\).
+Range-excluded edges satisfy \(\mathrm{dist}(p+\tau u,F)>R_{\mathrm{row}}-u_{\max}\Delta\); under (RT), \(h_F>\rho/\gamma\).
+Together these yield the margin \(d_\partial(p(\tau))\ge r_{\mathrm{safe}}+\rho/\gamma\).
+The stronger contraction for \(h_{\mathrm{true}}\) is a corollary when \(\Phi\neq\emptyset\) and the paper comparisons hold; it is not claimed for empty \(\Phi\).
+
+First crossing: start in the open exterior with the margin at \(\tau=0\). Continuity plus the unsigned-distance margin excludes a first hit of \(\partial S\). Exterior along the hold is a conclusion.
+
+\section{Joint recursive feasibility}
+\(0\in F_\rho\) iff agent \(h_{ij}\ge 0\), \(p\in D\), and \(h_{\mathrm{true}}\ge\rho/\gamma\) (or empty \(\Phi\) out of range).
+Omitted pairs lie beyond \(d_{\min}+2u_{\max}\Delta\). \(D\) is a closed rectangle.
+All QPs use the same frozen \(P_k\). P0 implies \(0\in F_{\rho,i}\) for every \(i\), the Euclidean projection exists, and the hold restores a P0-type invariant.
+Thus \(\mathcal K_0\) is a corollary of P0. A single object row does not replace the conjunction.
+
+\section{Dissipation}
+On the sat-then-QP cascade, with \(\mathcal K_0\) from the previous section and \(a>0\),
+\[
+\bar J\le \frac{2B_{H0}}{aK\Delta}+\frac{4B_E}{a^2}.
+\]
+Route \(B\) (\(\|\Pi_F(0)\|\le u_{\max}\)) is not used.
+
+\section{Not claimed}
+Global coverage convergence or stationarity; unknown or moving objects; ``small \(J\) implies coverage success''; that every floating-point QP call equals the exact projection; that polar \((H,g,m,c)\) are exact. Monitor abort is a fault detector, not a safety proof.
+\end{document}

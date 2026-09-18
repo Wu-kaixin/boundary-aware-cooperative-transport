@@ -148,6 +148,11 @@ class SimulationEnvironment:
             self.contact_params,
             scripted_params_from_config(config) if self.engine_name == "scripted" else None,
         )
+        self.theorem_abort: dict | None = None
+        if getattr(params, "theorem_mode", False):
+            from dbact.theorem_mode import freeze_cargoes
+
+            freeze_cargoes(self.cargoes)
 
         # C5 with the force budget filled in. The controller can only check where
         # the press stops; whether what is left of the penetration still moves the
@@ -208,8 +213,14 @@ class SimulationEnvironment:
     # ------------------------------------------------------------------ #
 
     def step(self) -> None:
-        commands = self.controller.step(self.agents, self.cargoes, self.t, self.dt)
-        self.controller.apply_commands(self.agents, commands, self.dt)
+        from dbact.theorem_mode import TheoremModeAbort
+
+        try:
+            commands = self.controller.step(self.agents, self.cargoes, self.t, self.dt)
+            self.controller.apply_commands(self.agents, commands, self.dt)
+        except TheoremModeAbort as abort:
+            self.theorem_abort = abort.as_dict()
+            raise
         statuses = self.engine.step(self.cargoes, self.agents, self.dt)
         self._last_statuses = {s.object_id: s for s in statuses}
         self.t += self.dt
