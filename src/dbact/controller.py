@@ -741,6 +741,11 @@ class DBACTController:
     ) -> tuple[np.ndarray, np.ndarray, np.ndarray, str, float, np.ndarray]:
         agent = agents[i]
         if len(view) == 0:
+            if self.params.theorem_map_source == "local":
+                # No geometry is invented for an unseen region. Remain still
+                # until sensing/one-hop relay supplies a local boundary.
+                zero = np.zeros(2)
+                return zero, zero.copy(), zero.copy(), "local_empty_map_hold", 0.0, agent.position.copy()
             raise TheoremModeAbort(
                 "empty_map_in_theorem_mode",
                 self._frame,

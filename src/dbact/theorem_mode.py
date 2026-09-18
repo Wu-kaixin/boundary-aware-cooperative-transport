@@ -38,6 +38,11 @@ On the proved invariant set the original-ρ QP contains 0, so abort does not
 fire. Object-row scaling and margin clamp, if enabled in YAML, are idle on that
 set and are not part of the theorem cascade.
 
+These object guarantees apply to oracle mode only. Local mode supplies only
+measured boundary samples to the QP. It never uses true vertices or a true
+clearance abort to select/withhold a command. Object clearance must be measured
+by an external observer; an empirical safe rollout is not a local-map theorem.
+
 Cost. The safety filter may change ``u_nom``. ``H_{k+1} - H_k`` is recorded and
 is **not** assumed negative.
 """
@@ -578,7 +583,7 @@ def theorem_step(
             boundary_normals=normals,
             object_velocity=np.zeros(2),
             boundary_point_velocities=None,
-            obstacle_vertices=cargoes[0].vertices if cargoes else None,
+            obstacle_vertices=cargoes[0].vertices if source == "oracle" and cargoes else None,
         )
         filter_results.append(result)
         if not result.feasible or result.status == "infeasible":
@@ -666,12 +671,17 @@ def theorem_step(
                 },
             )
 
-    cargo_vertices = [c.vertices for c in cargoes]
-    hold_obj_lb, hold_obj_sampled, _lipschitz_margin, obj_details = hold_segment_object_clearance(
-        positions, velocities, cargo_vertices, dt
-    )
+    # Local control cannot consult simulator geometry even as a pre-execution
+    # veto. NaN explicitly means unobserved here; the paired experiment measures
+    # true hold clearance outside the controller without feeding it back.
+    hold_obj_lb, hold_obj_sampled, obj_details = float("nan"), float("nan"), {}
+    if source == "oracle":
+        cargo_vertices = [c.vertices for c in cargoes]
+        hold_obj_lb, hold_obj_sampled, _lipschitz_margin, obj_details = hold_segment_object_clearance(
+            positions, velocities, cargo_vertices, dt
+        )
     hold_obj_margin = float(hold_obj_lb - controller.params.r_safe)
-    if hold_obj_lb + 1e-9 < controller.params.r_safe:
+    if source == "oracle" and hold_obj_lb + 1e-9 < controller.params.r_safe:
         _abort(
             controller,
             "hold_segment_object_clearance",

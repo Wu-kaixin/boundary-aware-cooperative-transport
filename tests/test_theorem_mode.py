@@ -21,6 +21,47 @@ from dbact.theorem_mode import (
 from dbact.types import AgentState, ControlCommand
 
 
+@pytest.mark.parametrize("empty", [False, True])
+def test_local_mode_cannot_read_truth_geometry_after_sensing(monkeypatch, empty):
+    """Poison the truth interface; local commands must depend on scans alone."""
+    from pathlib import Path
+    import yaml
+    from dbact_sim.environment import SimulationEnvironment
+    from dbact.types import BoundaryView
+
+    cfg = yaml.safe_load((Path(__file__).parents[1] / "configs/sim/theorem/static_l_shape_n16_oracle.yaml").read_text())
+    cfg["controller"]["theorem_map_source"] = "local"
+    env = SimulationEnvironment(cfg, seed=2)
+    sensed = {a.agent_id: env.controller.sensor.sense_view(a, env.cargoes, 0.0) for a in env.agents}
+    monkeypatch.setattr(env.controller.sensor, "sense_view",
+                        lambda a, cargoes, t: BoundaryView.empty() if empty else sensed[a.agent_id])
+
+    class HiddenCargo:
+        movable = False
+
+        def set_twist(self, velocity, omega):
+            pass
+
+        @property
+        def vertices(self):
+            raise AssertionError("local controller read hidden true geometry")
+
+    captured = []
+    original = env.controller.safety.filter_velocity
+
+    def filtered(*args, **kwargs):
+        captured.append(kwargs.get("obstacle_vertices"))
+        return original(*args, **kwargs)
+
+    monkeypatch.setattr(env.controller.safety, "filter_velocity", filtered)
+    commands = env.controller.step(env.agents, [HiddenCargo()], 0.0, env.dt)
+    assert len(commands) == len(env.agents)
+    assert captured and all(v is None for v in captured)
+    assert np.isnan(env.controller.last_theorem_record.hold_min_object_clearance)
+    if empty:
+        assert all(np.array_equal(c.velocity, np.zeros(2)) for c in commands)
+
+
 def test_wall_rows_keep_unclipped_update_inside_domain():
     domain = (0.0, 1.0, 0.0, 1.0)
     dt = 0.05
