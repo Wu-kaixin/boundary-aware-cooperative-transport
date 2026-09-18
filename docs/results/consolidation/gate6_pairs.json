@@ -1,0 +1,1466 @@
+{
+  "manifest": {
+    "commit": "e5e6bce038f1225d5814af462fb59efff83bbd92",
+    "python": "3.10.20",
+    "numpy": "2.2.6",
+    "scipy": "1.15.3",
+    "gate": 6,
+    "shapes": [
+      "l_shape",
+      "rectangle",
+      "c_shape"
+    ],
+    "seeds": [
+      2,
+      5,
+      8
+    ],
+    "frames": 3000,
+    "source_sha256": {
+      "src/dbact/__init__.py": "b546c2f19c3de9ade16543f86b64d1d2fd88b7ea6e0f653406723fbe3cf29395",
+      "src/dbact/agent_control.py": "d66980d0c1e49c1073260479444e088d061dfdbcd3baca7d8fdf46e4e2e4531f",
+      "src/dbact/apriori_centroid_bound.py": "677c9ec9ebcc15bab4e388768d311ae9128d645b647a7a8c3318db2a02a175e9",
+      "src/dbact/boundary_density.py": "7a5e0eaeb36b57ea0272ac5984304fc942ddbc7eeb0d3902e5fe4af61abc66db",
+      "src/dbact/boundary_map.py": "6bfdf4b23a010eb7d45081bd2d851d04d33314e3c80f160767dfa9612e6e7437",
+      "src/dbact/cargo.py": "bf26ef2ddec7c319de20911af9248187953bf6631ed42b55c867fd84086beae5",
+      "src/dbact/contact_dynamics.py": "79cda0c2a41f0205f24149114bbb4eb3e823b600406e2aa765127f02103f56d1",
+      "src/dbact/contracts.py": "0fa256e6194ac8bfd7b1f04360f6983206eeaa148765d558dc949e78ef6efede",
+      "src/dbact/controller.py": "2b1789ce60225506c997fe797f2777139df2591984623a20f3e69b49066c10d4",
+      "src/dbact/cpu_budget.py": "4eeb8c037f52e7d47ac9efadae05cf66c1f5793cb860cd6c6bba641f42621641",
+      "src/dbact/diagnosis.py": "84bab83530c8197d0bce8a2cd3b65b6a47981fd80a1eb295b17f1d97a0cb7d71",
+      "src/dbact/edge_green_integral.py": "0947f03440c40f8108cdfa55508e8f58e55fcef35bec1ef3ce9572e2f3c9f6d9",
+      "src/dbact/enclosure_gate.py": "858923f38411458cd447db661f33a4f3396eed7145908b470a38b7b7499efeb8",
+      "src/dbact/error_audit.py": "39896ec1cb48014c41ba252f8aac262feaf1eeb9708da85ecf7ab52a0324d69e",
+      "src/dbact/geometry.py": "a31c2fdb6594be2905ee42af0ddc2342b518394289e3633d292ba8b0f8f8e547",
+      "src/dbact/guarantees.py": "5b7a2b1a38d476e4b4d4b03f300a43db59f17ffca0418c307c86dbef4239047d",
+      "src/dbact/local_cvt.py": "172e035ae6c0d9dcef58f5c0ea462d9379ce981c974171f23a2b95dd6351274b",
+      "src/dbact/metrics.py": "14c338453e1b4efce827c6660280677f5149f89151b89c8349ea0f3a4ce59980",
+      "src/dbact/perception.py": "4d2e1cd215c29cfc16d826322e20b0672962a8f9864c3b0d871a08a7c42b023b",
+      "src/dbact/phase.py": "1eb19df9895b7fca9def24eef0f0f19f3d79dc0e6eeb006a3149ae5a12a349a3",
+      "src/dbact/provenance.py": "e735860de30d9d1b4fd4267ab5e7ed9c08f5745f24489d434b5a3ca078e39e0a",
+      "src/dbact/qp2d.py": "8290e73473c1a085ed40551098fec44615eb583124a278f0f0b8b7b54229cdf1",
+      "src/dbact/safety_filter.py": "8dca092221856943080b26f47d32b09d2c1000538fd160225dbbe84c8dc6e32b",
+      "src/dbact/static_deployment_diagnostics.py": "b1a23318619e4ef87606da5024366abb00c926c9ce8b862d9963ef4b93a0078f",
+      "src/dbact/task.py": "e7be986a318a9f013139542155fd7444aa757d92cc6b009b85be3054634778a1",
+      "src/dbact/theorem_mode.py": "b76920da5e6082cf11623c9e6193739b8cd0b9e64255b2aad64455bc973e1184",
+      "src/dbact/transport_control.py": "1e5e153cf9dd21b55c77418c6e568341e16f10bc4defee107a6717419b219f3f",
+      "src/dbact/transport_dynamics.py": "dd69a6c38f5fe3c29e2d014d9046960d82f792b302e36462673e4f3850f04aa6",
+      "src/dbact/types.py": "844f59866124b437cd33526040f2ea0ff458ca8a01bc430c39c1b2253c16cd32",
+      "src/dbact_sim/__init__.py": "0e62c734baac5fa1ac3cbbb7781807f97bb4210c620eb13956f327a53e5526dc",
+      "src/dbact_sim/environment.py": "ce530a8ac61bd94432bae418f415971c2b88716f102ae40566935d5371d37fee",
+      "src/dbact_sim/publication.py": "2e96597232c209794af659e839c8ea331e8c09735015a0ae47f265b654be2072",
+      "src/dbact_sim/replay.py": "cc1568ca3b09f3e78927a8d441ca3db76c1e95efbb4bca6f3a524ddf4b7eb370",
+      "src/dbact_sim/run_sim.py": "bf03e764d6895104dc14b61a5f29b525010cb70ff68926a4756ac2977405b13c",
+      "src/dbact_sim/scenarios.py": "bdbdc0b36efbebe5ddf1977f593a65917d26c58c713e6efc63ff0c87241d8dda",
+      "src/dbact_sim/trace.py": "30265a8c9abaca4101649c6eeb980b75235551b8eadaa05a028988795e9d94ee",
+      "src/dbact_sim/visualization/__init__.py": "8a0d3e6871d296b4c9550bbc0d836a98fcb1a098d678157bba3877c1a03a4864",
+      "src/dbact_sim/visualization/animation.py": "0e8913034d870a07c4afb88b38dffda2b78f7d97e31b9b504a327a92a9f46105",
+      "src/dbact_sim/visualization/comparison.py": "0d08fbca806019db9b5415442635217f0af259d01cbd36109eae1152cd29329f",
+      "src/dbact_sim/visualization/debug_overlays.py": "d36d5a370fbc8347673ef706fc428bfd7b6ec60f277b9467ecd6104b53617386",
+      "src/dbact_sim/visualization/hud.py": "828d984fce8bf85d3ae06519bbcd7b2d78e82a6a32c3b6fc3d0e736b4f0a372d",
+      "src/dbact_sim/visualization/legacy.py": "a137ccc451658bc7c0e4066f877f5399b3bb0962b338640bde05d0d857bd122c",
+      "src/dbact_sim/visualization/paper_figures.py": "883cc526dc617672ac16acd080e732e34d8c5b66c5c97694ad544c396c830255",
+      "src/dbact_sim/visualization/renderer.py": "e4a49a66eea0a8035d414889426f5eff89b3d894ca021fab118d41577efd09ed",
+      "src/dbact_sim/visualization/styles.py": "2fcbb87564a40a6a73a0a4b4120f400e280584c85d4157487c624f4a46cc700b",
+      "src/mas_adapter/__init__.py": "c3025d583eb00ddd3d8f92dc795525d3a82cee4c81e45b15f4681858a9d3160a",
+      "src/mas_adapter/decentralized_transport_controller.py": "213e61a43e69657fef55905d6ebd4a70988e2b96aec936f656d6cc3525a1bdd9",
+      "src/mas_adapter/object_observer.py": "1dbf73913d18264ba31f692d73db70316b03e00499f11b2a509659dd5d459b2f",
+      "scripts/run_deployment_pairs.py": "80b6bfbc0b87974453aa5d7955762e9e0f93a91e72010c41e0150d0c0f578d2e"
+    }
+  },
+  "pairs": [
+    [
+      {
+        "variant": "boundary_cvt",
+        "seed": 2,
+        "initial_state_sha256": "1b464d06337ec82d5cf961d16d9e34c9c5ebd17d207506f8c649787961522e84",
+        "config_sha256": "9ae8187f0d293fe13a610b80a0d641799b24d3a2c3fc5ff97aa699159f6945c2",
+        "goal_direction": [
+          0.19706172910618755,
+          0.9803910826408406
+        ],
+        "task": {
+          "cargo_0": {
+            "object_id": "cargo_0",
+            "direction": [
+              0.19706172910618755,
+              0.9803910826408406
+            ],
+            "angle_deg": 78.6348106982665,
+            "target_distance": 1.4466640406178684,
+            "start": [
+              3.7848360655737823,
+              3.8063524590164044
+            ],
+            "goal_point": [
+              4.069918182853684,
+              5.22464898401533
+            ],
+            "tolerance": 0.12,
+            "clearance": 1.9050471192360838,
+            "sampling_attempts": 1
+          }
+        },
+        "termination": {
+          "frames_run": 445,
+          "max_frames": 3000,
+          "settled": true,
+          "terminated_by": "settled",
+          "settle_frames": 40,
+          "settle_speed": 0.005
+        },
+        "contact_ready_frame": 81,
+        "contact_ready_seconds": 4.05,
+        "mean_contacts": 2.2354260089686098,
+        "max_contacts": 4,
+        "contact_azimuth_histogram_12_bins": [
+          0,
+          0,
+          0,
+          0,
+          198,
+          63,
+          0,
+          1,
+          363,
+          250,
+          122,
+          0
+        ],
+        "peak_normal_only_forward_capacity": 97.61608395050344,
+        "torque_capacity_min": -53.98835163031018,
+        "torque_capacity_max": 39.867031051570116,
+        "peak_actual_net_force": 38.91923179542039,
+        "peak_absolute_actual_torque": 14.218761537661052,
+        "direction_error_deg": 3.0469721769259412,
+        "max_cross_track": 0.07640668206340334,
+        "final_distance_error": -0.1012842202875397,
+        "qp_intervention_fraction": 0.09185393258426966,
+        "min_inter_agent_distance": 0.28011723030242597,
+        "min_signed_clearance": 0.09606842896755838,
+        "g500_success": false,
+        "failure_reasons": [
+          "G500: 3 scaled-barrier event(s), smallest factor 0.676; the contract allows 0"
+        ],
+        "capacity_label": "normal-only instantaneous contact wrench box, 0 <= f_i <= stiffness*delta_max; not dynamically guaranteed",
+        "changed_mechanism": "Only centroid target before CONTACT_READY; CVT mass, redeployment guards, sensing, safety and subsequent transport identical",
+        "shape": "l_shape"
+      },
+      {
+        "variant": "nearest_observed_target",
+        "seed": 2,
+        "initial_state_sha256": "1b464d06337ec82d5cf961d16d9e34c9c5ebd17d207506f8c649787961522e84",
+        "config_sha256": "9ae8187f0d293fe13a610b80a0d641799b24d3a2c3fc5ff97aa699159f6945c2",
+        "goal_direction": [
+          0.19706172910618755,
+          0.9803910826408406
+        ],
+        "task": {
+          "cargo_0": {
+            "object_id": "cargo_0",
+            "direction": [
+              0.19706172910618755,
+              0.9803910826408406
+            ],
+            "angle_deg": 78.6348106982665,
+            "target_distance": 1.4466640406178684,
+            "start": [
+              3.7848360655737823,
+              3.8063524590164044
+            ],
+            "goal_point": [
+              4.069918182853684,
+              5.22464898401533
+            ],
+            "tolerance": 0.12,
+            "clearance": 1.9050471192360838,
+            "sampling_attempts": 1
+          }
+        },
+        "termination": {
+          "frames_run": 1225,
+          "max_frames": 3000,
+          "settled": true,
+          "terminated_by": "settled",
+          "settle_frames": 40,
+          "settle_speed": 0.005
+        },
+        "contact_ready_frame": 477,
+        "contact_ready_seconds": 23.85,
+        "mean_contacts": 2.1190864600326265,
+        "max_contacts": 5,
+        "contact_azimuth_histogram_12_bins": [
+          0,
+          0,
+          0,
+          0,
+          342,
+          87,
+          0,
+          92,
+          1024,
+          714,
+          159,
+          180
+        ],
+        "peak_normal_only_forward_capacity": 108.39714294938416,
+        "torque_capacity_min": -56.22245647279468,
+        "torque_capacity_max": 37.89273328086453,
+        "peak_actual_net_force": 39.23131283216925,
+        "peak_absolute_actual_torque": 15.69273312240212,
+        "direction_error_deg": 1.9422857283188537,
+        "max_cross_track": 0.06455077847574842,
+        "final_distance_error": 0.031167986729885522,
+        "qp_intervention_fraction": 0.2864795918367347,
+        "min_inter_agent_distance": 0.2800000004297692,
+        "min_signed_clearance": 0.09137057412530236,
+        "g500_success": false,
+        "failure_reasons": [
+          "G500: 25 scaled-barrier event(s), smallest factor 0.016; the contract allows 0"
+        ],
+        "capacity_label": "normal-only instantaneous contact wrench box, 0 <= f_i <= stiffness*delta_max; not dynamically guaranteed",
+        "changed_mechanism": "Only centroid target before CONTACT_READY; CVT mass, redeployment guards, sensing, safety and subsequent transport identical",
+        "shape": "l_shape"
+      }
+    ],
+    [
+      {
+        "variant": "boundary_cvt",
+        "seed": 5,
+        "initial_state_sha256": "4fb8bb04621bf67a1bfcf04b29fa9e544e8e55480b24f5024ca83b6cdbd18842",
+        "config_sha256": "9ae8187f0d293fe13a610b80a0d641799b24d3a2c3fc5ff97aa699159f6945c2",
+        "goal_direction": [
+          -0.10625411423413605,
+          0.9943390081900233
+        ],
+        "task": {
+          "cargo_0": {
+            "object_id": "cargo_0",
+            "direction": [
+              -0.10625411423413605,
+              0.9943390081900233
+            ],
+            "angle_deg": 96.09942625178446,
+            "target_distance": 1.352955555454011,
+            "start": [
+              3.7848360655737823,
+              3.8063524590164044
+            ],
+            "goal_point": [
+              3.6410789714308627,
+              5.151648944151727
+            ],
+            "tolerance": 0.12,
+            "clearance": 1.9050471192360838,
+            "sampling_attempts": 1
+          }
+        },
+        "termination": {
+          "frames_run": 444,
+          "max_frames": 3000,
+          "settled": true,
+          "terminated_by": "settled",
+          "settle_frames": 40,
+          "settle_speed": 0.005
+        },
+        "contact_ready_frame": 73,
+        "contact_ready_seconds": 3.6500000000000004,
+        "mean_contacts": 2.6786516853932585,
+        "max_contacts": 5,
+        "contact_azimuth_histogram_12_bins": [
+          0,
+          0,
+          172,
+          0,
+          1,
+          37,
+          114,
+          38,
+          313,
+          192,
+          164,
+          161
+        ],
+        "peak_normal_only_forward_capacity": 100.41953632097889,
+        "torque_capacity_min": -30.759410601261024,
+        "torque_capacity_max": 64.70234662618044,
+        "peak_actual_net_force": 37.633444702534916,
+        "peak_absolute_actual_torque": 23.418075349721114,
+        "direction_error_deg": 2.9165627392578335,
+        "max_cross_track": 0.07015882685689305,
+        "final_distance_error": 0.024121649032341708,
+        "qp_intervention_fraction": 0.09234234234234234,
+        "min_inter_agent_distance": 0.28067837550651015,
+        "min_signed_clearance": 0.07281541440004416,
+        "g500_success": true,
+        "failure_reasons": [],
+        "capacity_label": "normal-only instantaneous contact wrench box, 0 <= f_i <= stiffness*delta_max; not dynamically guaranteed",
+        "changed_mechanism": "Only centroid target before CONTACT_READY; CVT mass, redeployment guards, sensing, safety and subsequent transport identical",
+        "shape": "l_shape"
+      },
+      {
+        "variant": "nearest_observed_target",
+        "seed": 5,
+        "initial_state_sha256": "4fb8bb04621bf67a1bfcf04b29fa9e544e8e55480b24f5024ca83b6cdbd18842",
+        "config_sha256": "9ae8187f0d293fe13a610b80a0d641799b24d3a2c3fc5ff97aa699159f6945c2",
+        "goal_direction": [
+          -0.10625411423413605,
+          0.9943390081900233
+        ],
+        "task": {
+          "cargo_0": {
+            "object_id": "cargo_0",
+            "direction": [
+              -0.10625411423413605,
+              0.9943390081900233
+            ],
+            "angle_deg": 96.09942625178446,
+            "target_distance": 1.352955555454011,
+            "start": [
+              3.7848360655737823,
+              3.8063524590164044
+            ],
+            "goal_point": [
+              3.6410789714308627,
+              5.151648944151727
+            ],
+            "tolerance": 0.12,
+            "clearance": 1.9050471192360838,
+            "sampling_attempts": 1
+          }
+        },
+        "termination": {
+          "frames_run": 638,
+          "max_frames": 3000,
+          "settled": true,
+          "terminated_by": "settled",
+          "settle_frames": 40,
+          "settle_speed": 0.005
+        },
+        "contact_ready_frame": 136,
+        "contact_ready_seconds": 6.800000000000001,
+        "mean_contacts": 2.223787167449139,
+        "max_contacts": 4,
+        "contact_azimuth_histogram_12_bins": [
+          0,
+          0,
+          84,
+          0,
+          0,
+          0,
+          1,
+          139,
+          207,
+          345,
+          460,
+          185
+        ],
+        "peak_normal_only_forward_capacity": 99.80352935883042,
+        "torque_capacity_min": -35.84940962670287,
+        "torque_capacity_max": 61.97015324414923,
+        "peak_actual_net_force": 42.24121266456836,
+        "peak_absolute_actual_torque": 25.079839737432195,
+        "direction_error_deg": 0.3661526455145669,
+        "max_cross_track": 0.028845844705690873,
+        "final_distance_error": 0.04702881723739627,
+        "qp_intervention_fraction": 0.20973746081504702,
+        "min_inter_agent_distance": 0.2800036066554957,
+        "min_signed_clearance": 0.07960302475534602,
+        "g500_success": false,
+        "failure_reasons": [
+          "G500: 70 scaled-barrier event(s), smallest factor 0.000; the contract allows 0"
+        ],
+        "capacity_label": "normal-only instantaneous contact wrench box, 0 <= f_i <= stiffness*delta_max; not dynamically guaranteed",
+        "changed_mechanism": "Only centroid target before CONTACT_READY; CVT mass, redeployment guards, sensing, safety and subsequent transport identical",
+        "shape": "l_shape"
+      }
+    ],
+    [
+      {
+        "variant": "boundary_cvt",
+        "seed": 8,
+        "initial_state_sha256": "2e04b993fd9f38636ab0808ffd39d08335417971d770dacc15aa84af887175e1",
+        "config_sha256": "9ae8187f0d293fe13a610b80a0d641799b24d3a2c3fc5ff97aa699159f6945c2",
+        "goal_direction": [
+          0.9991906209433407,
+          -0.04022565125465672
+        ],
+        "task": {
+          "cargo_0": {
+            "object_id": "cargo_0",
+            "direction": [
+              0.9991906209433407,
+              -0.04022565125465672
+            ],
+            "angle_deg": 357.6946179453914,
+            "target_distance": 1.3043850379523978,
+            "start": [
+              3.7848360655737823,
+              3.8063524590164044
+            ],
+            "goal_point": [
+              5.088165361594641,
+              3.753882721377939
+            ],
+            "tolerance": 0.12,
+            "clearance": 1.9050471192360838,
+            "sampling_attempts": 1
+          }
+        },
+        "termination": {
+          "frames_run": 352,
+          "max_frames": 3000,
+          "settled": true,
+          "terminated_by": "settled",
+          "settle_frames": 40,
+          "settle_speed": 0.005
+        },
+        "contact_ready_frame": 89,
+        "contact_ready_seconds": 4.45,
+        "mean_contacts": 2.41643059490085,
+        "max_contacts": 5,
+        "contact_azimuth_histogram_12_bins": [
+          0,
+          0,
+          9,
+          119,
+          256,
+          175,
+          219,
+          28,
+          46,
+          1,
+          0,
+          0
+        ],
+        "peak_normal_only_forward_capacity": 101.71248565340935,
+        "torque_capacity_min": -42.551939647257214,
+        "torque_capacity_max": 30.864060270773155,
+        "peak_actual_net_force": 40.838305807506046,
+        "peak_absolute_actual_torque": 13.869062743524964,
+        "direction_error_deg": 3.2203192417808455,
+        "max_cross_track": 0.07081001129358225,
+        "final_distance_error": -0.12546101967217638,
+        "qp_intervention_fraction": 0.058061079545454544,
+        "min_inter_agent_distance": 0.29678579841336306,
+        "min_signed_clearance": 0.0954974199844898,
+        "g500_success": false,
+        "failure_reasons": [
+          "G500: target reached never happened within the 352-frame run",
+          "G500: J=1.1789 m stopped 0.1255 m short of L=1.3044 m, outside the declared arrival tolerance 0.1200 m"
+        ],
+        "capacity_label": "normal-only instantaneous contact wrench box, 0 <= f_i <= stiffness*delta_max; not dynamically guaranteed",
+        "changed_mechanism": "Only centroid target before CONTACT_READY; CVT mass, redeployment guards, sensing, safety and subsequent transport identical",
+        "shape": "l_shape"
+      },
+      {
+        "variant": "nearest_observed_target",
+        "seed": 8,
+        "initial_state_sha256": "2e04b993fd9f38636ab0808ffd39d08335417971d770dacc15aa84af887175e1",
+        "config_sha256": "9ae8187f0d293fe13a610b80a0d641799b24d3a2c3fc5ff97aa699159f6945c2",
+        "goal_direction": [
+          0.9991906209433407,
+          -0.04022565125465672
+        ],
+        "task": {
+          "cargo_0": {
+            "object_id": "cargo_0",
+            "direction": [
+              0.9991906209433407,
+              -0.04022565125465672
+            ],
+            "angle_deg": 357.6946179453914,
+            "target_distance": 1.3043850379523978,
+            "start": [
+              3.7848360655737823,
+              3.8063524590164044
+            ],
+            "goal_point": [
+              5.088165361594641,
+              3.753882721377939
+            ],
+            "tolerance": 0.12,
+            "clearance": 1.9050471192360838,
+            "sampling_attempts": 1
+          }
+        },
+        "termination": {
+          "frames_run": 272,
+          "max_frames": 3000,
+          "settled": true,
+          "terminated_by": "settled",
+          "settle_frames": 40,
+          "settle_speed": 0.005
+        },
+        "contact_ready_frame": 92,
+        "contact_ready_seconds": 4.6000000000000005,
+        "mean_contacts": 1.879120879120879,
+        "max_contacts": 6,
+        "contact_azimuth_histogram_12_bins": [
+          0,
+          0,
+          0,
+          78,
+          76,
+          138,
+          118,
+          64,
+          0,
+          0,
+          0,
+          39
+        ],
+        "peak_normal_only_forward_capacity": 132.4987549083116,
+        "torque_capacity_min": -55.5794646598305,
+        "torque_capacity_max": 32.84413211581097,
+        "peak_actual_net_force": 41.19588085180173,
+        "peak_absolute_actual_torque": 19.221678286008526,
+        "direction_error_deg": 3.1578743426131877,
+        "max_cross_track": 0.06418738960809911,
+        "final_distance_error": -0.14096259268277112,
+        "qp_intervention_fraction": 0.18244485294117646,
+        "min_inter_agent_distance": 0.2800225806412146,
+        "min_signed_clearance": 0.09388620502080158,
+        "g500_success": false,
+        "failure_reasons": [
+          "G500: target reached never happened within the 272-frame run",
+          "G500: J=1.1634 m stopped 0.1410 m short of L=1.3044 m, outside the declared arrival tolerance 0.1200 m",
+          "G500: 1 scaled-barrier event(s), smallest factor 0.938; the contract allows 0"
+        ],
+        "capacity_label": "normal-only instantaneous contact wrench box, 0 <= f_i <= stiffness*delta_max; not dynamically guaranteed",
+        "changed_mechanism": "Only centroid target before CONTACT_READY; CVT mass, redeployment guards, sensing, safety and subsequent transport identical",
+        "shape": "l_shape"
+      }
+    ],
+    [
+      {
+        "variant": "boundary_cvt",
+        "seed": 2,
+        "initial_state_sha256": "1b464d06337ec82d5cf961d16d9e34c9c5ebd17d207506f8c649787961522e84",
+        "config_sha256": "6210fa30782eb1ce770686f58fd7736f4c4f4194befb117b6667fe56f3736220",
+        "goal_direction": [
+          0.19706172910618755,
+          0.9803910826408406
+        ],
+        "task": {
+          "cargo_0": {
+            "object_id": "cargo_0",
+            "direction": [
+              0.19706172910618755,
+              0.9803910826408406
+            ],
+            "angle_deg": 78.6348106982665,
+            "target_distance": 1.4466640406178684,
+            "start": [
+              3.999999999999995,
+              3.9999999999999964
+            ],
+            "goal_point": [
+              4.285082117279896,
+              5.4182965249989214
+            ],
+            "tolerance": 0.12,
+            "clearance": 1.5850000000000057,
+            "sampling_attempts": 1
+          }
+        },
+        "termination": {
+          "frames_run": 558,
+          "max_frames": 3000,
+          "settled": true,
+          "terminated_by": "settled",
+          "settle_frames": 40,
+          "settle_speed": 0.005
+        },
+        "contact_ready_frame": 101,
+        "contact_ready_seconds": 5.050000000000001,
+        "mean_contacts": 2.40608228980322,
+        "max_contacts": 5,
+        "contact_azimuth_histogram_12_bins": [
+          0,
+          0,
+          47,
+          95,
+          4,
+          105,
+          182,
+          8,
+          425,
+          435,
+          44,
+          0
+        ],
+        "peak_normal_only_forward_capacity": 92.57946356162951,
+        "torque_capacity_min": -27.157813464648694,
+        "torque_capacity_max": 28.94624659996207,
+        "peak_actual_net_force": 35.59363465909625,
+        "peak_absolute_actual_torque": 15.978033029967907,
+        "direction_error_deg": 1.4948351115306842,
+        "max_cross_track": 0.033502646208030895,
+        "final_distance_error": -0.1628270060636614,
+        "qp_intervention_fraction": 0.18156362007168458,
+        "min_inter_agent_distance": 0.2800010130599799,
+        "min_signed_clearance": 0.07677500749844812,
+        "g500_success": false,
+        "failure_reasons": [
+          "G500: target reached never happened within the 558-frame run",
+          "G500: J=1.2838 m stopped 0.1628 m short of L=1.4467 m, outside the declared arrival tolerance 0.1200 m"
+        ],
+        "capacity_label": "normal-only instantaneous contact wrench box, 0 <= f_i <= stiffness*delta_max; not dynamically guaranteed",
+        "changed_mechanism": "Only centroid target before CONTACT_READY; CVT mass, redeployment guards, sensing, safety and subsequent transport identical",
+        "shape": "rectangle"
+      },
+      {
+        "variant": "nearest_observed_target",
+        "seed": 2,
+        "initial_state_sha256": "1b464d06337ec82d5cf961d16d9e34c9c5ebd17d207506f8c649787961522e84",
+        "config_sha256": "6210fa30782eb1ce770686f58fd7736f4c4f4194befb117b6667fe56f3736220",
+        "goal_direction": [
+          0.19706172910618755,
+          0.9803910826408406
+        ],
+        "task": {
+          "cargo_0": {
+            "object_id": "cargo_0",
+            "direction": [
+              0.19706172910618755,
+              0.9803910826408406
+            ],
+            "angle_deg": 78.6348106982665,
+            "target_distance": 1.4466640406178684,
+            "start": [
+              3.999999999999995,
+              3.9999999999999964
+            ],
+            "goal_point": [
+              4.285082117279896,
+              5.4182965249989214
+            ],
+            "tolerance": 0.12,
+            "clearance": 1.5850000000000057,
+            "sampling_attempts": 1
+          }
+        },
+        "termination": {
+          "frames_run": 742,
+          "max_frames": 3000,
+          "settled": true,
+          "terminated_by": "settled",
+          "settle_frames": 40,
+          "settle_speed": 0.005
+        },
+        "contact_ready_frame": 244,
+        "contact_ready_seconds": 12.200000000000001,
+        "mean_contacts": 1.6177658142664872,
+        "max_contacts": 4,
+        "contact_azimuth_histogram_12_bins": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          107,
+          70,
+          249,
+          397,
+          47,
+          332,
+          0
+        ],
+        "peak_normal_only_forward_capacity": 101.76199403935175,
+        "torque_capacity_min": -44.33663574142511,
+        "torque_capacity_max": 24.11527532674978,
+        "peak_actual_net_force": 38.512817220956066,
+        "peak_absolute_actual_torque": 17.296128730054857,
+        "direction_error_deg": 1.4120050904370178,
+        "max_cross_track": 0.13971598108158337,
+        "final_distance_error": 0.10167641476123324,
+        "qp_intervention_fraction": 0.2733322102425876,
+        "min_inter_agent_distance": 0.28000000034127637,
+        "min_signed_clearance": 0.07918521681924119,
+        "g500_success": false,
+        "failure_reasons": [
+          "G500: 54 scaled-barrier event(s), smallest factor 0.066; the contract allows 0"
+        ],
+        "capacity_label": "normal-only instantaneous contact wrench box, 0 <= f_i <= stiffness*delta_max; not dynamically guaranteed",
+        "changed_mechanism": "Only centroid target before CONTACT_READY; CVT mass, redeployment guards, sensing, safety and subsequent transport identical",
+        "shape": "rectangle"
+      }
+    ],
+    [
+      {
+        "variant": "boundary_cvt",
+        "seed": 5,
+        "initial_state_sha256": "4fb8bb04621bf67a1bfcf04b29fa9e544e8e55480b24f5024ca83b6cdbd18842",
+        "config_sha256": "6210fa30782eb1ce770686f58fd7736f4c4f4194befb117b6667fe56f3736220",
+        "goal_direction": [
+          -0.10625411423413605,
+          0.9943390081900233
+        ],
+        "task": {
+          "cargo_0": {
+            "object_id": "cargo_0",
+            "direction": [
+              -0.10625411423413605,
+              0.9943390081900233
+            ],
+            "angle_deg": 96.09942625178446,
+            "target_distance": 1.352955555454011,
+            "start": [
+              3.999999999999995,
+              3.9999999999999964
+            ],
+            "goal_point": [
+              3.8562429058570755,
+              5.34529648513532
+            ],
+            "tolerance": 0.12,
+            "clearance": 1.5850000000000057,
+            "sampling_attempts": 1
+          }
+        },
+        "termination": {
+          "frames_run": 535,
+          "max_frames": 3000,
+          "settled": true,
+          "terminated_by": "settled",
+          "settle_frames": 40,
+          "settle_speed": 0.005
+        },
+        "contact_ready_frame": 87,
+        "contact_ready_seconds": 4.3500000000000005,
+        "mean_contacts": 2.628731343283582,
+        "max_contacts": 6,
+        "contact_azimuth_histogram_12_bins": [
+          263,
+          1,
+          0,
+          0,
+          0,
+          28,
+          197,
+          133,
+          237,
+          260,
+          88,
+          202
+        ],
+        "peak_normal_only_forward_capacity": 129.32520961979222,
+        "torque_capacity_min": -41.30359115521896,
+        "torque_capacity_max": 39.293870397524074,
+        "peak_actual_net_force": 43.80464792726783,
+        "peak_absolute_actual_torque": 16.498346322786663,
+        "direction_error_deg": 2.0121602937717284,
+        "max_cross_track": 0.11015687407324729,
+        "final_distance_error": -0.007601732523870641,
+        "qp_intervention_fraction": 0.20677570093457945,
+        "min_inter_agent_distance": 0.28000723260763294,
+        "min_signed_clearance": 0.08299408763200214,
+        "g500_success": false,
+        "failure_reasons": [
+          "G500: 45 scaled-barrier event(s), smallest factor 0.027; the contract allows 0"
+        ],
+        "capacity_label": "normal-only instantaneous contact wrench box, 0 <= f_i <= stiffness*delta_max; not dynamically guaranteed",
+        "changed_mechanism": "Only centroid target before CONTACT_READY; CVT mass, redeployment guards, sensing, safety and subsequent transport identical",
+        "shape": "rectangle"
+      },
+      {
+        "variant": "nearest_observed_target",
+        "seed": 5,
+        "initial_state_sha256": "4fb8bb04621bf67a1bfcf04b29fa9e544e8e55480b24f5024ca83b6cdbd18842",
+        "config_sha256": "6210fa30782eb1ce770686f58fd7736f4c4f4194befb117b6667fe56f3736220",
+        "goal_direction": [
+          -0.10625411423413605,
+          0.9943390081900233
+        ],
+        "task": {
+          "cargo_0": {
+            "object_id": "cargo_0",
+            "direction": [
+              -0.10625411423413605,
+              0.9943390081900233
+            ],
+            "angle_deg": 96.09942625178446,
+            "target_distance": 1.352955555454011,
+            "start": [
+              3.999999999999995,
+              3.9999999999999964
+            ],
+            "goal_point": [
+              3.8562429058570755,
+              5.34529648513532
+            ],
+            "tolerance": 0.12,
+            "clearance": 1.5850000000000057,
+            "sampling_attempts": 1
+          }
+        },
+        "termination": {
+          "frames_run": 416,
+          "max_frames": 3000,
+          "settled": true,
+          "terminated_by": "settled",
+          "settle_frames": 40,
+          "settle_speed": 0.005
+        },
+        "contact_ready_frame": 93,
+        "contact_ready_seconds": 4.65,
+        "mean_contacts": 2.172661870503597,
+        "max_contacts": 5,
+        "contact_azimuth_histogram_12_bins": [
+          130,
+          0,
+          0,
+          0,
+          0,
+          2,
+          32,
+          73,
+          213,
+          285,
+          85,
+          86
+        ],
+        "peak_normal_only_forward_capacity": 96.93091451949516,
+        "torque_capacity_min": -26.149097974887255,
+        "torque_capacity_max": 41.84815017941183,
+        "peak_actual_net_force": 33.81930075397718,
+        "peak_absolute_actual_torque": 16.25476421717852,
+        "direction_error_deg": 1.7450062990258315,
+        "max_cross_track": 0.04220192003676794,
+        "final_distance_error": 0.03227969449388346,
+        "qp_intervention_fraction": 0.2267127403846154,
+        "min_inter_agent_distance": 0.28003785077544097,
+        "min_signed_clearance": 0.08784421727465538,
+        "g500_success": false,
+        "failure_reasons": [
+          "G500: 119 scaled-barrier event(s), smallest factor 0.000; the contract allows 0"
+        ],
+        "capacity_label": "normal-only instantaneous contact wrench box, 0 <= f_i <= stiffness*delta_max; not dynamically guaranteed",
+        "changed_mechanism": "Only centroid target before CONTACT_READY; CVT mass, redeployment guards, sensing, safety and subsequent transport identical",
+        "shape": "rectangle"
+      }
+    ],
+    [
+      {
+        "variant": "boundary_cvt",
+        "seed": 8,
+        "initial_state_sha256": "2e04b993fd9f38636ab0808ffd39d08335417971d770dacc15aa84af887175e1",
+        "config_sha256": "6210fa30782eb1ce770686f58fd7736f4c4f4194befb117b6667fe56f3736220",
+        "goal_direction": [
+          0.9991906209433407,
+          -0.04022565125465672
+        ],
+        "task": {
+          "cargo_0": {
+            "object_id": "cargo_0",
+            "direction": [
+              0.9991906209433407,
+              -0.04022565125465672
+            ],
+            "angle_deg": 357.6946179453914,
+            "target_distance": 1.3043850379523978,
+            "start": [
+              3.999999999999995,
+              3.9999999999999964
+            ],
+            "goal_point": [
+              5.303329296020855,
+              3.947530262361531
+            ],
+            "tolerance": 0.12,
+            "clearance": 1.5850000000000057,
+            "sampling_attempts": 1
+          }
+        },
+        "termination": {
+          "frames_run": 392,
+          "max_frames": 3000,
+          "settled": true,
+          "terminated_by": "settled",
+          "settle_frames": 40,
+          "settle_speed": 0.005
+        },
+        "contact_ready_frame": 100,
+        "contact_ready_seconds": 5.0,
+        "mean_contacts": 1.6208651399491094,
+        "max_contacts": 5,
+        "contact_azimuth_histogram_12_bins": [
+          0,
+          0,
+          55,
+          0,
+          64,
+          303,
+          177,
+          0,
+          0,
+          38,
+          0,
+          0
+        ],
+        "peak_normal_only_forward_capacity": 100.03575287352854,
+        "torque_capacity_min": -20.95382049661819,
+        "torque_capacity_max": 25.334099603347752,
+        "peak_actual_net_force": 35.324719250227226,
+        "peak_absolute_actual_torque": 16.143123013151605,
+        "direction_error_deg": 0.9655696331056769,
+        "max_cross_track": 0.06062316670402386,
+        "final_distance_error": 0.11002407355301891,
+        "qp_intervention_fraction": 0.20200892857142858,
+        "min_inter_agent_distance": 0.28001505579615327,
+        "min_signed_clearance": 0.08317883293994881,
+        "g500_success": false,
+        "failure_reasons": [
+          "G500: 21 scaled-barrier event(s), smallest factor 0.035; the contract allows 0"
+        ],
+        "capacity_label": "normal-only instantaneous contact wrench box, 0 <= f_i <= stiffness*delta_max; not dynamically guaranteed",
+        "changed_mechanism": "Only centroid target before CONTACT_READY; CVT mass, redeployment guards, sensing, safety and subsequent transport identical",
+        "shape": "rectangle"
+      },
+      {
+        "variant": "nearest_observed_target",
+        "seed": 8,
+        "initial_state_sha256": "2e04b993fd9f38636ab0808ffd39d08335417971d770dacc15aa84af887175e1",
+        "config_sha256": "6210fa30782eb1ce770686f58fd7736f4c4f4194befb117b6667fe56f3736220",
+        "goal_direction": [
+          0.9991906209433407,
+          -0.04022565125465672
+        ],
+        "task": {
+          "cargo_0": {
+            "object_id": "cargo_0",
+            "direction": [
+              0.9991906209433407,
+              -0.04022565125465672
+            ],
+            "angle_deg": 357.6946179453914,
+            "target_distance": 1.3043850379523978,
+            "start": [
+              3.999999999999995,
+              3.9999999999999964
+            ],
+            "goal_point": [
+              5.303329296020855,
+              3.947530262361531
+            ],
+            "tolerance": 0.12,
+            "clearance": 1.5850000000000057,
+            "sampling_attempts": 1
+          }
+        },
+        "termination": {
+          "frames_run": 501,
+          "max_frames": 3000,
+          "settled": true,
+          "terminated_by": "settled",
+          "settle_frames": 40,
+          "settle_speed": 0.005
+        },
+        "contact_ready_frame": 97,
+        "contact_ready_seconds": 4.8500000000000005,
+        "mean_contacts": 2.458167330677291,
+        "max_contacts": 5,
+        "contact_azimuth_histogram_12_bins": [
+          0,
+          0,
+          103,
+          61,
+          108,
+          304,
+          367,
+          77,
+          112,
+          100,
+          2,
+          0
+        ],
+        "peak_normal_only_forward_capacity": 69.25913716049925,
+        "torque_capacity_min": -23.199085045028546,
+        "torque_capacity_max": 35.877631683142205,
+        "peak_actual_net_force": 35.33455235293534,
+        "peak_absolute_actual_torque": 14.746244921735405,
+        "direction_error_deg": 1.311548297646004,
+        "max_cross_track": 0.06395501458674974,
+        "final_distance_error": -0.016433921692452946,
+        "qp_intervention_fraction": 0.18999500998003993,
+        "min_inter_agent_distance": 0.28000092936935383,
+        "min_signed_clearance": 0.07788299339265088,
+        "g500_success": false,
+        "failure_reasons": [
+          "G500: 17 scaled-barrier event(s), smallest factor 0.180; the contract allows 0"
+        ],
+        "capacity_label": "normal-only instantaneous contact wrench box, 0 <= f_i <= stiffness*delta_max; not dynamically guaranteed",
+        "changed_mechanism": "Only centroid target before CONTACT_READY; CVT mass, redeployment guards, sensing, safety and subsequent transport identical",
+        "shape": "rectangle"
+      }
+    ],
+    [
+      {
+        "variant": "boundary_cvt",
+        "seed": 2,
+        "initial_state_sha256": "1b464d06337ec82d5cf961d16d9e34c9c5ebd17d207506f8c649787961522e84",
+        "config_sha256": "d1d3efb50b882f1169d0ed32210b257cc116bbdd7087826b2f2547a34c1e2de6",
+        "goal_direction": [
+          0.19706172910618755,
+          0.9803910826408406
+        ],
+        "task": {
+          "cargo_0": {
+            "object_id": "cargo_0",
+            "direction": [
+              0.19706172910618755,
+              0.9803910826408406
+            ],
+            "angle_deg": 78.6348106982665,
+            "target_distance": 1.4466640406178684,
+            "start": [
+              3.9999999999999583,
+              3.9176470588234884
+            ],
+            "goal_point": [
+              4.28508211727986,
+              5.335943583822413
+            ],
+            "tolerance": 0.12,
+            "clearance": 1.6364777868943796,
+            "sampling_attempts": 1
+          }
+        },
+        "termination": {
+          "frames_run": 330,
+          "max_frames": 3000,
+          "settled": true,
+          "terminated_by": "settled",
+          "settle_frames": 40,
+          "settle_speed": 0.005
+        },
+        "contact_ready_frame": 93,
+        "contact_ready_seconds": 4.65,
+        "mean_contacts": 2.012084592145015,
+        "max_contacts": 4,
+        "contact_azimuth_histogram_12_bins": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          70,
+          100,
+          166,
+          32,
+          175,
+          17,
+          106
+        ],
+        "peak_normal_only_forward_capacity": 76.45265312525206,
+        "torque_capacity_min": -24.8694477397963,
+        "torque_capacity_max": 15.467053162768494,
+        "peak_actual_net_force": 40.37753100351649,
+        "peak_absolute_actual_torque": 11.957669796838905,
+        "direction_error_deg": 1.5103644946890311,
+        "max_cross_track": 0.035029967078234525,
+        "final_distance_error": -0.11810768500778202,
+        "qp_intervention_fraction": 0.13011363636363638,
+        "min_inter_agent_distance": 0.2801918609179868,
+        "min_signed_clearance": 0.09114674471662873,
+        "g500_success": true,
+        "failure_reasons": [],
+        "capacity_label": "normal-only instantaneous contact wrench box, 0 <= f_i <= stiffness*delta_max; not dynamically guaranteed",
+        "changed_mechanism": "Only centroid target before CONTACT_READY; CVT mass, redeployment guards, sensing, safety and subsequent transport identical",
+        "shape": "c_shape"
+      },
+      {
+        "variant": "nearest_observed_target",
+        "seed": 2,
+        "initial_state_sha256": "1b464d06337ec82d5cf961d16d9e34c9c5ebd17d207506f8c649787961522e84",
+        "config_sha256": "d1d3efb50b882f1169d0ed32210b257cc116bbdd7087826b2f2547a34c1e2de6",
+        "goal_direction": [
+          0.19706172910618755,
+          0.9803910826408406
+        ],
+        "task": {
+          "cargo_0": {
+            "object_id": "cargo_0",
+            "direction": [
+              0.19706172910618755,
+              0.9803910826408406
+            ],
+            "angle_deg": 78.6348106982665,
+            "target_distance": 1.4466640406178684,
+            "start": [
+              3.9999999999999583,
+              3.9176470588234884
+            ],
+            "goal_point": [
+              4.28508211727986,
+              5.335943583822413
+            ],
+            "tolerance": 0.12,
+            "clearance": 1.6364777868943796,
+            "sampling_attempts": 1
+          }
+        },
+        "termination": {
+          "frames_run": 567,
+          "max_frames": 3000,
+          "settled": true,
+          "terminated_by": "settled",
+          "settle_frames": 40,
+          "settle_speed": 0.005
+        },
+        "contact_ready_frame": 286,
+        "contact_ready_seconds": 14.3,
+        "mean_contacts": 1.8644366197183098,
+        "max_contacts": 6,
+        "contact_azimuth_histogram_12_bins": [
+          103,
+          0,
+          0,
+          13,
+          0,
+          72,
+          151,
+          269,
+          228,
+          182,
+          28,
+          13
+        ],
+        "peak_normal_only_forward_capacity": 92.71093182353536,
+        "torque_capacity_min": -29.828041473927794,
+        "torque_capacity_max": 38.0319631105772,
+        "peak_actual_net_force": 31.183546386422382,
+        "peak_absolute_actual_torque": 14.394491272827626,
+        "direction_error_deg": 4.863183548213681,
+        "max_cross_track": 0.11641990377333875,
+        "final_distance_error": -0.07835400903927092,
+        "qp_intervention_fraction": 0.33807319223985893,
+        "min_inter_agent_distance": 0.2800000013794625,
+        "min_signed_clearance": 0.07039152044982332,
+        "g500_success": false,
+        "failure_reasons": [
+          "G500: 44 scaled-barrier event(s), smallest factor 0.074; the contract allows 0"
+        ],
+        "capacity_label": "normal-only instantaneous contact wrench box, 0 <= f_i <= stiffness*delta_max; not dynamically guaranteed",
+        "changed_mechanism": "Only centroid target before CONTACT_READY; CVT mass, redeployment guards, sensing, safety and subsequent transport identical",
+        "shape": "c_shape"
+      }
+    ],
+    [
+      {
+        "variant": "boundary_cvt",
+        "seed": 5,
+        "initial_state_sha256": "4fb8bb04621bf67a1bfcf04b29fa9e544e8e55480b24f5024ca83b6cdbd18842",
+        "config_sha256": "d1d3efb50b882f1169d0ed32210b257cc116bbdd7087826b2f2547a34c1e2de6",
+        "goal_direction": [
+          -0.10625411423413605,
+          0.9943390081900233
+        ],
+        "task": {
+          "cargo_0": {
+            "object_id": "cargo_0",
+            "direction": [
+              -0.10625411423413605,
+              0.9943390081900233
+            ],
+            "angle_deg": 96.09942625178446,
+            "target_distance": 1.352955555454011,
+            "start": [
+              3.9999999999999583,
+              3.9176470588234884
+            ],
+            "goal_point": [
+              3.8562429058570387,
+              5.262943543958812
+            ],
+            "tolerance": 0.12,
+            "clearance": 1.6364777868943796,
+            "sampling_attempts": 1
+          }
+        },
+        "termination": {
+          "frames_run": 352,
+          "max_frames": 3000,
+          "settled": true,
+          "terminated_by": "settled",
+          "settle_frames": 40,
+          "settle_speed": 0.005
+        },
+        "contact_ready_frame": 82,
+        "contact_ready_seconds": 4.1000000000000005,
+        "mean_contacts": 2.6657223796033995,
+        "max_contacts": 7,
+        "contact_azimuth_histogram_12_bins": [
+          179,
+          37,
+          0,
+          0,
+          0,
+          54,
+          169,
+          135,
+          128,
+          24,
+          42,
+          173
+        ],
+        "peak_normal_only_forward_capacity": 107.33500401861903,
+        "torque_capacity_min": -41.27079154161959,
+        "torque_capacity_max": 46.985233979314245,
+        "peak_actual_net_force": 35.383471377135756,
+        "peak_absolute_actual_torque": 16.538579219607527,
+        "direction_error_deg": 0.1505550825366284,
+        "max_cross_track": 0.05330633265822024,
+        "final_distance_error": 0.11054083643737367,
+        "qp_intervention_fraction": 0.22247869318181818,
+        "min_inter_agent_distance": 0.2800067167758723,
+        "min_signed_clearance": 0.04752322403234537,
+        "g500_success": false,
+        "failure_reasons": [
+          "G500: 54 scaled-barrier event(s), smallest factor 0.008; the contract allows 0"
+        ],
+        "capacity_label": "normal-only instantaneous contact wrench box, 0 <= f_i <= stiffness*delta_max; not dynamically guaranteed",
+        "changed_mechanism": "Only centroid target before CONTACT_READY; CVT mass, redeployment guards, sensing, safety and subsequent transport identical",
+        "shape": "c_shape"
+      },
+      {
+        "variant": "nearest_observed_target",
+        "seed": 5,
+        "initial_state_sha256": "4fb8bb04621bf67a1bfcf04b29fa9e544e8e55480b24f5024ca83b6cdbd18842",
+        "config_sha256": "d1d3efb50b882f1169d0ed32210b257cc116bbdd7087826b2f2547a34c1e2de6",
+        "goal_direction": [
+          -0.10625411423413605,
+          0.9943390081900233
+        ],
+        "task": {
+          "cargo_0": {
+            "object_id": "cargo_0",
+            "direction": [
+              -0.10625411423413605,
+              0.9943390081900233
+            ],
+            "angle_deg": 96.09942625178446,
+            "target_distance": 1.352955555454011,
+            "start": [
+              3.9999999999999583,
+              3.9176470588234884
+            ],
+            "goal_point": [
+              3.8562429058570387,
+              5.262943543958812
+            ],
+            "tolerance": 0.12,
+            "clearance": 1.6364777868943796,
+            "sampling_attempts": 1
+          }
+        },
+        "termination": {
+          "frames_run": 391,
+          "max_frames": 3000,
+          "settled": true,
+          "terminated_by": "settled",
+          "settle_frames": 40,
+          "settle_speed": 0.005
+        },
+        "contact_ready_frame": 94,
+        "contact_ready_seconds": 4.7,
+        "mean_contacts": 2.2653061224489797,
+        "max_contacts": 5,
+        "contact_azimuth_histogram_12_bins": [
+          122,
+          7,
+          0,
+          0,
+          0,
+          90,
+          75,
+          148,
+          26,
+          225,
+          82,
+          113
+        ],
+        "peak_normal_only_forward_capacity": 69.88682052657819,
+        "torque_capacity_min": -19.221637154663455,
+        "torque_capacity_max": 38.029448429726045,
+        "peak_actual_net_force": 33.330964303704675,
+        "peak_absolute_actual_torque": 31.321178453341773,
+        "direction_error_deg": 0.8270095215723079,
+        "max_cross_track": 0.0502008723194838,
+        "final_distance_error": 0.19364157676694038,
+        "qp_intervention_fraction": 0.28005115089514065,
+        "min_inter_agent_distance": 0.28003883100860627,
+        "min_signed_clearance": 0.064083709484842,
+        "g500_success": false,
+        "failure_reasons": [
+          "G500: J=1.5466 m stopped 0.1936 m past L=1.3530 m, outside the declared arrival tolerance 0.1200 m",
+          "G500: 154 scaled-barrier event(s), smallest factor 0.000; the contract allows 0"
+        ],
+        "capacity_label": "normal-only instantaneous contact wrench box, 0 <= f_i <= stiffness*delta_max; not dynamically guaranteed",
+        "changed_mechanism": "Only centroid target before CONTACT_READY; CVT mass, redeployment guards, sensing, safety and subsequent transport identical",
+        "shape": "c_shape"
+      }
+    ],
+    [
+      {
+        "variant": "boundary_cvt",
+        "seed": 8,
+        "initial_state_sha256": "2e04b993fd9f38636ab0808ffd39d08335417971d770dacc15aa84af887175e1",
+        "config_sha256": "d1d3efb50b882f1169d0ed32210b257cc116bbdd7087826b2f2547a34c1e2de6",
+        "goal_direction": [
+          0.9991906209433407,
+          -0.04022565125465672
+        ],
+        "task": {
+          "cargo_0": {
+            "object_id": "cargo_0",
+            "direction": [
+              0.9991906209433407,
+              -0.04022565125465672
+            ],
+            "angle_deg": 357.6946179453914,
+            "target_distance": 1.3043850379523978,
+            "start": [
+              3.9999999999999583,
+              3.9176470588234884
+            ],
+            "goal_point": [
+              5.303329296020817,
+              3.865177321185023
+            ],
+            "tolerance": 0.12,
+            "clearance": 1.6364777868943796,
+            "sampling_attempts": 1
+          }
+        },
+        "termination": {
+          "frames_run": 3000,
+          "max_frames": 3000,
+          "settled": false,
+          "terminated_by": "watchdog",
+          "settle_frames": 40,
+          "settle_speed": 0.005
+        },
+        "contact_ready_frame": 83,
+        "contact_ready_seconds": 4.15,
+        "mean_contacts": 4.661779406864379,
+        "max_contacts": 10,
+        "contact_azimuth_histogram_12_bins": [
+          1673,
+          1734,
+          281,
+          0,
+          984,
+          2016,
+          2162,
+          691,
+          922,
+          1283,
+          1916,
+          328
+        ],
+        "peak_normal_only_forward_capacity": 102.34600492385198,
+        "torque_capacity_min": -65.65145807247632,
+        "torque_capacity_max": 71.85938345143245,
+        "peak_actual_net_force": 34.73376217207075,
+        "peak_absolute_actual_torque": 24.70118775846892,
+        "direction_error_deg": 0.019489951360846247,
+        "max_cross_track": 0.056000314325373,
+        "final_distance_error": 1.7909707228567957,
+        "qp_intervention_fraction": 0.19216666666666668,
+        "min_inter_agent_distance": 0.22486313505926997,
+        "min_signed_clearance": 0.0569010136047901,
+        "g500_success": false,
+        "failure_reasons": [
+          "G500: transport activation never happened within the 3000-frame run",
+          "G500: J=3.0954 m stopped 1.7910 m past L=1.3044 m, outside the declared arrival tolerance 0.1200 m",
+          "G500: the run did not end in HOLD",
+          "G500: 12 solver fallback event(s); the contract allows 0",
+          "G500: 12 QP infeasibility event(s); the contract allows 0",
+          "G500: 410 scaled-barrier event(s), smallest factor 0.008; the contract allows 0",
+          "G500: min inter-agent distance 0.224863 m < d_min 0.280000 m by 5.51e-02 m"
+        ],
+        "capacity_label": "normal-only instantaneous contact wrench box, 0 <= f_i <= stiffness*delta_max; not dynamically guaranteed",
+        "changed_mechanism": "Only centroid target before CONTACT_READY; CVT mass, redeployment guards, sensing, safety and subsequent transport identical",
+        "shape": "c_shape"
+      },
+      {
+        "variant": "nearest_observed_target",
+        "seed": 8,
+        "initial_state_sha256": "2e04b993fd9f38636ab0808ffd39d08335417971d770dacc15aa84af887175e1",
+        "config_sha256": "d1d3efb50b882f1169d0ed32210b257cc116bbdd7087826b2f2547a34c1e2de6",
+        "goal_direction": [
+          0.9991906209433407,
+          -0.04022565125465672
+        ],
+        "task": {
+          "cargo_0": {
+            "object_id": "cargo_0",
+            "direction": [
+              0.9991906209433407,
+              -0.04022565125465672
+            ],
+            "angle_deg": 357.6946179453914,
+            "target_distance": 1.3043850379523978,
+            "start": [
+              3.9999999999999583,
+              3.9176470588234884
+            ],
+            "goal_point": [
+              5.303329296020817,
+              3.865177321185023
+            ],
+            "tolerance": 0.12,
+            "clearance": 1.6364777868943796,
+            "sampling_attempts": 1
+          }
+        },
+        "termination": {
+          "frames_run": 265,
+          "max_frames": 3000,
+          "settled": true,
+          "terminated_by": "settled",
+          "settle_frames": 40,
+          "settle_speed": 0.005
+        },
+        "contact_ready_frame": 98,
+        "contact_ready_seconds": 4.9,
+        "mean_contacts": 1.4699248120300752,
+        "max_contacts": 6,
+        "contact_azimuth_histogram_12_bins": [
+          0,
+          21,
+          13,
+          10,
+          77,
+          89,
+          104,
+          38,
+          0,
+          29,
+          10,
+          0
+        ],
+        "peak_normal_only_forward_capacity": 72.31027893260068,
+        "torque_capacity_min": -49.13720992455143,
+        "torque_capacity_max": 45.74222874627809,
+        "peak_actual_net_force": 31.416404586960663,
+        "peak_absolute_actual_torque": 15.03422154055177,
+        "direction_error_deg": 0.6887948616774996,
+        "max_cross_track": 0.06617309050482921,
+        "final_distance_error": 0.03913286590330811,
+        "qp_intervention_fraction": 0.23325471698113207,
+        "min_inter_agent_distance": 0.28004719593369104,
+        "min_signed_clearance": 0.07723265505342046,
+        "g500_success": false,
+        "failure_reasons": [
+          "G500: 23 scaled-barrier event(s), smallest factor 0.180; the contract allows 0"
+        ],
+        "capacity_label": "normal-only instantaneous contact wrench box, 0 <= f_i <= stiffness*delta_max; not dynamically guaranteed",
+        "changed_mechanism": "Only centroid target before CONTACT_READY; CVT mass, redeployment guards, sensing, safety and subsequent transport identical",
+        "shape": "c_shape"
+      }
+    ]
+  ]
+}

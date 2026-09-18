@@ -71,9 +71,19 @@
     "runs/paper/jeh_matrix/runs/rectangle/n20/seed_31/step_records.json": "84ed1ab8686ebe3526489f87f410c0efac5b7fe0229999cd9b82948ccea4ed5c",
     "runs/paper/jeh_matrix/runs/rectangle/n20/seed_37/step_records.json": "b09db44c856fb7f152c782754079eab041d378847c7bb4187c25fc2b3002319a",
     "runs/paper/jeh_matrix/runs/l_shape/n20/seed_2/trajectory.npz": "1060191e0b9285b4b79f975c8ac64c6347b33e7976999286a88c387d8af2602c",
+    "runs/paper/jeh_serial_pair/runs/l_shape/n20/seed_2/trajectory.npz": "1060191e0b9285b4b79f975c8ac64c6347b33e7976999286a88c387d8af2602c",
     "runs/paper/jeh_matrix/runs/rectangle/n20/seed_2/trajectory.npz": "c0fbb64c9a1cbfd31f715ed9cda54dec597533de310411c710b025adf096df07",
+    "runs/paper/jeh_serial_pair/runs/rectangle/n20/seed_2/trajectory.npz": "c0fbb64c9a1cbfd31f715ed9cda54dec597533de310411c710b025adf096df07",
     "runs/paper/jeh_matrix/runs/c_shape/n20/seed_2/trajectory.npz": "2afbabae5efc36e40a4d3fc6484cf99d1468832d1cb3aee290e83d2c7b594b63",
-    "docs/assets/static-deployment-comparison.png": "dd0863aba47652f1fbcfa918b9b52b05bb0a3c7152c7c2ca5a475f0d31bc54cd"
+    "docs/assets/static-deployment-comparison.png": "dd0863aba47652f1fbcfa918b9b52b05bb0a3c7152c7c2ca5a475f0d31bc54cd",
+    "runs/paper/local_boundary_pairs/summary.json": "7a7172cc26fab9596ef64c7df4e8d2232f62b5d278ae1aef2b40337d416f3c43",
+    "docs/results/consolidation/gate5_pairs.json": "7a7172cc26fab9596ef64c7df4e8d2232f62b5d278ae1aef2b40337d416f3c43",
+    "runs/paper/local_boundary_pairs/manifest.json": "c74f42e51287f2ca3a4e08db6dc5f599082fbf8a81315695eeee323fe5ac9ad9",
+    "docs/results/consolidation/gate5_manifest.json": "c74f42e51287f2ca3a4e08db6dc5f599082fbf8a81315695eeee323fe5ac9ad9",
+    "runs/paper/deployment_transport_pairs/summary.json": "b92905acdc90f552c3f79be4569698434a5d1baebf0e469856c14ad5e32525aa",
+    "docs/results/consolidation/gate6_pairs.json": "b92905acdc90f552c3f79be4569698434a5d1baebf0e469856c14ad5e32525aa",
+    "runs/paper/deployment_transport_pairs/manifest.json": "2059bdd4d42bf4899d658d48cfd9d9c403c4f412b9165ec094c3c1201c636a80",
+    "docs/results/consolidation/gate6_manifest.json": "2059bdd4d42bf4899d658d48cfd9d9c403c4f412b9165ec094c3c1201c636a80"
   },
   "figures": {
     "docs/assets/closed_loop_d_seed2.gif": {
@@ -125,7 +135,9 @@
     "docs/assets/static-deployment-comparison.png": {
       "inputs": {
         "runs/paper/jeh_matrix/runs/l_shape/n20/seed_2/trajectory.npz": "1060191e0b9285b4b79f975c8ac64c6347b33e7976999286a88c387d8af2602c",
+        "runs/paper/jeh_serial_pair/runs/l_shape/n20/seed_2/trajectory.npz": "1060191e0b9285b4b79f975c8ac64c6347b33e7976999286a88c387d8af2602c",
         "runs/paper/jeh_matrix/runs/rectangle/n20/seed_2/trajectory.npz": "c0fbb64c9a1cbfd31f715ed9cda54dec597533de310411c710b025adf096df07",
+        "runs/paper/jeh_serial_pair/runs/rectangle/n20/seed_2/trajectory.npz": "c0fbb64c9a1cbfd31f715ed9cda54dec597533de310411c710b025adf096df07",
         "runs/paper/jeh_matrix/runs/c_shape/n20/seed_2/trajectory.npz": "2afbabae5efc36e40a4d3fc6484cf99d1468832d1cb3aee290e83d2c7b594b63"
       },
       "seed": 2,
@@ -139,6 +151,8 @@
   "static_commits": [
     "aa3479d883f6a61368633dc1c53b00423e901ba4"
   ],
+  "gate5_commit": "e5e6bce038f1225d5814af462fb59efff83bbd92",
+  "gate6_commit": "e5e6bce038f1225d5814af462fb59efff83bbd92",
   "execution": {
     "commit": "aa3479d883f6a61368633dc1c53b00423e901ba4",
     "python": "3.10.20",
@@ -597,6 +611,88 @@
           "runs/paper/jeh_matrix/summary.json",
           "runs/paper/jeh_matrix/summary.csv",
           "runs/paper/jeh_matrix/prior_screen.json"
+        ],
+        "allow_nonzero": false
+      },
+      {
+        "name": "jeh_serial",
+        "command": [
+          "D:\\miniconda\\envs\\dbact\\python.exe",
+          "-u",
+          "scripts/run_apriori_centroid_bound.py",
+          "--out",
+          "runs/paper/jeh_serial_pair",
+          "--shapes",
+          "l_shape",
+          "rectangle",
+          "--seeds",
+          "2",
+          "--grids",
+          "20",
+          "--frames",
+          "600",
+          "--serial",
+          "--resume"
+        ],
+        "seeds": [
+          2
+        ],
+        "exit_code": 0,
+        "seconds": 2355.5128893852234,
+        "log": "runs/consolidation/jeh_serial.log",
+        "artifacts": [
+          "runs/paper/jeh_serial_pair/runs/l_shape/n20/seed_2/trajectory.npz",
+          "runs/paper/jeh_serial_pair/runs/rectangle/n20/seed_2/trajectory.npz"
+        ],
+        "allow_nonzero": false
+      },
+      {
+        "name": "gate5",
+        "command": [
+          "D:\\miniconda\\envs\\dbact\\python.exe",
+          "-u",
+          "scripts/run_deployment_pairs.py",
+          "--gate",
+          "5",
+          "--out",
+          "runs/paper/local_boundary_pairs"
+        ],
+        "seeds": [
+          2,
+          5,
+          8
+        ],
+        "exit_code": 0,
+        "seconds": 293.6616554260254,
+        "log": "runs/consolidation/gate5.log",
+        "artifacts": [
+          "runs/paper/local_boundary_pairs/summary.json",
+          "runs/paper/local_boundary_pairs/manifest.json"
+        ],
+        "allow_nonzero": false
+      },
+      {
+        "name": "gate6",
+        "command": [
+          "D:\\miniconda\\envs\\dbact\\python.exe",
+          "-u",
+          "scripts/run_deployment_pairs.py",
+          "--gate",
+          "6",
+          "--out",
+          "runs/paper/deployment_transport_pairs"
+        ],
+        "seeds": [
+          2,
+          5,
+          8
+        ],
+        "exit_code": 0,
+        "seconds": 324.13583493232727,
+        "log": "runs/consolidation/gate6.log",
+        "artifacts": [
+          "runs/paper/deployment_transport_pairs/summary.json",
+          "runs/paper/deployment_transport_pairs/manifest.json"
         ],
         "allow_nonzero": false
       }
