@@ -1,0 +1,57 @@
+{
+  "tol_J": 1e-12,
+  "tol_E": 1e-12,
+  "tol_H": 1e-12,
+  "reason": "Same seed, same frozen controller, Windows spawn ProcessPool vs in-process serial. Real mass-weighted J_k, E_k and observer H_star. 80-frame representative hold; the 600-frame matrix is compared on the overlapping prefix.",
+  "pairs": {
+    "l_shape": {
+      "serial_vs_spawn_pool": {
+        "n_a": 80,
+        "n_b": 80,
+        "max_abs_J": 0.0,
+        "max_abs_E": 0.0,
+        "max_abs_H": 0.0,
+        "max_abs_slack": 0.0,
+        "K0_a": true,
+        "K0_b": true,
+        "pass": true
+      },
+      "serial_80_vs_matrix_prefix": {
+        "n_a": 80,
+        "n_b": 600,
+        "max_abs_J": 0.0,
+        "max_abs_E": 0.0,
+        "max_abs_H": 0.0,
+        "max_abs_slack": 0.0,
+        "K0_a": true,
+        "K0_b": true,
+        "pass": true
+      }
+    },
+    "rectangle": {
+      "serial_vs_spawn_pool": {
+        "n_a": 80,
+        "n_b": 80,
+        "max_abs_J": 0.0,
+        "max_abs_E": 0.0,
+        "max_abs_H": 0.0,
+        "max_abs_slack": 0.0,
+        "K0_a": true,
+        "K0_b": true,
+        "pass": true
+      },
+      "serial_80_vs_matrix_prefix": {
+        "n_a": 80,
+        "n_b": 600,
+        "max_abs_J": 0.0,
+        "max_abs_E": 0.0,
+        "max_abs_H": 0.0,
+        "max_abs_slack": 0.0,
+        "K0_a": true,
+        "K0_b": true,
+        "pass": true
+      }
+    }
+  },
+  "pass": true
+}

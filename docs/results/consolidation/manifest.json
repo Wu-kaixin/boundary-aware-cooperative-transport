@@ -1,0 +1,889 @@
+{
+  "python": "3.10.20",
+  "numpy": "2.2.6",
+  "scipy": "1.15.3",
+  "files": {
+    "runs/readme/near_seed_2/summary.json": "83ca2d5102a95f817d030f6a5b1a5a70ba4264128dbbcd871cbe8054b37abcc2",
+    "docs/results/consolidation/near_seed2.json": "83ca2d5102a95f817d030f6a5b1a5a70ba4264128dbbcd871cbe8054b37abcc2",
+    "runs/readme/near_seed_2/closed_loop.gif": "783674c79ba8012f394973173ef874ab7f93a80862b4be8a95871e56f11602e8",
+    "docs/assets/closed_loop_d_seed2.gif": "783674c79ba8012f394973173ef874ab7f93a80862b4be8a95871e56f11602e8",
+    "runs/readme/near_seed_2/replay.npz": "73c79ca8f4e29e8bb3419d8466d326c6fe8963295276062a78f75f1dcdbfd875",
+    "runs/readme/near_seed_4/summary.json": "71b8dc56879d1ee88db6f5a68417298a7045eb802a294d2a5e366d6f04ac4193",
+    "docs/results/consolidation/near_seed4.json": "71b8dc56879d1ee88db6f5a68417298a7045eb802a294d2a5e366d6f04ac4193",
+    "runs/readme/near_seed_4/closed_loop.gif": "99788c433bafa5ec329b1670d1bec78e07f3f72735be73e896ddcdbbf89047fc",
+    "docs/assets/closed_loop_d_seed4.gif": "99788c433bafa5ec329b1670d1bec78e07f3f72735be73e896ddcdbbf89047fc",
+    "runs/readme/near_seed_4/replay.npz": "60652907d9397569aa997965c3754a692db3e91e678fe3ba076a3c274bae065a",
+    "runs/readme/near_seed_8/summary.json": "c0a2fd409506a03d416d6f8b71f293aa489e3ca321b142e9141fd4244653745a",
+    "docs/results/consolidation/near_seed8.json": "c0a2fd409506a03d416d6f8b71f293aa489e3ca321b142e9141fd4244653745a",
+    "runs/readme/near_seed_8/closed_loop.gif": "4e5964130be1f7e42ab2bddaeadc2af517f628df0433d9b9262413c943f22c42",
+    "docs/assets/closed_loop_d_seed8.gif": "4e5964130be1f7e42ab2bddaeadc2af517f628df0433d9b9262413c943f22c42",
+    "runs/readme/near_seed_8/replay.npz": "a61868397113a189fed281449069c65f6ab6ca968a5cecb12214a0b44aad1343",
+    "runs/readme/search_seed7/summary.json": "f1e78e1a68b5ab5e186833a1fbfa035623c4c584d544ae458a3b71b9132c92aa",
+    "docs/results/consolidation/search_seed7.json": "f1e78e1a68b5ab5e186833a1fbfa035623c4c584d544ae458a3b71b9132c92aa",
+    "runs/readme/search_seed7/closed_loop.gif": "16b216e86a68ae584a93419f3827f9b2e32f679506ac4c6fac4fb678aebcfd0f",
+    "docs/assets/search_d_seed7.gif": "16b216e86a68ae584a93419f3827f9b2e32f679506ac4c6fac4fb678aebcfd0f",
+    "runs/readme/search_seed7/replay.npz": "14c10344e699af0469bf475337763b84d81279c0bac7ca483c819ce71d2d78ca",
+    "runs/readme/d_sweep/g500_sweep.json": "58f70e021d5399b91731aed95ea130c503ef4a2ec97284b97ec2172d174d8ee1",
+    "docs/results/consolidation/g500_sweep.json": "58f70e021d5399b91731aed95ea130c503ef4a2ec97284b97ec2172d174d8ee1",
+    "runs/readme/d10_diag/diagnosis.json": "c12dd57f186213fab95da7b28b3a63ebdee631c0fcc6a838c49d41cac69139d9",
+    "docs/results/consolidation/d10_diag.json": "c12dd57f186213fab95da7b28b3a63ebdee631c0fcc6a838c49d41cac69139d9",
+    "runs/readme/d10_ab/ab.json": "9478d6b6c66f08e3f78306de29f0110a69955936440fb1ca76314306c7ee1b4e",
+    "docs/results/consolidation/d10_ab.json": "9478d6b6c66f08e3f78306de29f0110a69955936440fb1ca76314306c7ee1b4e",
+    "runs/readme/d10_enc/gate.json": "c9c720a2a6a0ae404a56851dda5860def3099f720f992c51fdab8517b93a8695",
+    "docs/results/consolidation/d10_enc.json": "c9c720a2a6a0ae404a56851dda5860def3099f720f992c51fdab8517b93a8695",
+    "runs/readme/d10_diag/figA_segments.png": "917c4747f57da15f5c654462ec7d4e0e5d982b1eb2b6b9b6dc72a943de4a4934",
+    "docs/assets/d10-post-detection-stages.png": "917c4747f57da15f5c654462ec7d4e0e5d982b1eb2b6b9b6dc72a943de4a4934",
+    "runs/readme/d10_diag/figB_coverage.png": "8ca92f27ad2fa067c61bac5db0cef9453b20afda4b9d80587e734dd788a270fa",
+    "docs/assets/d10-coverage-and-gap.png": "8ca92f27ad2fa067c61bac5db0cef9453b20afda4b9d80587e734dd788a270fa",
+    "runs/readme/d10_enc/figF_gate_tradeoff.png": "ec4db6e57d53a7b075bf46b1b94ec5039d95cbb37e61d4aedda56bb5755b17b3",
+    "docs/assets/d10-gate-tradeoff.png": "ec4db6e57d53a7b075bf46b1b94ec5039d95cbb37e61d4aedda56bb5755b17b3",
+    "runs/paper/jeh_matrix/summary.json": "74f619ae386232017b28448c169a0782733b4693ad90cfd1d0b2ed5a7a50e5e2",
+    "docs/results/consolidation/jeh_summary.json": "74f619ae386232017b28448c169a0782733b4693ad90cfd1d0b2ed5a7a50e5e2",
+    "runs/paper/jeh_matrix/summary.csv": "a6c2f6bc37882be889122becb381a04632c7cb423a5048a58e465a18de27ebc1",
+    "docs/results/consolidation/jeh_summary.csv": "a6c2f6bc37882be889122becb381a04632c7cb423a5048a58e465a18de27ebc1",
+    "runs/paper/jeh_matrix/prior_screen.json": "3c5efcb6b67b867a2b7e4ff7ae3b0bffa89fd055ae2b50b8ed8f29cac2381e57",
+    "docs/results/consolidation/prior_screen.json": "3c5efcb6b67b867a2b7e4ff7ae3b0bffa89fd055ae2b50b8ed8f29cac2381e57",
+    "runs/paper/jeh_matrix/runs/c_shape/n20/seed_2/step_records.json": "a78b5b3385026dbb8374a82c831f0400ffc75e530373976239928f54792613a6",
+    "runs/paper/jeh_matrix/runs/c_shape/n20/seed_5/step_records.json": "72a3dd91c960b67446059ebbf546ed1e4063e238a712adc39c00ca983422e481",
+    "runs/paper/jeh_matrix/runs/c_shape/n20/seed_8/step_records.json": "b5811dc04d68e0e8a0d4aceff3b1174521b2465506172ab1fee8980333d5aa4d",
+    "runs/paper/jeh_matrix/runs/c_shape/n20/seed_11/step_records.json": "68e94febaba21a83c1bf9bdcada8e92638dda61f193b5716fdcffd113cb4b68f",
+    "runs/paper/jeh_matrix/runs/c_shape/n20/seed_17/step_records.json": "f0d7089f021acca5f08f1cafd19e2f65cd33065b82dbd4e58d89e50841085e00",
+    "runs/paper/jeh_matrix/runs/c_shape/n20/seed_23/step_records.json": "119ea4ba6763e7b5f8597cd44cb10ef61b60549fae997a7a1ba990bee5f41fce",
+    "runs/paper/jeh_matrix/runs/c_shape/n20/seed_29/step_records.json": "81c7ce870a9f945015d7c309f34561d6ac008594846cb2ae39fd3debcf5df301",
+    "runs/paper/jeh_matrix/runs/c_shape/n20/seed_31/step_records.json": "e2edf733ac6c3a6a8680a4f7891cbc2fee87f01b460c4c999eab1381bab82903",
+    "runs/paper/jeh_matrix/runs/c_shape/n20/seed_37/step_records.json": "f52a09c1f66d23780526ed386964afbdd2ade27552d8737f231eca30984fafdf",
+    "runs/paper/jeh_matrix/runs/l_shape/n20/seed_2/step_records.json": "3e6bad3672937327246034bf04fde8f72ba22a24c8566372f1ec6a0772c98180",
+    "runs/paper/jeh_matrix/runs/l_shape/n20/seed_5/step_records.json": "2b8f2dd10ea1a6de6cffce7e56c394165152862ad2e2d2f2f88d2057b572a258",
+    "runs/paper/jeh_matrix/runs/l_shape/n20/seed_8/step_records.json": "ca9e27d6eb825c45b580b23a9d3eb1422036741b250684b43a43eca03c97d120",
+    "runs/paper/jeh_matrix/runs/l_shape/n20/seed_11/step_records.json": "97c3ee131f91672e2acc04cc2e4ef8730a882f6d4cf4af1f06026cf2e18d0fd8",
+    "runs/paper/jeh_matrix/runs/l_shape/n20/seed_17/step_records.json": "8ecf8eaae6ad7a73d8880462443f385daab7bde9dab9a75411d224f0e178daa7",
+    "runs/paper/jeh_matrix/runs/l_shape/n20/seed_23/step_records.json": "fd6be82947ba93e608bef4d24b368e06fa15eaa596f8465cc5f5141f945bbe6e",
+    "runs/paper/jeh_matrix/runs/l_shape/n20/seed_29/step_records.json": "ed6cf48ac4bc772ff78ed71825fa3c632ed2c13886c9e03ff98d736bcc0e49e4",
+    "runs/paper/jeh_matrix/runs/l_shape/n20/seed_31/step_records.json": "18c9f772ac1340b3acc290063cba482f28a34fae6015f2a16bb60ea54936a2a0",
+    "runs/paper/jeh_matrix/runs/l_shape/n20/seed_37/step_records.json": "aed44a5e094bd061bdf9763bbcb7a01cf972808961dd9a5772d5808c7920d201",
+    "runs/paper/jeh_matrix/runs/rectangle/n20/seed_2/step_records.json": "e470f30920d82795545c3eda933ad47c2b2db81575ae691784452c0d7a3397ff",
+    "runs/paper/jeh_matrix/runs/rectangle/n20/seed_5/step_records.json": "55efc4e8cf67dd25f047a4629ae84a16254639ec79de7dfe0db5393c6b9fee31",
+    "runs/paper/jeh_matrix/runs/rectangle/n20/seed_8/step_records.json": "697a250e340a4c18f3b2b84a4a8929b7a647d8d7adb5e9b7c865419d7bfe9d04",
+    "runs/paper/jeh_matrix/runs/rectangle/n20/seed_11/step_records.json": "d521c64200131e677acd62c6e7ce357c6d765de60c230b9b3f6d49fe032d8c93",
+    "runs/paper/jeh_matrix/runs/rectangle/n20/seed_17/step_records.json": "655741f8b7cff501dc4cee0af728464602bed2cd5a3dcd25b1c45082547ab08a",
+    "runs/paper/jeh_matrix/runs/rectangle/n20/seed_23/step_records.json": "90122b10e7cf3abda96fab1667b449a22923863cb279e9dc833ffd98e04e375e",
+    "runs/paper/jeh_matrix/runs/rectangle/n20/seed_29/step_records.json": "201fcef13ab80f0a21661a34d6947afbaa51d72671c7fa523cef7d997fb937db",
+    "runs/paper/jeh_matrix/runs/rectangle/n20/seed_31/step_records.json": "84ed1ab8686ebe3526489f87f410c0efac5b7fe0229999cd9b82948ccea4ed5c",
+    "runs/paper/jeh_matrix/runs/rectangle/n20/seed_37/step_records.json": "b09db44c856fb7f152c782754079eab041d378847c7bb4187c25fc2b3002319a",
+    "runs/paper/jeh_matrix/runs/l_shape/n20/seed_2/trajectory.npz": "1060191e0b9285b4b79f975c8ac64c6347b33e7976999286a88c387d8af2602c",
+    "runs/paper/jeh_serial_pair/runs/l_shape/n20/seed_2/trajectory.npz": "1060191e0b9285b4b79f975c8ac64c6347b33e7976999286a88c387d8af2602c",
+    "runs/paper/jeh_matrix/runs/rectangle/n20/seed_2/trajectory.npz": "c0fbb64c9a1cbfd31f715ed9cda54dec597533de310411c710b025adf096df07",
+    "runs/paper/jeh_serial_pair/runs/rectangle/n20/seed_2/trajectory.npz": "c0fbb64c9a1cbfd31f715ed9cda54dec597533de310411c710b025adf096df07",
+    "runs/paper/jeh_matrix/runs/c_shape/n20/seed_2/trajectory.npz": "2afbabae5efc36e40a4d3fc6484cf99d1468832d1cb3aee290e83d2c7b594b63",
+    "docs/assets/static-deployment-comparison.png": "dd0863aba47652f1fbcfa918b9b52b05bb0a3c7152c7c2ca5a475f0d31bc54cd",
+    "runs/paper/local_boundary_pairs/summary.json": "7a7172cc26fab9596ef64c7df4e8d2232f62b5d278ae1aef2b40337d416f3c43",
+    "docs/results/consolidation/gate5_pairs.json": "7a7172cc26fab9596ef64c7df4e8d2232f62b5d278ae1aef2b40337d416f3c43",
+    "runs/paper/local_boundary_pairs/manifest.json": "c74f42e51287f2ca3a4e08db6dc5f599082fbf8a81315695eeee323fe5ac9ad9",
+    "docs/results/consolidation/gate5_manifest.json": "c74f42e51287f2ca3a4e08db6dc5f599082fbf8a81315695eeee323fe5ac9ad9",
+    "runs/paper/deployment_transport_pairs/summary.json": "b92905acdc90f552c3f79be4569698434a5d1baebf0e469856c14ad5e32525aa",
+    "docs/results/consolidation/gate6_pairs.json": "b92905acdc90f552c3f79be4569698434a5d1baebf0e469856c14ad5e32525aa",
+    "runs/paper/deployment_transport_pairs/manifest.json": "2059bdd4d42bf4899d658d48cfd9d9c403c4f412b9165ec094c3c1201c636a80",
+    "docs/results/consolidation/gate6_manifest.json": "2059bdd4d42bf4899d658d48cfd9d9c403c4f412b9165ec094c3c1201c636a80"
+  },
+  "figures": {
+    "docs/assets/closed_loop_d_seed2.gif": {
+      "source": "runs/readme/near_seed_2/closed_loop.gif",
+      "inputs": {
+        "runs/readme/near_seed_2/replay.npz": "73c79ca8f4e29e8bb3419d8466d326c6fe8963295276062a78f75f1dcdbfd875",
+        "runs/readme/near_seed_2/summary.json": "83ca2d5102a95f817d030f6a5b1a5a70ba4264128dbbcd871cbe8054b37abcc2"
+      }
+    },
+    "docs/assets/closed_loop_d_seed4.gif": {
+      "source": "runs/readme/near_seed_4/closed_loop.gif",
+      "inputs": {
+        "runs/readme/near_seed_4/replay.npz": "60652907d9397569aa997965c3754a692db3e91e678fe3ba076a3c274bae065a",
+        "runs/readme/near_seed_4/summary.json": "71b8dc56879d1ee88db6f5a68417298a7045eb802a294d2a5e366d6f04ac4193"
+      }
+    },
+    "docs/assets/closed_loop_d_seed8.gif": {
+      "source": "runs/readme/near_seed_8/closed_loop.gif",
+      "inputs": {
+        "runs/readme/near_seed_8/replay.npz": "a61868397113a189fed281449069c65f6ab6ca968a5cecb12214a0b44aad1343",
+        "runs/readme/near_seed_8/summary.json": "c0a2fd409506a03d416d6f8b71f293aa489e3ca321b142e9141fd4244653745a"
+      }
+    },
+    "docs/assets/search_d_seed7.gif": {
+      "source": "runs/readme/search_seed7/closed_loop.gif",
+      "inputs": {
+        "runs/readme/search_seed7/replay.npz": "14c10344e699af0469bf475337763b84d81279c0bac7ca483c819ce71d2d78ca",
+        "runs/readme/search_seed7/summary.json": "f1e78e1a68b5ab5e186833a1fbfa035623c4c584d544ae458a3b71b9132c92aa"
+      }
+    },
+    "docs/assets/d10-post-detection-stages.png": {
+      "source": "runs/readme/d10_diag/figA_segments.png",
+      "inputs": {
+        "runs/readme/d10_diag/diagnosis.json": "c12dd57f186213fab95da7b28b3a63ebdee631c0fcc6a838c49d41cac69139d9"
+      }
+    },
+    "docs/assets/d10-coverage-and-gap.png": {
+      "source": "runs/readme/d10_diag/figB_coverage.png",
+      "inputs": {
+        "runs/readme/d10_diag/diagnosis.json": "c12dd57f186213fab95da7b28b3a63ebdee631c0fcc6a838c49d41cac69139d9"
+      }
+    },
+    "docs/assets/d10-gate-tradeoff.png": {
+      "source": "runs/readme/d10_enc/figF_gate_tradeoff.png",
+      "inputs": {
+        "runs/readme/d10_enc/gate.json": "c9c720a2a6a0ae404a56851dda5860def3099f720f992c51fdab8517b93a8695"
+      }
+    },
+    "docs/assets/static-deployment-comparison.png": {
+      "inputs": {
+        "runs/paper/jeh_matrix/runs/l_shape/n20/seed_2/trajectory.npz": "1060191e0b9285b4b79f975c8ac64c6347b33e7976999286a88c387d8af2602c",
+        "runs/paper/jeh_serial_pair/runs/l_shape/n20/seed_2/trajectory.npz": "1060191e0b9285b4b79f975c8ac64c6347b33e7976999286a88c387d8af2602c",
+        "runs/paper/jeh_matrix/runs/rectangle/n20/seed_2/trajectory.npz": "c0fbb64c9a1cbfd31f715ed9cda54dec597533de310411c710b025adf096df07",
+        "runs/paper/jeh_serial_pair/runs/rectangle/n20/seed_2/trajectory.npz": "c0fbb64c9a1cbfd31f715ed9cda54dec597533de310411c710b025adf096df07",
+        "runs/paper/jeh_matrix/runs/c_shape/n20/seed_2/trajectory.npz": "2afbabae5efc36e40a4d3fc6484cf99d1468832d1cb3aee290e83d2c7b594b63"
+      },
+      "seed": 2,
+      "label": "static oracle-map theory validation"
+    }
+  },
+  "scope": "oracle theorem validation from this branch; Gate 5/6 tables only if paired runs exist; no local-map safety theorem",
+  "closed_loop_commits": [
+    "aa3479d883f6a61368633dc1c53b00423e901ba4-dirty"
+  ],
+  "static_commits": [
+    "aa3479d883f6a61368633dc1c53b00423e901ba4"
+  ],
+  "gate5_commit": "e5e6bce038f1225d5814af462fb59efff83bbd92",
+  "gate6_commit": "e5e6bce038f1225d5814af462fb59efff83bbd92",
+  "execution": {
+    "commit": "aa3479d883f6a61368633dc1c53b00423e901ba4",
+    "python": "3.10.20",
+    "numpy": "2.2.6",
+    "scipy": "1.15.3",
+    "config_sha256": {
+      "configs/mas/controller.yaml": "8ecd9a78280723705d56463b757aeb6e26b3f14bfd6af69ab410ad6d2286bf41",
+      "configs/mas/dtransport.yaml": "eef8db03ba45dcb2ad244eb96647bd7491f6073c31046a6b2c4fc99d2389ce66",
+      "configs/mas/dtransport_mock.yaml": "fab48e67746eebce25d045e4cf47d49c6eda341349a65052e29bf9f73bcbb74d",
+      "configs/sim/baseline_scripted_b0.yaml": "8a8c3be47e3eb46e0411610da95f5422e4a012c79a85369e7bd500009e556b3a",
+      "configs/sim/baseline_unknown_polygon_caging.yaml": "ce9bf6d93f3fb59e91322dbb1344913a52449dc3b3a38893e3a80d08d1066fe7",
+      "configs/sim/baseline_unknown_polygon_caging_tight.yaml": "ce9bf6d93f3fb59e91322dbb1344913a52449dc3b3a38893e3a80d08d1066fe7",
+      "configs/sim/circle.yaml": "f9c1445ac139965de062ae3eb9b4251363968f726ad632545b5c0e07b0174d3b",
+      "configs/sim/d/l_shape_closed_loop.yaml": "a23a66fe8e831c005bd0cfe1b968218bfc95d6b1ccfb50510cd259381f6f85d4",
+      "configs/sim/d/l_shape_search.yaml": "09fa6b4f7feb9294225322317f16cd026a5578bbda57832238166410bded5e21",
+      "configs/sim/decentralized_cvt_coverage.yaml": "c77505e3772dedb331bad7e9b4aaca569d5968275f4bd9791af57d8f683832d7",
+      "configs/sim/l_shape.yaml": "0c1cb3699f9aa5113faf27caf48cc33e5001e634b1acb24ffd13a211b30bf216",
+      "configs/sim/multi_object.yaml": "e1ab7a1903e995593fc7cd19cb9e770b3ba165190c90c2fc149f18dca5cb9d9a",
+      "configs/sim/nonconvex.yaml": "0a8cbf32d579c59da7964124cb5cde25f81cd22b513cbc8d911b1689259189de",
+      "configs/sim/one_circle_caging.yaml": "b4622042948317b17abe13a8946f8cd01f098ef153a801db727ae972010948eb",
+      "configs/sim/one_nonconvex_polygon_caging.yaml": "54f4bf29136088c916bd9c12b1641f2340838f695d40353b439538a627a95989",
+      "configs/sim/one_nonconvex_polygon_caging_tight.yaml": "54f4bf29136088c916bd9c12b1641f2340838f695d40353b439538a627a95989",
+      "configs/sim/one_polygon_caging.yaml": "ce9bf6d93f3fb59e91322dbb1344913a52449dc3b3a38893e3a80d08d1066fe7",
+      "configs/sim/one_rectangle_polygon_caging.yaml": "8dab23b9d3462314168efd72268603e8c2d97abc1b3d160c3ab0397c39eff6de",
+      "configs/sim/one_rectangle_polygon_caging_tight.yaml": "8dab23b9d3462314168efd72268603e8c2d97abc1b3d160c3ab0397c39eff6de",
+      "configs/sim/paper_like_irregular_moving_cargo.yaml": "6412fab8170a37194bebaeb6c30febe2f95b13ebe2f54611d41b3349b8bb50f0",
+      "configs/sim/rectangle.yaml": "51b0dd0af5b588c909442779d4014abe39487aa8bbbc65ed6d3b67c08d50e103",
+      "configs/sim/theorem/static_c_shape_n16_oracle.yaml": "d6b3fdbedad104eb99361c5fc28ac4ce63febe5fd3a475f3ead7b45544bd947f",
+      "configs/sim/theorem/static_l_shape_n16_oracle.yaml": "a0cb2bb6b4a947760136da5ed520e69e18028803fec3cf8fe0d32ec25b2816af",
+      "configs/sim/theorem/static_l_shape_oracle.yaml": "503db1ee46251252ad1e66169e12015d887a83cb336e53bb7685440fdb16f81a",
+      "configs/sim/theorem/static_rectangle_n16_oracle.yaml": "e81e1b03eab6dee0a6fcd7fb027fb3dcb6437798018ea63feaf78cdd6924168e",
+      "configs/sim/theorem/wall_corner_oracle.yaml": "aa8dfad5486cde8e2a670fe20ff8b3c7df0b7f92d0365d6c8297eeb5e62d2695",
+      "configs/sim/v2/l_shape_distance_field_v2.yaml": "a93506cada944f1e86f69e7e0ec53eda63f0b4f9422bf4a7b8baf1aefb4b98c6",
+      "configs/sim/v2/l_shape_enclosure_v2.yaml": "5f900122622ea8e3603e190fc7db69be1c68af95462762639f5ad89765894cf0",
+      "configs/sim/v2/l_shape_v2.yaml": "caffe51205b3f273bad5c6fad1c0ed42e9fe8925ca977313fb03d3ef175fe9f3",
+      "configs/sim/v2/nonconvex_v2.yaml": "0a12cd6a0bd34b50c47d4cfc67f8ef055f5d8fb388fd9edd4e7e872f597a62fa",
+      "configs/sim/v2/shape_matrix.yaml": "8694bd77b747249d0fc413fd8d3b27af8b7c776768ddeba179f8c00983967d38",
+      "configs/sim/v2/shape_matrix_eg0.yaml": "946365ac9f1cef0403070ccc8acda94fc1bd4018817262ffe94e70616254b250"
+    },
+    "from_gate": 1,
+    "note": "Closed-loop non-zero exit records G500 failure, not a crashed run.",
+    "runs": [
+      {
+        "name": "near2",
+        "command": [
+          "D:\\miniconda\\envs\\dbact\\python.exe",
+          "-u",
+          "scripts/run_closed_loop.py",
+          "--seed",
+          "2",
+          "--until-settled",
+          "--no-render",
+          "--out",
+          "runs/readme/near_seed_2"
+        ],
+        "seeds": [
+          2
+        ],
+        "exit_code": null,
+        "seconds": 0.0,
+        "skipped": true,
+        "artifacts": [
+          "runs/readme/near_seed_2/summary.json",
+          "runs/readme/near_seed_2/replay.npz"
+        ]
+      },
+      {
+        "name": "near4",
+        "command": [
+          "D:\\miniconda\\envs\\dbact\\python.exe",
+          "-u",
+          "scripts/run_closed_loop.py",
+          "--seed",
+          "4",
+          "--until-settled",
+          "--no-render",
+          "--out",
+          "runs/readme/near_seed_4"
+        ],
+        "seeds": [
+          4
+        ],
+        "exit_code": 0,
+        "seconds": 10.661663293838501,
+        "log": "runs/consolidation/near4.log",
+        "artifacts": [
+          "runs/readme/near_seed_4/summary.json",
+          "runs/readme/near_seed_4/replay.npz"
+        ],
+        "allow_nonzero": true
+      },
+      {
+        "name": "near8",
+        "command": [
+          "D:\\miniconda\\envs\\dbact\\python.exe",
+          "-u",
+          "scripts/run_closed_loop.py",
+          "--seed",
+          "8",
+          "--until-settled",
+          "--no-render",
+          "--out",
+          "runs/readme/near_seed_8"
+        ],
+        "seeds": [
+          8
+        ],
+        "exit_code": 1,
+        "seconds": 14.936232805252075,
+        "log": "runs/consolidation/near8.log",
+        "artifacts": [
+          "runs/readme/near_seed_8/summary.json",
+          "runs/readme/near_seed_8/replay.npz"
+        ],
+        "allow_nonzero": true
+      },
+      {
+        "name": "render_near2",
+        "command": [
+          "D:\\miniconda\\envs\\dbact\\python.exe",
+          "-u",
+          "scripts/render_closed_loop.py",
+          "runs/readme/near_seed_2",
+          "--stride",
+          "2",
+          "--fps",
+          "25"
+        ],
+        "seeds": [
+          2
+        ],
+        "exit_code": 0,
+        "seconds": 16.113348245620728,
+        "log": "runs/consolidation/render_near2.log",
+        "artifacts": [
+          "runs/readme/near_seed_2/closed_loop.gif"
+        ],
+        "allow_nonzero": false
+      },
+      {
+        "name": "render_near4",
+        "command": [
+          "D:\\miniconda\\envs\\dbact\\python.exe",
+          "-u",
+          "scripts/render_closed_loop.py",
+          "runs/readme/near_seed_4",
+          "--stride",
+          "2",
+          "--fps",
+          "25"
+        ],
+        "seeds": [
+          4
+        ],
+        "exit_code": 0,
+        "seconds": 9.489116668701172,
+        "log": "runs/consolidation/render_near4.log",
+        "artifacts": [
+          "runs/readme/near_seed_4/closed_loop.gif"
+        ],
+        "allow_nonzero": false
+      },
+      {
+        "name": "render_near8",
+        "command": [
+          "D:\\miniconda\\envs\\dbact\\python.exe",
+          "-u",
+          "scripts/render_closed_loop.py",
+          "runs/readme/near_seed_8",
+          "--stride",
+          "2",
+          "--fps",
+          "25"
+        ],
+        "seeds": [
+          8
+        ],
+        "exit_code": 0,
+        "seconds": 12.437750101089478,
+        "log": "runs/consolidation/render_near8.log",
+        "artifacts": [
+          "runs/readme/near_seed_8/closed_loop.gif"
+        ],
+        "allow_nonzero": false
+      },
+      {
+        "name": "search7",
+        "command": [
+          "D:\\miniconda\\envs\\dbact\\python.exe",
+          "-u",
+          "scripts/run_closed_loop.py",
+          "--config",
+          "configs/sim/d/l_shape_search.yaml",
+          "--seed",
+          "7",
+          "--until-settled",
+          "--no-render",
+          "--out",
+          "runs/readme/search_seed7"
+        ],
+        "seeds": [
+          7
+        ],
+        "exit_code": 1,
+        "seconds": 52.220165967941284,
+        "log": "runs/consolidation/search7.log",
+        "artifacts": [
+          "runs/readme/search_seed7/summary.json",
+          "runs/readme/search_seed7/replay.npz"
+        ],
+        "allow_nonzero": true
+      },
+      {
+        "name": "render_search7",
+        "command": [
+          "D:\\miniconda\\envs\\dbact\\python.exe",
+          "-u",
+          "scripts/render_closed_loop.py",
+          "runs/readme/search_seed7",
+          "--stride",
+          "2",
+          "--fps",
+          "25"
+        ],
+        "seeds": [
+          7
+        ],
+        "exit_code": 0,
+        "seconds": 59.96188449859619,
+        "log": "runs/consolidation/render_search7.log",
+        "artifacts": [
+          "runs/readme/search_seed7/closed_loop.gif"
+        ],
+        "allow_nonzero": false
+      },
+      {
+        "name": "sweep",
+        "command": [
+          "D:\\miniconda\\envs\\dbact\\python.exe",
+          "-u",
+          "scripts/evaluate_closed_loop.py",
+          "--seeds",
+          "0..11",
+          "--until-settled",
+          "--out",
+          "runs/readme/d_sweep"
+        ],
+        "seeds": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "exit_code": 0,
+        "seconds": 396.3949701786041,
+        "log": "runs/consolidation/sweep.log",
+        "artifacts": [
+          "runs/readme/d_sweep/g500_sweep.json"
+        ],
+        "allow_nonzero": false
+      },
+      {
+        "name": "d10_diag",
+        "command": [
+          "D:\\miniconda\\envs\\dbact\\python.exe",
+          "-u",
+          "scripts/diagnose_redeployment.py",
+          "--seeds",
+          "0..7",
+          "--out",
+          "runs/readme/d10_diag"
+        ],
+        "seeds": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "exit_code": 0,
+        "seconds": 539.4641580581665,
+        "log": "runs/consolidation/d10_diag.log",
+        "artifacts": [
+          "runs/readme/d10_diag/diagnosis.json"
+        ],
+        "allow_nonzero": false
+      },
+      {
+        "name": "d10_ab",
+        "command": [
+          "D:\\miniconda\\envs\\dbact\\python.exe",
+          "-u",
+          "scripts/ab_explore.py",
+          "--seeds",
+          "0..7",
+          "--gains",
+          "0,6",
+          "--out",
+          "runs/readme/d10_ab"
+        ],
+        "seeds": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "exit_code": 0,
+        "seconds": 1456.4379606246948,
+        "log": "runs/consolidation/d10_ab.log",
+        "artifacts": [
+          "runs/readme/d10_ab/ab.json"
+        ],
+        "allow_nonzero": false
+      },
+      {
+        "name": "d10_enc",
+        "command": [
+          "D:\\miniconda\\envs\\dbact\\python.exe",
+          "-u",
+          "scripts/diagnose_enclosure_gate.py",
+          "--seeds",
+          "0..7",
+          "--out",
+          "runs/readme/d10_enc"
+        ],
+        "seeds": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "exit_code": 0,
+        "seconds": 607.5056517124176,
+        "log": "runs/consolidation/d10_enc.log",
+        "artifacts": [
+          "runs/readme/d10_enc/gate.json"
+        ],
+        "allow_nonzero": false
+      },
+      {
+        "name": "d10_analyse",
+        "command": [
+          "D:\\miniconda\\envs\\dbact\\python.exe",
+          "-u",
+          "scripts/analyse_enclosure_gate.py",
+          "--run",
+          "runs/readme/d10_enc",
+          "--figure"
+        ],
+        "seeds": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "exit_code": 0,
+        "seconds": 0.6289722919464111,
+        "log": "runs/consolidation/d10_analyse.log",
+        "artifacts": [
+          "runs/readme/d10_enc/figF_gate_tradeoff.png"
+        ],
+        "allow_nonzero": false
+      },
+      {
+        "name": "priors",
+        "command": [
+          "D:\\miniconda\\envs\\dbact\\python.exe",
+          "-u",
+          "scripts/run_apriori_centroid_bound.py",
+          "--out",
+          "runs/paper/priors",
+          "--shapes",
+          "l_shape",
+          "rectangle",
+          "c_shape",
+          "--seeds",
+          "2",
+          "--priors-only"
+        ],
+        "seeds": [
+          2
+        ],
+        "exit_code": null,
+        "seconds": 0.0,
+        "skipped": true,
+        "artifacts": [
+          "runs/paper/priors/prior_screen.json"
+        ]
+      },
+      {
+        "name": "jeh_matrix",
+        "command": [
+          "D:\\miniconda\\envs\\dbact\\python.exe",
+          "-u",
+          "scripts/run_apriori_centroid_bound.py",
+          "--out",
+          "runs/paper/jeh_matrix",
+          "--shapes",
+          "l_shape",
+          "rectangle",
+          "c_shape",
+          "--seeds",
+          "2",
+          "5",
+          "8",
+          "11",
+          "17",
+          "23",
+          "29",
+          "31",
+          "37",
+          "--grids",
+          "20",
+          "--frames",
+          "600",
+          "--resume"
+        ],
+        "seeds": [
+          2,
+          5,
+          8,
+          11,
+          17,
+          23,
+          29,
+          31,
+          37
+        ],
+        "exit_code": 0,
+        "seconds": 3860.2674441337585,
+        "log": "runs/consolidation/jeh_matrix.log",
+        "artifacts": [
+          "runs/paper/jeh_matrix/summary.json",
+          "runs/paper/jeh_matrix/summary.csv",
+          "runs/paper/jeh_matrix/prior_screen.json"
+        ],
+        "allow_nonzero": false
+      },
+      {
+        "name": "jeh_serial",
+        "command": [
+          "D:\\miniconda\\envs\\dbact\\python.exe",
+          "-u",
+          "scripts/run_apriori_centroid_bound.py",
+          "--out",
+          "runs/paper/jeh_serial_pair",
+          "--shapes",
+          "l_shape",
+          "rectangle",
+          "--seeds",
+          "2",
+          "--grids",
+          "20",
+          "--frames",
+          "600",
+          "--serial",
+          "--resume"
+        ],
+        "seeds": [
+          2
+        ],
+        "exit_code": 0,
+        "seconds": 2355.5128893852234,
+        "log": "runs/consolidation/jeh_serial.log",
+        "artifacts": [
+          "runs/paper/jeh_serial_pair/runs/l_shape/n20/seed_2/trajectory.npz",
+          "runs/paper/jeh_serial_pair/runs/rectangle/n20/seed_2/trajectory.npz"
+        ],
+        "allow_nonzero": false
+      },
+      {
+        "name": "gate5",
+        "command": [
+          "D:\\miniconda\\envs\\dbact\\python.exe",
+          "-u",
+          "scripts/run_deployment_pairs.py",
+          "--gate",
+          "5",
+          "--out",
+          "runs/paper/local_boundary_pairs"
+        ],
+        "seeds": [
+          2,
+          5,
+          8
+        ],
+        "exit_code": 0,
+        "seconds": 293.6616554260254,
+        "log": "runs/consolidation/gate5.log",
+        "artifacts": [
+          "runs/paper/local_boundary_pairs/summary.json",
+          "runs/paper/local_boundary_pairs/manifest.json"
+        ],
+        "allow_nonzero": false
+      },
+      {
+        "name": "gate6",
+        "command": [
+          "D:\\miniconda\\envs\\dbact\\python.exe",
+          "-u",
+          "scripts/run_deployment_pairs.py",
+          "--gate",
+          "6",
+          "--out",
+          "runs/paper/deployment_transport_pairs"
+        ],
+        "seeds": [
+          2,
+          5,
+          8
+        ],
+        "exit_code": 0,
+        "seconds": 324.13583493232727,
+        "log": "runs/consolidation/gate6.log",
+        "artifacts": [
+          "runs/paper/deployment_transport_pairs/summary.json",
+          "runs/paper/deployment_transport_pairs/manifest.json"
+        ],
+        "allow_nonzero": false
+      }
+    ],
+    "prior_runs": [
+      {
+        "name": "near2",
+        "command": [
+          "D:\\miniconda\\envs\\dbact\\python.exe",
+          "-u",
+          "scripts/run_closed_loop.py",
+          "--seed",
+          "2",
+          "--until-settled",
+          "--no-render",
+          "--out",
+          "runs/readme/near_seed_2"
+        ],
+        "seeds": [
+          2
+        ],
+        "exit_code": null,
+        "seconds": 0.0,
+        "skipped": true,
+        "artifacts": [
+          "runs/readme/near_seed_2/summary.json",
+          "runs/readme/near_seed_2/replay.npz"
+        ]
+      },
+      {
+        "name": "near4",
+        "command": [
+          "D:\\miniconda\\envs\\dbact\\python.exe",
+          "-u",
+          "scripts/run_closed_loop.py",
+          "--seed",
+          "4",
+          "--until-settled",
+          "--no-render",
+          "--out",
+          "runs/readme/near_seed_4"
+        ],
+        "seeds": [
+          4
+        ],
+        "exit_code": null,
+        "seconds": 0.0,
+        "skipped": true,
+        "artifacts": [
+          "runs/readme/near_seed_4/summary.json",
+          "runs/readme/near_seed_4/replay.npz"
+        ]
+      },
+      {
+        "name": "near8",
+        "command": [
+          "D:\\miniconda\\envs\\dbact\\python.exe",
+          "-u",
+          "scripts/run_closed_loop.py",
+          "--seed",
+          "8",
+          "--until-settled",
+          "--no-render",
+          "--out",
+          "runs/readme/near_seed_8"
+        ],
+        "seeds": [
+          8
+        ],
+        "exit_code": null,
+        "seconds": 0.0,
+        "skipped": true,
+        "artifacts": [
+          "runs/readme/near_seed_8/summary.json",
+          "runs/readme/near_seed_8/replay.npz"
+        ]
+      },
+      {
+        "name": "render_near2",
+        "command": [
+          "D:\\miniconda\\envs\\dbact\\python.exe",
+          "-u",
+          "scripts/render_closed_loop.py",
+          "runs/readme/near_seed_2",
+          "--stride",
+          "2",
+          "--fps",
+          "25"
+        ],
+        "seeds": [
+          2
+        ],
+        "exit_code": null,
+        "seconds": 0.0,
+        "skipped": true,
+        "artifacts": [
+          "runs/readme/near_seed_2/closed_loop.gif"
+        ]
+      },
+      {
+        "name": "render_near4",
+        "command": [
+          "D:\\miniconda\\envs\\dbact\\python.exe",
+          "-u",
+          "scripts/render_closed_loop.py",
+          "runs/readme/near_seed_4",
+          "--stride",
+          "2",
+          "--fps",
+          "25"
+        ],
+        "seeds": [
+          4
+        ],
+        "exit_code": null,
+        "seconds": 0.0,
+        "skipped": true,
+        "artifacts": [
+          "runs/readme/near_seed_4/closed_loop.gif"
+        ]
+      },
+      {
+        "name": "render_near8",
+        "command": [
+          "D:\\miniconda\\envs\\dbact\\python.exe",
+          "-u",
+          "scripts/render_closed_loop.py",
+          "runs/readme/near_seed_8",
+          "--stride",
+          "2",
+          "--fps",
+          "25"
+        ],
+        "seeds": [
+          8
+        ],
+        "exit_code": null,
+        "seconds": 0.0,
+        "skipped": true,
+        "artifacts": [
+          "runs/readme/near_seed_8/closed_loop.gif"
+        ]
+      },
+      {
+        "name": "search7",
+        "command": [
+          "D:\\miniconda\\envs\\dbact\\python.exe",
+          "-u",
+          "scripts/run_closed_loop.py",
+          "--config",
+          "configs/sim/d/l_shape_search.yaml",
+          "--seed",
+          "7",
+          "--until-settled",
+          "--no-render",
+          "--out",
+          "runs/readme/search_seed7"
+        ],
+        "seeds": [
+          7
+        ],
+        "exit_code": null,
+        "seconds": 0.0,
+        "skipped": true,
+        "artifacts": [
+          "runs/readme/search_seed7/summary.json",
+          "runs/readme/search_seed7/replay.npz"
+        ]
+      },
+      {
+        "name": "render_search7",
+        "command": [
+          "D:\\miniconda\\envs\\dbact\\python.exe",
+          "-u",
+          "scripts/render_closed_loop.py",
+          "runs/readme/search_seed7",
+          "--stride",
+          "2",
+          "--fps",
+          "25"
+        ],
+        "seeds": [
+          7
+        ],
+        "exit_code": null,
+        "seconds": 0.0,
+        "skipped": true,
+        "artifacts": [
+          "runs/readme/search_seed7/closed_loop.gif"
+        ]
+      }
+    ]
+  }
+}

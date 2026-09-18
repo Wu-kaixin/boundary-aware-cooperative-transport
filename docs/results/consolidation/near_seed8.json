@@ -1,0 +1,222 @@
+{
+  "provenance": {
+    "git_sha": "aa3479d883f6a61368633dc1c53b00423e901ba4-dirty",
+    "config_hash": "6e36f5aa5b8bc489",
+    "seed": 8,
+    "backend": "qp"
+  },
+  "engine": "penalty",
+  "task_mode": "transport",
+  "density_mode": "offset",
+  "steps": 352,
+  "final_time": 17.600000000000115,
+  "contracts": {
+    "C1": {
+      "robot_radius": 0.13,
+      "cage_offset": 0.105,
+      "delta_max": 0.065,
+      "gamma_obj": 8.0,
+      "rho": 0.02,
+      "d_min": 0.28,
+      "lead_offset": 0.26,
+      "r_safe": 0.065,
+      "barrier_margin": 0.29999999999999993
+    },
+    "coverage": {
+      "local_radius": 0.8,
+      "comm_range": 1.6
+    },
+    "d_min": 0.28,
+    "delta_max": 0.065,
+    "discrete_overshoot": 0.03184286171595835
+  },
+  "solver": {
+    "solves": 5632,
+    "fallbacks": 0,
+    "infeasible": 0,
+    "margin_relaxations": 0,
+    "barrier_scalings": 0,
+    "min_barrier_scale": 1.0,
+    "zero_input_feasible": false,
+    "zero_input_feasible_checks": 5632,
+    "zero_input_feasible_failures": 173,
+    "inside_margin_band": 2,
+    "max_slack": 0.0,
+    "max_modification_norm": 0.5441778590603109,
+    "statuses": {
+      "optimal": 5632
+    }
+  },
+  "error_audit": null,
+  "phases": {
+    "final_phase": "HOLD",
+    "entered": {
+      "SEARCH": 0,
+      "DISCOVER": 0,
+      "ENCLOSE": 16,
+      "CONTACT_READY": 89,
+      "TRANSPORT": 285,
+      "BRAKE": 285,
+      "HOLD": 312
+    },
+    "first_detection_frame": 0,
+    "enclosure_frame": 16,
+    "contact_ready_frame": 89,
+    "transport_frame": 285,
+    "brake_frame": 285,
+    "hold_frame": 312
+  },
+  "tasks": {
+    "cargo_0": {
+      "object_id": "cargo_0",
+      "direction": [
+        0.9991906209433407,
+        -0.04022565125465672
+      ],
+      "angle_deg": 357.6946179453914,
+      "target_distance": 1.3043850379523978,
+      "start": [
+        3.7848360655737823,
+        3.8063524590164044
+      ],
+      "goal_point": [
+        5.088165361594641,
+        3.753882721377939
+      ],
+      "tolerance": 0.12,
+      "clearance": 1.9050471192360838,
+      "sampling_attempts": 1
+    }
+  },
+  "min_inter_agent_distance": 0.29678579841336306,
+  "mean_path_length": 2.2744483895752348,
+  "cargoes": {
+    "cargo_0": {
+      "displacement_vector": [
+        1.1753015944254015,
+        -0.11370079061371774
+      ],
+      "displacement": 1.1807885956618465,
+      "rotation_deg": 0.0,
+      "final_coverage_legacy": 0.975,
+      "final_strict_coverage": 0.975,
+      "max_strict_coverage": 1.0,
+      "min_signed_clearance": 0.0954974199844898,
+      "max_penetration": 0.03450258001551021,
+      "max_agents_inside": 0,
+      "mean_contacts": 2.41643059490085,
+      "max_cargo_speed": 0.286857234319167,
+      "max_contacts": 5,
+      "peak_net_force": 40.838305807506046,
+      "recruited_agents": 15,
+      "J": 1.1789240182802216,
+      "efficiency": 0.9984209049880095,
+      "angle_deg": 3.2203192417808455,
+      "success": false,
+      "failure_reasons": [
+        "G500: target reached never happened within the 352-frame run",
+        "G500: J=1.1789 m stopped 0.1255 m short of L=1.3044 m, outside the declared arrival tolerance 0.1200 m"
+      ],
+      "task": {
+        "object_id": "cargo_0",
+        "direction": [
+          0.9991906209433407,
+          -0.04022565125465672
+        ],
+        "angle_deg": 357.6946179453914,
+        "target_distance": 1.3043850379523978,
+        "start": [
+          3.7848360655737823,
+          3.8063524590164044
+        ],
+        "goal_point": [
+          5.088165361594641,
+          3.753882721377939
+        ],
+        "tolerance": 0.12,
+        "clearance": 1.9050471192360838,
+        "sampling_attempts": 1
+      },
+      "g500": {
+        "success": false,
+        "failure_reasons": [
+          "G500: target reached never happened within the 352-frame run",
+          "G500: J=1.1789 m stopped 0.1255 m short of L=1.3044 m, outside the declared arrival tolerance 0.1200 m"
+        ],
+        "metrics": {
+          "engine": "penalty",
+          "target_distance": 1.3043850379523978,
+          "goal_angle_deg": 357.6946179453914,
+          "J": 1.1789240182802214,
+          "displacement": 1.1807885956618465,
+          "efficiency": 0.9984209049880094,
+          "direction_error_deg": 3.2203192417808455,
+          "max_cross_track": 0.07081001129358225,
+          "max_strict_coverage": 1.0,
+          "final_strict_coverage": 0.975,
+          "rotation_deg": 0.0,
+          "final_cargo_speed": 0.0,
+          "holding": true,
+          "final_phase": "HOLD",
+          "first_detection_frame": 0,
+          "enclosure_frame": 16,
+          "contact_ready_frame": 89,
+          "transport_frame": 285,
+          "brake_frame": 285,
+          "hold_frame": 312,
+          "reached_frame": null,
+          "frames_run": 352,
+          "progress_estimate_final": 1.3165734091656112,
+          "progress_estimate_ratio": 1.116758492278568,
+          "solver_fallbacks": 0,
+          "solver_infeasible": 0,
+          "margin_relaxations": 0,
+          "barrier_scalings": 0,
+          "min_barrier_scale": 1.0,
+          "min_inter_agent_distance": 0.29678579841336306,
+          "d_min": 0.28,
+          "min_signed_clearance": 0.0954974199844898,
+          "max_penetration": 0.03450258001551021,
+          "penetration_budget": 0.09684286171595835
+        },
+        "gates": {
+          "detect_by": null,
+          "contact_ready_by": null,
+          "transport_by": null,
+          "reach_by": null,
+          "efficiency_min": 0.8,
+          "direction_error_max_deg": 20.0,
+          "cross_track_max": 0.15,
+          "coverage_min": 0.7,
+          "progress_max_ratio": 1.4,
+          "arrival_tolerance": 0.12,
+          "hold_speed_max": 0.02,
+          "yaw_max_deg": 15.0,
+          "barrier_scalings_max": 0
+        }
+      }
+    }
+  },
+  "timing": {
+    "frames": 352,
+    "terminated_by": "settled",
+    "simulation_seconds": 14.367016299976967,
+    "frames_per_second": 24.50056383666554
+  },
+  "feasibility_c5": {
+    "r_safe": 0.065,
+    "gamma_obj": 8.0,
+    "rho": 0.02,
+    "object_velocity_bound": 0.2,
+    "demand_band": 0.0275,
+    "required_margin": 0.033,
+    "press_margin": 0.033,
+    "press_floor": 0.098,
+    "press_penetration": 0.032,
+    "force_per_robot": 16.0,
+    "breakaway_force": 24.235605000000003,
+    "min_push_agents": 4,
+    "quorum_force": 64.0,
+    "violations": []
+  }
+}

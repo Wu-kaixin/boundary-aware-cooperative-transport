@@ -59,14 +59,29 @@ class CVTResult:
 
 @dataclass
 class LocalCVT:
-    """Grid-quadrature limited-range Voronoi centroid over a strict disk."""
+    """Limited-range Voronoi centroid over a strict disk.
+
+    ``integration_method``:
+      - ``endpoint_grid`` (default): legacy linspace box filter (baseline).
+      - ``edge_green``: inscribed n-gon ∩ Voronoi ∩ domain, Green edge integrals
+        of the offset Gaussian mixture (see ``edge_green_integral``).
+    """
 
     local_radius: float = 0.8
     grid_resolution: int = 24
     comm_range: float | None = None
     warn_on_contract: bool = True
+    integration_method: str = "endpoint_grid"
+    edge_n_gon: int = 256
+    edge_panels: int = 48
+    edge_h_max: float = 0.004
+    edge_cull_sigmas: float = 6.0
 
     def __post_init__(self) -> None:
+        method = str(self.integration_method)
+        if method not in ("endpoint_grid", "edge_green"):
+            raise ValueError(f"unknown integration_method {method!r}")
+        self.integration_method = method
         if self.comm_range is not None and self.warn_on_contract:
             problems = CoverageContract(self.local_radius, self.comm_range).violations()
             for problem in problems:
@@ -118,6 +133,10 @@ class LocalCVT:
         domain: tuple[float, float, float, float],
     ) -> CVTResult:
         position = np.asarray(agents[agent_index].position, dtype=float).reshape(2)
+        if self.integration_method == "edge_green":
+            return self._compute_edge_green(
+                agent_index, agents, neighbor_indices, density, domain, position
+            )
         samples, cell_area = self.cell_samples(agent_index, agents, neighbor_indices, domain)
         if len(samples) == 0:
             return CVTResult(position.copy(), 0.0, 0, 0)
@@ -132,6 +151,55 @@ class LocalCVT:
 
         centroid = np.sum(samples * weights[:, None], axis=0) / total
         return CVTResult(centroid, cell_mass, len(samples), len(samples), unheld_mass)
+
+    def _compute_edge_green(
+        self,
+        agent_index: int,
+        agents: list[AgentState],
+        neighbor_indices: list[int],
+        density: BoundaryAwareDensity,
+        domain: tuple[float, float, float, float],
+        position: np.ndarray,
+    ) -> CVTResult:
+        from .edge_green_integral import clip_cell_polygon, mixture_mass_centroid_over_polygon
+
+        neighbors = (
+            np.vstack([agents[j].position for j in neighbor_indices])
+            if neighbor_indices
+            else np.empty((0, 2))
+        )
+        poly = clip_cell_polygon(
+            position, self.local_radius, neighbors, domain, self.edge_n_gon
+        )
+        local_density = density.restrict(position, self.local_radius)
+        if len(poly) < 3:
+            return CVTResult(position.copy(), 0.0, 0, 0)
+
+        mass, centroid, used = mixture_mass_centroid_over_polygon(
+            poly,
+            local_density.targets,
+            local_density.weights,
+            float(local_density.params.sigma),
+            float(local_density.params.base_density),
+            panels=self.edge_panels,
+            cull_sigmas=float(self.edge_cull_sigmas),
+            h_max=float(self.edge_h_max),
+            site=position,
+            radius=float(self.local_radius),
+        )
+        # Unheld mass: same polygon integral with unheld weights (gap field).
+        unheld = 0.0
+        if hasattr(local_density, "unheld_field") and len(local_density.points):
+            # Approximate unheld mass by evaluating gap-weighted density at polygon
+            # centroid samples — kept only for redeploy heuristics, not certificates.
+            samples, cell_area = self.cell_samples(
+                agent_index, agents, neighbor_indices, domain
+            )
+            if len(samples):
+                unheld = float(np.sum(local_density.unheld_field(samples))) * cell_area
+        if mass <= 1e-12:
+            return CVTResult(position.copy(), float(mass), used, used, unheld)
+        return CVTResult(np.asarray(centroid, dtype=float), float(mass), used, used, unheld)
 
     # backwards-compatible thin wrapper
     def compute_centroid(

@@ -192,7 +192,11 @@ def concavity_ratio(vertices: np.ndarray) -> float:
         hull_area = float(ConvexHull(v).volume)
     except Exception:
         return 0.0
-    return float(max(0.0, 1.0 - area / hull_area)) if hull_area > 1e-12 else 0.0
+    if hull_area <= 1e-12:
+        return 0.0
+    ratio = float(max(0.0, 1.0 - area / hull_area))
+    # Regular convex samples (circle, ellipse) can land at ~2e-16, not exact 0.
+    return 0.0 if ratio < 1e-12 else ratio
 
 
 def build_case_config(base: dict, shape: str, seed: int, alpha: float) -> tuple[dict, dict]:

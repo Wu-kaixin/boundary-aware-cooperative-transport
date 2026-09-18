@@ -58,6 +58,14 @@ from .phase import Phase, PhaseGates, PhaseMonitor, PhaseSignals
 from .provenance import frame_rng
 from .safety_filter import SafetyFilter, SafetyFilterParams
 from .task import TransportTask
+from .theorem_mode import (
+    TheoremModeAbort,
+    TheoremStepRecord,
+    apply_theorem_commands,
+    assert_theorem_params,
+    attach_theorem_runtime,
+    theorem_step,
+)
 from .transport_control import (
     DirectionalProgressController,
     TransportControlParams,
@@ -183,6 +191,12 @@ class DBACTParams:
     # --- coverage (S5) ---
     local_radius: float = 0.80
     grid_resolution: int = 24
+    # Cell integrator: endpoint_grid (legacy baseline) or edge_green (Green edges).
+    integration_method: str = "endpoint_grid"
+    edge_n_gon: int = 256
+    edge_panels: int = 48
+    edge_h_max: float = 0.004
+    edge_cull_sigmas: float = 6.0
     approach_mass_ratio: float = 3.0
     redeploy_gap_ratio: float = 0.15
 
@@ -317,6 +331,25 @@ class DBACTParams:
     target_radius: float = 1.0
     target_sensor_range: float = 2.0
     target_samples: int = 36
+
+    # --- static sampled theorem_mode (execution interface fix) ---
+    # Off by default: the transport controller is unchanged bit-for-bit.
+    theorem_mode: bool = False
+    # Map provenance: "oracle" injects the true polygon; "local" keeps the
+    # existing ray-cast / voxel map but freezes registration motion.
+    theorem_map_source: str = "oracle"
+    theorem_oracle_spacing: float = 0.04
+    # When True, coordinate clipping is off and illegal updates abort.
+    theorem_disable_clipping: bool = True
+    # Forbid QP projection fallback; infeasible / out-of-domain ends the case.
+    theorem_forbid_fallback: bool = True
+    # Keep object rows but do not silently rename scaled-barrier events.
+    theorem_allow_object_barrier_scaling: bool = True
+    # Keep 0 in F_rho whenever the hard barrier already admits 0 (margin clamp).
+    theorem_clamp_margin_to_keep_zero: bool = True
+    # Soft separation bias in the nominal law is off in theorem_mode so the
+    # only robot-robot effect on U_k is the hard QP half-constraint.
+    theorem_disable_soft_separation: bool = True
 
     @property
     def r_safe(self) -> float:
@@ -461,6 +494,7 @@ class DBACTController:
             self.goal_directions[object_id] = normalize(task.direction)
 
         # Contracts first: a controller that cannot satisfy them must not be built.
+        assert_theorem_params(params)
         params.coverage_contract().assert_valid()
         contract = params.contact_contract() if params.task_mode != "coverage" else None
         if contract is not None:
@@ -481,6 +515,11 @@ class DBACTController:
             local_radius=params.local_radius,
             grid_resolution=params.grid_resolution,
             comm_range=params.comm_range,
+            integration_method=str(getattr(params, "integration_method", "endpoint_grid")),
+            edge_n_gon=int(getattr(params, "edge_n_gon", 128)),
+            edge_panels=int(getattr(params, "edge_panels", 32)),
+            edge_h_max=float(getattr(params, "edge_h_max", 0.004)),
+            edge_cull_sigmas=float(getattr(params, "edge_cull_sigmas", 6.0)),
         )
         self.safety = SafetyFilter(
             SafetyFilterParams(
@@ -492,15 +531,28 @@ class DBACTController:
                 max_speed=params.max_speed,
                 backend=params.backend,
                 enable_object_rows=params.use_object_barrier,
-                max_object_rows=params.max_object_rows,
+                max_object_rows=(
+                    max(int(params.max_object_rows), 64) if params.theorem_mode else params.max_object_rows
+                ),
                 object_row_range=params.object_row_range,
                 object_row_window=params.object_row_window,
                 object_row_inner_limit=params.robot_radius,
                 object_row_face_cosine=params.object_row_face_cosine,
-                object_row_mode=params.object_row_mode,
+                object_row_mode=("nearest_feature" if params.theorem_mode else params.object_row_mode),
                 dt=params.dt,
                 object_velocity_bound=params.object_velocity_bound,
                 recovery_fraction=params.recovery_fraction,
+                enable_wall_rows=bool(params.theorem_mode),
+                domain=domain if params.theorem_mode else None,
+                forbid_fallback=bool(params.theorem_mode and params.theorem_forbid_fallback),
+                allow_object_barrier_scaling=(
+                    True
+                    if not params.theorem_mode
+                    else bool(params.theorem_allow_object_barrier_scaling)
+                ),
+                clamp_margin_to_keep_zero=bool(
+                    params.theorem_mode and params.theorem_clamp_margin_to_keep_zero
+                ),
             ),
             contract=contract,
         )
@@ -554,6 +606,8 @@ class DBACTController:
         # the held command is overwritten before it is ever read.
         self._sense_interval = 0.0
         self._held_nominal: dict[str, tuple] = {}
+        attach_theorem_runtime(self)
+        self.last_theorem_record: TheoremStepRecord | None = None
 
     # ------------------------------------------------------------------ #
     # main loop
@@ -564,6 +618,13 @@ class DBACTController:
         return self.phase_monitor.phase
 
     def step(
+        self, agents: list[AgentState], cargoes: list[Cargo], timestamp: float, dt: float
+    ) -> list[ControlCommand]:
+        if self.params.theorem_mode:
+            return theorem_step(self, agents, cargoes, timestamp, dt)
+        return self._transport_step(agents, cargoes, timestamp, dt)
+
+    def _transport_step(
         self, agents: list[AgentState], cargoes: list[Cargo], timestamp: float, dt: float
     ) -> list[ControlCommand]:
         self._time = float(timestamp)
@@ -670,6 +731,46 @@ class DBACTController:
             self.diagnostics.append(diagnostic)
         self._frame += 1
         return commands
+
+    def _theorem_nominal(
+        self,
+        i: int,
+        agents: list[AgentState],
+        neighbor_indices: list[int],
+        view: BoundaryView,
+    ) -> tuple[np.ndarray, np.ndarray, np.ndarray, str, float, np.ndarray]:
+        agent = agents[i]
+        if len(view) == 0:
+            if self.params.theorem_map_source == "local":
+                # No geometry is invented for an unseen region. Remain still
+                # until sensing/one-hop relay supplies a local boundary.
+                zero = np.zeros(2)
+                return zero, zero.copy(), zero.copy(), "local_empty_map_hold", 0.0, agent.position.copy()
+            raise TheoremModeAbort(
+                "empty_map_in_theorem_mode",
+                self._frame,
+                {"agent": agent.agent_id, "map_source": self.params.theorem_map_source},
+            )
+        crowd = np.vstack([agent.position] + [agents[j].position for j in neighbor_indices])
+        density = BoundaryAwareDensity.from_view(
+            view, self.density_params, robot_positions=crowd, goal_direction=None
+        )
+        cell = self.cvt.compute(i, agents, neighbor_indices, density, self.domain)
+        u_cvt = self.params.kp_cage * (cell.centroid - agent.position)
+        if not self.params.theorem_disable_soft_separation:
+            u_cvt = u_cvt + self._separation_velocity(agent, [agents[j] for j in neighbor_indices])
+        u_saturated = np.asarray(u_cvt, dtype=float).copy()
+        speed = float(np.linalg.norm(u_saturated))
+        if speed > self.params.max_speed:
+            u_saturated = u_saturated * (self.params.max_speed / speed)
+        return (
+            u_saturated,
+            np.asarray(u_cvt, dtype=float),
+            u_saturated,
+            "theorem_cvt",
+            float(cell.cell_mass),
+            np.asarray(cell.centroid, dtype=float),
+        )
 
     # ------------------------------------------------------------------ #
     # D10-DIAG instrumentation
@@ -1575,6 +1676,9 @@ class DBACTController:
         return [list(np.flatnonzero(row)) for row in within]
 
     def apply_commands(self, agents: list[AgentState], commands: list[ControlCommand], dt: float) -> None:
+        if self.params.theorem_mode and self.params.theorem_disable_clipping:
+            apply_theorem_commands(self, agents, commands, dt)
+            return
         by_id = {cmd.agent_id: cmd for cmd in commands}
         for agent in agents:
             cmd = by_id[agent.agent_id]

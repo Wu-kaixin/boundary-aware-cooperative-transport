@@ -58,3 +58,7 @@ Thumbs.db
 # information the committed stills and replay.npz do not, and it is one command to
 # regenerate:
 #     python scripts/render_closed_loop.py docs/results/representative
+
+# Curated static theorem evidence only
+!theory/static_deployment/*.csv
+!theory/static_deployment/figures/*.png
