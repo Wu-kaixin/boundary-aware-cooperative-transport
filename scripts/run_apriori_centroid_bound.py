@@ -609,37 +609,36 @@ def parse_spec(values: list[str], cast):
     return [cast(v) for v in values]
 
 
-_SOURCE_FILES = [
-    ROOT / "src/dbact/edge_green_integral.py",
-    ROOT / "src/dbact/apriori_centroid_bound.py",
-    ROOT / "src/dbact/local_cvt.py",
-    ROOT / "src/dbact/safety_filter.py",
-    ROOT / "src/dbact/theorem_mode.py",
-    ROOT / "src/dbact/controller.py",
-    ROOT / "scripts/run_apriori_centroid_bound.py",
-]
-
-
 def source_fingerprint() -> str:
+    # Include transitive scientific dependencies and scenario files. Normalize
+    # line endings so checking out the same commit on Windows preserves the key.
+    paths = sorted([*ROOT.glob("src/**/*.py"), *ROOT.glob("configs/**/*.yaml"),
+                    ROOT / "scripts/run_apriori_centroid_bound.py",
+                    ROOT / "pyproject.toml", ROOT / "requirements.txt"])
     h = hashlib.sha256()
-    for path in _SOURCE_FILES:
-        h.update(path.name.encode())
-        h.update(path.read_bytes() if path.exists() else b"missing")
+    for path in paths:
+        h.update(path.relative_to(ROOT).as_posix().encode())
+        h.update(b"\0")
+        h.update(path.read_bytes().replace(b"\r\n", b"\n"))
     return h.hexdigest()
 
 
 def prior_rule_fingerprint(args) -> str:
-    payload = {
-        "integration_method": args.integration_method,
-        "edge_n_gon": args.edge_n_gon,
-        "edge_panels": args.edge_panels,
-        "edge_h_max": args.edge_h_max,
-        "edge_cull_sigmas": args.edge_cull_sigmas,
-        "clamp_margin": args.clamp_margin,
-        "frames": args.frames,
-        "grids": args.grids,
-    }
-    return hashlib.sha256(json.dumps(payload, sort_keys=True).encode()).hexdigest()
+    import platform
+    import scipy
+    # Exclude scheduling/output switches only; every numerical knob matters.
+    excluded = {"out", "resume", "skip_existing", "workers", "serial", "benchmark_parallel"}
+    payload = {k: v for k, v in vars(args).items() if k not in excluded}
+    payload["runtime"] = [platform.python_version(), np.__version__, scipy.__version__]
+    return hashlib.sha256(json.dumps(payload, sort_keys=True, default=str).encode()).hexdigest()
+
+
+_CASE_OUTPUTS = ("summary.json", "metrics.csv", "trajectory.npz", "step_records.json")
+
+
+def case_output_hashes(case_dir: Path) -> dict:
+    return {name: hashlib.sha256((case_dir / name).read_bytes()).hexdigest()
+            for name in _CASE_OUTPUTS}
 
 
 def _atomic_complete(case_dir: Path, payload: dict) -> None:
@@ -674,6 +673,9 @@ def worker_run_case(payload: dict) -> dict:
     _atomic_complete(
         case_dir,
         {
+            "schema": 2,
+            "config_sha256": config_fingerprint(cfg),
+            "outputs": case_output_hashes(case_dir),
             "key": payload["key"],
             "source_fp": payload["source_fp"],
             "prior_fp": payload["prior_fp"],
@@ -706,16 +708,16 @@ def worker_prepare_prior(payload: dict) -> dict:
     return {"key": payload["key"], "prior_path": str(dest), "beats": prior["beats_geometry"]}
 
 
-def _reuse_ok(case_dir: Path, source_fp: str, prior_fp: str) -> bool:
-    marker = case_dir / "COMPLETE.json"
-    summary = case_dir / "summary.json"
-    if not marker.exists() or not summary.exists():
-        return False
+def _reuse_ok(case_dir: Path, source_fp: str, prior_fp: str, cfg: dict) -> bool:
     try:
-        meta = json.loads(marker.read_text(encoding="utf-8"))
-    except json.JSONDecodeError:
+        meta = json.loads((case_dir / "COMPLETE.json").read_text(encoding="utf-8"))
+        return (meta.get("schema") == 2
+                and meta.get("source_fp") == source_fp
+                and meta.get("prior_fp") == prior_fp
+                and meta.get("config_sha256") == config_fingerprint(cfg)
+                and meta.get("outputs") == case_output_hashes(case_dir))
+    except (OSError, ValueError, AttributeError):
         return False
-    return meta.get("source_fp") == source_fp and meta.get("prior_fp") == prior_fp
 
 
 def _run_pool(fn, payloads: list[dict], workers: int) -> list[dict]:
@@ -917,7 +919,7 @@ def main() -> None:
         shape, seed, grid = item["shape"], item["seed"], item["grid"]
         key = case_key(shape, seed, grid)
         case_dir = out / "runs" / shape / f"n{grid}" / f"seed_{seed}"
-        if (args.resume or args.skip_existing) and _reuse_ok(case_dir, source_fp, prior_fp):
+        if (args.resume or args.skip_existing) and _reuse_ok(case_dir, source_fp, prior_fp, cfgs[key]):
             summary = json.loads((case_dir / "summary.json").read_text(encoding="utf-8"))
             summary.update({"shape": shape, "seed": seed, "grid_resolution": grid})
             summary["metrics_csv"] = str(case_dir / "metrics.csv")

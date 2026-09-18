@@ -29,10 +29,50 @@ def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+
+def compare_trajectories(serial, parallel, frames=600):
+    expected = {"J": frames, "E": frames, "H_star": frames + 1, "positions": frames + 1}
+    delta = {}
+    for key, length in expected.items():
+        a, b = np.asarray(serial[key]), np.asarray(parallel[key])
+        if a.shape != b.shape or a.ndim == 0 or len(a) != length:
+            return {"pass": False, "reason": f"{key}: incompatible or incomplete horizon"}
+        if not np.all(np.isfinite(a)) or not np.all(np.isfinite(b)):
+            return {"pass": False, "reason": f"{key}: nonfinite measurements"}
+        delta[key] = float(np.max(np.abs(a - b)))
+    if not np.array_equal(serial["vertices"], parallel["vertices"]):
+        return {"pass": False, "reason": "different object geometry"}
+    return {"max_absolute_difference": delta, "frames": frames,
+            "pass": all(v <= 1e-12 for v in delta.values())}
+
+
+def serial_verdict(checks):
+    if set(checks) != {"l_shape", "rectangle"}:
+        return "INCOMPLETE"
+    return "PASS" if all(v["pass"] for v in checks.values()) else "FAIL"
+
+
+def d10_block(diagnosis, ab):
+    total = sum(diagnosis["aggregate"]["segments_total"].values())
+    converged = diagnosis["aggregate"]["segments_total"]["F"]
+    lines = ["", "**D10：当前重跑结果**", "",
+             f"发现至接触就绪共 {total} 帧，其中 ENCLOSURE_CONVERGENCE 为 {converged} 帧。",
+             "", "![当前 D10 阶段分布](docs/assets/d10-post-detection-stages.png)",
+             "![当前 D10 覆盖率](docs/assets/d10-coverage-and-gap.png)", "",
+             "| 探索增益 | 种子数 | 接触就绪帧（均值；观测 n） | 缩放障壁事件总数 |",
+             "| --- | ---: | ---: | ---: |"]
+    for gain, rows in ab["arms"].items():
+        times = [r["T_contact_ready"] for r in rows if r["T_contact_ready"] is not None]
+        mean = f"{np.mean(times):.6g}; n={len(times)}" if times else "未到达; n=0"
+        lines.append(f"| {gain} | {len(rows)} | {mean} | {sum(r['barrier_scalings'] for r in rows)} |")
+    lines += ["", "![当前 D10 门槛对照](docs/assets/d10-gate-tradeoff.png)",
+              "历史机制探索与旧数值见 [历史说明](docs/HISTORICAL_CLOSED_LOOP_README.md)，不用于解释本次图表。"]
+    return lines
+
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
-    manifest = {"python": platform.python_version(), "numpy": np.__version__,
-                "scipy": scipy.__version__, "files": {}, "figures": {},
+    manifest = {"report_runtime": {"python": platform.python_version(), "numpy": np.__version__,
+                                   "scipy": scipy.__version__}, "files": {}, "figures": {},
                 "scope": "oracle theorem validation from this branch; Gate 5/6 tables only if paired runs exist; no local-map safety theorem"}
 
     def remember(path):
@@ -51,7 +91,7 @@ def main():
                 "inputs": {remember(p): digest(p) for p in inputs},
             }
 
-    lines = ["由本次运行的 JSON/CSV 生成；所有种子与失败均保留。", "",
+    lines = ["由已记录运行的 JSON/CSV 生成；所有种子与失败均保留。报告重建不代表重新执行仿真。", "",
              "| 运行 | 帧数 | 终止 | G500 | 失败原因 |",
              "| --- | ---: | --- | --- | --- |"]
     near = []
@@ -91,6 +131,8 @@ def main():
     ]:
         source = ROOT / "runs/readme" / folder
         copy(source / file, ASSETS / asset, [source / data])
+
+    lines += d10_block(read(OUT / "d10_diag.json"), read(OUT / "d10_ab.json"))
 
     matrix = ROOT / "runs/paper/jeh_matrix"
     summary = read(matrix / "summary.json")
@@ -145,8 +187,7 @@ def main():
             if serial.exists():
                 other = np.load(serial, allow_pickle=False)
                 remember(serial)
-                delta = {key: float(np.max(np.abs(other[key] - data[key]))) for key in ("J", "E", "H_star", "positions")}
-                checks[shape] = {"max_absolute_difference": delta, "pass": all(v <= 1e-12 for v in delta.values())}
+                checks[shape] = compare_trajectories(other, data)
     fig.suptitle("Static oracle-map theory validation — numerical observer trajectories")
     fig.tight_layout()
     figure = ASSETS / "static-deployment-comparison.png"
@@ -157,11 +198,8 @@ def main():
         "inputs": {p: h for p, h in manifest["files"].items() if p.endswith("trajectory.npz")},
         "seed": 2, "label": "static oracle-map theory validation"}
     (OUT / "serial_parallel_consistency.json").write_text(json.dumps(checks, indent=2), encoding="utf-8")
-    if checks:
-        verdict = "PASS" if all(v["pass"] for v in checks.values()) else "FAIL"
-        serial_line = (f"串行/并行完整 600 帧对照（L 形与矩形，seed 2，容差 1e-12）：**{verdict}**。")
-    else:
-        serial_line = ("串行/并行完整 600 帧对照仍在运行；下图仅使用并行矩阵轨迹。")
+    verdict = serial_verdict(checks)
+    serial_line = (f"串行/并行完整 600 帧对照（L 形与矩形，seed 2，容差 1e-12）：**{verdict}**。")
     lines += ["", serial_line, "",
               "![静态部署对照](docs/assets/static-deployment-comparison.png)", "",
               "完整 QP 状态、K0 与最小净空：[静态安全](docs/results/consolidation/static_safety.json)。"]

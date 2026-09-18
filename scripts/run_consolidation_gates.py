@@ -56,49 +56,66 @@ def missing(paths: list[str]) -> list[str]:
     return [p for p in paths if not (ROOT / p).exists()]
 
 
-def recorded_sha(path: Path) -> str | None:
-    if path.suffix != ".json" or not path.exists():
-        return None
+def output_hashes(artifacts: list[str]) -> dict[str, str]:
+    return {p: hashlib.sha256((ROOT / p).read_bytes()).hexdigest() for p in artifacts}
+
+
+def input_signature(args: list[str], seeds: list[int]) -> dict:
+    paths = sorted([*ROOT.glob("src/**/*.py"), *ROOT.glob("scripts/*.py"),
+                    *ROOT.glob("configs/**/*.yaml"), ROOT / "pyproject.toml",
+                    ROOT / "requirements.txt"])
+    sources = {p.relative_to(ROOT).as_posix(): hashlib.sha256(
+        p.read_bytes().replace(b"\r\n", b"\n")).hexdigest() for p in paths}
+    inputs = []
+    if args[0].endswith("render_closed_loop.py"):
+        inputs = [str(Path(args[1]) / f) for f in ("replay.npz", "summary.json")]
+    elif args[0].endswith("analyse_enclosure_gate.py"):
+        folder = Path(args[args.index("--run") + 1])
+        payload = json.loads((ROOT / folder / "gate.json").read_text(encoding="utf-8"))
+        inputs = [str(folder / "gate.json"),
+                  *[str(folder / f"gate_seed{r['seed']}.npz") for r in payload["reports"]]]
+    return {"schema": 1, "command": args, "seeds": seeds, "sources": sources,
+            "inputs": output_hashes(inputs),
+            "runtime": [sys.executable, platform.python_version(), numpy.__version__, scipy.__version__]}
+
+
+def artifacts_current(artifacts: list[str], receipt: Path, signature: dict) -> bool:
     try:
-        payload = json.loads(path.read_text(encoding="utf-8"))
-    except (OSError, json.JSONDecodeError):
-        return None
-    if not isinstance(payload, dict):
-        return None
-    if "provenance" in payload:
-        return payload["provenance"].get("git_sha")
-    if "manifest" in payload and isinstance(payload["manifest"], dict):
-        return payload["manifest"].get("commit")
-    return payload.get("commit") or payload.get("code_sha")
-
-
-def matches_head(recorded: str | None) -> bool:
-    if not recorded:
+        data = json.loads(receipt.read_text(encoding="utf-8"))
+        return (data.get("signature") == signature
+                and data.get("outputs") == output_hashes(artifacts))
+    except (OSError, ValueError, AttributeError):
         return False
-    head = git_sha()
-    return recorded == head or recorded.removesuffix("-dirty") == head or recorded.startswith(head)
 
 
-def artifacts_current(artifacts: list[str]) -> bool:
-    paths = [ROOT / p for p in artifacts]
-    if any(not p.exists() for p in paths):
+def scientific_failure(args, artifacts, returncode, started_ns, log_path) -> bool:
+    # Exit 1 means a scored G500 failure only when this invocation actually
+    # produced a complete run. Never accept old outputs left by a crash.
+    if returncode != 1 or not args[0].endswith("run_closed_loop.py"):
         return False
-    summaries = [p for p in paths if p.name in {"summary.json", "g500_sweep.json", "manifest.json"}]
-    if summaries and not all(matches_head(recorded_sha(p)) for p in summaries):
-        return False
-    gifs = [p for p in paths if p.suffix == ".gif"]
-    for gif in gifs:
-        replay = gif.with_name("replay.npz")
-        if replay.exists() and gif.stat().st_mtime < replay.stat().st_mtime:
+    try:
+        if any((ROOT / p).stat().st_mtime_ns < started_ns for p in artifacts):
             return False
-    return True
+        if "Traceback (most recent call last)" in log_path.read_text(encoding="utf-8"):
+            return False
+        summary = json.loads(next(ROOT / p for p in artifacts if p.endswith("summary.json")).read_text(encoding="utf-8"))
+        gates = [c["g500"] for c in summary["cargoes"].values() if c.get("g500")]
+        timing = summary["timing"]
+        return (bool(gates) and any(g["success"] is False for g in gates)
+                and timing["terminated_by"] in {"settled", "watchdog", "budget"}
+                and timing["frames"] == summary["steps"] and summary["steps"] > 0)
+    except (OSError, ValueError, KeyError, StopIteration, TypeError):
+        return False
 
 
 def run(name: str, args: list[str], seeds: list[int], artifacts: list[str],
         allow_nonzero: bool, manifest: dict) -> None:
     print(f"START {name}", flush=True)
     start = time.time()
-    if artifacts_current(artifacts):
+    started_ns = time.time_ns()
+    signature = input_signature(args, seeds)
+    receipt = OUT / "receipts" / f"{name}.json"
+    if artifacts_current(artifacts, receipt, signature):
         row = {
             "name": name,
             "command": [sys.executable, "-u", *args],
@@ -112,6 +129,7 @@ def run(name: str, args: list[str], seeds: list[int], artifacts: list[str],
         (OUT / "readme_manifest.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
         print(f"SKIP {name} artifacts present", flush=True)
         return
+    receipt.unlink(missing_ok=True)
     log_path = OUT / f"{name}.log"
     with log_path.open("w", encoding="utf-8") as log:
         proc = subprocess.run([sys.executable, "-u", *args], cwd=ROOT, stdout=log, stderr=subprocess.STDOUT)
@@ -131,8 +149,16 @@ def run(name: str, args: list[str], seeds: list[int], artifacts: list[str],
     absent = missing(artifacts)
     if absent:
         raise SystemExit(f"{name} missing {absent}; see {log_path}")
-    if proc.returncode != 0 and not allow_nonzero:
+    if proc.returncode != 0 and not (allow_nonzero and scientific_failure(
+            args, artifacts, proc.returncode, started_ns, log_path)):
         raise SystemExit(f"{name} failed with exit code {proc.returncode}; see {log_path}")
+    if input_signature(args, seeds) != signature:
+        raise SystemExit(f"{name} inputs changed while running; refusing to cache the result")
+    receipt.parent.mkdir(parents=True, exist_ok=True)
+    temporary = receipt.with_suffix(".tmp")
+    temporary.write_text(json.dumps({"signature": signature, "outputs": output_hashes(artifacts),
+                                     "commit": git_sha(), "exit_code": proc.returncode}, indent=2), encoding="utf-8")
+    os.replace(temporary, receipt)
 
 
 def commands_for(from_gate: int) -> list[tuple[str, list[str], list[int], list[str], bool]]:
@@ -178,7 +204,8 @@ def commands_for(from_gate: int) -> list[tuple[str, list[str], list[int], list[s
              ["runs/readme/d_sweep/g500_sweep.json"], False),
             ("d10_diag", ["scripts/diagnose_redeployment.py", "--seeds", "0..7",
                           "--out", "runs/readme/d10_diag"], list(range(8)),
-             ["runs/readme/d10_diag/diagnosis.json"], False),
+             ["runs/readme/d10_diag/diagnosis.json", "runs/readme/d10_diag/figA_segments.png",
+              "runs/readme/d10_diag/figB_coverage.png"], False),
             ("d10_ab", ["scripts/ab_explore.py", "--seeds", "0..7", "--gains", "0,6",
                         "--out", "runs/readme/d10_ab"], list(range(8)),
              ["runs/readme/d10_ab/ab.json"], False),
@@ -224,6 +251,16 @@ def commands_for(from_gate: int) -> list[tuple[str, list[str], list[int], list[s
              "runs/paper/deployment_transport_pairs/manifest.json"],
             False,
         ))
+    # These raw products feed the published plots/safety tables, so their
+    # integrity is part of the experiment receipt as well as the summaries.
+    for name, _args, _seeds, artifacts, _allow in jobs:
+        if name == "d10_enc":
+            artifacts.extend(f"runs/readme/d10_enc/gate_seed{seed}.npz" for seed in range(8))
+        if name == "jeh_matrix":
+            for shape in ("l_shape", "rectangle", "c_shape"):
+                for seed in (2, 5, 8, 11, 17, 23, 29, 31, 37):
+                    base = f"runs/paper/jeh_matrix/runs/{shape}/n20/seed_{seed}"
+                    artifacts.extend([f"{base}/trajectory.npz", f"{base}/step_records.json"])
     return jobs
 
 
