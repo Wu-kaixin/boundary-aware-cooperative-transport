@@ -124,10 +124,13 @@ def test_concavity_ratio_is_zero_for_convex_and_positive_for_a_notch(matrix_runn
     displacement -- rests on this being a real quantity.
     """
     square = np.array([[0.0, 0.0], [1.0, 0.0], [1.0, 1.0], [0.0, 1.0]])
-    assert matrix_runner.concavity_ratio(square) == pytest.approx(0.0)
+    assert matrix_runner.concavity_ratio(square) == pytest.approx(0.0, abs=1e-12)
     notched = np.array([[0.0, 0.0], [1.0, 0.0], [1.0, 1.0], [0.5, 0.4], [0.0, 1.0]])
     assert matrix_runner.concavity_ratio(notched) > 0.0
-    assert matrix_runner.concavity_ratio(np.array([[0.0, 0.0], [1.0, 1.0]])) == 0.0
+    assert matrix_runner.concavity_ratio(np.array([[0.0, 0.0], [1.0, 1.0]])) == pytest.approx(0.0, abs=1e-12)
+    rng = np.random.default_rng(0)
+    circle = matrix_runner.local_outline("circle", rng)
+    assert abs(matrix_runner.concavity_ratio(circle)) < 1e-12
 
 
 def _mean_concavity(matrix_runner) -> dict[str, float]:

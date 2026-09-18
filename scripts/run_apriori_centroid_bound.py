@@ -821,7 +821,7 @@ def main() -> None:
     dump(
         out / "branch_manifest.json",
         {
-            "branch": "feat/apriori-certificate-repair",
+            "branch": "paper/boundary-aware-safe-deployment",
             "code_sha": sha,
             "source_fingerprint": source_fp,
             "prior_rule_fingerprint": prior_fp,
