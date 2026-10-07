@@ -28,6 +28,7 @@ from dbact.phase import Phase
 from dbact.static_deployment_diagnostics import UniformOffsetObserver
 from dbact.theorem_mode import TheoremModeAbort, hold_segment_object_clearance
 from dbact_sim.environment import SimulationEnvironment
+from dbact_sim.paper_evaluation import SCHEMA_VERSION, evaluate_static_hold, progress_errors, event_record
 
 
 def encode(value):
@@ -88,6 +89,8 @@ def static_arm(cfg, seed, variant, frames, out):
     initial = np.vstack([a.position for a in env.agents])
     rows, positions, costs = [], [initial.copy()], []
     abort = None
+    first_violation = None
+    held_commands = []
     for frame in range(frames):
         p = np.vstack([a.position for a in env.agents])
         try:
@@ -97,7 +100,23 @@ def static_arm(cfg, seed, variant, frames, out):
             break
         rec = env.controller.last_theorem_record
         # Observe after command commitment. This value never changes execution.
-        clearance, sampled, _, _ = hold_segment_object_clearance(p, rec.u_command, [vertices], env.dt)
+        clearance, sampled, lipschitz_margin, sample_details = hold_segment_object_clearance(p, rec.u_command, [vertices], env.dt)
+        independent = evaluate_static_hold(p, rec.u_command, vertices, env.dt, params.r_safe)
+        held_commands.append(rec.u_command.copy())
+        if first_violation is None and independent['status'] == 'OBSERVED_VIOLATION':
+            witness = next(r for r in independent['robots'] if r['status'] == 'OBSERVED_VIOLATION')
+            idx = witness['robot_index']; agent = env.agents[idx]
+            view = env.controller._views.get(agent.agent_id)
+            filt = env.controller._last_filter_results[idx]
+            first_violation = {**witness, 'frame':frame, 'control_time':frame*env.dt,
+                'robot_id':agent.agent_id, 'hold_start':p[idx].tolist(), 'command':rec.u_command[idx].tolist(),
+                'observed_points':view.points.tolist() if view is not None else [],
+                'observed_normals':view.normals.tolist() if view is not None else [],
+                'object_residual_min':float(filt.object_residual_min),
+                'active_object_rows':filt.object_rows_active,
+                'A_rows':None if filt.A_rows is None else filt.A_rows.tolist(),
+                'b_effective':None if filt.b_effective is None else filt.b_effective.tolist(),
+                'solver_status':filt.status}
         pooled = [v.points for v in env.controller._views.values() if len(v)]
         coverage = 0.0
         if pooled:
@@ -111,7 +130,11 @@ def static_arm(cfg, seed, variant, frames, out):
                      "union_map_coverage_at_0_08m": coverage,
                      "qp_intervention_fraction": float(np.mean([r.modification > 1e-8 for r in env.controller._last_filter_results])),
                      "empty_map_holds": sum(m == "local_empty_map_hold" for m in rec.modes),
-                     "solver_status": rec.solver_status})
+                     "solver_status": rec.solver_status,
+                     "independent_status": independent['status'],
+                     "clearance_path_min": independent['clearance_path_min'],
+                     "actual_violation_count": independent['actual_violation_count'],
+                     "sample_count":sample_details["n_samples"], "sample_h_seconds":sample_details["h"], "lipschitz_margin":lipschitz_margin})
         if frame % 10 == 0:
             measured = observer.evaluate(p, vertices)
             costs.append({"frame": frame, "H": measured["H"], "centroid_residual_squared": measured["centroid2"]})
@@ -130,10 +153,22 @@ def static_arm(cfg, seed, variant, frames, out):
               "object_safety_violation_frames": sum(r["safety_margin"] < -1e-9 for r in rows),
               "label": "empirical local-boundary comparison; no local-map object-safety theorem",
               "observer": {"angular_nodes": 64, "radial_nodes": 8, "cost_stride": 10, "safety_stride": 1}}
+    result.update({"schema_version":SCHEMA_VERSION,
+        "clearance_lower_bound_min":result['minimum_true_clearance'],
+        "clearance_sampled_min":min((r['true_hold_clearance_sampled'] for r in rows),default=None),
+        "clearance_path_min":min((r['clearance_path_min'] for r in rows if r['clearance_path_min'] is not None),default=None),
+        "lower_bound_check_failed_frames":result['object_safety_violation_frames'],
+        "actual_violation_observed":any(r['independent_status']=='OBSERVED_VIOLATION' for r in rows) if rows else None,
+        "actual_violation_count":sum(r['actual_violation_count'] or 0 for r in rows) if rows and all(r['actual_violation_count'] is not None for r in rows) else None,
+        "safety_evaluation_status":'OBSERVED_VIOLATION' if first_violation else ('CERTIFIED_SAFE' if len(rows)==frames and all(r['independent_status']=='CERTIFIED_SAFE' for r in rows) else 'UNRESOLVED'),
+        "first_violation_trace":first_violation,
+        "evaluation_tolerance_m":1e-9,
+        "mean_robot_displacement":float(np.mean(np.linalg.norm(positions[-1]-initial,axis=1))),
+        "mean_robot_path_length":float(np.mean(np.sum(np.linalg.norm(np.diff(np.asarray(positions),axis=0),axis=2),axis=0))) if rows else 0.0})
     dump(out / "config.json", cfg)
     dump(out / "metrics.json", {"steps": rows, "cost": costs})
     dump(out / "summary.json", result)
-    np.savez_compressed(out / "trajectory.npz", positions=positions, vertices=vertices)
+    np.savez_compressed(out / "trajectory.npz", positions=positions, vertices=vertices, commands=held_commands)
     return result
 
 
@@ -144,10 +179,17 @@ def transport_arm(cfg, seed, variant, frames, out):
     initial = np.vstack([a.position for a in env.agents])
     cid = env.cargoes[0].object_id
     goal = env.goal_directions[cid]
+    if hasattr(env.engine, 'model'):
+        env.engine.model.record_substeps = True
+    physical_streak = 0
+    physical_ready = None
+    substep_rows = []
+    env.controller.trace_enabled = True
     hist = np.zeros(12, dtype=int)
     rows = []
 
     def observe(frame, current):
+        nonlocal physical_streak, physical_ready
         if frame == 0:
             return
         cargo = current.cargoes[0]
@@ -163,7 +205,33 @@ def transport_arm(cfg, seed, variant, frames, out):
             tau = fmax * float(relative[0] * direction[1] - relative[1] * direction[0])
             torque_positive += max(tau, 0.0)
             torque_negative += min(tau, 0.0)
+        positive_contacts = sum(float(c.force @ goal)>1e-9 for c in report.contacts)
+        gates = current.controller.phase_monitor.gates
+        physical_streak = physical_streak + 1 if positive_contacts >= gates.contact_quorum else 0
+        if physical_ready is None and physical_streak >= gates.contact_dwell:
+            physical_ready = frame
+        if hasattr(current.engine, 'model'):
+            substep_rows.extend({'frame':frame, **r} for r in current.engine.model.last_substeps)
         rows.append({"frame": frame, "contacts": report.contact_count,
+                     "positive_contacts":positive_contacts, "physical_contact_streak":physical_streak,
+                     "contact_ids":[c.agent_id for c in report.contacts],
+                     "contact_normals":[c.normal.tolist() for c in report.contacts],
+                     "contact_forces":[c.force.tolist() for c in report.contacts],
+                     "forward_force":float(report.net_force @ goal),
+                     "positive_force_sum":sum(max(0.,float(c.force @ goal)) for c in report.contacts),
+                     "reverse_force_sum":sum(min(0.,float(c.force @ goal)) for c in report.contacts),
+                     "true_progress":current.tasks[cid].progress(cargo.position),
+                     "estimated_progress":float(current.controller.team_progress.get(cid,0.)),
+                     "true_velocity":cargo.linear_velocity.tolist(),
+                     "phase":current.controller.phase.name,
+                     "phase_guards":vars(current.controller.phase_signals).copy(),
+                     "robot_positions":[a.position.tolist() for a in current.agents],
+                     "commands":[a.velocity.tolist() for a in current.agents],
+                     "rotation":float(cargo.angle),
+                     "estimated_velocities":{a.agent_id:current.controller.maps[a.agent_id].object_velocity(cid).tolist() for a in current.agents},
+                     "integrals":{key:float(loop.integral) for key,loop in current.controller.transport_loops.items()},
+                     "diagnostics":[vars(d).copy() for d in current.controller.diagnostics],
+                     "barrier_scales":[float(f.barrier_scale) for f in current.controller._last_filter_results],
                      "normal_only_forward_capacity": max_forward,
                      "normal_only_torque_interval": [torque_negative, torque_positive],
                      "actual_net_force": report.net_force.tolist(), "actual_net_torque": report.net_torque,
@@ -195,6 +263,19 @@ def transport_arm(cfg, seed, variant, frames, out):
               "g500_success": gate["success"], "failure_reasons": gate["failure_reasons"],
               "capacity_label": "normal-only instantaneous contact wrench box, 0 <= f_i <= stiffness*delta_max; not dynamically guaranteed",
               "changed_mechanism": "Only centroid target before CONTACT_READY; CVT mass, redeployment guards, sensing, safety and subsequent transport identical"}
+    errors=progress_errors(env.tasks[cid].start, env.cargoes[0].position, goal, env.tasks[cid].distance)
+    events={name:event_record(summary['phases']['entered'].get(name),env.dt,termination['frames_run']) for name in ('SEARCH','DISCOVER','ENCLOSE','CONTACT_READY','TRANSPORT','BRAKE','HOLD')}
+    phases=list(events)
+    durations={a+'->'+b:None if events[a]['seconds'] is None or events[b]['seconds'] is None else events[b]['seconds']-events[a]['seconds'] for a,b in zip(phases,phases[1:])}
+    result.update({"schema_version":SCHEMA_VERSION, **errors, "events":events,"phase_durations":durations,
+        "physical_contact_ready":event_record(physical_ready,env.dt,termination['frames_run']),
+        "physical_readiness_definition":"positive projected contact force, existing controller contact_quorum and contact_dwell; control-frame observations",
+        "task_completed":None, "task_completed_definition":"UNRESOLVED: no separate physical completion rule frozen yet",
+        "settled":termination['settled'],"g500_pass":gate['success'],"watchdog":termination['terminated_by']=='watchdog',
+        "final_speed":float(np.linalg.norm(env.cargoes[0].linear_velocity)),
+        "rotation_deg":cargo['rotation_deg'],
+        "moving_safety_status":"UNRESOLVED: discrete physics substeps, no continuous certificate"})
+    dump(out / "physics_substeps.json", substep_rows)
     dump(out / "paired_metrics.json", {"steps": rows, "summary": result})
     dump(out / "config.json", cfg)
     return result

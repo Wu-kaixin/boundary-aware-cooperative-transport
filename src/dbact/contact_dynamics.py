@@ -116,6 +116,8 @@ class PenaltyContactModel:
 
     def __init__(self, params: ContactParams):
         self.params = params
+        self.record_substeps = False
+        self.last_substeps = []
 
     def compute_contacts(self, cargo: Cargo, agents: list[AgentState]) -> ContactReport:
         report = ContactReport(object_id=cargo.object_id)
@@ -170,6 +172,7 @@ class PenaltyContactModel:
 
     def step(self, cargo: Cargo, agents: list[AgentState], dt: float) -> ContactReport:
         """Advance one cargo by ``dt`` under contact forces alone."""
+        self.last_substeps = []
         report = self.compute_contacts(cargo, agents)
         if not cargo.movable:
             cargo.set_twist(np.zeros(2), 0.0)
@@ -183,6 +186,15 @@ class PenaltyContactModel:
         for k in range(n_sub):
             sub = report if k == 0 else self.compute_contacts(cargo, agents)
 
+            if self.record_substeps:
+                signed, _, _ = cargo.signed_distance(np.vstack([a.position for a in agents]))
+                self.last_substeps.append({'object_id':cargo.object_id,'substep':k,'offset_seconds':k*h,
+                    'sampling':'pre-integration; robot positions held at post-command positions by existing engine',
+                    'position':cargo.position.tolist(),'angle':float(cargo.angle),
+                    'robot_positions':[a.position.tolist() for a in agents],
+                    'signed_clearance_min':float(np.min(signed)),
+                    'penetration_max':float(max(0.,self.params.robot_radius-np.min(signed))),
+                    'force':sub.net_force.tolist(),'torque':float(sub.net_torque)})
             free_velocity = cargo.linear_velocity + h * sub.net_force / cargo.mass
             free_omega = cargo.angular_velocity + h * sub.net_torque / cargo.inertia
 

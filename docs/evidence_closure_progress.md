@@ -9,3 +9,11 @@
 - Gate6 v2 absent from reachable path history and searched worktrees. Search encountered inaccessible pytest caches; missing evidence remains a limitation. Seeds 12..31 excluded from held-out claims.
 - Shell sandbox startup fails; approved elevated execution works. No research thresholds changed.
 - Next: independent evaluation, compatibility schema, observer invariance test, full-horizon baseline reproductions.
+
+## Stage 1 — instrumentation checkpoint
+- Added evaluator-only full linear hold/solid polygon distances, versioned aliases and explicit unresolved states; original archive untouched.
+- Added physical substep copies, true/estimated progress, force decomposition, contact identities, phase guards, controller diagnostics, endpoint errors and censored events.
+- Corrected README/report generator descriptions of archived lower-bound failures and signed progress error.
+- Validation: 40 targeted tests passed (paper evaluator, contact dynamics, QP, theorem mode), including 12-frame instrumented/uninstrumented exact trajectory equality. Static and transport five-frame paired smoke runs completed. These are smoke checks, not formal experimental evidence.
+- Windows default GBK caused a read-only test failure; explicit UTF-8 fixed it. Run commands use PYTHONUTF8=1.
+- Full 600-frame static and 3000-frame transport reproduction starts next. No thresholds or horizons changed. task_completed remains unresolved pending protocol definition.

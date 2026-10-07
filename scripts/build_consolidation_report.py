@@ -231,11 +231,11 @@ def main():
                                  f"{min(r['minimum_safety_margin'] for r in rs if r['minimum_safety_margin'] is not None):.5g} | "
                                  f"{mean('final_union_map_coverage'):.4f} | {mean('qp_intervention_fraction'):.4f} |")
             unsafe = sum(r["object_safety_violation_frames"] > 0 for r in all_rows if r["variant"] == "local")
-            lines += ["", f"局部运行中观测到物体安全违反的次数：**{unsafe}/9**。"
+            lines += ["", f"局部运行中保守净空下界检查失败的案例数（非实际碰撞计数）：**{unsafe}/9**。"
                       "对照完成并不构成未知边界安全定理。"]
         else:
             lines += ["仅替换 CONTACT_READY 之前的部署目标；感知、安全层与后续搬运保持相同。",
-                      "", "| 形状 | 部署 | G500 通过 | 收定 | 接触就绪秒（均值；观测 n） | 接触数（均值） | 终态距离误差（均值） | QP 干预（均值） |",
+                      "", "| 形状 | 部署 | G500 通过 | 收定 | 接触就绪秒（均值；观测 n） | 接触数（均值） | 终态有符号进度误差（均值，非二维误差） | QP 干预（均值） |",
                       "| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |"]
             for shape in ("l_shape", "rectangle", "c_shape"):
                 for variant in ("boundary_cvt", "nearest_observed_target"):
