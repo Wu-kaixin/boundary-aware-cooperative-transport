@@ -1,0 +1,1368 @@
+{
+  "note": "Rates are computed inside each batch. Batches are not pooled, because they repeat conditions and mix static safety with transport.",
+  "batches": {
+    "ablation": {
+      "episodes": 12,
+      "execution_errors": 0,
+      "task_completed": {
+        "k": 6,
+        "n": 12,
+        "rate": 0.5,
+        "low": 0.2537815976337061,
+        "high": 0.7462184023662939,
+        "missing": 0
+      },
+      "settled": {
+        "k": 12,
+        "n": 12,
+        "rate": 1.0,
+        "low": 0.7575059933447592,
+        "high": 1.0,
+        "missing": 0
+      },
+      "g500_pass": {
+        "k": 3,
+        "n": 12,
+        "rate": 0.25,
+        "low": 0.08894166839405471,
+        "high": 0.5323053349335657,
+        "missing": 0
+      },
+      "by_shape": {
+        "c_shape": {
+          "n": 4,
+          "task_completed": {
+            "k": 3,
+            "n": 4,
+            "rate": 0.75,
+            "low": 0.30064184258240184,
+            "high": 0.9544127391902995,
+            "missing": 0
+          },
+          "settled": {
+            "k": 4,
+            "n": 4,
+            "rate": 1.0,
+            "low": 0.5101091635454027,
+            "high": 1.0,
+            "missing": 0
+          },
+          "g500_pass": {
+            "k": 2,
+            "n": 4,
+            "rate": 0.5,
+            "low": 0.15003898915214947,
+            "high": 0.8499610108478506,
+            "missing": 0
+          }
+        },
+        "l_shape": {
+          "n": 4,
+          "task_completed": {
+            "k": 1,
+            "n": 4,
+            "rate": 0.25,
+            "low": 0.04558726080970055,
+            "high": 0.6993581574175981,
+            "missing": 0
+          },
+          "settled": {
+            "k": 4,
+            "n": 4,
+            "rate": 1.0,
+            "low": 0.5101091635454027,
+            "high": 1.0,
+            "missing": 0
+          },
+          "g500_pass": {
+            "k": 0,
+            "n": 4,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.4898908364545973,
+            "missing": 0
+          }
+        },
+        "rectangle": {
+          "n": 4,
+          "task_completed": {
+            "k": 2,
+            "n": 4,
+            "rate": 0.5,
+            "low": 0.15003898915214947,
+            "high": 0.8499610108478506,
+            "missing": 0
+          },
+          "settled": {
+            "k": 4,
+            "n": 4,
+            "rate": 1.0,
+            "low": 0.5101091635454027,
+            "high": 1.0,
+            "missing": 0
+          },
+          "g500_pass": {
+            "k": 1,
+            "n": 4,
+            "rate": 0.25,
+            "low": 0.04558726080970055,
+            "high": 0.6993581574175981,
+            "missing": 0
+          }
+        }
+      },
+      "controller_readiness_boundary_cvt": {
+        "n": 0,
+        "observed": 0,
+        "censored": 0,
+        "unreached_proportion": null,
+        "conditional_mean_seconds": null,
+        "conditional_median_seconds": null
+      },
+      "paired_controller_ready_cvt_minus_nearest": {
+        "n": 0,
+        "mean": null,
+        "median": null,
+        "low": null,
+        "high": null
+      },
+      "paired_ready_censored_pairs": 0,
+      "paired_physical_ready_cvt_minus_nearest": {
+        "n": 0,
+        "mean": null,
+        "median": null,
+        "low": null,
+        "high": null
+      },
+      "paired_absolute_progress_cvt_minus_nearest": {
+        "n": 0,
+        "mean": null,
+        "median": null,
+        "low": null,
+        "high": null
+      },
+      "analysis_unit": "episode for rates; matched shape/seed/stratum pair for differences",
+      "bootstrap_seed": 20261007,
+      "censoring": "unreached events excluded from means; their count is reported separately"
+    },
+    "baseline_static": {
+      "episodes": 18,
+      "execution_errors": 0,
+      "task_completed": {
+        "k": 0,
+        "n": 0,
+        "rate": null,
+        "low": null,
+        "high": null,
+        "missing": 18
+      },
+      "settled": {
+        "k": 0,
+        "n": 0,
+        "rate": null,
+        "low": null,
+        "high": null,
+        "missing": 18
+      },
+      "g500_pass": {
+        "k": 0,
+        "n": 0,
+        "rate": null,
+        "low": null,
+        "high": null,
+        "missing": 18
+      },
+      "by_shape": {
+        "c_shape": {
+          "n": 6,
+          "task_completed": {
+            "k": 0,
+            "n": 0,
+            "rate": null,
+            "low": null,
+            "high": null,
+            "missing": 6
+          },
+          "settled": {
+            "k": 0,
+            "n": 0,
+            "rate": null,
+            "low": null,
+            "high": null,
+            "missing": 6
+          },
+          "g500_pass": {
+            "k": 0,
+            "n": 0,
+            "rate": null,
+            "low": null,
+            "high": null,
+            "missing": 6
+          }
+        },
+        "l_shape": {
+          "n": 6,
+          "task_completed": {
+            "k": 0,
+            "n": 0,
+            "rate": null,
+            "low": null,
+            "high": null,
+            "missing": 6
+          },
+          "settled": {
+            "k": 0,
+            "n": 0,
+            "rate": null,
+            "low": null,
+            "high": null,
+            "missing": 6
+          },
+          "g500_pass": {
+            "k": 0,
+            "n": 0,
+            "rate": null,
+            "low": null,
+            "high": null,
+            "missing": 6
+          }
+        },
+        "rectangle": {
+          "n": 6,
+          "task_completed": {
+            "k": 0,
+            "n": 0,
+            "rate": null,
+            "low": null,
+            "high": null,
+            "missing": 6
+          },
+          "settled": {
+            "k": 0,
+            "n": 0,
+            "rate": null,
+            "low": null,
+            "high": null,
+            "missing": 6
+          },
+          "g500_pass": {
+            "k": 0,
+            "n": 0,
+            "rate": null,
+            "low": null,
+            "high": null,
+            "missing": 6
+          }
+        }
+      },
+      "controller_readiness_boundary_cvt": {
+        "n": 0,
+        "observed": 0,
+        "censored": 0,
+        "unreached_proportion": null,
+        "conditional_mean_seconds": null,
+        "conditional_median_seconds": null
+      },
+      "paired_controller_ready_cvt_minus_nearest": {
+        "n": 0,
+        "mean": null,
+        "median": null,
+        "low": null,
+        "high": null
+      },
+      "paired_ready_censored_pairs": 0,
+      "paired_physical_ready_cvt_minus_nearest": {
+        "n": 0,
+        "mean": null,
+        "median": null,
+        "low": null,
+        "high": null
+      },
+      "paired_absolute_progress_cvt_minus_nearest": {
+        "n": 0,
+        "mean": null,
+        "median": null,
+        "low": null,
+        "high": null
+      },
+      "analysis_unit": "episode for rates; matched shape/seed/stratum pair for differences",
+      "bootstrap_seed": 20261007,
+      "censoring": "unreached events excluded from means; their count is reported separately"
+    },
+    "baseline_transport": {
+      "episodes": 18,
+      "execution_errors": 0,
+      "task_completed": {
+        "k": 0,
+        "n": 0,
+        "rate": null,
+        "low": null,
+        "high": null,
+        "missing": 18
+      },
+      "settled": {
+        "k": 17,
+        "n": 18,
+        "rate": 0.9444444444444444,
+        "low": 0.7424269921812741,
+        "high": 0.990124809021697,
+        "missing": 0
+      },
+      "g500_pass": {
+        "k": 2,
+        "n": 18,
+        "rate": 0.1111111111111111,
+        "low": 0.03101952264561239,
+        "high": 0.32799765130178804,
+        "missing": 0
+      },
+      "by_shape": {
+        "c_shape": {
+          "n": 6,
+          "task_completed": {
+            "k": 0,
+            "n": 0,
+            "rate": null,
+            "low": null,
+            "high": null,
+            "missing": 6
+          },
+          "settled": {
+            "k": 5,
+            "n": 6,
+            "rate": 0.8333333333333334,
+            "low": 0.43649717781352987,
+            "high": 0.9699466302516935,
+            "missing": 0
+          },
+          "g500_pass": {
+            "k": 1,
+            "n": 6,
+            "rate": 0.16666666666666666,
+            "low": 0.030053369748306635,
+            "high": 0.5635028221864702,
+            "missing": 0
+          }
+        },
+        "l_shape": {
+          "n": 6,
+          "task_completed": {
+            "k": 0,
+            "n": 0,
+            "rate": null,
+            "low": null,
+            "high": null,
+            "missing": 6
+          },
+          "settled": {
+            "k": 6,
+            "n": 6,
+            "rate": 1.0,
+            "low": 0.6096657120978346,
+            "high": 1.0,
+            "missing": 0
+          },
+          "g500_pass": {
+            "k": 1,
+            "n": 6,
+            "rate": 0.16666666666666666,
+            "low": 0.030053369748306635,
+            "high": 0.5635028221864702,
+            "missing": 0
+          }
+        },
+        "rectangle": {
+          "n": 6,
+          "task_completed": {
+            "k": 0,
+            "n": 0,
+            "rate": null,
+            "low": null,
+            "high": null,
+            "missing": 6
+          },
+          "settled": {
+            "k": 6,
+            "n": 6,
+            "rate": 1.0,
+            "low": 0.6096657120978346,
+            "high": 1.0,
+            "missing": 0
+          },
+          "g500_pass": {
+            "k": 0,
+            "n": 6,
+            "rate": 0.0,
+            "low": 2.7755575615628914e-17,
+            "high": 0.3903342879021653,
+            "missing": 0
+          }
+        }
+      },
+      "controller_readiness_boundary_cvt": {
+        "n": 9,
+        "observed": 9,
+        "censored": 0,
+        "unreached_proportion": 0.0,
+        "conditional_mean_seconds": 4.383333333333334,
+        "conditional_median_seconds": 4.3500000000000005
+      },
+      "paired_controller_ready_cvt_minus_nearest": {
+        "n": 9,
+        "mean": -4.6,
+        "median": -0.75,
+        "low": -9.01125,
+        "high": -1.1000000000000003
+      },
+      "paired_ready_censored_pairs": 0,
+      "paired_physical_ready_cvt_minus_nearest": {
+        "n": 0,
+        "mean": null,
+        "median": null,
+        "low": null,
+        "high": null
+      },
+      "paired_absolute_progress_cvt_minus_nearest": {
+        "n": 9,
+        "mean": 0.2078067851252687,
+        "median": 0.03975367596851109,
+        "low": -0.013156945737480203,
+        "high": 0.6053603441182355
+      },
+      "analysis_unit": "episode for rates; matched shape/seed/stratum pair for differences",
+      "bootstrap_seed": 20261007,
+      "censoring": "unreached events excluded from means; their count is reported separately"
+    },
+    "development": {
+      "episodes": 27,
+      "execution_errors": 0,
+      "task_completed": {
+        "k": 16,
+        "n": 27,
+        "rate": 0.5925925925925926,
+        "low": 0.4072670096806468,
+        "high": 0.7548524292560443,
+        "missing": 0
+      },
+      "settled": {
+        "k": 26,
+        "n": 27,
+        "rate": 0.9629629629629629,
+        "low": 0.8171653406642414,
+        "high": 0.9934318540192149,
+        "missing": 0
+      },
+      "g500_pass": {
+        "k": 3,
+        "n": 27,
+        "rate": 0.1111111111111111,
+        "low": 0.038520348283098374,
+        "high": 0.2805780081827982,
+        "missing": 0
+      },
+      "by_shape": {
+        "c_shape": {
+          "n": 9,
+          "task_completed": {
+            "k": 4,
+            "n": 9,
+            "rate": 0.4444444444444444,
+            "low": 0.18877852109766452,
+            "high": 0.733348706504507,
+            "missing": 0
+          },
+          "settled": {
+            "k": 8,
+            "n": 9,
+            "rate": 0.8888888888888888,
+            "low": 0.5650002944233439,
+            "high": 0.9801091123614551,
+            "missing": 0
+          },
+          "g500_pass": {
+            "k": 1,
+            "n": 9,
+            "rate": 0.1111111111111111,
+            "low": 0.019890887638544907,
+            "high": 0.434999705576656,
+            "missing": 0
+          }
+        },
+        "l_shape": {
+          "n": 9,
+          "task_completed": {
+            "k": 4,
+            "n": 9,
+            "rate": 0.4444444444444444,
+            "low": 0.18877852109766452,
+            "high": 0.733348706504507,
+            "missing": 0
+          },
+          "settled": {
+            "k": 9,
+            "n": 9,
+            "rate": 1.0,
+            "low": 0.7008549515804559,
+            "high": 1.0,
+            "missing": 0
+          },
+          "g500_pass": {
+            "k": 2,
+            "n": 9,
+            "rate": 0.2222222222222222,
+            "low": 0.06322510711784671,
+            "high": 0.5474110308930111,
+            "missing": 0
+          }
+        },
+        "rectangle": {
+          "n": 9,
+          "task_completed": {
+            "k": 8,
+            "n": 9,
+            "rate": 0.8888888888888888,
+            "low": 0.5650002944233439,
+            "high": 0.9801091123614551,
+            "missing": 0
+          },
+          "settled": {
+            "k": 9,
+            "n": 9,
+            "rate": 1.0,
+            "low": 0.7008549515804559,
+            "high": 1.0,
+            "missing": 0
+          },
+          "g500_pass": {
+            "k": 0,
+            "n": 9,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.2991450484195441,
+            "missing": 0
+          }
+        }
+      },
+      "controller_readiness_boundary_cvt": {
+        "n": 9,
+        "observed": 9,
+        "censored": 0,
+        "unreached_proportion": 0.0,
+        "conditional_mean_seconds": 4.383333333333334,
+        "conditional_median_seconds": 4.3500000000000005
+      },
+      "paired_controller_ready_cvt_minus_nearest": {
+        "n": 9,
+        "mean": -4.6,
+        "median": -0.75,
+        "low": -9.01125,
+        "high": -1.1000000000000003
+      },
+      "paired_ready_censored_pairs": 0,
+      "paired_physical_ready_cvt_minus_nearest": {
+        "n": 0,
+        "mean": null,
+        "median": null,
+        "low": null,
+        "high": null
+      },
+      "paired_absolute_progress_cvt_minus_nearest": {
+        "n": 9,
+        "mean": 0.2078067851252687,
+        "median": 0.03975367596851109,
+        "low": -0.013156945737480203,
+        "high": 0.6053603441182355
+      },
+      "analysis_unit": "episode for rates; matched shape/seed/stratum pair for differences",
+      "bootstrap_seed": 20261007,
+      "censoring": "unreached events excluded from means; their count is reported separately"
+    },
+    "diagnostic_v1": {
+      "episodes": 10,
+      "execution_errors": 10,
+      "task_completed": {
+        "k": 0,
+        "n": 10,
+        "rate": 0.0,
+        "low": 0.0,
+        "high": 0.2775327998628892,
+        "missing": 0
+      },
+      "settled": {
+        "k": 0,
+        "n": 10,
+        "rate": 0.0,
+        "low": 0.0,
+        "high": 0.2775327998628892,
+        "missing": 0
+      },
+      "g500_pass": {
+        "k": 0,
+        "n": 10,
+        "rate": 0.0,
+        "low": 0.0,
+        "high": 0.2775327998628892,
+        "missing": 0
+      },
+      "by_shape": {
+        "c_shape": {
+          "n": 4,
+          "task_completed": {
+            "k": 0,
+            "n": 4,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.4898908364545973,
+            "missing": 0
+          },
+          "settled": {
+            "k": 0,
+            "n": 4,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.4898908364545973,
+            "missing": 0
+          },
+          "g500_pass": {
+            "k": 0,
+            "n": 4,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.4898908364545973,
+            "missing": 0
+          }
+        },
+        "l_shape": {
+          "n": 2,
+          "task_completed": {
+            "k": 0,
+            "n": 2,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.6576197724933469,
+            "missing": 0
+          },
+          "settled": {
+            "k": 0,
+            "n": 2,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.6576197724933469,
+            "missing": 0
+          },
+          "g500_pass": {
+            "k": 0,
+            "n": 2,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.6576197724933469,
+            "missing": 0
+          }
+        },
+        "rectangle": {
+          "n": 4,
+          "task_completed": {
+            "k": 0,
+            "n": 4,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.4898908364545973,
+            "missing": 0
+          },
+          "settled": {
+            "k": 0,
+            "n": 4,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.4898908364545973,
+            "missing": 0
+          },
+          "g500_pass": {
+            "k": 0,
+            "n": 4,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.4898908364545973,
+            "missing": 0
+          }
+        }
+      },
+      "controller_readiness_boundary_cvt": {
+        "n": 5,
+        "observed": 0,
+        "censored": 5,
+        "unreached_proportion": 1.0,
+        "conditional_mean_seconds": null,
+        "conditional_median_seconds": null
+      },
+      "paired_controller_ready_cvt_minus_nearest": {
+        "n": 0,
+        "mean": null,
+        "median": null,
+        "low": null,
+        "high": null
+      },
+      "paired_ready_censored_pairs": 5,
+      "paired_physical_ready_cvt_minus_nearest": {
+        "n": 0,
+        "mean": null,
+        "median": null,
+        "low": null,
+        "high": null
+      },
+      "paired_absolute_progress_cvt_minus_nearest": {
+        "n": 0,
+        "mean": null,
+        "median": null,
+        "low": null,
+        "high": null
+      },
+      "analysis_unit": "episode for rates; matched shape/seed/stratum pair for differences",
+      "bootstrap_seed": 20261007,
+      "censoring": "unreached events excluded from means; their count is reported separately"
+    },
+    "diagnostic_v2": {
+      "episodes": 10,
+      "execution_errors": 0,
+      "task_completed": {
+        "k": 6,
+        "n": 10,
+        "rate": 0.6,
+        "low": 0.31267376973365824,
+        "high": 0.8318196702937638,
+        "missing": 0
+      },
+      "settled": {
+        "k": 10,
+        "n": 10,
+        "rate": 1.0,
+        "low": 0.7224672001371107,
+        "high": 0.9999999999999999,
+        "missing": 0
+      },
+      "g500_pass": {
+        "k": 1,
+        "n": 10,
+        "rate": 0.1,
+        "low": 0.017876213095072896,
+        "high": 0.4041500267952385,
+        "missing": 0
+      },
+      "by_shape": {
+        "c_shape": {
+          "n": 4,
+          "task_completed": {
+            "k": 2,
+            "n": 4,
+            "rate": 0.5,
+            "low": 0.15003898915214947,
+            "high": 0.8499610108478506,
+            "missing": 0
+          },
+          "settled": {
+            "k": 4,
+            "n": 4,
+            "rate": 1.0,
+            "low": 0.5101091635454027,
+            "high": 1.0,
+            "missing": 0
+          },
+          "g500_pass": {
+            "k": 1,
+            "n": 4,
+            "rate": 0.25,
+            "low": 0.04558726080970055,
+            "high": 0.6993581574175981,
+            "missing": 0
+          }
+        },
+        "l_shape": {
+          "n": 2,
+          "task_completed": {
+            "k": 2,
+            "n": 2,
+            "rate": 1.0,
+            "low": 0.34238022750665303,
+            "high": 1.0,
+            "missing": 0
+          },
+          "settled": {
+            "k": 2,
+            "n": 2,
+            "rate": 1.0,
+            "low": 0.34238022750665303,
+            "high": 1.0,
+            "missing": 0
+          },
+          "g500_pass": {
+            "k": 0,
+            "n": 2,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.6576197724933469,
+            "missing": 0
+          }
+        },
+        "rectangle": {
+          "n": 4,
+          "task_completed": {
+            "k": 2,
+            "n": 4,
+            "rate": 0.5,
+            "low": 0.15003898915214947,
+            "high": 0.8499610108478506,
+            "missing": 0
+          },
+          "settled": {
+            "k": 4,
+            "n": 4,
+            "rate": 1.0,
+            "low": 0.5101091635454027,
+            "high": 1.0,
+            "missing": 0
+          },
+          "g500_pass": {
+            "k": 0,
+            "n": 4,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.4898908364545973,
+            "missing": 0
+          }
+        }
+      },
+      "controller_readiness_boundary_cvt": {
+        "n": 5,
+        "observed": 5,
+        "censored": 0,
+        "unreached_proportion": 0.0,
+        "conditional_mean_seconds": 4.76,
+        "conditional_median_seconds": 4.4
+      },
+      "paired_controller_ready_cvt_minus_nearest": {
+        "n": 5,
+        "mean": -11.020000000000001,
+        "median": -15.3,
+        "low": -18.56,
+        "high": -3.4799999999999995
+      },
+      "paired_ready_censored_pairs": 0,
+      "paired_physical_ready_cvt_minus_nearest": {
+        "n": 0,
+        "mean": null,
+        "median": null,
+        "low": null,
+        "high": null
+      },
+      "paired_absolute_progress_cvt_minus_nearest": {
+        "n": 5,
+        "mean": 0.005211013772463202,
+        "median": 0.0015866199625966804,
+        "low": -0.047896235701741084,
+        "high": 0.06201629693786592
+      },
+      "analysis_unit": "episode for rates; matched shape/seed/stratum pair for differences",
+      "bootstrap_seed": 20261007,
+      "censoring": "unreached events excluded from means; their count is reported separately"
+    },
+    "recovery": {
+      "episodes": 10,
+      "execution_errors": 0,
+      "task_completed": {
+        "k": 6,
+        "n": 10,
+        "rate": 0.6,
+        "low": 0.31267376973365824,
+        "high": 0.8318196702937638,
+        "missing": 0
+      },
+      "settled": {
+        "k": 10,
+        "n": 10,
+        "rate": 1.0,
+        "low": 0.7224672001371107,
+        "high": 0.9999999999999999,
+        "missing": 0
+      },
+      "g500_pass": {
+        "k": 2,
+        "n": 10,
+        "rate": 0.2,
+        "low": 0.05668215145437519,
+        "high": 0.5098375284633583,
+        "missing": 0
+      },
+      "by_shape": {
+        "c_shape": {
+          "n": 4,
+          "task_completed": {
+            "k": 2,
+            "n": 4,
+            "rate": 0.5,
+            "low": 0.15003898915214947,
+            "high": 0.8499610108478506,
+            "missing": 0
+          },
+          "settled": {
+            "k": 4,
+            "n": 4,
+            "rate": 1.0,
+            "low": 0.5101091635454027,
+            "high": 1.0,
+            "missing": 0
+          },
+          "g500_pass": {
+            "k": 2,
+            "n": 4,
+            "rate": 0.5,
+            "low": 0.15003898915214947,
+            "high": 0.8499610108478506,
+            "missing": 0
+          }
+        },
+        "l_shape": {
+          "n": 2,
+          "task_completed": {
+            "k": 1,
+            "n": 2,
+            "rate": 0.5,
+            "low": 0.09453120573423074,
+            "high": 0.9054687942657693,
+            "missing": 0
+          },
+          "settled": {
+            "k": 2,
+            "n": 2,
+            "rate": 1.0,
+            "low": 0.34238022750665303,
+            "high": 1.0,
+            "missing": 0
+          },
+          "g500_pass": {
+            "k": 0,
+            "n": 2,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.6576197724933469,
+            "missing": 0
+          }
+        },
+        "rectangle": {
+          "n": 4,
+          "task_completed": {
+            "k": 3,
+            "n": 4,
+            "rate": 0.75,
+            "low": 0.30064184258240184,
+            "high": 0.9544127391902995,
+            "missing": 0
+          },
+          "settled": {
+            "k": 4,
+            "n": 4,
+            "rate": 1.0,
+            "low": 0.5101091635454027,
+            "high": 1.0,
+            "missing": 0
+          },
+          "g500_pass": {
+            "k": 0,
+            "n": 4,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.4898908364545973,
+            "missing": 0
+          }
+        }
+      },
+      "controller_readiness_boundary_cvt": {
+        "n": 5,
+        "observed": 5,
+        "censored": 0,
+        "unreached_proportion": 0.0,
+        "conditional_mean_seconds": 4.58,
+        "conditional_median_seconds": 4.65
+      },
+      "paired_controller_ready_cvt_minus_nearest": {
+        "n": 5,
+        "mean": -7.44,
+        "median": -7.15,
+        "low": -13.959999999999999,
+        "high": -1.6700000000000004
+      },
+      "paired_ready_censored_pairs": 0,
+      "paired_physical_ready_cvt_minus_nearest": {
+        "n": 0,
+        "mean": null,
+        "median": null,
+        "low": null,
+        "high": null
+      },
+      "paired_absolute_progress_cvt_minus_nearest": {
+        "n": 5,
+        "mean": 0.048736015882338266,
+        "median": 0.06115059130242817,
+        "low": 0.005973287050016785,
+        "high": 0.08465362351583146
+      },
+      "analysis_unit": "episode for rates; matched shape/seed/stratum pair for differences",
+      "bootstrap_seed": 20261007,
+      "censoring": "unreached events excluded from means; their count is reported separately"
+    },
+    "safety": {
+      "episodes": 9,
+      "execution_errors": 0,
+      "task_completed": {
+        "k": 0,
+        "n": 0,
+        "rate": null,
+        "low": null,
+        "high": null,
+        "missing": 9
+      },
+      "settled": {
+        "k": 0,
+        "n": 0,
+        "rate": null,
+        "low": null,
+        "high": null,
+        "missing": 9
+      },
+      "g500_pass": {
+        "k": 0,
+        "n": 0,
+        "rate": null,
+        "low": null,
+        "high": null,
+        "missing": 9
+      },
+      "by_shape": {
+        "c_shape": {
+          "n": 3,
+          "task_completed": {
+            "k": 0,
+            "n": 0,
+            "rate": null,
+            "low": null,
+            "high": null,
+            "missing": 3
+          },
+          "settled": {
+            "k": 0,
+            "n": 0,
+            "rate": null,
+            "low": null,
+            "high": null,
+            "missing": 3
+          },
+          "g500_pass": {
+            "k": 0,
+            "n": 0,
+            "rate": null,
+            "low": null,
+            "high": null,
+            "missing": 3
+          }
+        },
+        "l_shape": {
+          "n": 3,
+          "task_completed": {
+            "k": 0,
+            "n": 0,
+            "rate": null,
+            "low": null,
+            "high": null,
+            "missing": 3
+          },
+          "settled": {
+            "k": 0,
+            "n": 0,
+            "rate": null,
+            "low": null,
+            "high": null,
+            "missing": 3
+          },
+          "g500_pass": {
+            "k": 0,
+            "n": 0,
+            "rate": null,
+            "low": null,
+            "high": null,
+            "missing": 3
+          }
+        },
+        "rectangle": {
+          "n": 3,
+          "task_completed": {
+            "k": 0,
+            "n": 0,
+            "rate": null,
+            "low": null,
+            "high": null,
+            "missing": 3
+          },
+          "settled": {
+            "k": 0,
+            "n": 0,
+            "rate": null,
+            "low": null,
+            "high": null,
+            "missing": 3
+          },
+          "g500_pass": {
+            "k": 0,
+            "n": 0,
+            "rate": null,
+            "low": null,
+            "high": null,
+            "missing": 3
+          }
+        }
+      },
+      "controller_readiness_boundary_cvt": {
+        "n": 0,
+        "observed": 0,
+        "censored": 0,
+        "unreached_proportion": null,
+        "conditional_mean_seconds": null,
+        "conditional_median_seconds": null
+      },
+      "paired_controller_ready_cvt_minus_nearest": {
+        "n": 0,
+        "mean": null,
+        "median": null,
+        "low": null,
+        "high": null
+      },
+      "paired_ready_censored_pairs": 0,
+      "paired_physical_ready_cvt_minus_nearest": {
+        "n": 0,
+        "mean": null,
+        "median": null,
+        "low": null,
+        "high": null
+      },
+      "paired_absolute_progress_cvt_minus_nearest": {
+        "n": 0,
+        "mean": null,
+        "median": null,
+        "low": null,
+        "high": null
+      },
+      "analysis_unit": "episode for rates; matched shape/seed/stratum pair for differences",
+      "bootstrap_seed": 20261007,
+      "censoring": "unreached events excluded from means; their count is reported separately"
+    },
+    "test": {
+      "episodes": 36,
+      "execution_errors": 3,
+      "task_completed": {
+        "k": 4,
+        "n": 36,
+        "rate": 0.1111111111111111,
+        "low": 0.04406640300315648,
+        "high": 0.25314808590364857,
+        "missing": 0
+      },
+      "settled": {
+        "k": 26,
+        "n": 36,
+        "rate": 0.7222222222222222,
+        "low": 0.5600751000260289,
+        "high": 0.841516620598654,
+        "missing": 0
+      },
+      "g500_pass": {
+        "k": 5,
+        "n": 36,
+        "rate": 0.1388888888888889,
+        "low": 0.06081815009132838,
+        "high": 0.286595303893562,
+        "missing": 0
+      },
+      "by_shape": {
+        "c_shape": {
+          "n": 12,
+          "task_completed": {
+            "k": 0,
+            "n": 12,
+            "rate": 0.0,
+            "low": 2.7755575615628914e-17,
+            "high": 0.24249400665524085,
+            "missing": 0
+          },
+          "settled": {
+            "k": 9,
+            "n": 12,
+            "rate": 0.75,
+            "low": 0.46769466506643426,
+            "high": 0.9110583316059453,
+            "missing": 0
+          },
+          "g500_pass": {
+            "k": 2,
+            "n": 12,
+            "rate": 0.16666666666666666,
+            "low": 0.04696514218385378,
+            "high": 0.4480308622529734,
+            "missing": 0
+          }
+        },
+        "l_shape": {
+          "n": 12,
+          "task_completed": {
+            "k": 1,
+            "n": 12,
+            "rate": 0.08333333333333333,
+            "low": 0.014865094404917095,
+            "high": 0.35387991114111694,
+            "missing": 0
+          },
+          "settled": {
+            "k": 7,
+            "n": 12,
+            "rate": 0.5833333333333334,
+            "low": 0.31951131254954973,
+            "high": 0.8067396863412435,
+            "missing": 0
+          },
+          "g500_pass": {
+            "k": 1,
+            "n": 12,
+            "rate": 0.08333333333333333,
+            "low": 0.014865094404917095,
+            "high": 0.35387991114111694,
+            "missing": 0
+          }
+        },
+        "rectangle": {
+          "n": 12,
+          "task_completed": {
+            "k": 3,
+            "n": 12,
+            "rate": 0.25,
+            "low": 0.08894166839405471,
+            "high": 0.5323053349335657,
+            "missing": 0
+          },
+          "settled": {
+            "k": 10,
+            "n": 12,
+            "rate": 0.8333333333333334,
+            "low": 0.5519691377470266,
+            "high": 0.9530348578161463,
+            "missing": 0
+          },
+          "g500_pass": {
+            "k": 2,
+            "n": 12,
+            "rate": 0.16666666666666666,
+            "low": 0.04696514218385378,
+            "high": 0.4480308622529734,
+            "missing": 0
+          }
+        }
+      },
+      "controller_readiness_boundary_cvt": {
+        "n": 12,
+        "observed": 11,
+        "censored": 1,
+        "unreached_proportion": 0.08333333333333333,
+        "conditional_mean_seconds": 12.086363636363638,
+        "conditional_median_seconds": 15.65
+      },
+      "paired_controller_ready_cvt_minus_nearest": {
+        "n": 10,
+        "mean": -4.37,
+        "median": -0.7749999999999999,
+        "low": -10.020000000000001,
+        "high": -0.32000000000000056
+      },
+      "paired_ready_censored_pairs": 2,
+      "paired_physical_ready_cvt_minus_nearest": {
+        "n": 3,
+        "mean": -1.816666666666667,
+        "median": -6.6,
+        "low": -19.35,
+        "high": 20.5
+      },
+      "paired_absolute_progress_cvt_minus_nearest": {
+        "n": 11,
+        "mean": -0.17750727093411045,
+        "median": -0.06627097740053145,
+        "low": -1.0717276280088297,
+        "high": 0.6330073367180584
+      },
+      "analysis_unit": "episode for rates; matched shape/seed/stratum pair for differences",
+      "bootstrap_seed": 20261007,
+      "censoring": "unreached events excluded from means; their count is reported separately"
+    }
+  },
+  "failure_taxonomy": {
+    "ablation": {
+      "episodes": 12,
+      "counts": {
+        "g500_not_passed": 9,
+        "task_not_completed": 6
+      }
+    },
+    "baseline_static": {
+      "episodes": 18,
+      "counts": {
+        "controller_ready_censored": 18,
+        "observed_static_violation": 8
+      }
+    },
+    "baseline_transport": {
+      "episodes": 18,
+      "counts": {
+        "g500_not_passed": 16,
+        "watchdog": 1
+      }
+    },
+    "development": {
+      "episodes": 27,
+      "counts": {
+        "task_not_completed": 11,
+        "g500_not_passed": 24,
+        "watchdog": 1
+      }
+    },
+    "diagnostic_v1": {
+      "episodes": 10,
+      "counts": {
+        "execution_or_contract_error": 10
+      }
+    },
+    "diagnostic_v2": {
+      "episodes": 10,
+      "counts": {
+        "g500_not_passed": 9,
+        "task_not_completed": 4
+      }
+    },
+    "recovery": {
+      "episodes": 10,
+      "counts": {
+        "task_not_completed": 4,
+        "g500_not_passed": 8
+      }
+    },
+    "safety": {
+      "episodes": 9,
+      "counts": {
+        "controller_ready_censored": 9
+      }
+    },
+    "test": {
+      "episodes": 36,
+      "counts": {
+        "task_not_completed": 29,
+        "watchdog": 7,
+        "g500_not_passed": 28,
+        "execution_or_contract_error": 3,
+        "controller_ready_censored": 1
+      }
+    }
+  }
+}

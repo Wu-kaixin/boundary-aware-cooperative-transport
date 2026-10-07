@@ -1,0 +1,80 @@
+{
+  "saved_at_utc": "2026-10-07T05:48:47.264936+00:00",
+  "branch": "research/simulation-evidence-closure",
+  "source_head_before_checkpoint_commit": "5487c139f95905cf41c309cfb88d527444239ef1",
+  "batches": {
+    "baseline_static": {
+      "status": "COMPLETED",
+      "episodes": 18,
+      "pairs": 9
+    },
+    "baseline_transport": {
+      "status": "COMPLETED",
+      "episodes": 18,
+      "pairs": 9
+    },
+    "study_v1/safety": {
+      "status": "COMPLETED",
+      "saved_cases": 9,
+      "planned_cases": 9,
+      "execution_errors": 0
+    },
+    "study_v1/diagnostic": {
+      "status": "COMPLETED",
+      "saved_cases": 10,
+      "planned_cases": 10,
+      "execution_errors": 10
+    },
+    "study_v2/diagnostic": {
+      "status": "COMPLETED",
+      "saved_cases": 10,
+      "planned_cases": 10,
+      "execution_errors": 0
+    },
+    "study_v3/recovery": {
+      "status": "COMPLETED",
+      "saved_cases": 10,
+      "planned_cases": 10,
+      "execution_errors": 0
+    },
+    "study_v3/development": {
+      "status": "PARTIAL",
+      "saved_cases": 26,
+      "planned_cases": 27,
+      "execution_errors": 0
+    },
+    "study_v3/ablation": {
+      "status": "COMPLETED",
+      "saved_cases": 12,
+      "planned_cases": 12,
+      "execution_errors": 0
+    },
+    "verify_serial": {
+      "status": "COMPLETED",
+      "saved_cases": 2,
+      "planned_cases": 2,
+      "execution_errors": 0
+    },
+    "verify_parallel": {
+      "status": "COMPLETED",
+      "saved_cases": 2,
+      "planned_cases": 2,
+      "execution_errors": 0
+    }
+  },
+  "raw_files": 1139,
+  "raw_bytes": 1687877937,
+  "test_batch_status": "NOT_STARTED; frozen manifest only",
+  "next_steps": [
+    "Finish/check outstanding current batches if any; do not rerun completed cases.",
+    "Review mechanism and safety quality/stagnation reports; generate paper figures.",
+    "Run frozen independent test only when user resumes; no test episodes have been consumed.",
+    "Complete final regression after all source changes, evidence report and English professor summary."
+  ],
+  "limitations": [
+    "Full 555-pass regression precedes phase recovery and final runner edits; later phase subset passed16. Final full regression still pending.",
+    "Early batches captured source hashes but not complete source snapshots; later ablation/verification runner also saves source_snapshot.",
+    "Legacy PDFs and Gate6 v2 remain missing.",
+    "Main original controller and experimental candidate conclusions remain EMPIRICAL_ONLY."
+  ]
+}

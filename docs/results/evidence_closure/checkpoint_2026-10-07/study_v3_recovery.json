@@ -1,0 +1,1668 @@
+{
+  "manifest": {
+    "identity": {
+      "protocol_sha256": "79d4497ea87df26edf85a8f6a997f7fb43fea9180a1b3e582f6e57ff73776645",
+      "source_sha256": "746762a25b22978ebffb364c14d74bd47f5ed5392c59bea4f2beddef6382c00b",
+      "environment": {
+        "python": "3.10.20",
+        "numpy": "2.2.6",
+        "scipy": "1.15.3"
+      }
+    },
+    "source_files": {
+      "src/dbact/__init__.py": "b546c2f19c3de9ade16543f86b64d1d2fd88b7ea6e0f653406723fbe3cf29395",
+      "src/dbact/agent_control.py": "d66980d0c1e49c1073260479444e088d061dfdbcd3baca7d8fdf46e4e2e4531f",
+      "src/dbact/apriori_centroid_bound.py": "677c9ec9ebcc15bab4e388768d311ae9128d645b647a7a8c3318db2a02a175e9",
+      "src/dbact/boundary_density.py": "7a5e0eaeb36b57ea0272ac5984304fc942ddbc7eeb0d3902e5fe4af61abc66db",
+      "src/dbact/boundary_map.py": "6bfdf4b23a010eb7d45081bd2d851d04d33314e3c80f160767dfa9612e6e7437",
+      "src/dbact/cargo.py": "bf26ef2ddec7c319de20911af9248187953bf6631ed42b55c867fd84086beae5",
+      "src/dbact/contact_dynamics.py": "a9dad10249e74f1ad45d8825241c9cc708184bb5a29ab101dc9ceddcb521c569",
+      "src/dbact/contracts.py": "0fa256e6194ac8bfd7b1f04360f6983206eeaa148765d558dc949e78ef6efede",
+      "src/dbact/controller.py": "7cbe2e7c2fd8c4f06df2c6d7eae6aedc806e686a853cb1f98e4c9d07f12d9000",
+      "src/dbact/cpu_budget.py": "4eeb8c037f52e7d47ac9efadae05cf66c1f5793cb860cd6c6bba641f42621641",
+      "src/dbact/deployment_variants.py": "750c287b4e078adcf2d3d5ad96aa67715a8d90206c231b6c129b848c509c5df4",
+      "src/dbact/diagnosis.py": "84bab83530c8197d0bce8a2cd3b65b6a47981fd80a1eb295b17f1d97a0cb7d71",
+      "src/dbact/edge_green_integral.py": "0947f03440c40f8108cdfa55508e8f58e55fcef35bec1ef3ce9572e2f3c9f6d9",
+      "src/dbact/enclosure_gate.py": "858923f38411458cd447db661f33a4f3396eed7145908b470a38b7b7499efeb8",
+      "src/dbact/error_audit.py": "39896ec1cb48014c41ba252f8aac262feaf1eeb9708da85ecf7ab52a0324d69e",
+      "src/dbact/geometry.py": "a31c2fdb6594be2905ee42af0ddc2342b518394289e3633d292ba8b0f8f8e547",
+      "src/dbact/guarantees.py": "5b7a2b1a38d476e4b4d4b03f300a43db59f17ffca0418c307c86dbef4239047d",
+      "src/dbact/local_boundary_features.py": "935e6b5de4309d9a2d8a19f8f5ceed3e2bf8318b808922c7c512cd9e47175815",
+      "src/dbact/local_cvt.py": "172e035ae6c0d9dcef58f5c0ea462d9379ce981c974171f23a2b95dd6351274b",
+      "src/dbact/metrics.py": "14c338453e1b4efce827c6660280677f5149f89151b89c8349ea0f3a4ce59980",
+      "src/dbact/perception.py": "aa02413a6921ea72b50036f3fee3b6454172b296c099a56682beba8b1f687d2e",
+      "src/dbact/phase.py": "ffa8230569e48e99efc9bd39562eede6f488eccca6f72b0407db10670fd71896",
+      "src/dbact/provenance.py": "e735860de30d9d1b4fd4267ab5e7ed9c08f5745f24489d434b5a3ca078e39e0a",
+      "src/dbact/qp2d.py": "8290e73473c1a085ed40551098fec44615eb583124a278f0f0b8b7b54229cdf1",
+      "src/dbact/safety_filter.py": "2ee5640f14b13d331083627075b91de76ffd4556cd04d46681379ea29d629330",
+      "src/dbact/static_deployment_diagnostics.py": "b1a23318619e4ef87606da5024366abb00c926c9ce8b862d9963ef4b93a0078f",
+      "src/dbact/task.py": "e7be986a318a9f013139542155fd7444aa757d92cc6b009b85be3054634778a1",
+      "src/dbact/theorem_mode.py": "e6d6fe11dc8abcaa8148f3572ad4864fba5fdacb9ef01f2cfd456e2c38b79c27",
+      "src/dbact/transport_control.py": "1e5e153cf9dd21b55c77418c6e568341e16f10bc4defee107a6717419b219f3f",
+      "src/dbact/transport_dynamics.py": "dd69a6c38f5fe3c29e2d014d9046960d82f792b302e36462673e4f3850f04aa6",
+      "src/dbact/types.py": "844f59866124b437cd33526040f2ea0ff458ca8a01bc430c39c1b2253c16cd32",
+      "src/dbact_sim/__init__.py": "0e62c734baac5fa1ac3cbbb7781807f97bb4210c620eb13956f327a53e5526dc",
+      "src/dbact_sim/environment.py": "ce530a8ac61bd94432bae418f415971c2b88716f102ae40566935d5371d37fee",
+      "src/dbact_sim/paper_evaluation.py": "38dc6b7aa512c5d3a0829477b9ea366de9cfb647809db895dbbd92144ba986a2",
+      "src/dbact_sim/publication.py": "2e96597232c209794af659e839c8ea331e8c09735015a0ae47f265b654be2072",
+      "src/dbact_sim/replay.py": "cc1568ca3b09f3e78927a8d441ca3db76c1e95efbb4bca6f3a524ddf4b7eb370",
+      "src/dbact_sim/run_sim.py": "bf03e764d6895104dc14b61a5f29b525010cb70ff68926a4756ac2977405b13c",
+      "src/dbact_sim/scenarios.py": "bdbdc0b36efbebe5ddf1977f593a65917d26c58c713e6efc63ff0c87241d8dda",
+      "src/dbact_sim/trace.py": "30265a8c9abaca4101649c6eeb980b75235551b8eadaa05a028988795e9d94ee",
+      "src/dbact_sim/visualization/__init__.py": "8a0d3e6871d296b4c9550bbc0d836a98fcb1a098d678157bba3877c1a03a4864",
+      "src/dbact_sim/visualization/animation.py": "0e8913034d870a07c4afb88b38dffda2b78f7d97e31b9b504a327a92a9f46105",
+      "src/dbact_sim/visualization/comparison.py": "0d08fbca806019db9b5415442635217f0af259d01cbd36109eae1152cd29329f",
+      "src/dbact_sim/visualization/debug_overlays.py": "d36d5a370fbc8347673ef706fc428bfd7b6ec60f277b9467ecd6104b53617386",
+      "src/dbact_sim/visualization/hud.py": "828d984fce8bf85d3ae06519bbcd7b2d78e82a6a32c3b6fc3d0e736b4f0a372d",
+      "src/dbact_sim/visualization/legacy.py": "a137ccc451658bc7c0e4066f877f5399b3bb0962b338640bde05d0d857bd122c",
+      "src/dbact_sim/visualization/paper_figures.py": "883cc526dc617672ac16acd080e732e34d8c5b66c5c97694ad544c396c830255",
+      "src/dbact_sim/visualization/renderer.py": "e4a49a66eea0a8035d414889426f5eff89b3d894ca021fab118d41577efd09ed",
+      "src/dbact_sim/visualization/styles.py": "2fcbb87564a40a6a73a0a4b4120f400e280584c85d4157487c624f4a46cc700b",
+      "src/mas_adapter/__init__.py": "c3025d583eb00ddd3d8f92dc795525d3a82cee4c81e45b15f4681858a9d3160a",
+      "src/mas_adapter/decentralized_transport_controller.py": "213e61a43e69657fef55905d6ebd4a70988e2b96aec936f656d6cc3525a1bdd9",
+      "src/mas_adapter/object_observer.py": "1dbf73913d18264ba31f692d73db70316b03e00499f11b2a509659dd5d459b2f",
+      "scripts/ab_explore.py": "2a008f7bc92f02fe3eea4ac831a38af72fa6b4f2fbfe84fe1e97e27ec79271f0",
+      "scripts/analyse_dwell.py": "e40bcfef787080c5343fa76158266c94481f209b65628f7ac5dcf1af9a43c9bc",
+      "scripts/analyse_enclosure_gate.py": "6b9a51c535ad4250ea34b54d6edb7fc9f36dc8863095161da83d6388eb50966e",
+      "scripts/analyse_lateral_authority.py": "edd043857a76bb4d9e2ebc6e15c4624654f7b8a46fd240b98215f16bbd643e92",
+      "scripts/analyse_shape_matrix.py": "5fedce1474c8eb313319069306ced03b125d7e21bf20ad36937d90f884ba7cfa",
+      "scripts/build_consolidation_report.py": "45f5f9a9ee81205c528b1f5048c4e708244da99dbd4d61a1d3a4869321ed8f67",
+      "scripts/build_publication_package.py": "6ef1d1408d71d6bfd5936cc6a32816ac273ea4dc301eea85088483d824e6f617",
+      "scripts/check_contracts.py": "dbf22796e802acf2c28af100c1df0e51c111676f4d87b6309c8422316132ee76",
+      "scripts/derive_finite_time_bound.py": "a15cf8d989930025cefb0c746eacdcd3ac930259c7fd735892e9e13bd2b602c4",
+      "scripts/derive_issf_margin.py": "3fef550229db17e797c821fd6174c08631c279e939a241705a9998761b14a6c6",
+      "scripts/diagnose_dwell.py": "04d99ef3d69bdb40aac22f95c044b60c0c68f7d60c1b6d1f8d54db9fbb286898",
+      "scripts/diagnose_enclosure_gate.py": "9809d6dcf90a7bcf714b9cf2efb4fbc82c762da74b085aafb323dd1c908d29d5",
+      "scripts/diagnose_redeployment.py": "f0167e8187b9c472b9c62617d9870de228c6d519193c50710a049d5a5e8c6c7f",
+      "scripts/diagnose_unexplained_cases.py": "aae22111e877f25432661748e02f7e457d4b1a48c17272deae3753ac4a009abd",
+      "scripts/evaluate_closed_loop.py": "678ae9262683f41217c1efe5c00e9249b41a2cf895c00a91a6f423a2bf167dd7",
+      "scripts/generate_publication_artifacts.py": "134a105ae9cbb396ce17fe63072518631190ec8770a0e9c7e9a653d9abf1e2ee",
+      "scripts/make_repo_tree.py": "b2682fb1627af7f3acb6b3c99ddf8d1252e38f1e5734019e8adc2e49cd617b85",
+      "scripts/migrate_configs.py": "667287400e17d7697d1218ad6a12b7bf79d268edb28e521695aa1c8f3a5f72cd",
+      "scripts/probe_transport_ceiling.py": "a5f219ecacc743c67e9a623064030c58d63aff94d49ab963882a9254c6fbbf1a",
+      "scripts/profile_explore_gain.py": "b7b732f2c651435531dfaff031e0a7286c9ada887acb8765810c6be9890f6cec",
+      "scripts/render_closed_loop.py": "58102afc197b146cb47a0293baac7405a19c0f725b320b403e83d6cab28a9918",
+      "scripts/render_paper_figures.py": "b156c025a6c3b3a9e96fd4f9eb0403b5b757c0119f8b9632a82e64c1f6027644",
+      "scripts/render_research_outputs.py": "1bee37d29d805a6d81dfadf839f033efc3c5526bfb53cbe2eae19a6829d790d9",
+      "scripts/run_all_scenarios.py": "60f0f26a4aaf0bbfdbbe17907a09554dcdd38e259c1af49f48c7b1a902d2ad81",
+      "scripts/run_apriori_centroid_bound.py": "acb3d73d0ead1958f0f0f08fb7186c1b4e4b4a700e7647cc3d4c2d133aada7d6",
+      "scripts/run_arbitrary_shape_monte_carlo.py": "f35c795d9c6fc42e9138600aebd2e081ec556c9a82f6c770410f579714b61ada",
+      "scripts/run_batch.py": "62061eb58761fbc12e0d329d8dc518fbcb86f923fa4aeb6c223aa60083b32a00",
+      "scripts/run_closed_loop.py": "17a3444c0130d8277be4b81b77aa2a4759f0ae009333f2697df25084bfc03305",
+      "scripts/run_consolidation_gates.py": "cf25217a5ca37b0beac55d674ea3ef4716e59663cb15fd218e0d2cd7576699a5",
+      "scripts/run_deployment_pairs.py": "f050c73420228041f77d49a9d61ade430ec6dfcb09bd7e0ab1c8272e6d94a60f",
+      "scripts/run_distance_ablation.py": "0c8568dcffe4093f28a7c1e40a59f7f2aaf1aa6ac8a6816f55f6f29179abb5c6",
+      "scripts/run_mock_mas_pipeline.py": "26e9eb549e384775997fb46eb4514839a2cd5c751b345b5dddef1b34d0c36ed5",
+      "scripts/run_paper_simulation_study.py": "72c8779dc48e24b2dce43d186c33c2d66877d5f64d794d7af4b32037b9ea7a9a",
+      "scripts/run_progress_gain_ablation.py": "06301413235f1a8b4156c282aba127fdd06329fa9b262fb171fd298e501b5851",
+      "scripts/run_publication_representative.py": "4507a6d7777168613cbee825972c686a7d0b2dc78c87cb3c717881134142b2c9",
+      "scripts/run_push_arc_ablation.py": "5b2ee002d4811b71b7d4a858cad82383b73fbf2d09b7abc186f057f78acc84c3",
+      "scripts/run_robustness_ablation.py": "a234578e84eabb9dfad63ca7fc9354cf9277db6e6a9e17b1e8bc2476011a5cdd",
+      "scripts/run_se2_ablation.py": "055bd7deebd5623aef29c602b4beefc4e1cea020b4f049d107cc65dbd7034c4d",
+      "scripts/run_seven_s1_cvt_test.py": "d2e13981a0020ee52e7d1111557d2ccc5d77cafa6f083c7b4c21bbccd532044b",
+      "scripts/score_reachable_cone_gate.py": "c04eb4e1b26d70f3c1fcaa7c8f94cd488779717cc833e5622221ed1e79c565c3",
+      "scripts/spike_pymunk.py": "63d10228708df65203689b60ee15e2b80d0af3ff540f4f05ae26c42dddb857b6",
+      "scripts/validate_run.py": "533b1e6d2f1133df51c2b370fa8ee99d2d12b2e1dfc7773d257abf60fa37584b",
+      "scripts/validate_theorem_mode.py": "af7d50e8896287aeb4ee2c301c2c4309cb23ce5e14ac854d74b15a60346b74ce",
+      "scripts/verify_refactor.py": "542883b03dfea363f673f50701b395c6bb33262e86c89d61f5001d939358b40b",
+      "configs/mas/controller.yaml": "8ecd9a78280723705d56463b757aeb6e26b3f14bfd6af69ab410ad6d2286bf41",
+      "configs/mas/dtransport.yaml": "eef8db03ba45dcb2ad244eb96647bd7491f6073c31046a6b2c4fc99d2389ce66",
+      "configs/mas/dtransport_mock.yaml": "fab48e67746eebce25d045e4cf47d49c6eda341349a65052e29bf9f73bcbb74d",
+      "configs/sim/baseline_scripted_b0.yaml": "8a8c3be47e3eb46e0411610da95f5422e4a012c79a85369e7bd500009e556b3a",
+      "configs/sim/baseline_unknown_polygon_caging.yaml": "ce9bf6d93f3fb59e91322dbb1344913a52449dc3b3a38893e3a80d08d1066fe7",
+      "configs/sim/baseline_unknown_polygon_caging_tight.yaml": "ce9bf6d93f3fb59e91322dbb1344913a52449dc3b3a38893e3a80d08d1066fe7",
+      "configs/sim/circle.yaml": "f9c1445ac139965de062ae3eb9b4251363968f726ad632545b5c0e07b0174d3b",
+      "configs/sim/d/l_shape_closed_loop.yaml": "a23a66fe8e831c005bd0cfe1b968218bfc95d6b1ccfb50510cd259381f6f85d4",
+      "configs/sim/d/l_shape_search.yaml": "09fa6b4f7feb9294225322317f16cd026a5578bbda57832238166410bded5e21",
+      "configs/sim/decentralized_cvt_coverage.yaml": "c77505e3772dedb331bad7e9b4aaca569d5968275f4bd9791af57d8f683832d7",
+      "configs/sim/l_shape.yaml": "0c1cb3699f9aa5113faf27caf48cc33e5001e634b1acb24ffd13a211b30bf216",
+      "configs/sim/multi_object.yaml": "e1ab7a1903e995593fc7cd19cb9e770b3ba165190c90c2fc149f18dca5cb9d9a",
+      "configs/sim/nonconvex.yaml": "0a8cbf32d579c59da7964124cb5cde25f81cd22b513cbc8d911b1689259189de",
+      "configs/sim/one_circle_caging.yaml": "b4622042948317b17abe13a8946f8cd01f098ef153a801db727ae972010948eb",
+      "configs/sim/one_nonconvex_polygon_caging.yaml": "54f4bf29136088c916bd9c12b1641f2340838f695d40353b439538a627a95989",
+      "configs/sim/one_nonconvex_polygon_caging_tight.yaml": "54f4bf29136088c916bd9c12b1641f2340838f695d40353b439538a627a95989",
+      "configs/sim/one_polygon_caging.yaml": "ce9bf6d93f3fb59e91322dbb1344913a52449dc3b3a38893e3a80d08d1066fe7",
+      "configs/sim/one_rectangle_polygon_caging.yaml": "8dab23b9d3462314168efd72268603e8c2d97abc1b3d160c3ab0397c39eff6de",
+      "configs/sim/one_rectangle_polygon_caging_tight.yaml": "8dab23b9d3462314168efd72268603e8c2d97abc1b3d160c3ab0397c39eff6de",
+      "configs/sim/paper_like_irregular_moving_cargo.yaml": "6412fab8170a37194bebaeb6c30febe2f95b13ebe2f54611d41b3349b8bb50f0",
+      "configs/sim/rectangle.yaml": "51b0dd0af5b588c909442779d4014abe39487aa8bbbc65ed6d3b67c08d50e103",
+      "configs/sim/theorem/static_c_shape_n16_oracle.yaml": "d6b3fdbedad104eb99361c5fc28ac4ce63febe5fd3a475f3ead7b45544bd947f",
+      "configs/sim/theorem/static_l_shape_n16_oracle.yaml": "a0cb2bb6b4a947760136da5ed520e69e18028803fec3cf8fe0d32ec25b2816af",
+      "configs/sim/theorem/static_l_shape_oracle.yaml": "503db1ee46251252ad1e66169e12015d887a83cb336e53bb7685440fdb16f81a",
+      "configs/sim/theorem/static_rectangle_n16_oracle.yaml": "e81e1b03eab6dee0a6fcd7fb027fb3dcb6437798018ea63feaf78cdd6924168e",
+      "configs/sim/theorem/wall_corner_oracle.yaml": "aa8dfad5486cde8e2a670fe20ff8b3c7df0b7f92d0365d6c8297eeb5e62d2695",
+      "configs/sim/v2/l_shape_distance_field_v2.yaml": "a93506cada944f1e86f69e7e0ec53eda63f0b4f9422bf4a7b8baf1aefb4b98c6",
+      "configs/sim/v2/l_shape_enclosure_v2.yaml": "5f900122622ea8e3603e190fc7db69be1c68af95462762639f5ad89765894cf0",
+      "configs/sim/v2/l_shape_v2.yaml": "caffe51205b3f273bad5c6fad1c0ed42e9fe8925ca977313fb03d3ef175fe9f3",
+      "configs/sim/v2/nonconvex_v2.yaml": "0a12cd6a0bd34b50c47d4cfc67f8ef055f5d8fb388fd9edd4e7e872f597a62fa",
+      "configs/sim/v2/shape_matrix.yaml": "8694bd77b747249d0fc413fd8d3b27af8b7c776768ddeba179f8c00983967d38",
+      "configs/sim/v2/shape_matrix_eg0.yaml": "946365ac9f1cef0403070ccc8acda94fc1bd4018817262ffe94e70616254b250"
+    },
+    "git_sha": "dcf0415c9427d3d3e443e1b37819c7f1766e0795",
+    "workers": 3,
+    "cases": 10,
+    "started_utc": "2026-10-07T05:43:09.773777+00:00"
+  },
+  "results": [
+    {
+      "variant": "boundary_cvt",
+      "seed": 2,
+      "initial_state_sha256": "1b464d06337ec82d5cf961d16d9e34c9c5ebd17d207506f8c649787961522e84",
+      "config_sha256": "053a0fcd64aae9c9a87ee2b53487fbd6c1982839dcf4b1b363a180ac7e4a26e4",
+      "goal_direction": [
+        0.19706172910618755,
+        0.9803910826408406
+      ],
+      "task": {
+        "cargo_0": {
+          "object_id": "cargo_0",
+          "direction": [
+            0.19706172910618755,
+            0.9803910826408406
+          ],
+          "angle_deg": 78.6348106982665,
+          "target_distance": 1.4466640406178684,
+          "start": [
+            3.9999999999999583,
+            3.9176470588234884
+          ],
+          "goal_point": [
+            4.28508211727986,
+            5.335943583822413
+          ],
+          "tolerance": 0.12,
+          "clearance": 1.6364777868943796,
+          "sampling_attempts": 1
+        }
+      },
+      "termination": {
+        "frames_run": 330,
+        "max_frames": 3000,
+        "settled": true,
+        "terminated_by": "settled",
+        "settle_frames": 40,
+        "settle_speed": 0.005
+      },
+      "contact_ready_frame": 93,
+      "contact_ready_seconds": 4.65,
+      "mean_contacts": 2.012084592145015,
+      "max_contacts": 4,
+      "contact_azimuth_histogram_12_bins": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        70,
+        100,
+        166,
+        32,
+        175,
+        17,
+        106
+      ],
+      "peak_normal_only_forward_capacity": 76.45265312525206,
+      "torque_capacity_min": -24.8694477397963,
+      "torque_capacity_max": 15.467053162768494,
+      "peak_actual_net_force": 40.37753100351649,
+      "peak_absolute_actual_torque": 11.957669796838905,
+      "direction_error_deg": 1.5103644946890311,
+      "max_cross_track": 0.035029967078234525,
+      "final_distance_error": -0.11810768500778202,
+      "qp_intervention_fraction": 0.13011363636363638,
+      "min_inter_agent_distance": 0.2801918609179868,
+      "min_signed_clearance": 0.09114674471662873,
+      "g500_success": true,
+      "failure_reasons": [],
+      "capacity_label": "normal-only instantaneous contact wrench box, 0 <= f_i <= stiffness*delta_max; not dynamically guaranteed",
+      "changed_mechanism": "Only centroid target before CONTACT_READY; CVT mass, redeployment guards, sensing, safety and subsequent transport identical",
+      "schema_version": "paper-metrics-v1",
+      "true_progress": 1.3285563556100863,
+      "signed_progress_error": -0.11810768500778202,
+      "absolute_progress_error": 0.11810768500778202,
+      "euclidean_endpoint_error": 0.12319303491431499,
+      "events": {
+        "SEARCH": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 16.5
+        },
+        "DISCOVER": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 16.5
+        },
+        "ENCLOSE": {
+          "frame": 24,
+          "seconds": 1.2000000000000002,
+          "right_censored": false,
+          "observation_end_seconds": 16.5
+        },
+        "CONTACT_READY": {
+          "frame": 93,
+          "seconds": 4.65,
+          "right_censored": false,
+          "observation_end_seconds": 16.5
+        },
+        "TRANSPORT": {
+          "frame": 241,
+          "seconds": 12.05,
+          "right_censored": false,
+          "observation_end_seconds": 16.5
+        },
+        "BRAKE": {
+          "frame": 252,
+          "seconds": 12.600000000000001,
+          "right_censored": false,
+          "observation_end_seconds": 16.5
+        },
+        "HOLD": {
+          "frame": 290,
+          "seconds": 14.5,
+          "right_censored": false,
+          "observation_end_seconds": 16.5
+        }
+      },
+      "phase_durations": {
+        "SEARCH->DISCOVER": 0.0,
+        "DISCOVER->ENCLOSE": 1.2000000000000002,
+        "ENCLOSE->CONTACT_READY": 3.45,
+        "CONTACT_READY->TRANSPORT": 7.4,
+        "TRANSPORT->BRAKE": 0.5500000000000007,
+        "BRAKE->HOLD": 1.8999999999999986
+      },
+      "physical_contact_ready": {
+        "frame": null,
+        "seconds": null,
+        "right_censored": true,
+        "observation_end_seconds": 16.5
+      },
+      "physical_readiness_definition": "positive projected contact force, existing controller contact_quorum and contact_dwell; control-frame observations",
+      "task_completed": false,
+      "task_completed_definition": "settled plus final Euclidean endpoint error <= existing task tolerance",
+      "settled": true,
+      "g500_pass": true,
+      "watchdog": false,
+      "final_speed": 0.0,
+      "rotation_deg": -0.09191511605205524,
+      "moving_safety_status": "UNRESOLVED: discrete physics substeps, no continuous certificate",
+      "execution_status": "COMPLETED",
+      "case_id": "recovery_c_shape_2_boundary_cvt",
+      "shape": "c_shape",
+      "stratum": "near",
+      "wall_seconds": 15.22738579986617
+    },
+    {
+      "variant": "nearest_observed_target",
+      "seed": 2,
+      "initial_state_sha256": "1b464d06337ec82d5cf961d16d9e34c9c5ebd17d207506f8c649787961522e84",
+      "config_sha256": "053a0fcd64aae9c9a87ee2b53487fbd6c1982839dcf4b1b363a180ac7e4a26e4",
+      "goal_direction": [
+        0.19706172910618755,
+        0.9803910826408406
+      ],
+      "task": {
+        "cargo_0": {
+          "object_id": "cargo_0",
+          "direction": [
+            0.19706172910618755,
+            0.9803910826408406
+          ],
+          "angle_deg": 78.6348106982665,
+          "target_distance": 1.4466640406178684,
+          "start": [
+            3.9999999999999583,
+            3.9176470588234884
+          ],
+          "goal_point": [
+            4.28508211727986,
+            5.335943583822413
+          ],
+          "tolerance": 0.12,
+          "clearance": 1.6364777868943796,
+          "sampling_attempts": 1
+        }
+      },
+      "termination": {
+        "frames_run": 567,
+        "max_frames": 3000,
+        "settled": true,
+        "terminated_by": "settled",
+        "settle_frames": 40,
+        "settle_speed": 0.005
+      },
+      "contact_ready_frame": 286,
+      "contact_ready_seconds": 14.3,
+      "mean_contacts": 1.8644366197183098,
+      "max_contacts": 6,
+      "contact_azimuth_histogram_12_bins": [
+        103,
+        0,
+        0,
+        13,
+        0,
+        72,
+        151,
+        269,
+        228,
+        182,
+        28,
+        13
+      ],
+      "peak_normal_only_forward_capacity": 92.71093182353536,
+      "torque_capacity_min": -29.828041473927794,
+      "torque_capacity_max": 38.0319631105772,
+      "peak_actual_net_force": 31.183546386422382,
+      "peak_absolute_actual_torque": 14.394491272827626,
+      "direction_error_deg": 4.863183548213681,
+      "max_cross_track": 0.11641990377333875,
+      "final_distance_error": -0.07835400903927092,
+      "qp_intervention_fraction": 0.33807319223985893,
+      "min_inter_agent_distance": 0.2800000013794625,
+      "min_signed_clearance": 0.07039152044982332,
+      "g500_success": false,
+      "failure_reasons": [
+        "G500: 44 scaled-barrier event(s), smallest factor 0.074; the contract allows 0"
+      ],
+      "capacity_label": "normal-only instantaneous contact wrench box, 0 <= f_i <= stiffness*delta_max; not dynamically guaranteed",
+      "changed_mechanism": "Only centroid target before CONTACT_READY; CVT mass, redeployment guards, sensing, safety and subsequent transport identical",
+      "schema_version": "paper-metrics-v1",
+      "true_progress": 1.3683100315785974,
+      "signed_progress_error": -0.07835400903927092,
+      "absolute_progress_error": 0.07835400903927092,
+      "euclidean_endpoint_error": 0.14033155285651067,
+      "events": {
+        "SEARCH": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 28.35
+        },
+        "DISCOVER": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 28.35
+        },
+        "ENCLOSE": {
+          "frame": 34,
+          "seconds": 1.7000000000000002,
+          "right_censored": false,
+          "observation_end_seconds": 28.35
+        },
+        "CONTACT_READY": {
+          "frame": 286,
+          "seconds": 14.3,
+          "right_censored": false,
+          "observation_end_seconds": 28.35
+        },
+        "TRANSPORT": {
+          "frame": 383,
+          "seconds": 19.150000000000002,
+          "right_censored": false,
+          "observation_end_seconds": 28.35
+        },
+        "BRAKE": {
+          "frame": 446,
+          "seconds": 22.3,
+          "right_censored": false,
+          "observation_end_seconds": 28.35
+        },
+        "HOLD": {
+          "frame": 493,
+          "seconds": 24.650000000000002,
+          "right_censored": false,
+          "observation_end_seconds": 28.35
+        }
+      },
+      "phase_durations": {
+        "SEARCH->DISCOVER": 0.0,
+        "DISCOVER->ENCLOSE": 1.7000000000000002,
+        "ENCLOSE->CONTACT_READY": 12.600000000000001,
+        "CONTACT_READY->TRANSPORT": 4.850000000000001,
+        "TRANSPORT->BRAKE": 3.1499999999999986,
+        "BRAKE->HOLD": 2.3500000000000014
+      },
+      "physical_contact_ready": {
+        "frame": null,
+        "seconds": null,
+        "right_censored": true,
+        "observation_end_seconds": 28.35
+      },
+      "physical_readiness_definition": "positive projected contact force, existing controller contact_quorum and contact_dwell; control-frame observations",
+      "task_completed": false,
+      "task_completed_definition": "settled plus final Euclidean endpoint error <= existing task tolerance",
+      "settled": true,
+      "g500_pass": false,
+      "watchdog": false,
+      "final_speed": 0.0,
+      "rotation_deg": 0.19185779454639992,
+      "moving_safety_status": "UNRESOLVED: discrete physics substeps, no continuous certificate",
+      "execution_status": "COMPLETED",
+      "case_id": "recovery_c_shape_2_nearest_observed_target",
+      "shape": "c_shape",
+      "stratum": "near",
+      "wall_seconds": 28.612268100026995
+    },
+    {
+      "variant": "boundary_cvt",
+      "seed": 8,
+      "initial_state_sha256": "2e04b993fd9f38636ab0808ffd39d08335417971d770dacc15aa84af887175e1",
+      "config_sha256": "053a0fcd64aae9c9a87ee2b53487fbd6c1982839dcf4b1b363a180ac7e4a26e4",
+      "goal_direction": [
+        0.9991906209433407,
+        -0.04022565125465672
+      ],
+      "task": {
+        "cargo_0": {
+          "object_id": "cargo_0",
+          "direction": [
+            0.9991906209433407,
+            -0.04022565125465672
+          ],
+          "angle_deg": 357.6946179453914,
+          "target_distance": 1.3043850379523978,
+          "start": [
+            3.9999999999999583,
+            3.9176470588234884
+          ],
+          "goal_point": [
+            5.303329296020817,
+            3.865177321185023
+          ],
+          "tolerance": 0.12,
+          "clearance": 1.6364777868943796,
+          "sampling_attempts": 1
+        }
+      },
+      "termination": {
+        "frames_run": 376,
+        "max_frames": 3000,
+        "settled": true,
+        "terminated_by": "settled",
+        "settle_frames": 40,
+        "settle_speed": 0.005
+      },
+      "contact_ready_frame": 83,
+      "contact_ready_seconds": 4.15,
+      "mean_contacts": 2.3289124668435015,
+      "max_contacts": 5,
+      "contact_azimuth_histogram_12_bins": [
+        0,
+        14,
+        14,
+        0,
+        254,
+        73,
+        276,
+        0,
+        140,
+        88,
+        19,
+        0
+      ],
+      "peak_normal_only_forward_capacity": 68.15762523338304,
+      "torque_capacity_min": -29.224842929472143,
+      "torque_capacity_max": 32.478471106687756,
+      "peak_actual_net_force": 33.85613197211528,
+      "peak_absolute_actual_torque": 14.965375805901955,
+      "direction_error_deg": 0.7860413787209181,
+      "max_cross_track": 0.056000314325373,
+      "final_distance_error": 0.005332736033308416,
+      "qp_intervention_fraction": 0.13048537234042554,
+      "min_inter_agent_distance": 0.28034774520771705,
+      "min_signed_clearance": 0.07899902750654254,
+      "g500_success": true,
+      "failure_reasons": [],
+      "capacity_label": "normal-only instantaneous contact wrench box, 0 <= f_i <= stiffness*delta_max; not dynamically guaranteed",
+      "changed_mechanism": "Only centroid target before CONTACT_READY; CVT mass, redeployment guards, sensing, safety and subsequent transport identical",
+      "schema_version": "paper-metrics-v1",
+      "true_progress": 1.3097177739857064,
+      "signed_progress_error": 0.005332736033308638,
+      "absolute_progress_error": 0.005332736033308638,
+      "euclidean_endpoint_error": 0.018743765344803914,
+      "events": {
+        "SEARCH": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 18.8
+        },
+        "DISCOVER": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 18.8
+        },
+        "ENCLOSE": {
+          "frame": 25,
+          "seconds": 1.25,
+          "right_censored": false,
+          "observation_end_seconds": 18.8
+        },
+        "CONTACT_READY": {
+          "frame": 83,
+          "seconds": 4.15,
+          "right_censored": false,
+          "observation_end_seconds": 18.8
+        },
+        "TRANSPORT": {
+          "frame": 302,
+          "seconds": 15.100000000000001,
+          "right_censored": false,
+          "observation_end_seconds": 18.8
+        },
+        "BRAKE": {
+          "frame": 302,
+          "seconds": 15.100000000000001,
+          "right_censored": false,
+          "observation_end_seconds": 18.8
+        },
+        "HOLD": {
+          "frame": 335,
+          "seconds": 16.75,
+          "right_censored": false,
+          "observation_end_seconds": 18.8
+        }
+      },
+      "phase_durations": {
+        "SEARCH->DISCOVER": 0.0,
+        "DISCOVER->ENCLOSE": 1.25,
+        "ENCLOSE->CONTACT_READY": 2.9000000000000004,
+        "CONTACT_READY->TRANSPORT": 10.950000000000001,
+        "TRANSPORT->BRAKE": 0.0,
+        "BRAKE->HOLD": 1.6499999999999986
+      },
+      "physical_contact_ready": {
+        "frame": null,
+        "seconds": null,
+        "right_censored": true,
+        "observation_end_seconds": 18.8
+      },
+      "physical_readiness_definition": "positive projected contact force, existing controller contact_quorum and contact_dwell; control-frame observations",
+      "task_completed": true,
+      "task_completed_definition": "settled plus final Euclidean endpoint error <= existing task tolerance",
+      "settled": true,
+      "g500_pass": true,
+      "watchdog": false,
+      "final_speed": 0.0,
+      "rotation_deg": 3.9577700875798896,
+      "moving_safety_status": "UNRESOLVED: discrete physics substeps, no continuous certificate",
+      "execution_status": "COMPLETED",
+      "case_id": "recovery_c_shape_8_boundary_cvt",
+      "shape": "c_shape",
+      "stratum": "near",
+      "wall_seconds": 19.9913033999037
+    },
+    {
+      "variant": "nearest_observed_target",
+      "seed": 8,
+      "initial_state_sha256": "2e04b993fd9f38636ab0808ffd39d08335417971d770dacc15aa84af887175e1",
+      "config_sha256": "053a0fcd64aae9c9a87ee2b53487fbd6c1982839dcf4b1b363a180ac7e4a26e4",
+      "goal_direction": [
+        0.9991906209433407,
+        -0.04022565125465672
+      ],
+      "task": {
+        "cargo_0": {
+          "object_id": "cargo_0",
+          "direction": [
+            0.9991906209433407,
+            -0.04022565125465672
+          ],
+          "angle_deg": 357.6946179453914,
+          "target_distance": 1.3043850379523978,
+          "start": [
+            3.9999999999999583,
+            3.9176470588234884
+          ],
+          "goal_point": [
+            5.303329296020817,
+            3.865177321185023
+          ],
+          "tolerance": 0.12,
+          "clearance": 1.6364777868943796,
+          "sampling_attempts": 1
+        }
+      },
+      "termination": {
+        "frames_run": 265,
+        "max_frames": 3000,
+        "settled": true,
+        "terminated_by": "settled",
+        "settle_frames": 40,
+        "settle_speed": 0.005
+      },
+      "contact_ready_frame": 98,
+      "contact_ready_seconds": 4.9,
+      "mean_contacts": 1.4699248120300752,
+      "max_contacts": 6,
+      "contact_azimuth_histogram_12_bins": [
+        0,
+        21,
+        13,
+        10,
+        77,
+        89,
+        104,
+        38,
+        0,
+        29,
+        10,
+        0
+      ],
+      "peak_normal_only_forward_capacity": 72.31027893260068,
+      "torque_capacity_min": -49.13720992455143,
+      "torque_capacity_max": 45.74222874627809,
+      "peak_actual_net_force": 31.416404586960663,
+      "peak_absolute_actual_torque": 15.03422154055177,
+      "direction_error_deg": 0.6887948616774996,
+      "max_cross_track": 0.06617309050482921,
+      "final_distance_error": 0.03913286590330811,
+      "qp_intervention_fraction": 0.23325471698113207,
+      "min_inter_agent_distance": 0.28004719593369104,
+      "min_signed_clearance": 0.07723265505342046,
+      "g500_success": false,
+      "failure_reasons": [
+        "G500: 23 scaled-barrier event(s), smallest factor 0.180; the contract allows 0"
+      ],
+      "capacity_label": "normal-only instantaneous contact wrench box, 0 <= f_i <= stiffness*delta_max; not dynamically guaranteed",
+      "changed_mechanism": "Only centroid target before CONTACT_READY; CVT mass, redeployment guards, sensing, safety and subsequent transport identical",
+      "schema_version": "paper-metrics-v1",
+      "true_progress": 1.343517903855706,
+      "signed_progress_error": 0.03913286590330811,
+      "absolute_progress_error": 0.03913286590330811,
+      "euclidean_endpoint_error": 0.04233526561570884,
+      "events": {
+        "SEARCH": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 13.25
+        },
+        "DISCOVER": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 13.25
+        },
+        "ENCLOSE": {
+          "frame": 25,
+          "seconds": 1.25,
+          "right_censored": false,
+          "observation_end_seconds": 13.25
+        },
+        "CONTACT_READY": {
+          "frame": 98,
+          "seconds": 4.9,
+          "right_censored": false,
+          "observation_end_seconds": 13.25
+        },
+        "TRANSPORT": {
+          "frame": 141,
+          "seconds": 7.050000000000001,
+          "right_censored": false,
+          "observation_end_seconds": 13.25
+        },
+        "BRAKE": {
+          "frame": 191,
+          "seconds": 9.55,
+          "right_censored": false,
+          "observation_end_seconds": 13.25
+        },
+        "HOLD": {
+          "frame": 225,
+          "seconds": 11.25,
+          "right_censored": false,
+          "observation_end_seconds": 13.25
+        }
+      },
+      "phase_durations": {
+        "SEARCH->DISCOVER": 0.0,
+        "DISCOVER->ENCLOSE": 1.25,
+        "ENCLOSE->CONTACT_READY": 3.6500000000000004,
+        "CONTACT_READY->TRANSPORT": 2.1500000000000004,
+        "TRANSPORT->BRAKE": 2.5,
+        "BRAKE->HOLD": 1.6999999999999993
+      },
+      "physical_contact_ready": {
+        "frame": null,
+        "seconds": null,
+        "right_censored": true,
+        "observation_end_seconds": 13.25
+      },
+      "physical_readiness_definition": "positive projected contact force, existing controller contact_quorum and contact_dwell; control-frame observations",
+      "task_completed": true,
+      "task_completed_definition": "settled plus final Euclidean endpoint error <= existing task tolerance",
+      "settled": true,
+      "g500_pass": false,
+      "watchdog": false,
+      "final_speed": 0.0,
+      "rotation_deg": -1.1363547192808445,
+      "moving_safety_status": "UNRESOLVED: discrete physics substeps, no continuous certificate",
+      "execution_status": "COMPLETED",
+      "case_id": "recovery_c_shape_8_nearest_observed_target",
+      "shape": "c_shape",
+      "stratum": "near",
+      "wall_seconds": 14.62822029995732
+    },
+    {
+      "variant": "boundary_cvt",
+      "seed": 2,
+      "initial_state_sha256": "1b464d06337ec82d5cf961d16d9e34c9c5ebd17d207506f8c649787961522e84",
+      "config_sha256": "4b2422808b40c187600d9d27bc70c98fceb257a554309fad19900aad81f41df9",
+      "goal_direction": [
+        0.19706172910618755,
+        0.9803910826408406
+      ],
+      "task": {
+        "cargo_0": {
+          "object_id": "cargo_0",
+          "direction": [
+            0.19706172910618755,
+            0.9803910826408406
+          ],
+          "angle_deg": 78.6348106982665,
+          "target_distance": 1.4466640406178684,
+          "start": [
+            3.7848360655737823,
+            3.8063524590164044
+          ],
+          "goal_point": [
+            4.069918182853684,
+            5.22464898401533
+          ],
+          "tolerance": 0.12,
+          "clearance": 1.9050471192360838,
+          "sampling_attempts": 1
+        }
+      },
+      "termination": {
+        "frames_run": 445,
+        "max_frames": 3000,
+        "settled": true,
+        "terminated_by": "settled",
+        "settle_frames": 40,
+        "settle_speed": 0.005
+      },
+      "contact_ready_frame": 81,
+      "contact_ready_seconds": 4.05,
+      "mean_contacts": 2.2354260089686098,
+      "max_contacts": 4,
+      "contact_azimuth_histogram_12_bins": [
+        0,
+        0,
+        0,
+        0,
+        198,
+        63,
+        0,
+        1,
+        363,
+        250,
+        122,
+        0
+      ],
+      "peak_normal_only_forward_capacity": 97.61608395050344,
+      "torque_capacity_min": -53.98835163031018,
+      "torque_capacity_max": 39.867031051570116,
+      "peak_actual_net_force": 38.91923179542039,
+      "peak_absolute_actual_torque": 14.218761537661052,
+      "direction_error_deg": 3.0469721769259412,
+      "max_cross_track": 0.07640668206340334,
+      "final_distance_error": -0.1012842202875397,
+      "qp_intervention_fraction": 0.09185393258426966,
+      "min_inter_agent_distance": 0.28011723030242597,
+      "min_signed_clearance": 0.09606842896755838,
+      "g500_success": false,
+      "failure_reasons": [
+        "G500: 3 scaled-barrier event(s), smallest factor 0.676; the contract allows 0"
+      ],
+      "capacity_label": "normal-only instantaneous contact wrench box, 0 <= f_i <= stiffness*delta_max; not dynamically guaranteed",
+      "changed_mechanism": "Only centroid target before CONTACT_READY; CVT mass, redeployment guards, sensing, safety and subsequent transport identical",
+      "schema_version": "paper-metrics-v1",
+      "true_progress": 1.3453798203303287,
+      "signed_progress_error": -0.1012842202875397,
+      "absolute_progress_error": 0.1012842202875397,
+      "euclidean_endpoint_error": 0.12404482079661718,
+      "events": {
+        "SEARCH": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 22.25
+        },
+        "DISCOVER": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 22.25
+        },
+        "ENCLOSE": {
+          "frame": 21,
+          "seconds": 1.05,
+          "right_censored": false,
+          "observation_end_seconds": 22.25
+        },
+        "CONTACT_READY": {
+          "frame": 81,
+          "seconds": 4.05,
+          "right_censored": false,
+          "observation_end_seconds": 22.25
+        },
+        "TRANSPORT": {
+          "frame": 146,
+          "seconds": 7.300000000000001,
+          "right_censored": false,
+          "observation_end_seconds": 22.25
+        },
+        "BRAKE": {
+          "frame": 291,
+          "seconds": 14.55,
+          "right_censored": false,
+          "observation_end_seconds": 22.25
+        },
+        "HOLD": {
+          "frame": 371,
+          "seconds": 18.55,
+          "right_censored": false,
+          "observation_end_seconds": 22.25
+        }
+      },
+      "phase_durations": {
+        "SEARCH->DISCOVER": 0.0,
+        "DISCOVER->ENCLOSE": 1.05,
+        "ENCLOSE->CONTACT_READY": 3.0,
+        "CONTACT_READY->TRANSPORT": 3.250000000000001,
+        "TRANSPORT->BRAKE": 7.25,
+        "BRAKE->HOLD": 4.0
+      },
+      "physical_contact_ready": {
+        "frame": null,
+        "seconds": null,
+        "right_censored": true,
+        "observation_end_seconds": 22.25
+      },
+      "physical_readiness_definition": "positive projected contact force, existing controller contact_quorum and contact_dwell; control-frame observations",
+      "task_completed": false,
+      "task_completed_definition": "settled plus final Euclidean endpoint error <= existing task tolerance",
+      "settled": true,
+      "g500_pass": false,
+      "watchdog": false,
+      "final_speed": 0.0,
+      "rotation_deg": 0.0,
+      "moving_safety_status": "UNRESOLVED: discrete physics substeps, no continuous certificate",
+      "execution_status": "COMPLETED",
+      "case_id": "recovery_l_shape_2_boundary_cvt",
+      "shape": "l_shape",
+      "stratum": "near",
+      "wall_seconds": 19.891431499971077
+    },
+    {
+      "variant": "nearest_observed_target",
+      "seed": 2,
+      "initial_state_sha256": "1b464d06337ec82d5cf961d16d9e34c9c5ebd17d207506f8c649787961522e84",
+      "config_sha256": "4b2422808b40c187600d9d27bc70c98fceb257a554309fad19900aad81f41df9",
+      "goal_direction": [
+        0.19706172910618755,
+        0.9803910826408406
+      ],
+      "task": {
+        "cargo_0": {
+          "object_id": "cargo_0",
+          "direction": [
+            0.19706172910618755,
+            0.9803910826408406
+          ],
+          "angle_deg": 78.6348106982665,
+          "target_distance": 1.4466640406178684,
+          "start": [
+            3.7848360655737823,
+            3.8063524590164044
+          ],
+          "goal_point": [
+            4.069918182853684,
+            5.22464898401533
+          ],
+          "tolerance": 0.12,
+          "clearance": 1.9050471192360838,
+          "sampling_attempts": 1
+        }
+      },
+      "termination": {
+        "frames_run": 1225,
+        "max_frames": 3000,
+        "settled": true,
+        "terminated_by": "settled",
+        "settle_frames": 40,
+        "settle_speed": 0.005
+      },
+      "contact_ready_frame": 477,
+      "contact_ready_seconds": 23.85,
+      "mean_contacts": 2.1190864600326265,
+      "max_contacts": 5,
+      "contact_azimuth_histogram_12_bins": [
+        0,
+        0,
+        0,
+        0,
+        342,
+        87,
+        0,
+        92,
+        1024,
+        714,
+        159,
+        180
+      ],
+      "peak_normal_only_forward_capacity": 108.39714294938416,
+      "torque_capacity_min": -56.22245647279468,
+      "torque_capacity_max": 37.89273328086453,
+      "peak_actual_net_force": 39.23131283216925,
+      "peak_absolute_actual_torque": 15.69273312240212,
+      "direction_error_deg": 1.9422857283188537,
+      "max_cross_track": 0.06455077847574842,
+      "final_distance_error": 0.031167986729885522,
+      "qp_intervention_fraction": 0.2864795918367347,
+      "min_inter_agent_distance": 0.2800000004297692,
+      "min_signed_clearance": 0.09137057412530236,
+      "g500_success": false,
+      "failure_reasons": [
+        "G500: 25 scaled-barrier event(s), smallest factor 0.016; the contract allows 0"
+      ],
+      "capacity_label": "normal-only instantaneous contact wrench box, 0 <= f_i <= stiffness*delta_max; not dynamically guaranteed",
+      "changed_mechanism": "Only centroid target before CONTACT_READY; CVT mass, redeployment guards, sensing, safety and subsequent transport identical",
+      "schema_version": "paper-metrics-v1",
+      "true_progress": 1.4778320273477539,
+      "signed_progress_error": 0.031167986729885522,
+      "absolute_progress_error": 0.031167986729885522,
+      "euclidean_endpoint_error": 0.059017973522393075,
+      "events": {
+        "SEARCH": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 61.25
+        },
+        "DISCOVER": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 61.25
+        },
+        "ENCLOSE": {
+          "frame": 28,
+          "seconds": 1.4000000000000001,
+          "right_censored": false,
+          "observation_end_seconds": 61.25
+        },
+        "CONTACT_READY": {
+          "frame": 477,
+          "seconds": 23.85,
+          "right_censored": false,
+          "observation_end_seconds": 61.25
+        },
+        "TRANSPORT": {
+          "frame": 818,
+          "seconds": 40.900000000000006,
+          "right_censored": false,
+          "observation_end_seconds": 61.25
+        },
+        "BRAKE": {
+          "frame": 901,
+          "seconds": 45.050000000000004,
+          "right_censored": false,
+          "observation_end_seconds": 61.25
+        },
+        "HOLD": {
+          "frame": 963,
+          "seconds": 48.150000000000006,
+          "right_censored": false,
+          "observation_end_seconds": 61.25
+        }
+      },
+      "phase_durations": {
+        "SEARCH->DISCOVER": 0.0,
+        "DISCOVER->ENCLOSE": 1.4000000000000001,
+        "ENCLOSE->CONTACT_READY": 22.450000000000003,
+        "CONTACT_READY->TRANSPORT": 17.050000000000004,
+        "TRANSPORT->BRAKE": 4.149999999999999,
+        "BRAKE->HOLD": 3.1000000000000014
+      },
+      "physical_contact_ready": {
+        "frame": null,
+        "seconds": null,
+        "right_censored": true,
+        "observation_end_seconds": 61.25
+      },
+      "physical_readiness_definition": "positive projected contact force, existing controller contact_quorum and contact_dwell; control-frame observations",
+      "task_completed": true,
+      "task_completed_definition": "settled plus final Euclidean endpoint error <= existing task tolerance",
+      "settled": true,
+      "g500_pass": false,
+      "watchdog": false,
+      "final_speed": 0.0,
+      "rotation_deg": 0.0,
+      "moving_safety_status": "UNRESOLVED: discrete physics substeps, no continuous certificate",
+      "execution_status": "COMPLETED",
+      "case_id": "recovery_l_shape_2_nearest_observed_target",
+      "shape": "l_shape",
+      "stratum": "near",
+      "wall_seconds": 57.89500949997455
+    },
+    {
+      "variant": "boundary_cvt",
+      "seed": 2,
+      "initial_state_sha256": "1b464d06337ec82d5cf961d16d9e34c9c5ebd17d207506f8c649787961522e84",
+      "config_sha256": "6cc17371c2c54484d19d982240784217ccb4d4499230be0cf046e04f200fb2a7",
+      "goal_direction": [
+        0.19706172910618755,
+        0.9803910826408406
+      ],
+      "task": {
+        "cargo_0": {
+          "object_id": "cargo_0",
+          "direction": [
+            0.19706172910618755,
+            0.9803910826408406
+          ],
+          "angle_deg": 78.6348106982665,
+          "target_distance": 1.4466640406178684,
+          "start": [
+            3.999999999999995,
+            3.9999999999999964
+          ],
+          "goal_point": [
+            4.285082117279896,
+            5.4182965249989214
+          ],
+          "tolerance": 0.12,
+          "clearance": 1.5850000000000057,
+          "sampling_attempts": 1
+        }
+      },
+      "termination": {
+        "frames_run": 558,
+        "max_frames": 3000,
+        "settled": true,
+        "terminated_by": "settled",
+        "settle_frames": 40,
+        "settle_speed": 0.005
+      },
+      "contact_ready_frame": 101,
+      "contact_ready_seconds": 5.050000000000001,
+      "mean_contacts": 2.40608228980322,
+      "max_contacts": 5,
+      "contact_azimuth_histogram_12_bins": [
+        0,
+        0,
+        47,
+        95,
+        4,
+        105,
+        182,
+        8,
+        425,
+        435,
+        44,
+        0
+      ],
+      "peak_normal_only_forward_capacity": 92.57946356162951,
+      "torque_capacity_min": -27.157813464648694,
+      "torque_capacity_max": 28.94624659996207,
+      "peak_actual_net_force": 35.59363465909625,
+      "peak_absolute_actual_torque": 15.978033029967907,
+      "direction_error_deg": 1.4948351115306842,
+      "max_cross_track": 0.033502646208030895,
+      "final_distance_error": -0.1628270060636614,
+      "qp_intervention_fraction": 0.18156362007168458,
+      "min_inter_agent_distance": 0.2800010130599799,
+      "min_signed_clearance": 0.07677500749844812,
+      "g500_success": false,
+      "failure_reasons": [
+        "G500: target reached never happened within the 558-frame run",
+        "G500: J=1.2838 m stopped 0.1628 m short of L=1.4467 m, outside the declared arrival tolerance 0.1200 m"
+      ],
+      "capacity_label": "normal-only instantaneous contact wrench box, 0 <= f_i <= stiffness*delta_max; not dynamically guaranteed",
+      "changed_mechanism": "Only centroid target before CONTACT_READY; CVT mass, redeployment guards, sensing, safety and subsequent transport identical",
+      "schema_version": "paper-metrics-v1",
+      "true_progress": 1.283837034554207,
+      "signed_progress_error": -0.1628270060636614,
+      "absolute_progress_error": 0.1628270060636614,
+      "euclidean_endpoint_error": 0.16623796559930618,
+      "events": {
+        "SEARCH": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 27.900000000000002
+        },
+        "DISCOVER": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 27.900000000000002
+        },
+        "ENCLOSE": {
+          "frame": 24,
+          "seconds": 1.2000000000000002,
+          "right_censored": false,
+          "observation_end_seconds": 27.900000000000002
+        },
+        "CONTACT_READY": {
+          "frame": 101,
+          "seconds": 5.050000000000001,
+          "right_censored": false,
+          "observation_end_seconds": 27.900000000000002
+        },
+        "TRANSPORT": {
+          "frame": 165,
+          "seconds": 8.25,
+          "right_censored": false,
+          "observation_end_seconds": 27.900000000000002
+        },
+        "BRAKE": {
+          "frame": 361,
+          "seconds": 18.05,
+          "right_censored": false,
+          "observation_end_seconds": 27.900000000000002
+        },
+        "HOLD": {
+          "frame": 421,
+          "seconds": 21.05,
+          "right_censored": false,
+          "observation_end_seconds": 27.900000000000002
+        }
+      },
+      "phase_durations": {
+        "SEARCH->DISCOVER": 0.0,
+        "DISCOVER->ENCLOSE": 1.2000000000000002,
+        "ENCLOSE->CONTACT_READY": 3.8500000000000005,
+        "CONTACT_READY->TRANSPORT": 3.1999999999999993,
+        "TRANSPORT->BRAKE": 9.8,
+        "BRAKE->HOLD": 3.0
+      },
+      "physical_contact_ready": {
+        "frame": null,
+        "seconds": null,
+        "right_censored": true,
+        "observation_end_seconds": 27.900000000000002
+      },
+      "physical_readiness_definition": "positive projected contact force, existing controller contact_quorum and contact_dwell; control-frame observations",
+      "task_completed": false,
+      "task_completed_definition": "settled plus final Euclidean endpoint error <= existing task tolerance",
+      "settled": true,
+      "g500_pass": false,
+      "watchdog": false,
+      "final_speed": 0.0,
+      "rotation_deg": 1.09479814286763,
+      "moving_safety_status": "UNRESOLVED: discrete physics substeps, no continuous certificate",
+      "execution_status": "COMPLETED",
+      "case_id": "recovery_rectangle_2_boundary_cvt",
+      "shape": "rectangle",
+      "stratum": "near",
+      "wall_seconds": 24.286363699939102
+    },
+    {
+      "variant": "nearest_observed_target",
+      "seed": 2,
+      "initial_state_sha256": "1b464d06337ec82d5cf961d16d9e34c9c5ebd17d207506f8c649787961522e84",
+      "config_sha256": "6cc17371c2c54484d19d982240784217ccb4d4499230be0cf046e04f200fb2a7",
+      "goal_direction": [
+        0.19706172910618755,
+        0.9803910826408406
+      ],
+      "task": {
+        "cargo_0": {
+          "object_id": "cargo_0",
+          "direction": [
+            0.19706172910618755,
+            0.9803910826408406
+          ],
+          "angle_deg": 78.6348106982665,
+          "target_distance": 1.4466640406178684,
+          "start": [
+            3.999999999999995,
+            3.9999999999999964
+          ],
+          "goal_point": [
+            4.285082117279896,
+            5.4182965249989214
+          ],
+          "tolerance": 0.12,
+          "clearance": 1.5850000000000057,
+          "sampling_attempts": 1
+        }
+      },
+      "termination": {
+        "frames_run": 742,
+        "max_frames": 3000,
+        "settled": true,
+        "terminated_by": "settled",
+        "settle_frames": 40,
+        "settle_speed": 0.005
+      },
+      "contact_ready_frame": 244,
+      "contact_ready_seconds": 12.200000000000001,
+      "mean_contacts": 1.6177658142664872,
+      "max_contacts": 4,
+      "contact_azimuth_histogram_12_bins": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        107,
+        70,
+        249,
+        397,
+        47,
+        332,
+        0
+      ],
+      "peak_normal_only_forward_capacity": 101.76199403935175,
+      "torque_capacity_min": -44.33663574142511,
+      "torque_capacity_max": 24.11527532674978,
+      "peak_actual_net_force": 38.512817220956066,
+      "peak_absolute_actual_torque": 17.296128730054857,
+      "direction_error_deg": 1.4120050904370178,
+      "max_cross_track": 0.13971598108158337,
+      "final_distance_error": 0.10167641476123324,
+      "qp_intervention_fraction": 0.2733322102425876,
+      "min_inter_agent_distance": 0.28000000034127637,
+      "min_signed_clearance": 0.07918521681924119,
+      "g500_success": false,
+      "failure_reasons": [
+        "G500: 54 scaled-barrier event(s), smallest factor 0.066; the contract allows 0"
+      ],
+      "capacity_label": "normal-only instantaneous contact wrench box, 0 <= f_i <= stiffness*delta_max; not dynamically guaranteed",
+      "changed_mechanism": "Only centroid target before CONTACT_READY; CVT mass, redeployment guards, sensing, safety and subsequent transport identical",
+      "schema_version": "paper-metrics-v1",
+      "true_progress": 1.5483404553791016,
+      "signed_progress_error": 0.10167641476123324,
+      "absolute_progress_error": 0.10167641476123324,
+      "euclidean_endpoint_error": 0.1086033104501144,
+      "events": {
+        "SEARCH": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 37.1
+        },
+        "DISCOVER": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 37.1
+        },
+        "ENCLOSE": {
+          "frame": 34,
+          "seconds": 1.7000000000000002,
+          "right_censored": false,
+          "observation_end_seconds": 37.1
+        },
+        "CONTACT_READY": {
+          "frame": 244,
+          "seconds": 12.200000000000001,
+          "right_censored": false,
+          "observation_end_seconds": 37.1
+        },
+        "TRANSPORT": {
+          "frame": 283,
+          "seconds": 14.15,
+          "right_censored": false,
+          "observation_end_seconds": 37.1
+        },
+        "BRAKE": {
+          "frame": 466,
+          "seconds": 23.3,
+          "right_censored": false,
+          "observation_end_seconds": 37.1
+        },
+        "HOLD": {
+          "frame": 516,
+          "seconds": 25.8,
+          "right_censored": false,
+          "observation_end_seconds": 37.1
+        }
+      },
+      "phase_durations": {
+        "SEARCH->DISCOVER": 0.0,
+        "DISCOVER->ENCLOSE": 1.7000000000000002,
+        "ENCLOSE->CONTACT_READY": 10.5,
+        "CONTACT_READY->TRANSPORT": 1.9499999999999993,
+        "TRANSPORT->BRAKE": 9.15,
+        "BRAKE->HOLD": 2.5
+      },
+      "physical_contact_ready": {
+        "frame": null,
+        "seconds": null,
+        "right_censored": true,
+        "observation_end_seconds": 37.1
+      },
+      "physical_readiness_definition": "positive projected contact force, existing controller contact_quorum and contact_dwell; control-frame observations",
+      "task_completed": true,
+      "task_completed_definition": "settled plus final Euclidean endpoint error <= existing task tolerance",
+      "settled": true,
+      "g500_pass": false,
+      "watchdog": false,
+      "final_speed": 0.0,
+      "rotation_deg": -0.9865541980391798,
+      "moving_safety_status": "UNRESOLVED: discrete physics substeps, no continuous certificate",
+      "execution_status": "COMPLETED",
+      "case_id": "recovery_rectangle_2_nearest_observed_target",
+      "shape": "rectangle",
+      "stratum": "near",
+      "wall_seconds": 36.99548769998364
+    },
+    {
+      "variant": "boundary_cvt",
+      "seed": 8,
+      "initial_state_sha256": "2e04b993fd9f38636ab0808ffd39d08335417971d770dacc15aa84af887175e1",
+      "config_sha256": "6cc17371c2c54484d19d982240784217ccb4d4499230be0cf046e04f200fb2a7",
+      "goal_direction": [
+        0.9991906209433407,
+        -0.04022565125465672
+      ],
+      "task": {
+        "cargo_0": {
+          "object_id": "cargo_0",
+          "direction": [
+            0.9991906209433407,
+            -0.04022565125465672
+          ],
+          "angle_deg": 357.6946179453914,
+          "target_distance": 1.3043850379523978,
+          "start": [
+            3.999999999999995,
+            3.9999999999999964
+          ],
+          "goal_point": [
+            5.303329296020855,
+            3.947530262361531
+          ],
+          "tolerance": 0.12,
+          "clearance": 1.5850000000000057,
+          "sampling_attempts": 1
+        }
+      },
+      "termination": {
+        "frames_run": 392,
+        "max_frames": 3000,
+        "settled": true,
+        "terminated_by": "settled",
+        "settle_frames": 40,
+        "settle_speed": 0.005
+      },
+      "contact_ready_frame": 100,
+      "contact_ready_seconds": 5.0,
+      "mean_contacts": 1.6208651399491094,
+      "max_contacts": 5,
+      "contact_azimuth_histogram_12_bins": [
+        0,
+        0,
+        55,
+        0,
+        64,
+        303,
+        177,
+        0,
+        0,
+        38,
+        0,
+        0
+      ],
+      "peak_normal_only_forward_capacity": 100.03575287352854,
+      "torque_capacity_min": -20.95382049661819,
+      "torque_capacity_max": 25.334099603347752,
+      "peak_actual_net_force": 35.324719250227226,
+      "peak_absolute_actual_torque": 16.143123013151605,
+      "direction_error_deg": 0.9655696331056769,
+      "max_cross_track": 0.06062316670402386,
+      "final_distance_error": 0.11002407355301891,
+      "qp_intervention_fraction": 0.20200892857142858,
+      "min_inter_agent_distance": 0.28001505579615327,
+      "min_signed_clearance": 0.08317883293994881,
+      "g500_success": false,
+      "failure_reasons": [
+        "G500: 21 scaled-barrier event(s), smallest factor 0.035; the contract allows 0"
+      ],
+      "capacity_label": "normal-only instantaneous contact wrench box, 0 <= f_i <= stiffness*delta_max; not dynamically guaranteed",
+      "changed_mechanism": "Only centroid target before CONTACT_READY; CVT mass, redeployment guards, sensing, safety and subsequent transport identical",
+      "schema_version": "paper-metrics-v1",
+      "true_progress": 1.4144091115054167,
+      "signed_progress_error": 0.11002407355301891,
+      "absolute_progress_error": 0.11002407355301891,
+      "euclidean_endpoint_error": 0.11257693432466118,
+      "events": {
+        "SEARCH": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 19.6
+        },
+        "DISCOVER": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 19.6
+        },
+        "ENCLOSE": {
+          "frame": 20,
+          "seconds": 1.0,
+          "right_censored": false,
+          "observation_end_seconds": 19.6
+        },
+        "CONTACT_READY": {
+          "frame": 100,
+          "seconds": 5.0,
+          "right_censored": false,
+          "observation_end_seconds": 19.6
+        },
+        "TRANSPORT": {
+          "frame": 117,
+          "seconds": 5.8500000000000005,
+          "right_censored": false,
+          "observation_end_seconds": 19.6
+        },
+        "BRAKE": {
+          "frame": 231,
+          "seconds": 11.55,
+          "right_censored": false,
+          "observation_end_seconds": 19.6
+        },
+        "HOLD": {
+          "frame": 289,
+          "seconds": 14.450000000000001,
+          "right_censored": false,
+          "observation_end_seconds": 19.6
+        }
+      },
+      "phase_durations": {
+        "SEARCH->DISCOVER": 0.0,
+        "DISCOVER->ENCLOSE": 1.0,
+        "ENCLOSE->CONTACT_READY": 4.0,
+        "CONTACT_READY->TRANSPORT": 0.8500000000000005,
+        "TRANSPORT->BRAKE": 5.7,
+        "BRAKE->HOLD": 2.9000000000000004
+      },
+      "physical_contact_ready": {
+        "frame": null,
+        "seconds": null,
+        "right_censored": true,
+        "observation_end_seconds": 19.6
+      },
+      "physical_readiness_definition": "positive projected contact force, existing controller contact_quorum and contact_dwell; control-frame observations",
+      "task_completed": true,
+      "task_completed_definition": "settled plus final Euclidean endpoint error <= existing task tolerance",
+      "settled": true,
+      "g500_pass": false,
+      "watchdog": false,
+      "final_speed": 0.0,
+      "rotation_deg": 0.055615682738183576,
+      "moving_safety_status": "UNRESOLVED: discrete physics substeps, no continuous certificate",
+      "execution_status": "COMPLETED",
+      "case_id": "recovery_rectangle_8_boundary_cvt",
+      "shape": "rectangle",
+      "stratum": "near",
+      "wall_seconds": 18.715402000118047
+    },
+    {
+      "variant": "nearest_observed_target",
+      "seed": 8,
+      "initial_state_sha256": "2e04b993fd9f38636ab0808ffd39d08335417971d770dacc15aa84af887175e1",
+      "config_sha256": "6cc17371c2c54484d19d982240784217ccb4d4499230be0cf046e04f200fb2a7",
+      "goal_direction": [
+        0.9991906209433407,
+        -0.04022565125465672
+      ],
+      "task": {
+        "cargo_0": {
+          "object_id": "cargo_0",
+          "direction": [
+            0.9991906209433407,
+            -0.04022565125465672
+          ],
+          "angle_deg": 357.6946179453914,
+          "target_distance": 1.3043850379523978,
+          "start": [
+            3.999999999999995,
+            3.9999999999999964
+          ],
+          "goal_point": [
+            5.303329296020855,
+            3.947530262361531
+          ],
+          "tolerance": 0.12,
+          "clearance": 1.5850000000000057,
+          "sampling_attempts": 1
+        }
+      },
+      "termination": {
+        "frames_run": 418,
+        "max_frames": 3000,
+        "settled": true,
+        "terminated_by": "settled",
+        "settle_frames": 40,
+        "settle_speed": 0.005
+      },
+      "contact_ready_frame": 97,
+      "contact_ready_seconds": 4.8500000000000005,
+      "mean_contacts": 2.3532219570405726,
+      "max_contacts": 5,
+      "contact_azimuth_histogram_12_bins": [
+        0,
+        0,
+        95,
+        15,
+        94,
+        278,
+        278,
+        37,
+        87,
+        100,
+        2,
+        0
+      ],
+      "peak_normal_only_forward_capacity": 69.25913716049925,
+      "torque_capacity_min": -23.199085045028546,
+      "torque_capacity_max": 35.877631683142205,
+      "peak_actual_net_force": 34.19631555784454,
+      "peak_absolute_actual_torque": 14.430888188220246,
+      "direction_error_deg": 0.7778924909155371,
+      "max_cross_track": 0.06395501458674974,
+      "final_distance_error": -0.0035643650999215293,
+      "qp_intervention_fraction": 0.1854066985645933,
+      "min_inter_agent_distance": 0.28000092936935383,
+      "min_signed_clearance": 0.09516352780322634,
+      "g500_success": false,
+      "failure_reasons": [
+        "G500: 14 scaled-barrier event(s), smallest factor 0.180; the contract allows 0"
+      ],
+      "capacity_label": "normal-only instantaneous contact wrench box, 0 <= f_i <= stiffness*delta_max; not dynamically guaranteed",
+      "changed_mechanism": "Only centroid target before CONTACT_READY; CVT mass, redeployment guards, sensing, safety and subsequent transport identical",
+      "schema_version": "paper-metrics-v1",
+      "true_progress": 1.3008206728524763,
+      "signed_progress_error": -0.0035643650999215293,
+      "absolute_progress_error": 0.0035643650999215293,
+      "euclidean_endpoint_error": 0.0180181197881962,
+      "events": {
+        "SEARCH": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 20.900000000000002
+        },
+        "DISCOVER": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 20.900000000000002
+        },
+        "ENCLOSE": {
+          "frame": 19,
+          "seconds": 0.9500000000000001,
+          "right_censored": false,
+          "observation_end_seconds": 20.900000000000002
+        },
+        "CONTACT_READY": {
+          "frame": 97,
+          "seconds": 4.8500000000000005,
+          "right_censored": false,
+          "observation_end_seconds": 20.900000000000002
+        },
+        "TRANSPORT": {
+          "frame": 344,
+          "seconds": 17.2,
+          "right_censored": false,
+          "observation_end_seconds": 20.900000000000002
+        },
+        "BRAKE": {
+          "frame": 344,
+          "seconds": 17.2,
+          "right_censored": false,
+          "observation_end_seconds": 20.900000000000002
+        },
+        "HOLD": {
+          "frame": 378,
+          "seconds": 18.900000000000002,
+          "right_censored": false,
+          "observation_end_seconds": 20.900000000000002
+        }
+      },
+      "phase_durations": {
+        "SEARCH->DISCOVER": 0.0,
+        "DISCOVER->ENCLOSE": 0.9500000000000001,
+        "ENCLOSE->CONTACT_READY": 3.9000000000000004,
+        "CONTACT_READY->TRANSPORT": 12.349999999999998,
+        "TRANSPORT->BRAKE": 0.0,
+        "BRAKE->HOLD": 1.7000000000000028
+      },
+      "physical_contact_ready": {
+        "frame": null,
+        "seconds": null,
+        "right_censored": true,
+        "observation_end_seconds": 20.900000000000002
+      },
+      "physical_readiness_definition": "positive projected contact force, existing controller contact_quorum and contact_dwell; control-frame observations",
+      "task_completed": true,
+      "task_completed_definition": "settled plus final Euclidean endpoint error <= existing task tolerance",
+      "settled": true,
+      "g500_pass": false,
+      "watchdog": false,
+      "final_speed": 0.0,
+      "rotation_deg": -0.016425278258135806,
+      "moving_safety_status": "UNRESOLVED: discrete physics substeps, no continuous certificate",
+      "execution_status": "COMPLETED",
+      "case_id": "recovery_rectangle_8_nearest_observed_target",
+      "shape": "rectangle",
+      "stratum": "near",
+      "wall_seconds": 20.22258559986949
+    }
+  ],
+  "planned_denominator": 10,
+  "completed_denominator": 10,
+  "elapsed_seconds": 87.33183939987794
+}

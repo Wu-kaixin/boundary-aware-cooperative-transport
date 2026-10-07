@@ -27,3 +27,12 @@
 - Diagnostic v1 contained invalid estimate_yaw config and all10 cases failed before simulation. Errors retained in study_v1/diagnostic. v2 uses correct estimate_object_yaw; complete configs prevalidated. This is implementation failure, not algorithm failure.
 - v3 adds a separate estimated-progress phase-recovery diagnostic using unchanged brake threshold; default off. Main comparison continues with original downstream.
 - Three-method development comparison and single-factor diagnostic experiments running. No independent test cases consumed yet.
+
+## Stages 4–5 — frozen test and evidence report
+- Development batch finished 27/27 after the earlier partial checkpoint. No completed case was rerun.
+- `no_exploration` matches full CVT trajectory hashes because density explore_gain is already 0. Recorded as a null ablation.
+- Frozen protocol `provisional-test-frozen-v1` executed with workers 4. Source hash matched the freeze. 36/36 episodes recorded in about 459 s. 33 COMPLETED. 3 ERROR on l_shape near scale 1.2 seed 910072: initial clearance 0.0702 m inside robot radius 0.13 m, all three methods. Failures kept. Seeds were not replaced.
+- Test controller-readiness difference versus nearest target, 10 complete pairs: mean -4.37 s, median -0.77 s, bootstrap 95 percent [-10.02, -0.32]. Versus local spacing the interval includes 0 and CVT is slower on 9/11 pairs.
+- Task completion 1/12, 1/12, 2/12. Transport improvement is not supported. Physical-readiness latch remains inconclusive (3 complete pairs).
+- Evidence tables and figures: docs/results/evidence_closure/paper_evidence/. Storyline, claim matrix, mechanism report, and professor summary updated. Not pushed.
+

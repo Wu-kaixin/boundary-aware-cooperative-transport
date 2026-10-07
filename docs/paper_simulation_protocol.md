@@ -18,9 +18,21 @@ Development: 9 paired conditions x 3 methods. Ablations: 3 shapes x seed 2 x 4 i
 ## Execution and attribution
 Use D:/miniconda/envs/dbact/python.exe with PYTHONUTF8=1. The runner hashes all Python/config sources, complete case config, protocol and environment; each case owns its directory. Completed resume requires matching hashes and all output-file hashes. Failed episodes and process errors stay in the denominator. Incomplete directories are preserved and rejected rather than silently overwritten. Main guard supports Windows spawn. Outer worker count is explicit; BLAS and inner CVT threads are limited to one. resources.csv samples actual system CPU and parent memory; it must not be interpreted as per-worker utilization.
 
-Independent test cases, source freeze and budget will be fixed after pilot cost/variance and historical-seed audit, before reading any test results. No adaptive per-method tuning on test data is allowed. Statistics use episodes or matched cases, never frames as independent samples. A 95% Wilson interval describes unconditional task rates; paired bootstrap describes continuous effects, with missing events separately censored. Preparation, effective contact, safety and transport claims receive separate verdicts.
+Statistics use episodes or matched cases, never frames as independent samples. A 95% Wilson interval describes unconditional task rates; paired bootstrap uses resampling seed 20261007, and missing events stay censored. Preparation, effective contact, safety and transport claims receive separate verdicts.
+
+The development controller's density `explore_gain` is 0. The `no_exploration` ablation therefore rebuilds an identical density. Its three seed-2 trajectories match full boundary CVT byte for byte. That is a null intervention, not evidence that exploration is unimportant. `kp_explore` is a separate nominal search command and was left common. Turning on a nonzero `explore_gain` would be a new study.
+
+## Frozen test
+`docs/paper_simulation_protocol.test_frozen_v1.yaml` is provisional and not professor-approved. It was written before test execution. It contains 12 conditions (3 shapes × near/search × two joint scale/distance settings) × 3 methods, plus two verification episodes that are not part of the test denominator. Seeds 910071–910082 were absent from the accessible historical seed audit. Seeds 12–31 stay quarantined. Direction is drawn by the existing task sampler inside each seed; it is not a crossed factor. Partial boundary visibility is not a stratum. Scale and distance ratio change together.
+
+Invalid initial states are retained. They are not replaced with new seeds. A contract failure counts in the denominator for every method that shares that initial state.
 
 ```powershell
 $env:PYTHONUTF8='1'
 & D:\miniconda\envs\dbact\python.exe scripts/run_paper_simulation_study.py --protocol docs/paper_simulation_protocol.development.yaml --split development --workers 3 --resume
+& D:\miniconda\envs\dbact\python.exe scripts/run_paper_simulation_study.py --protocol docs/paper_simulation_protocol.test_frozen_v1.yaml --split test --workers 4 --resume
+& D:\miniconda\envs\dbact\python.exe scripts/build_paper_evidence.py --batch development=runs/evidence_closure/study_v3/development --batch test=runs/evidence_closure/frozen_test_v1/test --out docs/results/evidence_closure/paper_evidence
 ```
+
+## Literature baseline candidates
+The RAS 2023, 2024 and 2025 PDFs were not in this workspace, so no algorithm from those papers is reproduced here. The prompt's stated lessons are already reflected: separate allocation time from task completion, keep contact-level evidence, and repeat conditions. `local_spacing` is an engineering baseline. Candidates left for the professors, and not implemented as named paper methods, are a uniform arc-length spacing rule without Lloyd iteration, and a local-normal push/brace role split. Neither should be labeled as one of those papers.

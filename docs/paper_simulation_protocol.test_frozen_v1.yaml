@@ -1,0 +1,5606 @@
+version: provisional-test-frozen-v1
+professor_approved: false
+run_dir: runs/evidence_closure/frozen_test_v1
+hypotheses:
+- Boundary CVT shortens preparation
+- Preparation benefit need not imply transport benefit
+primary_metrics:
+- censored controller readiness
+- physical readiness
+- task_completed
+secondary_metrics:
+- absolute_progress_error
+- euclidean_endpoint_error
+- max_cross_track
+- g500_pass
+- settled
+- safety_evaluation_status
+fairness: Only pre-contact centroid target changes between methods; original mass/redeployment
+  and downstream controller remain common.
+physical_completion: settled AND Euclidean endpoint error <= existing task.tolerance;
+  distinct new endpoint metric, not altered G500
+analysis: episode/pair unit; unconditional failures; Wilson 95% rates; paired bootstrap
+  with fixed resampling seed; shapes separate
+selection_rules: All prelisted cases; no replacement for invalid initializations or
+  errors; diagnostic/development outputs cannot alter test methods. Fixed curves C
+  seed8 original and first lexicographic physical success.
+rng: 'BLAKE2 domain-separated frame_rng streams: agent_layout, cargo_placement, transport_task,
+  per-agent/time sensor, comm_dropout; common exogenous seeds, endogenous maps separate'
+physics: exact configs embedded for every case, penalty engine and original substeps
+cases:
+- case_id: test_l_shape_near_910071_boundary_cvt
+  split: test
+  gate: 6
+  shape: l_shape
+  seed: 910071
+  variant: boundary_cvt
+  frames: 3000
+  stratum: near_scale0.8_ratio0.4
+  config:
+    paper: true
+    dt: 0.05
+    domain:
+      xmin: 0.0
+      xmax: 8.0
+      ymin: 0.0
+      ymax: 8.0
+    agents:
+      count: 16
+      layout: scatter
+      center:
+      - 4.0
+      - 4.0
+      radius_min: 1.5
+      radius_max: 2.3
+      min_separation: 0.34
+    cargoes:
+    - id: cargo_0
+      shape: l_shape
+      center:
+      - 4.0
+      - 4.0
+      scale: 1.2000000000000002
+      surface_density: 2.0
+      movable: true
+    task:
+      mode: random_constrained
+      distance_min: 0.8145870119269027
+      distance_max: 0.8145870119269027
+      wall_margin: 0.35
+      tolerance: 0.12
+      angle_min_deg: 0.0
+      angle_max_deg: 360.0
+    controller:
+      task_mode: transport
+      sensor_range: 1.2
+      ray_count: 72
+      range_noise_std: 0.01
+      pca_neighbors: 5
+      residual_tolerance: 0.03
+      min_confidence: 0.15
+      comm_range: 1.6
+      voxel_size: 0.06
+      age_decay: 0.3
+      max_voxels_per_object: 320
+      motion_compensation: true
+      registration_gate: 0.12
+      registration_normal_cosine: 0.5
+      max_object_speed: 0.25
+      object_velocity_filter: 0.35
+      density_mode: offset
+      cage_offset: 0.105
+      lead_offset: 0.26
+      lead_threshold: 0.25
+      sigma: 0.2
+      base_density: 0.001
+      gap_gain: 0.6
+      gap_radius: 0.35
+      local_radius: 0.8
+      grid_resolution: 20
+      approach_mass_ratio: 3.0
+      redeploy_gap_ratio: 0.15
+      robot_radius: 0.13
+      delta_max: 0.065
+      d_min: 0.28
+      gamma_agent: 6.0
+      gamma_obj: 8.0
+      rho: 0.02
+      max_speed: 0.35
+      backend: qp
+      object_row_range: 0.6
+      object_row_window: 0.28
+      max_object_rows: 8
+      kp_explore: 0.25
+      kp_cage: 0.9
+      push_side_threshold: 0.35
+      min_push_agents: 4
+      contact_band_tolerance: 0.08
+      press_margin: null
+      press_margin_safety: 1.2
+      transport_law: progress
+      transport_reference_speed: 0.055
+      transport_kp: 2.4
+      transport_ki: 3.0
+      transport_effort_max: 0.3
+      transport_deadband: 0.05
+      brake_gain: 0.3
+      convoy_gain: 1.0
+      convoy_max: 0.25
+      cross_track_gain: 10.0
+      cross_track_damping: 12.0
+      cross_track_max_deg: 45.0
+      cross_track_deadband: 0.02
+      cross_track_reference: 0.08
+      separation_band: 0.06
+      kp_separate: 0.0
+      push_share_floor: 0.15
+      phase_informed_fraction: 0.55
+      phase_map_coverage_min: 0.7
+      contact_dwell: 20
+      brake_fraction: 0.65
+    transport:
+      engine: penalty
+      stiffness: 500.0
+      damping: 12.0
+      friction: 0.6
+      tangential_stiffness: 60.0
+      ground_friction: 0.6
+      gravity: 9.81
+      substeps: 4
+    render:
+      map_agent: agent_00
+    evaluation:
+      contact_radius: 0.42
+      j_min: 0.15
+      efficiency_min: 0.7
+      displacement_gate: 0.1
+    g500:
+      detect_by: null
+      contact_ready_by: null
+      transport_by: null
+      reach_by: null
+      efficiency_min: 0.8
+      direction_error_max_deg: 20.0
+      cross_track_max: 0.15
+      coverage_min: 0.7
+      progress_max_ratio: 1.4
+      arrival_tolerance: 0.12
+      hold_speed_max: 0.02
+      yaw_max_deg: 15.0
+- case_id: test_l_shape_near_910071_nearest_observed_target
+  split: test
+  gate: 6
+  shape: l_shape
+  seed: 910071
+  variant: nearest_observed_target
+  frames: 3000
+  stratum: near_scale0.8_ratio0.4
+  config:
+    paper: true
+    dt: 0.05
+    domain:
+      xmin: 0.0
+      xmax: 8.0
+      ymin: 0.0
+      ymax: 8.0
+    agents:
+      count: 16
+      layout: scatter
+      center:
+      - 4.0
+      - 4.0
+      radius_min: 1.5
+      radius_max: 2.3
+      min_separation: 0.34
+    cargoes:
+    - id: cargo_0
+      shape: l_shape
+      center:
+      - 4.0
+      - 4.0
+      scale: 1.2000000000000002
+      surface_density: 2.0
+      movable: true
+    task:
+      mode: random_constrained
+      distance_min: 0.8145870119269027
+      distance_max: 0.8145870119269027
+      wall_margin: 0.35
+      tolerance: 0.12
+      angle_min_deg: 0.0
+      angle_max_deg: 360.0
+    controller:
+      task_mode: transport
+      sensor_range: 1.2
+      ray_count: 72
+      range_noise_std: 0.01
+      pca_neighbors: 5
+      residual_tolerance: 0.03
+      min_confidence: 0.15
+      comm_range: 1.6
+      voxel_size: 0.06
+      age_decay: 0.3
+      max_voxels_per_object: 320
+      motion_compensation: true
+      registration_gate: 0.12
+      registration_normal_cosine: 0.5
+      max_object_speed: 0.25
+      object_velocity_filter: 0.35
+      density_mode: offset
+      cage_offset: 0.105
+      lead_offset: 0.26
+      lead_threshold: 0.25
+      sigma: 0.2
+      base_density: 0.001
+      gap_gain: 0.6
+      gap_radius: 0.35
+      local_radius: 0.8
+      grid_resolution: 20
+      approach_mass_ratio: 3.0
+      redeploy_gap_ratio: 0.15
+      robot_radius: 0.13
+      delta_max: 0.065
+      d_min: 0.28
+      gamma_agent: 6.0
+      gamma_obj: 8.0
+      rho: 0.02
+      max_speed: 0.35
+      backend: qp
+      object_row_range: 0.6
+      object_row_window: 0.28
+      max_object_rows: 8
+      kp_explore: 0.25
+      kp_cage: 0.9
+      push_side_threshold: 0.35
+      min_push_agents: 4
+      contact_band_tolerance: 0.08
+      press_margin: null
+      press_margin_safety: 1.2
+      transport_law: progress
+      transport_reference_speed: 0.055
+      transport_kp: 2.4
+      transport_ki: 3.0
+      transport_effort_max: 0.3
+      transport_deadband: 0.05
+      brake_gain: 0.3
+      convoy_gain: 1.0
+      convoy_max: 0.25
+      cross_track_gain: 10.0
+      cross_track_damping: 12.0
+      cross_track_max_deg: 45.0
+      cross_track_deadband: 0.02
+      cross_track_reference: 0.08
+      separation_band: 0.06
+      kp_separate: 0.0
+      push_share_floor: 0.15
+      phase_informed_fraction: 0.55
+      phase_map_coverage_min: 0.7
+      contact_dwell: 20
+      brake_fraction: 0.65
+    transport:
+      engine: penalty
+      stiffness: 500.0
+      damping: 12.0
+      friction: 0.6
+      tangential_stiffness: 60.0
+      ground_friction: 0.6
+      gravity: 9.81
+      substeps: 4
+    render:
+      map_agent: agent_00
+    evaluation:
+      contact_radius: 0.42
+      j_min: 0.15
+      efficiency_min: 0.7
+      displacement_gate: 0.1
+    g500:
+      detect_by: null
+      contact_ready_by: null
+      transport_by: null
+      reach_by: null
+      efficiency_min: 0.8
+      direction_error_max_deg: 20.0
+      cross_track_max: 0.15
+      coverage_min: 0.7
+      progress_max_ratio: 1.4
+      arrival_tolerance: 0.12
+      hold_speed_max: 0.02
+      yaw_max_deg: 15.0
+- case_id: test_l_shape_near_910071_local_spacing
+  split: test
+  gate: 6
+  shape: l_shape
+  seed: 910071
+  variant: local_spacing
+  frames: 3000
+  stratum: near_scale0.8_ratio0.4
+  config:
+    paper: true
+    dt: 0.05
+    domain:
+      xmin: 0.0
+      xmax: 8.0
+      ymin: 0.0
+      ymax: 8.0
+    agents:
+      count: 16
+      layout: scatter
+      center:
+      - 4.0
+      - 4.0
+      radius_min: 1.5
+      radius_max: 2.3
+      min_separation: 0.34
+    cargoes:
+    - id: cargo_0
+      shape: l_shape
+      center:
+      - 4.0
+      - 4.0
+      scale: 1.2000000000000002
+      surface_density: 2.0
+      movable: true
+    task:
+      mode: random_constrained
+      distance_min: 0.8145870119269027
+      distance_max: 0.8145870119269027
+      wall_margin: 0.35
+      tolerance: 0.12
+      angle_min_deg: 0.0
+      angle_max_deg: 360.0
+    controller:
+      task_mode: transport
+      sensor_range: 1.2
+      ray_count: 72
+      range_noise_std: 0.01
+      pca_neighbors: 5
+      residual_tolerance: 0.03
+      min_confidence: 0.15
+      comm_range: 1.6
+      voxel_size: 0.06
+      age_decay: 0.3
+      max_voxels_per_object: 320
+      motion_compensation: true
+      registration_gate: 0.12
+      registration_normal_cosine: 0.5
+      max_object_speed: 0.25
+      object_velocity_filter: 0.35
+      density_mode: offset
+      cage_offset: 0.105
+      lead_offset: 0.26
+      lead_threshold: 0.25
+      sigma: 0.2
+      base_density: 0.001
+      gap_gain: 0.6
+      gap_radius: 0.35
+      local_radius: 0.8
+      grid_resolution: 20
+      approach_mass_ratio: 3.0
+      redeploy_gap_ratio: 0.15
+      robot_radius: 0.13
+      delta_max: 0.065
+      d_min: 0.28
+      gamma_agent: 6.0
+      gamma_obj: 8.0
+      rho: 0.02
+      max_speed: 0.35
+      backend: qp
+      object_row_range: 0.6
+      object_row_window: 0.28
+      max_object_rows: 8
+      kp_explore: 0.25
+      kp_cage: 0.9
+      push_side_threshold: 0.35
+      min_push_agents: 4
+      contact_band_tolerance: 0.08
+      press_margin: null
+      press_margin_safety: 1.2
+      transport_law: progress
+      transport_reference_speed: 0.055
+      transport_kp: 2.4
+      transport_ki: 3.0
+      transport_effort_max: 0.3
+      transport_deadband: 0.05
+      brake_gain: 0.3
+      convoy_gain: 1.0
+      convoy_max: 0.25
+      cross_track_gain: 10.0
+      cross_track_damping: 12.0
+      cross_track_max_deg: 45.0
+      cross_track_deadband: 0.02
+      cross_track_reference: 0.08
+      separation_band: 0.06
+      kp_separate: 0.0
+      push_share_floor: 0.15
+      phase_informed_fraction: 0.55
+      phase_map_coverage_min: 0.7
+      contact_dwell: 20
+      brake_fraction: 0.65
+    transport:
+      engine: penalty
+      stiffness: 500.0
+      damping: 12.0
+      friction: 0.6
+      tangential_stiffness: 60.0
+      ground_friction: 0.6
+      gravity: 9.81
+      substeps: 4
+    render:
+      map_agent: agent_00
+    evaluation:
+      contact_radius: 0.42
+      j_min: 0.15
+      efficiency_min: 0.7
+      displacement_gate: 0.1
+    g500:
+      detect_by: null
+      contact_ready_by: null
+      transport_by: null
+      reach_by: null
+      efficiency_min: 0.8
+      direction_error_max_deg: 20.0
+      cross_track_max: 0.15
+      coverage_min: 0.7
+      progress_max_ratio: 1.4
+      arrival_tolerance: 0.12
+      hold_speed_max: 0.02
+      yaw_max_deg: 15.0
+- case_id: test_l_shape_near_910072_boundary_cvt
+  split: test
+  gate: 6
+  shape: l_shape
+  seed: 910072
+  variant: boundary_cvt
+  frames: 3000
+  stratum: near_scale1.2_ratio0.8
+  config:
+    paper: true
+    dt: 0.05
+    domain:
+      xmin: 0.0
+      xmax: 8.0
+      ymin: 0.0
+      ymax: 8.0
+    agents:
+      count: 16
+      layout: scatter
+      center:
+      - 4.0
+      - 4.0
+      radius_min: 1.5
+      radius_max: 2.3
+      min_separation: 0.34
+    cargoes:
+    - id: cargo_0
+      shape: l_shape
+      center:
+      - 4.0
+      - 4.0
+      scale: 1.7999999999999998
+      surface_density: 2.0
+      movable: true
+    task:
+      mode: random_constrained
+      distance_min: 2.4437610357807085
+      distance_max: 2.4437610357807085
+      wall_margin: 0.35
+      tolerance: 0.12
+      angle_min_deg: 0.0
+      angle_max_deg: 360.0
+    controller:
+      task_mode: transport
+      sensor_range: 1.2
+      ray_count: 72
+      range_noise_std: 0.01
+      pca_neighbors: 5
+      residual_tolerance: 0.03
+      min_confidence: 0.15
+      comm_range: 1.6
+      voxel_size: 0.06
+      age_decay: 0.3
+      max_voxels_per_object: 320
+      motion_compensation: true
+      registration_gate: 0.12
+      registration_normal_cosine: 0.5
+      max_object_speed: 0.25
+      object_velocity_filter: 0.35
+      density_mode: offset
+      cage_offset: 0.105
+      lead_offset: 0.26
+      lead_threshold: 0.25
+      sigma: 0.2
+      base_density: 0.001
+      gap_gain: 0.6
+      gap_radius: 0.35
+      local_radius: 0.8
+      grid_resolution: 20
+      approach_mass_ratio: 3.0
+      redeploy_gap_ratio: 0.15
+      robot_radius: 0.13
+      delta_max: 0.065
+      d_min: 0.28
+      gamma_agent: 6.0
+      gamma_obj: 8.0
+      rho: 0.02
+      max_speed: 0.35
+      backend: qp
+      object_row_range: 0.6
+      object_row_window: 0.28
+      max_object_rows: 8
+      kp_explore: 0.25
+      kp_cage: 0.9
+      push_side_threshold: 0.35
+      min_push_agents: 4
+      contact_band_tolerance: 0.08
+      press_margin: null
+      press_margin_safety: 1.2
+      transport_law: progress
+      transport_reference_speed: 0.055
+      transport_kp: 2.4
+      transport_ki: 3.0
+      transport_effort_max: 0.3
+      transport_deadband: 0.05
+      brake_gain: 0.3
+      convoy_gain: 1.0
+      convoy_max: 0.25
+      cross_track_gain: 10.0
+      cross_track_damping: 12.0
+      cross_track_max_deg: 45.0
+      cross_track_deadband: 0.02
+      cross_track_reference: 0.08
+      separation_band: 0.06
+      kp_separate: 0.0
+      push_share_floor: 0.15
+      phase_informed_fraction: 0.55
+      phase_map_coverage_min: 0.7
+      contact_dwell: 20
+      brake_fraction: 0.65
+    transport:
+      engine: penalty
+      stiffness: 500.0
+      damping: 12.0
+      friction: 0.6
+      tangential_stiffness: 60.0
+      ground_friction: 0.6
+      gravity: 9.81
+      substeps: 4
+    render:
+      map_agent: agent_00
+    evaluation:
+      contact_radius: 0.42
+      j_min: 0.15
+      efficiency_min: 0.7
+      displacement_gate: 0.1
+    g500:
+      detect_by: null
+      contact_ready_by: null
+      transport_by: null
+      reach_by: null
+      efficiency_min: 0.8
+      direction_error_max_deg: 20.0
+      cross_track_max: 0.15
+      coverage_min: 0.7
+      progress_max_ratio: 1.4
+      arrival_tolerance: 0.12
+      hold_speed_max: 0.02
+      yaw_max_deg: 15.0
+- case_id: test_l_shape_near_910072_nearest_observed_target
+  split: test
+  gate: 6
+  shape: l_shape
+  seed: 910072
+  variant: nearest_observed_target
+  frames: 3000
+  stratum: near_scale1.2_ratio0.8
+  config:
+    paper: true
+    dt: 0.05
+    domain:
+      xmin: 0.0
+      xmax: 8.0
+      ymin: 0.0
+      ymax: 8.0
+    agents:
+      count: 16
+      layout: scatter
+      center:
+      - 4.0
+      - 4.0
+      radius_min: 1.5
+      radius_max: 2.3
+      min_separation: 0.34
+    cargoes:
+    - id: cargo_0
+      shape: l_shape
+      center:
+      - 4.0
+      - 4.0
+      scale: 1.7999999999999998
+      surface_density: 2.0
+      movable: true
+    task:
+      mode: random_constrained
+      distance_min: 2.4437610357807085
+      distance_max: 2.4437610357807085
+      wall_margin: 0.35
+      tolerance: 0.12
+      angle_min_deg: 0.0
+      angle_max_deg: 360.0
+    controller:
+      task_mode: transport
+      sensor_range: 1.2
+      ray_count: 72
+      range_noise_std: 0.01
+      pca_neighbors: 5
+      residual_tolerance: 0.03
+      min_confidence: 0.15
+      comm_range: 1.6
+      voxel_size: 0.06
+      age_decay: 0.3
+      max_voxels_per_object: 320
+      motion_compensation: true
+      registration_gate: 0.12
+      registration_normal_cosine: 0.5
+      max_object_speed: 0.25
+      object_velocity_filter: 0.35
+      density_mode: offset
+      cage_offset: 0.105
+      lead_offset: 0.26
+      lead_threshold: 0.25
+      sigma: 0.2
+      base_density: 0.001
+      gap_gain: 0.6
+      gap_radius: 0.35
+      local_radius: 0.8
+      grid_resolution: 20
+      approach_mass_ratio: 3.0
+      redeploy_gap_ratio: 0.15
+      robot_radius: 0.13
+      delta_max: 0.065
+      d_min: 0.28
+      gamma_agent: 6.0
+      gamma_obj: 8.0
+      rho: 0.02
+      max_speed: 0.35
+      backend: qp
+      object_row_range: 0.6
+      object_row_window: 0.28
+      max_object_rows: 8
+      kp_explore: 0.25
+      kp_cage: 0.9
+      push_side_threshold: 0.35
+      min_push_agents: 4
+      contact_band_tolerance: 0.08
+      press_margin: null
+      press_margin_safety: 1.2
+      transport_law: progress
+      transport_reference_speed: 0.055
+      transport_kp: 2.4
+      transport_ki: 3.0
+      transport_effort_max: 0.3
+      transport_deadband: 0.05
+      brake_gain: 0.3
+      convoy_gain: 1.0
+      convoy_max: 0.25
+      cross_track_gain: 10.0
+      cross_track_damping: 12.0
+      cross_track_max_deg: 45.0
+      cross_track_deadband: 0.02
+      cross_track_reference: 0.08
+      separation_band: 0.06
+      kp_separate: 0.0
+      push_share_floor: 0.15
+      phase_informed_fraction: 0.55
+      phase_map_coverage_min: 0.7
+      contact_dwell: 20
+      brake_fraction: 0.65
+    transport:
+      engine: penalty
+      stiffness: 500.0
+      damping: 12.0
+      friction: 0.6
+      tangential_stiffness: 60.0
+      ground_friction: 0.6
+      gravity: 9.81
+      substeps: 4
+    render:
+      map_agent: agent_00
+    evaluation:
+      contact_radius: 0.42
+      j_min: 0.15
+      efficiency_min: 0.7
+      displacement_gate: 0.1
+    g500:
+      detect_by: null
+      contact_ready_by: null
+      transport_by: null
+      reach_by: null
+      efficiency_min: 0.8
+      direction_error_max_deg: 20.0
+      cross_track_max: 0.15
+      coverage_min: 0.7
+      progress_max_ratio: 1.4
+      arrival_tolerance: 0.12
+      hold_speed_max: 0.02
+      yaw_max_deg: 15.0
+- case_id: test_l_shape_near_910072_local_spacing
+  split: test
+  gate: 6
+  shape: l_shape
+  seed: 910072
+  variant: local_spacing
+  frames: 3000
+  stratum: near_scale1.2_ratio0.8
+  config:
+    paper: true
+    dt: 0.05
+    domain:
+      xmin: 0.0
+      xmax: 8.0
+      ymin: 0.0
+      ymax: 8.0
+    agents:
+      count: 16
+      layout: scatter
+      center:
+      - 4.0
+      - 4.0
+      radius_min: 1.5
+      radius_max: 2.3
+      min_separation: 0.34
+    cargoes:
+    - id: cargo_0
+      shape: l_shape
+      center:
+      - 4.0
+      - 4.0
+      scale: 1.7999999999999998
+      surface_density: 2.0
+      movable: true
+    task:
+      mode: random_constrained
+      distance_min: 2.4437610357807085
+      distance_max: 2.4437610357807085
+      wall_margin: 0.35
+      tolerance: 0.12
+      angle_min_deg: 0.0
+      angle_max_deg: 360.0
+    controller:
+      task_mode: transport
+      sensor_range: 1.2
+      ray_count: 72
+      range_noise_std: 0.01
+      pca_neighbors: 5
+      residual_tolerance: 0.03
+      min_confidence: 0.15
+      comm_range: 1.6
+      voxel_size: 0.06
+      age_decay: 0.3
+      max_voxels_per_object: 320
+      motion_compensation: true
+      registration_gate: 0.12
+      registration_normal_cosine: 0.5
+      max_object_speed: 0.25
+      object_velocity_filter: 0.35
+      density_mode: offset
+      cage_offset: 0.105
+      lead_offset: 0.26
+      lead_threshold: 0.25
+      sigma: 0.2
+      base_density: 0.001
+      gap_gain: 0.6
+      gap_radius: 0.35
+      local_radius: 0.8
+      grid_resolution: 20
+      approach_mass_ratio: 3.0
+      redeploy_gap_ratio: 0.15
+      robot_radius: 0.13
+      delta_max: 0.065
+      d_min: 0.28
+      gamma_agent: 6.0
+      gamma_obj: 8.0
+      rho: 0.02
+      max_speed: 0.35
+      backend: qp
+      object_row_range: 0.6
+      object_row_window: 0.28
+      max_object_rows: 8
+      kp_explore: 0.25
+      kp_cage: 0.9
+      push_side_threshold: 0.35
+      min_push_agents: 4
+      contact_band_tolerance: 0.08
+      press_margin: null
+      press_margin_safety: 1.2
+      transport_law: progress
+      transport_reference_speed: 0.055
+      transport_kp: 2.4
+      transport_ki: 3.0
+      transport_effort_max: 0.3
+      transport_deadband: 0.05
+      brake_gain: 0.3
+      convoy_gain: 1.0
+      convoy_max: 0.25
+      cross_track_gain: 10.0
+      cross_track_damping: 12.0
+      cross_track_max_deg: 45.0
+      cross_track_deadband: 0.02
+      cross_track_reference: 0.08
+      separation_band: 0.06
+      kp_separate: 0.0
+      push_share_floor: 0.15
+      phase_informed_fraction: 0.55
+      phase_map_coverage_min: 0.7
+      contact_dwell: 20
+      brake_fraction: 0.65
+    transport:
+      engine: penalty
+      stiffness: 500.0
+      damping: 12.0
+      friction: 0.6
+      tangential_stiffness: 60.0
+      ground_friction: 0.6
+      gravity: 9.81
+      substeps: 4
+    render:
+      map_agent: agent_00
+    evaluation:
+      contact_radius: 0.42
+      j_min: 0.15
+      efficiency_min: 0.7
+      displacement_gate: 0.1
+    g500:
+      detect_by: null
+      contact_ready_by: null
+      transport_by: null
+      reach_by: null
+      efficiency_min: 0.8
+      direction_error_max_deg: 20.0
+      cross_track_max: 0.15
+      coverage_min: 0.7
+      progress_max_ratio: 1.4
+      arrival_tolerance: 0.12
+      hold_speed_max: 0.02
+      yaw_max_deg: 15.0
+- case_id: test_l_shape_search_910073_boundary_cvt
+  split: test
+  gate: 6
+  shape: l_shape
+  seed: 910073
+  variant: boundary_cvt
+  frames: 3000
+  stratum: search_scale0.8_ratio0.4
+  config:
+    paper: true
+    dt: 0.05
+    domain:
+      xmin: 0.0
+      xmax: 8.0
+      ymin: 0.0
+      ymax: 8.0
+    agents:
+      count: 16
+      layout: grid
+      center:
+      - 4.0
+      - 0.55
+      spacing: 0.44
+      jitter: 0.0
+    cargoes:
+    - id: cargo_0
+      shape: l_shape
+      center:
+      - 4.0
+      - 4.0
+      scale: 1.2000000000000002
+      surface_density: 2.0
+      movable: true
+    task:
+      mode: random_constrained
+      distance_min: 0.8145870119269027
+      distance_max: 0.8145870119269027
+      wall_margin: 0.35
+      tolerance: 0.12
+      angle_min_deg: 0.0
+      angle_max_deg: 360.0
+    controller:
+      task_mode: transport
+      sensor_range: 1.2
+      ray_count: 72
+      range_noise_std: 0.01
+      pca_neighbors: 5
+      residual_tolerance: 0.03
+      min_confidence: 0.15
+      comm_range: 1.6
+      voxel_size: 0.06
+      age_decay: 0.3
+      max_voxels_per_object: 320
+      motion_compensation: true
+      registration_gate: 0.12
+      registration_normal_cosine: 0.5
+      max_object_speed: 0.25
+      object_velocity_filter: 0.35
+      density_mode: offset
+      cage_offset: 0.105
+      lead_offset: 0.26
+      lead_threshold: 0.25
+      sigma: 0.2
+      base_density: 0.001
+      gap_gain: 0.6
+      gap_radius: 0.35
+      local_radius: 0.8
+      grid_resolution: 20
+      approach_mass_ratio: 3.0
+      redeploy_gap_ratio: 0.15
+      robot_radius: 0.13
+      delta_max: 0.065
+      d_min: 0.28
+      gamma_agent: 6.0
+      gamma_obj: 8.0
+      rho: 0.02
+      max_speed: 0.35
+      backend: qp
+      object_row_range: 0.6
+      object_row_window: 0.28
+      max_object_rows: 8
+      kp_explore: 0.25
+      kp_cage: 0.9
+      push_side_threshold: 0.35
+      min_push_agents: 4
+      contact_band_tolerance: 0.08
+      press_margin: null
+      press_margin_safety: 1.2
+      transport_law: progress
+      transport_reference_speed: 0.055
+      transport_kp: 2.4
+      transport_ki: 3.0
+      transport_effort_max: 0.3
+      transport_deadband: 0.05
+      brake_gain: 0.3
+      convoy_gain: 1.0
+      convoy_max: 0.25
+      cross_track_gain: 10.0
+      cross_track_damping: 12.0
+      cross_track_max_deg: 45.0
+      cross_track_deadband: 0.02
+      cross_track_reference: 0.08
+      separation_band: 0.06
+      kp_separate: 0.0
+      push_share_floor: 0.15
+      phase_informed_fraction: 0.55
+      phase_map_coverage_min: 0.7
+      contact_dwell: 20
+      brake_fraction: 0.65
+    transport:
+      engine: penalty
+      stiffness: 500.0
+      damping: 12.0
+      friction: 0.6
+      tangential_stiffness: 60.0
+      ground_friction: 0.6
+      gravity: 9.81
+      substeps: 4
+    render:
+      map_agent: agent_00
+    evaluation:
+      contact_radius: 0.42
+      j_min: 0.15
+      efficiency_min: 0.7
+      displacement_gate: 0.1
+    g500:
+      detect_by: null
+      contact_ready_by: null
+      transport_by: null
+      reach_by: null
+      efficiency_min: 0.8
+      direction_error_max_deg: 20.0
+      cross_track_max: 0.15
+      coverage_min: 0.7
+      progress_max_ratio: 1.4
+      arrival_tolerance: 0.12
+      hold_speed_max: 0.02
+      yaw_max_deg: 15.0
+    require_initial_ignorance: true
+- case_id: test_l_shape_search_910073_nearest_observed_target
+  split: test
+  gate: 6
+  shape: l_shape
+  seed: 910073
+  variant: nearest_observed_target
+  frames: 3000
+  stratum: search_scale0.8_ratio0.4
+  config:
+    paper: true
+    dt: 0.05
+    domain:
+      xmin: 0.0
+      xmax: 8.0
+      ymin: 0.0
+      ymax: 8.0
+    agents:
+      count: 16
+      layout: grid
+      center:
+      - 4.0
+      - 0.55
+      spacing: 0.44
+      jitter: 0.0
+    cargoes:
+    - id: cargo_0
+      shape: l_shape
+      center:
+      - 4.0
+      - 4.0
+      scale: 1.2000000000000002
+      surface_density: 2.0
+      movable: true
+    task:
+      mode: random_constrained
+      distance_min: 0.8145870119269027
+      distance_max: 0.8145870119269027
+      wall_margin: 0.35
+      tolerance: 0.12
+      angle_min_deg: 0.0
+      angle_max_deg: 360.0
+    controller:
+      task_mode: transport
+      sensor_range: 1.2
+      ray_count: 72
+      range_noise_std: 0.01
+      pca_neighbors: 5
+      residual_tolerance: 0.03
+      min_confidence: 0.15
+      comm_range: 1.6
+      voxel_size: 0.06
+      age_decay: 0.3
+      max_voxels_per_object: 320
+      motion_compensation: true
+      registration_gate: 0.12
+      registration_normal_cosine: 0.5
+      max_object_speed: 0.25
+      object_velocity_filter: 0.35
+      density_mode: offset
+      cage_offset: 0.105
+      lead_offset: 0.26
+      lead_threshold: 0.25
+      sigma: 0.2
+      base_density: 0.001
+      gap_gain: 0.6
+      gap_radius: 0.35
+      local_radius: 0.8
+      grid_resolution: 20
+      approach_mass_ratio: 3.0
+      redeploy_gap_ratio: 0.15
+      robot_radius: 0.13
+      delta_max: 0.065
+      d_min: 0.28
+      gamma_agent: 6.0
+      gamma_obj: 8.0
+      rho: 0.02
+      max_speed: 0.35
+      backend: qp
+      object_row_range: 0.6
+      object_row_window: 0.28
+      max_object_rows: 8
+      kp_explore: 0.25
+      kp_cage: 0.9
+      push_side_threshold: 0.35
+      min_push_agents: 4
+      contact_band_tolerance: 0.08
+      press_margin: null
+      press_margin_safety: 1.2
+      transport_law: progress
+      transport_reference_speed: 0.055
+      transport_kp: 2.4
+      transport_ki: 3.0
+      transport_effort_max: 0.3
+      transport_deadband: 0.05
+      brake_gain: 0.3
+      convoy_gain: 1.0
+      convoy_max: 0.25
+      cross_track_gain: 10.0
+      cross_track_damping: 12.0
+      cross_track_max_deg: 45.0
+      cross_track_deadband: 0.02
+      cross_track_reference: 0.08
+      separation_band: 0.06
+      kp_separate: 0.0
+      push_share_floor: 0.15
+      phase_informed_fraction: 0.55
+      phase_map_coverage_min: 0.7
+      contact_dwell: 20
+      brake_fraction: 0.65
+    transport:
+      engine: penalty
+      stiffness: 500.0
+      damping: 12.0
+      friction: 0.6
+      tangential_stiffness: 60.0
+      ground_friction: 0.6
+      gravity: 9.81
+      substeps: 4
+    render:
+      map_agent: agent_00
+    evaluation:
+      contact_radius: 0.42
+      j_min: 0.15
+      efficiency_min: 0.7
+      displacement_gate: 0.1
+    g500:
+      detect_by: null
+      contact_ready_by: null
+      transport_by: null
+      reach_by: null
+      efficiency_min: 0.8
+      direction_error_max_deg: 20.0
+      cross_track_max: 0.15
+      coverage_min: 0.7
+      progress_max_ratio: 1.4
+      arrival_tolerance: 0.12
+      hold_speed_max: 0.02
+      yaw_max_deg: 15.0
+    require_initial_ignorance: true
+- case_id: test_l_shape_search_910073_local_spacing
+  split: test
+  gate: 6
+  shape: l_shape
+  seed: 910073
+  variant: local_spacing
+  frames: 3000
+  stratum: search_scale0.8_ratio0.4
+  config:
+    paper: true
+    dt: 0.05
+    domain:
+      xmin: 0.0
+      xmax: 8.0
+      ymin: 0.0
+      ymax: 8.0
+    agents:
+      count: 16
+      layout: grid
+      center:
+      - 4.0
+      - 0.55
+      spacing: 0.44
+      jitter: 0.0
+    cargoes:
+    - id: cargo_0
+      shape: l_shape
+      center:
+      - 4.0
+      - 4.0
+      scale: 1.2000000000000002
+      surface_density: 2.0
+      movable: true
+    task:
+      mode: random_constrained
+      distance_min: 0.8145870119269027
+      distance_max: 0.8145870119269027
+      wall_margin: 0.35
+      tolerance: 0.12
+      angle_min_deg: 0.0
+      angle_max_deg: 360.0
+    controller:
+      task_mode: transport
+      sensor_range: 1.2
+      ray_count: 72
+      range_noise_std: 0.01
+      pca_neighbors: 5
+      residual_tolerance: 0.03
+      min_confidence: 0.15
+      comm_range: 1.6
+      voxel_size: 0.06
+      age_decay: 0.3
+      max_voxels_per_object: 320
+      motion_compensation: true
+      registration_gate: 0.12
+      registration_normal_cosine: 0.5
+      max_object_speed: 0.25
+      object_velocity_filter: 0.35
+      density_mode: offset
+      cage_offset: 0.105
+      lead_offset: 0.26
+      lead_threshold: 0.25
+      sigma: 0.2
+      base_density: 0.001
+      gap_gain: 0.6
+      gap_radius: 0.35
+      local_radius: 0.8
+      grid_resolution: 20
+      approach_mass_ratio: 3.0
+      redeploy_gap_ratio: 0.15
+      robot_radius: 0.13
+      delta_max: 0.065
+      d_min: 0.28
+      gamma_agent: 6.0
+      gamma_obj: 8.0
+      rho: 0.02
+      max_speed: 0.35
+      backend: qp
+      object_row_range: 0.6
+      object_row_window: 0.28
+      max_object_rows: 8
+      kp_explore: 0.25
+      kp_cage: 0.9
+      push_side_threshold: 0.35
+      min_push_agents: 4
+      contact_band_tolerance: 0.08
+      press_margin: null
+      press_margin_safety: 1.2
+      transport_law: progress
+      transport_reference_speed: 0.055
+      transport_kp: 2.4
+      transport_ki: 3.0
+      transport_effort_max: 0.3
+      transport_deadband: 0.05
+      brake_gain: 0.3
+      convoy_gain: 1.0
+      convoy_max: 0.25
+      cross_track_gain: 10.0
+      cross_track_damping: 12.0
+      cross_track_max_deg: 45.0
+      cross_track_deadband: 0.02
+      cross_track_reference: 0.08
+      separation_band: 0.06
+      kp_separate: 0.0
+      push_share_floor: 0.15
+      phase_informed_fraction: 0.55
+      phase_map_coverage_min: 0.7
+      contact_dwell: 20
+      brake_fraction: 0.65
+    transport:
+      engine: penalty
+      stiffness: 500.0
+      damping: 12.0
+      friction: 0.6
+      tangential_stiffness: 60.0
+      ground_friction: 0.6
+      gravity: 9.81
+      substeps: 4
+    render:
+      map_agent: agent_00
+    evaluation:
+      contact_radius: 0.42
+      j_min: 0.15
+      efficiency_min: 0.7
+      displacement_gate: 0.1
+    g500:
+      detect_by: null
+      contact_ready_by: null
+      transport_by: null
+      reach_by: null
+      efficiency_min: 0.8
+      direction_error_max_deg: 20.0
+      cross_track_max: 0.15
+      coverage_min: 0.7
+      progress_max_ratio: 1.4
+      arrival_tolerance: 0.12
+      hold_speed_max: 0.02
+      yaw_max_deg: 15.0
+    require_initial_ignorance: true
+- case_id: test_l_shape_search_910074_boundary_cvt
+  split: test
+  gate: 6
+  shape: l_shape
+  seed: 910074
+  variant: boundary_cvt
+  frames: 3000
+  stratum: search_scale1.2_ratio0.8
+  config:
+    paper: true
+    dt: 0.05
+    domain:
+      xmin: 0.0
+      xmax: 8.0
+      ymin: 0.0
+      ymax: 8.0
+    agents:
+      count: 16
+      layout: grid
+      center:
+      - 4.0
+      - 0.55
+      spacing: 0.44
+      jitter: 0.0
+    cargoes:
+    - id: cargo_0
+      shape: l_shape
+      center:
+      - 4.0
+      - 4.0
+      scale: 1.7999999999999998
+      surface_density: 2.0
+      movable: true
+    task:
+      mode: random_constrained
+      distance_min: 2.4437610357807085
+      distance_max: 2.4437610357807085
+      wall_margin: 0.35
+      tolerance: 0.12
+      angle_min_deg: 0.0
+      angle_max_deg: 360.0
+    controller:
+      task_mode: transport
+      sensor_range: 1.2
+      ray_count: 72
+      range_noise_std: 0.01
+      pca_neighbors: 5
+      residual_tolerance: 0.03
+      min_confidence: 0.15
+      comm_range: 1.6
+      voxel_size: 0.06
+      age_decay: 0.3
+      max_voxels_per_object: 320
+      motion_compensation: true
+      registration_gate: 0.12
+      registration_normal_cosine: 0.5
+      max_object_speed: 0.25
+      object_velocity_filter: 0.35
+      density_mode: offset
+      cage_offset: 0.105
+      lead_offset: 0.26
+      lead_threshold: 0.25
+      sigma: 0.2
+      base_density: 0.001
+      gap_gain: 0.6
+      gap_radius: 0.35
+      local_radius: 0.8
+      grid_resolution: 20
+      approach_mass_ratio: 3.0
+      redeploy_gap_ratio: 0.15
+      robot_radius: 0.13
+      delta_max: 0.065
+      d_min: 0.28
+      gamma_agent: 6.0
+      gamma_obj: 8.0
+      rho: 0.02
+      max_speed: 0.35
+      backend: qp
+      object_row_range: 0.6
+      object_row_window: 0.28
+      max_object_rows: 8
+      kp_explore: 0.25
+      kp_cage: 0.9
+      push_side_threshold: 0.35
+      min_push_agents: 4
+      contact_band_tolerance: 0.08
+      press_margin: null
+      press_margin_safety: 1.2
+      transport_law: progress
+      transport_reference_speed: 0.055
+      transport_kp: 2.4
+      transport_ki: 3.0
+      transport_effort_max: 0.3
+      transport_deadband: 0.05
+      brake_gain: 0.3
+      convoy_gain: 1.0
+      convoy_max: 0.25
+      cross_track_gain: 10.0
+      cross_track_damping: 12.0
+      cross_track_max_deg: 45.0
+      cross_track_deadband: 0.02
+      cross_track_reference: 0.08
+      separation_band: 0.06
+      kp_separate: 0.0
+      push_share_floor: 0.15
+      phase_informed_fraction: 0.55
+      phase_map_coverage_min: 0.7
+      contact_dwell: 20
+      brake_fraction: 0.65
+    transport:
+      engine: penalty
+      stiffness: 500.0
+      damping: 12.0
+      friction: 0.6
+      tangential_stiffness: 60.0
+      ground_friction: 0.6
+      gravity: 9.81
+      substeps: 4
+    render:
+      map_agent: agent_00
+    evaluation:
+      contact_radius: 0.42
+      j_min: 0.15
+      efficiency_min: 0.7
+      displacement_gate: 0.1
+    g500:
+      detect_by: null
+      contact_ready_by: null
+      transport_by: null
+      reach_by: null
+      efficiency_min: 0.8
+      direction_error_max_deg: 20.0
+      cross_track_max: 0.15
+      coverage_min: 0.7
+      progress_max_ratio: 1.4
+      arrival_tolerance: 0.12
+      hold_speed_max: 0.02
+      yaw_max_deg: 15.0
+    require_initial_ignorance: true
+- case_id: test_l_shape_search_910074_nearest_observed_target
+  split: test
+  gate: 6
+  shape: l_shape
+  seed: 910074
+  variant: nearest_observed_target
+  frames: 3000
+  stratum: search_scale1.2_ratio0.8
+  config:
+    paper: true
+    dt: 0.05
+    domain:
+      xmin: 0.0
+      xmax: 8.0
+      ymin: 0.0
+      ymax: 8.0
+    agents:
+      count: 16
+      layout: grid
+      center:
+      - 4.0
+      - 0.55
+      spacing: 0.44
+      jitter: 0.0
+    cargoes:
+    - id: cargo_0
+      shape: l_shape
+      center:
+      - 4.0
+      - 4.0
+      scale: 1.7999999999999998
+      surface_density: 2.0
+      movable: true
+    task:
+      mode: random_constrained
+      distance_min: 2.4437610357807085
+      distance_max: 2.4437610357807085
+      wall_margin: 0.35
+      tolerance: 0.12
+      angle_min_deg: 0.0
+      angle_max_deg: 360.0
+    controller:
+      task_mode: transport
+      sensor_range: 1.2
+      ray_count: 72
+      range_noise_std: 0.01
+      pca_neighbors: 5
+      residual_tolerance: 0.03
+      min_confidence: 0.15
+      comm_range: 1.6
+      voxel_size: 0.06
+      age_decay: 0.3
+      max_voxels_per_object: 320
+      motion_compensation: true
+      registration_gate: 0.12
+      registration_normal_cosine: 0.5
+      max_object_speed: 0.25
+      object_velocity_filter: 0.35
+      density_mode: offset
+      cage_offset: 0.105
+      lead_offset: 0.26
+      lead_threshold: 0.25
+      sigma: 0.2
+      base_density: 0.001
+      gap_gain: 0.6
+      gap_radius: 0.35
+      local_radius: 0.8
+      grid_resolution: 20
+      approach_mass_ratio: 3.0
+      redeploy_gap_ratio: 0.15
+      robot_radius: 0.13
+      delta_max: 0.065
+      d_min: 0.28
+      gamma_agent: 6.0
+      gamma_obj: 8.0
+      rho: 0.02
+      max_speed: 0.35
+      backend: qp
+      object_row_range: 0.6
+      object_row_window: 0.28
+      max_object_rows: 8
+      kp_explore: 0.25
+      kp_cage: 0.9
+      push_side_threshold: 0.35
+      min_push_agents: 4
+      contact_band_tolerance: 0.08
+      press_margin: null
+      press_margin_safety: 1.2
+      transport_law: progress
+      transport_reference_speed: 0.055
+      transport_kp: 2.4
+      transport_ki: 3.0
+      transport_effort_max: 0.3
+      transport_deadband: 0.05
+      brake_gain: 0.3
+      convoy_gain: 1.0
+      convoy_max: 0.25
+      cross_track_gain: 10.0
+      cross_track_damping: 12.0
+      cross_track_max_deg: 45.0
+      cross_track_deadband: 0.02
+      cross_track_reference: 0.08
+      separation_band: 0.06
+      kp_separate: 0.0
+      push_share_floor: 0.15
+      phase_informed_fraction: 0.55
+      phase_map_coverage_min: 0.7
+      contact_dwell: 20
+      brake_fraction: 0.65
+    transport:
+      engine: penalty
+      stiffness: 500.0
+      damping: 12.0
+      friction: 0.6
+      tangential_stiffness: 60.0
+      ground_friction: 0.6
+      gravity: 9.81
+      substeps: 4
+    render:
+      map_agent: agent_00
+    evaluation:
+      contact_radius: 0.42
+      j_min: 0.15
+      efficiency_min: 0.7
+      displacement_gate: 0.1
+    g500:
+      detect_by: null
+      contact_ready_by: null
+      transport_by: null
+      reach_by: null
+      efficiency_min: 0.8
+      direction_error_max_deg: 20.0
+      cross_track_max: 0.15
+      coverage_min: 0.7
+      progress_max_ratio: 1.4
+      arrival_tolerance: 0.12
+      hold_speed_max: 0.02
+      yaw_max_deg: 15.0
+    require_initial_ignorance: true
+- case_id: test_l_shape_search_910074_local_spacing
+  split: test
+  gate: 6
+  shape: l_shape
+  seed: 910074
+  variant: local_spacing
+  frames: 3000
+  stratum: search_scale1.2_ratio0.8
+  config:
+    paper: true
+    dt: 0.05
+    domain:
+      xmin: 0.0
+      xmax: 8.0
+      ymin: 0.0
+      ymax: 8.0
+    agents:
+      count: 16
+      layout: grid
+      center:
+      - 4.0
+      - 0.55
+      spacing: 0.44
+      jitter: 0.0
+    cargoes:
+    - id: cargo_0
+      shape: l_shape
+      center:
+      - 4.0
+      - 4.0
+      scale: 1.7999999999999998
+      surface_density: 2.0
+      movable: true
+    task:
+      mode: random_constrained
+      distance_min: 2.4437610357807085
+      distance_max: 2.4437610357807085
+      wall_margin: 0.35
+      tolerance: 0.12
+      angle_min_deg: 0.0
+      angle_max_deg: 360.0
+    controller:
+      task_mode: transport
+      sensor_range: 1.2
+      ray_count: 72
+      range_noise_std: 0.01
+      pca_neighbors: 5
+      residual_tolerance: 0.03
+      min_confidence: 0.15
+      comm_range: 1.6
+      voxel_size: 0.06
+      age_decay: 0.3
+      max_voxels_per_object: 320
+      motion_compensation: true
+      registration_gate: 0.12
+      registration_normal_cosine: 0.5
+      max_object_speed: 0.25
+      object_velocity_filter: 0.35
+      density_mode: offset
+      cage_offset: 0.105
+      lead_offset: 0.26
+      lead_threshold: 0.25
+      sigma: 0.2
+      base_density: 0.001
+      gap_gain: 0.6
+      gap_radius: 0.35
+      local_radius: 0.8
+      grid_resolution: 20
+      approach_mass_ratio: 3.0
+      redeploy_gap_ratio: 0.15
+      robot_radius: 0.13
+      delta_max: 0.065
+      d_min: 0.28
+      gamma_agent: 6.0
+      gamma_obj: 8.0
+      rho: 0.02
+      max_speed: 0.35
+      backend: qp
+      object_row_range: 0.6
+      object_row_window: 0.28
+      max_object_rows: 8
+      kp_explore: 0.25
+      kp_cage: 0.9
+      push_side_threshold: 0.35
+      min_push_agents: 4
+      contact_band_tolerance: 0.08
+      press_margin: null
+      press_margin_safety: 1.2
+      transport_law: progress
+      transport_reference_speed: 0.055
+      transport_kp: 2.4
+      transport_ki: 3.0
+      transport_effort_max: 0.3
+      transport_deadband: 0.05
+      brake_gain: 0.3
+      convoy_gain: 1.0
+      convoy_max: 0.25
+      cross_track_gain: 10.0
+      cross_track_damping: 12.0
+      cross_track_max_deg: 45.0
+      cross_track_deadband: 0.02
+      cross_track_reference: 0.08
+      separation_band: 0.06
+      kp_separate: 0.0
+      push_share_floor: 0.15
+      phase_informed_fraction: 0.55
+      phase_map_coverage_min: 0.7
+      contact_dwell: 20
+      brake_fraction: 0.65
+    transport:
+      engine: penalty
+      stiffness: 500.0
+      damping: 12.0
+      friction: 0.6
+      tangential_stiffness: 60.0
+      ground_friction: 0.6
+      gravity: 9.81
+      substeps: 4
+    render:
+      map_agent: agent_00
+    evaluation:
+      contact_radius: 0.42
+      j_min: 0.15
+      efficiency_min: 0.7
+      displacement_gate: 0.1
+    g500:
+      detect_by: null
+      contact_ready_by: null
+      transport_by: null
+      reach_by: null
+      efficiency_min: 0.8
+      direction_error_max_deg: 20.0
+      cross_track_max: 0.15
+      coverage_min: 0.7
+      progress_max_ratio: 1.4
+      arrival_tolerance: 0.12
+      hold_speed_max: 0.02
+      yaw_max_deg: 15.0
+    require_initial_ignorance: true
+- case_id: test_rectangle_near_910075_boundary_cvt
+  split: test
+  gate: 6
+  shape: rectangle
+  seed: 910075
+  variant: boundary_cvt
+  frames: 3000
+  stratum: near_scale0.8_ratio0.4
+  config:
+    paper: true
+    dt: 0.05
+    domain:
+      xmin: 0.0
+      xmax: 8.0
+      ymin: 0.0
+      ymax: 8.0
+    agents:
+      count: 16
+      layout: scatter
+      center:
+      - 4.0
+      - 4.0
+      radius_min: 1.5
+      radius_max: 2.3
+      min_separation: 0.34
+    cargoes:
+    - id: cargo_0
+      shape: rectangle
+      center:
+      - 4.0
+      - 4.0
+      width: 1.2800000000000002
+      height: 0.96
+      surface_density: 2.0
+      movable: true
+    task:
+      mode: random_constrained
+      distance_min: 0.6400000000000003
+      distance_max: 0.6400000000000003
+      wall_margin: 0.35
+      tolerance: 0.12
+      angle_min_deg: 0.0
+      angle_max_deg: 360.0
+    controller:
+      task_mode: transport
+      sensor_range: 1.2
+      ray_count: 72
+      range_noise_std: 0.01
+      pca_neighbors: 5
+      residual_tolerance: 0.03
+      min_confidence: 0.15
+      comm_range: 1.6
+      voxel_size: 0.06
+      age_decay: 0.3
+      max_voxels_per_object: 320
+      motion_compensation: true
+      registration_gate: 0.12
+      registration_normal_cosine: 0.5
+      max_object_speed: 0.25
+      object_velocity_filter: 0.35
+      density_mode: offset
+      cage_offset: 0.105
+      lead_offset: 0.26
+      lead_threshold: 0.25
+      sigma: 0.2
+      base_density: 0.001
+      gap_gain: 0.6
+      gap_radius: 0.35
+      local_radius: 0.8
+      grid_resolution: 20
+      approach_mass_ratio: 3.0
+      redeploy_gap_ratio: 0.15
+      robot_radius: 0.13
+      delta_max: 0.065
+      d_min: 0.28
+      gamma_agent: 6.0
+      gamma_obj: 8.0
+      rho: 0.02
+      max_speed: 0.35
+      backend: qp
+      object_row_range: 0.6
+      object_row_window: 0.28
+      max_object_rows: 8
+      kp_explore: 0.25
+      kp_cage: 0.9
+      push_side_threshold: 0.35
+      min_push_agents: 4
+      contact_band_tolerance: 0.08
+      press_margin: null
+      press_margin_safety: 1.2
+      transport_law: progress
+      transport_reference_speed: 0.055
+      transport_kp: 2.4
+      transport_ki: 3.0
+      transport_effort_max: 0.3
+      transport_deadband: 0.05
+      brake_gain: 0.3
+      convoy_gain: 1.0
+      convoy_max: 0.25
+      cross_track_gain: 10.0
+      cross_track_damping: 12.0
+      cross_track_max_deg: 45.0
+      cross_track_deadband: 0.02
+      cross_track_reference: 0.08
+      separation_band: 0.06
+      kp_separate: 0.0
+      push_share_floor: 0.15
+      phase_informed_fraction: 0.55
+      phase_map_coverage_min: 0.7
+      contact_dwell: 20
+      brake_fraction: 0.65
+    transport:
+      engine: penalty
+      stiffness: 500.0
+      damping: 12.0
+      friction: 0.6
+      tangential_stiffness: 60.0
+      ground_friction: 0.6
+      gravity: 9.81
+      substeps: 4
+    render:
+      map_agent: agent_00
+    evaluation:
+      contact_radius: 0.42
+      j_min: 0.15
+      efficiency_min: 0.7
+      displacement_gate: 0.1
+    g500:
+      detect_by: null
+      contact_ready_by: null
+      transport_by: null
+      reach_by: null
+      efficiency_min: 0.8
+      direction_error_max_deg: 20.0
+      cross_track_max: 0.15
+      coverage_min: 0.7
+      progress_max_ratio: 1.4
+      arrival_tolerance: 0.12
+      hold_speed_max: 0.02
+      yaw_max_deg: 15.0
+- case_id: test_rectangle_near_910075_nearest_observed_target
+  split: test
+  gate: 6
+  shape: rectangle
+  seed: 910075
+  variant: nearest_observed_target
+  frames: 3000
+  stratum: near_scale0.8_ratio0.4
+  config:
+    paper: true
+    dt: 0.05
+    domain:
+      xmin: 0.0
+      xmax: 8.0
+      ymin: 0.0
+      ymax: 8.0
+    agents:
+      count: 16
+      layout: scatter
+      center:
+      - 4.0
+      - 4.0
+      radius_min: 1.5
+      radius_max: 2.3
+      min_separation: 0.34
+    cargoes:
+    - id: cargo_0
+      shape: rectangle
+      center:
+      - 4.0
+      - 4.0
+      width: 1.2800000000000002
+      height: 0.96
+      surface_density: 2.0
+      movable: true
+    task:
+      mode: random_constrained
+      distance_min: 0.6400000000000003
+      distance_max: 0.6400000000000003
+      wall_margin: 0.35
+      tolerance: 0.12
+      angle_min_deg: 0.0
+      angle_max_deg: 360.0
+    controller:
+      task_mode: transport
+      sensor_range: 1.2
+      ray_count: 72
+      range_noise_std: 0.01
+      pca_neighbors: 5
+      residual_tolerance: 0.03
+      min_confidence: 0.15
+      comm_range: 1.6
+      voxel_size: 0.06
+      age_decay: 0.3
+      max_voxels_per_object: 320
+      motion_compensation: true
+      registration_gate: 0.12
+      registration_normal_cosine: 0.5
+      max_object_speed: 0.25
+      object_velocity_filter: 0.35
+      density_mode: offset
+      cage_offset: 0.105
+      lead_offset: 0.26
+      lead_threshold: 0.25
+      sigma: 0.2
+      base_density: 0.001
+      gap_gain: 0.6
+      gap_radius: 0.35
+      local_radius: 0.8
+      grid_resolution: 20
+      approach_mass_ratio: 3.0
+      redeploy_gap_ratio: 0.15
+      robot_radius: 0.13
+      delta_max: 0.065
+      d_min: 0.28
+      gamma_agent: 6.0
+      gamma_obj: 8.0
+      rho: 0.02
+      max_speed: 0.35
+      backend: qp
+      object_row_range: 0.6
+      object_row_window: 0.28
+      max_object_rows: 8
+      kp_explore: 0.25
+      kp_cage: 0.9
+      push_side_threshold: 0.35
+      min_push_agents: 4
+      contact_band_tolerance: 0.08
+      press_margin: null
+      press_margin_safety: 1.2
+      transport_law: progress
+      transport_reference_speed: 0.055
+      transport_kp: 2.4
+      transport_ki: 3.0
+      transport_effort_max: 0.3
+      transport_deadband: 0.05
+      brake_gain: 0.3
+      convoy_gain: 1.0
+      convoy_max: 0.25
+      cross_track_gain: 10.0
+      cross_track_damping: 12.0
+      cross_track_max_deg: 45.0
+      cross_track_deadband: 0.02
+      cross_track_reference: 0.08
+      separation_band: 0.06
+      kp_separate: 0.0
+      push_share_floor: 0.15
+      phase_informed_fraction: 0.55
+      phase_map_coverage_min: 0.7
+      contact_dwell: 20
+      brake_fraction: 0.65
+    transport:
+      engine: penalty
+      stiffness: 500.0
+      damping: 12.0
+      friction: 0.6
+      tangential_stiffness: 60.0
+      ground_friction: 0.6
+      gravity: 9.81
+      substeps: 4
+    render:
+      map_agent: agent_00
+    evaluation:
+      contact_radius: 0.42
+      j_min: 0.15
+      efficiency_min: 0.7
+      displacement_gate: 0.1
+    g500:
+      detect_by: null
+      contact_ready_by: null
+      transport_by: null
+      reach_by: null
+      efficiency_min: 0.8
+      direction_error_max_deg: 20.0
+      cross_track_max: 0.15
+      coverage_min: 0.7
+      progress_max_ratio: 1.4
+      arrival_tolerance: 0.12
+      hold_speed_max: 0.02
+      yaw_max_deg: 15.0
+- case_id: test_rectangle_near_910075_local_spacing
+  split: test
+  gate: 6
+  shape: rectangle
+  seed: 910075
+  variant: local_spacing
+  frames: 3000
+  stratum: near_scale0.8_ratio0.4
+  config:
+    paper: true
+    dt: 0.05
+    domain:
+      xmin: 0.0
+      xmax: 8.0
+      ymin: 0.0
+      ymax: 8.0
+    agents:
+      count: 16
+      layout: scatter
+      center:
+      - 4.0
+      - 4.0
+      radius_min: 1.5
+      radius_max: 2.3
+      min_separation: 0.34
+    cargoes:
+    - id: cargo_0
+      shape: rectangle
+      center:
+      - 4.0
+      - 4.0
+      width: 1.2800000000000002
+      height: 0.96
+      surface_density: 2.0
+      movable: true
+    task:
+      mode: random_constrained
+      distance_min: 0.6400000000000003
+      distance_max: 0.6400000000000003
+      wall_margin: 0.35
+      tolerance: 0.12
+      angle_min_deg: 0.0
+      angle_max_deg: 360.0
+    controller:
+      task_mode: transport
+      sensor_range: 1.2
+      ray_count: 72
+      range_noise_std: 0.01
+      pca_neighbors: 5
+      residual_tolerance: 0.03
+      min_confidence: 0.15
+      comm_range: 1.6
+      voxel_size: 0.06
+      age_decay: 0.3
+      max_voxels_per_object: 320
+      motion_compensation: true
+      registration_gate: 0.12
+      registration_normal_cosine: 0.5
+      max_object_speed: 0.25
+      object_velocity_filter: 0.35
+      density_mode: offset
+      cage_offset: 0.105
+      lead_offset: 0.26
+      lead_threshold: 0.25
+      sigma: 0.2
+      base_density: 0.001
+      gap_gain: 0.6
+      gap_radius: 0.35
+      local_radius: 0.8
+      grid_resolution: 20
+      approach_mass_ratio: 3.0
+      redeploy_gap_ratio: 0.15
+      robot_radius: 0.13
+      delta_max: 0.065
+      d_min: 0.28
+      gamma_agent: 6.0
+      gamma_obj: 8.0
+      rho: 0.02
+      max_speed: 0.35
+      backend: qp
+      object_row_range: 0.6
+      object_row_window: 0.28
+      max_object_rows: 8
+      kp_explore: 0.25
+      kp_cage: 0.9
+      push_side_threshold: 0.35
+      min_push_agents: 4
+      contact_band_tolerance: 0.08
+      press_margin: null
+      press_margin_safety: 1.2
+      transport_law: progress
+      transport_reference_speed: 0.055
+      transport_kp: 2.4
+      transport_ki: 3.0
+      transport_effort_max: 0.3
+      transport_deadband: 0.05
+      brake_gain: 0.3
+      convoy_gain: 1.0
+      convoy_max: 0.25
+      cross_track_gain: 10.0
+      cross_track_damping: 12.0
+      cross_track_max_deg: 45.0
+      cross_track_deadband: 0.02
+      cross_track_reference: 0.08
+      separation_band: 0.06
+      kp_separate: 0.0
+      push_share_floor: 0.15
+      phase_informed_fraction: 0.55
+      phase_map_coverage_min: 0.7
+      contact_dwell: 20
+      brake_fraction: 0.65
+    transport:
+      engine: penalty
+      stiffness: 500.0
+      damping: 12.0
+      friction: 0.6
+      tangential_stiffness: 60.0
+      ground_friction: 0.6
+      gravity: 9.81
+      substeps: 4
+    render:
+      map_agent: agent_00
+    evaluation:
+      contact_radius: 0.42
+      j_min: 0.15
+      efficiency_min: 0.7
+      displacement_gate: 0.1
+    g500:
+      detect_by: null
+      contact_ready_by: null
+      transport_by: null
+      reach_by: null
+      efficiency_min: 0.8
+      direction_error_max_deg: 20.0
+      cross_track_max: 0.15
+      coverage_min: 0.7
+      progress_max_ratio: 1.4
+      arrival_tolerance: 0.12
+      hold_speed_max: 0.02
+      yaw_max_deg: 15.0
+- case_id: test_rectangle_near_910076_boundary_cvt
+  split: test
+  gate: 6
+  shape: rectangle
+  seed: 910076
+  variant: boundary_cvt
+  frames: 3000
+  stratum: near_scale1.2_ratio0.8
+  config:
+    paper: true
+    dt: 0.05
+    domain:
+      xmin: 0.0
+      xmax: 8.0
+      ymin: 0.0
+      ymax: 8.0
+    agents:
+      count: 16
+      layout: scatter
+      center:
+      - 4.0
+      - 4.0
+      radius_min: 1.5
+      radius_max: 2.3
+      min_separation: 0.34
+    cargoes:
+    - id: cargo_0
+      shape: rectangle
+      center:
+      - 4.0
+      - 4.0
+      width: 1.92
+      height: 1.44
+      surface_density: 2.0
+      movable: true
+    task:
+      mode: random_constrained
+      distance_min: 1.9199999999999997
+      distance_max: 1.9199999999999997
+      wall_margin: 0.35
+      tolerance: 0.12
+      angle_min_deg: 0.0
+      angle_max_deg: 360.0
+    controller:
+      task_mode: transport
+      sensor_range: 1.2
+      ray_count: 72
+      range_noise_std: 0.01
+      pca_neighbors: 5
+      residual_tolerance: 0.03
+      min_confidence: 0.15
+      comm_range: 1.6
+      voxel_size: 0.06
+      age_decay: 0.3
+      max_voxels_per_object: 320
+      motion_compensation: true
+      registration_gate: 0.12
+      registration_normal_cosine: 0.5
+      max_object_speed: 0.25
+      object_velocity_filter: 0.35
+      density_mode: offset
+      cage_offset: 0.105
+      lead_offset: 0.26
+      lead_threshold: 0.25
+      sigma: 0.2
+      base_density: 0.001
+      gap_gain: 0.6
+      gap_radius: 0.35
+      local_radius: 0.8
+      grid_resolution: 20
+      approach_mass_ratio: 3.0
+      redeploy_gap_ratio: 0.15
+      robot_radius: 0.13
+      delta_max: 0.065
+      d_min: 0.28
+      gamma_agent: 6.0
+      gamma_obj: 8.0
+      rho: 0.02
+      max_speed: 0.35
+      backend: qp
+      object_row_range: 0.6
+      object_row_window: 0.28
+      max_object_rows: 8
+      kp_explore: 0.25
+      kp_cage: 0.9
+      push_side_threshold: 0.35
+      min_push_agents: 4
+      contact_band_tolerance: 0.08
+      press_margin: null
+      press_margin_safety: 1.2
+      transport_law: progress
+      transport_reference_speed: 0.055
+      transport_kp: 2.4
+      transport_ki: 3.0
+      transport_effort_max: 0.3
+      transport_deadband: 0.05
+      brake_gain: 0.3
+      convoy_gain: 1.0
+      convoy_max: 0.25
+      cross_track_gain: 10.0
+      cross_track_damping: 12.0
+      cross_track_max_deg: 45.0
+      cross_track_deadband: 0.02
+      cross_track_reference: 0.08
+      separation_band: 0.06
+      kp_separate: 0.0
+      push_share_floor: 0.15
+      phase_informed_fraction: 0.55
+      phase_map_coverage_min: 0.7
+      contact_dwell: 20
+      brake_fraction: 0.65
+    transport:
+      engine: penalty
+      stiffness: 500.0
+      damping: 12.0
+      friction: 0.6
+      tangential_stiffness: 60.0
+      ground_friction: 0.6
+      gravity: 9.81
+      substeps: 4
+    render:
+      map_agent: agent_00
+    evaluation:
+      contact_radius: 0.42
+      j_min: 0.15
+      efficiency_min: 0.7
+      displacement_gate: 0.1
+    g500:
+      detect_by: null
+      contact_ready_by: null
+      transport_by: null
+      reach_by: null
+      efficiency_min: 0.8
+      direction_error_max_deg: 20.0
+      cross_track_max: 0.15
+      coverage_min: 0.7
+      progress_max_ratio: 1.4
+      arrival_tolerance: 0.12
+      hold_speed_max: 0.02
+      yaw_max_deg: 15.0
+- case_id: test_rectangle_near_910076_nearest_observed_target
+  split: test
+  gate: 6
+  shape: rectangle
+  seed: 910076
+  variant: nearest_observed_target
+  frames: 3000
+  stratum: near_scale1.2_ratio0.8
+  config:
+    paper: true
+    dt: 0.05
+    domain:
+      xmin: 0.0
+      xmax: 8.0
+      ymin: 0.0
+      ymax: 8.0
+    agents:
+      count: 16
+      layout: scatter
+      center:
+      - 4.0
+      - 4.0
+      radius_min: 1.5
+      radius_max: 2.3
+      min_separation: 0.34
+    cargoes:
+    - id: cargo_0
+      shape: rectangle
+      center:
+      - 4.0
+      - 4.0
+      width: 1.92
+      height: 1.44
+      surface_density: 2.0
+      movable: true
+    task:
+      mode: random_constrained
+      distance_min: 1.9199999999999997
+      distance_max: 1.9199999999999997
+      wall_margin: 0.35
+      tolerance: 0.12
+      angle_min_deg: 0.0
+      angle_max_deg: 360.0
+    controller:
+      task_mode: transport
+      sensor_range: 1.2
+      ray_count: 72
+      range_noise_std: 0.01
+      pca_neighbors: 5
+      residual_tolerance: 0.03
+      min_confidence: 0.15
+      comm_range: 1.6
+      voxel_size: 0.06
+      age_decay: 0.3
+      max_voxels_per_object: 320
+      motion_compensation: true
+      registration_gate: 0.12
+      registration_normal_cosine: 0.5
+      max_object_speed: 0.25
+      object_velocity_filter: 0.35
+      density_mode: offset
+      cage_offset: 0.105
+      lead_offset: 0.26
+      lead_threshold: 0.25
+      sigma: 0.2
+      base_density: 0.001
+      gap_gain: 0.6
+      gap_radius: 0.35
+      local_radius: 0.8
+      grid_resolution: 20
+      approach_mass_ratio: 3.0
+      redeploy_gap_ratio: 0.15
+      robot_radius: 0.13
+      delta_max: 0.065
+      d_min: 0.28
+      gamma_agent: 6.0
+      gamma_obj: 8.0
+      rho: 0.02
+      max_speed: 0.35
+      backend: qp
+      object_row_range: 0.6
+      object_row_window: 0.28
+      max_object_rows: 8
+      kp_explore: 0.25
+      kp_cage: 0.9
+      push_side_threshold: 0.35
+      min_push_agents: 4
+      contact_band_tolerance: 0.08
+      press_margin: null
+      press_margin_safety: 1.2
+      transport_law: progress
+      transport_reference_speed: 0.055
+      transport_kp: 2.4
+      transport_ki: 3.0
+      transport_effort_max: 0.3
+      transport_deadband: 0.05
+      brake_gain: 0.3
+      convoy_gain: 1.0
+      convoy_max: 0.25
+      cross_track_gain: 10.0
+      cross_track_damping: 12.0
+      cross_track_max_deg: 45.0
+      cross_track_deadband: 0.02
+      cross_track_reference: 0.08
+      separation_band: 0.06
+      kp_separate: 0.0
+      push_share_floor: 0.15
+      phase_informed_fraction: 0.55
+      phase_map_coverage_min: 0.7
+      contact_dwell: 20
+      brake_fraction: 0.65
+    transport:
+      engine: penalty
+      stiffness: 500.0
+      damping: 12.0
+      friction: 0.6
+      tangential_stiffness: 60.0
+      ground_friction: 0.6
+      gravity: 9.81
+      substeps: 4
+    render:
+      map_agent: agent_00
+    evaluation:
+      contact_radius: 0.42
+      j_min: 0.15
+      efficiency_min: 0.7
+      displacement_gate: 0.1
+    g500:
+      detect_by: null
+      contact_ready_by: null
+      transport_by: null
+      reach_by: null
+      efficiency_min: 0.8
+      direction_error_max_deg: 20.0
+      cross_track_max: 0.15
+      coverage_min: 0.7
+      progress_max_ratio: 1.4
+      arrival_tolerance: 0.12
+      hold_speed_max: 0.02
+      yaw_max_deg: 15.0
+- case_id: test_rectangle_near_910076_local_spacing
+  split: test
+  gate: 6
+  shape: rectangle
+  seed: 910076
+  variant: local_spacing
+  frames: 3000
+  stratum: near_scale1.2_ratio0.8
+  config:
+    paper: true
+    dt: 0.05
+    domain:
+      xmin: 0.0
+      xmax: 8.0
+      ymin: 0.0
+      ymax: 8.0
+    agents:
+      count: 16
+      layout: scatter
+      center:
+      - 4.0
+      - 4.0
+      radius_min: 1.5
+      radius_max: 2.3
+      min_separation: 0.34
+    cargoes:
+    - id: cargo_0
+      shape: rectangle
+      center:
+      - 4.0
+      - 4.0
+      width: 1.92
+      height: 1.44
+      surface_density: 2.0
+      movable: true
+    task:
+      mode: random_constrained
+      distance_min: 1.9199999999999997
+      distance_max: 1.9199999999999997
+      wall_margin: 0.35
+      tolerance: 0.12
+      angle_min_deg: 0.0
+      angle_max_deg: 360.0
+    controller:
+      task_mode: transport
+      sensor_range: 1.2
+      ray_count: 72
+      range_noise_std: 0.01
+      pca_neighbors: 5
+      residual_tolerance: 0.03
+      min_confidence: 0.15
+      comm_range: 1.6
+      voxel_size: 0.06
+      age_decay: 0.3
+      max_voxels_per_object: 320
+      motion_compensation: true
+      registration_gate: 0.12
+      registration_normal_cosine: 0.5
+      max_object_speed: 0.25
+      object_velocity_filter: 0.35
+      density_mode: offset
+      cage_offset: 0.105
+      lead_offset: 0.26
+      lead_threshold: 0.25
+      sigma: 0.2
+      base_density: 0.001
+      gap_gain: 0.6
+      gap_radius: 0.35
+      local_radius: 0.8
+      grid_resolution: 20
+      approach_mass_ratio: 3.0
+      redeploy_gap_ratio: 0.15
+      robot_radius: 0.13
+      delta_max: 0.065
+      d_min: 0.28
+      gamma_agent: 6.0
+      gamma_obj: 8.0
+      rho: 0.02
+      max_speed: 0.35
+      backend: qp
+      object_row_range: 0.6
+      object_row_window: 0.28
+      max_object_rows: 8
+      kp_explore: 0.25
+      kp_cage: 0.9
+      push_side_threshold: 0.35
+      min_push_agents: 4
+      contact_band_tolerance: 0.08
+      press_margin: null
+      press_margin_safety: 1.2
+      transport_law: progress
+      transport_reference_speed: 0.055
+      transport_kp: 2.4
+      transport_ki: 3.0
+      transport_effort_max: 0.3
+      transport_deadband: 0.05
+      brake_gain: 0.3
+      convoy_gain: 1.0
+      convoy_max: 0.25
+      cross_track_gain: 10.0
+      cross_track_damping: 12.0
+      cross_track_max_deg: 45.0
+      cross_track_deadband: 0.02
+      cross_track_reference: 0.08
+      separation_band: 0.06
+      kp_separate: 0.0
+      push_share_floor: 0.15
+      phase_informed_fraction: 0.55
+      phase_map_coverage_min: 0.7
+      contact_dwell: 20
+      brake_fraction: 0.65
+    transport:
+      engine: penalty
+      stiffness: 500.0
+      damping: 12.0
+      friction: 0.6
+      tangential_stiffness: 60.0
+      ground_friction: 0.6
+      gravity: 9.81
+      substeps: 4
+    render:
+      map_agent: agent_00
+    evaluation:
+      contact_radius: 0.42
+      j_min: 0.15
+      efficiency_min: 0.7
+      displacement_gate: 0.1
+    g500:
+      detect_by: null
+      contact_ready_by: null
+      transport_by: null
+      reach_by: null
+      efficiency_min: 0.8
+      direction_error_max_deg: 20.0
+      cross_track_max: 0.15
+      coverage_min: 0.7
+      progress_max_ratio: 1.4
+      arrival_tolerance: 0.12
+      hold_speed_max: 0.02
+      yaw_max_deg: 15.0
+- case_id: test_rectangle_search_910077_boundary_cvt
+  split: test
+  gate: 6
+  shape: rectangle
+  seed: 910077
+  variant: boundary_cvt
+  frames: 3000
+  stratum: search_scale0.8_ratio0.4
+  config:
+    paper: true
+    dt: 0.05
+    domain:
+      xmin: 0.0
+      xmax: 8.0
+      ymin: 0.0
+      ymax: 8.0
+    agents:
+      count: 16
+      layout: grid
+      center:
+      - 4.0
+      - 0.55
+      spacing: 0.44
+      jitter: 0.0
+    cargoes:
+    - id: cargo_0
+      shape: rectangle
+      center:
+      - 4.0
+      - 4.0
+      width: 1.2800000000000002
+      height: 0.96
+      surface_density: 2.0
+      movable: true
+    task:
+      mode: random_constrained
+      distance_min: 0.6400000000000003
+      distance_max: 0.6400000000000003
+      wall_margin: 0.35
+      tolerance: 0.12
+      angle_min_deg: 0.0
+      angle_max_deg: 360.0
+    controller:
+      task_mode: transport
+      sensor_range: 1.2
+      ray_count: 72
+      range_noise_std: 0.01
+      pca_neighbors: 5
+      residual_tolerance: 0.03
+      min_confidence: 0.15
+      comm_range: 1.6
+      voxel_size: 0.06
+      age_decay: 0.3
+      max_voxels_per_object: 320
+      motion_compensation: true
+      registration_gate: 0.12
+      registration_normal_cosine: 0.5
+      max_object_speed: 0.25
+      object_velocity_filter: 0.35
+      density_mode: offset
+      cage_offset: 0.105
+      lead_offset: 0.26
+      lead_threshold: 0.25
+      sigma: 0.2
+      base_density: 0.001
+      gap_gain: 0.6
+      gap_radius: 0.35
+      local_radius: 0.8
+      grid_resolution: 20
+      approach_mass_ratio: 3.0
+      redeploy_gap_ratio: 0.15
+      robot_radius: 0.13
+      delta_max: 0.065
+      d_min: 0.28
+      gamma_agent: 6.0
+      gamma_obj: 8.0
+      rho: 0.02
+      max_speed: 0.35
+      backend: qp
+      object_row_range: 0.6
+      object_row_window: 0.28
+      max_object_rows: 8
+      kp_explore: 0.25
+      kp_cage: 0.9
+      push_side_threshold: 0.35
+      min_push_agents: 4
+      contact_band_tolerance: 0.08
+      press_margin: null
+      press_margin_safety: 1.2
+      transport_law: progress
+      transport_reference_speed: 0.055
+      transport_kp: 2.4
+      transport_ki: 3.0
+      transport_effort_max: 0.3
+      transport_deadband: 0.05
+      brake_gain: 0.3
+      convoy_gain: 1.0
+      convoy_max: 0.25
+      cross_track_gain: 10.0
+      cross_track_damping: 12.0
+      cross_track_max_deg: 45.0
+      cross_track_deadband: 0.02
+      cross_track_reference: 0.08
+      separation_band: 0.06
+      kp_separate: 0.0
+      push_share_floor: 0.15
+      phase_informed_fraction: 0.55
+      phase_map_coverage_min: 0.7
+      contact_dwell: 20
+      brake_fraction: 0.65
+    transport:
+      engine: penalty
+      stiffness: 500.0
+      damping: 12.0
+      friction: 0.6
+      tangential_stiffness: 60.0
+      ground_friction: 0.6
+      gravity: 9.81
+      substeps: 4
+    render:
+      map_agent: agent_00
+    evaluation:
+      contact_radius: 0.42
+      j_min: 0.15
+      efficiency_min: 0.7
+      displacement_gate: 0.1
+    g500:
+      detect_by: null
+      contact_ready_by: null
+      transport_by: null
+      reach_by: null
+      efficiency_min: 0.8
+      direction_error_max_deg: 20.0
+      cross_track_max: 0.15
+      coverage_min: 0.7
+      progress_max_ratio: 1.4
+      arrival_tolerance: 0.12
+      hold_speed_max: 0.02
+      yaw_max_deg: 15.0
+    require_initial_ignorance: true
+- case_id: test_rectangle_search_910077_nearest_observed_target
+  split: test
+  gate: 6
+  shape: rectangle
+  seed: 910077
+  variant: nearest_observed_target
+  frames: 3000
+  stratum: search_scale0.8_ratio0.4
+  config:
+    paper: true
+    dt: 0.05
+    domain:
+      xmin: 0.0
+      xmax: 8.0
+      ymin: 0.0
+      ymax: 8.0
+    agents:
+      count: 16
+      layout: grid
+      center:
+      - 4.0
+      - 0.55
+      spacing: 0.44
+      jitter: 0.0
+    cargoes:
+    - id: cargo_0
+      shape: rectangle
+      center:
+      - 4.0
+      - 4.0
+      width: 1.2800000000000002
+      height: 0.96
+      surface_density: 2.0
+      movable: true
+    task:
+      mode: random_constrained
+      distance_min: 0.6400000000000003
+      distance_max: 0.6400000000000003
+      wall_margin: 0.35
+      tolerance: 0.12
+      angle_min_deg: 0.0
+      angle_max_deg: 360.0
+    controller:
+      task_mode: transport
+      sensor_range: 1.2
+      ray_count: 72
+      range_noise_std: 0.01
+      pca_neighbors: 5
+      residual_tolerance: 0.03
+      min_confidence: 0.15
+      comm_range: 1.6
+      voxel_size: 0.06
+      age_decay: 0.3
+      max_voxels_per_object: 320
+      motion_compensation: true
+      registration_gate: 0.12
+      registration_normal_cosine: 0.5
+      max_object_speed: 0.25
+      object_velocity_filter: 0.35
+      density_mode: offset
+      cage_offset: 0.105
+      lead_offset: 0.26
+      lead_threshold: 0.25
+      sigma: 0.2
+      base_density: 0.001
+      gap_gain: 0.6
+      gap_radius: 0.35
+      local_radius: 0.8
+      grid_resolution: 20
+      approach_mass_ratio: 3.0
+      redeploy_gap_ratio: 0.15
+      robot_radius: 0.13
+      delta_max: 0.065
+      d_min: 0.28
+      gamma_agent: 6.0
+      gamma_obj: 8.0
+      rho: 0.02
+      max_speed: 0.35
+      backend: qp
+      object_row_range: 0.6
+      object_row_window: 0.28
+      max_object_rows: 8
+      kp_explore: 0.25
+      kp_cage: 0.9
+      push_side_threshold: 0.35
+      min_push_agents: 4
+      contact_band_tolerance: 0.08
+      press_margin: null
+      press_margin_safety: 1.2
+      transport_law: progress
+      transport_reference_speed: 0.055
+      transport_kp: 2.4
+      transport_ki: 3.0
+      transport_effort_max: 0.3
+      transport_deadband: 0.05
+      brake_gain: 0.3
+      convoy_gain: 1.0
+      convoy_max: 0.25
+      cross_track_gain: 10.0
+      cross_track_damping: 12.0
+      cross_track_max_deg: 45.0
+      cross_track_deadband: 0.02
+      cross_track_reference: 0.08
+      separation_band: 0.06
+      kp_separate: 0.0
+      push_share_floor: 0.15
+      phase_informed_fraction: 0.55
+      phase_map_coverage_min: 0.7
+      contact_dwell: 20
+      brake_fraction: 0.65
+    transport:
+      engine: penalty
+      stiffness: 500.0
+      damping: 12.0
+      friction: 0.6
+      tangential_stiffness: 60.0
+      ground_friction: 0.6
+      gravity: 9.81
+      substeps: 4
+    render:
+      map_agent: agent_00
+    evaluation:
+      contact_radius: 0.42
+      j_min: 0.15
+      efficiency_min: 0.7
+      displacement_gate: 0.1
+    g500:
+      detect_by: null
+      contact_ready_by: null
+      transport_by: null
+      reach_by: null
+      efficiency_min: 0.8
+      direction_error_max_deg: 20.0
+      cross_track_max: 0.15
+      coverage_min: 0.7
+      progress_max_ratio: 1.4
+      arrival_tolerance: 0.12
+      hold_speed_max: 0.02
+      yaw_max_deg: 15.0
+    require_initial_ignorance: true
+- case_id: test_rectangle_search_910077_local_spacing
+  split: test
+  gate: 6
+  shape: rectangle
+  seed: 910077
+  variant: local_spacing
+  frames: 3000
+  stratum: search_scale0.8_ratio0.4
+  config:
+    paper: true
+    dt: 0.05
+    domain:
+      xmin: 0.0
+      xmax: 8.0
+      ymin: 0.0
+      ymax: 8.0
+    agents:
+      count: 16
+      layout: grid
+      center:
+      - 4.0
+      - 0.55
+      spacing: 0.44
+      jitter: 0.0
+    cargoes:
+    - id: cargo_0
+      shape: rectangle
+      center:
+      - 4.0
+      - 4.0
+      width: 1.2800000000000002
+      height: 0.96
+      surface_density: 2.0
+      movable: true
+    task:
+      mode: random_constrained
+      distance_min: 0.6400000000000003
+      distance_max: 0.6400000000000003
+      wall_margin: 0.35
+      tolerance: 0.12
+      angle_min_deg: 0.0
+      angle_max_deg: 360.0
+    controller:
+      task_mode: transport
+      sensor_range: 1.2
+      ray_count: 72
+      range_noise_std: 0.01
+      pca_neighbors: 5
+      residual_tolerance: 0.03
+      min_confidence: 0.15
+      comm_range: 1.6
+      voxel_size: 0.06
+      age_decay: 0.3
+      max_voxels_per_object: 320
+      motion_compensation: true
+      registration_gate: 0.12
+      registration_normal_cosine: 0.5
+      max_object_speed: 0.25
+      object_velocity_filter: 0.35
+      density_mode: offset
+      cage_offset: 0.105
+      lead_offset: 0.26
+      lead_threshold: 0.25
+      sigma: 0.2
+      base_density: 0.001
+      gap_gain: 0.6
+      gap_radius: 0.35
+      local_radius: 0.8
+      grid_resolution: 20
+      approach_mass_ratio: 3.0
+      redeploy_gap_ratio: 0.15
+      robot_radius: 0.13
+      delta_max: 0.065
+      d_min: 0.28
+      gamma_agent: 6.0
+      gamma_obj: 8.0
+      rho: 0.02
+      max_speed: 0.35
+      backend: qp
+      object_row_range: 0.6
+      object_row_window: 0.28
+      max_object_rows: 8
+      kp_explore: 0.25
+      kp_cage: 0.9
+      push_side_threshold: 0.35
+      min_push_agents: 4
+      contact_band_tolerance: 0.08
+      press_margin: null
+      press_margin_safety: 1.2
+      transport_law: progress
+      transport_reference_speed: 0.055
+      transport_kp: 2.4
+      transport_ki: 3.0
+      transport_effort_max: 0.3
+      transport_deadband: 0.05
+      brake_gain: 0.3
+      convoy_gain: 1.0
+      convoy_max: 0.25
+      cross_track_gain: 10.0
+      cross_track_damping: 12.0
+      cross_track_max_deg: 45.0
+      cross_track_deadband: 0.02
+      cross_track_reference: 0.08
+      separation_band: 0.06
+      kp_separate: 0.0
+      push_share_floor: 0.15
+      phase_informed_fraction: 0.55
+      phase_map_coverage_min: 0.7
+      contact_dwell: 20
+      brake_fraction: 0.65
+    transport:
+      engine: penalty
+      stiffness: 500.0
+      damping: 12.0
+      friction: 0.6
+      tangential_stiffness: 60.0
+      ground_friction: 0.6
+      gravity: 9.81
+      substeps: 4
+    render:
+      map_agent: agent_00
+    evaluation:
+      contact_radius: 0.42
+      j_min: 0.15
+      efficiency_min: 0.7
+      displacement_gate: 0.1
+    g500:
+      detect_by: null
+      contact_ready_by: null
+      transport_by: null
+      reach_by: null
+      efficiency_min: 0.8
+      direction_error_max_deg: 20.0
+      cross_track_max: 0.15
+      coverage_min: 0.7
+      progress_max_ratio: 1.4
+      arrival_tolerance: 0.12
+      hold_speed_max: 0.02
+      yaw_max_deg: 15.0
+    require_initial_ignorance: true
+- case_id: test_rectangle_search_910078_boundary_cvt
+  split: test
+  gate: 6
+  shape: rectangle
+  seed: 910078
+  variant: boundary_cvt
+  frames: 3000
+  stratum: search_scale1.2_ratio0.8
+  config:
+    paper: true
+    dt: 0.05
+    domain:
+      xmin: 0.0
+      xmax: 8.0
+      ymin: 0.0
+      ymax: 8.0
+    agents:
+      count: 16
+      layout: grid
+      center:
+      - 4.0
+      - 0.55
+      spacing: 0.44
+      jitter: 0.0
+    cargoes:
+    - id: cargo_0
+      shape: rectangle
+      center:
+      - 4.0
+      - 4.0
+      width: 1.92
+      height: 1.44
+      surface_density: 2.0
+      movable: true
+    task:
+      mode: random_constrained
+      distance_min: 1.9199999999999997
+      distance_max: 1.9199999999999997
+      wall_margin: 0.35
+      tolerance: 0.12
+      angle_min_deg: 0.0
+      angle_max_deg: 360.0
+    controller:
+      task_mode: transport
+      sensor_range: 1.2
+      ray_count: 72
+      range_noise_std: 0.01
+      pca_neighbors: 5
+      residual_tolerance: 0.03
+      min_confidence: 0.15
+      comm_range: 1.6
+      voxel_size: 0.06
+      age_decay: 0.3
+      max_voxels_per_object: 320
+      motion_compensation: true
+      registration_gate: 0.12
+      registration_normal_cosine: 0.5
+      max_object_speed: 0.25
+      object_velocity_filter: 0.35
+      density_mode: offset
+      cage_offset: 0.105
+      lead_offset: 0.26
+      lead_threshold: 0.25
+      sigma: 0.2
+      base_density: 0.001
+      gap_gain: 0.6
+      gap_radius: 0.35
+      local_radius: 0.8
+      grid_resolution: 20
+      approach_mass_ratio: 3.0
+      redeploy_gap_ratio: 0.15
+      robot_radius: 0.13
+      delta_max: 0.065
+      d_min: 0.28
+      gamma_agent: 6.0
+      gamma_obj: 8.0
+      rho: 0.02
+      max_speed: 0.35
+      backend: qp
+      object_row_range: 0.6
+      object_row_window: 0.28
+      max_object_rows: 8
+      kp_explore: 0.25
+      kp_cage: 0.9
+      push_side_threshold: 0.35
+      min_push_agents: 4
+      contact_band_tolerance: 0.08
+      press_margin: null
+      press_margin_safety: 1.2
+      transport_law: progress
+      transport_reference_speed: 0.055
+      transport_kp: 2.4
+      transport_ki: 3.0
+      transport_effort_max: 0.3
+      transport_deadband: 0.05
+      brake_gain: 0.3
+      convoy_gain: 1.0
+      convoy_max: 0.25
+      cross_track_gain: 10.0
+      cross_track_damping: 12.0
+      cross_track_max_deg: 45.0
+      cross_track_deadband: 0.02
+      cross_track_reference: 0.08
+      separation_band: 0.06
+      kp_separate: 0.0
+      push_share_floor: 0.15
+      phase_informed_fraction: 0.55
+      phase_map_coverage_min: 0.7
+      contact_dwell: 20
+      brake_fraction: 0.65
+    transport:
+      engine: penalty
+      stiffness: 500.0
+      damping: 12.0
+      friction: 0.6
+      tangential_stiffness: 60.0
+      ground_friction: 0.6
+      gravity: 9.81
+      substeps: 4
+    render:
+      map_agent: agent_00
+    evaluation:
+      contact_radius: 0.42
+      j_min: 0.15
+      efficiency_min: 0.7
+      displacement_gate: 0.1
+    g500:
+      detect_by: null
+      contact_ready_by: null
+      transport_by: null
+      reach_by: null
+      efficiency_min: 0.8
+      direction_error_max_deg: 20.0
+      cross_track_max: 0.15
+      coverage_min: 0.7
+      progress_max_ratio: 1.4
+      arrival_tolerance: 0.12
+      hold_speed_max: 0.02
+      yaw_max_deg: 15.0
+    require_initial_ignorance: true
+- case_id: test_rectangle_search_910078_nearest_observed_target
+  split: test
+  gate: 6
+  shape: rectangle
+  seed: 910078
+  variant: nearest_observed_target
+  frames: 3000
+  stratum: search_scale1.2_ratio0.8
+  config:
+    paper: true
+    dt: 0.05
+    domain:
+      xmin: 0.0
+      xmax: 8.0
+      ymin: 0.0
+      ymax: 8.0
+    agents:
+      count: 16
+      layout: grid
+      center:
+      - 4.0
+      - 0.55
+      spacing: 0.44
+      jitter: 0.0
+    cargoes:
+    - id: cargo_0
+      shape: rectangle
+      center:
+      - 4.0
+      - 4.0
+      width: 1.92
+      height: 1.44
+      surface_density: 2.0
+      movable: true
+    task:
+      mode: random_constrained
+      distance_min: 1.9199999999999997
+      distance_max: 1.9199999999999997
+      wall_margin: 0.35
+      tolerance: 0.12
+      angle_min_deg: 0.0
+      angle_max_deg: 360.0
+    controller:
+      task_mode: transport
+      sensor_range: 1.2
+      ray_count: 72
+      range_noise_std: 0.01
+      pca_neighbors: 5
+      residual_tolerance: 0.03
+      min_confidence: 0.15
+      comm_range: 1.6
+      voxel_size: 0.06
+      age_decay: 0.3
+      max_voxels_per_object: 320
+      motion_compensation: true
+      registration_gate: 0.12
+      registration_normal_cosine: 0.5
+      max_object_speed: 0.25
+      object_velocity_filter: 0.35
+      density_mode: offset
+      cage_offset: 0.105
+      lead_offset: 0.26
+      lead_threshold: 0.25
+      sigma: 0.2
+      base_density: 0.001
+      gap_gain: 0.6
+      gap_radius: 0.35
+      local_radius: 0.8
+      grid_resolution: 20
+      approach_mass_ratio: 3.0
+      redeploy_gap_ratio: 0.15
+      robot_radius: 0.13
+      delta_max: 0.065
+      d_min: 0.28
+      gamma_agent: 6.0
+      gamma_obj: 8.0
+      rho: 0.02
+      max_speed: 0.35
+      backend: qp
+      object_row_range: 0.6
+      object_row_window: 0.28
+      max_object_rows: 8
+      kp_explore: 0.25
+      kp_cage: 0.9
+      push_side_threshold: 0.35
+      min_push_agents: 4
+      contact_band_tolerance: 0.08
+      press_margin: null
+      press_margin_safety: 1.2
+      transport_law: progress
+      transport_reference_speed: 0.055
+      transport_kp: 2.4
+      transport_ki: 3.0
+      transport_effort_max: 0.3
+      transport_deadband: 0.05
+      brake_gain: 0.3
+      convoy_gain: 1.0
+      convoy_max: 0.25
+      cross_track_gain: 10.0
+      cross_track_damping: 12.0
+      cross_track_max_deg: 45.0
+      cross_track_deadband: 0.02
+      cross_track_reference: 0.08
+      separation_band: 0.06
+      kp_separate: 0.0
+      push_share_floor: 0.15
+      phase_informed_fraction: 0.55
+      phase_map_coverage_min: 0.7
+      contact_dwell: 20
+      brake_fraction: 0.65
+    transport:
+      engine: penalty
+      stiffness: 500.0
+      damping: 12.0
+      friction: 0.6
+      tangential_stiffness: 60.0
+      ground_friction: 0.6
+      gravity: 9.81
+      substeps: 4
+    render:
+      map_agent: agent_00
+    evaluation:
+      contact_radius: 0.42
+      j_min: 0.15
+      efficiency_min: 0.7
+      displacement_gate: 0.1
+    g500:
+      detect_by: null
+      contact_ready_by: null
+      transport_by: null
+      reach_by: null
+      efficiency_min: 0.8
+      direction_error_max_deg: 20.0
+      cross_track_max: 0.15
+      coverage_min: 0.7
+      progress_max_ratio: 1.4
+      arrival_tolerance: 0.12
+      hold_speed_max: 0.02
+      yaw_max_deg: 15.0
+    require_initial_ignorance: true
+- case_id: test_rectangle_search_910078_local_spacing
+  split: test
+  gate: 6
+  shape: rectangle
+  seed: 910078
+  variant: local_spacing
+  frames: 3000
+  stratum: search_scale1.2_ratio0.8
+  config:
+    paper: true
+    dt: 0.05
+    domain:
+      xmin: 0.0
+      xmax: 8.0
+      ymin: 0.0
+      ymax: 8.0
+    agents:
+      count: 16
+      layout: grid
+      center:
+      - 4.0
+      - 0.55
+      spacing: 0.44
+      jitter: 0.0
+    cargoes:
+    - id: cargo_0
+      shape: rectangle
+      center:
+      - 4.0
+      - 4.0
+      width: 1.92
+      height: 1.44
+      surface_density: 2.0
+      movable: true
+    task:
+      mode: random_constrained
+      distance_min: 1.9199999999999997
+      distance_max: 1.9199999999999997
+      wall_margin: 0.35
+      tolerance: 0.12
+      angle_min_deg: 0.0
+      angle_max_deg: 360.0
+    controller:
+      task_mode: transport
+      sensor_range: 1.2
+      ray_count: 72
+      range_noise_std: 0.01
+      pca_neighbors: 5
+      residual_tolerance: 0.03
+      min_confidence: 0.15
+      comm_range: 1.6
+      voxel_size: 0.06
+      age_decay: 0.3
+      max_voxels_per_object: 320
+      motion_compensation: true
+      registration_gate: 0.12
+      registration_normal_cosine: 0.5
+      max_object_speed: 0.25
+      object_velocity_filter: 0.35
+      density_mode: offset
+      cage_offset: 0.105
+      lead_offset: 0.26
+      lead_threshold: 0.25
+      sigma: 0.2
+      base_density: 0.001
+      gap_gain: 0.6
+      gap_radius: 0.35
+      local_radius: 0.8
+      grid_resolution: 20
+      approach_mass_ratio: 3.0
+      redeploy_gap_ratio: 0.15
+      robot_radius: 0.13
+      delta_max: 0.065
+      d_min: 0.28
+      gamma_agent: 6.0
+      gamma_obj: 8.0
+      rho: 0.02
+      max_speed: 0.35
+      backend: qp
+      object_row_range: 0.6
+      object_row_window: 0.28
+      max_object_rows: 8
+      kp_explore: 0.25
+      kp_cage: 0.9
+      push_side_threshold: 0.35
+      min_push_agents: 4
+      contact_band_tolerance: 0.08
+      press_margin: null
+      press_margin_safety: 1.2
+      transport_law: progress
+      transport_reference_speed: 0.055
+      transport_kp: 2.4
+      transport_ki: 3.0
+      transport_effort_max: 0.3
+      transport_deadband: 0.05
+      brake_gain: 0.3
+      convoy_gain: 1.0
+      convoy_max: 0.25
+      cross_track_gain: 10.0
+      cross_track_damping: 12.0
+      cross_track_max_deg: 45.0
+      cross_track_deadband: 0.02
+      cross_track_reference: 0.08
+      separation_band: 0.06
+      kp_separate: 0.0
+      push_share_floor: 0.15
+      phase_informed_fraction: 0.55
+      phase_map_coverage_min: 0.7
+      contact_dwell: 20
+      brake_fraction: 0.65
+    transport:
+      engine: penalty
+      stiffness: 500.0
+      damping: 12.0
+      friction: 0.6
+      tangential_stiffness: 60.0
+      ground_friction: 0.6
+      gravity: 9.81
+      substeps: 4
+    render:
+      map_agent: agent_00
+    evaluation:
+      contact_radius: 0.42
+      j_min: 0.15
+      efficiency_min: 0.7
+      displacement_gate: 0.1
+    g500:
+      detect_by: null
+      contact_ready_by: null
+      transport_by: null
+      reach_by: null
+      efficiency_min: 0.8
+      direction_error_max_deg: 20.0
+      cross_track_max: 0.15
+      coverage_min: 0.7
+      progress_max_ratio: 1.4
+      arrival_tolerance: 0.12
+      hold_speed_max: 0.02
+      yaw_max_deg: 15.0
+    require_initial_ignorance: true
+- case_id: test_c_shape_near_910079_boundary_cvt
+  split: test
+  gate: 6
+  shape: c_shape
+  seed: 910079
+  variant: boundary_cvt
+  frames: 3000
+  stratum: near_scale0.8_ratio0.4
+  config:
+    paper: true
+    dt: 0.05
+    domain:
+      xmin: 0.0
+      xmax: 8.0
+      ymin: 0.0
+      ymax: 8.0
+    agents:
+      count: 16
+      layout: scatter
+      center:
+      - 4.0
+      - 4.0
+      radius_min: 1.5
+      radius_max: 2.3
+      min_separation: 0.34
+    cargoes:
+    - id: cargo_0
+      shape: polygon
+      vertices:
+      - - 3.3600000000000003
+        - 3.52
+      - - 4.64
+        - 3.52
+      - - 4.64
+        - 4.4799999999999995
+      - - 4.279999999999999
+        - 4.4799999999999995
+      - - 4.279999999999999
+        - 3.84
+      - - 3.7199999999999998
+        - 3.84
+      - - 3.7199999999999998
+        - 4.4799999999999995
+      - - 3.3600000000000003
+        - 4.4799999999999995
+      surface_density: 2.0
+      movable: true
+    task:
+      mode: random_constrained
+      distance_min: 0.6399999999999997
+      distance_max: 0.6399999999999997
+      wall_margin: 0.35
+      tolerance: 0.12
+      angle_min_deg: 0.0
+      angle_max_deg: 360.0
+    controller:
+      task_mode: transport
+      sensor_range: 1.2
+      ray_count: 72
+      range_noise_std: 0.01
+      pca_neighbors: 5
+      residual_tolerance: 0.03
+      min_confidence: 0.15
+      comm_range: 1.6
+      voxel_size: 0.06
+      age_decay: 0.3
+      max_voxels_per_object: 320
+      motion_compensation: true
+      registration_gate: 0.12
+      registration_normal_cosine: 0.5
+      max_object_speed: 0.25
+      object_velocity_filter: 0.35
+      density_mode: offset
+      cage_offset: 0.105
+      lead_offset: 0.26
+      lead_threshold: 0.25
+      sigma: 0.2
+      base_density: 0.001
+      gap_gain: 0.6
+      gap_radius: 0.35
+      local_radius: 0.8
+      grid_resolution: 20
+      approach_mass_ratio: 3.0
+      redeploy_gap_ratio: 0.15
+      robot_radius: 0.13
+      delta_max: 0.065
+      d_min: 0.28
+      gamma_agent: 6.0
+      gamma_obj: 8.0
+      rho: 0.02
+      max_speed: 0.35
+      backend: qp
+      object_row_range: 0.6
+      object_row_window: 0.28
+      max_object_rows: 8
+      kp_explore: 0.25
+      kp_cage: 0.9
+      push_side_threshold: 0.35
+      min_push_agents: 4
+      contact_band_tolerance: 0.08
+      press_margin: null
+      press_margin_safety: 1.2
+      transport_law: progress
+      transport_reference_speed: 0.055
+      transport_kp: 2.4
+      transport_ki: 3.0
+      transport_effort_max: 0.3
+      transport_deadband: 0.05
+      brake_gain: 0.3
+      convoy_gain: 1.0
+      convoy_max: 0.25
+      cross_track_gain: 10.0
+      cross_track_damping: 12.0
+      cross_track_max_deg: 45.0
+      cross_track_deadband: 0.02
+      cross_track_reference: 0.08
+      separation_band: 0.06
+      kp_separate: 0.0
+      push_share_floor: 0.15
+      phase_informed_fraction: 0.55
+      phase_map_coverage_min: 0.7
+      contact_dwell: 20
+      brake_fraction: 0.65
+    transport:
+      engine: penalty
+      stiffness: 500.0
+      damping: 12.0
+      friction: 0.6
+      tangential_stiffness: 60.0
+      ground_friction: 0.6
+      gravity: 9.81
+      substeps: 4
+    render:
+      map_agent: agent_00
+    evaluation:
+      contact_radius: 0.42
+      j_min: 0.15
+      efficiency_min: 0.7
+      displacement_gate: 0.1
+    g500:
+      detect_by: null
+      contact_ready_by: null
+      transport_by: null
+      reach_by: null
+      efficiency_min: 0.8
+      direction_error_max_deg: 20.0
+      cross_track_max: 0.15
+      coverage_min: 0.7
+      progress_max_ratio: 1.4
+      arrival_tolerance: 0.12
+      hold_speed_max: 0.02
+      yaw_max_deg: 15.0
+- case_id: test_c_shape_near_910079_nearest_observed_target
+  split: test
+  gate: 6
+  shape: c_shape
+  seed: 910079
+  variant: nearest_observed_target
+  frames: 3000
+  stratum: near_scale0.8_ratio0.4
+  config:
+    paper: true
+    dt: 0.05
+    domain:
+      xmin: 0.0
+      xmax: 8.0
+      ymin: 0.0
+      ymax: 8.0
+    agents:
+      count: 16
+      layout: scatter
+      center:
+      - 4.0
+      - 4.0
+      radius_min: 1.5
+      radius_max: 2.3
+      min_separation: 0.34
+    cargoes:
+    - id: cargo_0
+      shape: polygon
+      vertices:
+      - - 3.3600000000000003
+        - 3.52
+      - - 4.64
+        - 3.52
+      - - 4.64
+        - 4.4799999999999995
+      - - 4.279999999999999
+        - 4.4799999999999995
+      - - 4.279999999999999
+        - 3.84
+      - - 3.7199999999999998
+        - 3.84
+      - - 3.7199999999999998
+        - 4.4799999999999995
+      - - 3.3600000000000003
+        - 4.4799999999999995
+      surface_density: 2.0
+      movable: true
+    task:
+      mode: random_constrained
+      distance_min: 0.6399999999999997
+      distance_max: 0.6399999999999997
+      wall_margin: 0.35
+      tolerance: 0.12
+      angle_min_deg: 0.0
+      angle_max_deg: 360.0
+    controller:
+      task_mode: transport
+      sensor_range: 1.2
+      ray_count: 72
+      range_noise_std: 0.01
+      pca_neighbors: 5
+      residual_tolerance: 0.03
+      min_confidence: 0.15
+      comm_range: 1.6
+      voxel_size: 0.06
+      age_decay: 0.3
+      max_voxels_per_object: 320
+      motion_compensation: true
+      registration_gate: 0.12
+      registration_normal_cosine: 0.5
+      max_object_speed: 0.25
+      object_velocity_filter: 0.35
+      density_mode: offset
+      cage_offset: 0.105
+      lead_offset: 0.26
+      lead_threshold: 0.25
+      sigma: 0.2
+      base_density: 0.001
+      gap_gain: 0.6
+      gap_radius: 0.35
+      local_radius: 0.8
+      grid_resolution: 20
+      approach_mass_ratio: 3.0
+      redeploy_gap_ratio: 0.15
+      robot_radius: 0.13
+      delta_max: 0.065
+      d_min: 0.28
+      gamma_agent: 6.0
+      gamma_obj: 8.0
+      rho: 0.02
+      max_speed: 0.35
+      backend: qp
+      object_row_range: 0.6
+      object_row_window: 0.28
+      max_object_rows: 8
+      kp_explore: 0.25
+      kp_cage: 0.9
+      push_side_threshold: 0.35
+      min_push_agents: 4
+      contact_band_tolerance: 0.08
+      press_margin: null
+      press_margin_safety: 1.2
+      transport_law: progress
+      transport_reference_speed: 0.055
+      transport_kp: 2.4
+      transport_ki: 3.0
+      transport_effort_max: 0.3
+      transport_deadband: 0.05
+      brake_gain: 0.3
+      convoy_gain: 1.0
+      convoy_max: 0.25
+      cross_track_gain: 10.0
+      cross_track_damping: 12.0
+      cross_track_max_deg: 45.0
+      cross_track_deadband: 0.02
+      cross_track_reference: 0.08
+      separation_band: 0.06
+      kp_separate: 0.0
+      push_share_floor: 0.15
+      phase_informed_fraction: 0.55
+      phase_map_coverage_min: 0.7
+      contact_dwell: 20
+      brake_fraction: 0.65
+    transport:
+      engine: penalty
+      stiffness: 500.0
+      damping: 12.0
+      friction: 0.6
+      tangential_stiffness: 60.0
+      ground_friction: 0.6
+      gravity: 9.81
+      substeps: 4
+    render:
+      map_agent: agent_00
+    evaluation:
+      contact_radius: 0.42
+      j_min: 0.15
+      efficiency_min: 0.7
+      displacement_gate: 0.1
+    g500:
+      detect_by: null
+      contact_ready_by: null
+      transport_by: null
+      reach_by: null
+      efficiency_min: 0.8
+      direction_error_max_deg: 20.0
+      cross_track_max: 0.15
+      coverage_min: 0.7
+      progress_max_ratio: 1.4
+      arrival_tolerance: 0.12
+      hold_speed_max: 0.02
+      yaw_max_deg: 15.0
+- case_id: test_c_shape_near_910079_local_spacing
+  split: test
+  gate: 6
+  shape: c_shape
+  seed: 910079
+  variant: local_spacing
+  frames: 3000
+  stratum: near_scale0.8_ratio0.4
+  config:
+    paper: true
+    dt: 0.05
+    domain:
+      xmin: 0.0
+      xmax: 8.0
+      ymin: 0.0
+      ymax: 8.0
+    agents:
+      count: 16
+      layout: scatter
+      center:
+      - 4.0
+      - 4.0
+      radius_min: 1.5
+      radius_max: 2.3
+      min_separation: 0.34
+    cargoes:
+    - id: cargo_0
+      shape: polygon
+      vertices:
+      - - 3.3600000000000003
+        - 3.52
+      - - 4.64
+        - 3.52
+      - - 4.64
+        - 4.4799999999999995
+      - - 4.279999999999999
+        - 4.4799999999999995
+      - - 4.279999999999999
+        - 3.84
+      - - 3.7199999999999998
+        - 3.84
+      - - 3.7199999999999998
+        - 4.4799999999999995
+      - - 3.3600000000000003
+        - 4.4799999999999995
+      surface_density: 2.0
+      movable: true
+    task:
+      mode: random_constrained
+      distance_min: 0.6399999999999997
+      distance_max: 0.6399999999999997
+      wall_margin: 0.35
+      tolerance: 0.12
+      angle_min_deg: 0.0
+      angle_max_deg: 360.0
+    controller:
+      task_mode: transport
+      sensor_range: 1.2
+      ray_count: 72
+      range_noise_std: 0.01
+      pca_neighbors: 5
+      residual_tolerance: 0.03
+      min_confidence: 0.15
+      comm_range: 1.6
+      voxel_size: 0.06
+      age_decay: 0.3
+      max_voxels_per_object: 320
+      motion_compensation: true
+      registration_gate: 0.12
+      registration_normal_cosine: 0.5
+      max_object_speed: 0.25
+      object_velocity_filter: 0.35
+      density_mode: offset
+      cage_offset: 0.105
+      lead_offset: 0.26
+      lead_threshold: 0.25
+      sigma: 0.2
+      base_density: 0.001
+      gap_gain: 0.6
+      gap_radius: 0.35
+      local_radius: 0.8
+      grid_resolution: 20
+      approach_mass_ratio: 3.0
+      redeploy_gap_ratio: 0.15
+      robot_radius: 0.13
+      delta_max: 0.065
+      d_min: 0.28
+      gamma_agent: 6.0
+      gamma_obj: 8.0
+      rho: 0.02
+      max_speed: 0.35
+      backend: qp
+      object_row_range: 0.6
+      object_row_window: 0.28
+      max_object_rows: 8
+      kp_explore: 0.25
+      kp_cage: 0.9
+      push_side_threshold: 0.35
+      min_push_agents: 4
+      contact_band_tolerance: 0.08
+      press_margin: null
+      press_margin_safety: 1.2
+      transport_law: progress
+      transport_reference_speed: 0.055
+      transport_kp: 2.4
+      transport_ki: 3.0
+      transport_effort_max: 0.3
+      transport_deadband: 0.05
+      brake_gain: 0.3
+      convoy_gain: 1.0
+      convoy_max: 0.25
+      cross_track_gain: 10.0
+      cross_track_damping: 12.0
+      cross_track_max_deg: 45.0
+      cross_track_deadband: 0.02
+      cross_track_reference: 0.08
+      separation_band: 0.06
+      kp_separate: 0.0
+      push_share_floor: 0.15
+      phase_informed_fraction: 0.55
+      phase_map_coverage_min: 0.7
+      contact_dwell: 20
+      brake_fraction: 0.65
+    transport:
+      engine: penalty
+      stiffness: 500.0
+      damping: 12.0
+      friction: 0.6
+      tangential_stiffness: 60.0
+      ground_friction: 0.6
+      gravity: 9.81
+      substeps: 4
+    render:
+      map_agent: agent_00
+    evaluation:
+      contact_radius: 0.42
+      j_min: 0.15
+      efficiency_min: 0.7
+      displacement_gate: 0.1
+    g500:
+      detect_by: null
+      contact_ready_by: null
+      transport_by: null
+      reach_by: null
+      efficiency_min: 0.8
+      direction_error_max_deg: 20.0
+      cross_track_max: 0.15
+      coverage_min: 0.7
+      progress_max_ratio: 1.4
+      arrival_tolerance: 0.12
+      hold_speed_max: 0.02
+      yaw_max_deg: 15.0
+- case_id: test_c_shape_near_910080_boundary_cvt
+  split: test
+  gate: 6
+  shape: c_shape
+  seed: 910080
+  variant: boundary_cvt
+  frames: 3000
+  stratum: near_scale1.2_ratio0.8
+  config:
+    paper: true
+    dt: 0.05
+    domain:
+      xmin: 0.0
+      xmax: 8.0
+      ymin: 0.0
+      ymax: 8.0
+    agents:
+      count: 16
+      layout: scatter
+      center:
+      - 4.0
+      - 4.0
+      radius_min: 1.5
+      radius_max: 2.3
+      min_separation: 0.34
+    cargoes:
+    - id: cargo_0
+      shape: polygon
+      vertices:
+      - - 3.04
+        - 3.28
+      - - 4.96
+        - 3.28
+      - - 4.96
+        - 4.72
+      - - 4.42
+        - 4.72
+      - - 4.42
+        - 3.76
+      - - 3.58
+        - 3.76
+      - - 3.58
+        - 4.72
+      - - 3.04
+        - 4.72
+      surface_density: 2.0
+      movable: true
+    task:
+      mode: random_constrained
+      distance_min: 1.92
+      distance_max: 1.92
+      wall_margin: 0.35
+      tolerance: 0.12
+      angle_min_deg: 0.0
+      angle_max_deg: 360.0
+    controller:
+      task_mode: transport
+      sensor_range: 1.2
+      ray_count: 72
+      range_noise_std: 0.01
+      pca_neighbors: 5
+      residual_tolerance: 0.03
+      min_confidence: 0.15
+      comm_range: 1.6
+      voxel_size: 0.06
+      age_decay: 0.3
+      max_voxels_per_object: 320
+      motion_compensation: true
+      registration_gate: 0.12
+      registration_normal_cosine: 0.5
+      max_object_speed: 0.25
+      object_velocity_filter: 0.35
+      density_mode: offset
+      cage_offset: 0.105
+      lead_offset: 0.26
+      lead_threshold: 0.25
+      sigma: 0.2
+      base_density: 0.001
+      gap_gain: 0.6
+      gap_radius: 0.35
+      local_radius: 0.8
+      grid_resolution: 20
+      approach_mass_ratio: 3.0
+      redeploy_gap_ratio: 0.15
+      robot_radius: 0.13
+      delta_max: 0.065
+      d_min: 0.28
+      gamma_agent: 6.0
+      gamma_obj: 8.0
+      rho: 0.02
+      max_speed: 0.35
+      backend: qp
+      object_row_range: 0.6
+      object_row_window: 0.28
+      max_object_rows: 8
+      kp_explore: 0.25
+      kp_cage: 0.9
+      push_side_threshold: 0.35
+      min_push_agents: 4
+      contact_band_tolerance: 0.08
+      press_margin: null
+      press_margin_safety: 1.2
+      transport_law: progress
+      transport_reference_speed: 0.055
+      transport_kp: 2.4
+      transport_ki: 3.0
+      transport_effort_max: 0.3
+      transport_deadband: 0.05
+      brake_gain: 0.3
+      convoy_gain: 1.0
+      convoy_max: 0.25
+      cross_track_gain: 10.0
+      cross_track_damping: 12.0
+      cross_track_max_deg: 45.0
+      cross_track_deadband: 0.02
+      cross_track_reference: 0.08
+      separation_band: 0.06
+      kp_separate: 0.0
+      push_share_floor: 0.15
+      phase_informed_fraction: 0.55
+      phase_map_coverage_min: 0.7
+      contact_dwell: 20
+      brake_fraction: 0.65
+    transport:
+      engine: penalty
+      stiffness: 500.0
+      damping: 12.0
+      friction: 0.6
+      tangential_stiffness: 60.0
+      ground_friction: 0.6
+      gravity: 9.81
+      substeps: 4
+    render:
+      map_agent: agent_00
+    evaluation:
+      contact_radius: 0.42
+      j_min: 0.15
+      efficiency_min: 0.7
+      displacement_gate: 0.1
+    g500:
+      detect_by: null
+      contact_ready_by: null
+      transport_by: null
+      reach_by: null
+      efficiency_min: 0.8
+      direction_error_max_deg: 20.0
+      cross_track_max: 0.15
+      coverage_min: 0.7
+      progress_max_ratio: 1.4
+      arrival_tolerance: 0.12
+      hold_speed_max: 0.02
+      yaw_max_deg: 15.0
+- case_id: test_c_shape_near_910080_nearest_observed_target
+  split: test
+  gate: 6
+  shape: c_shape
+  seed: 910080
+  variant: nearest_observed_target
+  frames: 3000
+  stratum: near_scale1.2_ratio0.8
+  config:
+    paper: true
+    dt: 0.05
+    domain:
+      xmin: 0.0
+      xmax: 8.0
+      ymin: 0.0
+      ymax: 8.0
+    agents:
+      count: 16
+      layout: scatter
+      center:
+      - 4.0
+      - 4.0
+      radius_min: 1.5
+      radius_max: 2.3
+      min_separation: 0.34
+    cargoes:
+    - id: cargo_0
+      shape: polygon
+      vertices:
+      - - 3.04
+        - 3.28
+      - - 4.96
+        - 3.28
+      - - 4.96
+        - 4.72
+      - - 4.42
+        - 4.72
+      - - 4.42
+        - 3.76
+      - - 3.58
+        - 3.76
+      - - 3.58
+        - 4.72
+      - - 3.04
+        - 4.72
+      surface_density: 2.0
+      movable: true
+    task:
+      mode: random_constrained
+      distance_min: 1.92
+      distance_max: 1.92
+      wall_margin: 0.35
+      tolerance: 0.12
+      angle_min_deg: 0.0
+      angle_max_deg: 360.0
+    controller:
+      task_mode: transport
+      sensor_range: 1.2
+      ray_count: 72
+      range_noise_std: 0.01
+      pca_neighbors: 5
+      residual_tolerance: 0.03
+      min_confidence: 0.15
+      comm_range: 1.6
+      voxel_size: 0.06
+      age_decay: 0.3
+      max_voxels_per_object: 320
+      motion_compensation: true
+      registration_gate: 0.12
+      registration_normal_cosine: 0.5
+      max_object_speed: 0.25
+      object_velocity_filter: 0.35
+      density_mode: offset
+      cage_offset: 0.105
+      lead_offset: 0.26
+      lead_threshold: 0.25
+      sigma: 0.2
+      base_density: 0.001
+      gap_gain: 0.6
+      gap_radius: 0.35
+      local_radius: 0.8
+      grid_resolution: 20
+      approach_mass_ratio: 3.0
+      redeploy_gap_ratio: 0.15
+      robot_radius: 0.13
+      delta_max: 0.065
+      d_min: 0.28
+      gamma_agent: 6.0
+      gamma_obj: 8.0
+      rho: 0.02
+      max_speed: 0.35
+      backend: qp
+      object_row_range: 0.6
+      object_row_window: 0.28
+      max_object_rows: 8
+      kp_explore: 0.25
+      kp_cage: 0.9
+      push_side_threshold: 0.35
+      min_push_agents: 4
+      contact_band_tolerance: 0.08
+      press_margin: null
+      press_margin_safety: 1.2
+      transport_law: progress
+      transport_reference_speed: 0.055
+      transport_kp: 2.4
+      transport_ki: 3.0
+      transport_effort_max: 0.3
+      transport_deadband: 0.05
+      brake_gain: 0.3
+      convoy_gain: 1.0
+      convoy_max: 0.25
+      cross_track_gain: 10.0
+      cross_track_damping: 12.0
+      cross_track_max_deg: 45.0
+      cross_track_deadband: 0.02
+      cross_track_reference: 0.08
+      separation_band: 0.06
+      kp_separate: 0.0
+      push_share_floor: 0.15
+      phase_informed_fraction: 0.55
+      phase_map_coverage_min: 0.7
+      contact_dwell: 20
+      brake_fraction: 0.65
+    transport:
+      engine: penalty
+      stiffness: 500.0
+      damping: 12.0
+      friction: 0.6
+      tangential_stiffness: 60.0
+      ground_friction: 0.6
+      gravity: 9.81
+      substeps: 4
+    render:
+      map_agent: agent_00
+    evaluation:
+      contact_radius: 0.42
+      j_min: 0.15
+      efficiency_min: 0.7
+      displacement_gate: 0.1
+    g500:
+      detect_by: null
+      contact_ready_by: null
+      transport_by: null
+      reach_by: null
+      efficiency_min: 0.8
+      direction_error_max_deg: 20.0
+      cross_track_max: 0.15
+      coverage_min: 0.7
+      progress_max_ratio: 1.4
+      arrival_tolerance: 0.12
+      hold_speed_max: 0.02
+      yaw_max_deg: 15.0
+- case_id: test_c_shape_near_910080_local_spacing
+  split: test
+  gate: 6
+  shape: c_shape
+  seed: 910080
+  variant: local_spacing
+  frames: 3000
+  stratum: near_scale1.2_ratio0.8
+  config:
+    paper: true
+    dt: 0.05
+    domain:
+      xmin: 0.0
+      xmax: 8.0
+      ymin: 0.0
+      ymax: 8.0
+    agents:
+      count: 16
+      layout: scatter
+      center:
+      - 4.0
+      - 4.0
+      radius_min: 1.5
+      radius_max: 2.3
+      min_separation: 0.34
+    cargoes:
+    - id: cargo_0
+      shape: polygon
+      vertices:
+      - - 3.04
+        - 3.28
+      - - 4.96
+        - 3.28
+      - - 4.96
+        - 4.72
+      - - 4.42
+        - 4.72
+      - - 4.42
+        - 3.76
+      - - 3.58
+        - 3.76
+      - - 3.58
+        - 4.72
+      - - 3.04
+        - 4.72
+      surface_density: 2.0
+      movable: true
+    task:
+      mode: random_constrained
+      distance_min: 1.92
+      distance_max: 1.92
+      wall_margin: 0.35
+      tolerance: 0.12
+      angle_min_deg: 0.0
+      angle_max_deg: 360.0
+    controller:
+      task_mode: transport
+      sensor_range: 1.2
+      ray_count: 72
+      range_noise_std: 0.01
+      pca_neighbors: 5
+      residual_tolerance: 0.03
+      min_confidence: 0.15
+      comm_range: 1.6
+      voxel_size: 0.06
+      age_decay: 0.3
+      max_voxels_per_object: 320
+      motion_compensation: true
+      registration_gate: 0.12
+      registration_normal_cosine: 0.5
+      max_object_speed: 0.25
+      object_velocity_filter: 0.35
+      density_mode: offset
+      cage_offset: 0.105
+      lead_offset: 0.26
+      lead_threshold: 0.25
+      sigma: 0.2
+      base_density: 0.001
+      gap_gain: 0.6
+      gap_radius: 0.35
+      local_radius: 0.8
+      grid_resolution: 20
+      approach_mass_ratio: 3.0
+      redeploy_gap_ratio: 0.15
+      robot_radius: 0.13
+      delta_max: 0.065
+      d_min: 0.28
+      gamma_agent: 6.0
+      gamma_obj: 8.0
+      rho: 0.02
+      max_speed: 0.35
+      backend: qp
+      object_row_range: 0.6
+      object_row_window: 0.28
+      max_object_rows: 8
+      kp_explore: 0.25
+      kp_cage: 0.9
+      push_side_threshold: 0.35
+      min_push_agents: 4
+      contact_band_tolerance: 0.08
+      press_margin: null
+      press_margin_safety: 1.2
+      transport_law: progress
+      transport_reference_speed: 0.055
+      transport_kp: 2.4
+      transport_ki: 3.0
+      transport_effort_max: 0.3
+      transport_deadband: 0.05
+      brake_gain: 0.3
+      convoy_gain: 1.0
+      convoy_max: 0.25
+      cross_track_gain: 10.0
+      cross_track_damping: 12.0
+      cross_track_max_deg: 45.0
+      cross_track_deadband: 0.02
+      cross_track_reference: 0.08
+      separation_band: 0.06
+      kp_separate: 0.0
+      push_share_floor: 0.15
+      phase_informed_fraction: 0.55
+      phase_map_coverage_min: 0.7
+      contact_dwell: 20
+      brake_fraction: 0.65
+    transport:
+      engine: penalty
+      stiffness: 500.0
+      damping: 12.0
+      friction: 0.6
+      tangential_stiffness: 60.0
+      ground_friction: 0.6
+      gravity: 9.81
+      substeps: 4
+    render:
+      map_agent: agent_00
+    evaluation:
+      contact_radius: 0.42
+      j_min: 0.15
+      efficiency_min: 0.7
+      displacement_gate: 0.1
+    g500:
+      detect_by: null
+      contact_ready_by: null
+      transport_by: null
+      reach_by: null
+      efficiency_min: 0.8
+      direction_error_max_deg: 20.0
+      cross_track_max: 0.15
+      coverage_min: 0.7
+      progress_max_ratio: 1.4
+      arrival_tolerance: 0.12
+      hold_speed_max: 0.02
+      yaw_max_deg: 15.0
+- case_id: test_c_shape_search_910081_boundary_cvt
+  split: test
+  gate: 6
+  shape: c_shape
+  seed: 910081
+  variant: boundary_cvt
+  frames: 3000
+  stratum: search_scale0.8_ratio0.4
+  config:
+    paper: true
+    dt: 0.05
+    domain:
+      xmin: 0.0
+      xmax: 8.0
+      ymin: 0.0
+      ymax: 8.0
+    agents:
+      count: 16
+      layout: grid
+      center:
+      - 4.0
+      - 0.55
+      spacing: 0.44
+      jitter: 0.0
+    cargoes:
+    - id: cargo_0
+      shape: polygon
+      vertices:
+      - - 3.3600000000000003
+        - 3.52
+      - - 4.64
+        - 3.52
+      - - 4.64
+        - 4.4799999999999995
+      - - 4.279999999999999
+        - 4.4799999999999995
+      - - 4.279999999999999
+        - 3.84
+      - - 3.7199999999999998
+        - 3.84
+      - - 3.7199999999999998
+        - 4.4799999999999995
+      - - 3.3600000000000003
+        - 4.4799999999999995
+      surface_density: 2.0
+      movable: true
+    task:
+      mode: random_constrained
+      distance_min: 0.6399999999999997
+      distance_max: 0.6399999999999997
+      wall_margin: 0.35
+      tolerance: 0.12
+      angle_min_deg: 0.0
+      angle_max_deg: 360.0
+    controller:
+      task_mode: transport
+      sensor_range: 1.2
+      ray_count: 72
+      range_noise_std: 0.01
+      pca_neighbors: 5
+      residual_tolerance: 0.03
+      min_confidence: 0.15
+      comm_range: 1.6
+      voxel_size: 0.06
+      age_decay: 0.3
+      max_voxels_per_object: 320
+      motion_compensation: true
+      registration_gate: 0.12
+      registration_normal_cosine: 0.5
+      max_object_speed: 0.25
+      object_velocity_filter: 0.35
+      density_mode: offset
+      cage_offset: 0.105
+      lead_offset: 0.26
+      lead_threshold: 0.25
+      sigma: 0.2
+      base_density: 0.001
+      gap_gain: 0.6
+      gap_radius: 0.35
+      local_radius: 0.8
+      grid_resolution: 20
+      approach_mass_ratio: 3.0
+      redeploy_gap_ratio: 0.15
+      robot_radius: 0.13
+      delta_max: 0.065
+      d_min: 0.28
+      gamma_agent: 6.0
+      gamma_obj: 8.0
+      rho: 0.02
+      max_speed: 0.35
+      backend: qp
+      object_row_range: 0.6
+      object_row_window: 0.28
+      max_object_rows: 8
+      kp_explore: 0.25
+      kp_cage: 0.9
+      push_side_threshold: 0.35
+      min_push_agents: 4
+      contact_band_tolerance: 0.08
+      press_margin: null
+      press_margin_safety: 1.2
+      transport_law: progress
+      transport_reference_speed: 0.055
+      transport_kp: 2.4
+      transport_ki: 3.0
+      transport_effort_max: 0.3
+      transport_deadband: 0.05
+      brake_gain: 0.3
+      convoy_gain: 1.0
+      convoy_max: 0.25
+      cross_track_gain: 10.0
+      cross_track_damping: 12.0
+      cross_track_max_deg: 45.0
+      cross_track_deadband: 0.02
+      cross_track_reference: 0.08
+      separation_band: 0.06
+      kp_separate: 0.0
+      push_share_floor: 0.15
+      phase_informed_fraction: 0.55
+      phase_map_coverage_min: 0.7
+      contact_dwell: 20
+      brake_fraction: 0.65
+    transport:
+      engine: penalty
+      stiffness: 500.0
+      damping: 12.0
+      friction: 0.6
+      tangential_stiffness: 60.0
+      ground_friction: 0.6
+      gravity: 9.81
+      substeps: 4
+    render:
+      map_agent: agent_00
+    evaluation:
+      contact_radius: 0.42
+      j_min: 0.15
+      efficiency_min: 0.7
+      displacement_gate: 0.1
+    g500:
+      detect_by: null
+      contact_ready_by: null
+      transport_by: null
+      reach_by: null
+      efficiency_min: 0.8
+      direction_error_max_deg: 20.0
+      cross_track_max: 0.15
+      coverage_min: 0.7
+      progress_max_ratio: 1.4
+      arrival_tolerance: 0.12
+      hold_speed_max: 0.02
+      yaw_max_deg: 15.0
+    require_initial_ignorance: true
+- case_id: test_c_shape_search_910081_nearest_observed_target
+  split: test
+  gate: 6
+  shape: c_shape
+  seed: 910081
+  variant: nearest_observed_target
+  frames: 3000
+  stratum: search_scale0.8_ratio0.4
+  config:
+    paper: true
+    dt: 0.05
+    domain:
+      xmin: 0.0
+      xmax: 8.0
+      ymin: 0.0
+      ymax: 8.0
+    agents:
+      count: 16
+      layout: grid
+      center:
+      - 4.0
+      - 0.55
+      spacing: 0.44
+      jitter: 0.0
+    cargoes:
+    - id: cargo_0
+      shape: polygon
+      vertices:
+      - - 3.3600000000000003
+        - 3.52
+      - - 4.64
+        - 3.52
+      - - 4.64
+        - 4.4799999999999995
+      - - 4.279999999999999
+        - 4.4799999999999995
+      - - 4.279999999999999
+        - 3.84
+      - - 3.7199999999999998
+        - 3.84
+      - - 3.7199999999999998
+        - 4.4799999999999995
+      - - 3.3600000000000003
+        - 4.4799999999999995
+      surface_density: 2.0
+      movable: true
+    task:
+      mode: random_constrained
+      distance_min: 0.6399999999999997
+      distance_max: 0.6399999999999997
+      wall_margin: 0.35
+      tolerance: 0.12
+      angle_min_deg: 0.0
+      angle_max_deg: 360.0
+    controller:
+      task_mode: transport
+      sensor_range: 1.2
+      ray_count: 72
+      range_noise_std: 0.01
+      pca_neighbors: 5
+      residual_tolerance: 0.03
+      min_confidence: 0.15
+      comm_range: 1.6
+      voxel_size: 0.06
+      age_decay: 0.3
+      max_voxels_per_object: 320
+      motion_compensation: true
+      registration_gate: 0.12
+      registration_normal_cosine: 0.5
+      max_object_speed: 0.25
+      object_velocity_filter: 0.35
+      density_mode: offset
+      cage_offset: 0.105
+      lead_offset: 0.26
+      lead_threshold: 0.25
+      sigma: 0.2
+      base_density: 0.001
+      gap_gain: 0.6
+      gap_radius: 0.35
+      local_radius: 0.8
+      grid_resolution: 20
+      approach_mass_ratio: 3.0
+      redeploy_gap_ratio: 0.15
+      robot_radius: 0.13
+      delta_max: 0.065
+      d_min: 0.28
+      gamma_agent: 6.0
+      gamma_obj: 8.0
+      rho: 0.02
+      max_speed: 0.35
+      backend: qp
+      object_row_range: 0.6
+      object_row_window: 0.28
+      max_object_rows: 8
+      kp_explore: 0.25
+      kp_cage: 0.9
+      push_side_threshold: 0.35
+      min_push_agents: 4
+      contact_band_tolerance: 0.08
+      press_margin: null
+      press_margin_safety: 1.2
+      transport_law: progress
+      transport_reference_speed: 0.055
+      transport_kp: 2.4
+      transport_ki: 3.0
+      transport_effort_max: 0.3
+      transport_deadband: 0.05
+      brake_gain: 0.3
+      convoy_gain: 1.0
+      convoy_max: 0.25
+      cross_track_gain: 10.0
+      cross_track_damping: 12.0
+      cross_track_max_deg: 45.0
+      cross_track_deadband: 0.02
+      cross_track_reference: 0.08
+      separation_band: 0.06
+      kp_separate: 0.0
+      push_share_floor: 0.15
+      phase_informed_fraction: 0.55
+      phase_map_coverage_min: 0.7
+      contact_dwell: 20
+      brake_fraction: 0.65
+    transport:
+      engine: penalty
+      stiffness: 500.0
+      damping: 12.0
+      friction: 0.6
+      tangential_stiffness: 60.0
+      ground_friction: 0.6
+      gravity: 9.81
+      substeps: 4
+    render:
+      map_agent: agent_00
+    evaluation:
+      contact_radius: 0.42
+      j_min: 0.15
+      efficiency_min: 0.7
+      displacement_gate: 0.1
+    g500:
+      detect_by: null
+      contact_ready_by: null
+      transport_by: null
+      reach_by: null
+      efficiency_min: 0.8
+      direction_error_max_deg: 20.0
+      cross_track_max: 0.15
+      coverage_min: 0.7
+      progress_max_ratio: 1.4
+      arrival_tolerance: 0.12
+      hold_speed_max: 0.02
+      yaw_max_deg: 15.0
+    require_initial_ignorance: true
+- case_id: test_c_shape_search_910081_local_spacing
+  split: test
+  gate: 6
+  shape: c_shape
+  seed: 910081
+  variant: local_spacing
+  frames: 3000
+  stratum: search_scale0.8_ratio0.4
+  config:
+    paper: true
+    dt: 0.05
+    domain:
+      xmin: 0.0
+      xmax: 8.0
+      ymin: 0.0
+      ymax: 8.0
+    agents:
+      count: 16
+      layout: grid
+      center:
+      - 4.0
+      - 0.55
+      spacing: 0.44
+      jitter: 0.0
+    cargoes:
+    - id: cargo_0
+      shape: polygon
+      vertices:
+      - - 3.3600000000000003
+        - 3.52
+      - - 4.64
+        - 3.52
+      - - 4.64
+        - 4.4799999999999995
+      - - 4.279999999999999
+        - 4.4799999999999995
+      - - 4.279999999999999
+        - 3.84
+      - - 3.7199999999999998
+        - 3.84
+      - - 3.7199999999999998
+        - 4.4799999999999995
+      - - 3.3600000000000003
+        - 4.4799999999999995
+      surface_density: 2.0
+      movable: true
+    task:
+      mode: random_constrained
+      distance_min: 0.6399999999999997
+      distance_max: 0.6399999999999997
+      wall_margin: 0.35
+      tolerance: 0.12
+      angle_min_deg: 0.0
+      angle_max_deg: 360.0
+    controller:
+      task_mode: transport
+      sensor_range: 1.2
+      ray_count: 72
+      range_noise_std: 0.01
+      pca_neighbors: 5
+      residual_tolerance: 0.03
+      min_confidence: 0.15
+      comm_range: 1.6
+      voxel_size: 0.06
+      age_decay: 0.3
+      max_voxels_per_object: 320
+      motion_compensation: true
+      registration_gate: 0.12
+      registration_normal_cosine: 0.5
+      max_object_speed: 0.25
+      object_velocity_filter: 0.35
+      density_mode: offset
+      cage_offset: 0.105
+      lead_offset: 0.26
+      lead_threshold: 0.25
+      sigma: 0.2
+      base_density: 0.001
+      gap_gain: 0.6
+      gap_radius: 0.35
+      local_radius: 0.8
+      grid_resolution: 20
+      approach_mass_ratio: 3.0
+      redeploy_gap_ratio: 0.15
+      robot_radius: 0.13
+      delta_max: 0.065
+      d_min: 0.28
+      gamma_agent: 6.0
+      gamma_obj: 8.0
+      rho: 0.02
+      max_speed: 0.35
+      backend: qp
+      object_row_range: 0.6
+      object_row_window: 0.28
+      max_object_rows: 8
+      kp_explore: 0.25
+      kp_cage: 0.9
+      push_side_threshold: 0.35
+      min_push_agents: 4
+      contact_band_tolerance: 0.08
+      press_margin: null
+      press_margin_safety: 1.2
+      transport_law: progress
+      transport_reference_speed: 0.055
+      transport_kp: 2.4
+      transport_ki: 3.0
+      transport_effort_max: 0.3
+      transport_deadband: 0.05
+      brake_gain: 0.3
+      convoy_gain: 1.0
+      convoy_max: 0.25
+      cross_track_gain: 10.0
+      cross_track_damping: 12.0
+      cross_track_max_deg: 45.0
+      cross_track_deadband: 0.02
+      cross_track_reference: 0.08
+      separation_band: 0.06
+      kp_separate: 0.0
+      push_share_floor: 0.15
+      phase_informed_fraction: 0.55
+      phase_map_coverage_min: 0.7
+      contact_dwell: 20
+      brake_fraction: 0.65
+    transport:
+      engine: penalty
+      stiffness: 500.0
+      damping: 12.0
+      friction: 0.6
+      tangential_stiffness: 60.0
+      ground_friction: 0.6
+      gravity: 9.81
+      substeps: 4
+    render:
+      map_agent: agent_00
+    evaluation:
+      contact_radius: 0.42
+      j_min: 0.15
+      efficiency_min: 0.7
+      displacement_gate: 0.1
+    g500:
+      detect_by: null
+      contact_ready_by: null
+      transport_by: null
+      reach_by: null
+      efficiency_min: 0.8
+      direction_error_max_deg: 20.0
+      cross_track_max: 0.15
+      coverage_min: 0.7
+      progress_max_ratio: 1.4
+      arrival_tolerance: 0.12
+      hold_speed_max: 0.02
+      yaw_max_deg: 15.0
+    require_initial_ignorance: true
+- case_id: test_c_shape_search_910082_boundary_cvt
+  split: test
+  gate: 6
+  shape: c_shape
+  seed: 910082
+  variant: boundary_cvt
+  frames: 3000
+  stratum: search_scale1.2_ratio0.8
+  config:
+    paper: true
+    dt: 0.05
+    domain:
+      xmin: 0.0
+      xmax: 8.0
+      ymin: 0.0
+      ymax: 8.0
+    agents:
+      count: 16
+      layout: grid
+      center:
+      - 4.0
+      - 0.55
+      spacing: 0.44
+      jitter: 0.0
+    cargoes:
+    - id: cargo_0
+      shape: polygon
+      vertices:
+      - - 3.04
+        - 3.28
+      - - 4.96
+        - 3.28
+      - - 4.96
+        - 4.72
+      - - 4.42
+        - 4.72
+      - - 4.42
+        - 3.76
+      - - 3.58
+        - 3.76
+      - - 3.58
+        - 4.72
+      - - 3.04
+        - 4.72
+      surface_density: 2.0
+      movable: true
+    task:
+      mode: random_constrained
+      distance_min: 1.92
+      distance_max: 1.92
+      wall_margin: 0.35
+      tolerance: 0.12
+      angle_min_deg: 0.0
+      angle_max_deg: 360.0
+    controller:
+      task_mode: transport
+      sensor_range: 1.2
+      ray_count: 72
+      range_noise_std: 0.01
+      pca_neighbors: 5
+      residual_tolerance: 0.03
+      min_confidence: 0.15
+      comm_range: 1.6
+      voxel_size: 0.06
+      age_decay: 0.3
+      max_voxels_per_object: 320
+      motion_compensation: true
+      registration_gate: 0.12
+      registration_normal_cosine: 0.5
+      max_object_speed: 0.25
+      object_velocity_filter: 0.35
+      density_mode: offset
+      cage_offset: 0.105
+      lead_offset: 0.26
+      lead_threshold: 0.25
+      sigma: 0.2
+      base_density: 0.001
+      gap_gain: 0.6
+      gap_radius: 0.35
+      local_radius: 0.8
+      grid_resolution: 20
+      approach_mass_ratio: 3.0
+      redeploy_gap_ratio: 0.15
+      robot_radius: 0.13
+      delta_max: 0.065
+      d_min: 0.28
+      gamma_agent: 6.0
+      gamma_obj: 8.0
+      rho: 0.02
+      max_speed: 0.35
+      backend: qp
+      object_row_range: 0.6
+      object_row_window: 0.28
+      max_object_rows: 8
+      kp_explore: 0.25
+      kp_cage: 0.9
+      push_side_threshold: 0.35
+      min_push_agents: 4
+      contact_band_tolerance: 0.08
+      press_margin: null
+      press_margin_safety: 1.2
+      transport_law: progress
+      transport_reference_speed: 0.055
+      transport_kp: 2.4
+      transport_ki: 3.0
+      transport_effort_max: 0.3
+      transport_deadband: 0.05
+      brake_gain: 0.3
+      convoy_gain: 1.0
+      convoy_max: 0.25
+      cross_track_gain: 10.0
+      cross_track_damping: 12.0
+      cross_track_max_deg: 45.0
+      cross_track_deadband: 0.02
+      cross_track_reference: 0.08
+      separation_band: 0.06
+      kp_separate: 0.0
+      push_share_floor: 0.15
+      phase_informed_fraction: 0.55
+      phase_map_coverage_min: 0.7
+      contact_dwell: 20
+      brake_fraction: 0.65
+    transport:
+      engine: penalty
+      stiffness: 500.0
+      damping: 12.0
+      friction: 0.6
+      tangential_stiffness: 60.0
+      ground_friction: 0.6
+      gravity: 9.81
+      substeps: 4
+    render:
+      map_agent: agent_00
+    evaluation:
+      contact_radius: 0.42
+      j_min: 0.15
+      efficiency_min: 0.7
+      displacement_gate: 0.1
+    g500:
+      detect_by: null
+      contact_ready_by: null
+      transport_by: null
+      reach_by: null
+      efficiency_min: 0.8
+      direction_error_max_deg: 20.0
+      cross_track_max: 0.15
+      coverage_min: 0.7
+      progress_max_ratio: 1.4
+      arrival_tolerance: 0.12
+      hold_speed_max: 0.02
+      yaw_max_deg: 15.0
+    require_initial_ignorance: true
+- case_id: test_c_shape_search_910082_nearest_observed_target
+  split: test
+  gate: 6
+  shape: c_shape
+  seed: 910082
+  variant: nearest_observed_target
+  frames: 3000
+  stratum: search_scale1.2_ratio0.8
+  config:
+    paper: true
+    dt: 0.05
+    domain:
+      xmin: 0.0
+      xmax: 8.0
+      ymin: 0.0
+      ymax: 8.0
+    agents:
+      count: 16
+      layout: grid
+      center:
+      - 4.0
+      - 0.55
+      spacing: 0.44
+      jitter: 0.0
+    cargoes:
+    - id: cargo_0
+      shape: polygon
+      vertices:
+      - - 3.04
+        - 3.28
+      - - 4.96
+        - 3.28
+      - - 4.96
+        - 4.72
+      - - 4.42
+        - 4.72
+      - - 4.42
+        - 3.76
+      - - 3.58
+        - 3.76
+      - - 3.58
+        - 4.72
+      - - 3.04
+        - 4.72
+      surface_density: 2.0
+      movable: true
+    task:
+      mode: random_constrained
+      distance_min: 1.92
+      distance_max: 1.92
+      wall_margin: 0.35
+      tolerance: 0.12
+      angle_min_deg: 0.0
+      angle_max_deg: 360.0
+    controller:
+      task_mode: transport
+      sensor_range: 1.2
+      ray_count: 72
+      range_noise_std: 0.01
+      pca_neighbors: 5
+      residual_tolerance: 0.03
+      min_confidence: 0.15
+      comm_range: 1.6
+      voxel_size: 0.06
+      age_decay: 0.3
+      max_voxels_per_object: 320
+      motion_compensation: true
+      registration_gate: 0.12
+      registration_normal_cosine: 0.5
+      max_object_speed: 0.25
+      object_velocity_filter: 0.35
+      density_mode: offset
+      cage_offset: 0.105
+      lead_offset: 0.26
+      lead_threshold: 0.25
+      sigma: 0.2
+      base_density: 0.001
+      gap_gain: 0.6
+      gap_radius: 0.35
+      local_radius: 0.8
+      grid_resolution: 20
+      approach_mass_ratio: 3.0
+      redeploy_gap_ratio: 0.15
+      robot_radius: 0.13
+      delta_max: 0.065
+      d_min: 0.28
+      gamma_agent: 6.0
+      gamma_obj: 8.0
+      rho: 0.02
+      max_speed: 0.35
+      backend: qp
+      object_row_range: 0.6
+      object_row_window: 0.28
+      max_object_rows: 8
+      kp_explore: 0.25
+      kp_cage: 0.9
+      push_side_threshold: 0.35
+      min_push_agents: 4
+      contact_band_tolerance: 0.08
+      press_margin: null
+      press_margin_safety: 1.2
+      transport_law: progress
+      transport_reference_speed: 0.055
+      transport_kp: 2.4
+      transport_ki: 3.0
+      transport_effort_max: 0.3
+      transport_deadband: 0.05
+      brake_gain: 0.3
+      convoy_gain: 1.0
+      convoy_max: 0.25
+      cross_track_gain: 10.0
+      cross_track_damping: 12.0
+      cross_track_max_deg: 45.0
+      cross_track_deadband: 0.02
+      cross_track_reference: 0.08
+      separation_band: 0.06
+      kp_separate: 0.0
+      push_share_floor: 0.15
+      phase_informed_fraction: 0.55
+      phase_map_coverage_min: 0.7
+      contact_dwell: 20
+      brake_fraction: 0.65
+    transport:
+      engine: penalty
+      stiffness: 500.0
+      damping: 12.0
+      friction: 0.6
+      tangential_stiffness: 60.0
+      ground_friction: 0.6
+      gravity: 9.81
+      substeps: 4
+    render:
+      map_agent: agent_00
+    evaluation:
+      contact_radius: 0.42
+      j_min: 0.15
+      efficiency_min: 0.7
+      displacement_gate: 0.1
+    g500:
+      detect_by: null
+      contact_ready_by: null
+      transport_by: null
+      reach_by: null
+      efficiency_min: 0.8
+      direction_error_max_deg: 20.0
+      cross_track_max: 0.15
+      coverage_min: 0.7
+      progress_max_ratio: 1.4
+      arrival_tolerance: 0.12
+      hold_speed_max: 0.02
+      yaw_max_deg: 15.0
+    require_initial_ignorance: true
+- case_id: test_c_shape_search_910082_local_spacing
+  split: test
+  gate: 6
+  shape: c_shape
+  seed: 910082
+  variant: local_spacing
+  frames: 3000
+  stratum: search_scale1.2_ratio0.8
+  config:
+    paper: true
+    dt: 0.05
+    domain:
+      xmin: 0.0
+      xmax: 8.0
+      ymin: 0.0
+      ymax: 8.0
+    agents:
+      count: 16
+      layout: grid
+      center:
+      - 4.0
+      - 0.55
+      spacing: 0.44
+      jitter: 0.0
+    cargoes:
+    - id: cargo_0
+      shape: polygon
+      vertices:
+      - - 3.04
+        - 3.28
+      - - 4.96
+        - 3.28
+      - - 4.96
+        - 4.72
+      - - 4.42
+        - 4.72
+      - - 4.42
+        - 3.76
+      - - 3.58
+        - 3.76
+      - - 3.58
+        - 4.72
+      - - 3.04
+        - 4.72
+      surface_density: 2.0
+      movable: true
+    task:
+      mode: random_constrained
+      distance_min: 1.92
+      distance_max: 1.92
+      wall_margin: 0.35
+      tolerance: 0.12
+      angle_min_deg: 0.0
+      angle_max_deg: 360.0
+    controller:
+      task_mode: transport
+      sensor_range: 1.2
+      ray_count: 72
+      range_noise_std: 0.01
+      pca_neighbors: 5
+      residual_tolerance: 0.03
+      min_confidence: 0.15
+      comm_range: 1.6
+      voxel_size: 0.06
+      age_decay: 0.3
+      max_voxels_per_object: 320
+      motion_compensation: true
+      registration_gate: 0.12
+      registration_normal_cosine: 0.5
+      max_object_speed: 0.25
+      object_velocity_filter: 0.35
+      density_mode: offset
+      cage_offset: 0.105
+      lead_offset: 0.26
+      lead_threshold: 0.25
+      sigma: 0.2
+      base_density: 0.001
+      gap_gain: 0.6
+      gap_radius: 0.35
+      local_radius: 0.8
+      grid_resolution: 20
+      approach_mass_ratio: 3.0
+      redeploy_gap_ratio: 0.15
+      robot_radius: 0.13
+      delta_max: 0.065
+      d_min: 0.28
+      gamma_agent: 6.0
+      gamma_obj: 8.0
+      rho: 0.02
+      max_speed: 0.35
+      backend: qp
+      object_row_range: 0.6
+      object_row_window: 0.28
+      max_object_rows: 8
+      kp_explore: 0.25
+      kp_cage: 0.9
+      push_side_threshold: 0.35
+      min_push_agents: 4
+      contact_band_tolerance: 0.08
+      press_margin: null
+      press_margin_safety: 1.2
+      transport_law: progress
+      transport_reference_speed: 0.055
+      transport_kp: 2.4
+      transport_ki: 3.0
+      transport_effort_max: 0.3
+      transport_deadband: 0.05
+      brake_gain: 0.3
+      convoy_gain: 1.0
+      convoy_max: 0.25
+      cross_track_gain: 10.0
+      cross_track_damping: 12.0
+      cross_track_max_deg: 45.0
+      cross_track_deadband: 0.02
+      cross_track_reference: 0.08
+      separation_band: 0.06
+      kp_separate: 0.0
+      push_share_floor: 0.15
+      phase_informed_fraction: 0.55
+      phase_map_coverage_min: 0.7
+      contact_dwell: 20
+      brake_fraction: 0.65
+    transport:
+      engine: penalty
+      stiffness: 500.0
+      damping: 12.0
+      friction: 0.6
+      tangential_stiffness: 60.0
+      ground_friction: 0.6
+      gravity: 9.81
+      substeps: 4
+    render:
+      map_agent: agent_00
+    evaluation:
+      contact_radius: 0.42
+      j_min: 0.15
+      efficiency_min: 0.7
+      displacement_gate: 0.1
+    g500:
+      detect_by: null
+      contact_ready_by: null
+      transport_by: null
+      reach_by: null
+      efficiency_min: 0.8
+      direction_error_max_deg: 20.0
+      cross_track_max: 0.15
+      coverage_min: 0.7
+      progress_max_ratio: 1.4
+      arrival_tolerance: 0.12
+      hold_speed_max: 0.02
+      yaw_max_deg: 15.0
+    require_initial_ignorance: true
+- case_id: verify_c_shape_2_boundary_cvt
+  split: verification
+  gate: 6
+  shape: c_shape
+  seed: 2
+  variant: boundary_cvt
+  frames: 3000
+  config:
+    paper: true
+    dt: 0.05
+    domain:
+      xmin: 0.0
+      xmax: 8.0
+      ymin: 0.0
+      ymax: 8.0
+    agents:
+      count: 16
+      layout: scatter
+      center:
+      - 4.0
+      - 4.0
+      radius_min: 1.5
+      radius_max: 2.3
+      min_separation: 0.34
+    cargoes:
+    - id: cargo_0
+      shape: polygon
+      vertices:
+      - - 3.2
+        - 3.4
+      - - 4.8
+        - 3.4
+      - - 4.8
+        - 4.6
+      - - 4.35
+        - 4.6
+      - - 4.35
+        - 3.8
+      - - 3.65
+        - 3.8
+      - - 3.65
+        - 4.6
+      - - 3.2
+        - 4.6
+      surface_density: 2.0
+      movable: true
+    task:
+      mode: random_constrained
+      distance_min: 0.9
+      distance_max: 1.6
+      wall_margin: 0.35
+      tolerance: 0.12
+      angle_min_deg: 0.0
+      angle_max_deg: 360.0
+    controller:
+      task_mode: transport
+      sensor_range: 1.2
+      ray_count: 72
+      range_noise_std: 0.01
+      pca_neighbors: 5
+      residual_tolerance: 0.03
+      min_confidence: 0.15
+      comm_range: 1.6
+      voxel_size: 0.06
+      age_decay: 0.3
+      max_voxels_per_object: 320
+      motion_compensation: true
+      registration_gate: 0.12
+      registration_normal_cosine: 0.5
+      max_object_speed: 0.25
+      object_velocity_filter: 0.35
+      density_mode: offset
+      cage_offset: 0.105
+      lead_offset: 0.26
+      lead_threshold: 0.25
+      sigma: 0.2
+      base_density: 0.001
+      gap_gain: 0.6
+      gap_radius: 0.35
+      local_radius: 0.8
+      grid_resolution: 20
+      approach_mass_ratio: 3.0
+      redeploy_gap_ratio: 0.15
+      robot_radius: 0.13
+      delta_max: 0.065
+      d_min: 0.28
+      gamma_agent: 6.0
+      gamma_obj: 8.0
+      rho: 0.02
+      max_speed: 0.35
+      backend: qp
+      object_row_range: 0.6
+      object_row_window: 0.28
+      max_object_rows: 8
+      kp_explore: 0.25
+      kp_cage: 0.9
+      push_side_threshold: 0.35
+      min_push_agents: 4
+      contact_band_tolerance: 0.08
+      press_margin: null
+      press_margin_safety: 1.2
+      transport_law: progress
+      transport_reference_speed: 0.055
+      transport_kp: 2.4
+      transport_ki: 3.0
+      transport_effort_max: 0.3
+      transport_deadband: 0.05
+      brake_gain: 0.3
+      convoy_gain: 1.0
+      convoy_max: 0.25
+      cross_track_gain: 10.0
+      cross_track_damping: 12.0
+      cross_track_max_deg: 45.0
+      cross_track_deadband: 0.02
+      cross_track_reference: 0.08
+      separation_band: 0.06
+      kp_separate: 0.0
+      push_share_floor: 0.15
+      phase_informed_fraction: 0.55
+      phase_map_coverage_min: 0.7
+      contact_dwell: 20
+      brake_fraction: 0.65
+    transport:
+      engine: penalty
+      stiffness: 500.0
+      damping: 12.0
+      friction: 0.6
+      tangential_stiffness: 60.0
+      ground_friction: 0.6
+      gravity: 9.81
+      substeps: 4
+    render:
+      map_agent: agent_00
+    evaluation:
+      contact_radius: 0.42
+      j_min: 0.15
+      efficiency_min: 0.7
+      displacement_gate: 0.1
+    g500:
+      detect_by: null
+      contact_ready_by: null
+      transport_by: null
+      reach_by: null
+      efficiency_min: 0.8
+      direction_error_max_deg: 20.0
+      cross_track_max: 0.15
+      coverage_min: 0.7
+      progress_max_ratio: 1.4
+      arrival_tolerance: 0.12
+      hold_speed_max: 0.02
+      yaw_max_deg: 15.0
+- case_id: verify_c_shape_2_nearest_observed_target
+  split: verification
+  gate: 6
+  shape: c_shape
+  seed: 2
+  variant: nearest_observed_target
+  frames: 3000
+  config:
+    paper: true
+    dt: 0.05
+    domain:
+      xmin: 0.0
+      xmax: 8.0
+      ymin: 0.0
+      ymax: 8.0
+    agents:
+      count: 16
+      layout: scatter
+      center:
+      - 4.0
+      - 4.0
+      radius_min: 1.5
+      radius_max: 2.3
+      min_separation: 0.34
+    cargoes:
+    - id: cargo_0
+      shape: polygon
+      vertices:
+      - - 3.2
+        - 3.4
+      - - 4.8
+        - 3.4
+      - - 4.8
+        - 4.6
+      - - 4.35
+        - 4.6
+      - - 4.35
+        - 3.8
+      - - 3.65
+        - 3.8
+      - - 3.65
+        - 4.6
+      - - 3.2
+        - 4.6
+      surface_density: 2.0
+      movable: true
+    task:
+      mode: random_constrained
+      distance_min: 0.9
+      distance_max: 1.6
+      wall_margin: 0.35
+      tolerance: 0.12
+      angle_min_deg: 0.0
+      angle_max_deg: 360.0
+    controller:
+      task_mode: transport
+      sensor_range: 1.2
+      ray_count: 72
+      range_noise_std: 0.01
+      pca_neighbors: 5
+      residual_tolerance: 0.03
+      min_confidence: 0.15
+      comm_range: 1.6
+      voxel_size: 0.06
+      age_decay: 0.3
+      max_voxels_per_object: 320
+      motion_compensation: true
+      registration_gate: 0.12
+      registration_normal_cosine: 0.5
+      max_object_speed: 0.25
+      object_velocity_filter: 0.35
+      density_mode: offset
+      cage_offset: 0.105
+      lead_offset: 0.26
+      lead_threshold: 0.25
+      sigma: 0.2
+      base_density: 0.001
+      gap_gain: 0.6
+      gap_radius: 0.35
+      local_radius: 0.8
+      grid_resolution: 20
+      approach_mass_ratio: 3.0
+      redeploy_gap_ratio: 0.15
+      robot_radius: 0.13
+      delta_max: 0.065
+      d_min: 0.28
+      gamma_agent: 6.0
+      gamma_obj: 8.0
+      rho: 0.02
+      max_speed: 0.35
+      backend: qp
+      object_row_range: 0.6
+      object_row_window: 0.28
+      max_object_rows: 8
+      kp_explore: 0.25
+      kp_cage: 0.9
+      push_side_threshold: 0.35
+      min_push_agents: 4
+      contact_band_tolerance: 0.08
+      press_margin: null
+      press_margin_safety: 1.2
+      transport_law: progress
+      transport_reference_speed: 0.055
+      transport_kp: 2.4
+      transport_ki: 3.0
+      transport_effort_max: 0.3
+      transport_deadband: 0.05
+      brake_gain: 0.3
+      convoy_gain: 1.0
+      convoy_max: 0.25
+      cross_track_gain: 10.0
+      cross_track_damping: 12.0
+      cross_track_max_deg: 45.0
+      cross_track_deadband: 0.02
+      cross_track_reference: 0.08
+      separation_band: 0.06
+      kp_separate: 0.0
+      push_share_floor: 0.15
+      phase_informed_fraction: 0.55
+      phase_map_coverage_min: 0.7
+      contact_dwell: 20
+      brake_fraction: 0.65
+    transport:
+      engine: penalty
+      stiffness: 500.0
+      damping: 12.0
+      friction: 0.6
+      tangential_stiffness: 60.0
+      ground_friction: 0.6
+      gravity: 9.81
+      substeps: 4
+    render:
+      map_agent: agent_00
+    evaluation:
+      contact_radius: 0.42
+      j_min: 0.15
+      efficiency_min: 0.7
+      displacement_gate: 0.1
+    g500:
+      detect_by: null
+      contact_ready_by: null
+      transport_by: null
+      reach_by: null
+      efficiency_min: 0.8
+      direction_error_max_deg: 20.0
+      cross_track_max: 0.15
+      coverage_min: 0.7
+      progress_max_ratio: 1.4
+      arrival_tolerance: 0.12
+      hold_speed_max: 0.02
+      yaw_max_deg: 15.0
+supersedes: v2 preserved; add distinct single-factor phase-recovery diagnostic based
+  on reproduced C seed8 guard trace. Main downstream unchanged.
+frozen_source_sha256: a13317cc0c8219731e5d58c0b78355b20ee5e031e85f1f1798dc30c9e356fe0c
+source_files:
+  src/dbact/__init__.py: b546c2f19c3de9ade16543f86b64d1d2fd88b7ea6e0f653406723fbe3cf29395
+  src/dbact/agent_control.py: d66980d0c1e49c1073260479444e088d061dfdbcd3baca7d8fdf46e4e2e4531f
+  src/dbact/apriori_centroid_bound.py: 677c9ec9ebcc15bab4e388768d311ae9128d645b647a7a8c3318db2a02a175e9
+  src/dbact/boundary_density.py: 7a5e0eaeb36b57ea0272ac5984304fc942ddbc7eeb0d3902e5fe4af61abc66db
+  src/dbact/boundary_map.py: 6bfdf4b23a010eb7d45081bd2d851d04d33314e3c80f160767dfa9612e6e7437
+  src/dbact/cargo.py: bf26ef2ddec7c319de20911af9248187953bf6631ed42b55c867fd84086beae5
+  src/dbact/contact_dynamics.py: a9dad10249e74f1ad45d8825241c9cc708184bb5a29ab101dc9ceddcb521c569
+  src/dbact/contracts.py: 0fa256e6194ac8bfd7b1f04360f6983206eeaa148765d558dc949e78ef6efede
+  src/dbact/controller.py: 7cbe2e7c2fd8c4f06df2c6d7eae6aedc806e686a853cb1f98e4c9d07f12d9000
+  src/dbact/cpu_budget.py: 4eeb8c037f52e7d47ac9efadae05cf66c1f5793cb860cd6c6bba641f42621641
+  src/dbact/deployment_variants.py: 5e08db89814b43dc1343b4cb34491e42d6013a4ec7d27f213994dadb0bf32624
+  src/dbact/diagnosis.py: 84bab83530c8197d0bce8a2cd3b65b6a47981fd80a1eb295b17f1d97a0cb7d71
+  src/dbact/edge_green_integral.py: 0947f03440c40f8108cdfa55508e8f58e55fcef35bec1ef3ce9572e2f3c9f6d9
+  src/dbact/enclosure_gate.py: 858923f38411458cd447db661f33a4f3396eed7145908b470a38b7b7499efeb8
+  src/dbact/error_audit.py: 39896ec1cb48014c41ba252f8aac262feaf1eeb9708da85ecf7ab52a0324d69e
+  src/dbact/geometry.py: a31c2fdb6594be2905ee42af0ddc2342b518394289e3633d292ba8b0f8f8e547
+  src/dbact/guarantees.py: 5b7a2b1a38d476e4b4d4b03f300a43db59f17ffca0418c307c86dbef4239047d
+  src/dbact/local_boundary_features.py: 935e6b5de4309d9a2d8a19f8f5ceed3e2bf8318b808922c7c512cd9e47175815
+  src/dbact/local_cvt.py: 172e035ae6c0d9dcef58f5c0ea462d9379ce981c974171f23a2b95dd6351274b
+  src/dbact/metrics.py: 14c338453e1b4efce827c6660280677f5149f89151b89c8349ea0f3a4ce59980
+  src/dbact/perception.py: aa02413a6921ea72b50036f3fee3b6454172b296c099a56682beba8b1f687d2e
+  src/dbact/phase.py: ffa8230569e48e99efc9bd39562eede6f488eccca6f72b0407db10670fd71896
+  src/dbact/provenance.py: e735860de30d9d1b4fd4267ab5e7ed9c08f5745f24489d434b5a3ca078e39e0a
+  src/dbact/qp2d.py: 8290e73473c1a085ed40551098fec44615eb583124a278f0f0b8b7b54229cdf1
+  src/dbact/safety_filter.py: 2ee5640f14b13d331083627075b91de76ffd4556cd04d46681379ea29d629330
+  src/dbact/static_deployment_diagnostics.py: b1a23318619e4ef87606da5024366abb00c926c9ce8b862d9963ef4b93a0078f
+  src/dbact/task.py: e7be986a318a9f013139542155fd7444aa757d92cc6b009b85be3054634778a1
+  src/dbact/theorem_mode.py: e6d6fe11dc8abcaa8148f3572ad4864fba5fdacb9ef01f2cfd456e2c38b79c27
+  src/dbact/transport_control.py: 1e5e153cf9dd21b55c77418c6e568341e16f10bc4defee107a6717419b219f3f
+  src/dbact/transport_dynamics.py: dd69a6c38f5fe3c29e2d014d9046960d82f792b302e36462673e4f3850f04aa6
+  src/dbact/types.py: 844f59866124b437cd33526040f2ea0ff458ca8a01bc430c39c1b2253c16cd32
+  src/dbact_sim/__init__.py: 0e62c734baac5fa1ac3cbbb7781807f97bb4210c620eb13956f327a53e5526dc
+  src/dbact_sim/environment.py: ce530a8ac61bd94432bae418f415971c2b88716f102ae40566935d5371d37fee
+  src/dbact_sim/paper_evaluation.py: 38dc6b7aa512c5d3a0829477b9ea366de9cfb647809db895dbbd92144ba986a2
+  src/dbact_sim/publication.py: 2e96597232c209794af659e839c8ea331e8c09735015a0ae47f265b654be2072
+  src/dbact_sim/replay.py: cc1568ca3b09f3e78927a8d441ca3db76c1e95efbb4bca6f3a524ddf4b7eb370
+  src/dbact_sim/run_sim.py: bf03e764d6895104dc14b61a5f29b525010cb70ff68926a4756ac2977405b13c
+  src/dbact_sim/scenarios.py: bdbdc0b36efbebe5ddf1977f593a65917d26c58c713e6efc63ff0c87241d8dda
+  src/dbact_sim/trace.py: 30265a8c9abaca4101649c6eeb980b75235551b8eadaa05a028988795e9d94ee
+  src/dbact_sim/visualization/__init__.py: 8a0d3e6871d296b4c9550bbc0d836a98fcb1a098d678157bba3877c1a03a4864
+  src/dbact_sim/visualization/animation.py: 0e8913034d870a07c4afb88b38dffda2b78f7d97e31b9b504a327a92a9f46105
+  src/dbact_sim/visualization/comparison.py: 0d08fbca806019db9b5415442635217f0af259d01cbd36109eae1152cd29329f
+  src/dbact_sim/visualization/debug_overlays.py: d36d5a370fbc8347673ef706fc428bfd7b6ec60f277b9467ecd6104b53617386
+  src/dbact_sim/visualization/hud.py: 828d984fce8bf85d3ae06519bbcd7b2d78e82a6a32c3b6fc3d0e736b4f0a372d
+  src/dbact_sim/visualization/legacy.py: a137ccc451658bc7c0e4066f877f5399b3bb0962b338640bde05d0d857bd122c
+  src/dbact_sim/visualization/paper_figures.py: 883cc526dc617672ac16acd080e732e34d8c5b66c5c97694ad544c396c830255
+  src/dbact_sim/visualization/renderer.py: e4a49a66eea0a8035d414889426f5eff89b3d894ca021fab118d41577efd09ed
+  src/dbact_sim/visualization/styles.py: 2fcbb87564a40a6a73a0a4b4120f400e280584c85d4157487c624f4a46cc700b
+  src/mas_adapter/__init__.py: c3025d583eb00ddd3d8f92dc795525d3a82cee4c81e45b15f4681858a9d3160a
+  src/mas_adapter/decentralized_transport_controller.py: 213e61a43e69657fef55905d6ebd4a70988e2b96aec936f656d6cc3525a1bdd9
+  src/mas_adapter/object_observer.py: 1dbf73913d18264ba31f692d73db70316b03e00499f11b2a509659dd5d459b2f
+  configs/mas/controller.yaml: 8ecd9a78280723705d56463b757aeb6e26b3f14bfd6af69ab410ad6d2286bf41
+  configs/mas/dtransport.yaml: eef8db03ba45dcb2ad244eb96647bd7491f6073c31046a6b2c4fc99d2389ce66
+  configs/mas/dtransport_mock.yaml: fab48e67746eebce25d045e4cf47d49c6eda341349a65052e29bf9f73bcbb74d
+  configs/sim/baseline_scripted_b0.yaml: 8a8c3be47e3eb46e0411610da95f5422e4a012c79a85369e7bd500009e556b3a
+  configs/sim/baseline_unknown_polygon_caging.yaml: ce9bf6d93f3fb59e91322dbb1344913a52449dc3b3a38893e3a80d08d1066fe7
+  configs/sim/baseline_unknown_polygon_caging_tight.yaml: ce9bf6d93f3fb59e91322dbb1344913a52449dc3b3a38893e3a80d08d1066fe7
+  configs/sim/circle.yaml: f9c1445ac139965de062ae3eb9b4251363968f726ad632545b5c0e07b0174d3b
+  configs/sim/d/l_shape_closed_loop.yaml: a23a66fe8e831c005bd0cfe1b968218bfc95d6b1ccfb50510cd259381f6f85d4
+  configs/sim/d/l_shape_search.yaml: 09fa6b4f7feb9294225322317f16cd026a5578bbda57832238166410bded5e21
+  configs/sim/decentralized_cvt_coverage.yaml: c77505e3772dedb331bad7e9b4aaca569d5968275f4bd9791af57d8f683832d7
+  configs/sim/l_shape.yaml: 0c1cb3699f9aa5113faf27caf48cc33e5001e634b1acb24ffd13a211b30bf216
+  configs/sim/multi_object.yaml: e1ab7a1903e995593fc7cd19cb9e770b3ba165190c90c2fc149f18dca5cb9d9a
+  configs/sim/nonconvex.yaml: 0a8cbf32d579c59da7964124cb5cde25f81cd22b513cbc8d911b1689259189de
+  configs/sim/one_circle_caging.yaml: b4622042948317b17abe13a8946f8cd01f098ef153a801db727ae972010948eb
+  configs/sim/one_nonconvex_polygon_caging.yaml: 54f4bf29136088c916bd9c12b1641f2340838f695d40353b439538a627a95989
+  configs/sim/one_nonconvex_polygon_caging_tight.yaml: 54f4bf29136088c916bd9c12b1641f2340838f695d40353b439538a627a95989
+  configs/sim/one_polygon_caging.yaml: ce9bf6d93f3fb59e91322dbb1344913a52449dc3b3a38893e3a80d08d1066fe7
+  configs/sim/one_rectangle_polygon_caging.yaml: 8dab23b9d3462314168efd72268603e8c2d97abc1b3d160c3ab0397c39eff6de
+  configs/sim/one_rectangle_polygon_caging_tight.yaml: 8dab23b9d3462314168efd72268603e8c2d97abc1b3d160c3ab0397c39eff6de
+  configs/sim/paper_like_irregular_moving_cargo.yaml: 6412fab8170a37194bebaeb6c30febe2f95b13ebe2f54611d41b3349b8bb50f0
+  configs/sim/rectangle.yaml: 51b0dd0af5b588c909442779d4014abe39487aa8bbbc65ed6d3b67c08d50e103
+  configs/sim/theorem/static_c_shape_n16_oracle.yaml: d6b3fdbedad104eb99361c5fc28ac4ce63febe5fd3a475f3ead7b45544bd947f
+  configs/sim/theorem/static_l_shape_n16_oracle.yaml: a0cb2bb6b4a947760136da5ed520e69e18028803fec3cf8fe0d32ec25b2816af
+  configs/sim/theorem/static_l_shape_oracle.yaml: 503db1ee46251252ad1e66169e12015d887a83cb336e53bb7685440fdb16f81a
+  configs/sim/theorem/static_rectangle_n16_oracle.yaml: e81e1b03eab6dee0a6fcd7fb027fb3dcb6437798018ea63feaf78cdd6924168e
+  configs/sim/theorem/wall_corner_oracle.yaml: aa8dfad5486cde8e2a670fe20ff8b3c7df0b7f92d0365d6c8297eeb5e62d2695
+  configs/sim/v2/l_shape_distance_field_v2.yaml: a93506cada944f1e86f69e7e0ec53eda63f0b4f9422bf4a7b8baf1aefb4b98c6
+  configs/sim/v2/l_shape_enclosure_v2.yaml: 5f900122622ea8e3603e190fc7db69be1c68af95462762639f5ad89765894cf0
+  configs/sim/v2/l_shape_v2.yaml: caffe51205b3f273bad5c6fad1c0ed42e9fe8925ca977313fb03d3ef175fe9f3
+  configs/sim/v2/nonconvex_v2.yaml: 0a12cd6a0bd34b50c47d4cfc67f8ef055f5d8fb388fd9edd4e7e872f597a62fa
+  configs/sim/v2/shape_matrix.yaml: 8694bd77b747249d0fc413fd8d3b27af8b7c776768ddeba179f8c00983967d38
+  configs/sim/v2/shape_matrix_eg0.yaml: 946365ac9f1cef0403070ccc8acda94fc1bd4018817262ffe94e70616254b250
+  scripts/run_paper_simulation_study.py: dd3ab476e0e44a689d7b5b9856dcd298bfb97587564c5c307c99434f98621248
+  scripts/run_deployment_pairs.py: f050c73420228041f77d49a9d61ade430ec6dfcb09bd7e0ab1c8272e6d94a60f
+test_budget:
+  conditions: 12
+  episodes: 36
+  workers: 4
+  horizon_per_episode: 3000
+  rationale: Pilot completed episodes commonly 10-61 wall seconds, watchdog longer.
+    Small stratified feasibility study; 4 conditions per shape gives wide rate intervals,
+    not a powered generalization claim. No result-dependent expansion.
+  power: not powered for definitive superiority
+  pilot_readiness_difference_std_seconds: 6.678557104644685
+geometry_strata: Three shapes x near/search x two joint scale/distance conditions
+  (0.8,0.4) and (1.2,0.8); scale and ratio not separately identifiable.
+status: FROZEN_BEFORE_TEST_EXECUTION

@@ -1,0 +1,22 @@
+{
+  "verify_c_shape_2_boundary_cvt": {
+    "metrics_equal_except_wall_time": true,
+    "products": {
+      "replay.npz": true,
+      "paired_metrics.json": true,
+      "physics_substeps.json": true,
+      "trajectories.csv": true,
+      "replay_arrays_equal": true
+    }
+  },
+  "verify_c_shape_2_nearest_observed_target": {
+    "metrics_equal_except_wall_time": true,
+    "products": {
+      "replay.npz": true,
+      "paired_metrics.json": true,
+      "physics_substeps.json": true,
+      "trajectories.csv": true,
+      "replay_arrays_equal": true
+    }
+  }
+}
