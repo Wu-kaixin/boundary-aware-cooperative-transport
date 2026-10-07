@@ -1,0 +1,23 @@
+# Preparation for cooperative transport from local boundary observations
+
+Status: provisional research storyline, 7 October 2026. EMPIRICAL_ONLY outside the explicitly delimited static oracle theorem. This version precedes controller repairs. No professor approval is implied.
+
+## Problem
+A team that does not know an object's geometry must discover enough boundary to arrange itself for cooperative transport. A short allocation or enclosure time is not itself successful transport: contact forces may cancel, contacts may be lost, and the estimated displacement may differ from the true task displacement. We therefore separate configuration preparation, effective physical contacts, safety, and task outcome. The central question is whether a boundary-based configuration demand formed from local measurements reduces preparation time under matched information and dynamics, and under what conditions that advantage survives downstream.
+
+## Key idea
+Local range observations and neighbor communication construct a distributed boundary measure. Arc-length weights represent boundary extent rather than the number of samples. Direction-dependent offsets distinguish pushing and resisting surfaces. A limited-range CVT produces configuration targets. The proposed contribution concerns this preparation mechanism; sensing, safety filtering, contact physics, transport feedback, and stopping logic remain common across configuration comparisons. True geometry is confined to simulated sensing, physical contact, and independent evaluation. Oracle-map experiments form a separately labeled reference, not evidence that an unknown-boundary controller has complete geometry.
+
+## Candidate contribution
+The defensible candidate is faster contact preparation using local boundary-induced configuration demand. The archived nine paired cases give mean controller readiness times of 4.383 s versus 8.983 s, with eight faster cases and one slower case; the paired median advantage is only 0.75 s. These small development samples do not establish general superiority. They also do not establish faster effective physical contact: controller readiness and sustained useful contact require distinct measurement.
+
+A broader claim of improved transport remains unsupported by the current comparisons. CVT wins only four of nine pairs on each of absolute final progress error, direction error, and maximum lateral displacement. G500 passes are two versus zero, but this composite criterion is not a substitute for individual task measures. The C-shape seed 8 CVT run becomes ready early and reaches the watchdog without settling. We retain this failure and all outliers.
+
+Local-boundary safety is an independent research limitation. Eight of nine archived local runs fail a conservative clearance lower-bound check. This is not eight observed physical collisions. The static oracle theorem and its 27 numerical cases cannot certify local maps or moving penalty-contact transport. The revised evaluator must discriminate measured violation, conditional numerical certification of a fixed polygonal hold, and unresolved cases.
+
+## Evidence required
+First, independently evaluate full hold paths for static polygons and record moving-body physical substeps. Preserve the original archive and its legacy field meanings. Record robot separation independently of object clearance and intended contact penetration. Second, measure readiness events with censoring, physical contact persistence, projected force, torque, true and estimated progress, signed and absolute errors, and Euclidean endpoint error. Mechanism diagnoses need matched initial conditions and single-factor interventions; correlation alone does not identify causes.
+
+Third, compare boundary CVT, the existing nearest-observed-target control, and an explicitly named engineering dispersion baseline with identical information permissions. Use separate, normalized arc-weight, offset, and exploration ablations without a combinatorial sweep. Freeze thresholds, horizons, physics, task sampling, analysis, and case manifests before independent testing. Historical seeds, including potentially used seeds 12 through 31, cannot be called unused. Pilot cost and variance determine a feasible test budget; failures and crashes stay in denominators.
+
+Finally, report episode-level paired effects and uncertainty by shape/task stratum, alongside unconditional completion, settled and G500 rates. Publish reproducible figures and manifests, and classify preparation, effective contacts, safety, and transport separately as SUPPORTED, NOT_SUPPORTED, or INCONCLUSIVE. The final manuscript scope remains a decision for Professors Ogura and Bai.

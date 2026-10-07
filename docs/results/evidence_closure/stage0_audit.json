@@ -1,0 +1,106 @@
+{
+  "retrieved_sha": "9693dfd6b5ef72af354b8f5dd3d8e1cc245b931a",
+  "archived_not_rerun": true,
+  "archive_files": {
+    "d10_ab.json": {
+      "sha256": "9478d6b6c66f08e3f78306de29f0110a69955936440fb1ca76314306c7ee1b4e"
+    },
+    "d10_diag.json": {
+      "sha256": "c12dd57f186213fab95da7b28b3a63ebdee631c0fcc6a838c49d41cac69139d9"
+    },
+    "d10_enc.json": {
+      "sha256": "c9c720a2a6a0ae404a56851dda5860def3099f720f992c51fdab8517b93a8695"
+    },
+    "g500_sweep.json": {
+      "sha256": "58f70e021d5399b91731aed95ea130c503ef4a2ec97284b97ec2172d174d8ee1"
+    },
+    "gate5_manifest.json": {
+      "sha256": "c74f42e51287f2ca3a4e08db6dc5f599082fbf8a81315695eeee323fe5ac9ad9"
+    },
+    "gate5_pairs.json": {
+      "sha256": "7a7172cc26fab9596ef64c7df4e8d2232f62b5d278ae1aef2b40337d416f3c43"
+    },
+    "gate6_manifest.json": {
+      "sha256": "2059bdd4d42bf4899d658d48cfd9d9c403c4f412b9165ec094c3c1201c636a80"
+    },
+    "gate6_pairs.json": {
+      "sha256": "b92905acdc90f552c3f79be4569698434a5d1baebf0e469856c14ad5e32525aa"
+    },
+    "jeh_summary.csv": {
+      "sha256": "a6c2f6bc37882be889122becb381a04632c7cb423a5048a58e465a18de27ebc1"
+    },
+    "jeh_summary.json": {
+      "sha256": "74f619ae386232017b28448c169a0782733b4693ad90cfd1d0b2ed5a7a50e5e2"
+    },
+    "manifest.json": {
+      "sha256": "7e3b089c12c7144ca9312ba725ecca209abaa8506f9aaed7a7a77b52114e8338"
+    },
+    "near_seed2.json": {
+      "sha256": "83ca2d5102a95f817d030f6a5b1a5a70ba4264128dbbcd871cbe8054b37abcc2"
+    },
+    "near_seed4.json": {
+      "sha256": "71b8dc56879d1ee88db6f5a68417298a7045eb802a294d2a5e366d6f04ac4193"
+    },
+    "near_seed8.json": {
+      "sha256": "c0a2fd409506a03d416d6f8b71f293aa489e3ca321b142e9141fd4244653745a"
+    },
+    "prior_screen.json": {
+      "sha256": "3c5efcb6b67b867a2b7e4ff7ae3b0bffa89fd055ae2b50b8ed8f29cac2381e57"
+    },
+    "results.md": {
+      "sha256": "39a1a7f1f425cad227d2253144a9168d5d918f1c5eccbc04bab97c2a80548eb2"
+    },
+    "search_seed7.json": {
+      "sha256": "f1e78e1a68b5ab5e186833a1fbfa035623c4c584d544ae458a3b71b9132c92aa"
+    },
+    "serial_parallel_consistency.json": {
+      "sha256": "07213cc7d9cfd9be56cc5809136b83cab4530f694fa7fa719b33e9825ef0a317"
+    },
+    "static_safety.json": {
+      "sha256": "6ead1b0fc4b7f17519563b31ec201ddd95a434315537385965ccf23a2ecc763c"
+    }
+  },
+  "gate6": {
+    "pairs": 9,
+    "ready_mean_cvt": 4.383333333333333,
+    "ready_mean_nearest": 8.983333333333334,
+    "paired_difference_median": -0.75,
+    "faster": 8,
+    "g500": [
+      2,
+      0
+    ],
+    "absolute_progress_worse_cases": [
+      {
+        "shape": "l_shape",
+        "seed": 2
+      },
+      {
+        "shape": "rectangle",
+        "seed": 2
+      },
+      {
+        "shape": "rectangle",
+        "seed": 8
+      },
+      {
+        "shape": "c_shape",
+        "seed": 2
+      },
+      {
+        "shape": "c_shape",
+        "seed": 8
+      }
+    ]
+  },
+  "limitations": [
+    "Gate6 v2 not found in reachable path history or accessible worktrees; some pytest cache directories inaccessible.",
+    "RAS2023/2024/2025 PDFs not found; use supplied experimental-design mapping only.",
+    "Seeds 12..31 quarantined, not held out."
+  ],
+  "gate5": {
+    "pairs": 9,
+    "lower_bound_failed_runs": 8,
+    "actual_violations": "UNRESOLVED pending independent trajectory evaluation"
+  }
+}
