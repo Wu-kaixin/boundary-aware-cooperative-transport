@@ -590,6 +590,9 @@ class DBACTController:
         self._sweep_direction: dict[int, float] = {}
         self._tokens: dict[str, dict[str, tuple[np.ndarray, float]]] = {}
         self._progress: dict[str, dict[str, float]] = {}
+        self._credible_progress: dict[str, dict[str, float]] = {}
+        self._progress_quality: dict[str, dict[str, str]] = {}
+        self.team_estimate_quality: str = "unavailable"
         self.transport_loops: dict[str, DirectionalProgressController] = {}
         self.phase_monitor = PhaseMonitor(gates=params.phase_gates())
         self.target_region_points = self._build_target_region_points()
@@ -841,14 +844,12 @@ class DBACTController:
             local_map = self.maps[agent.agent_id]
             own[agent.agent_id] = {}
             for object_id, task in self.tasks.items():
-                displacement = local_map.object_displacement(object_id)
                 # The calibration enters here and nowhere else: this is the transport loop's
                 # feedback. It deliberately does NOT scale ``object_velocity``, which feeds
                 # the barrier rows -- inflating a safety input to correct a transport
                 # estimate would be fixing one loop by lying to another.
-                own[agent.agent_id][object_id] = (
-                    float(np.dot(displacement, task.direction))
-                    * self.params.progress_estimate_gain
+                own[agent.agent_id][object_id] = self._credible_task_progress(
+                    agent.agent_id, object_id, local_map, task.direction
                 )
                 registration = local_map.last_registration.get(object_id)
                 if registration is not None and registration.matches > 0:
@@ -867,6 +868,47 @@ class DBACTController:
             eligible = informed.get(object_id) or list(range(len(agents)))
             values = [own[agents[j].agent_id][object_id] for j in eligible]
             self.team_progress[object_id] = float(np.median(values)) if values else 0.0
+        self.team_estimate_quality = self._team_estimate_quality(agents)
+
+    def _credible_task_progress(self, agent_id: str, object_id: str, local_map, direction: np.ndarray) -> float:
+        """Hold the last progress that the goal direction could actually see.
+
+        A flat or rank-deficient scan still returns a translation. Its null-space
+        component is damped to zero by the solver. Counting that zero as measured
+        progress would report "not moving" along a direction the robot cannot see.
+        """
+        measured = float(np.dot(local_map.object_displacement(object_id), direction))
+        measured *= self.params.progress_estimate_gain
+        quality = local_map.motion_quality.get(object_id, "unavailable")
+        registration = local_map.last_registration.get(object_id)
+        if quality == "degraded" and registration is not None:
+            axis = np.asarray(registration.observable_direction, dtype=float)
+            if float(np.linalg.norm(axis)) < 1e-9 or abs(float(np.dot(axis, direction))) < 0.5:
+                quality = "unavailable"
+        slot = self._credible_progress.setdefault(agent_id, {})
+        labels = self._progress_quality.setdefault(agent_id, {})
+        labels[object_id] = quality
+        if quality == "unavailable":
+            return float(slot.get(object_id, 0.0))
+        slot[object_id] = measured
+        return measured
+
+    def _team_estimate_quality(self, agents: list[AgentState]) -> str:
+        object_id = next(iter(self.tasks), None)
+        if object_id is None:
+            return "unavailable"
+        labels = [
+            self._progress_quality.get(agent.agent_id, {}).get(object_id, "unavailable")
+            for agent in agents
+        ]
+        if not labels:
+            return "unavailable"
+        credible = sum(label == "credible" for label in labels)
+        if credible * 2 >= len(labels):
+            return "credible"
+        if any(label in ("credible", "degraded") for label in labels):
+            return "degraded"
+        return "unavailable"
 
     def _agent_progress(self, agent_id: str, object_id: str | None = None) -> float:
         entries = self._progress.get(agent_id, {})
@@ -892,6 +934,7 @@ class DBACTController:
         target = self.tasks[object_id].distance if object_id else 1.0
         progress = self.team_progress.get(object_id, 0.0) if object_id else 0.0
         active = sum(1 for d in self.diagnostics if d.push_side) if self.diagnostics else 0
+        speed, stopping = self._estimated_stop(object_id)
         return PhaseSignals(
             agent_count=len(agents),
             informed_agents=informed,
@@ -900,7 +943,54 @@ class DBACTController:
             transport_active=active,
             progress=progress,
             target_distance=float(target),
+            estimated_speed=speed,
+            stopping_distance=stopping,
+            estimate_quality=self.team_estimate_quality,
         )
+
+    def _estimated_stop(self, object_id: str | None) -> tuple[float, float]:
+        """Along-track speed and the distance the declared brake model needs.
+
+        ``v_ref = clip(brake_gain * remaining, 0, reference_speed)`` starts
+        shedding reference speed ``reference_speed / brake_gain`` before the
+        target. A faster estimate adds ``v^2 / (2 a)`` with ``a = brake_gain *
+        reference_speed``. Both use the robots' registration, not the simulator.
+        """
+        if object_id is None or object_id not in self.goal_directions:
+            return 0.0, 0.0
+        goal = self.goal_directions[object_id]
+        speeds = [
+            float(np.dot(local_map.object_velocity(object_id), goal))
+            for local_map in self.maps.values()
+        ]
+        speed = float(np.median(speeds)) if speeds else 0.0
+        brake_gain = max(float(self.params.brake_gain), 1e-6)
+        reference = max(float(self.params.transport_reference_speed), 0.0)
+        deceleration = max(brake_gain * max(reference, 1e-6), 1e-6)
+        kinematic = max(speed, 0.0) ** 2 / (2.0 * deceleration)
+        scheduled = reference / brake_gain
+        return speed, max(kinematic, scheduled)
+
+    def _should_retract(self) -> bool:
+        """Open the ring when estimated speed is above the falling brake reference.
+
+        Clearing the velocity command is not enough: robots already in contact
+        keep producing penalty force until the cage target moves outward.
+        """
+        if not self.phase_monitor.reached(Phase.BRAKE):
+            return False
+        if self.phase_monitor.reached(Phase.HOLD):
+            return True
+        object_id = next(iter(self.tasks), None)
+        if object_id is None:
+            return True
+        remaining = float(self.tasks[object_id].distance) - float(self.team_progress.get(object_id, 0.0))
+        reference = float(np.clip(
+            self.params.brake_gain * max(remaining, 0.0),
+            0.0,
+            self.params.transport_reference_speed,
+        ))
+        return float(self.phase_signals.estimated_speed) > reference + 0.02
 
     # ------------------------------------------------------------------ #
     # nominal control law
@@ -1086,7 +1176,7 @@ class DBACTController:
         base = self.density_params
         if self.params.task_mode != "transport":
             return base
-        if self.phase_monitor.reached(Phase.HOLD):
+        if self.phase_monitor.reached(Phase.HOLD) or self._should_retract():
             standoff = max(self.params.hold_offset, self.params.robot_radius + 1e-3)
             return replace(base, cage_offset=standoff, lead_offset=standoff)
         if not self.phase_monitor.reached(Phase.TRANSPORT) or base.lead_offset is None:
@@ -1188,12 +1278,18 @@ class DBACTController:
 
         velocity = self.maps[agent.agent_id].object_velocity(object_id)
         loop = self.transport_loops[agent.agent_id]
+        if self.phase_monitor.reached(Phase.BRAKE) or self.phase_monitor.push_suspended:
+            loop.disarm()
 
         # Station-keeping feed-forward for every robot that can see the object,
         # pushing or not: the enclosure has to travel with the cargo or it tears.
         # It stops at HOLD, because a ring that keeps chasing the cargo keeps
         # pushing it, and the run would never come to rest.
-        travelling = self.phase_monitor.reached(Phase.TRANSPORT) and not self.phase_monitor.reached(Phase.HOLD)
+        travelling = (
+            self.phase_monitor.reached(Phase.TRANSPORT)
+            and not self.phase_monitor.reached(Phase.HOLD)
+            and not self.phase_monitor.push_suspended
+        )
         bias = loop.convoy_velocity(velocity) if travelling else np.zeros(2)
 
         nearest = self._nearest_index(view, agent.position)
@@ -1224,8 +1320,11 @@ class DBACTController:
         # push set entirely, and the correction costs more force than it buys aim.
         # Split like this, steering redistributes effort inside a stable arc.
         alignment = float(np.dot(normal, goal))
+        if self.phase_monitor.push_suspended:
+            loop.disarm()
         pushing = (
-            quorum >= self.params.min_push_agents
+            not self.phase_monitor.push_suspended
+            and quorum >= self.params.min_push_agents
             and self.phase_monitor.reached(Phase.CONTACT_READY)
             and alignment <= -self.params.push_side_threshold
             # A robot whose own estimate says the cargo has arrived stops being a
@@ -1249,6 +1348,7 @@ class DBACTController:
                 target_distance=distance,
                 dt=dt,
                 blocked=self._blocked_along(agent.agent_id),
+                braking=self.phase_monitor.reached(Phase.BRAKE),
             )
             # Press inward along the robot's own observed normal at the speed the
             # outer loop asks for. The depth it reaches is set by the object

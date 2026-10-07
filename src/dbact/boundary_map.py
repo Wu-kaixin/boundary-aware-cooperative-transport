@@ -124,11 +124,32 @@ class RegistrationResult:
     rotation: float = 0.0
     reference: np.ndarray = field(default_factory=lambda: np.zeros(2))
     yaw_clamped: bool = False
+    observable_direction: np.ndarray = field(default_factory=lambda: np.zeros(2))
+    quality: str = "unavailable"
 
     @property
     def observable(self) -> bool:
         """False when every matched normal was parallel: motion is unobservable."""
         return self.conditioning > 1e-3
+
+
+def _translation_quality(normal_matrix: np.ndarray, conditioning: float, matches: int) -> tuple[str, np.ndarray]:
+    """Label translation observability from the point-to-plane normal matrix.
+
+    The large-eigenvalue axis is the direction a range scan can see. A near-zero
+    eigenvalue is sliding along the surface. That component is not measured, so it
+    must not be reported as a credible zero.
+    """
+    values, vectors = np.linalg.eigh(np.asarray(normal_matrix, dtype=float))
+    direction = np.asarray(vectors[:, int(np.argmax(values))], dtype=float)
+    scale = float(np.linalg.norm(direction))
+    if scale > 0.0:
+        direction = direction / scale
+    if matches < 4:
+        return "unavailable", direction
+    if conditioning <= 1e-3:
+        return "degraded", direction
+    return "credible", direction
 
 
 @dataclass
@@ -203,6 +224,7 @@ class LocalBoundaryMap:
     rotation: dict[str, float] = field(default_factory=dict)
     angular_velocity: dict[str, float] = field(default_factory=dict)
     last_registration: dict[str, RegistrationResult] = field(default_factory=dict)
+    motion_quality: dict[str, str] = field(default_factory=dict)
 
     # ------------------------------------------------------------------ #
     # keys
@@ -246,7 +268,10 @@ class LocalBoundaryMap:
         results: dict[str, RegistrationResult] = {}
         shifted = False
         if not self.motion_compensation or len(scan) == 0 or len(self._keys) == 0 or dt <= 0.0:
+            for name in self.displacement:
+                self.motion_quality[name] = "unavailable"
             return results
+        self.motion_quality = {name: "unavailable" for name in self.displacement}
 
         for object_id in np.unique(scan.object_ids):
             name = str(object_id)
@@ -259,6 +284,7 @@ class LocalBoundaryMap:
                 continue
             results[name] = result
             self.last_registration[name] = result
+            self.motion_quality[name] = result.quality
             if result.matches:
                 # T2: rotate before translating, about the reference the solve used.
                 # The normals rotate with the surface -- a stored normal that did not
@@ -416,13 +442,17 @@ class LocalBoundaryMap:
         rhs = n.T @ residual
         trace = float(np.trace(normal_matrix))
         if trace <= 1e-12:
-            return RegistrationResult(object_id, np.zeros(2), len(residual), 0.0, 0.0, False)
+            return RegistrationResult(
+                object_id, np.zeros(2), len(residual), 0.0, 0.0, False,
+                reference=reference, quality="unavailable",
+            )
 
         damping = self.registration_damping * trace
         translation = np.linalg.solve(normal_matrix + damping * np.eye(2), rhs)
 
-        eigenvalues = np.linalg.eigvalsh(normal_matrix)
-        conditioning = float(max(eigenvalues[0], 0.0) / max(eigenvalues[1], 1e-12))
+        eigenvalues, _vectors = np.linalg.eigh(normal_matrix)
+        conditioning = float(max(eigenvalues[0], 0.0) / max(eigenvalues[-1], 1e-12))
+        quality, direction = _translation_quality(normal_matrix, conditioning, len(residual))
 
         limit = self.max_object_speed * dt
         norm = float(np.linalg.norm(translation))
@@ -432,7 +462,8 @@ class LocalBoundaryMap:
 
         rms = float(np.sqrt(np.mean((residual - n @ translation) ** 2)))
         return RegistrationResult(
-            object_id, translation, len(residual), rms, conditioning, clamped, reference=reference
+            object_id, translation, len(residual), rms, conditioning, clamped,
+            reference=reference, observable_direction=direction, quality=quality,
         )
 
     def _solve_se2(
@@ -466,7 +497,8 @@ class LocalBoundaryMap:
         trace = float(np.trace(normal_matrix))
         if trace <= 1e-12:
             return RegistrationResult(
-                object_id, np.zeros(2), len(residual), 0.0, 0.0, False, reference=reference
+                object_id, np.zeros(2), len(residual), 0.0, 0.0, False,
+                reference=reference, quality="unavailable",
             )
 
         damping = self.registration_damping * trace
@@ -475,8 +507,10 @@ class LocalBoundaryMap:
 
         # Translation observability is still read off the 2x2 block, so the meaning of
         # ``observable`` is unchanged.
-        block = np.linalg.eigvalsh(n.T @ n)
-        conditioning = float(max(block[0], 0.0) / max(block[1], 1e-12))
+        block = n.T @ n
+        block_values = np.linalg.eigvalsh(block)
+        conditioning = float(max(block_values[0], 0.0) / max(block_values[-1], 1e-12))
+        quality, direction = _translation_quality(block, conditioning, len(residual))
 
         # A rotation estimated from cells with no lever arm is a rotation estimated
         # from noise. The test is on the arm actually present in the data, in voxels,
@@ -507,6 +541,8 @@ class LocalBoundaryMap:
             rotation=theta,
             reference=reference,
             yaw_clamped=yaw_clamped,
+            observable_direction=direction,
+            quality=quality,
         )
 
     def _match_rows(

@@ -119,6 +119,26 @@ def test_an_inactive_robot_holds_no_state():
     assert loop.integral == pytest.approx(0.0)
 
 
+def test_braking_drops_the_integral_and_releases_an_object_that_is_already_too_fast():
+    loop = DirectionalProgressController(params())
+    run(loop, speed=0.0, steps=80, progress=0.2)
+    assert loop.integral > 0.0
+    fast = loop.update(GOAL, np.array([0.2, 0.0]), 0.7, 1.0, DT, braking=True)
+    assert loop.integral == 0.0
+    assert fast.effort == 0.0
+    slow = loop.update(GOAL, np.zeros(2), 0.7, 1.0, DT, braking=True)
+    assert slow.integral == 0.0
+    assert slow.effort == pytest.approx(params().kp * params().reference_speed)
+    loop = DirectionalProgressController(params())
+    run(loop, speed=0.0, steps=80, progress=0.2)
+    assert loop.integral > 0.0
+    loop.disarm()
+    assert loop.integral == 0.0
+    released = loop.update(GOAL, np.zeros(2), 0.2, 1.0, DT, active=False)
+    assert released.effort == 0.0
+    assert loop.integral == 0.0
+
+
 def test_the_convoy_feed_forward_is_the_estimate_itself_up_to_its_cap():
     loop = DirectionalProgressController(params(convoy_max=0.25))
     slow = loop.convoy_velocity(np.array([0.05, 0.02]))

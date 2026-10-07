@@ -152,8 +152,14 @@ def test_several_guards_can_open_in_one_step():
                 progress=0.9, target_distance=0.5),
         0,
     )
+    assert monitor.phase is Phase.BRAKE
+    assert monitor.frame_of(Phase.HOLD) is None
+    monitor.update(
+        signals(informed_agents=16, map_coverage=0.95, contact_ready=8, transport_active=6,
+                progress=0.9, target_distance=0.5, estimated_speed=0.0),
+        1,
+    )
     assert monitor.phase is Phase.HOLD
-    assert monitor.frame_of(Phase.TRANSPORT) == 0
 
 
 def test_phases_are_ordered_so_that_reached_means_at_least_this_far():

@@ -119,6 +119,10 @@ class DirectionalProgressController:
         self.integral = 0.0
         self.holding = False
 
+    def disarm(self) -> None:
+        """Drop push demand. Used on brake entry and while the push is suspended."""
+        self.integral = 0.0
+
     def reference_for(self, remaining: float) -> float:
         p = self.params
         if self.holding:
@@ -134,6 +138,7 @@ class DirectionalProgressController:
         dt: float,
         blocked: bool = False,
         active: bool = True,
+        braking: bool = False,
     ) -> TransportEffort:
         p = self.params
         d = np.asarray(direction, dtype=float).reshape(2)
@@ -151,6 +156,18 @@ class DirectionalProgressController:
 
         v_ref = self.reference_for(remaining)
         error = v_ref - v_par
+        if braking:
+            # The stop has been declared. Do not wind the integrator any further.
+            # A negative speed error means the object is already faster than the
+            # falling reference, so the press is released instead of stored.
+            self.integral = 0.0
+            if error <= 0.0:
+                return TransportEffort(0.0, v_ref, v_par, error, 0.0, remaining, False, False)
+            effort = float(np.clip(p.kp * error, 0.0, p.effort_max))
+            return TransportEffort(
+                effort=effort, reference_speed=v_ref, parallel_speed=v_par, error=error,
+                integral=0.0, remaining=remaining, holding=False, saturated=p.kp * error > p.effort_max,
+            )
 
         # Conditional integration: do not accumulate while the safety filter is
         # already pushing back along the press direction, and do not accumulate on
