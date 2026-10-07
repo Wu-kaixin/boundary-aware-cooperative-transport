@@ -323,6 +323,7 @@ class DBACTParams:
     # --- phase supervisor (D2) ---
     phase_informed_fraction: float = 0.55
     phase_map_coverage_min: float = 0.70
+    phase_recover_on_brake_progress: bool = False
     contact_dwell: int = 20
     brake_fraction: float = 0.80
 
@@ -419,6 +420,7 @@ class DBACTParams:
             contact_dwell=self.contact_dwell,
             transport_quorum=self.min_push_agents,
             brake_fraction=self.brake_fraction,
+            recover_on_brake_progress=self.phase_recover_on_brake_progress,
         )
 
 

@@ -34,6 +34,9 @@ class DeploymentVariant:
         if self.method=='no_direction_offsets': params=replace(params,lead_offset=None)
         if self.method=='no_exploration': params=replace(params,explore_gain=0.)
         modified=BoundaryAwareDensity.from_view(view,params,robot_positions=np.asarray([agents[i].position]+[agents[j].position for j in neighbors]),goal_direction=self.controller._goal_for(view))
+        if self.method=='no_arc_normalized' and float(np.sum(modified.weights))>0:
+            # Preserve total kernel mass after gap/exploration factors as well.
+            modified.weights *= float(np.sum(density.weights))/float(np.sum(modified.weights))
         alternate=self.base.compute(i,agents,neighbors,modified,domain)
         # All comparisons preserve the original mass and redeployment decisions.
         return replace(cell,centroid=alternate.centroid.copy())

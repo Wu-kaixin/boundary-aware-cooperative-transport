@@ -12,7 +12,7 @@ from dbact.cpu_budget import limit_blas_threads, ResourceSampler
 
 def digest(path): return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 def source_hashes():
-    return {p.relative_to(ROOT).as_posix():digest(p) for folder in ('src','scripts','configs') for p in sorted((ROOT/folder).rglob('*')) if p.is_file() and p.suffix in ('.py','.yaml')}
+    return {p.relative_to(ROOT).as_posix():digest(p) for folder in ('src','configs') for p in sorted((ROOT/folder).rglob('*')) if p.is_file() and p.suffix in ('.py','.yaml')}
 def worker(payload):
     case,folder,identity=payload; out=Path(folder);out.mkdir(parents=True,exist_ok=True)
     limit_blas_threads(1);start=time.perf_counter()
@@ -38,7 +38,9 @@ def main():
     parser.add_argument('--protocol',type=Path,required=True);parser.add_argument('--split',required=True)
     parser.add_argument('--workers',type=int,default=3);parser.add_argument('--resume',action='store_true');parser.add_argument('--out',type=Path)
     args=parser.parse_args(); protocol=yaml.safe_load(args.protocol.read_text(encoding='utf-8-sig'))
-    source=source_hashes();source_id=encode(source)
+    source=source_hashes()
+    for name in ('scripts/run_paper_simulation_study.py','scripts/run_deployment_pairs.py'):source[name]=digest(ROOT/name)
+    source_id=encode(source)
     if protocol.get('frozen_source_sha256') and protocol['frozen_source_sha256']!=source_id: raise RuntimeError('source differs from frozen protocol')
     cases=[c for c in protocol['cases'] if c['split']==args.split]
     if not cases: raise ValueError('empty split')
@@ -49,7 +51,10 @@ def main():
     manifest={'identity':identity,'source_files':source,'git_sha':subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),'workers':args.workers,'cases':len(cases),'started_utc':__import__('datetime').datetime.now(__import__('datetime').timezone.utc).isoformat()}
     old=out/'manifest.json'
     if old.exists() and json.loads(old.read_text())['identity']!=identity:raise RuntimeError('existing run has different identity; use a new directory')
-    dump(old,manifest);jobs=[];results=[]
+    dump(old,manifest)
+    for name in source:
+        target=out/'source_snapshot'/name;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes((ROOT/name).read_bytes())
+    jobs=[];results=[]
     for c in cases:
         case_identity={**identity,'case_sha256':encode(c)};folder=out/c['case_id'];file=folder/'case_result.json'
         if file.exists():

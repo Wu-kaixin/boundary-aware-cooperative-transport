@@ -61,6 +61,7 @@ class PhaseGates:
     transport_quorum: int = 3
     brake_fraction: float = 0.80
     hold_tolerance: float = 0.0
+    recover_on_brake_progress: bool = False
 
 
 @dataclass
@@ -117,7 +118,11 @@ class PhaseMonitor:
         if self.phase == Phase.ENCLOSE:
             return Phase.CONTACT_READY if self.quorum_streak >= g.contact_dwell else None
         if self.phase == Phase.CONTACT_READY:
-            return Phase.TRANSPORT if s.transport_active >= g.transport_quorum else None
+            # Diagnostic recovery: motion can begin during CONTACT_READY and the
+            # active-pusher quorum can disappear before its phase latch fires.
+            # Use the existing estimated brake threshold, never simulator truth.
+            recovered = g.recover_on_brake_progress and s.progress >= g.brake_fraction * s.target_distance
+            return Phase.TRANSPORT if s.transport_active >= g.transport_quorum or recovered else None
         if self.phase == Phase.TRANSPORT:
             return Phase.BRAKE if s.progress >= g.brake_fraction * s.target_distance else None
         if self.phase == Phase.BRAKE:

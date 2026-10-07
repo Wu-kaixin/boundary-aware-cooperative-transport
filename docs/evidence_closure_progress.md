@@ -17,3 +17,13 @@
 - Validation: 40 targeted tests passed (paper evaluator, contact dynamics, QP, theorem mode), including 12-frame instrumented/uninstrumented exact trajectory equality. Static and transport five-frame paired smoke runs completed. These are smoke checks, not formal experimental evidence.
 - Windows default GBK caused a read-only test failure; explicit UTF-8 fixed it. Run commands use PYTHONUTF8=1.
 - Full 600-frame static and 3000-frame transport reproduction starts next. No thresholds or horizons changed. task_completed remains unresolved pending protocol definition.
+
+## Stages 2–3 — measured checkpoint
+- Full original reproduction completed: 9 static local/oracle pairs (600 frames), 9 transport pairs (3000-frame watchdog). Source/config hashes and trajectories under runs/evidence_closure/baseline_*.
+- Independent path evaluation observed below-65-mm clearance in 8/9 local runs. L seed2: first control frame25, agent_14; path minimum 48.3328895 mm over full episode. At first violation sample-row residual remained positive. This is now new independent evidence, not reinterpretation of a bound as collision.
+- Candidate static fresh segments: all 9 complete 600 frames, no observed threshold violation; minimum across cases 65.8548473 mm. Mean robot displacement ranges .133–.284 m. Unknown regions and distribution shift remain unproved. Deployment quality/stagnation still to analyze.
+- Full regression at candidate checkpoint: 555 passed, 2 skipped. Phase recovery regressions: 16 passed.
+- C seed8 original: CONTACT_READY at 4.15s, TRANSPORT/BRAKE/HOLD never entered by 150s despite true motion; final phase guard estimated progress 3.25569m for target1.30439m, active pushers0. Final speed0 alone does not satisfy original settled condition. Absolute progress error1.79097m retained.
+- Diagnostic v1 contained invalid estimate_yaw config and all10 cases failed before simulation. Errors retained in study_v1/diagnostic. v2 uses correct estimate_object_yaw; complete configs prevalidated. This is implementation failure, not algorithm failure.
+- v3 adds a separate estimated-progress phase-recovery diagnostic using unchanged brake threshold; default off. Main comparison continues with original downstream.
+- Three-method development comparison and single-factor diagnostic experiments running. No independent test cases consumed yet.
