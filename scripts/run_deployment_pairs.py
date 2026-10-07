@@ -174,8 +174,9 @@ def static_arm(cfg, seed, variant, frames, out):
 
 def transport_arm(cfg, seed, variant, frames, out):
     env = SimulationEnvironment(cfg, seed=seed)
-    if variant == "nearest_observed_target":
-        env.controller.cvt = NearestObservedDeployment(env.controller)
+    from dbact.deployment_variants import DeploymentVariant
+    if variant != "boundary_cvt":
+        env.controller.cvt = DeploymentVariant(env.controller,variant)
     initial = np.vstack([a.position for a in env.agents])
     cid = env.cargoes[0].object_id
     goal = env.goal_directions[cid]
@@ -231,7 +232,7 @@ def transport_arm(cfg, seed, variant, frames, out):
                      "estimated_velocities":{a.agent_id:current.controller.maps[a.agent_id].object_velocity(cid).tolist() for a in current.agents},
                      "integrals":{key:float(loop.integral) for key,loop in current.controller.transport_loops.items()},
                      "diagnostics":[vars(d).copy() for d in current.controller.diagnostics],
-                     "barrier_scales":[float(f.barrier_scale) for f in current.controller._last_filter_results],
+                     "solver_statistics":current.controller.safety.stats.as_dict(),
                      "normal_only_forward_capacity": max_forward,
                      "normal_only_torque_interval": [torque_negative, torque_positive],
                      "actual_net_force": report.net_force.tolist(), "actual_net_torque": report.net_torque,

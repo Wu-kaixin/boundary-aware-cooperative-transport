@@ -932,6 +932,8 @@ class SafetyFilter:
         object_velocity: np.ndarray | None = None,
         boundary_point_velocities: np.ndarray | None = None,
         obstacle_vertices: np.ndarray | None = None,
+        observed_segments: list | None = None,
+        observation_time: float = 0.0,
     ) -> FilterResult:
         u_nom = np.asarray(nominal_velocity, dtype=float).reshape(2)
         speed = float(np.linalg.norm(u_nom))
@@ -966,6 +968,17 @@ class SafetyFilter:
                 boundary_point_velocities,
                 obstacle_vertices=obstacle_vertices,
             )
+
+        if observed_segments is not None and self.params.enable_object_rows:
+            from .local_boundary_features import segment_rows
+            normals, margins = segment_rows(position, observed_segments, self.params, observation_time)
+            extra_A, extra_b, extra_free, extra_h = self._finish_object_rows(
+                normals, margins, np.zeros(2), None)
+            # Supplement sample rows; preserve all accepted reachable features.
+            A_obj = np.vstack([A_obj, extra_A])
+            b_obj = np.concatenate([b_obj, extra_b])
+            b_obj_free = np.concatenate([b_obj_free, extra_free])
+            h_obj = np.concatenate([h_obj, extra_h])
 
         # Stack order matters for active-row accounting and for the scaled-barrier
         # split: agent | wall | object. Walls are hard domain constraints and are

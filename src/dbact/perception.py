@@ -81,6 +81,11 @@ class RayCastBoundarySensor:
     ) -> BoundaryView:
         """The same scan as ``sense``, as arrays. This is the inner-loop form."""
         returns = self.raw_returns(agent, cargoes, timestamp)
+        if getattr(self, 'record_local_features', False):
+            from .local_boundary_features import scan_segments
+            if not hasattr(self, 'local_features'): self.local_features = {}
+            self.local_features[agent.agent_id] = scan_segments(
+                returns, agent.position, timestamp, noise_std=self.params.range_noise_std)
         view = self._estimate_normals_view(agent, returns)
         if apply_gate and len(view):
             view = view.select(view.confidence >= self.params.min_confidence)

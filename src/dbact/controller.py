@@ -338,6 +338,7 @@ class DBACTParams:
     # Map provenance: "oracle" injects the true polygon; "local" keeps the
     # existing ray-cast / voxel map but freezes registration motion.
     theorem_map_source: str = "oracle"
+    theorem_local_segments: bool = False  # experimental fresh-scan rows; no safety theorem
     theorem_oracle_spacing: float = 0.04
     # When True, coordinate clipping is off and illegal updates abort.
     theorem_disable_clipping: bool = True

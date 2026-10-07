@@ -528,6 +528,7 @@ def theorem_step(
             controller._views[agent.agent_id] = view
         scans = [view for _ in agents]
     else:
+        controller.sensor.record_local_features = controller.params.theorem_local_segments
         scans = [controller.sensor.sense_view(agent, cargoes, timestamp) for agent in agents]
         for i, agent in enumerate(agents):
             local_map = controller.maps[agent.agent_id]
@@ -575,6 +576,12 @@ def theorem_step(
         points, normals, _v_obj, _v_points = controller._object_rows_from_map(
             agent.agent_id, agent.position, view
         )
+        features = None
+        if source == 'local' and controller.params.theorem_local_segments:
+            features = controller.sensor.local_features.get(agent.agent_id, [])
+            if not features:
+                u_nom = np.zeros(2)
+                modes[-1] = 'local_unknown_feature_hold'
         result = controller.safety.filter_velocity(
             agent.position,
             u_nom,
@@ -584,6 +591,8 @@ def theorem_step(
             object_velocity=np.zeros(2),
             boundary_point_velocities=None,
             obstacle_vertices=cargoes[0].vertices if source == "oracle" and cargoes else None,
+            observed_segments=features,
+            observation_time=timestamp,
         )
         filter_results.append(result)
         if not result.feasible or result.status == "infeasible":
