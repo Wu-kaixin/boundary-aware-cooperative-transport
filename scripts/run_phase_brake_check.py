@@ -22,7 +22,7 @@ def job(args):
     from run_deployment_pairs import config_for, transport_arm
 
     shape, seed, variant = args
-    out = ROOT / "runs/evidence_closure/phase_brake_v3" / f"{shape}_seed{seed}_{variant}"
+    out = ROOT / "runs/evidence_closure/phase_brake_v7" / f"{shape}_seed{seed}_{variant}"
     out.mkdir(parents=True, exist_ok=True)
     result = transport_arm(config_for(6, shape), seed, variant, 3000, out)
     phases = result["events"]

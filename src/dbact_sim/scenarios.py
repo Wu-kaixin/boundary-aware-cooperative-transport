@@ -160,6 +160,47 @@ def build_agents(cfg: dict, seed: int = 0) -> list[AgentState]:
     return [AgentState(agent_id=f"agent_{i:02d}", position=p) for i, p in enumerate(positions)]
 
 
+def polygon_circumradius(cargo, origin: np.ndarray) -> float:
+    """Farthest vertex from the layout origin. Offline geometry only."""
+    return float(np.max(np.linalg.norm(np.asarray(cargo.vertices, dtype=float) - origin, axis=1)))
+
+
+def legal_scatter_radii(cfg: dict, cargoes: list, robot_radius: float) -> tuple[float, float, list[str]]:
+    """Inner radius must leave one robot radius outside the vertex ball.
+
+    The configured annulus is kept when it already satisfies that floor. A scaled
+    object that would intersect the old annulus raises the inner radius and keeps
+    the same annulus width. Robot radius and the clearance contract are unchanged.
+    """
+    agents = cfg.get("agents", {})
+    radius_min = float(agents.get("radius_min", 0.9))
+    radius_max = float(agents.get("radius_max", 2.2))
+    center = np.asarray(agents.get("center", [4.0, 4.0]), dtype=float)
+    floor = float(robot_radius)
+    if cargoes:
+        floor = max(polygon_circumradius(cargo, center) + float(robot_radius) for cargo in cargoes)
+    notes: list[str] = []
+    if radius_min + 1e-9 < floor:
+        width = max(radius_max - radius_min, 0.2)
+        notes.append(
+            f"scatter inner radius raised from {radius_min:.4f} m to {floor:.4f} m so that "
+            f"true vertex clearance stays at least the robot radius {robot_radius:.4f} m"
+        )
+        radius_min = floor
+        if radius_max < radius_min + 0.05:
+            radius_max = radius_min + width
+    domain = domain_from_config(cfg)
+    room = min(center[0] - domain[0], domain[1] - center[0], center[1] - domain[2], domain[3] - center[1])
+    if radius_max > room:
+        radius_max = room
+    if radius_max <= radius_min + 1e-6:
+        raise ContractViolation(
+            "scaled object does not leave a legal scatter annulus inside the workspace: "
+            f"required inner radius {radius_min:.4f} m exceeds the {room:.4f} m inset"
+        )
+    return radius_min, radius_max, notes
+
+
 def assert_initial_state_valid(
     agents: list[AgentState],
     cargoes: list,
@@ -360,6 +401,7 @@ __all__ = [
     "is_paper_config",
     "domain_from_config",
     "build_agents",
+    "legal_scatter_radii",
     "assert_initial_state_valid",
     "build_cargoes",
     "goal_directions_from_config",

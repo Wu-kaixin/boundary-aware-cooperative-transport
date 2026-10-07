@@ -95,6 +95,15 @@ class TransportControlParams:
         return max(0.0, (self.effort_max - self.kp * self.reference_speed) / self.ki)
 
 
+def reference_stopping_lead(brake_gain: float, reference_speed: float) -> float:
+    """Distance at which the velocity reference starts to fall.
+
+    This is ``reference_speed / brake_gain``. It is not ``v^2 / (2 a)`` with
+    ``a = brake_gain * reference_speed``, which is only a gain product.
+    """
+    return max(float(reference_speed), 0.0) / max(float(brake_gain), 1e-6)
+
+
 @dataclass
 class TransportEffort:
     effort: float

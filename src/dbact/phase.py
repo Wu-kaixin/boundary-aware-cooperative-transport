@@ -110,6 +110,7 @@ class PhaseMonitor:
     short_of_target: bool = False
     contact_recovery_failed: bool = False
     estimate_stopped: bool = False
+    brake_push_quorum: bool = False
 
     def __post_init__(self) -> None:
         self.entered.setdefault(Phase.SEARCH.label, 0)
@@ -193,6 +194,7 @@ class PhaseMonitor:
         self.overshoot = signals.progress > signals.target_distance + tolerance
         self.short_of_target = signals.progress < signals.target_distance - tolerance
         self.push_suspended = False
+        self.brake_push_quorum = signals.transport_active >= self.gates.transport_quorum
 
     def _stop_for_estimate(self, signals: PhaseSignals) -> bool:
         return (

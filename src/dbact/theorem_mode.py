@@ -579,9 +579,11 @@ def theorem_step(
         features = None
         if source == 'local' and controller.params.theorem_local_segments:
             features = controller.sensor.local_features.get(agent.agent_id, [])
+            # An empty fresh-segment list is missing observation, not a geometric
+            # constraint. Sampled map rows still apply. Zeroing the nominal here
+            # held the team still and was scored as a safe deployment.
             if not features:
-                u_nom = np.zeros(2)
-                modes[-1] = 'local_unknown_feature_hold'
+                modes[-1] = 'local_segment_unavailable'
         result = controller.safety.filter_velocity(
             agent.position,
             u_nom,

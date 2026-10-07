@@ -12,6 +12,7 @@ trusting whoever reports it.
 from __future__ import annotations
 
 import json
+import copy
 from collections.abc import Callable
 from dataclasses import dataclass, field, replace
 from pathlib import Path
@@ -42,6 +43,7 @@ from .scenarios import (
     controller_params_from_config,
     domain_from_config,
     goal_directions_from_config,
+    legal_scatter_radii,
     scripted_params_from_config,
     tasks_from_config,
     validate_config,
@@ -84,8 +86,19 @@ class SimulationEnvironment:
         self.seed = int(seed)
         self.dt = float(config.get("dt", 0.05))
         self.domain = domain_from_config(config)
-        self.agents = build_agents(config, seed=self.seed)
         params_preview = controller_params_from_config(config)
+        preview = build_cargoes(config, seed=self.seed)
+        agent_config = config
+        self.layout_notes: list[str] = []
+        if str(config.get("agents", {}).get("layout", "grid")) == "scatter":
+            radius_min, radius_max, self.layout_notes = legal_scatter_radii(
+                config, preview, params_preview.robot_radius
+            )
+            if self.layout_notes:
+                agent_config = copy.deepcopy(config)
+                agent_config["agents"]["radius_min"] = radius_min
+                agent_config["agents"]["radius_max"] = radius_max
+        self.agents = build_agents(agent_config, seed=self.seed)
         self.cargoes = build_cargoes(
             config,
             seed=self.seed,

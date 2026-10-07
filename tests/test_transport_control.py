@@ -151,3 +151,12 @@ def test_the_dead_band_keeps_the_integral_off_estimator_noise():
     loop = DirectionalProgressController(params(deadband_fraction=0.9))
     run(loop, speed=0.054, steps=100)
     assert loop.integral == pytest.approx(0.0)
+
+
+def test_stopping_lead_is_the_reference_ramp_not_a_fake_deceleration():
+    from dbact.transport_control import reference_stopping_lead
+    lead = reference_stopping_lead(0.3, 0.055)
+    assert lead == pytest.approx(0.055 / 0.3)
+    fake = (0.2 ** 2) / (2 * 0.3 * 0.055)
+    assert fake > 1.0
+    assert lead < 0.2

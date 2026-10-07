@@ -69,6 +69,7 @@ from .theorem_mode import (
 from .transport_control import (
     DirectionalProgressController,
     TransportControlParams,
+    reference_stopping_lead,
 )
 from .types import AgentState, BoundaryView, ControlCommand
 
@@ -949,12 +950,12 @@ class DBACTController:
         )
 
     def _estimated_stop(self, object_id: str | None) -> tuple[float, float]:
-        """Along-track speed and the distance the declared brake model needs.
+        """Along-track speed and the lead of the existing velocity reference.
 
-        ``v_ref = clip(brake_gain * remaining, 0, reference_speed)`` starts
-        shedding reference speed ``reference_speed / brake_gain`` before the
-        target. A faster estimate adds ``v^2 / (2 a)`` with ``a = brake_gain *
-        reference_speed``. Both use the robots' registration, not the simulator.
+        ``v_ref`` begins to fall ``reference_speed / brake_gain`` before the
+        estimated target. Excess speed is handled by retracting the ring, not by
+        pretending that gain product is a physical deceleration. Neither quantity
+        reads the simulator pose.
         """
         if object_id is None or object_id not in self.goal_directions:
             return 0.0, 0.0
@@ -966,10 +967,11 @@ class DBACTController:
         speed = float(np.median(speeds)) if speeds else 0.0
         brake_gain = max(float(self.params.brake_gain), 1e-6)
         reference = max(float(self.params.transport_reference_speed), 0.0)
-        deceleration = max(brake_gain * max(reference, 1e-6), 1e-6)
-        kinematic = max(speed, 0.0) ** 2 / (2.0 * deceleration)
-        scheduled = reference / brake_gain
-        return speed, max(kinematic, scheduled)
+        # ``brake_gain * reference_speed`` is the slope of the velocity reference,
+        # not the object's stopping acceleration. Treating it as ``a`` in
+        # ``v^2/(2a)`` opened the ring about a metre early at 0.2 m/s and the
+        # asymmetric unload created the lateral endpoint error.
+        return speed, reference_stopping_lead(brake_gain, reference)
 
     def _should_retract(self) -> bool:
         """Open the ring when estimated speed is above the falling brake reference.
@@ -985,12 +987,26 @@ class DBACTController:
         if object_id is None:
             return True
         remaining = float(self.tasks[object_id].distance) - float(self.team_progress.get(object_id, 0.0))
+        # Reaching the estimated target must open the ring. Waiting for low speed
+        # first leaves the contact force on, so the speed never falls.
+        if remaining <= 0.0:
+            return True
+        if self._brake_has_push_quorum():
+            return False
         reference = float(np.clip(
             self.params.brake_gain * max(remaining, 0.0),
             0.0,
             self.params.transport_reference_speed,
         ))
         return float(self.phase_signals.estimated_speed) > reference + 0.02
+
+    def _brake_has_push_quorum(self) -> bool:
+        """A full push arc can bleed speed with the transport loop.
+
+        Below that count the contact force is not under the push law, which is
+        the C seed 8 failure. The quorum is not required in order to enter BRAKE.
+        """
+        return self.phase_monitor.brake_push_quorum
 
     # ------------------------------------------------------------------ #
     # nominal control law
@@ -1278,7 +1294,8 @@ class DBACTController:
 
         velocity = self.maps[agent.agent_id].object_velocity(object_id)
         loop = self.transport_loops[agent.agent_id]
-        if self.phase_monitor.reached(Phase.BRAKE) or self.phase_monitor.push_suspended:
+        incomplete_brake = self.phase_monitor.reached(Phase.BRAKE) and not self._brake_has_push_quorum()
+        if incomplete_brake or self.phase_monitor.push_suspended:
             loop.disarm()
 
         # Station-keeping feed-forward for every robot that can see the object,
@@ -1348,7 +1365,7 @@ class DBACTController:
                 target_distance=distance,
                 dt=dt,
                 blocked=self._blocked_along(agent.agent_id),
-                braking=self.phase_monitor.reached(Phase.BRAKE),
+                braking=self.phase_monitor.reached(Phase.BRAKE) and not self._brake_has_push_quorum(),
             )
             # Press inward along the robot's own observed normal at the speed the
             # outer loop asks for. The depth it reaches is set by the object
