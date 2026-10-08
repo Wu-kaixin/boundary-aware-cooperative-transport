@@ -987,8 +987,12 @@ class DBACTController:
         if object_id is None:
             return True
         remaining = float(self.tasks[object_id].distance) - float(self.team_progress.get(object_id, 0.0))
-        # Reaching the estimated target must open the ring. Waiting for low speed
-        # first leaves the contact force on, so the speed never falls.
+        # Open the ring once the estimate has reached the target. Doing it at the
+        # reference ramp (0.18 m) was tried on C seed 5 and increased the
+        # overshoot from 0.150 m to 0.161 m, so that earlier opening is not used.
+        # An unavailable estimate cannot support the remaining distance.
+        if self.team_estimate_quality == "unavailable":
+            return True
         if remaining <= 0.0:
             return True
         if self._brake_has_push_quorum():

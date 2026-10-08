@@ -578,6 +578,9 @@ def theorem_step(
         )
         features = None
         if source == 'local' and controller.params.theorem_local_segments:
+            from .local_boundary_features import gap_guarded_samples
+            if len(points):
+                points, normals = gap_guarded_samples(agent.position, points, normals)
             features = controller.sensor.local_features.get(agent.agent_id, [])
             # An empty fresh-segment list is missing observation, not a geometric
             # constraint. Sampled map rows still apply. Zeroing the nominal here

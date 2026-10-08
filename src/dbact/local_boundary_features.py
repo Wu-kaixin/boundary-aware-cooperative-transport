@@ -42,6 +42,34 @@ def scan_segments(returns, origin, timestamp, *, max_gap=.08, residual_max=.004,
     return output
 
 
+def gap_guarded_samples(origin, points, normals):
+    """Pull each sample toward the sensor by half the local gap.
+
+    A sample point is not the true nearest boundary. On L seed 2 the nearest
+    stored sample was 76.6 mm from the robot while the convex corner, lying
+    between two samples 40.5 mm apart, was 65.1 mm away. Half that chord is a
+    geometric allowance for the unobserved corner, not a change of r_safe.
+    """
+    origin = np.asarray(origin, dtype=float).reshape(2)
+    points = np.asarray(points, dtype=float).reshape(-1, 2)
+    normals = np.asarray(normals, dtype=float).reshape(-1, 2)
+    if len(points) < 2:
+        return points, normals
+    guarded = points.copy()
+    for index, point in enumerate(points):
+        others = np.linalg.norm(points - point, axis=1)
+        others[index] = np.inf
+        gap = float(np.min(others))
+        if not np.isfinite(gap) or gap <= 0.0:
+            continue
+        direction = origin - point
+        length = float(np.linalg.norm(direction))
+        if length < 1e-9:
+            continue
+        guarded[index] = point + direction / length * min(0.5 * gap, 0.04)
+    return guarded, normals
+
+
 def segment_rows(position, features, params, timestamp):
     """All observed segments in the one-hold switch cover, without row truncation."""
     features=[f for f in features if 0 <= timestamp-f.timestamp <= params.dt+1e-9]
