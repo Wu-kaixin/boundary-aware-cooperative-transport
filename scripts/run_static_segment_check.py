@@ -23,7 +23,7 @@ def main():
         cfg = config_for(5, "l_shape")
         cfg["controller"]["theorem_local_segments"] = segments
         name = "segments" if segments else "sample_rows"
-        out = ROOT / "runs/evidence_closure/static_segment_v1" / f"l_shape_seed2_{name}"
+        out = ROOT / "runs/evidence_closure/static_segment_v2" / f"l_shape_seed2_{name}"
         out.mkdir(parents=True, exist_ok=True)
         result = static_arm(cfg, 2, "local", 600, out)
         print({
