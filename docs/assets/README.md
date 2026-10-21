@@ -17,12 +17,6 @@ Current paper and closed-loop figures must come from the consolidation commit's 
 | `d10-gate-tradeoff.png` | `runs/readme/d10_enc/figF_gate_tradeoff.png` | D10-ENC: transition delay against the enclosure each candidate gate certifies. |
 | `static-deployment-comparison.png` | `scripts/build_consolidation_report.py` from `runs/paper/jeh_matrix` | Static oracle-map theory validation, L/rectangle/C, seed 2. |
 
-Historical, not a paper configuration (`configs/sim/paper_like_irregular_moving_cargo.yaml`):
-
-| File | Source | Purpose |
-| --- | --- | --- |
-| `dbact-moving-cargo.gif` | `runs/paper_like_irregular_moving_cargo/animation.gif` | Withdrawn coverage-era animation. Do not use as the README hero. |
-| `dbact-density-cvt-frame.png` | `runs/paper_like_irregular_moving_cargo/figures/FIG_520.png` | Withdrawn paper-style frame. |
-| `dbact-coverage-curve.png` | `runs/paper_like_irregular_moving_cargo/coverage_rate_curve.png` | Withdrawn coverage curve. |
-| `dbact-trajectory.png` | `runs/paper_like_irregular_moving_cargo/trajectory.png` | Withdrawn trajectory still. |
-| `dbact-final-snapshot.png` | `runs/paper_like_irregular_moving_cargo/final_snapshot.png` | Withdrawn final snapshot. |
+Withdrawn coverage-era display assets were removed during cleanup. Their limitations
+remain documented in [the refactor audit](../REFACTOR_2026-08-08.md); historical versions
+are available in Git. The underlying scenario remains a non-paper configuration.

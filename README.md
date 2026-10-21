@@ -85,7 +85,7 @@ runs/                       本地生成结果（不提交）
 - [重构记录](docs/REFACTOR_2026-10-21.md)记录远程/本地比较、迁移与验证范围。
 
 <!-- CONSOLIDATION_RESULTS_START -->
-较早的 Gate 0–6 汇总见 [consolidation](docs/results/consolidation/results.md)；其中数字是历史运行结果。[重构前 README](docs/archive/README_before_ccta2027.md)保留原有叙述。
+较早的 Gate 0–6 汇总见 [consolidation](docs/results/consolidation/results.md)；其中数字是历史运行结果。背景与撤回记录见[历史闭环说明](docs/HISTORICAL_CLOSED_LOOP_README.md)。
 <!-- CONSOLIDATION_RESULTS_END -->
 
 平台和硬件流程见 [MAS 集成说明](docs/MAS_INTEGRATION.md)；旧的闭环开发记录见 [CLOSED_LOOP_D](docs/CLOSED_LOOP_D.md)。
