@@ -22,14 +22,14 @@ import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
-from dbact.boundary_density import BoundaryAwareDensity, DensityParams  # noqa: E402
-from dbact.boundary_map import LocalBoundaryMap  # noqa: E402
+from dbact.deployment.density import BoundaryAwareDensity, DensityParams  # noqa: E402
+from dbact.sensing.boundary_map import LocalBoundaryMap  # noqa: E402
 from dbact.cargo import Cargo  # noqa: E402
 from dbact.contact_dynamics import ContactParams, PenaltyContactModel  # noqa: E402
 from dbact.geometry import points_in_polygon, signed_distance_to_polygon  # noqa: E402
-from dbact.local_cvt import LocalCVT, coverage_cost  # noqa: E402
+from dbact.deployment.cvt import LocalCVT, coverage_cost  # noqa: E402
 from dbact.metrics import signed_clearances  # noqa: E402
-from dbact.perception import (  # noqa: E402
+from dbact.sensing.sensor import (  # noqa: E402
     LegacyProximitySampler,
     PerceptionParams,
     RayCastBoundarySensor,

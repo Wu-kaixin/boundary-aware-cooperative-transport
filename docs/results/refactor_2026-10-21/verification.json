@@ -1,0 +1,61 @@
+{
+  "semantic_migration": {
+    "controller": true,
+    "agent_control": true,
+    "phase": true,
+    "transport_control": true,
+    "perception": true,
+    "boundary_map": true,
+    "local_boundary_features": true,
+    "boundary_density": true,
+    "local_cvt": true,
+    "deployment_variants": true,
+    "theorem_mode": true,
+    "safety_filter": true,
+    "qp2d": true,
+    "paired_static_arm": true,
+    "paired_transport_arm": true,
+    "paired_config_for": true,
+    "paired_run_pair": true
+  },
+  "serial_parallel": {
+    "static_rectangle_local": "identical measured results (wall time excluded)",
+    "static_rectangle_oracle": "identical measured results (wall time excluded)",
+    "transport_c_cvt": "identical measured results (wall time excluded)",
+    "transport_c_nearest": "identical measured results (wall time excluded)",
+    "transport_c_spacing": "identical measured results (wall time excluded)"
+  },
+  "parallel_execution_errors": 0,
+  "serial_execution_errors": 0,
+  "package_discovery": "all five new subpackages included by setuptools",
+  "preexisting_files_unchanged": [
+    "docs/results/evidence_closure/professor_figures/captions.md",
+    "docs/results/evidence_closure/professor_figures/figure1_problem.png",
+    "docs/results/evidence_closure/professor_figures/figure2_method.png",
+    "docs/results/evidence_closure/professor_figures/figure3_brake.png",
+    "docs/results/evidence_closure/professor_figures/figure4_methods.png",
+    "docs/results/evidence_closure/professor_figures/figure5_safety.png",
+    "scripts/render_professor_figures.py",
+    "tests/test_gap_guard.py",
+    "tests/test_push_cone.py"
+  ],
+  "preexisting_moved_implementations": "AST equivalence verified against preserved pre-refactor files",
+  "historical_files_verified": 104,
+  "active_document_links": "PASS",
+  "tests": {
+    "passed": 602,
+    "skipped": 2,
+    "failed": 0,
+    "log": "runs/refactor_2026-10-21/pytest-final.txt"
+  },
+  "validated_workflows": [
+    "parallel study",
+    "serial study",
+    "verified resume",
+    "legacy paired entry point",
+    "simulate CLI",
+    "evidence tables and figures"
+  ],
+  "branch": "paper/boundary-aware-safe-deployment",
+  "source_sha256": "916a6f3780afad933702862130e4ea2f9c87d36fcc974d984da8c5f9bf6924a5"
+}

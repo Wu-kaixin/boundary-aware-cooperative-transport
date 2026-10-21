@@ -18,7 +18,7 @@ from .visualization import (
 )
 
 
-def main() -> None:
+def main(argv=None) -> None:
     parser = argparse.ArgumentParser(description="Run a DBACT simulation scenario.")
     parser.add_argument("--config", required=True, help="Path to scenario YAML file.")
     parser.add_argument("--steps", type=int, default=400, help="Number of simulation steps.")
@@ -41,7 +41,7 @@ def main() -> None:
         default="",
         help="Comma-separated iteration indices for paper-style FIG outputs. Defaults to 0/25/50/75/100 percent.",
     )
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
 
     cfg = load_yaml(args.config)
     env = SimulationEnvironment(cfg, seed=args.seed)

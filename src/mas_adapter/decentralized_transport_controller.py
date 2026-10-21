@@ -16,7 +16,7 @@ from typing import Any
 
 import numpy as np
 
-from dbact.controller import DBACTController, DBACTParams
+from dbact.control.controller import DBACTController, DBACTParams
 from dbact.types import AgentState
 from mas_adapter.object_observer import ObjectObserver
 

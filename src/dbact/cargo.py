@@ -17,7 +17,7 @@ from typing import Iterable
 
 import numpy as np
 
-from .geometry import (
+from dbact.geometry import (
     closest_boundary_point_and_normal,
     ensure_ccw,
     make_circle,

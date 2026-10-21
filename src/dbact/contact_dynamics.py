@@ -52,8 +52,8 @@ from dataclasses import dataclass, field
 
 import numpy as np
 
-from .cargo import Cargo
-from .types import AgentState
+from dbact.cargo import Cargo
+from dbact.types import AgentState
 
 
 @dataclass

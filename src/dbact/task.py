@@ -37,7 +37,7 @@ from dataclasses import dataclass
 
 import numpy as np
 
-from .contracts import ContractViolation
+from dbact.contracts import ContractViolation
 
 
 @dataclass(frozen=True)

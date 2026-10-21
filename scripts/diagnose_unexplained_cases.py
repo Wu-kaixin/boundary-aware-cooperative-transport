@@ -48,7 +48,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from dbact.metrics import min_inter_agent_distance, strict_boundary_coverage  # noqa: E402
-from dbact.phase import Phase  # noqa: E402
+from dbact.control.phase import Phase  # noqa: E402
 from dbact_sim.environment import SimulationEnvironment  # noqa: E402
 from dbact_sim.scenarios import load_yaml  # noqa: E402
 

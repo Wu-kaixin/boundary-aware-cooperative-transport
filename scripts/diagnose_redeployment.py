@@ -46,7 +46,7 @@ from dbact.diagnosis import (
 )
 from dbact.geometry import polygon_perimeter
 from dbact.metrics import min_inter_agent_distance
-from dbact.phase import Phase
+from dbact.control.phase import Phase
 from dbact_sim.environment import SimulationEnvironment
 from dbact_sim.scenarios import load_yaml
 

@@ -20,9 +20,9 @@ from pathlib import Path
 import numpy as np
 
 from dbact.contracts import ClosedLoopContract, DirectionalProgressContract
-from dbact.controller import DBACTController
+from dbact.control.controller import DBACTController
 from dbact.error_audit import ErrorAudit
-from dbact.phase import Phase
+from dbact.control.phase import Phase
 from dbact.metrics import (
     boundary_coverage,
     directional_progress,
@@ -163,7 +163,7 @@ class SimulationEnvironment:
         )
         self.theorem_abort: dict | None = None
         if getattr(params, "theorem_mode", False):
-            from dbact.theorem_mode import freeze_cargoes
+            from dbact.deployment.theorem import freeze_cargoes
 
             freeze_cargoes(self.cargoes)
 
@@ -226,7 +226,7 @@ class SimulationEnvironment:
     # ------------------------------------------------------------------ #
 
     def step(self) -> None:
-        from dbact.theorem_mode import TheoremModeAbort
+        from dbact.deployment.theorem import TheoremModeAbort
 
         try:
             commands = self.controller.step(self.agents, self.cargoes, self.t, self.dt)

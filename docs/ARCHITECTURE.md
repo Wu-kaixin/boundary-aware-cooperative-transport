@@ -1,81 +1,84 @@
 # Architecture
 
-Current as of the C1–C3 + S1–S7 rebuild; see
-[REFACTOR_2026-08-08.md](REFACTOR_2026-08-08.md) for results and for what was
-withdrawn.
+Current structure: 21 October 2026, branch `paper/boundary-aware-safe-deployment`.
+See [the migration record](REFACTOR_2026-10-21.md) for preservation and verification.
+
+## Responsibilities
+
+| Layer | Canonical implementation | Responsibility |
+| --- | --- | --- |
+| Sensing | `dbact.sensing.sensor`, `.boundary_map`, `.features` | Occlusion-respecting ranges, per-agent maps and empirical local segments |
+| Deployment | `dbact.deployment.density`, `.cvt`, `.variants` | Boundary measure, limited-range CVT and pre-CONTACT_READY interventions |
+| Static reference | `dbact.deployment.theorem` | Delimited static oracle/local runtime and hold diagnostics |
+| Safety | `dbact.safety.filter`, `.qp2d` | Hard constraint construction and planar minimum-norm solve |
+| Control | `dbact.control.controller`, `.agent_control`, `.phase`, `.transport` | Wiring, phases, single-agent interface and transport commands |
+| Shared model | `dbact.types`, `.geometry`, `.cargo`, `.*_dynamics` | Data, geometry, rigid-body and contact models |
+| Contracts | `dbact.contracts`, `.provenance` | Declared backend, safety/success rules and reproducibility |
+| Simulation | `dbact_sim.environment`, `.scenarios` | Truth geometry for sensing/physics and state evolution |
+| Evaluation | `dbact_sim.paper_evaluation` | Independent truth-only metrics; no feedback into control |
+| Experiments | `dbact_sim.experiments` | Protocols, paired episodes, snapshots, receipts and statistics |
+| Integration | `mas_adapter` | MAS and RoboMaster bridge; separate from paper reproduction |
+
+Old top-level module paths are compatibility aliases to the same Python module objects.
+Classes, mutable module state, exceptions and monkeypatches retain identity across paths.
+Internal imports use canonical paths. Moving modules changes no control law. The pre-existing
+uncommitted gap-guard and push-cone changes were retained.
+
+## Data and information flow
 
 ```text
-src/dbact        core algorithm modules
-src/dbact_sim    standalone simulation and visualization
-src/mas_adapter  integration layer for MAS-public / RoboMaster S1
+Simulation truth --> ray sensor --> local observations --> local map
+       |                                  |
+       |                           density --> local CVT --> phase / nominal command
+       |                                  |                         |
+       |                             local boundary rows --> hard safety QP
+       |                                                            |
+       +---------------------- physics <--------------------- command
+       |
+       +---------------------- independent evaluator --> recorded metrics
 ```
 
-## Contract layer
+The core never imports `dbact_sim`, experiment scripts or `mas_adapter`.
+`tests/test_architecture.py` enforces this dependency direction across the core tree.
+The simulator may pass truth into the sensor and contact engine. Local control receives
+observations rather than truth polygons. Static oracle mode explicitly has different
+information permissions and must be reported separately.
 
-Asserted before any controller is constructed, so a configuration that cannot
-produce the experiment it describes fails immediately rather than after a run.
+The dependency graph is not a strict pipeline: safety and deployment share geometry and
+contracts; static hold diagnostics use safety helpers. The theorem runtime imports controller
+diagnostics lazily to avoid an import cycle. Subpackage initializers contain documentation;
+`dbact.__init__` preserves the public API.
 
-- `contracts.py` — C1 contact/safety, C2 solver provenance, C3 success criterion,
-  plus the coverage contract `R_l <= R_comm/2`.
-- `provenance.py` — git SHA, config hash, and BLAKE2-derived frame seeds, so a
-  run is reproducible and attributable. Python's built-in `hash` is deliberately
-  not used as a random source: it is salted per process.
+## Experimental workflow
 
-## Core modules
+`python -m dbact_sim` and the installed `dbact` command load the selected workflow:
 
-| module | stage | role |
-|---|---|---|
-| `cargo.py` | — | planar **rigid body**: position, angle, twist, mass, inertia. Carries no task direction. |
-| `perception.py` | S2 | ray-cast scanner, nearest hit per ray, local PCA normals, residual-based confidence |
-| `boundary_map.py` | S3 | per-agent **voxel** map; fusion is idempotent under relay |
-| `boundary_density.py` | S4 | boundary measure; `offset` and `distance_field` models; arc allocation for transport |
-| `local_cvt.py` | S5 | strict-disk limited-range CVT, truncated cost, cell mass |
-| `safety_filter.py` | S1 | one hard QP: inter-robot responsibility rows + nonsmooth object rows |
-| `qp2d.py` | S1 | exact planar minimum-norm solver, plus a cvxpy cross-check |
-| `contact_dynamics.py` | S6 | penalty contact, Coulomb contact friction, Coulomb **floor** friction |
-| `transport_dynamics.py` | S6 | engine registry: `penalty` \| `pymunk` \| `scripted` |
-| `controller.py` | S7 | wiring, mode arbitration, transport gating |
-| `metrics.py` | — | strict coverage, penetration report, directional progress |
+| Command | Implementation | Outputs |
+| --- | --- | --- |
+| `simulate` | `dbact_sim.run_sim` | State, summary and optional figures |
+| `deployment` | `experiments.deployment` | Matched Gate 5/6 pairs and replay products |
+| `study` | `experiments.protocol`, `.study` | Resolved cases, snapshots, receipts and summary |
+| `evidence` | `experiments.evidence` | Episode CSV, paired CSV, intervals and figures |
 
-## Data flow
+Cases may contain a complete `config`, a repository-relative `config_ref`, or use the existing
+shape/gate factory. Historical complete-case protocols remain readable. Only a selected split
+executes. Identifiers, gates, variants, shapes, seeds and positive frame limits are checked
+before output creation. `--dry-run` resolves cases without executing them.
 
-Per robot, per step, using only its own observations and its communication
-neighbours:
+Studies hash Python sources under `src/`, scenario files under `configs/`, and environment
+specifications. Resolved inputs, protocol, runtime versions, source hashes and Git state are
+recorded. Each case owns one directory. Windows-safe process workers limit nested BLAS/CVT
+threads. JSON receipts use atomic replacement. Missing, partial or modified products cannot
+be silently resumed. A frozen source mismatch requires a new study. The v2 runner rejects old
+receipt identities instead of rewriting them.
 
-```text
-AgentState + Cargo polygons
-  -> RayCastBoundarySensor          (nearest hit per ray, so occlusion is respected)
-  -> LocalBoundaryMap               (own scan, then one hop of neighbour relay)
-  -> BoundaryAwareDensity           (arc length x confidence x age x gap)
-  -> LocalCVT                       (centroid, cell mass, unheld mass)
-  -> mode arbitration               (explore | approach | redeploy | cage | push)
-  -> SafetyFilter                   (hard QP, no slack)
-  -> ControlCommand
-```
+Execution errors remain episodes in the denominator and make the command return nonzero.
+A measured task failure is a valid observation. CONTACT_READY, physical contact, settling,
+G500 and task completion retain separate meanings.
 
-The object-boundary rows given to the safety filter come from the robot's **own
-map**, never from the simulator. That is what makes the normal-estimate error a
-quantity with consequences rather than a number in a table.
+## Evidence ownership
 
-## Modes
-
-| mode | entered when | target |
-|---|---|---|
-| `explore` | map empty | deterministic sweep + neighbour repulsion |
-| `approach` | map non-empty but cell essentially empty | nearest unheld cage target |
-| `redeploy` | cell's boundary already held by neighbours, and not itself in contact | nearest unheld cage target beyond `R_l` |
-| `cage` | otherwise | density centroid of the local Voronoi cell |
-| `push` | in contact, enough neighbours in contact, observed normal opposes the goal | centroid + inward press along `-n̂` |
-
-`approach` and `redeploy` exist because move-to-centroid on a limited-range cell
-has local equilibria that the coverage law cannot escape on its own; both use only
-local information. `redeploy` also supplies the exit mechanism the recruitment
-argument needs.
-
-## Removed
-
-- `local_sensing.py` — see-through sampler with ground-truth normals; replaced by
-  `perception.py`. Its behaviour survives as `LegacyProximitySampler`, used only
-  as the B0 perception baseline in audits.
-- `local_cbf_qp.py` — soft filter with a slack penalty and a silent projection
-  fallback; replaced by `safety_filter.py` + `qp2d.py`.
+`experiments/ccta2027/` holds entry points and conference metadata; `manuscript/ccta2027/`
+maps the paper outline to evidence; `theory/static_deployment/` holds delimited derivations;
+`docs/results/` holds curated archives; `runs/` holds local products. Large historical protocols
+stay at their original paths so hashes and citations remain valid. See [CCTA2027.md](CCTA2027.md).

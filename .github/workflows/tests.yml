@@ -10,3 +10,7 @@ jobs:
           python-version: '3.11'
       - run: python -m pip install -e '.[dev,qp,sim,analysis,publication]'
       - run: python -m pytest -q
+      - name: Validate CCTA experiment protocol
+        run: python -m dbact_sim study --protocol experiments/ccta2027/smoke.yaml --split smoke --dry-run
+      - name: Exercise CCTA process runner
+        run: python -m dbact_sim study --protocol experiments/ccta2027/smoke.yaml --split smoke --workers 2 --out runs/ci-ccta-smoke

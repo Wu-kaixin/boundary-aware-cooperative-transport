@@ -51,7 +51,7 @@ from dbact.enclosure_gate import (  # noqa: E402
 )
 from dbact.geometry import polygon_perimeter  # noqa: E402
 from dbact.metrics import min_inter_agent_distance  # noqa: E402
-from dbact.phase import Phase  # noqa: E402
+from dbact.control.phase import Phase  # noqa: E402
 from dbact_sim.environment import SimulationEnvironment  # noqa: E402
 from dbact_sim.scenarios import load_yaml  # noqa: E402
 

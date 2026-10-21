@@ -28,10 +28,10 @@ def dump(path: Path, value) -> None:
 
 
 def clipping_counterexample(out: Path) -> dict:
-    from dbact.controller import DBACTController, DBACTParams
-    from dbact.theorem_mode import hold_segment_min_distance, point_in_domain, wall_halfplanes
+    from dbact.control.controller import DBACTController, DBACTParams
+    from dbact.deployment.theorem import hold_segment_min_distance, point_in_domain, wall_halfplanes
     from dbact.types import AgentState, ControlCommand
-    from dbact.qp2d import solve_min_norm_2d
+    from dbact.safety.qp2d import solve_min_norm_2d
 
     domain = (0.0, 8.0, 0.0, 8.0)
     dt = 0.05
@@ -138,7 +138,7 @@ def clipping_counterexample(out: Path) -> dict:
 
 def wall_activation_case(out: Path) -> dict:
     """One robot near xmin with nominal velocity pointing out of D."""
-    from dbact.safety_filter import SafetyFilter, SafetyFilterParams
+    from dbact.safety.filter import SafetyFilter, SafetyFilterParams
 
     domain = (0.0, 8.0, 0.0, 8.0)
     dt = 0.05
@@ -199,7 +199,7 @@ def wall_activation_case(out: Path) -> dict:
 
 
 def run_scene(config_path: Path, out_dir: Path, frames: int, seed: int) -> dict:
-    from dbact.theorem_mode import TheoremModeAbort
+    from dbact.deployment.theorem import TheoremModeAbort
     from dbact_sim.environment import SimulationEnvironment
 
     cfg = yaml.safe_load(config_path.read_text(encoding="utf-8"))

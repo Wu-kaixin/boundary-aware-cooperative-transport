@@ -29,6 +29,9 @@ analysis = ["pandas>=2.2"]
 publication = ["imageio-ffmpeg>=0.6"]
 dev = ["pytest>=8.0"]
 
+[project.scripts]
+dbact = "dbact_sim.cli:main"
+
 [tool.setuptools.packages.find]
 where = ["src"]
 

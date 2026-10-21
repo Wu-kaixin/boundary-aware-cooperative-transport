@@ -55,10 +55,10 @@ from dataclasses import dataclass
 import numpy as np
 from scipy.optimize import linprog
 
-from .cargo import Cargo
-from .contact_dynamics import ContactParams
-from .controller import DBACTParams
-from .geometry import (
+from dbact.cargo import Cargo
+from dbact.contact_dynamics import ContactParams
+from dbact.control.controller import DBACTParams
+from dbact.geometry import (
     certified_inscribed_radius,
     closest_point_on_segment,
     is_simple_polygon,

@@ -23,9 +23,9 @@ from dataclasses import dataclass, field
 
 import numpy as np
 
-from .cargo import Cargo
-from .contact_dynamics import ContactParams, ContactReport, PenaltyContactModel
-from .types import AgentState
+from dbact.cargo import Cargo
+from dbact.contact_dynamics import ContactParams, ContactReport, PenaltyContactModel
+from dbact.types import AgentState
 
 
 @dataclass
@@ -92,7 +92,7 @@ class PymunkTransportEngine:
     def __init__(self, params: ContactParams, friction: float | None = None):
         import pymunk  # imported here so the dependency is only needed on request
 
-        from .geometry import triangulate_simple_polygon
+        from dbact.geometry import triangulate_simple_polygon
 
         self._pymunk = pymunk
         self._triangulate = triangulate_simple_polygon

@@ -1,0 +1,39 @@
+version: ccta2027-smoke-v1
+purpose: Execution and serialization check only; no scientific success claim.
+run_dir: runs/ccta2027/smoke
+cases:
+  - case_id: static_rectangle_oracle
+    split: smoke
+    gate: 5
+    shape: rectangle
+    seed: 2
+    variant: oracle
+    frames: 4
+  - case_id: static_rectangle_local
+    split: smoke
+    gate: 5
+    shape: rectangle
+    seed: 2
+    variant: local
+    frames: 4
+  - case_id: transport_c_cvt
+    split: smoke
+    gate: 6
+    shape: c_shape
+    seed: 8
+    variant: boundary_cvt
+    frames: 12
+  - case_id: transport_c_nearest
+    split: smoke
+    gate: 6
+    shape: c_shape
+    seed: 8
+    variant: nearest_observed_target
+    frames: 12
+  - case_id: transport_c_spacing
+    split: smoke
+    gate: 6
+    shape: c_shape
+    seed: 8
+    variant: local_spacing
+    frames: 12

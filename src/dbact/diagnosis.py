@@ -33,7 +33,7 @@ from dataclasses import dataclass, field
 
 import numpy as np
 
-from .cargo import Cargo
+from dbact.cargo import Cargo
 
 # The seven post-detection stages, in the order a working pipeline would pass
 # through them. ``D`` is placed before ``E`` and ``F`` on purpose: it is the

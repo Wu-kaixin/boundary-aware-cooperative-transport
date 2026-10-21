@@ -15,7 +15,7 @@ from typing import TYPE_CHECKING, Any
 
 import numpy as np
 
-from dbact.phase import Phase
+from dbact.control.phase import Phase
 
 if TYPE_CHECKING:  # pragma: no cover
     from .environment import SimulationEnvironment

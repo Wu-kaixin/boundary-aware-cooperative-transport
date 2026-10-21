@@ -11,6 +11,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
+from matplotlib.lines import Line2D
 from matplotlib.patches import FancyBboxPatch, Polygon as MplPolygon
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -86,22 +87,25 @@ def figure_problem(path: Path) -> None:
 
 
 def figure_method(path: Path) -> None:
-    fig, ax = plt.subplots(figsize=(8.8, 4.6))
+    fig, ax = plt.subplots(figsize=(9.2, 5.2))
     ax.set_xlim(0, 12)
-    ax.set_ylim(0, 6)
+    ax.set_ylim(0, 7)
     ax.axis("off")
+
     def box(x, y, w, h, text, face):
         ax.add_patch(FancyBboxPatch((x, y), w, h, boxstyle="round,pad=0.03", facecolor=face, edgecolor="#24527a"))
         ax.text(x + w / 2, y + h / 2, text, ha="center", va="center", fontsize=8)
-    box(0.3, 3.6, 3.4, 1.6, "deployment, before CONTACT_READY\nCVT centroid, or nearest target,\nor local spacing", "#f7f1e3")
-    box(4.2, 3.6, 3.2, 1.6, "local ranges, arc weights,\noffset targets", "#e8f0f7")
-    box(8.0, 3.6, 3.5, 1.6, "shared layer\nsafety QP, brake, pause,\nintegral release", "#e7f4ea")
-    ax.annotate("", xy=(4.15, 4.4), xytext=(3.75, 4.4), arrowprops={"arrowstyle": "->"})
-    ax.annotate("", xy=(7.95, 4.4), xytext=(7.45, 4.4), arrowprops={"arrowstyle": "->"})
-    ax.annotate("", xy=(6.0, 3.55), xytext=(9.5, 3.55), arrowprops={"arrowstyle": "->", "connectionstyle": "arc3,rad=0.3"})
-    ax.text(7.6, 2.55, "estimated progress and speed\nfeed the brake; pause is not success", ha="center", fontsize=8)
-    ax.text(6, 0.6, "Only the centroid target changes between deployment methods.\nBrake, safety, sensing and contact physics stay common.", ha="center", fontsize=8)
-    ax.set_title("Figure 2. Executed split between deployment and the shared controller.")
+
+    box(0.25, 4.3, 3.3, 1.7, "local ranges\narc weights\noffset targets", "#e8f0f7")
+    box(4.15, 4.3, 3.5, 1.7, "deployment centroid\nbefore CONTACT_READY\nCVT, nearest, or spacing", "#f7f1e3")
+    box(8.25, 4.3, 3.4, 1.7, "shared safety QP\nand transport law", "#e7f4ea")
+    box(0.25, 1.3, 3.3, 1.8, "on-board estimator\nregistration + fusion drift\nprogress and speed", "#f8e8e8")
+    box(4.15, 1.3, 3.5, 1.8, "shared brake\nestimated remaining distance\nand estimated speed", "#e7f4ea")
+    ax.annotate("", xy=(4.1, 5.15), xytext=(3.6, 5.15), arrowprops={"arrowstyle": "->"})
+    ax.annotate("", xy=(8.2, 5.15), xytext=(7.7, 5.15), arrowprops={"arrowstyle": "->"})
+    ax.annotate("", xy=(4.1, 2.2), xytext=(3.6, 2.2), arrowprops={"arrowstyle": "->"})
+    ax.text(6.0, 0.45, "Observations feed the deployment centroid. The estimator feeds the brake\nwith progress and speed. Only the centroid differs between methods.", ha="center", fontsize=8)
+    ax.set_title("Figure 2. Executed data flow. Development controller, not a proof.")
     fig.tight_layout()
     fig.savefig(path, dpi=160)
     plt.close(fig)
@@ -150,27 +154,58 @@ def figure_methods(path: Path, run_dir: Path) -> None:
         return
     variants = ["boundary_cvt", "nearest_observed_target", "local_spacing"]
     colors = {"l_shape": "#24527a", "rectangle": "#1b7a3a", "c_shape": "#c47b2b"}
-    fig, axes = plt.subplots(1, 2, figsize=(8.6, 4.2))
+    labels = {"l_shape": "L", "rectangle": "rectangle", "c_shape": "C"}
+    fig, axes = plt.subplots(1, 2, figsize=(8.8, 4.6))
     notes = []
+    index_of = {name: index for index, name in enumerate(variants)}
     for index, variant in enumerate(variants):
         chosen = [row for row in rows if row.get("variant") == variant]
         done = sum(bool(row.get("task_completed")) for row in chosen)
-        notes.append(f"{variant.split('_')[0]} {done}/{len(chosen)}")
-        for row in chosen:
-            jitter = 0.12 if row.get("shape") == "rectangle" else (-0.12 if row.get("shape") == "c_shape" else 0.0)
-            color = "#b33a3a" if row.get("watchdog") or not row.get("task_completed") else colors.get(row.get("shape"), "#24527a")
-            if row.get("contact_ready_seconds") is not None:
-                axes[0].scatter([index + jitter], [row["contact_ready_seconds"]], s=28, color=color)
-            if row.get("euclidean_endpoint_error") is not None:
-                axes[1].scatter([index + jitter], [row["euclidean_endpoint_error"]], s=28, color=color)
-    axes[1].axhline(0.12, color="#888888", linewidth=0.8, label="0.12 m task tolerance")
+        short = {"boundary_cvt": "CVT", "nearest_observed_target": "nearest", "local_spacing": "spacing"}[variant]
+        notes.append(f"{short} {done}/{len(chosen)}")
+    pairs = {}
+    for row in rows:
+        pairs.setdefault((row.get("shape"), row.get("seed")), {})[row.get("variant")] = row
+    for (_shape, _seed), group in pairs.items():
+        xs, ready, endpoint = [], [], []
+        for variant in variants:
+            item = group.get(variant)
+            if item is None:
+                continue
+            xs.append(index_of[variant])
+            ready.append(item.get("contact_ready_seconds"))
+            endpoint.append(item.get("euclidean_endpoint_error"))
+        if len(xs) == 3 and all(value is not None for value in ready):
+            axes[0].plot(xs, ready, color="#d0d5dd", linewidth=0.6, zorder=1)
+        if len(xs) == 3 and all(value is not None for value in endpoint):
+            axes[1].plot(xs, endpoint, color="#d0d5dd", linewidth=0.6, zorder=1)
+    for row in rows:
+        index = index_of.get(row.get("variant"))
+        if index is None:
+            continue
+        color = colors.get(row.get("shape"), "#24527a")
+        completed = bool(row.get("task_completed")) and not row.get("watchdog")
+        marker = "o" if completed else "x"
+        if row.get("contact_ready_seconds") is not None:
+            axes[0].scatter([index], [row["contact_ready_seconds"]], s=32, color=color, marker=marker, zorder=3)
+        if row.get("euclidean_endpoint_error") is not None:
+            axes[1].scatter([index], [row["euclidean_endpoint_error"]], s=32, color=color, marker=marker, zorder=3)
+    axes[1].axhline(0.12, color="#888888", linewidth=0.8)
     for ax in axes:
         ax.set_xticks(range(3), ["CVT\nn=9", "nearest\nn=9", "spacing\nn=9"])
     axes[0].set_ylabel("CONTACT_READY (s)")
     axes[1].set_ylabel("endpoint error (m)")
+    handles = [
+        Line2D([], [], color=colors[name], marker="o", linestyle="None", label=labels[name])
+        for name in ("l_shape", "rectangle", "c_shape")
+    ]
+    handles.append(Line2D([], [], color="#555555", marker="o", linestyle="None", label="task completed"))
+    handles.append(Line2D([], [], color="#555555", marker="x", linestyle="None", label="task not completed"))
+    handles.append(Line2D([], [], color="#d0d5dd", linewidth=1.2, label="same shape and seed"))
+    axes[1].legend(handles=handles, fontsize=6.5, loc="upper right")
     fig.suptitle(
         "Figure 4. Development L/rectangle/C, seeds 2/5/8. Same downstream controller.\n"
-        "Task completion " + ", ".join(notes) + ". Red = not completed. Not an independent test."
+        "Task completion " + ", ".join(notes) + ". Lines pair one scenario. Not an independent test."
     )
     fig.tight_layout()
     fig.savefig(path, dpi=160)
@@ -186,22 +221,31 @@ def figure_safety(path: Path) -> None:
         clearance.append(1000 * float(summary.get("clearance_path_min") or 0))
         displacement.append(float(summary.get("mean_robot_displacement") or 0))
         status.append(summary.get("safety_evaluation_status"))
-    fig, axes = plt.subplots(1, 2, figsize=(7.4, 4.0))
+    fig, axes = plt.subplots(1, 2, figsize=(8.4, 4.8))
     if labels:
         bars = axes[0].bar(labels, clearance, color="#24527a")
         axes[0].axhline(65, color="#b33a3a", linewidth=0.8, label="65 mm static threshold")
         axes[1].bar(labels, displacement, color="#c47b2b")
         for bar, value, flag in zip(bars, clearance, status):
-            axes[0].text(bar.get_x() + bar.get_width() / 2, value + 0.4, f"{value:.2f} mm\n{flag}", ha="center", va="bottom", fontsize=7)
+            wording = "offline certified\nfor the fixed polygon" if flag == "CERTIFIED_SAFE" else "observed violation"
+            axes[0].text(bar.get_x() + bar.get_width() / 2, value + 0.4, f"{value:.2f} mm\n{wording}", ha="center", va="bottom", fontsize=7)
         for bar, value in zip(axes[1].patches, displacement):
             axes[1].text(bar.get_x() + bar.get_width() / 2, value + 0.02, f"{value:.3f} m", ha="center", fontsize=7)
-        axes[0].set_ylim(0, max(clearance) + 12)
+        axes[0].set_ylim(0, max(clearance) + 22)
         axes[1].set_ylim(0, max(displacement) + 0.2)
         axes[0].legend(fontsize=7)
     axes[0].set_ylabel("minimum path clearance (mm)")
     axes[1].set_ylabel("mean robot displacement (m)")
-    fig.suptitle("Figure 5. One static development case, L seed 2, n=1 each.\nBelow 65 mm is an observed violation. Not a transport safety claim.")
-    fig.tight_layout()
+    segment = root / "l_shape_seed2_segments" / "summary.json"
+    cap_note = "A 40 mm cap is not an online error bound."
+    if segment.exists():
+        summary = json.loads(segment.read_text(encoding="utf-8"))
+        truncated = summary.get("online_gap_guard_truncated_frames")
+        half_gap = summary.get("online_gap_guard_max_half_gap_m")
+        if truncated and half_gap:
+            cap_note = f"Half-gap exceeded 40 mm on {truncated}/600 frames (max {1000 * half_gap:.0f} mm). Online certificate unavailable."
+    fig.suptitle("Figure 5. L seed 2, n=1. Truth is used only for the offline polygon check.\n" + cap_note, fontsize=9)
+    fig.tight_layout(rect=(0, 0, 1, 0.88))
     fig.savefig(path, dpi=160)
     plt.close(fig)
 

@@ -9,7 +9,7 @@ import numpy as np
 from matplotlib import animation
 from matplotlib.patches import Polygon
 
-from dbact.boundary_density import BoundaryAwareDensity
+from dbact.deployment.density import BoundaryAwareDensity
 from dbact.cargo import Cargo
 
 from ..environment import SimulationEnvironment

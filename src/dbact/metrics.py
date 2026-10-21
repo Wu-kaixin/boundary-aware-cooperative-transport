@@ -24,10 +24,10 @@ from __future__ import annotations
 
 import numpy as np
 
-from .cargo import Cargo
-from .geometry import signed_distance_to_polygon
-from .guarantees import minimum_facing_cage_clearance
-from .types import AgentState
+from dbact.cargo import Cargo
+from dbact.geometry import signed_distance_to_polygon
+from dbact.guarantees import minimum_facing_cage_clearance
+from dbact.types import AgentState
 
 
 def min_inter_agent_distance(agents: list[AgentState]) -> float:

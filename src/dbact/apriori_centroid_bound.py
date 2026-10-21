@@ -519,9 +519,9 @@ def overlay_grid_resolution(cfg: dict, grid_resolution: int) -> dict:
 
 def build_controller_density(vertices: np.ndarray, cfg: dict, spacing: float):
     """Oracle discrete mixture used by the controller (no robot-dependent gap)."""
-    from dbact.boundary_density import BoundaryAwareDensity, DensityParams
+    from dbact.deployment.density import BoundaryAwareDensity, DensityParams
     from dbact.cargo import Cargo
-    from dbact.theorem_mode import oracle_boundary_view
+    from dbact.deployment.theorem import oracle_boundary_view
 
     verts = np.asarray(vertices, dtype=float).reshape(-1, 2)
     cargo = Cargo(object_id="prior", vertices=verts, movable=False)

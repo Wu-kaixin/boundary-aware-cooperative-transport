@@ -1,5 +1,9 @@
 # Roadmap
 
+> Current CCTA 2027 code structure and research boundaries are described in
+> [ARCHITECTURE.md](ARCHITECTURE.md) and [CCTA2027.md](CCTA2027.md).
+> The stage history below does not supersede the current claim–evidence matrix.
+
 > **Superseded for the research track.** The stage list below records the
 > engineering history of the MAS/hardware bridge and is still current for that.
 > The research pipeline was rebuilt on branch `A-boundary-aware` around a

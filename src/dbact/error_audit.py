@@ -77,10 +77,10 @@ from dataclasses import dataclass, field
 
 import numpy as np
 
-from .boundary_map import rot90
-from .cargo import Cargo
-from .geometry import signed_distance_and_gradient
-from .guarantees import boundary_map_gap_upper_bound
+from dbact.sensing.boundary_map import rot90
+from dbact.cargo import Cargo
+from dbact.geometry import signed_distance_and_gradient
+from dbact.guarantees import boundary_map_gap_upper_bound
 
 #: The six term names, in the order the module docstring introduces them. Written
 #: once so that a report cannot silently carry five.

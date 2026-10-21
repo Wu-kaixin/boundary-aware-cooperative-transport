@@ -1,5 +1,10 @@
 # Provisional simulation protocol and interfaces
 
+Current executable entry points are documented in
+[experiments/ccta2027](../experiments/ccta2027/README.md). The complete historical
+protocol files and their source freezes remain unchanged. The refactored study v2
+runner uses new identities and cannot resume a historical v1 run as current evidence.
+
 The development protocol is stored as complete case/config manifests in paper_simulation_protocol.development.yaml. It is provisional and has not been approved by the professors. All original safety, G500, stopping and watchdog thresholds are retained. The new physical completion metric requires the original settling rule and Euclidean endpoint error within the existing task tolerance; it is separate from G500 and will not rewrite historical verdicts.
 
 ## Methods

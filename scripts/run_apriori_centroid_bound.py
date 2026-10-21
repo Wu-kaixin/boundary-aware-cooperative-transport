@@ -38,7 +38,7 @@ from dbact.apriori_centroid_bound import (  # noqa: E402
     overlay_grid_resolution,
     step_in_k0,
 )
-from dbact.theorem_mode import TheoremModeAbort  # noqa: E402
+from dbact.deployment.theorem import TheoremModeAbort  # noqa: E402
 
 SHAPES = {
     "l_shape": ROOT / "configs/sim/theorem/static_l_shape_n16_oracle.yaml",

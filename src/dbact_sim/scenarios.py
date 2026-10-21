@@ -24,7 +24,7 @@ import yaml
 from dbact.cargo import Cargo
 from dbact.contact_dynamics import ContactParams
 from dbact.contracts import VALID_BACKENDS, ContractViolation
-from dbact.controller import DBACTParams
+from dbact.control.controller import DBACTParams
 from dbact.geometry import normalize, signed_distance_to_polygon
 from dbact.provenance import frame_rng
 from dbact.task import TaskSampler, TransportTask

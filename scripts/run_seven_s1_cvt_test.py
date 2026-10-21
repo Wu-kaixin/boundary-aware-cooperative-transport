@@ -40,7 +40,7 @@ def ensure_robomaster_importable() -> None:
         "or keep the bundled Test/test.venv site-packages directory available."
     )
 
-from dbact.agent_control import (  # noqa: E402
+from dbact.control.agent_control import (  # noqa: E402
     AgentVelocityCommand,
     AgentController,
     CentralizedCVTParams,
@@ -52,7 +52,7 @@ from dbact.agent_control import (  # noqa: E402
     VelocityLimits,
 )
 from dbact.cargo import Cargo  # noqa: E402
-from dbact.controller import DBACTController, DBACTParams  # noqa: E402
+from dbact.control.controller import DBACTController, DBACTParams  # noqa: E402
 
 
 AGENT_IDS = [
