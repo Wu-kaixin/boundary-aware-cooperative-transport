@@ -11,7 +11,6 @@
 
 | 目录 | 内容与适用范围 |
 | --- | --- |
-
 | [refactor_2026-10-21](refactor_2026-10-21/) | 模块迁移、串并行一致性与历史 602 项测试验证 |
 | [evidence_closure](evidence_closure/) | 2026-10-07 的三方法比较及历史验收，使用当时源码 |
 | [consolidation](consolidation/results.md) | 较早 Gate 0–6 汇总，不能替代当前重跑 |
