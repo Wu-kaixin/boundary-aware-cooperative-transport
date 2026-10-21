@@ -1,26 +1,39 @@
-# CCTA 2027 manuscript structure
+# CCTA 2027 论文工作区
 
-This is an implementation-to-evidence map, not an authored submission or an approved title.
-Official guidance is in [CCTA2027.md](../../docs/CCTA2027.md). The six-page budget is a project
-choice within the published initial eight-page cap.
+本目录目前是**章节与证据映射**，尚无初稿正文、经确认的论文标题或投稿文件。
+本页对应 `paper/boundary-aware-safe-deployment`。会议要求见 [CCTA2027.md](../../docs/CCTA2027.md)；
+六页组织预算是项目选择，具体投稿限制以官方要求为准。
 
-The current experimental revision and its acceptance boundaries are specified in
-[CCTA2027_EXPERIMENTS.md](../../docs/CCTA2027_EXPERIMENTS.md).
+## 论文主线
 
-| Section | Approx. pages | Implementation / evidence |
+机器人根据局部边界观测构造部署配置；在明确的固定几何和数值假设下评估静态路径安全，
+再把搬运准备与最终搬运任务分开测量。静态 oracle、局部边界和动态接触采用各自的信息权限。
+
+| 章节 | 预计页数 | 代码与证据入口 |
 | --- | ---: | --- |
-| Introduction and related work | 0.75 | `docs/paper_storyline.md`; verified literature still required |
-| Model and information permissions | 0.75 | `dbact.types`, `sensing/`, `contracts.py`; oracle versus local sensing |
-| Boundary-aware deployment and safety | 1.5 | `deployment/density.py`, `cvt.py`, `safety/filter.py`, `control/controller.py` |
-| Delimited analysis | 0.75 | `theory/static_deployment/`; geometry, sampling and error assumptions |
-| Experiments and limits | 1.5 | `experiments/`, `dbact_sim/experiments/`, independent evaluator and evidence matrix |
-| Conclusion and references | 0.75 | Conclusions bounded by populations; no fabricated references |
+| 问题、动机与相关工作 | 0.75 | `docs/paper_storyline.md`；相关文献仍需核对 |
+| 模型与信息权限 | 0.75 | `dbact.types`、`sensing/`、`contracts.py` |
+| 边界部署与安全滤波 | 1.5 | `deployment/`、`safety/`、`control/` |
+| 有限适用范围的分析 | 0.75 | `theory/static_deployment/` 的假设与推导 |
+| 实验、失败与适用范围 | 1.5 | 实验协议、独立评价与结果索引 |
+| 结论及参考文献 | 0.75 | 根据实际证据收束结论 |
 
-Preparation, physical contact, safety and task completion need distinct measurements. Keep
-local spacing and censored pairs visible. Static results cannot substitute for dynamic contact
-validation. Captions must name their source batch and quantity. Archived October evidence
-predates this refactor and the unvalidated local candidates.
+## 当前可用证据与缺口
 
-Before creating `main.tex`, settle the storyline, verify related work, freeze a new full study
-and retrieve current official IEEE template guidance. No submission-compliance claim is made
-about a nonexistent manuscript.
+完整 169 案例已执行并通过实现审计，结果与修复见
+[实验修订报告](../../docs/CCTA2027_EXPERIMENTS.md)，图表与复现材料见
+[结果包](../../docs/results/ccta2027_draft_v2/README.md)。
+
+- 静态分段候选 9/9 路径通过，成本降低，需同时报告 gap guard 的截断频率及固定几何假设。
+- 泛化搬运 CVT 5/12；准备时间与两种对照分别比较，并报告删失。
+- 鲁棒搬运 CVT 1/18，独立 Pymunk 任务未完成；不能声称鲁棒搬运或引擎不变性。
+- 连续运动边界安全未解决，初稿应限定为静态部署及经验准备证据。
+
+## 撰写规则
+
+接触就绪、物理接触、G500、收定、终点误差和任务完成分别定义。
+每张图注明实验版本、总体、分母、单位及不确定性处理；历史批次不与新实验混合。
+不要以“收定”替代成功，也不要把条件成立时的静态分析写成未知运动几何的保证。
+
+正文撰写前仍需完成相关文献核验、论证与主张的一致性检查、官方模板核对和最终版式编译。
+当前材料不构成已完成投稿的声明。返回[项目首页](../../README.md)。

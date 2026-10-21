@@ -1,11 +1,18 @@
-# Audited CCTA experiment bundle
+# CCTA 2027 draft v2: results and reproduction
 
 Recorded 21 October 2026. The agreed 169-case matrix is complete with zero runtime
 errors and a passed implementation audit. Scientific failures are retained:
 boundary CVT completes only 1/18 robustness tasks and the Pymunk task fails.
 See [the interpretation](../../CCTA2027_EXPERIMENTS.md) before using the figures.
 
-## Contents and provenance
+## Start here
+
+This bundle belongs to `paper/boundary-aware-safe-deployment`. Model execution,
+final analysis and historical v1 failure are separately versioned. For the
+repository workflow use [the experiment entry point](../../../experiments/ccta2027/README.md);
+for all batches use [the result index](../README.md).
+
+## Files and provenance
 
 - `case_results.json`: all 169 compact case receipts and original run identity.
 - `protocol_index.json`: all planned inputs and expected initial-state hashes.
