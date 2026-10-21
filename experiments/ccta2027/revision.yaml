@@ -1,0 +1,30 @@
+version: ccta2027-draft-experiments-v2
+scope: Static boundary-aware deployment, with empirical transport preparation and explicit failure outcomes.
+shapes: [l_shape, rectangle, c_shape]
+development_seeds: [2, 5, 8]
+static_frames: 600
+transport_frames: 3000
+methods: [boundary_cvt, nearest_observed_target, local_spacing]
+static_arms: [oracle, local_samples, local_segments]
+ablations: [boundary_cvt, no_arc, no_arc_normalized, no_direction_offsets, no_exploration]
+active_exploration_gain: 6.0
+generalization_template: docs/paper_simulation_protocol.test_frozen_v1.yaml
+generalization_seed_start: 202610210
+robustness_seeds: [202610230, 202610231]
+robustness:
+  - name: range_noise
+    controller: {range_noise_std: 0.02}
+  - name: communication_loss
+    controller: {communication_dropout_prob: 0.2}
+  - name: slower_sensing
+    controller: {perception_every: 2}
+acceptance:
+  all_planned_cases_recorded: true
+  execution_errors: 0
+  paired_initial_states_identical: true
+  oracle_static_path_safe: true
+  candidate_static_path_safe: true
+  retain_all_failed_and_censored_episodes: true
+  transport_success_rate: report_without_a_required_target
+  readiness_superiority: test_without_a_required_sign
+  unknown_boundary_dynamic_theorem: outside_scope

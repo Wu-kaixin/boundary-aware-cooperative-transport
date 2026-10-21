@@ -47,3 +47,29 @@ locates repository scenarios when an installed command runs outside the checkout
 
 Historical definitions and limits remain in [paper_simulation_protocol.md](../../docs/paper_simulation_protocol.md).
 Smoke success does not change their verdicts.
+
+## Complete draft experiment matrix
+
+The agreed 169-episode scheme is in [revision.yaml](revision.yaml); definitions and
+repairs are described in [CCTA2027_EXPERIMENTS.md](../../docs/CCTA2027_EXPERIMENTS.md).
+
+```sh
+python -m dbact_sim campaign freeze --plan experiments/ccta2027/revision.yaml --out runs/ccta2027/next_revision/frozen_protocol.yaml
+```
+
+Run `study --split all` with `PYTHONPATH` pointing to the freeze directory's
+`execution_source/src` and `DBACT_ROOT` to `execution_source`. Pass absolute protocol
+and output paths. This isolates workers from ongoing edits. The recorded case split
+remains intact, so populations can be reported separately:
+
+```sh
+python -m dbact_sim campaign audit --protocol runs/ccta2027/draft_v2/frozen_protocol.yaml --run runs/ccta2027/draft_v2/run --out runs/ccta2027/draft_v2/acceptance.json
+python -m dbact_sim evidence --batch revision=runs/ccta2027/draft_v2/run --by-split --out runs/ccta2027/draft_v2/evidence
+python -m dbact_sim.experiments.report --run runs/ccta2027/draft_v2/run --out docs/results/ccta2027_draft_v2/figures
+```
+
+A passed audit establishes the declared implementation/coverage checks. It does
+not turn task failures into successes or establish unsupported scientific claims.
+The completed v2 results, raw source archives and reproduction instructions are in
+[the audited result bundle](../../docs/results/ccta2027_draft_v2/README.md).
+Use a new directory for future freezes; never overwrite a recorded campaign.

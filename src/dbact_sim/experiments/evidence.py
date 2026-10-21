@@ -58,6 +58,33 @@ def paired_bootstrap(differences: list[float], seed: int = BOOTSTRAP_SEED) -> di
     }
 
 
+def seed_cluster_bootstrap(pairs: list[dict], field: str = "ready_difference_seconds") -> dict:
+    """Keep all repeated-shape/perturbation observations of one seed together.
+
+    Five seed clusters is a conservative reporting policy for this study, not a
+    theorem that bootstrap coverage becomes reliable at that sample size.
+    """
+    groups = defaultdict(list)
+    for row in pairs:
+        value = row.get(field)
+        if isinstance(value, (int, float)) and np.isfinite(value):
+            groups[row.get("seed")].append(float(value))
+    values = [value for group in groups.values() for value in group]
+    result = {"n_pairs": len(values), "n_seed_clusters": len(groups), "resampling_unit": "seed",
+              "mean": float(np.mean(values)) if values else None,
+              "median": float(np.median(values)) if values else None,
+              "low": None, "high": None, "status": "DESCRIPTIVE_ONLY_FEW_SEEDS"}
+    if len(groups) >= 5:
+        sums = np.array([sum(group) for group in groups.values()])
+        counts = np.array([len(group) for group in groups.values()])
+        rng = np.random.default_rng(BOOTSTRAP_SEED)
+        picks = rng.integers(0, len(groups), size=(BOOTSTRAP_DRAWS, len(groups)))
+        draws = sums[picks].sum(axis=1) / counts[picks].sum(axis=1)
+        result.update(low=float(np.quantile(draws, 0.025)), high=float(np.quantile(draws, 0.975)),
+                      status="EXPLORATORY_SEED_CLUSTER_INTERVAL")
+    return result
+
+
 def _load_json(path: Path):
     return json.loads(path.read_text(encoding="utf-8"))
 
@@ -106,6 +133,10 @@ def episode_row(result: dict, batch: str) -> dict:
     return {
         "batch": batch,
         "case_id": result.get("case_id"),
+        "condition_id": result.get("condition_id"),
+        "gate": result.get("gate"),
+        "arm": result.get("arm", result.get("variant")),
+        "split": result.get("split"),
         "shape": result.get("shape"),
         "seed": result.get("seed"),
         "variant": result.get("variant"),
@@ -135,6 +166,11 @@ def episode_row(result: dict, batch: str) -> dict:
         "safety_evaluation_status": result.get("safety_evaluation_status"),
         "actual_violation_observed": result.get("actual_violation_observed"),
         "mean_robot_displacement": result.get("mean_robot_displacement"),
+        "H_initial": result.get("H_initial"),
+        "H_final": result.get("H_final"),
+        "r_safe": result.get("r_safe"),
+        "initial_state_sha256": result.get("initial_state_sha256"),
+        "config_sha256": result.get("config_sha256"),
         "qp_intervention_fraction": result.get("qp_intervention_fraction"),
         "failure_reasons": " | ".join(result.get("failure_reasons") or []),
         "error": result.get("error"),
@@ -144,14 +180,17 @@ def episode_row(result: dict, batch: str) -> dict:
 
 
 def condition_key(row: dict) -> tuple:
-    return (row["batch"], row["shape"], row["seed"], row["stratum"])
+    return (row["batch"], row["shape"], row["seed"], row["stratum"], row.get("condition_id") or "")
 
 
 def pair_rows(episodes: list[dict], left: str, right: str) -> list[dict]:
     grouped = defaultdict(dict)
     for row in episodes:
         if row["variant"] in (left, right):
-            grouped[condition_key(row)][row["variant"]] = row
+            key = condition_key(row)
+            if row["variant"] in grouped[key]:
+                raise ValueError(f"Duplicate episode for condition {key}, method {row['variant']}")
+            grouped[key][row["variant"]] = row
     pairs = []
     for key, methods in sorted(grouped.items()):
         if left not in methods or right not in methods:
@@ -165,6 +204,7 @@ def pair_rows(episodes: list[dict], left: str, right: str) -> list[dict]:
                 "shape": key[1],
                 "seed": key[2],
                 "stratum": key[3],
+                "condition_id": key[4],
                 "left": left,
                 "right": right,
                 "ready_difference_seconds": (
@@ -197,6 +237,11 @@ def _bool_count(rows: list[dict], field: str) -> dict:
     usable = [row for row in rows if row.get(field) is not None]
     interval = wilson_interval(sum(bool(row[field]) for row in usable), len(usable))
     interval["missing"] = len(rows) - len(usable)
+    interval["n_seed_clusters"] = len({row.get("seed") for row in usable})
+    interval["interval_status"] = "WILSON_DISTINCT_SEEDS"
+    if interval["n_seed_clusters"] < len(usable):
+        interval["low"] = interval["high"] = None
+        interval["interval_status"] = "DESCRIPTIVE_ONLY_REUSED_SEEDS"
     return interval
 
 
@@ -205,12 +250,29 @@ def _batch_summary(episodes: list[dict], pairs: list[dict]) -> dict:
     for row in episodes:
         by_shape[row["shape"]].append(row)
     arrival = [row for row in episodes if row["variant"] == "boundary_cvt"]
+    spacing_pairs = pair_rows(episodes, "boundary_cvt", "local_spacing")
     return {
         "episodes": len(episodes),
         "execution_errors": sum(row["execution_status"] != "COMPLETED" for row in episodes),
         "task_completed": _bool_count(episodes, "task_completed"),
         "settled": _bool_count(episodes, "settled"),
         "g500_pass": _bool_count(episodes, "g500_pass"),
+        "by_method": {
+            method: {"n": len(rows), "task_completed": _bool_count(rows, "task_completed"),
+                     "settled": _bool_count(rows, "settled"), "g500_pass": _bool_count(rows, "g500_pass"),
+                     "controller_readiness": _arrival(rows, "controller_ready_seconds", "controller_ready_censored")}
+            for method in sorted({row["variant"] for row in episodes})
+            for rows in [[row for row in episodes if row["variant"] == method]]
+        },
+        "static_by_arm": {
+            arm: {"n": len(rows),
+                  "safe": sum(row["safety_evaluation_status"] == "CERTIFIED_SAFE" for row in rows),
+                  "observed_violations": sum(row["safety_evaluation_status"] == "OBSERVED_VIOLATION" for row in rows),
+                  "minimum_path_clearance": min((row["clearance_path_min"] for row in rows if row["clearance_path_min"] is not None), default=None),
+                  "mean_cost_ratio": float(np.mean([row["H_final"] / row["H_initial"] for row in rows]))}
+            for arm in sorted({row["arm"] for row in episodes if row.get("H_initial")})
+            for rows in [[row for row in episodes if row["arm"] == arm and row.get("H_initial")]]
+        },
         "by_shape": {
             shape: {
                 "n": len(rows),
@@ -224,6 +286,11 @@ def _batch_summary(episodes: list[dict], pairs: list[dict]) -> dict:
         "paired_controller_ready_cvt_minus_nearest": paired_bootstrap(
             [row["ready_difference_seconds"] for row in pairs if row["ready_difference_seconds"] is not None]
         ),
+        "paired_controller_ready_cvt_minus_spacing": paired_bootstrap(
+            [row["ready_difference_seconds"] for row in spacing_pairs if row["ready_difference_seconds"] is not None]
+        ),
+        "seed_cluster_ready_cvt_minus_nearest": seed_cluster_bootstrap(pairs),
+        "seed_cluster_ready_cvt_minus_spacing": seed_cluster_bootstrap(spacing_pairs),
         "paired_ready_censored_pairs": sum(row["ready_pair_status"] != "both_observed" for row in pairs),
         "paired_physical_ready_cvt_minus_nearest": paired_bootstrap(
             [row["physical_difference_seconds"] for row in pairs if row["physical_difference_seconds"] is not None]
@@ -312,32 +379,32 @@ def plot_readiness(pairs: list[dict], path: Path, focus: str | None = None) -> N
 def plot_rates(episodes: list[dict], path: Path, focus: str | None = None) -> None:
     chosen = [row for row in episodes if row["batch"] == focus] if focus else _focus(episodes)
     episodes = [row for row in chosen if row["variant"] in TRANSPORT_VARIANTS]
-    shapes = sorted({row["shape"] for row in episodes if row["shape"]})
+    groups = sorted({(row["shape"], row["variant"]) for row in episodes if row["shape"]})
     metrics = ("task_completed", "g500_pass", "settled")
-    fig, ax = plt.subplots(figsize=(8.2, 4.4))
+    fig, ax = plt.subplots(figsize=(12, 4.8))
     width = 0.25
-    x = np.arange(len(shapes))
+    x = np.arange(len(groups))
     for index, metric in enumerate(metrics):
         rates, lows, highs = [], [], []
-        for shape in shapes:
-            rows = [row for row in episodes if row["shape"] == shape]
+        for shape, method in groups:
+            rows = [row for row in episodes if row["shape"] == shape and row["variant"] == method]
             interval = _bool_count(rows, metric)
             rate = 0.0 if interval["rate"] is None else interval["rate"]
             rates.append(rate)
-            low = 0.0 if interval["low"] is None else interval["low"]
-            high = 0.0 if interval["high"] is None else interval["high"]
+            low = rate if interval["low"] is None else interval["low"]
+            high = rate if interval["high"] is None else interval["high"]
             lows.append(max(0.0, rate - low))
             highs.append(max(0.0, high - rate))
         ax.bar(x + (index - 1) * width, rates, width, yerr=np.vstack([lows, highs]), capsize=3, label=f"{metric}")
     labels = []
-    for shape in shapes:
-        n = sum(row["shape"] == shape for row in episodes)
-        labels.append(f"{shape}\nn={n}")
-    ax.set_xticks(x, labels)
+    for shape, method in groups:
+        n = sum(row["shape"] == shape and row["variant"] == method for row in episodes)
+        labels.append(f"{shape}\n{method}\nn={n}")
+    ax.set_xticks(x, labels, rotation=35, ha="right", fontsize=7)
     ax.set_ylim(0, 1)
-    ax.set_ylabel("Unconditional rate (Wilson 95% interval)")
+    ax.set_ylabel("Task rate; Wilson intervals only for distinct-seed groups")
     ax.legend()
-    ax.set_title("All methods pooled within shape. Completion, G500, and settled stay separate.")
+    ax.set_title("Methods reported separately; completion, G500, and settling are distinct")
     fig.tight_layout()
     fig.savefig(path, dpi=160)
     plt.close(fig)
@@ -390,10 +457,10 @@ def plot_contacts(episodes: list[dict], path: Path, focus: str | None = None) ->
     failures = [
         row
         for row in pool
-        if row["variant"] == "boundary_cvt" and row["case_id"] and "c_shape" in str(row["case_id"]) and str(row["seed"]) in {"8", "seed_8"}
+        if row["variant"] == "boundary_cvt" and row["task_completed"] is False and row["directory"]
     ]
     success = sorted(completed, key=lambda row: row["case_id"])[:1]
-    chosen = [("failure", failures[:1]), ("success", success)]
+    chosen = [("failure", sorted(failures, key=lambda row: row["case_id"])[:1]), ("success", success)]
     fig, axes = plt.subplots(2, 1, figsize=(8, 6.2), sharex=False)
     plotted = 0
     for label, rows in chosen:
@@ -416,9 +483,10 @@ def plot_contacts(episodes: list[dict], path: Path, focus: str | None = None) ->
     axes[0].set_ylabel("Contact count")
     axes[1].set_ylabel("Force (N) / torque")
     axes[1].set_xlabel("Time (s)")
-    axes[0].legend(fontsize=7)
-    axes[1].legend(fontsize=7)
-    axes[0].set_title("Fixed rule: C-shape seed 8 CVT, plus first lexicographic physical success" if plotted else "No selected timeseries")
+    if plotted:
+        axes[0].legend(fontsize=7)
+        axes[1].legend(fontsize=7)
+    axes[0].set_title("First lexicographic CVT task failure and success in this batch" if plotted else "No selected timeseries")
     fig.tight_layout()
     fig.savefig(path, dpi=160)
     plt.close(fig)
@@ -428,7 +496,7 @@ def plot_safety(episodes: list[dict], path: Path) -> None:
     rows = [row for row in episodes if row.get("clearance_path_min") is not None]
     fig, ax = plt.subplots(figsize=(8.4, 4.4))
     if rows:
-        labels = [f"{row['variant'][:6]}\n{row['shape'][:3]}:{row['seed']}" for row in rows]
+        labels = [f"{row['arm']}\n{row['shape'][:3]}:{row['seed']}" for row in rows]
         x = np.arange(len(rows))
         path_mm = [1000 * float(row["clearance_path_min"]) for row in rows]
         bound_x, bound_y = [], []
@@ -443,6 +511,26 @@ def plot_safety(episodes: list[dict], path: Path) -> None:
     ax.set_ylabel("Clearance (mm)")
     ax.set_title(f"Static path clearance versus lower bound, n={len(rows)}")
     ax.legend(fontsize=8)
+    fig.tight_layout()
+    fig.savefig(path, dpi=160)
+    plt.close(fig)
+
+
+def plot_static_quality(episodes: list[dict], path: Path) -> None:
+    rows = [row for row in episodes if row.get("H_initial") and row.get("H_final") is not None]
+    arms = sorted({row["arm"] for row in rows})
+    fig, axes = plt.subplots(1, 2, figsize=(10, 4))
+    for index, arm in enumerate(arms):
+        group = [row for row in rows if row["arm"] == arm]
+        x = index + np.linspace(-0.1, 0.1, len(group))
+        axes[0].scatter(x, [r["H_final"] / r["H_initial"] for r in group], label=arm)
+        axes[1].scatter(x, [r["mean_robot_displacement"] for r in group], label=arm)
+    axes[0].axhline(1, color="gray", linestyle="--")
+    axes[0].set_ylabel("Final / initial independent deployment cost")
+    axes[1].set_ylabel("Mean robot displacement (m)")
+    for ax in axes:
+        ax.set_xticks(range(len(arms)), arms, rotation=25, ha="right", fontsize=8)
+    fig.suptitle("Static safety must be read alongside deployment quality and motion")
     fig.tight_layout()
     fig.savefig(path, dpi=160)
     plt.close(fig)
@@ -500,12 +588,13 @@ def main(argv=None) -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--batch", action="append", required=True, help="label=directory")
     parser.add_argument("--out", type=Path, required=True)
+    parser.add_argument("--by-split", action="store_true", help="Report each recorded protocol split separately")
     args = parser.parse_args(argv)
     episodes = []
     for item in args.batch:
         label, raw = item.split("=", 1)
         for result in iter_results(Path(raw)):
-            episodes.append(episode_row(result, label))
+            episodes.append(episode_row(result, result.get("split") if args.by_split else label))
     pairs = pair_rows(episodes, "boundary_cvt", "nearest_observed_target")
     summary = summarize(episodes, pairs)
     summary["failure_taxonomy"] = {
@@ -517,6 +606,8 @@ def main(argv=None) -> None:
     write_csv(args.out / "pairs.csv", pairs)
     (args.out / "summary.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
     tags = [batch for batch in ("development", "test") if any(row["batch"] == batch for row in episodes)]
+    if args.by_split:
+        tags = sorted({row["batch"] for row in episodes})
     if not tags:
         tags = [None]
     for tag in tags:
@@ -530,6 +621,7 @@ def main(argv=None) -> None:
         )
         plot_contacts(episodes, args.out / f"fig_contact_force{suffix}.png", focus=tag)
     plot_safety(episodes, args.out / "fig_safety_clearance.png")
+    plot_static_quality(episodes, args.out / "fig_static_quality.png")
     plot_ablation(episodes, args.out / "fig_ablation.png")
     print(json.dumps({"episodes": len(episodes), "pairs": len(pairs), "out": str(args.out)}, indent=2))
 

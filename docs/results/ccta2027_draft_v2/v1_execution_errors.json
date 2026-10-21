@@ -1,0 +1,26 @@
+{
+  "planned": 169,
+  "recorded": 169,
+  "errors": [
+    {
+      "execution_status": "ERROR",
+      "error": "AttributeError(\"'PymunkTransportEngine' object has no attribute 'last_reports'\")",
+      "traceback": "Traceback (most recent call last):\n  File \"E:\\boundary-aware-cooperative-transport\\runs\\ccta2027\\draft_v1\\execution_source\\src\\dbact_sim\\experiments\\study.py\", line 66, in worker\n    result = runner(copy.deepcopy(case[\"config\"]), case[\"seed\"], case[\"variant\"], case[\"frames\"], out)\n  File \"E:\\boundary-aware-cooperative-transport\\runs\\ccta2027\\draft_v1\\execution_source\\src\\dbact_sim\\experiments\\deployment.py\", line 265, in transport_arm\n    termination = env.run_until_settled(max_frames=frames, on_frame=observe)\n  File \"E:\\boundary-aware-cooperative-transport\\runs\\ccta2027\\draft_v1\\execution_source\\src\\dbact_sim\\environment.py\", line 283, in run_until_settled\n    on_frame(frame, self)\n  File \"E:\\boundary-aware-cooperative-transport\\runs\\ccta2027\\draft_v1\\execution_source\\src\\dbact_sim\\experiments\\deployment.py\", line 221, in observe\n    report = current.engine.last_reports[cid]\nAttributeError: 'PymunkTransportEngine' object has no attribute 'last_reports'\n",
+      "task_completed": false,
+      "g500_pass": false,
+      "settled": false,
+      "case_id": "engine_l_shape_pymunk_boundary_cvt",
+      "shape": "l_shape",
+      "variant": "boundary_cvt",
+      "seed": 2,
+      "stratum": "l_shape_pymunk",
+      "condition_id": "l_shape_pymunk",
+      "arm": "boundary_cvt",
+      "gate": 6,
+      "split": "engine",
+      "factors": {},
+      "wall_seconds": 0.07678110001143068
+    }
+  ],
+  "note": "Failed first revision retained; full v2 rerun follows an engine-only infrastructure repair, with no main-controller retuning"
+}

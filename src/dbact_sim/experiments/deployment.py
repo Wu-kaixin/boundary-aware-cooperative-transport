@@ -156,6 +156,7 @@ def static_arm(cfg, seed, variant, frames, out):
         positions.append(np.vstack([a.position for a in env.agents]))
     final = observer.evaluate(positions[-1], vertices)
     result = {"variant": variant, "seed": seed, "frames_completed": len(rows), "frames_requested": frames,
+              "r_safe":params.r_safe, "d_min":params.d_min, "solver_statistics":env.controller.safety.stats.as_dict(),
               "abort": abort, "initial_state_sha256": encode(initial.tolist()), "config_sha256": encode(cfg),
               "H_initial": observer.evaluate(initial, vertices)["H"], "H_final": final["H"],
               "centroid_residual_squared_final": final["centroid2"],
@@ -197,6 +198,7 @@ def static_arm(cfg, seed, variant, frames, out):
 
 def transport_arm(cfg, seed, variant, frames, out):
     env = SimulationEnvironment(cfg, seed=seed)
+    penalty_capacity = env.engine.name == "penalty"
     from dbact.deployment.variants import DeploymentVariant
     if variant != "boundary_cvt":
         env.controller.cvt = DeploymentVariant(env.controller,variant)
@@ -256,8 +258,8 @@ def transport_arm(cfg, seed, variant, frames, out):
                      "integrals":{key:float(loop.integral) for key,loop in current.controller.transport_loops.items()},
                      "diagnostics":[vars(d).copy() for d in current.controller.diagnostics],
                      "solver_statistics":current.controller.safety.stats.as_dict(),
-                     "normal_only_forward_capacity": max_forward,
-                     "normal_only_torque_interval": [torque_negative, torque_positive],
+                     "normal_only_forward_capacity": max_forward if penalty_capacity else None,
+                     "normal_only_torque_interval": [torque_negative, torque_positive] if penalty_capacity else [None, None],
                      "actual_net_force": report.net_force.tolist(), "actual_net_torque": report.net_torque,
                      "qp_intervention_fraction": float(np.mean([d.modification > 1e-8 for d in current.controller.diagnostics]))})
 
@@ -274,9 +276,9 @@ def transport_arm(cfg, seed, variant, frames, out):
               "contact_ready_seconds": None if metrics["contact_ready_frame"] is None else metrics["contact_ready_frame"] * env.dt,
               "mean_contacts": cargo["mean_contacts"], "max_contacts": cargo["max_contacts"],
               "contact_azimuth_histogram_12_bins": hist.tolist(),
-              "peak_normal_only_forward_capacity": max(r["normal_only_forward_capacity"] for r in rows),
-              "torque_capacity_min": min(r["normal_only_torque_interval"][0] for r in rows),
-              "torque_capacity_max": max(r["normal_only_torque_interval"][1] for r in rows),
+              "peak_normal_only_forward_capacity": max(r["normal_only_forward_capacity"] for r in rows) if penalty_capacity else None,
+              "torque_capacity_min": min(r["normal_only_torque_interval"][0] for r in rows) if penalty_capacity else None,
+              "torque_capacity_max": max(r["normal_only_torque_interval"][1] for r in rows) if penalty_capacity else None,
               "peak_actual_net_force": float(np.linalg.norm(force, axis=1).max()),
               "peak_absolute_actual_torque": max(abs(r["actual_net_torque"]) for r in rows),
               "direction_error_deg": metrics["direction_error_deg"], "max_cross_track": metrics["max_cross_track"],
@@ -285,7 +287,7 @@ def transport_arm(cfg, seed, variant, frames, out):
               "min_inter_agent_distance": metrics["min_inter_agent_distance"],
               "min_signed_clearance": metrics["min_signed_clearance"],
               "g500_success": gate["success"], "failure_reasons": gate["failure_reasons"],
-              "capacity_label": "normal-only instantaneous contact wrench box, 0 <= f_i <= stiffness*delta_max; not dynamically guaranteed",
+              "capacity_label": "normal-only instantaneous contact wrench box, 0 <= f_i <= stiffness*delta_max; not dynamically guaranteed" if penalty_capacity else "NOT_APPLICABLE: a penalty spring force bound is not a rigid-contact impulse bound",
               "changed_mechanism": "Only centroid target before CONTACT_READY; CVT mass, redeployment guards, sensing, safety and subsequent transport identical"}
     errors=progress_errors(env.tasks[cid].start, env.cargoes[0].position, goal, env.tasks[cid].distance)
     events={name:event_record(summary['phases']['entered'].get(name),env.dt,termination['frames_run']) for name in ('SEARCH','DISCOVER','ENCLOSE','CONTACT_READY','TRANSPORT','BRAKE','HOLD')}
@@ -294,11 +296,13 @@ def transport_arm(cfg, seed, variant, frames, out):
     result.update({"schema_version":SCHEMA_VERSION, **errors, "events":events,"phase_durations":durations,
         "physical_contact_ready":event_record(physical_ready,env.dt,termination['frames_run']),
         "physical_readiness_definition":"positive projected contact force, existing controller contact_quorum and contact_dwell; control-frame observations",
-        "task_completed":None, "task_completed_definition":"UNRESOLVED: no separate physical completion rule frozen yet",
+        "task_completed":bool(termination['settled'] and errors['euclidean_endpoint_error'] <= cfg['task']['tolerance']),
+        "task_completed_definition":"settled plus final Euclidean endpoint error <= existing task tolerance",
         "settled":termination['settled'],"g500_pass":gate['success'],"watchdog":termination['terminated_by']=='watchdog',
         "final_speed":float(np.linalg.norm(env.cargoes[0].linear_velocity)),
         "rotation_deg":cargo['rotation_deg'],
         "moving_safety_status":"UNRESOLVED: discrete physics substeps, no continuous certificate"})
+    result["contact_reporting"] = getattr(env.engine, "contact_reporting", "start_of_control_hold_penalty_force")
     dump(out / "physics_substeps.json", substep_rows)
     dump(out / "paired_metrics.json", {"steps": rows, "summary": result})
     dump(out / "config.json", cfg)

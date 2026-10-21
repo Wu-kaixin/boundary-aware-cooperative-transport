@@ -113,7 +113,7 @@ class DBACTParams:
     # i, and nothing downstream assumes a symmetric neighbour set.
     communication_dropout_prob: float = 0.0
     # Calibration on the on-board progress estimate, applied where the transport loop reads
-    # it and nowhere else. 1.0 is an exact no-op and is the default.
+    # it and nowhere else. 1.0 is an exact no-op; the historical calibration is 1.24.
     #
     # Why it exists. The distance sweep measured J/L = 1.23-1.28 at every alpha from 0.2 to
     # 1.0, with corr(alpha, J/L) = +0.029 -- the team travels about 24% further than asked
@@ -217,7 +217,7 @@ class DBACTParams:
     # --- safety (S1) ---
     robot_radius: float = 0.16
     delta_max: float = 0.05
-    d_min: float = 0.30
+    d_min: float = 0.34
     gamma_agent: float = 6.0
     gamma_obj: float = 4.0
     rho: float = 0.05
@@ -853,7 +853,8 @@ class DBACTController:
                     agent.agent_id, object_id, local_map, task.direction
                 )
                 registration = local_map.last_registration.get(object_id)
-                if registration is not None and registration.matches > 0:
+                quality = self._progress_quality[agent.agent_id][object_id]
+                if registration is not None and registration.matches > 0 and quality != "unavailable":
                     informed.setdefault(object_id, []).append(i)
 
         for i, agent in enumerate(agents):
@@ -962,7 +963,8 @@ class DBACTController:
         goal = self.goal_directions[object_id]
         speeds = [
             float(np.dot(local_map.object_velocity(object_id), goal))
-            for local_map in self.maps.values()
+            for agent_id, local_map in self.maps.items()
+            if self._progress_quality.get(agent_id, {}).get(object_id, "unavailable") != "unavailable"
         ]
         speed = float(np.median(speeds)) if speeds else 0.0
         brake_gain = max(float(self.params.brake_gain), 1e-6)

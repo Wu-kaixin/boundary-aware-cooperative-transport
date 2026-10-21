@@ -28,7 +28,7 @@ def load_protocol(path: Path, split: str, root: Path) -> tuple[dict, list[dict]]
         if identifier in identifiers:
             raise ValueError(f"Duplicate case_id: {identifier}")
         identifiers.add(identifier)
-        if raw.get("split") != split:
+        if split != "all" and raw.get("split") != split:
             continue
         case = copy.deepcopy(raw)
         for name in ("seed", "frames", "gate"):

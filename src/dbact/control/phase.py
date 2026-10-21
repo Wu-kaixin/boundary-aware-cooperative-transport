@@ -153,7 +153,7 @@ class PhaseMonitor:
             self.unavailable_streak = 0
         if self.phase is Phase.BRAKE and self._hold_ready(signals):
             self.settle_streak += 1
-        elif self.phase is not Phase.BRAKE:
+        else:
             self.settle_streak = 0
         if self.phase is Phase.TRANSPORT and self.loss_streak >= gates.contact_loss_dwell:
             if not self.push_suspended:

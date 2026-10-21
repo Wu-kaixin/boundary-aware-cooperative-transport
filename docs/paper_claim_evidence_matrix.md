@@ -1,5 +1,9 @@
 # Claim–evidence matrix
 
+The table below is the immutable October 7 evidence snapshot. Current repairs,
+the separately frozen CCTA revision and its verdicts are documented in
+[CCTA2027_EXPERIMENTS.md](CCTA2027_EXPERIMENTS.md); populations are not pooled.
+
 Updated 7 October 2026 from executed runs. Batches are not pooled. EMPIRICAL_ONLY except the stated static-oracle scope.
 
 | Claim | Code | Evidence | Verdict |

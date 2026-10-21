@@ -24,7 +24,7 @@ from dataclasses import dataclass, field
 import numpy as np
 
 from dbact.cargo import Cargo
-from dbact.contact_dynamics import ContactParams, ContactReport, PenaltyContactModel
+from dbact.contact_dynamics import Contact, ContactParams, ContactReport, PenaltyContactModel
 from dbact.types import AgentState
 
 
@@ -107,6 +107,8 @@ class PymunkTransportEngine:
         self.space.damping = 1.0
         self._bodies: dict[str, object] = {}
         self._agent_bodies: dict[str, object] = {}
+        self.last_reports: dict[str, ContactReport] = {}
+        self.contact_reporting = "control_interval_impulse_average"
         self._built = False
 
     def _build(self, cargoes: list[Cargo], agents: list[AgentState]) -> None:
@@ -153,49 +155,85 @@ class PymunkTransportEngine:
         if not self._built:
             self._build(cargoes, agents)
 
+        if dt <= 0:
+            raise ValueError("Pymunk integration requires positive dt")
+
         for agent in agents:
             body = self._agent_bodies.get(agent.agent_id)
             if body is None:
                 continue
-            body.position = tuple(agent.position)
+            # The environment has already committed the robot endpoint. Starting
+            # at that endpoint and integrating again advanced it by a second hold.
+            body.position = tuple(agent.position - dt * agent.velocity)
             body.velocity = tuple(agent.velocity)
 
         n_sub = max(1, int(self.params.substeps))
         h = dt / n_sub
         delta_v = h * self.params.ground_friction * self.params.gravity
+        reports = {cargo.object_id: ContactReport(cargo.object_id) for cargo in cargoes}
+        contacts = {cargo.object_id: {} for cargo in cargoes}
+        agent_ids = {body: name for name, body in self._agent_bodies.items()}
         for _ in range(n_sub):
+            before = {cargo.object_id: (np.array(self._bodies[cargo.object_id].velocity),
+                                       float(self._bodies[cargo.object_id].angular_velocity)) for cargo in cargoes}
             self.space.step(h)
             for cargo in cargoes:
-                self._apply_ground_friction(self._bodies[cargo.object_id], cargo, delta_v)
+                body = self._bodies[cargo.object_id]
+                report = reports[cargo.object_id]
+                # Read solver-induced momentum before the separate floor-friction
+                # impulse. Sum every substep rather than dividing only the last
+                # substep's impulse by the full control period.
+                velocity, omega = before[cargo.object_id]
+                report.net_force += cargo.mass * (np.array(body.velocity) - velocity) / dt
+                report.net_torque += cargo.inertia * (float(body.angular_velocity) - omega) / dt
+
+                def collect(arbiter):
+                    first, second = arbiter.bodies
+                    other = second if first is body else first
+                    agent_id = agent_ids.get(other)
+                    if agent_id is None:
+                        return
+                    impulse = np.array(arbiter.total_impulse, dtype=float)
+                    normal = np.array(arbiter.normal, dtype=float)
+                    own_first = first is body
+                    if not own_first:
+                        impulse, normal = -impulse, -normal
+                    points = arbiter.contact_point_set.points
+                    if not points:
+                        return
+                    point = np.mean([np.array(p.point_a if own_first else p.point_b) for p in points], axis=0)
+                    penetration = max(0.0, max(-float(p.distance) for p in points))
+                    entry = contacts[cargo.object_id].setdefault(agent_id,
+                        {"impulse": np.zeros(2), "torque_impulse": 0.0, "penetration": 0.0})
+                    entry["impulse"] += impulse
+                    lever = point - np.array(body.position)
+                    entry["torque_impulse"] += float(lever[0] * impulse[1] - lever[1] * impulse[0])
+                    entry["penetration"] = max(entry["penetration"], penetration)
+                    entry["point"], entry["normal"] = point, normal
+
+                # Pymunk permits impulse access inside each_arbiter callbacks.
+                # Copy values here; an arbiter must never escape its callback.
+                # https://www.pymunk.org/en/latest/pymunk.html#pymunk.Arbiter.total_impulse
+                body.each_arbiter(collect)
+                self._apply_ground_friction(body, cargo, delta_v)
 
         statuses: list[TransportStatus] = []
         for cargo in cargoes:
             body = self._bodies[cargo.object_id]
             cargo.set_pose(np.array([body.position.x, body.position.y]), float(body.angle))
             cargo.set_twist(np.array([body.velocity.x, body.velocity.y]), float(body.angular_velocity))
-            # Net wrench read back from the solver's own impulses, so it is the
-            # engine's answer rather than a recomputation of it.
-            accumulated = {"force": np.zeros(2), "count": 0, "penetration": 0.0}
-
-            def collect(arbiter, store=accumulated):
-                impulse = arbiter.total_impulse
-                store["force"] = store["force"] + np.array([impulse.x, impulse.y])
-                store["count"] += 1
-                for point in arbiter.contact_point_set.points:
-                    store["penetration"] = max(store["penetration"], -float(point.distance))
-
-            body.each_arbiter(collect)
-            net_force = accumulated["force"] / max(dt, 1e-9)
-            net_torque = 0.0
-            count = accumulated["count"]
-            max_penetration = accumulated["penetration"]
+            report = reports[cargo.object_id]
+            report.contacts = [Contact(agent_id, values["point"], values["normal"], values["penetration"],
+                                       values["impulse"] / dt, values["torque_impulse"] / dt)
+                               for agent_id, values in sorted(contacts[cargo.object_id].items())]
+            self.last_reports[cargo.object_id] = report
             statuses.append(
                 TransportStatus(
                     object_id=cargo.object_id,
-                    contact_count=count,
-                    net_force=net_force,
-                    net_torque=net_torque,
-                    max_penetration=max_penetration,
+                    contact_count=report.contact_count,
+                    net_force=report.net_force.copy(),
+                    net_torque=report.net_torque,
+                    max_penetration=report.max_penetration,
                     engine=self.name,
                 )
             )

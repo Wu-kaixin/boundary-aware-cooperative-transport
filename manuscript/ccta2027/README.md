@@ -4,6 +4,9 @@ This is an implementation-to-evidence map, not an authored submission or an appr
 Official guidance is in [CCTA2027.md](../../docs/CCTA2027.md). The six-page budget is a project
 choice within the published initial eight-page cap.
 
+The current experimental revision and its acceptance boundaries are specified in
+[CCTA2027_EXPERIMENTS.md](../../docs/CCTA2027_EXPERIMENTS.md).
+
 | Section | Approx. pages | Implementation / evidence |
 | --- | ---: | --- |
 | Introduction and related work | 0.75 | `docs/paper_storyline.md`; verified literature still required |

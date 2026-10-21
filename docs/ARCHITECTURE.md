@@ -59,6 +59,7 @@ diagnostics lazily to avoid an import cycle. Subpackage initializers contain doc
 | `deployment` | `experiments.deployment` | Matched Gate 5/6 pairs and replay products |
 | `study` | `experiments.protocol`, `.study` | Resolved cases, snapshots, receipts and summary |
 | `evidence` | `experiments.evidence` | Episode CSV, paired CSV, intervals and figures |
+| `campaign` | `experiments.campaign` | Expanded design, initial-state preflight, execution snapshot and acceptance audit |
 
 Cases may contain a complete `config`, a repository-relative `config_ref`, or use the existing
 shape/gate factory. Historical complete-case protocols remain readable. Only a selected split

@@ -10,6 +10,7 @@ COMMANDS = {
     "deployment": ("dbact_sim.experiments.deployment", "Run matched static or transport pairs"),
     "study": ("dbact_sim.experiments.study", "Validate or execute an experiment protocol"),
     "evidence": ("dbact_sim.experiments.evidence", "Build tables and figures from recorded results"),
+    "campaign": ("dbact_sim.experiments.campaign", "Freeze and audit the full CCTA experiment matrix"),
 }
 
 

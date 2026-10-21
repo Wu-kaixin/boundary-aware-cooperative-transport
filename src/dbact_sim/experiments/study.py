@@ -28,7 +28,8 @@ def digest(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def source_hashes(root: Path = ROOT) -> dict[str, str]:
+def source_hashes(root: Path | None = None) -> dict[str, str]:
+    root = ROOT if root is None else root
     paths = [p for folder in ("src", "configs") for p in (root / folder).rglob("*")
              if p.is_file() and p.suffix in (".py", ".yaml", ".yml")]
     paths += [root / name for name in ("pyproject.toml", "requirements.txt", "environment.yml")
@@ -38,7 +39,7 @@ def source_hashes(root: Path = ROOT) -> dict[str, str]:
 
 def environment_versions() -> dict:
     packages = {}
-    for name in ("numpy", "scipy", "shapely", "PyYAML", "cvxpy", "osqp", "pymunk"):
+    for name in ("numpy", "scipy", "shapely", "PyYAML", "cvxpy", "clarabel", "osqp", "scs", "pymunk", "matplotlib", "threadpoolctl"):
         try:
             packages[name] = version(name)
         except PackageNotFoundError:
@@ -64,6 +65,8 @@ def worker(payload: tuple) -> dict:
         runner = static_arm if case["gate"] == 5 else transport_arm
         result = runner(copy.deepcopy(case["config"]), case["seed"], case["variant"], case["frames"], out)
         result["execution_status"] = "COMPLETED"
+        if case.get("expected_initial_state_sha256") and result.get("initial_state_sha256") != case["expected_initial_state_sha256"]:
+            raise RuntimeError("Initial state differs from the frozen preflight")
         if case["gate"] == 6:
             tolerance = case["config"]["task"]["tolerance"]
             result["task_completed"] = bool(result["settled"] and result["euclidean_endpoint_error"] <= tolerance)
@@ -72,7 +75,9 @@ def worker(payload: tuple) -> dict:
         result = {"execution_status": "ERROR", "error": repr(exc), "traceback": traceback.format_exc(),
                   "task_completed": False, "g500_pass": False, "settled": False}
     result.update(case_id=case["case_id"], shape=case["shape"], variant=case["variant"], seed=case["seed"],
-                  stratum=case.get("stratum", "near"), wall_seconds=time.perf_counter() - started)
+                  stratum=case.get("stratum", "near"), condition_id=case.get("condition_id"),
+                  arm=case.get("arm",case["variant"]), gate=case["gate"], split=case.get("split"), factors=case.get("factors",{}),
+                  wall_seconds=time.perf_counter() - started)
     products = {p.relative_to(out).as_posix(): digest(p) for p in sorted(out.rglob("*"))
                 if p.is_file() and p.name != "case_result.json"}
     dump(out / "case_result.json", {"identity": identity, "products": products, "result": result})
@@ -170,6 +175,10 @@ def run_study(protocol_path: Path, split: str, out: Path | None, workers: int, r
         finally:
             sampler.stop()
     summary = summarize()
+    # Sources can otherwise be edited while a process pool is still importing them.
+    # Preserve the measured rows but invalidate their attribution instead of
+    # claiming that a mixed-source run belongs to the start-of-run snapshot.
+    summary["source_integrity"] = "PASS" if source_hashes() == source else "SOURCE_CHANGED"
     dump(out / "summary.json", summary)
     return summary
 
@@ -192,7 +201,7 @@ def main(argv=None) -> int:
                           "source_matches_freeze": encode(source_hashes()) == frozen if frozen else None}, indent=2))
         return 0
     summary = run_study(args.protocol, args.split, args.out, args.workers, args.resume)
-    return 1 if summary["execution_errors"] else 0
+    return 1 if summary["execution_errors"] or summary["source_integrity"] != "PASS" else 0
 
 
 if __name__ == "__main__":

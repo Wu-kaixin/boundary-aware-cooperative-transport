@@ -1,5 +1,8 @@
 # Failure mechanism report
 
+This report describes the October 7 source and runs. Later code repairs and their
+new experimental evaluation are recorded in [CCTA2027_EXPERIMENTS.md](CCTA2027_EXPERIMENTS.md).
+
 Status: EMPIRICAL_ONLY. Development and diagnostic runs on 7 October 2026. Original downstream comparisons are `study_v3/development` and `baseline_transport`. Single-factor diagnostics are separate and are not counted as boundary-CVT gains. Correlation is not treated as a cause. Items marked OPEN are not identified.
 
 ## What was held fixed

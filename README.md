@@ -13,7 +13,7 @@ python -m pip install -e ".[dev,qp,sim,analysis,publication]"
 python -m dbact_sim --help
 ```
 
-统一入口提供 `simulate`、`deployment`、`study`、`evidence`；安装后也可用 `dbact`。原有 `scripts/` 命令继续兼容。
+统一入口提供 `simulate`、`deployment`、`study`、`evidence`、`campaign`；安装后也可用 `dbact`。原有 `scripts/` 命令继续兼容。
 
 先检查实验协议，再运行五个短案例，验证静态与动态管线：
 
@@ -77,6 +77,8 @@ runs/                       本地生成结果（不提交）
 [官方征稿](https://ccta2027.ieeecss.org/authors/call-for-papers)规定 IEEE 双栏格式，初稿最多 8 页；录用稿以 6 页为限，超页收费。[官网日期](https://ccta2027.ieeecss.org/)列出的全文截止日为 2027-02-07。核对日期：2026-10-21。未公布的时区、费用金额和最终页数上限保留待确认。
 
 项目以 6 页正文组织方法、限定的理论结论和可复现实验；这是项目选择。[会议要求与证据边界](docs/CCTA2027.md)及[实验说明](experiments/ccta2027/README.md)列出具体分工。
+
+本轮修复、冻结的完整实验矩阵与验收定义见 [CCTA 2027 实验修订](docs/CCTA2027_EXPERIMENTS.md)。历史运行与本轮结果分别记录。
 
 - 理论：静态 oracle 几何的适用条件见 [theory/static_deployment](theory/static_deployment/)。
 - 方法与主张：[论文主线](docs/paper_storyline.md)、[证据矩阵](docs/paper_claim_evidence_matrix.md)。

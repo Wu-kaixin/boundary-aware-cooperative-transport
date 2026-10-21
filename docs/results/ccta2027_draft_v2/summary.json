@@ -1,0 +1,2387 @@
+{
+  "note": "Rates are computed inside each batch. Batches are not pooled, because they repeat conditions and mix static safety with transport.",
+  "batches": {
+    "ablation": {
+      "episodes": 15,
+      "execution_errors": 0,
+      "task_completed": {
+        "k": 5,
+        "n": 15,
+        "rate": 0.3333333333333333,
+        "low": null,
+        "high": null,
+        "missing": 0,
+        "n_seed_clusters": 1,
+        "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+      },
+      "settled": {
+        "k": 15,
+        "n": 15,
+        "rate": 1.0,
+        "low": null,
+        "high": null,
+        "missing": 0,
+        "n_seed_clusters": 1,
+        "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+      },
+      "g500_pass": {
+        "k": 2,
+        "n": 15,
+        "rate": 0.13333333333333333,
+        "low": null,
+        "high": null,
+        "missing": 0,
+        "n_seed_clusters": 1,
+        "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+      },
+      "by_method": {
+        "boundary_cvt": {
+          "n": 3,
+          "task_completed": {
+            "k": 1,
+            "n": 3,
+            "rate": 0.3333333333333333,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 1,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "settled": {
+            "k": 3,
+            "n": 3,
+            "rate": 1.0,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 1,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "g500_pass": {
+            "k": 0,
+            "n": 3,
+            "rate": 0.0,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 1,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "controller_readiness": {
+            "n": 3,
+            "observed": 3,
+            "censored": 0,
+            "unreached_proportion": 0.0,
+            "conditional_mean_seconds": 4.583333333333333,
+            "conditional_median_seconds": 4.65
+          }
+        },
+        "no_arc": {
+          "n": 3,
+          "task_completed": {
+            "k": 1,
+            "n": 3,
+            "rate": 0.3333333333333333,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 1,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "settled": {
+            "k": 3,
+            "n": 3,
+            "rate": 1.0,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 1,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "g500_pass": {
+            "k": 1,
+            "n": 3,
+            "rate": 0.3333333333333333,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 1,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "controller_readiness": {
+            "n": 3,
+            "observed": 3,
+            "censored": 0,
+            "unreached_proportion": 0.0,
+            "conditional_mean_seconds": 4.8,
+            "conditional_median_seconds": 4.05
+          }
+        },
+        "no_arc_normalized": {
+          "n": 3,
+          "task_completed": {
+            "k": 1,
+            "n": 3,
+            "rate": 0.3333333333333333,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 1,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "settled": {
+            "k": 3,
+            "n": 3,
+            "rate": 1.0,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 1,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "g500_pass": {
+            "k": 0,
+            "n": 3,
+            "rate": 0.0,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 1,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "controller_readiness": {
+            "n": 3,
+            "observed": 3,
+            "censored": 0,
+            "unreached_proportion": 0.0,
+            "conditional_mean_seconds": 4.416666666666667,
+            "conditional_median_seconds": 4.15
+          }
+        },
+        "no_direction_offsets": {
+          "n": 3,
+          "task_completed": {
+            "k": 1,
+            "n": 3,
+            "rate": 0.3333333333333333,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 1,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "settled": {
+            "k": 3,
+            "n": 3,
+            "rate": 1.0,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 1,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "g500_pass": {
+            "k": 1,
+            "n": 3,
+            "rate": 0.3333333333333333,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 1,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "controller_readiness": {
+            "n": 3,
+            "observed": 3,
+            "censored": 0,
+            "unreached_proportion": 0.0,
+            "conditional_mean_seconds": 4.083333333333333,
+            "conditional_median_seconds": 3.9000000000000004
+          }
+        },
+        "no_exploration": {
+          "n": 3,
+          "task_completed": {
+            "k": 1,
+            "n": 3,
+            "rate": 0.3333333333333333,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 1,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "settled": {
+            "k": 3,
+            "n": 3,
+            "rate": 1.0,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 1,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "g500_pass": {
+            "k": 0,
+            "n": 3,
+            "rate": 0.0,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 1,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "controller_readiness": {
+            "n": 3,
+            "observed": 3,
+            "censored": 0,
+            "unreached_proportion": 0.0,
+            "conditional_mean_seconds": 4.583333333333333,
+            "conditional_median_seconds": 4.65
+          }
+        }
+      },
+      "static_by_arm": {},
+      "by_shape": {
+        "c_shape": {
+          "n": 5,
+          "task_completed": {
+            "k": 3,
+            "n": 5,
+            "rate": 0.6,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 1,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "settled": {
+            "k": 5,
+            "n": 5,
+            "rate": 1.0,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 1,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "g500_pass": {
+            "k": 2,
+            "n": 5,
+            "rate": 0.4,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 1,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          }
+        },
+        "l_shape": {
+          "n": 5,
+          "task_completed": {
+            "k": 2,
+            "n": 5,
+            "rate": 0.4,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 1,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "settled": {
+            "k": 5,
+            "n": 5,
+            "rate": 1.0,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 1,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "g500_pass": {
+            "k": 0,
+            "n": 5,
+            "rate": 0.0,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 1,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          }
+        },
+        "rectangle": {
+          "n": 5,
+          "task_completed": {
+            "k": 0,
+            "n": 5,
+            "rate": 0.0,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 1,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "settled": {
+            "k": 5,
+            "n": 5,
+            "rate": 1.0,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 1,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "g500_pass": {
+            "k": 0,
+            "n": 5,
+            "rate": 0.0,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 1,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          }
+        }
+      },
+      "controller_readiness_boundary_cvt": {
+        "n": 3,
+        "observed": 3,
+        "censored": 0,
+        "unreached_proportion": 0.0,
+        "conditional_mean_seconds": 4.583333333333333,
+        "conditional_median_seconds": 4.65
+      },
+      "paired_controller_ready_cvt_minus_nearest": {
+        "n": 0,
+        "mean": null,
+        "median": null,
+        "low": null,
+        "high": null
+      },
+      "paired_controller_ready_cvt_minus_spacing": {
+        "n": 0,
+        "mean": null,
+        "median": null,
+        "low": null,
+        "high": null
+      },
+      "seed_cluster_ready_cvt_minus_nearest": {
+        "n_pairs": 0,
+        "n_seed_clusters": 0,
+        "resampling_unit": "seed",
+        "mean": null,
+        "median": null,
+        "low": null,
+        "high": null,
+        "status": "DESCRIPTIVE_ONLY_FEW_SEEDS"
+      },
+      "seed_cluster_ready_cvt_minus_spacing": {
+        "n_pairs": 0,
+        "n_seed_clusters": 0,
+        "resampling_unit": "seed",
+        "mean": null,
+        "median": null,
+        "low": null,
+        "high": null,
+        "status": "DESCRIPTIVE_ONLY_FEW_SEEDS"
+      },
+      "paired_ready_censored_pairs": 0,
+      "paired_physical_ready_cvt_minus_nearest": {
+        "n": 0,
+        "mean": null,
+        "median": null,
+        "low": null,
+        "high": null
+      },
+      "paired_absolute_progress_cvt_minus_nearest": {
+        "n": 0,
+        "mean": null,
+        "median": null,
+        "low": null,
+        "high": null
+      },
+      "analysis_unit": "episode for rates; matched shape/seed/stratum pair for differences",
+      "bootstrap_seed": 20261007,
+      "censoring": "unreached events excluded from means; their count is reported separately"
+    },
+    "active_exploration": {
+      "episodes": 6,
+      "execution_errors": 0,
+      "task_completed": {
+        "k": 2,
+        "n": 6,
+        "rate": 0.3333333333333333,
+        "low": null,
+        "high": null,
+        "missing": 0,
+        "n_seed_clusters": 1,
+        "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+      },
+      "settled": {
+        "k": 6,
+        "n": 6,
+        "rate": 1.0,
+        "low": null,
+        "high": null,
+        "missing": 0,
+        "n_seed_clusters": 1,
+        "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+      },
+      "g500_pass": {
+        "k": 0,
+        "n": 6,
+        "rate": 0.0,
+        "low": null,
+        "high": null,
+        "missing": 0,
+        "n_seed_clusters": 1,
+        "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+      },
+      "by_method": {
+        "boundary_cvt": {
+          "n": 3,
+          "task_completed": {
+            "k": 1,
+            "n": 3,
+            "rate": 0.3333333333333333,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 1,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "settled": {
+            "k": 3,
+            "n": 3,
+            "rate": 1.0,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 1,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "g500_pass": {
+            "k": 0,
+            "n": 3,
+            "rate": 0.0,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 1,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "controller_readiness": {
+            "n": 3,
+            "observed": 3,
+            "censored": 0,
+            "unreached_proportion": 0.0,
+            "conditional_mean_seconds": 4.483333333333333,
+            "conditional_median_seconds": 4.25
+          }
+        },
+        "no_exploration": {
+          "n": 3,
+          "task_completed": {
+            "k": 1,
+            "n": 3,
+            "rate": 0.3333333333333333,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 1,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "settled": {
+            "k": 3,
+            "n": 3,
+            "rate": 1.0,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 1,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "g500_pass": {
+            "k": 0,
+            "n": 3,
+            "rate": 0.0,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 1,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "controller_readiness": {
+            "n": 3,
+            "observed": 3,
+            "censored": 0,
+            "unreached_proportion": 0.0,
+            "conditional_mean_seconds": 4.583333333333333,
+            "conditional_median_seconds": 4.5
+          }
+        }
+      },
+      "static_by_arm": {},
+      "by_shape": {
+        "c_shape": {
+          "n": 2,
+          "task_completed": {
+            "k": 1,
+            "n": 2,
+            "rate": 0.5,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 1,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "settled": {
+            "k": 2,
+            "n": 2,
+            "rate": 1.0,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 1,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "g500_pass": {
+            "k": 0,
+            "n": 2,
+            "rate": 0.0,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 1,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          }
+        },
+        "l_shape": {
+          "n": 2,
+          "task_completed": {
+            "k": 0,
+            "n": 2,
+            "rate": 0.0,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 1,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "settled": {
+            "k": 2,
+            "n": 2,
+            "rate": 1.0,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 1,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "g500_pass": {
+            "k": 0,
+            "n": 2,
+            "rate": 0.0,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 1,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          }
+        },
+        "rectangle": {
+          "n": 2,
+          "task_completed": {
+            "k": 1,
+            "n": 2,
+            "rate": 0.5,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 1,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "settled": {
+            "k": 2,
+            "n": 2,
+            "rate": 1.0,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 1,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "g500_pass": {
+            "k": 0,
+            "n": 2,
+            "rate": 0.0,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 1,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          }
+        }
+      },
+      "controller_readiness_boundary_cvt": {
+        "n": 3,
+        "observed": 3,
+        "censored": 0,
+        "unreached_proportion": 0.0,
+        "conditional_mean_seconds": 4.483333333333333,
+        "conditional_median_seconds": 4.25
+      },
+      "paired_controller_ready_cvt_minus_nearest": {
+        "n": 0,
+        "mean": null,
+        "median": null,
+        "low": null,
+        "high": null
+      },
+      "paired_controller_ready_cvt_minus_spacing": {
+        "n": 0,
+        "mean": null,
+        "median": null,
+        "low": null,
+        "high": null
+      },
+      "seed_cluster_ready_cvt_minus_nearest": {
+        "n_pairs": 0,
+        "n_seed_clusters": 0,
+        "resampling_unit": "seed",
+        "mean": null,
+        "median": null,
+        "low": null,
+        "high": null,
+        "status": "DESCRIPTIVE_ONLY_FEW_SEEDS"
+      },
+      "seed_cluster_ready_cvt_minus_spacing": {
+        "n_pairs": 0,
+        "n_seed_clusters": 0,
+        "resampling_unit": "seed",
+        "mean": null,
+        "median": null,
+        "low": null,
+        "high": null,
+        "status": "DESCRIPTIVE_ONLY_FEW_SEEDS"
+      },
+      "paired_ready_censored_pairs": 0,
+      "paired_physical_ready_cvt_minus_nearest": {
+        "n": 0,
+        "mean": null,
+        "median": null,
+        "low": null,
+        "high": null
+      },
+      "paired_absolute_progress_cvt_minus_nearest": {
+        "n": 0,
+        "mean": null,
+        "median": null,
+        "low": null,
+        "high": null
+      },
+      "analysis_unit": "episode for rates; matched shape/seed/stratum pair for differences",
+      "bootstrap_seed": 20261007,
+      "censoring": "unreached events excluded from means; their count is reported separately"
+    },
+    "development": {
+      "episodes": 27,
+      "execution_errors": 0,
+      "task_completed": {
+        "k": 14,
+        "n": 27,
+        "rate": 0.5185185185185185,
+        "low": null,
+        "high": null,
+        "missing": 0,
+        "n_seed_clusters": 3,
+        "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+      },
+      "settled": {
+        "k": 27,
+        "n": 27,
+        "rate": 1.0,
+        "low": null,
+        "high": null,
+        "missing": 0,
+        "n_seed_clusters": 3,
+        "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+      },
+      "g500_pass": {
+        "k": 2,
+        "n": 27,
+        "rate": 0.07407407407407407,
+        "low": null,
+        "high": null,
+        "missing": 0,
+        "n_seed_clusters": 3,
+        "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+      },
+      "by_method": {
+        "boundary_cvt": {
+          "n": 9,
+          "task_completed": {
+            "k": 5,
+            "n": 9,
+            "rate": 0.5555555555555556,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 3,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "settled": {
+            "k": 9,
+            "n": 9,
+            "rate": 1.0,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 3,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "g500_pass": {
+            "k": 1,
+            "n": 9,
+            "rate": 0.1111111111111111,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 3,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "controller_readiness": {
+            "n": 9,
+            "observed": 9,
+            "censored": 0,
+            "unreached_proportion": 0.0,
+            "conditional_mean_seconds": 4.383333333333334,
+            "conditional_median_seconds": 4.3500000000000005
+          }
+        },
+        "local_spacing": {
+          "n": 9,
+          "task_completed": {
+            "k": 4,
+            "n": 9,
+            "rate": 0.4444444444444444,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 3,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "settled": {
+            "k": 9,
+            "n": 9,
+            "rate": 1.0,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 3,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "g500_pass": {
+            "k": 1,
+            "n": 9,
+            "rate": 0.1111111111111111,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 3,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "controller_readiness": {
+            "n": 9,
+            "observed": 9,
+            "censored": 0,
+            "unreached_proportion": 0.0,
+            "conditional_mean_seconds": 4.305555555555556,
+            "conditional_median_seconds": 4.25
+          }
+        },
+        "nearest_observed_target": {
+          "n": 9,
+          "task_completed": {
+            "k": 5,
+            "n": 9,
+            "rate": 0.5555555555555556,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 3,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "settled": {
+            "k": 9,
+            "n": 9,
+            "rate": 1.0,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 3,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "g500_pass": {
+            "k": 0,
+            "n": 9,
+            "rate": 0.0,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 3,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "controller_readiness": {
+            "n": 9,
+            "observed": 9,
+            "censored": 0,
+            "unreached_proportion": 0.0,
+            "conditional_mean_seconds": 8.983333333333333,
+            "conditional_median_seconds": 4.9
+          }
+        }
+      },
+      "static_by_arm": {},
+      "by_shape": {
+        "c_shape": {
+          "n": 9,
+          "task_completed": {
+            "k": 4,
+            "n": 9,
+            "rate": 0.4444444444444444,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 3,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "settled": {
+            "k": 9,
+            "n": 9,
+            "rate": 1.0,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 3,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "g500_pass": {
+            "k": 0,
+            "n": 9,
+            "rate": 0.0,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 3,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          }
+        },
+        "l_shape": {
+          "n": 9,
+          "task_completed": {
+            "k": 3,
+            "n": 9,
+            "rate": 0.3333333333333333,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 3,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "settled": {
+            "k": 9,
+            "n": 9,
+            "rate": 1.0,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 3,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "g500_pass": {
+            "k": 2,
+            "n": 9,
+            "rate": 0.2222222222222222,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 3,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          }
+        },
+        "rectangle": {
+          "n": 9,
+          "task_completed": {
+            "k": 7,
+            "n": 9,
+            "rate": 0.7777777777777778,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 3,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "settled": {
+            "k": 9,
+            "n": 9,
+            "rate": 1.0,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 3,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "g500_pass": {
+            "k": 0,
+            "n": 9,
+            "rate": 0.0,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 3,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          }
+        }
+      },
+      "controller_readiness_boundary_cvt": {
+        "n": 9,
+        "observed": 9,
+        "censored": 0,
+        "unreached_proportion": 0.0,
+        "conditional_mean_seconds": 4.383333333333334,
+        "conditional_median_seconds": 4.3500000000000005
+      },
+      "paired_controller_ready_cvt_minus_nearest": {
+        "n": 9,
+        "mean": -4.6,
+        "median": -0.75,
+        "low": -9.01125,
+        "high": -1.1000000000000003
+      },
+      "paired_controller_ready_cvt_minus_spacing": {
+        "n": 9,
+        "mean": 0.07777777777777779,
+        "median": 0.20000000000000018,
+        "low": -0.13333333333333336,
+        "high": 0.27777777777777757
+      },
+      "seed_cluster_ready_cvt_minus_nearest": {
+        "n_pairs": 9,
+        "n_seed_clusters": 3,
+        "resampling_unit": "seed",
+        "mean": -4.6000000000000005,
+        "median": -0.75,
+        "low": null,
+        "high": null,
+        "status": "DESCRIPTIVE_ONLY_FEW_SEEDS"
+      },
+      "seed_cluster_ready_cvt_minus_spacing": {
+        "n_pairs": 9,
+        "n_seed_clusters": 3,
+        "resampling_unit": "seed",
+        "mean": 0.07777777777777779,
+        "median": 0.20000000000000018,
+        "low": null,
+        "high": null,
+        "status": "DESCRIPTIVE_ONLY_FEW_SEEDS"
+      },
+      "paired_ready_censored_pairs": 0,
+      "paired_physical_ready_cvt_minus_nearest": {
+        "n": 0,
+        "mean": null,
+        "median": null,
+        "low": null,
+        "high": null
+      },
+      "paired_absolute_progress_cvt_minus_nearest": {
+        "n": 9,
+        "mean": 0.016864734773102377,
+        "median": 0.0007163168085593252,
+        "low": -0.01914195921820963,
+        "high": 0.05857077559572296
+      },
+      "analysis_unit": "episode for rates; matched shape/seed/stratum pair for differences",
+      "bootstrap_seed": 20261007,
+      "censoring": "unreached events excluded from means; their count is reported separately"
+    },
+    "engine": {
+      "episodes": 2,
+      "execution_errors": 0,
+      "task_completed": {
+        "k": 1,
+        "n": 2,
+        "rate": 0.5,
+        "low": null,
+        "high": null,
+        "missing": 0,
+        "n_seed_clusters": 1,
+        "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+      },
+      "settled": {
+        "k": 1,
+        "n": 2,
+        "rate": 0.5,
+        "low": null,
+        "high": null,
+        "missing": 0,
+        "n_seed_clusters": 1,
+        "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+      },
+      "g500_pass": {
+        "k": 0,
+        "n": 2,
+        "rate": 0.0,
+        "low": null,
+        "high": null,
+        "missing": 0,
+        "n_seed_clusters": 1,
+        "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+      },
+      "by_method": {
+        "boundary_cvt": {
+          "n": 2,
+          "task_completed": {
+            "k": 1,
+            "n": 2,
+            "rate": 0.5,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 1,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "settled": {
+            "k": 1,
+            "n": 2,
+            "rate": 0.5,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 1,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "g500_pass": {
+            "k": 0,
+            "n": 2,
+            "rate": 0.0,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 1,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "controller_readiness": {
+            "n": 2,
+            "observed": 2,
+            "censored": 0,
+            "unreached_proportion": 0.0,
+            "conditional_mean_seconds": 4.05,
+            "conditional_median_seconds": 4.05
+          }
+        }
+      },
+      "static_by_arm": {},
+      "by_shape": {
+        "l_shape": {
+          "n": 2,
+          "task_completed": {
+            "k": 1,
+            "n": 2,
+            "rate": 0.5,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 1,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "settled": {
+            "k": 1,
+            "n": 2,
+            "rate": 0.5,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 1,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "g500_pass": {
+            "k": 0,
+            "n": 2,
+            "rate": 0.0,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 1,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          }
+        }
+      },
+      "controller_readiness_boundary_cvt": {
+        "n": 2,
+        "observed": 2,
+        "censored": 0,
+        "unreached_proportion": 0.0,
+        "conditional_mean_seconds": 4.05,
+        "conditional_median_seconds": 4.05
+      },
+      "paired_controller_ready_cvt_minus_nearest": {
+        "n": 0,
+        "mean": null,
+        "median": null,
+        "low": null,
+        "high": null
+      },
+      "paired_controller_ready_cvt_minus_spacing": {
+        "n": 0,
+        "mean": null,
+        "median": null,
+        "low": null,
+        "high": null
+      },
+      "seed_cluster_ready_cvt_minus_nearest": {
+        "n_pairs": 0,
+        "n_seed_clusters": 0,
+        "resampling_unit": "seed",
+        "mean": null,
+        "median": null,
+        "low": null,
+        "high": null,
+        "status": "DESCRIPTIVE_ONLY_FEW_SEEDS"
+      },
+      "seed_cluster_ready_cvt_minus_spacing": {
+        "n_pairs": 0,
+        "n_seed_clusters": 0,
+        "resampling_unit": "seed",
+        "mean": null,
+        "median": null,
+        "low": null,
+        "high": null,
+        "status": "DESCRIPTIVE_ONLY_FEW_SEEDS"
+      },
+      "paired_ready_censored_pairs": 0,
+      "paired_physical_ready_cvt_minus_nearest": {
+        "n": 0,
+        "mean": null,
+        "median": null,
+        "low": null,
+        "high": null
+      },
+      "paired_absolute_progress_cvt_minus_nearest": {
+        "n": 0,
+        "mean": null,
+        "median": null,
+        "low": null,
+        "high": null
+      },
+      "analysis_unit": "episode for rates; matched shape/seed/stratum pair for differences",
+      "bootstrap_seed": 20261007,
+      "censoring": "unreached events excluded from means; their count is reported separately"
+    },
+    "generalization": {
+      "episodes": 36,
+      "execution_errors": 0,
+      "task_completed": {
+        "k": 9,
+        "n": 36,
+        "rate": 0.25,
+        "low": null,
+        "high": null,
+        "missing": 0,
+        "n_seed_clusters": 12,
+        "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+      },
+      "settled": {
+        "k": 31,
+        "n": 36,
+        "rate": 0.8611111111111112,
+        "low": null,
+        "high": null,
+        "missing": 0,
+        "n_seed_clusters": 12,
+        "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+      },
+      "g500_pass": {
+        "k": 7,
+        "n": 36,
+        "rate": 0.19444444444444445,
+        "low": null,
+        "high": null,
+        "missing": 0,
+        "n_seed_clusters": 12,
+        "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+      },
+      "by_method": {
+        "boundary_cvt": {
+          "n": 12,
+          "task_completed": {
+            "k": 5,
+            "n": 12,
+            "rate": 0.4166666666666667,
+            "low": 0.19326031365875665,
+            "high": 0.6804886874504503,
+            "missing": 0,
+            "n_seed_clusters": 12,
+            "interval_status": "WILSON_DISTINCT_SEEDS"
+          },
+          "settled": {
+            "k": 10,
+            "n": 12,
+            "rate": 0.8333333333333334,
+            "low": 0.5519691377470266,
+            "high": 0.9530348578161463,
+            "missing": 0,
+            "n_seed_clusters": 12,
+            "interval_status": "WILSON_DISTINCT_SEEDS"
+          },
+          "g500_pass": {
+            "k": 4,
+            "n": 12,
+            "rate": 0.3333333333333333,
+            "low": 0.13812009109121315,
+            "high": 0.6093779111272004,
+            "missing": 0,
+            "n_seed_clusters": 12,
+            "interval_status": "WILSON_DISTINCT_SEEDS"
+          },
+          "controller_readiness": {
+            "n": 12,
+            "observed": 11,
+            "censored": 1,
+            "unreached_proportion": 0.08333333333333333,
+            "conditional_mean_seconds": 10.722727272727274,
+            "conditional_median_seconds": 7.95
+          }
+        },
+        "local_spacing": {
+          "n": 12,
+          "task_completed": {
+            "k": 1,
+            "n": 12,
+            "rate": 0.08333333333333333,
+            "low": 0.014865094404917095,
+            "high": 0.35387991114111694,
+            "missing": 0,
+            "n_seed_clusters": 12,
+            "interval_status": "WILSON_DISTINCT_SEEDS"
+          },
+          "settled": {
+            "k": 11,
+            "n": 12,
+            "rate": 0.9166666666666666,
+            "low": 0.646120088858883,
+            "high": 0.9851349055950829,
+            "missing": 0,
+            "n_seed_clusters": 12,
+            "interval_status": "WILSON_DISTINCT_SEEDS"
+          },
+          "g500_pass": {
+            "k": 1,
+            "n": 12,
+            "rate": 0.08333333333333333,
+            "low": 0.014865094404917095,
+            "high": 0.35387991114111694,
+            "missing": 0,
+            "n_seed_clusters": 12,
+            "interval_status": "WILSON_DISTINCT_SEEDS"
+          },
+          "controller_readiness": {
+            "n": 12,
+            "observed": 12,
+            "censored": 0,
+            "unreached_proportion": 0.0,
+            "conditional_mean_seconds": 12.891666666666666,
+            "conditional_median_seconds": 8.475000000000001
+          }
+        },
+        "nearest_observed_target": {
+          "n": 12,
+          "task_completed": {
+            "k": 3,
+            "n": 12,
+            "rate": 0.25,
+            "low": 0.08894166839405471,
+            "high": 0.5323053349335657,
+            "missing": 0,
+            "n_seed_clusters": 12,
+            "interval_status": "WILSON_DISTINCT_SEEDS"
+          },
+          "settled": {
+            "k": 10,
+            "n": 12,
+            "rate": 0.8333333333333334,
+            "low": 0.5519691377470266,
+            "high": 0.9530348578161463,
+            "missing": 0,
+            "n_seed_clusters": 12,
+            "interval_status": "WILSON_DISTINCT_SEEDS"
+          },
+          "g500_pass": {
+            "k": 2,
+            "n": 12,
+            "rate": 0.16666666666666666,
+            "low": 0.04696514218385378,
+            "high": 0.4480308622529734,
+            "missing": 0,
+            "n_seed_clusters": 12,
+            "interval_status": "WILSON_DISTINCT_SEEDS"
+          },
+          "controller_readiness": {
+            "n": 12,
+            "observed": 12,
+            "censored": 0,
+            "unreached_proportion": 0.0,
+            "conditional_mean_seconds": 13.045833333333334,
+            "conditional_median_seconds": 11.35
+          }
+        }
+      },
+      "static_by_arm": {},
+      "by_shape": {
+        "c_shape": {
+          "n": 12,
+          "task_completed": {
+            "k": 1,
+            "n": 12,
+            "rate": 0.08333333333333333,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 4,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "settled": {
+            "k": 9,
+            "n": 12,
+            "rate": 0.75,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 4,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "g500_pass": {
+            "k": 1,
+            "n": 12,
+            "rate": 0.08333333333333333,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 4,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          }
+        },
+        "l_shape": {
+          "n": 12,
+          "task_completed": {
+            "k": 4,
+            "n": 12,
+            "rate": 0.3333333333333333,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 4,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "settled": {
+            "k": 12,
+            "n": 12,
+            "rate": 1.0,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 4,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "g500_pass": {
+            "k": 4,
+            "n": 12,
+            "rate": 0.3333333333333333,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 4,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          }
+        },
+        "rectangle": {
+          "n": 12,
+          "task_completed": {
+            "k": 4,
+            "n": 12,
+            "rate": 0.3333333333333333,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 4,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "settled": {
+            "k": 10,
+            "n": 12,
+            "rate": 0.8333333333333334,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 4,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "g500_pass": {
+            "k": 2,
+            "n": 12,
+            "rate": 0.16666666666666666,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 4,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          }
+        }
+      },
+      "controller_readiness_boundary_cvt": {
+        "n": 12,
+        "observed": 11,
+        "censored": 1,
+        "unreached_proportion": 0.08333333333333333,
+        "conditional_mean_seconds": 10.722727272727274,
+        "conditional_median_seconds": 7.95
+      },
+      "paired_controller_ready_cvt_minus_nearest": {
+        "n": 11,
+        "mean": -1.3636363636363633,
+        "median": -0.40000000000000036,
+        "low": -2.736477272727272,
+        "high": -0.14545454545454553
+      },
+      "paired_controller_ready_cvt_minus_spacing": {
+        "n": 11,
+        "mean": -1.6318181818181812,
+        "median": -0.3999999999999999,
+        "low": -6.668295454545457,
+        "high": 1.5818181818181818
+      },
+      "seed_cluster_ready_cvt_minus_nearest": {
+        "n_pairs": 11,
+        "n_seed_clusters": 11,
+        "resampling_unit": "seed",
+        "mean": -1.3636363636363633,
+        "median": -0.40000000000000036,
+        "low": -2.736477272727272,
+        "high": -0.14545454545454553,
+        "status": "EXPLORATORY_SEED_CLUSTER_INTERVAL"
+      },
+      "seed_cluster_ready_cvt_minus_spacing": {
+        "n_pairs": 11,
+        "n_seed_clusters": 11,
+        "resampling_unit": "seed",
+        "mean": -1.6318181818181812,
+        "median": -0.3999999999999999,
+        "low": -6.668295454545457,
+        "high": 1.5818181818181818,
+        "status": "EXPLORATORY_SEED_CLUSTER_INTERVAL"
+      },
+      "paired_ready_censored_pairs": 1,
+      "paired_physical_ready_cvt_minus_nearest": {
+        "n": 3,
+        "mean": -6.1833333333333345,
+        "median": -3.349999999999998,
+        "low": -14.650000000000006,
+        "high": -0.5500000000000007
+      },
+      "paired_absolute_progress_cvt_minus_nearest": {
+        "n": 12,
+        "mean": 0.06694527117442138,
+        "median": 0.00435654337780178,
+        "low": -0.0471022487520395,
+        "high": 0.24247892309489183
+      },
+      "analysis_unit": "episode for rates; matched shape/seed/stratum pair for differences",
+      "bootstrap_seed": 20261007,
+      "censoring": "unreached events excluded from means; their count is reported separately"
+    },
+    "numerical": {
+      "episodes": 2,
+      "execution_errors": 0,
+      "task_completed": {
+        "k": 0,
+        "n": 0,
+        "rate": null,
+        "low": null,
+        "high": null,
+        "missing": 2,
+        "n_seed_clusters": 0,
+        "interval_status": "WILSON_DISTINCT_SEEDS"
+      },
+      "settled": {
+        "k": 0,
+        "n": 0,
+        "rate": null,
+        "low": null,
+        "high": null,
+        "missing": 2,
+        "n_seed_clusters": 0,
+        "interval_status": "WILSON_DISTINCT_SEEDS"
+      },
+      "g500_pass": {
+        "k": 0,
+        "n": 0,
+        "rate": null,
+        "low": null,
+        "high": null,
+        "missing": 2,
+        "n_seed_clusters": 0,
+        "interval_status": "WILSON_DISTINCT_SEEDS"
+      },
+      "by_method": {
+        "oracle": {
+          "n": 2,
+          "task_completed": {
+            "k": 0,
+            "n": 0,
+            "rate": null,
+            "low": null,
+            "high": null,
+            "missing": 2,
+            "n_seed_clusters": 0,
+            "interval_status": "WILSON_DISTINCT_SEEDS"
+          },
+          "settled": {
+            "k": 0,
+            "n": 0,
+            "rate": null,
+            "low": null,
+            "high": null,
+            "missing": 2,
+            "n_seed_clusters": 0,
+            "interval_status": "WILSON_DISTINCT_SEEDS"
+          },
+          "g500_pass": {
+            "k": 0,
+            "n": 0,
+            "rate": null,
+            "low": null,
+            "high": null,
+            "missing": 2,
+            "n_seed_clusters": 0,
+            "interval_status": "WILSON_DISTINCT_SEEDS"
+          },
+          "controller_readiness": {
+            "n": 2,
+            "observed": 0,
+            "censored": 2,
+            "unreached_proportion": 1.0,
+            "conditional_mean_seconds": null,
+            "conditional_median_seconds": null
+          }
+        }
+      },
+      "static_by_arm": {
+        "oracle_cvxpy": {
+          "n": 1,
+          "safe": 1,
+          "observed_violations": 0,
+          "minimum_path_clearance": 0.06750000001712042,
+          "mean_cost_ratio": 0.16161854956942884
+        },
+        "oracle_qp": {
+          "n": 1,
+          "safe": 1,
+          "observed_violations": 0,
+          "minimum_path_clearance": 0.06750000000000078,
+          "mean_cost_ratio": 0.16161890206130572
+        }
+      },
+      "by_shape": {
+        "rectangle": {
+          "n": 2,
+          "task_completed": {
+            "k": 0,
+            "n": 0,
+            "rate": null,
+            "low": null,
+            "high": null,
+            "missing": 2,
+            "n_seed_clusters": 0,
+            "interval_status": "WILSON_DISTINCT_SEEDS"
+          },
+          "settled": {
+            "k": 0,
+            "n": 0,
+            "rate": null,
+            "low": null,
+            "high": null,
+            "missing": 2,
+            "n_seed_clusters": 0,
+            "interval_status": "WILSON_DISTINCT_SEEDS"
+          },
+          "g500_pass": {
+            "k": 0,
+            "n": 0,
+            "rate": null,
+            "low": null,
+            "high": null,
+            "missing": 2,
+            "n_seed_clusters": 0,
+            "interval_status": "WILSON_DISTINCT_SEEDS"
+          }
+        }
+      },
+      "controller_readiness_boundary_cvt": {
+        "n": 0,
+        "observed": 0,
+        "censored": 0,
+        "unreached_proportion": null,
+        "conditional_mean_seconds": null,
+        "conditional_median_seconds": null
+      },
+      "paired_controller_ready_cvt_minus_nearest": {
+        "n": 0,
+        "mean": null,
+        "median": null,
+        "low": null,
+        "high": null
+      },
+      "paired_controller_ready_cvt_minus_spacing": {
+        "n": 0,
+        "mean": null,
+        "median": null,
+        "low": null,
+        "high": null
+      },
+      "seed_cluster_ready_cvt_minus_nearest": {
+        "n_pairs": 0,
+        "n_seed_clusters": 0,
+        "resampling_unit": "seed",
+        "mean": null,
+        "median": null,
+        "low": null,
+        "high": null,
+        "status": "DESCRIPTIVE_ONLY_FEW_SEEDS"
+      },
+      "seed_cluster_ready_cvt_minus_spacing": {
+        "n_pairs": 0,
+        "n_seed_clusters": 0,
+        "resampling_unit": "seed",
+        "mean": null,
+        "median": null,
+        "low": null,
+        "high": null,
+        "status": "DESCRIPTIVE_ONLY_FEW_SEEDS"
+      },
+      "paired_ready_censored_pairs": 0,
+      "paired_physical_ready_cvt_minus_nearest": {
+        "n": 0,
+        "mean": null,
+        "median": null,
+        "low": null,
+        "high": null
+      },
+      "paired_absolute_progress_cvt_minus_nearest": {
+        "n": 0,
+        "mean": null,
+        "median": null,
+        "low": null,
+        "high": null
+      },
+      "analysis_unit": "episode for rates; matched shape/seed/stratum pair for differences",
+      "bootstrap_seed": 20261007,
+      "censoring": "unreached events excluded from means; their count is reported separately"
+    },
+    "robustness": {
+      "episodes": 54,
+      "execution_errors": 0,
+      "task_completed": {
+        "k": 4,
+        "n": 54,
+        "rate": 0.07407407407407407,
+        "low": null,
+        "high": null,
+        "missing": 0,
+        "n_seed_clusters": 2,
+        "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+      },
+      "settled": {
+        "k": 44,
+        "n": 54,
+        "rate": 0.8148148148148148,
+        "low": null,
+        "high": null,
+        "missing": 0,
+        "n_seed_clusters": 2,
+        "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+      },
+      "g500_pass": {
+        "k": 2,
+        "n": 54,
+        "rate": 0.037037037037037035,
+        "low": null,
+        "high": null,
+        "missing": 0,
+        "n_seed_clusters": 2,
+        "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+      },
+      "by_method": {
+        "boundary_cvt": {
+          "n": 18,
+          "task_completed": {
+            "k": 1,
+            "n": 18,
+            "rate": 0.05555555555555555,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 2,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "settled": {
+            "k": 15,
+            "n": 18,
+            "rate": 0.8333333333333334,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 2,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "g500_pass": {
+            "k": 0,
+            "n": 18,
+            "rate": 0.0,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 2,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "controller_readiness": {
+            "n": 18,
+            "observed": 18,
+            "censored": 0,
+            "unreached_proportion": 0.0,
+            "conditional_mean_seconds": 4.4833333333333325,
+            "conditional_median_seconds": 4.475
+          }
+        },
+        "local_spacing": {
+          "n": 18,
+          "task_completed": {
+            "k": 1,
+            "n": 18,
+            "rate": 0.05555555555555555,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 2,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "settled": {
+            "k": 15,
+            "n": 18,
+            "rate": 0.8333333333333334,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 2,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "g500_pass": {
+            "k": 2,
+            "n": 18,
+            "rate": 0.1111111111111111,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 2,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "controller_readiness": {
+            "n": 18,
+            "observed": 18,
+            "censored": 0,
+            "unreached_proportion": 0.0,
+            "conditional_mean_seconds": 4.436111111111112,
+            "conditional_median_seconds": 4.65
+          }
+        },
+        "nearest_observed_target": {
+          "n": 18,
+          "task_completed": {
+            "k": 2,
+            "n": 18,
+            "rate": 0.1111111111111111,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 2,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "settled": {
+            "k": 14,
+            "n": 18,
+            "rate": 0.7777777777777778,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 2,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "g500_pass": {
+            "k": 0,
+            "n": 18,
+            "rate": 0.0,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 2,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "controller_readiness": {
+            "n": 18,
+            "observed": 18,
+            "censored": 0,
+            "unreached_proportion": 0.0,
+            "conditional_mean_seconds": 5.144444444444444,
+            "conditional_median_seconds": 5.025
+          }
+        }
+      },
+      "static_by_arm": {},
+      "by_shape": {
+        "c_shape": {
+          "n": 18,
+          "task_completed": {
+            "k": 1,
+            "n": 18,
+            "rate": 0.05555555555555555,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 2,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "settled": {
+            "k": 15,
+            "n": 18,
+            "rate": 0.8333333333333334,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 2,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "g500_pass": {
+            "k": 1,
+            "n": 18,
+            "rate": 0.05555555555555555,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 2,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          }
+        },
+        "l_shape": {
+          "n": 18,
+          "task_completed": {
+            "k": 2,
+            "n": 18,
+            "rate": 0.1111111111111111,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 2,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "settled": {
+            "k": 14,
+            "n": 18,
+            "rate": 0.7777777777777778,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 2,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "g500_pass": {
+            "k": 0,
+            "n": 18,
+            "rate": 0.0,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 2,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          }
+        },
+        "rectangle": {
+          "n": 18,
+          "task_completed": {
+            "k": 1,
+            "n": 18,
+            "rate": 0.05555555555555555,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 2,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "settled": {
+            "k": 15,
+            "n": 18,
+            "rate": 0.8333333333333334,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 2,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          },
+          "g500_pass": {
+            "k": 1,
+            "n": 18,
+            "rate": 0.05555555555555555,
+            "low": null,
+            "high": null,
+            "missing": 0,
+            "n_seed_clusters": 2,
+            "interval_status": "DESCRIPTIVE_ONLY_REUSED_SEEDS"
+          }
+        }
+      },
+      "controller_readiness_boundary_cvt": {
+        "n": 18,
+        "observed": 18,
+        "censored": 0,
+        "unreached_proportion": 0.0,
+        "conditional_mean_seconds": 4.4833333333333325,
+        "conditional_median_seconds": 4.475
+      },
+      "paired_controller_ready_cvt_minus_nearest": {
+        "n": 18,
+        "mean": -0.6611111111111112,
+        "median": -0.6250000000000004,
+        "low": -1.0916666666666668,
+        "high": -0.20277777777777795
+      },
+      "paired_controller_ready_cvt_minus_spacing": {
+        "n": 18,
+        "mean": 0.047222222222222304,
+        "median": 0.02499999999999991,
+        "low": -0.2555555555555555,
+        "high": 0.3833333333333335
+      },
+      "seed_cluster_ready_cvt_minus_nearest": {
+        "n_pairs": 18,
+        "n_seed_clusters": 2,
+        "resampling_unit": "seed",
+        "mean": -0.6611111111111112,
+        "median": -0.6250000000000004,
+        "low": null,
+        "high": null,
+        "status": "DESCRIPTIVE_ONLY_FEW_SEEDS"
+      },
+      "seed_cluster_ready_cvt_minus_spacing": {
+        "n_pairs": 18,
+        "n_seed_clusters": 2,
+        "resampling_unit": "seed",
+        "mean": 0.047222222222222304,
+        "median": 0.02499999999999991,
+        "low": null,
+        "high": null,
+        "status": "DESCRIPTIVE_ONLY_FEW_SEEDS"
+      },
+      "paired_ready_censored_pairs": 0,
+      "paired_physical_ready_cvt_minus_nearest": {
+        "n": 0,
+        "mean": null,
+        "median": null,
+        "low": null,
+        "high": null
+      },
+      "paired_absolute_progress_cvt_minus_nearest": {
+        "n": 18,
+        "mean": -0.056175277046497864,
+        "median": -0.01709671339756258,
+        "low": -0.13793381201027627,
+        "high": 0.006668668194444593
+      },
+      "analysis_unit": "episode for rates; matched shape/seed/stratum pair for differences",
+      "bootstrap_seed": 20261007,
+      "censoring": "unreached events excluded from means; their count is reported separately"
+    },
+    "static": {
+      "episodes": 27,
+      "execution_errors": 0,
+      "task_completed": {
+        "k": 0,
+        "n": 0,
+        "rate": null,
+        "low": null,
+        "high": null,
+        "missing": 27,
+        "n_seed_clusters": 0,
+        "interval_status": "WILSON_DISTINCT_SEEDS"
+      },
+      "settled": {
+        "k": 0,
+        "n": 0,
+        "rate": null,
+        "low": null,
+        "high": null,
+        "missing": 27,
+        "n_seed_clusters": 0,
+        "interval_status": "WILSON_DISTINCT_SEEDS"
+      },
+      "g500_pass": {
+        "k": 0,
+        "n": 0,
+        "rate": null,
+        "low": null,
+        "high": null,
+        "missing": 27,
+        "n_seed_clusters": 0,
+        "interval_status": "WILSON_DISTINCT_SEEDS"
+      },
+      "by_method": {
+        "local": {
+          "n": 18,
+          "task_completed": {
+            "k": 0,
+            "n": 0,
+            "rate": null,
+            "low": null,
+            "high": null,
+            "missing": 18,
+            "n_seed_clusters": 0,
+            "interval_status": "WILSON_DISTINCT_SEEDS"
+          },
+          "settled": {
+            "k": 0,
+            "n": 0,
+            "rate": null,
+            "low": null,
+            "high": null,
+            "missing": 18,
+            "n_seed_clusters": 0,
+            "interval_status": "WILSON_DISTINCT_SEEDS"
+          },
+          "g500_pass": {
+            "k": 0,
+            "n": 0,
+            "rate": null,
+            "low": null,
+            "high": null,
+            "missing": 18,
+            "n_seed_clusters": 0,
+            "interval_status": "WILSON_DISTINCT_SEEDS"
+          },
+          "controller_readiness": {
+            "n": 18,
+            "observed": 0,
+            "censored": 18,
+            "unreached_proportion": 1.0,
+            "conditional_mean_seconds": null,
+            "conditional_median_seconds": null
+          }
+        },
+        "oracle": {
+          "n": 9,
+          "task_completed": {
+            "k": 0,
+            "n": 0,
+            "rate": null,
+            "low": null,
+            "high": null,
+            "missing": 9,
+            "n_seed_clusters": 0,
+            "interval_status": "WILSON_DISTINCT_SEEDS"
+          },
+          "settled": {
+            "k": 0,
+            "n": 0,
+            "rate": null,
+            "low": null,
+            "high": null,
+            "missing": 9,
+            "n_seed_clusters": 0,
+            "interval_status": "WILSON_DISTINCT_SEEDS"
+          },
+          "g500_pass": {
+            "k": 0,
+            "n": 0,
+            "rate": null,
+            "low": null,
+            "high": null,
+            "missing": 9,
+            "n_seed_clusters": 0,
+            "interval_status": "WILSON_DISTINCT_SEEDS"
+          },
+          "controller_readiness": {
+            "n": 9,
+            "observed": 0,
+            "censored": 9,
+            "unreached_proportion": 1.0,
+            "conditional_mean_seconds": null,
+            "conditional_median_seconds": null
+          }
+        }
+      },
+      "static_by_arm": {
+        "local_samples": {
+          "n": 9,
+          "safe": 1,
+          "observed_violations": 8,
+          "minimum_path_clearance": 0.04833288951607506,
+          "mean_cost_ratio": 0.15327382510896673
+        },
+        "local_segments": {
+          "n": 9,
+          "safe": 9,
+          "observed_violations": 0,
+          "minimum_path_clearance": 0.06604219240471201,
+          "mean_cost_ratio": 0.15443958861900553
+        },
+        "oracle": {
+          "n": 9,
+          "safe": 9,
+          "observed_violations": 0,
+          "minimum_path_clearance": 0.06750000000000032,
+          "mean_cost_ratio": 0.15342919606674166
+        }
+      },
+      "by_shape": {
+        "c_shape": {
+          "n": 9,
+          "task_completed": {
+            "k": 0,
+            "n": 0,
+            "rate": null,
+            "low": null,
+            "high": null,
+            "missing": 9,
+            "n_seed_clusters": 0,
+            "interval_status": "WILSON_DISTINCT_SEEDS"
+          },
+          "settled": {
+            "k": 0,
+            "n": 0,
+            "rate": null,
+            "low": null,
+            "high": null,
+            "missing": 9,
+            "n_seed_clusters": 0,
+            "interval_status": "WILSON_DISTINCT_SEEDS"
+          },
+          "g500_pass": {
+            "k": 0,
+            "n": 0,
+            "rate": null,
+            "low": null,
+            "high": null,
+            "missing": 9,
+            "n_seed_clusters": 0,
+            "interval_status": "WILSON_DISTINCT_SEEDS"
+          }
+        },
+        "l_shape": {
+          "n": 9,
+          "task_completed": {
+            "k": 0,
+            "n": 0,
+            "rate": null,
+            "low": null,
+            "high": null,
+            "missing": 9,
+            "n_seed_clusters": 0,
+            "interval_status": "WILSON_DISTINCT_SEEDS"
+          },
+          "settled": {
+            "k": 0,
+            "n": 0,
+            "rate": null,
+            "low": null,
+            "high": null,
+            "missing": 9,
+            "n_seed_clusters": 0,
+            "interval_status": "WILSON_DISTINCT_SEEDS"
+          },
+          "g500_pass": {
+            "k": 0,
+            "n": 0,
+            "rate": null,
+            "low": null,
+            "high": null,
+            "missing": 9,
+            "n_seed_clusters": 0,
+            "interval_status": "WILSON_DISTINCT_SEEDS"
+          }
+        },
+        "rectangle": {
+          "n": 9,
+          "task_completed": {
+            "k": 0,
+            "n": 0,
+            "rate": null,
+            "low": null,
+            "high": null,
+            "missing": 9,
+            "n_seed_clusters": 0,
+            "interval_status": "WILSON_DISTINCT_SEEDS"
+          },
+          "settled": {
+            "k": 0,
+            "n": 0,
+            "rate": null,
+            "low": null,
+            "high": null,
+            "missing": 9,
+            "n_seed_clusters": 0,
+            "interval_status": "WILSON_DISTINCT_SEEDS"
+          },
+          "g500_pass": {
+            "k": 0,
+            "n": 0,
+            "rate": null,
+            "low": null,
+            "high": null,
+            "missing": 9,
+            "n_seed_clusters": 0,
+            "interval_status": "WILSON_DISTINCT_SEEDS"
+          }
+        }
+      },
+      "controller_readiness_boundary_cvt": {
+        "n": 0,
+        "observed": 0,
+        "censored": 0,
+        "unreached_proportion": null,
+        "conditional_mean_seconds": null,
+        "conditional_median_seconds": null
+      },
+      "paired_controller_ready_cvt_minus_nearest": {
+        "n": 0,
+        "mean": null,
+        "median": null,
+        "low": null,
+        "high": null
+      },
+      "paired_controller_ready_cvt_minus_spacing": {
+        "n": 0,
+        "mean": null,
+        "median": null,
+        "low": null,
+        "high": null
+      },
+      "seed_cluster_ready_cvt_minus_nearest": {
+        "n_pairs": 0,
+        "n_seed_clusters": 0,
+        "resampling_unit": "seed",
+        "mean": null,
+        "median": null,
+        "low": null,
+        "high": null,
+        "status": "DESCRIPTIVE_ONLY_FEW_SEEDS"
+      },
+      "seed_cluster_ready_cvt_minus_spacing": {
+        "n_pairs": 0,
+        "n_seed_clusters": 0,
+        "resampling_unit": "seed",
+        "mean": null,
+        "median": null,
+        "low": null,
+        "high": null,
+        "status": "DESCRIPTIVE_ONLY_FEW_SEEDS"
+      },
+      "paired_ready_censored_pairs": 0,
+      "paired_physical_ready_cvt_minus_nearest": {
+        "n": 0,
+        "mean": null,
+        "median": null,
+        "low": null,
+        "high": null
+      },
+      "paired_absolute_progress_cvt_minus_nearest": {
+        "n": 0,
+        "mean": null,
+        "median": null,
+        "low": null,
+        "high": null
+      },
+      "analysis_unit": "episode for rates; matched shape/seed/stratum pair for differences",
+      "bootstrap_seed": 20261007,
+      "censoring": "unreached events excluded from means; their count is reported separately"
+    }
+  },
+  "failure_taxonomy": {
+    "ablation": {
+      "episodes": 15,
+      "counts": {
+        "g500_not_passed": 13,
+        "task_not_completed": 10
+      }
+    },
+    "active_exploration": {
+      "episodes": 6,
+      "counts": {
+        "g500_not_passed": 6,
+        "task_not_completed": 4
+      }
+    },
+    "development": {
+      "episodes": 27,
+      "counts": {
+        "g500_not_passed": 25,
+        "task_not_completed": 13
+      }
+    },
+    "engine": {
+      "episodes": 2,
+      "counts": {
+        "g500_not_passed": 2,
+        "watchdog": 1,
+        "task_not_completed": 1
+      }
+    },
+    "generalization": {
+      "episodes": 36,
+      "counts": {
+        "g500_not_passed": 29,
+        "task_not_completed": 27,
+        "watchdog": 5,
+        "controller_ready_censored": 1
+      }
+    },
+    "numerical": {
+      "episodes": 2,
+      "counts": {
+        "controller_ready_censored": 2
+      }
+    },
+    "robustness": {
+      "episodes": 54,
+      "counts": {
+        "g500_not_passed": 52,
+        "task_not_completed": 50,
+        "watchdog": 10
+      }
+    },
+    "static": {
+      "episodes": 27,
+      "counts": {
+        "observed_static_violation": 8,
+        "controller_ready_censored": 27
+      }
+    }
+  },
+  "analysis_provenance": {
+    "analysis_file": "src/dbact_sim/experiments/evidence.py",
+    "analysis_sha256": "92d9f0107dc2d34da252fcb76582773cb8dd8f783403adc124b237993927ba3e",
+    "model_source_sha256": "fde491d7c48469c3f17f2fce68caeba1ed692aba1bff3baa273cab978f885fdd",
+    "note": "Analysis-only seed-dependence corrections are versioned separately from the frozen simulation model",
+    "source_files": {
+      "src/dbact_sim/__init__.py": "0e62c734baac5fa1ac3cbbb7781807f97bb4210c620eb13956f327a53e5526dc",
+      "src/dbact_sim/experiments/__init__.py": "d5ad470ef013823a3d7a52ae88d78650dcb642e62f161d16a653ae481b257637",
+      "src/dbact_sim/experiments/evidence.py": "92d9f0107dc2d34da252fcb76582773cb8dd8f783403adc124b237993927ba3e",
+      "src/dbact_sim/experiments/report.py": "16b19d43efee561fd68cd05d1a04f00a3ef8ce5fd3fc5e4be73c2b646c3a7ba4"
+    }
+  }
+}

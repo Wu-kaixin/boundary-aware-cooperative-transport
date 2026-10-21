@@ -1,0 +1,2937 @@
+{
+  "version": "ccta2027-draft-experiments-v2",
+  "protocol_sha256": "de636678fd77373ac3c5a904cfb007d1981be479932f62800eed3607aebcb66b",
+  "cases": [
+    {
+      "case_id": "static_l_shape_seed2_oracle",
+      "condition_id": "l_shape_seed2",
+      "split": "static",
+      "gate": 5,
+      "shape": "l_shape",
+      "seed": 2,
+      "variant": "oracle",
+      "arm": "oracle",
+      "frames": 600,
+      "stratum": "l_shape_seed2",
+      "factors": {},
+      "expected_initial_state_sha256": "1b464d06337ec82d5cf961d16d9e34c9c5ebd17d207506f8c649787961522e84",
+      "layout_notes": []
+    },
+    {
+      "case_id": "static_l_shape_seed2_local_samples",
+      "condition_id": "l_shape_seed2",
+      "split": "static",
+      "gate": 5,
+      "shape": "l_shape",
+      "seed": 2,
+      "variant": "local",
+      "arm": "local_samples",
+      "frames": 600,
+      "stratum": "l_shape_seed2",
+      "factors": {},
+      "expected_initial_state_sha256": "1b464d06337ec82d5cf961d16d9e34c9c5ebd17d207506f8c649787961522e84",
+      "layout_notes": []
+    },
+    {
+      "case_id": "static_l_shape_seed2_local_segments",
+      "condition_id": "l_shape_seed2",
+      "split": "static",
+      "gate": 5,
+      "shape": "l_shape",
+      "seed": 2,
+      "variant": "local",
+      "arm": "local_segments",
+      "frames": 600,
+      "stratum": "l_shape_seed2",
+      "factors": {},
+      "expected_initial_state_sha256": "1b464d06337ec82d5cf961d16d9e34c9c5ebd17d207506f8c649787961522e84",
+      "layout_notes": []
+    },
+    {
+      "case_id": "development_l_shape_seed2_boundary_cvt",
+      "condition_id": "l_shape_seed2",
+      "split": "development",
+      "gate": 6,
+      "shape": "l_shape",
+      "seed": 2,
+      "variant": "boundary_cvt",
+      "arm": "boundary_cvt",
+      "frames": 3000,
+      "stratum": "l_shape_seed2",
+      "factors": {},
+      "expected_initial_state_sha256": "1b464d06337ec82d5cf961d16d9e34c9c5ebd17d207506f8c649787961522e84",
+      "layout_notes": []
+    },
+    {
+      "case_id": "development_l_shape_seed2_nearest_observed_target",
+      "condition_id": "l_shape_seed2",
+      "split": "development",
+      "gate": 6,
+      "shape": "l_shape",
+      "seed": 2,
+      "variant": "nearest_observed_target",
+      "arm": "nearest_observed_target",
+      "frames": 3000,
+      "stratum": "l_shape_seed2",
+      "factors": {},
+      "expected_initial_state_sha256": "1b464d06337ec82d5cf961d16d9e34c9c5ebd17d207506f8c649787961522e84",
+      "layout_notes": []
+    },
+    {
+      "case_id": "development_l_shape_seed2_local_spacing",
+      "condition_id": "l_shape_seed2",
+      "split": "development",
+      "gate": 6,
+      "shape": "l_shape",
+      "seed": 2,
+      "variant": "local_spacing",
+      "arm": "local_spacing",
+      "frames": 3000,
+      "stratum": "l_shape_seed2",
+      "factors": {},
+      "expected_initial_state_sha256": "1b464d06337ec82d5cf961d16d9e34c9c5ebd17d207506f8c649787961522e84",
+      "layout_notes": []
+    },
+    {
+      "case_id": "static_l_shape_seed5_oracle",
+      "condition_id": "l_shape_seed5",
+      "split": "static",
+      "gate": 5,
+      "shape": "l_shape",
+      "seed": 5,
+      "variant": "oracle",
+      "arm": "oracle",
+      "frames": 600,
+      "stratum": "l_shape_seed5",
+      "factors": {},
+      "expected_initial_state_sha256": "4fb8bb04621bf67a1bfcf04b29fa9e544e8e55480b24f5024ca83b6cdbd18842",
+      "layout_notes": []
+    },
+    {
+      "case_id": "static_l_shape_seed5_local_samples",
+      "condition_id": "l_shape_seed5",
+      "split": "static",
+      "gate": 5,
+      "shape": "l_shape",
+      "seed": 5,
+      "variant": "local",
+      "arm": "local_samples",
+      "frames": 600,
+      "stratum": "l_shape_seed5",
+      "factors": {},
+      "expected_initial_state_sha256": "4fb8bb04621bf67a1bfcf04b29fa9e544e8e55480b24f5024ca83b6cdbd18842",
+      "layout_notes": []
+    },
+    {
+      "case_id": "static_l_shape_seed5_local_segments",
+      "condition_id": "l_shape_seed5",
+      "split": "static",
+      "gate": 5,
+      "shape": "l_shape",
+      "seed": 5,
+      "variant": "local",
+      "arm": "local_segments",
+      "frames": 600,
+      "stratum": "l_shape_seed5",
+      "factors": {},
+      "expected_initial_state_sha256": "4fb8bb04621bf67a1bfcf04b29fa9e544e8e55480b24f5024ca83b6cdbd18842",
+      "layout_notes": []
+    },
+    {
+      "case_id": "development_l_shape_seed5_boundary_cvt",
+      "condition_id": "l_shape_seed5",
+      "split": "development",
+      "gate": 6,
+      "shape": "l_shape",
+      "seed": 5,
+      "variant": "boundary_cvt",
+      "arm": "boundary_cvt",
+      "frames": 3000,
+      "stratum": "l_shape_seed5",
+      "factors": {},
+      "expected_initial_state_sha256": "4fb8bb04621bf67a1bfcf04b29fa9e544e8e55480b24f5024ca83b6cdbd18842",
+      "layout_notes": []
+    },
+    {
+      "case_id": "development_l_shape_seed5_nearest_observed_target",
+      "condition_id": "l_shape_seed5",
+      "split": "development",
+      "gate": 6,
+      "shape": "l_shape",
+      "seed": 5,
+      "variant": "nearest_observed_target",
+      "arm": "nearest_observed_target",
+      "frames": 3000,
+      "stratum": "l_shape_seed5",
+      "factors": {},
+      "expected_initial_state_sha256": "4fb8bb04621bf67a1bfcf04b29fa9e544e8e55480b24f5024ca83b6cdbd18842",
+      "layout_notes": []
+    },
+    {
+      "case_id": "development_l_shape_seed5_local_spacing",
+      "condition_id": "l_shape_seed5",
+      "split": "development",
+      "gate": 6,
+      "shape": "l_shape",
+      "seed": 5,
+      "variant": "local_spacing",
+      "arm": "local_spacing",
+      "frames": 3000,
+      "stratum": "l_shape_seed5",
+      "factors": {},
+      "expected_initial_state_sha256": "4fb8bb04621bf67a1bfcf04b29fa9e544e8e55480b24f5024ca83b6cdbd18842",
+      "layout_notes": []
+    },
+    {
+      "case_id": "static_l_shape_seed8_oracle",
+      "condition_id": "l_shape_seed8",
+      "split": "static",
+      "gate": 5,
+      "shape": "l_shape",
+      "seed": 8,
+      "variant": "oracle",
+      "arm": "oracle",
+      "frames": 600,
+      "stratum": "l_shape_seed8",
+      "factors": {},
+      "expected_initial_state_sha256": "2e04b993fd9f38636ab0808ffd39d08335417971d770dacc15aa84af887175e1",
+      "layout_notes": []
+    },
+    {
+      "case_id": "static_l_shape_seed8_local_samples",
+      "condition_id": "l_shape_seed8",
+      "split": "static",
+      "gate": 5,
+      "shape": "l_shape",
+      "seed": 8,
+      "variant": "local",
+      "arm": "local_samples",
+      "frames": 600,
+      "stratum": "l_shape_seed8",
+      "factors": {},
+      "expected_initial_state_sha256": "2e04b993fd9f38636ab0808ffd39d08335417971d770dacc15aa84af887175e1",
+      "layout_notes": []
+    },
+    {
+      "case_id": "static_l_shape_seed8_local_segments",
+      "condition_id": "l_shape_seed8",
+      "split": "static",
+      "gate": 5,
+      "shape": "l_shape",
+      "seed": 8,
+      "variant": "local",
+      "arm": "local_segments",
+      "frames": 600,
+      "stratum": "l_shape_seed8",
+      "factors": {},
+      "expected_initial_state_sha256": "2e04b993fd9f38636ab0808ffd39d08335417971d770dacc15aa84af887175e1",
+      "layout_notes": []
+    },
+    {
+      "case_id": "development_l_shape_seed8_boundary_cvt",
+      "condition_id": "l_shape_seed8",
+      "split": "development",
+      "gate": 6,
+      "shape": "l_shape",
+      "seed": 8,
+      "variant": "boundary_cvt",
+      "arm": "boundary_cvt",
+      "frames": 3000,
+      "stratum": "l_shape_seed8",
+      "factors": {},
+      "expected_initial_state_sha256": "2e04b993fd9f38636ab0808ffd39d08335417971d770dacc15aa84af887175e1",
+      "layout_notes": []
+    },
+    {
+      "case_id": "development_l_shape_seed8_nearest_observed_target",
+      "condition_id": "l_shape_seed8",
+      "split": "development",
+      "gate": 6,
+      "shape": "l_shape",
+      "seed": 8,
+      "variant": "nearest_observed_target",
+      "arm": "nearest_observed_target",
+      "frames": 3000,
+      "stratum": "l_shape_seed8",
+      "factors": {},
+      "expected_initial_state_sha256": "2e04b993fd9f38636ab0808ffd39d08335417971d770dacc15aa84af887175e1",
+      "layout_notes": []
+    },
+    {
+      "case_id": "development_l_shape_seed8_local_spacing",
+      "condition_id": "l_shape_seed8",
+      "split": "development",
+      "gate": 6,
+      "shape": "l_shape",
+      "seed": 8,
+      "variant": "local_spacing",
+      "arm": "local_spacing",
+      "frames": 3000,
+      "stratum": "l_shape_seed8",
+      "factors": {},
+      "expected_initial_state_sha256": "2e04b993fd9f38636ab0808ffd39d08335417971d770dacc15aa84af887175e1",
+      "layout_notes": []
+    },
+    {
+      "case_id": "ablation_l_shape_seed2_boundary_cvt",
+      "condition_id": "l_shape_seed2",
+      "split": "ablation",
+      "gate": 6,
+      "shape": "l_shape",
+      "seed": 2,
+      "variant": "boundary_cvt",
+      "arm": "boundary_cvt",
+      "frames": 3000,
+      "stratum": "l_shape_seed2",
+      "factors": {},
+      "expected_initial_state_sha256": "1b464d06337ec82d5cf961d16d9e34c9c5ebd17d207506f8c649787961522e84",
+      "layout_notes": []
+    },
+    {
+      "case_id": "ablation_l_shape_seed2_no_arc",
+      "condition_id": "l_shape_seed2",
+      "split": "ablation",
+      "gate": 6,
+      "shape": "l_shape",
+      "seed": 2,
+      "variant": "no_arc",
+      "arm": "no_arc",
+      "frames": 3000,
+      "stratum": "l_shape_seed2",
+      "factors": {},
+      "expected_initial_state_sha256": "1b464d06337ec82d5cf961d16d9e34c9c5ebd17d207506f8c649787961522e84",
+      "layout_notes": []
+    },
+    {
+      "case_id": "ablation_l_shape_seed2_no_arc_normalized",
+      "condition_id": "l_shape_seed2",
+      "split": "ablation",
+      "gate": 6,
+      "shape": "l_shape",
+      "seed": 2,
+      "variant": "no_arc_normalized",
+      "arm": "no_arc_normalized",
+      "frames": 3000,
+      "stratum": "l_shape_seed2",
+      "factors": {},
+      "expected_initial_state_sha256": "1b464d06337ec82d5cf961d16d9e34c9c5ebd17d207506f8c649787961522e84",
+      "layout_notes": []
+    },
+    {
+      "case_id": "ablation_l_shape_seed2_no_direction_offsets",
+      "condition_id": "l_shape_seed2",
+      "split": "ablation",
+      "gate": 6,
+      "shape": "l_shape",
+      "seed": 2,
+      "variant": "no_direction_offsets",
+      "arm": "no_direction_offsets",
+      "frames": 3000,
+      "stratum": "l_shape_seed2",
+      "factors": {},
+      "expected_initial_state_sha256": "1b464d06337ec82d5cf961d16d9e34c9c5ebd17d207506f8c649787961522e84",
+      "layout_notes": []
+    },
+    {
+      "case_id": "ablation_l_shape_seed2_no_exploration",
+      "condition_id": "l_shape_seed2",
+      "split": "ablation",
+      "gate": 6,
+      "shape": "l_shape",
+      "seed": 2,
+      "variant": "no_exploration",
+      "arm": "no_exploration",
+      "frames": 3000,
+      "stratum": "l_shape_seed2",
+      "factors": {},
+      "expected_initial_state_sha256": "1b464d06337ec82d5cf961d16d9e34c9c5ebd17d207506f8c649787961522e84",
+      "layout_notes": []
+    },
+    {
+      "case_id": "active_exploration_l_shape_seed2_boundary_cvt",
+      "condition_id": "l_shape_seed2",
+      "split": "active_exploration",
+      "gate": 6,
+      "shape": "l_shape",
+      "seed": 2,
+      "variant": "boundary_cvt",
+      "arm": "boundary_cvt",
+      "frames": 3000,
+      "stratum": "l_shape_seed2",
+      "factors": {
+        "explore_gain": 6.0
+      },
+      "expected_initial_state_sha256": "1b464d06337ec82d5cf961d16d9e34c9c5ebd17d207506f8c649787961522e84",
+      "layout_notes": []
+    },
+    {
+      "case_id": "active_exploration_l_shape_seed2_no_exploration",
+      "condition_id": "l_shape_seed2",
+      "split": "active_exploration",
+      "gate": 6,
+      "shape": "l_shape",
+      "seed": 2,
+      "variant": "no_exploration",
+      "arm": "no_exploration",
+      "frames": 3000,
+      "stratum": "l_shape_seed2",
+      "factors": {
+        "explore_gain": 6.0
+      },
+      "expected_initial_state_sha256": "1b464d06337ec82d5cf961d16d9e34c9c5ebd17d207506f8c649787961522e84",
+      "layout_notes": []
+    },
+    {
+      "case_id": "robustness_l_shape_seed202610230_range_noise_boundary_cvt",
+      "condition_id": "l_shape_seed202610230_range_noise",
+      "split": "robustness",
+      "gate": 6,
+      "shape": "l_shape",
+      "seed": 202610230,
+      "variant": "boundary_cvt",
+      "arm": "boundary_cvt",
+      "frames": 3000,
+      "stratum": "l_shape_seed202610230_range_noise",
+      "factors": {
+        "name": "range_noise",
+        "controller": {
+          "range_noise_std": 0.02
+        }
+      },
+      "expected_initial_state_sha256": "c4d2f492645db74e5934eb61a506ba9b56e3a855112e017786a646bcd0190511",
+      "layout_notes": []
+    },
+    {
+      "case_id": "robustness_l_shape_seed202610230_range_noise_nearest_observed_target",
+      "condition_id": "l_shape_seed202610230_range_noise",
+      "split": "robustness",
+      "gate": 6,
+      "shape": "l_shape",
+      "seed": 202610230,
+      "variant": "nearest_observed_target",
+      "arm": "nearest_observed_target",
+      "frames": 3000,
+      "stratum": "l_shape_seed202610230_range_noise",
+      "factors": {
+        "name": "range_noise",
+        "controller": {
+          "range_noise_std": 0.02
+        }
+      },
+      "expected_initial_state_sha256": "c4d2f492645db74e5934eb61a506ba9b56e3a855112e017786a646bcd0190511",
+      "layout_notes": []
+    },
+    {
+      "case_id": "robustness_l_shape_seed202610230_range_noise_local_spacing",
+      "condition_id": "l_shape_seed202610230_range_noise",
+      "split": "robustness",
+      "gate": 6,
+      "shape": "l_shape",
+      "seed": 202610230,
+      "variant": "local_spacing",
+      "arm": "local_spacing",
+      "frames": 3000,
+      "stratum": "l_shape_seed202610230_range_noise",
+      "factors": {
+        "name": "range_noise",
+        "controller": {
+          "range_noise_std": 0.02
+        }
+      },
+      "expected_initial_state_sha256": "c4d2f492645db74e5934eb61a506ba9b56e3a855112e017786a646bcd0190511",
+      "layout_notes": []
+    },
+    {
+      "case_id": "robustness_l_shape_seed202610230_communication_loss_boundary_cvt",
+      "condition_id": "l_shape_seed202610230_communication_loss",
+      "split": "robustness",
+      "gate": 6,
+      "shape": "l_shape",
+      "seed": 202610230,
+      "variant": "boundary_cvt",
+      "arm": "boundary_cvt",
+      "frames": 3000,
+      "stratum": "l_shape_seed202610230_communication_loss",
+      "factors": {
+        "name": "communication_loss",
+        "controller": {
+          "communication_dropout_prob": 0.2
+        }
+      },
+      "expected_initial_state_sha256": "c4d2f492645db74e5934eb61a506ba9b56e3a855112e017786a646bcd0190511",
+      "layout_notes": []
+    },
+    {
+      "case_id": "robustness_l_shape_seed202610230_communication_loss_nearest_observed_target",
+      "condition_id": "l_shape_seed202610230_communication_loss",
+      "split": "robustness",
+      "gate": 6,
+      "shape": "l_shape",
+      "seed": 202610230,
+      "variant": "nearest_observed_target",
+      "arm": "nearest_observed_target",
+      "frames": 3000,
+      "stratum": "l_shape_seed202610230_communication_loss",
+      "factors": {
+        "name": "communication_loss",
+        "controller": {
+          "communication_dropout_prob": 0.2
+        }
+      },
+      "expected_initial_state_sha256": "c4d2f492645db74e5934eb61a506ba9b56e3a855112e017786a646bcd0190511",
+      "layout_notes": []
+    },
+    {
+      "case_id": "robustness_l_shape_seed202610230_communication_loss_local_spacing",
+      "condition_id": "l_shape_seed202610230_communication_loss",
+      "split": "robustness",
+      "gate": 6,
+      "shape": "l_shape",
+      "seed": 202610230,
+      "variant": "local_spacing",
+      "arm": "local_spacing",
+      "frames": 3000,
+      "stratum": "l_shape_seed202610230_communication_loss",
+      "factors": {
+        "name": "communication_loss",
+        "controller": {
+          "communication_dropout_prob": 0.2
+        }
+      },
+      "expected_initial_state_sha256": "c4d2f492645db74e5934eb61a506ba9b56e3a855112e017786a646bcd0190511",
+      "layout_notes": []
+    },
+    {
+      "case_id": "robustness_l_shape_seed202610230_slower_sensing_boundary_cvt",
+      "condition_id": "l_shape_seed202610230_slower_sensing",
+      "split": "robustness",
+      "gate": 6,
+      "shape": "l_shape",
+      "seed": 202610230,
+      "variant": "boundary_cvt",
+      "arm": "boundary_cvt",
+      "frames": 3000,
+      "stratum": "l_shape_seed202610230_slower_sensing",
+      "factors": {
+        "name": "slower_sensing",
+        "controller": {
+          "perception_every": 2
+        }
+      },
+      "expected_initial_state_sha256": "c4d2f492645db74e5934eb61a506ba9b56e3a855112e017786a646bcd0190511",
+      "layout_notes": []
+    },
+    {
+      "case_id": "robustness_l_shape_seed202610230_slower_sensing_nearest_observed_target",
+      "condition_id": "l_shape_seed202610230_slower_sensing",
+      "split": "robustness",
+      "gate": 6,
+      "shape": "l_shape",
+      "seed": 202610230,
+      "variant": "nearest_observed_target",
+      "arm": "nearest_observed_target",
+      "frames": 3000,
+      "stratum": "l_shape_seed202610230_slower_sensing",
+      "factors": {
+        "name": "slower_sensing",
+        "controller": {
+          "perception_every": 2
+        }
+      },
+      "expected_initial_state_sha256": "c4d2f492645db74e5934eb61a506ba9b56e3a855112e017786a646bcd0190511",
+      "layout_notes": []
+    },
+    {
+      "case_id": "robustness_l_shape_seed202610230_slower_sensing_local_spacing",
+      "condition_id": "l_shape_seed202610230_slower_sensing",
+      "split": "robustness",
+      "gate": 6,
+      "shape": "l_shape",
+      "seed": 202610230,
+      "variant": "local_spacing",
+      "arm": "local_spacing",
+      "frames": 3000,
+      "stratum": "l_shape_seed202610230_slower_sensing",
+      "factors": {
+        "name": "slower_sensing",
+        "controller": {
+          "perception_every": 2
+        }
+      },
+      "expected_initial_state_sha256": "c4d2f492645db74e5934eb61a506ba9b56e3a855112e017786a646bcd0190511",
+      "layout_notes": []
+    },
+    {
+      "case_id": "robustness_l_shape_seed202610231_range_noise_boundary_cvt",
+      "condition_id": "l_shape_seed202610231_range_noise",
+      "split": "robustness",
+      "gate": 6,
+      "shape": "l_shape",
+      "seed": 202610231,
+      "variant": "boundary_cvt",
+      "arm": "boundary_cvt",
+      "frames": 3000,
+      "stratum": "l_shape_seed202610231_range_noise",
+      "factors": {
+        "name": "range_noise",
+        "controller": {
+          "range_noise_std": 0.02
+        }
+      },
+      "expected_initial_state_sha256": "125c8fc9917f218b673d801cc440ed0d4bca9b59f94b20cd43251330cb89b507",
+      "layout_notes": []
+    },
+    {
+      "case_id": "robustness_l_shape_seed202610231_range_noise_nearest_observed_target",
+      "condition_id": "l_shape_seed202610231_range_noise",
+      "split": "robustness",
+      "gate": 6,
+      "shape": "l_shape",
+      "seed": 202610231,
+      "variant": "nearest_observed_target",
+      "arm": "nearest_observed_target",
+      "frames": 3000,
+      "stratum": "l_shape_seed202610231_range_noise",
+      "factors": {
+        "name": "range_noise",
+        "controller": {
+          "range_noise_std": 0.02
+        }
+      },
+      "expected_initial_state_sha256": "125c8fc9917f218b673d801cc440ed0d4bca9b59f94b20cd43251330cb89b507",
+      "layout_notes": []
+    },
+    {
+      "case_id": "robustness_l_shape_seed202610231_range_noise_local_spacing",
+      "condition_id": "l_shape_seed202610231_range_noise",
+      "split": "robustness",
+      "gate": 6,
+      "shape": "l_shape",
+      "seed": 202610231,
+      "variant": "local_spacing",
+      "arm": "local_spacing",
+      "frames": 3000,
+      "stratum": "l_shape_seed202610231_range_noise",
+      "factors": {
+        "name": "range_noise",
+        "controller": {
+          "range_noise_std": 0.02
+        }
+      },
+      "expected_initial_state_sha256": "125c8fc9917f218b673d801cc440ed0d4bca9b59f94b20cd43251330cb89b507",
+      "layout_notes": []
+    },
+    {
+      "case_id": "robustness_l_shape_seed202610231_communication_loss_boundary_cvt",
+      "condition_id": "l_shape_seed202610231_communication_loss",
+      "split": "robustness",
+      "gate": 6,
+      "shape": "l_shape",
+      "seed": 202610231,
+      "variant": "boundary_cvt",
+      "arm": "boundary_cvt",
+      "frames": 3000,
+      "stratum": "l_shape_seed202610231_communication_loss",
+      "factors": {
+        "name": "communication_loss",
+        "controller": {
+          "communication_dropout_prob": 0.2
+        }
+      },
+      "expected_initial_state_sha256": "125c8fc9917f218b673d801cc440ed0d4bca9b59f94b20cd43251330cb89b507",
+      "layout_notes": []
+    },
+    {
+      "case_id": "robustness_l_shape_seed202610231_communication_loss_nearest_observed_target",
+      "condition_id": "l_shape_seed202610231_communication_loss",
+      "split": "robustness",
+      "gate": 6,
+      "shape": "l_shape",
+      "seed": 202610231,
+      "variant": "nearest_observed_target",
+      "arm": "nearest_observed_target",
+      "frames": 3000,
+      "stratum": "l_shape_seed202610231_communication_loss",
+      "factors": {
+        "name": "communication_loss",
+        "controller": {
+          "communication_dropout_prob": 0.2
+        }
+      },
+      "expected_initial_state_sha256": "125c8fc9917f218b673d801cc440ed0d4bca9b59f94b20cd43251330cb89b507",
+      "layout_notes": []
+    },
+    {
+      "case_id": "robustness_l_shape_seed202610231_communication_loss_local_spacing",
+      "condition_id": "l_shape_seed202610231_communication_loss",
+      "split": "robustness",
+      "gate": 6,
+      "shape": "l_shape",
+      "seed": 202610231,
+      "variant": "local_spacing",
+      "arm": "local_spacing",
+      "frames": 3000,
+      "stratum": "l_shape_seed202610231_communication_loss",
+      "factors": {
+        "name": "communication_loss",
+        "controller": {
+          "communication_dropout_prob": 0.2
+        }
+      },
+      "expected_initial_state_sha256": "125c8fc9917f218b673d801cc440ed0d4bca9b59f94b20cd43251330cb89b507",
+      "layout_notes": []
+    },
+    {
+      "case_id": "robustness_l_shape_seed202610231_slower_sensing_boundary_cvt",
+      "condition_id": "l_shape_seed202610231_slower_sensing",
+      "split": "robustness",
+      "gate": 6,
+      "shape": "l_shape",
+      "seed": 202610231,
+      "variant": "boundary_cvt",
+      "arm": "boundary_cvt",
+      "frames": 3000,
+      "stratum": "l_shape_seed202610231_slower_sensing",
+      "factors": {
+        "name": "slower_sensing",
+        "controller": {
+          "perception_every": 2
+        }
+      },
+      "expected_initial_state_sha256": "125c8fc9917f218b673d801cc440ed0d4bca9b59f94b20cd43251330cb89b507",
+      "layout_notes": []
+    },
+    {
+      "case_id": "robustness_l_shape_seed202610231_slower_sensing_nearest_observed_target",
+      "condition_id": "l_shape_seed202610231_slower_sensing",
+      "split": "robustness",
+      "gate": 6,
+      "shape": "l_shape",
+      "seed": 202610231,
+      "variant": "nearest_observed_target",
+      "arm": "nearest_observed_target",
+      "frames": 3000,
+      "stratum": "l_shape_seed202610231_slower_sensing",
+      "factors": {
+        "name": "slower_sensing",
+        "controller": {
+          "perception_every": 2
+        }
+      },
+      "expected_initial_state_sha256": "125c8fc9917f218b673d801cc440ed0d4bca9b59f94b20cd43251330cb89b507",
+      "layout_notes": []
+    },
+    {
+      "case_id": "robustness_l_shape_seed202610231_slower_sensing_local_spacing",
+      "condition_id": "l_shape_seed202610231_slower_sensing",
+      "split": "robustness",
+      "gate": 6,
+      "shape": "l_shape",
+      "seed": 202610231,
+      "variant": "local_spacing",
+      "arm": "local_spacing",
+      "frames": 3000,
+      "stratum": "l_shape_seed202610231_slower_sensing",
+      "factors": {
+        "name": "slower_sensing",
+        "controller": {
+          "perception_every": 2
+        }
+      },
+      "expected_initial_state_sha256": "125c8fc9917f218b673d801cc440ed0d4bca9b59f94b20cd43251330cb89b507",
+      "layout_notes": []
+    },
+    {
+      "case_id": "static_rectangle_seed2_oracle",
+      "condition_id": "rectangle_seed2",
+      "split": "static",
+      "gate": 5,
+      "shape": "rectangle",
+      "seed": 2,
+      "variant": "oracle",
+      "arm": "oracle",
+      "frames": 600,
+      "stratum": "rectangle_seed2",
+      "factors": {},
+      "expected_initial_state_sha256": "1b464d06337ec82d5cf961d16d9e34c9c5ebd17d207506f8c649787961522e84",
+      "layout_notes": []
+    },
+    {
+      "case_id": "static_rectangle_seed2_local_samples",
+      "condition_id": "rectangle_seed2",
+      "split": "static",
+      "gate": 5,
+      "shape": "rectangle",
+      "seed": 2,
+      "variant": "local",
+      "arm": "local_samples",
+      "frames": 600,
+      "stratum": "rectangle_seed2",
+      "factors": {},
+      "expected_initial_state_sha256": "1b464d06337ec82d5cf961d16d9e34c9c5ebd17d207506f8c649787961522e84",
+      "layout_notes": []
+    },
+    {
+      "case_id": "static_rectangle_seed2_local_segments",
+      "condition_id": "rectangle_seed2",
+      "split": "static",
+      "gate": 5,
+      "shape": "rectangle",
+      "seed": 2,
+      "variant": "local",
+      "arm": "local_segments",
+      "frames": 600,
+      "stratum": "rectangle_seed2",
+      "factors": {},
+      "expected_initial_state_sha256": "1b464d06337ec82d5cf961d16d9e34c9c5ebd17d207506f8c649787961522e84",
+      "layout_notes": []
+    },
+    {
+      "case_id": "development_rectangle_seed2_boundary_cvt",
+      "condition_id": "rectangle_seed2",
+      "split": "development",
+      "gate": 6,
+      "shape": "rectangle",
+      "seed": 2,
+      "variant": "boundary_cvt",
+      "arm": "boundary_cvt",
+      "frames": 3000,
+      "stratum": "rectangle_seed2",
+      "factors": {},
+      "expected_initial_state_sha256": "1b464d06337ec82d5cf961d16d9e34c9c5ebd17d207506f8c649787961522e84",
+      "layout_notes": []
+    },
+    {
+      "case_id": "development_rectangle_seed2_nearest_observed_target",
+      "condition_id": "rectangle_seed2",
+      "split": "development",
+      "gate": 6,
+      "shape": "rectangle",
+      "seed": 2,
+      "variant": "nearest_observed_target",
+      "arm": "nearest_observed_target",
+      "frames": 3000,
+      "stratum": "rectangle_seed2",
+      "factors": {},
+      "expected_initial_state_sha256": "1b464d06337ec82d5cf961d16d9e34c9c5ebd17d207506f8c649787961522e84",
+      "layout_notes": []
+    },
+    {
+      "case_id": "development_rectangle_seed2_local_spacing",
+      "condition_id": "rectangle_seed2",
+      "split": "development",
+      "gate": 6,
+      "shape": "rectangle",
+      "seed": 2,
+      "variant": "local_spacing",
+      "arm": "local_spacing",
+      "frames": 3000,
+      "stratum": "rectangle_seed2",
+      "factors": {},
+      "expected_initial_state_sha256": "1b464d06337ec82d5cf961d16d9e34c9c5ebd17d207506f8c649787961522e84",
+      "layout_notes": []
+    },
+    {
+      "case_id": "static_rectangle_seed5_oracle",
+      "condition_id": "rectangle_seed5",
+      "split": "static",
+      "gate": 5,
+      "shape": "rectangle",
+      "seed": 5,
+      "variant": "oracle",
+      "arm": "oracle",
+      "frames": 600,
+      "stratum": "rectangle_seed5",
+      "factors": {},
+      "expected_initial_state_sha256": "4fb8bb04621bf67a1bfcf04b29fa9e544e8e55480b24f5024ca83b6cdbd18842",
+      "layout_notes": []
+    },
+    {
+      "case_id": "static_rectangle_seed5_local_samples",
+      "condition_id": "rectangle_seed5",
+      "split": "static",
+      "gate": 5,
+      "shape": "rectangle",
+      "seed": 5,
+      "variant": "local",
+      "arm": "local_samples",
+      "frames": 600,
+      "stratum": "rectangle_seed5",
+      "factors": {},
+      "expected_initial_state_sha256": "4fb8bb04621bf67a1bfcf04b29fa9e544e8e55480b24f5024ca83b6cdbd18842",
+      "layout_notes": []
+    },
+    {
+      "case_id": "static_rectangle_seed5_local_segments",
+      "condition_id": "rectangle_seed5",
+      "split": "static",
+      "gate": 5,
+      "shape": "rectangle",
+      "seed": 5,
+      "variant": "local",
+      "arm": "local_segments",
+      "frames": 600,
+      "stratum": "rectangle_seed5",
+      "factors": {},
+      "expected_initial_state_sha256": "4fb8bb04621bf67a1bfcf04b29fa9e544e8e55480b24f5024ca83b6cdbd18842",
+      "layout_notes": []
+    },
+    {
+      "case_id": "development_rectangle_seed5_boundary_cvt",
+      "condition_id": "rectangle_seed5",
+      "split": "development",
+      "gate": 6,
+      "shape": "rectangle",
+      "seed": 5,
+      "variant": "boundary_cvt",
+      "arm": "boundary_cvt",
+      "frames": 3000,
+      "stratum": "rectangle_seed5",
+      "factors": {},
+      "expected_initial_state_sha256": "4fb8bb04621bf67a1bfcf04b29fa9e544e8e55480b24f5024ca83b6cdbd18842",
+      "layout_notes": []
+    },
+    {
+      "case_id": "development_rectangle_seed5_nearest_observed_target",
+      "condition_id": "rectangle_seed5",
+      "split": "development",
+      "gate": 6,
+      "shape": "rectangle",
+      "seed": 5,
+      "variant": "nearest_observed_target",
+      "arm": "nearest_observed_target",
+      "frames": 3000,
+      "stratum": "rectangle_seed5",
+      "factors": {},
+      "expected_initial_state_sha256": "4fb8bb04621bf67a1bfcf04b29fa9e544e8e55480b24f5024ca83b6cdbd18842",
+      "layout_notes": []
+    },
+    {
+      "case_id": "development_rectangle_seed5_local_spacing",
+      "condition_id": "rectangle_seed5",
+      "split": "development",
+      "gate": 6,
+      "shape": "rectangle",
+      "seed": 5,
+      "variant": "local_spacing",
+      "arm": "local_spacing",
+      "frames": 3000,
+      "stratum": "rectangle_seed5",
+      "factors": {},
+      "expected_initial_state_sha256": "4fb8bb04621bf67a1bfcf04b29fa9e544e8e55480b24f5024ca83b6cdbd18842",
+      "layout_notes": []
+    },
+    {
+      "case_id": "static_rectangle_seed8_oracle",
+      "condition_id": "rectangle_seed8",
+      "split": "static",
+      "gate": 5,
+      "shape": "rectangle",
+      "seed": 8,
+      "variant": "oracle",
+      "arm": "oracle",
+      "frames": 600,
+      "stratum": "rectangle_seed8",
+      "factors": {},
+      "expected_initial_state_sha256": "2e04b993fd9f38636ab0808ffd39d08335417971d770dacc15aa84af887175e1",
+      "layout_notes": []
+    },
+    {
+      "case_id": "static_rectangle_seed8_local_samples",
+      "condition_id": "rectangle_seed8",
+      "split": "static",
+      "gate": 5,
+      "shape": "rectangle",
+      "seed": 8,
+      "variant": "local",
+      "arm": "local_samples",
+      "frames": 600,
+      "stratum": "rectangle_seed8",
+      "factors": {},
+      "expected_initial_state_sha256": "2e04b993fd9f38636ab0808ffd39d08335417971d770dacc15aa84af887175e1",
+      "layout_notes": []
+    },
+    {
+      "case_id": "static_rectangle_seed8_local_segments",
+      "condition_id": "rectangle_seed8",
+      "split": "static",
+      "gate": 5,
+      "shape": "rectangle",
+      "seed": 8,
+      "variant": "local",
+      "arm": "local_segments",
+      "frames": 600,
+      "stratum": "rectangle_seed8",
+      "factors": {},
+      "expected_initial_state_sha256": "2e04b993fd9f38636ab0808ffd39d08335417971d770dacc15aa84af887175e1",
+      "layout_notes": []
+    },
+    {
+      "case_id": "development_rectangle_seed8_boundary_cvt",
+      "condition_id": "rectangle_seed8",
+      "split": "development",
+      "gate": 6,
+      "shape": "rectangle",
+      "seed": 8,
+      "variant": "boundary_cvt",
+      "arm": "boundary_cvt",
+      "frames": 3000,
+      "stratum": "rectangle_seed8",
+      "factors": {},
+      "expected_initial_state_sha256": "2e04b993fd9f38636ab0808ffd39d08335417971d770dacc15aa84af887175e1",
+      "layout_notes": []
+    },
+    {
+      "case_id": "development_rectangle_seed8_nearest_observed_target",
+      "condition_id": "rectangle_seed8",
+      "split": "development",
+      "gate": 6,
+      "shape": "rectangle",
+      "seed": 8,
+      "variant": "nearest_observed_target",
+      "arm": "nearest_observed_target",
+      "frames": 3000,
+      "stratum": "rectangle_seed8",
+      "factors": {},
+      "expected_initial_state_sha256": "2e04b993fd9f38636ab0808ffd39d08335417971d770dacc15aa84af887175e1",
+      "layout_notes": []
+    },
+    {
+      "case_id": "development_rectangle_seed8_local_spacing",
+      "condition_id": "rectangle_seed8",
+      "split": "development",
+      "gate": 6,
+      "shape": "rectangle",
+      "seed": 8,
+      "variant": "local_spacing",
+      "arm": "local_spacing",
+      "frames": 3000,
+      "stratum": "rectangle_seed8",
+      "factors": {},
+      "expected_initial_state_sha256": "2e04b993fd9f38636ab0808ffd39d08335417971d770dacc15aa84af887175e1",
+      "layout_notes": []
+    },
+    {
+      "case_id": "ablation_rectangle_seed2_boundary_cvt",
+      "condition_id": "rectangle_seed2",
+      "split": "ablation",
+      "gate": 6,
+      "shape": "rectangle",
+      "seed": 2,
+      "variant": "boundary_cvt",
+      "arm": "boundary_cvt",
+      "frames": 3000,
+      "stratum": "rectangle_seed2",
+      "factors": {},
+      "expected_initial_state_sha256": "1b464d06337ec82d5cf961d16d9e34c9c5ebd17d207506f8c649787961522e84",
+      "layout_notes": []
+    },
+    {
+      "case_id": "ablation_rectangle_seed2_no_arc",
+      "condition_id": "rectangle_seed2",
+      "split": "ablation",
+      "gate": 6,
+      "shape": "rectangle",
+      "seed": 2,
+      "variant": "no_arc",
+      "arm": "no_arc",
+      "frames": 3000,
+      "stratum": "rectangle_seed2",
+      "factors": {},
+      "expected_initial_state_sha256": "1b464d06337ec82d5cf961d16d9e34c9c5ebd17d207506f8c649787961522e84",
+      "layout_notes": []
+    },
+    {
+      "case_id": "ablation_rectangle_seed2_no_arc_normalized",
+      "condition_id": "rectangle_seed2",
+      "split": "ablation",
+      "gate": 6,
+      "shape": "rectangle",
+      "seed": 2,
+      "variant": "no_arc_normalized",
+      "arm": "no_arc_normalized",
+      "frames": 3000,
+      "stratum": "rectangle_seed2",
+      "factors": {},
+      "expected_initial_state_sha256": "1b464d06337ec82d5cf961d16d9e34c9c5ebd17d207506f8c649787961522e84",
+      "layout_notes": []
+    },
+    {
+      "case_id": "ablation_rectangle_seed2_no_direction_offsets",
+      "condition_id": "rectangle_seed2",
+      "split": "ablation",
+      "gate": 6,
+      "shape": "rectangle",
+      "seed": 2,
+      "variant": "no_direction_offsets",
+      "arm": "no_direction_offsets",
+      "frames": 3000,
+      "stratum": "rectangle_seed2",
+      "factors": {},
+      "expected_initial_state_sha256": "1b464d06337ec82d5cf961d16d9e34c9c5ebd17d207506f8c649787961522e84",
+      "layout_notes": []
+    },
+    {
+      "case_id": "ablation_rectangle_seed2_no_exploration",
+      "condition_id": "rectangle_seed2",
+      "split": "ablation",
+      "gate": 6,
+      "shape": "rectangle",
+      "seed": 2,
+      "variant": "no_exploration",
+      "arm": "no_exploration",
+      "frames": 3000,
+      "stratum": "rectangle_seed2",
+      "factors": {},
+      "expected_initial_state_sha256": "1b464d06337ec82d5cf961d16d9e34c9c5ebd17d207506f8c649787961522e84",
+      "layout_notes": []
+    },
+    {
+      "case_id": "active_exploration_rectangle_seed2_boundary_cvt",
+      "condition_id": "rectangle_seed2",
+      "split": "active_exploration",
+      "gate": 6,
+      "shape": "rectangle",
+      "seed": 2,
+      "variant": "boundary_cvt",
+      "arm": "boundary_cvt",
+      "frames": 3000,
+      "stratum": "rectangle_seed2",
+      "factors": {
+        "explore_gain": 6.0
+      },
+      "expected_initial_state_sha256": "1b464d06337ec82d5cf961d16d9e34c9c5ebd17d207506f8c649787961522e84",
+      "layout_notes": []
+    },
+    {
+      "case_id": "active_exploration_rectangle_seed2_no_exploration",
+      "condition_id": "rectangle_seed2",
+      "split": "active_exploration",
+      "gate": 6,
+      "shape": "rectangle",
+      "seed": 2,
+      "variant": "no_exploration",
+      "arm": "no_exploration",
+      "frames": 3000,
+      "stratum": "rectangle_seed2",
+      "factors": {
+        "explore_gain": 6.0
+      },
+      "expected_initial_state_sha256": "1b464d06337ec82d5cf961d16d9e34c9c5ebd17d207506f8c649787961522e84",
+      "layout_notes": []
+    },
+    {
+      "case_id": "robustness_rectangle_seed202610230_range_noise_boundary_cvt",
+      "condition_id": "rectangle_seed202610230_range_noise",
+      "split": "robustness",
+      "gate": 6,
+      "shape": "rectangle",
+      "seed": 202610230,
+      "variant": "boundary_cvt",
+      "arm": "boundary_cvt",
+      "frames": 3000,
+      "stratum": "rectangle_seed202610230_range_noise",
+      "factors": {
+        "name": "range_noise",
+        "controller": {
+          "range_noise_std": 0.02
+        }
+      },
+      "expected_initial_state_sha256": "c4d2f492645db74e5934eb61a506ba9b56e3a855112e017786a646bcd0190511",
+      "layout_notes": []
+    },
+    {
+      "case_id": "robustness_rectangle_seed202610230_range_noise_nearest_observed_target",
+      "condition_id": "rectangle_seed202610230_range_noise",
+      "split": "robustness",
+      "gate": 6,
+      "shape": "rectangle",
+      "seed": 202610230,
+      "variant": "nearest_observed_target",
+      "arm": "nearest_observed_target",
+      "frames": 3000,
+      "stratum": "rectangle_seed202610230_range_noise",
+      "factors": {
+        "name": "range_noise",
+        "controller": {
+          "range_noise_std": 0.02
+        }
+      },
+      "expected_initial_state_sha256": "c4d2f492645db74e5934eb61a506ba9b56e3a855112e017786a646bcd0190511",
+      "layout_notes": []
+    },
+    {
+      "case_id": "robustness_rectangle_seed202610230_range_noise_local_spacing",
+      "condition_id": "rectangle_seed202610230_range_noise",
+      "split": "robustness",
+      "gate": 6,
+      "shape": "rectangle",
+      "seed": 202610230,
+      "variant": "local_spacing",
+      "arm": "local_spacing",
+      "frames": 3000,
+      "stratum": "rectangle_seed202610230_range_noise",
+      "factors": {
+        "name": "range_noise",
+        "controller": {
+          "range_noise_std": 0.02
+        }
+      },
+      "expected_initial_state_sha256": "c4d2f492645db74e5934eb61a506ba9b56e3a855112e017786a646bcd0190511",
+      "layout_notes": []
+    },
+    {
+      "case_id": "robustness_rectangle_seed202610230_communication_loss_boundary_cvt",
+      "condition_id": "rectangle_seed202610230_communication_loss",
+      "split": "robustness",
+      "gate": 6,
+      "shape": "rectangle",
+      "seed": 202610230,
+      "variant": "boundary_cvt",
+      "arm": "boundary_cvt",
+      "frames": 3000,
+      "stratum": "rectangle_seed202610230_communication_loss",
+      "factors": {
+        "name": "communication_loss",
+        "controller": {
+          "communication_dropout_prob": 0.2
+        }
+      },
+      "expected_initial_state_sha256": "c4d2f492645db74e5934eb61a506ba9b56e3a855112e017786a646bcd0190511",
+      "layout_notes": []
+    },
+    {
+      "case_id": "robustness_rectangle_seed202610230_communication_loss_nearest_observed_target",
+      "condition_id": "rectangle_seed202610230_communication_loss",
+      "split": "robustness",
+      "gate": 6,
+      "shape": "rectangle",
+      "seed": 202610230,
+      "variant": "nearest_observed_target",
+      "arm": "nearest_observed_target",
+      "frames": 3000,
+      "stratum": "rectangle_seed202610230_communication_loss",
+      "factors": {
+        "name": "communication_loss",
+        "controller": {
+          "communication_dropout_prob": 0.2
+        }
+      },
+      "expected_initial_state_sha256": "c4d2f492645db74e5934eb61a506ba9b56e3a855112e017786a646bcd0190511",
+      "layout_notes": []
+    },
+    {
+      "case_id": "robustness_rectangle_seed202610230_communication_loss_local_spacing",
+      "condition_id": "rectangle_seed202610230_communication_loss",
+      "split": "robustness",
+      "gate": 6,
+      "shape": "rectangle",
+      "seed": 202610230,
+      "variant": "local_spacing",
+      "arm": "local_spacing",
+      "frames": 3000,
+      "stratum": "rectangle_seed202610230_communication_loss",
+      "factors": {
+        "name": "communication_loss",
+        "controller": {
+          "communication_dropout_prob": 0.2
+        }
+      },
+      "expected_initial_state_sha256": "c4d2f492645db74e5934eb61a506ba9b56e3a855112e017786a646bcd0190511",
+      "layout_notes": []
+    },
+    {
+      "case_id": "robustness_rectangle_seed202610230_slower_sensing_boundary_cvt",
+      "condition_id": "rectangle_seed202610230_slower_sensing",
+      "split": "robustness",
+      "gate": 6,
+      "shape": "rectangle",
+      "seed": 202610230,
+      "variant": "boundary_cvt",
+      "arm": "boundary_cvt",
+      "frames": 3000,
+      "stratum": "rectangle_seed202610230_slower_sensing",
+      "factors": {
+        "name": "slower_sensing",
+        "controller": {
+          "perception_every": 2
+        }
+      },
+      "expected_initial_state_sha256": "c4d2f492645db74e5934eb61a506ba9b56e3a855112e017786a646bcd0190511",
+      "layout_notes": []
+    },
+    {
+      "case_id": "robustness_rectangle_seed202610230_slower_sensing_nearest_observed_target",
+      "condition_id": "rectangle_seed202610230_slower_sensing",
+      "split": "robustness",
+      "gate": 6,
+      "shape": "rectangle",
+      "seed": 202610230,
+      "variant": "nearest_observed_target",
+      "arm": "nearest_observed_target",
+      "frames": 3000,
+      "stratum": "rectangle_seed202610230_slower_sensing",
+      "factors": {
+        "name": "slower_sensing",
+        "controller": {
+          "perception_every": 2
+        }
+      },
+      "expected_initial_state_sha256": "c4d2f492645db74e5934eb61a506ba9b56e3a855112e017786a646bcd0190511",
+      "layout_notes": []
+    },
+    {
+      "case_id": "robustness_rectangle_seed202610230_slower_sensing_local_spacing",
+      "condition_id": "rectangle_seed202610230_slower_sensing",
+      "split": "robustness",
+      "gate": 6,
+      "shape": "rectangle",
+      "seed": 202610230,
+      "variant": "local_spacing",
+      "arm": "local_spacing",
+      "frames": 3000,
+      "stratum": "rectangle_seed202610230_slower_sensing",
+      "factors": {
+        "name": "slower_sensing",
+        "controller": {
+          "perception_every": 2
+        }
+      },
+      "expected_initial_state_sha256": "c4d2f492645db74e5934eb61a506ba9b56e3a855112e017786a646bcd0190511",
+      "layout_notes": []
+    },
+    {
+      "case_id": "robustness_rectangle_seed202610231_range_noise_boundary_cvt",
+      "condition_id": "rectangle_seed202610231_range_noise",
+      "split": "robustness",
+      "gate": 6,
+      "shape": "rectangle",
+      "seed": 202610231,
+      "variant": "boundary_cvt",
+      "arm": "boundary_cvt",
+      "frames": 3000,
+      "stratum": "rectangle_seed202610231_range_noise",
+      "factors": {
+        "name": "range_noise",
+        "controller": {
+          "range_noise_std": 0.02
+        }
+      },
+      "expected_initial_state_sha256": "125c8fc9917f218b673d801cc440ed0d4bca9b59f94b20cd43251330cb89b507",
+      "layout_notes": []
+    },
+    {
+      "case_id": "robustness_rectangle_seed202610231_range_noise_nearest_observed_target",
+      "condition_id": "rectangle_seed202610231_range_noise",
+      "split": "robustness",
+      "gate": 6,
+      "shape": "rectangle",
+      "seed": 202610231,
+      "variant": "nearest_observed_target",
+      "arm": "nearest_observed_target",
+      "frames": 3000,
+      "stratum": "rectangle_seed202610231_range_noise",
+      "factors": {
+        "name": "range_noise",
+        "controller": {
+          "range_noise_std": 0.02
+        }
+      },
+      "expected_initial_state_sha256": "125c8fc9917f218b673d801cc440ed0d4bca9b59f94b20cd43251330cb89b507",
+      "layout_notes": []
+    },
+    {
+      "case_id": "robustness_rectangle_seed202610231_range_noise_local_spacing",
+      "condition_id": "rectangle_seed202610231_range_noise",
+      "split": "robustness",
+      "gate": 6,
+      "shape": "rectangle",
+      "seed": 202610231,
+      "variant": "local_spacing",
+      "arm": "local_spacing",
+      "frames": 3000,
+      "stratum": "rectangle_seed202610231_range_noise",
+      "factors": {
+        "name": "range_noise",
+        "controller": {
+          "range_noise_std": 0.02
+        }
+      },
+      "expected_initial_state_sha256": "125c8fc9917f218b673d801cc440ed0d4bca9b59f94b20cd43251330cb89b507",
+      "layout_notes": []
+    },
+    {
+      "case_id": "robustness_rectangle_seed202610231_communication_loss_boundary_cvt",
+      "condition_id": "rectangle_seed202610231_communication_loss",
+      "split": "robustness",
+      "gate": 6,
+      "shape": "rectangle",
+      "seed": 202610231,
+      "variant": "boundary_cvt",
+      "arm": "boundary_cvt",
+      "frames": 3000,
+      "stratum": "rectangle_seed202610231_communication_loss",
+      "factors": {
+        "name": "communication_loss",
+        "controller": {
+          "communication_dropout_prob": 0.2
+        }
+      },
+      "expected_initial_state_sha256": "125c8fc9917f218b673d801cc440ed0d4bca9b59f94b20cd43251330cb89b507",
+      "layout_notes": []
+    },
+    {
+      "case_id": "robustness_rectangle_seed202610231_communication_loss_nearest_observed_target",
+      "condition_id": "rectangle_seed202610231_communication_loss",
+      "split": "robustness",
+      "gate": 6,
+      "shape": "rectangle",
+      "seed": 202610231,
+      "variant": "nearest_observed_target",
+      "arm": "nearest_observed_target",
+      "frames": 3000,
+      "stratum": "rectangle_seed202610231_communication_loss",
+      "factors": {
+        "name": "communication_loss",
+        "controller": {
+          "communication_dropout_prob": 0.2
+        }
+      },
+      "expected_initial_state_sha256": "125c8fc9917f218b673d801cc440ed0d4bca9b59f94b20cd43251330cb89b507",
+      "layout_notes": []
+    },
+    {
+      "case_id": "robustness_rectangle_seed202610231_communication_loss_local_spacing",
+      "condition_id": "rectangle_seed202610231_communication_loss",
+      "split": "robustness",
+      "gate": 6,
+      "shape": "rectangle",
+      "seed": 202610231,
+      "variant": "local_spacing",
+      "arm": "local_spacing",
+      "frames": 3000,
+      "stratum": "rectangle_seed202610231_communication_loss",
+      "factors": {
+        "name": "communication_loss",
+        "controller": {
+          "communication_dropout_prob": 0.2
+        }
+      },
+      "expected_initial_state_sha256": "125c8fc9917f218b673d801cc440ed0d4bca9b59f94b20cd43251330cb89b507",
+      "layout_notes": []
+    },
+    {
+      "case_id": "robustness_rectangle_seed202610231_slower_sensing_boundary_cvt",
+      "condition_id": "rectangle_seed202610231_slower_sensing",
+      "split": "robustness",
+      "gate": 6,
+      "shape": "rectangle",
+      "seed": 202610231,
+      "variant": "boundary_cvt",
+      "arm": "boundary_cvt",
+      "frames": 3000,
+      "stratum": "rectangle_seed202610231_slower_sensing",
+      "factors": {
+        "name": "slower_sensing",
+        "controller": {
+          "perception_every": 2
+        }
+      },
+      "expected_initial_state_sha256": "125c8fc9917f218b673d801cc440ed0d4bca9b59f94b20cd43251330cb89b507",
+      "layout_notes": []
+    },
+    {
+      "case_id": "robustness_rectangle_seed202610231_slower_sensing_nearest_observed_target",
+      "condition_id": "rectangle_seed202610231_slower_sensing",
+      "split": "robustness",
+      "gate": 6,
+      "shape": "rectangle",
+      "seed": 202610231,
+      "variant": "nearest_observed_target",
+      "arm": "nearest_observed_target",
+      "frames": 3000,
+      "stratum": "rectangle_seed202610231_slower_sensing",
+      "factors": {
+        "name": "slower_sensing",
+        "controller": {
+          "perception_every": 2
+        }
+      },
+      "expected_initial_state_sha256": "125c8fc9917f218b673d801cc440ed0d4bca9b59f94b20cd43251330cb89b507",
+      "layout_notes": []
+    },
+    {
+      "case_id": "robustness_rectangle_seed202610231_slower_sensing_local_spacing",
+      "condition_id": "rectangle_seed202610231_slower_sensing",
+      "split": "robustness",
+      "gate": 6,
+      "shape": "rectangle",
+      "seed": 202610231,
+      "variant": "local_spacing",
+      "arm": "local_spacing",
+      "frames": 3000,
+      "stratum": "rectangle_seed202610231_slower_sensing",
+      "factors": {
+        "name": "slower_sensing",
+        "controller": {
+          "perception_every": 2
+        }
+      },
+      "expected_initial_state_sha256": "125c8fc9917f218b673d801cc440ed0d4bca9b59f94b20cd43251330cb89b507",
+      "layout_notes": []
+    },
+    {
+      "case_id": "static_c_shape_seed2_oracle",
+      "condition_id": "c_shape_seed2",
+      "split": "static",
+      "gate": 5,
+      "shape": "c_shape",
+      "seed": 2,
+      "variant": "oracle",
+      "arm": "oracle",
+      "frames": 600,
+      "stratum": "c_shape_seed2",
+      "factors": {},
+      "expected_initial_state_sha256": "1b464d06337ec82d5cf961d16d9e34c9c5ebd17d207506f8c649787961522e84",
+      "layout_notes": []
+    },
+    {
+      "case_id": "static_c_shape_seed2_local_samples",
+      "condition_id": "c_shape_seed2",
+      "split": "static",
+      "gate": 5,
+      "shape": "c_shape",
+      "seed": 2,
+      "variant": "local",
+      "arm": "local_samples",
+      "frames": 600,
+      "stratum": "c_shape_seed2",
+      "factors": {},
+      "expected_initial_state_sha256": "1b464d06337ec82d5cf961d16d9e34c9c5ebd17d207506f8c649787961522e84",
+      "layout_notes": []
+    },
+    {
+      "case_id": "static_c_shape_seed2_local_segments",
+      "condition_id": "c_shape_seed2",
+      "split": "static",
+      "gate": 5,
+      "shape": "c_shape",
+      "seed": 2,
+      "variant": "local",
+      "arm": "local_segments",
+      "frames": 600,
+      "stratum": "c_shape_seed2",
+      "factors": {},
+      "expected_initial_state_sha256": "1b464d06337ec82d5cf961d16d9e34c9c5ebd17d207506f8c649787961522e84",
+      "layout_notes": []
+    },
+    {
+      "case_id": "development_c_shape_seed2_boundary_cvt",
+      "condition_id": "c_shape_seed2",
+      "split": "development",
+      "gate": 6,
+      "shape": "c_shape",
+      "seed": 2,
+      "variant": "boundary_cvt",
+      "arm": "boundary_cvt",
+      "frames": 3000,
+      "stratum": "c_shape_seed2",
+      "factors": {},
+      "expected_initial_state_sha256": "1b464d06337ec82d5cf961d16d9e34c9c5ebd17d207506f8c649787961522e84",
+      "layout_notes": []
+    },
+    {
+      "case_id": "development_c_shape_seed2_nearest_observed_target",
+      "condition_id": "c_shape_seed2",
+      "split": "development",
+      "gate": 6,
+      "shape": "c_shape",
+      "seed": 2,
+      "variant": "nearest_observed_target",
+      "arm": "nearest_observed_target",
+      "frames": 3000,
+      "stratum": "c_shape_seed2",
+      "factors": {},
+      "expected_initial_state_sha256": "1b464d06337ec82d5cf961d16d9e34c9c5ebd17d207506f8c649787961522e84",
+      "layout_notes": []
+    },
+    {
+      "case_id": "development_c_shape_seed2_local_spacing",
+      "condition_id": "c_shape_seed2",
+      "split": "development",
+      "gate": 6,
+      "shape": "c_shape",
+      "seed": 2,
+      "variant": "local_spacing",
+      "arm": "local_spacing",
+      "frames": 3000,
+      "stratum": "c_shape_seed2",
+      "factors": {},
+      "expected_initial_state_sha256": "1b464d06337ec82d5cf961d16d9e34c9c5ebd17d207506f8c649787961522e84",
+      "layout_notes": []
+    },
+    {
+      "case_id": "static_c_shape_seed5_oracle",
+      "condition_id": "c_shape_seed5",
+      "split": "static",
+      "gate": 5,
+      "shape": "c_shape",
+      "seed": 5,
+      "variant": "oracle",
+      "arm": "oracle",
+      "frames": 600,
+      "stratum": "c_shape_seed5",
+      "factors": {},
+      "expected_initial_state_sha256": "4fb8bb04621bf67a1bfcf04b29fa9e544e8e55480b24f5024ca83b6cdbd18842",
+      "layout_notes": []
+    },
+    {
+      "case_id": "static_c_shape_seed5_local_samples",
+      "condition_id": "c_shape_seed5",
+      "split": "static",
+      "gate": 5,
+      "shape": "c_shape",
+      "seed": 5,
+      "variant": "local",
+      "arm": "local_samples",
+      "frames": 600,
+      "stratum": "c_shape_seed5",
+      "factors": {},
+      "expected_initial_state_sha256": "4fb8bb04621bf67a1bfcf04b29fa9e544e8e55480b24f5024ca83b6cdbd18842",
+      "layout_notes": []
+    },
+    {
+      "case_id": "static_c_shape_seed5_local_segments",
+      "condition_id": "c_shape_seed5",
+      "split": "static",
+      "gate": 5,
+      "shape": "c_shape",
+      "seed": 5,
+      "variant": "local",
+      "arm": "local_segments",
+      "frames": 600,
+      "stratum": "c_shape_seed5",
+      "factors": {},
+      "expected_initial_state_sha256": "4fb8bb04621bf67a1bfcf04b29fa9e544e8e55480b24f5024ca83b6cdbd18842",
+      "layout_notes": []
+    },
+    {
+      "case_id": "development_c_shape_seed5_boundary_cvt",
+      "condition_id": "c_shape_seed5",
+      "split": "development",
+      "gate": 6,
+      "shape": "c_shape",
+      "seed": 5,
+      "variant": "boundary_cvt",
+      "arm": "boundary_cvt",
+      "frames": 3000,
+      "stratum": "c_shape_seed5",
+      "factors": {},
+      "expected_initial_state_sha256": "4fb8bb04621bf67a1bfcf04b29fa9e544e8e55480b24f5024ca83b6cdbd18842",
+      "layout_notes": []
+    },
+    {
+      "case_id": "development_c_shape_seed5_nearest_observed_target",
+      "condition_id": "c_shape_seed5",
+      "split": "development",
+      "gate": 6,
+      "shape": "c_shape",
+      "seed": 5,
+      "variant": "nearest_observed_target",
+      "arm": "nearest_observed_target",
+      "frames": 3000,
+      "stratum": "c_shape_seed5",
+      "factors": {},
+      "expected_initial_state_sha256": "4fb8bb04621bf67a1bfcf04b29fa9e544e8e55480b24f5024ca83b6cdbd18842",
+      "layout_notes": []
+    },
+    {
+      "case_id": "development_c_shape_seed5_local_spacing",
+      "condition_id": "c_shape_seed5",
+      "split": "development",
+      "gate": 6,
+      "shape": "c_shape",
+      "seed": 5,
+      "variant": "local_spacing",
+      "arm": "local_spacing",
+      "frames": 3000,
+      "stratum": "c_shape_seed5",
+      "factors": {},
+      "expected_initial_state_sha256": "4fb8bb04621bf67a1bfcf04b29fa9e544e8e55480b24f5024ca83b6cdbd18842",
+      "layout_notes": []
+    },
+    {
+      "case_id": "static_c_shape_seed8_oracle",
+      "condition_id": "c_shape_seed8",
+      "split": "static",
+      "gate": 5,
+      "shape": "c_shape",
+      "seed": 8,
+      "variant": "oracle",
+      "arm": "oracle",
+      "frames": 600,
+      "stratum": "c_shape_seed8",
+      "factors": {},
+      "expected_initial_state_sha256": "2e04b993fd9f38636ab0808ffd39d08335417971d770dacc15aa84af887175e1",
+      "layout_notes": []
+    },
+    {
+      "case_id": "static_c_shape_seed8_local_samples",
+      "condition_id": "c_shape_seed8",
+      "split": "static",
+      "gate": 5,
+      "shape": "c_shape",
+      "seed": 8,
+      "variant": "local",
+      "arm": "local_samples",
+      "frames": 600,
+      "stratum": "c_shape_seed8",
+      "factors": {},
+      "expected_initial_state_sha256": "2e04b993fd9f38636ab0808ffd39d08335417971d770dacc15aa84af887175e1",
+      "layout_notes": []
+    },
+    {
+      "case_id": "static_c_shape_seed8_local_segments",
+      "condition_id": "c_shape_seed8",
+      "split": "static",
+      "gate": 5,
+      "shape": "c_shape",
+      "seed": 8,
+      "variant": "local",
+      "arm": "local_segments",
+      "frames": 600,
+      "stratum": "c_shape_seed8",
+      "factors": {},
+      "expected_initial_state_sha256": "2e04b993fd9f38636ab0808ffd39d08335417971d770dacc15aa84af887175e1",
+      "layout_notes": []
+    },
+    {
+      "case_id": "development_c_shape_seed8_boundary_cvt",
+      "condition_id": "c_shape_seed8",
+      "split": "development",
+      "gate": 6,
+      "shape": "c_shape",
+      "seed": 8,
+      "variant": "boundary_cvt",
+      "arm": "boundary_cvt",
+      "frames": 3000,
+      "stratum": "c_shape_seed8",
+      "factors": {},
+      "expected_initial_state_sha256": "2e04b993fd9f38636ab0808ffd39d08335417971d770dacc15aa84af887175e1",
+      "layout_notes": []
+    },
+    {
+      "case_id": "development_c_shape_seed8_nearest_observed_target",
+      "condition_id": "c_shape_seed8",
+      "split": "development",
+      "gate": 6,
+      "shape": "c_shape",
+      "seed": 8,
+      "variant": "nearest_observed_target",
+      "arm": "nearest_observed_target",
+      "frames": 3000,
+      "stratum": "c_shape_seed8",
+      "factors": {},
+      "expected_initial_state_sha256": "2e04b993fd9f38636ab0808ffd39d08335417971d770dacc15aa84af887175e1",
+      "layout_notes": []
+    },
+    {
+      "case_id": "development_c_shape_seed8_local_spacing",
+      "condition_id": "c_shape_seed8",
+      "split": "development",
+      "gate": 6,
+      "shape": "c_shape",
+      "seed": 8,
+      "variant": "local_spacing",
+      "arm": "local_spacing",
+      "frames": 3000,
+      "stratum": "c_shape_seed8",
+      "factors": {},
+      "expected_initial_state_sha256": "2e04b993fd9f38636ab0808ffd39d08335417971d770dacc15aa84af887175e1",
+      "layout_notes": []
+    },
+    {
+      "case_id": "ablation_c_shape_seed2_boundary_cvt",
+      "condition_id": "c_shape_seed2",
+      "split": "ablation",
+      "gate": 6,
+      "shape": "c_shape",
+      "seed": 2,
+      "variant": "boundary_cvt",
+      "arm": "boundary_cvt",
+      "frames": 3000,
+      "stratum": "c_shape_seed2",
+      "factors": {},
+      "expected_initial_state_sha256": "1b464d06337ec82d5cf961d16d9e34c9c5ebd17d207506f8c649787961522e84",
+      "layout_notes": []
+    },
+    {
+      "case_id": "ablation_c_shape_seed2_no_arc",
+      "condition_id": "c_shape_seed2",
+      "split": "ablation",
+      "gate": 6,
+      "shape": "c_shape",
+      "seed": 2,
+      "variant": "no_arc",
+      "arm": "no_arc",
+      "frames": 3000,
+      "stratum": "c_shape_seed2",
+      "factors": {},
+      "expected_initial_state_sha256": "1b464d06337ec82d5cf961d16d9e34c9c5ebd17d207506f8c649787961522e84",
+      "layout_notes": []
+    },
+    {
+      "case_id": "ablation_c_shape_seed2_no_arc_normalized",
+      "condition_id": "c_shape_seed2",
+      "split": "ablation",
+      "gate": 6,
+      "shape": "c_shape",
+      "seed": 2,
+      "variant": "no_arc_normalized",
+      "arm": "no_arc_normalized",
+      "frames": 3000,
+      "stratum": "c_shape_seed2",
+      "factors": {},
+      "expected_initial_state_sha256": "1b464d06337ec82d5cf961d16d9e34c9c5ebd17d207506f8c649787961522e84",
+      "layout_notes": []
+    },
+    {
+      "case_id": "ablation_c_shape_seed2_no_direction_offsets",
+      "condition_id": "c_shape_seed2",
+      "split": "ablation",
+      "gate": 6,
+      "shape": "c_shape",
+      "seed": 2,
+      "variant": "no_direction_offsets",
+      "arm": "no_direction_offsets",
+      "frames": 3000,
+      "stratum": "c_shape_seed2",
+      "factors": {},
+      "expected_initial_state_sha256": "1b464d06337ec82d5cf961d16d9e34c9c5ebd17d207506f8c649787961522e84",
+      "layout_notes": []
+    },
+    {
+      "case_id": "ablation_c_shape_seed2_no_exploration",
+      "condition_id": "c_shape_seed2",
+      "split": "ablation",
+      "gate": 6,
+      "shape": "c_shape",
+      "seed": 2,
+      "variant": "no_exploration",
+      "arm": "no_exploration",
+      "frames": 3000,
+      "stratum": "c_shape_seed2",
+      "factors": {},
+      "expected_initial_state_sha256": "1b464d06337ec82d5cf961d16d9e34c9c5ebd17d207506f8c649787961522e84",
+      "layout_notes": []
+    },
+    {
+      "case_id": "active_exploration_c_shape_seed2_boundary_cvt",
+      "condition_id": "c_shape_seed2",
+      "split": "active_exploration",
+      "gate": 6,
+      "shape": "c_shape",
+      "seed": 2,
+      "variant": "boundary_cvt",
+      "arm": "boundary_cvt",
+      "frames": 3000,
+      "stratum": "c_shape_seed2",
+      "factors": {
+        "explore_gain": 6.0
+      },
+      "expected_initial_state_sha256": "1b464d06337ec82d5cf961d16d9e34c9c5ebd17d207506f8c649787961522e84",
+      "layout_notes": []
+    },
+    {
+      "case_id": "active_exploration_c_shape_seed2_no_exploration",
+      "condition_id": "c_shape_seed2",
+      "split": "active_exploration",
+      "gate": 6,
+      "shape": "c_shape",
+      "seed": 2,
+      "variant": "no_exploration",
+      "arm": "no_exploration",
+      "frames": 3000,
+      "stratum": "c_shape_seed2",
+      "factors": {
+        "explore_gain": 6.0
+      },
+      "expected_initial_state_sha256": "1b464d06337ec82d5cf961d16d9e34c9c5ebd17d207506f8c649787961522e84",
+      "layout_notes": []
+    },
+    {
+      "case_id": "robustness_c_shape_seed202610230_range_noise_boundary_cvt",
+      "condition_id": "c_shape_seed202610230_range_noise",
+      "split": "robustness",
+      "gate": 6,
+      "shape": "c_shape",
+      "seed": 202610230,
+      "variant": "boundary_cvt",
+      "arm": "boundary_cvt",
+      "frames": 3000,
+      "stratum": "c_shape_seed202610230_range_noise",
+      "factors": {
+        "name": "range_noise",
+        "controller": {
+          "range_noise_std": 0.02
+        }
+      },
+      "expected_initial_state_sha256": "c4d2f492645db74e5934eb61a506ba9b56e3a855112e017786a646bcd0190511",
+      "layout_notes": []
+    },
+    {
+      "case_id": "robustness_c_shape_seed202610230_range_noise_nearest_observed_target",
+      "condition_id": "c_shape_seed202610230_range_noise",
+      "split": "robustness",
+      "gate": 6,
+      "shape": "c_shape",
+      "seed": 202610230,
+      "variant": "nearest_observed_target",
+      "arm": "nearest_observed_target",
+      "frames": 3000,
+      "stratum": "c_shape_seed202610230_range_noise",
+      "factors": {
+        "name": "range_noise",
+        "controller": {
+          "range_noise_std": 0.02
+        }
+      },
+      "expected_initial_state_sha256": "c4d2f492645db74e5934eb61a506ba9b56e3a855112e017786a646bcd0190511",
+      "layout_notes": []
+    },
+    {
+      "case_id": "robustness_c_shape_seed202610230_range_noise_local_spacing",
+      "condition_id": "c_shape_seed202610230_range_noise",
+      "split": "robustness",
+      "gate": 6,
+      "shape": "c_shape",
+      "seed": 202610230,
+      "variant": "local_spacing",
+      "arm": "local_spacing",
+      "frames": 3000,
+      "stratum": "c_shape_seed202610230_range_noise",
+      "factors": {
+        "name": "range_noise",
+        "controller": {
+          "range_noise_std": 0.02
+        }
+      },
+      "expected_initial_state_sha256": "c4d2f492645db74e5934eb61a506ba9b56e3a855112e017786a646bcd0190511",
+      "layout_notes": []
+    },
+    {
+      "case_id": "robustness_c_shape_seed202610230_communication_loss_boundary_cvt",
+      "condition_id": "c_shape_seed202610230_communication_loss",
+      "split": "robustness",
+      "gate": 6,
+      "shape": "c_shape",
+      "seed": 202610230,
+      "variant": "boundary_cvt",
+      "arm": "boundary_cvt",
+      "frames": 3000,
+      "stratum": "c_shape_seed202610230_communication_loss",
+      "factors": {
+        "name": "communication_loss",
+        "controller": {
+          "communication_dropout_prob": 0.2
+        }
+      },
+      "expected_initial_state_sha256": "c4d2f492645db74e5934eb61a506ba9b56e3a855112e017786a646bcd0190511",
+      "layout_notes": []
+    },
+    {
+      "case_id": "robustness_c_shape_seed202610230_communication_loss_nearest_observed_target",
+      "condition_id": "c_shape_seed202610230_communication_loss",
+      "split": "robustness",
+      "gate": 6,
+      "shape": "c_shape",
+      "seed": 202610230,
+      "variant": "nearest_observed_target",
+      "arm": "nearest_observed_target",
+      "frames": 3000,
+      "stratum": "c_shape_seed202610230_communication_loss",
+      "factors": {
+        "name": "communication_loss",
+        "controller": {
+          "communication_dropout_prob": 0.2
+        }
+      },
+      "expected_initial_state_sha256": "c4d2f492645db74e5934eb61a506ba9b56e3a855112e017786a646bcd0190511",
+      "layout_notes": []
+    },
+    {
+      "case_id": "robustness_c_shape_seed202610230_communication_loss_local_spacing",
+      "condition_id": "c_shape_seed202610230_communication_loss",
+      "split": "robustness",
+      "gate": 6,
+      "shape": "c_shape",
+      "seed": 202610230,
+      "variant": "local_spacing",
+      "arm": "local_spacing",
+      "frames": 3000,
+      "stratum": "c_shape_seed202610230_communication_loss",
+      "factors": {
+        "name": "communication_loss",
+        "controller": {
+          "communication_dropout_prob": 0.2
+        }
+      },
+      "expected_initial_state_sha256": "c4d2f492645db74e5934eb61a506ba9b56e3a855112e017786a646bcd0190511",
+      "layout_notes": []
+    },
+    {
+      "case_id": "robustness_c_shape_seed202610230_slower_sensing_boundary_cvt",
+      "condition_id": "c_shape_seed202610230_slower_sensing",
+      "split": "robustness",
+      "gate": 6,
+      "shape": "c_shape",
+      "seed": 202610230,
+      "variant": "boundary_cvt",
+      "arm": "boundary_cvt",
+      "frames": 3000,
+      "stratum": "c_shape_seed202610230_slower_sensing",
+      "factors": {
+        "name": "slower_sensing",
+        "controller": {
+          "perception_every": 2
+        }
+      },
+      "expected_initial_state_sha256": "c4d2f492645db74e5934eb61a506ba9b56e3a855112e017786a646bcd0190511",
+      "layout_notes": []
+    },
+    {
+      "case_id": "robustness_c_shape_seed202610230_slower_sensing_nearest_observed_target",
+      "condition_id": "c_shape_seed202610230_slower_sensing",
+      "split": "robustness",
+      "gate": 6,
+      "shape": "c_shape",
+      "seed": 202610230,
+      "variant": "nearest_observed_target",
+      "arm": "nearest_observed_target",
+      "frames": 3000,
+      "stratum": "c_shape_seed202610230_slower_sensing",
+      "factors": {
+        "name": "slower_sensing",
+        "controller": {
+          "perception_every": 2
+        }
+      },
+      "expected_initial_state_sha256": "c4d2f492645db74e5934eb61a506ba9b56e3a855112e017786a646bcd0190511",
+      "layout_notes": []
+    },
+    {
+      "case_id": "robustness_c_shape_seed202610230_slower_sensing_local_spacing",
+      "condition_id": "c_shape_seed202610230_slower_sensing",
+      "split": "robustness",
+      "gate": 6,
+      "shape": "c_shape",
+      "seed": 202610230,
+      "variant": "local_spacing",
+      "arm": "local_spacing",
+      "frames": 3000,
+      "stratum": "c_shape_seed202610230_slower_sensing",
+      "factors": {
+        "name": "slower_sensing",
+        "controller": {
+          "perception_every": 2
+        }
+      },
+      "expected_initial_state_sha256": "c4d2f492645db74e5934eb61a506ba9b56e3a855112e017786a646bcd0190511",
+      "layout_notes": []
+    },
+    {
+      "case_id": "robustness_c_shape_seed202610231_range_noise_boundary_cvt",
+      "condition_id": "c_shape_seed202610231_range_noise",
+      "split": "robustness",
+      "gate": 6,
+      "shape": "c_shape",
+      "seed": 202610231,
+      "variant": "boundary_cvt",
+      "arm": "boundary_cvt",
+      "frames": 3000,
+      "stratum": "c_shape_seed202610231_range_noise",
+      "factors": {
+        "name": "range_noise",
+        "controller": {
+          "range_noise_std": 0.02
+        }
+      },
+      "expected_initial_state_sha256": "125c8fc9917f218b673d801cc440ed0d4bca9b59f94b20cd43251330cb89b507",
+      "layout_notes": []
+    },
+    {
+      "case_id": "robustness_c_shape_seed202610231_range_noise_nearest_observed_target",
+      "condition_id": "c_shape_seed202610231_range_noise",
+      "split": "robustness",
+      "gate": 6,
+      "shape": "c_shape",
+      "seed": 202610231,
+      "variant": "nearest_observed_target",
+      "arm": "nearest_observed_target",
+      "frames": 3000,
+      "stratum": "c_shape_seed202610231_range_noise",
+      "factors": {
+        "name": "range_noise",
+        "controller": {
+          "range_noise_std": 0.02
+        }
+      },
+      "expected_initial_state_sha256": "125c8fc9917f218b673d801cc440ed0d4bca9b59f94b20cd43251330cb89b507",
+      "layout_notes": []
+    },
+    {
+      "case_id": "robustness_c_shape_seed202610231_range_noise_local_spacing",
+      "condition_id": "c_shape_seed202610231_range_noise",
+      "split": "robustness",
+      "gate": 6,
+      "shape": "c_shape",
+      "seed": 202610231,
+      "variant": "local_spacing",
+      "arm": "local_spacing",
+      "frames": 3000,
+      "stratum": "c_shape_seed202610231_range_noise",
+      "factors": {
+        "name": "range_noise",
+        "controller": {
+          "range_noise_std": 0.02
+        }
+      },
+      "expected_initial_state_sha256": "125c8fc9917f218b673d801cc440ed0d4bca9b59f94b20cd43251330cb89b507",
+      "layout_notes": []
+    },
+    {
+      "case_id": "robustness_c_shape_seed202610231_communication_loss_boundary_cvt",
+      "condition_id": "c_shape_seed202610231_communication_loss",
+      "split": "robustness",
+      "gate": 6,
+      "shape": "c_shape",
+      "seed": 202610231,
+      "variant": "boundary_cvt",
+      "arm": "boundary_cvt",
+      "frames": 3000,
+      "stratum": "c_shape_seed202610231_communication_loss",
+      "factors": {
+        "name": "communication_loss",
+        "controller": {
+          "communication_dropout_prob": 0.2
+        }
+      },
+      "expected_initial_state_sha256": "125c8fc9917f218b673d801cc440ed0d4bca9b59f94b20cd43251330cb89b507",
+      "layout_notes": []
+    },
+    {
+      "case_id": "robustness_c_shape_seed202610231_communication_loss_nearest_observed_target",
+      "condition_id": "c_shape_seed202610231_communication_loss",
+      "split": "robustness",
+      "gate": 6,
+      "shape": "c_shape",
+      "seed": 202610231,
+      "variant": "nearest_observed_target",
+      "arm": "nearest_observed_target",
+      "frames": 3000,
+      "stratum": "c_shape_seed202610231_communication_loss",
+      "factors": {
+        "name": "communication_loss",
+        "controller": {
+          "communication_dropout_prob": 0.2
+        }
+      },
+      "expected_initial_state_sha256": "125c8fc9917f218b673d801cc440ed0d4bca9b59f94b20cd43251330cb89b507",
+      "layout_notes": []
+    },
+    {
+      "case_id": "robustness_c_shape_seed202610231_communication_loss_local_spacing",
+      "condition_id": "c_shape_seed202610231_communication_loss",
+      "split": "robustness",
+      "gate": 6,
+      "shape": "c_shape",
+      "seed": 202610231,
+      "variant": "local_spacing",
+      "arm": "local_spacing",
+      "frames": 3000,
+      "stratum": "c_shape_seed202610231_communication_loss",
+      "factors": {
+        "name": "communication_loss",
+        "controller": {
+          "communication_dropout_prob": 0.2
+        }
+      },
+      "expected_initial_state_sha256": "125c8fc9917f218b673d801cc440ed0d4bca9b59f94b20cd43251330cb89b507",
+      "layout_notes": []
+    },
+    {
+      "case_id": "robustness_c_shape_seed202610231_slower_sensing_boundary_cvt",
+      "condition_id": "c_shape_seed202610231_slower_sensing",
+      "split": "robustness",
+      "gate": 6,
+      "shape": "c_shape",
+      "seed": 202610231,
+      "variant": "boundary_cvt",
+      "arm": "boundary_cvt",
+      "frames": 3000,
+      "stratum": "c_shape_seed202610231_slower_sensing",
+      "factors": {
+        "name": "slower_sensing",
+        "controller": {
+          "perception_every": 2
+        }
+      },
+      "expected_initial_state_sha256": "125c8fc9917f218b673d801cc440ed0d4bca9b59f94b20cd43251330cb89b507",
+      "layout_notes": []
+    },
+    {
+      "case_id": "robustness_c_shape_seed202610231_slower_sensing_nearest_observed_target",
+      "condition_id": "c_shape_seed202610231_slower_sensing",
+      "split": "robustness",
+      "gate": 6,
+      "shape": "c_shape",
+      "seed": 202610231,
+      "variant": "nearest_observed_target",
+      "arm": "nearest_observed_target",
+      "frames": 3000,
+      "stratum": "c_shape_seed202610231_slower_sensing",
+      "factors": {
+        "name": "slower_sensing",
+        "controller": {
+          "perception_every": 2
+        }
+      },
+      "expected_initial_state_sha256": "125c8fc9917f218b673d801cc440ed0d4bca9b59f94b20cd43251330cb89b507",
+      "layout_notes": []
+    },
+    {
+      "case_id": "robustness_c_shape_seed202610231_slower_sensing_local_spacing",
+      "condition_id": "c_shape_seed202610231_slower_sensing",
+      "split": "robustness",
+      "gate": 6,
+      "shape": "c_shape",
+      "seed": 202610231,
+      "variant": "local_spacing",
+      "arm": "local_spacing",
+      "frames": 3000,
+      "stratum": "c_shape_seed202610231_slower_sensing",
+      "factors": {
+        "name": "slower_sensing",
+        "controller": {
+          "perception_every": 2
+        }
+      },
+      "expected_initial_state_sha256": "125c8fc9917f218b673d801cc440ed0d4bca9b59f94b20cd43251330cb89b507",
+      "layout_notes": []
+    },
+    {
+      "case_id": "generalization_c_shape_near_scale0p8_ratio0p4_seed202610210_boundary_cvt",
+      "condition_id": "c_shape_near_scale0p8_ratio0p4_seed202610210",
+      "split": "generalization",
+      "gate": 6,
+      "shape": "c_shape",
+      "seed": 202610210,
+      "variant": "boundary_cvt",
+      "arm": "boundary_cvt",
+      "frames": 3000,
+      "stratum": "c_shape_near_scale0p8_ratio0p4_seed202610210",
+      "factors": {
+        "template_stratum": "near_scale0.8_ratio0.4",
+        "new_seed": true
+      },
+      "expected_initial_state_sha256": "e6cc2cf216bb2fd26d339b8d52e639dde85b0fa20c35ebef9137949968d5235a",
+      "layout_notes": []
+    },
+    {
+      "case_id": "generalization_c_shape_near_scale0p8_ratio0p4_seed202610210_nearest_observed_target",
+      "condition_id": "c_shape_near_scale0p8_ratio0p4_seed202610210",
+      "split": "generalization",
+      "gate": 6,
+      "shape": "c_shape",
+      "seed": 202610210,
+      "variant": "nearest_observed_target",
+      "arm": "nearest_observed_target",
+      "frames": 3000,
+      "stratum": "c_shape_near_scale0p8_ratio0p4_seed202610210",
+      "factors": {
+        "template_stratum": "near_scale0.8_ratio0.4",
+        "new_seed": true
+      },
+      "expected_initial_state_sha256": "e6cc2cf216bb2fd26d339b8d52e639dde85b0fa20c35ebef9137949968d5235a",
+      "layout_notes": []
+    },
+    {
+      "case_id": "generalization_c_shape_near_scale0p8_ratio0p4_seed202610210_local_spacing",
+      "condition_id": "c_shape_near_scale0p8_ratio0p4_seed202610210",
+      "split": "generalization",
+      "gate": 6,
+      "shape": "c_shape",
+      "seed": 202610210,
+      "variant": "local_spacing",
+      "arm": "local_spacing",
+      "frames": 3000,
+      "stratum": "c_shape_near_scale0p8_ratio0p4_seed202610210",
+      "factors": {
+        "template_stratum": "near_scale0.8_ratio0.4",
+        "new_seed": true
+      },
+      "expected_initial_state_sha256": "e6cc2cf216bb2fd26d339b8d52e639dde85b0fa20c35ebef9137949968d5235a",
+      "layout_notes": []
+    },
+    {
+      "case_id": "generalization_c_shape_near_scale1p2_ratio0p8_seed202610211_boundary_cvt",
+      "condition_id": "c_shape_near_scale1p2_ratio0p8_seed202610211",
+      "split": "generalization",
+      "gate": 6,
+      "shape": "c_shape",
+      "seed": 202610211,
+      "variant": "boundary_cvt",
+      "arm": "boundary_cvt",
+      "frames": 3000,
+      "stratum": "c_shape_near_scale1p2_ratio0p8_seed202610211",
+      "factors": {
+        "template_stratum": "near_scale1.2_ratio0.8",
+        "new_seed": true
+      },
+      "expected_initial_state_sha256": "2560ff67f880b16c2faba6d98fbf569560519c24e221d5cce59919e82135be88",
+      "layout_notes": []
+    },
+    {
+      "case_id": "generalization_c_shape_near_scale1p2_ratio0p8_seed202610211_nearest_observed_target",
+      "condition_id": "c_shape_near_scale1p2_ratio0p8_seed202610211",
+      "split": "generalization",
+      "gate": 6,
+      "shape": "c_shape",
+      "seed": 202610211,
+      "variant": "nearest_observed_target",
+      "arm": "nearest_observed_target",
+      "frames": 3000,
+      "stratum": "c_shape_near_scale1p2_ratio0p8_seed202610211",
+      "factors": {
+        "template_stratum": "near_scale1.2_ratio0.8",
+        "new_seed": true
+      },
+      "expected_initial_state_sha256": "2560ff67f880b16c2faba6d98fbf569560519c24e221d5cce59919e82135be88",
+      "layout_notes": []
+    },
+    {
+      "case_id": "generalization_c_shape_near_scale1p2_ratio0p8_seed202610211_local_spacing",
+      "condition_id": "c_shape_near_scale1p2_ratio0p8_seed202610211",
+      "split": "generalization",
+      "gate": 6,
+      "shape": "c_shape",
+      "seed": 202610211,
+      "variant": "local_spacing",
+      "arm": "local_spacing",
+      "frames": 3000,
+      "stratum": "c_shape_near_scale1p2_ratio0p8_seed202610211",
+      "factors": {
+        "template_stratum": "near_scale1.2_ratio0.8",
+        "new_seed": true
+      },
+      "expected_initial_state_sha256": "2560ff67f880b16c2faba6d98fbf569560519c24e221d5cce59919e82135be88",
+      "layout_notes": []
+    },
+    {
+      "case_id": "generalization_c_shape_search_scale0p8_ratio0p4_seed202610212_boundary_cvt",
+      "condition_id": "c_shape_search_scale0p8_ratio0p4_seed202610212",
+      "split": "generalization",
+      "gate": 6,
+      "shape": "c_shape",
+      "seed": 202610212,
+      "variant": "boundary_cvt",
+      "arm": "boundary_cvt",
+      "frames": 3000,
+      "stratum": "c_shape_search_scale0p8_ratio0p4_seed202610212",
+      "factors": {
+        "template_stratum": "search_scale0.8_ratio0.4",
+        "new_seed": true
+      },
+      "expected_initial_state_sha256": "ef111817f21031b895a241ef5d2726b6f8e58c7535c858b5d614a666b9edb784",
+      "layout_notes": []
+    },
+    {
+      "case_id": "generalization_c_shape_search_scale0p8_ratio0p4_seed202610212_nearest_observed_target",
+      "condition_id": "c_shape_search_scale0p8_ratio0p4_seed202610212",
+      "split": "generalization",
+      "gate": 6,
+      "shape": "c_shape",
+      "seed": 202610212,
+      "variant": "nearest_observed_target",
+      "arm": "nearest_observed_target",
+      "frames": 3000,
+      "stratum": "c_shape_search_scale0p8_ratio0p4_seed202610212",
+      "factors": {
+        "template_stratum": "search_scale0.8_ratio0.4",
+        "new_seed": true
+      },
+      "expected_initial_state_sha256": "ef111817f21031b895a241ef5d2726b6f8e58c7535c858b5d614a666b9edb784",
+      "layout_notes": []
+    },
+    {
+      "case_id": "generalization_c_shape_search_scale0p8_ratio0p4_seed202610212_local_spacing",
+      "condition_id": "c_shape_search_scale0p8_ratio0p4_seed202610212",
+      "split": "generalization",
+      "gate": 6,
+      "shape": "c_shape",
+      "seed": 202610212,
+      "variant": "local_spacing",
+      "arm": "local_spacing",
+      "frames": 3000,
+      "stratum": "c_shape_search_scale0p8_ratio0p4_seed202610212",
+      "factors": {
+        "template_stratum": "search_scale0.8_ratio0.4",
+        "new_seed": true
+      },
+      "expected_initial_state_sha256": "ef111817f21031b895a241ef5d2726b6f8e58c7535c858b5d614a666b9edb784",
+      "layout_notes": []
+    },
+    {
+      "case_id": "generalization_c_shape_search_scale1p2_ratio0p8_seed202610213_boundary_cvt",
+      "condition_id": "c_shape_search_scale1p2_ratio0p8_seed202610213",
+      "split": "generalization",
+      "gate": 6,
+      "shape": "c_shape",
+      "seed": 202610213,
+      "variant": "boundary_cvt",
+      "arm": "boundary_cvt",
+      "frames": 3000,
+      "stratum": "c_shape_search_scale1p2_ratio0p8_seed202610213",
+      "factors": {
+        "template_stratum": "search_scale1.2_ratio0.8",
+        "new_seed": true
+      },
+      "expected_initial_state_sha256": "ef111817f21031b895a241ef5d2726b6f8e58c7535c858b5d614a666b9edb784",
+      "layout_notes": []
+    },
+    {
+      "case_id": "generalization_c_shape_search_scale1p2_ratio0p8_seed202610213_nearest_observed_target",
+      "condition_id": "c_shape_search_scale1p2_ratio0p8_seed202610213",
+      "split": "generalization",
+      "gate": 6,
+      "shape": "c_shape",
+      "seed": 202610213,
+      "variant": "nearest_observed_target",
+      "arm": "nearest_observed_target",
+      "frames": 3000,
+      "stratum": "c_shape_search_scale1p2_ratio0p8_seed202610213",
+      "factors": {
+        "template_stratum": "search_scale1.2_ratio0.8",
+        "new_seed": true
+      },
+      "expected_initial_state_sha256": "ef111817f21031b895a241ef5d2726b6f8e58c7535c858b5d614a666b9edb784",
+      "layout_notes": []
+    },
+    {
+      "case_id": "generalization_c_shape_search_scale1p2_ratio0p8_seed202610213_local_spacing",
+      "condition_id": "c_shape_search_scale1p2_ratio0p8_seed202610213",
+      "split": "generalization",
+      "gate": 6,
+      "shape": "c_shape",
+      "seed": 202610213,
+      "variant": "local_spacing",
+      "arm": "local_spacing",
+      "frames": 3000,
+      "stratum": "c_shape_search_scale1p2_ratio0p8_seed202610213",
+      "factors": {
+        "template_stratum": "search_scale1.2_ratio0.8",
+        "new_seed": true
+      },
+      "expected_initial_state_sha256": "ef111817f21031b895a241ef5d2726b6f8e58c7535c858b5d614a666b9edb784",
+      "layout_notes": []
+    },
+    {
+      "case_id": "generalization_l_shape_near_scale0p8_ratio0p4_seed202610214_boundary_cvt",
+      "condition_id": "l_shape_near_scale0p8_ratio0p4_seed202610214",
+      "split": "generalization",
+      "gate": 6,
+      "shape": "l_shape",
+      "seed": 202610214,
+      "variant": "boundary_cvt",
+      "arm": "boundary_cvt",
+      "frames": 3000,
+      "stratum": "l_shape_near_scale0p8_ratio0p4_seed202610214",
+      "factors": {
+        "template_stratum": "near_scale0.8_ratio0.4",
+        "new_seed": true
+      },
+      "expected_initial_state_sha256": "7446173d7c13667901862c492c99d7438eb41376c461889de76368319060397b",
+      "layout_notes": []
+    },
+    {
+      "case_id": "generalization_l_shape_near_scale0p8_ratio0p4_seed202610214_nearest_observed_target",
+      "condition_id": "l_shape_near_scale0p8_ratio0p4_seed202610214",
+      "split": "generalization",
+      "gate": 6,
+      "shape": "l_shape",
+      "seed": 202610214,
+      "variant": "nearest_observed_target",
+      "arm": "nearest_observed_target",
+      "frames": 3000,
+      "stratum": "l_shape_near_scale0p8_ratio0p4_seed202610214",
+      "factors": {
+        "template_stratum": "near_scale0.8_ratio0.4",
+        "new_seed": true
+      },
+      "expected_initial_state_sha256": "7446173d7c13667901862c492c99d7438eb41376c461889de76368319060397b",
+      "layout_notes": []
+    },
+    {
+      "case_id": "generalization_l_shape_near_scale0p8_ratio0p4_seed202610214_local_spacing",
+      "condition_id": "l_shape_near_scale0p8_ratio0p4_seed202610214",
+      "split": "generalization",
+      "gate": 6,
+      "shape": "l_shape",
+      "seed": 202610214,
+      "variant": "local_spacing",
+      "arm": "local_spacing",
+      "frames": 3000,
+      "stratum": "l_shape_near_scale0p8_ratio0p4_seed202610214",
+      "factors": {
+        "template_stratum": "near_scale0.8_ratio0.4",
+        "new_seed": true
+      },
+      "expected_initial_state_sha256": "7446173d7c13667901862c492c99d7438eb41376c461889de76368319060397b",
+      "layout_notes": []
+    },
+    {
+      "case_id": "generalization_l_shape_near_scale1p2_ratio0p8_seed202610215_boundary_cvt",
+      "condition_id": "l_shape_near_scale1p2_ratio0p8_seed202610215",
+      "split": "generalization",
+      "gate": 6,
+      "shape": "l_shape",
+      "seed": 202610215,
+      "variant": "boundary_cvt",
+      "arm": "boundary_cvt",
+      "frames": 3000,
+      "stratum": "l_shape_near_scale1p2_ratio0p8_seed202610215",
+      "factors": {
+        "template_stratum": "near_scale1.2_ratio0.8",
+        "new_seed": true
+      },
+      "expected_initial_state_sha256": "a5ac9599d4b9523028f57454d30a8781a10ec0177a050d75c53c63cd6a2a23a7",
+      "layout_notes": [
+        "scatter inner radius raised from 1.5000 m to 1.6574 m so that true vertex clearance stays at least the robot radius 0.1300 m"
+      ]
+    },
+    {
+      "case_id": "generalization_l_shape_near_scale1p2_ratio0p8_seed202610215_nearest_observed_target",
+      "condition_id": "l_shape_near_scale1p2_ratio0p8_seed202610215",
+      "split": "generalization",
+      "gate": 6,
+      "shape": "l_shape",
+      "seed": 202610215,
+      "variant": "nearest_observed_target",
+      "arm": "nearest_observed_target",
+      "frames": 3000,
+      "stratum": "l_shape_near_scale1p2_ratio0p8_seed202610215",
+      "factors": {
+        "template_stratum": "near_scale1.2_ratio0.8",
+        "new_seed": true
+      },
+      "expected_initial_state_sha256": "a5ac9599d4b9523028f57454d30a8781a10ec0177a050d75c53c63cd6a2a23a7",
+      "layout_notes": [
+        "scatter inner radius raised from 1.5000 m to 1.6574 m so that true vertex clearance stays at least the robot radius 0.1300 m"
+      ]
+    },
+    {
+      "case_id": "generalization_l_shape_near_scale1p2_ratio0p8_seed202610215_local_spacing",
+      "condition_id": "l_shape_near_scale1p2_ratio0p8_seed202610215",
+      "split": "generalization",
+      "gate": 6,
+      "shape": "l_shape",
+      "seed": 202610215,
+      "variant": "local_spacing",
+      "arm": "local_spacing",
+      "frames": 3000,
+      "stratum": "l_shape_near_scale1p2_ratio0p8_seed202610215",
+      "factors": {
+        "template_stratum": "near_scale1.2_ratio0.8",
+        "new_seed": true
+      },
+      "expected_initial_state_sha256": "a5ac9599d4b9523028f57454d30a8781a10ec0177a050d75c53c63cd6a2a23a7",
+      "layout_notes": [
+        "scatter inner radius raised from 1.5000 m to 1.6574 m so that true vertex clearance stays at least the robot radius 0.1300 m"
+      ]
+    },
+    {
+      "case_id": "generalization_l_shape_search_scale0p8_ratio0p4_seed202610216_boundary_cvt",
+      "condition_id": "l_shape_search_scale0p8_ratio0p4_seed202610216",
+      "split": "generalization",
+      "gate": 6,
+      "shape": "l_shape",
+      "seed": 202610216,
+      "variant": "boundary_cvt",
+      "arm": "boundary_cvt",
+      "frames": 3000,
+      "stratum": "l_shape_search_scale0p8_ratio0p4_seed202610216",
+      "factors": {
+        "template_stratum": "search_scale0.8_ratio0.4",
+        "new_seed": true
+      },
+      "expected_initial_state_sha256": "ef111817f21031b895a241ef5d2726b6f8e58c7535c858b5d614a666b9edb784",
+      "layout_notes": []
+    },
+    {
+      "case_id": "generalization_l_shape_search_scale0p8_ratio0p4_seed202610216_nearest_observed_target",
+      "condition_id": "l_shape_search_scale0p8_ratio0p4_seed202610216",
+      "split": "generalization",
+      "gate": 6,
+      "shape": "l_shape",
+      "seed": 202610216,
+      "variant": "nearest_observed_target",
+      "arm": "nearest_observed_target",
+      "frames": 3000,
+      "stratum": "l_shape_search_scale0p8_ratio0p4_seed202610216",
+      "factors": {
+        "template_stratum": "search_scale0.8_ratio0.4",
+        "new_seed": true
+      },
+      "expected_initial_state_sha256": "ef111817f21031b895a241ef5d2726b6f8e58c7535c858b5d614a666b9edb784",
+      "layout_notes": []
+    },
+    {
+      "case_id": "generalization_l_shape_search_scale0p8_ratio0p4_seed202610216_local_spacing",
+      "condition_id": "l_shape_search_scale0p8_ratio0p4_seed202610216",
+      "split": "generalization",
+      "gate": 6,
+      "shape": "l_shape",
+      "seed": 202610216,
+      "variant": "local_spacing",
+      "arm": "local_spacing",
+      "frames": 3000,
+      "stratum": "l_shape_search_scale0p8_ratio0p4_seed202610216",
+      "factors": {
+        "template_stratum": "search_scale0.8_ratio0.4",
+        "new_seed": true
+      },
+      "expected_initial_state_sha256": "ef111817f21031b895a241ef5d2726b6f8e58c7535c858b5d614a666b9edb784",
+      "layout_notes": []
+    },
+    {
+      "case_id": "generalization_l_shape_search_scale1p2_ratio0p8_seed202610217_boundary_cvt",
+      "condition_id": "l_shape_search_scale1p2_ratio0p8_seed202610217",
+      "split": "generalization",
+      "gate": 6,
+      "shape": "l_shape",
+      "seed": 202610217,
+      "variant": "boundary_cvt",
+      "arm": "boundary_cvt",
+      "frames": 3000,
+      "stratum": "l_shape_search_scale1p2_ratio0p8_seed202610217",
+      "factors": {
+        "template_stratum": "search_scale1.2_ratio0.8",
+        "new_seed": true
+      },
+      "expected_initial_state_sha256": "ef111817f21031b895a241ef5d2726b6f8e58c7535c858b5d614a666b9edb784",
+      "layout_notes": []
+    },
+    {
+      "case_id": "generalization_l_shape_search_scale1p2_ratio0p8_seed202610217_nearest_observed_target",
+      "condition_id": "l_shape_search_scale1p2_ratio0p8_seed202610217",
+      "split": "generalization",
+      "gate": 6,
+      "shape": "l_shape",
+      "seed": 202610217,
+      "variant": "nearest_observed_target",
+      "arm": "nearest_observed_target",
+      "frames": 3000,
+      "stratum": "l_shape_search_scale1p2_ratio0p8_seed202610217",
+      "factors": {
+        "template_stratum": "search_scale1.2_ratio0.8",
+        "new_seed": true
+      },
+      "expected_initial_state_sha256": "ef111817f21031b895a241ef5d2726b6f8e58c7535c858b5d614a666b9edb784",
+      "layout_notes": []
+    },
+    {
+      "case_id": "generalization_l_shape_search_scale1p2_ratio0p8_seed202610217_local_spacing",
+      "condition_id": "l_shape_search_scale1p2_ratio0p8_seed202610217",
+      "split": "generalization",
+      "gate": 6,
+      "shape": "l_shape",
+      "seed": 202610217,
+      "variant": "local_spacing",
+      "arm": "local_spacing",
+      "frames": 3000,
+      "stratum": "l_shape_search_scale1p2_ratio0p8_seed202610217",
+      "factors": {
+        "template_stratum": "search_scale1.2_ratio0.8",
+        "new_seed": true
+      },
+      "expected_initial_state_sha256": "ef111817f21031b895a241ef5d2726b6f8e58c7535c858b5d614a666b9edb784",
+      "layout_notes": []
+    },
+    {
+      "case_id": "generalization_rectangle_near_scale0p8_ratio0p4_seed202610218_boundary_cvt",
+      "condition_id": "rectangle_near_scale0p8_ratio0p4_seed202610218",
+      "split": "generalization",
+      "gate": 6,
+      "shape": "rectangle",
+      "seed": 202610218,
+      "variant": "boundary_cvt",
+      "arm": "boundary_cvt",
+      "frames": 3000,
+      "stratum": "rectangle_near_scale0p8_ratio0p4_seed202610218",
+      "factors": {
+        "template_stratum": "near_scale0.8_ratio0.4",
+        "new_seed": true
+      },
+      "expected_initial_state_sha256": "43ad4a886228dff602fbc669bd19ca1341addd190b9f4fd43256988453180787",
+      "layout_notes": []
+    },
+    {
+      "case_id": "generalization_rectangle_near_scale0p8_ratio0p4_seed202610218_nearest_observed_target",
+      "condition_id": "rectangle_near_scale0p8_ratio0p4_seed202610218",
+      "split": "generalization",
+      "gate": 6,
+      "shape": "rectangle",
+      "seed": 202610218,
+      "variant": "nearest_observed_target",
+      "arm": "nearest_observed_target",
+      "frames": 3000,
+      "stratum": "rectangle_near_scale0p8_ratio0p4_seed202610218",
+      "factors": {
+        "template_stratum": "near_scale0.8_ratio0.4",
+        "new_seed": true
+      },
+      "expected_initial_state_sha256": "43ad4a886228dff602fbc669bd19ca1341addd190b9f4fd43256988453180787",
+      "layout_notes": []
+    },
+    {
+      "case_id": "generalization_rectangle_near_scale0p8_ratio0p4_seed202610218_local_spacing",
+      "condition_id": "rectangle_near_scale0p8_ratio0p4_seed202610218",
+      "split": "generalization",
+      "gate": 6,
+      "shape": "rectangle",
+      "seed": 202610218,
+      "variant": "local_spacing",
+      "arm": "local_spacing",
+      "frames": 3000,
+      "stratum": "rectangle_near_scale0p8_ratio0p4_seed202610218",
+      "factors": {
+        "template_stratum": "near_scale0.8_ratio0.4",
+        "new_seed": true
+      },
+      "expected_initial_state_sha256": "43ad4a886228dff602fbc669bd19ca1341addd190b9f4fd43256988453180787",
+      "layout_notes": []
+    },
+    {
+      "case_id": "generalization_rectangle_near_scale1p2_ratio0p8_seed202610219_boundary_cvt",
+      "condition_id": "rectangle_near_scale1p2_ratio0p8_seed202610219",
+      "split": "generalization",
+      "gate": 6,
+      "shape": "rectangle",
+      "seed": 202610219,
+      "variant": "boundary_cvt",
+      "arm": "boundary_cvt",
+      "frames": 3000,
+      "stratum": "rectangle_near_scale1p2_ratio0p8_seed202610219",
+      "factors": {
+        "template_stratum": "near_scale1.2_ratio0.8",
+        "new_seed": true
+      },
+      "expected_initial_state_sha256": "fe4b4fba609a61a56160dc2f158dc3781af41bd32525e38fe7f5de4389e281cf",
+      "layout_notes": []
+    },
+    {
+      "case_id": "generalization_rectangle_near_scale1p2_ratio0p8_seed202610219_nearest_observed_target",
+      "condition_id": "rectangle_near_scale1p2_ratio0p8_seed202610219",
+      "split": "generalization",
+      "gate": 6,
+      "shape": "rectangle",
+      "seed": 202610219,
+      "variant": "nearest_observed_target",
+      "arm": "nearest_observed_target",
+      "frames": 3000,
+      "stratum": "rectangle_near_scale1p2_ratio0p8_seed202610219",
+      "factors": {
+        "template_stratum": "near_scale1.2_ratio0.8",
+        "new_seed": true
+      },
+      "expected_initial_state_sha256": "fe4b4fba609a61a56160dc2f158dc3781af41bd32525e38fe7f5de4389e281cf",
+      "layout_notes": []
+    },
+    {
+      "case_id": "generalization_rectangle_near_scale1p2_ratio0p8_seed202610219_local_spacing",
+      "condition_id": "rectangle_near_scale1p2_ratio0p8_seed202610219",
+      "split": "generalization",
+      "gate": 6,
+      "shape": "rectangle",
+      "seed": 202610219,
+      "variant": "local_spacing",
+      "arm": "local_spacing",
+      "frames": 3000,
+      "stratum": "rectangle_near_scale1p2_ratio0p8_seed202610219",
+      "factors": {
+        "template_stratum": "near_scale1.2_ratio0.8",
+        "new_seed": true
+      },
+      "expected_initial_state_sha256": "fe4b4fba609a61a56160dc2f158dc3781af41bd32525e38fe7f5de4389e281cf",
+      "layout_notes": []
+    },
+    {
+      "case_id": "generalization_rectangle_search_scale0p8_ratio0p4_seed202610220_boundary_cvt",
+      "condition_id": "rectangle_search_scale0p8_ratio0p4_seed202610220",
+      "split": "generalization",
+      "gate": 6,
+      "shape": "rectangle",
+      "seed": 202610220,
+      "variant": "boundary_cvt",
+      "arm": "boundary_cvt",
+      "frames": 3000,
+      "stratum": "rectangle_search_scale0p8_ratio0p4_seed202610220",
+      "factors": {
+        "template_stratum": "search_scale0.8_ratio0.4",
+        "new_seed": true
+      },
+      "expected_initial_state_sha256": "ef111817f21031b895a241ef5d2726b6f8e58c7535c858b5d614a666b9edb784",
+      "layout_notes": []
+    },
+    {
+      "case_id": "generalization_rectangle_search_scale0p8_ratio0p4_seed202610220_nearest_observed_target",
+      "condition_id": "rectangle_search_scale0p8_ratio0p4_seed202610220",
+      "split": "generalization",
+      "gate": 6,
+      "shape": "rectangle",
+      "seed": 202610220,
+      "variant": "nearest_observed_target",
+      "arm": "nearest_observed_target",
+      "frames": 3000,
+      "stratum": "rectangle_search_scale0p8_ratio0p4_seed202610220",
+      "factors": {
+        "template_stratum": "search_scale0.8_ratio0.4",
+        "new_seed": true
+      },
+      "expected_initial_state_sha256": "ef111817f21031b895a241ef5d2726b6f8e58c7535c858b5d614a666b9edb784",
+      "layout_notes": []
+    },
+    {
+      "case_id": "generalization_rectangle_search_scale0p8_ratio0p4_seed202610220_local_spacing",
+      "condition_id": "rectangle_search_scale0p8_ratio0p4_seed202610220",
+      "split": "generalization",
+      "gate": 6,
+      "shape": "rectangle",
+      "seed": 202610220,
+      "variant": "local_spacing",
+      "arm": "local_spacing",
+      "frames": 3000,
+      "stratum": "rectangle_search_scale0p8_ratio0p4_seed202610220",
+      "factors": {
+        "template_stratum": "search_scale0.8_ratio0.4",
+        "new_seed": true
+      },
+      "expected_initial_state_sha256": "ef111817f21031b895a241ef5d2726b6f8e58c7535c858b5d614a666b9edb784",
+      "layout_notes": []
+    },
+    {
+      "case_id": "generalization_rectangle_search_scale1p2_ratio0p8_seed202610221_boundary_cvt",
+      "condition_id": "rectangle_search_scale1p2_ratio0p8_seed202610221",
+      "split": "generalization",
+      "gate": 6,
+      "shape": "rectangle",
+      "seed": 202610221,
+      "variant": "boundary_cvt",
+      "arm": "boundary_cvt",
+      "frames": 3000,
+      "stratum": "rectangle_search_scale1p2_ratio0p8_seed202610221",
+      "factors": {
+        "template_stratum": "search_scale1.2_ratio0.8",
+        "new_seed": true
+      },
+      "expected_initial_state_sha256": "ef111817f21031b895a241ef5d2726b6f8e58c7535c858b5d614a666b9edb784",
+      "layout_notes": []
+    },
+    {
+      "case_id": "generalization_rectangle_search_scale1p2_ratio0p8_seed202610221_nearest_observed_target",
+      "condition_id": "rectangle_search_scale1p2_ratio0p8_seed202610221",
+      "split": "generalization",
+      "gate": 6,
+      "shape": "rectangle",
+      "seed": 202610221,
+      "variant": "nearest_observed_target",
+      "arm": "nearest_observed_target",
+      "frames": 3000,
+      "stratum": "rectangle_search_scale1p2_ratio0p8_seed202610221",
+      "factors": {
+        "template_stratum": "search_scale1.2_ratio0.8",
+        "new_seed": true
+      },
+      "expected_initial_state_sha256": "ef111817f21031b895a241ef5d2726b6f8e58c7535c858b5d614a666b9edb784",
+      "layout_notes": []
+    },
+    {
+      "case_id": "generalization_rectangle_search_scale1p2_ratio0p8_seed202610221_local_spacing",
+      "condition_id": "rectangle_search_scale1p2_ratio0p8_seed202610221",
+      "split": "generalization",
+      "gate": 6,
+      "shape": "rectangle",
+      "seed": 202610221,
+      "variant": "local_spacing",
+      "arm": "local_spacing",
+      "frames": 3000,
+      "stratum": "rectangle_search_scale1p2_ratio0p8_seed202610221",
+      "factors": {
+        "template_stratum": "search_scale1.2_ratio0.8",
+        "new_seed": true
+      },
+      "expected_initial_state_sha256": "ef111817f21031b895a241ef5d2726b6f8e58c7535c858b5d614a666b9edb784",
+      "layout_notes": []
+    },
+    {
+      "case_id": "numerical_rectangle_qp_qp_oracle_qp",
+      "condition_id": "rectangle_qp_qp",
+      "split": "numerical",
+      "gate": 5,
+      "shape": "rectangle",
+      "seed": 2,
+      "variant": "oracle",
+      "arm": "oracle_qp",
+      "frames": 600,
+      "stratum": "rectangle_qp_qp",
+      "factors": {},
+      "expected_initial_state_sha256": "1b464d06337ec82d5cf961d16d9e34c9c5ebd17d207506f8c649787961522e84",
+      "layout_notes": []
+    },
+    {
+      "case_id": "numerical_rectangle_qp_cvxpy_oracle_cvxpy",
+      "condition_id": "rectangle_qp_cvxpy",
+      "split": "numerical",
+      "gate": 5,
+      "shape": "rectangle",
+      "seed": 2,
+      "variant": "oracle",
+      "arm": "oracle_cvxpy",
+      "frames": 600,
+      "stratum": "rectangle_qp_cvxpy",
+      "factors": {},
+      "expected_initial_state_sha256": "1b464d06337ec82d5cf961d16d9e34c9c5ebd17d207506f8c649787961522e84",
+      "layout_notes": []
+    },
+    {
+      "case_id": "engine_l_shape_penalty_boundary_cvt",
+      "condition_id": "l_shape_penalty",
+      "split": "engine",
+      "gate": 6,
+      "shape": "l_shape",
+      "seed": 2,
+      "variant": "boundary_cvt",
+      "arm": "boundary_cvt",
+      "frames": 3000,
+      "stratum": "l_shape_penalty",
+      "factors": {},
+      "expected_initial_state_sha256": "1b464d06337ec82d5cf961d16d9e34c9c5ebd17d207506f8c649787961522e84",
+      "layout_notes": []
+    },
+    {
+      "case_id": "engine_l_shape_pymunk_boundary_cvt",
+      "condition_id": "l_shape_pymunk",
+      "split": "engine",
+      "gate": 6,
+      "shape": "l_shape",
+      "seed": 2,
+      "variant": "boundary_cvt",
+      "arm": "boundary_cvt",
+      "frames": 3000,
+      "stratum": "l_shape_pymunk",
+      "factors": {},
+      "expected_initial_state_sha256": "1b464d06337ec82d5cf961d16d9e34c9c5ebd17d207506f8c649787961522e84",
+      "layout_notes": []
+    }
+  ]
+}
