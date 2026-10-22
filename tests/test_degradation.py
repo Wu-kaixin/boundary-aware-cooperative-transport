@@ -167,9 +167,12 @@ def test_perception_stride_gives_registration_the_whole_elapsed_interval(base_co
 # --------------------------------------------------------------------------- #
 
 
-def test_planning_stride_holds_the_nominal_command(base_config):
+def test_planning_stride_holds_the_nominal_command(base_config, monkeypatch):
     env = SimulationEnvironment(with_controller(base_config, planning_every=7), seed=0)
     env.step()
+    # Hold permissions fixed: feedback acquisition/loss now correctly overrides
+    # the slow nominal planner. The dedicated reliability test covers that path.
+    monkeypatch.setattr(env.controller, "_update_progress", lambda *args: None)
     held = {k: tuple(np.array(v[0])) for k, v in env.controller._held_nominal.items()}
     assert held, "the first frame must plan and populate the hold"
     env.step()

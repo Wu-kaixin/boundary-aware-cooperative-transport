@@ -41,6 +41,12 @@ def test_unavailable_motion_does_not_vote_in_progress_or_speed():
     assert controller.team_progress["cargo"] == pytest.approx(0.7)
     assert controller._agent_progress("a1", "cargo") == pytest.approx(0.7)
     assert controller._estimated_stop("cargo")[0] == pytest.approx(0.1)
+    assert controller._transport_feedback["a1"]["cargo"] == pytest.approx([.1, 0.])
+    # Losing the last live one-hop source must invalidate the relay; the previous
+    # nonzero velocity cannot survive in the next control hold.
+    controller.maps["a0"].motion_quality["cargo"] = "unavailable"
+    controller._update_progress(agents, [[1, 2], [0, 2], [0, 1]])
+    assert all(not slot for slot in controller._transport_feedback.values())
 
 
 def test_default_controller_satisfies_its_own_disc_separation_contract():

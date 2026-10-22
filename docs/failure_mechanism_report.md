@@ -1,3 +1,13 @@
+# Current evidence pointer (22 October 2026)
+
+The historical analysis below is retained for provenance. For the audited v2
+population and the subsequent development repairs, use
+[the current reliability report](RELIABILITY_REVISION_2026-10-22.md),
+[the v2 experiment report](CCTA2027_EXPERIMENTS.md), and the linked receipt bundles.
+Historical open items are not automatically current defects.
+
+---
+
 # Failure mechanism report
 
 This report describes the October 7 source and runs. Later code repairs and their

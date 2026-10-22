@@ -1,0 +1,39 @@
+version: ccta2027-reliability-validation-2026-10-22
+scope: >-
+  Prospective validation after the development repair; retain all outcomes,
+  distinguish seed clusters, and make no superiority claim before execution.
+shapes: [l_shape, rectangle, c_shape]
+# Twelve independent seed clusters per repeated-shape population.
+development_seeds: [202610240, 202610241, 202610242, 202610243, 202610244, 202610245,
+                    202610246, 202610247, 202610248, 202610249, 202610250, 202610251]
+static_frames: 600
+transport_frames: 3000
+methods: [boundary_cvt, nearest_observed_target, local_spacing]
+static_arms: [oracle, local_samples, local_segments]
+ablations: [boundary_cvt, no_arc, no_arc_normalized, no_direction_offsets, no_exploration]
+ablation_seeds: [202610500, 202610501, 202610502, 202610503, 202610504, 202610505,
+                 202610506, 202610507, 202610508, 202610509, 202610510, 202610511]
+# This is a separate active-gain diagnostic, not the zero-gain main controller.
+ablation_exploration_gain: 6.0
+active_exploration_gain: 6.0
+generalization_template: docs/paper_simulation_protocol.test_frozen_v1.yaml
+generalization_seed_start: 202610300
+robustness_seeds: [202610400, 202610401, 202610402, 202610403, 202610404, 202610405,
+                   202610406, 202610407, 202610408, 202610409, 202610410, 202610411]
+robustness:
+  - name: range_noise
+    controller: {range_noise_std: 0.02}
+  - name: communication_loss
+    controller: {communication_dropout_prob: 0.2}
+  - name: slower_sensing
+    controller: {perception_every: 2}
+acceptance:
+  all_planned_cases_recorded: true
+  execution_errors: 0
+  paired_initial_states_identical: true
+  oracle_static_path_safe: true
+  candidate_static_path_safe: true
+  retain_all_failed_and_censored_episodes: true
+  transport_success_rate: report_without_a_required_target
+  readiness_superiority: test_without_a_required_sign
+  unknown_boundary_dynamic_theorem: outside_scope

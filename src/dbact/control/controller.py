@@ -273,6 +273,10 @@ class DBACTParams:
     transport_kp: float = 2.4
     transport_ki: float = 3.0
     transport_effort_max: float = 0.30
+    # Development candidates, not promoted: combined replays regressed task
+    # completion. Default transport retains the audited feedback/brake policy.
+    transport_feedback_guard: bool = False
+    brake_release_integral: bool = False
     transport_deadband: float = 0.05
     brake_gain: float = 0.55
     convoy_gain: float = 1.0
@@ -593,6 +597,7 @@ class DBACTController:
         self._progress: dict[str, dict[str, float]] = {}
         self._credible_progress: dict[str, dict[str, float]] = {}
         self._progress_quality: dict[str, dict[str, str]] = {}
+        self._transport_feedback: dict[str, dict[str, np.ndarray]] = {}
         self.team_estimate_quality: str = "unavailable"
         self.transport_loops: dict[str, DirectionalProgressController] = {}
         self.phase_monitor = PhaseMonitor(gates=params.phase_gates())
@@ -613,6 +618,7 @@ class DBACTController:
         # the held command is overwritten before it is ever read.
         self._sense_interval = 0.0
         self._held_nominal: dict[str, tuple] = {}
+        self._held_response_state: tuple | None = None
         attach_theorem_runtime(self)
         self.last_theorem_record: TheoremStepRecord | None = None
 
@@ -693,7 +699,17 @@ class DBACTController:
         # constraint that became active after it was computed, which is a different and
         # much less defensible experiment.
         plan_stride = max(1, int(self.params.planning_every))
-        planning = (self._frame % plan_stride == 0) or not self._held_nominal
+        # A supervisor/feedback change must take effect on this control hold,
+        # including when nominal planning is intentionally slower than sensing.
+        response_state = (
+            self.phase_monitor.phase, self.phase_monitor.push_suspended,
+            self.team_estimate_quality,
+            tuple((a.agent_id, tuple(sorted(self._transport_feedback.get(a.agent_id, {}))))
+                  for a in agents),
+        )
+        planning = ((self._frame % plan_stride == 0) or not self._held_nominal
+                    or response_state != self._held_response_state)
+        self._held_response_state = response_state
 
         self.diagnostics = []
         commands: list[ControlCommand] = []
@@ -860,10 +876,19 @@ class DBACTController:
         for i, agent in enumerate(agents):
             group = [i] + list(neighbors[i])
             self._progress[agent.agent_id] = {}
+            self._transport_feedback[agent.agent_id] = {}
             for object_id in self.tasks:
-                eligible = [j for j in group if j in informed.get(object_id, [])] or group
-                values = [own[agents[j].agent_id][object_id] for j in eligible]
+                live = [j for j in group if j in informed.get(object_id, [])]
+                values = [own[agents[j].agent_id][object_id] for j in (live or group)]
                 self._progress[agent.agent_id][object_id] = float(np.median(values))
+                if live:
+                    # Use the same currently usable one-hop population as the
+                    # progress vote. A blind robot can receive feedback; treating
+                    # its stale velocity as zero, or disabling it despite live
+                    # neighbours, both break the progress/velocity pairing.
+                    voters = [i] if i in live else live
+                    velocities = [self.maps[agents[j].agent_id].object_velocity(object_id) for j in voters]
+                    self._transport_feedback[agent.agent_id][object_id] = np.median(velocities, axis=0)
 
         self.team_progress = {}
         for object_id in self.tasks:
@@ -1298,10 +1323,20 @@ class DBACTController:
         if goal is None:
             return np.zeros(2), False, 0.0, None
 
-        velocity = self.maps[agent.agent_id].object_velocity(object_id)
+        local_velocity = self.maps[agent.agent_id].object_velocity(object_id)
+        relayed_velocity = self._transport_feedback.get(agent.agent_id, {}).get(object_id)
+        velocity = (relayed_velocity if self.params.transport_feedback_guard and relayed_velocity is not None
+                    else local_velocity)
         loop = self.transport_loops[agent.agent_id]
-        incomplete_brake = self.phase_monitor.reached(Phase.BRAKE) and not self._brake_has_push_quorum()
-        if incomplete_brake or self.phase_monitor.push_suspended:
+        feedback_available = not self.params.transport_feedback_guard or (
+            self.team_estimate_quality != "unavailable"
+            and (relayed_velocity is not None
+                 or self._progress_quality.get(agent.agent_id, {}).get(object_id, "unavailable") != "unavailable")
+        )
+        braking = self.phase_monitor.reached(Phase.BRAKE)
+        if ((braking and not self._brake_has_push_quorum())
+                or self.phase_monitor.reached(Phase.HOLD)
+                or self.phase_monitor.push_suspended or not feedback_available):
             loop.disarm()
 
         # Station-keeping feed-forward for every robot that can see the object,
@@ -1312,6 +1347,7 @@ class DBACTController:
             self.phase_monitor.reached(Phase.TRANSPORT)
             and not self.phase_monitor.reached(Phase.HOLD)
             and not self.phase_monitor.push_suspended
+            and feedback_available
         )
         bias = loop.convoy_velocity(velocity) if travelling else np.zeros(2)
 
@@ -1347,6 +1383,8 @@ class DBACTController:
             loop.disarm()
         pushing = (
             not self.phase_monitor.push_suspended
+            and feedback_available
+            and not self.phase_monitor.reached(Phase.HOLD)
             and quorum >= self.params.min_push_agents
             and self.phase_monitor.reached(Phase.CONTACT_READY)
             and alignment <= -self.params.push_side_threshold
@@ -1371,7 +1409,8 @@ class DBACTController:
                 target_distance=distance,
                 dt=dt,
                 blocked=self._blocked_along(agent.agent_id),
-                braking=self.phase_monitor.reached(Phase.BRAKE) and not self._brake_has_push_quorum(),
+                braking=braking and (self.params.brake_release_integral or not self._brake_has_push_quorum()),
+                allow_braking_integral=self.params.brake_release_integral and self._brake_has_push_quorum(),
             )
             # Press inward along the robot's own observed normal at the speed the
             # outer loop asks for. The depth it reaches is set by the object

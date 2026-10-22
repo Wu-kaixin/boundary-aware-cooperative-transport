@@ -37,6 +37,19 @@ def test_freeze_does_not_overwrite_an_existing_snapshot(tmp_path):
     assert not (tmp_path / "protocol.yaml").exists()
 
 
+def test_prospective_validation_has_independent_active_ablation_seed_clusters():
+    plan = yaml.safe_load((ROOT / "experiments/ccta2027/reliability_validation.yaml").read_text())
+    cases = build_cases(plan, ROOT)
+    assert len(cases) == 832
+    for split in ("ablation", "active_exploration", "robustness", "generalization"):
+        group = [c for c in cases if c["split"] == split]
+        assert len({c["seed"] for c in group}) == 12
+    ablations = [c for c in cases if c["split"] == "ablation"]
+    assert all(c["config"]["controller"]["explore_gain"] == 6. for c in ablations)
+    assert all(c["factors"]["diagnostic"] == "active_gain_ablation" for c in ablations)
+    assert set(plan["ablation_seeds"]).isdisjoint(plan["development_seeds"] + plan["robustness_seeds"])
+
+
 def test_all_split_preserves_individual_case_splits(tmp_path):
     cases = [{"case_id": f"{split}_case", "split": split, "gate": 6, "shape": "rectangle",
               "seed": 2, "variant": "boundary_cvt", "frames": 1, "config": {}}

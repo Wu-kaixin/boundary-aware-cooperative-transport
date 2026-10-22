@@ -1,5 +1,11 @@
 # Roadmap
 
+> Research update, 22 October 2026: use the
+> [reliability revision](RELIABILITY_REVISION_2026-10-22.md),
+> [static applicability supplement](../theory/static_deployment/applicability_and_residual.md),
+> and [authored manuscript](../manuscript/ccta2027/main.tex).
+> The historical stages below are not a current research task list.
+
 > Current CCTA 2027 code structure and research boundaries are described in
 > [ARCHITECTURE.md](ARCHITECTURE.md) and [CCTA2027.md](CCTA2027.md).
 > The stage history below does not supersede the current claim–evidence matrix.

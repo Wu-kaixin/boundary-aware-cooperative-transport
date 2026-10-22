@@ -1,0 +1,2630 @@
+{
+  "schema": "transport-reliability-v1",
+  "receipts_sha256": "864894fbc0664733d1c66416f21c4f237b622bf89b1ece68c3f277f4428184cc",
+  "scope": "descriptive outcomes and observed mechanism signals; no causal identification",
+  "transport_episodes": 140,
+  "trace_episodes": 0,
+  "counts": {
+    "ablation/boundary_cvt": {
+      "undershoot": 2,
+      "completed": 1
+    },
+    "ablation/no_arc": {
+      "completed": 1,
+      "mixed_endpoint_error": 1,
+      "undershoot": 1
+    },
+    "ablation/no_arc_normalized": {
+      "completed": 1,
+      "mixed_endpoint_error": 1,
+      "undershoot": 1
+    },
+    "ablation/no_direction_offsets": {
+      "completed": 1,
+      "mixed_endpoint_error": 1,
+      "undershoot": 1
+    },
+    "ablation/no_exploration": {
+      "undershoot": 2,
+      "completed": 1
+    },
+    "active_exploration/boundary_cvt": {
+      "undershoot": 1,
+      "mixed_endpoint_error": 1,
+      "completed": 1
+    },
+    "active_exploration/no_exploration": {
+      "completed": 1,
+      "combined_endpoint_error": 1,
+      "undershoot": 1
+    },
+    "development/boundary_cvt": {
+      "undershoot": 3,
+      "overshoot": 1,
+      "completed": 5
+    },
+    "development/local_spacing": {
+      "combined_endpoint_error": 1,
+      "completed": 4,
+      "undershoot": 2,
+      "cross_track_error": 1,
+      "mixed_endpoint_error": 1
+    },
+    "development/nearest_observed_target": {
+      "cross_track_error": 1,
+      "overshoot": 1,
+      "completed": 5,
+      "undershoot": 2
+    },
+    "engine/boundary_cvt": {
+      "completed": 1,
+      "cross_track_error": 1
+    },
+    "generalization/boundary_cvt": {
+      "completed": 5,
+      "cross_track_error": 3,
+      "mixed_endpoint_error": 1,
+      "undershoot": 3
+    },
+    "generalization/local_spacing": {
+      "combined_endpoint_error": 1,
+      "mixed_endpoint_error": 4,
+      "cross_track_error": 5,
+      "completed": 1,
+      "overshoot": 1
+    },
+    "generalization/nearest_observed_target": {
+      "mixed_endpoint_error": 3,
+      "cross_track_error": 4,
+      "completed": 3,
+      "undershoot": 2
+    },
+    "robustness/boundary_cvt": {
+      "cross_track_error": 8,
+      "mixed_endpoint_error": 8,
+      "completed": 1,
+      "undershoot": 1
+    },
+    "robustness/local_spacing": {
+      "mixed_endpoint_error": 9,
+      "cross_track_error": 5,
+      "combined_endpoint_error": 1,
+      "undershoot": 2,
+      "completed": 1
+    },
+    "robustness/nearest_observed_target": {
+      "overshoot": 1,
+      "mixed_endpoint_error": 7,
+      "cross_track_error": 5,
+      "undershoot": 3,
+      "completed": 2
+    }
+  },
+  "cases": [
+    {
+      "case_id": "ablation_c_shape_seed2_boundary_cvt",
+      "split": "ablation",
+      "variant": "boundary_cvt",
+      "seed": 2,
+      "outcome": "undershoot",
+      "endpoint_error_m": 0.1434407606223407,
+      "signed_progress_error_m": -0.12009428581282555,
+      "final_cross_track_m": 0.07843860225056928,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "ablation_c_shape_seed2_no_arc",
+      "split": "ablation",
+      "variant": "no_arc",
+      "seed": 2,
+      "outcome": "completed",
+      "endpoint_error_m": 0.08229820861362064,
+      "signed_progress_error_m": -0.0595549819864134,
+      "final_cross_track_m": 0.05679964138627107,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "ablation_c_shape_seed2_no_arc_normalized",
+      "split": "ablation",
+      "variant": "no_arc_normalized",
+      "seed": 2,
+      "outcome": "completed",
+      "endpoint_error_m": 0.10106182955522863,
+      "signed_progress_error_m": -0.09627758202929448,
+      "final_cross_track_m": 0.030726545390631792,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "ablation_c_shape_seed2_no_direction_offsets",
+      "split": "ablation",
+      "variant": "no_direction_offsets",
+      "seed": 2,
+      "outcome": "completed",
+      "endpoint_error_m": 0.1198634168617096,
+      "signed_progress_error_m": -0.11013517972187903,
+      "final_cross_track_m": 0.047302017815240995,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "ablation_c_shape_seed2_no_exploration",
+      "split": "ablation",
+      "variant": "no_exploration",
+      "seed": 2,
+      "outcome": "undershoot",
+      "endpoint_error_m": 0.1434407606223407,
+      "signed_progress_error_m": -0.12009428581282555,
+      "final_cross_track_m": 0.07843860225056928,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "ablation_l_shape_seed2_boundary_cvt",
+      "split": "ablation",
+      "variant": "boundary_cvt",
+      "seed": 2,
+      "outcome": "completed",
+      "endpoint_error_m": 0.11105453991964695,
+      "signed_progress_error_m": -0.10686239817369136,
+      "final_cross_track_m": 0.030224802618576393,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "ablation_l_shape_seed2_no_arc",
+      "split": "ablation",
+      "variant": "no_arc",
+      "seed": 2,
+      "outcome": "mixed_endpoint_error",
+      "endpoint_error_m": 0.17928046714895407,
+      "signed_progress_error_m": -0.1212155885326347,
+      "final_cross_track_m": 0.1320918884634261,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "ablation_l_shape_seed2_no_arc_normalized",
+      "split": "ablation",
+      "variant": "no_arc_normalized",
+      "seed": 2,
+      "outcome": "mixed_endpoint_error",
+      "endpoint_error_m": 0.1791619734695958,
+      "signed_progress_error_m": -0.12573470740020132,
+      "final_cross_track_m": 0.1276314855061474,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "ablation_l_shape_seed2_no_direction_offsets",
+      "split": "ablation",
+      "variant": "no_direction_offsets",
+      "seed": 2,
+      "outcome": "mixed_endpoint_error",
+      "endpoint_error_m": 0.20478765581787478,
+      "signed_progress_error_m": -0.13640638425298013,
+      "final_cross_track_m": 0.15274580946922464,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "ablation_l_shape_seed2_no_exploration",
+      "split": "ablation",
+      "variant": "no_exploration",
+      "seed": 2,
+      "outcome": "completed",
+      "endpoint_error_m": 0.11105453991964695,
+      "signed_progress_error_m": -0.10686239817369136,
+      "final_cross_track_m": 0.030224802618576393,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "ablation_rectangle_seed2_boundary_cvt",
+      "split": "ablation",
+      "variant": "boundary_cvt",
+      "seed": 2,
+      "outcome": "undershoot",
+      "endpoint_error_m": 0.1834351716142707,
+      "signed_progress_error_m": -0.16840115695545466,
+      "final_cross_track_m": 0.07272903492568335,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "ablation_rectangle_seed2_no_arc",
+      "split": "ablation",
+      "variant": "no_arc",
+      "seed": 2,
+      "outcome": "undershoot",
+      "endpoint_error_m": 0.17063822652125452,
+      "signed_progress_error_m": -0.16452736592412154,
+      "final_cross_track_m": 0.0452564935936179,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "ablation_rectangle_seed2_no_arc_normalized",
+      "split": "ablation",
+      "variant": "no_arc_normalized",
+      "seed": 2,
+      "outcome": "undershoot",
+      "endpoint_error_m": 0.16145614011372314,
+      "signed_progress_error_m": -0.14252121603637624,
+      "final_cross_track_m": 0.0758669108369042,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "ablation_rectangle_seed2_no_direction_offsets",
+      "split": "ablation",
+      "variant": "no_direction_offsets",
+      "seed": 2,
+      "outcome": "undershoot",
+      "endpoint_error_m": 0.1675804575605991,
+      "signed_progress_error_m": -0.16563127542584044,
+      "final_cross_track_m": 0.025485100687051277,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "ablation_rectangle_seed2_no_exploration",
+      "split": "ablation",
+      "variant": "no_exploration",
+      "seed": 2,
+      "outcome": "undershoot",
+      "endpoint_error_m": 0.1834351716142707,
+      "signed_progress_error_m": -0.16840115695545466,
+      "final_cross_track_m": 0.07272903492568335,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "active_exploration_c_shape_seed2_boundary_cvt",
+      "split": "active_exploration",
+      "variant": "boundary_cvt",
+      "seed": 2,
+      "outcome": "undershoot",
+      "endpoint_error_m": 0.16843175759907789,
+      "signed_progress_error_m": -0.13505154893770932,
+      "final_cross_track_m": 0.10064957077623349,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "active_exploration_c_shape_seed2_no_exploration",
+      "split": "active_exploration",
+      "variant": "no_exploration",
+      "seed": 2,
+      "outcome": "completed",
+      "endpoint_error_m": 0.11528767742640234,
+      "signed_progress_error_m": -0.10333455473345365,
+      "final_cross_track_m": 0.05111964753803639,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "transport_not_observed",
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "active_exploration_l_shape_seed2_boundary_cvt",
+      "split": "active_exploration",
+      "variant": "boundary_cvt",
+      "seed": 2,
+      "outcome": "mixed_endpoint_error",
+      "endpoint_error_m": 0.18651551829792717,
+      "signed_progress_error_m": -0.13154933116068412,
+      "final_cross_track_m": 0.1322225852005665,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "active_exploration_l_shape_seed2_no_exploration",
+      "split": "active_exploration",
+      "variant": "no_exploration",
+      "seed": 2,
+      "outcome": "combined_endpoint_error",
+      "endpoint_error_m": 0.14719934097665419,
+      "signed_progress_error_m": -0.10334473568306479,
+      "final_cross_track_m": 0.10482133175341161,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "active_exploration_rectangle_seed2_boundary_cvt",
+      "split": "active_exploration",
+      "variant": "boundary_cvt",
+      "seed": 2,
+      "outcome": "completed",
+      "endpoint_error_m": 0.1184570801315562,
+      "signed_progress_error_m": -0.11765661234543168,
+      "final_cross_track_m": 0.01374777817288096,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "active_exploration_rectangle_seed2_no_exploration",
+      "split": "active_exploration",
+      "variant": "no_exploration",
+      "seed": 2,
+      "outcome": "undershoot",
+      "endpoint_error_m": 0.2008814787622114,
+      "signed_progress_error_m": -0.18013665358745468,
+      "final_cross_track_m": 0.08890531223726819,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "development_c_shape_seed2_boundary_cvt",
+      "split": "development",
+      "variant": "boundary_cvt",
+      "seed": 2,
+      "outcome": "undershoot",
+      "endpoint_error_m": 0.1434407606223407,
+      "signed_progress_error_m": -0.12009428581282555,
+      "final_cross_track_m": 0.07843860225056928,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "development_c_shape_seed2_local_spacing",
+      "split": "development",
+      "variant": "local_spacing",
+      "seed": 2,
+      "outcome": "combined_endpoint_error",
+      "endpoint_error_m": 0.1233106674615606,
+      "signed_progress_error_m": -0.08864900754711447,
+      "final_cross_track_m": 0.08571390885222316,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "development_c_shape_seed2_nearest_observed_target",
+      "split": "development",
+      "variant": "nearest_observed_target",
+      "seed": 2,
+      "outcome": "cross_track_error",
+      "endpoint_error_m": 0.13801451384231395,
+      "signed_progress_error_m": -0.05818564478067212,
+      "final_cross_track_m": 0.12514965750088056,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "development_c_shape_seed5_boundary_cvt",
+      "split": "development",
+      "variant": "boundary_cvt",
+      "seed": 5,
+      "outcome": "overshoot",
+      "endpoint_error_m": 0.13534864664023655,
+      "signed_progress_error_m": 0.13487525754906704,
+      "final_cross_track_m": 0.011310218760768997,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "development_c_shape_seed5_local_spacing",
+      "split": "development",
+      "variant": "local_spacing",
+      "seed": 5,
+      "outcome": "completed",
+      "endpoint_error_m": 0.06727870494689484,
+      "signed_progress_error_m": 0.050043447783005846,
+      "final_cross_track_m": 0.04496751575660922,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "transport_not_observed",
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "development_c_shape_seed5_nearest_observed_target",
+      "split": "development",
+      "variant": "nearest_observed_target",
+      "seed": 5,
+      "outcome": "overshoot",
+      "endpoint_error_m": 0.16432482741666288,
+      "signed_progress_error_m": 0.15814177430502618,
+      "final_cross_track_m": 0.04465230257415848,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "development_c_shape_seed8_boundary_cvt",
+      "split": "development",
+      "variant": "boundary_cvt",
+      "seed": 8,
+      "outcome": "completed",
+      "endpoint_error_m": 0.008288297622307551,
+      "signed_progress_error_m": 0.0009444465230301624,
+      "final_cross_track_m": 0.008234312250642748,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "transport_not_observed",
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "development_c_shape_seed8_local_spacing",
+      "split": "development",
+      "variant": "local_spacing",
+      "seed": 8,
+      "outcome": "completed",
+      "endpoint_error_m": 0.01163908594109969,
+      "signed_progress_error_m": 0.011511985626576848,
+      "final_cross_track_m": 0.0017153741509631374,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "transport_not_observed",
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "development_c_shape_seed8_nearest_observed_target",
+      "split": "development",
+      "variant": "nearest_observed_target",
+      "seed": 8,
+      "outcome": "completed",
+      "endpoint_error_m": 0.046379035500476194,
+      "signed_progress_error_m": 0.03623617541528379,
+      "final_cross_track_m": 0.028947444191624483,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "development_l_shape_seed2_boundary_cvt",
+      "split": "development",
+      "variant": "boundary_cvt",
+      "seed": 2,
+      "outcome": "completed",
+      "endpoint_error_m": 0.11105453991964695,
+      "signed_progress_error_m": -0.10686239817369136,
+      "final_cross_track_m": 0.030224802618576393,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "development_l_shape_seed2_local_spacing",
+      "split": "development",
+      "variant": "local_spacing",
+      "seed": 2,
+      "outcome": "undershoot",
+      "endpoint_error_m": 0.15861342364638947,
+      "signed_progress_error_m": -0.15834092524726917,
+      "final_cross_track_m": 0.009293522080876592,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "development_l_shape_seed2_nearest_observed_target",
+      "split": "development",
+      "variant": "nearest_observed_target",
+      "seed": 2,
+      "outcome": "undershoot",
+      "endpoint_error_m": 0.17660094421022735,
+      "signed_progress_error_m": -0.16792805054176396,
+      "final_cross_track_m": 0.05466318081841379,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "development_l_shape_seed5_boundary_cvt",
+      "split": "development",
+      "variant": "boundary_cvt",
+      "seed": 5,
+      "outcome": "completed",
+      "endpoint_error_m": 0.11860857592983767,
+      "signed_progress_error_m": 0.027220688392041392,
+      "final_cross_track_m": 0.11544274948028331,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "development_l_shape_seed5_local_spacing",
+      "split": "development",
+      "variant": "local_spacing",
+      "seed": 5,
+      "outcome": "cross_track_error",
+      "endpoint_error_m": 0.1324178564917307,
+      "signed_progress_error_m": -0.04491333382070062,
+      "final_cross_track_m": 0.12456837946676073,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "development_l_shape_seed5_nearest_observed_target",
+      "split": "development",
+      "variant": "nearest_observed_target",
+      "seed": 5,
+      "outcome": "completed",
+      "endpoint_error_m": 0.06175372892515811,
+      "signed_progress_error_m": 0.04685690041662971,
+      "final_cross_track_m": 0.04022379792495925,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "development_l_shape_seed8_boundary_cvt",
+      "split": "development",
+      "variant": "boundary_cvt",
+      "seed": 8,
+      "outcome": "undershoot",
+      "endpoint_error_m": 0.15164517227193933,
+      "signed_progress_error_m": -0.15084257930770795,
+      "final_cross_track_m": 0.015581223995052334,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "transport_not_observed",
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "development_l_shape_seed8_local_spacing",
+      "split": "development",
+      "variant": "local_spacing",
+      "seed": 8,
+      "outcome": "undershoot",
+      "endpoint_error_m": 0.15186545281373792,
+      "signed_progress_error_m": -0.14142773189543334,
+      "final_cross_track_m": 0.055329128036099455,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "development_l_shape_seed8_nearest_observed_target",
+      "split": "development",
+      "variant": "nearest_observed_target",
+      "seed": 8,
+      "outcome": "undershoot",
+      "endpoint_error_m": 0.1530310076964092,
+      "signed_progress_error_m": -0.1388149385023154,
+      "final_cross_track_m": 0.06441197221927647,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "development_rectangle_seed2_boundary_cvt",
+      "split": "development",
+      "variant": "boundary_cvt",
+      "seed": 2,
+      "outcome": "undershoot",
+      "endpoint_error_m": 0.1834351716142707,
+      "signed_progress_error_m": -0.16840115695545466,
+      "final_cross_track_m": 0.07272903492568335,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "development_rectangle_seed2_local_spacing",
+      "split": "development",
+      "variant": "local_spacing",
+      "seed": 2,
+      "outcome": "mixed_endpoint_error",
+      "endpoint_error_m": 0.18851933271773247,
+      "signed_progress_error_m": -0.12265680229248743,
+      "final_cross_track_m": 0.14316021674934962,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "development_rectangle_seed2_nearest_observed_target",
+      "split": "development",
+      "variant": "nearest_observed_target",
+      "seed": 2,
+      "outcome": "completed",
+      "endpoint_error_m": 0.024870553965079378,
+      "signed_progress_error_m": 0.02353312529958429,
+      "final_cross_track_m": 0.008045897598403266,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "development_rectangle_seed5_boundary_cvt",
+      "split": "development",
+      "variant": "boundary_cvt",
+      "seed": 5,
+      "outcome": "completed",
+      "endpoint_error_m": 0.11271245339976953,
+      "signed_progress_error_m": -0.04107671956749415,
+      "final_cross_track_m": 0.10496094636086634,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "development_rectangle_seed5_local_spacing",
+      "split": "development",
+      "variant": "local_spacing",
+      "seed": 5,
+      "outcome": "completed",
+      "endpoint_error_m": 0.0733962108011851,
+      "signed_progress_error_m": -0.03248633734788564,
+      "final_cross_track_m": 0.06581520831609797,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "development_rectangle_seed5_nearest_observed_target",
+      "split": "development",
+      "variant": "nearest_observed_target",
+      "seed": 5,
+      "outcome": "completed",
+      "endpoint_error_m": 0.07564835533461567,
+      "signed_progress_error_m": 0.04036040275893482,
+      "final_cross_track_m": 0.06398211901749458,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "development_rectangle_seed8_boundary_cvt",
+      "split": "development",
+      "variant": "boundary_cvt",
+      "seed": 8,
+      "outcome": "completed",
+      "endpoint_error_m": 0.10418288482535941,
+      "signed_progress_error_m": 0.1001939337311275,
+      "final_cross_track_m": 0.028552567905821235,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "development_rectangle_seed8_local_spacing",
+      "split": "development",
+      "variant": "local_spacing",
+      "seed": 8,
+      "outcome": "completed",
+      "endpoint_error_m": 0.06430464799221743,
+      "signed_progress_error_m": 0.04046778963933262,
+      "final_cross_track_m": 0.049974451023595205,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "development_rectangle_seed8_nearest_observed_target",
+      "split": "development",
+      "variant": "nearest_observed_target",
+      "seed": 8,
+      "outcome": "completed",
+      "endpoint_error_m": 0.04234425043845251,
+      "signed_progress_error_m": -0.028671841034308088,
+      "final_cross_track_m": 0.031160248344609717,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "transport_not_observed",
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "engine_l_shape_penalty_boundary_cvt",
+      "split": "engine",
+      "variant": "boundary_cvt",
+      "seed": 2,
+      "outcome": "completed",
+      "endpoint_error_m": 0.11105453991964695,
+      "signed_progress_error_m": -0.10686239817369136,
+      "final_cross_track_m": 0.030224802618576393,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "engine_l_shape_pymunk_boundary_cvt",
+      "split": "engine",
+      "variant": "boundary_cvt",
+      "seed": 2,
+      "outcome": "cross_track_error",
+      "endpoint_error_m": 0.3784194192002365,
+      "signed_progress_error_m": -0.08620492445060224,
+      "final_cross_track_m": 0.36846976514811935,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "watchdog",
+        "hold_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "generalization_c_shape_near_scale0p8_ratio0p4_seed202610210_boundary_cvt",
+      "split": "generalization",
+      "variant": "boundary_cvt",
+      "seed": 202610210,
+      "outcome": "completed",
+      "endpoint_error_m": 0.08604118400310422,
+      "signed_progress_error_m": 0.08466937919557838,
+      "final_cross_track_m": 0.015302992233265917,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "generalization_c_shape_near_scale0p8_ratio0p4_seed202610210_local_spacing",
+      "split": "generalization",
+      "variant": "local_spacing",
+      "seed": 202610210,
+      "outcome": "combined_endpoint_error",
+      "endpoint_error_m": 0.1276181870916275,
+      "signed_progress_error_m": 0.060938991769921125,
+      "final_cross_track_m": 0.11212868035707513,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "generalization_c_shape_near_scale0p8_ratio0p4_seed202610210_nearest_observed_target",
+      "split": "generalization",
+      "variant": "nearest_observed_target",
+      "seed": 202610210,
+      "outcome": "mixed_endpoint_error",
+      "endpoint_error_m": 0.23981714823325304,
+      "signed_progress_error_m": 0.18437782583260776,
+      "final_cross_track_m": 0.15335280215232658,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "generalization_c_shape_near_scale1p2_ratio0p8_seed202610211_boundary_cvt",
+      "split": "generalization",
+      "variant": "boundary_cvt",
+      "seed": 202610211,
+      "outcome": "cross_track_error",
+      "endpoint_error_m": 0.2233881070259954,
+      "signed_progress_error_m": 0.0638842687730814,
+      "final_cross_track_m": 0.21405851201011902,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "generalization_c_shape_near_scale1p2_ratio0p8_seed202610211_local_spacing",
+      "split": "generalization",
+      "variant": "local_spacing",
+      "seed": 202610211,
+      "outcome": "mixed_endpoint_error",
+      "endpoint_error_m": 0.3631675189578744,
+      "signed_progress_error_m": 0.2745551176123655,
+      "final_cross_track_m": 0.23771860301389583,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "generalization_c_shape_near_scale1p2_ratio0p8_seed202610211_nearest_observed_target",
+      "split": "generalization",
+      "variant": "nearest_observed_target",
+      "seed": 202610211,
+      "outcome": "mixed_endpoint_error",
+      "endpoint_error_m": 0.26598482359736453,
+      "signed_progress_error_m": 0.16847085401189554,
+      "final_cross_track_m": 0.20582880685808705,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "generalization_c_shape_search_scale0p8_ratio0p4_seed202610212_boundary_cvt",
+      "split": "generalization",
+      "variant": "boundary_cvt",
+      "seed": 202610212,
+      "outcome": "mixed_endpoint_error",
+      "endpoint_error_m": 0.5281941644329338,
+      "signed_progress_error_m": 0.1365076467647739,
+      "final_cross_track_m": 0.510249681739978,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "generalization_c_shape_search_scale0p8_ratio0p4_seed202610212_local_spacing",
+      "split": "generalization",
+      "variant": "local_spacing",
+      "seed": 202610212,
+      "outcome": "cross_track_error",
+      "endpoint_error_m": 0.17732604982074507,
+      "signed_progress_error_m": 0.08402756844673542,
+      "final_cross_track_m": 0.15615343635654821,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "generalization_c_shape_search_scale0p8_ratio0p4_seed202610212_nearest_observed_target",
+      "split": "generalization",
+      "variant": "nearest_observed_target",
+      "seed": 202610212,
+      "outcome": "cross_track_error",
+      "endpoint_error_m": 0.667256731205084,
+      "signed_progress_error_m": -0.011187510880202867,
+      "final_cross_track_m": 0.6671629373240087,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "generalization_c_shape_search_scale1p2_ratio0p8_seed202610213_boundary_cvt",
+      "split": "generalization",
+      "variant": "boundary_cvt",
+      "seed": 202610213,
+      "outcome": "undershoot",
+      "endpoint_error_m": 1.9199999999999997,
+      "signed_progress_error_m": -1.92,
+      "final_cross_track_m": 0.0,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "watchdog",
+        "contact_ready_not_observed",
+        "transport_not_observed",
+        "brake_not_observed",
+        "hold_not_observed",
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "generalization_c_shape_search_scale1p2_ratio0p8_seed202610213_local_spacing",
+      "split": "generalization",
+      "variant": "local_spacing",
+      "seed": 202610213,
+      "outcome": "mixed_endpoint_error",
+      "endpoint_error_m": 2.262365272731269,
+      "signed_progress_error_m": -2.20568938745463,
+      "final_cross_track_m": 0.503220581187264,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "watchdog",
+        "hold_not_observed",
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "generalization_c_shape_search_scale1p2_ratio0p8_seed202610213_nearest_observed_target",
+      "split": "generalization",
+      "variant": "nearest_observed_target",
+      "seed": 202610213,
+      "outcome": "mixed_endpoint_error",
+      "endpoint_error_m": 1.4296578955232488,
+      "signed_progress_error_m": 0.9625083570922457,
+      "final_cross_track_m": 1.0571184232428978,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "watchdog"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "generalization_l_shape_near_scale0p8_ratio0p4_seed202610214_boundary_cvt",
+      "split": "generalization",
+      "variant": "boundary_cvt",
+      "seed": 202610214,
+      "outcome": "cross_track_error",
+      "endpoint_error_m": 0.1630530137904876,
+      "signed_progress_error_m": 0.10343100110299408,
+      "final_cross_track_m": 0.12604885289836384,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "generalization_l_shape_near_scale0p8_ratio0p4_seed202610214_local_spacing",
+      "split": "generalization",
+      "variant": "local_spacing",
+      "seed": 202610214,
+      "outcome": "completed",
+      "endpoint_error_m": 0.06101397802251474,
+      "signed_progress_error_m": 0.0609792751600472,
+      "final_cross_track_m": 0.0020575507495958264,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "generalization_l_shape_near_scale0p8_ratio0p4_seed202610214_nearest_observed_target",
+      "split": "generalization",
+      "variant": "nearest_observed_target",
+      "seed": 202610214,
+      "outcome": "cross_track_error",
+      "endpoint_error_m": 0.4607624305568946,
+      "signed_progress_error_m": 0.07679808973999114,
+      "final_cross_track_m": 0.4543171478438662,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "generalization_l_shape_near_scale1p2_ratio0p8_seed202610215_boundary_cvt",
+      "split": "generalization",
+      "variant": "boundary_cvt",
+      "seed": 202610215,
+      "outcome": "completed",
+      "endpoint_error_m": 0.09005513453586257,
+      "signed_progress_error_m": -0.023754756426224155,
+      "final_cross_track_m": 0.08686563649339749,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "generalization_l_shape_near_scale1p2_ratio0p8_seed202610215_local_spacing",
+      "split": "generalization",
+      "variant": "local_spacing",
+      "seed": 202610215,
+      "outcome": "cross_track_error",
+      "endpoint_error_m": 0.3764316523762258,
+      "signed_progress_error_m": -0.10624255438571506,
+      "final_cross_track_m": 0.36112782854315456,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "generalization_l_shape_near_scale1p2_ratio0p8_seed202610215_nearest_observed_target",
+      "split": "generalization",
+      "variant": "nearest_observed_target",
+      "seed": 202610215,
+      "outcome": "completed",
+      "endpoint_error_m": 0.081706824670871,
+      "signed_progress_error_m": 0.01987583704589113,
+      "final_cross_track_m": 0.07925248450062392,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "generalization_l_shape_search_scale0p8_ratio0p4_seed202610216_boundary_cvt",
+      "split": "generalization",
+      "variant": "boundary_cvt",
+      "seed": 202610216,
+      "outcome": "completed",
+      "endpoint_error_m": 0.04909062635464688,
+      "signed_progress_error_m": -0.048826927396062425,
+      "final_cross_track_m": 0.0050814128892660735,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "transport_not_observed",
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "generalization_l_shape_search_scale0p8_ratio0p4_seed202610216_local_spacing",
+      "split": "generalization",
+      "variant": "local_spacing",
+      "seed": 202610216,
+      "outcome": "mixed_endpoint_error",
+      "endpoint_error_m": 2.8197016933970724,
+      "signed_progress_error_m": 2.8089552967547906,
+      "final_cross_track_m": 0.24594263676622796,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "transport_not_observed",
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "generalization_l_shape_search_scale0p8_ratio0p4_seed202610216_nearest_observed_target",
+      "split": "generalization",
+      "variant": "nearest_observed_target",
+      "seed": 202610216,
+      "outcome": "undershoot",
+      "endpoint_error_m": 0.1694247064713683,
+      "signed_progress_error_m": -0.1665827036005214,
+      "final_cross_track_m": 0.03090200679648726,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "generalization_l_shape_search_scale1p2_ratio0p8_seed202610217_boundary_cvt",
+      "split": "generalization",
+      "variant": "boundary_cvt",
+      "seed": 202610217,
+      "outcome": "cross_track_error",
+      "endpoint_error_m": 2.63574072236795,
+      "signed_progress_error_m": -0.00990686004863539,
+      "final_cross_track_m": 2.6357221040300702,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "generalization_l_shape_search_scale1p2_ratio0p8_seed202610217_local_spacing",
+      "split": "generalization",
+      "variant": "local_spacing",
+      "seed": 202610217,
+      "outcome": "cross_track_error",
+      "endpoint_error_m": 2.342944629066747,
+      "signed_progress_error_m": -0.0962282636442442,
+      "final_cross_track_m": 2.340967675161007,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "generalization_l_shape_search_scale1p2_ratio0p8_seed202610217_nearest_observed_target",
+      "split": "generalization",
+      "variant": "nearest_observed_target",
+      "seed": 202610217,
+      "outcome": "cross_track_error",
+      "endpoint_error_m": 2.3510275216142476,
+      "signed_progress_error_m": 0.047412152883692826,
+      "final_cross_track_m": 2.350549402830446,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "generalization_rectangle_near_scale0p8_ratio0p4_seed202610218_boundary_cvt",
+      "split": "generalization",
+      "variant": "boundary_cvt",
+      "seed": 202610218,
+      "outcome": "completed",
+      "endpoint_error_m": 0.04531368312694377,
+      "signed_progress_error_m": -0.0061358359758310055,
+      "final_cross_track_m": 0.044896340556962615,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "generalization_rectangle_near_scale0p8_ratio0p4_seed202610218_local_spacing",
+      "split": "generalization",
+      "variant": "local_spacing",
+      "seed": 202610218,
+      "outcome": "cross_track_error",
+      "endpoint_error_m": 0.12254352431558906,
+      "signed_progress_error_m": 0.024582428941073764,
+      "final_cross_track_m": 0.12005256989770118,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "generalization_rectangle_near_scale0p8_ratio0p4_seed202610218_nearest_observed_target",
+      "split": "generalization",
+      "variant": "nearest_observed_target",
+      "seed": 202610218,
+      "outcome": "completed",
+      "endpoint_error_m": 0.11802337154532523,
+      "signed_progress_error_m": 0.09048864582888705,
+      "final_cross_track_m": 0.07577150656401209,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "generalization_rectangle_near_scale1p2_ratio0p8_seed202610219_boundary_cvt",
+      "split": "generalization",
+      "variant": "boundary_cvt",
+      "seed": 202610219,
+      "outcome": "completed",
+      "endpoint_error_m": 0.09504589876104146,
+      "signed_progress_error_m": -0.051645230215735305,
+      "final_cross_track_m": 0.07979030685025496,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "generalization_rectangle_near_scale1p2_ratio0p8_seed202610219_local_spacing",
+      "split": "generalization",
+      "variant": "local_spacing",
+      "seed": 202610219,
+      "outcome": "overshoot",
+      "endpoint_error_m": 0.1499987779715773,
+      "signed_progress_error_m": 0.14945668831102155,
+      "final_cross_track_m": 0.01274094627838505,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "generalization_rectangle_near_scale1p2_ratio0p8_seed202610219_nearest_observed_target",
+      "split": "generalization",
+      "variant": "nearest_observed_target",
+      "seed": 202610219,
+      "outcome": "completed",
+      "endpoint_error_m": 0.06489985107687302,
+      "signed_progress_error_m": -0.03953063326889006,
+      "final_cross_track_m": 0.051471542653788976,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "generalization_rectangle_search_scale0p8_ratio0p4_seed202610220_boundary_cvt",
+      "split": "generalization",
+      "variant": "boundary_cvt",
+      "seed": 202610220,
+      "outcome": "undershoot",
+      "endpoint_error_m": 0.17213244103406433,
+      "signed_progress_error_m": -0.15849680344419276,
+      "final_cross_track_m": 0.06714417736720407,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "transport_not_observed",
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "generalization_rectangle_search_scale0p8_ratio0p4_seed202610220_local_spacing",
+      "split": "generalization",
+      "variant": "local_spacing",
+      "seed": 202610220,
+      "outcome": "cross_track_error",
+      "endpoint_error_m": 0.404979598937333,
+      "signed_progress_error_m": -0.028370229129699442,
+      "final_cross_track_m": 0.40398466017235285,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "generalization_rectangle_search_scale0p8_ratio0p4_seed202610220_nearest_observed_target",
+      "split": "generalization",
+      "variant": "nearest_observed_target",
+      "seed": 202610220,
+      "outcome": "cross_track_error",
+      "endpoint_error_m": 0.12779044368218226,
+      "signed_progress_error_m": 0.041517012440497214,
+      "final_cross_track_m": 0.12085832687284975,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "transport_not_observed",
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "generalization_rectangle_search_scale1p2_ratio0p8_seed202610221_boundary_cvt",
+      "split": "generalization",
+      "variant": "boundary_cvt",
+      "seed": 202610221,
+      "outcome": "undershoot",
+      "endpoint_error_m": 1.9196552424706703,
+      "signed_progress_error_m": -1.9196265852277012,
+      "final_cross_track_m": 0.010489195973149549,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "watchdog",
+        "transport_not_observed",
+        "brake_not_observed",
+        "hold_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "generalization_rectangle_search_scale1p2_ratio0p8_seed202610221_local_spacing",
+      "split": "generalization",
+      "variant": "local_spacing",
+      "seed": 202610221,
+      "outcome": "mixed_endpoint_error",
+      "endpoint_error_m": 0.37148283535962173,
+      "signed_progress_error_m": 0.12318953353668838,
+      "final_cross_track_m": 0.3504623172237451,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "generalization_rectangle_search_scale1p2_ratio0p8_seed202610221_nearest_observed_target",
+      "split": "generalization",
+      "variant": "nearest_observed_target",
+      "seed": 202610221,
+      "outcome": "undershoot",
+      "endpoint_error_m": 1.9149395649543521,
+      "signed_progress_error_m": -1.9147924178524307,
+      "final_cross_track_m": 0.023738870284955384,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "watchdog",
+        "transport_not_observed",
+        "brake_not_observed",
+        "hold_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "robustness_c_shape_seed202610230_communication_loss_boundary_cvt",
+      "split": "robustness",
+      "variant": "boundary_cvt",
+      "seed": 202610230,
+      "outcome": "cross_track_error",
+      "endpoint_error_m": 0.19841936529227894,
+      "signed_progress_error_m": 0.012435221719179657,
+      "final_cross_track_m": 0.19802931546562916,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "robustness_c_shape_seed202610230_communication_loss_local_spacing",
+      "split": "robustness",
+      "variant": "local_spacing",
+      "seed": 202610230,
+      "outcome": "mixed_endpoint_error",
+      "endpoint_error_m": 0.23706246387812632,
+      "signed_progress_error_m": 0.16483786798211142,
+      "final_cross_track_m": 0.17037338131022683,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "robustness_c_shape_seed202610230_communication_loss_nearest_observed_target",
+      "split": "robustness",
+      "variant": "nearest_observed_target",
+      "seed": 202610230,
+      "outcome": "overshoot",
+      "endpoint_error_m": 0.5818647227662617,
+      "signed_progress_error_m": 0.5702369416112494,
+      "final_cross_track_m": 0.11574275796656618,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "transport_not_observed",
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "robustness_c_shape_seed202610230_range_noise_boundary_cvt",
+      "split": "robustness",
+      "variant": "boundary_cvt",
+      "seed": 202610230,
+      "outcome": "mixed_endpoint_error",
+      "endpoint_error_m": 0.5411642826660332,
+      "signed_progress_error_m": -0.3479812977817933,
+      "final_cross_track_m": 0.414448787219291,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "watchdog",
+        "hold_not_observed",
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "robustness_c_shape_seed202610230_range_noise_local_spacing",
+      "split": "robustness",
+      "variant": "local_spacing",
+      "seed": 202610230,
+      "outcome": "mixed_endpoint_error",
+      "endpoint_error_m": 0.7059847282863101,
+      "signed_progress_error_m": -0.5823677753505893,
+      "final_cross_track_m": 0.3990766978999159,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "watchdog",
+        "hold_not_observed",
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "robustness_c_shape_seed202610230_range_noise_nearest_observed_target",
+      "split": "robustness",
+      "variant": "nearest_observed_target",
+      "seed": 202610230,
+      "outcome": "mixed_endpoint_error",
+      "endpoint_error_m": 0.59852240978265,
+      "signed_progress_error_m": -0.290150092427641,
+      "final_cross_track_m": 0.5234902089593098,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "watchdog",
+        "hold_not_observed",
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "robustness_c_shape_seed202610230_slower_sensing_boundary_cvt",
+      "split": "robustness",
+      "variant": "boundary_cvt",
+      "seed": 202610230,
+      "outcome": "cross_track_error",
+      "endpoint_error_m": 0.1822333677807724,
+      "signed_progress_error_m": -0.07473284003958769,
+      "final_cross_track_m": 0.16620470195617107,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "robustness_c_shape_seed202610230_slower_sensing_local_spacing",
+      "split": "robustness",
+      "variant": "local_spacing",
+      "seed": 202610230,
+      "outcome": "cross_track_error",
+      "endpoint_error_m": 0.2551566036159843,
+      "signed_progress_error_m": -0.0008369692866603273,
+      "final_cross_track_m": 0.2551552308914276,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "robustness_c_shape_seed202610230_slower_sensing_nearest_observed_target",
+      "split": "robustness",
+      "variant": "nearest_observed_target",
+      "seed": 202610230,
+      "outcome": "cross_track_error",
+      "endpoint_error_m": 0.19797563972513615,
+      "signed_progress_error_m": 0.06428500920430236,
+      "final_cross_track_m": 0.18724794128689284,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "robustness_c_shape_seed202610231_communication_loss_boundary_cvt",
+      "split": "robustness",
+      "variant": "boundary_cvt",
+      "seed": 202610231,
+      "outcome": "completed",
+      "endpoint_error_m": 0.09561441899714526,
+      "signed_progress_error_m": -0.0054268304320124194,
+      "final_cross_track_m": 0.09546028824398048,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "robustness_c_shape_seed202610231_communication_loss_local_spacing",
+      "split": "robustness",
+      "variant": "local_spacing",
+      "seed": 202610231,
+      "outcome": "cross_track_error",
+      "endpoint_error_m": 0.3983256849209792,
+      "signed_progress_error_m": -0.011931656813836566,
+      "final_cross_track_m": 0.3981469412584304,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "robustness_c_shape_seed202610231_communication_loss_nearest_observed_target",
+      "split": "robustness",
+      "variant": "nearest_observed_target",
+      "seed": 202610231,
+      "outcome": "mixed_endpoint_error",
+      "endpoint_error_m": 0.2837389824882736,
+      "signed_progress_error_m": 0.14513683431672675,
+      "final_cross_track_m": 0.24380957632545905,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "robustness_c_shape_seed202610231_range_noise_boundary_cvt",
+      "split": "robustness",
+      "variant": "boundary_cvt",
+      "seed": 202610231,
+      "outcome": "mixed_endpoint_error",
+      "endpoint_error_m": 1.3885491210856733,
+      "signed_progress_error_m": 0.3975339210435518,
+      "final_cross_track_m": 1.3304267899014717,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "robustness_c_shape_seed202610231_range_noise_local_spacing",
+      "split": "robustness",
+      "variant": "local_spacing",
+      "seed": 202610231,
+      "outcome": "mixed_endpoint_error",
+      "endpoint_error_m": 1.2656105504358532,
+      "signed_progress_error_m": 0.36296038370848205,
+      "final_cross_track_m": 1.2124478649545039,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "robustness_c_shape_seed202610231_range_noise_nearest_observed_target",
+      "split": "robustness",
+      "variant": "nearest_observed_target",
+      "seed": 202610231,
+      "outcome": "mixed_endpoint_error",
+      "endpoint_error_m": 1.1569393858591628,
+      "signed_progress_error_m": 0.46609143582551305,
+      "final_cross_track_m": 1.0588992001141035,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "robustness_c_shape_seed202610231_slower_sensing_boundary_cvt",
+      "split": "robustness",
+      "variant": "boundary_cvt",
+      "seed": 202610231,
+      "outcome": "cross_track_error",
+      "endpoint_error_m": 0.14794088063357846,
+      "signed_progress_error_m": 0.05232891683703955,
+      "final_cross_track_m": 0.13837698011338775,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "robustness_c_shape_seed202610231_slower_sensing_local_spacing",
+      "split": "robustness",
+      "variant": "local_spacing",
+      "seed": 202610231,
+      "outcome": "cross_track_error",
+      "endpoint_error_m": 0.5409265329991998,
+      "signed_progress_error_m": 0.026192879307015637,
+      "final_cross_track_m": 0.5402920017695454,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "robustness_c_shape_seed202610231_slower_sensing_nearest_observed_target",
+      "split": "robustness",
+      "variant": "nearest_observed_target",
+      "seed": 202610231,
+      "outcome": "cross_track_error",
+      "endpoint_error_m": 0.27117360755976444,
+      "signed_progress_error_m": 0.07304022093328055,
+      "final_cross_track_m": 0.2611517787858139,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "robustness_l_shape_seed202610230_communication_loss_boundary_cvt",
+      "split": "robustness",
+      "variant": "boundary_cvt",
+      "seed": 202610230,
+      "outcome": "cross_track_error",
+      "endpoint_error_m": 0.1852116442637573,
+      "signed_progress_error_m": -0.11855841478976537,
+      "final_cross_track_m": 0.14229285102710723,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "robustness_l_shape_seed202610230_communication_loss_local_spacing",
+      "split": "robustness",
+      "variant": "local_spacing",
+      "seed": 202610230,
+      "outcome": "combined_endpoint_error",
+      "endpoint_error_m": 0.14041348110459684,
+      "signed_progress_error_m": -0.11722800482078366,
+      "final_cross_track_m": 0.07728868327025176,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "robustness_l_shape_seed202610230_communication_loss_nearest_observed_target",
+      "split": "robustness",
+      "variant": "nearest_observed_target",
+      "seed": 202610230,
+      "outcome": "undershoot",
+      "endpoint_error_m": 0.1468789912014018,
+      "signed_progress_error_m": -0.14149766935499253,
+      "final_cross_track_m": 0.0393934972228498,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "robustness_l_shape_seed202610230_range_noise_boundary_cvt",
+      "split": "robustness",
+      "variant": "boundary_cvt",
+      "seed": 202610230,
+      "outcome": "mixed_endpoint_error",
+      "endpoint_error_m": 0.9455998286203235,
+      "signed_progress_error_m": -0.8831242467475637,
+      "final_cross_track_m": 0.3380097641982157,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "watchdog",
+        "brake_not_observed",
+        "hold_not_observed",
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "robustness_l_shape_seed202610230_range_noise_local_spacing",
+      "split": "robustness",
+      "variant": "local_spacing",
+      "seed": 202610230,
+      "outcome": "mixed_endpoint_error",
+      "endpoint_error_m": 1.0742296973943868,
+      "signed_progress_error_m": -1.0436110709664526,
+      "final_cross_track_m": 0.25464755117669946,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "watchdog",
+        "brake_not_observed",
+        "hold_not_observed",
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "robustness_l_shape_seed202610230_range_noise_nearest_observed_target",
+      "split": "robustness",
+      "variant": "nearest_observed_target",
+      "seed": 202610230,
+      "outcome": "mixed_endpoint_error",
+      "endpoint_error_m": 1.1860297948840341,
+      "signed_progress_error_m": -1.174964457756024,
+      "final_cross_track_m": 0.16163290928135987,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "watchdog",
+        "brake_not_observed",
+        "hold_not_observed",
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "robustness_l_shape_seed202610230_slower_sensing_boundary_cvt",
+      "split": "robustness",
+      "variant": "boundary_cvt",
+      "seed": 202610230,
+      "outcome": "mixed_endpoint_error",
+      "endpoint_error_m": 0.2516056301381335,
+      "signed_progress_error_m": -0.1504853920000282,
+      "final_cross_track_m": 0.2016421084788717,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "robustness_l_shape_seed202610230_slower_sensing_local_spacing",
+      "split": "robustness",
+      "variant": "local_spacing",
+      "seed": 202610230,
+      "outcome": "undershoot",
+      "endpoint_error_m": 0.18525370111068695,
+      "signed_progress_error_m": -0.18505978333589868,
+      "final_cross_track_m": 0.008474099767997246,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "robustness_l_shape_seed202610230_slower_sensing_nearest_observed_target",
+      "split": "robustness",
+      "variant": "nearest_observed_target",
+      "seed": 202610230,
+      "outcome": "undershoot",
+      "endpoint_error_m": 0.20068712365734478,
+      "signed_progress_error_m": -0.16590219882438273,
+      "final_cross_track_m": 0.11292378857925986,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "robustness_l_shape_seed202610231_communication_loss_boundary_cvt",
+      "split": "robustness",
+      "variant": "boundary_cvt",
+      "seed": 202610231,
+      "outcome": "cross_track_error",
+      "endpoint_error_m": 0.2090973366302602,
+      "signed_progress_error_m": 0.04243878953139246,
+      "final_cross_track_m": 0.20474531821015718,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "robustness_l_shape_seed202610231_communication_loss_local_spacing",
+      "split": "robustness",
+      "variant": "local_spacing",
+      "seed": 202610231,
+      "outcome": "completed",
+      "endpoint_error_m": 0.0364168061375212,
+      "signed_progress_error_m": 0.006912093805944819,
+      "final_cross_track_m": 0.03575481406014609,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "robustness_l_shape_seed202610231_communication_loss_nearest_observed_target",
+      "split": "robustness",
+      "variant": "nearest_observed_target",
+      "seed": 202610231,
+      "outcome": "completed",
+      "endpoint_error_m": 0.09652515974098064,
+      "signed_progress_error_m": 0.0038609069219219805,
+      "final_cross_track_m": 0.09644791268224566,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "robustness_l_shape_seed202610231_range_noise_boundary_cvt",
+      "split": "robustness",
+      "variant": "boundary_cvt",
+      "seed": 202610231,
+      "outcome": "mixed_endpoint_error",
+      "endpoint_error_m": 1.0751371224443038,
+      "signed_progress_error_m": 0.3275371774895919,
+      "final_cross_track_m": 1.0240308732748098,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "robustness_l_shape_seed202610231_range_noise_local_spacing",
+      "split": "robustness",
+      "variant": "local_spacing",
+      "seed": 202610231,
+      "outcome": "mixed_endpoint_error",
+      "endpoint_error_m": 0.6551811457753774,
+      "signed_progress_error_m": 0.14982742084198608,
+      "final_cross_track_m": 0.6378197846910793,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "robustness_l_shape_seed202610231_range_noise_nearest_observed_target",
+      "split": "robustness",
+      "variant": "nearest_observed_target",
+      "seed": 202610231,
+      "outcome": "mixed_endpoint_error",
+      "endpoint_error_m": 1.4548428649313452,
+      "signed_progress_error_m": 0.5346166104056467,
+      "final_cross_track_m": 1.3530531554673013,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "watchdog",
+        "hold_not_observed",
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "robustness_l_shape_seed202610231_slower_sensing_boundary_cvt",
+      "split": "robustness",
+      "variant": "boundary_cvt",
+      "seed": 202610231,
+      "outcome": "cross_track_error",
+      "endpoint_error_m": 0.26666262297599064,
+      "signed_progress_error_m": 0.11713390698545689,
+      "final_cross_track_m": 0.23955918334882856,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "robustness_l_shape_seed202610231_slower_sensing_local_spacing",
+      "split": "robustness",
+      "variant": "local_spacing",
+      "seed": 202610231,
+      "outcome": "mixed_endpoint_error",
+      "endpoint_error_m": 0.3557461992648368,
+      "signed_progress_error_m": 0.12788319336097675,
+      "final_cross_track_m": 0.3319657318868561,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "robustness_l_shape_seed202610231_slower_sensing_nearest_observed_target",
+      "split": "robustness",
+      "variant": "nearest_observed_target",
+      "seed": 202610231,
+      "outcome": "cross_track_error",
+      "endpoint_error_m": 0.3514094508767226,
+      "signed_progress_error_m": 0.0877223856655629,
+      "final_cross_track_m": 0.3402842711889898,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "robustness_rectangle_seed202610230_communication_loss_boundary_cvt",
+      "split": "robustness",
+      "variant": "boundary_cvt",
+      "seed": 202610230,
+      "outcome": "mixed_endpoint_error",
+      "endpoint_error_m": 0.21325809195947043,
+      "signed_progress_error_m": -0.12393508183463364,
+      "final_cross_track_m": 0.1735485790112861,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "robustness_rectangle_seed202610230_communication_loss_local_spacing",
+      "split": "robustness",
+      "variant": "local_spacing",
+      "seed": 202610230,
+      "outcome": "mixed_endpoint_error",
+      "endpoint_error_m": 0.2045227365512716,
+      "signed_progress_error_m": -0.12071390623788703,
+      "final_cross_track_m": 0.1650990690682763,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "robustness_rectangle_seed202610230_communication_loss_nearest_observed_target",
+      "split": "robustness",
+      "variant": "nearest_observed_target",
+      "seed": 202610230,
+      "outcome": "completed",
+      "endpoint_error_m": 0.09374390889367096,
+      "signed_progress_error_m": -0.0064513679726936335,
+      "final_cross_track_m": 0.0935216568819532,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "robustness_rectangle_seed202610230_range_noise_boundary_cvt",
+      "split": "robustness",
+      "variant": "boundary_cvt",
+      "seed": 202610230,
+      "outcome": "undershoot",
+      "endpoint_error_m": 1.2749664216366863,
+      "signed_progress_error_m": -1.2748928232541095,
+      "final_cross_track_m": 0.013699106402327512,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "watchdog",
+        "hold_not_observed",
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "robustness_rectangle_seed202610230_range_noise_local_spacing",
+      "split": "robustness",
+      "variant": "local_spacing",
+      "seed": 202610230,
+      "outcome": "undershoot",
+      "endpoint_error_m": 1.3301301709234097,
+      "signed_progress_error_m": -1.3298905530932446,
+      "final_cross_track_m": 0.025246552122678376,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "watchdog",
+        "hold_not_observed",
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "robustness_rectangle_seed202610230_range_noise_nearest_observed_target",
+      "split": "robustness",
+      "variant": "nearest_observed_target",
+      "seed": 202610230,
+      "outcome": "undershoot",
+      "endpoint_error_m": 1.32044880363252,
+      "signed_progress_error_m": -1.3203244975513677,
+      "final_cross_track_m": 0.018118062266189904,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "watchdog",
+        "brake_not_observed",
+        "hold_not_observed",
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "robustness_rectangle_seed202610230_slower_sensing_boundary_cvt",
+      "split": "robustness",
+      "variant": "boundary_cvt",
+      "seed": 202610230,
+      "outcome": "cross_track_error",
+      "endpoint_error_m": 0.1938178727344604,
+      "signed_progress_error_m": -0.06744574334251885,
+      "final_cross_track_m": 0.1817042638362858,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "robustness_rectangle_seed202610230_slower_sensing_local_spacing",
+      "split": "robustness",
+      "variant": "local_spacing",
+      "seed": 202610230,
+      "outcome": "cross_track_error",
+      "endpoint_error_m": 0.23572681724308342,
+      "signed_progress_error_m": -0.11131799799180464,
+      "final_cross_track_m": 0.20778699596137057,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "robustness_rectangle_seed202610230_slower_sensing_nearest_observed_target",
+      "split": "robustness",
+      "variant": "nearest_observed_target",
+      "seed": 202610230,
+      "outcome": "cross_track_error",
+      "endpoint_error_m": 0.1480806643581169,
+      "signed_progress_error_m": -0.08622236331328947,
+      "final_cross_track_m": 0.12038931522943547,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "robustness_rectangle_seed202610231_communication_loss_boundary_cvt",
+      "split": "robustness",
+      "variant": "boundary_cvt",
+      "seed": 202610231,
+      "outcome": "cross_track_error",
+      "endpoint_error_m": 0.22813530910517513,
+      "signed_progress_error_m": 0.050478299733736076,
+      "final_cross_track_m": 0.2224806969525781,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "robustness_rectangle_seed202610231_communication_loss_local_spacing",
+      "split": "robustness",
+      "variant": "local_spacing",
+      "seed": 202610231,
+      "outcome": "cross_track_error",
+      "endpoint_error_m": 0.5542595686815467,
+      "signed_progress_error_m": 0.01859722477947745,
+      "final_cross_track_m": 0.5539474819019903,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "robustness_rectangle_seed202610231_communication_loss_nearest_observed_target",
+      "split": "robustness",
+      "variant": "nearest_observed_target",
+      "seed": 202610231,
+      "outcome": "cross_track_error",
+      "endpoint_error_m": 0.22705470986695436,
+      "signed_progress_error_m": -0.010411192141696723,
+      "final_cross_track_m": 0.22681589086956738,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "robustness_rectangle_seed202610231_range_noise_boundary_cvt",
+      "split": "robustness",
+      "variant": "boundary_cvt",
+      "seed": 202610231,
+      "outcome": "mixed_endpoint_error",
+      "endpoint_error_m": 1.4835829842514632,
+      "signed_progress_error_m": 0.3955007045750061,
+      "final_cross_track_m": 1.4298942841487097,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "robustness_rectangle_seed202610231_range_noise_local_spacing",
+      "split": "robustness",
+      "variant": "local_spacing",
+      "seed": 202610231,
+      "outcome": "mixed_endpoint_error",
+      "endpoint_error_m": 1.886039425097058,
+      "signed_progress_error_m": 0.4751114576571942,
+      "final_cross_track_m": 1.8252161011297532,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "robustness_rectangle_seed202610231_range_noise_nearest_observed_target",
+      "split": "robustness",
+      "variant": "nearest_observed_target",
+      "seed": 202610231,
+      "outcome": "mixed_endpoint_error",
+      "endpoint_error_m": 1.7475949157772257,
+      "signed_progress_error_m": 0.38900140493908975,
+      "final_cross_track_m": 1.7037505382554756,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "robustness_rectangle_seed202610231_slower_sensing_boundary_cvt",
+      "split": "robustness",
+      "variant": "boundary_cvt",
+      "seed": 202610231,
+      "outcome": "mixed_endpoint_error",
+      "endpoint_error_m": 0.7569971292720462,
+      "signed_progress_error_m": 0.3357814913001467,
+      "final_cross_track_m": 0.6784507674300093,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [
+        "physical_contact_dwell_not_observed"
+      ],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "robustness_rectangle_seed202610231_slower_sensing_local_spacing",
+      "split": "robustness",
+      "variant": "local_spacing",
+      "seed": 202610231,
+      "outcome": "mixed_endpoint_error",
+      "endpoint_error_m": 0.5015720769902169,
+      "signed_progress_error_m": 0.19735278159239344,
+      "final_cross_track_m": 0.4611143329089057,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    },
+    {
+      "case_id": "robustness_rectangle_seed202610231_slower_sensing_nearest_observed_target",
+      "split": "robustness",
+      "variant": "nearest_observed_target",
+      "seed": 202610231,
+      "outcome": "mixed_endpoint_error",
+      "endpoint_error_m": 1.0735242823145652,
+      "signed_progress_error_m": 0.25899049710869404,
+      "final_cross_track_m": 1.041814910205452,
+      "task_tolerance_m": 0.12,
+      "observed_tags": [],
+      "trace": {
+        "available": false,
+        "causal_attribution": "unresolved"
+      }
+    }
+  ]
+}

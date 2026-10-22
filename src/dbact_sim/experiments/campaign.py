@@ -39,14 +39,24 @@ def build_cases(plan: dict, root: Path) -> list[dict]:
             cfg = config_for(6, shape)
             for method in plan["methods"]:
                 add("development", condition, shape, seed, 6, cfg, method)
-        seed = plan["development_seeds"][0]
-        for method in plan["ablations"]:
-            add("ablation", f"{shape}_seed{seed}", shape, seed, 6, config_for(6, shape), method)
-        cfg = config_for(6, shape)
-        cfg["controller"]["explore_gain"] = plan["active_exploration_gain"]
-        for method in ("boundary_cvt", "no_exploration"):
-            add("active_exploration", f"{shape}_seed{seed}", shape, seed, 6, cfg, method,
-                factors={"explore_gain": plan["active_exploration_gain"]})
+        # Old plans retain their original one-seed/null-gain diagnostic exactly.
+        # Prospective plans can request independent seeds and an active gain.
+        for seed in plan.get("ablation_seeds", [plan["development_seeds"][0]]):
+            cfg = config_for(6, shape)
+            factors = {}
+            if "ablation_exploration_gain" in plan:
+                gain = float(plan["ablation_exploration_gain"])
+                if not np.isfinite(gain) or gain <= 0:
+                    raise ValueError("ablation_exploration_gain must be positive and finite")
+                cfg["controller"]["explore_gain"] = gain
+                factors = {"explore_gain": gain, "diagnostic": "active_gain_ablation"}
+            for method in plan["ablations"]:
+                add("ablation", f"{shape}_seed{seed}", shape, seed, 6, cfg, method, factors=factors)
+            cfg = config_for(6, shape)
+            cfg["controller"]["explore_gain"] = plan["active_exploration_gain"]
+            for method in ("boundary_cvt", "no_exploration"):
+                add("active_exploration", f"{shape}_seed{seed}", shape, seed, 6, cfg, method,
+                    factors={"explore_gain": plan["active_exploration_gain"]})
         for seed in plan["robustness_seeds"]:
             for perturbation in plan["robustness"]:
                 cfg = config_for(6, shape)

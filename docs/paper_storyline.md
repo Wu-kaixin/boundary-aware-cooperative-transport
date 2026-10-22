@@ -1,3 +1,13 @@
+# Current draft pointer (22 October 2026)
+
+An [authored IEEEtran draft](../manuscript/ccta2027/main.tex) now replaces this
+historical storyline as the working main text. Its empirical tables refer to
+[the audited v2 campaign](CCTA2027_EXPERIMENTS.md), not the older figures below.
+The supported theme is static boundary-aware deployment with limited downstream
+preparation evidence; robust moving-object transport remains unestablished.
+
+---
+
 # Preparation for cooperative transport from local boundary observations
 
 Status: provisional storyline, updated 7 October 2026 after the development batch and frozen test v1. EMPIRICAL_ONLY outside the delimited static oracle theorem. This text is not a professor-approved manuscript scope.

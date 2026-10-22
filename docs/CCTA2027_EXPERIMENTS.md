@@ -1,5 +1,10 @@
 # CCTA 2027 experimental revision
 
+Follow-up, 22 October 2026: the [reliability/theory/manuscript revision](RELIABILITY_REVISION_2026-10-22.md)
+classifies these frozen outcomes, retains rejected controller candidates, and
+adds an authored manuscript. Its development replays and prospective validation
+are separate from the v2 scientific results below.
+
 Scope agreed on 21 October 2026: use the existing CCTA scheme, including static
 oracle/local deployment, independent safety checks, three-method transport,
 ablations, generalization and robustness. This report distinguishes code defects

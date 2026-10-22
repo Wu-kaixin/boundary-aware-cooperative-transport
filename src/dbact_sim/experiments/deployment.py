@@ -251,6 +251,8 @@ def transport_arm(cfg, seed, variant, frames, out):
                      "true_velocity":cargo.linear_velocity.tolist(),
                      "phase":current.controller.phase.name,
                      "phase_guards":vars(current.controller.phase_signals).copy(),
+                     "phase_response":current.controller.phase_monitor.as_dict(),
+                     "progress_quality":{key: dict(value) for key, value in current.controller._progress_quality.items()},
                      "robot_positions":[a.position.tolist() for a in current.agents],
                      "commands":[a.velocity.tolist() for a in current.agents],
                      "rotation":float(cargo.angle),
@@ -301,6 +303,8 @@ def transport_arm(cfg, seed, variant, frames, out):
         "settled":termination['settled'],"g500_pass":gate['success'],"watchdog":termination['terminated_by']=='watchdog',
         "final_speed":float(np.linalg.norm(env.cargoes[0].linear_velocity)),
         "rotation_deg":cargo['rotation_deg'],
+        "phase_response":summary["phases"],
+        "final_estimated_progress":rows[-1]["estimated_progress"] if rows else None,
         "moving_safety_status":"UNRESOLVED: discrete physics substeps, no continuous certificate"})
     result["contact_reporting"] = getattr(env.engine, "contact_reporting", "start_of_control_hold_penalty_force")
     dump(out / "physics_substeps.json", substep_rows)

@@ -148,6 +148,7 @@ class DirectionalProgressController:
         blocked: bool = False,
         active: bool = True,
         braking: bool = False,
+        allow_braking_integral: bool = False,
     ) -> TransportEffort:
         p = self.params
         d = np.asarray(direction, dtype=float).reshape(2)
@@ -166,17 +167,20 @@ class DirectionalProgressController:
         v_ref = self.reference_for(remaining)
         error = v_ref - v_par
         if braking:
-            # The stop has been declared. Do not wind the integrator any further.
-            # A negative speed error means the object is already faster than the
-            # falling reference, so the press is released instead of stored.
-            self.integral = 0.0
+            # Release stored demand as soon as speed reaches the falling
+            # reference. Below it a full push arc may still need integral action
+            # to overcome static friction; unconditional P-only braking stalled
+            # three previously successful development tasks (22 October replay).
             if error <= 0.0:
+                self.integral = 0.0
                 return TransportEffort(0.0, v_ref, v_par, error, 0.0, remaining, False, False)
-            effort = float(np.clip(p.kp * error, 0.0, p.effort_max))
-            return TransportEffort(
-                effort=effort, reference_speed=v_ref, parallel_speed=v_par, error=error,
-                integral=0.0, remaining=remaining, holding=False, saturated=p.kp * error > p.effort_max,
-            )
+            if not allow_braking_integral:
+                self.integral = 0.0
+                effort = float(np.clip(p.kp * error, 0.0, p.effort_max))
+                return TransportEffort(
+                    effort=effort, reference_speed=v_ref, parallel_speed=v_par, error=error,
+                    integral=0.0, remaining=remaining, holding=False, saturated=p.kp * error > p.effort_max,
+                )
 
         # Conditional integration: do not accumulate while the safety filter is
         # already pushing back along the press direction, and do not accumulate on

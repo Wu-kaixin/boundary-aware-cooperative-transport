@@ -1,3 +1,13 @@
+# Current manuscript evidence (22 October 2026)
+
+The older matrix below is historical. The authored draft uses
+[v2 audited results](CCTA2027_EXPERIMENTS.md),
+[its current claim/source map](../manuscript/ccta2027/sources.md), and
+[the static applicability supplement](../theory/static_deployment/applicability_and_residual.md).
+Development repair replays are separate from the frozen v2 scientific tables.
+
+---
+
 # Claim–evidence matrix
 
 The table below is the immutable October 7 evidence snapshot. Current repairs,
