@@ -186,6 +186,26 @@ def integrate():
     print((RECEIPTS / "integration_summary.json").read_text(encoding="utf-8"), flush=True)
 
 
+def verify_local_originals(rows, archive, root):
+    """Use the original backup membership, independent of later Git commits."""
+    failures = []
+    tracked = set(archive.namelist())
+    checked_local, checked_tracked = 0, 0
+    for row in rows:
+        if row["path"] in tracked:
+            if hashlib.sha256(archive.read(row["path"])).hexdigest() != row["sha256"]:
+                failures.append({"local_tracked_backup_changed": row["path"]})
+            checked_tracked += 1
+            continue
+        if row["path"].startswith("scripts/maintenance/"):
+            continue
+        path = root / row["path"]
+        if not path.is_file() or digest(path) != row["sha256"]:
+            failures.append({"local_original_changed": row["path"]})
+        checked_local += 1
+    return failures, checked_local, checked_tracked
+
+
 def verify():
     failures = []
     mappings = read_rows("transfer_mapping.jsonl")
@@ -201,21 +221,11 @@ def verify():
                 failures.append({"source": row["path"], "destination": target})
     # Existing data must remain byte-identical. Active tracked files can change;
     # their original contents are preserved by local-tracked-before.zip.
-    tracked = subprocess.check_output(["git", "ls-files", "-z"], cwd=ROOT).decode("utf-8").split("\0")
-    checked_local, checked_tracked = 0, 0
     with ZipFile(ARCHIVES / "local-tracked-before.zip") as archive:
-        for row in read_rows("local_inventory_before.jsonl"):
-            if row["path"] in tracked:
-                if hashlib.sha256(archive.read(row["path"])).hexdigest() != row["sha256"]:
-                    failures.append({"local_tracked_backup_changed": row["path"]})
-                checked_tracked += 1
-                continue
-            if row["path"].startswith("scripts/maintenance/"):
-                continue
-            path = ROOT / row["path"]
-            if not path.is_file() or digest(path) != row["sha256"]:
-                failures.append({"local_original_changed": row["path"]})
-            checked_local += 1
+        original_failures, checked_local, checked_tracked = verify_local_originals(
+            read_rows("local_inventory_before.jsonl"), archive, ROOT
+        )
+        failures.extend(original_failures)
     branch = read_rows("development_mapping.jsonl")
     with ZipFile(ARCHIVES / "development-568b1fc.zip") as archive:
         for row in branch:

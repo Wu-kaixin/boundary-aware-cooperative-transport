@@ -23,6 +23,8 @@
 
 GitHub Actions 在 Ubuntu 和 Windows 中分别创建根 `.venv`，安装同一锁文件，执行仓库健康检查、主项目测试、MAS 无硬件测试、协议 dry-run 与五案例双 worker smoke。每次运行保留健康 JSON、测试 XML 与 smoke 摘要，见 [Actions](https://github.com/Wu-kaixin/boundary-aware-cooperative-transport/actions/workflows/tests.yml)。通过状态应以相应分支最终提交的实际 Actions 结果为准。
 
+提交后的再次保全检查还修正了一个审计工具问题：原项目文件的“原先已跟踪”身份必须由重建前 ZIP 成员清单决定，不能读取不断变化的当前 Git 索引。相应回归检查覆盖了后续首次提交的文件和原始文件被改写的情况；修复后全部 18,355 个转移文件与原项目备份再次验证通过。
+
 ## 一致性的定义
 
 - 两个活动分支应指向同一最终提交；本地对应分支与 GitHub 的提交 SHA、Git tree、路径及 blob 身份一致。
