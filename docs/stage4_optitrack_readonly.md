@@ -43,10 +43,9 @@ This script builds the same `WorldState` structure used by MAS, but it never pub
 Run from the MAS platform root:
 
 ```powershell
-conda activate dbact
-cd E:\DBACT\boundary-aware-cooperative-transport\platforms\mas_public
+cd platforms/mas_public  # from the repository root
 
-python apps\dbact\log_optitrack_world_state.py `
+..\..\.venv\Scripts\python.exe apps\dbact\log_optitrack_world_state.py `
   --mock `
   --frames 50 `
   --hz 100 `
@@ -75,10 +74,9 @@ Rigid Body 003 -> robot_3
 Then run:
 
 ```powershell
-conda activate dbact
-cd E:\DBACT\boundary-aware-cooperative-transport\platforms\mas_public
+cd platforms/mas_public  # from the repository root
 
-python apps\dbact\log_optitrack_world_state.py `
+..\..\.venv\Scripts\python.exe apps\dbact\log_optitrack_world_state.py `
   --frames 300 `
   --hz 100 `
   --print-every 30 `

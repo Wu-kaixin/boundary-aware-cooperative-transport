@@ -1,7 +1,10 @@
 # Architecture
 
-Current structure: 21 October 2026, branch `paper/boundary-aware-safe-deployment`.
-See [the migration record](REFACTOR_2026-10-21.md) for preservation and verification.
+Current workspace: rebuilt on 23 October 2026 from the existing modular framework
+and development revision `568b1fc`. See [the rebuild record](REBUILD_2026-10-23.md),
+[data index](DATA_INDEX.md), and [original module migration](REFACTOR_2026-10-21.md).
+All components, including MAS, use the root `.venv`. Runtime dependencies are
+defined in `pyproject.toml` and pinned in `requirements.lock.txt`.
 
 ## Responsibilities
 

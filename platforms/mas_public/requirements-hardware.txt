@@ -1,0 +1,5 @@
+# Optional hardware SDK. Run from the repository root with .venv Python.
+# Preserved SDK revision from the original MAS dependency manifest.
+--extra-index-url https://test.pypi.org/simple/
+rm_libmedia_codec==0.0.1
+robomaster @ git+https://github.com/jeguzzi/RoboMaster-SDK.git@3dc9755f49eacc20ce08c0c6c89d65f16dfc3fc9

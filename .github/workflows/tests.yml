@@ -1,16 +1,59 @@
 name: Tests
 on: [push, pull_request]
+permissions:
+  contents: read
 jobs:
   pytest:
-    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    env:
+      PYTHONUTF8: '1'
+      PYTHONIOENCODING: utf-8
+      MPLBACKEND: Agg
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
-      - run: python -m pip install -e '.[dev,qp,sim,analysis,publication]'
-      - run: python -m pytest -q
-      - name: Validate CCTA experiment protocol
-        run: python -m dbact_sim study --protocol experiments/ccta2027/smoke.yaml --split smoke --dry-run
-      - name: Exercise CCTA process runner
-        run: python -m dbact_sim study --protocol experiments/ccta2027/smoke.yaml --split smoke --workers 2 --out runs/ci-ccta-smoke
+          python-version: '3.12'
+      - name: Create the project environment
+        run: |
+          python -m venv .venv
+          mkdir -p runs/ci
+          if [[ "$RUNNER_OS" == "Windows" ]]; then
+            echo "PROJECT_PYTHON=.venv/Scripts/python.exe" >> "$GITHUB_ENV"
+          else
+            echo "PROJECT_PYTHON=.venv/bin/python" >> "$GITHUB_ENV"
+          fi
+      - name: Install locked dependencies
+        run: |
+          "$PROJECT_PYTHON" -m pip install --disable-pip-version-check -r requirements.lock.txt
+          "$PROJECT_PYTHON" -m pip install --disable-pip-version-check --no-deps -e .
+      - name: Check repository health
+        run: '"$PROJECT_PYTHON" scripts/check_repository_health.py --output runs/ci/health.json'
+      - name: Test the core project
+        run: '"$PROJECT_PYTHON" -m pytest -q -p no:cacheprovider --basetemp=runs/ci/core-temp --junitxml=runs/ci/core-tests.xml'
+      - name: Test MAS without hardware
+        run: |
+          cd platforms/mas_public
+          "../../$PROJECT_PYTHON" -m pytest -q -p no:cacheprovider --basetemp=../../runs/ci/mas-temp --junitxml=../../runs/ci/mas-tests.xml
+      - name: Validate the CCTA smoke protocol
+        run: '"$PROJECT_PYTHON" -m dbact_sim study --protocol experiments/ccta2027/smoke.yaml --split smoke --dry-run'
+      - name: Exercise the CCTA process runner
+        run: '"$PROJECT_PYTHON" -m dbact_sim study --protocol experiments/ccta2027/smoke.yaml --split smoke --workers 2 --out runs/ci/smoke'
+      - name: Retain health and execution receipts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: repository-health-${{ matrix.os }}
+          path: |
+            runs/ci/health.json
+            runs/ci/*-tests.xml
+            runs/ci/smoke/summary.json

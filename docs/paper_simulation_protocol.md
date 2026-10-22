@@ -21,7 +21,7 @@ The diagnostic split enables the existing estimate_yaw mechanism alone on the fi
 Development: 9 paired conditions x 3 methods. Ablations: 3 shapes x seed 2 x 4 isolated changes. Safety: 9 repaired local episodes, compared with separately rerun 9 local/oracle pairs. Diagnostic: 5 loss conditions x 2 methods. No development seed is called held out. Seeds 12..31 are quarantined because a missing historical study may have used them.
 
 ## Execution and attribution
-Use D:/miniconda/envs/dbact/python.exe with PYTHONUTF8=1. The runner hashes all Python/config sources, complete case config, protocol and environment; each case owns its directory. Completed resume requires matching hashes and all output-file hashes. Failed episodes and process errors stay in the denominator. Incomplete directories are preserved and rejected rather than silently overwritten. Main guard supports Windows spawn. Outer worker count is explicit; BLAS and inner CVT threads are limited to one. resources.csv samples actual system CPU and parent memory; it must not be interpreted as per-worker utilization.
+Use the project-local `.venv/Scripts/python.exe` with PYTHONUTF8=1 for new runs. Historical receipts retain their original interpreter paths. The runner hashes all Python/config sources, complete case config, protocol and environment; each case owns its directory. Completed resume requires matching hashes and all output-file hashes. Failed episodes and process errors stay in the denominator. Incomplete directories are preserved and rejected rather than silently overwritten. Main guard supports Windows spawn. Outer worker count is explicit; BLAS and inner CVT threads are limited to one. resources.csv samples actual system CPU and parent memory; it must not be interpreted as per-worker utilization.
 
 Statistics use episodes or matched cases, never frames as independent samples. A 95% Wilson interval describes unconditional task rates; paired bootstrap uses resampling seed 20261007, and missing events stay censored. Preparation, effective contact, safety and transport claims receive separate verdicts.
 
@@ -34,9 +34,9 @@ Invalid initial states are retained. They are not replaced with new seeds. A con
 
 ```powershell
 $env:PYTHONUTF8='1'
-& D:\miniconda\envs\dbact\python.exe scripts/run_paper_simulation_study.py --protocol docs/paper_simulation_protocol.development.yaml --split development --workers 3 --resume
-& D:\miniconda\envs\dbact\python.exe scripts/run_paper_simulation_study.py --protocol docs/paper_simulation_protocol.test_frozen_v1.yaml --split test --workers 4 --resume
-& D:\miniconda\envs\dbact\python.exe scripts/build_paper_evidence.py --batch development=runs/evidence_closure/study_v3/development --batch test=runs/evidence_closure/frozen_test_v1/test --out docs/results/evidence_closure/paper_evidence
+& .\.venv\Scripts\python.exe scripts/run_paper_simulation_study.py --protocol docs/paper_simulation_protocol.development.yaml --split development --workers 3 --resume
+& .\.venv\Scripts\python.exe scripts/run_paper_simulation_study.py --protocol docs/paper_simulation_protocol.test_frozen_v1.yaml --split test --workers 4 --resume
+& .\.venv\Scripts\python.exe scripts/build_paper_evidence.py --batch development=runs/evidence_closure/study_v3/development --batch test=runs/evidence_closure/frozen_test_v1/test --out docs/results/evidence_closure/paper_evidence
 ```
 
 ## Literature baseline candidates

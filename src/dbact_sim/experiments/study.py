@@ -32,7 +32,7 @@ def source_hashes(root: Path | None = None) -> dict[str, str]:
     root = ROOT if root is None else root
     paths = [p for folder in ("src", "configs") for p in (root / folder).rglob("*")
              if p.is_file() and p.suffix in (".py", ".yaml", ".yml")]
-    paths += [root / name for name in ("pyproject.toml", "requirements.txt", "environment.yml")
+    paths += [root / name for name in ("pyproject.toml", "requirements.txt", "requirements.lock.txt", ".python-version", "environment.yml")
               if (root / name).is_file()]
     return {p.relative_to(root).as_posix(): digest(p) for p in sorted(paths)}
 

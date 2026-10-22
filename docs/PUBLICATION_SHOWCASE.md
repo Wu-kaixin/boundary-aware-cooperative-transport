@@ -21,8 +21,8 @@ With the frozen table these rules select:
 
 ## Build
 
-Install the publication dependency set first (`pip install -e .[publication]`),
-or use `requirements.txt` / `environment.yml`.  The full build checks for its
+Install into the root `.venv` with `scripts/setup_env.ps1` or
+`.venv/bin/python -m pip install -r requirements.txt`.  The full build checks for its
 H.264 encoder before running either selected episode.
 
 Selection and provenance only:

@@ -17,6 +17,7 @@ dependencies = [
   "scipy>=1.13",
   "matplotlib>=3.9",
   "PyYAML>=6.0",
+  "threadpoolctl>=3.6",
 ]
 
 [project.optional-dependencies]
@@ -27,7 +28,9 @@ qp = ["cvxpy>=1.4", "osqp>=0.6"]
 sim = ["pymunk>=6.6", "shapely>=2.0"]
 analysis = ["pandas>=2.2"]
 publication = ["imageio-ffmpeg>=0.6"]
-dev = ["pytest>=8.0"]
+mas = ["pyzmq>=27.1"]
+literature = ["pypdf>=6.0"]
+dev = ["pytest>=8.0", "ruff>=0.15"]
 
 [project.scripts]
 dbact = "dbact_sim.cli:main"

@@ -8,6 +8,11 @@ __pycache__/
 .venv/
 venv/
 .env
+/data/literature/
+/artifacts/migrations/
+/artifacts/validation/
+/artifacts/manuscript/
+/tools/tectonic/
 
 # Outputs
 runs/
@@ -63,3 +68,7 @@ Thumbs.db
 # Curated static theorem evidence only
 !theory/static_deployment/*.csv
 !theory/static_deployment/figures/*.png
+
+# Migration receipts are versionable provenance; original payloads stay local.
+!docs/migrations/**/*.json
+!docs/migrations/**/*.jsonl

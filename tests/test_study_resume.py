@@ -37,6 +37,21 @@ def test_fingerprint_covers_moved_implementation(tmp_path):
     assert study.source_hashes(tmp_path) != before
 
 
+@pytest.mark.parametrize("specification", ["requirements.lock.txt", ".python-version"])
+def test_environment_spec_change_rejects_cached_run(tmp_path, specification):
+    spec = tmp_path / specification
+    spec.write_text("original")
+    identity = {"source": study.source_hashes(tmp_path)}
+    product = tmp_path / "trace.json"
+    product.write_text("{}")
+    dump(tmp_path / "case_result.json", {"identity": identity,
+         "products": {"trace.json": study.digest(product)}, "result": {"execution_status": "COMPLETED"}})
+    assert study.cached_result(tmp_path, identity)["execution_status"] == "COMPLETED"
+    spec.write_text("updated")
+    with pytest.raises(RuntimeError, match="identity mismatch"):
+        study.cached_result(tmp_path, {"source": study.source_hashes(tmp_path)})
+
+
 def test_failed_episode_stays_in_receipt_and_denominator(tmp_path, monkeypatch):
     def fail(*args):
         raise ValueError("invalid initial geometry")

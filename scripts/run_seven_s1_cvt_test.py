@@ -7,7 +7,6 @@ from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-WORKSPACE_ROOT = REPO_ROOT.parent
 SRC_DIR = REPO_ROOT / "src"
 if str(SRC_DIR) not in sys.path:
     sys.path.insert(0, str(SRC_DIR))
@@ -18,27 +17,11 @@ def ensure_robomaster_importable() -> None:
         import robomaster  # noqa: F401
 
         return
-    except ModuleNotFoundError:
-        pass
-
-    candidates = [
-        WORKSPACE_ROOT / "Wormhole" / "s1 hack" / "Test" / "test.venv" / "Lib" / "site-packages",
-        WORKSPACE_ROOT / "Wormhole" / "s1 hack" / "Test" / "fork.venv" / "Lib" / "site-packages",
-        WORKSPACE_ROOT / "Wormhole" / "s1 hack" / "Test" / "rm_env" / "Lib" / "site-packages",
-    ]
-    for candidate in candidates:
-        if (candidate / "robomaster").exists() and str(candidate) not in sys.path:
-            sys.path.append(str(candidate))
-            try:
-                import robomaster  # noqa: F401
-
-                return
-            except ModuleNotFoundError:
-                continue
-    raise ModuleNotFoundError(
-        "No module named 'robomaster'. Install it in the active Python environment "
-        "or keep the bundled Test/test.venv site-packages directory available."
-    )
+    except ModuleNotFoundError as error:
+        raise ModuleNotFoundError(
+            "Install the RoboMaster SDK into this project's root .venv using "
+            "platforms/mas_public/requirements-hardware.txt."
+        ) from error
 
 from dbact.control.agent_control import (  # noqa: E402
     AgentVelocityCommand,

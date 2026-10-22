@@ -7,18 +7,17 @@ This document describes daily setup, startup modes, key safety switches, experim
 ## Code Setup / 代码环境
 
 ```powershell
-git clone https://github.com/qiubinquan/MAS.git
-cd MAS
-python --version
-python -m venv .venv
-.\.venv\Scripts\Activate
-python -m pip install --upgrade pip
-pip install -r requirements.txt
+# From the DBACT repository root:
+.\scripts\setup_env.ps1
+cd platforms/mas_public
+..\..\.venv\Scripts\Activate.ps1
+# Optional real hardware SDK, from this platform directory:
+python -m pip install -r requirements-hardware.txt
 ```
 
-Use Python 3.10 or newer. The current development environment uses Python 3.11.
+Use the root project .venv, rebuilt with standalone Python 3.12.
 
-建议使用 Python 3.10 或更新版本。当前开发环境使用 Python 3.11。
+使用仓库根目录的同一个 .venv；当前重建基线为独立 Python 3.12。
 
 ## Before Running / 运行前检查
 

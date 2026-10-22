@@ -9,15 +9,20 @@
 从本仓库根目录进入平台，不需要另外克隆 MAS：
 
 ```powershell
+# From the repository root; shares this project's one .venv.
+.\scripts\setup_env.ps1
 cd platforms/mas_public
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-python -m pip install -r requirements.txt
-python -m pip install -e ../..
+..\..\.venv\Scripts\Activate.ps1
+```
+
+如需真实 RoboMaster 通信，从仓库根目录另行安装可选 SDK：
+
+```powershell
+.\.venv\Scripts\python.exe -m pip install -r platforms/mas_public/requirements-hardware.txt
 ```
 
 Python 要求见本目录 [pyproject.toml](pyproject.toml)。
-平台依赖还包含 RoboMaster SDK；根目录的仿真依赖不能替代它们。
+根环境包含 MAS 消息与测试依赖；RoboMaster SDK 是单独安装的可选硬件依赖。
 
 ## 配置与程序
 
@@ -57,7 +62,6 @@ Mock 只验证消息与控制链路，不能验证真实物体观测或论文的
 
 ```powershell
 python -m pytest -q
-python -m ruff check .
 python -m pip check
 ```
 
