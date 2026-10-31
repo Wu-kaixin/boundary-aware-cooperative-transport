@@ -273,7 +273,20 @@ def cleanup(mission, items):
         for item in pending:
             path = check_source(item)
             log(mission, operation="delete_intent", source=item["original_path"], recovery=item["final_location"], sha256=item["sha256"])
-            io_path(path).unlink()
+            try:
+                io_path(path).unlink()
+            except PermissionError:
+                # Git pack files copied on Windows may carry the read-only
+                # attribute. Clear only that verified source file's attribute;
+                # do not change ACLs, recurse, or suppress lock/access failures.
+                metadata = io_path(path).lstat()
+                if os.name != "nt" or not metadata.st_file_attributes & stat.FILE_ATTRIBUTE_READONLY:
+                    raise
+                check_source(item)
+                log(mission, operation="clear_source_readonly", source=item["original_path"],
+                    original_attributes=metadata.st_file_attributes)
+                io_path(path).chmod(stat.S_IREAD | stat.S_IWRITE)
+                io_path(path).unlink()
             log(mission, operation="delete_complete", source=item["original_path"], bytes=int(item["size"]))
         # No recursive deletion: any new/nonempty/locked directory remains.
         directories = [p for p, kind, _ in actual if kind == "directory"] + [base, base.parent]

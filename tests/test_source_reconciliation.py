@@ -3,6 +3,7 @@ import hashlib
 import importlib.util
 import json
 from pathlib import Path
+import stat
 
 import pytest
 
@@ -95,3 +96,17 @@ def test_cleanup_preserves_explicitly_retained_original(migration):
     # With no PC3 entries, the other source should be treated as absent.
     module.cleanup(mission, [item])
     assert (module.ROOT / item["original_path"]).read_bytes() == b"original data"
+
+
+def test_verified_readonly_source_can_be_cleaned_without_touching_canonical_copy(migration):
+    module, mission = migration
+    item = item_for(module)
+    module.apply(mission, [item])
+    (mission / "migration_manifest.csv").write_text("test manifest")
+    (mission / "cleanup_gate.json").write_text(json.dumps({"status": "PASS",
+        "manifest_sha256": module.digest(mission / "migration_manifest.csv")}))
+    source = module.ROOT / item["original_path"]
+    source.chmod(stat.S_IREAD)
+    module.cleanup(mission, [item])
+    assert not source.exists()
+    assert (module.ROOT / item["final_location"]).read_bytes() == b"original data"
