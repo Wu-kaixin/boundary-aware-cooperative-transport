@@ -98,6 +98,16 @@ def cached_result(folder: Path, identity: dict) -> dict:
     return cached["result"]
 
 
+def verify_source_snapshot(out: Path, source: dict[str, str]) -> None:
+    """Check the saved execution source before a resume can write any receipt."""
+    snapshot = out / "source_snapshot"
+    for name, expected in source.items():
+        path = snapshot / name
+        if (not path.resolve().is_relative_to(snapshot.resolve())
+                or not path.is_file() or digest(path) != expected):
+            raise RuntimeError(f"Source snapshot integrity failure: {name}; preserve this study and use a new directory")
+
+
 def run_study(protocol_path: Path, split: str, out: Path | None, workers: int, resume: bool) -> dict:
     if workers <= 0:
         raise ValueError("workers must be positive")
@@ -118,6 +128,9 @@ def run_study(protocol_path: Path, split: str, out: Path | None, workers: int, r
         previous = json.loads(manifest_path.read_text(encoding="utf-8"))
         if previous.get("identity") != identity:
             raise RuntimeError("Existing study has different identity; use a new directory")
+        if previous.get("source_files") != source:
+            raise RuntimeError("Existing study source inventory differs; preserve it and use a new directory")
+        verify_source_snapshot(out, source)
     elif out.exists() and any(out.iterdir()):
         raise RuntimeError("Nonempty output without a manifest; preserve it and use a new directory")
     jobs, results = [], []
@@ -138,10 +151,11 @@ def run_study(protocol_path: Path, split: str, out: Path | None, workers: int, r
         manifest["resumed_utc"] = datetime.now(timezone.utc).isoformat()
     dump(manifest_path, manifest)
     dump(out / "resolved_protocol.json", {**protocol, "cases": cases})
-    for name in source:
-        target = out / "source_snapshot" / name
-        target.parent.mkdir(parents=True, exist_ok=True)
-        target.write_bytes((ROOT / name).read_bytes())
+    if previous is None:
+        for name in source:
+            target = out / "source_snapshot" / name
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes((ROOT / name).read_bytes())
     started = time.perf_counter()
 
     def summarize() -> dict:

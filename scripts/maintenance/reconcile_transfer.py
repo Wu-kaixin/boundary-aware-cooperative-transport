@@ -14,7 +14,11 @@ import os
 from pathlib import Path, PurePosixPath
 import shutil
 import subprocess
+import sys
 from zipfile import ZipFile, ZIP_DEFLATED
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+from scripts.maintenance.audit_output import write_report
 
 ROOT = Path(__file__).resolve().parents[2]
 SOURCE = ROOT / "其他电脑转移" / ROOT.name
@@ -206,7 +210,7 @@ def verify_local_originals(rows, archive, root):
     return failures, checked_local, checked_tracked
 
 
-def verify():
+def verify(output: Path | None = None):
     failures = []
     mappings = read_rows("transfer_mapping.jsonl")
     with ZipFile(ARCHIVES / "transfer-originals.zip") as archive:
@@ -232,7 +236,7 @@ def verify():
             if hashlib.sha256(archive.read(row["path"])).hexdigest() != row["archive_sha256"]:
                 failures.append({"development_archive_changed": row["path"]})
     receipt = {"status": "PASS" if not failures else "FAIL", "transfer_files_verified": len(mappings), "transfer_bytes_verified": sum(row["bytes"] for row in mappings), "preexisting_local_untracked_files_verified": checked_local, "preexisting_local_tracked_backups_verified": checked_tracked, "development_archive_files_verified": len(branch), "access_boundaries": "local_access_boundaries.json; inaccessible preexisting caches left untouched", "failures": failures, "archives": {p.name: {"bytes": p.stat().st_size, "sha256": digest(p)} for p in sorted(ARCHIVES.glob('*.zip'))}}
-    save("preservation_verification.json", receipt)
+    write_report(output, receipt)
     print(json.dumps(receipt, ensure_ascii=False, indent=2), flush=True)
     if failures:
         raise SystemExit(1)
@@ -255,4 +259,11 @@ def source_check():
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("phase", choices=["prepare", "integrate", "verify", "source-check"])
-    {"prepare": prepare, "integrate": integrate, "verify": verify, "source-check": source_check}[parser.parse_args().phase]()
+    parser.add_argument("--output", type=Path, help="New verification report; historical receipts are never overwritten")
+    args = parser.parse_args()
+    if args.output is not None and args.phase != "verify":
+        parser.error("--output is only supported for verify")
+    if args.phase == "verify":
+        verify(args.output)
+    else:
+        {"prepare": prepare, "integrate": integrate, "source-check": source_check}[args.phase]()

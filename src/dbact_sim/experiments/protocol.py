@@ -25,9 +25,13 @@ def load_protocol(path: Path, split: str, root: Path) -> tuple[dict, list[dict]]
         reserved = {"CON", "PRN", "AUX", "NUL", *(f"COM{i}" for i in range(1, 10)), *(f"LPT{i}" for i in range(1, 10))}
         if identifier.upper() in reserved:
             raise ValueError(f"Invalid case_id: {identifier!r}; reserved Windows device name")
-        if identifier in identifiers:
+        if identifier.casefold() == "source_snapshot":
+            raise ValueError(f"Invalid case_id: {identifier!r}; reserved study directory")
+        if identifier.casefold() in identifiers:
             raise ValueError(f"Duplicate case_id: {identifier}")
-        identifiers.add(identifier)
+        # Every protocol must address distinct directories on Windows as well
+        # as POSIX; case-only differences otherwise make workers share output.
+        identifiers.add(identifier.casefold())
         if split != "all" and raw.get("split") != split:
             continue
         case = copy.deepcopy(raw)

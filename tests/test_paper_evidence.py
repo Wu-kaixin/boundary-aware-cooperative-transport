@@ -6,6 +6,20 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 from build_paper_evidence import episode_row, pair_rows, paired_bootstrap, wilson_interval
 
 
+def test_archived_pair_explicit_seed_survives_nonstandard_directory(tmp_path):
+    import json
+    from dbact_sim.experiments.evidence import iter_results
+
+    folder = tmp_path / "rectangle" / "historical-label"
+    folder.mkdir(parents=True)
+    payload = {"variant": "boundary_cvt", "shape": "rectangle", "seed": 2}
+    (folder / "pair.json").write_text(json.dumps(payload), encoding="utf-8")
+    results = list(iter_results(tmp_path))
+    assert len(results) == 1
+    assert results[0]["seed"] == 2
+    assert results[0]["case_id"] == "rectangle_seed2_boundary_cvt"
+
+
 def test_wilson_empty_and_bounds():
     empty = wilson_interval(0, 0)
     assert empty["rate"] is None

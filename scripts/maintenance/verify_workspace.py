@@ -11,6 +11,9 @@ import sys
 from urllib.parse import unquote
 from xml.etree import ElementTree
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+from scripts.maintenance.audit_output import write_report
+
 ROOT = Path(__file__).resolve().parents[2]
 RECEIPTS = ROOT / "docs/migrations/2026-10-23"
 
@@ -34,7 +37,7 @@ def junit(path):
     return result
 
 
-def verify():
+def verify(output: Path | None = None):
     failures = []
     assert Path(sys.prefix).resolve() == (ROOT / ".venv").resolve()
     assert not (Path(sys.base_prefix) / "conda-meta").exists()
@@ -104,10 +107,14 @@ def verify():
         "navigation_documents_checked": len(navigation), "failures": failures,
         "installed_packages": dict(sorted((dist.metadata["Name"], dist.version) for dist in distributions())),
     }
-    (RECEIPTS / "workspace_verification.json").write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    result["verification_scope"] = "Current environment and preserved historical receipts; not new experiment validation"
+    write_report(output, result)
     print(json.dumps({key: value for key, value in result.items() if key not in {"locked_dependencies", "installed_packages"}}, ensure_ascii=False, indent=2))
     return 0 if not failures else 1
 
 
 if __name__ == "__main__":
-    raise SystemExit(verify())
+    import argparse
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--output", type=Path, help="New report; omit for read-only stdout")
+    raise SystemExit(verify(parser.parse_args().output))

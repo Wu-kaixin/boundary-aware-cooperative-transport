@@ -1,4 +1,5 @@
 from pathlib import Path
+import json
 
 import pytest
 
@@ -62,3 +63,32 @@ def test_failed_episode_stays_in_receipt_and_denominator(tmp_path, monkeypatch):
     assert result["execution_status"] == "ERROR"
     assert result["task_completed"] is False
     assert study.cached_result(tmp_path, {"source": "a"}) == result
+
+
+@pytest.mark.parametrize("damage", ["changed", "missing", "inventory"])
+def test_resume_preserves_damaged_execution_snapshot(tmp_path, monkeypatch, damage):
+    root = tmp_path / "repository"
+    source_file = root / "src/experiment.py"
+    source_file.parent.mkdir(parents=True)
+    source_file.write_text("original implementation")
+    protocol = root / "protocol.yaml"
+    protocol.write_text("cases: []")
+    monkeypatch.setattr(study, "ROOT", root)
+    # No simulation is needed to exercise the resume transaction boundary.
+    monkeypatch.setattr(study, "load_protocol", lambda *_: ({}, []))
+    output = tmp_path / "run"
+    study.run_study(protocol, "smoke", output, 1, False)
+    snapshot = output / "source_snapshot/src/experiment.py"
+    if damage == "changed":
+        snapshot.write_text("changed saved evidence")
+    elif damage == "missing":
+        snapshot.unlink()
+    else:
+        manifest = json.loads((output / "manifest.json").read_text())
+        manifest["source_files"] = {}
+        dump(output / "manifest.json", manifest)
+    before = {p.relative_to(output): p.read_bytes() for p in output.rglob("*") if p.is_file()}
+    with pytest.raises(RuntimeError, match="[Ss]ource (snapshot|inventory)"):
+        study.run_study(protocol, "smoke", output, 1, True)
+    after = {p.relative_to(output): p.read_bytes() for p in output.rglob("*") if p.is_file()}
+    assert after == before

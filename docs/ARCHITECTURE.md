@@ -67,7 +67,8 @@ diagnostics lazily to avoid an import cycle. Subpackage initializers contain doc
 Cases may contain a complete `config`, a repository-relative `config_ref`, or use the existing
 shape/gate factory. Historical complete-case protocols remain readable. Only a selected split
 executes. Identifiers, gates, variants, shapes, seeds and positive frame limits are checked
-before output creation. `--dry-run` resolves cases without executing them.
+before output creation. Case IDs are unique ignoring case and cannot use the
+runner's `source_snapshot` directory. `--dry-run` resolves cases without executing them.
 
 Studies hash Python sources under `src/`, scenario files under `configs/`, and environment
 specifications. Resolved inputs, protocol, runtime versions, source hashes and Git state are
@@ -75,6 +76,9 @@ recorded. Each case owns one directory. Windows-safe process workers limit neste
 threads. JSON receipts use atomic replacement. Missing, partial or modified products cannot
 be silently resumed. A frozen source mismatch requires a new study. The v2 runner rejects old
 receipt identities instead of rewriting them.
+Resume also verifies the saved source inventory and every execution snapshot
+file before changing receipts. A missing or modified snapshot remains untouched;
+it is never silently reconstructed from the current checkout.
 
 Execution errors remain episodes in the denominator and make the command return nonzero.
 A measured task failure is a valid observation. CONTACT_READY, physical contact, settling,

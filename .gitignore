@@ -13,6 +13,9 @@ venv/
 /artifacts/validation/
 /artifacts/manuscript/
 /tools/tectonic/
+# Local incoming copies are audited separately, never added as nested projects.
+/PC2/
+/PC3/
 
 # Outputs
 runs/
@@ -72,3 +75,17 @@ Thumbs.db
 # Migration receipts are versionable provenance; original payloads stay local.
 !docs/migrations/**/*.json
 !docs/migrations/**/*.jsonl
+
+# Small, intentional inputs and figures must remain reviewable in Git.
+!tests/**/*.csv
+!tests/**/*.png
+!tests/**/*.gif
+!platforms/mas_public/apps/pytest_tests/fixtures/**
+!configs/**/*.csv
+!experiments/**/*.csv
+!manuscript/**/*.csv
+!manuscript/**/*.png
+!manuscript/**/*.jpg
+!manuscript/**/*.jpeg
+!theory/**/*.csv
+!theory/**/*.png

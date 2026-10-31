@@ -5,14 +5,14 @@
 
 ## 快速验证管线
 
-从仓库根目录运行，输出目录首次使用时应不存在：
+从仓库根目录运行，使用根 `.venv`，输出目录首次使用时应不存在。Windows PowerShell：
 
-```sh
-python -m dbact_sim study --protocol experiments/ccta2027/smoke.yaml --split smoke --dry-run
-python -m dbact_sim study --protocol experiments/ccta2027/smoke.yaml --split smoke --workers 2 --out runs/ccta2027/smoke_parallel
-python -m dbact_sim study --protocol experiments/ccta2027/smoke.yaml --split smoke --workers 1 --out runs/ccta2027/smoke_serial
-python -m dbact_sim study --protocol experiments/ccta2027/smoke.yaml --split smoke --workers 2 --out runs/ccta2027/smoke_parallel --resume
-python -m dbact_sim evidence --batch smoke=runs/ccta2027/smoke_parallel --out runs/ccta2027/smoke_evidence
+```powershell
+.\.venv\Scripts\python.exe -m dbact_sim study --protocol experiments/ccta2027/smoke.yaml --split smoke --dry-run
+.\.venv\Scripts\python.exe -m dbact_sim study --protocol experiments/ccta2027/smoke.yaml --split smoke --workers 2 --out runs/ccta2027/smoke_parallel
+.\.venv\Scripts\python.exe -m dbact_sim study --protocol experiments/ccta2027/smoke.yaml --split smoke --workers 1 --out runs/ccta2027/smoke_serial
+.\.venv\Scripts\python.exe -m dbact_sim study --protocol experiments/ccta2027/smoke.yaml --split smoke --workers 2 --out runs/ccta2027/smoke_parallel --resume
+.\.venv\Scripts\python.exe -m dbact_sim evidence --batch smoke=runs/ccta2027/smoke_parallel --out runs/ccta2027/smoke_evidence
 ```
 
 五例覆盖 oracle/local 静态执行和 CVT/最近目标/局部间距搬运。
@@ -30,12 +30,12 @@ python -m dbact_sim evidence --batch smoke=runs/ccta2027/smoke_parallel --out ru
 以下为 Windows PowerShell，从仓库根目录运行。选择尚不存在的目录：
 
 ```powershell
-python -m dbact_sim campaign freeze --plan experiments/ccta2027/revision.yaml --out runs/ccta2027/next_revision/frozen_protocol.yaml
+.\.venv\Scripts\python.exe -m dbact_sim campaign freeze --plan experiments/ccta2027/revision.yaml --out runs/ccta2027/next_revision/frozen_protocol.yaml
 $campaignRoot = (Resolve-Path runs/ccta2027/next_revision).Path
 $env:PYTHONPATH = Join-Path $campaignRoot 'execution_source/src'
 $env:DBACT_ROOT = Join-Path $campaignRoot 'execution_source'
-python -m dbact_sim study --protocol "$campaignRoot/frozen_protocol.yaml" --split all --workers 4 --out "$campaignRoot/run"
-python -m dbact_sim campaign audit --protocol "$campaignRoot/frozen_protocol.yaml" --run "$campaignRoot/run" --out "$campaignRoot/acceptance.json"
+.\.venv\Scripts\python.exe -m dbact_sim study --protocol "$campaignRoot/frozen_protocol.yaml" --split all --workers 4 --out "$campaignRoot/run"
+.\.venv\Scripts\python.exe -m dbact_sim campaign audit --protocol "$campaignRoot/frozen_protocol.yaml" --run "$campaignRoot/run" --out "$campaignRoot/acceptance.json"
 ```
 
 冻结后必须从 `execution_source` 执行，协议与输出传绝对路径，避免工作目录中的修改混入。
@@ -44,8 +44,8 @@ python -m dbact_sim campaign audit --protocol "$campaignRoot/frozen_protocol.yam
 分析在另一个 PowerShell 会话中从仓库根目录运行，使用当前分析代码：
 
 ```powershell
-python -m dbact_sim evidence --batch revision=runs/ccta2027/next_revision/run --by-split --out runs/ccta2027/next_revision/evidence
-python -m dbact_sim.experiments.report --run runs/ccta2027/next_revision/run --out runs/ccta2027/next_revision/figures
+.\.venv\Scripts\python.exe -m dbact_sim evidence --batch revision=runs/ccta2027/next_revision/run --by-split --out runs/ccta2027/next_revision/evidence
+.\.venv\Scripts\python.exe -m dbact_sim.experiments.report --run runs/ccta2027/next_revision/run --out runs/ccta2027/next_revision/figures
 ```
 
 复现已经发布的 v2 时，应使用归档包内的原始模型源码及独立的 `analysis_source`，
@@ -71,8 +71,8 @@ summary.json                全部已记录案例、分母和执行状态
 
 ## 历史协议
 
-```sh
-python -m dbact_sim study --protocol docs/paper_simulation_protocol.test_frozen_v1.yaml --split test --dry-run
+```powershell
+.\.venv\Scripts\python.exe -m dbact_sim study --protocol docs/paper_simulation_protocol.test_frozen_v1.yaml --split test --dry-run
 ```
 
 此命令只解析历史 36 例。真正执行必须使用对应冻结源码和环境；

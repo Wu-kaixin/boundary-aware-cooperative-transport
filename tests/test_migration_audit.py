@@ -4,6 +4,8 @@ import importlib.util
 from pathlib import Path
 from zipfile import ZipFile
 
+import pytest
+
 
 def load_audit():
     path = Path(__file__).parents[1] / "scripts/maintenance/reconcile_transfer.py"
@@ -34,3 +36,23 @@ def test_original_backup_membership_survives_later_commits(tmp_path):
         failures, local, tracked = audit.verify_local_originals(rows, archive, tmp_path)
     assert failures == [{"local_original_changed": "later_tracked.py"}]
     assert (local, tracked) == (1, 1)
+
+
+def test_current_audit_report_cannot_overwrite_frozen_or_existing_receipt(tmp_path, monkeypatch):
+    load_audit()  # Load the same helper used by the standalone maintenance CLI.
+    from scripts.maintenance import audit_output
+
+    monkeypatch.setattr(audit_output, "ROOT", tmp_path)
+    frozen = tmp_path / "docs/migrations/old/receipt.json"
+    frozen.parent.mkdir(parents=True)
+    frozen.write_bytes(b"frozen original")
+    with pytest.raises(ValueError, match="frozen"):
+        audit_output.write_report(frozen, {"status": "PASS"})
+    assert frozen.read_bytes() == b"frozen original"
+    current = tmp_path / "runs/maintenance/current.json"
+    audit_output.write_report(current, {"status": "PASS"})
+    before = current.read_bytes()
+    with pytest.raises(FileExistsError):
+        audit_output.write_report(current, {"status": "FAIL"})
+    assert current.read_bytes() == before
+    audit_output.write_report(None, {"status": "PASS"})

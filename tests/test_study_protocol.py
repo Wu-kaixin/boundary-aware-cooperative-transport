@@ -18,7 +18,8 @@ def protocol_file(tmp_path, cases):
 
 
 @pytest.mark.parametrize("field,value", [
-    ("case_id", "../escape"), ("case_id", "a/b"), ("case_id", "NUL"), ("gate", 7), ("frames", 0),
+    ("case_id", "../escape"), ("case_id", "a/b"), ("case_id", "NUL"),
+    ("case_id", "source_snapshot"), ("case_id", "SOURCE_SNAPSHOT"), ("gate", 7), ("frames", 0),
     ("frames", True), ("seed", -1), ("variant", "unknown"), ("shape", "unknown"),
 ])
 def test_invalid_case_rejected_before_execution(tmp_path, field, value):
@@ -32,6 +33,12 @@ def test_duplicate_ids_and_empty_split_rejected(tmp_path):
         load_protocol(protocol_file(tmp_path, [CASE, CASE]), "development", ROOT)
     with pytest.raises(ValueError, match="Empty split"):
         load_protocol(protocol_file(tmp_path, [CASE]), "test", ROOT)
+
+
+def test_case_only_ids_cannot_share_a_windows_output_directory(tmp_path):
+    other = {**CASE, "case_id": CASE["case_id"].upper()}
+    with pytest.raises(ValueError, match="Duplicate"):
+        load_protocol(protocol_file(tmp_path, [CASE, other]), "development", ROOT)
 
 
 def test_configs_are_copied_and_reference_is_confined(tmp_path):

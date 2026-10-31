@@ -18,11 +18,12 @@ from urllib.parse import unquote
 
 ROOT = Path(__file__).resolve().parents[1]
 NAVIGATION = (
-    "README.md", "docs/ARCHITECTURE.md", "docs/DATA_INDEX.md",
+    "README.md", "docs/ARCHITECTURE.md", "docs/DATA_INDEX.md", "docs/REPOSITORY_GUIDE.md",
     "docs/REBUILD_2026-10-23.md", "docs/REPOSITORY_HEALTH.md", "docs/results/README.md",
     "docs/migrations/2026-10-23/README.md", "data/README.md", "artifacts/README.md",
     "scripts/literature/README.md", "platforms/mas_public/README.md",
     "docs/literature_review_2026-10-22/README.md",
+    "experiments/ccta2027/README.md", "manuscript/ccta2027/README.md",
 )
 
 

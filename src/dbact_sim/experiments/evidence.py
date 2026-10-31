@@ -104,7 +104,10 @@ def iter_results(root: Path):
                 continue
             copied = dict(result)
             copied.setdefault("shape", path.parents[1].name)
-            copied.setdefault("seed", int(path.parent.name.replace("seed_", "")))
+            # Only infer a legacy seed when it is absent. setdefault evaluates
+            # its default eagerly, even for receipts with an explicit seed.
+            if "seed" not in copied:
+                copied["seed"] = int(path.parent.name.removeprefix("seed_"))
             copied.setdefault("case_id", f"{copied['shape']}_seed{copied['seed']}_{copied['variant']}")
             copied.setdefault("execution_status", "COMPLETED")
             copied.setdefault("stratum", "archived_gate")
