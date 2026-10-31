@@ -2,10 +2,17 @@
 
 ## 当前维护约定
 
-2026-10-31 原地整理沿用已有 Git 根目录，使用独立任务分支，不执行推送或调整原分支、标签。
-下文的两分支同步结果仅描述 2026-10-23，不是后续维护必须重复执行的操作。
+2026-10-31 原地整理沿用已有 Git 根目录。第一轮先在本地任务分支验证；随后按明确授权更新
+`paper/boundary-aware-safe-deployment`，保留 `main` 的既有基线，删除已被paper包含的临时整理分支。
+远端核查本来就只有main和paper，无需额外删除远端分支；原归档标签保留。
+下文的“两分支相同提交”只描述2026-10-23的验收，不作为当前规则。
 每次工程验证使用 `runs/maintenance/<mission>/<attempt>/` 的新目录；核心测试、MAS 无硬件测试和短 smoke 分别留存日志与退出码。
 恢复记录与逐文件来源映射保存在本地 `artifacts/migrations/<mission>/`，不自动加入 Git。
+
+PC3后续恢复审查、有效备份验证、损坏原件归档及发布状态在本次任务的 `pc3-recovery-001/` 中。
+有效开发ZIP由Git历史再生成并获得相同SHA-256；有效bundle通过严格pack校验和隔离对象库fsck，
+包含活动对象库未保存的旧引用对象。40种损坏字节继续保留在已核验归档中，清理的只是原路径重复副本。
+对其损坏前完整身份缺少证据的限制见[数据索引](DATA_INDEX.md)，不将恢复备份与证明原身份混为一谈。
 
 `scripts/maintenance/reconcile_transfer.py verify` 和 `verify_workspace.py` 现在默认只向标准输出报告，
 可通过 `--output` 保存一个尚不存在的本地报告；禁止覆盖 `docs/migrations/` 内的冻结收据。
