@@ -1,0 +1,67 @@
+{
+  "status": "COMPLETED",
+  "cases": [
+    {
+      "case_id": "far_c_open_away_pos0_translation_all_captured",
+      "end_frame": 579,
+      "exit_code": 0,
+      "command": [
+        "C:\\Users\\kai\\boundary-aware-cooperative-transport\\.venv\\Scripts\\python.exe",
+        "C:\\Users\\kai\\boundary-aware-cooperative-transport\\scripts\\replay_qp_conflict.py",
+        "--case",
+        "far_c_open_away_pos0_translation_all_captured",
+        "--out",
+        "C:\\Users\\kai\\boundary-aware-cooperative-transport\\runs\\research\\2026-11-03-qp-conflict-v1\\far_c_open_away_pos0_translation_all_captured",
+        "--end-frame",
+        "579"
+      ]
+    },
+    {
+      "case_id": "far_c_open_away_pos0_safe_geometry",
+      "end_frame": 933,
+      "exit_code": 0,
+      "command": [
+        "C:\\Users\\kai\\boundary-aware-cooperative-transport\\.venv\\Scripts\\python.exe",
+        "C:\\Users\\kai\\boundary-aware-cooperative-transport\\scripts\\replay_qp_conflict.py",
+        "--case",
+        "far_c_open_away_pos0_safe_geometry",
+        "--out",
+        "C:\\Users\\kai\\boundary-aware-cooperative-transport\\runs\\research\\2026-11-03-qp-conflict-v1\\far_c_open_away_pos0_safe_geometry",
+        "--end-frame",
+        "933"
+      ]
+    },
+    {
+      "case_id": "far_skew_box_s0_r0_pos0_translation_all_captured",
+      "end_frame": 784,
+      "exit_code": 0,
+      "command": [
+        "C:\\Users\\kai\\boundary-aware-cooperative-transport\\.venv\\Scripts\\python.exe",
+        "C:\\Users\\kai\\boundary-aware-cooperative-transport\\scripts\\replay_qp_conflict.py",
+        "--case",
+        "far_skew_box_s0_r0_pos0_translation_all_captured",
+        "--out",
+        "C:\\Users\\kai\\boundary-aware-cooperative-transport\\runs\\research\\2026-11-03-qp-conflict-v1\\far_skew_box_s0_r0_pos0_translation_all_captured",
+        "--end-frame",
+        "784"
+      ]
+    },
+    {
+      "case_id": "far_skew_box_s0_r0_pos0_safe_geometry",
+      "end_frame": 1115,
+      "exit_code": 0,
+      "command": [
+        "C:\\Users\\kai\\boundary-aware-cooperative-transport\\.venv\\Scripts\\python.exe",
+        "C:\\Users\\kai\\boundary-aware-cooperative-transport\\scripts\\replay_qp_conflict.py",
+        "--case",
+        "far_skew_box_s0_r0_pos0_safe_geometry",
+        "--out",
+        "C:\\Users\\kai\\boundary-aware-cooperative-transport\\runs\\research\\2026-11-03-qp-conflict-v1\\far_skew_box_s0_r0_pos0_safe_geometry",
+        "--end-frame",
+        "1115"
+      ]
+    }
+  ],
+  "new_physical_episodes": 0,
+  "protocol_sha256": "7422c188312484b0ca663851e1910e01d0f04cc052aa65a2148e98f8d614c318"
+}

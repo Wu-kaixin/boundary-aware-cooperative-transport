@@ -1,5 +1,7 @@
 # CCTA 2027 实验入口
 
+2026-11-03：[qp_conflict_v1.json](qp_conflict_v1.json)冻结四条已有轨迹的完整控制器重放与约束子集诊断，共 3,411 帧、953 个缩放步，新物理回合 0。[全部结果和独立见证](../../docs/results/qp_conflict_v1/README.md)区分联合约束矛盾、速度影响及地图失真；运行代码和最佳数值参数未改，控制修复仍待验证。
+
 2026-11-03：[acquisition_geometry_v1.json](acquisition_geometry_v1.json)冻结平移参照与仅调整采集几何的候选，四条件×两臂，全部数值参数和判据不变。[完整八回合结果](../../docs/results/acquisition_geometry_v1/README.md)：完成均 4/4、G500 均 2/4，但斜箱采集缩放 240→689、C 形冻结后缩放 7→16，门槛 FAIL。默认关闭，不追加条件或事后放宽门槛。
 
 2026-11-03：[task_translation_physical_v2.json](task_translation_physical_v2.json)固定四个原最佳配置回合＋四个平移组合回合，数值参数不变。[完整结果](../../docs/results/task_translation_physical_v2/README.md)：安全完成 3/4→4/4、误停 1→0、硬违规均 0、G500 均 2/4，扩展门槛 PASS、未采用。斜箱采集缩放 240 次需先处理。[v1](task_translation_physical_v1.json)仅冻结、未执行，修正预算标签计数后另冻 v2；全部原件保留。

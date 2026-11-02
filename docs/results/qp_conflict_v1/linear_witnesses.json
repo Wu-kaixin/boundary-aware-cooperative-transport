@@ -1,0 +1,699 @@
+{
+  "scope": "Post-hoc algebraic explanation of already selected frozen witnesses; no new replay or physics",
+  "formula": "distance(map_sample,true_boundary) >= distance(robot,true_boundary) - distance(robot,map_sample)",
+  "witnesses": {
+    "far_c_open_away_pos0_translation_all_captured/ENCLOSE_first": {
+      "frame": 408,
+      "agent_id": "agent_08",
+      "linear_certificate": {
+        "nonnegative_weights": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.3046649016848243,
+          0.4318167406906455,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.2635183576245306
+        ],
+        "normal_cancellation_residual": 1.5959455978986625e-16,
+        "positive_rhs_gap": 7.921434732962873e-05,
+        "rows": [
+          {
+            "index": 4,
+            "kind": "agent",
+            "neighbor_or_object": "agent_07",
+            "weight": 0.3046649016848243,
+            "A": [
+              0.48924402082816343,
+              0.27854710113894754
+            ],
+            "b": -0.002511149601764573
+          },
+          {
+            "index": 5,
+            "kind": "agent",
+            "neighbor_or_object": "agent_09",
+            "weight": 0.4318167406906455,
+            "A": [
+              -0.3921107763644507,
+              0.4119212885086476
+            ],
+            "b": -0.007372506650817526
+          },
+          {
+            "index": 11,
+            "kind": "object",
+            "neighbor_or_object": "object",
+            "weight": 0.2635183576245306,
+            "A": [
+              0.07689982632158346,
+              -0.997038824074424
+            ],
+            "b": 0.015284875493502628
+          }
+        ],
+        "interpretation": "lambda >= 0, lambda.T A = 0, lambda.T b > 0: contradictory even without a speed cap; floating-point witness with residual reported"
+      },
+      "without_speed_cap": {
+        "status": "infeasible",
+        "feasible": false,
+        "numerically_valid": true
+      },
+      "nearest_map_sample_distance_m": 0.17483964602587376,
+      "true_boundary_distance_m": 0.20916076415885154,
+      "nearest_map_sample_boundary_distance_lower_bound_m": 0.03432111813297778
+    },
+    "far_c_open_away_pos0_translation_all_captured/ENCLOSE_worst": {
+      "frame": 408,
+      "agent_id": "agent_08",
+      "linear_certificate": {
+        "nonnegative_weights": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.3046649016848243,
+          0.4318167406906455,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.2635183576245306
+        ],
+        "normal_cancellation_residual": 1.5959455978986625e-16,
+        "positive_rhs_gap": 7.921434732962873e-05,
+        "rows": [
+          {
+            "index": 4,
+            "kind": "agent",
+            "neighbor_or_object": "agent_07",
+            "weight": 0.3046649016848243,
+            "A": [
+              0.48924402082816343,
+              0.27854710113894754
+            ],
+            "b": -0.002511149601764573
+          },
+          {
+            "index": 5,
+            "kind": "agent",
+            "neighbor_or_object": "agent_09",
+            "weight": 0.4318167406906455,
+            "A": [
+              -0.3921107763644507,
+              0.4119212885086476
+            ],
+            "b": -0.007372506650817526
+          },
+          {
+            "index": 11,
+            "kind": "object",
+            "neighbor_or_object": "object",
+            "weight": 0.2635183576245306,
+            "A": [
+              0.07689982632158346,
+              -0.997038824074424
+            ],
+            "b": 0.015284875493502628
+          }
+        ],
+        "interpretation": "lambda >= 0, lambda.T A = 0, lambda.T b > 0: contradictory even without a speed cap; floating-point witness with residual reported"
+      },
+      "without_speed_cap": {
+        "status": "infeasible",
+        "feasible": false,
+        "numerically_valid": true
+      },
+      "nearest_map_sample_distance_m": 0.17483964602587376,
+      "true_boundary_distance_m": 0.20916076415885154,
+      "nearest_map_sample_boundary_distance_lower_bound_m": 0.03432111813297778
+    },
+    "far_c_open_away_pos0_translation_all_captured/CONTACT_READY_first": {
+      "frame": 543,
+      "agent_id": "agent_04",
+      "linear_certificate": {
+        "nonnegative_weights": [
+          0.0,
+          0.34867430153126566,
+          0.33002212237176093,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.3213035760969734
+        ],
+        "normal_cancellation_residual": 5.939889636374895e-17,
+        "positive_rhs_gap": 0.015459819556415465,
+        "rows": [
+          {
+            "index": 1,
+            "kind": "agent",
+            "neighbor_or_object": "agent_01",
+            "weight": 0.34867430153126566,
+            "A": [
+              0.5728825453582846,
+              -0.37401863709406413
+            ],
+            "b": -0.11586326375241617
+          },
+          {
+            "index": 2,
+            "kind": "agent",
+            "neighbor_or_object": "agent_02",
+            "weight": 0.33002212237176093,
+            "A": [
+              0.3648879166603729,
+              0.47684853616999057
+            ],
+            "b": -0.03519578862915748
+          },
+          {
+            "index": 9,
+            "kind": "object",
+            "neighbor_or_object": "object",
+            "weight": 0.3213035760969734,
+            "A": [
+              -0.9964735218187819,
+              -0.08390780842134819
+            ],
+            "b": 0.21000000000000005
+          }
+        ],
+        "interpretation": "lambda >= 0, lambda.T A = 0, lambda.T b > 0: contradictory even without a speed cap; floating-point witness with residual reported"
+      },
+      "without_speed_cap": {
+        "status": "infeasible",
+        "feasible": false,
+        "numerically_valid": true
+      },
+      "nearest_map_sample_distance_m": 0.10407766223696355,
+      "true_boundary_distance_m": 0.09248168529504419,
+      "nearest_map_sample_boundary_distance_lower_bound_m": 0.0
+    },
+    "far_c_open_away_pos0_translation_all_captured/CONTACT_READY_worst": {
+      "frame": 574,
+      "agent_id": "agent_04",
+      "linear_certificate": {
+        "nonnegative_weights": [
+          0.0,
+          0.0,
+          0.25889511413542476,
+          0.4825732087140274,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.25853167715054776
+        ],
+        "normal_cancellation_residual": 1.792551451871053e-17,
+        "positive_rhs_gap": 0.04592314935649864,
+        "rows": [
+          {
+            "index": 2,
+            "kind": "agent",
+            "neighbor_or_object": "agent_02",
+            "weight": 0.25889511413542476,
+            "A": [
+              0.5821728159396065,
+              0.03950552680704966
+            ],
+            "b": -0.020164405700515003
+          },
+          {
+            "index": 3,
+            "kind": "agent",
+            "neighbor_or_object": "agent_03",
+            "weight": 0.4825732087140274,
+            "A": [
+              -0.24802423332004508,
+              0.510668089770494
+            ],
+            "b": -0.006523438667881104
+          },
+          {
+            "index": 9,
+            "kind": "object",
+            "neighbor_or_object": "object",
+            "weight": 0.25853167715054776,
+            "A": [
+              -0.12003112291367246,
+              -0.9927701292505143
+            ],
+            "b": 0.21
+          }
+        ],
+        "interpretation": "lambda >= 0, lambda.T A = 0, lambda.T b > 0: contradictory even without a speed cap; floating-point witness with residual reported"
+      },
+      "without_speed_cap": {
+        "status": "infeasible",
+        "feasible": false,
+        "numerically_valid": true
+      },
+      "nearest_map_sample_distance_m": 0.10128774904589523,
+      "true_boundary_distance_m": 0.08877551003890351,
+      "nearest_map_sample_boundary_distance_lower_bound_m": 0.0
+    },
+    "far_c_open_away_pos0_safe_geometry/BRAKE_first": {
+      "frame": 914,
+      "agent_id": "agent_05",
+      "linear_certificate": null,
+      "without_speed_cap": {
+        "status": "optimal",
+        "feasible": true,
+        "u": [
+          -0.6108485526874036,
+          -0.15838406597789625
+        ],
+        "minimum_speed": 0.6310479115534622,
+        "min_residual": -1.5228096561514803e-13,
+        "numerically_valid": true
+      },
+      "nearest_map_sample_distance_m": 0.1270972823190277,
+      "true_boundary_distance_m": 0.6209750711673593,
+      "nearest_map_sample_boundary_distance_lower_bound_m": 0.49387778884833156
+    },
+    "far_c_open_away_pos0_safe_geometry/BRAKE_worst": {
+      "frame": 917,
+      "agent_id": "agent_05",
+      "linear_certificate": null,
+      "without_speed_cap": {
+        "status": "optimal",
+        "feasible": true,
+        "u": [
+          -1.5269979886107834,
+          -0.08697747758729775
+        ],
+        "minimum_speed": 1.5294730918943384,
+        "min_residual": -3.052558206206868e-13,
+        "numerically_valid": true
+      },
+      "nearest_map_sample_distance_m": 0.0796044150301755,
+      "true_boundary_distance_m": 0.669656264982959,
+      "nearest_map_sample_boundary_distance_lower_bound_m": 0.5900518499527836
+    },
+    "far_skew_box_s0_r0_pos0_translation_all_captured/ENCLOSE_first": {
+      "frame": 437,
+      "agent_id": "agent_12",
+      "linear_certificate": {
+        "nonnegative_weights": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.2487726041146522,
+          0.38313288440248705,
+          0.0,
+          0.36809451148286065
+        ],
+        "normal_cancellation_residual": 3.565586790162336e-17,
+        "positive_rhs_gap": 0.0034150884817519926,
+        "rows": [
+          {
+            "index": 6,
+            "kind": "agent",
+            "neighbor_or_object": "agent_11",
+            "weight": 0.2487726041146522,
+            "A": [
+              -0.5030320421086412,
+              0.39362222941561775
+            ],
+            "b": -0.07078477115858316
+          },
+          {
+            "index": 7,
+            "kind": "agent",
+            "neighbor_or_object": "agent_13",
+            "weight": 0.38313288440248705,
+            "A": [
+              -0.6309437269202665,
+              -0.33369613019444166
+            ],
+            "b": -0.14688232038508614
+          },
+          {
+            "index": 9,
+            "kind": "object",
+            "neighbor_or_object": "object",
+            "weight": 0.36809451148286065,
+            "A": [
+              0.9966893545387119,
+              0.08130393932157157
+            ],
+            "b": 0.21
+          }
+        ],
+        "interpretation": "lambda >= 0, lambda.T A = 0, lambda.T b > 0: contradictory even without a speed cap; floating-point witness with residual reported"
+      },
+      "without_speed_cap": {
+        "status": "infeasible",
+        "feasible": false,
+        "numerically_valid": true
+      },
+      "nearest_map_sample_distance_m": 0.19190877104600498,
+      "true_boundary_distance_m": 0.19049022297440885,
+      "nearest_map_sample_boundary_distance_lower_bound_m": 0.0
+    },
+    "far_skew_box_s0_r0_pos0_translation_all_captured/ENCLOSE_worst": {
+      "frame": 745,
+      "agent_id": "agent_05",
+      "linear_certificate": {
+        "nonnegative_weights": [
+          0.0,
+          0.363310063444107,
+          0.0,
+          0.3937447085654433,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.24294522799044965
+        ],
+        "normal_cancellation_residual": 4.012203970186559e-17,
+        "positive_rhs_gap": 0.018704665718977206,
+        "rows": [
+          {
+            "index": 1,
+            "kind": "agent",
+            "neighbor_or_object": "agent_01",
+            "weight": 0.363310063444107,
+            "A": [
+              0.4770069405498303,
+              0.2940092758083548
+            ],
+            "b": -0.0002828066955468944
+          },
+          {
+            "index": 3,
+            "kind": "agent",
+            "neighbor_or_object": "agent_03",
+            "weight": 0.3937447085654433,
+            "A": [
+              -0.44063380501328364,
+              0.3457281265610135
+            ],
+            "b": -6.456571190444071e-05
+          },
+          {
+            "index": 10,
+            "kind": "object",
+            "neighbor_or_object": "object",
+            "weight": 0.24294522799044965,
+            "A": [
+              0.0008059730426449949,
+              -0.9999996752036745
+            ],
+            "b": 0.07751884982748553
+          }
+        ],
+        "interpretation": "lambda >= 0, lambda.T A = 0, lambda.T b > 0: contradictory even without a speed cap; floating-point witness with residual reported"
+      },
+      "without_speed_cap": {
+        "status": "infeasible",
+        "feasible": false,
+        "numerically_valid": true
+      },
+      "nearest_map_sample_distance_m": 0.18525703339397412,
+      "true_boundary_distance_m": 0.18813130936205624,
+      "nearest_map_sample_boundary_distance_lower_bound_m": 0.002874275968082124
+    },
+    "far_skew_box_s0_r0_pos0_safe_geometry/DISCOVER_first": {
+      "frame": 433,
+      "agent_id": "agent_08",
+      "linear_certificate": {
+        "nonnegative_weights": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.32101270037295027,
+          0.0,
+          0.0,
+          0.0,
+          0.3452339846948472,
+          0.3337533149322026
+        ],
+        "normal_cancellation_residual": 2.7755575615628914e-17,
+        "positive_rhs_gap": 0.001726085162491475,
+        "rows": [
+          {
+            "index": 6,
+            "kind": "agent",
+            "neighbor_or_object": "agent_10",
+            "weight": 0.32101270037295027,
+            "A": [
+              0.2911031778078401,
+              0.4999648275464601
+            ],
+            "b": -0.015829416685038372
+          },
+          {
+            "index": 10,
+            "kind": "agent",
+            "neighbor_or_object": "agent_14",
+            "weight": 0.3452339846948472,
+            "A": [
+              -0.27159179248881227,
+              0.5018570438472967
+            ],
+            "b": -0.009016945654825151
+          },
+          {
+            "index": 11,
+            "kind": "object",
+            "neighbor_or_object": "object",
+            "weight": 0.3337533149322026,
+            "A": [
+              0.0009435098379497696,
+              -0.9999995548944938
+            ],
+            "b": 0.02972400450342092
+          }
+        ],
+        "interpretation": "lambda >= 0, lambda.T A = 0, lambda.T b > 0: contradictory even without a speed cap; floating-point witness with residual reported"
+      },
+      "without_speed_cap": {
+        "status": "infeasible",
+        "feasible": false,
+        "numerically_valid": true
+      },
+      "nearest_map_sample_distance_m": 0.19598635464284433,
+      "true_boundary_distance_m": 0.19459098513436857,
+      "nearest_map_sample_boundary_distance_lower_bound_m": 0.0
+    },
+    "far_skew_box_s0_r0_pos0_safe_geometry/DISCOVER_worst": {
+      "frame": 611,
+      "agent_id": "agent_08",
+      "linear_certificate": {
+        "nonnegative_weights": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.18451574963949713,
+          0.0,
+          0.0,
+          0.0,
+          0.48867878847678875,
+          0.3268054618837141
+        ],
+        "normal_cancellation_residual": 2.6537851419907583e-17,
+        "positive_rhs_gap": 0.002910650408429342,
+        "rows": [
+          {
+            "index": 7,
+            "kind": "agent",
+            "neighbor_or_object": "agent_10",
+            "weight": 0.18451574963949713,
+            "A": [
+              0.4342159025487353,
+              0.3537291650876906
+            ],
+            "b": -5.0829194885540496e-05
+          },
+          {
+            "index": 11,
+            "kind": "agent",
+            "neighbor_or_object": "agent_14",
+            "weight": 0.48867878847678875,
+            "A": [
+              -0.1648344825192778,
+              0.5351911750501106
+            ],
+            "b": -3.5918713836569083e-10
+          },
+          {
+            "index": 12,
+            "kind": "object",
+            "neighbor_or_object": "object",
+            "weight": 0.3268054618837141,
+            "A": [
+              0.0013201812786773285,
+              -0.999999128560316
+            ],
+            "b": 0.008935069059504818
+          }
+        ],
+        "interpretation": "lambda >= 0, lambda.T A = 0, lambda.T b > 0: contradictory even without a speed cap; floating-point witness with residual reported"
+      },
+      "without_speed_cap": {
+        "status": "infeasible",
+        "feasible": false,
+        "numerically_valid": true
+      },
+      "nearest_map_sample_distance_m": 0.19120831251505724,
+      "true_boundary_distance_m": 0.19314475938082776,
+      "nearest_map_sample_boundary_distance_lower_bound_m": 0.0019364468657705192
+    },
+    "far_skew_box_s0_r0_pos0_safe_geometry/ENCLOSE_first": {
+      "frame": 740,
+      "agent_id": "agent_06",
+      "linear_certificate": {
+        "nonnegative_weights": [
+          0.0,
+          0.0,
+          0.0,
+          0.6044709893996173,
+          0.0,
+          0.046521008712243704,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.34900800188813896
+        ],
+        "normal_cancellation_residual": 6.831464790300544e-19,
+        "positive_rhs_gap": 0.0027426961086073403,
+        "rows": [
+          {
+            "index": 3,
+            "kind": "agent",
+            "neighbor_or_object": "agent_03",
+            "weight": 0.6044709893996173,
+            "A": [
+              -0.04184931288095761,
+              0.5761519120119942
+            ],
+            "b": -0.015076793027763727
+          },
+          {
+            "index": 5,
+            "kind": "agent",
+            "neighbor_or_object": "agent_05",
+            "weight": 0.046521008712243704,
+            "A": [
+              0.6056988723551981,
+              0.015670212434198305
+            ],
+            "b": -0.04013750964756861
+          },
+          {
+            "index": 12,
+            "kind": "object",
+            "neighbor_or_object": "object",
+            "weight": 0.34900800188813896,
+            "A": [
+              -0.008254902292782286,
+              -0.9999659277136078
+            ],
+            "b": 0.03932121174537926
+          }
+        ],
+        "interpretation": "lambda >= 0, lambda.T A = 0, lambda.T b > 0: contradictory even without a speed cap; floating-point witness with residual reported"
+      },
+      "without_speed_cap": {
+        "status": "infeasible",
+        "feasible": false,
+        "numerically_valid": true
+      },
+      "nearest_map_sample_distance_m": 0.19078678934088636,
+      "true_boundary_distance_m": 0.19193978533677392,
+      "nearest_map_sample_boundary_distance_lower_bound_m": 0.0011529959958875569
+    },
+    "far_skew_box_s0_r0_pos0_safe_geometry/ENCLOSE_worst": {
+      "frame": 902,
+      "agent_id": "agent_04",
+      "linear_certificate": {
+        "nonnegative_weights": [
+          0.0,
+          0.4721447044159127,
+          0.0,
+          0.2608255654804296,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.26702973010365777
+        ],
+        "normal_cancellation_residual": 1.411711080892127e-16,
+        "positive_rhs_gap": 0.05591205402854099,
+        "rows": [
+          {
+            "index": 1,
+            "kind": "agent",
+            "neighbor_or_object": "agent_01",
+            "weight": 0.4721447044159127,
+            "A": [
+              0.3512273046954406,
+              0.43632920799315933
+            ],
+            "b": -0.00010784798367112491
+          },
+          {
+            "index": 3,
+            "kind": "agent",
+            "neighbor_or_object": "agent_03",
+            "weight": 0.2608255654804296,
+            "A": [
+              -0.5127059547629709,
+              0.22652071494811743
+            ],
+            "b": -0.00043427276251178926
+          },
+          {
+            "index": 9,
+            "kind": "object",
+            "neighbor_or_object": "object",
+            "weight": 0.26702973010365777,
+            "A": [
+              -0.12022365962594864,
+              -0.9927468316072049
+            ],
+            "b": 0.21
+          }
+        ],
+        "interpretation": "lambda >= 0, lambda.T A = 0, lambda.T b > 0: contradictory even without a speed cap; floating-point witness with residual reported"
+      },
+      "without_speed_cap": {
+        "status": "infeasible",
+        "feasible": false,
+        "numerically_valid": true
+      },
+      "nearest_map_sample_distance_m": 0.07740625485850837,
+      "true_boundary_distance_m": 0.4356270928400961,
+      "nearest_map_sample_boundary_distance_lower_bound_m": 0.3582208379815877
+    }
+  },
+  "analysis_sha256": "04c0dfbc635daeb65f3298f59883b02b792e5c2b0fc6556507419ec02da97d66",
+  "script_sha256": "d9ebfa0b72d8f5960f28a408dead33326e41734f0dc7c2f1b56e6e7480b8cd21"
+}

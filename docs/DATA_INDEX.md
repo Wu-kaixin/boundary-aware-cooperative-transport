@@ -1,5 +1,7 @@
 # 数据与原始文件索引
 
+2026-11-03：[联合 QP 诊断](results/qp_conflict_v1/README.md)的四条精确重放、每步可行性和选定完整矩阵在 `runs/research/2026-11-03-qp-conflict-v1/`，执行前冻结在同级 `freeze/`；原始物理数据仍在 acquisition-geometry-v1。预检首轮失败、原脚本及第二轮通过分别保留在 `runs/maintenance/2026-11-03-qp-conflict-v1/preflight1/`、`preflight2/`。953 步精简 CSV、代数见证和图表已入 Git；新增物理回合 0。
+
 2026-11-03：[采集几何八回合](results/acquisition_geometry_v1/README.md)的完整原始结果位于 `runs/research/2026-11-03-acquisition-geometry-v1/run/`，执行前源码/脚本/协议/环境在同级 `freeze/`。全部门槛及逐帧缩放索引在 `analysis.json`；冻结门槛 FAIL，不修改旧平移试验。工程 RED、首轮测试消息不匹配、最终 37 项针对性通过和完整 892 通过/2 跳过日志分别保存在 `runs/maintenance/2026-11-03-acquisition-geometry-v1/`。
 
 2026-11-03：[首次平移闭环八回合](results/task_translation_physical_v2/README.md)的原始产品在 `runs/research/2026-11-03-task-translation-physical-v2/run/`，执行前源码/脚本/协议在同级 `freeze/`，屏障事件明细在 `barrier_diagnostic_v1/`。v1 只冻结、未执行，原件与退役收据保留在 `2026-11-03-task-translation-physical-v1/`；v2 在任何新物理数据前修正预算标签统计。八个新回合及全部原失败分别记账，不与旧重放混算。
