@@ -1,0 +1,74 @@
+{
+  "status": "PASS",
+  "case": "near_l_reference_protected_baseline",
+  "current_protocol_sha256": "db32813906f9bcb7b0553a3708efdd9de7917ef782ec4756b52da4a1f91954f6",
+  "original_case": "near_l_reference_boundary_cvt_candidate",
+  "original_protocol_sha256": "80e0025fa99899dc67afbe061d58b913e7359acef6fe5da6611623c61a05d7f6",
+  "original_receipt_sha256": "52d3210cacfc3b2c3d04b81929b029beebea171e1de0911eeba607708a42864e",
+  "current_receipt_sha256": "613169c982b0ff3f40813e38d00228fee3bfec14ca46399447b6719e540f246e",
+  "resolved_parameters_equal": true,
+  "physics_and_phase_gates_equal": true,
+  "replay_exact": true,
+  "arrays": {
+    "times": true,
+    "phase": true,
+    "min_distance": true,
+    "map_coverage": true,
+    "push_flags": true,
+    "contact_flags": true,
+    "efforts": true,
+    "agent_ids": true,
+    "agent_positions": true,
+    "domain": true,
+    "robot_radius": true,
+    "sensed_counts": true,
+    "sensed_points": true,
+    "cargo/cargo_0/centers": true,
+    "cargo/cargo_0/angles": true,
+    "cargo/cargo_0/local_vertices": true,
+    "cargo/cargo_0/strict_coverage": true,
+    "cargo/cargo_0/contacts": true,
+    "cargo/cargo_0/penetration": true,
+    "cargo/cargo_0/speed": true,
+    "cargo/cargo_0/progress_estimate": true,
+    "task/cargo_0/direction": true,
+    "task/cargo_0/start": true,
+    "task/cargo_0/goal_point": true,
+    "task/cargo_0/distance": true
+  },
+  "old_scientific_fields_exact": {
+    "paired_metrics.json": true,
+    "physics_substeps.json": true,
+    "summary.json": true
+  },
+  "verified_identity_changes": {
+    "config_sha256": [
+      "5df97bd4e6545e7fec5fdeed5b6403a539e9205ec351a3a1ce93518a70a5cbe4",
+      "834fa995407a65e8a3fb1a53cc2172c0d17a651a025b9ed9857bf98e89195cc7"
+    ],
+    "config_hash": [
+      "8cf525c61edbceee",
+      "e2356da9fd5d8eeb"
+    ],
+    "git_sha": [
+      "cba1fc625064acc577f26ac8d1f2d08e96d67225-dirty",
+      "ff585b782636dbb883b228ec27bf320a4bfd7a33-dirty"
+    ]
+  },
+  "safe_completed": true,
+  "g500": true,
+  "hard_safety_failures": [],
+  "endpoint_error_m": 0.008433050706511073,
+  "completion_seconds": 19.650000000000002,
+  "safety_metrics": {
+    "min_inter_agent_distance": 0.2845655121526551,
+    "d_min": 0.28,
+    "min_signed_clearance": 0.07759400123539084,
+    "max_penetration": 0.05240599876460916,
+    "penetration_budget": 0.0959423747342594,
+    "solver_fallbacks": 0,
+    "solver_infeasible": 0,
+    "barrier_scalings": 0
+  },
+  "scope": "One fresh physical compatibility run on a reused condition; not a new independent reliability trial."
+}

@@ -1,0 +1,1364 @@
+{
+  "status": "FAIL",
+  "cases": [
+    {
+      "case": "far_c_open_away_pos0_reference",
+      "condition": "far_c_open_away_pos0",
+      "frames": 1508,
+      "paired_frames": 1060,
+      "availability_relative_to_original": 1.0,
+      "original_same_input_mae_m": 0.10493558360189081,
+      "candidate_same_input_mae_m": 0.10313787993670283,
+      "original_own_available_mae_m": 0.10493558360189081,
+      "candidate_own_available_mae_m": 0.10313787993670283,
+      "first_hold": {
+        "frame": 1468,
+        "time_s": 73.39999999999797,
+        "true_goal_error_m": 0.0774090870387259,
+        "original_estimated_goal_error_m": 0.016715761608908423,
+        "candidate_estimated_goal_error_m": 0.03375596022206463,
+        "candidate_fresh": true,
+        "position_band_m": 0.02
+      },
+      "original_local_bad_fit_count": 649,
+      "candidate_local_bad_fit_count": 50,
+      "accepted_local_readouts": [
+        15302,
+        13768
+      ],
+      "original_statuses_exact": 15885,
+      "original_readouts_exact": 15302,
+      "scan_counts_verified": 24128,
+      "candidate_status_counts": {
+        "bootstrap_only": 15,
+        "before_bootstrap": 1091,
+        "accepted": 13768,
+        "translation_unobservable": 1753,
+        "motion_bound_exceeded": 343,
+        "final_match_unobservable": 6
+      },
+      "reference_surface_diagnostics": {
+        "agent_00": {
+          "total_points": 134,
+          "refined_points": 126,
+          "projection_rms_m": 0.0075517286077208794,
+          "projection_max_m": 0.020061361152244474,
+          "original_normal_conditioning": 0.2101492346668751,
+          "fitted_normal_conditioning": 0.18578331086204172
+        },
+        "agent_01": {
+          "total_points": 134,
+          "refined_points": 126,
+          "projection_rms_m": 0.0075517286077208794,
+          "projection_max_m": 0.020061361152244474,
+          "original_normal_conditioning": 0.21014923466687513,
+          "fitted_normal_conditioning": 0.18578331086204178
+        },
+        "agent_03": {
+          "total_points": 259,
+          "refined_points": 246,
+          "projection_rms_m": 0.008127212920732539,
+          "projection_max_m": 0.04625988167029933,
+          "original_normal_conditioning": 0.5354158128219537,
+          "fitted_normal_conditioning": 0.495333329668313
+        },
+        "agent_04": {
+          "total_points": 189,
+          "refined_points": 185,
+          "projection_rms_m": 0.007599819731958204,
+          "projection_max_m": 0.020129070281264094,
+          "original_normal_conditioning": 0.14968362531987853,
+          "fitted_normal_conditioning": 0.12499586951803002
+        },
+        "agent_05": {
+          "total_points": 259,
+          "refined_points": 246,
+          "projection_rms_m": 0.008127212920732546,
+          "projection_max_m": 0.04625988167029937,
+          "original_normal_conditioning": 0.5354158128219533,
+          "fitted_normal_conditioning": 0.49533332966831306
+        },
+        "agent_06": {
+          "total_points": 259,
+          "refined_points": 246,
+          "projection_rms_m": 0.008127212920732539,
+          "projection_max_m": 0.04625988167029933,
+          "original_normal_conditioning": 0.5354158128219533,
+          "fitted_normal_conditioning": 0.49533332966831306
+        },
+        "agent_07": {
+          "total_points": 235,
+          "refined_points": 226,
+          "projection_rms_m": 0.008137398502540485,
+          "projection_max_m": 0.04625988167029935,
+          "original_normal_conditioning": 0.42049028844258834,
+          "fitted_normal_conditioning": 0.3811793576540247
+        },
+        "agent_08": {
+          "total_points": 239,
+          "refined_points": 223,
+          "projection_rms_m": 0.008021829772518347,
+          "projection_max_m": 0.04625988167029935,
+          "original_normal_conditioning": 0.6847684407520815,
+          "fitted_normal_conditioning": 0.646172948378788
+        },
+        "agent_09": {
+          "total_points": 235,
+          "refined_points": 226,
+          "projection_rms_m": 0.008137398502540487,
+          "projection_max_m": 0.04625988167029935,
+          "original_normal_conditioning": 0.4204902884425884,
+          "fitted_normal_conditioning": 0.3811793576540249
+        },
+        "agent_10": {
+          "total_points": 264,
+          "refined_points": 254,
+          "projection_rms_m": 0.00798040063388165,
+          "projection_max_m": 0.04625988167029937,
+          "original_normal_conditioning": 0.5944302653019247,
+          "fitted_normal_conditioning": 0.5513037337364839
+        },
+        "agent_11": {
+          "total_points": 210,
+          "refined_points": 195,
+          "projection_rms_m": 0.00820201253908573,
+          "projection_max_m": 0.04625988167029935,
+          "original_normal_conditioning": 0.4818489935818563,
+          "fitted_normal_conditioning": 0.4468270298559432
+        },
+        "agent_12": {
+          "total_points": 111,
+          "refined_points": 96,
+          "projection_rms_m": 0.008525806740685931,
+          "projection_max_m": 0.04625988167029929,
+          "original_normal_conditioning": 0.19638353939066988,
+          "fitted_normal_conditioning": 0.22143495194839774
+        },
+        "agent_13": {
+          "total_points": 241,
+          "refined_points": 225,
+          "projection_rms_m": 0.007185299138979873,
+          "projection_max_m": 0.01971435366090261,
+          "original_normal_conditioning": 0.6927782607347996,
+          "fitted_normal_conditioning": 0.6609259742204082
+        },
+        "agent_14": {
+          "total_points": 241,
+          "refined_points": 225,
+          "projection_rms_m": 0.007185299138979873,
+          "projection_max_m": 0.01971435366090261,
+          "original_normal_conditioning": 0.6927782607347995,
+          "fitted_normal_conditioning": 0.6609259742204079
+        },
+        "agent_02": {
+          "total_points": 184,
+          "refined_points": 174,
+          "projection_rms_m": 0.007224816264940367,
+          "projection_max_m": 0.025691080100998007,
+          "original_normal_conditioning": 0.21539217346929704,
+          "fitted_normal_conditioning": 0.21107192959225413
+        }
+      },
+      "series_sha256": "719eb329408b127d044d26868d122bdc77d0c8c94fa3ee8764ff3a7e8a6a619b",
+      "templates_sha256": "c98db92fb0abdb990ab3978e1058e1ca35220ba93c808af3da1dd2c71ae6a7ac"
+    },
+    {
+      "case": "far_skew_box_s0_r0_pos0_reference",
+      "condition": "far_skew_box_s0_r0_pos0",
+      "frames": 1785,
+      "paired_frames": 1343,
+      "availability_relative_to_original": 1.0,
+      "original_same_input_mae_m": 0.12573468131345553,
+      "candidate_same_input_mae_m": 0.11153288612297194,
+      "original_own_available_mae_m": 0.12573468131345553,
+      "candidate_own_available_mae_m": 0.11153288612297194,
+      "first_hold": {
+        "frame": 1745,
+        "time_s": 87.24999999999719,
+        "true_goal_error_m": 0.135106119017135,
+        "original_estimated_goal_error_m": 0.018157704980053344,
+        "candidate_estimated_goal_error_m": 0.039598228865705715,
+        "candidate_fresh": true,
+        "position_band_m": 0.02
+      },
+      "original_local_bad_fit_count": 5562,
+      "candidate_local_bad_fit_count": 139,
+      "accepted_local_readouts": [
+        19109,
+        12020
+      ],
+      "original_statuses_exact": 19829,
+      "original_readouts_exact": 19109,
+      "scan_counts_verified": 28560,
+      "candidate_status_counts": {
+        "before_bootstrap": 1675,
+        "bootstrap_only": 15,
+        "translation_unobservable": 7686,
+        "accepted": 12020,
+        "final_match_unobservable": 17,
+        "motion_bound_exceeded": 91
+      },
+      "reference_surface_diagnostics": {
+        "agent_03": {
+          "total_points": 215,
+          "refined_points": 215,
+          "projection_rms_m": 0.00823303148895377,
+          "projection_max_m": 0.02602976184859303,
+          "original_normal_conditioning": 0.023243270322582554,
+          "fitted_normal_conditioning": 0.0008310711277071395
+        },
+        "agent_04": {
+          "total_points": 175,
+          "refined_points": 172,
+          "projection_rms_m": 0.008442060642745877,
+          "projection_max_m": 0.025129728670472386,
+          "original_normal_conditioning": 0.02694549216883519,
+          "fitted_normal_conditioning": 0.0010348622037453668
+        },
+        "agent_05": {
+          "total_points": 215,
+          "refined_points": 215,
+          "projection_rms_m": 0.00823303148895377,
+          "projection_max_m": 0.02602976184859303,
+          "original_normal_conditioning": 0.02324327032258255,
+          "fitted_normal_conditioning": 0.0008310711277071395
+        },
+        "agent_06": {
+          "total_points": 266,
+          "refined_points": 255,
+          "projection_rms_m": 0.007827786714537512,
+          "projection_max_m": 0.026034989644946247,
+          "original_normal_conditioning": 0.18234779880433477,
+          "fitted_normal_conditioning": 0.1589513303087162
+        },
+        "agent_07": {
+          "total_points": 266,
+          "refined_points": 255,
+          "projection_rms_m": 0.00782778671453751,
+          "projection_max_m": 0.02603498964494626,
+          "original_normal_conditioning": 0.18234779880433472,
+          "fitted_normal_conditioning": 0.15895133030871617
+        },
+        "agent_08": {
+          "total_points": 257,
+          "refined_points": 246,
+          "projection_rms_m": 0.007789291470271131,
+          "projection_max_m": 0.026034989644946247,
+          "original_normal_conditioning": 0.18966984117201074,
+          "fitted_normal_conditioning": 0.1656098669997951
+        },
+        "agent_09": {
+          "total_points": 230,
+          "refined_points": 211,
+          "projection_rms_m": 0.007479216159329654,
+          "projection_max_m": 0.02603498964494625,
+          "original_normal_conditioning": 0.2097256135048417,
+          "fitted_normal_conditioning": 0.18716739697044926
+        },
+        "agent_10": {
+          "total_points": 230,
+          "refined_points": 211,
+          "projection_rms_m": 0.007479216159329654,
+          "projection_max_m": 0.02603498964494625,
+          "original_normal_conditioning": 0.20972561350484167,
+          "fitted_normal_conditioning": 0.18716739697044926
+        },
+        "agent_11": {
+          "total_points": 183,
+          "refined_points": 164,
+          "projection_rms_m": 0.007499305316475649,
+          "projection_max_m": 0.025973973279682143,
+          "original_normal_conditioning": 0.26929827928540045,
+          "fitted_normal_conditioning": 0.24358398656280453
+        },
+        "agent_12": {
+          "total_points": 183,
+          "refined_points": 164,
+          "projection_rms_m": 0.007499305316475649,
+          "projection_max_m": 0.025973973279682143,
+          "original_normal_conditioning": 0.2692982792854007,
+          "fitted_normal_conditioning": 0.2435839865628046
+        },
+        "agent_01": {
+          "total_points": 144,
+          "refined_points": 136,
+          "projection_rms_m": 0.007730599705276148,
+          "projection_max_m": 0.0222328794786965,
+          "original_normal_conditioning": 0.03518618372457878,
+          "fitted_normal_conditioning": 0.0007212463950876205
+        },
+        "agent_14": {
+          "total_points": 182,
+          "refined_points": 158,
+          "projection_rms_m": 0.006628173081049569,
+          "projection_max_m": 0.018069879969916203,
+          "original_normal_conditioning": 0.2758345707047671,
+          "fitted_normal_conditioning": 0.2548102524265106
+        },
+        "agent_13": {
+          "total_points": 185,
+          "refined_points": 172,
+          "projection_rms_m": 0.007376263229525637,
+          "projection_max_m": 0.022150717557574435,
+          "original_normal_conditioning": 0.30660715488346324,
+          "fitted_normal_conditioning": 0.2803529746842574
+        },
+        "agent_02": {
+          "total_points": 179,
+          "refined_points": 174,
+          "projection_rms_m": 0.008051315721417788,
+          "projection_max_m": 0.030145495171963743,
+          "original_normal_conditioning": 0.03832847983245655,
+          "fitted_normal_conditioning": 0.000503069412862956
+        },
+        "agent_00": {
+          "total_points": 25,
+          "refined_points": 13,
+          "projection_rms_m": 0.005546696551200601,
+          "projection_max_m": 0.014739897610275207,
+          "original_normal_conditioning": 0.18196941067752714,
+          "fitted_normal_conditioning": 0.16392185455742803
+        }
+      },
+      "series_sha256": "36298076a3944aa4028089e0b436bf5d08ca328335733957f9c7f773dbb9291d",
+      "templates_sha256": "2d46a1ebaf6dcc28ea2d3c5e31e767d2c4f0c22f50db27dd02e9342c4b15d0f0"
+    },
+    {
+      "case": "near_circle_reference",
+      "condition": "near_circle",
+      "frames": 319,
+      "paired_frames": 217,
+      "availability_relative_to_original": 1.0,
+      "original_same_input_mae_m": 0.004538536857885658,
+      "candidate_same_input_mae_m": 0.006697991935804842,
+      "original_own_available_mae_m": 0.004538536857885658,
+      "candidate_own_available_mae_m": 0.006697991935804842,
+      "first_hold": {
+        "frame": 279,
+        "time_s": 13.950000000000063,
+        "true_goal_error_m": 0.019148005056892695,
+        "original_estimated_goal_error_m": 0.019780387130297835,
+        "candidate_estimated_goal_error_m": 0.02204593729402239,
+        "candidate_fresh": true,
+        "position_band_m": 0.02
+      },
+      "original_local_bad_fit_count": 0,
+      "candidate_local_bad_fit_count": 0,
+      "accepted_local_readouts": [
+        3361,
+        2434
+      ],
+      "original_statuses_exact": 3488,
+      "original_readouts_exact": 3361,
+      "scan_counts_verified": 5104,
+      "candidate_status_counts": {
+        "bootstrap_only": 16,
+        "motion_bound_exceeded": 1038,
+        "accepted": 2434
+      },
+      "reference_surface_diagnostics": {
+        "agent_00": {
+          "total_points": 222,
+          "refined_points": 212,
+          "projection_rms_m": 0.008327669606817563,
+          "projection_max_m": 0.02971117354093719,
+          "original_normal_conditioning": 0.6125334759760136,
+          "fitted_normal_conditioning": 0.6164965381084979
+        },
+        "agent_01": {
+          "total_points": 137,
+          "refined_points": 124,
+          "projection_rms_m": 0.009022356569414892,
+          "projection_max_m": 0.027242426055219596,
+          "original_normal_conditioning": 0.6392233268014939,
+          "fitted_normal_conditioning": 0.6599148499725189
+        },
+        "agent_02": {
+          "total_points": 128,
+          "refined_points": 116,
+          "projection_rms_m": 0.008493873913840762,
+          "projection_max_m": 0.024197119309726945,
+          "original_normal_conditioning": 0.5262402363116185,
+          "fitted_normal_conditioning": 0.5289922163544762
+        },
+        "agent_03": {
+          "total_points": 175,
+          "refined_points": 166,
+          "projection_rms_m": 0.008528526489350579,
+          "projection_max_m": 0.02976217498705406,
+          "original_normal_conditioning": 0.8861236741154466,
+          "fitted_normal_conditioning": 0.9201087422773537
+        },
+        "agent_04": {
+          "total_points": 156,
+          "refined_points": 149,
+          "projection_rms_m": 0.008850200390563048,
+          "projection_max_m": 0.029762174987053757,
+          "original_normal_conditioning": 0.6976308997545426,
+          "fitted_normal_conditioning": 0.7320069677567366
+        },
+        "agent_05": {
+          "total_points": 189,
+          "refined_points": 183,
+          "projection_rms_m": 0.008356568486673118,
+          "projection_max_m": 0.029702880521887586,
+          "original_normal_conditioning": 0.7099675862702842,
+          "fitted_normal_conditioning": 0.7089048704578705
+        },
+        "agent_06": {
+          "total_points": 159,
+          "refined_points": 151,
+          "projection_rms_m": 0.008710335866714228,
+          "projection_max_m": 0.02970288052188746,
+          "original_normal_conditioning": 0.7810270885524212,
+          "fitted_normal_conditioning": 0.8170617733333918
+        },
+        "agent_07": {
+          "total_points": 169,
+          "refined_points": 154,
+          "projection_rms_m": 0.00854772897078001,
+          "projection_max_m": 0.030567861627569876,
+          "original_normal_conditioning": 0.6569850841008344,
+          "fitted_normal_conditioning": 0.6486368043638456
+        },
+        "agent_08": {
+          "total_points": 163,
+          "refined_points": 149,
+          "projection_rms_m": 0.008637053541109593,
+          "projection_max_m": 0.030567861627569814,
+          "original_normal_conditioning": 0.6849906540663694,
+          "fitted_normal_conditioning": 0.6842602154821853
+        },
+        "agent_09": {
+          "total_points": 229,
+          "refined_points": 221,
+          "projection_rms_m": 0.008712313928472108,
+          "projection_max_m": 0.030567861627569717,
+          "original_normal_conditioning": 0.7681182689765691,
+          "fitted_normal_conditioning": 0.7759113502187133
+        },
+        "agent_10": {
+          "total_points": 179,
+          "refined_points": 172,
+          "projection_rms_m": 0.008795886231869733,
+          "projection_max_m": 0.02970288052188746,
+          "original_normal_conditioning": 0.7906627647219806,
+          "fitted_normal_conditioning": 0.8341073304005429
+        },
+        "agent_11": {
+          "total_points": 191,
+          "refined_points": 182,
+          "projection_rms_m": 0.008659551064335358,
+          "projection_max_m": 0.030567861627569717,
+          "original_normal_conditioning": 0.8988245895697285,
+          "fitted_normal_conditioning": 0.9277430583789931
+        },
+        "agent_12": {
+          "total_points": 191,
+          "refined_points": 182,
+          "projection_rms_m": 0.008659551064335363,
+          "projection_max_m": 0.030567861627569876,
+          "original_normal_conditioning": 0.8988245895697287,
+          "fitted_normal_conditioning": 0.9277430583789932
+        },
+        "agent_13": {
+          "total_points": 137,
+          "refined_points": 124,
+          "projection_rms_m": 0.008985735448217713,
+          "projection_max_m": 0.030567861627569786,
+          "original_normal_conditioning": 0.6462242561576973,
+          "fitted_normal_conditioning": 0.673269931736286
+        },
+        "agent_14": {
+          "total_points": 188,
+          "refined_points": 175,
+          "projection_rms_m": 0.008655546221434648,
+          "projection_max_m": 0.030567861627569855,
+          "original_normal_conditioning": 0.7264637271298889,
+          "fitted_normal_conditioning": 0.7346687196679282
+        },
+        "agent_15": {
+          "total_points": 144,
+          "refined_points": 136,
+          "projection_rms_m": 0.008586987330600492,
+          "projection_max_m": 0.03056786162756987,
+          "original_normal_conditioning": 0.4830306830193071,
+          "fitted_normal_conditioning": 0.47652607051843476
+        }
+      },
+      "series_sha256": "8152e2d0b840e33f47cd6955ac064cdde3a085b692691942cc0e88465c8174db",
+      "templates_sha256": "33879d62b9a6aab4ff31e0183d488f8d3501455414265ca6bf82d0c49004dead"
+    },
+    {
+      "case": "near_ellipse_parallel_reference",
+      "condition": "near_ellipse_parallel",
+      "frames": 281,
+      "paired_frames": 182,
+      "availability_relative_to_original": 1.0,
+      "original_same_input_mae_m": 0.0064719282584297265,
+      "candidate_same_input_mae_m": 0.00809701216489882,
+      "original_own_available_mae_m": 0.0064719282584297265,
+      "candidate_own_available_mae_m": 0.00809701216489882,
+      "first_hold": {
+        "frame": 241,
+        "time_s": 12.050000000000036,
+        "true_goal_error_m": 0.016571633702319316,
+        "original_estimated_goal_error_m": 0.019658315384192694,
+        "candidate_estimated_goal_error_m": 0.02316212038244675,
+        "candidate_fresh": true,
+        "position_band_m": 0.02
+      },
+      "original_local_bad_fit_count": 20,
+      "candidate_local_bad_fit_count": 0,
+      "accepted_local_readouts": [
+        2890,
+        2908
+      ],
+      "original_statuses_exact": 2928,
+      "original_readouts_exact": 2890,
+      "scan_counts_verified": 4496,
+      "candidate_status_counts": {
+        "bootstrap_only": 16,
+        "accepted": 2908,
+        "motion_bound_exceeded": 4
+      },
+      "reference_surface_diagnostics": {
+        "agent_00": {
+          "total_points": 253,
+          "refined_points": 247,
+          "projection_rms_m": 0.008210837925624371,
+          "projection_max_m": 0.026937836078237926,
+          "original_normal_conditioning": 0.45220969456332055,
+          "fitted_normal_conditioning": 0.4201584805725574
+        },
+        "agent_01": {
+          "total_points": 176,
+          "refined_points": 162,
+          "projection_rms_m": 0.008001241472930127,
+          "projection_max_m": 0.02693783607823785,
+          "original_normal_conditioning": 0.4249920125445518,
+          "fitted_normal_conditioning": 0.3839930715526838
+        },
+        "agent_02": {
+          "total_points": 123,
+          "refined_points": 107,
+          "projection_rms_m": 0.00794836094696019,
+          "projection_max_m": 0.026937836078237912,
+          "original_normal_conditioning": 0.6564521992998209,
+          "fitted_normal_conditioning": 0.6378532923628804
+        },
+        "agent_03": {
+          "total_points": 148,
+          "refined_points": 135,
+          "projection_rms_m": 0.008010019201646372,
+          "projection_max_m": 0.026937836078237912,
+          "original_normal_conditioning": 0.5119484534655065,
+          "fitted_normal_conditioning": 0.490062619523572
+        },
+        "agent_04": {
+          "total_points": 154,
+          "refined_points": 147,
+          "projection_rms_m": 0.00813126813022559,
+          "projection_max_m": 0.026937836078237874,
+          "original_normal_conditioning": 0.4765845783251455,
+          "fitted_normal_conditioning": 0.4511315497380477
+        },
+        "agent_05": {
+          "total_points": 236,
+          "refined_points": 222,
+          "projection_rms_m": 0.007824793963476984,
+          "projection_max_m": 0.026937836078237926,
+          "original_normal_conditioning": 0.5002719857984143,
+          "fitted_normal_conditioning": 0.4741258966769012
+        },
+        "agent_06": {
+          "total_points": 179,
+          "refined_points": 173,
+          "projection_rms_m": 0.008026137545901566,
+          "projection_max_m": 0.0269378360782379,
+          "original_normal_conditioning": 0.4762951840033218,
+          "fitted_normal_conditioning": 0.44406674599570983
+        },
+        "agent_07": {
+          "total_points": 229,
+          "refined_points": 214,
+          "projection_rms_m": 0.007868864708683455,
+          "projection_max_m": 0.02517581222035663,
+          "original_normal_conditioning": 0.3813356228829444,
+          "fitted_normal_conditioning": 0.36049956570896935
+        },
+        "agent_08": {
+          "total_points": 197,
+          "refined_points": 181,
+          "projection_rms_m": 0.007859466412776257,
+          "projection_max_m": 0.025175812220356628,
+          "original_normal_conditioning": 0.45938769102655225,
+          "fitted_normal_conditioning": 0.44207545515908175
+        },
+        "agent_09": {
+          "total_points": 217,
+          "refined_points": 208,
+          "projection_rms_m": 0.008077376121614618,
+          "projection_max_m": 0.025175812220356517,
+          "original_normal_conditioning": 0.4416205060064261,
+          "fitted_normal_conditioning": 0.4124261154907804
+        },
+        "agent_10": {
+          "total_points": 176,
+          "refined_points": 165,
+          "projection_rms_m": 0.007859904134335741,
+          "projection_max_m": 0.026937836078237874,
+          "original_normal_conditioning": 0.43529161057499466,
+          "fitted_normal_conditioning": 0.408760531811733
+        },
+        "agent_11": {
+          "total_points": 200,
+          "refined_points": 195,
+          "projection_rms_m": 0.008209106715908214,
+          "projection_max_m": 0.025175812220356628,
+          "original_normal_conditioning": 0.4701475232620734,
+          "fitted_normal_conditioning": 0.43917520708658236
+        },
+        "agent_12": {
+          "total_points": 200,
+          "refined_points": 195,
+          "projection_rms_m": 0.008209106715908219,
+          "projection_max_m": 0.025175812220356628,
+          "original_normal_conditioning": 0.47014752326207343,
+          "fitted_normal_conditioning": 0.4391752070865822
+        },
+        "agent_13": {
+          "total_points": 140,
+          "refined_points": 123,
+          "projection_rms_m": 0.007848367484263747,
+          "projection_max_m": 0.026797072051080336,
+          "original_normal_conditioning": 0.5041892785634106,
+          "fitted_normal_conditioning": 0.4542944074222786
+        },
+        "agent_14": {
+          "total_points": 175,
+          "refined_points": 172,
+          "projection_rms_m": 0.008179028079988476,
+          "projection_max_m": 0.025175812220356517,
+          "original_normal_conditioning": 0.5398475184964683,
+          "fitted_normal_conditioning": 0.5167401695060334
+        },
+        "agent_15": {
+          "total_points": 147,
+          "refined_points": 139,
+          "projection_rms_m": 0.00816289208688157,
+          "projection_max_m": 0.02300130132789627,
+          "original_normal_conditioning": 0.6194430470558594,
+          "fitted_normal_conditioning": 0.615036369288166
+        }
+      },
+      "series_sha256": "54fe6b678ddd05a8d3cc6d7ad611e8ae9925666684ebf5dfcd0142e48795e2e5",
+      "templates_sha256": "d12ab3cb7d5b856c54955fa05b949421836eb76531162f93ec142d822c508747"
+    },
+    {
+      "case": "near_rectangle_parallel_reference",
+      "condition": "near_rectangle_parallel",
+      "frames": 267,
+      "paired_frames": 177,
+      "availability_relative_to_original": 1.0,
+      "original_same_input_mae_m": 0.009408144192956703,
+      "candidate_same_input_mae_m": 0.009293329999991733,
+      "original_own_available_mae_m": 0.009408144192956703,
+      "candidate_own_available_mae_m": 0.009293329999991733,
+      "first_hold": {
+        "frame": 227,
+        "time_s": 11.350000000000026,
+        "true_goal_error_m": 0.01281738536822978,
+        "original_estimated_goal_error_m": 0.018573965929203774,
+        "candidate_estimated_goal_error_m": 0.01863640559779858,
+        "candidate_fresh": true,
+        "position_band_m": 0.02
+      },
+      "original_local_bad_fit_count": 0,
+      "candidate_local_bad_fit_count": 0,
+      "accepted_local_readouts": [
+        2827,
+        2829
+      ],
+      "original_statuses_exact": 2845,
+      "original_readouts_exact": 2827,
+      "scan_counts_verified": 4272,
+      "candidate_status_counts": {
+        "bootstrap_only": 16,
+        "before_bootstrap": 3,
+        "accepted": 2829
+      },
+      "reference_surface_diagnostics": {
+        "agent_00": {
+          "total_points": 279,
+          "refined_points": 257,
+          "projection_rms_m": 0.007958188889069734,
+          "projection_max_m": 0.0338114468021049,
+          "original_normal_conditioning": 0.8921664215577461,
+          "fitted_normal_conditioning": 0.8879808114133764
+        },
+        "agent_01": {
+          "total_points": 203,
+          "refined_points": 177,
+          "projection_rms_m": 0.007660756807056957,
+          "projection_max_m": 0.02550453100639581,
+          "original_normal_conditioning": 0.9528998251719478,
+          "fitted_normal_conditioning": 0.9340386643791677
+        },
+        "agent_04": {
+          "total_points": 177,
+          "refined_points": 169,
+          "projection_rms_m": 0.007921231450377679,
+          "projection_max_m": 0.021791902112577286,
+          "original_normal_conditioning": 0.7861551770051479,
+          "fitted_normal_conditioning": 0.80511010921852
+        },
+        "agent_05": {
+          "total_points": 250,
+          "refined_points": 241,
+          "projection_rms_m": 0.008282962738809413,
+          "projection_max_m": 0.03381144680210501,
+          "original_normal_conditioning": 0.6714281849754828,
+          "fitted_normal_conditioning": 0.6593469382914845
+        },
+        "agent_06": {
+          "total_points": 198,
+          "refined_points": 195,
+          "projection_rms_m": 0.008140197692696029,
+          "projection_max_m": 0.022193463009179085,
+          "original_normal_conditioning": 0.9733457694531921,
+          "fitted_normal_conditioning": 0.9808796151580728
+        },
+        "agent_07": {
+          "total_points": 226,
+          "refined_points": 193,
+          "projection_rms_m": 0.0070417984595320445,
+          "projection_max_m": 0.025504531006395867,
+          "original_normal_conditioning": 0.8732354508633331,
+          "fitted_normal_conditioning": 0.8686330809191294
+        },
+        "agent_08": {
+          "total_points": 147,
+          "refined_points": 132,
+          "projection_rms_m": 0.006827130175335471,
+          "projection_max_m": 0.025504531006395867,
+          "original_normal_conditioning": 0.9847526766266761,
+          "fitted_normal_conditioning": 0.9759412361761175
+        },
+        "agent_09": {
+          "total_points": 186,
+          "refined_points": 181,
+          "projection_rms_m": 0.008190763454126579,
+          "projection_max_m": 0.03381144680210503,
+          "original_normal_conditioning": 0.8717261308552391,
+          "fitted_normal_conditioning": 0.8739532246498042
+        },
+        "agent_10": {
+          "total_points": 203,
+          "refined_points": 182,
+          "projection_rms_m": 0.007952834507365246,
+          "projection_max_m": 0.025713441159561874,
+          "original_normal_conditioning": 0.9611873390501354,
+          "fitted_normal_conditioning": 0.9342515012895583
+        },
+        "agent_11": {
+          "total_points": 217,
+          "refined_points": 202,
+          "projection_rms_m": 0.007731827953927111,
+          "projection_max_m": 0.033811446802105086,
+          "original_normal_conditioning": 0.6740775973798315,
+          "fitted_normal_conditioning": 0.6659350887896845
+        },
+        "agent_12": {
+          "total_points": 217,
+          "refined_points": 202,
+          "projection_rms_m": 0.00773182795392711,
+          "projection_max_m": 0.03381144680210501,
+          "original_normal_conditioning": 0.674077597379832,
+          "fitted_normal_conditioning": 0.6659350887896848
+        },
+        "agent_13": {
+          "total_points": 159,
+          "refined_points": 147,
+          "projection_rms_m": 0.007676758791844714,
+          "projection_max_m": 0.025504531006395867,
+          "original_normal_conditioning": 0.8472202902009563,
+          "fitted_normal_conditioning": 0.847635940357418
+        },
+        "agent_14": {
+          "total_points": 186,
+          "refined_points": 169,
+          "projection_rms_m": 0.007593224816919286,
+          "projection_max_m": 0.033811446802105044,
+          "original_normal_conditioning": 0.8643097292477945,
+          "fitted_normal_conditioning": 0.8712744481732928
+        },
+        "agent_15": {
+          "total_points": 139,
+          "refined_points": 131,
+          "projection_rms_m": 0.008093801741830737,
+          "projection_max_m": 0.03381144680210502,
+          "original_normal_conditioning": 0.6266564350277993,
+          "fitted_normal_conditioning": 0.6034347323444522
+        },
+        "agent_02": {
+          "total_points": 171,
+          "refined_points": 149,
+          "projection_rms_m": 0.008301011533177024,
+          "projection_max_m": 0.03869293714946363,
+          "original_normal_conditioning": 0.7460683902688231,
+          "fitted_normal_conditioning": 0.7482521986311205
+        },
+        "agent_03": {
+          "total_points": 232,
+          "refined_points": 207,
+          "projection_rms_m": 0.007049965660446936,
+          "projection_max_m": 0.024831354901071204,
+          "original_normal_conditioning": 0.7140070853603433,
+          "fitted_normal_conditioning": 0.6815546808085317
+        }
+      },
+      "series_sha256": "507fd7f3e1f1bca9b2c49530fce311065f02737a87c3c7c0fcbd739b4f000ddf",
+      "templates_sha256": "0c770dba59ec6dda902ad43e785623e2393e72ccb91afabfcf0393db56aaed46"
+    },
+    {
+      "case": "near_l_reference_reference",
+      "condition": "near_l_reference",
+      "frames": 393,
+      "paired_frames": 315,
+      "availability_relative_to_original": 1.0,
+      "original_same_input_mae_m": 0.02172025013276266,
+      "candidate_same_input_mae_m": 0.021934812070966127,
+      "original_own_available_mae_m": 0.02172025013276266,
+      "candidate_own_available_mae_m": 0.021934812070966127,
+      "first_hold": {
+        "frame": 353,
+        "time_s": 17.650000000000116,
+        "true_goal_error_m": 0.00843305070651127,
+        "original_estimated_goal_error_m": 0.019107897856921727,
+        "candidate_estimated_goal_error_m": 0.01831985518195236,
+        "candidate_fresh": true,
+        "position_band_m": 0.02
+      },
+      "original_local_bad_fit_count": 0,
+      "candidate_local_bad_fit_count": 0,
+      "accepted_local_readouts": [
+        5033,
+        5033
+      ],
+      "original_statuses_exact": 5049,
+      "original_readouts_exact": 5033,
+      "scan_counts_verified": 6288,
+      "candidate_status_counts": {
+        "bootstrap_only": 16,
+        "before_bootstrap": 7,
+        "accepted": 5033
+      },
+      "reference_surface_diagnostics": {
+        "agent_00": {
+          "total_points": 210,
+          "refined_points": 198,
+          "projection_rms_m": 0.007278397258866581,
+          "projection_max_m": 0.026826652418310996,
+          "original_normal_conditioning": 0.8958456465565713,
+          "fitted_normal_conditioning": 0.8659809220648285
+        },
+        "agent_01": {
+          "total_points": 203,
+          "refined_points": 164,
+          "projection_rms_m": 0.006393967846636485,
+          "projection_max_m": 0.01879291366480174,
+          "original_normal_conditioning": 0.580272863284131,
+          "fitted_normal_conditioning": 0.5613605862177948
+        },
+        "agent_02": {
+          "total_points": 152,
+          "refined_points": 122,
+          "projection_rms_m": 0.005853206674639825,
+          "projection_max_m": 0.018426300928899114,
+          "original_normal_conditioning": 0.5894928700505869,
+          "fitted_normal_conditioning": 0.5825995871214442
+        },
+        "agent_03": {
+          "total_points": 152,
+          "refined_points": 122,
+          "projection_rms_m": 0.005853206674639825,
+          "projection_max_m": 0.018426300928899114,
+          "original_normal_conditioning": 0.5894928700505873,
+          "fitted_normal_conditioning": 0.5825995871214448
+        },
+        "agent_04": {
+          "total_points": 152,
+          "refined_points": 122,
+          "projection_rms_m": 0.005853206674639823,
+          "projection_max_m": 0.018426300928899114,
+          "original_normal_conditioning": 0.589492870050587,
+          "fitted_normal_conditioning": 0.5825995871214441
+        },
+        "agent_05": {
+          "total_points": 251,
+          "refined_points": 217,
+          "projection_rms_m": 0.006825883755867599,
+          "projection_max_m": 0.026826652418310996,
+          "original_normal_conditioning": 0.9304178982145724,
+          "fitted_normal_conditioning": 0.9038948404114993
+        },
+        "agent_06": {
+          "total_points": 183,
+          "refined_points": 156,
+          "projection_rms_m": 0.006091216307218206,
+          "projection_max_m": 0.018986379413221975,
+          "original_normal_conditioning": 0.4609552420424871,
+          "fitted_normal_conditioning": 0.4405788395970992
+        },
+        "agent_07": {
+          "total_points": 155,
+          "refined_points": 117,
+          "projection_rms_m": 0.0072140951165005265,
+          "projection_max_m": 0.023379251080722384,
+          "original_normal_conditioning": 0.5139017343848953,
+          "fitted_normal_conditioning": 0.5194732956955105
+        },
+        "agent_09": {
+          "total_points": 166,
+          "refined_points": 148,
+          "projection_rms_m": 0.007441455599508027,
+          "projection_max_m": 0.026826652418310948,
+          "original_normal_conditioning": 0.676110023708594,
+          "fitted_normal_conditioning": 0.7021203402545351
+        },
+        "agent_10": {
+          "total_points": 183,
+          "refined_points": 156,
+          "projection_rms_m": 0.006091216307218211,
+          "projection_max_m": 0.018986379413221975,
+          "original_normal_conditioning": 0.4609552420424869,
+          "fitted_normal_conditioning": 0.44057883959709926
+        },
+        "agent_11": {
+          "total_points": 233,
+          "refined_points": 203,
+          "projection_rms_m": 0.007523363654012023,
+          "projection_max_m": 0.02682665241831102,
+          "original_normal_conditioning": 0.75217106302342,
+          "fitted_normal_conditioning": 0.7839651446746119
+        },
+        "agent_12": {
+          "total_points": 166,
+          "refined_points": 148,
+          "projection_rms_m": 0.007441455599508028,
+          "projection_max_m": 0.026826652418310948,
+          "original_normal_conditioning": 0.676110023708594,
+          "fitted_normal_conditioning": 0.7021203402545357
+        },
+        "agent_13": {
+          "total_points": 155,
+          "refined_points": 117,
+          "projection_rms_m": 0.00721409511650053,
+          "projection_max_m": 0.023379251080722384,
+          "original_normal_conditioning": 0.5139017343848952,
+          "fitted_normal_conditioning": 0.5194732956955103
+        },
+        "agent_15": {
+          "total_points": 168,
+          "refined_points": 147,
+          "projection_rms_m": 0.006795300723811841,
+          "projection_max_m": 0.018300432610734767,
+          "original_normal_conditioning": 0.6538893253770833,
+          "fitted_normal_conditioning": 0.6789870709286626
+        },
+        "agent_08": {
+          "total_points": 130,
+          "refined_points": 103,
+          "projection_rms_m": 0.007951071116073113,
+          "projection_max_m": 0.02500116078943323,
+          "original_normal_conditioning": 0.3623849902610151,
+          "fitted_normal_conditioning": 0.3715391013715028
+        },
+        "agent_14": {
+          "total_points": 210,
+          "refined_points": 185,
+          "projection_rms_m": 0.007621447242297707,
+          "projection_max_m": 0.027083521080475532,
+          "original_normal_conditioning": 0.5040923496258031,
+          "fitted_normal_conditioning": 0.5220220671540311
+        }
+      },
+      "series_sha256": "d5d5fac7c90528a807605255887586e9053432bd587b0226d308580fa2facb51",
+      "templates_sha256": "31b608089d1b1693f295ee407f6fe4b3d35241501a9486b251c9165d7e6fcfcd"
+    },
+    {
+      "case": "near_ellipse_perpendicular_reference",
+      "condition": "near_ellipse_perpendicular",
+      "frames": 311,
+      "paired_frames": 198,
+      "availability_relative_to_original": 1.0,
+      "original_same_input_mae_m": 0.01072300856154301,
+      "candidate_same_input_mae_m": 0.010297545327196903,
+      "original_own_available_mae_m": 0.01072300856154301,
+      "candidate_own_available_mae_m": 0.010297545327196903,
+      "first_hold": {
+        "frame": 271,
+        "time_s": 13.550000000000058,
+        "true_goal_error_m": 0.006597926334905461,
+        "original_estimated_goal_error_m": 0.015931645579638144,
+        "candidate_estimated_goal_error_m": 0.014068279400418939,
+        "candidate_fresh": true,
+        "position_band_m": 0.02
+      },
+      "original_local_bad_fit_count": 0,
+      "candidate_local_bad_fit_count": 0,
+      "accepted_local_readouts": [
+        3144,
+        3140
+      ],
+      "original_statuses_exact": 3184,
+      "original_readouts_exact": 3144,
+      "scan_counts_verified": 4976,
+      "candidate_status_counts": {
+        "bootstrap_only": 16,
+        "accepted": 3140,
+        "motion_bound_exceeded": 28
+      },
+      "reference_surface_diagnostics": {
+        "agent_00": {
+          "total_points": 235,
+          "refined_points": 223,
+          "projection_rms_m": 0.00759454305801631,
+          "projection_max_m": 0.02432937019424899,
+          "original_normal_conditioning": 0.2529153904752815,
+          "fitted_normal_conditioning": 0.24291884601462307
+        },
+        "agent_01": {
+          "total_points": 154,
+          "refined_points": 142,
+          "projection_rms_m": 0.007023569044650668,
+          "projection_max_m": 0.016919424344659272,
+          "original_normal_conditioning": 0.2510918626266157,
+          "fitted_normal_conditioning": 0.25176235948301223
+        },
+        "agent_02": {
+          "total_points": 146,
+          "refined_points": 139,
+          "projection_rms_m": 0.006989267934144049,
+          "projection_max_m": 0.021931948041738127,
+          "original_normal_conditioning": 0.24470508512842426,
+          "fitted_normal_conditioning": 0.2439198513928463
+        },
+        "agent_03": {
+          "total_points": 265,
+          "refined_points": 252,
+          "projection_rms_m": 0.00737311244123082,
+          "projection_max_m": 0.024980600724495827,
+          "original_normal_conditioning": 0.35275730381334947,
+          "fitted_normal_conditioning": 0.3451925363083568
+        },
+        "agent_04": {
+          "total_points": 168,
+          "refined_points": 159,
+          "projection_rms_m": 0.0074858065497863035,
+          "projection_max_m": 0.024765333432677342,
+          "original_normal_conditioning": 0.3299269808184674,
+          "fitted_normal_conditioning": 0.3329924607285221
+        },
+        "agent_05": {
+          "total_points": 213,
+          "refined_points": 203,
+          "projection_rms_m": 0.007742834733498987,
+          "projection_max_m": 0.024329370194248936,
+          "original_normal_conditioning": 0.27617842241794377,
+          "fitted_normal_conditioning": 0.26417064517411504
+        },
+        "agent_06": {
+          "total_points": 171,
+          "refined_points": 159,
+          "projection_rms_m": 0.007287103944401278,
+          "projection_max_m": 0.024980600724495827,
+          "original_normal_conditioning": 0.32542063395618226,
+          "fitted_normal_conditioning": 0.32303598135508443
+        },
+        "agent_07": {
+          "total_points": 201,
+          "refined_points": 185,
+          "projection_rms_m": 0.0073747283129636885,
+          "projection_max_m": 0.022888799010629943,
+          "original_normal_conditioning": 0.2218351991072473,
+          "fitted_normal_conditioning": 0.21328166604516238
+        },
+        "agent_08": {
+          "total_points": 153,
+          "refined_points": 141,
+          "projection_rms_m": 0.007530041141465323,
+          "projection_max_m": 0.022888799010629998,
+          "original_normal_conditioning": 0.2756219075267848,
+          "fitted_normal_conditioning": 0.2639306685619341
+        },
+        "agent_09": {
+          "total_points": 259,
+          "refined_points": 250,
+          "projection_rms_m": 0.00779504996290727,
+          "projection_max_m": 0.024329370194248873,
+          "original_normal_conditioning": 0.28513959978796477,
+          "fitted_normal_conditioning": 0.2775918008588419
+        },
+        "agent_10": {
+          "total_points": 221,
+          "refined_points": 211,
+          "projection_rms_m": 0.007377063934029131,
+          "projection_max_m": 0.024980600724495747,
+          "original_normal_conditioning": 0.2657626158341363,
+          "fitted_normal_conditioning": 0.2543591037598612
+        },
+        "agent_11": {
+          "total_points": 259,
+          "refined_points": 238,
+          "projection_rms_m": 0.00759318421740671,
+          "projection_max_m": 0.024329370194248873,
+          "original_normal_conditioning": 0.33012405724592575,
+          "fitted_normal_conditioning": 0.32351933467220323
+        },
+        "agent_12": {
+          "total_points": 149,
+          "refined_points": 139,
+          "projection_rms_m": 0.008130625961078781,
+          "projection_max_m": 0.02432937019424899,
+          "original_normal_conditioning": 0.2649396669248636,
+          "fitted_normal_conditioning": 0.248081565290574
+        },
+        "agent_13": {
+          "total_points": 177,
+          "refined_points": 166,
+          "projection_rms_m": 0.007385826704383456,
+          "projection_max_m": 0.021171193514532515,
+          "original_normal_conditioning": 0.22779232186254506,
+          "fitted_normal_conditioning": 0.22295393652376091
+        },
+        "agent_14": {
+          "total_points": 193,
+          "refined_points": 184,
+          "projection_rms_m": 0.007862671628874409,
+          "projection_max_m": 0.024329370194248873,
+          "original_normal_conditioning": 0.3067494695282167,
+          "fitted_normal_conditioning": 0.30100335357163777
+        },
+        "agent_15": {
+          "total_points": 192,
+          "refined_points": 186,
+          "projection_rms_m": 0.008183492204556948,
+          "projection_max_m": 0.02432937019424899,
+          "original_normal_conditioning": 0.3387561556854102,
+          "fitted_normal_conditioning": 0.33173395866263794
+        }
+      },
+      "series_sha256": "835ce1e1baaf947887105e55f94c778d3abbc0a03cde0aed34a8ee9d152b24f1",
+      "templates_sha256": "cbac5d13344483e36cfa20d21313764044b6c9b9ef53b7d134bd6728b36a0df4"
+    },
+    {
+      "case": "near_c_open_away_reference",
+      "condition": "near_c_open_away",
+      "frames": 238,
+      "paired_frames": 164,
+      "availability_relative_to_original": 1.0,
+      "original_same_input_mae_m": 0.028664006390138153,
+      "candidate_same_input_mae_m": 0.028548200071785157,
+      "original_own_available_mae_m": 0.028664006390138153,
+      "candidate_own_available_mae_m": 0.028548200071785157,
+      "first_hold": {
+        "frame": 198,
+        "time_s": 9.900000000000006,
+        "true_goal_error_m": 0.038804224318657106,
+        "original_estimated_goal_error_m": 0.018835791219853248,
+        "candidate_estimated_goal_error_m": 0.015910806804305115,
+        "candidate_fresh": true,
+        "position_band_m": 0.02
+      },
+      "original_local_bad_fit_count": 0,
+      "candidate_local_bad_fit_count": 0,
+      "accepted_local_readouts": [
+        2614,
+        2620
+      ],
+      "original_statuses_exact": 2637,
+      "original_readouts_exact": 2614,
+      "scan_counts_verified": 3808,
+      "candidate_status_counts": {
+        "bootstrap_only": 16,
+        "before_bootstrap": 3,
+        "accepted": 2620,
+        "motion_bound_exceeded": 1
+      },
+      "reference_surface_diagnostics": {
+        "agent_00": {
+          "total_points": 200,
+          "refined_points": 155,
+          "projection_rms_m": 0.007128165481329522,
+          "projection_max_m": 0.02388375538154818,
+          "original_normal_conditioning": 0.9398788136513962,
+          "fitted_normal_conditioning": 0.9595349879304046
+        },
+        "agent_01": {
+          "total_points": 165,
+          "refined_points": 150,
+          "projection_rms_m": 0.007407517155865503,
+          "projection_max_m": 0.021106087749041488,
+          "original_normal_conditioning": 0.497837070073318,
+          "fitted_normal_conditioning": 0.5136910118138892
+        },
+        "agent_03": {
+          "total_points": 177,
+          "refined_points": 156,
+          "projection_rms_m": 0.007402481535975337,
+          "projection_max_m": 0.02379664914228099,
+          "original_normal_conditioning": 0.5312145052956644,
+          "fitted_normal_conditioning": 0.5409127765472088
+        },
+        "agent_04": {
+          "total_points": 187,
+          "refined_points": 178,
+          "projection_rms_m": 0.007620910186544212,
+          "projection_max_m": 0.023883755381548348,
+          "original_normal_conditioning": 0.595130646603437,
+          "fitted_normal_conditioning": 0.6283673586352384
+        },
+        "agent_05": {
+          "total_points": 217,
+          "refined_points": 169,
+          "projection_rms_m": 0.007013187811343044,
+          "projection_max_m": 0.02468552309941567,
+          "original_normal_conditioning": 0.8077813042182573,
+          "fitted_normal_conditioning": 0.8237731611089725
+        },
+        "agent_06": {
+          "total_points": 164,
+          "refined_points": 145,
+          "projection_rms_m": 0.007244273302224888,
+          "projection_max_m": 0.023883755381548126,
+          "original_normal_conditioning": 0.7375799666282806,
+          "fitted_normal_conditioning": 0.7852079194786157
+        },
+        "agent_07": {
+          "total_points": 142,
+          "refined_points": 78,
+          "projection_rms_m": 0.005236702927334812,
+          "projection_max_m": 0.017815117090422865,
+          "original_normal_conditioning": 0.6977255669799094,
+          "fitted_normal_conditioning": 0.6706204568303825
+        },
+        "agent_08": {
+          "total_points": 119,
+          "refined_points": 78,
+          "projection_rms_m": 0.00572042938681899,
+          "projection_max_m": 0.017815117090423088,
+          "original_normal_conditioning": 0.42589224933792047,
+          "fitted_normal_conditioning": 0.40254824624056634
+        },
+        "agent_09": {
+          "total_points": 159,
+          "refined_points": 114,
+          "projection_rms_m": 0.007305840705788127,
+          "projection_max_m": 0.02345485626348665,
+          "original_normal_conditioning": 0.8127384613348819,
+          "fitted_normal_conditioning": 0.787363447732177
+        },
+        "agent_11": {
+          "total_points": 208,
+          "refined_points": 159,
+          "projection_rms_m": 0.007088528831686141,
+          "projection_max_m": 0.02345485626348665,
+          "original_normal_conditioning": 0.6863626101754815,
+          "fitted_normal_conditioning": 0.651942442055493
+        },
+        "agent_12": {
+          "total_points": 159,
+          "refined_points": 114,
+          "projection_rms_m": 0.007305840705788134,
+          "projection_max_m": 0.02345485626348665,
+          "original_normal_conditioning": 0.8127384613348819,
+          "fitted_normal_conditioning": 0.7873634477321771
+        },
+        "agent_13": {
+          "total_points": 140,
+          "refined_points": 114,
+          "projection_rms_m": 0.006998226871060746,
+          "projection_max_m": 0.020717482373039428,
+          "original_normal_conditioning": 0.7027876432672717,
+          "fitted_normal_conditioning": 0.7291335995631825
+        },
+        "agent_14": {
+          "total_points": 145,
+          "refined_points": 103,
+          "projection_rms_m": 0.006837398137221091,
+          "projection_max_m": 0.02326548060272636,
+          "original_normal_conditioning": 0.7732028177920518,
+          "fitted_normal_conditioning": 0.7680262773899886
+        },
+        "agent_15": {
+          "total_points": 128,
+          "refined_points": 83,
+          "projection_rms_m": 0.0071261926878391085,
+          "projection_max_m": 0.023265480602726384,
+          "original_normal_conditioning": 0.816780547802468,
+          "fitted_normal_conditioning": 0.8276200069201449
+        },
+        "agent_02": {
+          "total_points": 146,
+          "refined_points": 126,
+          "projection_rms_m": 0.007631085051405297,
+          "projection_max_m": 0.025233937397701224,
+          "original_normal_conditioning": 0.28239087044588956,
+          "fitted_normal_conditioning": 0.28183546413286853
+        },
+        "agent_10": {
+          "total_points": 187,
+          "refined_points": 179,
+          "projection_rms_m": 0.007630277429843432,
+          "projection_max_m": 0.022969922554641243,
+          "original_normal_conditioning": 0.6016365638303229,
+          "fitted_normal_conditioning": 0.626917360584216
+        }
+      },
+      "series_sha256": "b054c4a587c889bab5ec8f7dcda839f755876abb9b1ed293482929256a5bad0a",
+      "templates_sha256": "d3565007567ab9abc7f4dc514dcd2b855a696f985ff675395427c6c65f61725c"
+    }
+  ],
+  "gates": {
+    "far_c_open_away_pos0": {
+      "availability": true,
+      "same_input_error": true
+    },
+    "far_skew_box_s0_r0_pos0": {
+      "availability": true,
+      "same_input_error": false,
+      "reject_old_false_stop": true
+    },
+    "near_circle": {
+      "availability": true,
+      "same_input_error": true
+    },
+    "near_ellipse_parallel": {
+      "availability": true,
+      "same_input_error": true
+    },
+    "near_rectangle_parallel": {
+      "availability": true,
+      "same_input_error": true
+    },
+    "near_l_reference": {
+      "availability": true,
+      "same_input_error": true
+    },
+    "near_ellipse_perpendicular": {
+      "availability": true,
+      "same_input_error": true
+    },
+    "near_c_open_away": {
+      "availability": true,
+      "same_input_error": true
+    }
+  },
+  "new_physical_episodes": 0,
+  "wall_seconds": 285.76581969996914,
+  "protocol_sha256": "e7952bd39c9df87b5bb0d3f4bc33e871af97052c9829cc1d8da951d2bcbde956",
+  "source_integrity": "PASS",
+  "scope": "Eight reused trajectories; identical inputs and original baseline readings exactly reproduced. Candidate-specific estimator state/admission. No new successes or independent validation."
+}

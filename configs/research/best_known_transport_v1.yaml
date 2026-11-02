@@ -1,0 +1,214 @@
+paper: true
+dt: 0.05
+domain:
+  xmin: 0.0
+  xmax: 8.0
+  ymin: 0.0
+  ymax: 8.0
+agents:
+  count: 16
+  layout: scatter
+  center:
+  - 4.0
+  - 4.0
+  radius_min: 1.670047119236084
+  radius_max: 2.4700471192360838
+  min_separation: 0.34
+cargoes:
+- id: cargo_0
+  shape: polygon
+  vertices:
+  - - 3.315163934426218
+    - 3.2936475409835957
+  - - 5.115163934426218
+    - 3.2936475409835957
+  - - 5.115163934426218
+    - 3.9686475409835955
+  - - 4.065163934426218
+    - 3.9686475409835955
+  - - 4.065163934426218
+    - 5.093647540983596
+  - - 3.315163934426218
+    - 5.093647540983596
+  movable: true
+  surface_density: 2.0
+task:
+  mode: random_constrained
+  distance_min: 1.2
+  distance_max: 1.2
+  wall_margin: 0.35
+  tolerance: 0.12
+  angle_min_deg: 0.0
+  angle_max_deg: 0.0
+controller:
+  task_mode: transport
+  sensor_range: 1.2
+  ray_count: 72
+  range_noise_std: 0.01
+  pca_neighbors: 5
+  residual_tolerance: 0.03
+  min_confidence: 0.15
+  perception_every: 1
+  planning_every: 1
+  communication_dropout_prob: 0.0
+  progress_estimate_gain: 1.24
+  comm_range: 1.6
+  voxel_size: 0.06
+  age_decay: 0.3
+  max_voxels_per_object: 320
+  motion_compensation: true
+  registration_gate: 0.12
+  registration_normal_cosine: 0.5
+  max_object_speed: 0.45
+  carve_enabled: true
+  carve_margin: 0.06
+  estimate_object_yaw: false
+  max_object_yaw_rate: 0.8
+  min_yaw_lever_voxels: 2.0
+  density_mode: offset
+  cage_offset: 0.105
+  lead_offset: 0.26
+  lead_threshold: 0.25
+  enclose_uniform_ring: false
+  sigma: 0.2
+  base_density: 0.001
+  gap_gain: 0.6
+  gap_radius: 0.35
+  local_radius: 0.8
+  grid_resolution: 20
+  integration_method: endpoint_grid
+  edge_n_gon: 256
+  edge_panels: 48
+  edge_h_max: 0.004
+  edge_cull_sigmas: 6.0
+  approach_mass_ratio: 3.0
+  redeploy_gap_ratio: 0.15
+  explore_gain: 0.0
+  explore_step: 0.25
+  explore_window: 0.18
+  robot_radius: 0.13
+  delta_max: 0.065
+  d_min: 0.28
+  gamma_agent: 6.0
+  gamma_obj: 8.0
+  rho: 0.02
+  max_speed: 0.35
+  backend: qp
+  use_object_barrier: true
+  max_object_rows: 8
+  object_row_range: 0.6
+  object_row_window: 0.28
+  object_row_face_cosine: 0.26
+  object_row_mode: aggregate
+  aggregate_frame_consistent: true
+  dt: 0.05
+  object_velocity_bound: 0.2
+  recovery_fraction: 0.6
+  search_mode: sweep
+  search_margin: 0.45
+  search_speed: 0.28
+  search_lane_tolerance: 0.12
+  token_ttl: 12.0
+  token_arrival_radius: 0.3
+  kp_explore: 0.25
+  kp_cage: 0.9
+  kp_transport: 0.18
+  push_side_threshold: 0.35
+  min_push_agents: 4
+  contact_band_tolerance: 0.08
+  object_velocity_filter: 0.35
+  transport_law: progress
+  transport_reference_speed: 0.055
+  transport_kp: 2.4
+  transport_ki: 3.0
+  transport_effort_max: 0.3
+  transport_feedback_guard: false
+  brake_release_integral: false
+  transport_safety_feedback: false
+  dynamic_contact_roles: false
+  dynamic_contact_allocation: true
+  dynamic_contact_relocation: true
+  confirmed_contact_handoff: false
+  contact_recovery_fix: false
+  contact_reinforcement: false
+  reference_radial_pivot: true
+  reference_innovation_trim: false
+  reference_support_gate: false
+  reference_early_anchor: false
+  reference_bootstrap_gain: null
+  initial_reference_acquisition: false
+  initial_task_reference: false
+  initial_acquisition_seconds: 60.0
+  contact_patch_distance: true
+  boundary_navigation: vector_goal
+  navigation_estimator: observed_reference
+  navigation_voter_continuity: false
+  navigation_hold_dwell: 1
+  transport_deadband: 0.05
+  brake_gain: 0.3
+  convoy_gain: 1.0
+  convoy_max: 0.25
+  kp_press: 3.0
+  standoff_range: 0.55
+  press_margin: null
+  press_margin_safety: 1.2
+  hold_offset: 0.17
+  lead_lookahead_time: 1.2
+  lead_lookahead_max: 0.18
+  separation_band: 0.06
+  kp_separate: 0.0
+  cross_track_gain: 10.0
+  cross_track_max_deg: 45.0
+  cross_track_deadband: 0.02
+  cross_track_damping: 12.0
+  cross_track_reference: 0.08
+  push_share_floor: 0.15
+  phase_informed_fraction: 0.55
+  phase_map_coverage_min: 0.7
+  phase_recover_on_brake_progress: false
+  contact_dwell: 20
+  brake_fraction: 0.65
+  target_center:
+  - 4.0
+  - 4.0
+  target_radius: 1.0
+  target_sensor_range: 2.0
+  target_samples: 36
+  theorem_mode: false
+  theorem_map_source: oracle
+  theorem_local_segments: false
+  theorem_oracle_spacing: 0.04
+  theorem_disable_clipping: true
+  theorem_forbid_fallback: true
+  theorem_allow_object_barrier_scaling: true
+  theorem_clamp_margin_to_keep_zero: true
+  theorem_disable_soft_separation: true
+transport:
+  engine: penalty
+  stiffness: 500.0
+  damping: 12.0
+  friction: 0.6
+  tangential_stiffness: 60.0
+  ground_friction: 0.6
+  gravity: 9.81
+  substeps: 4
+render:
+  map_agent: agent_00
+evaluation:
+  contact_radius: 0.42
+  j_min: 0.15
+  efficiency_min: 0.7
+  displacement_gate: 0.1
+g500:
+  detect_by: null
+  contact_ready_by: null
+  transport_by: null
+  reach_by: null
+  efficiency_min: 0.8
+  direction_error_max_deg: 20.0
+  cross_track_max: 0.15
+  coverage_min: 0.7
+  progress_max_ratio: 1.4
+  arrival_tolerance: 0.12
+  hold_speed_max: 0.02
+  yaw_max_deg: 15.0

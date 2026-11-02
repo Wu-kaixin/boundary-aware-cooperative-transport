@@ -1,5 +1,7 @@
 # DBACT：边界感知部署与协作搬运
 
+2026-11-03：[最优参数保护与参考面试验](docs/results/reference_surface_v1/README.md)完成八条同输入重放和一个完整基线复现。全部既有参数保持；斜箱位移 MAE 125.7→111.5 mm，未过预定门槛，候选关闭。保存的最优公共配置复现 L 形原轨迹，终点误差 8.43 mm、G500 通过。
+
 2026-11-03：[初始任务参考](docs/results/task_reference_v1/README.md)完成固定12回合：错误 HOLD 1/4→0/4，但完整任务完成3/4→1/4，候选未采用、默认关闭。[部署贡献审计](docs/results/deployment_contribution_v1/README.md)核验36条既有匹配轨迹：CVT改善共同部署时段覆盖，三方法完整搬运均11/12，不能宣称完成率优势。
 
 [匹配支撑固定筛选](docs/results/reference_support_v1/README.md)：8条同输入轨迹已完成；局部大误差减少但未通过团队误差门槛，新增物理回合0，候选默认关闭。

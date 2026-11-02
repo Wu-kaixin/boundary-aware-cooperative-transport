@@ -308,6 +308,7 @@ class DBACTParams:
     reference_radial_pivot: bool = False
     reference_innovation_trim: bool = False
     reference_support_gate: bool = False
+    reference_surface_refinement: bool = False
     reference_early_anchor: bool = False
     reference_bootstrap_gain: float | None = None  # None preserves progress_estimate_gain
     initial_reference_acquisition: bool = False
@@ -628,6 +629,9 @@ class DBACTController:
             raise ValueError("Innovation trim requires both observed reference channels")
         if params.reference_support_gate and params.navigation_estimator != "observed_reference":
             raise ValueError("Reference support gate requires both observed reference channels")
+        if params.reference_surface_refinement and (
+                params.navigation_estimator != "observed_reference" or params.initial_reference_acquisition):
+            raise ValueError("Surface refinement requires the original observed reference bootstrap")
         if ((params.reference_early_anchor or params.reference_bootstrap_gain is not None)
                 and params.navigation_estimator != "observed_reference"):
             raise ValueError("Reference-origin options require observed_reference")
@@ -1171,7 +1175,12 @@ class DBACTController:
             aid = agent.agent_id
             tracker = self._reference_trackers.get(aid)
             if tracker is None:
-                tracker = ObservedReferenceTracker(gate=self.params.registration_gate,
+                tracker_type, extra = ObservedReferenceTracker, {}
+                if self.params.reference_surface_refinement:
+                    from dbact.control.reference_surface import SurfaceReferenceTracker
+                    tracker_type = SurfaceReferenceTracker
+                    extra['surface_residual_tolerance'] = self.params.residual_tolerance
+                tracker = tracker_type(gate=self.params.registration_gate,
                     normal_cosine=self.params.registration_normal_cosine,
                     max_speed=self.params.max_object_speed,
                     max_yaw_rate=self.params.max_object_yaw_rate,
@@ -1179,7 +1188,7 @@ class DBACTController:
                     radial_readout=self.params.reference_radial_pivot,
                     innovation_trim=self.params.reference_innovation_trim,
                     support_gate=self.params.reference_support_gate,
-                    range_noise_std=self.params.range_noise_std)
+                    range_noise_std=self.params.range_noise_std, **extra)
                 self._reference_trackers[aid] = tracker
             if not tracker.initialized:
                 local_map = self.maps[aid]

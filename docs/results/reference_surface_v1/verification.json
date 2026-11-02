@@ -1,0 +1,63 @@
+{
+  "status": "PASS",
+  "checked_at_utc": "2026-11-02T17:01:11.265606+00:00",
+  "base_commit": "ff585b782636dbb883b228ec27bf320a4bfd7a33",
+  "execution_source_sha256": "260f486e31046edbf1f3ff4e1361027c0477b74b6589d0ff55a97c6c28f93e57",
+  "core_suite": {
+    "tests": 855,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 2,
+    "xml_sha256": "6f5b8194e0e00d22c1692383658ebc4e92817ece3fe7f9b7bf4807ecfe70837f"
+  },
+  "core_passed": 853,
+  "subsequent_targeted_with_new_parameter_receipt_test": {
+    "passed": 27,
+    "log_sha256": "fa50677584fca5d00b263d4cacad7fdcae85c854f6de6a8a5365431e01d06460"
+  },
+  "mas_suite": {
+    "tests": 106,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0,
+    "xml_sha256": "6af49b4f6805eda11b7a31d1c8b14fd57b8b2e65a010727854584c4d2ee9b623"
+  },
+  "parallel_smoke": {
+    "completed": 5,
+    "errors": 0,
+    "source_integrity": "PASS",
+    "summary_sha256": "69e5def6857fafaeb059bb9169cbb02573455fdab489076bce34d7d7752fd0f7"
+  },
+  "same_identity_smoke_resume": "PASS",
+  "repository_health": {
+    "schema": "repository-health-v1",
+    "checked_at_utc": "2026-11-02T17:00:03.702048+00:00",
+    "status": "PASS",
+    "head": "ff585b782636dbb883b228ec27bf320a4bfd7a33",
+    "tree": "b5db538a80d8d78f7c85ccc431829912880e14a2",
+    "python": "3.12.14",
+    "executable": "C:\\Users\\kai\\boundary-aware-cooperative-transport\\.venv\\Scripts\\python.exe",
+    "tracked_files_checked": 1236,
+    "python_files_parsed": 419,
+    "curated_evidence_verified": {
+      "ccta2027_draft_v2": 26,
+      "reliability_2026-10-22": 20
+    },
+    "navigation_documents_checked": 15,
+    "pip_check": "No broken requirements found.",
+    "git_fsck": "PASS",
+    "local_data_scope": "Full raw runs, downloaded references, environment payloads and backup archives stay local; see docs/DATA_INDEX.md",
+    "security_scope": "Filename and embedded private-key/token screening only; not a dependency vulnerability audit",
+    "failures": []
+  },
+  "independent_code_and_report_review": "No actionable blocker; reproduced baseline verification and checked data/figure hashes.",
+  "initial_default_tmp_attempt": {
+    "passed": 788,
+    "skipped": 2,
+    "setup_errors": 65,
+    "cause": "pytest could not create numbered directories under sandbox system temp; used fresh workspace basetemp for complete passing rerun",
+    "log_sha256": "438083552c5e79f94d0c332e8d56c5f71753d8fe2c3f243bdc3f7fd5f6368d0a"
+  },
+  "study_result": "Offline admission FAIL; candidate default OFF. One protected-baseline physical replay PASS. No candidate physical trial.",
+  "later_ci": "Local pre-push receipt; GitHub checks are recorded separately after the resulting commit exists."
+}

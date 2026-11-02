@@ -376,6 +376,12 @@ def transport_arm(cfg, seed, variant, frames, out):
             + ", bootstrap_gain=" + str(env.controller.params.reference_bootstrap_gain)
             + ". Same own/one-hop observations; reference feedback selected only after CONTACT_READY. "
             "No zero-motion assumption, truth, attachment, threshold, safety-map, physics or independent evaluation change.")
+    elif env.controller.params.reference_surface_refinement:
+        result["changed_mechanism"] = (
+            "Immutable local surface fits from the original initial own/one-hop scan, "
+            "using existing registration and residual thresholds. Original bootstrap "
+            "epoch, anchor, offset, radial pivot, matching loop, aggregation, stopping, "
+            "safety maps and physics unchanged. No truth or shape prior; default off.")
     elif env.controller.params.aggregate_frame_consistent:
         result["changed_mechanism"] = (
             "Normalize the aggregated observed plane normal and offset consistently, "
