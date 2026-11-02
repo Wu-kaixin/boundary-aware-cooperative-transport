@@ -45,3 +45,26 @@ phase gates and initial states verified for all8 prospective cases. Protected
 config SHA remains a5d5c8e200fa502557d4da9a9db2a646d027abababd59661bcdac21a1b43b112.
 Single execution session35111 is running; inspect its terminal result, do not
 duplicate a live run or treat a polling timeout as termination.
+
+Task4 complete. Session35111 terminal exit0,8 executions,0 execution errors,
+source integrity PASS. Analyzer99792 terminal exit0; publisher57952 terminal
+exit0. Four baselines reproduce all25 arrays and all scientific JSON fields.
+Candidate safe completion3/4 vs4/4, false HOLD/hard failures0 each, G5002/4 each.
+C scaling8 to0 but TRANSPORT quorum never attained. Skew no reference freeze,
+600s budget termination, endpoint1.2m, acquisition1422/post-acquisition21608
+scaled robot-steps; total23030. The latter are all status=unavailable, not a
+successful freeze. All candidate absent-reference nominal commands are zero;
+all declared voters independently checked fresh and within one-hop distance.
+
+Ruling: reject this candidate under the original gates and keep it default off.
+One traced geometry defect is explained and C scaling is removed in this screen,
+but acquisition/deployment and coordinated participation are not repaired. Cost
+of adopting by C outcome alone would be losing the previously successful skew.
+No extra episodes are appended to this frozen study; subsequent experiments
+need a separate prospective protocol under the user's continuing authorization.
+
+One fresh-context reviewer is inspecting fa8b619..implementation41a3183 plus the
+final evidence. Important interim finding: nearest_feature row mode ignores
+per-point velocities, so this new selector must reject that unsupported mode.
+All frozen cases use aggregate mode; preserve their runtime/source/protocol
+identity and handle the compatibility guard in a separately tested followup.

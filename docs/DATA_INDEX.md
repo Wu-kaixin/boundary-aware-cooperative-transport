@@ -1,5 +1,7 @@
 # 数据与原始文件索引
 
+2026-11-03：[参考驱动地图八回合](results/reference_map_v1/README.md)的原始数据在 `runs/research/2026-11-03-reference-map-v1/run/`，源码/脚本/协议冻结在同级 `freeze/`；全部8例均执行完成，候选3/4成功，斜箱600秒截尾，门槛FAIL。核心903通过/2跳过、针对性71通过及后验C形阶段审计在 `runs/maintenance/2026-11-03-reference-map-v1/`。[地图来源追踪](results/map_provenance_v1/README.md)的933帧逐阶段数组、独立祖先分析在 `runs/research/2026-11-03-map-provenance-v1/`，首次失败与第二次通过预检另保留在同名maintenance目录。旧数据和冻结源码均未覆盖。
+
 2026-11-03：[联合 QP 诊断](results/qp_conflict_v1/README.md)的四条精确重放、每步可行性和选定完整矩阵在 `runs/research/2026-11-03-qp-conflict-v1/`，执行前冻结在同级 `freeze/`；原始物理数据仍在 acquisition-geometry-v1。预检首轮失败、原脚本及第二轮通过分别保留在 `runs/maintenance/2026-11-03-qp-conflict-v1/preflight1/`、`preflight2/`。953 步精简 CSV、代数见证和图表已入 Git；新增物理回合 0。
 
 2026-11-03：[采集几何八回合](results/acquisition_geometry_v1/README.md)的完整原始结果位于 `runs/research/2026-11-03-acquisition-geometry-v1/run/`，执行前源码/脚本/协议/环境在同级 `freeze/`。全部门槛及逐帧缩放索引在 `analysis.json`；冻结门槛 FAIL，不修改旧平移试验。工程 RED、首轮测试消息不匹配、最终 37 项针对性通过和完整 892 通过/2 跳过日志分别保存在 `runs/maintenance/2026-11-03-acquisition-geometry-v1/`。

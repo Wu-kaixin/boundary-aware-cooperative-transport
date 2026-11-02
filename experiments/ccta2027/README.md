@@ -1,5 +1,7 @@
 # CCTA 2027 实验入口
 
+2026-11-03：[reference_map_v1.json](reference_map_v1.json)冻结原平移参照与参考驱动地图候选，四条件×两臂，最佳数值参数不变。[完整结果](../../docs/results/reference_map_v1/README.md)为4/4→3/4安全完成、门槛FAIL，候选未采用；保留斜箱600秒截尾及全部缩放。[来源追踪设计](map_provenance_v1_design.md)与[933帧离线证据](../../docs/results/map_provenance_v1/README.md)单独记账，后者没有新物理回合。
+
 2026-11-03：[qp_conflict_v1.json](qp_conflict_v1.json)冻结四条已有轨迹的完整控制器重放与约束子集诊断，共 3,411 帧、953 个缩放步，新物理回合 0。[全部结果和独立见证](../../docs/results/qp_conflict_v1/README.md)区分联合约束矛盾、速度影响及地图失真；运行代码和最佳数值参数未改，控制修复仍待验证。
 
 2026-11-03：[acquisition_geometry_v1.json](acquisition_geometry_v1.json)冻结平移参照与仅调整采集几何的候选，四条件×两臂，全部数值参数和判据不变。[完整八回合结果](../../docs/results/acquisition_geometry_v1/README.md)：完成均 4/4、G500 均 2/4，但斜箱采集缩放 240→689、C 形冻结后缩放 7→16，门槛 FAIL。默认关闭，不追加条件或事后放宽门槛。
