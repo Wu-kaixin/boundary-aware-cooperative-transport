@@ -316,6 +316,7 @@ class DBACTParams:
     initial_reference_motion_model: str = "se2"  # se2 | translation (explicit hypothesis)
     initial_reference_use_all_captured: bool = False
     initial_reference_safe_geometry: bool = False
+    initial_reference_map_motion: bool = False
     initial_acquisition_seconds: float = 60.0
     contact_patch_distance: bool = False
     # New development arms, off by default. The vector law changes controller
@@ -642,6 +643,12 @@ class DBACTController:
                 isinstance(params.reference_bootstrap_gain, bool)
                 or not np.isfinite(params.reference_bootstrap_gain) or params.reference_bootstrap_gain <= 0):
             raise ValueError("reference_bootstrap_gain must be finite and positive")
+        if (not isinstance(params.initial_reference_map_motion, bool)
+                or (params.initial_reference_map_motion and (
+                    not params.initial_task_reference or params.initial_reference_motion_model != "translation"
+                    or params.task_mode != "transport" or params.perception_every != 1
+                    or params.planning_every != 1 or not params.motion_compensation))):
+            raise ValueError("Reference map requires boolean selection, initial translation reference and every-frame transport")
         if params.initial_task_reference and not params.initial_reference_acquisition:
             raise ValueError("Initial task reference requires stationary acquisition")
         if (not isinstance(params.initial_reference_safe_geometry, bool)
@@ -791,6 +798,7 @@ class DBACTController:
         self.navigation_voter_trace = None
         self._reference_trackers = {}
         self._reference_readings = {}
+        self._map_reference_state = {}
         self.initial_reference_status = "disabled"
         self.initial_reference_epoch = None
         self.initial_reference_supporters = []
@@ -879,24 +887,28 @@ class DBACTController:
         # the update on an empty scan would age the map and decay its weights on a
         # frame where no measurement contradicted it.
         reference_batches = {} if self.params.navigation_estimator in _REFERENCE_CHANNELS else None
-        for i, agent in enumerate(agents):
-            if not sensing:
-                self._views[agent.agent_id] = self.maps[agent.agent_id].view(timestamp)
-                continue
-            local_map = self.maps[agent.agent_id]
-            local_map.register(scans[i], interval)
-            if local_map.carve_enabled:
-                local_map.carve(agent.position, scans[i])
-            batch, codes = _merge_scans(scans, [i] + list(neighbors[i]))
-            if reference_batches is not None:
-                reference_batches[agent.agent_id] = batch
-            local_map.update(batch, timestamp, agent_codes=codes, dt=interval)
-            self._views[agent.agent_id] = local_map.view(timestamp)
+        if self.params.initial_reference_map_motion:
+            from dbact.control.reference_map import update_reference_maps
+            update_reference_maps(self, agents, neighbors, scans, timestamp, interval)
+        else:
+            for i, agent in enumerate(agents):
+                if not sensing:
+                    self._views[agent.agent_id] = self.maps[agent.agent_id].view(timestamp)
+                    continue
+                local_map = self.maps[agent.agent_id]
+                local_map.register(scans[i], interval)
+                if local_map.carve_enabled:
+                    local_map.carve(agent.position, scans[i])
+                batch, codes = _merge_scans(scans, [i] + list(neighbors[i]))
+                if reference_batches is not None:
+                    reference_batches[agent.agent_id] = batch
+                local_map.update(batch, timestamp, agent_codes=codes, dt=interval)
+                self._views[agent.agent_id] = local_map.view(timestamp)
 
         self._update_tokens(agents, neighbors, timestamp)
         contact_ready = [self._contact_ready(agents[i], self._views[agents[i].agent_id]) for i in range(len(agents))]
         self._update_progress(agents, neighbors)
-        if reference_batches is not None:
+        if reference_batches is not None and not self.params.initial_reference_map_motion:
             self._update_reference(agents, reference_batches, timestamp)
         if self.params.boundary_navigation == "vector_goal":
             self._update_navigation(agents, neighbors)
@@ -949,6 +961,9 @@ class DBACTController:
                 u_nom, mode, cell_mass, push_side, effort = self._held_nominal[agent.agent_id]
             if self.initial_reference_status == "unavailable":
                 u_nom, mode, push_side, effort = np.zeros(2), "initial_reference_unavailable", False, 0.
+            if (self.params.initial_reference_map_motion
+                    and self._map_reference_state[agent.agent_id]['status'] == 'unavailable'):
+                u_nom, mode, push_side, effort = np.zeros(2), "map_reference_unavailable", False, 0.
             points, normals, v_obj, v_points = self._object_rows_from_map(
                 agent.agent_id, agent.position, view
             )
@@ -1092,6 +1107,12 @@ class DBACTController:
         loop = self.transport_loops.get(agent.agent_id)
         diagnostic.local_holding = bool(loop.holding) if loop is not None else False
         diagnostic.safety_feedback_blocked = self._blocked_along(agent.agent_id)
+        if self.params.initial_reference_map_motion:
+            state = self._map_reference_state[agent.agent_id]
+            diagnostic.map_reference_status = state['status']
+            diagnostic.map_reference_voters = state['voters']
+            diagnostic.map_reference_displacement = state.get('displacement')
+            diagnostic.map_reference_velocity = state.get('velocity')
         tracker = self._reference_trackers.get(agent.agent_id)
         if tracker is not None:
             diagnostic.reference_status = tracker.reason
@@ -2361,6 +2382,10 @@ class DBACTController:
         """
         if len(view) == 0:
             return np.empty((0, 2)), np.empty((0, 2)), np.zeros(2), None
+        if (self.params.initial_reference_map_motion
+                and self._map_reference_state.get(agent_id, {}).get('status') == 'unavailable'):
+            return (view.points, view.normals, np.zeros(2),
+                    self.params.max_object_speed * view.normals)
         nearest = self._nearest_index(view, position)
         velocity = np.zeros(2)
         point_velocities = None

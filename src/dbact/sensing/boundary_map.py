@@ -258,7 +258,29 @@ class LocalBoundaryMap:
     # motion compensation
     # ------------------------------------------------------------------ #
 
-    def register(self, scan: BoundaryView, dt: float) -> dict[str, RegistrationResult]:
+    def align_translation(self, object_id: str, displacement: np.ndarray, velocity: np.ndarray) -> None:
+        """Transport retained cells by an externally observed absolute translation.
+
+        The caller owns the zero epoch and fresh/local admission. Use registration
+        with apply_motion=False and update with integrate_motion=False afterwards:
+        scan refinement must not be counted as a second rigid body displacement.
+        This method does not refresh observation ages or infer physical zero yaw.
+        """
+        displacement = np.asarray(displacement, dtype=float).reshape(2)
+        velocity = np.asarray(velocity, dtype=float).reshape(2)
+        if not np.isfinite(displacement).all() or not np.isfinite(velocity).all():
+            raise ValueError("Finite reference displacement and velocity required")
+        delta = displacement - self.displacement.get(object_id, np.zeros(2))
+        rows = np.flatnonzero(self._objects == object_id)
+        if len(rows) and np.any(delta):
+            self._points[rows] += delta[None, :]
+            self._rekey()
+        self.displacement[object_id] = displacement.copy()
+        self.velocity[object_id] = velocity.copy()
+        self._step_motion.pop(object_id, None)
+        self._step_rotation.pop(object_id, None)
+
+    def register(self, scan: BoundaryView, dt: float, *, apply_motion: bool = True) -> dict[str, RegistrationResult]:
         """Estimate each object's translation from ``scan`` against the stored map.
 
         ``scan`` must be the robot's *own* fresh returns. Relayed points are
@@ -285,7 +307,7 @@ class LocalBoundaryMap:
             results[name] = result
             self.last_registration[name] = result
             self.motion_quality[name] = result.quality
-            if result.matches:
+            if result.matches and apply_motion:
                 # T2: rotate before translating, about the reference the solve used.
                 # The normals rotate with the surface -- a stored normal that did not
                 # turn with its own cell would make the next step's point-to-plane
@@ -697,6 +719,8 @@ class LocalBoundaryMap:
         timestamp: float,
         agent_codes: np.ndarray | None = None,
         dt: float = 0.0,
+        *,
+        integrate_motion: bool = True,
     ) -> None:
         """Fuse a batch of returns. Accepts a ``BoundaryView`` or a list."""
         if isinstance(new_observations, BoundaryView):
@@ -708,7 +732,8 @@ class LocalBoundaryMap:
             observations = list(new_observations)
             if not observations:
                 self.prune(timestamp)
-                self._commit_motion(dt)
+                if integrate_motion:
+                    self._commit_motion(dt)
                 return
             view = BoundaryView.from_observations(observations)
             sources = {}
@@ -719,7 +744,8 @@ class LocalBoundaryMap:
 
         if len(view) == 0:
             self.prune(timestamp)
-            self._commit_motion(dt)
+            if integrate_motion:
+                self._commit_motion(dt)
             return
 
         # A packet relayed over several paths arrives as several identical copies
@@ -769,10 +795,12 @@ class LocalBoundaryMap:
         drift = self._merge(
             cell_keys, cell_object, cell_point, cell_normal, cell_weight, cell_confidence, cell_arc, cell_time
         )
-        for name, translation in (drift or {}).items():
-            self._step_motion[name] = self._step_motion.get(name, np.zeros(2)) + translation
+        if integrate_motion:
+            for name, translation in (drift or {}).items():
+                self._step_motion[name] = self._step_motion.get(name, np.zeros(2)) + translation
         self.prune(timestamp)
-        self._commit_motion(dt)
+        if integrate_motion:
+            self._commit_motion(dt)
 
     def _merge(
         self,

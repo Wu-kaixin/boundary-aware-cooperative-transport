@@ -387,6 +387,14 @@ def transport_arm(cfg, seed, variant, frames, out):
             result['changed_mechanism'] += (
                 " Acquisition cage/lead offsets respect the active safety radius plus the existing "
                 "feasibility margin; original geometry resumes at freeze. This does not certify QP feasibility.")
+        if env.controller.params.initial_reference_map_motion:
+            result['initial_reference']['reference_driven_map_motion'] = True
+            result['changed_mechanism'] += (
+                " Map geometry/velocity use the same fresh own/one-hop initial translation reference; "
+                "stationary acquisition uses its declared zero epoch. Registration and fusion do not "
+                "add a second rigid displacement. Missing reference inhibits nominal motion, retains "
+                "anchored history, and exposes fresh packets with the existing speed disturbance bound. "
+                "Translation and existing row-cap assumptions remain; no dynamic safety certificate.")
     elif (env.controller.params.reference_early_anchor
             or env.controller.params.reference_bootstrap_gain is not None):
         result["changed_mechanism"] = (
