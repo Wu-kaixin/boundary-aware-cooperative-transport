@@ -6,9 +6,9 @@ stop, separately demonstrate the deployment contribution, and finish a
 CCTA2027-compliant paper draft. Address the existing issues first, then continue
 toward the entire goal. This ledger does not narrow that objective.
 
-Status: ACTIVE. Latest published checkpoint is 4e1bb4c; the complete four-condition
-replay and opt-in wiring are the current publication increment. No blocking
-condition has been established. The full research goal remains incomplete.
+Status: ACTIVE. Latest published checkpoint is 77e5ed9; the new eight-episode
+physical pilot and acquisition-barrier audit are the current publication increment.
+No blocking condition has been established. The full research goal is incomplete.
 
 ## Requirements and current evidence
 
@@ -16,7 +16,7 @@ condition has been established. The full research goal remains incomplete.
 | --- | --- | --- |
 | Preserve best common numerical parameters | configs/research/best_known_transport_v1.yaml; protected_baseline.json and receipt test | Protected; preserve during mechanism work. |
 | Safe deployment and unattached transport using allowed information | Existing controller, simulation contact model, 33-condition / 12-start receipts | Partial simulation evidence; shared phase supervisor must be acknowledged. |
-| Reliable goal-aligned displacement and stopping | transport_validation_v1 stop audit; task_reference_v1; reference_surface_v1 | Incomplete: far-skew false HOLD; initial-reference stalls; no accepted repair. |
+| Reliable goal-aligned displacement and stopping | task_translation_physical_v2; earlier transport_validation_v1 / task_reference_v1 | Four reused conditions now safely complete with no false HOLD; default-off candidate still needs acquisition safety, wider protected conditions and unused-condition validation. |
 | Dynamic safety and generalization appropriate to claims | G500 / hard-safety receipts and theory/static_deployment | Incomplete; static conditions do not prove dynamic safety. Freeze new conditions only after a usable common controller. |
 | Independent boundary-deployment contribution | deployment_contribution_v1, 36 existing matched trajectories | Coverage contribution supported; completion superiority unproven. New matched evaluation required for the final system. |
 | Reproducible environment | root .venv and requirements.lock.txt | Installed joblib 1.5.1 / PyYAML 6.0.2 differ from locked 1.6.0 / 6.0.3. Handle in a separate declared check, never by relabeling old runs. |
@@ -36,19 +36,32 @@ in a fixed four-arm same-input comparison.
 Translation-only yaw is an explicit hypothesis, not a measured zero or a
 rotation-robust stopping certificate. Preserve the free-ray diagnostic results.
 
-Current evidence: all four conditions in task_translation_completion_v1 are
+Current evidence: task_translation_physical_v2 completed 8 fresh physical episodes
+(exec 11579 exit 0; 210.4 s wall time, no execution error). Safe completion 3/4 to
+4/4, false HOLD 1 to 0, hard safety 0 in both arms, G500 2/4 in both. All four
+baselines exactly reproduced 25 arrays and scientific JSON fields; candidate
+zero epochs are valid. Original prospective advance gate PASS, not adoption.
+The new issue is severe acquisition scaling: skew 240 events, all before freeze;
+789 control frames, packed scans and complete step fields exactly match the old
+SE(2) initial-reference acquisition prefix. C has 1 acquisition and 7 post-freeze
+scalings. Next prioritize acquisition geometry/velocity/safety consistency with
+numeric parameters unchanged, then wider/unused conditions and final matched
+deployment comparisons. Report: docs/results/task_translation_physical_v2/.
+The unexecuted v1 freeze is preserved; v2 fixed timeout-label bookkeeping before
+new physics. See task_translation_physical_v2_plan.md for execution and review.
+
+Historical replay evidence: all four conditions in task_translation_completion_v1 are
 complete, and the original screen is FAIL (L/C/skew sustained-feedback criterion).
 Session 25427 is terminal, exit 1 after writing the complete skew data: a path
 join typo failed only final aggregation. Original failure/source snapshots are
 preserved; separate zero-update finalization completed (session 30915, exit 0).
 Report: docs/results/task_translation_completion_v1/. Original v2 session 3893
 remains a retained budget stop; v1 remains a retained arithmetic invalidation.
-The candidate is now wired as an explicit default-off runtime option; no new
-candidate physical trial or success has yet been established. The RED-to-GREEN
-record and full-suite verification are recorded in task_translation_wiring_plan.md.
-Published 4e1bb4c passed both CI platforms, 876 passes / 2 skips, on the older
-runtime. Next is a separately frozen exploratory 4-baseline / 4-candidate pilot,
-followed by wider protected-condition regression and unused conditions if useful.
+The candidate remains an explicit default-off option after the completed pilot.
+The RED-to-GREEN record and 884-pass / 2-skip core verification are recorded in
+task_translation_wiring_plan.md. Published 77e5ed9 passed both CI platforms on
+the same runtime used in the new physical pilot; research helpers have separate
+freeze/run/evaluation checks. Wider conditions and adoption remain unestablished.
 The latest official paper-format check is recorded separately in
 docs/CCTA2027_REQUIREMENTS_CHECK_2026-11-03.md; manuscript scientific completion
 is still unproven and the original full goal remains active.

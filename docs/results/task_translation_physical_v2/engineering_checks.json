@@ -1,0 +1,91 @@
+{
+  "checked_at_utc": "2026-11-02T21:30:22.615848+00:00",
+  "scope": "Research-helper freeze/preflight/full physical execution and evidence checks. Control runtime unchanged from the prior reviewed/tested source; no repeated core suite solely for analysis scripts.",
+  "runtime_source_sha256": "9c7927a57d614f6f2d18757c2677c7af8829203882d3b40effd43043f3afa948",
+  "prior_engineering_receipt_sha256": "4abd5a179802f1c92946bd0b4ea0352b5ef0aec565997b1d4ce4474a246b3d42",
+  "prior_runtime_core": {
+    "tests": 886,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 2,
+    "passed": 884,
+    "time_seconds": 145.35,
+    "xml_sha256": "08c80bd8ee8b8388966a67d5d15651d674c2c77812762460870e3c99ae88e604",
+    "log_sha256": "b2860155cbc129dd01845df14e8af2b106e57f818574d95ed0a371715f91da3f",
+    "local_log": "runs/maintenance/2026-11-03-task-translation-completion-v1/core-wiring-v2.log"
+  },
+  "prior_runtime_mas_passed": 106,
+  "prior_runtime_ci": {
+    "commit": "77e5ed9bca17209a398d9f401aaaf70532ed1bb6",
+    "run_id": 41523057948,
+    "status": "success"
+  },
+  "new_execution": {
+    "exec_session": 11579,
+    "exit_code": 0,
+    "episodes": 8,
+    "execution_errors": 0,
+    "source_integrity": "PASS",
+    "elapsed_wall_seconds": 210.36280850000912
+  },
+  "new_evaluation": {
+    "exec_session": 91844,
+    "exit_code": 0,
+    "preflight_old_baseline_checks": 4,
+    "preflight_protected_cases": 8,
+    "exact_baseline_reproductions": 4,
+    "replay_arrays_per_baseline": 25,
+    "advance_gate": "PASS",
+    "candidate_adopted": false
+  },
+  "barrier_audit": {
+    "exec_session": 63584,
+    "exit_code": 0,
+    "new_physical_episodes": 0,
+    "public_receipt_sha256": "6efec0adbd9773d53719a6205fcb5a84f91f051c4ebcb23c10eebb86d8ac050c"
+  },
+  "publication": {
+    "exec_session": 46924,
+    "exit_code": 0,
+    "product_hashes": "PASS",
+    "figure_visually_checked": true
+  },
+  "unexecuted_v1": {
+    "frozen_snapshot_verified": true,
+    "still_zero_physics": true,
+    "retired_cli_refusal_exit_code": 1,
+    "original_frozen_runner_sha256": "ebbb5c0e8a8ab0ad38feaf2a483280d6ecdc481acb91e8039fbb1ccf43c96489",
+    "current_retired_runner_sha256": "1da0be001dab31285d9253dc639275edb4a0bbc0feca0adda9176cc018a14d25"
+  },
+  "timeout_metric_check": {
+    "scope": "Read-only evaluator check on old data, zero new physical episodes",
+    "old_label": "watchdog",
+    "old_max_frames_string_test": false,
+    "corrected_budget_terminated": true,
+    "frames": 12000,
+    "settled": false,
+    "old_receipt_sha256": "2f19b1d6c68f9bb6cfb63bcc0158d8e24f3d0a067b50dac137f29599ba86c95f"
+  },
+  "repository_health": {
+    "schema": "repository-health-v1",
+    "checked_at_utc": "2026-11-02T21:29:01.194661+00:00",
+    "status": "PASS",
+    "head": "77e5ed9bca17209a398d9f401aaaf70532ed1bb6",
+    "tree": "0f6b2dadf7eae22a58124f2fe03ac384b7e5e16c",
+    "python": "3.12.14",
+    "executable": "C:\\Users\\kai\\boundary-aware-cooperative-transport\\.venv\\Scripts\\python.exe",
+    "tracked_files_checked": 1325,
+    "python_files_parsed": 439,
+    "curated_evidence_verified": {
+      "ccta2027_draft_v2": 26,
+      "reliability_2026-10-22": 20
+    },
+    "navigation_documents_checked": 15,
+    "pip_check": "No broken requirements found.",
+    "git_fsck": "PASS",
+    "local_data_scope": "Full raw runs, downloaded references, environment payloads and backup archives stay local; see docs/DATA_INDEX.md",
+    "security_scope": "Filename and embedded private-key/token screening only; not a dependency vulnerability audit",
+    "failures": []
+  },
+  "repository_health_sha256": "a0086758ebac8169712301994514b1671320835737ae0fbb755dfe2985940156"
+}

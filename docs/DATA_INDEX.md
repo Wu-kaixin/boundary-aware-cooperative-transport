@@ -1,5 +1,7 @@
 # 数据与原始文件索引
 
+2026-11-03：[首次平移闭环八回合](results/task_translation_physical_v2/README.md)的原始产品在 `runs/research/2026-11-03-task-translation-physical-v2/run/`，执行前源码/脚本/协议在同级 `freeze/`，屏障事件明细在 `barrier_diagnostic_v1/`。v1 只冻结、未执行，原件与退役收据保留在 `2026-11-03-task-translation-physical-v1/`；v2 在任何新物理数据前修正预算标签统计。八个新回合及全部原失败分别记账，不与旧重放混算。
+
 重放完成后的控制器接口检查在 `runs/maintenance/2026-11-03-task-translation-completion-v1/`：`wiring-red.*` 保留实现前失败，`wiring-green.*` 保留 33 项针对性通过；`core-wiring.*` 是默认沙箱临时目录权限导致的失败，`core-wiring-v2.*` 使用新的仓库内临时目录。它们均为工程检查，不是物理试验；原重放及环境身份不变。
 
 2026-11-03：[四条件完整结果](results/task_translation_completion_v1/README.md)由前三项旧完整输出及新补算斜箱构成；补算数组/源码在 `runs/research/2026-11-03-task-translation-completion-v1/`。该次逐帧计算完成后，汇总路径错误导致执行退出，原失败收据保留；独立汇总恢复在 `runs/research/2026-11-03-task-translation-finalization-v1/`，没有重跑估计器或物理。所有原始 v1/v2/补算/快照均保留，不能把汇总恢复当成新的闭环验证。

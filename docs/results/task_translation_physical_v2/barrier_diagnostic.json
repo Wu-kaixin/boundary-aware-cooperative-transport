@@ -1,0 +1,269 @@
+{
+  "scope": "Post-hoc barrier localization and pre-freeze compatibility audit; no new physical episodes or safety-certificate claim",
+  "cases": [
+    {
+      "case_id": "near_l_reference_translation_all_captured",
+      "condition": "near_l_reference",
+      "arm": "translation_all_captured",
+      "scaled_robot_steps": 0,
+      "control_frames_with_scaling": 0,
+      "by_phase": {},
+      "by_capture_state": {},
+      "by_agent": {},
+      "min_scale": 1.0,
+      "first_event": null,
+      "last_event": null,
+      "receipt_sha256": "7ccd198a28343636b6c6e0b369675ad23b3ae69c0010be458429004942a9c0db"
+    },
+    {
+      "case_id": "near_circle_reference",
+      "condition": "near_circle",
+      "arm": "reference",
+      "scaled_robot_steps": 0,
+      "control_frames_with_scaling": 0,
+      "by_phase": {},
+      "by_capture_state": {},
+      "by_agent": {},
+      "min_scale": 1.0,
+      "first_event": null,
+      "last_event": null,
+      "receipt_sha256": "3058006202265b1a1c588357eed9cbf5262e02651dd4d787ee81187c8d37305d"
+    },
+    {
+      "case_id": "near_l_reference_reference",
+      "condition": "near_l_reference",
+      "arm": "reference",
+      "scaled_robot_steps": 0,
+      "control_frames_with_scaling": 0,
+      "by_phase": {},
+      "by_capture_state": {},
+      "by_agent": {},
+      "min_scale": 1.0,
+      "first_event": null,
+      "last_event": null,
+      "receipt_sha256": "f6bfbae463f6d3636c4df3fc52c87e50988686b171747ef4a644d796f73615af"
+    },
+    {
+      "case_id": "far_c_open_away_pos0_reference",
+      "condition": "far_c_open_away_pos0",
+      "arm": "reference",
+      "scaled_robot_steps": 3,
+      "control_frames_with_scaling": 3,
+      "by_phase": {
+        "CONTACT_READY": 3
+      },
+      "by_capture_state": {
+        "disabled": 3
+      },
+      "by_agent": {
+        "agent_10": 3
+      },
+      "min_scale": 0.4765625,
+      "first_event": {
+        "frame": 464,
+        "phase": "CONTACT_READY",
+        "capture_state": "disabled",
+        "agents": [
+          "agent_10"
+        ]
+      },
+      "last_event": {
+        "frame": 472,
+        "phase": "CONTACT_READY",
+        "capture_state": "disabled",
+        "agents": [
+          "agent_10"
+        ]
+      },
+      "receipt_sha256": "3623f4db040d433c4df87c38f5aaf4186841fae7e5393327cd83ba7766a6865d"
+    },
+    {
+      "case_id": "far_c_open_away_pos0_translation_all_captured",
+      "condition": "far_c_open_away_pos0",
+      "arm": "translation_all_captured",
+      "scaled_robot_steps": 8,
+      "control_frames_with_scaling": 8,
+      "by_phase": {
+        "ENCLOSE": 1,
+        "CONTACT_READY": 7
+      },
+      "by_capture_state": {
+        "acquiring": 1,
+        "frozen": 7
+      },
+      "by_agent": {
+        "agent_08": 1,
+        "agent_04": 7
+      },
+      "min_scale": 0.15234375,
+      "first_event": {
+        "frame": 408,
+        "phase": "ENCLOSE",
+        "capture_state": "acquiring",
+        "agents": [
+          "agent_08"
+        ]
+      },
+      "last_event": {
+        "frame": 579,
+        "phase": "CONTACT_READY",
+        "capture_state": "frozen",
+        "agents": [
+          "agent_04"
+        ]
+      },
+      "receipt_sha256": "63bb65e24f17f68b2d0eecd0df9f37eb5eb75e70be5eca2e048fcd70516b7813",
+      "old_se2_acquisition_prefix": {
+        "old_case_id": "far_c_open_away_pos0_task_reference",
+        "old_receipt_sha256": "2f19b1d6c68f9bb6cfb63bcc0158d8e24f3d0a067b50dac137f29599ba86c95f",
+        "epoch_seconds": 20.500000000000156,
+        "control_frames_before_freeze": 409,
+        "replay_fields_exact": {
+          "times": true,
+          "phase": true,
+          "min_distance": true,
+          "map_coverage": true,
+          "push_flags": true,
+          "contact_flags": true,
+          "efforts": true,
+          "agent_positions": true,
+          "sensed_counts": true,
+          "cargo/cargo_0/centers": true,
+          "cargo/cargo_0/angles": true,
+          "cargo/cargo_0/strict_coverage": true,
+          "cargo/cargo_0/contacts": true,
+          "cargo/cargo_0/penetration": true,
+          "cargo/cargo_0/speed": true,
+          "cargo/cargo_0/progress_estimate": true,
+          "packed_sensed_points": true
+        },
+        "paired_steps_exact": true,
+        "old_scaled_robot_steps": 1,
+        "new_scaled_robot_steps": 1,
+        "scope": "Strict pre-freeze prefix of an earlier SE(2) initial-reference episode, not another new control or evidence for whole-episode equality"
+      }
+    },
+    {
+      "case_id": "far_skew_box_s0_r0_pos0_reference",
+      "condition": "far_skew_box_s0_r0_pos0",
+      "arm": "reference",
+      "scaled_robot_steps": 2,
+      "control_frames_with_scaling": 2,
+      "by_phase": {
+        "CONTACT_READY": 2
+      },
+      "by_capture_state": {
+        "disabled": 2
+      },
+      "by_agent": {
+        "agent_09": 2
+      },
+      "min_scale": 0.92578125,
+      "first_event": {
+        "frame": 464,
+        "phase": "CONTACT_READY",
+        "capture_state": "disabled",
+        "agents": [
+          "agent_09"
+        ]
+      },
+      "last_event": {
+        "frame": 465,
+        "phase": "CONTACT_READY",
+        "capture_state": "disabled",
+        "agents": [
+          "agent_09"
+        ]
+      },
+      "receipt_sha256": "29b6df389afb88f81b1c64f7fddda78be2a6fdce8d8e0c3eea6b6181f7ecab51"
+    },
+    {
+      "case_id": "far_skew_box_s0_r0_pos0_translation_all_captured",
+      "condition": "far_skew_box_s0_r0_pos0",
+      "arm": "translation_all_captured",
+      "scaled_robot_steps": 240,
+      "control_frames_with_scaling": 183,
+      "by_phase": {
+        "ENCLOSE": 240
+      },
+      "by_capture_state": {
+        "acquiring": 240
+      },
+      "by_agent": {
+        "agent_12": 68,
+        "agent_09": 8,
+        "agent_06": 71,
+        "agent_05": 92,
+        "agent_10": 1
+      },
+      "min_scale": 0.00390625,
+      "first_event": {
+        "frame": 437,
+        "phase": "ENCLOSE",
+        "capture_state": "acquiring",
+        "agents": [
+          "agent_12"
+        ]
+      },
+      "last_event": {
+        "frame": 784,
+        "phase": "ENCLOSE",
+        "capture_state": "acquiring",
+        "agents": [
+          "agent_05"
+        ]
+      },
+      "receipt_sha256": "d5e16c346cb4b73fc0f7e8fd200d23a5cd1cc00c32cbe0c851bcbaeb0ad113c3",
+      "old_se2_acquisition_prefix": {
+        "old_case_id": "far_skew_box_s0_r0_pos0_task_reference",
+        "old_receipt_sha256": "3288300761da9263d9395d8c483af3edb0d965e9afc67dc9c409a158b7d7d13b",
+        "epoch_seconds": 39.49999999999989,
+        "control_frames_before_freeze": 789,
+        "replay_fields_exact": {
+          "times": true,
+          "phase": true,
+          "min_distance": true,
+          "map_coverage": true,
+          "push_flags": true,
+          "contact_flags": true,
+          "efforts": true,
+          "agent_positions": true,
+          "sensed_counts": true,
+          "cargo/cargo_0/centers": true,
+          "cargo/cargo_0/angles": true,
+          "cargo/cargo_0/strict_coverage": true,
+          "cargo/cargo_0/contacts": true,
+          "cargo/cargo_0/penetration": true,
+          "cargo/cargo_0/speed": true,
+          "cargo/cargo_0/progress_estimate": true,
+          "packed_sensed_points": true
+        },
+        "paired_steps_exact": true,
+        "old_scaled_robot_steps": 240,
+        "new_scaled_robot_steps": 240,
+        "scope": "Strict pre-freeze prefix of an earlier SE(2) initial-reference episode, not another new control or evidence for whole-episode equality"
+      }
+    },
+    {
+      "case_id": "near_circle_translation_all_captured",
+      "condition": "near_circle",
+      "arm": "translation_all_captured",
+      "scaled_robot_steps": 0,
+      "control_frames_with_scaling": 0,
+      "by_phase": {},
+      "by_capture_state": {},
+      "by_agent": {},
+      "min_scale": 1.0,
+      "first_event": null,
+      "last_event": null,
+      "receipt_sha256": "c627efe1c339f516590e8c6f8cec67b397e23221824af4bb1932cc893c04497a"
+    }
+  ],
+  "new_physical_episodes": 0,
+  "original_advance_gate_unchanged": "PASS",
+  "protocol_sha256": "eb74bd23df060e067f436ade37e921f5ff57e4af404a6264bbf356c706c064e1",
+  "analysis_sha256": "6c07944f2e1278b7284265917280b75ad0cc9cbeeaaf02f383d0918329ce4603",
+  "script_sha256": "943f0c957deac2c0e3e19a0b6c2353e79f567dcaa6691d3f0ae42eeb42db1f66",
+  "event_trace": "runs/research/2026-11-03-task-translation-physical-v2/barrier_diagnostic_v1/events.json",
+  "event_trace_sha256": "565bddfe1a664026c04a29e385a6f57a39c43c10e3bea0688389a7499f642636"
+}
