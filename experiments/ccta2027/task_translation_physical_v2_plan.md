@@ -45,8 +45,11 @@ trial had yet been run and the original offline screen stayed FAIL.
    scale increment to per-agent status: skew 240 all before freeze; identical
    old SE(2) prefix over 789 frames plus packed scans/full step fields. C has
    1 acquisition and 7 post-freeze events. No outcome or gate changed by the audit.
-4. Perform one final fresh-context review of this new study/report increment,
-   resolve material issues, then synchronize the authorized research branch.
+4. DONE: one final fresh-context review of 77e5ed9..dcfdd53, no
+   Critical/Important/Minor findings. It independently verified eight receipts,
+   recomputed episode rows, four exact baselines, counter/prefix audits and hashes.
+   docs/results/task_translation_physical_v2/final_review.md records its scope.
+   Synchronize the already-authorized research branch after the review record.
 5. Infer the next physical/control step from all outcomes. The full goal still
    requires reliability over wider/unused conditions, final matched deployment
    contribution and an evidence-aligned CCTA2027 paper, not just this pilot.
@@ -79,3 +82,13 @@ otherwise a future invocation could accidentally launch the superseded eight
 episodes. The CLI refusal was observed exit 1 with run/started still absent; its
 original frozen script remains unchanged. Cost: current v1 helper differs by the
 explicit refusal from its frozen historical copy; only v2 is executable here.
+
+Final: Ruling: general reliability, dynamic safety certification, larger rotations,
+deployment superiority, locked-environment physical reproduction and adoption
+remain unjudged by this bounded review — keep each unfulfilled and the candidate
+off by default. Cost if treated otherwise: unsupported claims outside the four
+reused development cases. No fixes or minors were deferred.
+
+This increment is complete: eight new episodes and all prespecified outcomes,
+exact baseline reproduction, adverse-scaling diagnosis, curated report/figures,
+repository checks and independent final review. Full goal remains ACTIVE.
