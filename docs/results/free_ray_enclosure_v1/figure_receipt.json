@@ -1,0 +1,127 @@
+{
+  "script_sha256": "03a6e0b17c5533a68111fe176dad251204c1141bb773ef182b69b52eb7486ceb",
+  "inputs": {
+    "experiments\\ccta2027\\free_ray_enclosure_v1.json": "8276ba7223104527fe9fdd808ef4f04792350d83c8732123ce0df80714454ecd",
+    "runs\\research\\2026-11-03-free-ray-enclosure-v1\\near_circle_task_reference\\sanitized_packets.json": "73bdc617ee21dee621a9c25d13f8115dfe0656ad8e66847f4bde7f34bc5c9d0d",
+    "docs\\results\\free_ray_enclosure_v1\\near_circle_task_reference_enclosures.json": "cacfc26144249933a7125e164ca402f4f10e1c8fb6f2c548ab2657f4a2a92b75",
+    "runs\\research\\2026-11-03-free-ray-enclosure-v1\\near_l_reference_task_reference\\sanitized_packets.json": "9a80b6892aa412acdc5aa9b96fad88cbe362209a29e75548299faf16ce4a0493",
+    "docs\\results\\free_ray_enclosure_v1\\near_l_reference_task_reference_enclosures.json": "76312dcc7c69d8998325e981ea76ace1902ad6e2013f1fe65933e56d4b5e3a5b",
+    "runs\\research\\2026-11-03-free-ray-enclosure-v1\\far_c_open_away_pos0_task_reference\\sanitized_packets.json": "dc16f1a020c98d6b1972da286eef61571d4f26cb662aedf0146735fad9845f1e",
+    "docs\\results\\free_ray_enclosure_v1\\far_c_open_away_pos0_task_reference_enclosures.json": "8f5d707bc0ac58fd7949177ee964129fcee0e343fa3d7c0b1b0de1b6f9252224",
+    "runs\\research\\2026-11-03-free-ray-enclosure-v1\\far_skew_box_s0_r0_pos0_task_reference\\sanitized_packets.json": "a68cbf28e277563ed3a6d1bfd2045e33035c8100f11905030268a13d7fb955ae",
+    "docs\\results\\free_ray_enclosure_v1\\far_skew_box_s0_r0_pos0_task_reference_enclosures.json": "67f7fcfcfb2df27d24ecaea1cccf475d6c79fb0309fa6358d6a9c4be26b258a9"
+  },
+  "connectivity_scope": "Descriptive static graph only; no relaying or new control episode",
+  "graphs": {
+    "near_circle_task_reference": {
+      "components": [
+        [
+          "agent_00",
+          "agent_01",
+          "agent_02",
+          "agent_03",
+          "agent_04",
+          "agent_05",
+          "agent_06",
+          "agent_07",
+          "agent_08",
+          "agent_09",
+          "agent_10",
+          "agent_11",
+          "agent_12",
+          "agent_13",
+          "agent_14",
+          "agent_15"
+        ]
+      ],
+      "component_diameter_hops": [
+        4
+      ]
+    },
+    "near_l_reference_task_reference": {
+      "components": [
+        [
+          "agent_00",
+          "agent_01",
+          "agent_02",
+          "agent_03",
+          "agent_04",
+          "agent_05",
+          "agent_06",
+          "agent_07",
+          "agent_08",
+          "agent_09",
+          "agent_10",
+          "agent_11",
+          "agent_12",
+          "agent_13",
+          "agent_14",
+          "agent_15"
+        ]
+      ],
+      "component_diameter_hops": [
+        4
+      ]
+    },
+    "far_c_open_away_pos0_task_reference": {
+      "components": [
+        [
+          "agent_00",
+          "agent_01",
+          "agent_02",
+          "agent_03",
+          "agent_04",
+          "agent_05",
+          "agent_06",
+          "agent_07",
+          "agent_08",
+          "agent_09",
+          "agent_10",
+          "agent_11",
+          "agent_12",
+          "agent_13",
+          "agent_14"
+        ],
+        [
+          "agent_15"
+        ]
+      ],
+      "component_diameter_hops": [
+        3,
+        0
+      ]
+    },
+    "far_skew_box_s0_r0_pos0_task_reference": {
+      "components": [
+        [
+          "agent_00",
+          "agent_01",
+          "agent_02",
+          "agent_03",
+          "agent_04",
+          "agent_05",
+          "agent_06",
+          "agent_07",
+          "agent_08",
+          "agent_09",
+          "agent_10",
+          "agent_11",
+          "agent_12",
+          "agent_13",
+          "agent_14"
+        ],
+        [
+          "agent_15"
+        ]
+      ],
+      "component_diameter_hops": [
+        3,
+        0
+      ]
+    }
+  },
+  "products": {
+    "free_ray_snapshots.png": "a44247d06257a98890ee9061ce017d541e29e0b5e80e65d4962335b4a4ca0484",
+    "free_ray_snapshots.pdf": "2c739b87917a3454ae9bc03eb0d9f0f6f2ca1bbe42008bbfd73d5380112cc408"
+  }
+}

@@ -1,0 +1,660 @@
+{
+  "scope": "Four reused acquisition snapshots; zero new physical episodes",
+  "protocol_sha256": "8276ba7223104527fe9fdd808ef4f04792350d83c8732123ce0df80714454ecd",
+  "source_sha256": "6892bbbd247118891622c46ed0c112ffe31714b17435af730b6f246089475112",
+  "source_integrity": "PASS",
+  "environment": {
+    "python": "3.12.14",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "executable": "C:\\Users\\kai\\boundary-aware-cooperative-transport\\.venv\\Scripts\\python.exe",
+    "packages": {
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "shapely": "2.2.0",
+      "PyYAML": "6.0.2",
+      "cvxpy": "1.9.3",
+      "clarabel": "0.11.1",
+      "osqp": "1.1.3",
+      "scs": "3.3.1",
+      "pymunk": "7.3.1",
+      "matplotlib": "3.11.2",
+      "threadpoolctl": "3.7.0"
+    }
+  },
+  "physical_episodes": 0,
+  "wall_seconds": 147.37933669995982,
+  "cases": [
+    {
+      "case_id": "near_circle_task_reference",
+      "condition": "near_circle",
+      "epoch": 1.800000000000001,
+      "scan_count_checks": 16,
+      "original_scan_counts": [
+        19,
+        12,
+        9,
+        13,
+        12,
+        17,
+        12,
+        19,
+        9,
+        14,
+        15,
+        15,
+        13,
+        12,
+        10,
+        7
+      ],
+      "zero_epoch": {
+        "status": "frozen",
+        "epoch": 1.800000000000001,
+        "supporters": [
+          "agent_00",
+          "agent_05",
+          "agent_10",
+          "agent_11"
+        ],
+        "pre_epoch_contact_samples": 0,
+        "max_pre_epoch_translation": 0.0,
+        "max_pre_epoch_rotation": 0.0,
+        "zero_epoch_valid": true
+      },
+      "sensor_parameters": {
+        "sensor_range": 1.2,
+        "ray_count": 72,
+        "range_noise_std": 0.01,
+        "pca_neighbors": 5,
+        "residual_tolerance": 0.03,
+        "min_confidence": 0.15,
+        "max_arc_gap": 0.25,
+        "seed": 20261102
+      },
+      "communication_range_m": 1.6,
+      "sanitized_packet_sha256": "73bdc617ee21dee621a9c25d13f8115dfe0656ad8e66847f4bde7f34bc5c9d0d",
+      "arms": {
+        "own": {
+          "packets": 16,
+          "status_counts": {
+            "WORKSPACE_ONLY": 16
+          },
+          "object_exclusions": 0,
+          "center_exclusions": 0,
+          "intersecting_free_rays": 0,
+          "area_ratio_min": 1.0,
+          "area_ratio_max": 1.0
+        },
+        "one_hop": {
+          "packets": 16,
+          "status_counts": {
+            "WORKSPACE_ONLY": 16
+          },
+          "object_exclusions": 0,
+          "center_exclusions": 0,
+          "intersecting_free_rays": 0,
+          "area_ratio_min": 1.0,
+          "area_ratio_max": 1.0
+        },
+        "all_team_evaluator_only": {
+          "packets": 1,
+          "status_counts": {
+            "BOUNDED_BY_FREE_RAYS": 1
+          },
+          "object_exclusions": 0,
+          "center_exclusions": 0,
+          "intersecting_free_rays": 0,
+          "area_ratio_min": 0.03880835262696242,
+          "area_ratio_max": 0.03880835262696242
+        }
+      },
+      "stop_counterfactual": {
+        "scope": "Original controls/transforms only; these are NOT new successes",
+        "basic_eligible_frames": 7611,
+        "counters": {
+          "workspace": {
+            "bound_pass_frames": 0,
+            "bound_and_quorum_frames": 0,
+            "bound_pass_outside_task_tolerance": 0,
+            "minimum_bound_m": 0.9484837777149185
+          },
+          "own": {
+            "bound_pass_frames": 0,
+            "bound_and_quorum_frames": 0,
+            "bound_pass_outside_task_tolerance": 0,
+            "minimum_bound_m": 0.9484837777149185
+          },
+          "one_hop": {
+            "bound_pass_frames": 0,
+            "bound_and_quorum_frames": 0,
+            "bound_pass_outside_task_tolerance": 0,
+            "minimum_bound_m": 0.9484837777149185
+          },
+          "all_team_evaluator_only": {
+            "bound_pass_frames": 0,
+            "bound_and_quorum_frames": 0,
+            "bound_pass_outside_task_tolerance": 0,
+            "minimum_bound_m": 0.16402983051270462
+          }
+        },
+        "first_basic": {
+          "frame": 279,
+          "phase": "BRAKE",
+          "voters": [
+            "agent_00",
+            "agent_05",
+            "agent_10",
+            "agent_11"
+          ],
+          "quorum": true,
+          "true_error_m": 0.019269031134264526,
+          "bounds_m": {
+            "workspace": 9.28247659174684,
+            "own": 9.28247659174684,
+            "one_hop": 9.28247659174684,
+            "all_team_evaluator_only": 1.567810341167447
+          }
+        },
+        "first_bound_and_quorum_pass": {
+          "workspace": null,
+          "own": null,
+          "one_hop": null,
+          "all_team_evaluator_only": null
+        },
+        "final": {
+          "frame": 12000,
+          "phase": "BRAKE",
+          "voters": [
+            "agent_00",
+            "agent_05",
+            "agent_10",
+            "agent_11"
+          ],
+          "quorum": true,
+          "true_error_m": 0.007721918029763812,
+          "bounds_m": {
+            "workspace": 11.309893325439752,
+            "own": 11.309893325439752,
+            "one_hop": 11.309893325439752,
+            "all_team_evaluator_only": 1.9048390097168693
+          }
+        }
+      }
+    },
+    {
+      "case_id": "near_l_reference_task_reference",
+      "condition": "near_l_reference",
+      "epoch": 1.7000000000000008,
+      "scan_count_checks": 16,
+      "original_scan_counts": [
+        22,
+        2,
+        8,
+        14,
+        10,
+        26,
+        15,
+        24,
+        5,
+        9,
+        16,
+        18,
+        7,
+        5,
+        13,
+        4
+      ],
+      "zero_epoch": {
+        "status": "frozen",
+        "epoch": 1.7000000000000008,
+        "supporters": [
+          "agent_00",
+          "agent_01",
+          "agent_02",
+          "agent_03",
+          "agent_04",
+          "agent_05",
+          "agent_10"
+        ],
+        "pre_epoch_contact_samples": 0,
+        "max_pre_epoch_translation": 0.0,
+        "max_pre_epoch_rotation": 0.0,
+        "zero_epoch_valid": true
+      },
+      "sensor_parameters": {
+        "sensor_range": 1.2,
+        "ray_count": 72,
+        "range_noise_std": 0.01,
+        "pca_neighbors": 5,
+        "residual_tolerance": 0.03,
+        "min_confidence": 0.15,
+        "max_arc_gap": 0.25,
+        "seed": 20261102
+      },
+      "communication_range_m": 1.6,
+      "sanitized_packet_sha256": "9a80b6892aa412acdc5aa9b96fad88cbe362209a29e75548299faf16ce4a0493",
+      "arms": {
+        "own": {
+          "packets": 16,
+          "status_counts": {
+            "WORKSPACE_ONLY": 16
+          },
+          "object_exclusions": 0,
+          "center_exclusions": 0,
+          "intersecting_free_rays": 0,
+          "area_ratio_min": 1.0,
+          "area_ratio_max": 1.0
+        },
+        "one_hop": {
+          "packets": 16,
+          "status_counts": {
+            "WORKSPACE_ONLY": 16
+          },
+          "object_exclusions": 0,
+          "center_exclusions": 0,
+          "intersecting_free_rays": 0,
+          "area_ratio_min": 1.0,
+          "area_ratio_max": 1.0
+        },
+        "all_team_evaluator_only": {
+          "packets": 1,
+          "status_counts": {
+            "BOUNDED_BY_FREE_RAYS": 1
+          },
+          "object_exclusions": 0,
+          "center_exclusions": 0,
+          "intersecting_free_rays": 0,
+          "area_ratio_min": 0.05331869793392867,
+          "area_ratio_max": 0.05331869793392867
+        }
+      },
+      "stop_counterfactual": {
+        "scope": "Original controls/transforms only; these are NOT new successes",
+        "basic_eligible_frames": 0,
+        "counters": {
+          "workspace": {
+            "bound_pass_frames": 0,
+            "bound_and_quorum_frames": 0,
+            "bound_pass_outside_task_tolerance": 0,
+            "minimum_bound_m": null
+          },
+          "own": {
+            "bound_pass_frames": 0,
+            "bound_and_quorum_frames": 0,
+            "bound_pass_outside_task_tolerance": 0,
+            "minimum_bound_m": null
+          },
+          "one_hop": {
+            "bound_pass_frames": 0,
+            "bound_and_quorum_frames": 0,
+            "bound_pass_outside_task_tolerance": 0,
+            "minimum_bound_m": null
+          },
+          "all_team_evaluator_only": {
+            "bound_pass_frames": 0,
+            "bound_and_quorum_frames": 0,
+            "bound_pass_outside_task_tolerance": 0,
+            "minimum_bound_m": null
+          }
+        },
+        "first_basic": null,
+        "first_bound_and_quorum_pass": {
+          "workspace": null,
+          "own": null,
+          "one_hop": null,
+          "all_team_evaluator_only": null
+        },
+        "final": {
+          "frame": 373,
+          "phase": "HOLD",
+          "voters": [
+            "agent_00",
+            "agent_01",
+            "agent_02",
+            "agent_03",
+            "agent_04",
+            "agent_05",
+            "agent_10"
+          ],
+          "quorum": true,
+          "true_error_m": 0.020115976608926396,
+          "bounds_m": {
+            "workspace": 0.07168380346037047,
+            "own": 0.07168380346037047,
+            "one_hop": 0.07168380346037047,
+            "all_team_evaluator_only": 0.027439627808320637
+          }
+        }
+      }
+    },
+    {
+      "case_id": "far_c_open_away_pos0_task_reference",
+      "condition": "far_c_open_away_pos0",
+      "epoch": 20.500000000000156,
+      "scan_count_checks": 16,
+      "original_scan_counts": [
+        11,
+        2,
+        0,
+        12,
+        22,
+        27,
+        30,
+        24,
+        21,
+        12,
+        29,
+        10,
+        30,
+        19,
+        20,
+        0
+      ],
+      "zero_epoch": {
+        "status": "frozen",
+        "epoch": 20.500000000000156,
+        "supporters": [
+          "agent_04",
+          "agent_05",
+          "agent_06",
+          "agent_07"
+        ],
+        "pre_epoch_contact_samples": 0,
+        "max_pre_epoch_translation": 0.0,
+        "max_pre_epoch_rotation": 0.0,
+        "zero_epoch_valid": true
+      },
+      "sensor_parameters": {
+        "sensor_range": 1.2,
+        "ray_count": 72,
+        "range_noise_std": 0.01,
+        "pca_neighbors": 5,
+        "residual_tolerance": 0.03,
+        "min_confidence": 0.15,
+        "max_arc_gap": 0.25,
+        "seed": 20261102
+      },
+      "communication_range_m": 1.6,
+      "sanitized_packet_sha256": "dc16f1a020c98d6b1972da286eef61571d4f26cb662aedf0146735fad9845f1e",
+      "arms": {
+        "own": {
+          "packets": 16,
+          "status_counts": {
+            "WORKSPACE_ONLY": 14,
+            "NO_TARGET_RETURNS": 2
+          },
+          "object_exclusions": 0,
+          "center_exclusions": 0,
+          "intersecting_free_rays": 0,
+          "area_ratio_min": 1.0,
+          "area_ratio_max": 1.0
+        },
+        "one_hop": {
+          "packets": 16,
+          "status_counts": {
+            "WORKSPACE_ONLY": 15,
+            "NO_TARGET_RETURNS": 1
+          },
+          "object_exclusions": 0,
+          "center_exclusions": 0,
+          "intersecting_free_rays": 0,
+          "area_ratio_min": 1.0,
+          "area_ratio_max": 1.0
+        },
+        "all_team_evaluator_only": {
+          "packets": 1,
+          "status_counts": {
+            "WORKSPACE_ONLY": 1
+          },
+          "object_exclusions": 0,
+          "center_exclusions": 0,
+          "intersecting_free_rays": 0,
+          "area_ratio_min": 1.0,
+          "area_ratio_max": 1.0
+        }
+      },
+      "stop_counterfactual": {
+        "scope": "Original controls/transforms only; these are NOT new successes",
+        "basic_eligible_frames": 4494,
+        "counters": {
+          "workspace": {
+            "bound_pass_frames": 0,
+            "bound_and_quorum_frames": 0,
+            "bound_pass_outside_task_tolerance": 0,
+            "minimum_bound_m": 0.1671286967440197
+          },
+          "own": {
+            "bound_pass_frames": 0,
+            "bound_and_quorum_frames": 0,
+            "bound_pass_outside_task_tolerance": 0,
+            "minimum_bound_m": 0.1671286967440197
+          },
+          "one_hop": {
+            "bound_pass_frames": 0,
+            "bound_and_quorum_frames": 0,
+            "bound_pass_outside_task_tolerance": 0,
+            "minimum_bound_m": 0.1671286967440197
+          },
+          "all_team_evaluator_only": {
+            "bound_pass_frames": 0,
+            "bound_and_quorum_frames": 0,
+            "bound_pass_outside_task_tolerance": 0,
+            "minimum_bound_m": 0.1671286967440197
+          }
+        },
+        "first_basic": {
+          "frame": 1336,
+          "phase": "BRAKE",
+          "voters": [
+            "agent_04",
+            "agent_05",
+            "agent_06",
+            "agent_07"
+          ],
+          "quorum": true,
+          "true_error_m": 0.057539228451417596,
+          "bounds_m": {
+            "workspace": 0.2979084852361534,
+            "own": 0.2979084852361534,
+            "one_hop": 0.2979084852361534,
+            "all_team_evaluator_only": 0.2979084852361534
+          }
+        },
+        "first_bound_and_quorum_pass": {
+          "workspace": null,
+          "own": null,
+          "one_hop": null,
+          "all_team_evaluator_only": null
+        },
+        "final": {
+          "frame": 12000,
+          "phase": "BRAKE",
+          "voters": [
+            "agent_05",
+            "agent_06",
+            "agent_07"
+          ],
+          "quorum": false,
+          "true_error_m": 0.057674318433121034,
+          "bounds_m": {
+            "workspace": 0.2625550860566561,
+            "own": 0.2625550860566561,
+            "one_hop": 0.2625550860566561,
+            "all_team_evaluator_only": 0.2625550860566561
+          }
+        }
+      }
+    },
+    {
+      "case_id": "far_skew_box_s0_r0_pos0_task_reference",
+      "condition": "far_skew_box_s0_r0_pos0",
+      "epoch": 39.49999999999989,
+      "scan_count_checks": 16,
+      "original_scan_counts": [
+        28,
+        28,
+        23,
+        28,
+        12,
+        31,
+        31,
+        32,
+        22,
+        30,
+        24,
+        22,
+        12,
+        28,
+        24,
+        0
+      ],
+      "zero_epoch": {
+        "status": "frozen",
+        "epoch": 39.49999999999989,
+        "supporters": [
+          "agent_03",
+          "agent_05",
+          "agent_06",
+          "agent_07"
+        ],
+        "pre_epoch_contact_samples": 0,
+        "max_pre_epoch_translation": 0.0,
+        "max_pre_epoch_rotation": 0.0,
+        "zero_epoch_valid": true
+      },
+      "sensor_parameters": {
+        "sensor_range": 1.2,
+        "ray_count": 72,
+        "range_noise_std": 0.01,
+        "pca_neighbors": 5,
+        "residual_tolerance": 0.03,
+        "min_confidence": 0.15,
+        "max_arc_gap": 0.25,
+        "seed": 20261102
+      },
+      "communication_range_m": 1.6,
+      "sanitized_packet_sha256": "a68cbf28e277563ed3a6d1bfd2045e33035c8100f11905030268a13d7fb955ae",
+      "arms": {
+        "own": {
+          "packets": 16,
+          "status_counts": {
+            "WORKSPACE_ONLY": 15,
+            "NO_TARGET_RETURNS": 1
+          },
+          "object_exclusions": 0,
+          "center_exclusions": 0,
+          "intersecting_free_rays": 0,
+          "area_ratio_min": 1.0,
+          "area_ratio_max": 1.0
+        },
+        "one_hop": {
+          "packets": 16,
+          "status_counts": {
+            "WORKSPACE_ONLY": 15,
+            "NO_TARGET_RETURNS": 1
+          },
+          "object_exclusions": 0,
+          "center_exclusions": 0,
+          "intersecting_free_rays": 0,
+          "area_ratio_min": 1.0,
+          "area_ratio_max": 1.0
+        },
+        "all_team_evaluator_only": {
+          "packets": 1,
+          "status_counts": {
+            "WORKSPACE_ONLY": 1
+          },
+          "object_exclusions": 0,
+          "center_exclusions": 0,
+          "intersecting_free_rays": 0,
+          "area_ratio_min": 1.0,
+          "area_ratio_max": 1.0
+        }
+      },
+      "stop_counterfactual": {
+        "scope": "Original controls/transforms only; these are NOT new successes",
+        "basic_eligible_frames": 4582,
+        "counters": {
+          "workspace": {
+            "bound_pass_frames": 1,
+            "bound_and_quorum_frames": 0,
+            "bound_pass_outside_task_tolerance": 0,
+            "minimum_bound_m": 0.11314306723131272
+          },
+          "own": {
+            "bound_pass_frames": 1,
+            "bound_and_quorum_frames": 0,
+            "bound_pass_outside_task_tolerance": 0,
+            "minimum_bound_m": 0.11314306723131272
+          },
+          "one_hop": {
+            "bound_pass_frames": 1,
+            "bound_and_quorum_frames": 0,
+            "bound_pass_outside_task_tolerance": 0,
+            "minimum_bound_m": 0.11314306723131272
+          },
+          "all_team_evaluator_only": {
+            "bound_pass_frames": 1,
+            "bound_and_quorum_frames": 0,
+            "bound_pass_outside_task_tolerance": 0,
+            "minimum_bound_m": 0.11314306723131272
+          }
+        },
+        "first_basic": {
+          "frame": 1738,
+          "phase": "BRAKE",
+          "voters": [
+            "agent_03",
+            "agent_05",
+            "agent_06"
+          ],
+          "quorum": false,
+          "true_error_m": 0.01865316994774866,
+          "bounds_m": {
+            "workspace": 0.11314306723131272,
+            "own": 0.11314306723131272,
+            "one_hop": 0.11314306723131272,
+            "all_team_evaluator_only": 0.11314306723131272
+          }
+        },
+        "first_bound_and_quorum_pass": {
+          "workspace": null,
+          "own": null,
+          "one_hop": null,
+          "all_team_evaluator_only": null
+        },
+        "final": {
+          "frame": 12000,
+          "phase": "BRAKE",
+          "voters": [
+            "agent_03",
+            "agent_05",
+            "agent_06"
+          ],
+          "quorum": false,
+          "true_error_m": 0.05647457853129744,
+          "bounds_m": {
+            "workspace": 0.18102455546217602,
+            "own": 0.18102455546217602,
+            "one_hop": 0.18102455546217602,
+            "all_team_evaluator_only": 0.18102455546217602
+          }
+        }
+      }
+    }
+  ],
+  "products": {
+    "far_c_open_away_pos0_task_reference/enclosures.json": "8f5d707bc0ac58fd7949177ee964129fcee0e343fa3d7c0b1b0de1b6f9252224",
+    "far_c_open_away_pos0_task_reference/sanitized_packets.json": "dc16f1a020c98d6b1972da286eef61571d4f26cb662aedf0146735fad9845f1e",
+    "far_c_open_away_pos0_task_reference/summary.json": "d9848d26bca21c6be6de305bee70ece8b9fa1b0fe536acdb66dc65d7c11c4770",
+    "far_skew_box_s0_r0_pos0_task_reference/enclosures.json": "67f7fcfcfb2df27d24ecaea1cccf475d6c79fb0309fa6358d6a9c4be26b258a9",
+    "far_skew_box_s0_r0_pos0_task_reference/sanitized_packets.json": "a68cbf28e277563ed3a6d1bfd2045e33035c8100f11905030268a13d7fb955ae",
+    "far_skew_box_s0_r0_pos0_task_reference/summary.json": "5916474ef29da25197ddcef3662cb15207bac8b2cb64f1cf32cd29649efc7c4c",
+    "near_circle_task_reference/enclosures.json": "cacfc26144249933a7125e164ca402f4f10e1c8fb6f2c548ab2657f4a2a92b75",
+    "near_circle_task_reference/sanitized_packets.json": "73bdc617ee21dee621a9c25d13f8115dfe0656ad8e66847f4bde7f34bc5c9d0d",
+    "near_circle_task_reference/summary.json": "a8b381f9bf3b807724509672d3a781467863d572a51cff21ac8d44233ed0cfcc",
+    "near_l_reference_task_reference/enclosures.json": "76312dcc7c69d8998325e981ea76ace1902ad6e2013f1fe65933e56d4b5e3a5b",
+    "near_l_reference_task_reference/sanitized_packets.json": "9a80b6892aa412acdc5aa9b96fad88cbe362209a29e75548299faf16ce4a0493",
+    "near_l_reference_task_reference/summary.json": "3654e2e4ab28214b37872002500c7fceed7902b5e4da8ee138f930ca0e7464ac"
+  }
+}

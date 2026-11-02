@@ -1,5 +1,7 @@
 # 数据与原始文件索引
 
+2026-11-03：[自由射线包围诊断](results/free_ray_enclosure_v1/README.md)使用四个原采集冻结快照，新增物理回合 0；清理后的测量包、完整 132 份集合、旧停止帧反事实统计和独立源码快照保存在 `runs/research/2026-11-03-free-ray-enclosure-v1/`。局部收缩 0/128，全队收缩 2/4，未作为运行修复采用。
+
 2026-11-03：[保护最优参数的参考面试验](results/reference_surface_v1/README.md)保存八条同输入重放于 `runs/research/2026-11-03-reference-surface-v1/`；一个完整基线复现于 `runs/research/2026-11-03-protected-baseline-reproduction-v1/`。未改旧数据；最优公共参数在 `configs/research/best_known_transport_v1.yaml`，完整来源与 SHA-256 在结果目录。
 
 2026-11-03：新获取8回合在 `runs/research/2026-11-02-task-reference-acquisition-v1/`；新闭环12回合在 `runs/research/2026-11-03-task-reference-v1/`，各自保留原始产品、冻结源码和失败。[新参考报告](results/task_reference_v1/README.md)与[部署贡献审计](results/deployment_contribution_v1/README.md)分别记录新实验和既有36回合的重新分析。轮廓探测原次已标 INVALIDATED，修正次在 `runs/maintenance/2026-11-03-initial-contour-probe-v2/`；没有覆盖原结果。
