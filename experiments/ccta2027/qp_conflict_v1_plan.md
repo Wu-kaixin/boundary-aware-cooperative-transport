@@ -58,3 +58,24 @@ contradictions without changing selection, outcomes or gates. Cost: neither the
 geometry discrepancy nor a contradictory local QP proves a future repair works.
 
 Step 4: final review and authorized publication pending. Full goal remains active.
+
+Step 4 review: complete for 8e7920d..9db6972. Fresh-context read-only reviewer
+reported no Critical, Important or Minor findings. Independently reconstructed
+all 11 unique selected matrices and five feasibility sets with CLARABEL; verified
+all 953 event indices/aggregates, nine contradiction certificates, two minimum
+speeds and the C geometry lower bound. Source/environment/original/published
+identities and frame indexing match. See docs/results/qp_conflict_v1/final_review.md.
+
+The review did not rerun 3411 frames, new physics or the full core suite. It did
+not judge future repair success, general reliability, team-wide impossibility,
+dynamic certification, hardware or paper readiness. These remain unmet goal work.
+The executor's final README clarifications explicitly name the rho-free zero-motion
+counterfactual and distinguish the earlier eight physical episodes from this
+zero-new-physics diagnostic. No frozen product or runtime/configuration change.
+
+Repository health before the diagnostic commit: PASS, 1359 tracked files, 445
+Python files, 15 navigation documents, pip check and git fsck; health.json records
+the precommit HEAD and staged working files. Final publication checks and remote
+head/CI outcomes are retained separately under the same maintenance directory.
+Normal push to the existing research branch is authorized; no force or main merge.
+This diagnostic and its review are complete; the full research goal stays ACTIVE.
