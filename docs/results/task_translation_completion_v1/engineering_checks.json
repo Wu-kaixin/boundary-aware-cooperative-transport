@@ -1,0 +1,104 @@
+{
+  "checked_at_utc": "2026-11-02T20:44:55.307119+00:00",
+  "scope": "Engineering checks after opt-in runtime wiring; not replay-producing source or physical candidate validation",
+  "runtime_source_sha256": "9c7927a57d614f6f2d18757c2677c7af8829203882d3b40effd43043f3afa948",
+  "replay_runtime_source_sha256": "dc425ae9f3e4ee96fbe9290505364c32b0c0a20dbec76b7991ae05f87f5fcaa0",
+  "core": {
+    "tests": 886,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 2,
+    "passed": 884,
+    "time_seconds": 145.35,
+    "xml_sha256": "08c80bd8ee8b8388966a67d5d15651d674c2c77812762460870e3c99ae88e604",
+    "log_sha256": "b2860155cbc129dd01845df14e8af2b106e57f818574d95ed0a371715f91da3f",
+    "local_log": "runs/maintenance/2026-11-03-task-translation-completion-v1/core-wiring-v2.log"
+  },
+  "targeted_green": {
+    "tests": 33,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "passed": 33,
+    "time_seconds": 3.442,
+    "xml_sha256": "525552cc950baf8cc0b68d247e60d6244f62b10092c81737c2771aa3ce9e3b7f",
+    "log_sha256": "50f8bad33fd93f925a766ab2aaa2678da7c3a99fc6de1197d027f6ed8befcd53",
+    "local_log": "runs/maintenance/2026-11-03-task-translation-completion-v1/wiring-green.log"
+  },
+  "targeted_red": {
+    "tests": 8,
+    "failures": 7,
+    "errors": 0,
+    "skipped": 0,
+    "passed": 1,
+    "time_seconds": 2.386,
+    "xml_sha256": "76d9152fb1ee65db079ff7ecf7be2d6605b8b0a69f5310d0b112186d19ab2cd4",
+    "log_sha256": "b536f78bf8c9c4bf4161774f8a4311d96ae9621e74faa73989d6bfeddf10c67e",
+    "local_log": "runs/maintenance/2026-11-03-task-translation-completion-v1/wiring-red.log"
+  },
+  "first_core_attempt": {
+    "tests": 886,
+    "failures": 0,
+    "errors": 65,
+    "skipped": 2,
+    "passed": 819,
+    "time_seconds": 151.439,
+    "xml_sha256": "9b5c0d508442a5abab9618cb98047269377f82db37835a3a25bfc6c4303aaf1d",
+    "log_sha256": "b81e39e1aab71ff3ac49fdca70eba8c91718fc9cc9d1e5a03c982d4173e85dcc",
+    "local_log": "runs/maintenance/2026-11-03-task-translation-completion-v1/core-wiring.log",
+    "failure_reason": "65 tmp_path setup errors: sandbox default numbered temp directory could not be created; retained unchanged"
+  },
+  "rerun": {
+    "observed_exec_session": 79303,
+    "observed_exit_code": 0,
+    "basetemp": "runs/maintenance/2026-11-03-task-translation-completion-v1/core-temp-v2"
+  },
+  "environment": {
+    "python": "3.12.14",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "executable": "C:\\Users\\kai\\boundary-aware-cooperative-transport\\.venv\\Scripts\\python.exe",
+    "packages": {
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "shapely": "2.2.0",
+      "PyYAML": "6.0.2",
+      "cvxpy": "1.9.3",
+      "clarabel": "0.11.1",
+      "osqp": "1.1.3",
+      "scs": "3.3.1",
+      "pymunk": "7.3.1",
+      "matplotlib": "3.11.2",
+      "threadpoolctl": "3.7.0"
+    }
+  },
+  "installed_locked_requirements_checked": 41,
+  "lock_mismatches": [
+    {
+      "package": "joblib",
+      "locked": "==1.6.0",
+      "installed": "1.5.1"
+    },
+    {
+      "package": "pyyaml",
+      "locked": "==6.0.3",
+      "installed": "6.0.2"
+    }
+  ],
+  "protected": {
+    "canonical_sha256": "a5d5c8e200fa502557d4da9a9db2a646d027abababd59661bcdac21a1b43b112",
+    "all_previous_resolved_parameters_equal": true,
+    "default_new_selectors": {
+      "reference_surface_refinement": false,
+      "initial_reference_motion_model": "se2",
+      "initial_reference_use_all_captured": false
+    }
+  },
+  "changed_runtime_and_test_sha256": {
+    "src/dbact/control/controller.py": "393e378fde473cf051ad4849a37c2b067a143c4eafac3eb98bdf1c9c7a0d5824",
+    "src/dbact_sim/experiments/deployment.py": "db3a1ed44d781f734bf34ebf966be25f215c8c3e28b974f581835ffc15fb553d",
+    "tests/test_reference_surface.py": "cd001cf79c66993dd12c799a617f4f1cf45887db700fde151d0c2d24eaca4f61",
+    "tests/test_task_translation_wiring.py": "e02f1f4a3ec2dd435d2d605915fb332be1ee688c9324e8ae3497c46d05159e61"
+  },
+  "new_candidate_physical_episodes": 0,
+  "candidate_adopted": false
+}

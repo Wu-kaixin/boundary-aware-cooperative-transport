@@ -1,0 +1,41 @@
+{
+  "scope": "Staged increment on base 4e1bb4c; no physical candidate validation",
+  "repository_health": {
+    "schema": "repository-health-v1",
+    "checked_at_utc": "2026-11-02T20:46:14.087428+00:00",
+    "status": "PASS",
+    "head": "4e1bb4c95eda9fefe8fa759dfb4258b6a2911e63",
+    "tree": "e64091e9a38d86a628284290f53a4940a0a30494",
+    "python": "3.12.14",
+    "executable": "C:\\Users\\kai\\boundary-aware-cooperative-transport\\.venv\\Scripts\\python.exe",
+    "tracked_files_checked": 1304,
+    "python_files_parsed": 435,
+    "curated_evidence_verified": {
+      "ccta2027_draft_v2": 26,
+      "reliability_2026-10-22": 20
+    },
+    "navigation_documents_checked": 15,
+    "pip_check": "No broken requirements found.",
+    "git_fsck": "PASS",
+    "local_data_scope": "Full raw runs, downloaded references, environment payloads and backup archives stay local; see docs/DATA_INDEX.md",
+    "security_scope": "Filename and embedded private-key/token screening only; not a dependency vulnerability audit",
+    "failures": []
+  },
+  "repository_health_sha256": "4b8c8d8163e09bf61fa688d143a04e287969d51b3ae838b6b5590b3a9791aa35",
+  "mas": {
+    "tests": 106,
+    "passed": 106,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "xml_sha256": "a1e125737b883cc17bcbf82c2ff75f760ef107522c25e0ed5a31e9437074e011",
+    "log_sha256": "61215e09af7976f678d341886a3066755278382d7be401382f1a23b9ff62b764"
+  },
+  "source_and_evidence_checks": {
+    "engineering_receipt_sha256": "4abd5a179802f1c92946bd0b4ea0352b5ef0aec565997b1d4ce4474a246b3d42",
+    "frozen_replay_snapshot_verified": true,
+    "raw_products_rechecked": 12,
+    "publication_product_hashes_verified": true,
+    "original_screen": "FAIL"
+  }
+}

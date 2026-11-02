@@ -1,0 +1,49 @@
+{
+  "scope": "Recover aggregation only after the complete replay's recorded path-join error.\n\nNo estimator updates or physics. The original failed execution and every raw\nproduct remain unchanged; this finalization has a separate manifest and output.\n",
+  "started_at_utc": "2026-11-02T20:16:48.618985+00:00",
+  "script_sha256": "e68edb7d1eb2ea1b88b3c1bec3ca6a798f7a3a567b5aafefa360786e036581ac",
+  "study_protocol_sha256": "b7cf3464a936e461202e55399e30531132840414788ee6389fdcd2ced0908cad",
+  "failed_execution_receipt_sha256": "fbde1c685e736982e6ab6697592ecafcdf94a4b09d41c8c5f72f760abd8e84e2",
+  "original_failed_wrapper_sha256": "863890422b79512238d9f91897a89b4d047fe01c85daf5d3407f58ae6680d53f",
+  "corrected_wrapper_sha256": "0fc66fa5be73c4577eb33bf9a995a992476d7a06d7be17f1969778788687dd1c",
+  "origins": {
+    "near_circle_task_reference": {
+      "kind": "reused_complete_v2_output",
+      "path": "runs/research/2026-11-03-task-translation-v2/near_circle_task_reference",
+      "products": {
+        "summary.json": "7d9386dd892fff84ed5d27f5cc3ddb1db212e97fdf631ec70f430e6560cd328a",
+        "series.npz": "61c4fa547e2281f9b05d458d6d53ef998b6c7dcae90ca6b5a56c11e23ee9d27c",
+        "templates.json": "8e0926cf050f1a8e748ccc14c160f5bf92ef05c6737fa45fc0bac4eebdc36ca1"
+      }
+    },
+    "near_l_reference_task_reference": {
+      "kind": "reused_complete_v2_output",
+      "path": "runs/research/2026-11-03-task-translation-v2/near_l_reference_task_reference",
+      "products": {
+        "summary.json": "5757112f01d994bafec0655acef99b17400dca52382c4430c01aa64e0adf7f56",
+        "series.npz": "c82006c602d68341d23cbc41aa2cd0ed318e37df74df723dd31e358b574112d3",
+        "templates.json": "1e2093cbc8b86cd8ffad3ba727a86caeaaa01c1a10395f271aafe622670dbfa7"
+      }
+    },
+    "far_c_open_away_pos0_task_reference": {
+      "kind": "reused_complete_v2_output",
+      "path": "runs/research/2026-11-03-task-translation-v2/far_c_open_away_pos0_task_reference",
+      "products": {
+        "summary.json": "b652c6f3b61935bc81270538cdb16fd6631830666b25905510f52b3a533917bc",
+        "series.npz": "d184c438bfb9ec7232c6847ba2920ba67dcb530637e31c758b3bd2ec53ffa15a",
+        "templates.json": "9d02519ecdd4fd2a94425f1b9a0e40d58aa3290d3a31db073296abc097dd26f5"
+      }
+    },
+    "far_skew_box_s0_r0_pos0_task_reference": {
+      "kind": "recomputed_missing_case",
+      "path": "runs/research/2026-11-03-task-translation-completion-v1/far_skew_box_s0_r0_pos0_task_reference",
+      "products": {
+        "summary.json": "acd1ac3ee7fd6b45d352c8609b5284d72ac2393e50f7fe15f0501cacc05b38b7",
+        "series.npz": "2eee87be7198177bf4a33124dbc97023f0816fa3c0d8199ad8b92f26b1b36568",
+        "templates.json": "5b4eb05a2d4d4e994e451d86b420221ee10b5b8af3ba280a0ff04c132a7973f4"
+      }
+    }
+  },
+  "new_physical_episodes": 0,
+  "estimator_updates": 0
+}

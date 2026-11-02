@@ -313,6 +313,8 @@ class DBACTParams:
     reference_bootstrap_gain: float | None = None  # None preserves progress_estimate_gain
     initial_reference_acquisition: bool = False
     initial_task_reference: bool = False
+    initial_reference_motion_model: str = "se2"  # se2 | translation (explicit hypothesis)
+    initial_reference_use_all_captured: bool = False
     initial_acquisition_seconds: float = 60.0
     contact_patch_distance: bool = False
     # New development arms, off by default. The vector law changes controller
@@ -641,6 +643,13 @@ class DBACTController:
             raise ValueError("reference_bootstrap_gain must be finite and positive")
         if params.initial_task_reference and not params.initial_reference_acquisition:
             raise ValueError("Initial task reference requires stationary acquisition")
+        if params.initial_reference_motion_model not in ("se2", "translation"):
+            raise ValueError("Initial reference motion model must be se2 or translation")
+        if not isinstance(params.initial_reference_use_all_captured, bool):
+            raise ValueError("Initial reference template admission must be boolean")
+        if ((params.initial_reference_motion_model != "se2" or params.initial_reference_use_all_captured)
+                and not params.initial_task_reference):
+            raise ValueError("Initial reference options require initial_task_reference")
         if params.initial_reference_acquisition and (
                 params.navigation_estimator != "observed_reference" or params.range_noise_std <= 0
                 or params.navigation_voter_continuity or params.reference_early_anchor
@@ -1204,6 +1213,7 @@ class DBACTController:
 
     def _update_initial_reference(self, agents, batches, timestamp):
         from dbact.control.initial_task_reference import TaskReferenceTracker
+        from dbact.control.task_translation import TranslationTaskReferenceTracker
         p = self.params
         if self.initial_reference_status == "acquiring":
             self.safety.params.r_safe = p.robot_radius+3*p.range_noise_std+2*p.max_speed*p.dt
@@ -1224,8 +1234,11 @@ class DBACTController:
                 self.initial_reference_supporters = supported
                 self.safety.params.r_safe = self._transport_safe_radius
                 if p.initial_task_reference:
-                    for aid in supported:
-                        tracker = TaskReferenceTracker(reference_point=self._task_reference_point,
+                    tracker_type = (TranslationTaskReferenceTracker
+                                    if p.initial_reference_motion_model == "translation" else TaskReferenceTracker)
+                    selected = [a.agent_id for a in agents] if p.initial_reference_use_all_captured else supported
+                    for aid in selected:
+                        tracker = tracker_type(reference_point=self._task_reference_point,
                             gate=p.registration_gate, normal_cosine=p.registration_normal_cosine,
                             max_speed=p.max_object_speed, max_yaw_rate=p.max_object_yaw_rate,
                             velocity_filter=p.object_velocity_filter, range_noise_std=p.range_noise_std,
@@ -1239,6 +1252,10 @@ class DBACTController:
         if self.initial_reference_status != "frozen" or not p.initial_task_reference:
             return
         for aid, tracker in self._reference_trackers.items():
+            # A robot without a usable zero-epoch capture must never bootstrap
+            # from later moving data. It remains absent from fresh votes.
+            if not tracker.initialized:
+                continue
             reading = tracker.update(batches.get(aid, BoundaryView.empty()), timestamp)
             if reading is not None:
                 self._reference_readings[aid] = reading

@@ -1,0 +1,113 @@
+{
+  "cases": [
+    {
+      "condition": "near_circle",
+      "time_s": 599.9500000000021,
+      "true_goal_error_m": 0.007721918029763713,
+      "arms": {
+        "se2_supported": {
+          "goal_error_m": 0.010719007300576906,
+          "model_bound_m": 11.309893325439752,
+          "fresh_voters": 4
+        },
+        "translation_supported": {
+          "goal_error_m": 0.006157927846483233,
+          "model_bound_m": 0.010015045188026098,
+          "fresh_voters": 4
+        },
+        "se2_all_captured": {
+          "goal_error_m": 0.011524619514950934,
+          "model_bound_m": 11.309893325439752,
+          "fresh_voters": 12
+        },
+        "translation_all_captured": {
+          "goal_error_m": 0.00722587717712236,
+          "model_bound_m": 0.012562242737800752,
+          "fresh_voters": 16
+        }
+      }
+    },
+    {
+      "condition": "near_l_reference",
+      "time_s": 18.60000000000013,
+      "true_goal_error_m": 0.020115976608926202,
+      "arms": {
+        "se2_supported": {
+          "goal_error_m": 0.016852612840218002,
+          "model_bound_m": 0.0716838034603703,
+          "fresh_voters": 7
+        },
+        "translation_supported": {
+          "goal_error_m": 0.018242701922767862,
+          "model_bound_m": 0.02014382626141803,
+          "fresh_voters": 7
+        },
+        "se2_all_captured": {
+          "goal_error_m": 0.017515037844178384,
+          "model_bound_m": 0.0795754174952549,
+          "fresh_voters": 16
+        },
+        "translation_all_captured": {
+          "goal_error_m": 0.016474425625168036,
+          "model_bound_m": 0.02014382626141803,
+          "fresh_voters": 16
+        }
+      }
+    },
+    {
+      "condition": "far_c_open_away_pos0",
+      "time_s": 599.9500000000021,
+      "true_goal_error_m": 0.057674318433121236,
+      "arms": {
+        "se2_supported": {
+          "goal_error_m": 0.011756118559897527,
+          "model_bound_m": 0.26255508605665595,
+          "fresh_voters": 3
+        },
+        "translation_supported": {
+          "goal_error_m": 0.041721649434979455,
+          "model_bound_m": 0.050689034413880174,
+          "fresh_voters": 3
+        },
+        "se2_all_captured": {
+          "goal_error_m": 0.008452685751517261,
+          "model_bound_m": 0.26255508605665595,
+          "fresh_voters": 10
+        },
+        "translation_all_captured": {
+          "goal_error_m": 0.04422715242352383,
+          "model_bound_m": 0.05450897738608991,
+          "fresh_voters": 10
+        }
+      }
+    },
+    {
+      "condition": "far_skew_box_s0_r0_pos0",
+      "time_s": 599.9500000000021,
+      "true_goal_error_m": 0.05647457853129763,
+      "arms": {
+        "se2_supported": {
+          "goal_error_m": 0.004413763769990008,
+          "model_bound_m": 0.18102455546217586,
+          "fresh_voters": 3
+        },
+        "translation_supported": {
+          "goal_error_m": 0.05165806059844214,
+          "model_bound_m": 0.05965829477620586,
+          "fresh_voters": 3
+        },
+        "se2_all_captured": {
+          "goal_error_m": 0.005301958667271592,
+          "model_bound_m": 0.20421338419940832,
+          "fresh_voters": 13
+        },
+        "translation_all_captured": {
+          "goal_error_m": 0.051109779356731694,
+          "model_bound_m": 0.06483988271281725,
+          "fresh_voters": 13
+        }
+      }
+    }
+  ],
+  "scope": "Last pre-physics control samples of old trajectories, not new physical endpoints. Translation bounds assume translation."
+}

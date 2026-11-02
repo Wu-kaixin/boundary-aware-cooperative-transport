@@ -369,6 +369,19 @@ def transport_arm(cfg, seed, variant, frames, out):
             + ". Extra acquisition time counts against the original budget. "
             "Workspace-center-set HOLD gate is conditional on correct registration, not an error certificate. "
             "No object-center truth, shape prior, physics or independent success criterion change.")
+        if (env.controller.params.initial_reference_motion_model != "se2"
+                or env.controller.params.initial_reference_use_all_captured):
+            result['initial_reference'].update(
+                motion_model=env.controller.params.initial_reference_motion_model,
+                use_all_captured=env.controller.params.initial_reference_use_all_captured,
+                selected_trackers=list(env.controller._reference_trackers),
+                bound_semantics=("translation hypothesis; not a rotation-robust center certificate"
+                    if env.controller.params.initial_reference_motion_model == "translation"
+                    else "estimated SE(2) workspace bound; not a registration certificate"))
+            result['changed_mechanism'] += (
+                " Opt-in motion_model=" + env.controller.params.initial_reference_motion_model
+                + ", use_all_captured=" + str(env.controller.params.initial_reference_use_all_captured)
+                + ". Fitted zero yaw in translation mode is a hypothesis, not measured physical zero yaw.")
     elif (env.controller.params.reference_early_anchor
             or env.controller.params.reference_bootstrap_gain is not None):
         result["changed_mechanism"] = (

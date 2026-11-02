@@ -122,6 +122,8 @@ def test_protected_configuration_and_resolved_values_match_saved_receipt():
     assert hashlib.sha256(path.read_bytes()).hexdigest() == receipt['canonical_sha256']
     resolved = asdict(SimulationEnvironment(load_yaml(path), seed=receipt['canonical_seed']).controller.params)
     assert resolved.pop('reference_surface_refinement') is False
+    assert resolved.pop('initial_reference_motion_model') == 'se2'
+    assert resolved.pop('initial_reference_use_all_captured') is False
     assert resolved == receipt['effective_controller']
 
 

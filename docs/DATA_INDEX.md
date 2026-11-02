@@ -1,5 +1,9 @@
 # 数据与原始文件索引
 
+重放完成后的控制器接口检查在 `runs/maintenance/2026-11-03-task-translation-completion-v1/`：`wiring-red.*` 保留实现前失败，`wiring-green.*` 保留 33 项针对性通过；`core-wiring.*` 是默认沙箱临时目录权限导致的失败，`core-wiring-v2.*` 使用新的仓库内临时目录。它们均为工程检查，不是物理试验；原重放及环境身份不变。
+
+2026-11-03：[四条件完整结果](results/task_translation_completion_v1/README.md)由前三项旧完整输出及新补算斜箱构成；补算数组/源码在 `runs/research/2026-11-03-task-translation-completion-v1/`。该次逐帧计算完成后，汇总路径错误导致执行退出，原失败收据保留；独立汇总恢复在 `runs/research/2026-11-03-task-translation-finalization-v1/`，没有重跑估计器或物理。所有原始 v1/v2/补算/快照均保留，不能把汇总恢复当成新的闭环验证。
+
 2026-11-03：[平移任务参考进展](results/task_translation_checkpoint_v1/README.md)是带时间戳的 3/4 条件快照，不是完整结论。原始重放、模板、逐帧数组和源码在 `runs/research/2026-11-03-task-translation-v2/`；v1 严格重建检查失败的原件在同级 `2026-11-03-task-translation-v1/`，未被覆盖。旋转背景与停止筛选校准分别在 `runs/maintenance/2026-11-03-task-translation-rotation-context/` 和 `runs/maintenance/2026-11-03-task-translation-v2/`。Git 只保存协议与精简证据，新增物理回合为 0。
 
 2026-11-03：[自由射线包围诊断](results/free_ray_enclosure_v1/README.md)使用四个原采集冻结快照，新增物理回合 0；清理后的测量包、完整 132 份集合、旧停止帧反事实统计和独立源码快照保存在 `runs/research/2026-11-03-free-ray-enclosure-v1/`。局部收缩 0/128，全队收缩 2/4，未作为运行修复采用。

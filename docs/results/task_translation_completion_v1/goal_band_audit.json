@@ -1,0 +1,50 @@
+{
+  "scope": "Post-hoc evaluator-only check: can perfect position enter the old goal band?\n\nIgnoring speed, quorum and model bounds gives an optimistic upper limit on\npossible perfect-readout stop streaks along each fixed old trajectory. This is\nnot a controller input, gate revision, physical episode or adoption decision.\n",
+  "script_sha256": "d3d4a27460d9c976ee31880b711732efcb64f3e2ce783b2036c130110563fd6c",
+  "source_analysis_sha256": "14eb581801293dea796c7b63746b23703d29d0b56860ab3702c90e0864f12411",
+  "selection": "All four original fixed study cases, entire post-ready windows",
+  "cases": [
+    {
+      "case_id": "near_circle_task_reference",
+      "frames": 11899,
+      "original_task_completed": false,
+      "goal_band_m": 0.02,
+      "minimum_true_goal_error_m": 0.0077219180297638116,
+      "position_only_eligible_frames": 11725,
+      "optimistic_longest_stop_streak": 11725,
+      "replay_sha256": "d98f7b3527d96fabfa3de079992e70b7eff5aa762252589a9ad9d08e52b408ee"
+    },
+    {
+      "case_id": "near_l_reference_task_reference",
+      "frames": 293,
+      "original_task_completed": true,
+      "goal_band_m": 0.02,
+      "minimum_true_goal_error_m": 0.020115976608926393,
+      "position_only_eligible_frames": 0,
+      "optimistic_longest_stop_streak": 0,
+      "replay_sha256": "8ee3514c152eb3bb5184c94cf0a94cc48ffebd5bcee3e613695f3802a7f4a79b"
+    },
+    {
+      "case_id": "far_c_open_away_pos0_task_reference",
+      "frames": 11549,
+      "original_task_completed": false,
+      "goal_band_m": 0.02,
+      "minimum_true_goal_error_m": 0.052745630334179776,
+      "position_only_eligible_frames": 0,
+      "optimistic_longest_stop_streak": 0,
+      "replay_sha256": "f556566af1284a004787d8a4ee8e114f77834d1e7bb1a5481938a26ca93af1a5"
+    },
+    {
+      "case_id": "far_skew_box_s0_r0_pos0_task_reference",
+      "frames": 11189,
+      "original_task_completed": false,
+      "goal_band_m": 0.02,
+      "minimum_true_goal_error_m": 0.01839110535851613,
+      "position_only_eligible_frames": 86,
+      "optimistic_longest_stop_streak": 86,
+      "replay_sha256": "773403451f1e22155f3d41e789cb7c6ba4cabb063609a1d37646660374d0a0fa"
+    }
+  ],
+  "original_gates_modified": false,
+  "new_physical_episodes": 0
+}

@@ -1,0 +1,1016 @@
+{
+  "scope": "Three hash-verified v2 outputs reused; one missing case recomputed with unchanged v2 code and gates. All inputs are old physical trajectories.",
+  "cases": [
+    {
+      "condition": "near_circle",
+      "case_id": "near_circle_task_reference",
+      "arms": {
+        "se2_supported": {
+          "initialized": 4,
+          "selected": 4,
+          "post_ready_frames": 11899,
+          "available_frames": 11899,
+          "missing_team_frames": 0,
+          "quorum_frames": 8420,
+          "insufficient_quorum_frames": 3479,
+          "paired_availability": 1.0,
+          "paired_error": {
+            "frames": 11899,
+            "mae_m": 0.0026868407107731823,
+            "rmse_m": 0.0030935690480939585,
+            "p95_m": 0.005496982719938982,
+            "max_m": 0.0121650494588964
+          },
+          "paired_original_error": {
+            "frames": 11899,
+            "mae_m": 0.0026868407107731823,
+            "rmse_m": 0.0030935690480939585,
+            "p95_m": 0.005496982719938982,
+            "max_m": 0.0121650494588964
+          },
+          "own_available_error": {
+            "frames": 11899,
+            "mae_m": 0.0026868407107731823,
+            "rmse_m": 0.0030935690480939585,
+            "p95_m": 0.005496982719938982,
+            "max_m": 0.0121650494588964
+          },
+          "potential_stop_frames": 0,
+          "false_goal_stop_frames": 0,
+          "longest_valid_potential_stop_streak": 0,
+          "statuses_all_agents": {
+            "accepted": 43691,
+            "not_selected": 142788,
+            "motion_bound_exceeded": 3905
+          },
+          "statuses_selected_agents": {
+            "accepted": 43691,
+            "motion_bound_exceeded": 3905
+          }
+        },
+        "translation_supported": {
+          "initialized": 4,
+          "selected": 4,
+          "post_ready_frames": 11899,
+          "available_frames": 11899,
+          "missing_team_frames": 0,
+          "quorum_frames": 11899,
+          "insufficient_quorum_frames": 0,
+          "paired_availability": 1.0,
+          "paired_error": {
+            "frames": 11899,
+            "mae_m": 0.0024363700561945297,
+            "rmse_m": 0.002723357042717571,
+            "p95_m": 0.004628409553248163,
+            "max_m": 0.008406230529427317
+          },
+          "paired_original_error": {
+            "frames": 11899,
+            "mae_m": 0.0026868407107731823,
+            "rmse_m": 0.0030935690480939585,
+            "p95_m": 0.005496982719938982,
+            "max_m": 0.0121650494588964
+          },
+          "own_available_error": {
+            "frames": 11899,
+            "mae_m": 0.0024363700561945297,
+            "rmse_m": 0.002723357042717571,
+            "p95_m": 0.004628409553248163,
+            "max_m": 0.008406230529427317
+          },
+          "potential_stop_frames": 10213,
+          "false_goal_stop_frames": 0,
+          "longest_valid_potential_stop_streak": 108,
+          "statuses_all_agents": {
+            "accepted": 47596,
+            "not_selected": 142788
+          },
+          "statuses_selected_agents": {
+            "accepted": 47596
+          }
+        },
+        "se2_all_captured": {
+          "initialized": 16,
+          "selected": 16,
+          "post_ready_frames": 11899,
+          "available_frames": 11899,
+          "missing_team_frames": 0,
+          "quorum_frames": 11899,
+          "insufficient_quorum_frames": 0,
+          "paired_availability": 1.0,
+          "paired_error": {
+            "frames": 11899,
+            "mae_m": 0.0014674326032834523,
+            "rmse_m": 0.0016935436713448656,
+            "p95_m": 0.0028963522446673355,
+            "max_m": 0.008068569756642455
+          },
+          "paired_original_error": {
+            "frames": 11899,
+            "mae_m": 0.0026868407107731823,
+            "rmse_m": 0.0030935690480939585,
+            "p95_m": 0.005496982719938982,
+            "max_m": 0.0121650494588964
+          },
+          "own_available_error": {
+            "frames": 11899,
+            "mae_m": 0.0014674326032834523,
+            "rmse_m": 0.0016935436713448656,
+            "p95_m": 0.0028963522446673355,
+            "max_m": 0.008068569756642455
+          },
+          "potential_stop_frames": 0,
+          "false_goal_stop_frames": 0,
+          "longest_valid_potential_stop_streak": 0,
+          "statuses_all_agents": {
+            "accepted": 161454,
+            "motion_bound_exceeded": 17457,
+            "support_nearly_linear": 10743,
+            "translation_unobservable": 713,
+            "task_rotation_unobservable": 16,
+            "final_match_unobservable": 1
+          },
+          "statuses_selected_agents": {
+            "accepted": 161454,
+            "motion_bound_exceeded": 17457,
+            "support_nearly_linear": 10743,
+            "translation_unobservable": 713,
+            "task_rotation_unobservable": 16,
+            "final_match_unobservable": 1
+          }
+        },
+        "translation_all_captured": {
+          "initialized": 16,
+          "selected": 16,
+          "post_ready_frames": 11899,
+          "available_frames": 11899,
+          "missing_team_frames": 0,
+          "quorum_frames": 11899,
+          "insufficient_quorum_frames": 0,
+          "paired_availability": 1.0,
+          "paired_error": {
+            "frames": 11899,
+            "mae_m": 0.0013811185921098535,
+            "rmse_m": 0.0015622716698569816,
+            "p95_m": 0.0026254499770000184,
+            "max_m": 0.0068514614666735744
+          },
+          "paired_original_error": {
+            "frames": 11899,
+            "mae_m": 0.0026868407107731823,
+            "rmse_m": 0.0030935690480939585,
+            "p95_m": 0.005496982719938982,
+            "max_m": 0.0121650494588964
+          },
+          "own_available_error": {
+            "frames": 11899,
+            "mae_m": 0.0013811185921098535,
+            "rmse_m": 0.0015622716698569816,
+            "p95_m": 0.0026254499770000184,
+            "max_m": 0.0068514614666735744
+          },
+          "potential_stop_frames": 11036,
+          "false_goal_stop_frames": 0,
+          "longest_valid_potential_stop_streak": 824,
+          "statuses_all_agents": {
+            "accepted": 190382,
+            "motion_bound_exceeded": 2
+          },
+          "statuses_selected_agents": {
+            "accepted": 190382,
+            "motion_bound_exceeded": 2
+          }
+        }
+      },
+      "acquisition_epoch_s": 1.800000000000001,
+      "original_supporters": [
+        "agent_00",
+        "agent_05",
+        "agent_10",
+        "agent_11"
+      ],
+      "acquisition_history": {
+        "frames": 37,
+        "captured_points": {
+          "agent_00": 349,
+          "agent_01": 249,
+          "agent_02": 214,
+          "agent_03": 269,
+          "agent_04": 288,
+          "agent_05": 326,
+          "agent_06": 295,
+          "agent_07": 198,
+          "agent_08": 225,
+          "agent_09": 302,
+          "agent_10": 309,
+          "agent_11": 273,
+          "agent_12": 266,
+          "agent_13": 220,
+          "agent_14": 248,
+          "agent_15": 250
+        }
+      },
+      "true_rotation_radians": {
+        "min": 0.0,
+        "max": 0.0
+      },
+      "exact_original_statuses": 47856,
+      "exact_original_readings": 43947,
+      "exact_original_navigation": 11963,
+      "scan_counts_verified": 192000,
+      "scope": "Reused input/control trajectory; translation yaw is a hypothesis, not measured physical yaw",
+      "series_sha256": "61c4fa547e2281f9b05d458d6d53ef998b6c7dcae90ca6b5a56c11e23ee9d27c",
+      "templates_sha256": "8e0926cf050f1a8e748ccc14c160f5bf92ef05c6737fa45fc0bac4eebdc36ca1"
+    },
+    {
+      "condition": "near_l_reference",
+      "case_id": "near_l_reference_task_reference",
+      "arms": {
+        "se2_supported": {
+          "initialized": 7,
+          "selected": 7,
+          "post_ready_frames": 293,
+          "available_frames": 293,
+          "missing_team_frames": 0,
+          "quorum_frames": 293,
+          "insufficient_quorum_frames": 0,
+          "paired_availability": 1.0,
+          "paired_error": {
+            "frames": 293,
+            "mae_m": 0.004117362061626561,
+            "rmse_m": 0.004561359128604785,
+            "p95_m": 0.0076154595169276645,
+            "max_m": 0.011507768420760338
+          },
+          "paired_original_error": {
+            "frames": 293,
+            "mae_m": 0.004117362061626561,
+            "rmse_m": 0.004561359128604785,
+            "p95_m": 0.0076154595169276645,
+            "max_m": 0.011507768420760338
+          },
+          "own_available_error": {
+            "frames": 293,
+            "mae_m": 0.004117362061626561,
+            "rmse_m": 0.004561359128604785,
+            "p95_m": 0.0076154595169276645,
+            "max_m": 0.011507768420760338
+          },
+          "potential_stop_frames": 30,
+          "false_goal_stop_frames": 0,
+          "longest_valid_potential_stop_streak": 9,
+          "statuses_all_agents": {
+            "accepted": 2048,
+            "not_selected": 2637,
+            "motion_bound_exceeded": 3
+          },
+          "statuses_selected_agents": {
+            "accepted": 2048,
+            "motion_bound_exceeded": 3
+          }
+        },
+        "translation_supported": {
+          "initialized": 7,
+          "selected": 7,
+          "post_ready_frames": 293,
+          "available_frames": 293,
+          "missing_team_frames": 0,
+          "quorum_frames": 292,
+          "insufficient_quorum_frames": 1,
+          "paired_availability": 1.0,
+          "paired_error": {
+            "frames": 293,
+            "mae_m": 0.002766000263324632,
+            "rmse_m": 0.0032950414063809158,
+            "p95_m": 0.0062984787870873854,
+            "max_m": 0.009793699606509098
+          },
+          "paired_original_error": {
+            "frames": 293,
+            "mae_m": 0.004117362061626561,
+            "rmse_m": 0.004561359128604785,
+            "p95_m": 0.0076154595169276645,
+            "max_m": 0.011507768420760338
+          },
+          "own_available_error": {
+            "frames": 293,
+            "mae_m": 0.002766000263324632,
+            "rmse_m": 0.0032950414063809158,
+            "p95_m": 0.0062984787870873854,
+            "max_m": 0.009793699606509098
+          },
+          "potential_stop_frames": 21,
+          "false_goal_stop_frames": 0,
+          "longest_valid_potential_stop_streak": 8,
+          "statuses_all_agents": {
+            "accepted": 2042,
+            "not_selected": 2637,
+            "motion_bound_exceeded": 9
+          },
+          "statuses_selected_agents": {
+            "accepted": 2042,
+            "motion_bound_exceeded": 9
+          }
+        },
+        "se2_all_captured": {
+          "initialized": 16,
+          "selected": 16,
+          "post_ready_frames": 293,
+          "available_frames": 293,
+          "missing_team_frames": 0,
+          "quorum_frames": 293,
+          "insufficient_quorum_frames": 0,
+          "paired_availability": 1.0,
+          "paired_error": {
+            "frames": 293,
+            "mae_m": 0.0034645149748887666,
+            "rmse_m": 0.003747845318120514,
+            "p95_m": 0.005923890878405881,
+            "max_m": 0.007379959780070079
+          },
+          "paired_original_error": {
+            "frames": 293,
+            "mae_m": 0.004117362061626561,
+            "rmse_m": 0.004561359128604785,
+            "p95_m": 0.0076154595169276645,
+            "max_m": 0.011507768420760338
+          },
+          "own_available_error": {
+            "frames": 293,
+            "mae_m": 0.0034645149748887666,
+            "rmse_m": 0.003747845318120514,
+            "p95_m": 0.005923890878405881,
+            "max_m": 0.007379959780070079
+          },
+          "potential_stop_frames": 39,
+          "false_goal_stop_frames": 0,
+          "longest_valid_potential_stop_streak": 21,
+          "statuses_all_agents": {
+            "accepted": 4678,
+            "motion_bound_exceeded": 10
+          },
+          "statuses_selected_agents": {
+            "accepted": 4678,
+            "motion_bound_exceeded": 10
+          }
+        },
+        "translation_all_captured": {
+          "initialized": 16,
+          "selected": 16,
+          "post_ready_frames": 293,
+          "available_frames": 293,
+          "missing_team_frames": 0,
+          "quorum_frames": 293,
+          "insufficient_quorum_frames": 0,
+          "paired_availability": 1.0,
+          "paired_error": {
+            "frames": 293,
+            "mae_m": 0.003061556187301777,
+            "rmse_m": 0.003416413842180681,
+            "p95_m": 0.005898124253227893,
+            "max_m": 0.007553930593600847
+          },
+          "paired_original_error": {
+            "frames": 293,
+            "mae_m": 0.004117362061626561,
+            "rmse_m": 0.004561359128604785,
+            "p95_m": 0.0076154595169276645,
+            "max_m": 0.011507768420760338
+          },
+          "own_available_error": {
+            "frames": 293,
+            "mae_m": 0.003061556187301777,
+            "rmse_m": 0.003416413842180681,
+            "p95_m": 0.005898124253227893,
+            "max_m": 0.007553930593600847
+          },
+          "potential_stop_frames": 38,
+          "false_goal_stop_frames": 0,
+          "longest_valid_potential_stop_streak": 17,
+          "statuses_all_agents": {
+            "accepted": 4678,
+            "motion_bound_exceeded": 10
+          },
+          "statuses_selected_agents": {
+            "accepted": 4678,
+            "motion_bound_exceeded": 10
+          }
+        }
+      },
+      "acquisition_epoch_s": 1.7000000000000008,
+      "original_supporters": [
+        "agent_00",
+        "agent_01",
+        "agent_02",
+        "agent_03",
+        "agent_04",
+        "agent_05",
+        "agent_10"
+      ],
+      "acquisition_history": {
+        "frames": 35,
+        "captured_points": {
+          "agent_00": 364,
+          "agent_01": 144,
+          "agent_02": 155,
+          "agent_03": 241,
+          "agent_04": 284,
+          "agent_05": 333,
+          "agent_06": 324,
+          "agent_07": 127,
+          "agent_08": 157,
+          "agent_09": 359,
+          "agent_10": 313,
+          "agent_11": 257,
+          "agent_12": 287,
+          "agent_13": 105,
+          "agent_14": 190,
+          "agent_15": 278
+        }
+      },
+      "true_rotation_radians": {
+        "min": 0.0,
+        "max": 0.00776532005568183
+      },
+      "exact_original_statuses": 2373,
+      "exact_original_readings": 2363,
+      "exact_original_navigation": 338,
+      "scan_counts_verified": 5968,
+      "scope": "Reused input/control trajectory; translation yaw is a hypothesis, not measured physical yaw",
+      "series_sha256": "c82006c602d68341d23cbc41aa2cd0ed318e37df74df723dd31e358b574112d3",
+      "templates_sha256": "1e2093cbc8b86cd8ffad3ba727a86caeaaa01c1a10395f271aafe622670dbfa7"
+    },
+    {
+      "condition": "far_c_open_away_pos0",
+      "case_id": "far_c_open_away_pos0_task_reference",
+      "arms": {
+        "se2_supported": {
+          "initialized": 4,
+          "selected": 4,
+          "post_ready_frames": 11549,
+          "available_frames": 11549,
+          "missing_team_frames": 0,
+          "quorum_frames": 4020,
+          "insufficient_quorum_frames": 7529,
+          "paired_availability": 1.0,
+          "paired_error": {
+            "frames": 11549,
+            "mae_m": 0.058849550588010766,
+            "rmse_m": 0.059697522656765395,
+            "p95_m": 0.0691628797284412,
+            "max_m": 0.08390816604106305
+          },
+          "paired_original_error": {
+            "frames": 11549,
+            "mae_m": 0.058849550588010766,
+            "rmse_m": 0.059697522656765395,
+            "p95_m": 0.0691628797284412,
+            "max_m": 0.08390816604106305
+          },
+          "own_available_error": {
+            "frames": 11549,
+            "mae_m": 0.058849550588010766,
+            "rmse_m": 0.059697522656765395,
+            "p95_m": 0.0691628797284412,
+            "max_m": 0.08390816604106305
+          },
+          "potential_stop_frames": 0,
+          "false_goal_stop_frames": 0,
+          "longest_valid_potential_stop_streak": 0,
+          "statuses_all_agents": {
+            "not_selected": 138588,
+            "accepted": 38666,
+            "motion_bound_exceeded": 3,
+            "final_match_unobservable": 321,
+            "support_nearly_linear": 2319,
+            "translation_unobservable": 4887
+          },
+          "statuses_selected_agents": {
+            "accepted": 38666,
+            "motion_bound_exceeded": 3,
+            "final_match_unobservable": 321,
+            "support_nearly_linear": 2319,
+            "translation_unobservable": 4887
+          }
+        },
+        "translation_supported": {
+          "initialized": 4,
+          "selected": 4,
+          "post_ready_frames": 11549,
+          "available_frames": 11549,
+          "missing_team_frames": 0,
+          "quorum_frames": 4017,
+          "insufficient_quorum_frames": 7532,
+          "paired_availability": 1.0,
+          "paired_error": {
+            "frames": 11549,
+            "mae_m": 0.012756599606922067,
+            "rmse_m": 0.01357397709242963,
+            "p95_m": 0.02064243113391405,
+            "max_m": 0.03136691622326855
+          },
+          "paired_original_error": {
+            "frames": 11549,
+            "mae_m": 0.058849550588010766,
+            "rmse_m": 0.059697522656765395,
+            "p95_m": 0.0691628797284412,
+            "max_m": 0.08390816604106305
+          },
+          "own_available_error": {
+            "frames": 11549,
+            "mae_m": 0.012756599606922067,
+            "rmse_m": 0.01357397709242963,
+            "p95_m": 0.02064243113391405,
+            "max_m": 0.03136691622326855
+          },
+          "potential_stop_frames": 0,
+          "false_goal_stop_frames": 0,
+          "longest_valid_potential_stop_streak": 0,
+          "statuses_all_agents": {
+            "not_selected": 138588,
+            "accepted": 38664,
+            "motion_bound_exceeded": 5,
+            "support_nearly_linear": 3063,
+            "final_match_unobservable": 324,
+            "translation_unobservable": 4140
+          },
+          "statuses_selected_agents": {
+            "accepted": 38664,
+            "motion_bound_exceeded": 5,
+            "support_nearly_linear": 3063,
+            "final_match_unobservable": 324,
+            "translation_unobservable": 4140
+          }
+        },
+        "se2_all_captured": {
+          "initialized": 15,
+          "selected": 16,
+          "post_ready_frames": 11549,
+          "available_frames": 11549,
+          "missing_team_frames": 0,
+          "quorum_frames": 11549,
+          "insufficient_quorum_frames": 0,
+          "paired_availability": 1.0,
+          "paired_error": {
+            "frames": 11549,
+            "mae_m": 0.0599333617256522,
+            "rmse_m": 0.06067311327358787,
+            "p95_m": 0.06715566602199323,
+            "max_m": 0.08172539117026761
+          },
+          "paired_original_error": {
+            "frames": 11549,
+            "mae_m": 0.058849550588010766,
+            "rmse_m": 0.059697522656765395,
+            "p95_m": 0.0691628797284412,
+            "max_m": 0.08390816604106305
+          },
+          "own_available_error": {
+            "frames": 11549,
+            "mae_m": 0.0599333617256522,
+            "rmse_m": 0.06067311327358787,
+            "p95_m": 0.06715566602199323,
+            "max_m": 0.08172539117026761
+          },
+          "potential_stop_frames": 0,
+          "false_goal_stop_frames": 0,
+          "longest_valid_potential_stop_streak": 0,
+          "statuses_all_agents": {
+            "accepted": 119282,
+            "bootstrap_unobservable": 11549,
+            "translation_unobservable": 42916,
+            "support_nearly_linear": 10281,
+            "final_match_unobservable": 752,
+            "motion_bound_exceeded": 4
+          },
+          "statuses_selected_agents": {
+            "accepted": 119282,
+            "bootstrap_unobservable": 11549,
+            "translation_unobservable": 42916,
+            "support_nearly_linear": 10281,
+            "final_match_unobservable": 752,
+            "motion_bound_exceeded": 4
+          }
+        },
+        "translation_all_captured": {
+          "initialized": 15,
+          "selected": 16,
+          "post_ready_frames": 11549,
+          "available_frames": 11549,
+          "missing_team_frames": 0,
+          "quorum_frames": 11549,
+          "insufficient_quorum_frames": 0,
+          "paired_availability": 1.0,
+          "paired_error": {
+            "frames": 11549,
+            "mae_m": 0.014269673937569165,
+            "rmse_m": 0.014637046920508866,
+            "p95_m": 0.019041199109789044,
+            "max_m": 0.024484928353147698
+          },
+          "paired_original_error": {
+            "frames": 11549,
+            "mae_m": 0.058849550588010766,
+            "rmse_m": 0.059697522656765395,
+            "p95_m": 0.0691628797284412,
+            "max_m": 0.08390816604106305
+          },
+          "own_available_error": {
+            "frames": 11549,
+            "mae_m": 0.014269673937569165,
+            "rmse_m": 0.014637046920508866,
+            "p95_m": 0.019041199109789044,
+            "max_m": 0.024484928353147698
+          },
+          "potential_stop_frames": 0,
+          "false_goal_stop_frames": 0,
+          "longest_valid_potential_stop_streak": 0,
+          "statuses_all_agents": {
+            "accepted": 119276,
+            "bootstrap_unobservable": 11549,
+            "translation_unobservable": 33524,
+            "support_nearly_linear": 19905,
+            "final_match_unobservable": 524,
+            "motion_bound_exceeded": 6
+          },
+          "statuses_selected_agents": {
+            "accepted": 119276,
+            "bootstrap_unobservable": 11549,
+            "translation_unobservable": 33524,
+            "support_nearly_linear": 19905,
+            "final_match_unobservable": 524,
+            "motion_bound_exceeded": 6
+          }
+        }
+      },
+      "acquisition_epoch_s": 20.500000000000156,
+      "original_supporters": [
+        "agent_04",
+        "agent_05",
+        "agent_06",
+        "agent_07"
+      ],
+      "acquisition_history": {
+        "frames": 411,
+        "captured_points": {
+          "agent_00": 241,
+          "agent_01": 258,
+          "agent_02": 96,
+          "agent_03": 284,
+          "agent_04": 449,
+          "agent_05": 490,
+          "agent_06": 575,
+          "agent_07": 519,
+          "agent_08": 527,
+          "agent_09": 511,
+          "agent_10": 517,
+          "agent_11": 470,
+          "agent_12": 488,
+          "agent_13": 493,
+          "agent_14": 469,
+          "agent_15": 0
+        }
+      },
+      "true_rotation_radians": {
+        "min": 0.0,
+        "max": 0.03456967739672315
+      },
+      "exact_original_statuses": 46360,
+      "exact_original_readings": 38826,
+      "exact_original_navigation": 11589,
+      "scan_counts_verified": 192000,
+      "scope": "Reused input/control trajectory; translation yaw is a hypothesis, not measured physical yaw",
+      "series_sha256": "d184c438bfb9ec7232c6847ba2920ba67dcb530637e31c758b3bd2ec53ffa15a",
+      "templates_sha256": "9d02519ecdd4fd2a94425f1b9a0e40d58aa3290d3a31db073296abc097dd26f5"
+    },
+    {
+      "condition": "far_skew_box_s0_r0_pos0",
+      "case_id": "far_skew_box_s0_r0_pos0_task_reference",
+      "arms": {
+        "se2_supported": {
+          "initialized": 4,
+          "selected": 4,
+          "post_ready_frames": 11189,
+          "available_frames": 11189,
+          "missing_team_frames": 0,
+          "quorum_frames": 1296,
+          "insufficient_quorum_frames": 9893,
+          "paired_availability": 1.0,
+          "paired_error": {
+            "frames": 11189,
+            "mae_m": 0.045514208152357676,
+            "rmse_m": 0.047260502368606766,
+            "p95_m": 0.05941074609415377,
+            "max_m": 0.07771629418319065
+          },
+          "paired_original_error": {
+            "frames": 11189,
+            "mae_m": 0.045514208152357676,
+            "rmse_m": 0.047260502368606766,
+            "p95_m": 0.05941074609415377,
+            "max_m": 0.07771629418319065
+          },
+          "own_available_error": {
+            "frames": 11189,
+            "mae_m": 0.045514208152357676,
+            "rmse_m": 0.047260502368606766,
+            "p95_m": 0.05941074609415377,
+            "max_m": 0.07771629418319065
+          },
+          "potential_stop_frames": 0,
+          "false_goal_stop_frames": 0,
+          "longest_valid_potential_stop_streak": 0,
+          "statuses_all_agents": {
+            "not_selected": 134268,
+            "accepted": 34672,
+            "support_nearly_linear": 10071,
+            "motion_bound_exceeded": 13
+          },
+          "statuses_selected_agents": {
+            "accepted": 34672,
+            "support_nearly_linear": 10071,
+            "motion_bound_exceeded": 13
+          }
+        },
+        "translation_supported": {
+          "initialized": 4,
+          "selected": 4,
+          "post_ready_frames": 11189,
+          "available_frames": 11189,
+          "missing_team_frames": 0,
+          "quorum_frames": 1242,
+          "insufficient_quorum_frames": 9947,
+          "paired_availability": 1.0,
+          "paired_error": {
+            "frames": 11189,
+            "mae_m": 0.006238273022549482,
+            "rmse_m": 0.0067269745190126,
+            "p95_m": 0.010230112324970026,
+            "max_m": 0.026124146224689573
+          },
+          "paired_original_error": {
+            "frames": 11189,
+            "mae_m": 0.045514208152357676,
+            "rmse_m": 0.047260502368606766,
+            "p95_m": 0.05941074609415377,
+            "max_m": 0.07771629418319065
+          },
+          "own_available_error": {
+            "frames": 11189,
+            "mae_m": 0.006238273022549482,
+            "rmse_m": 0.0067269745190126,
+            "p95_m": 0.010230112324970026,
+            "max_m": 0.026124146224689573
+          },
+          "potential_stop_frames": 0,
+          "false_goal_stop_frames": 0,
+          "longest_valid_potential_stop_streak": 0,
+          "statuses_all_agents": {
+            "not_selected": 134268,
+            "accepted": 34629,
+            "support_nearly_linear": 10122,
+            "motion_bound_exceeded": 5
+          },
+          "statuses_selected_agents": {
+            "accepted": 34629,
+            "support_nearly_linear": 10122,
+            "motion_bound_exceeded": 5
+          }
+        },
+        "se2_all_captured": {
+          "initialized": 15,
+          "selected": 16,
+          "post_ready_frames": 11189,
+          "available_frames": 11189,
+          "missing_team_frames": 0,
+          "quorum_frames": 11189,
+          "insufficient_quorum_frames": 0,
+          "paired_availability": 1.0,
+          "paired_error": {
+            "frames": 11189,
+            "mae_m": 0.047611856285323585,
+            "rmse_m": 0.04927127545674597,
+            "p95_m": 0.056316867877903624,
+            "max_m": 0.06476110415977684
+          },
+          "paired_original_error": {
+            "frames": 11189,
+            "mae_m": 0.045514208152357676,
+            "rmse_m": 0.047260502368606766,
+            "p95_m": 0.05941074609415377,
+            "max_m": 0.07771629418319065
+          },
+          "own_available_error": {
+            "frames": 11189,
+            "mae_m": 0.047611856285323585,
+            "rmse_m": 0.04927127545674597,
+            "p95_m": 0.056316867877903624,
+            "max_m": 0.06476110415977684
+          },
+          "potential_stop_frames": 0,
+          "false_goal_stop_frames": 0,
+          "longest_valid_potential_stop_streak": 0,
+          "statuses_all_agents": {
+            "accepted": 144428,
+            "bootstrap_unobservable": 11189,
+            "support_nearly_linear": 22957,
+            "translation_unobservable": 380,
+            "motion_bound_exceeded": 60,
+            "final_match_unobservable": 10
+          },
+          "statuses_selected_agents": {
+            "accepted": 144428,
+            "bootstrap_unobservable": 11189,
+            "support_nearly_linear": 22957,
+            "translation_unobservable": 380,
+            "motion_bound_exceeded": 60,
+            "final_match_unobservable": 10
+          }
+        },
+        "translation_all_captured": {
+          "initialized": 15,
+          "selected": 16,
+          "post_ready_frames": 11189,
+          "available_frames": 11189,
+          "missing_team_frames": 0,
+          "quorum_frames": 11189,
+          "insufficient_quorum_frames": 0,
+          "paired_availability": 1.0,
+          "paired_error": {
+            "frames": 11189,
+            "mae_m": 0.0038019580755017067,
+            "rmse_m": 0.004233691599298274,
+            "p95_m": 0.006623000142853681,
+            "max_m": 0.02481555920554418
+          },
+          "paired_original_error": {
+            "frames": 11189,
+            "mae_m": 0.045514208152357676,
+            "rmse_m": 0.047260502368606766,
+            "p95_m": 0.05941074609415377,
+            "max_m": 0.07771629418319065
+          },
+          "own_available_error": {
+            "frames": 11189,
+            "mae_m": 0.0038019580755017067,
+            "rmse_m": 0.004233691599298274,
+            "p95_m": 0.006623000142853681,
+            "max_m": 0.02481555920554418
+          },
+          "potential_stop_frames": 7,
+          "false_goal_stop_frames": 0,
+          "longest_valid_potential_stop_streak": 2,
+          "statuses_all_agents": {
+            "accepted": 144382,
+            "bootstrap_unobservable": 11189,
+            "support_nearly_linear": 23120,
+            "translation_unobservable": 283,
+            "motion_bound_exceeded": 49,
+            "final_match_unobservable": 1
+          },
+          "statuses_selected_agents": {
+            "accepted": 144382,
+            "bootstrap_unobservable": 11189,
+            "support_nearly_linear": 23120,
+            "translation_unobservable": 283,
+            "motion_bound_exceeded": 49,
+            "final_match_unobservable": 1
+          }
+        }
+      },
+      "acquisition_epoch_s": 39.49999999999989,
+      "original_supporters": [
+        "agent_03",
+        "agent_05",
+        "agent_06",
+        "agent_07"
+      ],
+      "acquisition_history": {
+        "frames": 791,
+        "captured_points": {
+          "agent_00": 447,
+          "agent_01": 570,
+          "agent_02": 565,
+          "agent_03": 695,
+          "agent_04": 577,
+          "agent_05": 617,
+          "agent_06": 783,
+          "agent_07": 661,
+          "agent_08": 670,
+          "agent_09": 658,
+          "agent_10": 648,
+          "agent_11": 575,
+          "agent_12": 617,
+          "agent_13": 598,
+          "agent_14": 565,
+          "agent_15": 0
+        }
+      },
+      "true_rotation_radians": {
+        "min": 0.0,
+        "max": 0.028514559641479725
+      },
+      "exact_original_statuses": 44840,
+      "exact_original_readings": 34752,
+      "exact_original_navigation": 11209,
+      "scan_counts_verified": 192000,
+      "scope": "Reused input/control trajectory; translation yaw is a hypothesis, not measured physical yaw",
+      "series_sha256": "2eee87be7198177bf4a33124dbc97023f0816fa3c0d8199ad8b92f26b1b36568",
+      "templates_sha256": "5b4eb05a2d4d4e994e451d86b420221ee10b5b8af3ba280a0ff04c132a7973f4"
+    }
+  ],
+  "gates": {
+    "near_circle": {
+      "availability": true,
+      "error": true,
+      "false_goal_stop": true,
+      "sustained_feedback": true
+    },
+    "near_l_reference": {
+      "availability": true,
+      "error": true,
+      "false_goal_stop": true,
+      "sustained_feedback": false
+    },
+    "far_c_open_away_pos0": {
+      "availability": true,
+      "error": true,
+      "false_goal_stop": true,
+      "sustained_feedback": false
+    },
+    "far_skew_box_s0_r0_pos0": {
+      "availability": true,
+      "error": true,
+      "false_goal_stop": true,
+      "sustained_feedback": false
+    }
+  },
+  "origins": {
+    "near_circle_task_reference": {
+      "kind": "reused_complete_v2_output",
+      "path": "runs/research/2026-11-03-task-translation-v2/near_circle_task_reference",
+      "products": {
+        "summary.json": "7d9386dd892fff84ed5d27f5cc3ddb1db212e97fdf631ec70f430e6560cd328a",
+        "series.npz": "61c4fa547e2281f9b05d458d6d53ef998b6c7dcae90ca6b5a56c11e23ee9d27c",
+        "templates.json": "8e0926cf050f1a8e748ccc14c160f5bf92ef05c6737fa45fc0bac4eebdc36ca1"
+      }
+    },
+    "near_l_reference_task_reference": {
+      "kind": "reused_complete_v2_output",
+      "path": "runs/research/2026-11-03-task-translation-v2/near_l_reference_task_reference",
+      "products": {
+        "summary.json": "5757112f01d994bafec0655acef99b17400dca52382c4430c01aa64e0adf7f56",
+        "series.npz": "c82006c602d68341d23cbc41aa2cd0ed318e37df74df723dd31e358b574112d3",
+        "templates.json": "1e2093cbc8b86cd8ffad3ba727a86caeaaa01c1a10395f271aafe622670dbfa7"
+      }
+    },
+    "far_c_open_away_pos0_task_reference": {
+      "kind": "reused_complete_v2_output",
+      "path": "runs/research/2026-11-03-task-translation-v2/far_c_open_away_pos0_task_reference",
+      "products": {
+        "summary.json": "b652c6f3b61935bc81270538cdb16fd6631830666b25905510f52b3a533917bc",
+        "series.npz": "d184c438bfb9ec7232c6847ba2920ba67dcb530637e31c758b3bd2ec53ffa15a",
+        "templates.json": "9d02519ecdd4fd2a94425f1b9a0e40d58aa3290d3a31db073296abc097dd26f5"
+      }
+    },
+    "far_skew_box_s0_r0_pos0_task_reference": {
+      "kind": "recomputed_missing_case",
+      "path": "runs/research/2026-11-03-task-translation-completion-v1/far_skew_box_s0_r0_pos0_task_reference",
+      "products": {
+        "summary.json": "acd1ac3ee7fd6b45d352c8609b5284d72ac2393e50f7fe15f0501cacc05b38b7",
+        "series.npz": "2eee87be7198177bf4a33124dbc97023f0816fa3c0d8199ad8b92f26b1b36568",
+        "templates.json": "5b4eb05a2d4d4e994e451d86b420221ee10b5b8af3ba280a0ff04c132a7973f4"
+      }
+    }
+  },
+  "physical_trial_screen": "FAIL",
+  "new_physical_episodes": 0,
+  "candidate_adopted": false,
+  "source_integrity": "PASS",
+  "source_sha256": "dc425ae9f3e4ee96fbe9290505364c32b0c0a20dbec76b7991ae05f87f5fcaa0",
+  "protocol_sha256": "b7cf3464a936e461202e55399e30531132840414788ee6389fdcd2ced0908cad",
+  "prior_protocol_sha256": "eabd01a86578b5ed1ac97a598c3ca9fd2b0eab1647a7f44a008e03fe8ab07854",
+  "environment": {
+    "python": "3.12.14",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "executable": "C:\\Users\\kai\\boundary-aware-cooperative-transport\\.venv\\Scripts\\python.exe",
+    "packages": {
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "shapely": "2.2.0",
+      "PyYAML": "6.0.2",
+      "cvxpy": "1.9.3",
+      "clarabel": "0.11.1",
+      "osqp": "1.1.3",
+      "scs": "3.3.1",
+      "pymunk": "7.3.1",
+      "matplotlib": "3.11.2",
+      "threadpoolctl": "3.7.0"
+    }
+  },
+  "prior_execution_status": "WALL_BUDGET_EXHAUSTED",
+  "replay_execution_status": "POSTPROCESSING_FAILED",
+  "finalization_status": "COMPLETED",
+  "finalization_manifest_sha256": "0a6eed5118f7163f96bb353c8119ab8b931e214f3828fbdfd3eb377c82a3660a",
+  "finalization_wall_seconds": 7.430333300027996
+}

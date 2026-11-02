@@ -6,9 +6,9 @@ stop, separately demonstrate the deployment contribution, and finish a
 CCTA2027-compliant paper draft. Address the existing issues first, then continue
 toward the entire goal. This ledger does not narrow that objective.
 
-Status: ACTIVE. Previous completed turn was progress: the free-ray diagnostic,
-report and README were published as 3a9dcda / 1eded7c, both platform checks passed
-(872 core tests, two skips on each). No blocking condition has been established.
+Status: ACTIVE. Latest published checkpoint is 4e1bb4c; the complete four-condition
+replay and opt-in wiring are the current publication increment. No blocking
+condition has been established. The full research goal remains incomplete.
 
 ## Requirements and current evidence
 
@@ -19,7 +19,7 @@ report and README were published as 3a9dcda / 1eded7c, both platform checks pass
 | Reliable goal-aligned displacement and stopping | transport_validation_v1 stop audit; task_reference_v1; reference_surface_v1 | Incomplete: far-skew false HOLD; initial-reference stalls; no accepted repair. |
 | Dynamic safety and generalization appropriate to claims | G500 / hard-safety receipts and theory/static_deployment | Incomplete; static conditions do not prove dynamic safety. Freeze new conditions only after a usable common controller. |
 | Independent boundary-deployment contribution | deployment_contribution_v1, 36 existing matched trajectories | Coverage contribution supported; completion superiority unproven. New matched evaluation required for the final system. |
-| Reproducible environment | root .venv and requirements.lock.txt | Existing PyYAML 6.0.2 / 6.0.3 identity difference must be handled in a separate declared check, never by relabeling old runs. |
+| Reproducible environment | root .venv and requirements.lock.txt | Installed joblib 1.5.1 / PyYAML 6.0.2 differ from locked 1.6.0 / 6.0.3. Handle in a separate declared check, never by relabeling old runs. |
 | CCTA2027 paper draft | manuscript/ccta2027/main.tex / main.pdf; official conference requirements | Existing draft covers old 27-episode census. Reconcile final evidence and claims, recheck official requirements, compile and visually inspect final draft. |
 
 ## Current architecture decision
@@ -29,29 +29,37 @@ not produced a reliable common system. Stop adding empirical gates to the same
 biased state. First test whether existing sensor information can constrain the
 unknown center and whether the transform relevant to that set is observable.
 
-Current work: `task_translation_v1_design.md` and `task_translation_v1_plan.md`.
-They test motion-model ambiguity and whether already-captured initial templates
-were discarded unnecessarily, in a fixed four-arm same-input comparison.
+Completed comparison: `task_translation_v1_design.md` and the independently
+frozen `task_translation_completion_v1_design.md` test motion-model ambiguity
+and whether already-captured initial templates were discarded unnecessarily,
+in a fixed four-arm same-input comparison.
 Translation-only yaw is an explicit hypothesis, not a measured zero or a
 rotation-robust stopping certificate. Preserve the free-ray diagnostic results.
 
-Current execution: corrected protocol task_translation_v2.json, exec session
-3893, log runs/maintenance/2026-11-03-task-translation-v2/study.log. Re-poll the
-actual handle; never infer liveness from this note. Original v1 stopped on a
-strict task-vector arithmetic mismatch and is preserved as invalidated, with
-no completed candidate result. Runtime tests now pass 876 with two skips.
+Current evidence: all four conditions in task_translation_completion_v1 are
+complete, and the original screen is FAIL (L/C/skew sustained-feedback criterion).
+Session 25427 is terminal, exit 1 after writing the complete skew data: a path
+join typo failed only final aggregation. Original failure/source snapshots are
+preserved; separate zero-update finalization completed (session 30915, exit 0).
+Report: docs/results/task_translation_completion_v1/. Original v2 session 3893
+remains a retained budget stop; v1 remains a retained arithmetic invalidation.
+The candidate is now wired as an explicit default-off runtime option; no new
+candidate physical trial or success has yet been established. The RED-to-GREEN
+record and full-suite verification are recorded in task_translation_wiring_plan.md.
+Published 4e1bb4c passed both CI platforms, 876 passes / 2 skips, on the older
+runtime. Next is a separately frozen exploratory 4-baseline / 4-candidate pilot,
+followed by wider protected-condition regression and unused conditions if useful.
 The latest official paper-format check is recorded separately in
 docs/CCTA2027_REQUIREMENTS_CHECK_2026-11-03.md; manuscript scientific completion
 is still unproven and the original full goal remains active.
 
-Publication checkpoint captured at 2026-11-02 19:32:52 UTC:
+Historical publication checkpoint captured at 2026-11-02 19:32:52 UTC:
 docs/results/task_translation_checkpoint_v1/. Three of four conditions have
 complete same-input results; the far-skew condition remains pending. Overall
-screening is INCOMPLETE, with the original sustained-feedback gate already
-failed for L and C. The user requested GitHub upload and README updates, so this
-dated checkpoint is being published without waiting for or altering the live
-run. The fourth case must still be collected; none of these offline results
-establishes a physical repair or completion of the original full goal.
+screening was INCOMPLETE, with the original sustained-feedback gate already
+failed for L and C. That snapshot was published while the fourth case was still
+pending and remains unchanged. The later complete report supersedes it for
+current status, without establishing a physical repair or full-goal completion.
 
 2026-11-03 progress: the frozen four-snapshot audit completed in 147.38 s,
 with zero new physical episodes. All 132 conditional sets contained the true

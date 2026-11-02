@@ -1,6 +1,8 @@
 # CCTA 2027 实验入口
 
-2026-11-03：[task_translation_v2.json](task_translation_v2.json)冻结四条旧任务参考轨迹×四个估计臂，固定比较平移模型和全部既有采集模板的准入，不改变最佳数值参数；[本次发布快照](../../docs/results/task_translation_checkpoint_v1/README.md)为 3/4 条件完成、整体 INCOMPLETE，新增物理回合 0。L/C 已未通过原连续反馈筛选。无效的 [v1 原协议](task_translation_v1.json)和本地运行原件保留；候选未接入控制器。
+2026-11-03：[task_translation_completion_v1.json](task_translation_completion_v1.json)为 v2 预算截尾后的独立资源补全：核验复用三项，只补算缺失斜箱，算法和阈值不变。四项数据已完整；补算末尾汇总路径错误通过独立零重放汇总恢复，原失败身份保留。[完整结果](../../docs/results/task_translation_completion_v1/README.md)仍为原筛选 FAIL，新增候选物理回合 0；[默认关闭的实验接口](task_translation_wiring_plan.md)已实现，[后续闭环草案](task_translation_physical_pilot_draft.md)尚未冻结或执行。
+
+2026-11-03：[task_translation_v2.json](task_translation_v2.json)冻结四条旧任务参考轨迹×四个估计臂，固定比较平移模型和全部既有采集模板的准入，不改变最佳数值参数；[原发布快照](../../docs/results/task_translation_checkpoint_v1/README.md)记录当时 3/4 条件完成、整体 INCOMPLETE，新增物理回合 0。L/C 已未通过原连续反馈筛选。无效的 [v1 原协议](task_translation_v1.json)和本地运行原件保留；当时候选尚未接入控制器。
 
 2026-11-03：[reference_surface_v1.json](reference_surface_v1.json)固定八条历史轨迹的同输入估计试验，数值参数全部保持；斜箱 MAE 改善 11.30%，未过 25% 门槛，不进入候选闭环比较。[protected_baseline_v1_reproduction.json](protected_baseline_v1_reproduction.json)另执行一个完整基线复现回合，原物理轨迹和科学字段精确一致。[结果、指标与下一步](../../docs/results/reference_surface_v1/README.md)。
 
