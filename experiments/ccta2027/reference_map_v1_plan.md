@@ -13,13 +13,13 @@ receipts. New runs only; default selector False. No hidden truth/global inputs.
 Review focus: reference dropout and recovery; out-of-hop data exclusion; double
 integration through fusion; inactive-path compatibility; post-freeze rotations.
 
-- [ ] Add tests in tests/test_reference_map.py for real map shifts and fusion,
+- [x] Add tests in tests/test_reference_map.py for real map shifts and fusion,
       invalid input, zero epoch and one-hop gap/recovery; watch failures.
-- [ ] Implement align_translation and opt-out motion integration in boundary_map.py;
+- [x] Implement align_translation and opt-out motion integration in boundary_map.py;
       integrate the candidate through control/reference_map.py and controller.py.
       Add flag validation/trace/episode metadata and default protection assertions.
-- [ ] Run targeted and full core tests; preserve exact baseline behavior.
-- [ ] Freeze eight physical episodes in a new reference_map_v1 protocol/run directory,
+- [x] Run targeted and full core tests; preserve exact baseline behavior.
+- [x] Freeze eight physical episodes in a new reference_map_v1 protocol/run directory,
       execute once and analyze all outcomes using unchanged original evaluators.
 - [ ] Publish provenance and physical results, updated README and all negative
       decisions; fresh final review, authorized normal branch push and CI.
@@ -68,3 +68,15 @@ final evidence. Important interim finding: nearest_feature row mode ignores
 per-point velocities, so this new selector must reject that unsupported mode.
 All frozen cases use aggregate mode; preserve their runtime/source/protocol
 identity and handle the compatibility guard in a separately tested followup.
+
+Final review completed on fa8b619..a565a18: With fixes, exactly one Important
+finding and no unresolved Minor/Critical findings. Executor's single fix pass
+rejects the unsupported nearest_feature combination. New focused regression
+failed before the guard (DID NOT RAISE); targeted33 then passed; current core
+904 passed/2 skipped in149.61s, terminal session33498 exit0. All8 aggregate-row
+configurations still construct. Current source2a49a2bc273f40b8a775c5879db666a0619
+df377effe04866c45b3e68f79211d differs from physicaldc9e9ac1 only in this guard.
+All frozen files, products and protected parameters remain unchanged. See
+docs/results/reference_map_v1/final_review.md and guard_followup_checks.json.
+Publication documents are ready; normal push and exact-head CI will be recorded
+in this run's ignored maintenance receipts after the publication commit.

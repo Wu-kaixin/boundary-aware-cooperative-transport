@@ -4,7 +4,7 @@
 
 本项目的目标是利用局部边界感知和邻域通信，对未知形状物体安全部署，完成无附着协作搬运和可靠停止，并通过匹配对照实验单独验证边界部署的贡献，最终形成符合 CCTA2027 要求的论文初稿。当前保留既有共享阶段监督器，先建立可复现的仿真证据。
 
-**最佳公共配置已完整保存，本轮未改既有数值参数、物理模型或成功/安全判据。** [可运行配置](configs/research/best_known_transport_v1.yaml)以近场 L 形为例，显式保存原控制参数；[使用说明](configs/research/README.md)和[参数来源及 SHA-256](docs/results/reference_surface_v1/protected_baseline.json)用于核验。其余形状及初态仍由原实验协议提供。全局历史默认值保持兼容，新参考面候选默认关闭。
+**最佳公共配置已完整保存，本轮未改既有数值参数、物理模型或成功/安全判据。** [可运行配置](configs/research/best_known_transport_v1.yaml)以近场 L 形为例，显式保存原控制参数；[使用说明](configs/research/README.md)和[参数来源及 SHA-256](docs/results/reference_surface_v1/protected_baseline.json)用于核验。其余形状及初态仍由原实验协议提供。全局历史默认值保持兼容，新增候选默认关闭。
 
 **最新验证：[参考驱动地图完整八回合](docs/results/reference_map_v1/README.md)。** 全部最佳数值参数不变，安全完成 **4/4→3/4**、G500 仍 **2/4**，预定门槛 **FAIL，候选未采用、默认关闭**。C 形缩放 **8→0**；斜箱未能在 60 秒内冻结初始参考，600 秒截尾，采集期/采集结束后缩放为 **1,422 / 21,608**，后者全部处于参考不可用阶段。四个原参照全部 25 组回放数组和科学字段精确复现。C 形还存在协作激活未达到原 4 台门槛的问题，不能只按终点误差宣布修复。
 
@@ -36,7 +36,9 @@
 
 [完整试验报告与图表](docs/results/reference_surface_v1/README.md) · [全部八块数据](docs/results/reference_surface_v1/all_eight_blocks.csv) · [基线复现证据](docs/results/reference_surface_v1/baseline_reproduction.json) · [部署贡献审计](docs/results/deployment_contribution_v1/README.md)
 
-本轮物理源码对应的[本地完整回归](docs/results/reference_map_v1/engineering_checks.json)为 **903 项通过、2 项跳过**，针对性检查 71 项通过；[Windows / Ubuntu CI](https://github.com/Wu-kaixin/boundary-aware-cooperative-transport/actions/workflows/tests.yml)按各自提交记录核心、MAS 和 smoke 检查。八个新物理回合与 933 帧旧轨迹来源追踪分别记账。单元测试不等同于研究成功；大体积原始轨迹和冻结源码仍按[数据索引](docs/DATA_INDEX.md)保留本地。
+本轮物理源码对应的[本地完整回归](docs/results/reference_map_v1/engineering_checks.json)为 **903 项通过、2 项跳过**，针对性检查 71 项通过。[独立最终审查与收尾](docs/results/reference_map_v1/final_review.md)另行记录配置防护修订：参考地图候选拒绝会忽略缺测速度界的 `nearest_feature` 组合；原默认路径保持兼容，八个实验均使用受支持的聚合约束。修订后的检查与源码身份见[配置防护回归收据](docs/results/reference_map_v1/guard_followup_checks.json)，不重标记旧实验。[Windows / Ubuntu CI](https://github.com/Wu-kaixin/boundary-aware-cooperative-transport/actions/workflows/tests.yml)按各自提交记录核心、MAS 和 smoke 检查。八个新物理回合与 933 帧旧轨迹来源追踪分别记账。单元测试不等同于研究成功；大体积原始轨迹和冻结源码仍按[数据索引](docs/DATA_INDEX.md)保留本地。
+
+配置防护修订后的本地核心回归为 **904 项通过、2 项跳过**，针对性检查 **33 项通过**；本次发布收尾未新增物理回合。
 
 ## 目前遗留的问题与下一步
 

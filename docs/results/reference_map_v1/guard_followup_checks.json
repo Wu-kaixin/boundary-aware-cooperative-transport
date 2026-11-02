@@ -1,0 +1,69 @@
+{
+  "checked_at_utc": "2026-11-02T23:40:00.330766+00:00",
+  "scope": "Post-review configuration guard only; no new physical episodes and no relabeling of frozen study",
+  "reviewed_range": {
+    "base": "fa8b6194d65d8027303c97cdb207ecb6cf02742a",
+    "head": "a565a18da58a3d943eb0eb7597193a19549aaff4"
+  },
+  "review_verdict": "With fixes; one Important incompatibility guard finding",
+  "executor_resolution": "Reject reference-map candidate with non-aggregate object rows; default-off nearest-feature path still accepted",
+  "runtime_source_sha256": "2a49a2bc273f40b8a775c5879db666a0619df377effe04866c45b3e68f79211d",
+  "frozen_physical_runtime_sha256": "dc9e9ac1d5360f54c4bc7b85d1066c8ec01b1baa8955d90c181385857b918f37",
+  "red_expected_failure": {
+    "tests": 1,
+    "failures": 1,
+    "errors": 0,
+    "skipped": 0,
+    "passed": 0,
+    "seconds": 2.764,
+    "xml_sha256": "79f7f33ac69fe41ef47bf0451bdfc7e769acdf36db6c45786c5c3908a8a04fcf"
+  },
+  "targeted": {
+    "tests": 33,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "passed": 33,
+    "seconds": 3.296,
+    "xml_sha256": "8a2e39ab24e0b5c3f26c54e91815a1fe1d7b257a713576930c9cc205606670f9"
+  },
+  "core": {
+    "tests": 906,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 2,
+    "passed": 904,
+    "seconds": 149.587,
+    "xml_sha256": "aa03afafcfddd7ca8792d1fac16da108cce4f6e1875d514c1a935e97d2dfb235"
+  },
+  "changed_files_sha256": {
+    "src/dbact/control/controller.py": "6426ec84616be7287398860ce2cc775198068cb9cdcab9b6718671c080ae2072",
+    "tests/test_reference_map.py": "33a1cdc5de11bd6871a1cfc82c675768c18c28d5c99e3b62dcf813f85f43c8c7"
+  },
+  "integrity": {
+    "current_runtime_source_sha256": "2a49a2bc273f40b8a775c5879db666a0619df377effe04866c45b3e68f79211d",
+    "changed_runtime_files": [
+      "src/dbact/control/controller.py"
+    ],
+    "frozen_source_files_verified": 133,
+    "frozen_helpers_verified": 3,
+    "all_eight_use_aggregate_rows": true,
+    "published_products_unchanged": true,
+    "canonical_sha256": "a5d5c8e200fa502557d4da9a9db2a646d027abababd59661bcdac21a1b43b112"
+  },
+  "new_physical_episodes": 0,
+  "local_checks": "runs/maintenance/2026-11-03-reference-map-v1/guard-followup",
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "existing_package_differences": {
+    "joblib": {
+      "installed": "1.5.1",
+      "locked": "1.6.0"
+    },
+    "PyYAML": {
+      "installed": "6.0.2",
+      "locked": "6.0.3"
+    }
+  },
+  "candidate_adopted": false,
+  "broad_research_goal_complete": false
+}

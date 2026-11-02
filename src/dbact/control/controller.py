@@ -649,6 +649,8 @@ class DBACTController:
                     or params.task_mode != "transport" or params.perception_every != 1
                     or params.planning_every != 1 or not params.motion_compensation))):
             raise ValueError("Reference map requires boolean selection, initial translation reference and every-frame transport")
+        if params.initial_reference_map_motion and params.object_row_mode != "aggregate":
+            raise ValueError("Reference map requires aggregate object rows to retain missing-motion bounds")
         if params.initial_task_reference and not params.initial_reference_acquisition:
             raise ValueError("Initial task reference requires stationary acquisition")
         if (not isinstance(params.initial_reference_safe_geometry, bool)

@@ -70,3 +70,8 @@ G500：圆形/L形两臂均通过；C形/斜箱两臂均未通过。候选只有
 `runs/research/2026-11-03-reference-map-v1/run/`，执行前源码/脚本在同级`freeze/`；
 工程和后验诊断在`runs/maintenance/2026-11-03-reference-map-v1/`。
 本地joblib/PyYAML与锁文件的既有差异仍存在，不能标记为锁环境物理复跑。
+
+发布前的[独立最终审查与收尾](final_review.md)发现并修复了一项配置兼容问题：
+参考地图候选现在拒绝会忽略逐点缺测速度界的 `nearest_feature` 约束模式。
+八回合均使用聚合模式，冻结结果保持原源码身份；后续构造防护的源码与回归
+另存于[修订检查](guard_followup_checks.json)，不表示重新运行了物理试验。

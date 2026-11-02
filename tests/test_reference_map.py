@@ -91,6 +91,19 @@ def test_invalid_reference_map_contract_rejected(change):
         SimulationEnvironment(cfg, seed=1)
 
 
+def test_reference_map_rejects_rows_that_ignore_missing_motion_bounds():
+    cfg = load_yaml('configs/research/best_known_transport_v1.yaml')
+    cfg['controller'].update(initial_reference_acquisition=True, initial_task_reference=True,
+        initial_reference_motion_model='translation', initial_reference_use_all_captured=True,
+        initial_reference_map_motion=False, object_row_mode='nearest_feature',
+        aggregate_frame_consistent=False)
+    baseline = SimulationEnvironment(cfg, seed=1)
+    assert baseline.controller.safety.params.object_row_mode == 'nearest_feature'
+    cfg['controller']['initial_reference_map_motion'] = True
+    with pytest.raises(ValueError, match='Reference map requires aggregate object rows'):
+        SimulationEnvironment(cfg, seed=1)
+
+
 def test_one_hop_reference_dropout_and_recovery_preserves_anchor(monkeypatch):
     from dbact.control.reference_map import update_reference_maps
     env = environment()
