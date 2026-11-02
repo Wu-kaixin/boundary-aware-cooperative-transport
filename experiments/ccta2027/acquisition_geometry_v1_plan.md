@@ -64,3 +64,26 @@ scaling frames, rather than enlarge offsets again. Cost: this negative result
 does not resolve the safety limitation; broader validation still waits.
 
 Task 5: final read-only review and authorized branch publication pending.
+
+Task 5 review: complete for b7bf69f..f1b4959. Fresh-context read-only reviewer
+independently recomputed eight episode rows, all phase counters and all four
+25-array/scientific-field reproductions; package/source/protocol/publication
+identities and core XML checked. No Critical or Important findings. One minor
+README chronology ambiguity is corrected in the final documentation commit:
+prior C translation baseline yaw2.574deg -> current geometry candidate3.575deg.
+This fulfills the user's request for an accurate updated README; no new runtime
+or data change, and no second review or redundant physics/test run.
+
+Repository health after staging: PASS, 1342 tracked files, 442 Python files,
+15 navigation documents, pip check and git fsck; receipt health.json in the
+maintenance directory (head names precommit b7bf69f, checked staged working files).
+Measured study elapsed_seconds: 194.63326730002882; not a simulation budget.
+
+Final: Ruling: all reviewer exclusions remain unmet goal work — general
+reliability, unused conditions, rotation, deployment superiority, decentralization,
+hardware, locked-environment physics and joint-QP causality are not established
+by this development screen. Cost of claiming otherwise would be unsupported
+research claims. Remote push/CI is checked separately by the executor.
+
+This increment's implementation, fixed eight-episode experiment, negative
+decision, evidence publication and review are complete. Full goal stays ACTIVE.
