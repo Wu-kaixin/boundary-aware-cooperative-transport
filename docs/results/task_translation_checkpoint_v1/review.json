@@ -1,0 +1,12 @@
+{
+  "scope": "Independent read-only review of the experimental checkpoint, not scientific adoption",
+  "base": "1eded7c5cd0dde8f87b7e9e2d027f9cc41d4a84c",
+  "head": "04e052e57cba04db3ceb1fdb1764bfc6f4831bc4",
+  "critical": 0,
+  "important": 0,
+  "minor": 0,
+  "verdict": "Fit to push the exact incomplete checkpoint",
+  "independently_verified": ["all 12 completed-arm denominators", "published hashes and raw summaries", "frozen source snapshots", "original case identities", "unchanged v1/v2 cases, arms and gates", "876 passed and 2 skipped in existing test XML"],
+  "experiments_or_tests_rerun_by_reviewer": false,
+  "remaining_scope": ["fourth-case completion and final screen", "closed-loop validation", "rotation/generalization/dynamic safety", "final manuscript", "separate environment reconciliation"]
+}

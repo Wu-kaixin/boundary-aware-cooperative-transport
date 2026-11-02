@@ -23,8 +23,8 @@ results and the protected numerical baseline. User delegated design decisions.
 - [x] Implement and freeze a four-arm same-input replay with acquisition-buffer
   reconstruction and exact original reference reproduction.
 - [ ] Execute once, retain all outcomes and decide the predeclared physical-trial gate.
-- [ ] Run appropriate regression, perform one whole-change independent review,
-  document evidence and push to the existing research branch.
+- [x] Run appropriate regression, perform one whole-change independent review,
+  and document the completed checkpoint for the requested branch publication.
 - [ ] Continue toward a reliable full system, independent deployment contribution
   and final CCTA2027 paper; do not mark the full goal complete at this screening step.
 
@@ -97,3 +97,28 @@ The final fresh-context review for this publication covers the full increment
 since 1eded7c, including the unwired prototype, frozen protocols, checkpoint,
 calibration, rotation audit and documentation. The remaining scientific execution
 task stays open; this publication is not completion of the original full goal.
+
+2026-11-03 final publication review: fresh reviewer examined 1eded7c..04e052e,
+including all 12 completed-arm denominators, hashes, original identities, source
+snapshots and test XML. Critical / Important / Minor findings: 0 / 0 / 0.
+The exact checkpoint is fit to push. No source fixes or second review required.
+
+Final: Ruling: the reviewer set aside fourth-case completion and final screening —
+keep the dated checkpoint INCOMPLETE and collect the eventual run outcome
+separately; otherwise missing data could be mistaken for a passing study.
+Final: Ruling: the reviewer set aside closed-loop improvement and adoption — no
+runtime wiring or new physical trial was performed, so neither is claimed;
+otherwise offline accuracy could be mistaken for reliable stopping.
+Final: Ruling: the reviewer set aside generalization, substantial rotation and
+dynamic-safety guarantees — these remain explicit validation requirements;
+otherwise the translation model could be used outside its evidence range.
+Final: Ruling: the reviewer set aside final manuscript completeness — the format
+check and evidence update do not complete the paper; otherwise obsolete results
+could be presented as validation of the final system.
+Final: Ruling: the reviewer set aside the pre-existing PyYAML/lock discrepancy —
+preserve the live frozen environment and reconcile it in a separate declared
+execution; otherwise old results could be assigned the wrong environment.
+
+User authorization already selects a normal push to the existing research
+branch. Keep this checkout and all raw/snapshot/ledger files; do not merge main,
+force-push, delete historical records, or ask for another integration choice.
