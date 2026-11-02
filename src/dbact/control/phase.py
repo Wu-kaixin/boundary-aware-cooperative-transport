@@ -90,6 +90,9 @@ class PhaseSignals:
     # Opt-in prospective geometric readiness, independent of the push enable.
     # None preserves the original response clocks exactly; not physical contact.
     recovery_ready: int | None = None
+    # Additional opt-in unknown-center arrival guard. Default preserves all
+    # historical transitions; this never changes the physical success criterion.
+    task_reference_ready: bool = True
 
 
 @dataclass
@@ -201,7 +204,7 @@ class PhaseMonitor:
         arrived = signals.progress >= signals.target_distance - self.gates.hold_tolerance
         slow = abs(signals.estimated_speed) <= self.gates.hold_speed
         known = signals.estimate_quality != "unavailable"
-        return arrived and slow and known
+        return arrived and slow and known and signals.task_reference_ready
 
     def _mark_brake(self, signals: PhaseSignals) -> None:
         tolerance = self.gates.hold_tolerance

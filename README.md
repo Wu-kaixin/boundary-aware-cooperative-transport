@@ -1,5 +1,7 @@
 # DBACT：边界感知部署与协作搬运
 
+2026-11-03：[初始任务参考](docs/results/task_reference_v1/README.md)完成固定12回合：错误 HOLD 1/4→0/4，但完整任务完成3/4→1/4，候选未采用、默认关闭。[部署贡献审计](docs/results/deployment_contribution_v1/README.md)核验36条既有匹配轨迹：CVT改善共同部署时段覆盖，三方法完整搬运均11/12，不能宣称完成率优势。
+
 [匹配支撑固定筛选](docs/results/reference_support_v1/README.md)：8条同输入轨迹已完成；局部大误差减少但未通过团队误差门槛，新增物理回合0，候选默认关闭。
 
 
@@ -16,7 +18,7 @@
 
 这是持续研究中的科研软件。静态部署分析有明确适用条件；动态接触、鲁棒搬运及实机性能仍有未解决问题。程序执行完成与科研任务成功分别记录，失败案例保留在结果中。
 
-两个活动分支是 `main` 和 [`paper/boundary-aware-safe-deployment`](https://github.com/Wu-kaixin/boundary-aware-cooperative-transport/tree/paper/boundary-aware-safe-deployment)。本次研究在原目录进行，未自动提交或推送；运行身份以冻结源码快照及收据为准，不能将本地新结果归到尚未包含它们的远端提交。
+两个活动分支是 `main` 和 [`paper/boundary-aware-safe-deployment`](https://github.com/Wu-kaixin/boundary-aware-cooperative-transport/tree/paper/boundary-aware-safe-deployment)。用户已授权同步研究分支；11月1–2日既有研究于 `27d17ad` 同步，跨平台分析导入修复于 `6e7958c` 同步。实验运行身份仍以各自冻结源码快照和收据为准，不能因后续提交而重标记旧结果。
 
 **阅读入口：** [架构](docs/ARCHITECTURE.md) · [实验协议](experiments/ccta2027/README.md) · [冻结结果](docs/results/README.md) · [数据索引](docs/DATA_INDEX.md) · [论文稿件](manuscript/ccta2027/README.md) · [仓库指南](docs/REPOSITORY_GUIDE.md)
 

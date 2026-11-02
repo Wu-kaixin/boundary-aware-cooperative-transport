@@ -310,6 +310,9 @@ class DBACTParams:
     reference_support_gate: bool = False
     reference_early_anchor: bool = False
     reference_bootstrap_gain: float | None = None  # None preserves progress_estimate_gain
+    initial_reference_acquisition: bool = False
+    initial_task_reference: bool = False
+    initial_acquisition_seconds: float = 60.0
     contact_patch_distance: bool = False
     # New development arms, off by default. The vector law changes controller
     # arrival feedback, never the independent simulator completion criterion.
@@ -632,6 +635,14 @@ class DBACTController:
                 isinstance(params.reference_bootstrap_gain, bool)
                 or not np.isfinite(params.reference_bootstrap_gain) or params.reference_bootstrap_gain <= 0):
             raise ValueError("reference_bootstrap_gain must be finite and positive")
+        if params.initial_task_reference and not params.initial_reference_acquisition:
+            raise ValueError("Initial task reference requires stationary acquisition")
+        if params.initial_reference_acquisition and (
+                params.navigation_estimator != "observed_reference" or params.range_noise_std <= 0
+                or params.navigation_voter_continuity or params.reference_early_anchor
+                or params.reference_bootstrap_gain is not None
+                or not np.isfinite(params.initial_acquisition_seconds) or params.initial_acquisition_seconds <= 0):
+            raise ValueError("Initial acquisition requires the every-frame observed reference and a positive budget")
         if params.contact_patch_distance and (params.boundary_navigation != "vector_goal" or params.planning_every != 1):
             raise ValueError("Contact patch distance requires every-frame vector_goal")
         if params.dynamic_contact_roles and (params.planning_every != 1 or len(self.tasks) != 1):
@@ -762,6 +773,18 @@ class DBACTController:
         self.navigation_voter_trace = None
         self._reference_trackers = {}
         self._reference_readings = {}
+        self.initial_reference_status = "disabled"
+        self.initial_reference_epoch = None
+        self.initial_reference_supporters = []
+        self.task_reference_bound = float("inf")
+        self.task_reference_hold_ready = not params.initial_task_reference
+        if params.initial_reference_acquisition:
+            from dbact.control.initial_task_reference import InitialReferenceCapture, workspace_vertices
+            self._initial_capture = InitialReferenceCapture(noise=params.range_noise_std)
+            self._center_vertices = workspace_vertices(domain)
+            self._task_reference_point = self._center_vertices.mean(axis=0)
+            self._transport_safe_radius = self.safety.params.r_safe
+            self.initial_reference_status = "acquiring"
         self._time = 0.0
         self._frame = 0
         # D10-DIAG. Off by default: the extra quantities cost an unheld-target
@@ -863,6 +886,8 @@ class DBACTController:
             self._recovery_eligible = {a.agent_id:self._prospective_push_ready(i,agents,neighbors[i],contact_ready)
                                       for i,a in enumerate(agents)}
         self.phase_signals = self._phase_signals(agents, contact_ready)
+        if self.initial_reference_status in ("acquiring", "unavailable"):
+            self.phase_signals.contact_ready = 0
         self.phase_monitor.update(self.phase_signals, self._frame)
 
         # T5: a planner that recomputes on one frame in ``planning_every`` and holds its
@@ -904,6 +929,8 @@ class DBACTController:
                 self._held_nominal[agent.agent_id] = (u_nom, mode, cell_mass, push_side, effort)
             else:
                 u_nom, mode, cell_mass, push_side, effort = self._held_nominal[agent.agent_id]
+            if self.initial_reference_status == "unavailable":
+                u_nom, mode, push_side, effort = np.zeros(2), "initial_reference_unavailable", False, 0.
             points, normals, v_obj, v_points = self._object_rows_from_map(
                 agent.agent_id, agent.position, view
             )
@@ -1132,6 +1159,10 @@ class DBACTController:
         a subsequent accepted match must measure a velocity as well as position.
         """
         self._reference_readings = {}
+        if self.params.initial_reference_acquisition:
+            self._update_initial_reference(agents, batches, timestamp)
+            if self.params.initial_task_reference or self.initial_reference_status != "frozen":
+                return
         if not self.phase_monitor.reached(Phase.CONTACT_READY) and not self.params.reference_early_anchor:
             return
         from dbact.control.observed_reference import ObservedReferenceTracker
@@ -1162,6 +1193,47 @@ class DBACTController:
             if reading is not None:
                 self._reference_readings[aid] = reading
 
+    def _update_initial_reference(self, agents, batches, timestamp):
+        from dbact.control.initial_task_reference import TaskReferenceTracker
+        p = self.params
+        if self.initial_reference_status == "acquiring":
+            self.safety.params.r_safe = p.robot_radius+3*p.range_noise_std+2*p.max_speed*p.dt
+            # Exactly the deadline is admissible; a later sensor frame is not.
+            # Tolerance handles accumulated floating-point dt without granting
+            # an extra control interval.
+            if timestamp > p.initial_acquisition_seconds+1e-9:
+                self._initial_capture.freeze()
+                self.initial_reference_status = "unavailable"
+                return
+            for aid, batch in batches.items():
+                self._initial_capture.add(aid, batch)
+            supported = [a.agent_id for a in agents if self._initial_capture.supported(a.agent_id)]
+            if len(supported) >= p.min_push_agents:
+                self._initial_capture.freeze()
+                self.initial_reference_status = "frozen"
+                self.initial_reference_epoch = float(timestamp)
+                self.initial_reference_supporters = supported
+                self.safety.params.r_safe = self._transport_safe_radius
+                if p.initial_task_reference:
+                    for aid in supported:
+                        tracker = TaskReferenceTracker(reference_point=self._task_reference_point,
+                            gate=p.registration_gate, normal_cosine=p.registration_normal_cosine,
+                            max_speed=p.max_object_speed, max_yaw_rate=p.max_object_yaw_rate,
+                            velocity_filter=p.object_velocity_filter, range_noise_std=p.range_noise_std,
+                            support_gate=True)
+                        tracker.initialize_initial(self._initial_capture.view(aid), timestamp)
+                        self._reference_trackers[aid] = tracker
+            elif timestamp >= p.initial_acquisition_seconds-1e-9:
+                self._initial_capture.freeze()
+                self.initial_reference_status = "unavailable"
+            return
+        if self.initial_reference_status != "frozen" or not p.initial_task_reference:
+            return
+        for aid, tracker in self._reference_trackers.items():
+            reading = tracker.update(batches.get(aid, BoundaryView.empty()), timestamp)
+            if reading is not None:
+                self._reference_readings[aid] = reading
+
     def _update_navigation(self, agents, neighbors) -> None:
         """Add a two-float displacement message on the existing one-hop links.
 
@@ -1171,8 +1243,8 @@ class DBACTController:
         """
         object_id, task = next(iter(self.tasks.items()))
         displacement, velocity = {}, {}
-        if (self.params.navigation_estimator in _REFERENCE_CHANNELS
-                and self.phase_monitor.reached(Phase.CONTACT_READY)):
+        if (self.params.initial_task_reference or (self.params.navigation_estimator in _REFERENCE_CHANNELS
+                and self.phase_monitor.reached(Phase.CONTACT_READY))):
             reference_position, reference_velocity = _REFERENCE_CHANNELS[self.params.navigation_estimator]
             for aid, reading in self._reference_readings.items():
                 # Hold admission fixed across the component experiment. Old map
@@ -1193,10 +1265,19 @@ class DBACTController:
         band = self.params.cross_track_deadband
         self._navigation = {
             agent.agent_id: point_goal_feedback(displacement, velocity,
-                [agent.agent_id] + [agents[j].agent_id for j in neighbors[i]], target, band)
+                [agent.agent_id] + [agents[j].agent_id for j in neighbors[i]], target, band,
+                rotation_invariant=self.params.initial_task_reference)
             for i, agent in enumerate(agents)}
         self.team_navigation = point_goal_feedback(displacement, velocity,
-            [a.agent_id for a in agents], target, band)
+            [a.agent_id for a in agents], target, band,
+            rotation_invariant=self.params.initial_task_reference)
+        if self.params.initial_task_reference:
+            from dbact.control.initial_task_reference import center_error_bound
+            bounds = [center_error_bound(r.displacement, r.angle, self._task_reference_point,
+                       self._center_vertices, target) for r in self._reference_readings.values()]
+            self.task_reference_bound = max(bounds, default=float("inf"))
+            self.task_reference_hold_ready = (len(bounds) >= self.params.min_push_agents
+                                              and self.task_reference_bound <= task.tolerance)
         self.navigation_voter_trace = None
         if self.params.navigation_voter_continuity:
             stream = (self.params.navigation_estimator
@@ -1320,6 +1401,7 @@ class DBACTController:
             stopping_distance=stopping,
             estimate_quality=quality,
             recovery_ready=sum(self._recovery_eligible.values()) if self.params.contact_recovery_fix else None,
+            task_reference_ready=self.task_reference_hold_ready,
         )
 
     def _estimated_stop(self, object_id: str | None) -> tuple[float, float]:

@@ -292,6 +292,7 @@ def transport_arm(cfg, seed, variant, frames, out):
                      "positive_force_sum":sum(max(0.,float(c.force @ goal)) for c in report.contacts),
                      "reverse_force_sum":sum(min(0.,float(c.force @ goal)) for c in report.contacts),
                      "true_progress":current.tasks[cid].progress(cargo.position),
+                     "true_center_displacement":(cargo.position-current.tasks[cid].start).tolist(),
                      "estimated_progress":float(current.controller.team_progress.get(cid,0.)),
                      "true_velocity":cargo.linear_velocity.tolist(),
                      "phase":current.controller.phase.name,
@@ -299,6 +300,13 @@ def transport_arm(cfg, seed, variant, frames, out):
                      "phase_response":current.controller.phase_monitor.as_dict(),
                      "navigation_supervisor":navigation_record,
                      "navigation_voter_trace":current.controller.navigation_voter_trace,
+                     "initial_reference": {
+                         "status": current.controller.initial_reference_status,
+                         "epoch": current.controller.initial_reference_epoch,
+                         "supporters": current.controller.initial_reference_supporters,
+                         "center_error_bound": current.controller.task_reference_bound,
+                         "hold_ready": current.controller.task_reference_hold_ready,
+                     },
                      "hold_confirmation_streak":current.controller.phase_monitor.settle_streak,
                      "progress_quality":{key: dict(value) for key, value in current.controller._progress_quality.items()},
                      "robot_positions":[a.position.tolist() for a in current.agents],
@@ -342,7 +350,26 @@ def transport_arm(cfg, seed, variant, frames, out):
     result["reference_initializations"] = {
         aid: tracker.initialization_record() for aid, tracker in env.controller._reference_trackers.items()
     }
-    if (env.controller.params.reference_early_anchor
+    if env.controller.params.initial_reference_acquisition:
+        epoch = env.controller.initial_reference_epoch
+        pre = [r for r in rows if epoch is None or r['frame']*env.dt <= epoch+1e-10]
+        centers = np.array(env.log.cargo_centers[cid])
+        prefix = centers[:len(pre)+1]
+        max_translation = float(np.linalg.norm(prefix-prefix[0], axis=1).max())
+        max_rotation = max((abs(r['rotation']-env.log.cargo_angles[cid][0]) for r in pre), default=0.)
+        contacts = sum(r['contacts'] for r in pre)
+        result['initial_reference'] = dict(status=env.controller.initial_reference_status,
+            epoch=epoch, supporters=env.controller.initial_reference_supporters,
+            pre_epoch_contact_samples=contacts,
+            max_pre_epoch_translation=max_translation, max_pre_epoch_rotation=max_rotation,
+            zero_epoch_valid=bool(epoch is not None and contacts == 0 and max_translation <= 1e-9 and max_rotation <= 1e-9))
+        result["changed_mechanism"] = (
+            "Stationary observed-standoff acquisition and immutable initial templates; "
+            "common-workspace-point readout=" + str(env.controller.params.initial_task_reference)
+            + ". Extra acquisition time counts against the original budget. "
+            "Workspace-center-set HOLD gate is conditional on correct registration, not an error certificate. "
+            "No object-center truth, shape prior, physics or independent success criterion change.")
+    elif (env.controller.params.reference_early_anchor
             or env.controller.params.reference_bootstrap_gain is not None):
         result["changed_mechanism"] = (
             "Reference-origin ablation: early_anchor=" + str(env.controller.params.reference_early_anchor)

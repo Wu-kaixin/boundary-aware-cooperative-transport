@@ -166,6 +166,10 @@ class ObservedReferenceTracker:
         if len(n) < 8 or conditioning <= 1e-3:
             self.reason = 'final_match_unobservable'
             return None
+        rejection = self._geometry_rejection(n, matched_points)
+        if rejection is not None:
+            self.reason = rejection
+            return None
         if self.support_gate:
             # Noisy local PCA normals can manufacture apparent full rank on a
             # single flat patch. Inspect the *matched spatial support* as well.
@@ -200,3 +204,7 @@ class ObservedReferenceTracker:
                                              len(n), rms, conditioning, angle)
         self.reason = 'accepted'
         return self.last_reading
+
+    def _geometry_rejection(self, normals, matched_points):
+        """Additional opt-in admission by a specialized reference, before commit."""
+        return None

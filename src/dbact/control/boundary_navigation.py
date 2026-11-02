@@ -29,6 +29,7 @@ def point_goal_feedback(
     permitted_ids: Sequence[str],
     target_delta: np.ndarray,
     arrival_band: float,
+    *, rotation_invariant: bool = False,
 ) -> VectorGoalFeedback | None:
     """Coordinate median of fresh, full-vector-credible permitted messages.
 
@@ -46,7 +47,11 @@ def point_goal_feedback(
     v = np.asarray([velocities[i] for i in ids], dtype=float).reshape(-1, 2)
     if not np.isfinite(d).all() or not np.isfinite(v).all():
         raise ValueError("Non-finite boundary-map message")
-    displacement, velocity = np.median(d, axis=0), np.median(v, axis=0)
+    if rotation_invariant:
+        from dbact.control.initial_task_reference import geometric_median
+        displacement, velocity = geometric_median(d), geometric_median(v)
+    else:
+        displacement, velocity = np.median(d, axis=0), np.median(v, axis=0)
     error = target - displacement
     distance = float(np.linalg.norm(error))
     direction = error / distance if distance > 1e-12 else target / max(float(np.linalg.norm(target)), 1e-12)

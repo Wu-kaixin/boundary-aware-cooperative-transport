@@ -1,0 +1,514 @@
+{
+  "episodes": [
+    {
+      "condition": "near_circle",
+      "arm": "reference",
+      "execution": "COMPLETED",
+      "completed": true,
+      "safe_completed": true,
+      "g500": true,
+      "hard_safety": [],
+      "endpoint_m": 0.019148005056892906,
+      "seconds": 15.950000000000001,
+      "final_phase": "HOLD",
+      "false_hold": false,
+      "first_hold": {
+        "frame": 280,
+        "physical_error_before_m": 0.019148005056892906,
+        "physical_error_after_m": 0.019148005056892906,
+        "nominal_error_m": 0.019780387130297835,
+        "workspace_error_bound_m": null
+      },
+      "acquisition": null,
+      "barrier_scalings": 0,
+      "reference_admission": {
+        "accepted": 3361,
+        "bootstrap_only": 16,
+        "motion_bound_exceeded": 111,
+        "not_enabled": 1616
+      }
+    },
+    {
+      "condition": "near_circle",
+      "arm": "acquisition_only",
+      "execution": "COMPLETED",
+      "completed": true,
+      "safe_completed": true,
+      "g500": true,
+      "hard_safety": [],
+      "endpoint_m": 0.019148005056892906,
+      "seconds": 15.950000000000001,
+      "final_phase": "HOLD",
+      "false_hold": false,
+      "first_hold": {
+        "frame": 280,
+        "physical_error_before_m": 0.019148005056892906,
+        "physical_error_after_m": 0.019148005056892906,
+        "nominal_error_m": 0.019780387130297835,
+        "workspace_error_bound_m": null
+      },
+      "acquisition": {
+        "status": "frozen",
+        "epoch": 1.800000000000001,
+        "supporters": [
+          "agent_00",
+          "agent_05",
+          "agent_10",
+          "agent_11"
+        ],
+        "pre_epoch_contact_samples": 0,
+        "max_pre_epoch_translation": 0.0,
+        "max_pre_epoch_rotation": 0.0,
+        "zero_epoch_valid": true
+      },
+      "barrier_scalings": 0,
+      "reference_admission": {
+        "accepted": 3361,
+        "bootstrap_only": 16,
+        "motion_bound_exceeded": 111,
+        "not_enabled": 1616
+      }
+    },
+    {
+      "condition": "near_circle",
+      "arm": "task_reference",
+      "execution": "COMPLETED",
+      "completed": false,
+      "safe_completed": false,
+      "g500": false,
+      "hard_safety": [],
+      "endpoint_m": 0.007721918029763812,
+      "seconds": 600.0,
+      "final_phase": "BRAKE",
+      "false_hold": false,
+      "first_hold": null,
+      "acquisition": {
+        "status": "frozen",
+        "epoch": 1.800000000000001,
+        "supporters": [
+          "agent_00",
+          "agent_05",
+          "agent_10",
+          "agent_11"
+        ],
+        "pre_epoch_contact_samples": 0,
+        "max_pre_epoch_translation": 0.0,
+        "max_pre_epoch_rotation": 0.0,
+        "zero_epoch_valid": true
+      },
+      "barrier_scalings": 0,
+      "reference_admission": {
+        "accepted": 43947,
+        "bootstrap_only": 4,
+        "motion_bound_exceeded": 3905,
+        "not_enabled": 144144
+      }
+    },
+    {
+      "condition": "near_l_reference",
+      "arm": "reference",
+      "execution": "COMPLETED",
+      "completed": true,
+      "safe_completed": true,
+      "g500": true,
+      "hard_safety": [],
+      "endpoint_m": 0.008433050706511073,
+      "seconds": 19.650000000000002,
+      "final_phase": "HOLD",
+      "false_hold": false,
+      "first_hold": {
+        "frame": 354,
+        "physical_error_before_m": 0.008433050706511073,
+        "physical_error_after_m": 0.008433050706511073,
+        "nominal_error_m": 0.019107897856921727,
+        "workspace_error_bound_m": null
+      },
+      "acquisition": null,
+      "barrier_scalings": 0,
+      "reference_admission": {
+        "accepted": 5033,
+        "bootstrap_only": 16,
+        "not_enabled": 1232,
+        "not_initialized": 7
+      }
+    },
+    {
+      "condition": "near_l_reference",
+      "arm": "acquisition_only",
+      "execution": "COMPLETED",
+      "completed": true,
+      "safe_completed": true,
+      "g500": true,
+      "hard_safety": [],
+      "endpoint_m": 0.010844700603450398,
+      "seconds": 19.1,
+      "final_phase": "HOLD",
+      "false_hold": false,
+      "first_hold": {
+        "frame": 343,
+        "physical_error_before_m": 0.010844700603450398,
+        "physical_error_after_m": 0.010844700603450398,
+        "nominal_error_m": 0.01930284319257714,
+        "workspace_error_bound_m": null
+      },
+      "acquisition": {
+        "status": "frozen",
+        "epoch": 1.7000000000000008,
+        "supporters": [
+          "agent_00",
+          "agent_01",
+          "agent_02",
+          "agent_03",
+          "agent_04",
+          "agent_05",
+          "agent_10"
+        ],
+        "pre_epoch_contact_samples": 0,
+        "max_pre_epoch_translation": 0.0,
+        "max_pre_epoch_rotation": 0.0,
+        "zero_epoch_valid": true
+      },
+      "barrier_scalings": 0,
+      "reference_admission": {
+        "accepted": 4844,
+        "bootstrap_only": 16,
+        "motion_bound_exceeded": 2,
+        "not_enabled": 1248,
+        "not_initialized": 2
+      }
+    },
+    {
+      "condition": "near_l_reference",
+      "arm": "task_reference",
+      "execution": "COMPLETED",
+      "completed": true,
+      "safe_completed": true,
+      "g500": true,
+      "hard_safety": [],
+      "endpoint_m": 0.020115976608926396,
+      "seconds": 18.650000000000002,
+      "final_phase": "HOLD",
+      "false_hold": false,
+      "first_hold": {
+        "frame": 334,
+        "physical_error_before_m": 0.020115976608926396,
+        "physical_error_after_m": 0.020115976608926396,
+        "nominal_error_m": 0.018615388971081004,
+        "workspace_error_bound_m": 0.06991063828013808
+      },
+      "acquisition": {
+        "status": "frozen",
+        "epoch": 1.7000000000000008,
+        "supporters": [
+          "agent_00",
+          "agent_01",
+          "agent_02",
+          "agent_03",
+          "agent_04",
+          "agent_05",
+          "agent_10"
+        ],
+        "pre_epoch_contact_samples": 0,
+        "max_pre_epoch_translation": 0.0,
+        "max_pre_epoch_rotation": 0.0,
+        "zero_epoch_valid": true
+      },
+      "barrier_scalings": 0,
+      "reference_admission": {
+        "accepted": 2363,
+        "bootstrap_only": 7,
+        "motion_bound_exceeded": 3,
+        "not_enabled": 3595
+      }
+    },
+    {
+      "condition": "far_c_open_away_pos0",
+      "arm": "reference",
+      "execution": "COMPLETED",
+      "completed": true,
+      "safe_completed": true,
+      "g500": false,
+      "hard_safety": [],
+      "endpoint_m": 0.07740908703872568,
+      "seconds": 75.4,
+      "final_phase": "HOLD",
+      "false_hold": false,
+      "first_hold": {
+        "frame": 1469,
+        "physical_error_before_m": 0.07740908703872568,
+        "physical_error_after_m": 0.07740908703872568,
+        "nominal_error_m": 0.016715761608908423,
+        "workspace_error_bound_m": null
+      },
+      "acquisition": null,
+      "barrier_scalings": 3,
+      "reference_admission": {
+        "accepted": 15302,
+        "bootstrap_only": 15,
+        "motion_bound_exceeded": 549,
+        "not_enabled": 7152,
+        "not_initialized": 1091,
+        "translation_unobservable": 19
+      }
+    },
+    {
+      "condition": "far_c_open_away_pos0",
+      "arm": "acquisition_only",
+      "execution": "COMPLETED",
+      "completed": true,
+      "safe_completed": true,
+      "g500": false,
+      "hard_safety": [],
+      "endpoint_m": 0.06791899632641168,
+      "seconds": 58.0,
+      "final_phase": "HOLD",
+      "false_hold": false,
+      "first_hold": {
+        "frame": 1121,
+        "physical_error_before_m": 0.06791899632641168,
+        "physical_error_after_m": 0.06791899632641168,
+        "nominal_error_m": 0.01828264216729229,
+        "workspace_error_bound_m": null
+      },
+      "acquisition": {
+        "status": "frozen",
+        "epoch": 20.500000000000156,
+        "supporters": [
+          "agent_03",
+          "agent_04",
+          "agent_05",
+          "agent_06",
+          "agent_07"
+        ],
+        "pre_epoch_contact_samples": 0,
+        "max_pre_epoch_translation": 0.0,
+        "max_pre_epoch_rotation": 0.0,
+        "zero_epoch_valid": true
+      },
+      "barrier_scalings": 1,
+      "reference_admission": {
+        "accepted": 10257,
+        "bootstrap_only": 15,
+        "final_match_unobservable": 5,
+        "motion_bound_exceeded": 255,
+        "not_enabled": 7136,
+        "not_initialized": 734,
+        "translation_unobservable": 158
+      }
+    },
+    {
+      "condition": "far_c_open_away_pos0",
+      "arm": "task_reference",
+      "execution": "COMPLETED",
+      "completed": false,
+      "safe_completed": false,
+      "g500": false,
+      "hard_safety": [],
+      "endpoint_m": 0.057674318433121034,
+      "seconds": 600.0,
+      "final_phase": "BRAKE",
+      "false_hold": false,
+      "first_hold": null,
+      "acquisition": {
+        "status": "frozen",
+        "epoch": 20.500000000000156,
+        "supporters": [
+          "agent_04",
+          "agent_05",
+          "agent_06",
+          "agent_07"
+        ],
+        "pre_epoch_contact_samples": 0,
+        "max_pre_epoch_translation": 0.0,
+        "max_pre_epoch_rotation": 0.0,
+        "zero_epoch_valid": true
+      },
+      "barrier_scalings": 1,
+      "reference_admission": {
+        "accepted": 38826,
+        "bootstrap_only": 4,
+        "final_match_unobservable": 321,
+        "motion_bound_exceeded": 3,
+        "not_enabled": 145640,
+        "support_nearly_linear": 2319,
+        "translation_unobservable": 4887
+      }
+    },
+    {
+      "condition": "far_skew_box_s0_r0_pos0",
+      "arm": "reference",
+      "execution": "COMPLETED",
+      "completed": false,
+      "safe_completed": false,
+      "g500": false,
+      "hard_safety": [],
+      "endpoint_m": 0.1351061190171348,
+      "seconds": 89.25,
+      "final_phase": "HOLD",
+      "false_hold": true,
+      "first_hold": {
+        "frame": 1746,
+        "physical_error_before_m": 0.1351061190171348,
+        "physical_error_after_m": 0.1351061190171348,
+        "nominal_error_m": 0.018157704980053344,
+        "workspace_error_bound_m": null
+      },
+      "acquisition": null,
+      "barrier_scalings": 2,
+      "reference_admission": {
+        "accepted": 19109,
+        "bootstrap_only": 15,
+        "final_match_unobservable": 1,
+        "motion_bound_exceeded": 514,
+        "not_enabled": 7056,
+        "not_initialized": 1675,
+        "translation_unobservable": 190
+      }
+    },
+    {
+      "condition": "far_skew_box_s0_r0_pos0",
+      "arm": "acquisition_only",
+      "execution": "COMPLETED",
+      "completed": false,
+      "safe_completed": false,
+      "g500": false,
+      "hard_safety": [],
+      "endpoint_m": 0.35700239009371304,
+      "seconds": 54.35,
+      "final_phase": "HOLD",
+      "false_hold": true,
+      "first_hold": {
+        "frame": 1048,
+        "physical_error_before_m": 0.35700239009371304,
+        "physical_error_after_m": 0.35700239009371304,
+        "nominal_error_m": 0.01791534204771828,
+        "workspace_error_bound_m": null
+      },
+      "acquisition": {
+        "status": "frozen",
+        "epoch": 39.49999999999989,
+        "supporters": [
+          "agent_03",
+          "agent_05",
+          "agent_06",
+          "agent_07"
+        ],
+        "pre_epoch_contact_samples": 0,
+        "max_pre_epoch_translation": 0.0,
+        "max_pre_epoch_rotation": 0.0,
+        "zero_epoch_valid": true
+      },
+      "barrier_scalings": 236,
+      "reference_admission": {
+        "accepted": 4124,
+        "bootstrap_only": 15,
+        "not_enabled": 12976,
+        "not_initialized": 277
+      }
+    },
+    {
+      "condition": "far_skew_box_s0_r0_pos0",
+      "arm": "task_reference",
+      "execution": "COMPLETED",
+      "completed": false,
+      "safe_completed": false,
+      "g500": false,
+      "hard_safety": [],
+      "endpoint_m": 0.05647457853129744,
+      "seconds": 600.0,
+      "final_phase": "BRAKE",
+      "false_hold": false,
+      "first_hold": null,
+      "acquisition": {
+        "status": "frozen",
+        "epoch": 39.49999999999989,
+        "supporters": [
+          "agent_03",
+          "agent_05",
+          "agent_06",
+          "agent_07"
+        ],
+        "pre_epoch_contact_samples": 0,
+        "max_pre_epoch_translation": 0.0,
+        "max_pre_epoch_rotation": 0.0,
+        "zero_epoch_valid": true
+      },
+      "barrier_scalings": 245,
+      "reference_admission": {
+        "accepted": 34752,
+        "bootstrap_only": 4,
+        "motion_bound_exceeded": 13,
+        "not_enabled": 147160,
+        "support_nearly_linear": 10071
+      }
+    }
+  ],
+  "totals": {
+    "reference": {
+      "episodes": 4,
+      "completed": 3,
+      "safe_completed": 3,
+      "g500": 2,
+      "false_holds": 1,
+      "hard_failures": 0
+    },
+    "acquisition_only": {
+      "episodes": 4,
+      "completed": 3,
+      "safe_completed": 3,
+      "g500": 2,
+      "false_holds": 1,
+      "hard_failures": 0
+    },
+    "task_reference": {
+      "episodes": 4,
+      "completed": 1,
+      "safe_completed": 1,
+      "g500": 1,
+      "false_holds": 0,
+      "hard_failures": 0
+    }
+  },
+  "adoption": "FAIL",
+  "baseline_physical_reproduction": {
+    "near_circle": true,
+    "near_l_reference": true,
+    "far_c_open_away_pos0": true,
+    "far_skew_box_s0_r0_pos0": true
+  },
+  "receipt_sha256": {
+    "near_circle_reference": "56b3904b49f451adf5db7a27cc24a3ab02da803b2e5606d5851dc7aa0c803f32",
+    "near_circle_acquisition_only": "dd9d4a8d282ada2beaea19671f7d3dd39ccf9e367a327d68f4ffd0757985e75c",
+    "near_circle_task_reference": "0684fd4be92bbd19306799b44deead86fb6979dfaa8776ef4b7d021cb6a729be",
+    "near_l_reference_reference": "7aa30be62f57a805d7e39c698e453500f97466311ef161a4092024cacb89962c",
+    "near_l_reference_acquisition_only": "4888dc4335d162d553749b15c9add0a1342d044c329d9358f05435d76a7019da",
+    "near_l_reference_task_reference": "03c00bbb0d60805e90b19f9c6666cd06f91d85bd8f46fdd04a5834daf36a69f8",
+    "far_c_open_away_pos0_reference": "d6a2238bce4bb08c17f95e8b211a32bccdf0623c21a481fd4c232aa70b959b0f",
+    "far_c_open_away_pos0_acquisition_only": "ea4e70ae36d04c52b48fd56da0f1a8953df1a9ccf5f5afc02b1227df5719f27e",
+    "far_c_open_away_pos0_task_reference": "2f19b1d6c68f9bb6cfb63bcc0158d8e24f3d0a067b50dac137f29599ba86c95f",
+    "far_skew_box_s0_r0_pos0_reference": "0f96f312ec8ea407e7719f2c70ff8e47151b36443d1a10ef6e31f44a7f15151c",
+    "far_skew_box_s0_r0_pos0_acquisition_only": "991c5cd20a660f5f05950d6f0b679cdc30c4fa013540897a59d99a3427e8ceb2",
+    "far_skew_box_s0_r0_pos0_task_reference": "3288300761da9263d9395d8c483af3edb0d965e9afc67dc9c409a158b7d7d13b"
+  },
+  "source_sha256": "b7f6e0f812320f82a284a4157a85ca1915d0aa9aca99cb63c0508bf035a17f2c",
+  "environment": {
+    "python": "3.12.14",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "executable": "C:\\Users\\kai\\boundary-aware-cooperative-transport\\.venv\\Scripts\\python.exe",
+    "packages": {
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "shapely": "2.2.0",
+      "PyYAML": "6.0.2",
+      "cvxpy": "1.9.3",
+      "clarabel": "0.11.1",
+      "osqp": "1.1.3",
+      "scs": "3.3.1",
+      "pymunk": "7.3.1",
+      "matplotlib": "3.11.2",
+      "threadpoolctl": "3.7.0"
+    }
+  },
+  "protocol_sha256": "1a187feb8a3178af64d553b04efd73925e76ca279f30f7b11ed8007c6165ed48",
+  "analysis_helper_sha256": "4c61530d722a773b25bf7dc34c2328a4ddff29aeb405211dc8e7197af67c5a58"
+}

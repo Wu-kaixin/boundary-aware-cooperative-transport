@@ -1,0 +1,18 @@
+{
+  "source_protocol_sha256": "ebb896969981a64d5cc11dfe9f8f118107f82ac770d972ffc5ae3b78bc1db80a",
+  "conditions": [
+    "far_c_open_away_pos0",
+    "far_skew_box_s0_r0_pos0",
+    "near_circle",
+    "near_l_reference"
+  ],
+  "snapshots": [
+    "first_support",
+    "final"
+  ],
+  "method": "Shapely concave_hull ratio=0, no holes; boundary samples every 2*noise; report unsupported fraction at distance>3*noise OR outward-normal dot<.5",
+  "decision": "Diagnostic only. Fit centroid and low unsupported fraction do not certify complete hidden geometry. Never use contaminated final skew template as a zero reference.",
+  "runner_sha256": "1486594cbe678b092e87b2e188ba0f9f62d12692e7681a51544280e5d616c4d4",
+  "new_physical_episodes": 0,
+  "alignment_correction": "Direct-step acquisition replay starts after its first step; prepend constructor initial state. Require every reconstructed first-support voxel count to match the original receipt."
+}

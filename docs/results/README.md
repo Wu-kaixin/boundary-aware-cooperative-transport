@@ -1,5 +1,7 @@
 # 结果与证据索引
 
+2026-11-03：[初始任务参考](task_reference_v1/README.md)固定12回合完成，错误 HOLD 减少但完整完成3/4→1/4，未采用；另有[获取可行性8回合](task_reference_acquisition_v1/README.md)。[独立部署机制审计](deployment_contribution_v1/README.md)重新核验36条既有匹配轨迹，支持覆盖贡献，不支持完成率优势；新增物理回合0。
+
 [匹配支撑固定筛选](reference_support_v1/README.md)：8条同输入轨迹已完成；局部大误差减少但未通过团队误差门槛，新增物理回合0，候选默认关闭。
 
 

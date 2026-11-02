@@ -1,0 +1,1958 @@
+{
+  "protocol": {
+    "source_protocol_sha256": "ebb896969981a64d5cc11dfe9f8f118107f82ac770d972ffc5ae3b78bc1db80a",
+    "conditions": [
+      "far_c_open_away_pos0",
+      "far_skew_box_s0_r0_pos0",
+      "near_circle",
+      "near_l_reference"
+    ],
+    "snapshots": [
+      "first_support",
+      "final"
+    ],
+    "method": "Shapely concave_hull ratio=0, no holes; boundary samples every 2*noise; report unsupported fraction at distance>3*noise OR outward-normal dot<.5",
+    "decision": "Diagnostic only. Fit centroid and low unsupported fraction do not certify complete hidden geometry. Never use contaminated final skew template as a zero reference.",
+    "runner_sha256": "1486594cbe678b092e87b2e188ba0f9f62d12692e7681a51544280e5d616c4d4",
+    "new_physical_episodes": 0,
+    "alignment_correction": "Direct-step acquisition replay starts after its first step; prepend constructor initial state. Require every reconstructed first-support voxel count to match the original receipt."
+  },
+  "reports": [
+    {
+      "condition": "far_c_open_away_pos0",
+      "snapshot": "first_support",
+      "local": [
+        {
+          "agent": "agent_00",
+          "points": 236,
+          "status": "fitted",
+          "center": [
+            2.6538357142560214,
+            4.707761847780719
+          ],
+          "area": 0.03222415690779555,
+          "perimeter": 5.0051502103434995,
+          "vertices": 236,
+          "unsupported_fraction": 0.5594594594594594,
+          "max_nearest_sample_gap": 0.026428039377147522,
+          "initial_center_error_m": 0.9975727994232589
+        },
+        {
+          "agent": "agent_01",
+          "points": 254,
+          "status": "fitted",
+          "center": [
+            2.7090750547548845,
+            4.698980361537995
+          ],
+          "area": 0.035655825811558295,
+          "perimeter": 5.186018831345052,
+          "vertices": 254,
+          "unsupported_fraction": 0.5703125,
+          "max_nearest_sample_gap": 0.026428039377147522,
+          "initial_center_error_m": 0.9821704036006949
+        },
+        {
+          "agent": "agent_02",
+          "points": 96,
+          "status": "fitted",
+          "center": [
+            2.5613497386180226,
+            4.684174332137214
+          ],
+          "area": 0.027408477869256657,
+          "perimeter": 3.3893389226698973,
+          "vertices": 96,
+          "unsupported_fraction": 0.6121495327102804,
+          "max_nearest_sample_gap": 0.16090069128578144,
+          "initial_center_error_m": 1.0624880036985027
+        },
+        {
+          "agent": "agent_03",
+          "points": 275,
+          "status": "fitted",
+          "center": [
+            2.867537399003069,
+            4.684290904120268
+          ],
+          "area": 0.03926764059662373,
+          "perimeter": 6.193457022621755,
+          "vertices": 274,
+          "unsupported_fraction": 0.6258351893095768,
+          "max_nearest_sample_gap": 0.16206202553457774,
+          "initial_center_error_m": 0.9447549995312036
+        },
+        {
+          "agent": "agent_04",
+          "points": 432,
+          "status": "fitted",
+          "center": [
+            3.0452448509326513,
+            4.773764064270075
+          ],
+          "area": 0.061789306778252194,
+          "perimeter": 8.989579058724704,
+          "vertices": 430,
+          "unsupported_fraction": 0.6054216867469879,
+          "max_nearest_sample_gap": 0.03239271908081007,
+          "initial_center_error_m": 0.8280482762743793
+        },
+        {
+          "agent": "agent_05",
+          "points": 486,
+          "status": "fitted",
+          "center": [
+            3.1057097964330596,
+            4.81467695743895
+          ],
+          "area": 0.06651146316294175,
+          "perimeter": 10.044939923302135,
+          "vertices": 485,
+          "unsupported_fraction": 0.6021505376344086,
+          "max_nearest_sample_gap": 0.04517178858194448,
+          "initial_center_error_m": 0.7853437992069033
+        },
+        {
+          "agent": "agent_06",
+          "points": 570,
+          "status": "fitted",
+          "center": [
+            3.217345558512381,
+            4.94341471008871
+          ],
+          "area": 0.07753852145887628,
+          "perimeter": 11.146132827696844,
+          "vertices": 569,
+          "unsupported_fraction": 0.6096131301289566,
+          "max_nearest_sample_gap": 0.025198517207014604,
+          "initial_center_error_m": 0.6669889227195263
+        },
+        {
+          "agent": "agent_07",
+          "points": 521,
+          "status": "fitted",
+          "center": [
+            2.952051058523987,
+            4.923237507455847
+          ],
+          "area": 0.1147532551757458,
+          "perimeter": 11.08737975082311,
+          "vertices": 521,
+          "unsupported_fraction": 0.6345919610231425,
+          "max_nearest_sample_gap": 0.21265040735219565,
+          "initial_center_error_m": 0.6927455236943081
+        },
+        {
+          "agent": "agent_08",
+          "points": 528,
+          "status": "fitted",
+          "center": [
+            3.340650049793003,
+            4.957965870034954
+          ],
+          "area": 0.06957636643175195,
+          "perimeter": 9.952603085132331,
+          "vertices": 528,
+          "unsupported_fraction": 0.6106770833333334,
+          "max_nearest_sample_gap": 0.01386591943550214,
+          "initial_center_error_m": 0.6856531707105558
+        },
+        {
+          "agent": "agent_09",
+          "points": 513,
+          "status": "fitted",
+          "center": [
+            3.3586415894026036,
+            4.978506767408547
+          ],
+          "area": 0.06413085054131014,
+          "perimeter": 9.776645743721721,
+          "vertices": 512,
+          "unsupported_fraction": 0.614569536423841,
+          "max_nearest_sample_gap": 0.01386591943550214,
+          "initial_center_error_m": 0.6731636576091796
+        },
+        {
+          "agent": "agent_10",
+          "points": 519,
+          "status": "fitted",
+          "center": [
+            3.3829505180342854,
+            4.973907792339651
+          ],
+          "area": 0.06638171143427662,
+          "perimeter": 9.754118171203363,
+          "vertices": 519,
+          "unsupported_fraction": 0.6103723404255319,
+          "max_nearest_sample_gap": 0.01386591943550214,
+          "initial_center_error_m": 0.6870607310485531
+        },
+        {
+          "agent": "agent_11",
+          "points": 474,
+          "status": "fitted",
+          "center": [
+            3.3932345283067353,
+            4.986559369980514
+          ],
+          "area": 0.06013421377547872,
+          "perimeter": 9.268643195245321,
+          "vertices": 474,
+          "unsupported_fraction": 0.5960170697012802,
+          "max_nearest_sample_gap": 0.015813554016753037,
+          "initial_center_error_m": 0.6799234480072514
+        },
+        {
+          "agent": "agent_12",
+          "points": 493,
+          "status": "fitted",
+          "center": [
+            3.447128438365063,
+            5.006212911464397
+          ],
+          "area": 0.06098073061998019,
+          "perimeter": 9.528525185845432,
+          "vertices": 493,
+          "unsupported_fraction": 0.598079561042524,
+          "max_nearest_sample_gap": 0.018512158398223216,
+          "initial_center_error_m": 0.6878090281709388
+        },
+        {
+          "agent": "agent_13",
+          "points": 501,
+          "status": "fitted",
+          "center": [
+            3.38525097577388,
+            4.9871668841056
+          ],
+          "area": 0.06288485093891141,
+          "perimeter": 9.517976988979228,
+          "vertices": 500,
+          "unsupported_fraction": 0.603542234332425,
+          "max_nearest_sample_gap": 0.01386591943550214,
+          "initial_center_error_m": 0.6759678595294911
+        },
+        {
+          "agent": "agent_14",
+          "points": 480,
+          "status": "fitted",
+          "center": [
+            3.4528560753096413,
+            5.006201459405373
+          ],
+          "area": 0.06084931610822944,
+          "perimeter": 9.263453974064424,
+          "vertices": 480,
+          "unsupported_fraction": 0.5880681818181818,
+          "max_nearest_sample_gap": 0.01619930173305762,
+          "initial_center_error_m": 0.6907272375513567
+        },
+        {
+          "agent": "agent_15",
+          "points": 0,
+          "status": "insufficient"
+        }
+      ],
+      "uncontaminated": true
+    },
+    {
+      "condition": "far_c_open_away_pos0",
+      "snapshot": "final",
+      "local": [
+        {
+          "agent": "agent_00",
+          "points": 1509,
+          "status": "fitted",
+          "center": [
+            3.1040719313862124,
+            5.473013097367738
+          ],
+          "area": 0.20360012773261876,
+          "perimeter": 27.09516462295995,
+          "vertices": 1508,
+          "unsupported_fraction": 0.6351807228915662,
+          "max_nearest_sample_gap": 0.021112451941544864,
+          "initial_center_error_m": 0.1270521706440432
+        },
+        {
+          "agent": "agent_01",
+          "points": 1420,
+          "status": "fitted",
+          "center": [
+            3.0575422750157686,
+            5.477016817626593
+          ],
+          "area": 0.1886855254797976,
+          "perimeter": 25.60833489702298,
+          "vertices": 1419,
+          "unsupported_fraction": 0.6302349336057201,
+          "max_nearest_sample_gap": 0.021112451941544864,
+          "initial_center_error_m": 0.1301058090845125
+        },
+        {
+          "agent": "agent_02",
+          "points": 1322,
+          "status": "fitted",
+          "center": [
+            3.025071439260329,
+            5.402858729183008
+          ],
+          "area": 0.17449455976571215,
+          "perimeter": 24.890253225510293,
+          "vertices": 1320,
+          "unsupported_fraction": 0.6242105263157894,
+          "max_nearest_sample_gap": 0.057400206188590985,
+          "initial_center_error_m": 0.21090037902732559
+        },
+        {
+          "agent": "agent_03",
+          "points": 1197,
+          "status": "fitted",
+          "center": [
+            3.0426687337192226,
+            5.218858311592716
+          ],
+          "area": 0.1591432248870878,
+          "perimeter": 21.760172160857504,
+          "vertices": 1196,
+          "unsupported_fraction": 0.6496086694762191,
+          "max_nearest_sample_gap": 0.021112451941544864,
+          "initial_center_error_m": 0.38542944975098326
+        },
+        {
+          "agent": "agent_04",
+          "points": 1016,
+          "status": "fitted",
+          "center": [
+            2.9339799827353543,
+            5.17927865696361
+          ],
+          "area": 0.14080864290204323,
+          "perimeter": 18.937966667193336,
+          "vertices": 1013,
+          "unsupported_fraction": 0.6304347826086957,
+          "max_nearest_sample_gap": 0.036223696847376134,
+          "initial_center_error_m": 0.45229315119612795
+        },
+        {
+          "agent": "agent_05",
+          "points": 1172,
+          "status": "fitted",
+          "center": [
+            3.0208013087787777,
+            5.202877842203845
+          ],
+          "area": 0.15623206461736197,
+          "perimeter": 21.432164171585256,
+          "vertices": 1170,
+          "unsupported_fraction": 0.6308068459657702,
+          "max_nearest_sample_gap": 0.021112451941544864,
+          "initial_center_error_m": 0.4049425155548144
+        },
+        {
+          "agent": "agent_06",
+          "points": 1229,
+          "status": "fitted",
+          "center": [
+            3.079208100450573,
+            5.2404111056477785
+          ],
+          "area": 0.16809711468797867,
+          "perimeter": 22.123403380850984,
+          "vertices": 1228,
+          "unsupported_fraction": 0.6425631981187536,
+          "max_nearest_sample_gap": 0.021112451941544864,
+          "initial_center_error_m": 0.3601895001639572
+        },
+        {
+          "agent": "agent_07",
+          "points": 1209,
+          "status": "fitted",
+          "center": [
+            3.105896381473494,
+            5.251515094590563
+          ],
+          "area": 0.163240495057612,
+          "perimeter": 21.6898124050656,
+          "vertices": 1206,
+          "unsupported_fraction": 0.6335514574657942,
+          "max_nearest_sample_gap": 0.021112451941544864,
+          "initial_center_error_m": 0.3485347853697551
+        },
+        {
+          "agent": "agent_08",
+          "points": 1145,
+          "status": "fitted",
+          "center": [
+            2.9524735568526244,
+            5.164835658809556
+          ],
+          "area": 0.22497580335005415,
+          "perimeter": 21.781103214584725,
+          "vertices": 1144,
+          "unsupported_fraction": 0.6419975932611311,
+          "max_nearest_sample_gap": 0.2457202564585748,
+          "initial_center_error_m": 0.45949108290744706
+        },
+        {
+          "agent": "agent_09",
+          "points": 1239,
+          "status": "fitted",
+          "center": [
+            3.1237451489732844,
+            5.282563853020457
+          ],
+          "area": 0.16624712918052814,
+          "perimeter": 22.62465342415663,
+          "vertices": 1239,
+          "unsupported_fraction": 0.6414985590778098,
+          "max_nearest_sample_gap": 0.013332912768242665,
+          "initial_center_error_m": 0.3183230112778789
+        },
+        {
+          "agent": "agent_10",
+          "points": 1363,
+          "status": "fitted",
+          "center": [
+            3.248753805198831,
+            5.545746491693308
+          ],
+          "area": 0.21092115525871563,
+          "perimeter": 25.485526415773858,
+          "vertices": 1362,
+          "unsupported_fraction": 0.6392339544513458,
+          "max_nearest_sample_gap": 0.21314436415055263,
+          "initial_center_error_m": 0.15833868044396687
+        },
+        {
+          "agent": "agent_11",
+          "points": 1223,
+          "status": "fitted",
+          "center": [
+            3.122184625408157,
+            5.865910701158313
+          ],
+          "area": 0.31637680003051905,
+          "perimeter": 24.59701611804404,
+          "vertices": 1221,
+          "unsupported_fraction": 0.647887323943662,
+          "max_nearest_sample_gap": 0.26182294826364944,
+          "initial_center_error_m": 0.26683451537419406
+        },
+        {
+          "agent": "agent_12",
+          "points": 1300,
+          "status": "fitted",
+          "center": [
+            3.2636743485284896,
+            5.587114984799596
+          ],
+          "area": 0.19746253199249614,
+          "perimeter": 24.506287627400617,
+          "vertices": 1298,
+          "unsupported_fraction": 0.6310731446876668,
+          "max_nearest_sample_gap": 0.20987415209706892,
+          "initial_center_error_m": 0.16418074181510442
+        },
+        {
+          "agent": "agent_13",
+          "points": 1346,
+          "status": "fitted",
+          "center": [
+            3.24618864475471,
+            5.511252448348618
+          ],
+          "area": 0.2083412771249137,
+          "perimeter": 25.53733954358234,
+          "vertices": 1341,
+          "unsupported_fraction": 0.6400206291903043,
+          "max_nearest_sample_gap": 0.21314436415055263,
+          "initial_center_error_m": 0.17101826738497114
+        },
+        {
+          "agent": "agent_14",
+          "points": 1343,
+          "status": "fitted",
+          "center": [
+            3.117960155078342,
+            5.489435376645148
+          ],
+          "area": 0.19809882906581927,
+          "perimeter": 26.006392440671632,
+          "vertices": 1342,
+          "unsupported_fraction": 0.631979695431472,
+          "max_nearest_sample_gap": 0.1152868339746901,
+          "initial_center_error_m": 0.11201385230430853
+        },
+        {
+          "agent": "agent_15",
+          "points": 0,
+          "status": "insufficient"
+        }
+      ],
+      "uncontaminated": true
+    },
+    {
+      "condition": "far_skew_box_s0_r0_pos0",
+      "snapshot": "first_support",
+      "local": [
+        {
+          "agent": "agent_00",
+          "points": 447,
+          "status": "fitted",
+          "center": [
+            2.5656609178187955,
+            5.242499886607053
+          ],
+          "area": 0.05726171894339658,
+          "perimeter": 9.01955784151315,
+          "vertices": 447,
+          "unsupported_fraction": 0.6215022091310751,
+          "max_nearest_sample_gap": 0.1329736590917879,
+          "initial_center_error_m": 0.6429032476370097
+        },
+        {
+          "agent": "agent_01",
+          "points": 572,
+          "status": "fitted",
+          "center": [
+            2.802504985467288,
+            5.195906753935494
+          ],
+          "area": 0.07748745641341803,
+          "perimeter": 10.50933264929105,
+          "vertices": 571,
+          "unsupported_fraction": 0.6402966625463535,
+          "max_nearest_sample_gap": 0.009985868163014519,
+          "initial_center_error_m": 0.50179142597972
+        },
+        {
+          "agent": "agent_02",
+          "points": 566,
+          "status": "fitted",
+          "center": [
+            2.8870456392788797,
+            5.183232980347252
+          ],
+          "area": 0.07672261389503642,
+          "perimeter": 10.47433676511184,
+          "vertices": 564,
+          "unsupported_fraction": 0.6274752475247525,
+          "max_nearest_sample_gap": 0.02065498050444983,
+          "initial_center_error_m": 0.4680216965273823
+        },
+        {
+          "agent": "agent_03",
+          "points": 695,
+          "status": "fitted",
+          "center": [
+            3.029199015290207,
+            5.242600974254648
+          ],
+          "area": 0.09353594135128752,
+          "perimeter": 13.246810076144607,
+          "vertices": 695,
+          "unsupported_fraction": 0.6238894373149062,
+          "max_nearest_sample_gap": 0.043027751864110585,
+          "initial_center_error_m": 0.36434440168554605
+        },
+        {
+          "agent": "agent_04",
+          "points": 577,
+          "status": "fitted",
+          "center": [
+            2.8584058281970726,
+            5.187041050329056
+          ],
+          "area": 0.08213298396524932,
+          "perimeter": 10.344496529659258,
+          "vertices": 576,
+          "unsupported_fraction": 0.6229712858926342,
+          "max_nearest_sample_gap": 0.009993280533391791,
+          "initial_center_error_m": 0.4784379144282621
+        },
+        {
+          "agent": "agent_05",
+          "points": 617,
+          "status": "fitted",
+          "center": [
+            2.907180575807914,
+            5.195505423817189
+          ],
+          "area": 0.08676439028974302,
+          "perimeter": 12.238525103848005,
+          "vertices": 616,
+          "unsupported_fraction": 0.6111111111111112,
+          "max_nearest_sample_gap": 0.12983147903938028,
+          "initial_center_error_m": 0.4481017657932999
+        },
+        {
+          "agent": "agent_06",
+          "points": 783,
+          "status": "fitted",
+          "center": [
+            3.1649846388192433,
+            5.289099454307731
+          ],
+          "area": 0.10675961654402948,
+          "perimeter": 14.40087876401641,
+          "vertices": 782,
+          "unsupported_fraction": 0.6204710144927537,
+          "max_nearest_sample_gap": 0.02065498050444983,
+          "initial_center_error_m": 0.3176195091524054
+        },
+        {
+          "agent": "agent_07",
+          "points": 662,
+          "status": "fitted",
+          "center": [
+            3.356362247343112,
+            5.251457502484461
+          ],
+          "area": 0.0903926272624725,
+          "perimeter": 12.156102138319246,
+          "vertices": 660,
+          "unsupported_fraction": 0.6595517609391676,
+          "max_nearest_sample_gap": 0.044521155705610965,
+          "initial_center_error_m": 0.43267016818493276
+        },
+        {
+          "agent": "agent_08",
+          "points": 670,
+          "status": "fitted",
+          "center": [
+            3.3750452690956942,
+            5.255831450952781
+          ],
+          "area": 0.09221538688774784,
+          "perimeter": 11.95259034532939,
+          "vertices": 669,
+          "unsupported_fraction": 0.6453362255965293,
+          "max_nearest_sample_gap": 0.009993280533391791,
+          "initial_center_error_m": 0.4405699606250852
+        },
+        {
+          "agent": "agent_09",
+          "points": 658,
+          "status": "fitted",
+          "center": [
+            3.408636195573364,
+            5.2710049442989
+          ],
+          "area": 0.08866646294305118,
+          "perimeter": 11.742964265507393,
+          "vertices": 654,
+          "unsupported_fraction": 0.6486784140969163,
+          "max_nearest_sample_gap": 0.009986593578870905,
+          "initial_center_error_m": 0.45110314551526703
+        },
+        {
+          "agent": "agent_10",
+          "points": 648,
+          "status": "fitted",
+          "center": [
+            3.457275501069853,
+            5.279642115184496
+          ],
+          "area": 0.08513606289913642,
+          "perimeter": 11.86451773594715,
+          "vertices": 645,
+          "unsupported_fraction": 0.6466083150984683,
+          "max_nearest_sample_gap": 0.0099708322897753,
+          "initial_center_error_m": 0.4798697302687232
+        },
+        {
+          "agent": "agent_11",
+          "points": 575,
+          "status": "fitted",
+          "center": [
+            3.5846611315191117,
+            5.308869613013735
+          ],
+          "area": 0.07517631498049887,
+          "perimeter": 10.654897173864976,
+          "vertices": 572,
+          "unsupported_fraction": 0.6311274509803921,
+          "max_nearest_sample_gap": 0.009986104909224656,
+          "initial_center_error_m": 0.5653789124402837
+        },
+        {
+          "agent": "agent_12",
+          "points": 617,
+          "status": "fitted",
+          "center": [
+            3.5383805887627524,
+            5.297463698585906
+          ],
+          "area": 0.07878812157313324,
+          "perimeter": 11.348787947963771,
+          "vertices": 615,
+          "unsupported_fraction": 0.6363636363636364,
+          "max_nearest_sample_gap": 0.0099708322897753,
+          "initial_center_error_m": 0.5326403611042788
+        },
+        {
+          "agent": "agent_13",
+          "points": 598,
+          "status": "fitted",
+          "center": [
+            3.5671099575631526,
+            5.307719910590431
+          ],
+          "area": 0.07573150327756199,
+          "perimeter": 11.03077451634662,
+          "vertices": 597,
+          "unsupported_fraction": 0.6383981154299175,
+          "max_nearest_sample_gap": 0.010528469446612414,
+          "initial_center_error_m": 0.5510166631962374
+        },
+        {
+          "agent": "agent_14",
+          "points": 565,
+          "status": "fitted",
+          "center": [
+            3.6195451877916764,
+            5.320850094779468
+          ],
+          "area": 0.07181153185704292,
+          "perimeter": 10.76265857171715,
+          "vertices": 563,
+          "unsupported_fraction": 0.6459854014598541,
+          "max_nearest_sample_gap": 0.04914124413333224,
+          "initial_center_error_m": 0.5897896843300338
+        },
+        {
+          "agent": "agent_15",
+          "points": 0,
+          "status": "insufficient"
+        }
+      ],
+      "uncontaminated": true
+    },
+    {
+      "condition": "far_skew_box_s0_r0_pos0",
+      "snapshot": "final",
+      "local": [
+        {
+          "agent": "agent_00",
+          "points": 530,
+          "status": "fitted",
+          "center": [
+            2.5629794035883116,
+            5.2708878086935265
+          ],
+          "area": 0.06699196836934099,
+          "perimeter": 10.024727837846442,
+          "vertices": 528,
+          "unsupported_fraction": 0.6222222222222222,
+          "max_nearest_sample_gap": 0.04297619860025825,
+          "initial_center_error_m": 0.6298459775507874
+        },
+        {
+          "agent": "agent_01",
+          "points": 619,
+          "status": "fitted",
+          "center": [
+            2.7713435510366287,
+            5.227850662528136
+          ],
+          "area": 0.08420287461810055,
+          "perimeter": 11.344870500540793,
+          "vertices": 618,
+          "unsupported_fraction": 0.6559633027522935,
+          "max_nearest_sample_gap": 0.009985868163014519,
+          "initial_center_error_m": 0.4964979263057946
+        },
+        {
+          "agent": "agent_02",
+          "points": 627,
+          "status": "fitted",
+          "center": [
+            2.8264834536801016,
+            5.223746372953794
+          ],
+          "area": 0.08397676031596253,
+          "perimeter": 11.320090281801209,
+          "vertices": 625,
+          "unsupported_fraction": 0.6421291053227633,
+          "max_nearest_sample_gap": 0.009994553157136632,
+          "initial_center_error_m": 0.465164586975604
+        },
+        {
+          "agent": "agent_03",
+          "points": 802,
+          "status": "fitted",
+          "center": [
+            3.0227972733385218,
+            5.287457867673858
+          ],
+          "area": 0.10671339883568966,
+          "perimeter": 14.71460244276859,
+          "vertices": 801,
+          "unsupported_fraction": 0.6278659611992945,
+          "max_nearest_sample_gap": 0.01524328293550124,
+          "initial_center_error_m": 0.32193608912784927
+        },
+        {
+          "agent": "agent_04",
+          "points": 619,
+          "status": "fitted",
+          "center": [
+            2.8159750338800853,
+            5.219808286628391
+          ],
+          "area": 0.08788702438307866,
+          "perimeter": 11.096057342559757,
+          "vertices": 618,
+          "unsupported_fraction": 0.6336056009334889,
+          "max_nearest_sample_gap": 0.009993280533391791,
+          "initial_center_error_m": 0.4745691944235869
+        },
+        {
+          "agent": "agent_05",
+          "points": 663,
+          "status": "fitted",
+          "center": [
+            2.8660520575113226,
+            5.224548649547003
+          ],
+          "area": 0.09261903801676387,
+          "perimeter": 12.988636692069669,
+          "vertices": 662,
+          "unsupported_fraction": 0.6287179487179487,
+          "max_nearest_sample_gap": 0.12983147903938028,
+          "initial_center_error_m": 0.4423746786963044
+        },
+        {
+          "agent": "agent_06",
+          "points": 869,
+          "status": "fitted",
+          "center": [
+            3.1368493546572296,
+            5.332742473215493
+          ],
+          "area": 0.11817536170094109,
+          "perimeter": 15.663505636340119,
+          "vertices": 868,
+          "unsupported_fraction": 0.64149377593361,
+          "max_nearest_sample_gap": 0.009994553157136632,
+          "initial_center_error_m": 0.2697859532326005
+        },
+        {
+          "agent": "agent_07",
+          "points": 716,
+          "status": "fitted",
+          "center": [
+            3.331151364095094,
+            5.28771999539216
+          ],
+          "area": 0.09893930189023056,
+          "perimeter": 14.05083169351878,
+          "vertices": 715,
+          "unsupported_fraction": 0.666030534351145,
+          "max_nearest_sample_gap": 0.04996468862553101,
+          "initial_center_error_m": 0.38852252753333794
+        },
+        {
+          "agent": "agent_08",
+          "points": 686,
+          "status": "fitted",
+          "center": [
+            3.389476433882013,
+            5.2707153131981395
+          ],
+          "area": 0.09514291685226169,
+          "perimeter": 12.242296391829347,
+          "vertices": 685,
+          "unsupported_fraction": 0.6514346439957492,
+          "max_nearest_sample_gap": 0.009993280533391791,
+          "initial_center_error_m": 0.43843472802145267
+        },
+        {
+          "agent": "agent_09",
+          "points": 682,
+          "status": "fitted",
+          "center": [
+            3.404240298499714,
+            5.282715492562196
+          ],
+          "area": 0.09341942391769645,
+          "perimeter": 12.082079558755717,
+          "vertices": 679,
+          "unsupported_fraction": 0.656989247311828,
+          "max_nearest_sample_gap": 0.009986593578870905,
+          "initial_center_error_m": 0.43958118464197654
+        },
+        {
+          "agent": "agent_10",
+          "points": 666,
+          "status": "fitted",
+          "center": [
+            3.463155270659751,
+            5.294078522484399
+          ],
+          "area": 0.08882378562273943,
+          "perimeter": 12.117642847318068,
+          "vertices": 663,
+          "unsupported_fraction": 0.6504854368932039,
+          "max_nearest_sample_gap": 0.0099708322897753,
+          "initial_center_error_m": 0.47483649924293375
+        },
+        {
+          "agent": "agent_11",
+          "points": 610,
+          "status": "fitted",
+          "center": [
+            3.5705218349953665,
+            5.318297157330932
+          ],
+          "area": 0.08058300840432774,
+          "perimeter": 11.128319565002704,
+          "vertices": 607,
+          "unsupported_fraction": 0.6470588235294118,
+          "max_nearest_sample_gap": 0.01160622234626308,
+          "initial_center_error_m": 0.5484043114119734
+        },
+        {
+          "agent": "agent_12",
+          "points": 817,
+          "status": "fitted",
+          "center": [
+            3.217749215812399,
+            5.328420466585751
+          ],
+          "area": 0.10682614388462866,
+          "perimeter": 14.97647685254333,
+          "vertices": 814,
+          "unsupported_fraction": 0.6416881998277347,
+          "max_nearest_sample_gap": 0.009971467640529145,
+          "initial_center_error_m": 0.2960072985484208
+        },
+        {
+          "agent": "agent_13",
+          "points": 627,
+          "status": "fitted",
+          "center": [
+            3.554351061669635,
+            5.317869808464166
+          ],
+          "area": 0.0809584719821864,
+          "perimeter": 11.398895295668725,
+          "vertices": 626,
+          "unsupported_fraction": 0.6479357798165137,
+          "max_nearest_sample_gap": 0.010528469446612414,
+          "initial_center_error_m": 0.53481990633892
+        },
+        {
+          "agent": "agent_14",
+          "points": 585,
+          "status": "fitted",
+          "center": [
+            3.625179508491138,
+            5.33762340330261
+          ],
+          "area": 0.07509445310401928,
+          "perimeter": 11.042450233884853,
+          "vertices": 582,
+          "unsupported_fraction": 0.6499402628434886,
+          "max_nearest_sample_gap": 0.04712597828034735,
+          "initial_center_error_m": 0.5870732446922604
+        },
+        {
+          "agent": "agent_15",
+          "points": 0,
+          "status": "insufficient"
+        }
+      ],
+      "uncontaminated": false
+    },
+    {
+      "condition": "near_circle",
+      "snapshot": "first_support",
+      "local": [
+        {
+          "agent": "agent_00",
+          "points": 360,
+          "status": "fitted",
+          "center": [
+            3.863375399500632,
+            3.5666711500862593
+          ],
+          "area": 0.04648959511064198,
+          "perimeter": 8.312686513908861,
+          "vertices": 360,
+          "unsupported_fraction": 0.5735785953177257,
+          "max_nearest_sample_gap": 0.060467886671800815,
+          "initial_center_error_m": 0.45435687914800177
+        },
+        {
+          "agent": "agent_01",
+          "points": 275,
+          "status": "fitted",
+          "center": [
+            4.561261712225394,
+            4.13251773477625
+          ],
+          "area": 0.03821538382476918,
+          "perimeter": 6.123165098583023,
+          "vertices": 275,
+          "unsupported_fraction": 0.5342465753424658,
+          "max_nearest_sample_gap": 0.02184595880183068,
+          "initial_center_error_m": 0.5766937312304427
+        },
+        {
+          "agent": "agent_02",
+          "points": 233,
+          "status": "fitted",
+          "center": [
+            4.589465573052199,
+            4.04314752516698
+          ],
+          "area": 0.03828739528816343,
+          "perimeter": 5.715722463537033,
+          "vertices": 233,
+          "unsupported_fraction": 0.5615763546798029,
+          "max_nearest_sample_gap": 0.05487169337747362,
+          "initial_center_error_m": 0.5910426133045452
+        },
+        {
+          "agent": "agent_03",
+          "points": 288,
+          "status": "fitted",
+          "center": [
+            4.509411844207007,
+            3.9227546041717436
+          ],
+          "area": 0.044776235253149034,
+          "perimeter": 6.832320456647277,
+          "vertices": 288,
+          "unsupported_fraction": 0.5679513184584178,
+          "max_nearest_sample_gap": 0.05487169337747362,
+          "initial_center_error_m": 0.5152351678555125
+        },
+        {
+          "agent": "agent_04",
+          "points": 306,
+          "status": "fitted",
+          "center": [
+            4.480741049644563,
+            3.8976787177503973
+          ],
+          "area": 0.04663495620507841,
+          "perimeter": 7.093781769218947,
+          "vertices": 306,
+          "unsupported_fraction": 0.556420233463035,
+          "max_nearest_sample_gap": 0.05487169337747362,
+          "initial_center_error_m": 0.4915095132493404
+        },
+        {
+          "agent": "agent_05",
+          "points": 346,
+          "status": "fitted",
+          "center": [
+            4.111882599064581,
+            3.5394394176265407
+          ],
+          "area": 0.04771325797964145,
+          "perimeter": 7.701303642952278,
+          "vertices": 345,
+          "unsupported_fraction": 0.563922942206655,
+          "max_nearest_sample_gap": 0.06588248492583211,
+          "initial_center_error_m": 0.47395544728337746
+        },
+        {
+          "agent": "agent_06",
+          "points": 306,
+          "status": "fitted",
+          "center": [
+            4.295568897812046,
+            3.523211523766122
+          ],
+          "area": 0.03956025229061122,
+          "perimeter": 6.70076074246543,
+          "vertices": 306,
+          "unsupported_fraction": 0.5653923541247485,
+          "max_nearest_sample_gap": 0.029550188866464065,
+          "initial_center_error_m": 0.5609707874954197
+        },
+        {
+          "agent": "agent_07",
+          "points": 248,
+          "status": "fitted",
+          "center": [
+            3.7531174802478224,
+            4.42472787957588
+          ],
+          "area": 0.039184926606558375,
+          "perimeter": 6.549652329628389,
+          "vertices": 248,
+          "unsupported_fraction": 0.5521064301552107,
+          "max_nearest_sample_gap": 0.08354998119123856,
+          "initial_center_error_m": 0.49126851135425675
+        },
+        {
+          "agent": "agent_08",
+          "points": 241,
+          "status": "fitted",
+          "center": [
+            3.504108960356406,
+            4.307864784622806
+          ],
+          "area": 0.03294287218275737,
+          "perimeter": 5.8318715136741215,
+          "vertices": 241,
+          "unsupported_fraction": 0.5328467153284672,
+          "max_nearest_sample_gap": 0.029603072573677485,
+          "initial_center_error_m": 0.5836854022584672
+        },
+        {
+          "agent": "agent_09",
+          "points": 310,
+          "status": "fitted",
+          "center": [
+            3.637690549216578,
+            3.5704185663299777
+          ],
+          "area": 0.03931860943951954,
+          "perimeter": 6.899667969599388,
+          "vertices": 310,
+          "unsupported_fraction": 0.5551181102362205,
+          "max_nearest_sample_gap": 0.03268295860561102,
+          "initial_center_error_m": 0.5619682787140976
+        },
+        {
+          "agent": "agent_10",
+          "points": 329,
+          "status": "fitted",
+          "center": [
+            4.3403729619471285,
+            3.8207573893870705
+          ],
+          "area": 0.05674564765575862,
+          "perimeter": 8.03285090239679,
+          "vertices": 329,
+          "unsupported_fraction": 0.5472027972027972,
+          "max_nearest_sample_gap": 0.057867087395308915,
+          "initial_center_error_m": 0.38468385290263857
+        },
+        {
+          "agent": "agent_11",
+          "points": 319,
+          "status": "fitted",
+          "center": [
+            3.520902551804384,
+            3.989920946118367
+          ],
+          "area": 0.04518244090446382,
+          "perimeter": 7.328275170046739,
+          "vertices": 319,
+          "unsupported_fraction": 0.5478424015009381,
+          "max_nearest_sample_gap": 0.04910042040707294,
+          "initial_center_error_m": 0.4792034559502289
+        },
+        {
+          "agent": "agent_12",
+          "points": 282,
+          "status": "fitted",
+          "center": [
+            3.564207706518045,
+            3.6407204735569
+          ],
+          "area": 0.039064224960961964,
+          "perimeter": 6.353315386719241,
+          "vertices": 282,
+          "unsupported_fraction": 0.5534188034188035,
+          "max_nearest_sample_gap": 0.03551706266401594,
+          "initial_center_error_m": 0.5647979295105011
+        },
+        {
+          "agent": "agent_13",
+          "points": 239,
+          "status": "fitted",
+          "center": [
+            4.264412289804987,
+            4.533162751889499
+          ],
+          "area": 0.03451151086669056,
+          "perimeter": 5.545572297571577,
+          "vertices": 239,
+          "unsupported_fraction": 0.5445544554455446,
+          "max_nearest_sample_gap": 0.02213542327629082,
+          "initial_center_error_m": 0.5951271956501327
+        },
+        {
+          "agent": "agent_14",
+          "points": 284,
+          "status": "fitted",
+          "center": [
+            3.644533383389395,
+            4.273973503114108
+          ],
+          "area": 0.05164222452893262,
+          "perimeter": 6.867023022581061,
+          "vertices": 284,
+          "unsupported_fraction": 0.53099173553719,
+          "max_nearest_sample_gap": 0.05349221223810077,
+          "initial_center_error_m": 0.4487961630107783
+        },
+        {
+          "agent": "agent_15",
+          "points": 258,
+          "status": "fitted",
+          "center": [
+            3.464793184252757,
+            3.6920291365443254
+          ],
+          "area": 0.034378490882449174,
+          "perimeter": 6.007653884782729,
+          "vertices": 258,
+          "unsupported_fraction": 0.5510204081632653,
+          "max_nearest_sample_gap": 0.04524441417505461,
+          "initial_center_error_m": 0.617488775897862
+        }
+      ],
+      "uncontaminated": true
+    },
+    {
+      "condition": "near_circle",
+      "snapshot": "final",
+      "local": [
+        {
+          "agent": "agent_00",
+          "points": 703,
+          "status": "fitted",
+          "center": [
+            3.862999916978411,
+            3.6864809812894346
+          ],
+          "area": 0.08984115432087485,
+          "perimeter": 12.816289608869898,
+          "vertices": 703,
+          "unsupported_fraction": 0.6274111675126903,
+          "max_nearest_sample_gap": 0.0226066565472399,
+          "initial_center_error_m": 0.34214499534715775
+        },
+        {
+          "agent": "agent_01",
+          "points": 692,
+          "status": "fitted",
+          "center": [
+            4.23392313270971,
+            4.248675761560725
+          ],
+          "area": 0.09078006777078117,
+          "perimeter": 12.955395650070345,
+          "vertices": 690,
+          "unsupported_fraction": 0.6357214934409687,
+          "max_nearest_sample_gap": 0.024752688420553694,
+          "initial_center_error_m": 0.3414083572565068
+        },
+        {
+          "agent": "agent_02",
+          "points": 684,
+          "status": "fitted",
+          "center": [
+            4.29772356882584,
+            4.15687628726325
+          ],
+          "area": 0.09151474156008695,
+          "perimeter": 12.683417658028077,
+          "vertices": 682,
+          "unsupported_fraction": 0.6372950819672131,
+          "max_nearest_sample_gap": 0.026993742602886332,
+          "initial_center_error_m": 0.33652562003501163
+        },
+        {
+          "agent": "agent_03",
+          "points": 691,
+          "status": "fitted",
+          "center": [
+            4.32678805457769,
+            4.026438490413713
+          ],
+          "area": 0.09060243029034838,
+          "perimeter": 12.930891995366302,
+          "vertices": 690,
+          "unsupported_fraction": 0.6303696303696303,
+          "max_nearest_sample_gap": 0.01764227189302846,
+          "initial_center_error_m": 0.32785580121460106
+        },
+        {
+          "agent": "agent_04",
+          "points": 641,
+          "status": "fitted",
+          "center": [
+            4.263283490849101,
+            3.811332458626528
+          ],
+          "area": 0.09196508085058083,
+          "perimeter": 12.488691597863934,
+          "vertices": 640,
+          "unsupported_fraction": 0.6209081309398099,
+          "max_nearest_sample_gap": 0.04914788334703702,
+          "initial_center_error_m": 0.3239037476189628
+        },
+        {
+          "agent": "agent_05",
+          "points": 702,
+          "status": "fitted",
+          "center": [
+            3.997478856950177,
+            3.6689053758256227
+          ],
+          "area": 0.09006624664391619,
+          "perimeter": 13.204113314956185,
+          "vertices": 698,
+          "unsupported_fraction": 0.6335952848722987,
+          "max_nearest_sample_gap": 0.06658142672765131,
+          "initial_center_error_m": 0.33110422274476037
+        },
+        {
+          "agent": "agent_06",
+          "points": 710,
+          "status": "fitted",
+          "center": [
+            4.072617724005547,
+            3.6685331262332292
+          ],
+          "area": 0.09007881590163429,
+          "perimeter": 13.424319141553193,
+          "vertices": 706,
+          "unsupported_fraction": 0.631937682570594,
+          "max_nearest_sample_gap": 0.020514661324077883,
+          "initial_center_error_m": 0.33932819252816726
+        },
+        {
+          "agent": "agent_07",
+          "points": 688,
+          "status": "fitted",
+          "center": [
+            3.92038000873042,
+            4.3406184724205925
+          ],
+          "area": 0.08909851187269055,
+          "perimeter": 12.970362272925671,
+          "vertices": 687,
+          "unsupported_fraction": 0.6251246261216351,
+          "max_nearest_sample_gap": 0.012829750812336529,
+          "initial_center_error_m": 0.34980035272128496
+        },
+        {
+          "agent": "agent_08",
+          "points": 688,
+          "status": "fitted",
+          "center": [
+            3.8011798475346095,
+            4.28610385746242
+          ],
+          "area": 0.08910160956581062,
+          "perimeter": 12.90916920285995,
+          "vertices": 687,
+          "unsupported_fraction": 0.6275100401606426,
+          "max_nearest_sample_gap": 0.01547015775003954,
+          "initial_center_error_m": 0.34840331554284504
+        },
+        {
+          "agent": "agent_09",
+          "points": 686,
+          "status": "fitted",
+          "center": [
+            3.7247008068621037,
+            3.7542828582918015
+          ],
+          "area": 0.08876311681421196,
+          "perimeter": 12.68423824646195,
+          "vertices": 683,
+          "unsupported_fraction": 0.6316326530612245,
+          "max_nearest_sample_gap": 0.015838174853183902,
+          "initial_center_error_m": 0.36900753308240697
+        },
+        {
+          "agent": "agent_10",
+          "points": 712,
+          "status": "fitted",
+          "center": [
+            4.175952303857381,
+            3.747443688706466
+          ],
+          "area": 0.0944388557123002,
+          "perimeter": 13.479631582485533,
+          "vertices": 709,
+          "unsupported_fraction": 0.626953125,
+          "max_nearest_sample_gap": 0.028102550057490447,
+          "initial_center_error_m": 0.3078049765791777
+        },
+        {
+          "agent": "agent_11",
+          "points": 717,
+          "status": "fitted",
+          "center": [
+            3.7397649467904466,
+            3.9579651817140635
+          ],
+          "area": 0.1029190971012724,
+          "perimeter": 13.970419765350929,
+          "vertices": 717,
+          "unsupported_fraction": 0.630579297245964,
+          "max_nearest_sample_gap": 0.047036927330918674,
+          "initial_center_error_m": 0.26360805918498725
+        },
+        {
+          "agent": "agent_12",
+          "points": 696,
+          "status": "fitted",
+          "center": [
+            3.664872488323781,
+            3.866048145590345
+          ],
+          "area": 0.09013925575990604,
+          "perimeter": 12.847962862045694,
+          "vertices": 695,
+          "unsupported_fraction": 0.6282828282828283,
+          "max_nearest_sample_gap": 0.015838174853183902,
+          "initial_center_error_m": 0.3609065646147568
+        },
+        {
+          "agent": "agent_13",
+          "points": 679,
+          "status": "fitted",
+          "center": [
+            4.1048065125702475,
+            4.33091519290845
+          ],
+          "area": 0.09010308213383189,
+          "perimeter": 12.744402333329178,
+          "vertices": 679,
+          "unsupported_fraction": 0.6382322713257965,
+          "max_nearest_sample_gap": 0.024996415267833787,
+          "initial_center_error_m": 0.34711564351786867
+        },
+        {
+          "agent": "agent_14",
+          "points": 700,
+          "status": "fitted",
+          "center": [
+            3.697718227370659,
+            4.1594324102349445
+          ],
+          "area": 0.09172805484030108,
+          "perimeter": 13.310114090568321,
+          "vertices": 699,
+          "unsupported_fraction": 0.6367265469061876,
+          "max_nearest_sample_gap": 0.025773799108093323,
+          "initial_center_error_m": 0.3417498551532148
+        },
+        {
+          "agent": "agent_15",
+          "points": 683,
+          "status": "fitted",
+          "center": [
+            3.639949756389732,
+            3.9189140599569146
+          ],
+          "area": 0.0888367163522864,
+          "perimeter": 12.555351754059265,
+          "vertices": 680,
+          "unsupported_fraction": 0.6235897435897436,
+          "max_nearest_sample_gap": 0.017248177391641598,
+          "initial_center_error_m": 0.3690678902267619
+        }
+      ],
+      "uncontaminated": true
+    },
+    {
+      "condition": "near_l_reference",
+      "snapshot": "first_support",
+      "local": [
+        {
+          "agent": "agent_00",
+          "points": 401,
+          "status": "fitted",
+          "center": [
+            4.4312723314296205,
+            3.519870980894199
+          ],
+          "area": 0.10870186130219688,
+          "perimeter": 9.678486318132258,
+          "vertices": 401,
+          "unsupported_fraction": 0.5565345080763583,
+          "max_nearest_sample_gap": 0.17152144950419018,
+          "initial_center_error_m": 0.6453833735418355
+        },
+        {
+          "agent": "agent_01",
+          "points": 184,
+          "status": "fitted",
+          "center": [
+            4.33986626496041,
+            3.937302531563922
+          ],
+          "area": 0.31243672828102975,
+          "perimeter": 10.283025961526223,
+          "vertices": 184,
+          "unsupported_fraction": 0.7041322314049587,
+          "max_nearest_sample_gap": 0.36619505370471483,
+          "initial_center_error_m": 0.3456009991398216
+        },
+        {
+          "agent": "agent_02",
+          "points": 170,
+          "status": "fitted",
+          "center": [
+            4.510857629656576,
+            3.5519307273409777
+          ],
+          "area": 0.21327501508635532,
+          "perimeter": 5.938929088196147,
+          "vertices": 169,
+          "unsupported_fraction": 0.6090425531914894,
+          "max_nearest_sample_gap": 0.36553656852024285,
+          "initial_center_error_m": 0.6795157031883267
+        },
+        {
+          "agent": "agent_03",
+          "points": 280,
+          "status": "fitted",
+          "center": [
+            4.722543468562959,
+            3.5546541830072065
+          ],
+          "area": 0.05201478967548886,
+          "perimeter": 7.134823170380634,
+          "vertices": 279,
+          "unsupported_fraction": 0.5714285714285714,
+          "max_nearest_sample_gap": 0.09126330196988972,
+          "initial_center_error_m": 0.8487649619747409
+        },
+        {
+          "agent": "agent_04",
+          "points": 305,
+          "status": "fitted",
+          "center": [
+            4.670099440471366,
+            3.534602960737247
+          ],
+          "area": 0.05637003375282495,
+          "perimeter": 7.242313735857134,
+          "vertices": 304,
+          "unsupported_fraction": 0.5769980506822612,
+          "max_nearest_sample_gap": 0.09126330196988972,
+          "initial_center_error_m": 0.8158600764068457
+        },
+        {
+          "agent": "agent_05",
+          "points": 376,
+          "status": "fitted",
+          "center": [
+            4.212891266018926,
+            3.416846886560414
+          ],
+          "area": 0.05273435757028436,
+          "perimeter": 7.857811062065807,
+          "vertices": 376,
+          "unsupported_fraction": 0.5561312607944733,
+          "max_nearest_sample_gap": 0.048988728646154445,
+          "initial_center_error_m": 0.620798070922755
+        },
+        {
+          "agent": "agent_06",
+          "points": 337,
+          "status": "fitted",
+          "center": [
+            4.4529861054198445,
+            3.3793184916990118
+          ],
+          "area": 0.04560550613149503,
+          "perimeter": 6.419901792952302,
+          "vertices": 337,
+          "unsupported_fraction": 0.567287784679089,
+          "max_nearest_sample_gap": 0.018125741059884088,
+          "initial_center_error_m": 0.7684022035693455
+        },
+        {
+          "agent": "agent_07",
+          "points": 180,
+          "status": "fitted",
+          "center": [
+            3.6997065197077044,
+            4.82119776009066
+          ],
+          "area": 0.04834597522049944,
+          "perimeter": 5.852528949321058,
+          "vertices": 180,
+          "unsupported_fraction": 0.6057441253263708,
+          "max_nearest_sample_gap": 0.1171845206865905,
+          "initial_center_error_m": 0.8743808869617353
+        },
+        {
+          "agent": "agent_08",
+          "points": 249,
+          "status": "fitted",
+          "center": [
+            3.473992710483972,
+            4.509217012654014
+          ],
+          "area": 0.04071105847379234,
+          "perimeter": 6.9461754916413385,
+          "vertices": 249,
+          "unsupported_fraction": 0.6075949367088608,
+          "max_nearest_sample_gap": 0.10648964651019201,
+          "initial_center_error_m": 0.7321103978228101
+        },
+        {
+          "agent": "agent_09",
+          "points": 384,
+          "status": "fitted",
+          "center": [
+            3.8109352353664394,
+            3.57525615432959
+          ],
+          "area": 0.05590883607186584,
+          "perimeter": 7.867710221541961,
+          "vertices": 384,
+          "unsupported_fraction": 0.5449826989619377,
+          "max_nearest_sample_gap": 0.025079656312166413,
+          "initial_center_error_m": 0.46492238025375054
+        },
+        {
+          "agent": "agent_10",
+          "points": 339,
+          "status": "fitted",
+          "center": [
+            4.606892096883671,
+            3.521801606920639
+          ],
+          "area": 0.06000462913312909,
+          "perimeter": 7.5707674579208835,
+          "vertices": 338,
+          "unsupported_fraction": 0.5889908256880734,
+          "max_nearest_sample_gap": 0.09126330196988972,
+          "initial_center_error_m": 0.7726523929967148
+        },
+        {
+          "agent": "agent_11",
+          "points": 313,
+          "status": "fitted",
+          "center": [
+            3.556376030744797,
+            4.357240133916629
+          ],
+          "area": 0.09633129110729866,
+          "perimeter": 9.320207780821717,
+          "vertices": 313,
+          "unsupported_fraction": 0.590032154340836,
+          "max_nearest_sample_gap": 0.23530226303236842,
+          "initial_center_error_m": 0.5695811964755392
+        },
+        {
+          "agent": "agent_12",
+          "points": 355,
+          "status": "fitted",
+          "center": [
+            3.6451946854938777,
+            3.7502857712855078
+          ],
+          "area": 0.0549779697558296,
+          "perimeter": 8.151247136564029,
+          "vertices": 355,
+          "unsupported_fraction": 0.541095890410959,
+          "max_nearest_sample_gap": 0.028925024762655606,
+          "initial_center_error_m": 0.43387095688031674
+        },
+        {
+          "agent": "agent_13",
+          "points": 137,
+          "status": "fitted",
+          "center": [
+            3.9913844749977088,
+            4.562972471184079
+          ],
+          "area": 0.42122382140067605,
+          "perimeter": 8.967038048259521,
+          "vertices": 137,
+          "unsupported_fraction": 0.7413793103448276,
+          "max_nearest_sample_gap": 0.36619505370471483,
+          "initial_center_error_m": 0.563038391748014
+        },
+        {
+          "agent": "agent_14",
+          "points": 250,
+          "status": "fitted",
+          "center": [
+            3.408289487423184,
+            4.3164869336135965
+          ],
+          "area": 0.03705200368244764,
+          "perimeter": 5.868527555015304,
+          "vertices": 250,
+          "unsupported_fraction": 0.5379146919431279,
+          "max_nearest_sample_gap": 0.024912731017946246,
+          "initial_center_error_m": 0.6710330169537438
+        },
+        {
+          "agent": "agent_15",
+          "points": 313,
+          "status": "fitted",
+          "center": [
+            3.5431513691897685,
+            3.8072147808734216
+          ],
+          "area": 0.048869608250239414,
+          "perimeter": 7.363844930167381,
+          "vertices": 313,
+          "unsupported_fraction": 0.5494296577946768,
+          "max_nearest_sample_gap": 0.028925024762655606,
+          "initial_center_error_m": 0.49585966985311847
+        }
+      ],
+      "uncontaminated": true
+    },
+    {
+      "condition": "near_l_reference",
+      "snapshot": "final",
+      "local": [
+        {
+          "agent": "agent_00",
+          "points": 1116,
+          "status": "fitted",
+          "center": [
+            4.126145215318366,
+            3.8481275214314987
+          ],
+          "area": 0.16563959398467687,
+          "perimeter": 20.918311377659233,
+          "vertices": 1115,
+          "unsupported_fraction": 0.6200873362445415,
+          "max_nearest_sample_gap": 0.10219361437251485,
+          "initial_center_error_m": 0.19742812640112048
+        },
+        {
+          "agent": "agent_01",
+          "points": 1390,
+          "status": "fitted",
+          "center": [
+            4.067880425975762,
+            4.0013607619949
+          ],
+          "area": 0.19355921098066123,
+          "perimeter": 25.224488098071784,
+          "vertices": 1386,
+          "unsupported_fraction": 0.6521516393442623,
+          "max_nearest_sample_gap": 0.026944761330442997,
+          "initial_center_error_m": 0.06789406383374155
+        },
+        {
+          "agent": "agent_02",
+          "points": 1275,
+          "status": "fitted",
+          "center": [
+            4.0294032092868175,
+            4.161018461224212
+          ],
+          "area": 0.20381079903185492,
+          "perimeter": 23.715090510944275,
+          "vertices": 1269,
+          "unsupported_fraction": 0.6364136413641364,
+          "max_nearest_sample_gap": 0.12529829211562427,
+          "initial_center_error_m": 0.16368107273409285
+        },
+        {
+          "agent": "agent_03",
+          "points": 853,
+          "status": "fitted",
+          "center": [
+            4.47133698293783,
+            3.8368831887313117
+          ],
+          "area": 0.1166452457744747,
+          "perimeter": 15.662596813979462,
+          "vertices": 849,
+          "unsupported_fraction": 0.6530782029950083,
+          "max_nearest_sample_gap": 0.009995190661740342,
+          "initial_center_error_m": 0.49876411819958855
+        },
+        {
+          "agent": "agent_04",
+          "points": 840,
+          "status": "fitted",
+          "center": [
+            4.463618045908998,
+            3.8225169680766826
+          ],
+          "area": 0.1170126196371974,
+          "perimeter": 15.203913724174537,
+          "vertices": 838,
+          "unsupported_fraction": 0.643279797125951,
+          "max_nearest_sample_gap": 0.016204345499770033,
+          "initial_center_error_m": 0.49642916827396677
+        },
+        {
+          "agent": "agent_05",
+          "points": 1168,
+          "status": "fitted",
+          "center": [
+            4.153876632961341,
+            3.81021351423445
+          ],
+          "area": 0.15793884291758734,
+          "perimeter": 21.06019101162048,
+          "vertices": 1167,
+          "unsupported_fraction": 0.6420281001832621,
+          "max_nearest_sample_gap": 0.015125445203144596,
+          "initial_center_error_m": 0.24432954866482326
+        },
+        {
+          "agent": "agent_06",
+          "points": 1076,
+          "status": "fitted",
+          "center": [
+            4.244213946692882,
+            3.7706234492843507
+          ],
+          "area": 0.14446272561417978,
+          "perimeter": 19.776285104791278,
+          "vertices": 1075,
+          "unsupported_fraction": 0.636897001303781,
+          "max_nearest_sample_gap": 0.01170102236706839,
+          "initial_center_error_m": 0.33504336104081284
+        },
+        {
+          "agent": "agent_07",
+          "points": 871,
+          "status": "fitted",
+          "center": [
+            3.870822786578738,
+            4.393944092587213
+          ],
+          "area": 0.11815132058794213,
+          "perimeter": 15.915549826563923,
+          "vertices": 868,
+          "unsupported_fraction": 0.6514285714285715,
+          "max_nearest_sample_gap": 0.009994507768216681,
+          "initial_center_error_m": 0.41458256180361946
+        },
+        {
+          "agent": "agent_08",
+          "points": 881,
+          "status": "fitted",
+          "center": [
+            3.8058374140860347,
+            4.356311255137847
+          ],
+          "area": 0.11970307611767708,
+          "perimeter": 16.02565981922654,
+          "vertices": 879,
+          "unsupported_fraction": 0.645682001614205,
+          "max_nearest_sample_gap": 0.017400615707581606,
+          "initial_center_error_m": 0.4057792753538669
+        },
+        {
+          "agent": "agent_09",
+          "points": 977,
+          "status": "fitted",
+          "center": [
+            3.96838492478805,
+            3.8150641552552247
+          ],
+          "area": 0.16528255902097727,
+          "perimeter": 18.839069817441423,
+          "vertices": 977,
+          "unsupported_fraction": 0.6288732394366198,
+          "max_nearest_sample_gap": 0.3036004201805921,
+          "initial_center_error_m": 0.18761870816129758
+        },
+        {
+          "agent": "agent_10",
+          "points": 876,
+          "status": "fitted",
+          "center": [
+            4.415773417877285,
+            3.7758788521038937
+          ],
+          "area": 0.12175518259447096,
+          "perimeter": 15.765250965961101,
+          "vertices": 875,
+          "unsupported_fraction": 0.6534090909090909,
+          "max_nearest_sample_gap": 0.00999220679083024,
+          "initial_center_error_m": 0.472332323632034
+        },
+        {
+          "agent": "agent_11",
+          "points": 1173,
+          "status": "fitted",
+          "center": [
+            3.8650351327332677,
+            4.1149378477292355
+          ],
+          "area": 0.16241583274844185,
+          "perimeter": 21.527358599981387,
+          "vertices": 1171,
+          "unsupported_fraction": 0.6374022850270595,
+          "max_nearest_sample_gap": 0.014090414751193915,
+          "initial_center_error_m": 0.17727443198880702
+        },
+        {
+          "agent": "agent_12",
+          "points": 1199,
+          "status": "fitted",
+          "center": [
+            3.8831746759491654,
+            4.0812736992424785
+          ],
+          "area": 0.16033052684341362,
+          "perimeter": 21.700253667714012,
+          "vertices": 1199,
+          "unsupported_fraction": 0.6303317535545023,
+          "max_nearest_sample_gap": 0.014701061282060938,
+          "initial_center_error_m": 0.14231503971168177
+        },
+        {
+          "agent": "agent_13",
+          "points": 1003,
+          "status": "fitted",
+          "center": [
+            4.029391203484852,
+            4.2995758068195
+          ],
+          "area": 0.1358729887248096,
+          "perimeter": 18.190079524372994,
+          "vertices": 1001,
+          "unsupported_fraction": 0.6483985765124555,
+          "max_nearest_sample_gap": 0.00998939438777183,
+          "initial_center_error_m": 0.3010141306880002
+        },
+        {
+          "agent": "agent_14",
+          "points": 1048,
+          "status": "fitted",
+          "center": [
+            4.037226612455754,
+            4.083321649537621
+          ],
+          "area": 0.1845591916033268,
+          "perimeter": 20.573447270330835,
+          "vertices": 1048,
+          "unsupported_fraction": 0.6508760545100584,
+          "max_nearest_sample_gap": 0.32167249478574106,
+          "initial_center_error_m": 0.09125961843337325
+        },
+        {
+          "agent": "agent_15",
+          "points": 1003,
+          "status": "fitted",
+          "center": [
+            3.8430553710470825,
+            3.950372443058494
+          ],
+          "area": 0.13244025252561134,
+          "perimeter": 19.33792250985536,
+          "vertices": 1003,
+          "unsupported_fraction": 0.6039807824296499,
+          "max_nearest_sample_gap": 0.04398871785106633,
+          "initial_center_error_m": 0.1646041037311772
+        }
+      ],
+      "uncontaminated": true
+    }
+  ]
+}

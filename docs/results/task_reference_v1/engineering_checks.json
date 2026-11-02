@@ -1,0 +1,115 @@
+{
+  "current_source_checks": [
+    {
+      "name": "git-diff",
+      "status": "PASS",
+      "exit_code": 0,
+      "seconds": 0.18699999997625127
+    },
+    {
+      "name": "git-fsck",
+      "status": "PASS",
+      "exit_code": 0,
+      "seconds": 5.10899999999674
+    },
+    {
+      "name": "pip-check",
+      "status": "PASS",
+      "exit_code": 0,
+      "seconds": 2.7030000000377186
+    },
+    {
+      "name": "environment",
+      "status": "PASS",
+      "exit_code": 0,
+      "seconds": 2.202999999979511
+    },
+    {
+      "name": "cli-help",
+      "status": "PASS",
+      "exit_code": 0,
+      "seconds": 0.18800000002374873
+    },
+    {
+      "name": "health-help",
+      "status": "PASS",
+      "exit_code": 0,
+      "seconds": 0.25
+    },
+    {
+      "name": "health",
+      "status": "PASS",
+      "exit_code": 0,
+      "seconds": 9.280999999959022
+    },
+    {
+      "name": "core-tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "seconds": 129.4220000000205
+    },
+    {
+      "name": "mas-tests",
+      "status": "PASS",
+      "exit_code": 0,
+      "seconds": 11.84299999999348
+    },
+    {
+      "name": "study-help",
+      "status": "PASS",
+      "exit_code": 0,
+      "seconds": 2.952999999979511
+    },
+    {
+      "name": "evidence-help",
+      "status": "PASS",
+      "exit_code": 0,
+      "seconds": 1.7339999999967404
+    },
+    {
+      "name": "smoke-dry-run",
+      "status": "PASS",
+      "exit_code": 0,
+      "seconds": 3.110000000044238
+    },
+    {
+      "name": "smoke",
+      "status": "PASS",
+      "exit_code": 0,
+      "seconds": 10.75
+    },
+    {
+      "name": "smoke-evidence",
+      "status": "PASS",
+      "exit_code": 0,
+      "seconds": 3.3280000000377186
+    },
+    {
+      "name": "smoke-serial",
+      "status": "PASS",
+      "exit_code": 0,
+      "seconds": 13.062999999965541
+    },
+    {
+      "name": "smoke-resume",
+      "status": "PASS",
+      "exit_code": 0,
+      "seconds": 5.0
+    }
+  ],
+  "core_tests": {
+    "passed": 843,
+    "skipped": 2,
+    "junit_sha256": "d61d28e56b8756e45ff8982ccc2756ba7cf5bfc08ee7d0098e7fb3511a529d2a"
+  },
+  "mas_junit_sha256": "120cb18ae1b0284484150d64b60e04b50560eaa0b706b29acad790b2e3026c17",
+  "commands_sha256": "2e3edaca486f1f787b7c8c654de3097001a3efac085b10b3fe968a2b0e62f298",
+  "scope": "Engineering tests of the post-review source. Frozen scientific episodes retain their earlier source identity.",
+  "portable_ci": {
+    "commit": "6e7958ce09b64e85bdde23d0c6ecdc98ed27149a",
+    "run": 41468642725,
+    "windows": "success",
+    "ubuntu": "success"
+  },
+  "post_review_source_sha256": "f3ab9b5da62ae328821763cefe9a0c9d0527ccd1a548fe10adcff73bbb7763e9"
+}

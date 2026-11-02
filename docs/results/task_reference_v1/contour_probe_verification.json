@@ -1,0 +1,100 @@
+{
+  "input_alignment": "all 16 reconstructed voxel counts match each original first-support receipt",
+  "conditions": [
+    {
+      "condition": "far_c_open_away_pos0",
+      "counts": [
+        236,
+        254,
+        96,
+        275,
+        432,
+        486,
+        570,
+        521,
+        528,
+        513,
+        519,
+        474,
+        493,
+        501,
+        480,
+        0
+      ],
+      "reconstruction_sha256": "cc626c19dd7bbcb2d2be3fc888bd7f72516e1083c2c37495375e35b06d1e5ff7",
+      "source_receipt_sha256": "925bc6384ebdaa53349ed963a51e0d4f2de3666d416cee8f9ba670a3fc5b4203"
+    },
+    {
+      "condition": "far_skew_box_s0_r0_pos0",
+      "counts": [
+        447,
+        572,
+        566,
+        695,
+        577,
+        617,
+        783,
+        662,
+        670,
+        658,
+        648,
+        575,
+        617,
+        598,
+        565,
+        0
+      ],
+      "reconstruction_sha256": "ac5627a74a8b34791e770c99f50ad59340ba21724cc2d738b82b698dad980459",
+      "source_receipt_sha256": "268c064b2e939e1c3561960971eec66e43b7218b16db6eb026e1e651da75ea25"
+    },
+    {
+      "condition": "near_circle",
+      "counts": [
+        360,
+        275,
+        233,
+        288,
+        306,
+        346,
+        306,
+        248,
+        241,
+        310,
+        329,
+        319,
+        282,
+        239,
+        284,
+        258
+      ],
+      "reconstruction_sha256": "622da7010a0f1279c42905511fe724401730808ce2eea6c47116ee555db85267",
+      "source_receipt_sha256": "09f5e3fe0b078e04d3ededcf209c8b2becaf947940aaca00c6d06e3e2f4d8bdf"
+    },
+    {
+      "condition": "near_l_reference",
+      "counts": [
+        401,
+        184,
+        170,
+        280,
+        305,
+        376,
+        337,
+        180,
+        249,
+        384,
+        339,
+        313,
+        355,
+        137,
+        250,
+        313
+      ],
+      "reconstruction_sha256": "d95b20d85d77fec76ac4a62576b7f4c42827a8419551bb09872512ba2f543683",
+      "source_receipt_sha256": "9a17cb7fdb6262b5eaebcf56d4545b57d769137833c889ebf74b1a5bb4f48da0"
+    }
+  ],
+  "invalidated_attempt": "runs/maintenance/2026-11-03-initial-contour-probe",
+  "invalidated_reason": "Initial state omitted from direct-step replay; original outputs preserved",
+  "current_analysis_sha256": "a553c453c3e66aa9843d85366a4c2804018c601651beafe5d2c817bbaf44fa67"
+}

@@ -1,0 +1,246 @@
+{
+  "scope": "Same recorded controls and trajectories; a gate counterfactual is not a new success",
+  "protocol_sha256": "1a187feb8a3178af64d553b04efd73925e76ca279f30f7b11ed8007c6165ed48",
+  "script_sha256": "a167f0a829267a711922eb54662a6f99a88c65fc17992c9fa8fc0fbd46cba44f",
+  "cases": [
+    {
+      "condition": "near_circle",
+      "basic_stop_eligible_frames": 7611,
+      "insufficient_quorum_frames": 2168,
+      "workspace_bound_reject_frames": 7611,
+      "first_basic_stop_eligible": {
+        "frame": 279,
+        "phase": "BRAKE",
+        "true_goal_error_m": 0.019269031134264526,
+        "estimated_nominal_error_m": 0.019359823837200817,
+        "voters": [
+          "agent_00",
+          "agent_05",
+          "agent_10",
+          "agent_11"
+        ],
+        "conditional_workspace_bound_m": 9.28247659174684,
+        "estimated_velocity": [
+          -0.013458394992221226,
+          0.006540046850658714
+        ],
+        "true_velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "final": {
+        "frame": 12000,
+        "phase": "BRAKE",
+        "true_goal_error_m": 0.007721918029763812,
+        "estimated_nominal_error_m": 0.010719007300576906,
+        "voters": [
+          "agent_00",
+          "agent_05",
+          "agent_10",
+          "agent_11"
+        ],
+        "conditional_workspace_bound_m": 11.309893325439752,
+        "estimated_velocity": [
+          -0.017323014757132632,
+          -0.002696669470024275
+        ],
+        "true_velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "all_frozen_trackers_initialized": true,
+      "zero_epoch": {
+        "status": "frozen",
+        "epoch": 1.800000000000001,
+        "supporters": [
+          "agent_00",
+          "agent_05",
+          "agent_10",
+          "agent_11"
+        ],
+        "pre_epoch_contact_samples": 0,
+        "max_pre_epoch_translation": 0.0,
+        "max_pre_epoch_rotation": 0.0,
+        "zero_epoch_valid": true
+      },
+      "raw_receipt_sha256": "0684fd4be92bbd19306799b44deead86fb6979dfaa8776ef4b7d021cb6a729be"
+    },
+    {
+      "condition": "near_l_reference",
+      "basic_stop_eligible_frames": 0,
+      "insufficient_quorum_frames": 0,
+      "workspace_bound_reject_frames": 0,
+      "first_basic_stop_eligible": null,
+      "final": {
+        "frame": 373,
+        "phase": "HOLD",
+        "true_goal_error_m": 0.020115976608926396,
+        "estimated_nominal_error_m": 0.016852612840218002,
+        "voters": [
+          "agent_00",
+          "agent_01",
+          "agent_02",
+          "agent_03",
+          "agent_04",
+          "agent_05",
+          "agent_10"
+        ],
+        "conditional_workspace_bound_m": 0.0716838034603703,
+        "estimated_velocity": [
+          -0.004592714513393601,
+          -0.00033284742571376463
+        ],
+        "true_velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "all_frozen_trackers_initialized": true,
+      "zero_epoch": {
+        "status": "frozen",
+        "epoch": 1.7000000000000008,
+        "supporters": [
+          "agent_00",
+          "agent_01",
+          "agent_02",
+          "agent_03",
+          "agent_04",
+          "agent_05",
+          "agent_10"
+        ],
+        "pre_epoch_contact_samples": 0,
+        "max_pre_epoch_translation": 0.0,
+        "max_pre_epoch_rotation": 0.0,
+        "zero_epoch_valid": true
+      },
+      "raw_receipt_sha256": "03c00bbb0d60805e90b19f9c6666cd06f91d85bd8f46fdd04a5834daf36a69f8"
+    },
+    {
+      "condition": "far_c_open_away_pos0",
+      "basic_stop_eligible_frames": 4494,
+      "insufficient_quorum_frames": 2990,
+      "workspace_bound_reject_frames": 4494,
+      "first_basic_stop_eligible": {
+        "frame": 1336,
+        "phase": "BRAKE",
+        "true_goal_error_m": 0.057539228451417596,
+        "estimated_nominal_error_m": 0.010555443401172248,
+        "voters": [
+          "agent_04",
+          "agent_05",
+          "agent_06",
+          "agent_07"
+        ],
+        "conditional_workspace_bound_m": 0.2979084852361532,
+        "estimated_velocity": [
+          -0.011626922970693522,
+          -0.0016953026432471729
+        ],
+        "true_velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "final": {
+        "frame": 12000,
+        "phase": "BRAKE",
+        "true_goal_error_m": 0.057674318433121034,
+        "estimated_nominal_error_m": 0.011756118559897527,
+        "voters": [
+          "agent_05",
+          "agent_06",
+          "agent_07"
+        ],
+        "conditional_workspace_bound_m": 0.26255508605665595,
+        "estimated_velocity": [
+          0.0031711398498755557,
+          0.019033409880520435
+        ],
+        "true_velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "all_frozen_trackers_initialized": true,
+      "zero_epoch": {
+        "status": "frozen",
+        "epoch": 20.500000000000156,
+        "supporters": [
+          "agent_04",
+          "agent_05",
+          "agent_06",
+          "agent_07"
+        ],
+        "pre_epoch_contact_samples": 0,
+        "max_pre_epoch_translation": 0.0,
+        "max_pre_epoch_rotation": 0.0,
+        "zero_epoch_valid": true
+      },
+      "raw_receipt_sha256": "2f19b1d6c68f9bb6cfb63bcc0158d8e24f3d0a067b50dac137f29599ba86c95f"
+    },
+    {
+      "condition": "far_skew_box_s0_r0_pos0",
+      "basic_stop_eligible_frames": 4582,
+      "insufficient_quorum_frames": 4022,
+      "workspace_bound_reject_frames": 4581,
+      "first_basic_stop_eligible": {
+        "frame": 1738,
+        "phase": "BRAKE",
+        "true_goal_error_m": 0.01865316994774866,
+        "estimated_nominal_error_m": 0.018073494556809254,
+        "voters": [
+          "agent_03",
+          "agent_05",
+          "agent_06"
+        ],
+        "conditional_workspace_bound_m": 0.11314306723131255,
+        "estimated_velocity": [
+          -0.017525496735100055,
+          -0.002364447579319314
+        ],
+        "true_velocity": [
+          -0.007344739238994319,
+          0.0007562900636868238
+        ]
+      },
+      "final": {
+        "frame": 12000,
+        "phase": "BRAKE",
+        "true_goal_error_m": 0.05647457853129744,
+        "estimated_nominal_error_m": 0.004413763769990008,
+        "voters": [
+          "agent_03",
+          "agent_05",
+          "agent_06"
+        ],
+        "conditional_workspace_bound_m": 0.18102455546217586,
+        "estimated_velocity": [
+          -0.010834711650399755,
+          -0.016454919966955986
+        ],
+        "true_velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      "all_frozen_trackers_initialized": true,
+      "zero_epoch": {
+        "status": "frozen",
+        "epoch": 39.49999999999989,
+        "supporters": [
+          "agent_03",
+          "agent_05",
+          "agent_06",
+          "agent_07"
+        ],
+        "pre_epoch_contact_samples": 0,
+        "max_pre_epoch_translation": 0.0,
+        "max_pre_epoch_rotation": 0.0,
+        "zero_epoch_valid": true
+      },
+      "raw_receipt_sha256": "3288300761da9263d9395d8c483af3edb0d965e9afc67dc9c409a158b7d7d13b"
+    }
+  ]
+}

@@ -1,5 +1,7 @@
 # CCTA 2027 实验入口
 
+2026-11-03：[task_reference_v1.json](task_reference_v1.json)固定执行12回合，三组完整完成3/4、3/4、1/4，新参考未通过采用门槛，默认关闭；[结果与停止诊断](../../docs/results/task_reference_v1/README.md)。前置[获取协议](task_reference_acquisition_v1.json)另执行8回合。既有36回合的[部署贡献审计](../../docs/results/deployment_contribution_v1/README.md)没有新增物理回合或新验证集。
+
 [匹配支撑固定筛选](../../docs/results/reference_support_v1/README.md)：8条同输入轨迹已完成；局部大误差减少但未通过团队误差门槛，新增物理回合0，候选默认关闭。
 
 
