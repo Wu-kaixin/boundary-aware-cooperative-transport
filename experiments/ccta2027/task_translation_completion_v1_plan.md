@@ -50,8 +50,10 @@ under runs/research/2026-11-03-task-translation-finalization-v1/.
 3. DONE locally: complete report/CSV/figures generated without overwriting the
    historical 3/4 checkpoint. New compact figure layout preserves the first
    render and receipt. Source and every old raw product remain unchanged.
-4. One fresh final review of this completion-report plus opt-in wiring increment
-   before pushing it. The previous checkpoint review is complete and not repeated.
+4. DONE: one fresh final review of this completion-report plus opt-in wiring
+   increment (4e1bb4c..917b5517), with no Critical/Important/Minor findings.
+   Review: docs/results/task_translation_completion_v1/final_review.md.
+   The previous checkpoint review was not repeated.
 5. Keep all original L/C/skew sustained-feedback FAILs. The all-four results and
    separate position audit justify an exploratory physical question, with no
    automatic adoption. Minimal default-off wiring is implemented; execution and
@@ -96,3 +98,15 @@ reports explicitly separate old replay fingerprints from new engineering checks.
 Ruling: preserve project run receipts and ledgers instead of deleting review
 workspace artifacts — the repository's evidence-preservation rule takes precedence
 over generic skill cleanup. Cost: small local maintenance storage remains.
+
+Final: Ruling: the review leaves physical stopping, real-rotation robustness,
+dynamic safety, final matched deployment contribution, the complete paper and
+exact lock-environment reproduction unjudged — retain every item as unfulfilled;
+the user receives completed replay evidence and a default-off interface, not a
+promoted controller. Cost if later treated as established: unsupported performance
+or reproducibility claims. No findings were declined and no minors were deferred.
+
+Task complete for this publication increment: full core 884 passed / 2 skipped,
+MAS 106 passed, repository health and original-product/source checks PASS,
+independent final review ready for publication. The full research goal remains
+active; the 8-episode physical pilot is the next separate experiment to freeze.

@@ -76,3 +76,7 @@ Cost: exact lock-environment reproducibility remains a declared future check.
 Any exploratory pilot needs its own frozen source, protocol, parameter comparison,
 resource budget and complete outcome reporting. No physical performance claim
 follows from the engineering tests.
+
+Final whole-increment review: 4e1bb4c..917b5517, no findings requiring action.
+`docs/results/task_translation_completion_v1/final_review.md` records its scope.
+Implementation task complete; physical pilot and candidate adoption remain open.
