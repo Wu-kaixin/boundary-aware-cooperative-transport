@@ -1,0 +1,54 @@
+{
+  "scope": "Post-hoc calibration of the offline dwell screen against completed old tasks.\n\nDoes not change the frozen screen, rerun controls, or turn a candidate into a\nphysical success. Original completed cases are selected before reading masks.\n",
+  "selection": "All original task_reference cases with task_completed=True",
+  "script_sha256": "d46f938db505aad98600deb3b43fe41d793b46dc3ea1259406135a9df1d9bbf5",
+  "study_protocol_sha256": "eabd01a86578b5ed1ac97a598c3ca9fd2b0eab1647a7f44a008e03fe8ab07854",
+  "cases": [
+    {
+      "case_id": "near_l_reference_task_reference",
+      "original_task_completed": true,
+      "original_termination": {
+        "frames_run": 373,
+        "max_frames": 12000,
+        "settled": true,
+        "terminated_by": "settled",
+        "settle_frames": 40,
+        "settle_speed": 0.005
+      },
+      "first_hold_frame": 334,
+      "hold_window_frames": 40,
+      "physical_quiet_frames_in_hold": 40,
+      "arms": {
+        "se2_supported": {
+          "total_potential_frames": 30,
+          "potential_frames_in_old_hold": 30,
+          "longest_potential_streak": 9,
+          "first_potential_frame": 334
+        },
+        "translation_supported": {
+          "total_potential_frames": 21,
+          "potential_frames_in_old_hold": 21,
+          "longest_potential_streak": 8,
+          "first_potential_frame": 336
+        },
+        "se2_all_captured": {
+          "total_potential_frames": 39,
+          "potential_frames_in_old_hold": 37,
+          "longest_potential_streak": 21,
+          "first_potential_frame": 332
+        },
+        "translation_all_captured": {
+          "total_potential_frames": 38,
+          "potential_frames_in_old_hold": 38,
+          "longest_potential_streak": 17,
+          "first_potential_frame": 334
+        }
+      },
+      "original_receipt_sha256": "03c00bbb0d60805e90b19f9c6666cd06f91d85bd8f46fdd04a5834daf36a69f8",
+      "replay_summary_sha256": "5757112f01d994bafec0655acef99b17400dca52382c4430c01aa64e0adf7f56",
+      "replay_series_sha256": "c82006c602d68341d23cbc41aa2cd0ed318e37df74df723dd31e358b574112d3"
+    }
+  ],
+  "frozen_screen_modified": false,
+  "new_physical_episodes": 0
+}

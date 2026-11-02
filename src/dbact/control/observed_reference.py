@@ -154,9 +154,7 @@ class ObservedReferenceTracker:
             if len(n) < 8 or self._conditioning(n) <= 1e-3:
                 self.reason = 'translation_unobservable'
                 return None
-            turn = n[:,1]*lever[:,0]-n[:,0]*lever[:,1]
-            design = np.column_stack([n, turn])
-            delta = np.linalg.lstsq(design, residual, rcond=1e-3)[0]
+            delta = self._motion_increment(n, lever, residual)
             translation += delta[:2]
             angle += float(delta[2])
             if np.linalg.norm(delta) <= 1e-6:
@@ -204,6 +202,12 @@ class ObservedReferenceTracker:
                                              len(n), rms, conditioning, angle)
         self.reason = 'accepted'
         return self.last_reading
+
+    def _motion_increment(self, normals, lever, residual):
+        """Default SE(2) solve, unchanged by optional specialized motion models."""
+        turn = normals[:,1]*lever[:,0]-normals[:,0]*lever[:,1]
+        design = np.column_stack([normals, turn])
+        return np.linalg.lstsq(design, residual, rcond=1e-3)[0]
 
     def _geometry_rejection(self, normals, matched_points):
         """Additional opt-in admission by a specialized reference, before commit."""

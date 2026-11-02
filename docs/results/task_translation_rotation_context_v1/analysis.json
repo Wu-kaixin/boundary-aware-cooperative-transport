@@ -1,0 +1,283 @@
+{
+  "scope": "Describe actual yaw in all 12 protected-setting cases and 4 acquisition cases.\n\nEvaluator context only: these reused runs are not new validation. The material\npoint rotation term is not a registration-error or stopping certificate.\n",
+  "script_sha256": "d60f72f4e7e90c52861beab3dbb5ae031d3fd190b8dfc7d5a6ad44a3afcc8b4a",
+  "sources": {
+    "protected_setting_12": {
+      "protocol": "experiments/ccta2027/transport_validation_v1_new_starts.json",
+      "identity": {
+        "schema": "ccta-study-v2",
+        "protocol_sha256": "80e0025fa99899dc67afbe061d58b913e7359acef6fe5da6611623c61a05d7f6",
+        "split": "validation",
+        "source_sha256": "b367dac7065068db2f064081e5a271c7ec1b716279b296bb21077985245c7865",
+        "environment": {
+          "python": "3.12.14",
+          "platform": "Windows-11-10.0.26300-SP0",
+          "executable": "C:\\Users\\kai\\boundary-aware-cooperative-transport\\.venv\\Scripts\\python.exe",
+          "packages": {
+            "numpy": "2.5.4",
+            "scipy": "1.18.1",
+            "shapely": "2.2.0",
+            "PyYAML": "6.0.2",
+            "cvxpy": "1.9.3",
+            "clarabel": "0.11.1",
+            "osqp": "1.1.3",
+            "scs": "3.3.1",
+            "pymunk": "7.3.1",
+            "matplotlib": "3.11.2",
+            "threadpoolctl": "3.7.0"
+          }
+        }
+      }
+    },
+    "initial_task_reference_4": {
+      "protocol": "experiments/ccta2027/task_reference_v1.json",
+      "identity": {
+        "schema": "ccta-study-v2",
+        "protocol_sha256": "1a187feb8a3178af64d553b04efd73925e76ca279f30f7b11ed8007c6165ed48",
+        "split": "development",
+        "source_sha256": "b7f6e0f812320f82a284a4157a85ca1915d0aa9aca99cb63c0508bf035a17f2c",
+        "environment": {
+          "python": "3.12.14",
+          "platform": "Windows-11-10.0.26300-SP0",
+          "executable": "C:\\Users\\kai\\boundary-aware-cooperative-transport\\.venv\\Scripts\\python.exe",
+          "packages": {
+            "numpy": "2.5.4",
+            "scipy": "1.18.1",
+            "shapely": "2.2.0",
+            "PyYAML": "6.0.2",
+            "cvxpy": "1.9.3",
+            "clarabel": "0.11.1",
+            "osqp": "1.1.3",
+            "scs": "3.3.1",
+            "pymunk": "7.3.1",
+            "matplotlib": "3.11.2",
+            "threadpoolctl": "3.7.0"
+          }
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "cohort": "protected_setting_12",
+      "condition": "near_u_tray_s0_r90",
+      "case_id": "near_u_tray_s0_r90_boundary_cvt_candidate",
+      "samples": 272,
+      "final_yaw_deg": 0.0,
+      "peak_absolute_yaw_deg": 0.0,
+      "true_material_point_rotation_term_max_m": 0.0,
+      "true_radius_m": 1.3131447495487991,
+      "original_task_completed": true,
+      "original_endpoint_m": 0.022557255944765105,
+      "receipt_sha256": "2820dcf939fc3f08b43ad3bea4128b93a6ca6b5f3f5239b991823ba9fb48bd92"
+    },
+    {
+      "cohort": "protected_setting_12",
+      "condition": "near_ellipse_parallel",
+      "case_id": "near_ellipse_parallel_boundary_cvt_candidate",
+      "samples": 282,
+      "final_yaw_deg": 0.0,
+      "peak_absolute_yaw_deg": 0.0,
+      "true_material_point_rotation_term_max_m": 0.0,
+      "true_radius_m": 1.065993780435571,
+      "original_task_completed": true,
+      "original_endpoint_m": 0.016571633702319188,
+      "receipt_sha256": "87331f596b8c5df2308e79964a8f46ebb685db6a8900047b9b68749a89e51e2b"
+    },
+    {
+      "cohort": "protected_setting_12",
+      "condition": "near_ellipse_perpendicular",
+      "case_id": "near_ellipse_perpendicular_boundary_cvt_candidate",
+      "samples": 312,
+      "final_yaw_deg": 0.06239895657386207,
+      "peak_absolute_yaw_deg": 0.06239895657386207,
+      "true_material_point_rotation_term_max_m": 0.0011609388490994394,
+      "true_radius_m": 1.0659937804355253,
+      "original_task_completed": true,
+      "original_endpoint_m": 0.0065979263349055855,
+      "receipt_sha256": "6f6bdcdd2f755b06cf02b88f4ce2a88e221bb4b3141d40e31e16561d9a496b04"
+    },
+    {
+      "cohort": "protected_setting_12",
+      "condition": "near_skew_box_s1_r90",
+      "case_id": "near_skew_box_s1_r90_boundary_cvt_candidate",
+      "samples": 277,
+      "final_yaw_deg": -1.5357729562295328,
+      "peak_absolute_yaw_deg": 1.5357729562295328,
+      "true_material_point_rotation_term_max_m": 0.03371112918410281,
+      "true_radius_m": 1.2577140652805694,
+      "original_task_completed": true,
+      "original_endpoint_m": 0.06282094013935524,
+      "receipt_sha256": "bec434c9d4b1925a7d799e50e90b1bcbdb6126050a6a54ccdfa1206f69ce7595"
+    },
+    {
+      "cohort": "protected_setting_12",
+      "condition": "near_circle",
+      "case_id": "near_circle_boundary_cvt_candidate",
+      "samples": 320,
+      "final_yaw_deg": 0.0,
+      "peak_absolute_yaw_deg": 0.0,
+      "true_material_point_rotation_term_max_m": 0.0,
+      "true_radius_m": 0.8101693387314333,
+      "original_task_completed": true,
+      "original_endpoint_m": 0.019148005056892906,
+      "receipt_sha256": "e75770f5c70df3cad533bd0d61cb8274cf5677ef06604ce5b13932ec28b6121b"
+    },
+    {
+      "cohort": "protected_setting_12",
+      "condition": "far_c_open_away_pos0",
+      "case_id": "far_c_open_away_pos0_boundary_cvt_candidate",
+      "samples": 1509,
+      "final_yaw_deg": 2.321416218345224,
+      "peak_absolute_yaw_deg": 2.321416218345224,
+      "true_material_point_rotation_term_max_m": 0.05241228941126911,
+      "true_radius_m": 1.2936966521890678,
+      "original_task_completed": true,
+      "original_endpoint_m": 0.07740908703872568,
+      "receipt_sha256": "ebbf3b6b5e907ff6dea93caf31560b66fd56133f0bff422db0e3bbc1962ec6c5"
+    },
+    {
+      "cohort": "protected_setting_12",
+      "condition": "far_circle_pos0",
+      "case_id": "far_circle_pos0_boundary_cvt_candidate",
+      "samples": 1139,
+      "final_yaw_deg": -0.1327238395709762,
+      "peak_absolute_yaw_deg": 0.1327238395709762,
+      "true_material_point_rotation_term_max_m": 0.0018767309252300957,
+      "true_radius_m": 0.8101693387314484,
+      "original_task_completed": true,
+      "original_endpoint_m": 0.0007788175976591705,
+      "receipt_sha256": "521251ef19f0c1c17bd8010a7327bd6e2caad0d93bbaba31d768878863f783a1"
+    },
+    {
+      "cohort": "protected_setting_12",
+      "condition": "near_rectangle_parallel",
+      "case_id": "near_rectangle_parallel_boundary_cvt_candidate",
+      "samples": 268,
+      "final_yaw_deg": 0.0,
+      "peak_absolute_yaw_deg": 0.0,
+      "true_material_point_rotation_term_max_m": 0.0,
+      "true_radius_m": 1.0355025953613066,
+      "original_task_completed": true,
+      "original_endpoint_m": 0.01281738536822963,
+      "receipt_sha256": "ad97c09b7dd6278d45d7c77dbfc22c28842d852ec79a4a9197d7307febfdf9e7"
+    },
+    {
+      "cohort": "protected_setting_12",
+      "condition": "near_c_open_away",
+      "case_id": "near_c_open_away_boundary_cvt_candidate",
+      "samples": 239,
+      "final_yaw_deg": 0.030328493494742658,
+      "peak_absolute_yaw_deg": 0.07510618259936387,
+      "true_material_point_rotation_term_max_m": 0.0016958423614538455,
+      "true_radius_m": 1.293696652189097,
+      "original_task_completed": true,
+      "original_endpoint_m": 0.03880422431865691,
+      "receipt_sha256": "f829875a57b7db697ae548924c9e1f9e284a296076fe0980d30830a3f680ddc8"
+    },
+    {
+      "cohort": "protected_setting_12",
+      "condition": "far_skew_box_s0_r0_pos0",
+      "case_id": "far_skew_box_s0_r0_pos0_boundary_cvt_candidate",
+      "samples": 1786,
+      "final_yaw_deg": -2.0403697466323423,
+      "peak_absolute_yaw_deg": 3.504109116671831,
+      "true_material_point_rotation_term_max_m": 0.07370703983022794,
+      "true_radius_m": 1.205373574883876,
+      "original_task_completed": false,
+      "original_endpoint_m": 0.1351061190171348,
+      "receipt_sha256": "2868e22a421c35f066497ffdeca4eed48cd83286a6131fea6193d41d08e9732e"
+    },
+    {
+      "cohort": "protected_setting_12",
+      "condition": "far_c_open_away_pos1",
+      "case_id": "far_c_open_away_pos1_boundary_cvt_candidate",
+      "samples": 1017,
+      "final_yaw_deg": 1.9272325149201355,
+      "peak_absolute_yaw_deg": 1.9272325149201355,
+      "true_material_point_rotation_term_max_m": 0.04351344440015699,
+      "true_radius_m": 1.2936966521890965,
+      "original_task_completed": true,
+      "original_endpoint_m": 0.014810838502036293,
+      "receipt_sha256": "1e5c7d43dfcd1a5c6f5bf6c91a46d142dad01f950d0093d31ea4a3dccaed90c8"
+    },
+    {
+      "cohort": "protected_setting_12",
+      "condition": "near_l_reference",
+      "case_id": "near_l_reference_boundary_cvt_candidate",
+      "samples": 394,
+      "final_yaw_deg": 1.3248196143335926,
+      "peak_absolute_yaw_deg": 1.3248196143335926,
+      "true_material_point_rotation_term_max_m": 0.03052206239177783,
+      "true_radius_m": 1.3200471192360912,
+      "original_task_completed": true,
+      "original_endpoint_m": 0.008433050706511073,
+      "receipt_sha256": "52d3210cacfc3b2c3d04b81929b029beebea171e1de0911eeba607708a42864e"
+    },
+    {
+      "cohort": "initial_task_reference_4",
+      "condition": "near_circle",
+      "case_id": "near_circle_task_reference",
+      "samples": 12001,
+      "final_yaw_deg": 0.0,
+      "peak_absolute_yaw_deg": 0.0,
+      "true_material_point_rotation_term_max_m": 0.0,
+      "true_radius_m": 0.8101693387314333,
+      "original_task_completed": false,
+      "original_endpoint_m": 0.007721918029763812,
+      "receipt_sha256": "0684fd4be92bbd19306799b44deead86fb6979dfaa8776ef4b7d021cb6a729be"
+    },
+    {
+      "cohort": "initial_task_reference_4",
+      "condition": "near_l_reference",
+      "case_id": "near_l_reference_task_reference",
+      "samples": 374,
+      "final_yaw_deg": 0.4449200657588623,
+      "peak_absolute_yaw_deg": 0.4449200657588623,
+      "true_material_point_rotation_term_max_m": 0.010250562614781649,
+      "true_radius_m": 1.3200471192360912,
+      "original_task_completed": true,
+      "original_endpoint_m": 0.020115976608926396,
+      "receipt_sha256": "03c00bbb0d60805e90b19f9c6666cd06f91d85bd8f46fdd04a5834daf36a69f8"
+    },
+    {
+      "cohort": "initial_task_reference_4",
+      "condition": "far_c_open_away_pos0",
+      "case_id": "far_c_open_away_pos0_task_reference",
+      "samples": 12001,
+      "final_yaw_deg": 1.9806966139610351,
+      "peak_absolute_yaw_deg": 1.9806966139610351,
+      "true_material_point_rotation_term_max_m": 0.04472044901544861,
+      "true_radius_m": 1.2936966521890678,
+      "original_task_completed": false,
+      "original_endpoint_m": 0.057674318433121034,
+      "receipt_sha256": "2f19b1d6c68f9bb6cfb63bcc0158d8e24f3d0a067b50dac137f29599ba86c95f"
+    },
+    {
+      "cohort": "initial_task_reference_4",
+      "condition": "far_skew_box_s0_r0_pos0",
+      "case_id": "far_skew_box_s0_r0_pos0_task_reference",
+      "samples": 12001,
+      "final_yaw_deg": 1.633763922130858,
+      "peak_absolute_yaw_deg": 1.633763922130858,
+      "true_material_point_rotation_term_max_m": 0.034369532281045306,
+      "true_radius_m": 1.205373574883876,
+      "original_task_completed": false,
+      "original_endpoint_m": 0.05647457853129744,
+      "receipt_sha256": "3288300761da9263d9395d8c483af3edb0d965e9afc67dc9c409a158b7d7d13b"
+    }
+  ],
+  "cohorts": {
+    "protected_setting_12": {
+      "episodes": 12,
+      "max_absolute_yaw_deg": 3.504109116671831,
+      "max_material_point_rotation_term_m": 0.07370703983022794
+    },
+    "initial_task_reference_4": {
+      "episodes": 4,
+      "max_absolute_yaw_deg": 1.9806966139610351,
+      "max_material_point_rotation_term_m": 0.04472044901544861
+    }
+  },
+  "new_physical_episodes": 0
+}

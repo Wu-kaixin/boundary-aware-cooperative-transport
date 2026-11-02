@@ -6,9 +6,9 @@ stop, separately demonstrate the deployment contribution, and finish a
 CCTA2027-compliant paper draft. Address the existing issues first, then continue
 toward the entire goal. This ledger does not narrow that objective.
 
-Status: ACTIVE. Previous completed turn was progress: research and README were
-published as bee74ee / 7da54cc, both platform checks passed. This is the first
-goal-driven continuation. No blocking condition has been established.
+Status: ACTIVE. Previous completed turn was progress: the free-ray diagnostic,
+report and README were published as 3a9dcda / 1eded7c, both platform checks passed
+(872 core tests, two skips on each). No blocking condition has been established.
 
 ## Requirements and current evidence
 
@@ -29,9 +29,29 @@ not produced a reliable common system. Stop adding empirical gates to the same
 biased state. First test whether existing sensor information can constrain the
 unknown center and whether the transform relevant to that set is observable.
 
-Current work: `free_ray_enclosure_v1_design.md` and
-`free_ray_enclosure_v1_plan.md`. They develop a conditional geometric component
-and an observational feasibility audit, not a replacement success criterion.
+Current work: `task_translation_v1_design.md` and `task_translation_v1_plan.md`.
+They test motion-model ambiguity and whether already-captured initial templates
+were discarded unnecessarily, in a fixed four-arm same-input comparison.
+Translation-only yaw is an explicit hypothesis, not a measured zero or a
+rotation-robust stopping certificate. Preserve the free-ray diagnostic results.
+
+Current execution: corrected protocol task_translation_v2.json, exec session
+3893, log runs/maintenance/2026-11-03-task-translation-v2/study.log. Re-poll the
+actual handle; never infer liveness from this note. Original v1 stopped on a
+strict task-vector arithmetic mismatch and is preserved as invalidated, with
+no completed candidate result. Runtime tests now pass 876 with two skips.
+The latest official paper-format check is recorded separately in
+docs/CCTA2027_REQUIREMENTS_CHECK_2026-11-03.md; manuscript scientific completion
+is still unproven and the original full goal remains active.
+
+Publication checkpoint captured at 2026-11-02 19:32:52 UTC:
+docs/results/task_translation_checkpoint_v1/. Three of four conditions have
+complete same-input results; the far-skew condition remains pending. Overall
+screening is INCOMPLETE, with the original sustained-feedback gate already
+failed for L and C. The user requested GitHub upload and README updates, so this
+dated checkpoint is being published without waiting for or altering the live
+run. The fourth case must still be collected; none of these offline results
+establishes a physical repair or completion of the original full goal.
 
 2026-11-03 progress: the frozen four-snapshot audit completed in 147.38 s,
 with zero new physical episodes. All 132 conditional sets contained the true

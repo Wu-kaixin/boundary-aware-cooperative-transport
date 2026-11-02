@@ -1,5 +1,9 @@
 # 结果与证据索引
 
+2026-11-03：[平移任务参考进展快照](task_translation_checkpoint_v1/README.md)发布固定四条件中的三个已完成重放、全部四臂和原始门槛；整体 **INCOMPLETE**，L/C 连续反馈筛选未过，候选未接入控制器。新增物理回合 0。[真实旋转背景](task_translation_rotation_context_v1/README.md)另列既有 12+4 条轨迹，不合并为新验证样本。
+
+2026-11-03：[自由射线信息诊断](free_ray_enclosure_v1/README.md)保留局部收缩 0/128、全队条件收缩 2/4 的负结果；尚未解决旋转歧义和可靠停止。
+
 2026-11-03：[最优参数保护与参考面试验](reference_surface_v1/README.md)：八条相同输入的估计比较，斜箱 MAE 降低 11.30% 而未达 25% 门槛，候选继续关闭；一个新物理基线回合精确复现旧 L 形效果。完整参数、失败判定、原始身份和下一步验收指标分别保留。
 
 2026-11-03：[初始任务参考](task_reference_v1/README.md)固定12回合完成，错误 HOLD 减少但完整完成3/4→1/4，未采用；另有[获取可行性8回合](task_reference_acquisition_v1/README.md)。[独立部署机制审计](deployment_contribution_v1/README.md)重新核验36条既有匹配轨迹，支持覆盖贡献，不支持完成率优势；新增物理回合0。

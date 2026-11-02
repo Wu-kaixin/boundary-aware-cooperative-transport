@@ -1,5 +1,7 @@
 # 数据与原始文件索引
 
+2026-11-03：[平移任务参考进展](results/task_translation_checkpoint_v1/README.md)是带时间戳的 3/4 条件快照，不是完整结论。原始重放、模板、逐帧数组和源码在 `runs/research/2026-11-03-task-translation-v2/`；v1 严格重建检查失败的原件在同级 `2026-11-03-task-translation-v1/`，未被覆盖。旋转背景与停止筛选校准分别在 `runs/maintenance/2026-11-03-task-translation-rotation-context/` 和 `runs/maintenance/2026-11-03-task-translation-v2/`。Git 只保存协议与精简证据，新增物理回合为 0。
+
 2026-11-03：[自由射线包围诊断](results/free_ray_enclosure_v1/README.md)使用四个原采集冻结快照，新增物理回合 0；清理后的测量包、完整 132 份集合、旧停止帧反事实统计和独立源码快照保存在 `runs/research/2026-11-03-free-ray-enclosure-v1/`。局部收缩 0/128，全队收缩 2/4，未作为运行修复采用。
 
 2026-11-03：[保护最优参数的参考面试验](results/reference_surface_v1/README.md)保存八条同输入重放于 `runs/research/2026-11-03-reference-surface-v1/`；一个完整基线复现于 `runs/research/2026-11-03-protected-baseline-reproduction-v1/`。未改旧数据；最优公共参数在 `configs/research/best_known_transport_v1.yaml`，完整来源与 SHA-256 在结果目录。
