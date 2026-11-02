@@ -3,14 +3,17 @@ from __future__ import annotations
 import argparse
 import gc
 import json
+import os
 from pathlib import Path
 import shutil
 import subprocess
 import sys
 import time
-import benchmark_workstation as monitor  # Existing root-env thread budget, before numpy.
+if __name__ == "__main__":
+    for _name in ("OMP_NUM_THREADS", "MKL_NUM_THREADS", "OPENBLAS_NUM_THREADS", "NUMEXPR_NUM_THREADS", "DBACT_CVT_WORKERS"):
+        os.environ[_name] = "1"
 import numpy as np
-from validate_transport_prior import ROOT, guard, read, sha
+from research_io import ROOT, guard, read, sha
 from dbact.control.controller import DBACTParams, _merge_scans
 from dbact.control.observed_reference import ObservedReferenceTracker, rotation
 from dbact_sim.environment import SimulationEnvironment
@@ -32,6 +35,7 @@ def event(action,**data):
 
 
 def command(label,args,seconds=1800):
+    import benchmark_workstation as monitor
     monitor.OUT,monitor.AUDIT=OUT,AUDIT
     result=monitor.run_command(label,args,seconds,monitor.os.environ.copy())
     dump(OUT/(label+'-result.json'),result);event('command',label=label,result=result)
