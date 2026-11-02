@@ -1,0 +1,55 @@
+{
+  "mapping": {
+    "analysis.json": {
+      "source": "artifacts/research/2026-11-01-contact-reinforcement-v1/analysis/analysis.json",
+      "sha256": "43af0beb79784de02a4ba59ffb84b788282ac25c4a37be1d2fa8c94e645a9914"
+    },
+    "all_9_episodes.csv": {
+      "source": "artifacts/research/2026-11-01-contact-reinforcement-v1/analysis/all_9_episodes.csv",
+      "sha256": "27ba02ad2173b8f1ccbe1366b438c81012cf05d653845b5f7060c9d0df9a1e73"
+    },
+    "paired_comparisons.csv": {
+      "source": "artifacts/research/2026-11-01-contact-reinforcement-v1/analysis/paired_comparisons.csv",
+      "sha256": "b0fff07922fe348fbe7a6d3f7531392180b3768b16b7eaeb9567a10510222fc5"
+    },
+    "complete_trajectories.pdf": {
+      "source": "artifacts/research/2026-11-01-contact-reinforcement-v1/analysis/complete_trajectories.pdf",
+      "sha256": "a8b9431fd18c641a7de8fb80cd273b3440feef53ef8a7ada715c489bf5f48573"
+    },
+    "complete_trajectories.svg": {
+      "source": "artifacts/research/2026-11-01-contact-reinforcement-v1/analysis/complete_trajectories.svg",
+      "sha256": "fdc19fc3d3446246d05e6aecce5f0faa4cee35ae8a00a824cc5fd6990c8eeba2"
+    },
+    "complete_trajectories.png": {
+      "source": "artifacts/research/2026-11-01-contact-reinforcement-v1/analysis/complete_trajectories.png",
+      "sha256": "72410bf01f1c2f83939c7e65ea568bd06e7b9bdbc46bae24e31a74d6c64bd50e"
+    },
+    "task_and_contact_timeseries.pdf": {
+      "source": "artifacts/research/2026-11-01-contact-reinforcement-v1/analysis/task_and_contact_timeseries.pdf",
+      "sha256": "06f5dd45d77fce737dbffec5c8fa371a0a9eabfa5736eb42b448cb124474e072"
+    },
+    "task_and_contact_timeseries.svg": {
+      "source": "artifacts/research/2026-11-01-contact-reinforcement-v1/analysis/task_and_contact_timeseries.svg",
+      "sha256": "69bf668e3a2ce2b59de4940d8ebb6b255ea65b2a2377b7f338418eb95657bbcd"
+    },
+    "task_and_contact_timeseries.png": {
+      "source": "artifacts/research/2026-11-01-contact-reinforcement-v1/analysis/task_and_contact_timeseries.png",
+      "sha256": "3ca0255f22a41fc7b09102b9a39878ace0ec317d2fb58a8bb67592af57f28772"
+    },
+    "outcome_diagnosis.json": {
+      "source": "artifacts/research/2026-11-01-contact-reinforcement-v1/outcome_diagnosis.json",
+      "sha256": "1ac392abbc6b91f3e1bf15608c6169461ccb088d6f82ba81782f37ce60f899b9"
+    }
+  },
+  "protocol_sha256": "28005d76d96eef3ec5a2a3b9f016cd4c4a7562538ee385ca608ee9001227cd77",
+  "analysis_sha256": "7f2bfd4f74c26c2a9bb8088a82f4b9a42aa857665a554fde2059445e575b7be9",
+  "statistics": "Three preselected failures, one reused development seed. No reliable success-rate estimate or generalization. Frame/event counts are not independent observations.",
+  "smoothing": "none",
+  "plots": "all recorded samples passed to Matplotlib; no frames treated as independent",
+  "renderer_path_simplification": {
+    "enabled": true,
+    "threshold": 0.111111111111,
+    "matplotlib": "3.11.2"
+  },
+  "captions": "README.md"
+}

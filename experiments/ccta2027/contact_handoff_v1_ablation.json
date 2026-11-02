@@ -1,0 +1,4118 @@
+{
+  "version": "contact-handoff-v1-ablation",
+  "status": "FROZEN_BEFORE_EXECUTION",
+  "scope": "One seed-2 development block, no independent reliability/generalization claim",
+  "question": "Separate the effects of relative pressure allocation and relocation",
+  "run_dir": "runs/research/2026-11-01-contact-handoff-v1/ablation",
+  "cases": [
+    {
+      "case_id": "circle_feedback_fix",
+      "condition_id": "circle",
+      "shape": "circle",
+      "split": "development",
+      "gate": 6,
+      "seed": 2,
+      "frames": 3000,
+      "variant": "boundary_cvt",
+      "config": {
+        "paper": true,
+        "dt": 0.05,
+        "domain": {
+          "xmin": 0.0,
+          "xmax": 8.0,
+          "ymin": 0.0,
+          "ymax": 8.0
+        },
+        "agents": {
+          "count": 16,
+          "layout": "scatter",
+          "center": [
+            4.0,
+            4.0
+          ],
+          "radius_min": 1.670047119236084,
+          "radius_max": 2.4700471192360838,
+          "min_separation": 0.34
+        },
+        "cargoes": [
+          {
+            "id": "cargo_0",
+            "shape": "polygon",
+            "vertices": [
+              [
+                4.810169338731351,
+                4.0
+              ],
+              [
+                4.806268151923554,
+                4.079410481765138
+              ],
+              [
+                4.794602162061728,
+                4.158056197180693
+              ],
+              [
+                4.775283719005521,
+                4.235179745015092
+              ],
+              [
+                4.748498869922099,
+                4.310038383342668
+              ],
+              [
+                4.714505567550224,
+                4.381911182554435
+              ],
+              [
+                4.673631185974366,
+                4.450105968304314
+              ],
+              [
+                4.62626936783331,
+                4.513965987526471
+              ],
+              [
+                4.57287623332636,
+                4.57287623332636
+              ],
+              [
+                4.513965987526471,
+                4.62626936783331
+              ],
+              [
+                4.450105968304314,
+                4.673631185974366
+              ],
+              [
+                4.381911182554435,
+                4.714505567550224
+              ],
+              [
+                4.310038383342668,
+                4.748498869922099
+              ],
+              [
+                4.235179745015092,
+                4.775283719005521
+              ],
+              [
+                4.158056197180693,
+                4.794602162061728
+              ],
+              [
+                4.079410481765138,
+                4.806268151923554
+              ],
+              [
+                4.0,
+                4.810169338731351
+              ],
+              [
+                3.920589518234862,
+                4.806268151923554
+              ],
+              [
+                3.841943802819307,
+                4.794602162061728
+              ],
+              [
+                3.7648202549849086,
+                4.775283719005521
+              ],
+              [
+                3.6899616166573317,
+                4.748498869922099
+              ],
+              [
+                3.6180888174455648,
+                4.714505567550224
+              ],
+              [
+                3.549894031695686,
+                4.673631185974366
+              ],
+              [
+                3.4860340124735294,
+                4.626269367833311
+              ],
+              [
+                3.4271237666736405,
+                4.57287623332636
+              ],
+              [
+                3.3737306321666893,
+                4.513965987526471
+              ],
+              [
+                3.326368814025634,
+                4.450105968304314
+              ],
+              [
+                3.285494432449776,
+                4.381911182554435
+              ],
+              [
+                3.251501130077901,
+                4.310038383342668
+              ],
+              [
+                3.224716280994479,
+                4.235179745015092
+              ],
+              [
+                3.205397837938272,
+                4.158056197180693
+              ],
+              [
+                3.193731848076446,
+                4.079410481765138
+              ],
+              [
+                3.189830661268649,
+                4.0
+              ],
+              [
+                3.1937318480764456,
+                3.920589518234862
+              ],
+              [
+                3.205397837938272,
+                3.841943802819307
+              ],
+              [
+                3.224716280994479,
+                3.7648202549849086
+              ],
+              [
+                3.2515011300779006,
+                3.6899616166573317
+              ],
+              [
+                3.285494432449776,
+                3.6180888174455648
+              ],
+              [
+                3.326368814025634,
+                3.549894031695686
+              ],
+              [
+                3.3737306321666893,
+                3.4860340124735294
+              ],
+              [
+                3.4271237666736405,
+                3.4271237666736405
+              ],
+              [
+                3.486034012473529,
+                3.37373063216669
+              ],
+              [
+                3.549894031695686,
+                3.326368814025634
+              ],
+              [
+                3.6180888174455648,
+                3.285494432449776
+              ],
+              [
+                3.689961616657331,
+                3.251501130077901
+              ],
+              [
+                3.7648202549849086,
+                3.224716280994479
+              ],
+              [
+                3.8419438028193067,
+                3.205397837938272
+              ],
+              [
+                3.920589518234862,
+                3.1937318480764456
+              ],
+              [
+                4.0,
+                3.189830661268649
+              ],
+              [
+                4.079410481765137,
+                3.1937318480764456
+              ],
+              [
+                4.158056197180693,
+                3.205397837938272
+              ],
+              [
+                4.235179745015091,
+                3.224716280994479
+              ],
+              [
+                4.310038383342668,
+                3.251501130077901
+              ],
+              [
+                4.381911182554435,
+                3.285494432449776
+              ],
+              [
+                4.450105968304314,
+                3.326368814025634
+              ],
+              [
+                4.513965987526471,
+                3.3737306321666893
+              ],
+              [
+                4.572876233326359,
+                3.4271237666736405
+              ],
+              [
+                4.62626936783331,
+                3.486034012473529
+              ],
+              [
+                4.673631185974366,
+                3.549894031695686
+              ],
+              [
+                4.714505567550224,
+                3.6180888174455643
+              ],
+              [
+                4.7484988699220985,
+                3.689961616657331
+              ],
+              [
+                4.775283719005521,
+                3.7648202549849086
+              ],
+              [
+                4.794602162061728,
+                3.8419438028193067
+              ],
+              [
+                4.806268151923554,
+                3.920589518234862
+              ]
+            ],
+            "movable": true,
+            "surface_density": 2.0
+          }
+        ],
+        "task": {
+          "mode": "random_constrained",
+          "distance_min": 1.2,
+          "distance_max": 1.2,
+          "wall_margin": 0.35,
+          "tolerance": 0.12,
+          "angle_min_deg": 0.0,
+          "angle_max_deg": 0.0
+        },
+        "controller": {
+          "task_mode": "transport",
+          "sensor_range": 1.2,
+          "ray_count": 72,
+          "range_noise_std": 0.01,
+          "pca_neighbors": 5,
+          "residual_tolerance": 0.03,
+          "min_confidence": 0.15,
+          "comm_range": 1.6,
+          "voxel_size": 0.06,
+          "age_decay": 0.3,
+          "max_voxels_per_object": 320,
+          "motion_compensation": true,
+          "registration_gate": 0.12,
+          "registration_normal_cosine": 0.5,
+          "max_object_speed": 0.25,
+          "object_velocity_filter": 0.35,
+          "density_mode": "offset",
+          "cage_offset": 0.105,
+          "lead_offset": 0.26,
+          "lead_threshold": 0.25,
+          "sigma": 0.2,
+          "base_density": 0.001,
+          "gap_gain": 0.6,
+          "gap_radius": 0.35,
+          "local_radius": 0.8,
+          "grid_resolution": 20,
+          "approach_mass_ratio": 3.0,
+          "redeploy_gap_ratio": 0.15,
+          "robot_radius": 0.13,
+          "delta_max": 0.065,
+          "d_min": 0.28,
+          "gamma_agent": 6.0,
+          "gamma_obj": 8.0,
+          "rho": 0.02,
+          "max_speed": 0.35,
+          "backend": "qp",
+          "object_row_range": 0.6,
+          "object_row_window": 0.28,
+          "max_object_rows": 8,
+          "kp_explore": 0.25,
+          "kp_cage": 0.9,
+          "push_side_threshold": 0.35,
+          "min_push_agents": 4,
+          "contact_band_tolerance": 0.08,
+          "press_margin": null,
+          "press_margin_safety": 1.2,
+          "transport_law": "progress",
+          "transport_reference_speed": 0.055,
+          "transport_kp": 2.4,
+          "transport_ki": 3.0,
+          "transport_effort_max": 0.3,
+          "transport_deadband": 0.05,
+          "brake_gain": 0.3,
+          "convoy_gain": 1.0,
+          "convoy_max": 0.25,
+          "cross_track_gain": 10.0,
+          "cross_track_damping": 12.0,
+          "cross_track_max_deg": 45.0,
+          "cross_track_deadband": 0.02,
+          "cross_track_reference": 0.08,
+          "separation_band": 0.06,
+          "kp_separate": 0.0,
+          "push_share_floor": 0.15,
+          "phase_informed_fraction": 0.55,
+          "phase_map_coverage_min": 0.7,
+          "contact_dwell": 20,
+          "brake_fraction": 0.65,
+          "transport_safety_feedback": true,
+          "dynamic_contact_roles": false,
+          "dynamic_contact_allocation": true,
+          "dynamic_contact_relocation": true
+        },
+        "transport": {
+          "engine": "penalty",
+          "stiffness": 500.0,
+          "damping": 12.0,
+          "friction": 0.6,
+          "tangential_stiffness": 60.0,
+          "ground_friction": 0.6,
+          "gravity": 9.81,
+          "substeps": 4
+        },
+        "render": {
+          "map_agent": "agent_00"
+        },
+        "evaluation": {
+          "contact_radius": 0.42,
+          "j_min": 0.15,
+          "efficiency_min": 0.7,
+          "displacement_gate": 0.1
+        },
+        "g500": {
+          "detect_by": null,
+          "contact_ready_by": null,
+          "transport_by": null,
+          "reach_by": null,
+          "efficiency_min": 0.8,
+          "direction_error_max_deg": 20.0,
+          "cross_track_max": 0.15,
+          "coverage_min": 0.7,
+          "progress_max_ratio": 1.4,
+          "arrival_tolerance": 0.12,
+          "hold_speed_max": 0.02,
+          "yaw_max_deg": 15.0
+        }
+      },
+      "expected_initial_state_sha256": "3d7ca454a451f0f6e15c1faa3531212594071e6148a2093b2659c86d5596ee84",
+      "factors": {
+        "condition": "circle",
+        "shape": "circle",
+        "angle_deg": 0,
+        "geometry_source": {
+          "path": "scripts/run_arbitrary_shape_monte_carlo.py",
+          "sha256": "f35c795d9c6fc42e9138600aebd2e081ec556c9a82f6c770410f579714b61ada",
+          "normalization": "centroid recentered, isotropic equal polygon area"
+        },
+        "area_m2": 2.0587500000000003,
+        "mass_kg": 4.117500000000001,
+        "inertia_kg_m2": 1.3491417315354244,
+        "perimeter_m": 5.088400033654982,
+        "diameter_m": 1.620338677462703,
+        "reach_m": 0.8101693387314333,
+        "vertices": 64,
+        "initial_centroid": [
+          3.999999999999942,
+          3.999999999999943
+        ],
+        "task": {
+          "object_id": "cargo_0",
+          "direction": [
+            1.0,
+            0.0
+          ],
+          "angle_deg": 0.0,
+          "target_distance": 1.2,
+          "start": [
+            3.999999999999942,
+            3.999999999999943
+          ],
+          "goal_point": [
+            5.199999999999942,
+            3.999999999999943
+          ],
+          "tolerance": 0.12,
+          "clearance": 1.3951693387314332,
+          "sampling_attempts": 1
+        },
+        "agent_initial_sha256": "3d7ca454a451f0f6e15c1faa3531212594071e6148a2093b2659c86d5596ee84",
+        "complete_initial_sha256": "89e0049c8c7a5b2ffc7a19e65ab7b049990098cf6057d936fc9b655735654823",
+        "source_case": "circle_boundary_cvt"
+      },
+      "arm": "feedback_fix"
+    },
+    {
+      "case_id": "circle_allocation_only",
+      "condition_id": "circle",
+      "shape": "circle",
+      "split": "development",
+      "gate": 6,
+      "seed": 2,
+      "frames": 3000,
+      "variant": "boundary_cvt",
+      "config": {
+        "paper": true,
+        "dt": 0.05,
+        "domain": {
+          "xmin": 0.0,
+          "xmax": 8.0,
+          "ymin": 0.0,
+          "ymax": 8.0
+        },
+        "agents": {
+          "count": 16,
+          "layout": "scatter",
+          "center": [
+            4.0,
+            4.0
+          ],
+          "radius_min": 1.670047119236084,
+          "radius_max": 2.4700471192360838,
+          "min_separation": 0.34
+        },
+        "cargoes": [
+          {
+            "id": "cargo_0",
+            "shape": "polygon",
+            "vertices": [
+              [
+                4.810169338731351,
+                4.0
+              ],
+              [
+                4.806268151923554,
+                4.079410481765138
+              ],
+              [
+                4.794602162061728,
+                4.158056197180693
+              ],
+              [
+                4.775283719005521,
+                4.235179745015092
+              ],
+              [
+                4.748498869922099,
+                4.310038383342668
+              ],
+              [
+                4.714505567550224,
+                4.381911182554435
+              ],
+              [
+                4.673631185974366,
+                4.450105968304314
+              ],
+              [
+                4.62626936783331,
+                4.513965987526471
+              ],
+              [
+                4.57287623332636,
+                4.57287623332636
+              ],
+              [
+                4.513965987526471,
+                4.62626936783331
+              ],
+              [
+                4.450105968304314,
+                4.673631185974366
+              ],
+              [
+                4.381911182554435,
+                4.714505567550224
+              ],
+              [
+                4.310038383342668,
+                4.748498869922099
+              ],
+              [
+                4.235179745015092,
+                4.775283719005521
+              ],
+              [
+                4.158056197180693,
+                4.794602162061728
+              ],
+              [
+                4.079410481765138,
+                4.806268151923554
+              ],
+              [
+                4.0,
+                4.810169338731351
+              ],
+              [
+                3.920589518234862,
+                4.806268151923554
+              ],
+              [
+                3.841943802819307,
+                4.794602162061728
+              ],
+              [
+                3.7648202549849086,
+                4.775283719005521
+              ],
+              [
+                3.6899616166573317,
+                4.748498869922099
+              ],
+              [
+                3.6180888174455648,
+                4.714505567550224
+              ],
+              [
+                3.549894031695686,
+                4.673631185974366
+              ],
+              [
+                3.4860340124735294,
+                4.626269367833311
+              ],
+              [
+                3.4271237666736405,
+                4.57287623332636
+              ],
+              [
+                3.3737306321666893,
+                4.513965987526471
+              ],
+              [
+                3.326368814025634,
+                4.450105968304314
+              ],
+              [
+                3.285494432449776,
+                4.381911182554435
+              ],
+              [
+                3.251501130077901,
+                4.310038383342668
+              ],
+              [
+                3.224716280994479,
+                4.235179745015092
+              ],
+              [
+                3.205397837938272,
+                4.158056197180693
+              ],
+              [
+                3.193731848076446,
+                4.079410481765138
+              ],
+              [
+                3.189830661268649,
+                4.0
+              ],
+              [
+                3.1937318480764456,
+                3.920589518234862
+              ],
+              [
+                3.205397837938272,
+                3.841943802819307
+              ],
+              [
+                3.224716280994479,
+                3.7648202549849086
+              ],
+              [
+                3.2515011300779006,
+                3.6899616166573317
+              ],
+              [
+                3.285494432449776,
+                3.6180888174455648
+              ],
+              [
+                3.326368814025634,
+                3.549894031695686
+              ],
+              [
+                3.3737306321666893,
+                3.4860340124735294
+              ],
+              [
+                3.4271237666736405,
+                3.4271237666736405
+              ],
+              [
+                3.486034012473529,
+                3.37373063216669
+              ],
+              [
+                3.549894031695686,
+                3.326368814025634
+              ],
+              [
+                3.6180888174455648,
+                3.285494432449776
+              ],
+              [
+                3.689961616657331,
+                3.251501130077901
+              ],
+              [
+                3.7648202549849086,
+                3.224716280994479
+              ],
+              [
+                3.8419438028193067,
+                3.205397837938272
+              ],
+              [
+                3.920589518234862,
+                3.1937318480764456
+              ],
+              [
+                4.0,
+                3.189830661268649
+              ],
+              [
+                4.079410481765137,
+                3.1937318480764456
+              ],
+              [
+                4.158056197180693,
+                3.205397837938272
+              ],
+              [
+                4.235179745015091,
+                3.224716280994479
+              ],
+              [
+                4.310038383342668,
+                3.251501130077901
+              ],
+              [
+                4.381911182554435,
+                3.285494432449776
+              ],
+              [
+                4.450105968304314,
+                3.326368814025634
+              ],
+              [
+                4.513965987526471,
+                3.3737306321666893
+              ],
+              [
+                4.572876233326359,
+                3.4271237666736405
+              ],
+              [
+                4.62626936783331,
+                3.486034012473529
+              ],
+              [
+                4.673631185974366,
+                3.549894031695686
+              ],
+              [
+                4.714505567550224,
+                3.6180888174455643
+              ],
+              [
+                4.7484988699220985,
+                3.689961616657331
+              ],
+              [
+                4.775283719005521,
+                3.7648202549849086
+              ],
+              [
+                4.794602162061728,
+                3.8419438028193067
+              ],
+              [
+                4.806268151923554,
+                3.920589518234862
+              ]
+            ],
+            "movable": true,
+            "surface_density": 2.0
+          }
+        ],
+        "task": {
+          "mode": "random_constrained",
+          "distance_min": 1.2,
+          "distance_max": 1.2,
+          "wall_margin": 0.35,
+          "tolerance": 0.12,
+          "angle_min_deg": 0.0,
+          "angle_max_deg": 0.0
+        },
+        "controller": {
+          "task_mode": "transport",
+          "sensor_range": 1.2,
+          "ray_count": 72,
+          "range_noise_std": 0.01,
+          "pca_neighbors": 5,
+          "residual_tolerance": 0.03,
+          "min_confidence": 0.15,
+          "comm_range": 1.6,
+          "voxel_size": 0.06,
+          "age_decay": 0.3,
+          "max_voxels_per_object": 320,
+          "motion_compensation": true,
+          "registration_gate": 0.12,
+          "registration_normal_cosine": 0.5,
+          "max_object_speed": 0.25,
+          "object_velocity_filter": 0.35,
+          "density_mode": "offset",
+          "cage_offset": 0.105,
+          "lead_offset": 0.26,
+          "lead_threshold": 0.25,
+          "sigma": 0.2,
+          "base_density": 0.001,
+          "gap_gain": 0.6,
+          "gap_radius": 0.35,
+          "local_radius": 0.8,
+          "grid_resolution": 20,
+          "approach_mass_ratio": 3.0,
+          "redeploy_gap_ratio": 0.15,
+          "robot_radius": 0.13,
+          "delta_max": 0.065,
+          "d_min": 0.28,
+          "gamma_agent": 6.0,
+          "gamma_obj": 8.0,
+          "rho": 0.02,
+          "max_speed": 0.35,
+          "backend": "qp",
+          "object_row_range": 0.6,
+          "object_row_window": 0.28,
+          "max_object_rows": 8,
+          "kp_explore": 0.25,
+          "kp_cage": 0.9,
+          "push_side_threshold": 0.35,
+          "min_push_agents": 4,
+          "contact_band_tolerance": 0.08,
+          "press_margin": null,
+          "press_margin_safety": 1.2,
+          "transport_law": "progress",
+          "transport_reference_speed": 0.055,
+          "transport_kp": 2.4,
+          "transport_ki": 3.0,
+          "transport_effort_max": 0.3,
+          "transport_deadband": 0.05,
+          "brake_gain": 0.3,
+          "convoy_gain": 1.0,
+          "convoy_max": 0.25,
+          "cross_track_gain": 10.0,
+          "cross_track_damping": 12.0,
+          "cross_track_max_deg": 45.0,
+          "cross_track_deadband": 0.02,
+          "cross_track_reference": 0.08,
+          "separation_band": 0.06,
+          "kp_separate": 0.0,
+          "push_share_floor": 0.15,
+          "phase_informed_fraction": 0.55,
+          "phase_map_coverage_min": 0.7,
+          "contact_dwell": 20,
+          "brake_fraction": 0.65,
+          "transport_safety_feedback": true,
+          "dynamic_contact_roles": true,
+          "dynamic_contact_allocation": true,
+          "dynamic_contact_relocation": false
+        },
+        "transport": {
+          "engine": "penalty",
+          "stiffness": 500.0,
+          "damping": 12.0,
+          "friction": 0.6,
+          "tangential_stiffness": 60.0,
+          "ground_friction": 0.6,
+          "gravity": 9.81,
+          "substeps": 4
+        },
+        "render": {
+          "map_agent": "agent_00"
+        },
+        "evaluation": {
+          "contact_radius": 0.42,
+          "j_min": 0.15,
+          "efficiency_min": 0.7,
+          "displacement_gate": 0.1
+        },
+        "g500": {
+          "detect_by": null,
+          "contact_ready_by": null,
+          "transport_by": null,
+          "reach_by": null,
+          "efficiency_min": 0.8,
+          "direction_error_max_deg": 20.0,
+          "cross_track_max": 0.15,
+          "coverage_min": 0.7,
+          "progress_max_ratio": 1.4,
+          "arrival_tolerance": 0.12,
+          "hold_speed_max": 0.02,
+          "yaw_max_deg": 15.0
+        }
+      },
+      "expected_initial_state_sha256": "3d7ca454a451f0f6e15c1faa3531212594071e6148a2093b2659c86d5596ee84",
+      "factors": {
+        "condition": "circle",
+        "shape": "circle",
+        "angle_deg": 0,
+        "geometry_source": {
+          "path": "scripts/run_arbitrary_shape_monte_carlo.py",
+          "sha256": "f35c795d9c6fc42e9138600aebd2e081ec556c9a82f6c770410f579714b61ada",
+          "normalization": "centroid recentered, isotropic equal polygon area"
+        },
+        "area_m2": 2.0587500000000003,
+        "mass_kg": 4.117500000000001,
+        "inertia_kg_m2": 1.3491417315354244,
+        "perimeter_m": 5.088400033654982,
+        "diameter_m": 1.620338677462703,
+        "reach_m": 0.8101693387314333,
+        "vertices": 64,
+        "initial_centroid": [
+          3.999999999999942,
+          3.999999999999943
+        ],
+        "task": {
+          "object_id": "cargo_0",
+          "direction": [
+            1.0,
+            0.0
+          ],
+          "angle_deg": 0.0,
+          "target_distance": 1.2,
+          "start": [
+            3.999999999999942,
+            3.999999999999943
+          ],
+          "goal_point": [
+            5.199999999999942,
+            3.999999999999943
+          ],
+          "tolerance": 0.12,
+          "clearance": 1.3951693387314332,
+          "sampling_attempts": 1
+        },
+        "agent_initial_sha256": "3d7ca454a451f0f6e15c1faa3531212594071e6148a2093b2659c86d5596ee84",
+        "complete_initial_sha256": "89e0049c8c7a5b2ffc7a19e65ab7b049990098cf6057d936fc9b655735654823",
+        "source_case": "circle_boundary_cvt"
+      },
+      "arm": "allocation_only"
+    },
+    {
+      "case_id": "circle_relocation_only",
+      "condition_id": "circle",
+      "shape": "circle",
+      "split": "development",
+      "gate": 6,
+      "seed": 2,
+      "frames": 3000,
+      "variant": "boundary_cvt",
+      "config": {
+        "paper": true,
+        "dt": 0.05,
+        "domain": {
+          "xmin": 0.0,
+          "xmax": 8.0,
+          "ymin": 0.0,
+          "ymax": 8.0
+        },
+        "agents": {
+          "count": 16,
+          "layout": "scatter",
+          "center": [
+            4.0,
+            4.0
+          ],
+          "radius_min": 1.670047119236084,
+          "radius_max": 2.4700471192360838,
+          "min_separation": 0.34
+        },
+        "cargoes": [
+          {
+            "id": "cargo_0",
+            "shape": "polygon",
+            "vertices": [
+              [
+                4.810169338731351,
+                4.0
+              ],
+              [
+                4.806268151923554,
+                4.079410481765138
+              ],
+              [
+                4.794602162061728,
+                4.158056197180693
+              ],
+              [
+                4.775283719005521,
+                4.235179745015092
+              ],
+              [
+                4.748498869922099,
+                4.310038383342668
+              ],
+              [
+                4.714505567550224,
+                4.381911182554435
+              ],
+              [
+                4.673631185974366,
+                4.450105968304314
+              ],
+              [
+                4.62626936783331,
+                4.513965987526471
+              ],
+              [
+                4.57287623332636,
+                4.57287623332636
+              ],
+              [
+                4.513965987526471,
+                4.62626936783331
+              ],
+              [
+                4.450105968304314,
+                4.673631185974366
+              ],
+              [
+                4.381911182554435,
+                4.714505567550224
+              ],
+              [
+                4.310038383342668,
+                4.748498869922099
+              ],
+              [
+                4.235179745015092,
+                4.775283719005521
+              ],
+              [
+                4.158056197180693,
+                4.794602162061728
+              ],
+              [
+                4.079410481765138,
+                4.806268151923554
+              ],
+              [
+                4.0,
+                4.810169338731351
+              ],
+              [
+                3.920589518234862,
+                4.806268151923554
+              ],
+              [
+                3.841943802819307,
+                4.794602162061728
+              ],
+              [
+                3.7648202549849086,
+                4.775283719005521
+              ],
+              [
+                3.6899616166573317,
+                4.748498869922099
+              ],
+              [
+                3.6180888174455648,
+                4.714505567550224
+              ],
+              [
+                3.549894031695686,
+                4.673631185974366
+              ],
+              [
+                3.4860340124735294,
+                4.626269367833311
+              ],
+              [
+                3.4271237666736405,
+                4.57287623332636
+              ],
+              [
+                3.3737306321666893,
+                4.513965987526471
+              ],
+              [
+                3.326368814025634,
+                4.450105968304314
+              ],
+              [
+                3.285494432449776,
+                4.381911182554435
+              ],
+              [
+                3.251501130077901,
+                4.310038383342668
+              ],
+              [
+                3.224716280994479,
+                4.235179745015092
+              ],
+              [
+                3.205397837938272,
+                4.158056197180693
+              ],
+              [
+                3.193731848076446,
+                4.079410481765138
+              ],
+              [
+                3.189830661268649,
+                4.0
+              ],
+              [
+                3.1937318480764456,
+                3.920589518234862
+              ],
+              [
+                3.205397837938272,
+                3.841943802819307
+              ],
+              [
+                3.224716280994479,
+                3.7648202549849086
+              ],
+              [
+                3.2515011300779006,
+                3.6899616166573317
+              ],
+              [
+                3.285494432449776,
+                3.6180888174455648
+              ],
+              [
+                3.326368814025634,
+                3.549894031695686
+              ],
+              [
+                3.3737306321666893,
+                3.4860340124735294
+              ],
+              [
+                3.4271237666736405,
+                3.4271237666736405
+              ],
+              [
+                3.486034012473529,
+                3.37373063216669
+              ],
+              [
+                3.549894031695686,
+                3.326368814025634
+              ],
+              [
+                3.6180888174455648,
+                3.285494432449776
+              ],
+              [
+                3.689961616657331,
+                3.251501130077901
+              ],
+              [
+                3.7648202549849086,
+                3.224716280994479
+              ],
+              [
+                3.8419438028193067,
+                3.205397837938272
+              ],
+              [
+                3.920589518234862,
+                3.1937318480764456
+              ],
+              [
+                4.0,
+                3.189830661268649
+              ],
+              [
+                4.079410481765137,
+                3.1937318480764456
+              ],
+              [
+                4.158056197180693,
+                3.205397837938272
+              ],
+              [
+                4.235179745015091,
+                3.224716280994479
+              ],
+              [
+                4.310038383342668,
+                3.251501130077901
+              ],
+              [
+                4.381911182554435,
+                3.285494432449776
+              ],
+              [
+                4.450105968304314,
+                3.326368814025634
+              ],
+              [
+                4.513965987526471,
+                3.3737306321666893
+              ],
+              [
+                4.572876233326359,
+                3.4271237666736405
+              ],
+              [
+                4.62626936783331,
+                3.486034012473529
+              ],
+              [
+                4.673631185974366,
+                3.549894031695686
+              ],
+              [
+                4.714505567550224,
+                3.6180888174455643
+              ],
+              [
+                4.7484988699220985,
+                3.689961616657331
+              ],
+              [
+                4.775283719005521,
+                3.7648202549849086
+              ],
+              [
+                4.794602162061728,
+                3.8419438028193067
+              ],
+              [
+                4.806268151923554,
+                3.920589518234862
+              ]
+            ],
+            "movable": true,
+            "surface_density": 2.0
+          }
+        ],
+        "task": {
+          "mode": "random_constrained",
+          "distance_min": 1.2,
+          "distance_max": 1.2,
+          "wall_margin": 0.35,
+          "tolerance": 0.12,
+          "angle_min_deg": 0.0,
+          "angle_max_deg": 0.0
+        },
+        "controller": {
+          "task_mode": "transport",
+          "sensor_range": 1.2,
+          "ray_count": 72,
+          "range_noise_std": 0.01,
+          "pca_neighbors": 5,
+          "residual_tolerance": 0.03,
+          "min_confidence": 0.15,
+          "comm_range": 1.6,
+          "voxel_size": 0.06,
+          "age_decay": 0.3,
+          "max_voxels_per_object": 320,
+          "motion_compensation": true,
+          "registration_gate": 0.12,
+          "registration_normal_cosine": 0.5,
+          "max_object_speed": 0.25,
+          "object_velocity_filter": 0.35,
+          "density_mode": "offset",
+          "cage_offset": 0.105,
+          "lead_offset": 0.26,
+          "lead_threshold": 0.25,
+          "sigma": 0.2,
+          "base_density": 0.001,
+          "gap_gain": 0.6,
+          "gap_radius": 0.35,
+          "local_radius": 0.8,
+          "grid_resolution": 20,
+          "approach_mass_ratio": 3.0,
+          "redeploy_gap_ratio": 0.15,
+          "robot_radius": 0.13,
+          "delta_max": 0.065,
+          "d_min": 0.28,
+          "gamma_agent": 6.0,
+          "gamma_obj": 8.0,
+          "rho": 0.02,
+          "max_speed": 0.35,
+          "backend": "qp",
+          "object_row_range": 0.6,
+          "object_row_window": 0.28,
+          "max_object_rows": 8,
+          "kp_explore": 0.25,
+          "kp_cage": 0.9,
+          "push_side_threshold": 0.35,
+          "min_push_agents": 4,
+          "contact_band_tolerance": 0.08,
+          "press_margin": null,
+          "press_margin_safety": 1.2,
+          "transport_law": "progress",
+          "transport_reference_speed": 0.055,
+          "transport_kp": 2.4,
+          "transport_ki": 3.0,
+          "transport_effort_max": 0.3,
+          "transport_deadband": 0.05,
+          "brake_gain": 0.3,
+          "convoy_gain": 1.0,
+          "convoy_max": 0.25,
+          "cross_track_gain": 10.0,
+          "cross_track_damping": 12.0,
+          "cross_track_max_deg": 45.0,
+          "cross_track_deadband": 0.02,
+          "cross_track_reference": 0.08,
+          "separation_band": 0.06,
+          "kp_separate": 0.0,
+          "push_share_floor": 0.15,
+          "phase_informed_fraction": 0.55,
+          "phase_map_coverage_min": 0.7,
+          "contact_dwell": 20,
+          "brake_fraction": 0.65,
+          "transport_safety_feedback": true,
+          "dynamic_contact_roles": true,
+          "dynamic_contact_allocation": false,
+          "dynamic_contact_relocation": true
+        },
+        "transport": {
+          "engine": "penalty",
+          "stiffness": 500.0,
+          "damping": 12.0,
+          "friction": 0.6,
+          "tangential_stiffness": 60.0,
+          "ground_friction": 0.6,
+          "gravity": 9.81,
+          "substeps": 4
+        },
+        "render": {
+          "map_agent": "agent_00"
+        },
+        "evaluation": {
+          "contact_radius": 0.42,
+          "j_min": 0.15,
+          "efficiency_min": 0.7,
+          "displacement_gate": 0.1
+        },
+        "g500": {
+          "detect_by": null,
+          "contact_ready_by": null,
+          "transport_by": null,
+          "reach_by": null,
+          "efficiency_min": 0.8,
+          "direction_error_max_deg": 20.0,
+          "cross_track_max": 0.15,
+          "coverage_min": 0.7,
+          "progress_max_ratio": 1.4,
+          "arrival_tolerance": 0.12,
+          "hold_speed_max": 0.02,
+          "yaw_max_deg": 15.0
+        }
+      },
+      "expected_initial_state_sha256": "3d7ca454a451f0f6e15c1faa3531212594071e6148a2093b2659c86d5596ee84",
+      "factors": {
+        "condition": "circle",
+        "shape": "circle",
+        "angle_deg": 0,
+        "geometry_source": {
+          "path": "scripts/run_arbitrary_shape_monte_carlo.py",
+          "sha256": "f35c795d9c6fc42e9138600aebd2e081ec556c9a82f6c770410f579714b61ada",
+          "normalization": "centroid recentered, isotropic equal polygon area"
+        },
+        "area_m2": 2.0587500000000003,
+        "mass_kg": 4.117500000000001,
+        "inertia_kg_m2": 1.3491417315354244,
+        "perimeter_m": 5.088400033654982,
+        "diameter_m": 1.620338677462703,
+        "reach_m": 0.8101693387314333,
+        "vertices": 64,
+        "initial_centroid": [
+          3.999999999999942,
+          3.999999999999943
+        ],
+        "task": {
+          "object_id": "cargo_0",
+          "direction": [
+            1.0,
+            0.0
+          ],
+          "angle_deg": 0.0,
+          "target_distance": 1.2,
+          "start": [
+            3.999999999999942,
+            3.999999999999943
+          ],
+          "goal_point": [
+            5.199999999999942,
+            3.999999999999943
+          ],
+          "tolerance": 0.12,
+          "clearance": 1.3951693387314332,
+          "sampling_attempts": 1
+        },
+        "agent_initial_sha256": "3d7ca454a451f0f6e15c1faa3531212594071e6148a2093b2659c86d5596ee84",
+        "complete_initial_sha256": "89e0049c8c7a5b2ffc7a19e65ab7b049990098cf6057d936fc9b655735654823",
+        "source_case": "circle_boundary_cvt"
+      },
+      "arm": "relocation_only"
+    },
+    {
+      "case_id": "circle_joint_v1",
+      "condition_id": "circle",
+      "shape": "circle",
+      "split": "development",
+      "gate": 6,
+      "seed": 2,
+      "frames": 3000,
+      "variant": "boundary_cvt",
+      "config": {
+        "paper": true,
+        "dt": 0.05,
+        "domain": {
+          "xmin": 0.0,
+          "xmax": 8.0,
+          "ymin": 0.0,
+          "ymax": 8.0
+        },
+        "agents": {
+          "count": 16,
+          "layout": "scatter",
+          "center": [
+            4.0,
+            4.0
+          ],
+          "radius_min": 1.670047119236084,
+          "radius_max": 2.4700471192360838,
+          "min_separation": 0.34
+        },
+        "cargoes": [
+          {
+            "id": "cargo_0",
+            "shape": "polygon",
+            "vertices": [
+              [
+                4.810169338731351,
+                4.0
+              ],
+              [
+                4.806268151923554,
+                4.079410481765138
+              ],
+              [
+                4.794602162061728,
+                4.158056197180693
+              ],
+              [
+                4.775283719005521,
+                4.235179745015092
+              ],
+              [
+                4.748498869922099,
+                4.310038383342668
+              ],
+              [
+                4.714505567550224,
+                4.381911182554435
+              ],
+              [
+                4.673631185974366,
+                4.450105968304314
+              ],
+              [
+                4.62626936783331,
+                4.513965987526471
+              ],
+              [
+                4.57287623332636,
+                4.57287623332636
+              ],
+              [
+                4.513965987526471,
+                4.62626936783331
+              ],
+              [
+                4.450105968304314,
+                4.673631185974366
+              ],
+              [
+                4.381911182554435,
+                4.714505567550224
+              ],
+              [
+                4.310038383342668,
+                4.748498869922099
+              ],
+              [
+                4.235179745015092,
+                4.775283719005521
+              ],
+              [
+                4.158056197180693,
+                4.794602162061728
+              ],
+              [
+                4.079410481765138,
+                4.806268151923554
+              ],
+              [
+                4.0,
+                4.810169338731351
+              ],
+              [
+                3.920589518234862,
+                4.806268151923554
+              ],
+              [
+                3.841943802819307,
+                4.794602162061728
+              ],
+              [
+                3.7648202549849086,
+                4.775283719005521
+              ],
+              [
+                3.6899616166573317,
+                4.748498869922099
+              ],
+              [
+                3.6180888174455648,
+                4.714505567550224
+              ],
+              [
+                3.549894031695686,
+                4.673631185974366
+              ],
+              [
+                3.4860340124735294,
+                4.626269367833311
+              ],
+              [
+                3.4271237666736405,
+                4.57287623332636
+              ],
+              [
+                3.3737306321666893,
+                4.513965987526471
+              ],
+              [
+                3.326368814025634,
+                4.450105968304314
+              ],
+              [
+                3.285494432449776,
+                4.381911182554435
+              ],
+              [
+                3.251501130077901,
+                4.310038383342668
+              ],
+              [
+                3.224716280994479,
+                4.235179745015092
+              ],
+              [
+                3.205397837938272,
+                4.158056197180693
+              ],
+              [
+                3.193731848076446,
+                4.079410481765138
+              ],
+              [
+                3.189830661268649,
+                4.0
+              ],
+              [
+                3.1937318480764456,
+                3.920589518234862
+              ],
+              [
+                3.205397837938272,
+                3.841943802819307
+              ],
+              [
+                3.224716280994479,
+                3.7648202549849086
+              ],
+              [
+                3.2515011300779006,
+                3.6899616166573317
+              ],
+              [
+                3.285494432449776,
+                3.6180888174455648
+              ],
+              [
+                3.326368814025634,
+                3.549894031695686
+              ],
+              [
+                3.3737306321666893,
+                3.4860340124735294
+              ],
+              [
+                3.4271237666736405,
+                3.4271237666736405
+              ],
+              [
+                3.486034012473529,
+                3.37373063216669
+              ],
+              [
+                3.549894031695686,
+                3.326368814025634
+              ],
+              [
+                3.6180888174455648,
+                3.285494432449776
+              ],
+              [
+                3.689961616657331,
+                3.251501130077901
+              ],
+              [
+                3.7648202549849086,
+                3.224716280994479
+              ],
+              [
+                3.8419438028193067,
+                3.205397837938272
+              ],
+              [
+                3.920589518234862,
+                3.1937318480764456
+              ],
+              [
+                4.0,
+                3.189830661268649
+              ],
+              [
+                4.079410481765137,
+                3.1937318480764456
+              ],
+              [
+                4.158056197180693,
+                3.205397837938272
+              ],
+              [
+                4.235179745015091,
+                3.224716280994479
+              ],
+              [
+                4.310038383342668,
+                3.251501130077901
+              ],
+              [
+                4.381911182554435,
+                3.285494432449776
+              ],
+              [
+                4.450105968304314,
+                3.326368814025634
+              ],
+              [
+                4.513965987526471,
+                3.3737306321666893
+              ],
+              [
+                4.572876233326359,
+                3.4271237666736405
+              ],
+              [
+                4.62626936783331,
+                3.486034012473529
+              ],
+              [
+                4.673631185974366,
+                3.549894031695686
+              ],
+              [
+                4.714505567550224,
+                3.6180888174455643
+              ],
+              [
+                4.7484988699220985,
+                3.689961616657331
+              ],
+              [
+                4.775283719005521,
+                3.7648202549849086
+              ],
+              [
+                4.794602162061728,
+                3.8419438028193067
+              ],
+              [
+                4.806268151923554,
+                3.920589518234862
+              ]
+            ],
+            "movable": true,
+            "surface_density": 2.0
+          }
+        ],
+        "task": {
+          "mode": "random_constrained",
+          "distance_min": 1.2,
+          "distance_max": 1.2,
+          "wall_margin": 0.35,
+          "tolerance": 0.12,
+          "angle_min_deg": 0.0,
+          "angle_max_deg": 0.0
+        },
+        "controller": {
+          "task_mode": "transport",
+          "sensor_range": 1.2,
+          "ray_count": 72,
+          "range_noise_std": 0.01,
+          "pca_neighbors": 5,
+          "residual_tolerance": 0.03,
+          "min_confidence": 0.15,
+          "comm_range": 1.6,
+          "voxel_size": 0.06,
+          "age_decay": 0.3,
+          "max_voxels_per_object": 320,
+          "motion_compensation": true,
+          "registration_gate": 0.12,
+          "registration_normal_cosine": 0.5,
+          "max_object_speed": 0.25,
+          "object_velocity_filter": 0.35,
+          "density_mode": "offset",
+          "cage_offset": 0.105,
+          "lead_offset": 0.26,
+          "lead_threshold": 0.25,
+          "sigma": 0.2,
+          "base_density": 0.001,
+          "gap_gain": 0.6,
+          "gap_radius": 0.35,
+          "local_radius": 0.8,
+          "grid_resolution": 20,
+          "approach_mass_ratio": 3.0,
+          "redeploy_gap_ratio": 0.15,
+          "robot_radius": 0.13,
+          "delta_max": 0.065,
+          "d_min": 0.28,
+          "gamma_agent": 6.0,
+          "gamma_obj": 8.0,
+          "rho": 0.02,
+          "max_speed": 0.35,
+          "backend": "qp",
+          "object_row_range": 0.6,
+          "object_row_window": 0.28,
+          "max_object_rows": 8,
+          "kp_explore": 0.25,
+          "kp_cage": 0.9,
+          "push_side_threshold": 0.35,
+          "min_push_agents": 4,
+          "contact_band_tolerance": 0.08,
+          "press_margin": null,
+          "press_margin_safety": 1.2,
+          "transport_law": "progress",
+          "transport_reference_speed": 0.055,
+          "transport_kp": 2.4,
+          "transport_ki": 3.0,
+          "transport_effort_max": 0.3,
+          "transport_deadband": 0.05,
+          "brake_gain": 0.3,
+          "convoy_gain": 1.0,
+          "convoy_max": 0.25,
+          "cross_track_gain": 10.0,
+          "cross_track_damping": 12.0,
+          "cross_track_max_deg": 45.0,
+          "cross_track_deadband": 0.02,
+          "cross_track_reference": 0.08,
+          "separation_band": 0.06,
+          "kp_separate": 0.0,
+          "push_share_floor": 0.15,
+          "phase_informed_fraction": 0.55,
+          "phase_map_coverage_min": 0.7,
+          "contact_dwell": 20,
+          "brake_fraction": 0.65,
+          "transport_safety_feedback": true,
+          "dynamic_contact_roles": true,
+          "dynamic_contact_allocation": true,
+          "dynamic_contact_relocation": true
+        },
+        "transport": {
+          "engine": "penalty",
+          "stiffness": 500.0,
+          "damping": 12.0,
+          "friction": 0.6,
+          "tangential_stiffness": 60.0,
+          "ground_friction": 0.6,
+          "gravity": 9.81,
+          "substeps": 4
+        },
+        "render": {
+          "map_agent": "agent_00"
+        },
+        "evaluation": {
+          "contact_radius": 0.42,
+          "j_min": 0.15,
+          "efficiency_min": 0.7,
+          "displacement_gate": 0.1
+        },
+        "g500": {
+          "detect_by": null,
+          "contact_ready_by": null,
+          "transport_by": null,
+          "reach_by": null,
+          "efficiency_min": 0.8,
+          "direction_error_max_deg": 20.0,
+          "cross_track_max": 0.15,
+          "coverage_min": 0.7,
+          "progress_max_ratio": 1.4,
+          "arrival_tolerance": 0.12,
+          "hold_speed_max": 0.02,
+          "yaw_max_deg": 15.0
+        }
+      },
+      "expected_initial_state_sha256": "3d7ca454a451f0f6e15c1faa3531212594071e6148a2093b2659c86d5596ee84",
+      "factors": {
+        "condition": "circle",
+        "shape": "circle",
+        "angle_deg": 0,
+        "geometry_source": {
+          "path": "scripts/run_arbitrary_shape_monte_carlo.py",
+          "sha256": "f35c795d9c6fc42e9138600aebd2e081ec556c9a82f6c770410f579714b61ada",
+          "normalization": "centroid recentered, isotropic equal polygon area"
+        },
+        "area_m2": 2.0587500000000003,
+        "mass_kg": 4.117500000000001,
+        "inertia_kg_m2": 1.3491417315354244,
+        "perimeter_m": 5.088400033654982,
+        "diameter_m": 1.620338677462703,
+        "reach_m": 0.8101693387314333,
+        "vertices": 64,
+        "initial_centroid": [
+          3.999999999999942,
+          3.999999999999943
+        ],
+        "task": {
+          "object_id": "cargo_0",
+          "direction": [
+            1.0,
+            0.0
+          ],
+          "angle_deg": 0.0,
+          "target_distance": 1.2,
+          "start": [
+            3.999999999999942,
+            3.999999999999943
+          ],
+          "goal_point": [
+            5.199999999999942,
+            3.999999999999943
+          ],
+          "tolerance": 0.12,
+          "clearance": 1.3951693387314332,
+          "sampling_attempts": 1
+        },
+        "agent_initial_sha256": "3d7ca454a451f0f6e15c1faa3531212594071e6148a2093b2659c86d5596ee84",
+        "complete_initial_sha256": "89e0049c8c7a5b2ffc7a19e65ab7b049990098cf6057d936fc9b655735654823",
+        "source_case": "circle_boundary_cvt"
+      },
+      "arm": "joint_v1"
+    },
+    {
+      "case_id": "rectangle_parallel_feedback_fix",
+      "condition_id": "rectangle_parallel",
+      "shape": "rectangle",
+      "split": "development",
+      "gate": 6,
+      "seed": 2,
+      "frames": 3000,
+      "variant": "boundary_cvt",
+      "config": {
+        "paper": true,
+        "dt": 0.05,
+        "domain": {
+          "xmin": 0.0,
+          "xmax": 8.0,
+          "ymin": 0.0,
+          "ymax": 8.0
+        },
+        "agents": {
+          "count": 16,
+          "layout": "scatter",
+          "center": [
+            4.0,
+            4.0
+          ],
+          "radius_min": 1.670047119236084,
+          "radius_max": 2.4700471192360838,
+          "min_separation": 0.34
+        },
+        "cargoes": [
+          {
+            "id": "cargo_0",
+            "shape": "polygon",
+            "vertices": [
+              [
+                3.1715979237109604,
+                3.37869844278322
+              ],
+              [
+                4.828402076289049,
+                3.37869844278322
+              ],
+              [
+                4.828402076289049,
+                4.621301557216787
+              ],
+              [
+                3.1715979237109604,
+                4.621301557216787
+              ]
+            ],
+            "movable": true,
+            "surface_density": 2.0
+          }
+        ],
+        "task": {
+          "mode": "random_constrained",
+          "distance_min": 1.2,
+          "distance_max": 1.2,
+          "wall_margin": 0.35,
+          "tolerance": 0.12,
+          "angle_min_deg": 0.0,
+          "angle_max_deg": 0.0
+        },
+        "controller": {
+          "task_mode": "transport",
+          "sensor_range": 1.2,
+          "ray_count": 72,
+          "range_noise_std": 0.01,
+          "pca_neighbors": 5,
+          "residual_tolerance": 0.03,
+          "min_confidence": 0.15,
+          "comm_range": 1.6,
+          "voxel_size": 0.06,
+          "age_decay": 0.3,
+          "max_voxels_per_object": 320,
+          "motion_compensation": true,
+          "registration_gate": 0.12,
+          "registration_normal_cosine": 0.5,
+          "max_object_speed": 0.25,
+          "object_velocity_filter": 0.35,
+          "density_mode": "offset",
+          "cage_offset": 0.105,
+          "lead_offset": 0.26,
+          "lead_threshold": 0.25,
+          "sigma": 0.2,
+          "base_density": 0.001,
+          "gap_gain": 0.6,
+          "gap_radius": 0.35,
+          "local_radius": 0.8,
+          "grid_resolution": 20,
+          "approach_mass_ratio": 3.0,
+          "redeploy_gap_ratio": 0.15,
+          "robot_radius": 0.13,
+          "delta_max": 0.065,
+          "d_min": 0.28,
+          "gamma_agent": 6.0,
+          "gamma_obj": 8.0,
+          "rho": 0.02,
+          "max_speed": 0.35,
+          "backend": "qp",
+          "object_row_range": 0.6,
+          "object_row_window": 0.28,
+          "max_object_rows": 8,
+          "kp_explore": 0.25,
+          "kp_cage": 0.9,
+          "push_side_threshold": 0.35,
+          "min_push_agents": 4,
+          "contact_band_tolerance": 0.08,
+          "press_margin": null,
+          "press_margin_safety": 1.2,
+          "transport_law": "progress",
+          "transport_reference_speed": 0.055,
+          "transport_kp": 2.4,
+          "transport_ki": 3.0,
+          "transport_effort_max": 0.3,
+          "transport_deadband": 0.05,
+          "brake_gain": 0.3,
+          "convoy_gain": 1.0,
+          "convoy_max": 0.25,
+          "cross_track_gain": 10.0,
+          "cross_track_damping": 12.0,
+          "cross_track_max_deg": 45.0,
+          "cross_track_deadband": 0.02,
+          "cross_track_reference": 0.08,
+          "separation_band": 0.06,
+          "kp_separate": 0.0,
+          "push_share_floor": 0.15,
+          "phase_informed_fraction": 0.55,
+          "phase_map_coverage_min": 0.7,
+          "contact_dwell": 20,
+          "brake_fraction": 0.65,
+          "transport_safety_feedback": true,
+          "dynamic_contact_roles": false,
+          "dynamic_contact_allocation": true,
+          "dynamic_contact_relocation": true
+        },
+        "transport": {
+          "engine": "penalty",
+          "stiffness": 500.0,
+          "damping": 12.0,
+          "friction": 0.6,
+          "tangential_stiffness": 60.0,
+          "ground_friction": 0.6,
+          "gravity": 9.81,
+          "substeps": 4
+        },
+        "render": {
+          "map_agent": "agent_00"
+        },
+        "evaluation": {
+          "contact_radius": 0.42,
+          "j_min": 0.15,
+          "efficiency_min": 0.7,
+          "displacement_gate": 0.1
+        },
+        "g500": {
+          "detect_by": null,
+          "contact_ready_by": null,
+          "transport_by": null,
+          "reach_by": null,
+          "efficiency_min": 0.8,
+          "direction_error_max_deg": 20.0,
+          "cross_track_max": 0.15,
+          "coverage_min": 0.7,
+          "progress_max_ratio": 1.4,
+          "arrival_tolerance": 0.12,
+          "hold_speed_max": 0.02,
+          "yaw_max_deg": 15.0
+        }
+      },
+      "expected_initial_state_sha256": "3d7ca454a451f0f6e15c1faa3531212594071e6148a2093b2659c86d5596ee84",
+      "factors": {
+        "condition": "rectangle_parallel",
+        "shape": "rectangle",
+        "angle_deg": 0,
+        "geometry_source": {
+          "path": "configs/sim/theorem/static_rectangle_n16_oracle.yaml",
+          "sha256": "e81e1b03eab6dee0a6fcd7fb027fb3dcb6437798018ea63feaf78cdd6924168e",
+          "normalization": "centroid recentered, isotropic equal polygon area"
+        },
+        "area_m2": 2.0587500000000007,
+        "mass_kg": 4.1175000000000015,
+        "inertia_kg_m2": 1.471684570312501,
+        "perimeter_m": 5.798814534023313,
+        "diameter_m": 2.0710051907226115,
+        "reach_m": 1.0355025953613066,
+        "vertices": 4,
+        "initial_centroid": [
+          4.000000000000005,
+          4.000000000000004
+        ],
+        "task": {
+          "object_id": "cargo_0",
+          "direction": [
+            1.0,
+            0.0
+          ],
+          "angle_deg": 0.0,
+          "target_distance": 1.2,
+          "start": [
+            4.000000000000005,
+            4.000000000000004
+          ],
+          "goal_point": [
+            5.2000000000000055,
+            4.000000000000004
+          ],
+          "tolerance": 0.12,
+          "clearance": 1.6205025953613066,
+          "sampling_attempts": 1
+        },
+        "agent_initial_sha256": "3d7ca454a451f0f6e15c1faa3531212594071e6148a2093b2659c86d5596ee84",
+        "complete_initial_sha256": "7a1c4d2742a7616b9a87f45ffaa316146c22301b14e4886fedb98585c524ce8e",
+        "source_case": "rectangle_parallel_boundary_cvt"
+      },
+      "arm": "feedback_fix"
+    },
+    {
+      "case_id": "rectangle_parallel_allocation_only",
+      "condition_id": "rectangle_parallel",
+      "shape": "rectangle",
+      "split": "development",
+      "gate": 6,
+      "seed": 2,
+      "frames": 3000,
+      "variant": "boundary_cvt",
+      "config": {
+        "paper": true,
+        "dt": 0.05,
+        "domain": {
+          "xmin": 0.0,
+          "xmax": 8.0,
+          "ymin": 0.0,
+          "ymax": 8.0
+        },
+        "agents": {
+          "count": 16,
+          "layout": "scatter",
+          "center": [
+            4.0,
+            4.0
+          ],
+          "radius_min": 1.670047119236084,
+          "radius_max": 2.4700471192360838,
+          "min_separation": 0.34
+        },
+        "cargoes": [
+          {
+            "id": "cargo_0",
+            "shape": "polygon",
+            "vertices": [
+              [
+                3.1715979237109604,
+                3.37869844278322
+              ],
+              [
+                4.828402076289049,
+                3.37869844278322
+              ],
+              [
+                4.828402076289049,
+                4.621301557216787
+              ],
+              [
+                3.1715979237109604,
+                4.621301557216787
+              ]
+            ],
+            "movable": true,
+            "surface_density": 2.0
+          }
+        ],
+        "task": {
+          "mode": "random_constrained",
+          "distance_min": 1.2,
+          "distance_max": 1.2,
+          "wall_margin": 0.35,
+          "tolerance": 0.12,
+          "angle_min_deg": 0.0,
+          "angle_max_deg": 0.0
+        },
+        "controller": {
+          "task_mode": "transport",
+          "sensor_range": 1.2,
+          "ray_count": 72,
+          "range_noise_std": 0.01,
+          "pca_neighbors": 5,
+          "residual_tolerance": 0.03,
+          "min_confidence": 0.15,
+          "comm_range": 1.6,
+          "voxel_size": 0.06,
+          "age_decay": 0.3,
+          "max_voxels_per_object": 320,
+          "motion_compensation": true,
+          "registration_gate": 0.12,
+          "registration_normal_cosine": 0.5,
+          "max_object_speed": 0.25,
+          "object_velocity_filter": 0.35,
+          "density_mode": "offset",
+          "cage_offset": 0.105,
+          "lead_offset": 0.26,
+          "lead_threshold": 0.25,
+          "sigma": 0.2,
+          "base_density": 0.001,
+          "gap_gain": 0.6,
+          "gap_radius": 0.35,
+          "local_radius": 0.8,
+          "grid_resolution": 20,
+          "approach_mass_ratio": 3.0,
+          "redeploy_gap_ratio": 0.15,
+          "robot_radius": 0.13,
+          "delta_max": 0.065,
+          "d_min": 0.28,
+          "gamma_agent": 6.0,
+          "gamma_obj": 8.0,
+          "rho": 0.02,
+          "max_speed": 0.35,
+          "backend": "qp",
+          "object_row_range": 0.6,
+          "object_row_window": 0.28,
+          "max_object_rows": 8,
+          "kp_explore": 0.25,
+          "kp_cage": 0.9,
+          "push_side_threshold": 0.35,
+          "min_push_agents": 4,
+          "contact_band_tolerance": 0.08,
+          "press_margin": null,
+          "press_margin_safety": 1.2,
+          "transport_law": "progress",
+          "transport_reference_speed": 0.055,
+          "transport_kp": 2.4,
+          "transport_ki": 3.0,
+          "transport_effort_max": 0.3,
+          "transport_deadband": 0.05,
+          "brake_gain": 0.3,
+          "convoy_gain": 1.0,
+          "convoy_max": 0.25,
+          "cross_track_gain": 10.0,
+          "cross_track_damping": 12.0,
+          "cross_track_max_deg": 45.0,
+          "cross_track_deadband": 0.02,
+          "cross_track_reference": 0.08,
+          "separation_band": 0.06,
+          "kp_separate": 0.0,
+          "push_share_floor": 0.15,
+          "phase_informed_fraction": 0.55,
+          "phase_map_coverage_min": 0.7,
+          "contact_dwell": 20,
+          "brake_fraction": 0.65,
+          "transport_safety_feedback": true,
+          "dynamic_contact_roles": true,
+          "dynamic_contact_allocation": true,
+          "dynamic_contact_relocation": false
+        },
+        "transport": {
+          "engine": "penalty",
+          "stiffness": 500.0,
+          "damping": 12.0,
+          "friction": 0.6,
+          "tangential_stiffness": 60.0,
+          "ground_friction": 0.6,
+          "gravity": 9.81,
+          "substeps": 4
+        },
+        "render": {
+          "map_agent": "agent_00"
+        },
+        "evaluation": {
+          "contact_radius": 0.42,
+          "j_min": 0.15,
+          "efficiency_min": 0.7,
+          "displacement_gate": 0.1
+        },
+        "g500": {
+          "detect_by": null,
+          "contact_ready_by": null,
+          "transport_by": null,
+          "reach_by": null,
+          "efficiency_min": 0.8,
+          "direction_error_max_deg": 20.0,
+          "cross_track_max": 0.15,
+          "coverage_min": 0.7,
+          "progress_max_ratio": 1.4,
+          "arrival_tolerance": 0.12,
+          "hold_speed_max": 0.02,
+          "yaw_max_deg": 15.0
+        }
+      },
+      "expected_initial_state_sha256": "3d7ca454a451f0f6e15c1faa3531212594071e6148a2093b2659c86d5596ee84",
+      "factors": {
+        "condition": "rectangle_parallel",
+        "shape": "rectangle",
+        "angle_deg": 0,
+        "geometry_source": {
+          "path": "configs/sim/theorem/static_rectangle_n16_oracle.yaml",
+          "sha256": "e81e1b03eab6dee0a6fcd7fb027fb3dcb6437798018ea63feaf78cdd6924168e",
+          "normalization": "centroid recentered, isotropic equal polygon area"
+        },
+        "area_m2": 2.0587500000000007,
+        "mass_kg": 4.1175000000000015,
+        "inertia_kg_m2": 1.471684570312501,
+        "perimeter_m": 5.798814534023313,
+        "diameter_m": 2.0710051907226115,
+        "reach_m": 1.0355025953613066,
+        "vertices": 4,
+        "initial_centroid": [
+          4.000000000000005,
+          4.000000000000004
+        ],
+        "task": {
+          "object_id": "cargo_0",
+          "direction": [
+            1.0,
+            0.0
+          ],
+          "angle_deg": 0.0,
+          "target_distance": 1.2,
+          "start": [
+            4.000000000000005,
+            4.000000000000004
+          ],
+          "goal_point": [
+            5.2000000000000055,
+            4.000000000000004
+          ],
+          "tolerance": 0.12,
+          "clearance": 1.6205025953613066,
+          "sampling_attempts": 1
+        },
+        "agent_initial_sha256": "3d7ca454a451f0f6e15c1faa3531212594071e6148a2093b2659c86d5596ee84",
+        "complete_initial_sha256": "7a1c4d2742a7616b9a87f45ffaa316146c22301b14e4886fedb98585c524ce8e",
+        "source_case": "rectangle_parallel_boundary_cvt"
+      },
+      "arm": "allocation_only"
+    },
+    {
+      "case_id": "rectangle_parallel_relocation_only",
+      "condition_id": "rectangle_parallel",
+      "shape": "rectangle",
+      "split": "development",
+      "gate": 6,
+      "seed": 2,
+      "frames": 3000,
+      "variant": "boundary_cvt",
+      "config": {
+        "paper": true,
+        "dt": 0.05,
+        "domain": {
+          "xmin": 0.0,
+          "xmax": 8.0,
+          "ymin": 0.0,
+          "ymax": 8.0
+        },
+        "agents": {
+          "count": 16,
+          "layout": "scatter",
+          "center": [
+            4.0,
+            4.0
+          ],
+          "radius_min": 1.670047119236084,
+          "radius_max": 2.4700471192360838,
+          "min_separation": 0.34
+        },
+        "cargoes": [
+          {
+            "id": "cargo_0",
+            "shape": "polygon",
+            "vertices": [
+              [
+                3.1715979237109604,
+                3.37869844278322
+              ],
+              [
+                4.828402076289049,
+                3.37869844278322
+              ],
+              [
+                4.828402076289049,
+                4.621301557216787
+              ],
+              [
+                3.1715979237109604,
+                4.621301557216787
+              ]
+            ],
+            "movable": true,
+            "surface_density": 2.0
+          }
+        ],
+        "task": {
+          "mode": "random_constrained",
+          "distance_min": 1.2,
+          "distance_max": 1.2,
+          "wall_margin": 0.35,
+          "tolerance": 0.12,
+          "angle_min_deg": 0.0,
+          "angle_max_deg": 0.0
+        },
+        "controller": {
+          "task_mode": "transport",
+          "sensor_range": 1.2,
+          "ray_count": 72,
+          "range_noise_std": 0.01,
+          "pca_neighbors": 5,
+          "residual_tolerance": 0.03,
+          "min_confidence": 0.15,
+          "comm_range": 1.6,
+          "voxel_size": 0.06,
+          "age_decay": 0.3,
+          "max_voxels_per_object": 320,
+          "motion_compensation": true,
+          "registration_gate": 0.12,
+          "registration_normal_cosine": 0.5,
+          "max_object_speed": 0.25,
+          "object_velocity_filter": 0.35,
+          "density_mode": "offset",
+          "cage_offset": 0.105,
+          "lead_offset": 0.26,
+          "lead_threshold": 0.25,
+          "sigma": 0.2,
+          "base_density": 0.001,
+          "gap_gain": 0.6,
+          "gap_radius": 0.35,
+          "local_radius": 0.8,
+          "grid_resolution": 20,
+          "approach_mass_ratio": 3.0,
+          "redeploy_gap_ratio": 0.15,
+          "robot_radius": 0.13,
+          "delta_max": 0.065,
+          "d_min": 0.28,
+          "gamma_agent": 6.0,
+          "gamma_obj": 8.0,
+          "rho": 0.02,
+          "max_speed": 0.35,
+          "backend": "qp",
+          "object_row_range": 0.6,
+          "object_row_window": 0.28,
+          "max_object_rows": 8,
+          "kp_explore": 0.25,
+          "kp_cage": 0.9,
+          "push_side_threshold": 0.35,
+          "min_push_agents": 4,
+          "contact_band_tolerance": 0.08,
+          "press_margin": null,
+          "press_margin_safety": 1.2,
+          "transport_law": "progress",
+          "transport_reference_speed": 0.055,
+          "transport_kp": 2.4,
+          "transport_ki": 3.0,
+          "transport_effort_max": 0.3,
+          "transport_deadband": 0.05,
+          "brake_gain": 0.3,
+          "convoy_gain": 1.0,
+          "convoy_max": 0.25,
+          "cross_track_gain": 10.0,
+          "cross_track_damping": 12.0,
+          "cross_track_max_deg": 45.0,
+          "cross_track_deadband": 0.02,
+          "cross_track_reference": 0.08,
+          "separation_band": 0.06,
+          "kp_separate": 0.0,
+          "push_share_floor": 0.15,
+          "phase_informed_fraction": 0.55,
+          "phase_map_coverage_min": 0.7,
+          "contact_dwell": 20,
+          "brake_fraction": 0.65,
+          "transport_safety_feedback": true,
+          "dynamic_contact_roles": true,
+          "dynamic_contact_allocation": false,
+          "dynamic_contact_relocation": true
+        },
+        "transport": {
+          "engine": "penalty",
+          "stiffness": 500.0,
+          "damping": 12.0,
+          "friction": 0.6,
+          "tangential_stiffness": 60.0,
+          "ground_friction": 0.6,
+          "gravity": 9.81,
+          "substeps": 4
+        },
+        "render": {
+          "map_agent": "agent_00"
+        },
+        "evaluation": {
+          "contact_radius": 0.42,
+          "j_min": 0.15,
+          "efficiency_min": 0.7,
+          "displacement_gate": 0.1
+        },
+        "g500": {
+          "detect_by": null,
+          "contact_ready_by": null,
+          "transport_by": null,
+          "reach_by": null,
+          "efficiency_min": 0.8,
+          "direction_error_max_deg": 20.0,
+          "cross_track_max": 0.15,
+          "coverage_min": 0.7,
+          "progress_max_ratio": 1.4,
+          "arrival_tolerance": 0.12,
+          "hold_speed_max": 0.02,
+          "yaw_max_deg": 15.0
+        }
+      },
+      "expected_initial_state_sha256": "3d7ca454a451f0f6e15c1faa3531212594071e6148a2093b2659c86d5596ee84",
+      "factors": {
+        "condition": "rectangle_parallel",
+        "shape": "rectangle",
+        "angle_deg": 0,
+        "geometry_source": {
+          "path": "configs/sim/theorem/static_rectangle_n16_oracle.yaml",
+          "sha256": "e81e1b03eab6dee0a6fcd7fb027fb3dcb6437798018ea63feaf78cdd6924168e",
+          "normalization": "centroid recentered, isotropic equal polygon area"
+        },
+        "area_m2": 2.0587500000000007,
+        "mass_kg": 4.1175000000000015,
+        "inertia_kg_m2": 1.471684570312501,
+        "perimeter_m": 5.798814534023313,
+        "diameter_m": 2.0710051907226115,
+        "reach_m": 1.0355025953613066,
+        "vertices": 4,
+        "initial_centroid": [
+          4.000000000000005,
+          4.000000000000004
+        ],
+        "task": {
+          "object_id": "cargo_0",
+          "direction": [
+            1.0,
+            0.0
+          ],
+          "angle_deg": 0.0,
+          "target_distance": 1.2,
+          "start": [
+            4.000000000000005,
+            4.000000000000004
+          ],
+          "goal_point": [
+            5.2000000000000055,
+            4.000000000000004
+          ],
+          "tolerance": 0.12,
+          "clearance": 1.6205025953613066,
+          "sampling_attempts": 1
+        },
+        "agent_initial_sha256": "3d7ca454a451f0f6e15c1faa3531212594071e6148a2093b2659c86d5596ee84",
+        "complete_initial_sha256": "7a1c4d2742a7616b9a87f45ffaa316146c22301b14e4886fedb98585c524ce8e",
+        "source_case": "rectangle_parallel_boundary_cvt"
+      },
+      "arm": "relocation_only"
+    },
+    {
+      "case_id": "rectangle_parallel_joint_v1",
+      "condition_id": "rectangle_parallel",
+      "shape": "rectangle",
+      "split": "development",
+      "gate": 6,
+      "seed": 2,
+      "frames": 3000,
+      "variant": "boundary_cvt",
+      "config": {
+        "paper": true,
+        "dt": 0.05,
+        "domain": {
+          "xmin": 0.0,
+          "xmax": 8.0,
+          "ymin": 0.0,
+          "ymax": 8.0
+        },
+        "agents": {
+          "count": 16,
+          "layout": "scatter",
+          "center": [
+            4.0,
+            4.0
+          ],
+          "radius_min": 1.670047119236084,
+          "radius_max": 2.4700471192360838,
+          "min_separation": 0.34
+        },
+        "cargoes": [
+          {
+            "id": "cargo_0",
+            "shape": "polygon",
+            "vertices": [
+              [
+                3.1715979237109604,
+                3.37869844278322
+              ],
+              [
+                4.828402076289049,
+                3.37869844278322
+              ],
+              [
+                4.828402076289049,
+                4.621301557216787
+              ],
+              [
+                3.1715979237109604,
+                4.621301557216787
+              ]
+            ],
+            "movable": true,
+            "surface_density": 2.0
+          }
+        ],
+        "task": {
+          "mode": "random_constrained",
+          "distance_min": 1.2,
+          "distance_max": 1.2,
+          "wall_margin": 0.35,
+          "tolerance": 0.12,
+          "angle_min_deg": 0.0,
+          "angle_max_deg": 0.0
+        },
+        "controller": {
+          "task_mode": "transport",
+          "sensor_range": 1.2,
+          "ray_count": 72,
+          "range_noise_std": 0.01,
+          "pca_neighbors": 5,
+          "residual_tolerance": 0.03,
+          "min_confidence": 0.15,
+          "comm_range": 1.6,
+          "voxel_size": 0.06,
+          "age_decay": 0.3,
+          "max_voxels_per_object": 320,
+          "motion_compensation": true,
+          "registration_gate": 0.12,
+          "registration_normal_cosine": 0.5,
+          "max_object_speed": 0.25,
+          "object_velocity_filter": 0.35,
+          "density_mode": "offset",
+          "cage_offset": 0.105,
+          "lead_offset": 0.26,
+          "lead_threshold": 0.25,
+          "sigma": 0.2,
+          "base_density": 0.001,
+          "gap_gain": 0.6,
+          "gap_radius": 0.35,
+          "local_radius": 0.8,
+          "grid_resolution": 20,
+          "approach_mass_ratio": 3.0,
+          "redeploy_gap_ratio": 0.15,
+          "robot_radius": 0.13,
+          "delta_max": 0.065,
+          "d_min": 0.28,
+          "gamma_agent": 6.0,
+          "gamma_obj": 8.0,
+          "rho": 0.02,
+          "max_speed": 0.35,
+          "backend": "qp",
+          "object_row_range": 0.6,
+          "object_row_window": 0.28,
+          "max_object_rows": 8,
+          "kp_explore": 0.25,
+          "kp_cage": 0.9,
+          "push_side_threshold": 0.35,
+          "min_push_agents": 4,
+          "contact_band_tolerance": 0.08,
+          "press_margin": null,
+          "press_margin_safety": 1.2,
+          "transport_law": "progress",
+          "transport_reference_speed": 0.055,
+          "transport_kp": 2.4,
+          "transport_ki": 3.0,
+          "transport_effort_max": 0.3,
+          "transport_deadband": 0.05,
+          "brake_gain": 0.3,
+          "convoy_gain": 1.0,
+          "convoy_max": 0.25,
+          "cross_track_gain": 10.0,
+          "cross_track_damping": 12.0,
+          "cross_track_max_deg": 45.0,
+          "cross_track_deadband": 0.02,
+          "cross_track_reference": 0.08,
+          "separation_band": 0.06,
+          "kp_separate": 0.0,
+          "push_share_floor": 0.15,
+          "phase_informed_fraction": 0.55,
+          "phase_map_coverage_min": 0.7,
+          "contact_dwell": 20,
+          "brake_fraction": 0.65,
+          "transport_safety_feedback": true,
+          "dynamic_contact_roles": true,
+          "dynamic_contact_allocation": true,
+          "dynamic_contact_relocation": true
+        },
+        "transport": {
+          "engine": "penalty",
+          "stiffness": 500.0,
+          "damping": 12.0,
+          "friction": 0.6,
+          "tangential_stiffness": 60.0,
+          "ground_friction": 0.6,
+          "gravity": 9.81,
+          "substeps": 4
+        },
+        "render": {
+          "map_agent": "agent_00"
+        },
+        "evaluation": {
+          "contact_radius": 0.42,
+          "j_min": 0.15,
+          "efficiency_min": 0.7,
+          "displacement_gate": 0.1
+        },
+        "g500": {
+          "detect_by": null,
+          "contact_ready_by": null,
+          "transport_by": null,
+          "reach_by": null,
+          "efficiency_min": 0.8,
+          "direction_error_max_deg": 20.0,
+          "cross_track_max": 0.15,
+          "coverage_min": 0.7,
+          "progress_max_ratio": 1.4,
+          "arrival_tolerance": 0.12,
+          "hold_speed_max": 0.02,
+          "yaw_max_deg": 15.0
+        }
+      },
+      "expected_initial_state_sha256": "3d7ca454a451f0f6e15c1faa3531212594071e6148a2093b2659c86d5596ee84",
+      "factors": {
+        "condition": "rectangle_parallel",
+        "shape": "rectangle",
+        "angle_deg": 0,
+        "geometry_source": {
+          "path": "configs/sim/theorem/static_rectangle_n16_oracle.yaml",
+          "sha256": "e81e1b03eab6dee0a6fcd7fb027fb3dcb6437798018ea63feaf78cdd6924168e",
+          "normalization": "centroid recentered, isotropic equal polygon area"
+        },
+        "area_m2": 2.0587500000000007,
+        "mass_kg": 4.1175000000000015,
+        "inertia_kg_m2": 1.471684570312501,
+        "perimeter_m": 5.798814534023313,
+        "diameter_m": 2.0710051907226115,
+        "reach_m": 1.0355025953613066,
+        "vertices": 4,
+        "initial_centroid": [
+          4.000000000000005,
+          4.000000000000004
+        ],
+        "task": {
+          "object_id": "cargo_0",
+          "direction": [
+            1.0,
+            0.0
+          ],
+          "angle_deg": 0.0,
+          "target_distance": 1.2,
+          "start": [
+            4.000000000000005,
+            4.000000000000004
+          ],
+          "goal_point": [
+            5.2000000000000055,
+            4.000000000000004
+          ],
+          "tolerance": 0.12,
+          "clearance": 1.6205025953613066,
+          "sampling_attempts": 1
+        },
+        "agent_initial_sha256": "3d7ca454a451f0f6e15c1faa3531212594071e6148a2093b2659c86d5596ee84",
+        "complete_initial_sha256": "7a1c4d2742a7616b9a87f45ffaa316146c22301b14e4886fedb98585c524ce8e",
+        "source_case": "rectangle_parallel_boundary_cvt"
+      },
+      "arm": "joint_v1"
+    },
+    {
+      "case_id": "c_open_away_feedback_fix",
+      "condition_id": "c_open_away",
+      "shape": "c_shape",
+      "split": "development",
+      "gate": 6,
+      "seed": 2,
+      "frames": 3000,
+      "variant": "boundary_cvt",
+      "config": {
+        "paper": true,
+        "dt": 0.05,
+        "domain": {
+          "xmin": 0.0,
+          "xmax": 8.0,
+          "ymin": 0.0,
+          "ymax": 8.0
+        },
+        "agents": {
+          "count": 16,
+          "layout": "scatter",
+          "center": [
+            4.0,
+            4.0
+          ],
+          "radius_min": 1.670047119236084,
+          "radius_max": 2.4700471192360838,
+          "min_separation": 0.34
+        },
+        "cargoes": [
+          {
+            "id": "cargo_0",
+            "shape": "polygon",
+            "vertices": [
+              [
+                4.63689245304311,
+                3.015711663478804
+              ],
+              [
+                4.63689245304311,
+                4.984288336521299
+              ],
+              [
+                3.1604599482612388,
+                4.984288336521299
+              ],
+              [
+                3.1604599482612388,
+                4.430626147228097
+              ],
+              [
+                4.144748284782486,
+                4.430626147228097
+              ],
+              [
+                4.144748284782486,
+                3.5693738527720056
+              ],
+              [
+                3.1604599482612388,
+                3.5693738527720056
+              ],
+              [
+                3.1604599482612388,
+                3.015711663478804
+              ]
+            ],
+            "movable": true,
+            "surface_density": 2.0
+          }
+        ],
+        "task": {
+          "mode": "random_constrained",
+          "distance_min": 1.2,
+          "distance_max": 1.2,
+          "wall_margin": 0.35,
+          "tolerance": 0.12,
+          "angle_min_deg": 0.0,
+          "angle_max_deg": 0.0
+        },
+        "controller": {
+          "task_mode": "transport",
+          "sensor_range": 1.2,
+          "ray_count": 72,
+          "range_noise_std": 0.01,
+          "pca_neighbors": 5,
+          "residual_tolerance": 0.03,
+          "min_confidence": 0.15,
+          "comm_range": 1.6,
+          "voxel_size": 0.06,
+          "age_decay": 0.3,
+          "max_voxels_per_object": 320,
+          "motion_compensation": true,
+          "registration_gate": 0.12,
+          "registration_normal_cosine": 0.5,
+          "max_object_speed": 0.25,
+          "object_velocity_filter": 0.35,
+          "density_mode": "offset",
+          "cage_offset": 0.105,
+          "lead_offset": 0.26,
+          "lead_threshold": 0.25,
+          "sigma": 0.2,
+          "base_density": 0.001,
+          "gap_gain": 0.6,
+          "gap_radius": 0.35,
+          "local_radius": 0.8,
+          "grid_resolution": 20,
+          "approach_mass_ratio": 3.0,
+          "redeploy_gap_ratio": 0.15,
+          "robot_radius": 0.13,
+          "delta_max": 0.065,
+          "d_min": 0.28,
+          "gamma_agent": 6.0,
+          "gamma_obj": 8.0,
+          "rho": 0.02,
+          "max_speed": 0.35,
+          "backend": "qp",
+          "object_row_range": 0.6,
+          "object_row_window": 0.28,
+          "max_object_rows": 8,
+          "kp_explore": 0.25,
+          "kp_cage": 0.9,
+          "push_side_threshold": 0.35,
+          "min_push_agents": 4,
+          "contact_band_tolerance": 0.08,
+          "press_margin": null,
+          "press_margin_safety": 1.2,
+          "transport_law": "progress",
+          "transport_reference_speed": 0.055,
+          "transport_kp": 2.4,
+          "transport_ki": 3.0,
+          "transport_effort_max": 0.3,
+          "transport_deadband": 0.05,
+          "brake_gain": 0.3,
+          "convoy_gain": 1.0,
+          "convoy_max": 0.25,
+          "cross_track_gain": 10.0,
+          "cross_track_damping": 12.0,
+          "cross_track_max_deg": 45.0,
+          "cross_track_deadband": 0.02,
+          "cross_track_reference": 0.08,
+          "separation_band": 0.06,
+          "kp_separate": 0.0,
+          "push_share_floor": 0.15,
+          "phase_informed_fraction": 0.55,
+          "phase_map_coverage_min": 0.7,
+          "contact_dwell": 20,
+          "brake_fraction": 0.65,
+          "transport_safety_feedback": true,
+          "dynamic_contact_roles": false,
+          "dynamic_contact_allocation": true,
+          "dynamic_contact_relocation": true
+        },
+        "transport": {
+          "engine": "penalty",
+          "stiffness": 500.0,
+          "damping": 12.0,
+          "friction": 0.6,
+          "tangential_stiffness": 60.0,
+          "ground_friction": 0.6,
+          "gravity": 9.81,
+          "substeps": 4
+        },
+        "render": {
+          "map_agent": "agent_00"
+        },
+        "evaluation": {
+          "contact_radius": 0.42,
+          "j_min": 0.15,
+          "efficiency_min": 0.7,
+          "displacement_gate": 0.1
+        },
+        "g500": {
+          "detect_by": null,
+          "contact_ready_by": null,
+          "transport_by": null,
+          "reach_by": null,
+          "efficiency_min": 0.8,
+          "direction_error_max_deg": 20.0,
+          "cross_track_max": 0.15,
+          "coverage_min": 0.7,
+          "progress_max_ratio": 1.4,
+          "arrival_tolerance": 0.12,
+          "hold_speed_max": 0.02,
+          "yaw_max_deg": 15.0
+        }
+      },
+      "expected_initial_state_sha256": "3d7ca454a451f0f6e15c1faa3531212594071e6148a2093b2659c86d5596ee84",
+      "factors": {
+        "condition": "c_open_away",
+        "shape": "c_shape",
+        "angle_deg": 90,
+        "geometry_source": {
+          "path": "configs/sim/theorem/static_c_shape_n16_oracle.yaml",
+          "sha256": "d6b3fdbedad104eb99361c5fc28ac4ce63febe5fd3a475f3ead7b45544bd947f",
+          "normalization": "centroid recentered, isotropic equal polygon area"
+        },
+        "area_m2": 2.0587500000000007,
+        "mass_kg": 4.1175000000000015,
+        "inertia_kg_m2": 2.546568472416135,
+        "perimeter_m": 8.858595028691228,
+        "diameter_m": 2.460720841303119,
+        "reach_m": 1.293696652189097,
+        "vertices": 8,
+        "initial_centroid": [
+          3.9999999999999725,
+          4.00000000000007
+        ],
+        "task": {
+          "object_id": "cargo_0",
+          "direction": [
+            1.0,
+            0.0
+          ],
+          "angle_deg": 0.0,
+          "target_distance": 1.2,
+          "start": [
+            3.9999999999999725,
+            4.00000000000007
+          ],
+          "goal_point": [
+            5.199999999999973,
+            4.00000000000007
+          ],
+          "tolerance": 0.12,
+          "clearance": 1.878696652189097,
+          "sampling_attempts": 1
+        },
+        "agent_initial_sha256": "3d7ca454a451f0f6e15c1faa3531212594071e6148a2093b2659c86d5596ee84",
+        "complete_initial_sha256": "b5a35e2e2dbb73118820332635a8a51a680e788b15971f790e4e3af70e29a20b",
+        "source_case": "c_open_away_boundary_cvt"
+      },
+      "arm": "feedback_fix"
+    },
+    {
+      "case_id": "c_open_away_allocation_only",
+      "condition_id": "c_open_away",
+      "shape": "c_shape",
+      "split": "development",
+      "gate": 6,
+      "seed": 2,
+      "frames": 3000,
+      "variant": "boundary_cvt",
+      "config": {
+        "paper": true,
+        "dt": 0.05,
+        "domain": {
+          "xmin": 0.0,
+          "xmax": 8.0,
+          "ymin": 0.0,
+          "ymax": 8.0
+        },
+        "agents": {
+          "count": 16,
+          "layout": "scatter",
+          "center": [
+            4.0,
+            4.0
+          ],
+          "radius_min": 1.670047119236084,
+          "radius_max": 2.4700471192360838,
+          "min_separation": 0.34
+        },
+        "cargoes": [
+          {
+            "id": "cargo_0",
+            "shape": "polygon",
+            "vertices": [
+              [
+                4.63689245304311,
+                3.015711663478804
+              ],
+              [
+                4.63689245304311,
+                4.984288336521299
+              ],
+              [
+                3.1604599482612388,
+                4.984288336521299
+              ],
+              [
+                3.1604599482612388,
+                4.430626147228097
+              ],
+              [
+                4.144748284782486,
+                4.430626147228097
+              ],
+              [
+                4.144748284782486,
+                3.5693738527720056
+              ],
+              [
+                3.1604599482612388,
+                3.5693738527720056
+              ],
+              [
+                3.1604599482612388,
+                3.015711663478804
+              ]
+            ],
+            "movable": true,
+            "surface_density": 2.0
+          }
+        ],
+        "task": {
+          "mode": "random_constrained",
+          "distance_min": 1.2,
+          "distance_max": 1.2,
+          "wall_margin": 0.35,
+          "tolerance": 0.12,
+          "angle_min_deg": 0.0,
+          "angle_max_deg": 0.0
+        },
+        "controller": {
+          "task_mode": "transport",
+          "sensor_range": 1.2,
+          "ray_count": 72,
+          "range_noise_std": 0.01,
+          "pca_neighbors": 5,
+          "residual_tolerance": 0.03,
+          "min_confidence": 0.15,
+          "comm_range": 1.6,
+          "voxel_size": 0.06,
+          "age_decay": 0.3,
+          "max_voxels_per_object": 320,
+          "motion_compensation": true,
+          "registration_gate": 0.12,
+          "registration_normal_cosine": 0.5,
+          "max_object_speed": 0.25,
+          "object_velocity_filter": 0.35,
+          "density_mode": "offset",
+          "cage_offset": 0.105,
+          "lead_offset": 0.26,
+          "lead_threshold": 0.25,
+          "sigma": 0.2,
+          "base_density": 0.001,
+          "gap_gain": 0.6,
+          "gap_radius": 0.35,
+          "local_radius": 0.8,
+          "grid_resolution": 20,
+          "approach_mass_ratio": 3.0,
+          "redeploy_gap_ratio": 0.15,
+          "robot_radius": 0.13,
+          "delta_max": 0.065,
+          "d_min": 0.28,
+          "gamma_agent": 6.0,
+          "gamma_obj": 8.0,
+          "rho": 0.02,
+          "max_speed": 0.35,
+          "backend": "qp",
+          "object_row_range": 0.6,
+          "object_row_window": 0.28,
+          "max_object_rows": 8,
+          "kp_explore": 0.25,
+          "kp_cage": 0.9,
+          "push_side_threshold": 0.35,
+          "min_push_agents": 4,
+          "contact_band_tolerance": 0.08,
+          "press_margin": null,
+          "press_margin_safety": 1.2,
+          "transport_law": "progress",
+          "transport_reference_speed": 0.055,
+          "transport_kp": 2.4,
+          "transport_ki": 3.0,
+          "transport_effort_max": 0.3,
+          "transport_deadband": 0.05,
+          "brake_gain": 0.3,
+          "convoy_gain": 1.0,
+          "convoy_max": 0.25,
+          "cross_track_gain": 10.0,
+          "cross_track_damping": 12.0,
+          "cross_track_max_deg": 45.0,
+          "cross_track_deadband": 0.02,
+          "cross_track_reference": 0.08,
+          "separation_band": 0.06,
+          "kp_separate": 0.0,
+          "push_share_floor": 0.15,
+          "phase_informed_fraction": 0.55,
+          "phase_map_coverage_min": 0.7,
+          "contact_dwell": 20,
+          "brake_fraction": 0.65,
+          "transport_safety_feedback": true,
+          "dynamic_contact_roles": true,
+          "dynamic_contact_allocation": true,
+          "dynamic_contact_relocation": false
+        },
+        "transport": {
+          "engine": "penalty",
+          "stiffness": 500.0,
+          "damping": 12.0,
+          "friction": 0.6,
+          "tangential_stiffness": 60.0,
+          "ground_friction": 0.6,
+          "gravity": 9.81,
+          "substeps": 4
+        },
+        "render": {
+          "map_agent": "agent_00"
+        },
+        "evaluation": {
+          "contact_radius": 0.42,
+          "j_min": 0.15,
+          "efficiency_min": 0.7,
+          "displacement_gate": 0.1
+        },
+        "g500": {
+          "detect_by": null,
+          "contact_ready_by": null,
+          "transport_by": null,
+          "reach_by": null,
+          "efficiency_min": 0.8,
+          "direction_error_max_deg": 20.0,
+          "cross_track_max": 0.15,
+          "coverage_min": 0.7,
+          "progress_max_ratio": 1.4,
+          "arrival_tolerance": 0.12,
+          "hold_speed_max": 0.02,
+          "yaw_max_deg": 15.0
+        }
+      },
+      "expected_initial_state_sha256": "3d7ca454a451f0f6e15c1faa3531212594071e6148a2093b2659c86d5596ee84",
+      "factors": {
+        "condition": "c_open_away",
+        "shape": "c_shape",
+        "angle_deg": 90,
+        "geometry_source": {
+          "path": "configs/sim/theorem/static_c_shape_n16_oracle.yaml",
+          "sha256": "d6b3fdbedad104eb99361c5fc28ac4ce63febe5fd3a475f3ead7b45544bd947f",
+          "normalization": "centroid recentered, isotropic equal polygon area"
+        },
+        "area_m2": 2.0587500000000007,
+        "mass_kg": 4.1175000000000015,
+        "inertia_kg_m2": 2.546568472416135,
+        "perimeter_m": 8.858595028691228,
+        "diameter_m": 2.460720841303119,
+        "reach_m": 1.293696652189097,
+        "vertices": 8,
+        "initial_centroid": [
+          3.9999999999999725,
+          4.00000000000007
+        ],
+        "task": {
+          "object_id": "cargo_0",
+          "direction": [
+            1.0,
+            0.0
+          ],
+          "angle_deg": 0.0,
+          "target_distance": 1.2,
+          "start": [
+            3.9999999999999725,
+            4.00000000000007
+          ],
+          "goal_point": [
+            5.199999999999973,
+            4.00000000000007
+          ],
+          "tolerance": 0.12,
+          "clearance": 1.878696652189097,
+          "sampling_attempts": 1
+        },
+        "agent_initial_sha256": "3d7ca454a451f0f6e15c1faa3531212594071e6148a2093b2659c86d5596ee84",
+        "complete_initial_sha256": "b5a35e2e2dbb73118820332635a8a51a680e788b15971f790e4e3af70e29a20b",
+        "source_case": "c_open_away_boundary_cvt"
+      },
+      "arm": "allocation_only"
+    },
+    {
+      "case_id": "c_open_away_relocation_only",
+      "condition_id": "c_open_away",
+      "shape": "c_shape",
+      "split": "development",
+      "gate": 6,
+      "seed": 2,
+      "frames": 3000,
+      "variant": "boundary_cvt",
+      "config": {
+        "paper": true,
+        "dt": 0.05,
+        "domain": {
+          "xmin": 0.0,
+          "xmax": 8.0,
+          "ymin": 0.0,
+          "ymax": 8.0
+        },
+        "agents": {
+          "count": 16,
+          "layout": "scatter",
+          "center": [
+            4.0,
+            4.0
+          ],
+          "radius_min": 1.670047119236084,
+          "radius_max": 2.4700471192360838,
+          "min_separation": 0.34
+        },
+        "cargoes": [
+          {
+            "id": "cargo_0",
+            "shape": "polygon",
+            "vertices": [
+              [
+                4.63689245304311,
+                3.015711663478804
+              ],
+              [
+                4.63689245304311,
+                4.984288336521299
+              ],
+              [
+                3.1604599482612388,
+                4.984288336521299
+              ],
+              [
+                3.1604599482612388,
+                4.430626147228097
+              ],
+              [
+                4.144748284782486,
+                4.430626147228097
+              ],
+              [
+                4.144748284782486,
+                3.5693738527720056
+              ],
+              [
+                3.1604599482612388,
+                3.5693738527720056
+              ],
+              [
+                3.1604599482612388,
+                3.015711663478804
+              ]
+            ],
+            "movable": true,
+            "surface_density": 2.0
+          }
+        ],
+        "task": {
+          "mode": "random_constrained",
+          "distance_min": 1.2,
+          "distance_max": 1.2,
+          "wall_margin": 0.35,
+          "tolerance": 0.12,
+          "angle_min_deg": 0.0,
+          "angle_max_deg": 0.0
+        },
+        "controller": {
+          "task_mode": "transport",
+          "sensor_range": 1.2,
+          "ray_count": 72,
+          "range_noise_std": 0.01,
+          "pca_neighbors": 5,
+          "residual_tolerance": 0.03,
+          "min_confidence": 0.15,
+          "comm_range": 1.6,
+          "voxel_size": 0.06,
+          "age_decay": 0.3,
+          "max_voxels_per_object": 320,
+          "motion_compensation": true,
+          "registration_gate": 0.12,
+          "registration_normal_cosine": 0.5,
+          "max_object_speed": 0.25,
+          "object_velocity_filter": 0.35,
+          "density_mode": "offset",
+          "cage_offset": 0.105,
+          "lead_offset": 0.26,
+          "lead_threshold": 0.25,
+          "sigma": 0.2,
+          "base_density": 0.001,
+          "gap_gain": 0.6,
+          "gap_radius": 0.35,
+          "local_radius": 0.8,
+          "grid_resolution": 20,
+          "approach_mass_ratio": 3.0,
+          "redeploy_gap_ratio": 0.15,
+          "robot_radius": 0.13,
+          "delta_max": 0.065,
+          "d_min": 0.28,
+          "gamma_agent": 6.0,
+          "gamma_obj": 8.0,
+          "rho": 0.02,
+          "max_speed": 0.35,
+          "backend": "qp",
+          "object_row_range": 0.6,
+          "object_row_window": 0.28,
+          "max_object_rows": 8,
+          "kp_explore": 0.25,
+          "kp_cage": 0.9,
+          "push_side_threshold": 0.35,
+          "min_push_agents": 4,
+          "contact_band_tolerance": 0.08,
+          "press_margin": null,
+          "press_margin_safety": 1.2,
+          "transport_law": "progress",
+          "transport_reference_speed": 0.055,
+          "transport_kp": 2.4,
+          "transport_ki": 3.0,
+          "transport_effort_max": 0.3,
+          "transport_deadband": 0.05,
+          "brake_gain": 0.3,
+          "convoy_gain": 1.0,
+          "convoy_max": 0.25,
+          "cross_track_gain": 10.0,
+          "cross_track_damping": 12.0,
+          "cross_track_max_deg": 45.0,
+          "cross_track_deadband": 0.02,
+          "cross_track_reference": 0.08,
+          "separation_band": 0.06,
+          "kp_separate": 0.0,
+          "push_share_floor": 0.15,
+          "phase_informed_fraction": 0.55,
+          "phase_map_coverage_min": 0.7,
+          "contact_dwell": 20,
+          "brake_fraction": 0.65,
+          "transport_safety_feedback": true,
+          "dynamic_contact_roles": true,
+          "dynamic_contact_allocation": false,
+          "dynamic_contact_relocation": true
+        },
+        "transport": {
+          "engine": "penalty",
+          "stiffness": 500.0,
+          "damping": 12.0,
+          "friction": 0.6,
+          "tangential_stiffness": 60.0,
+          "ground_friction": 0.6,
+          "gravity": 9.81,
+          "substeps": 4
+        },
+        "render": {
+          "map_agent": "agent_00"
+        },
+        "evaluation": {
+          "contact_radius": 0.42,
+          "j_min": 0.15,
+          "efficiency_min": 0.7,
+          "displacement_gate": 0.1
+        },
+        "g500": {
+          "detect_by": null,
+          "contact_ready_by": null,
+          "transport_by": null,
+          "reach_by": null,
+          "efficiency_min": 0.8,
+          "direction_error_max_deg": 20.0,
+          "cross_track_max": 0.15,
+          "coverage_min": 0.7,
+          "progress_max_ratio": 1.4,
+          "arrival_tolerance": 0.12,
+          "hold_speed_max": 0.02,
+          "yaw_max_deg": 15.0
+        }
+      },
+      "expected_initial_state_sha256": "3d7ca454a451f0f6e15c1faa3531212594071e6148a2093b2659c86d5596ee84",
+      "factors": {
+        "condition": "c_open_away",
+        "shape": "c_shape",
+        "angle_deg": 90,
+        "geometry_source": {
+          "path": "configs/sim/theorem/static_c_shape_n16_oracle.yaml",
+          "sha256": "d6b3fdbedad104eb99361c5fc28ac4ce63febe5fd3a475f3ead7b45544bd947f",
+          "normalization": "centroid recentered, isotropic equal polygon area"
+        },
+        "area_m2": 2.0587500000000007,
+        "mass_kg": 4.1175000000000015,
+        "inertia_kg_m2": 2.546568472416135,
+        "perimeter_m": 8.858595028691228,
+        "diameter_m": 2.460720841303119,
+        "reach_m": 1.293696652189097,
+        "vertices": 8,
+        "initial_centroid": [
+          3.9999999999999725,
+          4.00000000000007
+        ],
+        "task": {
+          "object_id": "cargo_0",
+          "direction": [
+            1.0,
+            0.0
+          ],
+          "angle_deg": 0.0,
+          "target_distance": 1.2,
+          "start": [
+            3.9999999999999725,
+            4.00000000000007
+          ],
+          "goal_point": [
+            5.199999999999973,
+            4.00000000000007
+          ],
+          "tolerance": 0.12,
+          "clearance": 1.878696652189097,
+          "sampling_attempts": 1
+        },
+        "agent_initial_sha256": "3d7ca454a451f0f6e15c1faa3531212594071e6148a2093b2659c86d5596ee84",
+        "complete_initial_sha256": "b5a35e2e2dbb73118820332635a8a51a680e788b15971f790e4e3af70e29a20b",
+        "source_case": "c_open_away_boundary_cvt"
+      },
+      "arm": "relocation_only"
+    },
+    {
+      "case_id": "c_open_away_joint_v1",
+      "condition_id": "c_open_away",
+      "shape": "c_shape",
+      "split": "development",
+      "gate": 6,
+      "seed": 2,
+      "frames": 3000,
+      "variant": "boundary_cvt",
+      "config": {
+        "paper": true,
+        "dt": 0.05,
+        "domain": {
+          "xmin": 0.0,
+          "xmax": 8.0,
+          "ymin": 0.0,
+          "ymax": 8.0
+        },
+        "agents": {
+          "count": 16,
+          "layout": "scatter",
+          "center": [
+            4.0,
+            4.0
+          ],
+          "radius_min": 1.670047119236084,
+          "radius_max": 2.4700471192360838,
+          "min_separation": 0.34
+        },
+        "cargoes": [
+          {
+            "id": "cargo_0",
+            "shape": "polygon",
+            "vertices": [
+              [
+                4.63689245304311,
+                3.015711663478804
+              ],
+              [
+                4.63689245304311,
+                4.984288336521299
+              ],
+              [
+                3.1604599482612388,
+                4.984288336521299
+              ],
+              [
+                3.1604599482612388,
+                4.430626147228097
+              ],
+              [
+                4.144748284782486,
+                4.430626147228097
+              ],
+              [
+                4.144748284782486,
+                3.5693738527720056
+              ],
+              [
+                3.1604599482612388,
+                3.5693738527720056
+              ],
+              [
+                3.1604599482612388,
+                3.015711663478804
+              ]
+            ],
+            "movable": true,
+            "surface_density": 2.0
+          }
+        ],
+        "task": {
+          "mode": "random_constrained",
+          "distance_min": 1.2,
+          "distance_max": 1.2,
+          "wall_margin": 0.35,
+          "tolerance": 0.12,
+          "angle_min_deg": 0.0,
+          "angle_max_deg": 0.0
+        },
+        "controller": {
+          "task_mode": "transport",
+          "sensor_range": 1.2,
+          "ray_count": 72,
+          "range_noise_std": 0.01,
+          "pca_neighbors": 5,
+          "residual_tolerance": 0.03,
+          "min_confidence": 0.15,
+          "comm_range": 1.6,
+          "voxel_size": 0.06,
+          "age_decay": 0.3,
+          "max_voxels_per_object": 320,
+          "motion_compensation": true,
+          "registration_gate": 0.12,
+          "registration_normal_cosine": 0.5,
+          "max_object_speed": 0.25,
+          "object_velocity_filter": 0.35,
+          "density_mode": "offset",
+          "cage_offset": 0.105,
+          "lead_offset": 0.26,
+          "lead_threshold": 0.25,
+          "sigma": 0.2,
+          "base_density": 0.001,
+          "gap_gain": 0.6,
+          "gap_radius": 0.35,
+          "local_radius": 0.8,
+          "grid_resolution": 20,
+          "approach_mass_ratio": 3.0,
+          "redeploy_gap_ratio": 0.15,
+          "robot_radius": 0.13,
+          "delta_max": 0.065,
+          "d_min": 0.28,
+          "gamma_agent": 6.0,
+          "gamma_obj": 8.0,
+          "rho": 0.02,
+          "max_speed": 0.35,
+          "backend": "qp",
+          "object_row_range": 0.6,
+          "object_row_window": 0.28,
+          "max_object_rows": 8,
+          "kp_explore": 0.25,
+          "kp_cage": 0.9,
+          "push_side_threshold": 0.35,
+          "min_push_agents": 4,
+          "contact_band_tolerance": 0.08,
+          "press_margin": null,
+          "press_margin_safety": 1.2,
+          "transport_law": "progress",
+          "transport_reference_speed": 0.055,
+          "transport_kp": 2.4,
+          "transport_ki": 3.0,
+          "transport_effort_max": 0.3,
+          "transport_deadband": 0.05,
+          "brake_gain": 0.3,
+          "convoy_gain": 1.0,
+          "convoy_max": 0.25,
+          "cross_track_gain": 10.0,
+          "cross_track_damping": 12.0,
+          "cross_track_max_deg": 45.0,
+          "cross_track_deadband": 0.02,
+          "cross_track_reference": 0.08,
+          "separation_band": 0.06,
+          "kp_separate": 0.0,
+          "push_share_floor": 0.15,
+          "phase_informed_fraction": 0.55,
+          "phase_map_coverage_min": 0.7,
+          "contact_dwell": 20,
+          "brake_fraction": 0.65,
+          "transport_safety_feedback": true,
+          "dynamic_contact_roles": true,
+          "dynamic_contact_allocation": true,
+          "dynamic_contact_relocation": true
+        },
+        "transport": {
+          "engine": "penalty",
+          "stiffness": 500.0,
+          "damping": 12.0,
+          "friction": 0.6,
+          "tangential_stiffness": 60.0,
+          "ground_friction": 0.6,
+          "gravity": 9.81,
+          "substeps": 4
+        },
+        "render": {
+          "map_agent": "agent_00"
+        },
+        "evaluation": {
+          "contact_radius": 0.42,
+          "j_min": 0.15,
+          "efficiency_min": 0.7,
+          "displacement_gate": 0.1
+        },
+        "g500": {
+          "detect_by": null,
+          "contact_ready_by": null,
+          "transport_by": null,
+          "reach_by": null,
+          "efficiency_min": 0.8,
+          "direction_error_max_deg": 20.0,
+          "cross_track_max": 0.15,
+          "coverage_min": 0.7,
+          "progress_max_ratio": 1.4,
+          "arrival_tolerance": 0.12,
+          "hold_speed_max": 0.02,
+          "yaw_max_deg": 15.0
+        }
+      },
+      "expected_initial_state_sha256": "3d7ca454a451f0f6e15c1faa3531212594071e6148a2093b2659c86d5596ee84",
+      "factors": {
+        "condition": "c_open_away",
+        "shape": "c_shape",
+        "angle_deg": 90,
+        "geometry_source": {
+          "path": "configs/sim/theorem/static_c_shape_n16_oracle.yaml",
+          "sha256": "d6b3fdbedad104eb99361c5fc28ac4ce63febe5fd3a475f3ead7b45544bd947f",
+          "normalization": "centroid recentered, isotropic equal polygon area"
+        },
+        "area_m2": 2.0587500000000007,
+        "mass_kg": 4.1175000000000015,
+        "inertia_kg_m2": 2.546568472416135,
+        "perimeter_m": 8.858595028691228,
+        "diameter_m": 2.460720841303119,
+        "reach_m": 1.293696652189097,
+        "vertices": 8,
+        "initial_centroid": [
+          3.9999999999999725,
+          4.00000000000007
+        ],
+        "task": {
+          "object_id": "cargo_0",
+          "direction": [
+            1.0,
+            0.0
+          ],
+          "angle_deg": 0.0,
+          "target_distance": 1.2,
+          "start": [
+            3.9999999999999725,
+            4.00000000000007
+          ],
+          "goal_point": [
+            5.199999999999973,
+            4.00000000000007
+          ],
+          "tolerance": 0.12,
+          "clearance": 1.878696652189097,
+          "sampling_attempts": 1
+        },
+        "agent_initial_sha256": "3d7ca454a451f0f6e15c1faa3531212594071e6148a2093b2659c86d5596ee84",
+        "complete_initial_sha256": "b5a35e2e2dbb73118820332635a8a51a680e788b15971f790e4e3af70e29a20b",
+        "source_case": "c_open_away_boundary_cvt"
+      },
+      "arm": "joint_v1"
+    }
+  ],
+  "arms": [
+    "feedback_fix",
+    "allocation_only",
+    "relocation_only",
+    "joint_v1"
+  ],
+  "conditions": [
+    {
+      "condition": "circle",
+      "shape": "circle",
+      "angle_deg": 0,
+      "geometry_source": {
+        "path": "scripts/run_arbitrary_shape_monte_carlo.py",
+        "sha256": "f35c795d9c6fc42e9138600aebd2e081ec556c9a82f6c770410f579714b61ada",
+        "normalization": "centroid recentered, isotropic equal polygon area"
+      },
+      "area_m2": 2.0587500000000003,
+      "mass_kg": 4.117500000000001,
+      "inertia_kg_m2": 1.3491417315354244,
+      "perimeter_m": 5.088400033654982,
+      "diameter_m": 1.620338677462703,
+      "reach_m": 0.8101693387314333,
+      "vertices": 64,
+      "initial_centroid": [
+        3.999999999999942,
+        3.999999999999943
+      ],
+      "task": {
+        "object_id": "cargo_0",
+        "direction": [
+          1.0,
+          0.0
+        ],
+        "angle_deg": 0.0,
+        "target_distance": 1.2,
+        "start": [
+          3.999999999999942,
+          3.999999999999943
+        ],
+        "goal_point": [
+          5.199999999999942,
+          3.999999999999943
+        ],
+        "tolerance": 0.12,
+        "clearance": 1.3951693387314332,
+        "sampling_attempts": 1
+      },
+      "agent_initial_sha256": "3d7ca454a451f0f6e15c1faa3531212594071e6148a2093b2659c86d5596ee84",
+      "complete_initial_sha256": "89e0049c8c7a5b2ffc7a19e65ab7b049990098cf6057d936fc9b655735654823"
+    },
+    {
+      "condition": "ellipse_parallel",
+      "shape": "ellipse24",
+      "angle_deg": 0,
+      "geometry_source": {
+        "path": "scripts/run_arbitrary_shape_monte_carlo.py",
+        "sha256": "f35c795d9c6fc42e9138600aebd2e081ec556c9a82f6c770410f579714b61ada",
+        "normalization": "centroid recentered, isotropic equal polygon area"
+      },
+      "area_m2": 2.0587500000000003,
+      "mass_kg": 4.117500000000001,
+      "inertia_kg_m2": 1.5499468507369045,
+      "perimeter_m": 5.3792669569394675,
+      "diameter_m": 2.131987560871039,
+      "reach_m": 1.065993780435571,
+      "vertices": 24,
+      "initial_centroid": [
+        4.0000000000000515,
+        4.000000000000051
+      ],
+      "task": {
+        "object_id": "cargo_0",
+        "direction": [
+          1.0,
+          0.0
+        ],
+        "angle_deg": 0.0,
+        "target_distance": 1.2,
+        "start": [
+          4.0000000000000515,
+          4.000000000000051
+        ],
+        "goal_point": [
+          5.200000000000052,
+          4.000000000000051
+        ],
+        "tolerance": 0.12,
+        "clearance": 1.650993780435571,
+        "sampling_attempts": 1
+      },
+      "agent_initial_sha256": "3d7ca454a451f0f6e15c1faa3531212594071e6148a2093b2659c86d5596ee84",
+      "complete_initial_sha256": "ca0b8f547bba01b0986c4e11007a55bb7066662ab475fce959981bb9613c497f"
+    },
+    {
+      "condition": "ellipse_perpendicular",
+      "shape": "ellipse24",
+      "angle_deg": 90,
+      "geometry_source": {
+        "path": "scripts/run_arbitrary_shape_monte_carlo.py",
+        "sha256": "f35c795d9c6fc42e9138600aebd2e081ec556c9a82f6c770410f579714b61ada",
+        "normalization": "centroid recentered, isotropic equal polygon area"
+      },
+      "area_m2": 2.0587500000000007,
+      "mass_kg": 4.1175000000000015,
+      "inertia_kg_m2": 1.549946850736905,
+      "perimeter_m": 5.3792669569394675,
+      "diameter_m": 2.131987560871039,
+      "reach_m": 1.0659937804355253,
+      "vertices": 24,
+      "initial_centroid": [
+        3.9999999999999947,
+        3.9999999999999942
+      ],
+      "task": {
+        "object_id": "cargo_0",
+        "direction": [
+          1.0,
+          0.0
+        ],
+        "angle_deg": 0.0,
+        "target_distance": 1.2,
+        "start": [
+          3.9999999999999947,
+          3.9999999999999942
+        ],
+        "goal_point": [
+          5.199999999999995,
+          3.9999999999999942
+        ],
+        "tolerance": 0.12,
+        "clearance": 1.6509937804355252,
+        "sampling_attempts": 1
+      },
+      "agent_initial_sha256": "3d7ca454a451f0f6e15c1faa3531212594071e6148a2093b2659c86d5596ee84",
+      "complete_initial_sha256": "a9bef7b7b890fad45e57b32789e7fa6dcc47d1b4d9ef701d79ec36d455536887"
+    },
+    {
+      "condition": "rectangle_parallel",
+      "shape": "rectangle",
+      "angle_deg": 0,
+      "geometry_source": {
+        "path": "configs/sim/theorem/static_rectangle_n16_oracle.yaml",
+        "sha256": "e81e1b03eab6dee0a6fcd7fb027fb3dcb6437798018ea63feaf78cdd6924168e",
+        "normalization": "centroid recentered, isotropic equal polygon area"
+      },
+      "area_m2": 2.0587500000000007,
+      "mass_kg": 4.1175000000000015,
+      "inertia_kg_m2": 1.471684570312501,
+      "perimeter_m": 5.798814534023313,
+      "diameter_m": 2.0710051907226115,
+      "reach_m": 1.0355025953613066,
+      "vertices": 4,
+      "initial_centroid": [
+        4.000000000000005,
+        4.000000000000004
+      ],
+      "task": {
+        "object_id": "cargo_0",
+        "direction": [
+          1.0,
+          0.0
+        ],
+        "angle_deg": 0.0,
+        "target_distance": 1.2,
+        "start": [
+          4.000000000000005,
+          4.000000000000004
+        ],
+        "goal_point": [
+          5.2000000000000055,
+          4.000000000000004
+        ],
+        "tolerance": 0.12,
+        "clearance": 1.6205025953613066,
+        "sampling_attempts": 1
+      },
+      "agent_initial_sha256": "3d7ca454a451f0f6e15c1faa3531212594071e6148a2093b2659c86d5596ee84",
+      "complete_initial_sha256": "7a1c4d2742a7616b9a87f45ffaa316146c22301b14e4886fedb98585c524ce8e"
+    },
+    {
+      "condition": "rectangle_perpendicular",
+      "shape": "rectangle",
+      "angle_deg": 90,
+      "geometry_source": {
+        "path": "configs/sim/theorem/static_rectangle_n16_oracle.yaml",
+        "sha256": "e81e1b03eab6dee0a6fcd7fb027fb3dcb6437798018ea63feaf78cdd6924168e",
+        "normalization": "centroid recentered, isotropic equal polygon area"
+      },
+      "area_m2": 2.05875,
+      "mass_kg": 4.1175,
+      "inertia_kg_m2": 1.4716845703124999,
+      "perimeter_m": 5.798814534023313,
+      "diameter_m": 2.0710051907226115,
+      "reach_m": 1.035502595361316,
+      "vertices": 4,
+      "initial_centroid": [
+        4.0000000000000036,
+        4.000000000000012
+      ],
+      "task": {
+        "object_id": "cargo_0",
+        "direction": [
+          1.0,
+          0.0
+        ],
+        "angle_deg": 0.0,
+        "target_distance": 1.2,
+        "start": [
+          4.0000000000000036,
+          4.000000000000012
+        ],
+        "goal_point": [
+          5.200000000000004,
+          4.000000000000012
+        ],
+        "tolerance": 0.12,
+        "clearance": 1.620502595361316,
+        "sampling_attempts": 1
+      },
+      "agent_initial_sha256": "3d7ca454a451f0f6e15c1faa3531212594071e6148a2093b2659c86d5596ee84",
+      "complete_initial_sha256": "32ca42c63d23089f632d69c74f53bb8f9dda794fab81b4a77c715bd1803bf566"
+    },
+    {
+      "condition": "l_reference",
+      "shape": "l_shape",
+      "angle_deg": 0,
+      "geometry_source": {
+        "path": "configs/sim/theorem/static_l_shape_n16_oracle.yaml",
+        "sha256": "a0cb2bb6b4a947760136da5ed520e69e18028803fec3cf8fe0d32ec25b2816af",
+        "normalization": "centroid recentered, isotropic equal polygon area"
+      },
+      "area_m2": 2.0587500000000007,
+      "mass_kg": 4.1175000000000015,
+      "inertia_kg_m2": 2.086619857838117,
+      "perimeter_m": 7.200000000000001,
+      "diameter_m": 2.545584412271572,
+      "reach_m": 1.3200471192360912,
+      "vertices": 6,
+      "initial_centroid": [
+        3.999999999999982,
+        3.999999999999985
+      ],
+      "task": {
+        "object_id": "cargo_0",
+        "direction": [
+          1.0,
+          0.0
+        ],
+        "angle_deg": 0.0,
+        "target_distance": 1.2,
+        "start": [
+          3.999999999999982,
+          3.999999999999985
+        ],
+        "goal_point": [
+          5.1999999999999815,
+          3.999999999999985
+        ],
+        "tolerance": 0.12,
+        "clearance": 1.9050471192360914,
+        "sampling_attempts": 1
+      },
+      "agent_initial_sha256": "3d7ca454a451f0f6e15c1faa3531212594071e6148a2093b2659c86d5596ee84",
+      "complete_initial_sha256": "4919a5cc6c7f0804dfa4ba6498963101fc9204ccf91a5db0da110c7c5b872a98"
+    },
+    {
+      "condition": "l_rotated",
+      "shape": "l_shape",
+      "angle_deg": 180,
+      "geometry_source": {
+        "path": "configs/sim/theorem/static_l_shape_n16_oracle.yaml",
+        "sha256": "a0cb2bb6b4a947760136da5ed520e69e18028803fec3cf8fe0d32ec25b2816af",
+        "normalization": "centroid recentered, isotropic equal polygon area"
+      },
+      "area_m2": 2.0587500000000003,
+      "mass_kg": 4.117500000000001,
+      "inertia_kg_m2": 2.0866198578381154,
+      "perimeter_m": 7.200000000000001,
+      "diameter_m": 2.545584412271571,
+      "reach_m": 1.3200471192360939,
+      "vertices": 6,
+      "initial_centroid": [
+        4.000000000000031,
+        4.00000000000003
+      ],
+      "task": {
+        "object_id": "cargo_0",
+        "direction": [
+          1.0,
+          0.0
+        ],
+        "angle_deg": 0.0,
+        "target_distance": 1.2,
+        "start": [
+          4.000000000000031,
+          4.00000000000003
+        ],
+        "goal_point": [
+          5.200000000000031,
+          4.00000000000003
+        ],
+        "tolerance": 0.12,
+        "clearance": 1.905047119236094,
+        "sampling_attempts": 1
+      },
+      "agent_initial_sha256": "3d7ca454a451f0f6e15c1faa3531212594071e6148a2093b2659c86d5596ee84",
+      "complete_initial_sha256": "4c260eb665f916f207572c8a37a75b48724d0221709001ed588a72d173225db1"
+    },
+    {
+      "condition": "c_open_toward",
+      "shape": "c_shape",
+      "angle_deg": -90,
+      "geometry_source": {
+        "path": "configs/sim/theorem/static_c_shape_n16_oracle.yaml",
+        "sha256": "d6b3fdbedad104eb99361c5fc28ac4ce63febe5fd3a475f3ead7b45544bd947f",
+        "normalization": "centroid recentered, isotropic equal polygon area"
+      },
+      "area_m2": 2.05875,
+      "mass_kg": 4.1175,
+      "inertia_kg_m2": 2.546568472416134,
+      "perimeter_m": 8.858595028691228,
+      "diameter_m": 2.460720841303119,
+      "reach_m": 1.2936966521890727,
+      "vertices": 8,
+      "initial_centroid": [
+        4.000000000000047,
+        3.999999999999945
+      ],
+      "task": {
+        "object_id": "cargo_0",
+        "direction": [
+          1.0,
+          0.0
+        ],
+        "angle_deg": 0.0,
+        "target_distance": 1.2,
+        "start": [
+          4.000000000000047,
+          3.999999999999945
+        ],
+        "goal_point": [
+          5.200000000000047,
+          3.999999999999945
+        ],
+        "tolerance": 0.12,
+        "clearance": 1.8786966521890727,
+        "sampling_attempts": 1
+      },
+      "agent_initial_sha256": "3d7ca454a451f0f6e15c1faa3531212594071e6148a2093b2659c86d5596ee84",
+      "complete_initial_sha256": "d57ef87ae327efd776e1f76cccb92f1436b8701d545c035cc209b5100b2e386a"
+    },
+    {
+      "condition": "c_open_away",
+      "shape": "c_shape",
+      "angle_deg": 90,
+      "geometry_source": {
+        "path": "configs/sim/theorem/static_c_shape_n16_oracle.yaml",
+        "sha256": "d6b3fdbedad104eb99361c5fc28ac4ce63febe5fd3a475f3ead7b45544bd947f",
+        "normalization": "centroid recentered, isotropic equal polygon area"
+      },
+      "area_m2": 2.0587500000000007,
+      "mass_kg": 4.1175000000000015,
+      "inertia_kg_m2": 2.546568472416135,
+      "perimeter_m": 8.858595028691228,
+      "diameter_m": 2.460720841303119,
+      "reach_m": 1.293696652189097,
+      "vertices": 8,
+      "initial_centroid": [
+        3.9999999999999725,
+        4.00000000000007
+      ],
+      "task": {
+        "object_id": "cargo_0",
+        "direction": [
+          1.0,
+          0.0
+        ],
+        "angle_deg": 0.0,
+        "target_distance": 1.2,
+        "start": [
+          3.9999999999999725,
+          4.00000000000007
+        ],
+        "goal_point": [
+          5.199999999999973,
+          4.00000000000007
+        ],
+        "tolerance": 0.12,
+        "clearance": 1.878696652189097,
+        "sampling_attempts": 1
+      },
+      "agent_initial_sha256": "3d7ca454a451f0f6e15c1faa3531212594071e6148a2093b2659c86d5596ee84",
+      "complete_initial_sha256": "b5a35e2e2dbb73118820332635a8a51a680e788b15971f790e4e3af70e29a20b"
+    }
+  ],
+  "fixed_budget": {
+    "episodes": 12,
+    "seed": 2,
+    "frames_per_episode": 3000,
+    "dt": 0.05,
+    "workers": 8,
+    "internal_threads": 1,
+    "candidate_versions": 1,
+    "stop": "Unchanged HOLD + linear speed <=0.005 for 40 frames; resource cutoff otherwise",
+    "completion": "Unchanged settled + final Euclidean error <=0.12 m",
+    "extended_cutoff": "600 s; unfinished at cutoff is right-censored, not eventual impossibility",
+    "no_retry_until_success": true
+  },
+  "fairness": {
+    "fixed": "initial positions, sensing, progress estimator, physics, safety/phase/stop thresholds, seed",
+    "changed": "Only declared arm switches and deployment variant; extended changes frame budget for both arms",
+    "unit": "paired geometry/direction condition in one development seed; frames are not replicates"
+  },
+  "analysis_rules": {
+    "denominator": "Every planned/launched episode; retain errors, watchdogs and adverse cases",
+    "report": "All paired endpoint errors, completion, G500, settle/censor time, hard safety events, handoff reasons",
+    "compatibility": "Original/spacing replay arrays must match historical controls exactly; ablation references must match v1",
+    "continue_gate": "For main: net >=2 additional completions vs both controls, <=1 lost success vs either, no new hard safety violation; otherwise do not promote",
+    "extended": "Report separately; never use longer candidate runs against 150-s controls or restart a terminated run"
+  },
+  "historical_inputs": {
+    "runs/research/2026-10-31-multishape-census-v1/run/circle_boundary_cvt/case_result.json": "0a2e402d4f51e1129b4c9250884e9bfc7ebf3cecc039e2c00326a374656726af",
+    "runs/research/2026-10-31-multishape-census-v1/run/circle_boundary_cvt/config.json": "5c49dee1902bb2a622de61759cb92e87f5d8c84704a33cf3bc0d4fc92a3ae44f",
+    "runs/research/2026-10-31-multishape-census-v1/run/circle_boundary_cvt/paired_metrics.json": "29326fd636ade4d640bb125053c7151e00c63ad40d258306f5530acfb3caf02b",
+    "runs/research/2026-10-31-multishape-census-v1/run/circle_boundary_cvt/physics_substeps.json": "bc6643df1928eb457688a45044edd0d59b0e97b1400e67cd11e67d1882960009",
+    "runs/research/2026-10-31-multishape-census-v1/run/circle_boundary_cvt/replay.npz": "95a14f5b9ed9e3154c6b6d79bb482e299d9fa197fcf9b749ca507e99e8fba6f5",
+    "runs/research/2026-10-31-multishape-census-v1/run/circle_boundary_cvt/resolved_case.json": "36369dd425a616182a0f2ae9ebddd8e886a5817e374945cf88f0154e0ded690b",
+    "runs/research/2026-10-31-multishape-census-v1/run/circle_boundary_cvt/safety_timeseries.csv": "c45777ec5b4e6d639fa4cff099877d3e49a636069bb0fb753920326e5162052e",
+    "runs/research/2026-10-31-multishape-census-v1/run/circle_boundary_cvt/summary.json": "1f05511ae9af5d8c5f14a330677575d7bc0c3667700c5c43ce79a41e26ac2d1b",
+    "runs/research/2026-10-31-multishape-census-v1/run/circle_boundary_cvt/trajectories.csv": "30d4d07aead9cb37582ae191e8a4f983863cba673bbc06137f93a63bc91cf752",
+    "runs/research/2026-10-31-multishape-census-v1/run/rectangle_parallel_boundary_cvt/case_result.json": "5800eddb34f6fc9e3379c1e4da486e795a3ee011a77a19daad22dc42f85a62ea",
+    "runs/research/2026-10-31-multishape-census-v1/run/rectangle_parallel_boundary_cvt/config.json": "2b7c6df67389465ef6d6168f05e7d00d3fd3a961039ad4a2b431618084428e14",
+    "runs/research/2026-10-31-multishape-census-v1/run/rectangle_parallel_boundary_cvt/paired_metrics.json": "d3745150b420a6cc49b47aac35e6f4fe7533e15d1819f73b55e77a7e3bc68098",
+    "runs/research/2026-10-31-multishape-census-v1/run/rectangle_parallel_boundary_cvt/physics_substeps.json": "9168feb3e045ab6586231d45216f50d33465da3321a2744f0c8b1966c796bf78",
+    "runs/research/2026-10-31-multishape-census-v1/run/rectangle_parallel_boundary_cvt/replay.npz": "25c0a9e423087f0ebfb7fe18adf714293518a9635be1c20c0a93b53fd03dc391",
+    "runs/research/2026-10-31-multishape-census-v1/run/rectangle_parallel_boundary_cvt/resolved_case.json": "6ea1587de0d6c4ac5978522439261619d1233f24e14574a16c1f46acc6ffb29f",
+    "runs/research/2026-10-31-multishape-census-v1/run/rectangle_parallel_boundary_cvt/safety_timeseries.csv": "c0d73e2279c9a210e639f079d39c08144c4209c50f2134281e01fd73a547563d",
+    "runs/research/2026-10-31-multishape-census-v1/run/rectangle_parallel_boundary_cvt/summary.json": "29774bc3a316b8fddbe94f1d0035f5440c1aced0a36ac568ce1e3bfd3b2d330f",
+    "runs/research/2026-10-31-multishape-census-v1/run/rectangle_parallel_boundary_cvt/trajectories.csv": "95192955c2ff660b4d4d1b2ac68c40a310e215577f0af93fec3b10f9205ef4e8",
+    "runs/research/2026-10-31-multishape-census-v1/run/c_open_away_boundary_cvt/case_result.json": "c582c74bff04e9ded34a6a0658c6b1a34695ae390c84202e3bdacd764a2dc2e2",
+    "runs/research/2026-10-31-multishape-census-v1/run/c_open_away_boundary_cvt/config.json": "8c3a4b044722fc8ac8c66eaa48f7c8060c4b4b3d21e34169b3e9e8086ad18d35",
+    "runs/research/2026-10-31-multishape-census-v1/run/c_open_away_boundary_cvt/paired_metrics.json": "f5d23b77fa3d0b0f438174a5a38041801e7afa24f69a9a34afa3b25906b5784b",
+    "runs/research/2026-10-31-multishape-census-v1/run/c_open_away_boundary_cvt/physics_substeps.json": "f126710b8ddb4b6d8579d0ace86dd26006829fe2b268cec48122eee566a041e4",
+    "runs/research/2026-10-31-multishape-census-v1/run/c_open_away_boundary_cvt/replay.npz": "5a987388dcf565fe349b28c351382c4c6f6185888534ec915ce1febe0ca64159",
+    "runs/research/2026-10-31-multishape-census-v1/run/c_open_away_boundary_cvt/resolved_case.json": "d3f4855cadba0575a6c845ee4c14ca81e2397b76bc021a6a553ac824693620e3",
+    "runs/research/2026-10-31-multishape-census-v1/run/c_open_away_boundary_cvt/safety_timeseries.csv": "dc39ae248235e828190c895c73ecafbc62ea3d3913e42ca01a25456e8494c36d",
+    "runs/research/2026-10-31-multishape-census-v1/run/c_open_away_boundary_cvt/summary.json": "766ab27c30119dc104a8653e6a04d705c2ff4e30e8ac70666d9795652b3c205a",
+    "runs/research/2026-10-31-multishape-census-v1/run/c_open_away_boundary_cvt/trajectories.csv": "a284633e3287d8508fc529152d2797e4227fc191830ec46da7df9cf7feac721f"
+  },
+  "frozen_source_sha256": "47a8e56124ffaa1a933493fd26e2fab5cd192e6b81f14cb86df046664638155a",
+  "freeze_script_sha256": "aa1d9fcb6154a8e696fe6e67682f1466f88673eff446627fec28242970d5a480",
+  "environment": {
+    "python": "3.12.14",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "executable": "C:\\Users\\kai\\boundary-aware-cooperative-transport\\.venv\\Scripts\\python.exe",
+    "packages": {
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "shapely": "2.2.0",
+      "PyYAML": "6.0.3",
+      "cvxpy": "1.9.3",
+      "clarabel": "0.11.1",
+      "osqp": "1.1.3",
+      "scs": "3.3.1",
+      "pymunk": "7.3.1",
+      "matplotlib": "3.11.2",
+      "threadpoolctl": "3.7.0"
+    }
+  }
+}

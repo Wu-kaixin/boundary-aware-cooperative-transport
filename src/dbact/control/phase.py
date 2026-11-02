@@ -87,6 +87,9 @@ class PhaseSignals:
     estimated_speed: float = 0.0
     stopping_distance: float = 0.0
     estimate_quality: str = "credible"
+    # Opt-in prospective geometric readiness, independent of the push enable.
+    # None preserves the original response clocks exactly; not physical contact.
+    recovery_ready: int | None = None
 
 
 @dataclass
@@ -137,6 +140,7 @@ class PhaseMonitor:
 
     def _update_response_clocks(self, signals: PhaseSignals) -> None:
         gates = self.gates
+        previous_regain = self.regain_streak
         if signals.transport_active < gates.sustain_contacts:
             self.loss_streak += 1
             self.regain_streak = 0
@@ -155,6 +159,16 @@ class PhaseMonitor:
             self.settle_streak += 1
         else:
             self.settle_streak = 0
+        if self.push_suspended and signals.recovery_ready is not None:
+            qualified = (signals.recovery_ready >= gates.transport_quorum
+                         and signals.estimate_quality != "unavailable")
+            self.regain_streak = previous_regain + 1 if qualified else 0
+            if self.regain_streak >= gates.contact_regain_dwell and not self._brake_due(signals):
+                self.push_suspended = False
+                self.pause_frames = self.loss_streak = 0
+            else:
+                self.pause_frames += 1
+            return
         if self.phase is Phase.TRANSPORT and self.loss_streak >= gates.contact_loss_dwell:
             if not self.push_suspended:
                 self.push_suspended = True

@@ -1,0 +1,51 @@
+{
+  "screen_selected": "wider_motion_prior",
+  "transfer": {
+    "selected": "wider_motion_prior",
+    "reference": {
+      "cases": 12,
+      "safe_completed": 6,
+      "completed": 6,
+      "g500": 4,
+      "errors": 0,
+      "hard_safety_cases": 0,
+      "barrier_scalings": 58,
+      "mean_endpoint_error_m": 0.19774070490536075
+    },
+    "candidate": {
+      "cases": 12,
+      "safe_completed": 10,
+      "completed": 10,
+      "g500": 4,
+      "errors": 0,
+      "hard_safety_cases": 0,
+      "barrier_scalings": 187,
+      "mean_endpoint_error_m": 0.07414012501639805
+    },
+    "lost": [],
+    "rescued": [
+      [
+        "far_c_open_away_pos0",
+        "boundary_cvt"
+      ],
+      [
+        "far_c_open_away_pos0",
+        "nearest_observed_target"
+      ],
+      [
+        "far_skew_box_s0_r0_pos1",
+        "boundary_cvt"
+      ],
+      [
+        "far_skew_box_s0_r0_pos1",
+        "local_spacing"
+      ]
+    ],
+    "new_hard": [],
+    "conservative_transfer_gate": true,
+    "default_changed": false,
+    "gate_reading": "No lost paired safe completion or new paired hard-safety failure; aggregate improvement in safe completion or G500. Defaults still require broader frozen coverage."
+  },
+  "default_changed": false,
+  "published_script_sha256": "b044a4a5fc3ac708479f163f99788cea1daca5a1a34bd40ccb3d8f38d3eef6b9"
+}

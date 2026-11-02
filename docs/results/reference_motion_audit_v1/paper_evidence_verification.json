@@ -1,0 +1,73 @@
+{
+  "regression": {
+    "analysis_sha256": "b290644d199bd985b5dcfeb062c62ebcc4f4ed08f47c080d10ad30ad93b3bb9b",
+    "groups": {
+      "boundary_cvt": {
+        "reference": {
+          "cases": 33,
+          "safe_completed": 31,
+          "g500": 27,
+          "barrier_scalings": 18
+        },
+        "candidate": {
+          "cases": 33,
+          "safe_completed": 33,
+          "g500": 31,
+          "barrier_scalings": 1
+        }
+      }
+    },
+    "receipt_count": 66,
+    "scope": "Historical execution identities preserved; these records are not independent new experiments of the current source."
+  },
+  "new_starts": {
+    "analysis_sha256": "7ed2af25f7b96592187e51b589a3a7d46fb2f4919e863c1758d079ab48982e3b",
+    "groups": {
+      "nearest_observed_target": {
+        "reference": {
+          "cases": 12,
+          "safe_completed": 10,
+          "g500": 6,
+          "barrier_scalings": 70
+        },
+        "candidate": {
+          "cases": 12,
+          "safe_completed": 11,
+          "g500": 8,
+          "barrier_scalings": 26
+        }
+      },
+      "local_spacing": {
+        "reference": {
+          "cases": 12,
+          "safe_completed": 10,
+          "g500": 6,
+          "barrier_scalings": 1
+        },
+        "candidate": {
+          "cases": 12,
+          "safe_completed": 11,
+          "g500": 6,
+          "barrier_scalings": 123
+        }
+      },
+      "boundary_cvt": {
+        "reference": {
+          "cases": 12,
+          "safe_completed": 11,
+          "g500": 9,
+          "barrier_scalings": 2
+        },
+        "candidate": {
+          "cases": 12,
+          "safe_completed": 11,
+          "g500": 9,
+          "barrier_scalings": 5
+        }
+      }
+    },
+    "receipt_count": 72,
+    "scope": "Historical execution identities preserved; these records are not independent new experiments of the current source."
+  },
+  "source_snapshot_batches_verified": 5
+}

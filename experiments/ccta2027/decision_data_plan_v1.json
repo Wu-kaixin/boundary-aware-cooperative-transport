@@ -1,0 +1,685 @@
+{
+  "schema": "dbact-research-decision-design-v1",
+  "design_id": "decision-data-plan-v1",
+  "status": "DESIGN_FROZEN_NOT_EXECUTED",
+  "execution_ready": false,
+  "new_simulation_episodes_this_turn": 0,
+  "runner": null,
+  "warning": "Not a study protocol. Instrumentation and oracle hook are NOT_IMPLEMENTED; execution_source/config freeze required before physical runs. Conditional later phases are not automatically started.",
+  "origin_protocol": {
+    "path": "experiments/ccta2027/multishape_census_v1.json",
+    "sha256": "0d6f4701dabfe4850ec487378a4ffd4db273e275697f61aa5db435ea3624b39b",
+    "source_manifest_sha256": "452284cf6c9dc4527910db23f412ee27e1df9208275ea094a4b95f647bf503b9",
+    "source_sha256": "8b125172ada774973647a76797eed6a7350fbf75bb09e057393cb9e94bf0b079",
+    "git_head": "cba1fc625064acc577f26ac8d1f2d08e96d67225",
+    "worktree_dirty": true
+  },
+  "evidence": {
+    "census_episodes": 27,
+    "independent_development_blocks": 1,
+    "development_seed": 2,
+    "completion_counts_of_9": {
+      "boundary_cvt": 5,
+      "local_spacing": 5,
+      "nearest_observed_target": 2
+    },
+    "engineering_repeats_are_new_research_samples": false,
+    "historical_products_verified": 216
+  },
+  "recommendation": "recommended_at_most_6_diagnostic_episodes_only",
+  "comparison_slots": [
+    {
+      "slot": "B1",
+      "condition": "circle",
+      "seed": 2,
+      "arm": "original_with_isolated_shadow",
+      "gate": "baseline scientific identity unchanged",
+      "origin": {
+        "case_id": "circle_boundary_cvt",
+        "resolved_case_sha256": "36369dd425a616182a0f2ae9ebddd8e886a5817e374945cf88f0154e0ded690b",
+        "case_result_sha256": "0a2e402d4f51e1129b4c9250884e9bfc7ebf3cecc039e2c00326a374656726af",
+        "original_config_sha256": "01e9c23940517d46e28fc50fdf9abaae5f0b757473c81b3c8e158997f0ecfa69",
+        "initial_robot_sha256": "3d7ca454a451f0f6e15c1faa3531212594071e6148a2093b2659c86d5596ee84"
+      }
+    },
+    {
+      "slot": "B2",
+      "condition": "c_open_away",
+      "seed": 2,
+      "arm": "original_with_isolated_shadow",
+      "gate": "baseline scientific identity unchanged",
+      "origin": {
+        "case_id": "c_open_away_boundary_cvt",
+        "resolved_case_sha256": "d3f4855cadba0575a6c845ee4c14ca81e2397b76bc021a6a553ac824693620e3",
+        "case_result_sha256": "c582c74bff04e9ded34a6a0658c6b1a34695ae390c84202e3bdacd764a2dc2e2",
+        "original_config_sha256": "ff583c86477fb80c122f367d94f5c78498b16800f739231572f7eb0f10ae5a2d",
+        "initial_robot_sha256": "3d7ca454a451f0f6e15c1faa3531212594071e6148a2093b2659c86d5596ee84"
+      }
+    },
+    {
+      "slot": "B3",
+      "condition": "rectangle_parallel",
+      "seed": 2,
+      "arm": "original_with_isolated_shadow",
+      "gate": "baseline scientific identity unchanged",
+      "origin": {
+        "case_id": "rectangle_parallel_boundary_cvt",
+        "resolved_case_sha256": "6ea1587de0d6c4ac5978522439261619d1233f24e14574a16c1f46acc6ffb29f",
+        "case_result_sha256": "5800eddb34f6fc9e3379c1e4da486e795a3ee011a77a19daad22dc42f85a62ea",
+        "original_config_sha256": "cb6c6d456a28880b7ae1d91ea67da02888df5c2f76cf5cc95556c47465269038",
+        "initial_robot_sha256": "3d7ca454a451f0f6e15c1faa3531212594071e6148a2093b2659c86d5596ee84"
+      }
+    },
+    {
+      "slot": "O1",
+      "condition": "circle",
+      "seed": 2,
+      "arm": "lateral_state_oracle_diagnostic",
+      "gate": "this failure has nonzero downstream command or state effect in isolated shadow",
+      "origin": {
+        "case_id": "circle_boundary_cvt",
+        "resolved_case_sha256": "36369dd425a616182a0f2ae9ebddd8e886a5817e374945cf88f0154e0ded690b",
+        "case_result_sha256": "0a2e402d4f51e1129b4c9250884e9bfc7ebf3cecc039e2c00326a374656726af",
+        "original_config_sha256": "01e9c23940517d46e28fc50fdf9abaae5f0b757473c81b3c8e158997f0ecfa69",
+        "initial_robot_sha256": "3d7ca454a451f0f6e15c1faa3531212594071e6148a2093b2659c86d5596ee84"
+      }
+    },
+    {
+      "slot": "O2",
+      "condition": "c_open_away",
+      "seed": 2,
+      "arm": "lateral_state_oracle_diagnostic",
+      "gate": "this failure has nonzero downstream command or state effect in isolated shadow",
+      "origin": {
+        "case_id": "c_open_away_boundary_cvt",
+        "resolved_case_sha256": "d3f4855cadba0575a6c845ee4c14ca81e2397b76bc021a6a553ac824693620e3",
+        "case_result_sha256": "c582c74bff04e9ded34a6a0658c6b1a34695ae390c84202e3bdacd764a2dc2e2",
+        "original_config_sha256": "ff583c86477fb80c122f367d94f5c78498b16800f739231572f7eb0f10ae5a2d",
+        "initial_robot_sha256": "3d7ca454a451f0f6e15c1faa3531212594071e6148a2093b2659c86d5596ee84"
+      }
+    },
+    {
+      "slot": "O3",
+      "condition": "rectangle_parallel",
+      "seed": 2,
+      "arm": "lateral_state_oracle_diagnostic",
+      "gate": "any preselected failure qualifies",
+      "origin": {
+        "case_id": "rectangle_parallel_boundary_cvt",
+        "resolved_case_sha256": "6ea1587de0d6c4ac5978522439261619d1233f24e14574a16c1f46acc6ffb29f",
+        "case_result_sha256": "5800eddb34f6fc9e3379c1e4da486e795a3ee011a77a19daad22dc42f85a62ea",
+        "original_config_sha256": "cb6c6d456a28880b7ae1d91ea67da02888df5c2f76cf5cc95556c47465269038",
+        "initial_robot_sha256": "3d7ca454a451f0f6e15c1faa3531212594071e6148a2093b2659c86d5596ee84"
+      }
+    }
+  ],
+  "immutable_science": {
+    "max_frames": 3000,
+    "dt_seconds": 0.05,
+    "horizon_seconds": 150,
+    "robots": 16,
+    "task_distance_m": 1.2,
+    "completion": "execution COMPLETED AND original settled AND final Euclidean endpoint error <= 0.12 m",
+    "settled": "HOLD reached, cargo linear speed <= 0.005 m/s for 40 consecutive frames; no angular criterion",
+    "g500": "Separate original predicate, not the primary completion metric",
+    "configuration_source": "Exact per-case config identified above; no parameter changes"
+  },
+  "oracle_channel": {
+    "function": "DBACTController._steered_direction",
+    "replace_only": [
+      "lateral displacement P_perp (x_cargo - x_start)",
+      "lateral velocity P_perp v_cargo"
+    ],
+    "sampling_state": "pre-control x_k, never post-step on_frame truth",
+    "activation": "strictly next control call after first shared CONTACT_READY: k > k_ready",
+    "exclude": [
+      "map writeback",
+      "longitudinal progress",
+      "other transport velocity input",
+      "pusher membership predicate",
+      "safety constraints",
+      "physics parameters"
+    ],
+    "privileged_diagnostic_only": true
+  },
+  "shadow_gate": {
+    "original_scientific_identity": "exact all 25 replay arrays and complete original scientific JSON; extra logs separate",
+    "effect_command_abs_tolerance_m_s": 1e-12,
+    "effect_continuous_state_abs_tolerance_native_units": 1e-12,
+    "rtol": 0,
+    "discrete_states": "exact comparison",
+    "requires_all_mutable_states_and_full_downstream_action_capture": true,
+    "failure_no_effect": "NOT_RUN_NO_EFFECT",
+    "incomplete_counterfactual": "NOT_IDENTIFIABLE",
+    "two_failures_no_effect": "stop after 3 baseline slots",
+    "negative_control_oracle": "enabled if at least one failure oracle is enabled"
+  },
+  "research_decision_MIDs_not_controller_parameters": {
+    "Q1_primary": "at least one of two predefined failures changes to completion",
+    "Q1_secondary_endpoint_reduction_m": 0.06,
+    "Q2_primary_candidate_minus_spacing": 0.2,
+    "Q2_single_block_net_gain_min_vs_each_baseline": 2,
+    "Q2_single_block_max_original_successes_lost_vs_each_baseline": 1,
+    "Q3_candidate_minus_direction_ablated_completion": 0.1,
+    "Q4_validation_target_point_difference": 0.2,
+    "Q5_max_relative_benefit_loss_noise": 0.1,
+    "Q5_resource_noninferiority_margin": 0.1,
+    "Q5_resource_change": [
+      16,
+      12
+    ]
+  },
+  "statistics": {
+    "primary_comparator": "local_spacing",
+    "secondary_mechanistic_comparator": "boundary_cvt",
+    "primary_condition_weighting": "equal weight for each of nine frozen conditions",
+    "secondary_weighting": "five shape families equal weight, orientations averaged within family; sensitivity only",
+    "independent_unit": "whole scene/initial-state/randomness block spanning nine conditions and all methods",
+    "current_inference": "descriptive only; post-selected development conditions, one random block",
+    "binary_execution_error_rule": "system completion Y=0, physical endpoint NA, separately show unknown-physical-outcome sensitivity",
+    "not_started_rule": "show planned/started/not-run and reason; no hidden denominator change",
+    "unfinished_time_rule": "never fill failure termination as success time; early absorbing failure is not independent right censoring",
+    "validation_N": null,
+    "validation_N_status": "requires candidate freeze and justified variance/precision design; 81-episode 3-block pilot is development only",
+    "single_primary_alpha": 0.05,
+    "power_planning": {
+      "formula_power": "ceil((z(.975)+z(.8))^2 * sigma_D^2 / 0.20^2)",
+      "power_target": 0.8,
+      "two_sided_alpha": 0.05,
+      "sigma_hypothetical": [
+        {
+          "sigma": 0.2,
+          "approx_blocks_power": 8,
+          "approx_blocks_precision_halfwidth_0_1": 16
+        },
+        {
+          "sigma": 0.35,
+          "approx_blocks_power": 25,
+          "approx_blocks_precision_halfwidth_0_1": 48
+        },
+        {
+          "sigma": 0.5,
+          "approx_blocks_power": 50,
+          "approx_blocks_precision_halfwidth_0_1": 97
+        }
+      ],
+      "all_success_single_condition_one_sided_95_lower": {
+        "3": 0.3684031498640387,
+        "20": 0.8608916593317348,
+        "30": 0.9049661471446958,
+        "59": 0.950492390111773
+      },
+      "scope": "Illustrative assumptions, not chosen validation sample size; shared-seed shapes are not independent binomial trials"
+    }
+  },
+  "conditions": [
+    {
+      "condition": "circle",
+      "shape": "circle",
+      "angle_deg": 0,
+      "geometry_source": {
+        "path": "scripts/run_arbitrary_shape_monte_carlo.py",
+        "sha256": "f35c795d9c6fc42e9138600aebd2e081ec556c9a82f6c770410f579714b61ada",
+        "normalization": "centroid recentered, isotropic equal polygon area"
+      },
+      "area_m2": 2.0587500000000003,
+      "mass_kg": 4.117500000000001,
+      "inertia_kg_m2": 1.3491417315354244,
+      "perimeter_m": 5.088400033654982,
+      "diameter_m": 1.620338677462703,
+      "reach_m": 0.8101693387314333,
+      "vertices": 64,
+      "initial_centroid": [
+        3.999999999999942,
+        3.999999999999943
+      ],
+      "task": {
+        "object_id": "cargo_0",
+        "direction": [
+          1.0,
+          0.0
+        ],
+        "angle_deg": 0.0,
+        "target_distance": 1.2,
+        "start": [
+          3.999999999999942,
+          3.999999999999943
+        ],
+        "goal_point": [
+          5.199999999999942,
+          3.999999999999943
+        ],
+        "tolerance": 0.12,
+        "clearance": 1.3951693387314332,
+        "sampling_attempts": 1
+      },
+      "agent_initial_sha256": "3d7ca454a451f0f6e15c1faa3531212594071e6148a2093b2659c86d5596ee84",
+      "complete_initial_sha256": "89e0049c8c7a5b2ffc7a19e65ab7b049990098cf6057d936fc9b655735654823"
+    },
+    {
+      "condition": "ellipse_parallel",
+      "shape": "ellipse24",
+      "angle_deg": 0,
+      "geometry_source": {
+        "path": "scripts/run_arbitrary_shape_monte_carlo.py",
+        "sha256": "f35c795d9c6fc42e9138600aebd2e081ec556c9a82f6c770410f579714b61ada",
+        "normalization": "centroid recentered, isotropic equal polygon area"
+      },
+      "area_m2": 2.0587500000000003,
+      "mass_kg": 4.117500000000001,
+      "inertia_kg_m2": 1.5499468507369045,
+      "perimeter_m": 5.3792669569394675,
+      "diameter_m": 2.131987560871039,
+      "reach_m": 1.065993780435571,
+      "vertices": 24,
+      "initial_centroid": [
+        4.0000000000000515,
+        4.000000000000051
+      ],
+      "task": {
+        "object_id": "cargo_0",
+        "direction": [
+          1.0,
+          0.0
+        ],
+        "angle_deg": 0.0,
+        "target_distance": 1.2,
+        "start": [
+          4.0000000000000515,
+          4.000000000000051
+        ],
+        "goal_point": [
+          5.200000000000052,
+          4.000000000000051
+        ],
+        "tolerance": 0.12,
+        "clearance": 1.650993780435571,
+        "sampling_attempts": 1
+      },
+      "agent_initial_sha256": "3d7ca454a451f0f6e15c1faa3531212594071e6148a2093b2659c86d5596ee84",
+      "complete_initial_sha256": "ca0b8f547bba01b0986c4e11007a55bb7066662ab475fce959981bb9613c497f"
+    },
+    {
+      "condition": "ellipse_perpendicular",
+      "shape": "ellipse24",
+      "angle_deg": 90,
+      "geometry_source": {
+        "path": "scripts/run_arbitrary_shape_monte_carlo.py",
+        "sha256": "f35c795d9c6fc42e9138600aebd2e081ec556c9a82f6c770410f579714b61ada",
+        "normalization": "centroid recentered, isotropic equal polygon area"
+      },
+      "area_m2": 2.0587500000000007,
+      "mass_kg": 4.1175000000000015,
+      "inertia_kg_m2": 1.549946850736905,
+      "perimeter_m": 5.3792669569394675,
+      "diameter_m": 2.131987560871039,
+      "reach_m": 1.0659937804355253,
+      "vertices": 24,
+      "initial_centroid": [
+        3.9999999999999947,
+        3.9999999999999942
+      ],
+      "task": {
+        "object_id": "cargo_0",
+        "direction": [
+          1.0,
+          0.0
+        ],
+        "angle_deg": 0.0,
+        "target_distance": 1.2,
+        "start": [
+          3.9999999999999947,
+          3.9999999999999942
+        ],
+        "goal_point": [
+          5.199999999999995,
+          3.9999999999999942
+        ],
+        "tolerance": 0.12,
+        "clearance": 1.6509937804355252,
+        "sampling_attempts": 1
+      },
+      "agent_initial_sha256": "3d7ca454a451f0f6e15c1faa3531212594071e6148a2093b2659c86d5596ee84",
+      "complete_initial_sha256": "a9bef7b7b890fad45e57b32789e7fa6dcc47d1b4d9ef701d79ec36d455536887"
+    },
+    {
+      "condition": "rectangle_parallel",
+      "shape": "rectangle",
+      "angle_deg": 0,
+      "geometry_source": {
+        "path": "configs/sim/theorem/static_rectangle_n16_oracle.yaml",
+        "sha256": "e81e1b03eab6dee0a6fcd7fb027fb3dcb6437798018ea63feaf78cdd6924168e",
+        "normalization": "centroid recentered, isotropic equal polygon area"
+      },
+      "area_m2": 2.0587500000000007,
+      "mass_kg": 4.1175000000000015,
+      "inertia_kg_m2": 1.471684570312501,
+      "perimeter_m": 5.798814534023313,
+      "diameter_m": 2.0710051907226115,
+      "reach_m": 1.0355025953613066,
+      "vertices": 4,
+      "initial_centroid": [
+        4.000000000000005,
+        4.000000000000004
+      ],
+      "task": {
+        "object_id": "cargo_0",
+        "direction": [
+          1.0,
+          0.0
+        ],
+        "angle_deg": 0.0,
+        "target_distance": 1.2,
+        "start": [
+          4.000000000000005,
+          4.000000000000004
+        ],
+        "goal_point": [
+          5.2000000000000055,
+          4.000000000000004
+        ],
+        "tolerance": 0.12,
+        "clearance": 1.6205025953613066,
+        "sampling_attempts": 1
+      },
+      "agent_initial_sha256": "3d7ca454a451f0f6e15c1faa3531212594071e6148a2093b2659c86d5596ee84",
+      "complete_initial_sha256": "7a1c4d2742a7616b9a87f45ffaa316146c22301b14e4886fedb98585c524ce8e"
+    },
+    {
+      "condition": "rectangle_perpendicular",
+      "shape": "rectangle",
+      "angle_deg": 90,
+      "geometry_source": {
+        "path": "configs/sim/theorem/static_rectangle_n16_oracle.yaml",
+        "sha256": "e81e1b03eab6dee0a6fcd7fb027fb3dcb6437798018ea63feaf78cdd6924168e",
+        "normalization": "centroid recentered, isotropic equal polygon area"
+      },
+      "area_m2": 2.05875,
+      "mass_kg": 4.1175,
+      "inertia_kg_m2": 1.4716845703124999,
+      "perimeter_m": 5.798814534023313,
+      "diameter_m": 2.0710051907226115,
+      "reach_m": 1.035502595361316,
+      "vertices": 4,
+      "initial_centroid": [
+        4.0000000000000036,
+        4.000000000000012
+      ],
+      "task": {
+        "object_id": "cargo_0",
+        "direction": [
+          1.0,
+          0.0
+        ],
+        "angle_deg": 0.0,
+        "target_distance": 1.2,
+        "start": [
+          4.0000000000000036,
+          4.000000000000012
+        ],
+        "goal_point": [
+          5.200000000000004,
+          4.000000000000012
+        ],
+        "tolerance": 0.12,
+        "clearance": 1.620502595361316,
+        "sampling_attempts": 1
+      },
+      "agent_initial_sha256": "3d7ca454a451f0f6e15c1faa3531212594071e6148a2093b2659c86d5596ee84",
+      "complete_initial_sha256": "32ca42c63d23089f632d69c74f53bb8f9dda794fab81b4a77c715bd1803bf566"
+    },
+    {
+      "condition": "l_reference",
+      "shape": "l_shape",
+      "angle_deg": 0,
+      "geometry_source": {
+        "path": "configs/sim/theorem/static_l_shape_n16_oracle.yaml",
+        "sha256": "a0cb2bb6b4a947760136da5ed520e69e18028803fec3cf8fe0d32ec25b2816af",
+        "normalization": "centroid recentered, isotropic equal polygon area"
+      },
+      "area_m2": 2.0587500000000007,
+      "mass_kg": 4.1175000000000015,
+      "inertia_kg_m2": 2.086619857838117,
+      "perimeter_m": 7.200000000000001,
+      "diameter_m": 2.545584412271572,
+      "reach_m": 1.3200471192360912,
+      "vertices": 6,
+      "initial_centroid": [
+        3.999999999999982,
+        3.999999999999985
+      ],
+      "task": {
+        "object_id": "cargo_0",
+        "direction": [
+          1.0,
+          0.0
+        ],
+        "angle_deg": 0.0,
+        "target_distance": 1.2,
+        "start": [
+          3.999999999999982,
+          3.999999999999985
+        ],
+        "goal_point": [
+          5.1999999999999815,
+          3.999999999999985
+        ],
+        "tolerance": 0.12,
+        "clearance": 1.9050471192360914,
+        "sampling_attempts": 1
+      },
+      "agent_initial_sha256": "3d7ca454a451f0f6e15c1faa3531212594071e6148a2093b2659c86d5596ee84",
+      "complete_initial_sha256": "4919a5cc6c7f0804dfa4ba6498963101fc9204ccf91a5db0da110c7c5b872a98"
+    },
+    {
+      "condition": "l_rotated",
+      "shape": "l_shape",
+      "angle_deg": 180,
+      "geometry_source": {
+        "path": "configs/sim/theorem/static_l_shape_n16_oracle.yaml",
+        "sha256": "a0cb2bb6b4a947760136da5ed520e69e18028803fec3cf8fe0d32ec25b2816af",
+        "normalization": "centroid recentered, isotropic equal polygon area"
+      },
+      "area_m2": 2.0587500000000003,
+      "mass_kg": 4.117500000000001,
+      "inertia_kg_m2": 2.0866198578381154,
+      "perimeter_m": 7.200000000000001,
+      "diameter_m": 2.545584412271571,
+      "reach_m": 1.3200471192360939,
+      "vertices": 6,
+      "initial_centroid": [
+        4.000000000000031,
+        4.00000000000003
+      ],
+      "task": {
+        "object_id": "cargo_0",
+        "direction": [
+          1.0,
+          0.0
+        ],
+        "angle_deg": 0.0,
+        "target_distance": 1.2,
+        "start": [
+          4.000000000000031,
+          4.00000000000003
+        ],
+        "goal_point": [
+          5.200000000000031,
+          4.00000000000003
+        ],
+        "tolerance": 0.12,
+        "clearance": 1.905047119236094,
+        "sampling_attempts": 1
+      },
+      "agent_initial_sha256": "3d7ca454a451f0f6e15c1faa3531212594071e6148a2093b2659c86d5596ee84",
+      "complete_initial_sha256": "4c260eb665f916f207572c8a37a75b48724d0221709001ed588a72d173225db1"
+    },
+    {
+      "condition": "c_open_toward",
+      "shape": "c_shape",
+      "angle_deg": -90,
+      "geometry_source": {
+        "path": "configs/sim/theorem/static_c_shape_n16_oracle.yaml",
+        "sha256": "d6b3fdbedad104eb99361c5fc28ac4ce63febe5fd3a475f3ead7b45544bd947f",
+        "normalization": "centroid recentered, isotropic equal polygon area"
+      },
+      "area_m2": 2.05875,
+      "mass_kg": 4.1175,
+      "inertia_kg_m2": 2.546568472416134,
+      "perimeter_m": 8.858595028691228,
+      "diameter_m": 2.460720841303119,
+      "reach_m": 1.2936966521890727,
+      "vertices": 8,
+      "initial_centroid": [
+        4.000000000000047,
+        3.999999999999945
+      ],
+      "task": {
+        "object_id": "cargo_0",
+        "direction": [
+          1.0,
+          0.0
+        ],
+        "angle_deg": 0.0,
+        "target_distance": 1.2,
+        "start": [
+          4.000000000000047,
+          3.999999999999945
+        ],
+        "goal_point": [
+          5.200000000000047,
+          3.999999999999945
+        ],
+        "tolerance": 0.12,
+        "clearance": 1.8786966521890727,
+        "sampling_attempts": 1
+      },
+      "agent_initial_sha256": "3d7ca454a451f0f6e15c1faa3531212594071e6148a2093b2659c86d5596ee84",
+      "complete_initial_sha256": "d57ef87ae327efd776e1f76cccb92f1436b8701d545c035cc209b5100b2e386a"
+    },
+    {
+      "condition": "c_open_away",
+      "shape": "c_shape",
+      "angle_deg": 90,
+      "geometry_source": {
+        "path": "configs/sim/theorem/static_c_shape_n16_oracle.yaml",
+        "sha256": "d6b3fdbedad104eb99361c5fc28ac4ce63febe5fd3a475f3ead7b45544bd947f",
+        "normalization": "centroid recentered, isotropic equal polygon area"
+      },
+      "area_m2": 2.0587500000000007,
+      "mass_kg": 4.1175000000000015,
+      "inertia_kg_m2": 2.546568472416135,
+      "perimeter_m": 8.858595028691228,
+      "diameter_m": 2.460720841303119,
+      "reach_m": 1.293696652189097,
+      "vertices": 8,
+      "initial_centroid": [
+        3.9999999999999725,
+        4.00000000000007
+      ],
+      "task": {
+        "object_id": "cargo_0",
+        "direction": [
+          1.0,
+          0.0
+        ],
+        "angle_deg": 0.0,
+        "target_distance": 1.2,
+        "start": [
+          3.9999999999999725,
+          4.00000000000007
+        ],
+        "goal_point": [
+          5.199999999999973,
+          4.00000000000007
+        ],
+        "tolerance": 0.12,
+        "clearance": 1.878696652189097,
+        "sampling_attempts": 1
+      },
+      "agent_initial_sha256": "3d7ca454a451f0f6e15c1faa3531212594071e6148a2093b2659c86d5596ee84",
+      "complete_initial_sha256": "b5a35e2e2dbb73118820332635a8a51a680e788b15971f790e4e3af70e29a20b"
+    }
+  ],
+  "budgets": {
+    "minimum": {
+      "max_episodes": 3,
+      "workers": 2,
+      "wall_minutes_cap_proposed": 20,
+      "raw_storage_gib_reserve_proposed": 2
+    },
+    "recommended": {
+      "max_episodes": 6,
+      "workers": 2,
+      "wall_minutes_cap_proposed": 40,
+      "raw_storage_gib_reserve_proposed": 4
+    },
+    "extended_conditional": {
+      "max_episodes": 33,
+      "composition": "6 diagnostic + 27 candidate/CVT/spacing on all nine original conditions, seed2",
+      "diagnostic_workers": 2,
+      "candidate_workers_max": 8,
+      "wall_minutes_total_cap_proposed": 90,
+      "raw_storage_gib_reserve_proposed": 10
+    }
+  },
+  "later_conditional_not_in_33_budget": {
+    "new_development_blocks": {
+      "blocks": 3,
+      "episodes": 81,
+      "purpose": "replicability and crude variance/cost pilot, not independent validation",
+      "seed_list": "NOT_YET_FROZEN; new namespace, exclude all previously executed development/validation identities"
+    },
+    "noise_one_factor": {
+      "sentinel_conditions": [
+        "circle",
+        "c_open_away",
+        "rectangle_parallel"
+      ],
+      "levels_m": [
+        0.01,
+        0.02
+      ],
+      "arms": [
+        "candidate",
+        "local_spacing"
+      ],
+      "blocks": 3,
+      "additional_episodes_at_new_level": 18
+    },
+    "robot_count_one_factor": {
+      "sentinel_conditions": [
+        "circle",
+        "c_open_away",
+        "rectangle_parallel"
+      ],
+      "counts": [
+        16,
+        12
+      ],
+      "new_level_additional_episodes": 18,
+      "controller_quorum_changes": false
+    },
+    "ablation": "exact module and eligibility rules freeze after candidate selection",
+    "independent_validation": "N and fresh seed list not yet frozen; no auto-append-until-significant"
+  },
+  "recording_requirements": [
+    "execution/analysis source hashes and version, config, environment, full initial-state hashes",
+    "pre-control indices/time, phase guard time, post-agent/pre-cargo contact time and four physics substeps",
+    "actual selected observation ID, normal, nearest feature, ring, share, full nominal/filtered command",
+    "all mutable control states read/written in the isolated counterfactual, original map displacement/velocity/progress",
+    "original and oracle steering, direct vs derived field labels",
+    "task/G500/settled/contact/positive progress/termination/exception separately",
+    "all launched/planned cases, action infeasibility, paths, command-effort proxy, sensing and communication budgets",
+    "original safety predicates and raw inter-agent distance/penetration/QP diagnostics; no new success thresholds"
+  ],
+  "stop_conditions": [
+    "baseline scientific records change with shadow enabled",
+    "counterfactual state or timing incomplete",
+    "unauthorized truth input into deployable arm",
+    "source/config/initial-state/random-budget identity mismatch",
+    "new original hard safety-contract breach or program error blocks promotion",
+    "fixed episode/wall/storage budget exhausted; preserve partial output without silent retries"
+  ],
+  "update_rule": "New evidence appends a versioned result table; design changes create a new version and preserve this one. Never relabel development as holdout."
+}

@@ -1,0 +1,29 @@
+| Condition | Method | Deploy | Contact | Complete | G500 | Endpoint m | Time s | Failure |
+|---|---|---|---|---|---|---|---|---|
+| circle | CVT | True | True | False | True | 1.1772 | 13.50 | SETTLED_OUTSIDE_ENDPOINT_TOLERANCE |
+| circle | Nearest | True | True | False | False | 1.2144 | 13.85 | SETTLED_OUTSIDE_ENDPOINT_TOLERANCE |
+| circle | Spacing | True | True | False | True | 0.9055 | 12.65 | SETTLED_OUTSIDE_ENDPOINT_TOLERANCE |
+| ellipse_parallel | CVT | True | True | False | True | 0.8379 | 26.60 | SETTLED_OUTSIDE_ENDPOINT_TOLERANCE |
+| ellipse_parallel | Nearest | True | True | False | False | 1.3278 | 18.60 | SETTLED_OUTSIDE_ENDPOINT_TOLERANCE |
+| ellipse_parallel | Spacing | True | True | False | False | 0.9025 | 150.00 | WATCHDOG_TRANSPORT |
+| ellipse_perpendicular | CVT | True | True | False | True | 0.3557 | 13.40 | SETTLED_OUTSIDE_ENDPOINT_TOLERANCE |
+| ellipse_perpendicular | Nearest | True | True | False | True | 0.3213 | 11.90 | SETTLED_OUTSIDE_ENDPOINT_TOLERANCE |
+| ellipse_perpendicular | Spacing | True | True | False | False | 0.3937 | 12.20 | SETTLED_OUTSIDE_ENDPOINT_TOLERANCE |
+| rectangle_parallel | CVT | True | True | True | False | 0.0957 | 20.95 | COMPLETED |
+| rectangle_parallel | Nearest | True | True | False | False | 0.2168 | 30.15 | SETTLED_OUTSIDE_ENDPOINT_TOLERANCE |
+| rectangle_parallel | Spacing | True | True | True | False | 0.0607 | 24.05 | COMPLETED |
+| rectangle_perpendicular | CVT | True | True | True | True | 0.0389 | 20.05 | COMPLETED |
+| rectangle_perpendicular | Nearest | True | True | True | False | 0.0970 | 23.35 | COMPLETED |
+| rectangle_perpendicular | Spacing | True | True | True | True | 0.0300 | 17.65 | COMPLETED |
+| l_reference | CVT | True | True | True | False | 0.1117 | 24.15 | COMPLETED |
+| l_reference | Nearest | True | True | False | False | 0.1341 | 29.40 | SETTLED_OUTSIDE_ENDPOINT_TOLERANCE |
+| l_reference | Spacing | True | True | True | False | 0.1168 | 15.40 | COMPLETED |
+| l_rotated | CVT | True | True | True | False | 0.1195 | 42.95 | COMPLETED |
+| l_rotated | Nearest | True | True | False | False | 0.3062 | 150.00 | WATCHDOG_BRAKE |
+| l_rotated | Spacing | True | True | True | False | 0.1122 | 69.55 | COMPLETED |
+| c_open_toward | CVT | True | True | True | True | 0.1015 | 15.60 | COMPLETED |
+| c_open_toward | Nearest | True | True | True | False | 0.0493 | 17.35 | COMPLETED |
+| c_open_toward | Spacing | True | True | True | True | 0.0462 | 12.90 | COMPLETED |
+| c_open_away | CVT | True | True | False | False | 0.8460 | 150.00 | WATCHDOG_TRANSPORT |
+| c_open_away | Nearest | True | True | False | False | 0.4963 | 150.00 | WATCHDOG_TRANSPORT |
+| c_open_away | Spacing | True | True | False | False | 0.8180 | 150.00 | WATCHDOG_BRAKE |

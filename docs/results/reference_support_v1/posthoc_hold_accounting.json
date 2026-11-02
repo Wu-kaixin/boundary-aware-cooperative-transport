@@ -1,0 +1,89 @@
+{
+  "scope": "Exploratory fixed-order median accounting after the frozen screen; not used to revise gate or predict closed-loop success.",
+  "conditions": {
+    "far_c_open_away_pos0": [
+      {
+        "arm": "original",
+        "voters": 13,
+        "bootstrap_component_m": [
+          0.04011687728290955,
+          0.023302179400669976
+        ],
+        "rotation_component_m": [
+          0.031066837159705818,
+          0.004148471275064066
+        ],
+        "registration_remainder_m": [
+          0.004293347833314837,
+          0.004656064175967475
+        ],
+        "total_error_m": [
+          0.0754770622759302,
+          0.032106714851701516
+        ]
+      },
+      {
+        "arm": "support_gate",
+        "voters": 12,
+        "bootstrap_component_m": [
+          0.05928015652729954,
+          0.02333841773694477
+        ],
+        "rotation_component_m": [
+          0.043182035470357136,
+          0.006395891617670617
+        ],
+        "registration_remainder_m": [
+          0.0027380130191410473,
+          -0.000825113330700681
+        ],
+        "total_error_m": [
+          0.10520020501679772,
+          0.028909196023914705
+        ]
+      }
+    ],
+    "far_skew_box_s0_r0_pos0": [
+      {
+        "arm": "original",
+        "voters": 14,
+        "bootstrap_component_m": [
+          0.045419550828476804,
+          -0.02571515307127458
+        ],
+        "rotation_component_m": [
+          -0.017281394818832112,
+          0.004552563437523641
+        ],
+        "registration_remainder_m": [
+          0.09289888960408393,
+          0.0012377013770976351
+        ],
+        "total_error_m": [
+          0.12103704561372863,
+          -0.019924888256653304
+        ]
+      },
+      {
+        "arm": "support_gate",
+        "voters": 8,
+        "bootstrap_component_m": [
+          0.16746003073544877,
+          -0.026696210284317283
+        ],
+        "rotation_component_m": [
+          -0.01577906863525816,
+          -0.0035479727068031992
+        ],
+        "registration_remainder_m": [
+          -0.004157229864376333,
+          -0.002731331134440882
+        ],
+        "total_error_m": [
+          0.14752373223581428,
+          -0.032975514125561364
+        ]
+      }
+    ]
+  }
+}

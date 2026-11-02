@@ -1,0 +1,63 @@
+{
+  "figures": {
+    "all_episodes": {
+      "caption": "All eight previously consumed development conditions and four paired arms. Cells report safe task completion, Euclidean endpoint error, elapsed physical duration and the unchanged G500 verdict. A cutoff is not a completion time; the maximum observation is 600 s. These are selected conditions, not independent reliability trials.",
+      "inputs": {
+        "analysis.json": "b9c526aa8d31d7f3b403d4f3a9caa19c754f097d3a7b5193fc1aefff584faa3a"
+      },
+      "size_inches": [
+        7.2,
+        4.5
+      ],
+      "files": {
+        "pdf": "dda9567562d01ae3a7692306d183ecc3243e7eb444311a206e4ff3e977f43e67",
+        "svg": "adb9b6a1209aef4ac478ff8faf7bf0b474dd07b6370ff505509aea6f3ac5c0bf",
+        "png": "50dd88d565ac74dba400f88f71cfa8513afb3b1b005952de6389d6b8fc96c8f4"
+      }
+    },
+    "stop_and_bias": {
+      "caption": "Control-time aligned trajectories of the two preselected far-field cases, with all recorded samples and no smoothing. Top: true goal error (the dotted line is the original 0.12 m task tolerance). Bottom: signed controller displacement error along x. Circles indicate first HOLD; traces end at their actual termination. Different arms follow different trajectories, so these curves are not a same-input estimator comparison.",
+      "inputs": {
+        "runs\\maintenance\\2026-11-02-voter-continuity-v1\\timeseries\\far_skew_box_s0_r0_pos0_reference.csv": "bed6a896406683c2423770da73225cc69ba90c648654173e3c7d7ba5d9da67a0",
+        "runs\\maintenance\\2026-11-02-voter-continuity-v1\\timeseries\\far_skew_box_s0_r0_pos0_continuity.csv": "e69bdb7592e45236e710ebcbdf3fb1ae09f4e7b4050a0347cdc89e915f11cce0",
+        "runs\\maintenance\\2026-11-02-voter-continuity-v1\\timeseries\\far_skew_box_s0_r0_pos0_confirmation.csv": "19975f16f3526fff8cbccf93e1ed1b06ca98fd3d4428174528aacbdd5bbafdb8",
+        "runs\\maintenance\\2026-11-02-voter-continuity-v1\\timeseries\\far_skew_box_s0_r0_pos0_combined.csv": "4b4f0e92c326993c63ceb96ad9db5cc30b0669dbe388a16166c05b4a9e2fb677",
+        "runs\\maintenance\\2026-11-02-voter-continuity-v1\\timeseries\\far_c_open_away_pos0_reference.csv": "da7b26cee0210db8c941c29168cb941baaaace9839ac32d3c107b3d6b5def9f3",
+        "runs\\maintenance\\2026-11-02-voter-continuity-v1\\timeseries\\far_c_open_away_pos0_continuity.csv": "206ee3c28ae3cac16df5a5b0a29e4c9d6efefce8a25a5d06fbab8e0b3d775cdd",
+        "runs\\maintenance\\2026-11-02-voter-continuity-v1\\timeseries\\far_c_open_away_pos0_confirmation.csv": "baab45caa2d423ee47f0a276bffe7029bcee5515868efa2f3187e658afb3114d",
+        "runs\\maintenance\\2026-11-02-voter-continuity-v1\\timeseries\\far_c_open_away_pos0_combined.csv": "206ee3c28ae3cac16df5a5b0a29e4c9d6efefce8a25a5d06fbab8e0b3d775cdd"
+      },
+      "size_inches": [
+        7.2,
+        4.7
+      ],
+      "files": {
+        "pdf": "e14b376e7ac174a4af888580c539d79d5c688697143c621c35662ec4355da622",
+        "svg": "75bb1509924299e86a5cfce6b48ae91481017b046d22d4e7222430cbcc973552",
+        "png": "ea8d0704f0208fc2054e7fb9084f058358a3f21f8ab5b20ad7328f428b9faf6a"
+      }
+    },
+    "prior_error_accounting": {
+      "caption": "Exact signed error accounting from the first usable reference readout to first HOLD on the eight original recorded trajectories: initial error plus roster changes plus common-voter increment error equals total displacement error. Every case has one uninterrupted common-voter segment. The components are correlated bookkeeping terms, not independently identified causal effects. No extra simulation is represented.",
+      "inputs": {
+        "prior_log_audit.json": "a94d69f77c0c4827260bd45a85bff3dd18cb23f2677eadb5514db69ae2f5a902"
+      },
+      "size_inches": [
+        7.2,
+        4.7
+      ],
+      "files": {
+        "pdf": "b9a8fb68292b235b430054e7b1e71bb49c5a8f89893cef27d085529329018cf5",
+        "svg": "e9d346bfd59b427feae5f74c64d812f53cc3a4f7305388d5f91cbb849aba3043",
+        "png": "dd2e83cd710da3d64a7160a1c17bf33e5c1d888b8a393083a522b570476a01a3"
+      }
+    }
+  },
+  "script_sha256": "13dc61d0ee3bd1dafacd4481713efd80686e0a7d581e3bf67d614887bc74c5a4",
+  "formats": [
+    "PDF embedded TrueType",
+    "SVG text",
+    "PNG 220dpi"
+  ],
+  "sampling": "Full recorded control-time rows; no smoothing or synthetic points. Statistical unit is a condition block, not a frame."
+}

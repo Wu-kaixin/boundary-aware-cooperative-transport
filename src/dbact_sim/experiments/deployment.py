@@ -18,6 +18,7 @@ import subprocess
 import tempfile
 
 from dbact_sim.experiments.paths import repository_root
+from dbact_sim.experiments.shapes import SHAPES, CARGO_FAMILIES, smooth_outline, cargo_outline
 
 ROOT = repository_root()
 import numpy as np
@@ -75,6 +76,22 @@ class NearestObservedDeployment:
 
 
 def config_for(gate, shape):
+    if shape not in SHAPES:
+        raise ValueError(f"Unsupported shape: {shape}")
+    if shape in ("circle", "ellipse24") or shape in CARGO_FAMILIES:
+        # Add geometry to the existing common configuration; do not import an
+        # old circle scenario's sensing, feedback, physics or success settings.
+        from dbact.cargo import Cargo
+        from dbact_sim.scenarios import build_cargoes
+        base = config_for(gate, "l_shape")
+        reference = build_cargoes(config_for(6, "l_shape"), seed=0)[0]
+        outline = cargo_outline(shape) if shape in CARGO_FAMILIES else smooth_outline(shape)
+        scale = np.sqrt(reference.area / Cargo("probe", outline).area)
+        base["cargoes"] = [{"id": "cargo_0", "shape": "polygon",
+                            "vertices": (outline * scale + [4.0, 4.0]).tolist(),
+                            "surface_density": reference.surface_density,
+                            "movable": gate != 5}]
+        return base
     path = (ROOT / f"configs/sim/theorem/static_{shape}_n16_oracle.yaml" if gate == 5
             else ROOT / "configs/sim/d/l_shape_closed_loop.yaml")
     cfg = yaml.safe_load(path.read_text(encoding="utf-8"))
@@ -196,8 +213,28 @@ def static_arm(cfg, seed, variant, frames, out):
     return result
 
 
+def install_initial_location_hint(controller, agents, hint):
+    """Explicit location-information ablation, never an implicit truth lookup.
+
+    The configured one-shot location packet expires under the existing token
+    TTL. It contains neither an outline nor ongoing object pose feedback.
+    Unknown-location runs omit it. This helper only consumes the given packet.
+    """
+    if hint is None:
+        return
+    if not isinstance(hint, dict) or set(hint) != {'object_id','position'}:
+        raise ValueError('Initial location hint requires only object_id and position')
+    oid = hint['object_id']
+    position = np.asarray(hint['position'],dtype=float)
+    if oid not in controller.tasks or position.shape != (2,) or not np.isfinite(position).all():
+        raise ValueError('Invalid explicit location hint')
+    for agent in agents:
+        controller._tokens.setdefault(agent.agent_id,{})[oid] = (position.copy(),0.)
+
+
 def transport_arm(cfg, seed, variant, frames, out):
     env = SimulationEnvironment(cfg, seed=seed)
+    install_initial_location_hint(env.controller,env.agents,cfg.get('experiment_initial_location_hint'))
     penalty_capacity = env.engine.name == "penalty"
     from dbact.deployment.variants import DeploymentVariant
     if variant != "boundary_cvt":
@@ -236,6 +273,14 @@ def transport_arm(cfg, seed, variant, frames, out):
         physical_streak = physical_streak + 1 if positive_contacts >= gates.contact_quorum else 0
         if physical_ready is None and physical_streak >= gates.contact_dwell:
             physical_ready = frame
+        navigation = current.controller.team_navigation
+        navigation_record = None if navigation is None else {
+            "displacement": navigation.displacement.tolist(),
+            "velocity": navigation.velocity.tolist(),
+            "error": navigation.error.tolist(),
+            "remaining": float(navigation.remaining),
+            "voters": list(navigation.voters),
+        }
         if hasattr(current.engine, 'model'):
             substep_rows.extend({'frame':frame, **r} for r in current.engine.model.last_substeps)
         rows.append({"frame": frame, "contacts": report.contact_count,
@@ -252,6 +297,9 @@ def transport_arm(cfg, seed, variant, frames, out):
                      "phase":current.controller.phase.name,
                      "phase_guards":vars(current.controller.phase_signals).copy(),
                      "phase_response":current.controller.phase_monitor.as_dict(),
+                     "navigation_supervisor":navigation_record,
+                     "navigation_voter_trace":current.controller.navigation_voter_trace,
+                     "hold_confirmation_streak":current.controller.phase_monitor.settle_streak,
                      "progress_quality":{key: dict(value) for key, value in current.controller._progress_quality.items()},
                      "robot_positions":[a.position.tolist() for a in current.agents],
                      "commands":[a.velocity.tolist() for a in current.agents],
@@ -291,6 +339,51 @@ def transport_arm(cfg, seed, variant, frames, out):
               "g500_success": gate["success"], "failure_reasons": gate["failure_reasons"],
               "capacity_label": "normal-only instantaneous contact wrench box, 0 <= f_i <= stiffness*delta_max; not dynamically guaranteed" if penalty_capacity else "NOT_APPLICABLE: a penalty spring force bound is not a rigid-contact impulse bound",
               "changed_mechanism": "Only centroid target before CONTACT_READY; CVT mass, redeployment guards, sensing, safety and subsequent transport identical"}
+    result["reference_initializations"] = {
+        aid: tracker.initialization_record() for aid, tracker in env.controller._reference_trackers.items()
+    }
+    if (env.controller.params.reference_early_anchor
+            or env.controller.params.reference_bootstrap_gain is not None):
+        result["changed_mechanism"] = (
+            "Reference-origin ablation: early_anchor=" + str(env.controller.params.reference_early_anchor)
+            + ", bootstrap_gain=" + str(env.controller.params.reference_bootstrap_gain)
+            + ". Same own/one-hop observations; reference feedback selected only after CONTACT_READY. "
+            "No zero-motion assumption, truth, attachment, threshold, safety-map, physics or independent evaluation change.")
+    elif env.controller.params.aggregate_frame_consistent:
+        result["changed_mechanism"] = (
+            "Normalize the aggregated observed plane normal and offset consistently, "
+            "evaluated in robot-relative coordinates. Face selection, row count, normal, "
+            "motion estimate, safety radii/margins/gains, QP solver and relaxation tiers, "
+            "pressure law, physical model and all arrival/settling/evaluation criteria unchanged. "
+            "Common reference readout and contact-distance options are recorded in config; "
+            "this is an engineering correction, not a new safety certificate.")
+    elif env.controller.params.reference_radial_pivot or env.controller.params.contact_patch_distance:
+        result["changed_mechanism"] = (
+            "Independent geometry readout factors: radial-reference="
+            + str(env.controller.params.reference_radial_pivot)
+            + ", own-scan patch-distance=" + str(env.controller.params.contact_patch_distance)
+            + ". Registration fit/admission, pressure gains, mapped normals, QP inputs/thresholds, physics and stopping criteria unchanged. No reference-center truth, force feedback or extra observations.")
+    elif env.controller.params.contact_reinforcement:
+        result["changed_mechanism"] = "Recovery repair plus incumbent patch retention and bounded one-hop spare recruitment along observed offset patches; no donor release or pressure normalization. Original pressure law, reference estimator, safety, physics and independent stopping/evaluation unchanged. Group motion response is not an individual contact-force certificate."
+    elif env.controller.params.contact_recovery_fix:
+        result["changed_mechanism"] = "Only suspended recovery uses prospective local geometric push eligibility independent of the disabled push command; original quorum/dwell/pause timeout and all braking/holding criteria unchanged. Not a physical contact certificate."
+    elif env.controller.params.navigation_estimator == "observed_reference":
+        result["changed_mechanism"] = "Replace vector-CVT transport displacement/velocity readout by a persistent own/one-hop observed-reference SE(2) match after CONTACT_READY; bootstrap offset inherited, missing/rejected matches abstain; original map/barrier velocity, physics, phase gates, arrival tube and independent success unchanged"
+    elif env.controller.params.navigation_estimator.startswith("observed_reference_"):
+        result["changed_mechanism"] = ("Experimental common-reference-admission channel ablation: "
+            + env.controller.params.navigation_estimator
+            + "; old values on new admission are diagnostic controls, not the original method. "
+              "No change to reference fitting, deployment, safety maps/velocity, physics, phase gates or success criteria.")
+    elif env.controller.params.boundary_navigation == "vector_goal":
+        result["changed_mechanism"] = "Experimental one-hop full-vector goal feedback, adaptive unilateral push membership and matching boundary offsets, 2D estimated control arrival tube and recoverable local pre-HOLD latch; sensing/physics/safety/independent success unchanged"
+    elif env.controller.params.boundary_navigation == "adaptive_arc":
+        result["changed_mechanism"] = "Only push membership uses the existing steered direction; original scalar feedback, phase/stop, deployment, physics, safety and evaluation unchanged"
+    elif env.controller.params.confirmed_contact_handoff:
+        result["changed_mechanism"] = "One-hop acknowledged contact handoff with local motion/gap proxy, incumbent retention and rollback; default pressure law outside the pair, unchanged sensing/physics/safety/phase/evaluation"
+    elif env.controller.params.dynamic_contact_roles:
+        result["changed_mechanism"] = "Experimental local nonnegative contact allocation and bounded observed-patch redeployment; sensing, physics, safety constraints and evaluation unchanged"
+    elif env.controller.params.transport_safety_feedback:
+        result["changed_mechanism"] = "Restore the existing transport integrator's previous-frame safety modification feedback; no contact-role change"
     errors=progress_errors(env.tasks[cid].start, env.cargoes[0].position, goal, env.tasks[cid].distance)
     events={name:event_record(summary['phases']['entered'].get(name),env.dt,termination['frames_run']) for name in ('SEARCH','DISCOVER','ENCLOSE','CONTACT_READY','TRANSPORT','BRAKE','HOLD')}
     phases=list(events)
@@ -307,6 +400,18 @@ def transport_arm(cfg, seed, variant, frames, out):
         "final_estimated_progress":rows[-1]["estimated_progress"] if rows else None,
         "moving_safety_status":"UNRESOLVED: discrete physics substeps, no continuous certificate"})
     result["contact_reporting"] = getattr(env.engine, "contact_reporting", "start_of_control_hold_penalty_force")
+    if 'experiment_initial_location_hint' in cfg:
+        result['initial_location_information'] = {
+            'permission':'known initial location only; explicit one-shot packet',
+            'packet':cfg['experiment_initial_location_hint'],
+            'ttl_seconds':env.controller.params.token_ttl,
+            'geometry_prior':False,'continuous_truth_feedback':False}
+    if variant == 'detection_density_cvt':
+        result['deployment_control'] = ('Fresh detecting-agent Gaussian support, own/one-hop only; '
+            'same kernel mass, width and background, original CVT mass/guards; before CONTACT_READY only. '
+            'Mechanism adaptation, not a reproduction of a complete published transport method.')
+    if env.controller.params.reference_innovation_trim:
+        result['reference_trim_candidate'] = 'Innovation after preliminary SE(2) fit; original thresholds, no truth'
     dump(out / "physics_substeps.json", substep_rows)
     dump(out / "paired_metrics.json", {"steps": rows, "summary": result})
     dump(out / "config.json", cfg)
@@ -340,7 +445,7 @@ def run_pair(payload):
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--gate", type=int, choices=(5, 6), required=True)
-    parser.add_argument("--shapes", nargs="+", choices=("l_shape", "rectangle", "c_shape"), default=["l_shape", "rectangle", "c_shape"])
+    parser.add_argument("--shapes", nargs="+", choices=SHAPES, default=["l_shape", "rectangle", "c_shape"])
     parser.add_argument("--seeds", nargs="+", type=int, default=[2, 5, 8])
     parser.add_argument("--frames", type=int, default=None)
     parser.add_argument("--workers", type=int, default=4)

@@ -1,0 +1,29 @@
+{
+  "script_sha256": "c6ffeca1c721e6765dc1e0aefe218504f8e40a853764bd93c5e0ab83c94fc5c0",
+  "figures": {
+    "paired_errors": {
+      "caption": "Paired displacement errors on eight original development trajectories. Both estimators receive identical reconstructed own/one-hop scans and original initialization metadata, with candidate-specific admission and internal state. MAE uses times when both team estimates are available; the candidate is available at all originally available evaluation times in this batch. Frames and local readouts are not independent trials; these are not closed-loop improvements.",
+      "analysis_sha256": "d9ba75bc6356887a67482909ecd106ee1941ef2e1b8ac2a712be466f52ec66dc",
+      "files": {
+        "pdf": "544800623c2dd0fba1566d0c2723416ca8cbd4be3308744ec5c814637daeba19",
+        "svg": "795678837af2264e6e8e200fe6807401c036f9f6a09ec529146ad3824139c9aa",
+        "png": "df931c790683838a921e9a29abace2412fd9e3cd478b89bb4bb5645d685402c0"
+      }
+    },
+    "far_goal_readouts": {
+      "caption": "Goal-distance estimates and evaluation truth on the original C and skew-box trajectories. All recorded physical times are shown without smoothing; NaNs are gaps. Dotted lines mark the original controller HOLD, not a candidate stopping event. The offline candidate rejects the original skew-box position gate at that time, but its subsequent closed-loop trajectory and completion were not executed.",
+      "analysis_sha256": "d9ba75bc6356887a67482909ecd106ee1941ef2e1b8ac2a712be466f52ec66dc",
+      "files": {
+        "pdf": "8e1ea9ab529cb857a3251db47da6d9846ba5cba32d4afc1ab878582a526ced83",
+        "svg": "2b8f54a6b297de26a1c891f5212f6a90470babfcf8bd67b620b1a2dbfad5443f",
+        "png": "2107b5d30423b4c8afd55c473872a935c8ec1e18c4b8faa224645c8755cb4464"
+      }
+    }
+  },
+  "formats": [
+    "PDF embedded fonts",
+    "SVG text",
+    "PNG 220dpi"
+  ],
+  "smoothing": "none"
+}

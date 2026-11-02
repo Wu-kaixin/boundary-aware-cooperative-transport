@@ -1,0 +1,37 @@
+{
+  "script_sha256": "ddb04321fed97c8aae815bfdb35cd7827560ddfa8df16e9efe13829a1ad73d14",
+  "figures": {
+    "same_input_errors": {
+      "caption": "Mean displacement error on each original trajectory, evaluated at identical post-ready times and with the same original accepted voters. Each row uses one recorded episode; columns after Recorded use evaluation truth to replace registration or remove per-agent bootstrap/point-rotation error before taking the coordinate median. They are not deployable estimators or new task outcomes. Rows are two reused far-field conditions under three historical arms, not six independent reliability trials.",
+      "size_inches": [
+        7.2,
+        3.35
+      ],
+      "analysis_sha256": "db4d4d73d2d956c39adc0fe3744fed78bca874f2d555a2d94eaf1b0518c5e899",
+      "files": {
+        "pdf": "49929e2fa7df9461fa9a9262bbf0a8d26f0e8429f52fb80626f21f2dd2460b1c",
+        "svg": "22020bb8cf94df1b96ee9e462e6c56fcb02a52835ee49a10a0984f867cd1de42",
+        "png": "275420318c1e9e351efa7391c2a20624f9effbc637cef4d0c52992f8c306e72a"
+      }
+    },
+    "residual_vs_motion_error": {
+      "caption": "Local registration readout error versus the accepted fit residual at predeclared first-post-ready, BRAKE, HOLD, final, and maximum-team-remainder probes. Only original actual voters are shown; all probe records are provided in CSV. Small residuals coexist with large rigid-motion errors. Points are correlated diagnostic observations, not independent experimental samples. The gate/trim set may differ at the evaluator true pose, so cross-pose residuals alone do not rank correspondence quality.",
+      "size_inches": [
+        7.2,
+        3.9
+      ],
+      "analysis_sha256": "db4d4d73d2d956c39adc0fe3744fed78bca874f2d555a2d94eaf1b0518c5e899",
+      "files": {
+        "pdf": "8eda97e0f800d5d421269d2df77ec4e7a437d5561fd41d1352cc08654dede8f6",
+        "svg": "b900bea1c5a23e84c9f46b36f13493b391d8439584cfa8cdb05f019fc808b7c4",
+        "png": "2d8e740fb994d08a697cde6d3734b3f4ad2de0f5ece8376cca0dc56ccf28d8fc"
+      }
+    }
+  },
+  "formats": [
+    "PDF embedded fonts",
+    "SVG text",
+    "PNG 220 dpi"
+  ],
+  "smoothing": "None"
+}

@@ -1,0 +1,22 @@
+{
+  "captions": {
+    "known_condition_pairs": "Paired endpoint errors for all 33 previously used near-field conditions with boundary CVT. Historical executions are reused only after configuration and product verification and retain their original identities; 25 missing candidate episodes are newly executed. The logarithmic axis includes all endpoints and the unchanged 0.12 m task tolerance. These development conditions do not estimate out-of-distribution reliability.",
+    "new_start_outcomes": "All 72 episodes in 12 predeclared new-start condition blocks. Each block pairs three deployment modules and two motion-estimation priors using identical physical initialization. S denotes safe task completion, G the unchanged G500 contract, F incomplete tasks, and H hard-safety violations; endpoint errors include failures. One fixed new seed and designed geometries are used, without population confidence intervals."
+  },
+  "inputs": {
+    "regression": "b290644d199bd985b5dcfeb062c62ebcc4f4ed08f47c080d10ad30ad93b3bb9b",
+    "new_starts": "7ed2af25f7b96592187e51b589a3a7d46fb2f4919e863c1758d079ab48982e3b"
+  },
+  "script_sha256": "c4265f01575c8b9d9040ceb237a39c1779a0c602011c7367f34ae09794f62825",
+  "smoothing": "None",
+  "downsampling": "None: every episode",
+  "intervals": "None: shared-seed designed condition blocks, not iid arbitrary-shape draws",
+  "artifacts": {
+    "known_condition_pairs.pdf": "e21faedf38cebc9c900c27a8a76215d11114be3fb8d692732553f856016c4f25",
+    "known_condition_pairs.png": "8e5241ccb3001688c5231794d504239d8665c01d03adce6b8d26d4cfd8a62339",
+    "known_condition_pairs.svg": "eb6cdc6e5c14e3457bab02b1ec1af28ba7b72e907410160bf9dea70d576ac438",
+    "new_start_outcomes.pdf": "3e7a1e977751c7b590b0343ddb7287449ae2de82a9a24e1803963f7133cb26ef",
+    "new_start_outcomes.png": "c01ec03d69178063c38e9aad5eb9eefce92c869ce8d02a23c852871e58f68cf0",
+    "new_start_outcomes.svg": "536391323fd6bbfb5e06c253e0867fc562394d7f3a167b3107584369e40c9011"
+  }
+}

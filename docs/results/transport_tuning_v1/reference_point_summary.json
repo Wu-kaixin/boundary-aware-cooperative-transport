@@ -1,0 +1,372 @@
+{
+  "cases": {
+    "near/circle_boundary_cvt": {
+      "case": "near/circle_boundary_cvt",
+      "accepted_readouts": 2164,
+      "local_components": {
+        "bootstrap": {
+          "mean_signed_xy_m": [
+            0.02777440098913015,
+            0.0008145709414623118
+          ],
+          "mean_norm_m": 0.0301256779340846
+        },
+        "material_point_rotation": {
+          "mean_signed_xy_m": [
+            0.0,
+            0.0
+          ],
+          "mean_norm_m": 0.0
+        },
+        "registration": {
+          "mean_signed_xy_m": [
+            -0.0015523715025734155,
+            0.00040006666640872245
+          ],
+          "mean_norm_m": 0.003207522077094992
+        },
+        "total": {
+          "mean_signed_xy_m": [
+            0.026222029486556726,
+            0.0012146376078710369
+          ],
+          "mean_norm_m": 0.030315437797355124
+        }
+      },
+      "maximum_vector_identity_residual_m": 1.1102230246251565e-16,
+      "maximum_team_aggregation_residual_m": 0.0,
+      "final": {
+        "time_s": 17.700000000000117,
+        "actual_error_m": 0.02816957344081408,
+        "perfect_registration_error_m": 0.030469812426802256,
+        "aggregation_registration_residual_m": 0.0023758739467822955,
+        "actual_error": [
+          0.028044485656938845,
+          0.0026517337866327137
+        ],
+        "perfect_reference_bias": [
+          0.03027004010421286,
+          0.0034834094525131934
+        ],
+        "registration_residual": [
+          -0.002225554447274014,
+          -0.0008316756658804797
+        ]
+      },
+      "team_mean_actual_error_m": 0.02850876856406964,
+      "team_mean_perfect_registration_error_m": 0.02939776607627482,
+      "inputs": {
+        "resolved_case.json": "f58bc93acd71aaebefdac8597f7f0bbe7025cb2063eac428cd51878eac9aa32e",
+        "paired_metrics.json": "73b75698f58bd6263250b13a72de573af468cf7880788e35eae36e1878f91e76",
+        "replay.npz": "a51099d636c9f57ae998976b4e48c174801f405b32326bcd4f40fba31c0b3b54"
+      }
+    },
+    "near/ellipse_parallel_boundary_cvt": {
+      "case": "near/ellipse_parallel_boundary_cvt",
+      "accepted_readouts": 1871,
+      "local_components": {
+        "bootstrap": {
+          "mean_signed_xy_m": [
+            -0.0044239174707109315,
+            -0.005397929782291221
+          ],
+          "mean_norm_m": 0.03680877534324608
+        },
+        "material_point_rotation": {
+          "mean_signed_xy_m": [
+            6.207553551154603e-05,
+            5.835474250945514e-05
+          ],
+          "mean_norm_m": 0.0002664832558296468
+        },
+        "registration": {
+          "mean_signed_xy_m": [
+            -0.054138249914990444,
+            -0.00804819626602065
+          ],
+          "mean_norm_m": 0.05675237567613666
+        },
+        "total": {
+          "mean_signed_xy_m": [
+            -0.058500091850189895,
+            -0.013387771305802385
+          ],
+          "mean_norm_m": 0.08986823791529315
+        }
+      },
+      "maximum_vector_identity_residual_m": 1.6414820891430537e-16,
+      "maximum_team_aggregation_residual_m": 0.0,
+      "final": {
+        "time_s": 13.500000000000057,
+        "actual_error_m": 0.008634199306293533,
+        "perfect_registration_error_m": 0.008657496246370362,
+        "aggregation_registration_residual_m": 0.000529444897254718,
+        "actual_error": [
+          -0.0017755950681432875,
+          -0.008449654419843746
+        ],
+        "perfect_reference_bias": [
+          -0.0022951364394516727,
+          -0.008347729630277804
+        ],
+        "registration_residual": [
+          0.0005195413713083852,
+          -0.0001019247895659419
+        ]
+      },
+      "team_mean_actual_error_m": 0.03332211429649272,
+      "team_mean_perfect_registration_error_m": 0.01387072394801484,
+      "inputs": {
+        "resolved_case.json": "602385c8fcd51117f1c76b03ccf68213edc9ea44e703143c145be4fba5d0ca40",
+        "paired_metrics.json": "419a5495b36e82cc5e1afe8d1d603e507a4096eab8c26a9963985b5514752071",
+        "replay.npz": "932774df3e748654f8b68d504d07fe533644f7206aa16d71d399e44f04e49dd1"
+      }
+    },
+    "near/c_open_away_boundary_cvt": {
+      "case": "near/c_open_away_boundary_cvt",
+      "accepted_readouts": 2850,
+      "local_components": {
+        "bootstrap": {
+          "mean_signed_xy_m": [
+            0.01809336472153464,
+            0.013193217632129509
+          ],
+          "mean_norm_m": 0.04492007491582798
+        },
+        "material_point_rotation": {
+          "mean_signed_xy_m": [
+            0.000606222966088907,
+            0.0005934534204520871
+          ],
+          "mean_norm_m": 0.006949742736080651
+        },
+        "registration": {
+          "mean_signed_xy_m": [
+            -0.39006596857863196,
+            0.0028208761558963023
+          ],
+          "mean_norm_m": 0.39079132328293037
+        },
+        "total": {
+          "mean_signed_xy_m": [
+            -0.3713663808910091,
+            0.016607547208477538
+          ],
+          "mean_norm_m": 0.39822279544131084
+        }
+      },
+      "maximum_vector_identity_residual_m": 4.440892098500626e-16,
+      "maximum_team_aggregation_residual_m": 0.0,
+      "final": {
+        "time_s": 46.4499999999995,
+        "actual_error_m": 0.8249241093801651,
+        "perfect_registration_error_m": 0.026389420283760855,
+        "aggregation_registration_residual_m": 0.8469598723971191,
+        "actual_error": [
+          -0.8248878250870135,
+          0.007737070496980438
+        ],
+        "perfect_reference_bias": [
+          0.02204499937929727,
+          0.014505843832047546
+        ],
+        "registration_residual": [
+          -0.8469328244663108,
+          -0.006768773335067108
+        ]
+      },
+      "team_mean_actual_error_m": 0.6421100788690745,
+      "team_mean_perfect_registration_error_m": 0.02790178789952346,
+      "inputs": {
+        "resolved_case.json": "a7f26cbbd7f826d20ccfff0578fe1185166ddee712b2d302b015c90e586f79c9",
+        "paired_metrics.json": "7eb82e731f79af7593e11b3cb950b57ebf869b317a489e97e515bdb9d5d362ee",
+        "replay.npz": "fbf0f977682a2d5bb478a7078f9c88cbd760145c1bf848a3b5a2b2becab92c43"
+      }
+    },
+    "near/u_tray_s0_r90_boundary_cvt": {
+      "case": "near/u_tray_s0_r90_boundary_cvt",
+      "accepted_readouts": 5763,
+      "local_components": {
+        "bootstrap": {
+          "mean_signed_xy_m": [
+            -0.0397169442997751,
+            0.02008663449526848
+          ],
+          "mean_norm_m": 0.09180328849897736
+        },
+        "material_point_rotation": {
+          "mean_signed_xy_m": [
+            -0.03253150612510986,
+            -0.002797930961678772
+          ],
+          "mean_norm_m": 0.06496959484888977
+        },
+        "registration": {
+          "mean_signed_xy_m": [
+            -0.5520989139609517,
+            -0.04147224377471963
+          ],
+          "mean_norm_m": 0.5555441042152323
+        },
+        "total": {
+          "mean_signed_xy_m": [
+            -0.6243473643858368,
+            -0.024183540241130747
+          ],
+          "mean_norm_m": 0.6513964709650637
+        }
+      },
+      "maximum_vector_identity_residual_m": 4.440892098500626e-16,
+      "maximum_team_aggregation_residual_m": 0.0,
+      "final": {
+        "time_s": 56.699999999998916,
+        "actual_error_m": 0.21539712493642485,
+        "perfect_registration_error_m": 0.10672892830584216,
+        "aggregation_registration_residual_m": 0.1086735204582377,
+        "actual_error": [
+          -0.21350624728833933,
+          -0.0284781284449718
+        ],
+        "perfect_reference_bias": [
+          -0.1056892300307064,
+          -0.014861049519802577
+        ],
+        "registration_residual": [
+          -0.10781701725763293,
+          -0.013617078925169224
+        ]
+      },
+      "team_mean_actual_error_m": 0.8386914394058862,
+      "team_mean_perfect_registration_error_m": 0.09078815072570023,
+      "inputs": {
+        "resolved_case.json": "584b68a1107f984cf8d7157c18a8a0f4bd5a3332ec650f697f4b880d9f8eff4f",
+        "paired_metrics.json": "8748dc3f6eef68090124499a42de97e31718a49e888028165366a9329288083a",
+        "replay.npz": "083b06d0fe5ed04cbf1a08cfa676b6b7014fb056e0a508f7b6f8ee89ba7706a8"
+      }
+    },
+    "far/skew_box_s0_r0_pos0_unknown_location": {
+      "case": "far/skew_box_s0_r0_pos0_unknown_location",
+      "accepted_readouts": 10611,
+      "local_components": {
+        "bootstrap": {
+          "mean_signed_xy_m": [
+            -0.012857826084422336,
+            -0.02388810774512728
+          ],
+          "mean_norm_m": 0.0766214058249832
+        },
+        "material_point_rotation": {
+          "mean_signed_xy_m": [
+            0.012479373674796495,
+            0.010258450753993714
+          ],
+          "mean_norm_m": 0.017219475358449664
+        },
+        "registration": {
+          "mean_signed_xy_m": [
+            -0.10114650344730955,
+            -0.0018029722607164076
+          ],
+          "mean_norm_m": 0.15389805541871113
+        },
+        "total": {
+          "mean_signed_xy_m": [
+            -0.10152495585693658,
+            -0.015432629251848736
+          ],
+          "mean_norm_m": 0.2039460264918374
+        }
+      },
+      "maximum_vector_identity_residual_m": 2.220446049250313e-16,
+      "maximum_team_aggregation_residual_m": 0.0,
+      "final": {
+        "time_s": 60.09999999999872,
+        "actual_error_m": 0.4268948835716489,
+        "perfect_registration_error_m": 0.016918429750195578,
+        "aggregation_registration_residual_m": 0.4370188863000473,
+        "actual_error": [
+          -0.42524699972635327,
+          -0.03747306824089247
+        ],
+        "perfect_reference_bias": [
+          0.011074293429045756,
+          -0.012790359270157224
+        ],
+        "registration_residual": [
+          -0.436321293155399,
+          -0.024682708970735247
+        ]
+      },
+      "team_mean_actual_error_m": 0.14745399236459444,
+      "team_mean_perfect_registration_error_m": 0.017563838235210412,
+      "inputs": {
+        "resolved_case.json": "3e499d356fd82626198aa31ea184eb9f63e3219cb18507d8d44ba6a7a857dbb2",
+        "paired_metrics.json": "3735176d2a252f6a875557e61cf9954c2e04f0d4b5dee34736af777f84b62594",
+        "replay.npz": "ace81a0162349f68d9c1d58f68dc47e2d09252c32d0326ae2bfa1fc2ded6fc97"
+      }
+    },
+    "far/c_open_away_pos1_initial_location_hint": {
+      "case": "far/c_open_away_pos1_initial_location_hint",
+      "accepted_readouts": 56998,
+      "local_components": {
+        "bootstrap": {
+          "mean_signed_xy_m": [
+            0.01585727876944255,
+            0.01522299766223528
+          ],
+          "mean_norm_m": 0.09670066368509093
+        },
+        "material_point_rotation": {
+          "mean_signed_xy_m": [
+            0.3176008555518345,
+            0.018890165682987667
+          ],
+          "mean_norm_m": 0.35504392014897596
+        },
+        "registration": {
+          "mean_signed_xy_m": [
+            -0.023189787689441136,
+            0.04147879928085555
+          ],
+          "mean_norm_m": 0.15990533084149083
+        },
+        "total": {
+          "mean_signed_xy_m": [
+            0.310268346631826,
+            0.07559196262607354
+          ],
+          "mean_norm_m": 0.45018926148759736
+        }
+      },
+      "maximum_vector_identity_residual_m": 4.440892098500626e-16,
+      "maximum_team_aggregation_residual_m": 0.0,
+      "final": {
+        "time_s": 304.85000000003504,
+        "actual_error_m": 2.402631161956943,
+        "perfect_registration_error_m": 1.0768749195783,
+        "aggregation_registration_residual_m": 1.9831266024334706,
+        "actual_error": [
+          0.7292952803250397,
+          2.2892716952127357
+        ],
+        "perfect_reference_bias": [
+          -0.6466312461358902,
+          0.8611199823122884
+        ],
+        "registration_residual": [
+          1.3759265264609297,
+          1.428151712900447
+        ]
+      },
+      "team_mean_actual_error_m": 0.5891687613281125,
+      "team_mean_perfect_registration_error_m": 0.4578803749276796,
+      "inputs": {
+        "resolved_case.json": "0034c468f674fa95b4d40f48aa1d30088041fa9cf0872f10f82d428eae0e703a",
+        "paired_metrics.json": "a12e72a9e45fed58e2872a120f12a4e111657582416cb58adbbf6dd0a251b5ca",
+        "replay.npz": "f31fa9de538872714e1cc4273966089290a19723daddd564b4721dff6ea2fb3c"
+      }
+    }
+  },
+  "scope": "Offline exact rigid-geometry counterfactual on the observed reference points. Same historical accepted voters; no new controller or physical run. Ground truth is only an analysis input. Norms of signed components cannot be added. Frames/readouts are not independent experiments.",
+  "full_audit_sha256": "efcf5300fab9066491746fc6dd87caaa86baf7f858dd4bfc3166bcdbe4006e3f"
+}

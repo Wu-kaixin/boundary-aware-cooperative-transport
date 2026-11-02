@@ -1,0 +1,23 @@
+{
+  "kind": "EXISTING_LOG_AND_SOURCE_AUDIT_NO_NEW_PHYSICS",
+  "phase_signal_ast_unchanged": true,
+  "pushing_expression_ast_unchanged": true,
+  "predicate_mismatch_count": 0,
+  "first_mismatches": [],
+  "paused_frames": 80,
+  "paused_start_s": 13.900000000000063,
+  "paused_last_s": 17.85000000000012,
+  "all_paused_actual_pushers_zero": true,
+  "all_paused_active_signals_zero": true,
+  "maximum_shadow_eligible_quorum_streak_during_pause": 0,
+  "current_recovery_dwell": 20,
+  "structural_finding": "In this vector transport path, active uses previous enacted push_side flags. push_suspended forbids all pushing, so after one hold the active count cannot reach transport_quorum and contact regain cannot accumulate. BRAKE eventually clears the suspension; that is not a successful TRANSPORT resume.",
+  "interpretation": "Shadow eligibility removes ONLY the global pause predicate; it is not physical contact confirmation or proof that resuming would be safe or successful. A structural unreachable guard does not show that fixing it rescues this recorded case.",
+  "sources": {
+    "runs\\research\\2026-11-01-displacement-stop-v1\\run\\source_snapshot\\src\\dbact\\control\\controller.py": "6f03211aa21127c93cbe0c8b6035d839b5983c94556d80a0752a3188c882293e",
+    "src\\dbact\\control\\phase.py": "94e36e3f61c7285d496ec130d6a6c85a6cd09475e433a1c2a0a1a1ce7a2be833",
+    "runs\\research\\2026-11-01-displacement-stop-v1\\run\\c_open_away_reference_cvt\\paired_metrics.json": "3a105405d7aae6d6d906c3b26b710e8fca69bf3c96d2650f351d8ac88b331f99",
+    "runs\\research\\2026-11-01-displacement-stop-v1\\run\\c_open_away_reference_cvt\\replay.npz": "ff1e55b36c0b67df05c18bdc1f51750e3823ab16b615dc1122d62c761c42d77f",
+    "artifacts\\migrations\\2026-11-01-feedback-components-v1\\execution_helpers\\review_recovery_loop.py": "a8ed7784c9223f50ce2d47384f57821cee4edd24def1909b8f0919e5eb0550a7"
+  }
+}

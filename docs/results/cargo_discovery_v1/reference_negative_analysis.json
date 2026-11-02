@@ -1,0 +1,22 @@
+{
+  "status": "FAIL",
+  "exact_historical_accepted_readings": 2850,
+  "frames": 930,
+  "paired_frames": 580,
+  "original_MAE_m": 0.6421659625839542,
+  "candidate_MAE_m": 0.5941606826038517,
+  "fractional_reduction": 0.0747552545247624,
+  "fresh_fraction": 0.9002347417840375,
+  "final_error_m": 0.7152767077193216,
+  "wall_seconds": 44.02478499998688,
+  "gate": {
+    "minimum_relative_MAE_reduction": 0.25,
+    "maximum_final_displacement_error_m": 0.12,
+    "minimum_fresh_feedback_fraction": 0.9,
+    "wall_seconds": 1800,
+    "window": "from first historical reference bootstrap to termination",
+    "paired_MAE": "frames on which original and candidate both have a fresh team reading"
+  },
+  "decision": "Stop candidate expansion; common four-method batch retains previous corrected controller",
+  "scope": "Same physical trajectory and local inputs; selected development case, not closed-loop improvement or independent samples"
+}

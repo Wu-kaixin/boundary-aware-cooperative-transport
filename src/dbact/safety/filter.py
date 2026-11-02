@@ -167,6 +167,9 @@ class SafetyFilterParams:
     # invariance of true signed distance, including feature switches.  Infinite
     # planes of non-nearest edges are forbidden (C5/L11/L17).
     object_row_mode: str = "aggregate"
+    # Research opt-in: normalize both coefficients of the aggregated plane.
+    # False retains frozen historical trajectories, including their origin defect.
+    aggregate_frame_consistent: bool = False
     # Control period, used only to check that the sampled barrier condition is a
     # valid discrete-time CBF: ``gamma_obj * dt <= 1``.
     dt: float = 0.05
@@ -850,7 +853,16 @@ class SafetyFilter:
             return np.empty((0, 2)), np.empty(0), None
         n_bar = stacked / norm
         offset = float(np.sum(weight * np.einsum("ij,ij->i", normals, points)) / total)
-        h_bar = float(np.dot(n_bar, position)) - offset - self.params.r_safe
+        if self.params.aggregate_frame_consistent:
+            # A plane's normal AND offset must share the same normalization.
+            # Evaluate in robot-relative coordinates to avoid world-origin
+            # dependence and cancellation. This is distance to the aggregate
+            # plane, not a certificate of distance to an unknown curved object.
+            local_offsets = np.einsum("ij,ij->i", normals, position - points)
+            h_bar = float(weight @ local_offsets / norm) - self.params.r_safe
+            offset = float(n_bar @ position) - h_bar - self.params.r_safe
+        else:
+            h_bar = float(np.dot(n_bar, position)) - offset - self.params.r_safe
         alignment = float(norm / total) if total > 0.0 else 0.0
 
         aggregated_velocity = None
@@ -866,7 +878,8 @@ class SafetyFilter:
                     "weight_sum": total,
                     "stacked_norm": norm,
                     "alignment_sum_gn_over_G": alignment,
-                    "translation_defect": float(1.0 - alignment),
+                    "translation_defect": 0.0 if self.params.aggregate_frame_consistent else float(1.0 - alignment),
+                    "aggregate_frame_consistent": self.params.aggregate_frame_consistent,
                     "n_bar": n_bar.tolist(),
                     "offset_from_n_k": offset,
                     "b_bar": np.asarray(b_bar, dtype=float).tolist(),

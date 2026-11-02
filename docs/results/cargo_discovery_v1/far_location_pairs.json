@@ -1,0 +1,13 @@
+{
+  "caption": "Far-field location-information ablation on three geometries and two positions. Both arms have zero initial sensor returns and identical physical states; the hint arm alone receives a one-shot initial location token with unchanged TTL. Detection, task completion and final error are reported separately. No geometry prior or ongoing pose oracle is supplied.",
+  "source_sha256": "716c3bd9e8a02d8f69ce6742f3b556666d94808bb59123453a98aef777dbbdf1",
+  "inputs": {
+    "experiments/ccta2027/cargo_far_v1.json": "c8130b9613dc6c10a1dacbff489535e75e83f7508a8b97967d325c1d86affb58",
+    "artifacts/research/2026-11-02-cargo-discovery-v1/far-analysis/analysis.json": "70e1218621cab652461e8291931b9d3a8b8a78cbc804a58c9c723b8b2a321f6e"
+  },
+  "outputs": {
+    "artifacts/research/2026-11-02-cargo-discovery-v1/figures/far_location_pairs.pdf": "0712c1305efa0cd6af8f5487afad217b75a62cdf5b66c210665072385f81cb85",
+    "artifacts/research/2026-11-02-cargo-discovery-v1/figures/far_location_pairs.svg": "73a32e1ffbc60a26b73b3a12ae32e5ea7a19793e2c33b2b3e3594ce0857859d2",
+    "artifacts/research/2026-11-02-cargo-discovery-v1/figures/far_location_pairs.png": "82e19ce328420761c2c32fc0dd98fefb16ebe37062cd4f6049811713733a0d2d"
+  }
+}

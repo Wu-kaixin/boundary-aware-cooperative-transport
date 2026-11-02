@@ -1,0 +1,331 @@
+{
+  "status": "FAIL",
+  "cases": [
+    {
+      "case": "far_c_open_away_pos0_reference",
+      "condition": "far_c_open_away_pos0",
+      "frames": 1508,
+      "paired_frames": 1060,
+      "availability_relative_to_original": 1.0,
+      "original_same_input_mae_m": 0.10493558360189081,
+      "candidate_same_input_mae_m": 0.10924804601445186,
+      "original_own_available_mae_m": 0.10493558360189081,
+      "candidate_own_available_mae_m": 0.10924804601445186,
+      "first_hold": {
+        "frame": 1468,
+        "time_s": 73.39999999999797,
+        "true_goal_error_m": 0.0774090870387259,
+        "original_estimated_goal_error_m": 0.016715761608908423,
+        "candidate_estimated_goal_error_m": 0.032300343270968195,
+        "candidate_fresh": true,
+        "position_band_m": 0.02
+      },
+      "original_local_bad_fit_count": 649,
+      "candidate_local_bad_fit_count": 0,
+      "accepted_local_readouts": [
+        15302,
+        13926
+      ],
+      "original_statuses_exact": 15885,
+      "original_readouts_exact": 15302,
+      "scan_counts_verified": 24128,
+      "candidate_status_counts": {
+        "bootstrap_only": 15,
+        "before_bootstrap": 1091,
+        "accepted": 13926,
+        "support_nearly_linear": 594,
+        "translation_unobservable": 1343,
+        "motion_bound_exceeded": 7
+      },
+      "series_sha256": "732c3a303b6772c3a6017c0fac1ff9096e103cff2fbcef01cf62824b5f62dca2"
+    },
+    {
+      "case": "far_skew_box_s0_r0_pos0_reference",
+      "condition": "far_skew_box_s0_r0_pos0",
+      "frames": 1785,
+      "paired_frames": 1343,
+      "availability_relative_to_original": 1.0,
+      "original_same_input_mae_m": 0.12573468131345553,
+      "candidate_same_input_mae_m": 0.11632386598505536,
+      "original_own_available_mae_m": 0.12573468131345553,
+      "candidate_own_available_mae_m": 0.11632386598505536,
+      "first_hold": {
+        "frame": 1745,
+        "time_s": 87.24999999999719,
+        "true_goal_error_m": 0.135106119017135,
+        "original_estimated_goal_error_m": 0.018157704980053344,
+        "candidate_estimated_goal_error_m": 0.02786812338673881,
+        "candidate_fresh": true,
+        "position_band_m": 0.02
+      },
+      "original_local_bad_fit_count": 5562,
+      "candidate_local_bad_fit_count": 0,
+      "accepted_local_readouts": [
+        19109,
+        12053
+      ],
+      "original_statuses_exact": 19829,
+      "original_readouts_exact": 19109,
+      "scan_counts_verified": 28560,
+      "candidate_status_counts": {
+        "before_bootstrap": 1675,
+        "bootstrap_only": 15,
+        "support_nearly_linear": 6977,
+        "accepted": 12053,
+        "translation_unobservable": 784
+      },
+      "series_sha256": "e26416adb08291b8b3539e89d39d5146c70a1d90e12d9062a65a4d9b8ebe31ec"
+    },
+    {
+      "case": "near_circle_reference",
+      "condition": "near_circle",
+      "frames": 319,
+      "paired_frames": 217,
+      "availability_relative_to_original": 1.0,
+      "original_same_input_mae_m": 0.004538536857885658,
+      "candidate_same_input_mae_m": 0.004538536857885658,
+      "original_own_available_mae_m": 0.004538536857885658,
+      "candidate_own_available_mae_m": 0.004538536857885658,
+      "first_hold": {
+        "frame": 279,
+        "time_s": 13.950000000000063,
+        "true_goal_error_m": 0.019148005056892695,
+        "original_estimated_goal_error_m": 0.019780387130297835,
+        "candidate_estimated_goal_error_m": 0.019780387130297835,
+        "candidate_fresh": true,
+        "position_band_m": 0.02
+      },
+      "original_local_bad_fit_count": 0,
+      "candidate_local_bad_fit_count": 0,
+      "accepted_local_readouts": [
+        3361,
+        3361
+      ],
+      "original_statuses_exact": 3488,
+      "original_readouts_exact": 3361,
+      "scan_counts_verified": 5104,
+      "candidate_status_counts": {
+        "bootstrap_only": 16,
+        "accepted": 3361,
+        "motion_bound_exceeded": 111
+      },
+      "series_sha256": "1457169301a0834f395313d07a11e9ae8d1be0775efe2ed90bf42d8f35ce1853"
+    },
+    {
+      "case": "near_ellipse_parallel_reference",
+      "condition": "near_ellipse_parallel",
+      "frames": 281,
+      "paired_frames": 182,
+      "availability_relative_to_original": 1.0,
+      "original_same_input_mae_m": 0.0064719282584297265,
+      "candidate_same_input_mae_m": 0.0064719282584297265,
+      "original_own_available_mae_m": 0.0064719282584297265,
+      "candidate_own_available_mae_m": 0.0064719282584297265,
+      "first_hold": {
+        "frame": 241,
+        "time_s": 12.050000000000036,
+        "true_goal_error_m": 0.016571633702319316,
+        "original_estimated_goal_error_m": 0.019658315384192694,
+        "candidate_estimated_goal_error_m": 0.019658315384192694,
+        "candidate_fresh": true,
+        "position_band_m": 0.02
+      },
+      "original_local_bad_fit_count": 20,
+      "candidate_local_bad_fit_count": 20,
+      "accepted_local_readouts": [
+        2890,
+        2890
+      ],
+      "original_statuses_exact": 2928,
+      "original_readouts_exact": 2890,
+      "scan_counts_verified": 4496,
+      "candidate_status_counts": {
+        "bootstrap_only": 16,
+        "accepted": 2890,
+        "motion_bound_exceeded": 22
+      },
+      "series_sha256": "36714a078444101fe8559f2b99197c2568f4ccde1ee468f5a32a08f14611027c"
+    },
+    {
+      "case": "near_rectangle_parallel_reference",
+      "condition": "near_rectangle_parallel",
+      "frames": 267,
+      "paired_frames": 177,
+      "availability_relative_to_original": 1.0,
+      "original_same_input_mae_m": 0.009408144192956703,
+      "candidate_same_input_mae_m": 0.009408144192956703,
+      "original_own_available_mae_m": 0.009408144192956703,
+      "candidate_own_available_mae_m": 0.009408144192956703,
+      "first_hold": {
+        "frame": 227,
+        "time_s": 11.350000000000026,
+        "true_goal_error_m": 0.01281738536822978,
+        "original_estimated_goal_error_m": 0.018573965929203774,
+        "candidate_estimated_goal_error_m": 0.018573965929203774,
+        "candidate_fresh": true,
+        "position_band_m": 0.02
+      },
+      "original_local_bad_fit_count": 0,
+      "candidate_local_bad_fit_count": 0,
+      "accepted_local_readouts": [
+        2827,
+        2827
+      ],
+      "original_statuses_exact": 2845,
+      "original_readouts_exact": 2827,
+      "scan_counts_verified": 4272,
+      "candidate_status_counts": {
+        "bootstrap_only": 16,
+        "before_bootstrap": 3,
+        "accepted": 2827,
+        "motion_bound_exceeded": 2
+      },
+      "series_sha256": "b4be55ac1567f30c58fb83f2cd85bc8a524b4ccbf1b271da06ecd964a80ee7c0"
+    },
+    {
+      "case": "near_l_reference_reference",
+      "condition": "near_l_reference",
+      "frames": 393,
+      "paired_frames": 315,
+      "availability_relative_to_original": 1.0,
+      "original_same_input_mae_m": 0.02172025013276266,
+      "candidate_same_input_mae_m": 0.02172025013276266,
+      "original_own_available_mae_m": 0.02172025013276266,
+      "candidate_own_available_mae_m": 0.02172025013276266,
+      "first_hold": {
+        "frame": 353,
+        "time_s": 17.650000000000116,
+        "true_goal_error_m": 0.00843305070651127,
+        "original_estimated_goal_error_m": 0.019107897856921727,
+        "candidate_estimated_goal_error_m": 0.019107897856921727,
+        "candidate_fresh": true,
+        "position_band_m": 0.02
+      },
+      "original_local_bad_fit_count": 0,
+      "candidate_local_bad_fit_count": 0,
+      "accepted_local_readouts": [
+        5033,
+        5033
+      ],
+      "original_statuses_exact": 5049,
+      "original_readouts_exact": 5033,
+      "scan_counts_verified": 6288,
+      "candidate_status_counts": {
+        "bootstrap_only": 16,
+        "before_bootstrap": 7,
+        "accepted": 5033
+      },
+      "series_sha256": "cd584d2d48681c048cb884534e2b5b2c90ab8cbe0eddb792368bedc54f57721d"
+    },
+    {
+      "case": "near_ellipse_perpendicular_reference",
+      "condition": "near_ellipse_perpendicular",
+      "frames": 311,
+      "paired_frames": 198,
+      "availability_relative_to_original": 1.0,
+      "original_same_input_mae_m": 0.01072300856154301,
+      "candidate_same_input_mae_m": 0.01072300856154301,
+      "original_own_available_mae_m": 0.01072300856154301,
+      "candidate_own_available_mae_m": 0.01072300856154301,
+      "first_hold": {
+        "frame": 271,
+        "time_s": 13.550000000000058,
+        "true_goal_error_m": 0.006597926334905461,
+        "original_estimated_goal_error_m": 0.015931645579638144,
+        "candidate_estimated_goal_error_m": 0.015931645579638144,
+        "candidate_fresh": true,
+        "position_band_m": 0.02
+      },
+      "original_local_bad_fit_count": 0,
+      "candidate_local_bad_fit_count": 0,
+      "accepted_local_readouts": [
+        3144,
+        3144
+      ],
+      "original_statuses_exact": 3184,
+      "original_readouts_exact": 3144,
+      "scan_counts_verified": 4976,
+      "candidate_status_counts": {
+        "bootstrap_only": 16,
+        "accepted": 3144,
+        "motion_bound_exceeded": 24
+      },
+      "series_sha256": "58fde76cb2747c7fd44b43051f9c55c133938981692ef5a3d5dadb89ebf40f69"
+    },
+    {
+      "case": "near_c_open_away_reference",
+      "condition": "near_c_open_away",
+      "frames": 238,
+      "paired_frames": 164,
+      "availability_relative_to_original": 1.0,
+      "original_same_input_mae_m": 0.028664006390138153,
+      "candidate_same_input_mae_m": 0.028664006390138153,
+      "original_own_available_mae_m": 0.028664006390138153,
+      "candidate_own_available_mae_m": 0.028664006390138153,
+      "first_hold": {
+        "frame": 198,
+        "time_s": 9.900000000000006,
+        "true_goal_error_m": 0.038804224318657106,
+        "original_estimated_goal_error_m": 0.018835791219853248,
+        "candidate_estimated_goal_error_m": 0.018835791219853248,
+        "candidate_fresh": true,
+        "position_band_m": 0.02
+      },
+      "original_local_bad_fit_count": 0,
+      "candidate_local_bad_fit_count": 0,
+      "accepted_local_readouts": [
+        2614,
+        2614
+      ],
+      "original_statuses_exact": 2637,
+      "original_readouts_exact": 2614,
+      "scan_counts_verified": 3808,
+      "candidate_status_counts": {
+        "bootstrap_only": 16,
+        "before_bootstrap": 3,
+        "accepted": 2614,
+        "motion_bound_exceeded": 7
+      },
+      "series_sha256": "6a79793965f3c49dfb8f67a9610c650371a89b417b216a764e9ae39c19b578a3"
+    }
+  ],
+  "gates": {
+    "far_c_open_away_pos0": {
+      "availability": true,
+      "same_input_error": true
+    },
+    "far_skew_box_s0_r0_pos0": {
+      "availability": true,
+      "same_input_error": false,
+      "reject_old_false_stop": true
+    },
+    "near_circle": {
+      "availability": true,
+      "same_input_error": true
+    },
+    "near_ellipse_parallel": {
+      "availability": true,
+      "same_input_error": true
+    },
+    "near_rectangle_parallel": {
+      "availability": true,
+      "same_input_error": true
+    },
+    "near_l_reference": {
+      "availability": true,
+      "same_input_error": true
+    },
+    "near_ellipse_perpendicular": {
+      "availability": true,
+      "same_input_error": true
+    },
+    "near_c_open_away": {
+      "availability": true,
+      "same_input_error": true
+    }
+  },
+  "new_physical_episodes": 0,
+  "wall_seconds": 250.86651190003613,
+  "freeze_sha256": "dcda61097ec31d12b00f8de3207fbdefed6bb3eb80772321453e6c9dcbf876b3",
+  "scope": "Eight reused trajectories, paired identical sensor inputs but candidate-specific admission and internal estimator state. No new task successes or independent validation."
+}

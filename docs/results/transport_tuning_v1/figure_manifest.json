@@ -1,0 +1,28 @@
+{
+  "figures": [
+    {
+      "name": "parameter_screen",
+      "inputs": {
+        "analysis": "864fb1fd6ee26eb3b0908a7332fcb7f59a497c86ce78704f275974e25303b9e8"
+      },
+      "caption": "All 48 fixed-budget development episodes. Each condition uses the same initial state across six settings. Cell labels distinguish safe task completion, the unchanged G500 contract, and hard-safety failure; endpoint errors are reported for failures as well. These eight selected conditions and one reused seed do not estimate population reliability."
+    },
+    {
+      "name": "reference_point_error",
+      "inputs": {
+        "audit": "efcf5300fab9066491746fc6dd87caaa86baf7f858dd4bfc3166bcdbe4006e3f"
+      },
+      "caption": "Offline errors at the last available control readout in six historical episodes. The counterfactual uses exact rigid motion of each initialized material reference point and the original accepted voter sets. It is not a new controller or physical trajectory; it separates reference-point semantics from registration residuals. The horizontal axis is logarithmic."
+    }
+  ],
+  "script_sha256": "b218535c6ba0826cf2488a00e9e90b89133039210aa1583bfa8759acf1cb17f5",
+  "artifacts": {
+    "parameter_screen.png": "5b037469904c931a40d4880becca3c773bd14f2bd001f1d291662bb19ea3db23",
+    "parameter_screen.svg": "0220ffcfbb6015c93d6f8b630d01b4ecb9823168592d73fd85453a6e84eec241",
+    "reference_point_error.png": "686918b8026b0789f880160dbc9b1f7f9515796fc6dd636cce5bb3a30825048e",
+    "reference_point_error.svg": "eb806124717c745fb48c19380ffd4d666bac7450b63f90148b2c7c6b085695af"
+  },
+  "smoothing": "None",
+  "sampling": "All48screenepisodes; lastavailablecontrolreadout for the six preselected offline cases",
+  "confidence_intervals": "Not used: selected one-seed development cases, not independent population samples"
+}

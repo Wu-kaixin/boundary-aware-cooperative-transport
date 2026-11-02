@@ -9,6 +9,7 @@ import yaml
 
 from dbact.deployment.variants import METHODS
 from dbact_sim.experiments.deployment import config_for
+from dbact_sim.experiments.shapes import SHAPES
 
 
 def load_protocol(path: Path, split: str, root: Path) -> tuple[dict, list[dict]]:
@@ -43,7 +44,7 @@ def load_protocol(path: Path, split: str, root: Path) -> tuple[dict, list[dict]]
         variants = ("oracle", "local") if case["gate"] == 5 else METHODS
         if case.get("variant") not in variants:
             raise ValueError(f"{identifier}: unsupported variant {case.get('variant')!r}")
-        if case.get("shape") not in ("l_shape", "rectangle", "c_shape"):
+        if case.get("shape") not in SHAPES:
             raise ValueError(f"{identifier}: unsupported shape")
         if "config" in case and "config_ref" in case:
             raise ValueError(f"{identifier}: choose config or config_ref")

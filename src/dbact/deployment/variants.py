@@ -4,7 +4,22 @@ import numpy as np
 from dbact.control.phase import Phase
 from dbact.deployment.density import BoundaryAwareDensity
 
-METHODS=('boundary_cvt','nearest_observed_target','local_spacing','push_cone','no_arc','no_arc_normalized','no_direction_offsets','no_exploration')
+METHODS=('boundary_cvt','nearest_observed_target','local_spacing','detection_density_cvt','push_cone','no_arc','no_arc_normalized','no_direction_offsets','no_exploration')
+
+
+def detection_density(density, positions):
+    """Detection-agent Gaussian control, not a published full-system replica.
+
+    Match the boundary density's kernel mass, width and background; only the
+    support locations change to the fresh detecting robots' positions. The
+    caller has already restricted these packets to own/one-hop information.
+    Empty detection packets provide only the shared background density.
+    """
+    points = np.asarray(positions, dtype=float).reshape(-1, 2)
+    weights = np.full(len(points), density.total_mass / len(points)) if len(points) else np.empty(0)
+    return BoundaryAwareDensity(points, np.zeros_like(points), weights,
+        replace(density.params, mode='offset', cage_offset=0., lead_offset=None),
+        offsets=np.zeros(len(points)), gap=np.zeros(len(points)))
 
 
 def push_cone_index(points, normals, offsets, origin, neighbor_positions, goal, *, threshold, local_radius, d_min):
@@ -45,6 +60,13 @@ class DeploymentVariant:
     def compute(self,i,agents,neighbors,density,domain):
         cell=self.base.compute(i,agents,neighbors,density,domain)
         if self.method=='boundary_cvt' or self.controller.phase_monitor.reached(Phase.CONTACT_READY) or not len(density.points): return cell
+        if self.method == 'detection_density_cvt':
+            permitted = [i] + list(neighbors)
+            detected = getattr(self.controller, '_fresh_detections', set())
+            modified = detection_density(density, [agents[j].position for j in permitted
+                                                   if agents[j].agent_id in detected])
+            alternate = self.base.compute(i, agents, neighbors, modified, domain)
+            return replace(cell, centroid=alternate.centroid.copy())
         if self.method == 'push_cone':
             view = self.controller._views[agents[i].agent_id]
             goal = self.controller._goal_for(view)

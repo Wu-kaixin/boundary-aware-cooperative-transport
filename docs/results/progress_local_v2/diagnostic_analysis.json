@@ -1,0 +1,146 @@
+{
+  "cases": [
+    {
+      "case_id": "development_rectangle_seed2_boundary_cvt",
+      "arm": "baseline",
+      "frames": 679,
+      "endpoint_error": 0.16213673721482752,
+      "completed": false,
+      "g500": false,
+      "settled": true,
+      "watchdog": false,
+      "mean_abs_aligned_team_error": 0.1108037347550421,
+      "final_aligned_bias": 0.1708357007410024,
+      "brake": {
+        "control_frame": 361,
+        "time": 18.05000000000012,
+        "true_progress": 0.8146646620582416,
+        "estimated_progress": 0.9507761503020155,
+        "bias": 0.13611148824377384
+      },
+      "registrations": 10744,
+      "matched_normal_rows": 216461,
+      "removed_by_trim": 33389,
+      "identifiable": 10742,
+      "coarse_accepted_unidentifiable": 0,
+      "ranks": {
+        "2": 10742,
+        "1": 2
+      },
+      "fresh_unavailable": 522,
+      "admission_reasons": {
+        "NO_FRESH_REGISTRATION": 120,
+        "ORIGINAL_QUALITY_UNAVAILABLE": 520,
+        "REGISTRATION_CLAMPED": 3918,
+        "ADMITTED": 6084,
+        "DIRECTION_UNIDENTIFIABLE": 2,
+        "MAP_RESIDUAL_OUTSIDE_EXISTING_STEP_BOUND": 220
+      },
+      "q_median": 1.2130481791540744,
+      "q_p95": 7.600352494465541,
+      "accounting_max_error": 1.1102230246251565e-16,
+      "candidate_identity_max_error": 5.73976630113826e-16,
+      "mean_abs_candidate_change_admitted": 0.0021241365691959677,
+      "own_mae_available": 0.13445816144179806,
+      "candidate_mae_admitted": 0.13992773884600584,
+      "original_mae_same_admitted": 0.1396536685573468,
+      "pre_anchor_mae_available": 0.10496515128300152,
+      "raw_trace_sha256": "328c63589dc30994944d40819f751d89b8e01f72022d6595ac905503b7eeefca"
+    },
+    {
+      "case_id": "development_l_shape_seed8_boundary_cvt",
+      "arm": "baseline",
+      "frames": 376,
+      "endpoint_error": 0.15164517238482955,
+      "completed": false,
+      "g500": false,
+      "settled": true,
+      "watchdog": false,
+      "mean_abs_aligned_team_error": 0.0726487730288102,
+      "final_aligned_bias": 0.15490651141194078,
+      "brake": {
+        "control_frame": 272,
+        "time": 13.600000000000058,
+        "true_progress": 0.7539440957991678,
+        "estimated_progress": 0.8564715031301939,
+        "bias": 0.10252740733102617
+      },
+      "registrations": 5889,
+      "matched_normal_rows": 125668,
+      "removed_by_trim": 18687,
+      "identifiable": 5878,
+      "coarse_accepted_unidentifiable": 0,
+      "ranks": {
+        "2": 5878,
+        "1": 11
+      },
+      "fresh_unavailable": 283,
+      "admission_reasons": {
+        "NO_FRESH_REGISTRATION": 127,
+        "REGISTRATION_CLAMPED": 1824,
+        "ORIGINAL_QUALITY_UNAVAILABLE": 272,
+        "ADMITTED": 3653,
+        "DIRECTION_UNIDENTIFIABLE": 11,
+        "MAP_RESIDUAL_OUTSIDE_EXISTING_STEP_BOUND": 129
+      },
+      "q_median": 0.3425247001001983,
+      "q_p95": 7.10179361434572,
+      "accounting_max_error": 1.1085967213664283e-16,
+      "candidate_identity_max_error": 6.396792817664476e-16,
+      "mean_abs_candidate_change_admitted": 0.0015547680420394344,
+      "own_mae_available": 0.0789079281516489,
+      "candidate_mae_admitted": 0.0781744963797458,
+      "original_mae_same_admitted": 0.07789011393882449,
+      "pre_anchor_mae_available": 0.07290224072691553,
+      "raw_trace_sha256": "6e2a6ee78fd734b30f183987f51ffc155a272509ec8fcf2eb876fb79646d4a1b"
+    },
+    {
+      "case_id": "development_c_shape_seed8_boundary_cvt",
+      "arm": "baseline",
+      "frames": 393,
+      "endpoint_error": 0.008288220090523192,
+      "completed": true,
+      "g500": false,
+      "settled": true,
+      "watchdog": false,
+      "mean_abs_aligned_team_error": 0.01283440304792361,
+      "final_aligned_bias": 0.036019617774877055,
+      "brake": {
+        "control_frame": 302,
+        "time": 15.10000000000008,
+        "true_progress": 0.8460760708977207,
+        "estimated_progress": 0.8515772770055815,
+        "bias": 0.005501206107860757
+      },
+      "registrations": 6179,
+      "matched_normal_rows": 124609,
+      "removed_by_trim": 17854,
+      "identifiable": 6177,
+      "coarse_accepted_unidentifiable": 0,
+      "ranks": {
+        "2": 6177,
+        "1": 2
+      },
+      "fresh_unavailable": 261,
+      "admission_reasons": {
+        "NO_FRESH_REGISTRATION": 109,
+        "REGISTRATION_CLAMPED": 2045,
+        "ORIGINAL_QUALITY_UNAVAILABLE": 259,
+        "ADMITTED": 3770,
+        "DIRECTION_UNIDENTIFIABLE": 2,
+        "MAP_RESIDUAL_OUTSIDE_EXISTING_STEP_BOUND": 103
+      },
+      "q_median": 0.49909288466306223,
+      "q_p95": 6.844207170625005,
+      "accounting_max_error": 1.1188966420050406e-16,
+      "candidate_identity_max_error": 7.572067972638763e-16,
+      "mean_abs_candidate_change_admitted": 0.0014576625111138665,
+      "own_mae_available": 0.05514124652803301,
+      "candidate_mae_admitted": 0.058545792283373276,
+      "original_mae_same_admitted": 0.058333330254708805,
+      "pre_anchor_mae_available": 0.11089274673773418,
+      "raw_trace_sha256": "5f137098bea28de20d5a5d0c0dae177ef6cd5e1bb4b139de6603e8609e0fc9db"
+    }
+  ],
+  "equivalence": {}
+}

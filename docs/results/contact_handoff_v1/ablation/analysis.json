@@ -1,0 +1,1405 @@
+{
+  "stage": "ablation",
+  "counts": {
+    "feedback_fix": {
+      "completed": 1,
+      "denominator": 3,
+      "g500": 2,
+      "errors": 0,
+      "censored": 1
+    },
+    "allocation_only": {
+      "completed": 0,
+      "denominator": 3,
+      "g500": 0,
+      "errors": 0,
+      "censored": 3
+    },
+    "relocation_only": {
+      "completed": 1,
+      "denominator": 3,
+      "g500": 2,
+      "errors": 0,
+      "censored": 1
+    },
+    "joint_v1": {
+      "completed": 0,
+      "denominator": 3,
+      "g500": 0,
+      "errors": 0,
+      "censored": 3
+    }
+  },
+  "comparisons": {},
+  "development_gate_pass": false,
+  "compatibility_pass": true,
+  "compatibility": {
+    "circle_feedback_fix": {
+      "replay_exact": true,
+      "arrays": {
+        "times": true,
+        "phase": true,
+        "min_distance": true,
+        "map_coverage": true,
+        "push_flags": true,
+        "contact_flags": true,
+        "efforts": true,
+        "agent_ids": true,
+        "agent_positions": true,
+        "domain": true,
+        "robot_radius": true,
+        "sensed_counts": true,
+        "sensed_points": true,
+        "cargo/cargo_0/centers": true,
+        "cargo/cargo_0/angles": true,
+        "cargo/cargo_0/local_vertices": true,
+        "cargo/cargo_0/strict_coverage": true,
+        "cargo/cargo_0/contacts": true,
+        "cargo/cargo_0/penetration": true,
+        "cargo/cargo_0/speed": true,
+        "cargo/cargo_0/progress_estimate": true,
+        "task/cargo_0/direction": true,
+        "task/cargo_0/start": true,
+        "task/cargo_0/goal_point": true,
+        "task/cargo_0/distance": true
+      },
+      "old_step_fields_exact": true
+    },
+    "circle_joint_v1": {
+      "replay_exact": true,
+      "arrays": {
+        "times": true,
+        "phase": true,
+        "min_distance": true,
+        "map_coverage": true,
+        "push_flags": true,
+        "contact_flags": true,
+        "efforts": true,
+        "agent_ids": true,
+        "agent_positions": true,
+        "domain": true,
+        "robot_radius": true,
+        "sensed_counts": true,
+        "sensed_points": true,
+        "cargo/cargo_0/centers": true,
+        "cargo/cargo_0/angles": true,
+        "cargo/cargo_0/local_vertices": true,
+        "cargo/cargo_0/strict_coverage": true,
+        "cargo/cargo_0/contacts": true,
+        "cargo/cargo_0/penetration": true,
+        "cargo/cargo_0/speed": true,
+        "cargo/cargo_0/progress_estimate": true,
+        "task/cargo_0/direction": true,
+        "task/cargo_0/start": true,
+        "task/cargo_0/goal_point": true,
+        "task/cargo_0/distance": true
+      },
+      "old_step_fields_exact": true
+    },
+    "rectangle_parallel_feedback_fix": {
+      "replay_exact": true,
+      "arrays": {
+        "times": true,
+        "phase": true,
+        "min_distance": true,
+        "map_coverage": true,
+        "push_flags": true,
+        "contact_flags": true,
+        "efforts": true,
+        "agent_ids": true,
+        "agent_positions": true,
+        "domain": true,
+        "robot_radius": true,
+        "sensed_counts": true,
+        "sensed_points": true,
+        "cargo/cargo_0/centers": true,
+        "cargo/cargo_0/angles": true,
+        "cargo/cargo_0/local_vertices": true,
+        "cargo/cargo_0/strict_coverage": true,
+        "cargo/cargo_0/contacts": true,
+        "cargo/cargo_0/penetration": true,
+        "cargo/cargo_0/speed": true,
+        "cargo/cargo_0/progress_estimate": true,
+        "task/cargo_0/direction": true,
+        "task/cargo_0/start": true,
+        "task/cargo_0/goal_point": true,
+        "task/cargo_0/distance": true
+      },
+      "old_step_fields_exact": true
+    },
+    "rectangle_parallel_joint_v1": {
+      "replay_exact": true,
+      "arrays": {
+        "times": true,
+        "phase": true,
+        "min_distance": true,
+        "map_coverage": true,
+        "push_flags": true,
+        "contact_flags": true,
+        "efforts": true,
+        "agent_ids": true,
+        "agent_positions": true,
+        "domain": true,
+        "robot_radius": true,
+        "sensed_counts": true,
+        "sensed_points": true,
+        "cargo/cargo_0/centers": true,
+        "cargo/cargo_0/angles": true,
+        "cargo/cargo_0/local_vertices": true,
+        "cargo/cargo_0/strict_coverage": true,
+        "cargo/cargo_0/contacts": true,
+        "cargo/cargo_0/penetration": true,
+        "cargo/cargo_0/speed": true,
+        "cargo/cargo_0/progress_estimate": true,
+        "task/cargo_0/direction": true,
+        "task/cargo_0/start": true,
+        "task/cargo_0/goal_point": true,
+        "task/cargo_0/distance": true
+      },
+      "old_step_fields_exact": true
+    },
+    "c_open_away_feedback_fix": {
+      "replay_exact": true,
+      "arrays": {
+        "times": true,
+        "phase": true,
+        "min_distance": true,
+        "map_coverage": true,
+        "push_flags": true,
+        "contact_flags": true,
+        "efforts": true,
+        "agent_ids": true,
+        "agent_positions": true,
+        "domain": true,
+        "robot_radius": true,
+        "sensed_counts": true,
+        "sensed_points": true,
+        "cargo/cargo_0/centers": true,
+        "cargo/cargo_0/angles": true,
+        "cargo/cargo_0/local_vertices": true,
+        "cargo/cargo_0/strict_coverage": true,
+        "cargo/cargo_0/contacts": true,
+        "cargo/cargo_0/penetration": true,
+        "cargo/cargo_0/speed": true,
+        "cargo/cargo_0/progress_estimate": true,
+        "task/cargo_0/direction": true,
+        "task/cargo_0/start": true,
+        "task/cargo_0/goal_point": true,
+        "task/cargo_0/distance": true
+      },
+      "old_step_fields_exact": true
+    },
+    "c_open_away_joint_v1": {
+      "replay_exact": true,
+      "arrays": {
+        "times": true,
+        "phase": true,
+        "min_distance": true,
+        "map_coverage": true,
+        "push_flags": true,
+        "contact_flags": true,
+        "efforts": true,
+        "agent_ids": true,
+        "agent_positions": true,
+        "domain": true,
+        "robot_radius": true,
+        "sensed_counts": true,
+        "sensed_points": true,
+        "cargo/cargo_0/centers": true,
+        "cargo/cargo_0/angles": true,
+        "cargo/cargo_0/local_vertices": true,
+        "cargo/cargo_0/strict_coverage": true,
+        "cargo/cargo_0/contacts": true,
+        "cargo/cargo_0/penetration": true,
+        "cargo/cargo_0/speed": true,
+        "cargo/cargo_0/progress_estimate": true,
+        "task/cargo_0/direction": true,
+        "task/cargo_0/start": true,
+        "task/cargo_0/goal_point": true,
+        "task/cargo_0/distance": true
+      },
+      "old_step_fields_exact": true
+    }
+  },
+  "all_episodes": [
+    {
+      "condition": "circle",
+      "arm": "feedback_fix",
+      "seed": 2,
+      "execution_status": "COMPLETED",
+      "completed": false,
+      "g500": true,
+      "settled": true,
+      "endpoint_error_m": 1.1781427342060524,
+      "wall_seconds": 25.06746240000939,
+      "frames": 270,
+      "seconds": 13.5,
+      "completion_seconds": null,
+      "watchdog": false,
+      "outcome": "SETTLED_OUTSIDE_2D_TOLERANCE",
+      "final_phase": "HOLD",
+      "true_progress_m": 1.1563699085244123,
+      "estimated_progress_m": 1.2329641151150295,
+      "max_cross_track_m": 1.177334581705789,
+      "hard_safety": "",
+      "min_clearance_m": 0.079245315688814,
+      "min_separation_m": 0.2800311770263032,
+      "max_penetration_m": 0.050754684311186,
+      "barrier_scalings": 0,
+      "solver_fallbacks": 0,
+      "tail_window_seconds": 5.0,
+      "tail_mean_positive_contacts": 1.51,
+      "tail_mean_push_flags": 2.63,
+      "tail_mean_forward_contact_force_N": 12.245013020671344,
+      "tail_mean_true_speed_m_s": 0.1635940433666671,
+      "g500_reasons": "",
+      "handoff_proposals": 0,
+      "handoff_confirmations": 0,
+      "handoff_releases": 0,
+      "handoff_rollbacks": 0,
+      "relocation_starts": 0
+    },
+    {
+      "condition": "circle",
+      "arm": "allocation_only",
+      "seed": 2,
+      "execution_status": "COMPLETED",
+      "completed": false,
+      "g500": false,
+      "settled": false,
+      "endpoint_error_m": 1.0742700050359062,
+      "wall_seconds": 215.5120248000021,
+      "frames": 3000,
+      "seconds": 150.0,
+      "completion_seconds": null,
+      "watchdog": true,
+      "outcome": "BUDGET_EXHAUSTED_150S",
+      "final_phase": "TRANSPORT",
+      "true_progress_m": 0.12832207064784162,
+      "estimated_progress_m": 0.04733631731592626,
+      "max_cross_track_m": 0.07458189766502832,
+      "hard_safety": "",
+      "min_clearance_m": 0.07758003527640996,
+      "min_separation_m": 0.28055406028734003,
+      "max_penetration_m": 0.05241996472359005,
+      "barrier_scalings": 0,
+      "solver_fallbacks": 0,
+      "tail_window_seconds": 5.0,
+      "tail_mean_positive_contacts": 1.62,
+      "tail_mean_push_flags": 3.1,
+      "tail_mean_forward_contact_force_N": 3.9139814768260606,
+      "tail_mean_true_speed_m_s": 0.0,
+      "g500_reasons": "G500: target reached never happened within the 3000-frame run | G500: J=0.1283 m stopped 1.0717 m short of L=1.2000 m, outside the declared arrival tolerance 0.1200 m | G500: the run did not end in HOLD",
+      "handoff_proposals": 0,
+      "handoff_confirmations": 0,
+      "handoff_releases": 0,
+      "handoff_rollbacks": 0,
+      "relocation_starts": 0
+    },
+    {
+      "condition": "circle",
+      "arm": "relocation_only",
+      "seed": 2,
+      "execution_status": "COMPLETED",
+      "completed": false,
+      "g500": true,
+      "settled": true,
+      "endpoint_error_m": 1.131607229032108,
+      "wall_seconds": 26.41772409999976,
+      "frames": 270,
+      "seconds": 13.5,
+      "completion_seconds": null,
+      "watchdog": false,
+      "outcome": "SETTLED_OUTSIDE_2D_TOLERANCE",
+      "final_phase": "HOLD",
+      "true_progress_m": 1.1429312231396573,
+      "estimated_progress_m": 1.2433695269544829,
+      "max_cross_track_m": 1.1301672776652976,
+      "hard_safety": "",
+      "min_clearance_m": 0.079245315688814,
+      "min_separation_m": 0.28003484523362276,
+      "max_penetration_m": 0.050754684311186,
+      "barrier_scalings": 0,
+      "solver_fallbacks": 0,
+      "tail_window_seconds": 5.0,
+      "tail_mean_positive_contacts": 1.61,
+      "tail_mean_push_flags": 2.57,
+      "tail_mean_forward_contact_force_N": 13.13474500029476,
+      "tail_mean_true_speed_m_s": 0.15607566340712503,
+      "g500_reasons": "",
+      "handoff_proposals": 0,
+      "handoff_confirmations": 0,
+      "handoff_releases": 0,
+      "handoff_rollbacks": 0,
+      "relocation_starts": 1
+    },
+    {
+      "condition": "circle",
+      "arm": "joint_v1",
+      "seed": 2,
+      "execution_status": "COMPLETED",
+      "completed": false,
+      "g500": false,
+      "settled": false,
+      "endpoint_error_m": 1.1134646378064443,
+      "wall_seconds": 216.28459210001165,
+      "frames": 3000,
+      "seconds": 150.0,
+      "completion_seconds": null,
+      "watchdog": true,
+      "outcome": "BUDGET_EXHAUSTED_150S",
+      "final_phase": "TRANSPORT",
+      "true_progress_m": 0.08766309235858527,
+      "estimated_progress_m": 0.125728237440803,
+      "max_cross_track_m": 0.05010093356587042,
+      "hard_safety": "",
+      "min_clearance_m": 0.07758003527640996,
+      "min_separation_m": 0.28146710739972897,
+      "max_penetration_m": 0.05241996472359005,
+      "barrier_scalings": 5,
+      "solver_fallbacks": 0,
+      "tail_window_seconds": 5.0,
+      "tail_mean_positive_contacts": 1.6,
+      "tail_mean_push_flags": 4.49,
+      "tail_mean_forward_contact_force_N": 18.540900282216032,
+      "tail_mean_true_speed_m_s": 0.00030461223858637516,
+      "g500_reasons": "G500: target reached never happened within the 3000-frame run | G500: J=0.0877 m stopped 1.1123 m short of L=1.2000 m, outside the declared arrival tolerance 0.1200 m | G500: the run did not end in HOLD | G500: 5 scaled-barrier event(s), smallest factor 0.441; the contract allows 0",
+      "handoff_proposals": 0,
+      "handoff_confirmations": 0,
+      "handoff_releases": 0,
+      "handoff_rollbacks": 0,
+      "relocation_starts": 10
+    },
+    {
+      "condition": "rectangle_parallel",
+      "arm": "feedback_fix",
+      "seed": 2,
+      "execution_status": "COMPLETED",
+      "completed": true,
+      "g500": true,
+      "settled": true,
+      "endpoint_error_m": 0.055132878322252436,
+      "wall_seconds": 51.45111659998656,
+      "frames": 526,
+      "seconds": 26.3,
+      "completion_seconds": 26.3,
+      "watchdog": false,
+      "outcome": "COMPLETED",
+      "final_phase": "HOLD",
+      "true_progress_m": 1.1464116794079722,
+      "estimated_progress_m": 1.2361624169371546,
+      "max_cross_track_m": 0.037771696279911726,
+      "hard_safety": "",
+      "min_clearance_m": 0.0837705064930062,
+      "min_separation_m": 0.2802806125551082,
+      "max_penetration_m": 0.046229493506993805,
+      "barrier_scalings": 0,
+      "solver_fallbacks": 0,
+      "tail_window_seconds": 5.0,
+      "tail_mean_positive_contacts": 1.3,
+      "tail_mean_push_flags": 1.44,
+      "tail_mean_forward_contact_force_N": 16.33106523703275,
+      "tail_mean_true_speed_m_s": 0.08374424884504494,
+      "g500_reasons": "",
+      "handoff_proposals": 0,
+      "handoff_confirmations": 0,
+      "handoff_releases": 0,
+      "handoff_rollbacks": 0,
+      "relocation_starts": 0
+    },
+    {
+      "condition": "rectangle_parallel",
+      "arm": "allocation_only",
+      "seed": 2,
+      "execution_status": "COMPLETED",
+      "completed": false,
+      "g500": false,
+      "settled": false,
+      "endpoint_error_m": 1.1447489762607095,
+      "wall_seconds": 222.4773145999934,
+      "frames": 3000,
+      "seconds": 150.0,
+      "completion_seconds": null,
+      "watchdog": true,
+      "outcome": "BUDGET_EXHAUSTED_150S",
+      "final_phase": "BRAKE",
+      "true_progress_m": 0.05535709423241997,
+      "estimated_progress_m": -0.1150748906484135,
+      "max_cross_track_m": 0.02699839797179493,
+      "hard_safety": "",
+      "min_clearance_m": 0.05871331731202685,
+      "min_separation_m": 0.28056573488490205,
+      "max_penetration_m": 0.07128668268797315,
+      "barrier_scalings": 14,
+      "solver_fallbacks": 0,
+      "tail_window_seconds": 5.0,
+      "tail_mean_positive_contacts": 0.57,
+      "tail_mean_push_flags": 0.2,
+      "tail_mean_forward_contact_force_N": 3.4855875344063225,
+      "tail_mean_true_speed_m_s": 0.0,
+      "g500_reasons": "G500: target reached never happened within the 3000-frame run | G500: J=0.0554 m stopped 1.1446 m short of L=1.2000 m, outside the declared arrival tolerance 0.1200 m | G500: the run did not end in HOLD | G500: 14 scaled-barrier event(s), smallest factor 0.141; the contract allows 0",
+      "handoff_proposals": 0,
+      "handoff_confirmations": 0,
+      "handoff_releases": 0,
+      "handoff_rollbacks": 0,
+      "relocation_starts": 0
+    },
+    {
+      "condition": "rectangle_parallel",
+      "arm": "relocation_only",
+      "seed": 2,
+      "execution_status": "COMPLETED",
+      "completed": true,
+      "g500": true,
+      "settled": true,
+      "endpoint_error_m": 0.08305096289194869,
+      "wall_seconds": 52.84757269997499,
+      "frames": 527,
+      "seconds": 26.35,
+      "completion_seconds": 26.35,
+      "watchdog": false,
+      "outcome": "COMPLETED",
+      "final_phase": "HOLD",
+      "true_progress_m": 1.117151409184614,
+      "estimated_progress_m": 1.146638605238111,
+      "max_cross_track_m": 0.037771696279911726,
+      "hard_safety": "",
+      "min_clearance_m": 0.0837705064930062,
+      "min_separation_m": 0.2800209350560627,
+      "max_penetration_m": 0.046229493506993805,
+      "barrier_scalings": 0,
+      "solver_fallbacks": 0,
+      "tail_window_seconds": 5.0,
+      "tail_mean_positive_contacts": 1.17,
+      "tail_mean_push_flags": 1.19,
+      "tail_mean_forward_contact_force_N": 15.277531839426256,
+      "tail_mean_true_speed_m_s": 0.07409687363722414,
+      "g500_reasons": "",
+      "handoff_proposals": 0,
+      "handoff_confirmations": 0,
+      "handoff_releases": 0,
+      "handoff_rollbacks": 0,
+      "relocation_starts": 1
+    },
+    {
+      "condition": "rectangle_parallel",
+      "arm": "joint_v1",
+      "seed": 2,
+      "execution_status": "COMPLETED",
+      "completed": false,
+      "g500": false,
+      "settled": false,
+      "endpoint_error_m": 1.144886661893826,
+      "wall_seconds": 224.9943057000055,
+      "frames": 3000,
+      "seconds": 150.0,
+      "completion_seconds": null,
+      "watchdog": true,
+      "outcome": "BUDGET_EXHAUSTED_150S",
+      "final_phase": "BRAKE",
+      "true_progress_m": 0.055224569305950766,
+      "estimated_progress_m": -0.10324583516022807,
+      "max_cross_track_m": 0.02699839797179493,
+      "hard_safety": "",
+      "min_clearance_m": 0.05871331731202685,
+      "min_separation_m": 0.28056573488490205,
+      "max_penetration_m": 0.07128668268797315,
+      "barrier_scalings": 0,
+      "solver_fallbacks": 0,
+      "tail_window_seconds": 5.0,
+      "tail_mean_positive_contacts": 1.81,
+      "tail_mean_push_flags": 0.38,
+      "tail_mean_forward_contact_force_N": 8.773556311252843,
+      "tail_mean_true_speed_m_s": 0.0,
+      "g500_reasons": "G500: target reached never happened within the 3000-frame run | G500: J=0.0552 m stopped 1.1448 m short of L=1.2000 m, outside the declared arrival tolerance 0.1200 m | G500: the run did not end in HOLD",
+      "handoff_proposals": 0,
+      "handoff_confirmations": 0,
+      "handoff_releases": 0,
+      "handoff_rollbacks": 0,
+      "relocation_starts": 13
+    },
+    {
+      "condition": "c_open_away",
+      "arm": "feedback_fix",
+      "seed": 2,
+      "execution_status": "COMPLETED",
+      "completed": false,
+      "g500": false,
+      "settled": false,
+      "endpoint_error_m": 0.8663916348637541,
+      "wall_seconds": 237.82665559998713,
+      "frames": 3000,
+      "seconds": 150.0,
+      "completion_seconds": null,
+      "watchdog": true,
+      "outcome": "BUDGET_EXHAUSTED_150S",
+      "final_phase": "BRAKE",
+      "true_progress_m": 0.33458394773015154,
+      "estimated_progress_m": 0.30406282317992506,
+      "max_cross_track_m": 0.047961916812499616,
+      "hard_safety": "",
+      "min_clearance_m": 0.04695741632902089,
+      "min_separation_m": 0.2806535720748782,
+      "max_penetration_m": 0.08304258367097911,
+      "barrier_scalings": 0,
+      "solver_fallbacks": 0,
+      "tail_window_seconds": 5.0,
+      "tail_mean_positive_contacts": 1.27,
+      "tail_mean_push_flags": 0.84,
+      "tail_mean_forward_contact_force_N": 0.8745773763742668,
+      "tail_mean_true_speed_m_s": 0.0,
+      "g500_reasons": "G500: target reached never happened within the 3000-frame run | G500: J=0.3346 m stopped 0.8654 m short of L=1.2000 m, outside the declared arrival tolerance 0.1200 m | G500: the run did not end in HOLD",
+      "handoff_proposals": 0,
+      "handoff_confirmations": 0,
+      "handoff_releases": 0,
+      "handoff_rollbacks": 0,
+      "relocation_starts": 0
+    },
+    {
+      "condition": "c_open_away",
+      "arm": "allocation_only",
+      "seed": 2,
+      "execution_status": "COMPLETED",
+      "completed": false,
+      "g500": false,
+      "settled": false,
+      "endpoint_error_m": 1.0784317445843228,
+      "wall_seconds": 240.8756696000055,
+      "frames": 3000,
+      "seconds": 150.0,
+      "completion_seconds": null,
+      "watchdog": true,
+      "outcome": "BUDGET_EXHAUSTED_150S",
+      "final_phase": "CONTACT_READY",
+      "true_progress_m": 0.12223331451956287,
+      "estimated_progress_m": -0.1309921486828978,
+      "max_cross_track_m": 0.037868184478509814,
+      "hard_safety": "",
+      "min_clearance_m": 0.08605975223485496,
+      "min_separation_m": 0.2800787551248784,
+      "max_penetration_m": 0.043940247765145046,
+      "barrier_scalings": 0,
+      "solver_fallbacks": 0,
+      "tail_window_seconds": 5.0,
+      "tail_mean_positive_contacts": 0.0,
+      "tail_mean_push_flags": 0.0,
+      "tail_mean_forward_contact_force_N": 0.0,
+      "tail_mean_true_speed_m_s": 0.0,
+      "g500_reasons": "G500: transport activation never happened within the 3000-frame run | G500: target reached never happened within the 3000-frame run | G500: J=0.1222 m stopped 1.0778 m short of L=1.2000 m, outside the declared arrival tolerance 0.1200 m | G500: the run did not end in HOLD",
+      "handoff_proposals": 0,
+      "handoff_confirmations": 0,
+      "handoff_releases": 0,
+      "handoff_rollbacks": 0,
+      "relocation_starts": 0
+    },
+    {
+      "condition": "c_open_away",
+      "arm": "relocation_only",
+      "seed": 2,
+      "execution_status": "COMPLETED",
+      "completed": false,
+      "g500": false,
+      "settled": false,
+      "endpoint_error_m": 0.8444983405581838,
+      "wall_seconds": 247.83704749998287,
+      "frames": 3000,
+      "seconds": 150.0,
+      "completion_seconds": null,
+      "watchdog": true,
+      "outcome": "BUDGET_EXHAUSTED_150S",
+      "final_phase": "BRAKE",
+      "true_progress_m": 0.36155947893843976,
+      "estimated_progress_m": 0.31246499220338714,
+      "max_cross_track_m": 0.11959826738278334,
+      "hard_safety": "",
+      "min_clearance_m": 0.04695741632902089,
+      "min_separation_m": 0.28025208462249984,
+      "max_penetration_m": 0.08304258367097911,
+      "barrier_scalings": 0,
+      "solver_fallbacks": 0,
+      "tail_window_seconds": 5.0,
+      "tail_mean_positive_contacts": 2.9,
+      "tail_mean_push_flags": 2.33,
+      "tail_mean_forward_contact_force_N": 10.754972175481248,
+      "tail_mean_true_speed_m_s": 0.006182414051082974,
+      "g500_reasons": "G500: target reached never happened within the 3000-frame run | G500: J=0.3616 m stopped 0.8384 m short of L=1.2000 m, outside the declared arrival tolerance 0.1200 m | G500: the run did not end in HOLD | G500: final cargo speed 0.0577 m/s > 0.020 m/s: the cargo was still drifting at the end of the budget",
+      "handoff_proposals": 0,
+      "handoff_confirmations": 0,
+      "handoff_releases": 0,
+      "handoff_rollbacks": 0,
+      "relocation_starts": 29
+    },
+    {
+      "condition": "c_open_away",
+      "arm": "joint_v1",
+      "seed": 2,
+      "execution_status": "COMPLETED",
+      "completed": false,
+      "g500": false,
+      "settled": false,
+      "endpoint_error_m": 1.0790207215752565,
+      "wall_seconds": 241.97771839998313,
+      "frames": 3000,
+      "seconds": 150.0,
+      "completion_seconds": null,
+      "watchdog": true,
+      "outcome": "BUDGET_EXHAUSTED_150S",
+      "final_phase": "CONTACT_READY",
+      "true_progress_m": 0.12164193649155486,
+      "estimated_progress_m": 0.18534788060950733,
+      "max_cross_track_m": 0.03781011048784588,
+      "hard_safety": "",
+      "min_clearance_m": 0.08605975223485496,
+      "min_separation_m": 0.28462234800073005,
+      "max_penetration_m": 0.043940247765145046,
+      "barrier_scalings": 0,
+      "solver_fallbacks": 0,
+      "tail_window_seconds": 5.0,
+      "tail_mean_positive_contacts": 0.0,
+      "tail_mean_push_flags": 0.0,
+      "tail_mean_forward_contact_force_N": 0.0,
+      "tail_mean_true_speed_m_s": 0.0,
+      "g500_reasons": "G500: transport activation never happened within the 3000-frame run | G500: target reached never happened within the 3000-frame run | G500: J=0.1216 m stopped 1.0784 m short of L=1.2000 m, outside the declared arrival tolerance 0.1200 m | G500: the run did not end in HOLD",
+      "handoff_proposals": 0,
+      "handoff_confirmations": 0,
+      "handoff_releases": 0,
+      "handoff_rollbacks": 0,
+      "relocation_starts": 20
+    }
+  ],
+  "events": {
+    "circle_feedback_fix": {
+      "handoff_events": {
+        "not_enabled": 4320
+      },
+      "states_agent_frames": {
+        "not_enabled": 4320
+      },
+      "rollback_reasons": {},
+      "v1_reasons_agent_frames": {
+        "not_enabled": 4320
+      },
+      "phase_events": {
+        "SEARCH": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 13.5
+        },
+        "DISCOVER": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 13.5
+        },
+        "ENCLOSE": {
+          "frame": 19,
+          "seconds": 0.9500000000000001,
+          "right_censored": false,
+          "observation_end_seconds": 13.5
+        },
+        "CONTACT_READY": {
+          "frame": 115,
+          "seconds": 5.75,
+          "right_censored": false,
+          "observation_end_seconds": 13.5
+        },
+        "TRANSPORT": {
+          "frame": 116,
+          "seconds": 5.800000000000001,
+          "right_censored": false,
+          "observation_end_seconds": 13.5
+        },
+        "BRAKE": {
+          "frame": 186,
+          "seconds": 9.3,
+          "right_censored": false,
+          "observation_end_seconds": 13.5
+        },
+        "HOLD": {
+          "frame": 230,
+          "seconds": 11.5,
+          "right_censored": false,
+          "observation_end_seconds": 13.5
+        }
+      }
+    },
+    "circle_allocation_only": {
+      "handoff_events": {
+        "not_enabled": 48000
+      },
+      "states_agent_frames": {
+        "not_enabled": 48000
+      },
+      "rollback_reasons": {},
+      "v1_reasons_agent_frames": {
+        "not_enabled": 5,
+        "inactive": 1835,
+        "allocation_only": 46160
+      },
+      "phase_events": {
+        "SEARCH": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 150.0
+        },
+        "DISCOVER": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 150.0
+        },
+        "ENCLOSE": {
+          "frame": 19,
+          "seconds": 0.9500000000000001,
+          "right_censored": false,
+          "observation_end_seconds": 150.0
+        },
+        "CONTACT_READY": {
+          "frame": 115,
+          "seconds": 5.75,
+          "right_censored": false,
+          "observation_end_seconds": 150.0
+        },
+        "TRANSPORT": {
+          "frame": 116,
+          "seconds": 5.800000000000001,
+          "right_censored": false,
+          "observation_end_seconds": 150.0
+        },
+        "BRAKE": {
+          "frame": null,
+          "seconds": null,
+          "right_censored": true,
+          "observation_end_seconds": 150.0
+        },
+        "HOLD": {
+          "frame": null,
+          "seconds": null,
+          "right_censored": true,
+          "observation_end_seconds": 150.0
+        }
+      }
+    },
+    "circle_relocation_only": {
+      "handoff_events": {
+        "not_enabled": 4320
+      },
+      "states_agent_frames": {
+        "not_enabled": 4320
+      },
+      "rollback_reasons": {},
+      "v1_reasons_agent_frames": {
+        "not_enabled": 5,
+        "inactive": 2596,
+        "yield": 539,
+        "current_contact": 281,
+        "no_local_target": 832,
+        "committed_new": 1,
+        "committed": 66
+      },
+      "phase_events": {
+        "SEARCH": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 13.5
+        },
+        "DISCOVER": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 13.5
+        },
+        "ENCLOSE": {
+          "frame": 19,
+          "seconds": 0.9500000000000001,
+          "right_censored": false,
+          "observation_end_seconds": 13.5
+        },
+        "CONTACT_READY": {
+          "frame": 115,
+          "seconds": 5.75,
+          "right_censored": false,
+          "observation_end_seconds": 13.5
+        },
+        "TRANSPORT": {
+          "frame": 116,
+          "seconds": 5.800000000000001,
+          "right_censored": false,
+          "observation_end_seconds": 13.5
+        },
+        "BRAKE": {
+          "frame": 188,
+          "seconds": 9.4,
+          "right_censored": false,
+          "observation_end_seconds": 13.5
+        },
+        "HOLD": {
+          "frame": 230,
+          "seconds": 11.5,
+          "right_censored": false,
+          "observation_end_seconds": 13.5
+        }
+      }
+    },
+    "circle_joint_v1": {
+      "handoff_events": {
+        "not_enabled": 48000
+      },
+      "states_agent_frames": {
+        "not_enabled": 48000
+      },
+      "rollback_reasons": {},
+      "v1_reasons_agent_frames": {
+        "not_enabled": 5,
+        "inactive": 1835,
+        "yield": 12469,
+        "current_contact": 11147,
+        "committed_new": 10,
+        "no_local_target": 21940,
+        "committed": 584,
+        "occupied": 3,
+        "lease_expired": 4,
+        "arrived": 3
+      },
+      "phase_events": {
+        "SEARCH": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 150.0
+        },
+        "DISCOVER": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 150.0
+        },
+        "ENCLOSE": {
+          "frame": 19,
+          "seconds": 0.9500000000000001,
+          "right_censored": false,
+          "observation_end_seconds": 150.0
+        },
+        "CONTACT_READY": {
+          "frame": 115,
+          "seconds": 5.75,
+          "right_censored": false,
+          "observation_end_seconds": 150.0
+        },
+        "TRANSPORT": {
+          "frame": 116,
+          "seconds": 5.800000000000001,
+          "right_censored": false,
+          "observation_end_seconds": 150.0
+        },
+        "BRAKE": {
+          "frame": null,
+          "seconds": null,
+          "right_censored": true,
+          "observation_end_seconds": 150.0
+        },
+        "HOLD": {
+          "frame": null,
+          "seconds": null,
+          "right_censored": true,
+          "observation_end_seconds": 150.0
+        }
+      }
+    },
+    "rectangle_parallel_feedback_fix": {
+      "handoff_events": {
+        "not_enabled": 8416
+      },
+      "states_agent_frames": {
+        "not_enabled": 8416
+      },
+      "rollback_reasons": {},
+      "v1_reasons_agent_frames": {
+        "not_enabled": 8416
+      },
+      "phase_events": {
+        "SEARCH": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 26.3
+        },
+        "DISCOVER": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 26.3
+        },
+        "ENCLOSE": {
+          "frame": 40,
+          "seconds": 2.0,
+          "right_censored": false,
+          "observation_end_seconds": 26.3
+        },
+        "CONTACT_READY": {
+          "frame": 96,
+          "seconds": 4.800000000000001,
+          "right_censored": false,
+          "observation_end_seconds": 26.3
+        },
+        "TRANSPORT": {
+          "frame": 285,
+          "seconds": 14.25,
+          "right_censored": false,
+          "observation_end_seconds": 26.3
+        },
+        "BRAKE": {
+          "frame": 428,
+          "seconds": 21.400000000000002,
+          "right_censored": false,
+          "observation_end_seconds": 26.3
+        },
+        "HOLD": {
+          "frame": 486,
+          "seconds": 24.3,
+          "right_censored": false,
+          "observation_end_seconds": 26.3
+        }
+      }
+    },
+    "rectangle_parallel_allocation_only": {
+      "handoff_events": {
+        "not_enabled": 48000
+      },
+      "states_agent_frames": {
+        "not_enabled": 48000
+      },
+      "rollback_reasons": {},
+      "v1_reasons_agent_frames": {
+        "not_enabled": 7,
+        "inactive": 4621,
+        "allocation_only": 43372
+      },
+      "phase_events": {
+        "SEARCH": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 150.0
+        },
+        "DISCOVER": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 150.0
+        },
+        "ENCLOSE": {
+          "frame": 40,
+          "seconds": 2.0,
+          "right_censored": false,
+          "observation_end_seconds": 150.0
+        },
+        "CONTACT_READY": {
+          "frame": 96,
+          "seconds": 4.800000000000001,
+          "right_censored": false,
+          "observation_end_seconds": 150.0
+        },
+        "TRANSPORT": {
+          "frame": 102,
+          "seconds": 5.1000000000000005,
+          "right_censored": false,
+          "observation_end_seconds": 150.0
+        },
+        "BRAKE": {
+          "frame": 462,
+          "seconds": 23.1,
+          "right_censored": false,
+          "observation_end_seconds": 150.0
+        },
+        "HOLD": {
+          "frame": null,
+          "seconds": null,
+          "right_censored": true,
+          "observation_end_seconds": 150.0
+        }
+      }
+    },
+    "rectangle_parallel_relocation_only": {
+      "handoff_events": {
+        "not_enabled": 8432
+      },
+      "states_agent_frames": {
+        "not_enabled": 8432
+      },
+      "rollback_reasons": {},
+      "v1_reasons_agent_frames": {
+        "not_enabled": 7,
+        "inactive": 2637,
+        "yield": 3690,
+        "current_contact": 1495,
+        "no_local_target": 576,
+        "committed_new": 1,
+        "committed": 25,
+        "arrived": 1
+      },
+      "phase_events": {
+        "SEARCH": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 26.35
+        },
+        "DISCOVER": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 26.35
+        },
+        "ENCLOSE": {
+          "frame": 40,
+          "seconds": 2.0,
+          "right_censored": false,
+          "observation_end_seconds": 26.35
+        },
+        "CONTACT_READY": {
+          "frame": 96,
+          "seconds": 4.800000000000001,
+          "right_censored": false,
+          "observation_end_seconds": 26.35
+        },
+        "TRANSPORT": {
+          "frame": 285,
+          "seconds": 14.25,
+          "right_censored": false,
+          "observation_end_seconds": 26.35
+        },
+        "BRAKE": {
+          "frame": 427,
+          "seconds": 21.35,
+          "right_censored": false,
+          "observation_end_seconds": 26.35
+        },
+        "HOLD": {
+          "frame": 487,
+          "seconds": 24.35,
+          "right_censored": false,
+          "observation_end_seconds": 26.35
+        }
+      }
+    },
+    "rectangle_parallel_joint_v1": {
+      "handoff_events": {
+        "not_enabled": 48000
+      },
+      "states_agent_frames": {
+        "not_enabled": 48000
+      },
+      "rollback_reasons": {},
+      "v1_reasons_agent_frames": {
+        "not_enabled": 7,
+        "inactive": 4290,
+        "yield": 20403,
+        "current_contact": 4445,
+        "no_local_target": 18242,
+        "committed_new": 13,
+        "committed": 592,
+        "arrived": 7,
+        "lease_expired": 1
+      },
+      "phase_events": {
+        "SEARCH": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 150.0
+        },
+        "DISCOVER": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 150.0
+        },
+        "ENCLOSE": {
+          "frame": 40,
+          "seconds": 2.0,
+          "right_censored": false,
+          "observation_end_seconds": 150.0
+        },
+        "CONTACT_READY": {
+          "frame": 96,
+          "seconds": 4.800000000000001,
+          "right_censored": false,
+          "observation_end_seconds": 150.0
+        },
+        "TRANSPORT": {
+          "frame": 102,
+          "seconds": 5.1000000000000005,
+          "right_censored": false,
+          "observation_end_seconds": 150.0
+        },
+        "BRAKE": {
+          "frame": 462,
+          "seconds": 23.1,
+          "right_censored": false,
+          "observation_end_seconds": 150.0
+        },
+        "HOLD": {
+          "frame": null,
+          "seconds": null,
+          "right_censored": true,
+          "observation_end_seconds": 150.0
+        }
+      }
+    },
+    "c_open_away_feedback_fix": {
+      "handoff_events": {
+        "not_enabled": 48000
+      },
+      "states_agent_frames": {
+        "not_enabled": 48000
+      },
+      "rollback_reasons": {},
+      "v1_reasons_agent_frames": {
+        "not_enabled": 48000
+      },
+      "phase_events": {
+        "SEARCH": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 150.0
+        },
+        "DISCOVER": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 150.0
+        },
+        "ENCLOSE": {
+          "frame": 26,
+          "seconds": 1.3,
+          "right_censored": false,
+          "observation_end_seconds": 150.0
+        },
+        "CONTACT_READY": {
+          "frame": 76,
+          "seconds": 3.8000000000000003,
+          "right_censored": false,
+          "observation_end_seconds": 150.0
+        },
+        "TRANSPORT": {
+          "frame": 256,
+          "seconds": 12.8,
+          "right_censored": false,
+          "observation_end_seconds": 150.0
+        },
+        "BRAKE": {
+          "frame": 424,
+          "seconds": 21.200000000000003,
+          "right_censored": false,
+          "observation_end_seconds": 150.0
+        },
+        "HOLD": {
+          "frame": null,
+          "seconds": null,
+          "right_censored": true,
+          "observation_end_seconds": 150.0
+        }
+      }
+    },
+    "c_open_away_allocation_only": {
+      "handoff_events": {
+        "not_enabled": 48000
+      },
+      "states_agent_frames": {
+        "not_enabled": 48000
+      },
+      "rollback_reasons": {},
+      "v1_reasons_agent_frames": {
+        "not_enabled": 6,
+        "inactive": 3681,
+        "allocation_only": 44313
+      },
+      "phase_events": {
+        "SEARCH": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 150.0
+        },
+        "DISCOVER": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 150.0
+        },
+        "ENCLOSE": {
+          "frame": 26,
+          "seconds": 1.3,
+          "right_censored": false,
+          "observation_end_seconds": 150.0
+        },
+        "CONTACT_READY": {
+          "frame": 76,
+          "seconds": 3.8000000000000003,
+          "right_censored": false,
+          "observation_end_seconds": 150.0
+        },
+        "TRANSPORT": {
+          "frame": null,
+          "seconds": null,
+          "right_censored": true,
+          "observation_end_seconds": 150.0
+        },
+        "BRAKE": {
+          "frame": null,
+          "seconds": null,
+          "right_censored": true,
+          "observation_end_seconds": 150.0
+        },
+        "HOLD": {
+          "frame": null,
+          "seconds": null,
+          "right_censored": true,
+          "observation_end_seconds": 150.0
+        }
+      }
+    },
+    "c_open_away_relocation_only": {
+      "handoff_events": {
+        "not_enabled": 48000
+      },
+      "states_agent_frames": {
+        "not_enabled": 48000
+      },
+      "rollback_reasons": {},
+      "v1_reasons_agent_frames": {
+        "not_enabled": 6,
+        "inactive": 2415,
+        "yield": 23523,
+        "current_contact": 15387,
+        "no_local_target": 4949,
+        "committed_new": 29,
+        "committed": 1672,
+        "arrived": 4,
+        "lease_expired": 13,
+        "occupied": 2
+      },
+      "phase_events": {
+        "SEARCH": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 150.0
+        },
+        "DISCOVER": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 150.0
+        },
+        "ENCLOSE": {
+          "frame": 26,
+          "seconds": 1.3,
+          "right_censored": false,
+          "observation_end_seconds": 150.0
+        },
+        "CONTACT_READY": {
+          "frame": 76,
+          "seconds": 3.8000000000000003,
+          "right_censored": false,
+          "observation_end_seconds": 150.0
+        },
+        "TRANSPORT": {
+          "frame": 493,
+          "seconds": 24.650000000000002,
+          "right_censored": false,
+          "observation_end_seconds": 150.0
+        },
+        "BRAKE": {
+          "frame": 719,
+          "seconds": 35.95,
+          "right_censored": false,
+          "observation_end_seconds": 150.0
+        },
+        "HOLD": {
+          "frame": null,
+          "seconds": null,
+          "right_censored": true,
+          "observation_end_seconds": 150.0
+        }
+      }
+    },
+    "c_open_away_joint_v1": {
+      "handoff_events": {
+        "not_enabled": 48000
+      },
+      "states_agent_frames": {
+        "not_enabled": 48000
+      },
+      "rollback_reasons": {},
+      "v1_reasons_agent_frames": {
+        "not_enabled": 6,
+        "inactive": 3637,
+        "yield": 27342,
+        "current_contact": 3469,
+        "no_local_target": 12815,
+        "committed_new": 20,
+        "committed": 695,
+        "occupied": 2,
+        "lease_expired": 4,
+        "map_lost": 1,
+        "arrived": 9
+      },
+      "phase_events": {
+        "SEARCH": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 150.0
+        },
+        "DISCOVER": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 150.0
+        },
+        "ENCLOSE": {
+          "frame": 26,
+          "seconds": 1.3,
+          "right_censored": false,
+          "observation_end_seconds": 150.0
+        },
+        "CONTACT_READY": {
+          "frame": 76,
+          "seconds": 3.8000000000000003,
+          "right_censored": false,
+          "observation_end_seconds": 150.0
+        },
+        "TRANSPORT": {
+          "frame": null,
+          "seconds": null,
+          "right_censored": true,
+          "observation_end_seconds": 150.0
+        },
+        "BRAKE": {
+          "frame": null,
+          "seconds": null,
+          "right_censored": true,
+          "observation_end_seconds": 150.0
+        },
+        "HOLD": {
+          "frame": null,
+          "seconds": null,
+          "right_censored": true,
+          "observation_end_seconds": 150.0
+        }
+      }
+    }
+  },
+  "source_integrity": "PASS",
+  "historical_integrity": "PASS",
+  "scope": "Fixed development seed 2; paired conditions, no reliability inference",
+  "confirmation_limit": "Local gap/command/motion proxy, not physical contact/force or individual causal contribution proof",
+  "confirmation_evaluation_only": [],
+  "patch_abort_evaluation_only": []
+}

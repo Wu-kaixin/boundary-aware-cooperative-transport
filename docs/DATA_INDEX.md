@@ -1,6 +1,32 @@
 # 数据与原始文件索引
 
+[匹配支撑固定筛选](results/reference_support_v1/README.md)：8条同输入轨迹已完成；局部大误差减少但未通过团队误差门槛，新增物理回合0，候选默认关闭。
+
+
+[最新参考运动与论文证据核验](results/reference_motion_audit_v1/README.md)：同输入参考运动核验完成：24条旧轨迹、6条远场原配准器精确重放，新增物理回合0；区分初始化、参考点旋转和匹配误差，并核查论文主张与验证缺口。
+
+
+[参考初始化数据](results/reference_origin_v1/README.md)：参考初始化固定消融完成：24回合（8个已知开发条件×3臂），三臂均7/8完成；取消初始化放大救回斜箱但损失远场C形，提前参考未救回斜箱且G500下降。两项均未采用，原判据和默认方法不变。
+
+
+[投票与停止数据](results/voter_continuity_v1/README.md)：投票集合与停止确认固定消融：32回合（8个已知开发条件×4臂），分别检验换票读数连续化和1秒到达确认，保留全部失败与截尾；默认关闭、原成功安全判据不变。
+
+
+2026-11-02 运动先验复验：新数据在 `runs/research/2026-11-02-transport-validation-v1/{regression,new_starts}/`，分别25和72回合；另核验复用33个原参数、8个候选旧回合，路径与原执行身份在本任务 `artifacts/migrations/` 下的 `design.json` 登记，未复制或重标记旧结果。两阶段结果、全部失败、停止事件审计及图表见[复验报告](results/transport_validation_v1/README.md)。33条件旧初态与12条件新初态分开统计，保留全部原始产物及哈希。
+
+坐标一致修复批次原始 18 回合在 `runs/research/2026-11-02-contact-consistency-v1/run/`，执行源码与原始失败完整保留；分析/审计/工程测试分别在同身份 `artifacts/research/`、`artifacts/migrations/`、`runs/maintenance/`。见[结果与身份](results/contact_consistency_v1/README.md)。固定 18 回合，九个开发条件、同一 seed 2、每例最多 600 秒。共同参考配置下，旧聚合公式完成 5/9，坐标一致修正完成 8/9；G500 分别 2/9、7/9，修正臂原硬安全检查违规 0/9。C 背向仍失败且出现越过目标后的错误停止；8/9 不是总体成功概率。本轮是公共安全计算修复的配对比较，不是原 CVT 对 spacing 的优越性检验。
+
+最新几何读出批次：`runs/research/2026-11-02-contact-geometry-v1/run/`，12个开发回合及原始失败均保留；[结果与身份](results/contact_geometry_v1/README.md)。独立评价与控制器估计分开，论文未改。
+
+2026-11-01 恢复与增援固定九回合：原始产品及执行源码在 `runs/research/2026-11-01-contact-reinforcement-v1/run/`，分析和旧日志诊断在 `artifacts/research/2026-11-01-contact-reinforcement-v1/`，恢复备份/审计在同身份 `artifacts/migrations/`，工程测试在 `runs/maintenance/`。完整九行结果和矢量图见[结果入口](results/contact_reinforcement_v1/README.md)。全部失败保留，默认候选关闭，稿件题目不变。
+
 本索引区分历史迁移记录与当前机器的本地文件。大体积文件在本地完整项目中，不等同于 Git 克隆内容。
+
+2026-11-01 位置/速度分量比较：`runs/research/2026-11-01-feedback-components-v1/run/` 保存36个新回合、源码快照、协议和产品收据；27个原CVT/spacing/二维CVT参照仍来自上一轮原路径，未重标为新实验。旧日志接触丢失审查、恢复循环核验及新闭环分析在 `artifacts/research/2026-11-01-feedback-components-v1/`。精简证据、全部63行身份明确的结果、矢量图及未解决项见[分量比较](results/feedback_components_v1/README.md)。恢复和验证材料分别在同身份 `artifacts/migrations/`、`runs/maintenance/`；大体积逐帧数据与备份不自动加入Git。所有失败保留，默认控制与论文未替换。
+
+2026-11-01 位移估计与可靠停止开发比较：36回合原始数据、执行源码和收据在 `runs/research/2026-11-01-displacement-stop-v1/run/`；旧C背向的完整重建扫描、同输入估计和闭环分析在 `artifacts/research/2026-11-01-displacement-stop-v1/`。重建输入经12000帧输出精确核验，但身份仍是“验证过的重建”，不是原始扫描录像。精简证据见[位移与停止结果](results/displacement_stop_v1/README.md)。四方法共用同一开发seed和600秒上限；全部失败、G500不通过及C背向退化保留。审计/恢复材料在同身份的 `artifacts/migrations/`，工程验证在 `runs/maintenance/`，大体积数据不自动加入Git。
+
+2026-11-01 六方法边界反馈开发比较：54回合原始数据和执行源码在 `runs/research/2026-11-01-boundary-navigation-v1/run/`，分析在 `artifacts/research/2026-11-01-boundary-navigation-v1/`，恢复材料在同身份的 `artifacts/migrations/`。精简证据见[六方法结果](results/boundary_navigation_v1/README.md)。同一开发seed、最多600秒；全部失败和安全超限保留，原CVT/spacing历史前缀精确复现。这里的原始日志、详细机器记录和备份是本地数据，不自动加入Git。
 
 2026-10-31 原地整理从 PC2 恢复本地运行、文献和旧备份，保留其原相对路径、批次结构和字节。
 PC3 中重复错放的稿件图片按哈希映射到已有规范副本；40种损坏 ZIP/bundle 的原始字节逐项保全在
@@ -40,3 +66,45 @@ PC3 中重复错放的稿件图片按哈希映射到已有规范副本；40种�
 历史清单保留旧机器绝对路径和 `tmp/literature/` 等原路径。新工具使用当前目录；历史文件身份、环境归属和科研结论不重写。文献全文不提交到 Git。
 
 完整迁移时复制 `runs/`、`data/literature/`、`artifacts/`、`tools/` 及代码文档；在新电脑重新创建 `.venv`。随后从[README](../README.md)的流程验证。参考环境和数据目录不应从其他项目借用。
+
+## 2026-10-31 多形状完整任务普查
+
+- `runs/research/2026-10-31-multishape-census-v1/run/`：27 回合原始数据、真实 replay、逐帧/子步记录、执行源快照、环境和逐项哈希收据。
+- `runs/research/2026-10-31-multishape-census-v1/analysis/`：全部任务能力表和阶段图；派生质量告警单独保存，不改原 summary。
+- `runs/research/2026-10-31-multishape-census-v1/v2-offline-final/`：仅从原 v2 日志计算的带符号累计误差，非新增实验。
+- `artifacts/research/2026-10-31-multishape-census-v1/`：修改前备份、状态、媒体、源码补充和验证报告；视频及大体积回放不自动加入 Git。
+- `runs/maintenance/2026-10-31-multishape-census-v1/`：基线与修改后工程验证，不是论文样本。
+- [精简公开结果](results/multishape_census_v1/README.md)：源身份、完整 CSV、图和本地媒体路径。一个 seed 的九条件是开发普查，未知泛化范围不补写为成功率。
+
+旧 v1/v2 原始日志、配置、失败、哈希和历史形状矩阵保持原字节。新数据没有替代或重标旧数据。
+
+## 2026-11-01 无附着动态接触比较
+
+- `runs/research/2026-11-01-dynamic-contact-v1/run/`：新冻结 27 回合，旧行为、反馈修复及局部动态接触三臂；完整失败、回放、观测法向、名义命令、角色和换位事件。不同于前次部署方法普查，不能合并为同一实验。
+- `artifacts/research/2026-11-01-dynamic-contact-v1/analysis/`：全表、配对比较、逐帧旧行为一致性及图—数据—分析哈希映射。
+- [精简结果](results/dynamic_contact_v1/README.md)：任务完成 5/9、4/9、2/9，候选不推广；图表是完整派生产品的校验副本。
+- `runs/maintenance/2026-11-01-dynamic-contact-v1/` 与 `artifacts/migrations/2026-11-01-dynamic-contact-v1/`：工程测试、备份和恢复记录，非新增科研样本。
+
+## 2026-11-01 确认与回退接触交接
+
+- `runs/research/2026-11-01-contact-handoff-v1/ablation/`：12 回合，三条件四臂，隔离归一化压力分配和换位；参考结果精确复现。
+- 同批 `main/`：九条件三方法共 27 回合，150 秒固定预算，原 CVT/spacing/交接候选均完成 5/9；无持续接管确认，不能把位置判定当成完成换位或物理接管。
+- 同批 `extended/`：九条件两方法共 18 回合，用户指定最多 600 秒物理时间；原停止规则保留，预算耗尽为右删失，已结束的 HOLD 不重启。
+- `artifacts/research/2026-11-01-contact-handoff-v1/`：离线失败审查、三批全表、矢量图、按物理时间同步的说明视频、GIF 与来源哈希。
+- [精简证据](results/contact_handoff_v1/README.md)是上述派生文件的哈希核验副本；完整数据与视频留在本仓库本地目录。
+- `artifacts/migrations/2026-11-01-contact-handoff-v1/` 保存原工作区补丁、被改文件备份和状态；`runs/maintenance/2026-11-01-contact-handoff-v1/` 保存测试与工程 smoke，不计入科研样本。
+
+## 2026-11-02-cargo-discovery-v1
+
+- `runs/research/2026-11-02-cargo-discovery-v1/near/`：132个固定近场回合。
+- `runs/research/2026-11-02-cargo-discovery-v1/far/`：12个未知位置/初始位置提示配对回合。
+- `artifacts/research/2026-11-02-cargo-discovery-v1/`：C背向离线否定结果、核验分析、矢量图及同步视频。
+- `artifacts/migrations/2026-11-02-cargo-discovery-v1/`：保护记录、状态、命令、哈希、验证与最终报告。
+- [精简证据](results/cargo_discovery_v1/README.md)：新旧条件分层，失败与G500单列；不代表独立90%可靠性。
+
+## 2026-11-02-transport-tuning-v1
+
+- `runs/research/2026-11-02-transport-tuning-v1/screen/`：48个固定参数开发回合；`transfer/`：另24个跨条件、跨部署方法回合。每例最多600秒，保留全部失败、配置、轨迹、执行快照与收据。
+- `artifacts/research/2026-11-02-transport-tuning-v1/`：G500原因审查、六个旧案例的参考点误差分解、两阶段核验结果、全表和部署安全统计。离线反事实不是新增物理试验。
+- `artifacts/migrations/2026-11-02-transport-tuning-v1/`：修改前原件、工作树/暂存区补丁、状态及恢复说明；`runs/maintenance/2026-11-02-transport-tuning-v1/`：测试、命令、退出码及资源日志。
+- [精简结果和负结果](results/transport_tuning_v1/README.md)：两阶段不混为总体成功率。候选仅为开发版本，全局默认、原判据、论文标题和历史数据不变。

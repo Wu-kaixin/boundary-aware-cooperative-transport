@@ -1,0 +1,32 @@
+{
+  "case": "c_open_away_pos1_initial_location_hint",
+  "scope": "Post-physics saved frames only; original contract includes its own full-record metrics. No rerun or rule change.",
+  "first_saved_center_inside": {
+    "frame": 4019,
+    "time_s": 200.95000000001144,
+    "agent_index": 8,
+    "signed_clearance_m": -0.004077653561433632,
+    "phase": "BRAKE",
+    "preceding_control_estimation_error_m": 0.5786825385032439
+  },
+  "worst_saved_center_inside": {
+    "frame": 5077,
+    "time_s": 253.85000000002347,
+    "agent_index": 1,
+    "signed_clearance_m": -0.30012593321614617
+  },
+  "original_contract": {
+    "min_signed_clearance": -0.30012593321614617,
+    "max_penetration": 0.4301259332161462,
+    "penetration_budget": 0.1825,
+    "min_inter_agent_distance": 0.27999999619284865,
+    "solver_fallbacks": 0,
+    "solver_infeasible": 0
+  },
+  "inputs": {
+    "runs/research/2026-11-02-cargo-discovery-v1/far/c_open_away_pos1_initial_location_hint/replay.npz": "f31fa9de538872714e1cc4273966089290a19723daddd564b4721dff6ea2fb3c",
+    "runs/research/2026-11-02-cargo-discovery-v1/far/c_open_away_pos1_initial_location_hint/summary.json": "d13fb4ae0d777b734f6669c873e0f4bb927673b6b6fbff49062cf6983ba70c74",
+    "runs/research/2026-11-02-cargo-discovery-v1/far/c_open_away_pos1_initial_location_hint/resolved_case.json": "0034c468f674fa95b4d40f48aa1d30088041fa9cf0872f10f82d428eae0e703a"
+  },
+  "conclusion": "Hard safety violation retained. This descriptive temporal audit does not isolate a causal estimation or contact-control fault."
+}

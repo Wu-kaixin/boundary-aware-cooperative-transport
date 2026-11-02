@@ -1,4 +1,9 @@
 # Curated evidence hashes refer to exact bytes across platforms.
+docs/results/** -text whitespace=cr-at-eol
+experiments/ccta2027/*.json -text whitespace=cr-at-eol
+# Generated vector figures and the unmodified upstream class retain original bytes.
+docs/results/**/*.svg -whitespace
+manuscript/ccta2027/ieeeconf.cls -text -whitespace
 docs/results/ccta2027_draft_v2/** -text
 docs/results/reliability_2026-10-22/** -text
 docs/migrations/** -text whitespace=cr-at-eol

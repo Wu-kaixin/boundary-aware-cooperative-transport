@@ -1,12 +1,55 @@
 # DBACT：边界感知部署与协作搬运
 
-**Decentralized Boundary-Aware Cooperative Transportation** 研究多机器人如何利用局部边界观测，围绕未知形状物体完成部署，并在接触后协作搬运。本仓库提供感知与局部地图、边界密度/CVT 部署、安全 QP、控制阶段、仿真与独立评价，以及可追溯的实验运行和分析工具。
+[匹配支撑固定筛选](docs/results/reference_support_v1/README.md)：8条同输入轨迹已完成；局部大误差减少但未通过团队误差门槛，新增物理回合0，候选默认关闭。
+
+
+[最新参考运动与论文证据核验](docs/results/reference_motion_audit_v1/README.md)：同输入参考运动核验完成：24条旧轨迹、6条远场原配准器精确重放，新增物理回合0；区分初始化、参考点旋转和匹配误差，并核查论文主张与验证缺口。
+
+
+[最新参考初始化消融](docs/results/reference_origin_v1/README.md)：参考初始化固定消融完成：24回合（8个已知开发条件×3臂），三臂均7/8完成；取消初始化放大救回斜箱但损失远场C形，提前参考未救回斜箱且G500下降。两项均未采用，原判据和默认方法不变。
+
+
+[最新投票与停止消融](docs/results/voter_continuity_v1/README.md)：投票集合与停止确认固定消融：32回合（8个已知开发条件×4臂），分别检验换票读数连续化和1秒到达确认，保留全部失败与截尾；默认关闭、原成功安全判据不变。
+
+
+**Decentralized Boundary-Aware Cooperative Transport** 研究多机器人如何利用局部边界观测，围绕未知形状物体完成部署，并在接触后协作搬运。本仓库提供感知与局部地图、边界密度/CVT 部署、安全 QP、控制阶段、仿真与独立评价，以及可追溯的实验运行和分析工具。
 
 这是持续研究中的科研软件。静态部署分析有明确适用条件；动态接触、鲁棒搬运及实机性能仍有未解决问题。程序执行完成与科研任务成功分别记录，失败案例保留在结果中。
 
-当前研究与维护入口为 [`paper/boundary-aware-safe-deployment`](https://github.com/Wu-kaixin/boundary-aware-cooperative-transport/tree/paper/boundary-aware-safe-deployment)；`main` 保留已有基线。历史分支成果通过原归档标签和本地备份追溯。两个活动分支不要求指向同一提交，具体状态以 Git 为准。
+两个活动分支是 `main` 和 [`paper/boundary-aware-safe-deployment`](https://github.com/Wu-kaixin/boundary-aware-cooperative-transport/tree/paper/boundary-aware-safe-deployment)。本次研究在原目录进行，未自动提交或推送；运行身份以冻结源码快照及收据为准，不能将本地新结果归到尚未包含它们的远端提交。
 
 **阅读入口：** [架构](docs/ARCHITECTURE.md) · [实验协议](experiments/ccta2027/README.md) · [冻结结果](docs/results/README.md) · [数据索引](docs/DATA_INDEX.md) · [论文稿件](manuscript/ccta2027/README.md) · [仓库指南](docs/REPOSITORY_GUIDE.md)
+
+## 当前研究：从局部边界部署到实际搬运和停止
+
+[运动估计先验复验](docs/results/transport_validation_v1/README.md)：固定新增97回合，核验后复用41条历史比较记录。旧33个近场条件中，CVT安全完成31/33→33/33、G500 27/33→31/33；冻结后的12个新初态中，CVT仍为11/12、G500仍9/12，未通过“新增完成数”的预定门槛。共同候选参数下，CVT、spacing、nearest均11/12完成，G500分别9/12、6/12、8/12，完成率优势未成立。所有回合无硬安全违规；远场斜箱候选仍在0.135米误差处停止，超过原0.12米容差。保留失败与停止时估计偏差；默认值和论文题目不变，不把有限条件比例视为任意形状成功概率。
+
+[可靠运输与G500参数开发](docs/results/transport_tuning_v1/README.md)：固定完成48回合筛选＋24回合迁移检查，原成功与安全判据不变。提高运动估计速度先验的CVT候选在八个筛选条件上安全完成4/8→7/8、G500 2/8→6/8；另四个迁移条件中，CVT安全完成2/4→4/4，spacing、nearest各2/4→3/4。CVT迁移约束缩放24→0次，但spacing为25→178次，不能笼统宣称全部方法更安全。原参数回合精确复现，失败保留；未更改全局默认值，不把开发计数解释为任意形状可靠概率。[G500定义、失败机制与后续对照](docs/TRANSPORT_TUNING_RESEARCH_2026-11-02.md)。
+
+[不规则货物与远场比较](docs/results/cargo_discovery_v1/README.md)：固定近场132回合（33条件×4方法），安全完成为边界 CVT 31/33；spacing 31/33；nearest 31/33；检测点密度 CVT 1/33；远场12回合中未知位置 3/6 完成、6/6 检测；初始位置提示 3/6 完成、6/6 检测；硬安全失败：未知位置 0/6、提示 1/6。两组分别冻结，完整负结果保留；未达到相对全部对照的预先开发优势门槛，不能宣称整体算法优越；应按具体条件与指标报告得失。
+
+[最新坐标一致修复](docs/results/contact_consistency_v1/README.md)：固定 18 回合，九个开发条件、同一 seed 2、每例最多 600 秒。共同参考配置下，旧聚合公式完成 5/9，坐标一致修正完成 8/9；G500 分别 2/9、7/9，修正臂原硬安全检查违规 0/9。C 背向仍失败且出现越过目标后的错误停止；8/9 不是总体成功概率。本轮是公共安全计算修复的配对比较，不是原 CVT 对 spacing 的优越性检验。
+
+[最新几何读出消融](docs/results/contact_geometry_v1/README.md)：固定 12 回合已完成：原参考 0/3、参考点修正 0/3、接触距离拟合 0/3、组合 0/3。没有候选达到预设任务救回门槛。保留有支持的诊断与实验开关，默认关闭；不追加回合或事后调参。 圆形位移误差与接触能力、椭圆结束确认、C形接触可达性分别核查，全部结果及原判据保留。
+
+[最新恢复与增援比较](docs/results/contact_reinforcement_v1/README.md)按固定预算完成三条件×三臂九回合，每例最多600秒：原参考 0/3、仅修恢复 0/3、修复加增援 0/3。未达到本轮开发门槛。停止这一冻结候选的继续调参，保留实验开关，默认关闭。原参考三例全轨迹和历史字段精确复现；全部失败、G500与安全指标见[九回合能力表](docs/results/contact_reinforcement_v1/capability_table.md)。无附着、局部信息和原判据保持，论文题目未改；不将这三个失败条件与历史成功拼成新总体成功率。
+
+[上一轮位置/速度分量比较](docs/results/feedback_components_v1/README.md)新增36个冻结回合，并明确复用27个历史任务参照。共同准入下的旧通道、只换位置、只换速度、双通道分别完成3/9、6/9、4/9、6/9，G500为2/9、2/9、1/9、3/9；原CVT历史参照为完成5/9、G500 5/9。位置反馈的收益与速度反馈的取舍分开记录，圆形、椭圆平行和C背向仍全部未完成。现有暂停/恢复存在计数循环依赖，但影子资格也不足，不能宣称修复计数就能救回C形。默认方法不提升，见[完整能力表](docs/results/feedback_components_v1/capability_table.md)与[研究判断](docs/results/feedback_components_v1/DECISION.md)。仅仿真，无附着，原物理、成功和安全判据及论文题目不变。
+
+[上一轮位移估计与停止比较](docs/results/displacement_stop_v1/README.md)先从旧 C 背向的12000帧记录精确重建约0.5米的估计偏差，再比较一个固定观测参考候选。相同历史输入上的平均位移误差从0.282米降至0.012米；新冻结36回合中，原CVT、spacing、旧二维CVT均完成5/9，候选在600秒内完成6/9（150秒仍5/9）。新增椭圆垂直方向完成，但其25次屏障缩放使G500仍失败；新C背向即使估计较准，仍因推进不足而失败、终点误差退化到0.784米。候选保持默认关闭，不据这一个反复使用的开发seed宣称可靠性或算法优越。见[全部结果](docs/results/displacement_stop_v1/capability_table.md)和[诊断与局限](docs/DISPLACEMENT_STOP_RESEARCH_2026-11-01.md)。当前只做仿真，保留MAS接口，论文题目不变。
+
+[上一轮六方法比较](docs/results/boundary_navigation_v1/README.md)完成54回合固定开发试验（每例最多600秒）：原CVT、spacing、push-cone、侧向推手、二维反馈＋CVT、二维反馈＋spacing分别完成5/9、5/9、4/9、4/9、5/9、4/9，150秒与600秒完成数相同。二维CVT降低四个原失败条件的终点误差，但没有救回完成；部分候选还出现穿透预算超限，全部保持实验选项，不替换默认方法。参见[完整能力表](docs/results/boundary_navigation_v1/capability_table.md)及[研究解释](docs/BOUNDARY_NAVIGATION_RESEARCH_2026-11-01.md)。
+
+[多形状完整任务普查](docs/results/multishape_census_v1/README.md)恢复圆形、椭圆、矩形、L 形和 C 形：九个形状—朝向条件，三种既有部署方法，一个固定开发 seed，共 27 回合。各方法共用感知、反馈、物理、安全和完成判据。几何就绪、真实接触、收定、二维任务完成和 G500 分别记录；全部失败与 watchdog 保留。这不是独立泛化验证。
+
+- [完整能力表](docs/results/multishape_census_v1/capability_table.md)与[全部 27 回合 CSV](docs/results/multishape_census_v1/all_27_episodes.csv)。
+- [五形状阶段图](docs/results/multishape_census_v1/five_shape_stages.png)及[本地完整过程/同步视频索引](docs/results/multishape_census_v1/MEDIA.md)。
+- [CCTA2027 初稿](manuscript/ccta2027/main.pdf)：*Boundary-Aware Deployment for Cooperative Transport of Unknown Objects*。
+- [v2 否定结果](docs/results/progress_local_v2/README.md)保留为诊断支线；anchored 候选不再扩展。已有[累计误差分解](docs/results/multishape_census_v1/README.md#已有-v2-日志的离线分析)基于冻结日志离线生成。
+- [无附着动态接触 v1](docs/results/dynamic_contact_v1/README.md)：新增固定 27 回合，原行为/安全反馈修复/动态接触分别完成 5/9、4/9、2/9。候选退化，实验开关保持关闭；代码修复、换位失败和全部原始结果均可追溯。
+- [确认与回退交接 v1](docs/results/contact_handoff_v1/README.md)：先隔离压力分配与换位，再比较单个交接候选。150 秒主比较三方法仍为 5/9；35 次提议没有形成持续接管确认，候选不推广。单列双方最多 600 秒观察、全部失败、同步视频与前缀一致性检查。[研究判断和标题选项](docs/CONTACT_HANDOFF_RESEARCH_2026-11-01.md)说明下一项应检验的能力。
+
+局部部署使用自身/邻居边界信息，但闭环还包含全队进度中位数与共同阶段监督器，因此不宣称整个搬运系统完全去中心化。G500 是旧执行契约：本配置按投影进度判到达，部分轨迹质量仅告警；它与二维完成不是严格包含关系。
 
 ## 环境与快速开始
 
@@ -154,6 +197,8 @@ Git 中包含活动源码、配置、实验设计、回归测试、理论/稿件
 本次维护不修改控制律、CVT定义、安全阈值、接触判据、动力学或成功标准；新增工程回归不冒充新增物理实验。
 
 ## 阅读入口与追溯
+
+2026-10-31 [进度反馈跟进](docs/results/progress_local_v2/README.md)已完成实际匹配日志及固定三臂比较，更新为[6 页 CCTA 初稿](manuscript/ccta2027/README.md)。仅证书与原轨迹精确一致；无真值读出未救回失败且加重 C 形误差，停止扩大此候选。此前[oracle 诊断](docs/results/readiness_diagnostic_v1/README.md)及不利结果保留，尚不构成一般性能优势。
 
 - [完整结果索引](docs/results/README.md)、[数据位置与完整性](docs/DATA_INDEX.md)
 - [论文草稿](manuscript/ccta2027/README.md)、[文献阅读与研究定位](docs/literature_review_2026-10-22/README.md)

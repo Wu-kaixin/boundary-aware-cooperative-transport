@@ -1,0 +1,2451 @@
+{
+  "stage": "extended",
+  "counts": {
+    "legacy": {
+      "completed": 5,
+      "denominator": 9,
+      "g500": 5,
+      "errors": 0,
+      "censored": 1
+    },
+    "handoff": {
+      "completed": 5,
+      "denominator": 9,
+      "g500": 6,
+      "errors": 0,
+      "censored": 1
+    }
+  },
+  "comparisons": {
+    "legacy": {
+      "gained": [],
+      "lost": [],
+      "net": 0,
+      "new_hard_safety": []
+    }
+  },
+  "development_gate_pass": false,
+  "compatibility_pass": true,
+  "compatibility": {
+    "circle_legacy": {
+      "prefix_exact": true,
+      "arrays": {
+        "times": true,
+        "phase": true,
+        "min_distance": true,
+        "map_coverage": true,
+        "push_flags": true,
+        "contact_flags": true,
+        "efforts": true,
+        "agent_ids": true,
+        "agent_positions": true,
+        "domain": true,
+        "robot_radius": true,
+        "sensed_counts": true,
+        "sensed_points": true,
+        "cargo/cargo_0/centers": true,
+        "cargo/cargo_0/angles": true,
+        "cargo/cargo_0/local_vertices": true,
+        "cargo/cargo_0/strict_coverage": true,
+        "cargo/cargo_0/contacts": true,
+        "cargo/cargo_0/penetration": true,
+        "cargo/cargo_0/speed": true,
+        "cargo/cargo_0/progress_estimate": true,
+        "task/cargo_0/direction": true,
+        "task/cargo_0/start": true,
+        "task/cargo_0/goal_point": true,
+        "task/cargo_0/distance": true
+      }
+    },
+    "circle_handoff": {
+      "prefix_exact": true,
+      "arrays": {
+        "times": true,
+        "phase": true,
+        "min_distance": true,
+        "map_coverage": true,
+        "push_flags": true,
+        "contact_flags": true,
+        "efforts": true,
+        "agent_ids": true,
+        "agent_positions": true,
+        "domain": true,
+        "robot_radius": true,
+        "sensed_counts": true,
+        "sensed_points": true,
+        "cargo/cargo_0/centers": true,
+        "cargo/cargo_0/angles": true,
+        "cargo/cargo_0/local_vertices": true,
+        "cargo/cargo_0/strict_coverage": true,
+        "cargo/cargo_0/contacts": true,
+        "cargo/cargo_0/penetration": true,
+        "cargo/cargo_0/speed": true,
+        "cargo/cargo_0/progress_estimate": true,
+        "task/cargo_0/direction": true,
+        "task/cargo_0/start": true,
+        "task/cargo_0/goal_point": true,
+        "task/cargo_0/distance": true
+      }
+    },
+    "ellipse_parallel_legacy": {
+      "prefix_exact": true,
+      "arrays": {
+        "times": true,
+        "phase": true,
+        "min_distance": true,
+        "map_coverage": true,
+        "push_flags": true,
+        "contact_flags": true,
+        "efforts": true,
+        "agent_ids": true,
+        "agent_positions": true,
+        "domain": true,
+        "robot_radius": true,
+        "sensed_counts": true,
+        "sensed_points": true,
+        "cargo/cargo_0/centers": true,
+        "cargo/cargo_0/angles": true,
+        "cargo/cargo_0/local_vertices": true,
+        "cargo/cargo_0/strict_coverage": true,
+        "cargo/cargo_0/contacts": true,
+        "cargo/cargo_0/penetration": true,
+        "cargo/cargo_0/speed": true,
+        "cargo/cargo_0/progress_estimate": true,
+        "task/cargo_0/direction": true,
+        "task/cargo_0/start": true,
+        "task/cargo_0/goal_point": true,
+        "task/cargo_0/distance": true
+      }
+    },
+    "ellipse_parallel_handoff": {
+      "prefix_exact": true,
+      "arrays": {
+        "times": true,
+        "phase": true,
+        "min_distance": true,
+        "map_coverage": true,
+        "push_flags": true,
+        "contact_flags": true,
+        "efforts": true,
+        "agent_ids": true,
+        "agent_positions": true,
+        "domain": true,
+        "robot_radius": true,
+        "sensed_counts": true,
+        "sensed_points": true,
+        "cargo/cargo_0/centers": true,
+        "cargo/cargo_0/angles": true,
+        "cargo/cargo_0/local_vertices": true,
+        "cargo/cargo_0/strict_coverage": true,
+        "cargo/cargo_0/contacts": true,
+        "cargo/cargo_0/penetration": true,
+        "cargo/cargo_0/speed": true,
+        "cargo/cargo_0/progress_estimate": true,
+        "task/cargo_0/direction": true,
+        "task/cargo_0/start": true,
+        "task/cargo_0/goal_point": true,
+        "task/cargo_0/distance": true
+      }
+    },
+    "ellipse_perpendicular_legacy": {
+      "prefix_exact": true,
+      "arrays": {
+        "times": true,
+        "phase": true,
+        "min_distance": true,
+        "map_coverage": true,
+        "push_flags": true,
+        "contact_flags": true,
+        "efforts": true,
+        "agent_ids": true,
+        "agent_positions": true,
+        "domain": true,
+        "robot_radius": true,
+        "sensed_counts": true,
+        "sensed_points": true,
+        "cargo/cargo_0/centers": true,
+        "cargo/cargo_0/angles": true,
+        "cargo/cargo_0/local_vertices": true,
+        "cargo/cargo_0/strict_coverage": true,
+        "cargo/cargo_0/contacts": true,
+        "cargo/cargo_0/penetration": true,
+        "cargo/cargo_0/speed": true,
+        "cargo/cargo_0/progress_estimate": true,
+        "task/cargo_0/direction": true,
+        "task/cargo_0/start": true,
+        "task/cargo_0/goal_point": true,
+        "task/cargo_0/distance": true
+      }
+    },
+    "ellipse_perpendicular_handoff": {
+      "prefix_exact": true,
+      "arrays": {
+        "times": true,
+        "phase": true,
+        "min_distance": true,
+        "map_coverage": true,
+        "push_flags": true,
+        "contact_flags": true,
+        "efforts": true,
+        "agent_ids": true,
+        "agent_positions": true,
+        "domain": true,
+        "robot_radius": true,
+        "sensed_counts": true,
+        "sensed_points": true,
+        "cargo/cargo_0/centers": true,
+        "cargo/cargo_0/angles": true,
+        "cargo/cargo_0/local_vertices": true,
+        "cargo/cargo_0/strict_coverage": true,
+        "cargo/cargo_0/contacts": true,
+        "cargo/cargo_0/penetration": true,
+        "cargo/cargo_0/speed": true,
+        "cargo/cargo_0/progress_estimate": true,
+        "task/cargo_0/direction": true,
+        "task/cargo_0/start": true,
+        "task/cargo_0/goal_point": true,
+        "task/cargo_0/distance": true
+      }
+    },
+    "rectangle_parallel_legacy": {
+      "prefix_exact": true,
+      "arrays": {
+        "times": true,
+        "phase": true,
+        "min_distance": true,
+        "map_coverage": true,
+        "push_flags": true,
+        "contact_flags": true,
+        "efforts": true,
+        "agent_ids": true,
+        "agent_positions": true,
+        "domain": true,
+        "robot_radius": true,
+        "sensed_counts": true,
+        "sensed_points": true,
+        "cargo/cargo_0/centers": true,
+        "cargo/cargo_0/angles": true,
+        "cargo/cargo_0/local_vertices": true,
+        "cargo/cargo_0/strict_coverage": true,
+        "cargo/cargo_0/contacts": true,
+        "cargo/cargo_0/penetration": true,
+        "cargo/cargo_0/speed": true,
+        "cargo/cargo_0/progress_estimate": true,
+        "task/cargo_0/direction": true,
+        "task/cargo_0/start": true,
+        "task/cargo_0/goal_point": true,
+        "task/cargo_0/distance": true
+      }
+    },
+    "rectangle_parallel_handoff": {
+      "prefix_exact": true,
+      "arrays": {
+        "times": true,
+        "phase": true,
+        "min_distance": true,
+        "map_coverage": true,
+        "push_flags": true,
+        "contact_flags": true,
+        "efforts": true,
+        "agent_ids": true,
+        "agent_positions": true,
+        "domain": true,
+        "robot_radius": true,
+        "sensed_counts": true,
+        "sensed_points": true,
+        "cargo/cargo_0/centers": true,
+        "cargo/cargo_0/angles": true,
+        "cargo/cargo_0/local_vertices": true,
+        "cargo/cargo_0/strict_coverage": true,
+        "cargo/cargo_0/contacts": true,
+        "cargo/cargo_0/penetration": true,
+        "cargo/cargo_0/speed": true,
+        "cargo/cargo_0/progress_estimate": true,
+        "task/cargo_0/direction": true,
+        "task/cargo_0/start": true,
+        "task/cargo_0/goal_point": true,
+        "task/cargo_0/distance": true
+      }
+    },
+    "rectangle_perpendicular_legacy": {
+      "prefix_exact": true,
+      "arrays": {
+        "times": true,
+        "phase": true,
+        "min_distance": true,
+        "map_coverage": true,
+        "push_flags": true,
+        "contact_flags": true,
+        "efforts": true,
+        "agent_ids": true,
+        "agent_positions": true,
+        "domain": true,
+        "robot_radius": true,
+        "sensed_counts": true,
+        "sensed_points": true,
+        "cargo/cargo_0/centers": true,
+        "cargo/cargo_0/angles": true,
+        "cargo/cargo_0/local_vertices": true,
+        "cargo/cargo_0/strict_coverage": true,
+        "cargo/cargo_0/contacts": true,
+        "cargo/cargo_0/penetration": true,
+        "cargo/cargo_0/speed": true,
+        "cargo/cargo_0/progress_estimate": true,
+        "task/cargo_0/direction": true,
+        "task/cargo_0/start": true,
+        "task/cargo_0/goal_point": true,
+        "task/cargo_0/distance": true
+      }
+    },
+    "rectangle_perpendicular_handoff": {
+      "prefix_exact": true,
+      "arrays": {
+        "times": true,
+        "phase": true,
+        "min_distance": true,
+        "map_coverage": true,
+        "push_flags": true,
+        "contact_flags": true,
+        "efforts": true,
+        "agent_ids": true,
+        "agent_positions": true,
+        "domain": true,
+        "robot_radius": true,
+        "sensed_counts": true,
+        "sensed_points": true,
+        "cargo/cargo_0/centers": true,
+        "cargo/cargo_0/angles": true,
+        "cargo/cargo_0/local_vertices": true,
+        "cargo/cargo_0/strict_coverage": true,
+        "cargo/cargo_0/contacts": true,
+        "cargo/cargo_0/penetration": true,
+        "cargo/cargo_0/speed": true,
+        "cargo/cargo_0/progress_estimate": true,
+        "task/cargo_0/direction": true,
+        "task/cargo_0/start": true,
+        "task/cargo_0/goal_point": true,
+        "task/cargo_0/distance": true
+      }
+    },
+    "l_reference_legacy": {
+      "prefix_exact": true,
+      "arrays": {
+        "times": true,
+        "phase": true,
+        "min_distance": true,
+        "map_coverage": true,
+        "push_flags": true,
+        "contact_flags": true,
+        "efforts": true,
+        "agent_ids": true,
+        "agent_positions": true,
+        "domain": true,
+        "robot_radius": true,
+        "sensed_counts": true,
+        "sensed_points": true,
+        "cargo/cargo_0/centers": true,
+        "cargo/cargo_0/angles": true,
+        "cargo/cargo_0/local_vertices": true,
+        "cargo/cargo_0/strict_coverage": true,
+        "cargo/cargo_0/contacts": true,
+        "cargo/cargo_0/penetration": true,
+        "cargo/cargo_0/speed": true,
+        "cargo/cargo_0/progress_estimate": true,
+        "task/cargo_0/direction": true,
+        "task/cargo_0/start": true,
+        "task/cargo_0/goal_point": true,
+        "task/cargo_0/distance": true
+      }
+    },
+    "l_reference_handoff": {
+      "prefix_exact": true,
+      "arrays": {
+        "times": true,
+        "phase": true,
+        "min_distance": true,
+        "map_coverage": true,
+        "push_flags": true,
+        "contact_flags": true,
+        "efforts": true,
+        "agent_ids": true,
+        "agent_positions": true,
+        "domain": true,
+        "robot_radius": true,
+        "sensed_counts": true,
+        "sensed_points": true,
+        "cargo/cargo_0/centers": true,
+        "cargo/cargo_0/angles": true,
+        "cargo/cargo_0/local_vertices": true,
+        "cargo/cargo_0/strict_coverage": true,
+        "cargo/cargo_0/contacts": true,
+        "cargo/cargo_0/penetration": true,
+        "cargo/cargo_0/speed": true,
+        "cargo/cargo_0/progress_estimate": true,
+        "task/cargo_0/direction": true,
+        "task/cargo_0/start": true,
+        "task/cargo_0/goal_point": true,
+        "task/cargo_0/distance": true
+      }
+    },
+    "l_rotated_legacy": {
+      "prefix_exact": true,
+      "arrays": {
+        "times": true,
+        "phase": true,
+        "min_distance": true,
+        "map_coverage": true,
+        "push_flags": true,
+        "contact_flags": true,
+        "efforts": true,
+        "agent_ids": true,
+        "agent_positions": true,
+        "domain": true,
+        "robot_radius": true,
+        "sensed_counts": true,
+        "sensed_points": true,
+        "cargo/cargo_0/centers": true,
+        "cargo/cargo_0/angles": true,
+        "cargo/cargo_0/local_vertices": true,
+        "cargo/cargo_0/strict_coverage": true,
+        "cargo/cargo_0/contacts": true,
+        "cargo/cargo_0/penetration": true,
+        "cargo/cargo_0/speed": true,
+        "cargo/cargo_0/progress_estimate": true,
+        "task/cargo_0/direction": true,
+        "task/cargo_0/start": true,
+        "task/cargo_0/goal_point": true,
+        "task/cargo_0/distance": true
+      }
+    },
+    "l_rotated_handoff": {
+      "prefix_exact": true,
+      "arrays": {
+        "times": true,
+        "phase": true,
+        "min_distance": true,
+        "map_coverage": true,
+        "push_flags": true,
+        "contact_flags": true,
+        "efforts": true,
+        "agent_ids": true,
+        "agent_positions": true,
+        "domain": true,
+        "robot_radius": true,
+        "sensed_counts": true,
+        "sensed_points": true,
+        "cargo/cargo_0/centers": true,
+        "cargo/cargo_0/angles": true,
+        "cargo/cargo_0/local_vertices": true,
+        "cargo/cargo_0/strict_coverage": true,
+        "cargo/cargo_0/contacts": true,
+        "cargo/cargo_0/penetration": true,
+        "cargo/cargo_0/speed": true,
+        "cargo/cargo_0/progress_estimate": true,
+        "task/cargo_0/direction": true,
+        "task/cargo_0/start": true,
+        "task/cargo_0/goal_point": true,
+        "task/cargo_0/distance": true
+      }
+    },
+    "c_open_toward_legacy": {
+      "prefix_exact": true,
+      "arrays": {
+        "times": true,
+        "phase": true,
+        "min_distance": true,
+        "map_coverage": true,
+        "push_flags": true,
+        "contact_flags": true,
+        "efforts": true,
+        "agent_ids": true,
+        "agent_positions": true,
+        "domain": true,
+        "robot_radius": true,
+        "sensed_counts": true,
+        "sensed_points": true,
+        "cargo/cargo_0/centers": true,
+        "cargo/cargo_0/angles": true,
+        "cargo/cargo_0/local_vertices": true,
+        "cargo/cargo_0/strict_coverage": true,
+        "cargo/cargo_0/contacts": true,
+        "cargo/cargo_0/penetration": true,
+        "cargo/cargo_0/speed": true,
+        "cargo/cargo_0/progress_estimate": true,
+        "task/cargo_0/direction": true,
+        "task/cargo_0/start": true,
+        "task/cargo_0/goal_point": true,
+        "task/cargo_0/distance": true
+      }
+    },
+    "c_open_toward_handoff": {
+      "prefix_exact": true,
+      "arrays": {
+        "times": true,
+        "phase": true,
+        "min_distance": true,
+        "map_coverage": true,
+        "push_flags": true,
+        "contact_flags": true,
+        "efforts": true,
+        "agent_ids": true,
+        "agent_positions": true,
+        "domain": true,
+        "robot_radius": true,
+        "sensed_counts": true,
+        "sensed_points": true,
+        "cargo/cargo_0/centers": true,
+        "cargo/cargo_0/angles": true,
+        "cargo/cargo_0/local_vertices": true,
+        "cargo/cargo_0/strict_coverage": true,
+        "cargo/cargo_0/contacts": true,
+        "cargo/cargo_0/penetration": true,
+        "cargo/cargo_0/speed": true,
+        "cargo/cargo_0/progress_estimate": true,
+        "task/cargo_0/direction": true,
+        "task/cargo_0/start": true,
+        "task/cargo_0/goal_point": true,
+        "task/cargo_0/distance": true
+      }
+    },
+    "c_open_away_legacy": {
+      "prefix_exact": true,
+      "arrays": {
+        "times": true,
+        "phase": true,
+        "min_distance": true,
+        "map_coverage": true,
+        "push_flags": true,
+        "contact_flags": true,
+        "efforts": true,
+        "agent_ids": true,
+        "agent_positions": true,
+        "domain": true,
+        "robot_radius": true,
+        "sensed_counts": true,
+        "sensed_points": true,
+        "cargo/cargo_0/centers": true,
+        "cargo/cargo_0/angles": true,
+        "cargo/cargo_0/local_vertices": true,
+        "cargo/cargo_0/strict_coverage": true,
+        "cargo/cargo_0/contacts": true,
+        "cargo/cargo_0/penetration": true,
+        "cargo/cargo_0/speed": true,
+        "cargo/cargo_0/progress_estimate": true,
+        "task/cargo_0/direction": true,
+        "task/cargo_0/start": true,
+        "task/cargo_0/goal_point": true,
+        "task/cargo_0/distance": true
+      }
+    },
+    "c_open_away_handoff": {
+      "prefix_exact": true,
+      "arrays": {
+        "times": true,
+        "phase": true,
+        "min_distance": true,
+        "map_coverage": true,
+        "push_flags": true,
+        "contact_flags": true,
+        "efforts": true,
+        "agent_ids": true,
+        "agent_positions": true,
+        "domain": true,
+        "robot_radius": true,
+        "sensed_counts": true,
+        "sensed_points": true,
+        "cargo/cargo_0/centers": true,
+        "cargo/cargo_0/angles": true,
+        "cargo/cargo_0/local_vertices": true,
+        "cargo/cargo_0/strict_coverage": true,
+        "cargo/cargo_0/contacts": true,
+        "cargo/cargo_0/penetration": true,
+        "cargo/cargo_0/speed": true,
+        "cargo/cargo_0/progress_estimate": true,
+        "task/cargo_0/direction": true,
+        "task/cargo_0/start": true,
+        "task/cargo_0/goal_point": true,
+        "task/cargo_0/distance": true
+      }
+    }
+  },
+  "all_episodes": [
+    {
+      "condition": "circle",
+      "arm": "legacy",
+      "seed": 2,
+      "execution_status": "COMPLETED",
+      "completed": false,
+      "g500": true,
+      "settled": true,
+      "endpoint_error_m": 1.1772256545333308,
+      "wall_seconds": 18.002223899995442,
+      "frames": 270,
+      "seconds": 13.5,
+      "completion_seconds": null,
+      "watchdog": false,
+      "outcome": "SETTLED_OUTSIDE_2D_TOLERANCE",
+      "final_phase": "HOLD",
+      "true_progress_m": 1.1247158694948838,
+      "estimated_progress_m": 1.218015559270215,
+      "max_cross_track_m": 1.174815960644695,
+      "hard_safety": "",
+      "min_clearance_m": 0.07925385807301971,
+      "min_separation_m": 0.2801402697137052,
+      "max_penetration_m": 0.05074614192698029,
+      "barrier_scalings": 0,
+      "solver_fallbacks": 0,
+      "tail_window_seconds": 5.0,
+      "tail_mean_positive_contacts": 1.42,
+      "tail_mean_push_flags": 2.85,
+      "tail_mean_forward_contact_force_N": 12.261722793328206,
+      "tail_mean_true_speed_m_s": 0.162285622166924,
+      "g500_reasons": "",
+      "handoff_proposals": 0,
+      "handoff_confirmations": 0,
+      "handoff_releases": 0,
+      "handoff_rollbacks": 0,
+      "relocation_starts": 0
+    },
+    {
+      "condition": "circle",
+      "arm": "handoff",
+      "seed": 2,
+      "execution_status": "COMPLETED",
+      "completed": false,
+      "g500": true,
+      "settled": true,
+      "endpoint_error_m": 1.1784542226020478,
+      "wall_seconds": 18.270554099988658,
+      "frames": 273,
+      "seconds": 13.65,
+      "completion_seconds": null,
+      "watchdog": false,
+      "outcome": "SETTLED_OUTSIDE_2D_TOLERANCE",
+      "final_phase": "HOLD",
+      "true_progress_m": 1.1347804252272575,
+      "estimated_progress_m": 1.2285172664844604,
+      "max_cross_track_m": 1.1766481045049364,
+      "hard_safety": "",
+      "min_clearance_m": 0.07925385807301971,
+      "min_separation_m": 0.2801094009062647,
+      "max_penetration_m": 0.05074614192698029,
+      "barrier_scalings": 0,
+      "solver_fallbacks": 0,
+      "tail_window_seconds": 5.0,
+      "tail_mean_positive_contacts": 1.39,
+      "tail_mean_push_flags": 2.74,
+      "tail_mean_forward_contact_force_N": 11.931768956554166,
+      "tail_mean_true_speed_m_s": 0.15503551715507474,
+      "g500_reasons": "",
+      "handoff_proposals": 2,
+      "handoff_confirmations": 0,
+      "handoff_releases": 0,
+      "handoff_rollbacks": 3,
+      "relocation_starts": 0
+    },
+    {
+      "condition": "ellipse_parallel",
+      "arm": "legacy",
+      "seed": 2,
+      "execution_status": "COMPLETED",
+      "completed": false,
+      "g500": true,
+      "settled": true,
+      "endpoint_error_m": 0.8379313775615701,
+      "wall_seconds": 33.688678100006655,
+      "frames": 532,
+      "seconds": 26.6,
+      "completion_seconds": null,
+      "watchdog": false,
+      "outcome": "SETTLED_OUTSIDE_2D_TOLERANCE",
+      "final_phase": "HOLD",
+      "true_progress_m": 1.1295333853109346,
+      "estimated_progress_m": 1.2163456617850965,
+      "max_cross_track_m": 0.8349631427293622,
+      "hard_safety": "",
+      "min_clearance_m": 0.06600863917295685,
+      "min_separation_m": 0.28049977553806504,
+      "max_penetration_m": 0.06399136082704315,
+      "barrier_scalings": 0,
+      "solver_fallbacks": 0,
+      "tail_window_seconds": 5.0,
+      "tail_mean_positive_contacts": 0.91,
+      "tail_mean_push_flags": 1.77,
+      "tail_mean_forward_contact_force_N": 10.375776557364025,
+      "tail_mean_true_speed_m_s": 0.054449974688975056,
+      "g500_reasons": "",
+      "handoff_proposals": 0,
+      "handoff_confirmations": 0,
+      "handoff_releases": 0,
+      "handoff_rollbacks": 0,
+      "relocation_starts": 0
+    },
+    {
+      "condition": "ellipse_parallel",
+      "arm": "handoff",
+      "seed": 2,
+      "execution_status": "COMPLETED",
+      "completed": false,
+      "g500": true,
+      "settled": true,
+      "endpoint_error_m": 0.7792153641203369,
+      "wall_seconds": 31.602373200003058,
+      "frames": 482,
+      "seconds": 24.1,
+      "completion_seconds": null,
+      "watchdog": false,
+      "outcome": "SETTLED_OUTSIDE_2D_TOLERANCE",
+      "final_phase": "HOLD",
+      "true_progress_m": 1.1540243647076966,
+      "estimated_progress_m": 1.2174133304095496,
+      "max_cross_track_m": 0.77785784346541,
+      "hard_safety": "",
+      "min_clearance_m": 0.06164673020146593,
+      "min_separation_m": 0.2801442230955187,
+      "max_penetration_m": 0.06835326979853407,
+      "barrier_scalings": 0,
+      "solver_fallbacks": 0,
+      "tail_window_seconds": 5.0,
+      "tail_mean_positive_contacts": 0.81,
+      "tail_mean_push_flags": 1.64,
+      "tail_mean_forward_contact_force_N": 10.102940037202881,
+      "tail_mean_true_speed_m_s": 0.14086930732528838,
+      "g500_reasons": "",
+      "handoff_proposals": 5,
+      "handoff_confirmations": 0,
+      "handoff_releases": 0,
+      "handoff_rollbacks": 6,
+      "relocation_starts": 0
+    },
+    {
+      "condition": "ellipse_perpendicular",
+      "arm": "legacy",
+      "seed": 2,
+      "execution_status": "COMPLETED",
+      "completed": false,
+      "g500": true,
+      "settled": true,
+      "endpoint_error_m": 0.35571595081263097,
+      "wall_seconds": 17.253409400000237,
+      "frames": 268,
+      "seconds": 13.4,
+      "completion_seconds": null,
+      "watchdog": false,
+      "outcome": "SETTLED_OUTSIDE_2D_TOLERANCE",
+      "final_phase": "HOLD",
+      "true_progress_m": 1.1183666080596923,
+      "estimated_progress_m": 1.2325518228303403,
+      "max_cross_track_m": 0.3462222219656823,
+      "hard_safety": "",
+      "min_clearance_m": 0.08297590135269564,
+      "min_separation_m": 0.2800036990763583,
+      "max_penetration_m": 0.04702409864730436,
+      "barrier_scalings": 0,
+      "solver_fallbacks": 0,
+      "tail_window_seconds": 5.0,
+      "tail_mean_positive_contacts": 1.75,
+      "tail_mean_push_flags": 2.35,
+      "tail_mean_forward_contact_force_N": 16.656321702205624,
+      "tail_mean_true_speed_m_s": 0.1541393632175818,
+      "g500_reasons": "",
+      "handoff_proposals": 0,
+      "handoff_confirmations": 0,
+      "handoff_releases": 0,
+      "handoff_rollbacks": 0,
+      "relocation_starts": 0
+    },
+    {
+      "condition": "ellipse_perpendicular",
+      "arm": "handoff",
+      "seed": 2,
+      "execution_status": "COMPLETED",
+      "completed": false,
+      "g500": true,
+      "settled": true,
+      "endpoint_error_m": 0.35571595081263097,
+      "wall_seconds": 17.972448999993503,
+      "frames": 268,
+      "seconds": 13.4,
+      "completion_seconds": null,
+      "watchdog": false,
+      "outcome": "SETTLED_OUTSIDE_2D_TOLERANCE",
+      "final_phase": "HOLD",
+      "true_progress_m": 1.1183666080596923,
+      "estimated_progress_m": 1.2325518228303403,
+      "max_cross_track_m": 0.3462222219656823,
+      "hard_safety": "",
+      "min_clearance_m": 0.08297590135269564,
+      "min_separation_m": 0.2800036990763583,
+      "max_penetration_m": 0.04702409864730436,
+      "barrier_scalings": 0,
+      "solver_fallbacks": 0,
+      "tail_window_seconds": 5.0,
+      "tail_mean_positive_contacts": 1.75,
+      "tail_mean_push_flags": 2.35,
+      "tail_mean_forward_contact_force_N": 16.656321702205624,
+      "tail_mean_true_speed_m_s": 0.1541393632175818,
+      "g500_reasons": "",
+      "handoff_proposals": 0,
+      "handoff_confirmations": 0,
+      "handoff_releases": 0,
+      "handoff_rollbacks": 0,
+      "relocation_starts": 0
+    },
+    {
+      "condition": "rectangle_parallel",
+      "arm": "legacy",
+      "seed": 2,
+      "execution_status": "COMPLETED",
+      "completed": true,
+      "g500": false,
+      "settled": true,
+      "endpoint_error_m": 0.09567198920868619,
+      "wall_seconds": 29.436887999996543,
+      "frames": 419,
+      "seconds": 20.950000000000003,
+      "completion_seconds": 20.950000000000003,
+      "watchdog": false,
+      "outcome": "COMPLETED",
+      "final_phase": "HOLD",
+      "true_progress_m": 1.288566382214107,
+      "estimated_progress_m": 1.3439247504804277,
+      "max_cross_track_m": 0.042494346635324476,
+      "hard_safety": "",
+      "min_clearance_m": 0.08199270326354435,
+      "min_separation_m": 0.28081337109767024,
+      "max_penetration_m": 0.04800729673645565,
+      "barrier_scalings": 2,
+      "solver_fallbacks": 0,
+      "tail_window_seconds": 5.0,
+      "tail_mean_positive_contacts": 1.22,
+      "tail_mean_push_flags": 1.4,
+      "tail_mean_forward_contact_force_N": 15.136384355488712,
+      "tail_mean_true_speed_m_s": 0.06033890981764085,
+      "g500_reasons": "G500: 2 scaled-barrier event(s), smallest factor 0.773; the contract allows 0",
+      "handoff_proposals": 0,
+      "handoff_confirmations": 0,
+      "handoff_releases": 0,
+      "handoff_rollbacks": 0,
+      "relocation_starts": 0
+    },
+    {
+      "condition": "rectangle_parallel",
+      "arm": "handoff",
+      "seed": 2,
+      "execution_status": "COMPLETED",
+      "completed": true,
+      "g500": true,
+      "settled": true,
+      "endpoint_error_m": 0.03585716159120057,
+      "wall_seconds": 30.508794900000794,
+      "frames": 413,
+      "seconds": 20.650000000000002,
+      "completion_seconds": 20.650000000000002,
+      "watchdog": false,
+      "outcome": "COMPLETED",
+      "final_phase": "HOLD",
+      "true_progress_m": 1.2345754506101745,
+      "estimated_progress_m": 1.2048132980826145,
+      "max_cross_track_m": 0.042494346635324476,
+      "hard_safety": "",
+      "min_clearance_m": 0.08260606422837702,
+      "min_separation_m": 0.28080871461090817,
+      "max_penetration_m": 0.047393935771622986,
+      "barrier_scalings": 0,
+      "solver_fallbacks": 0,
+      "tail_window_seconds": 5.0,
+      "tail_mean_positive_contacts": 1.3,
+      "tail_mean_push_flags": 1.46,
+      "tail_mean_forward_contact_force_N": 15.808968767860556,
+      "tail_mean_true_speed_m_s": 0.06033696325383337,
+      "g500_reasons": "",
+      "handoff_proposals": 2,
+      "handoff_confirmations": 0,
+      "handoff_releases": 0,
+      "handoff_rollbacks": 2,
+      "relocation_starts": 0
+    },
+    {
+      "condition": "rectangle_perpendicular",
+      "arm": "legacy",
+      "seed": 2,
+      "execution_status": "COMPLETED",
+      "completed": true,
+      "g500": true,
+      "settled": true,
+      "endpoint_error_m": 0.038895292190779564,
+      "wall_seconds": 23.83828110000468,
+      "frames": 401,
+      "seconds": 20.05,
+      "completion_seconds": 20.05,
+      "watchdog": false,
+      "outcome": "COMPLETED",
+      "final_phase": "HOLD",
+      "true_progress_m": 1.1704325707378622,
+      "estimated_progress_m": 1.2334854623257239,
+      "max_cross_track_m": 0.025337869189590023,
+      "hard_safety": "",
+      "min_clearance_m": 0.0794603332914301,
+      "min_separation_m": 0.2800563530523608,
+      "max_penetration_m": 0.05053966670856991,
+      "barrier_scalings": 0,
+      "solver_fallbacks": 0,
+      "tail_window_seconds": 5.0,
+      "tail_mean_positive_contacts": 1.21,
+      "tail_mean_push_flags": 1.17,
+      "tail_mean_forward_contact_force_N": 16.066005484068036,
+      "tail_mean_true_speed_m_s": 0.09708249016198377,
+      "g500_reasons": "",
+      "handoff_proposals": 0,
+      "handoff_confirmations": 0,
+      "handoff_releases": 0,
+      "handoff_rollbacks": 0,
+      "relocation_starts": 0
+    },
+    {
+      "condition": "rectangle_perpendicular",
+      "arm": "handoff",
+      "seed": 2,
+      "execution_status": "COMPLETED",
+      "completed": true,
+      "g500": true,
+      "settled": true,
+      "endpoint_error_m": 0.038895292190779564,
+      "wall_seconds": 25.152404500026023,
+      "frames": 401,
+      "seconds": 20.05,
+      "completion_seconds": 20.05,
+      "watchdog": false,
+      "outcome": "COMPLETED",
+      "final_phase": "HOLD",
+      "true_progress_m": 1.1704325707378622,
+      "estimated_progress_m": 1.2334854623257239,
+      "max_cross_track_m": 0.025337869189590023,
+      "hard_safety": "",
+      "min_clearance_m": 0.0794603332914301,
+      "min_separation_m": 0.2800563530523608,
+      "max_penetration_m": 0.05053966670856991,
+      "barrier_scalings": 0,
+      "solver_fallbacks": 0,
+      "tail_window_seconds": 5.0,
+      "tail_mean_positive_contacts": 1.21,
+      "tail_mean_push_flags": 1.17,
+      "tail_mean_forward_contact_force_N": 16.066005484068036,
+      "tail_mean_true_speed_m_s": 0.09708249016198377,
+      "g500_reasons": "",
+      "handoff_proposals": 0,
+      "handoff_confirmations": 0,
+      "handoff_releases": 0,
+      "handoff_rollbacks": 0,
+      "relocation_starts": 0
+    },
+    {
+      "condition": "l_reference",
+      "arm": "legacy",
+      "seed": 2,
+      "execution_status": "COMPLETED",
+      "completed": true,
+      "g500": false,
+      "settled": true,
+      "endpoint_error_m": 0.11169275748900068,
+      "wall_seconds": 30.574062899977434,
+      "frames": 483,
+      "seconds": 24.150000000000002,
+      "completion_seconds": 24.150000000000002,
+      "watchdog": false,
+      "outcome": "COMPLETED",
+      "final_phase": "HOLD",
+      "true_progress_m": 1.100873894485336,
+      "estimated_progress_m": 1.1855706375987607,
+      "max_cross_track_m": 0.051471227700458755,
+      "hard_safety": "",
+      "min_clearance_m": 0.07650582830685104,
+      "min_separation_m": 0.2834088563203063,
+      "max_penetration_m": 0.05349417169314896,
+      "barrier_scalings": 2,
+      "solver_fallbacks": 0,
+      "tail_window_seconds": 5.0,
+      "tail_mean_positive_contacts": 1.44,
+      "tail_mean_push_flags": 2.13,
+      "tail_mean_forward_contact_force_N": 15.466029592499478,
+      "tail_mean_true_speed_m_s": 0.04543600560200005,
+      "g500_reasons": "G500: 2 scaled-barrier event(s), smallest factor 0.871; the contract allows 0",
+      "handoff_proposals": 0,
+      "handoff_confirmations": 0,
+      "handoff_releases": 0,
+      "handoff_rollbacks": 0,
+      "relocation_starts": 0
+    },
+    {
+      "condition": "l_reference",
+      "arm": "handoff",
+      "seed": 2,
+      "execution_status": "COMPLETED",
+      "completed": true,
+      "g500": false,
+      "settled": true,
+      "endpoint_error_m": 0.11169275748900068,
+      "wall_seconds": 31.96022440001252,
+      "frames": 483,
+      "seconds": 24.150000000000002,
+      "completion_seconds": 24.150000000000002,
+      "watchdog": false,
+      "outcome": "COMPLETED",
+      "final_phase": "HOLD",
+      "true_progress_m": 1.100873894485336,
+      "estimated_progress_m": 1.1855706375987607,
+      "max_cross_track_m": 0.051471227700458755,
+      "hard_safety": "",
+      "min_clearance_m": 0.07650582830685104,
+      "min_separation_m": 0.2834088563203063,
+      "max_penetration_m": 0.05349417169314896,
+      "barrier_scalings": 2,
+      "solver_fallbacks": 0,
+      "tail_window_seconds": 5.0,
+      "tail_mean_positive_contacts": 1.44,
+      "tail_mean_push_flags": 2.13,
+      "tail_mean_forward_contact_force_N": 15.466029592499478,
+      "tail_mean_true_speed_m_s": 0.04543600560200005,
+      "g500_reasons": "G500: 2 scaled-barrier event(s), smallest factor 0.871; the contract allows 0",
+      "handoff_proposals": 1,
+      "handoff_confirmations": 0,
+      "handoff_releases": 0,
+      "handoff_rollbacks": 0,
+      "relocation_starts": 0
+    },
+    {
+      "condition": "l_rotated",
+      "arm": "legacy",
+      "seed": 2,
+      "execution_status": "COMPLETED",
+      "completed": true,
+      "g500": false,
+      "settled": true,
+      "endpoint_error_m": 0.11954628796467351,
+      "wall_seconds": 58.88986450000084,
+      "frames": 859,
+      "seconds": 42.95,
+      "completion_seconds": 42.95,
+      "watchdog": false,
+      "outcome": "COMPLETED",
+      "final_phase": "HOLD",
+      "true_progress_m": 1.0837149751176574,
+      "estimated_progress_m": 1.2041301753838733,
+      "max_cross_track_m": 0.0378553340327219,
+      "hard_safety": "",
+      "min_clearance_m": 0.08435283133723459,
+      "min_separation_m": 0.2801647365339025,
+      "max_penetration_m": 0.045647168662765414,
+      "barrier_scalings": 0,
+      "solver_fallbacks": 0,
+      "tail_window_seconds": 5.0,
+      "tail_mean_positive_contacts": 1.19,
+      "tail_mean_push_flags": 0.77,
+      "tail_mean_forward_contact_force_N": 12.343858617181079,
+      "tail_mean_true_speed_m_s": 0.016201228404332843,
+      "g500_reasons": "G500: transport activation never happened within the 859-frame run",
+      "handoff_proposals": 0,
+      "handoff_confirmations": 0,
+      "handoff_releases": 0,
+      "handoff_rollbacks": 0,
+      "relocation_starts": 0
+    },
+    {
+      "condition": "l_rotated",
+      "arm": "handoff",
+      "seed": 2,
+      "execution_status": "COMPLETED",
+      "completed": true,
+      "g500": false,
+      "settled": true,
+      "endpoint_error_m": 0.11954628796467351,
+      "wall_seconds": 60.41493279999122,
+      "frames": 859,
+      "seconds": 42.95,
+      "completion_seconds": 42.95,
+      "watchdog": false,
+      "outcome": "COMPLETED",
+      "final_phase": "HOLD",
+      "true_progress_m": 1.0837149751176574,
+      "estimated_progress_m": 1.2041301753838733,
+      "max_cross_track_m": 0.0378553340327219,
+      "hard_safety": "",
+      "min_clearance_m": 0.08435283133723459,
+      "min_separation_m": 0.2801647365339025,
+      "max_penetration_m": 0.045647168662765414,
+      "barrier_scalings": 0,
+      "solver_fallbacks": 0,
+      "tail_window_seconds": 5.0,
+      "tail_mean_positive_contacts": 1.19,
+      "tail_mean_push_flags": 0.77,
+      "tail_mean_forward_contact_force_N": 12.343858617181079,
+      "tail_mean_true_speed_m_s": 0.016201228404332843,
+      "g500_reasons": "G500: transport activation never happened within the 859-frame run",
+      "handoff_proposals": 4,
+      "handoff_confirmations": 0,
+      "handoff_releases": 0,
+      "handoff_rollbacks": 4,
+      "relocation_starts": 0
+    },
+    {
+      "condition": "c_open_toward",
+      "arm": "legacy",
+      "seed": 2,
+      "execution_status": "COMPLETED",
+      "completed": true,
+      "g500": true,
+      "settled": true,
+      "endpoint_error_m": 0.10148706576259073,
+      "wall_seconds": 20.45571970002493,
+      "frames": 312,
+      "seconds": 15.600000000000001,
+      "completion_seconds": 15.600000000000001,
+      "watchdog": false,
+      "outcome": "COMPLETED",
+      "final_phase": "HOLD",
+      "true_progress_m": 1.1085652938683115,
+      "estimated_progress_m": 1.226926154908999,
+      "max_cross_track_m": 0.04561680631255749,
+      "hard_safety": "",
+      "min_clearance_m": 0.06565263255217424,
+      "min_separation_m": 0.2801760301950672,
+      "max_penetration_m": 0.06434736744782577,
+      "barrier_scalings": 0,
+      "solver_fallbacks": 0,
+      "tail_window_seconds": 5.0,
+      "tail_mean_positive_contacts": 1.18,
+      "tail_mean_push_flags": 1.76,
+      "tail_mean_forward_contact_force_N": 15.853090948677686,
+      "tail_mean_true_speed_m_s": 0.11156415889793041,
+      "g500_reasons": "",
+      "handoff_proposals": 0,
+      "handoff_confirmations": 0,
+      "handoff_releases": 0,
+      "handoff_rollbacks": 0,
+      "relocation_starts": 0
+    },
+    {
+      "condition": "c_open_toward",
+      "arm": "handoff",
+      "seed": 2,
+      "execution_status": "COMPLETED",
+      "completed": true,
+      "g500": true,
+      "settled": true,
+      "endpoint_error_m": 0.10148706576259073,
+      "wall_seconds": 20.986813800001983,
+      "frames": 312,
+      "seconds": 15.600000000000001,
+      "completion_seconds": 15.600000000000001,
+      "watchdog": false,
+      "outcome": "COMPLETED",
+      "final_phase": "HOLD",
+      "true_progress_m": 1.1085652938683115,
+      "estimated_progress_m": 1.226926154908999,
+      "max_cross_track_m": 0.04561680631255749,
+      "hard_safety": "",
+      "min_clearance_m": 0.06565263255217424,
+      "min_separation_m": 0.2801760301950672,
+      "max_penetration_m": 0.06434736744782577,
+      "barrier_scalings": 0,
+      "solver_fallbacks": 0,
+      "tail_window_seconds": 5.0,
+      "tail_mean_positive_contacts": 1.18,
+      "tail_mean_push_flags": 1.76,
+      "tail_mean_forward_contact_force_N": 15.853090948677686,
+      "tail_mean_true_speed_m_s": 0.11156415889793041,
+      "g500_reasons": "",
+      "handoff_proposals": 0,
+      "handoff_confirmations": 0,
+      "handoff_releases": 0,
+      "handoff_rollbacks": 0,
+      "relocation_starts": 0
+    },
+    {
+      "condition": "c_open_away",
+      "arm": "legacy",
+      "seed": 2,
+      "execution_status": "COMPLETED",
+      "completed": false,
+      "g500": false,
+      "settled": false,
+      "endpoint_error_m": 0.5194190379274828,
+      "wall_seconds": 1074.4868684000103,
+      "frames": 12000,
+      "seconds": 600.0,
+      "completion_seconds": null,
+      "watchdog": true,
+      "outcome": "RIGHT_CENSORED_600S",
+      "final_phase": "BRAKE",
+      "true_progress_m": 0.6972377995878558,
+      "estimated_progress_m": 0.8180314059002053,
+      "max_cross_track_m": 0.13106817769872325,
+      "hard_safety": "",
+      "min_clearance_m": 0.04962278028193793,
+      "min_separation_m": 0.2805589793879871,
+      "max_penetration_m": 0.08037721971806208,
+      "barrier_scalings": 0,
+      "solver_fallbacks": 0,
+      "tail_window_seconds": 5.0,
+      "tail_mean_positive_contacts": 1.77,
+      "tail_mean_push_flags": 2.14,
+      "tail_mean_forward_contact_force_N": 8.8086825198809,
+      "tail_mean_true_speed_m_s": 0.0,
+      "g500_reasons": "G500: target reached never happened within the 12000-frame run | G500: J=0.6972 m stopped 0.5028 m short of L=1.2000 m, outside the declared arrival tolerance 0.1200 m | G500: the run did not end in HOLD",
+      "handoff_proposals": 0,
+      "handoff_confirmations": 0,
+      "handoff_releases": 0,
+      "handoff_rollbacks": 0,
+      "relocation_starts": 0
+    },
+    {
+      "condition": "c_open_away",
+      "arm": "handoff",
+      "seed": 2,
+      "execution_status": "COMPLETED",
+      "completed": false,
+      "g500": false,
+      "settled": false,
+      "endpoint_error_m": 0.6560440127470786,
+      "wall_seconds": 1120.2693434999965,
+      "frames": 12000,
+      "seconds": 600.0,
+      "completion_seconds": null,
+      "watchdog": true,
+      "outcome": "RIGHT_CENSORED_600S",
+      "final_phase": "BRAKE",
+      "true_progress_m": 0.5445827802883159,
+      "estimated_progress_m": 0.6251380603757374,
+      "max_cross_track_m": 0.05849653648769326,
+      "hard_safety": "",
+      "min_clearance_m": 0.04962278028193793,
+      "min_separation_m": 0.28130561087153755,
+      "max_penetration_m": 0.08037721971806208,
+      "barrier_scalings": 0,
+      "solver_fallbacks": 0,
+      "tail_window_seconds": 5.0,
+      "tail_mean_positive_contacts": 3.56,
+      "tail_mean_push_flags": 2.24,
+      "tail_mean_forward_contact_force_N": 17.355660618559224,
+      "tail_mean_true_speed_m_s": 0.010720557537923432,
+      "g500_reasons": "G500: target reached never happened within the 12000-frame run | G500: J=0.5446 m stopped 0.6554 m short of L=1.2000 m, outside the declared arrival tolerance 0.1200 m | G500: the run did not end in HOLD",
+      "handoff_proposals": 30,
+      "handoff_confirmations": 0,
+      "handoff_releases": 0,
+      "handoff_rollbacks": 27,
+      "relocation_starts": 0
+    }
+  ],
+  "events": {
+    "circle_legacy": {
+      "handoff_events": {
+        "not_enabled": 4320
+      },
+      "states_agent_frames": {
+        "not_enabled": 4320
+      },
+      "rollback_reasons": {},
+      "v1_reasons_agent_frames": {
+        "not_enabled": 4320
+      },
+      "phase_events": {
+        "SEARCH": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 13.5
+        },
+        "DISCOVER": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 13.5
+        },
+        "ENCLOSE": {
+          "frame": 19,
+          "seconds": 0.9500000000000001,
+          "right_censored": false,
+          "observation_end_seconds": 13.5
+        },
+        "CONTACT_READY": {
+          "frame": 115,
+          "seconds": 5.75,
+          "right_censored": false,
+          "observation_end_seconds": 13.5
+        },
+        "TRANSPORT": {
+          "frame": 116,
+          "seconds": 5.800000000000001,
+          "right_censored": false,
+          "observation_end_seconds": 13.5
+        },
+        "BRAKE": {
+          "frame": 188,
+          "seconds": 9.4,
+          "right_censored": false,
+          "observation_end_seconds": 13.5
+        },
+        "HOLD": {
+          "frame": 230,
+          "seconds": 11.5,
+          "right_censored": false,
+          "observation_end_seconds": 13.5
+        }
+      }
+    },
+    "circle_handoff": {
+      "handoff_events": {
+        "not_enabled": 5,
+        "none": 3709,
+        "no_observed_replacement_pair": 646,
+        "proposed": 2,
+        "accepted_keep_pressing": 1,
+        "arrived_not_confirmed": 1,
+        "rollback_returned": 2,
+        "rollback:patch_or_estimate_lost": 1,
+        "rollback:replacement_or_link_lost": 1
+      },
+      "states_agent_frames": {
+        "not_enabled": 5,
+        "idle": 4282,
+        "offer": 21,
+        "engage": 58,
+        "rollback": 2
+      },
+      "rollback_reasons": {
+        "offer_unacknowledged": 1,
+        "patch_or_estimate_lost": 1,
+        "replacement_or_link_lost": 1
+      },
+      "v1_reasons_agent_frames": {
+        "not_enabled": 4368
+      },
+      "phase_events": {
+        "SEARCH": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 13.65
+        },
+        "DISCOVER": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 13.65
+        },
+        "ENCLOSE": {
+          "frame": 19,
+          "seconds": 0.9500000000000001,
+          "right_censored": false,
+          "observation_end_seconds": 13.65
+        },
+        "CONTACT_READY": {
+          "frame": 115,
+          "seconds": 5.75,
+          "right_censored": false,
+          "observation_end_seconds": 13.65
+        },
+        "TRANSPORT": {
+          "frame": 116,
+          "seconds": 5.800000000000001,
+          "right_censored": false,
+          "observation_end_seconds": 13.65
+        },
+        "BRAKE": {
+          "frame": 187,
+          "seconds": 9.35,
+          "right_censored": false,
+          "observation_end_seconds": 13.65
+        },
+        "HOLD": {
+          "frame": 233,
+          "seconds": 11.65,
+          "right_censored": false,
+          "observation_end_seconds": 13.65
+        }
+      }
+    },
+    "ellipse_parallel_legacy": {
+      "handoff_events": {
+        "not_enabled": 8512
+      },
+      "states_agent_frames": {
+        "not_enabled": 8512
+      },
+      "rollback_reasons": {},
+      "v1_reasons_agent_frames": {
+        "not_enabled": 8512
+      },
+      "phase_events": {
+        "SEARCH": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 26.6
+        },
+        "DISCOVER": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 26.6
+        },
+        "ENCLOSE": {
+          "frame": 18,
+          "seconds": 0.9,
+          "right_censored": false,
+          "observation_end_seconds": 26.6
+        },
+        "CONTACT_READY": {
+          "frame": 116,
+          "seconds": 5.800000000000001,
+          "right_censored": false,
+          "observation_end_seconds": 26.6
+        },
+        "TRANSPORT": {
+          "frame": 204,
+          "seconds": 10.200000000000001,
+          "right_censored": false,
+          "observation_end_seconds": 26.6
+        },
+        "BRAKE": {
+          "frame": 409,
+          "seconds": 20.450000000000003,
+          "right_censored": false,
+          "observation_end_seconds": 26.6
+        },
+        "HOLD": {
+          "frame": 492,
+          "seconds": 24.6,
+          "right_censored": false,
+          "observation_end_seconds": 26.6
+        }
+      }
+    },
+    "ellipse_parallel_handoff": {
+      "handoff_events": {
+        "not_enabled": 5,
+        "none": 5684,
+        "no_observed_replacement_pair": 2002,
+        "proposed": 5,
+        "accepted_keep_pressing": 3,
+        "arrived_not_confirmed": 3,
+        "rollback:patch_or_estimate_lost": 2,
+        "rollback:replacement_or_link_lost": 2,
+        "rollback_returned": 4,
+        "phase_or_information_abort": 2
+      },
+      "states_agent_frames": {
+        "not_enabled": 5,
+        "idle": 7407,
+        "offer": 53,
+        "engage": 243,
+        "rollback": 4
+      },
+      "rollback_reasons": {
+        "patch_or_estimate_lost": 2,
+        "replacement_or_link_lost": 2,
+        "offer_unacknowledged": 2
+      },
+      "v1_reasons_agent_frames": {
+        "not_enabled": 7712
+      },
+      "phase_events": {
+        "SEARCH": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 24.1
+        },
+        "DISCOVER": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 24.1
+        },
+        "ENCLOSE": {
+          "frame": 18,
+          "seconds": 0.9,
+          "right_censored": false,
+          "observation_end_seconds": 24.1
+        },
+        "CONTACT_READY": {
+          "frame": 116,
+          "seconds": 5.800000000000001,
+          "right_censored": false,
+          "observation_end_seconds": 24.1
+        },
+        "TRANSPORT": {
+          "frame": 157,
+          "seconds": 7.8500000000000005,
+          "right_censored": false,
+          "observation_end_seconds": 24.1
+        },
+        "BRAKE": {
+          "frame": 391,
+          "seconds": 19.55,
+          "right_censored": false,
+          "observation_end_seconds": 24.1
+        },
+        "HOLD": {
+          "frame": 442,
+          "seconds": 22.1,
+          "right_censored": false,
+          "observation_end_seconds": 24.1
+        }
+      }
+    },
+    "ellipse_perpendicular_legacy": {
+      "handoff_events": {
+        "not_enabled": 4288
+      },
+      "states_agent_frames": {
+        "not_enabled": 4288
+      },
+      "rollback_reasons": {},
+      "v1_reasons_agent_frames": {
+        "not_enabled": 4288
+      },
+      "phase_events": {
+        "SEARCH": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 13.4
+        },
+        "DISCOVER": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 13.4
+        },
+        "ENCLOSE": {
+          "frame": 9,
+          "seconds": 0.45,
+          "right_censored": false,
+          "observation_end_seconds": 13.4
+        },
+        "CONTACT_READY": {
+          "frame": 154,
+          "seconds": 7.7,
+          "right_censored": false,
+          "observation_end_seconds": 13.4
+        },
+        "TRANSPORT": {
+          "frame": 155,
+          "seconds": 7.75,
+          "right_censored": false,
+          "observation_end_seconds": 13.4
+        },
+        "BRAKE": {
+          "frame": 193,
+          "seconds": 9.65,
+          "right_censored": false,
+          "observation_end_seconds": 13.4
+        },
+        "HOLD": {
+          "frame": 228,
+          "seconds": 11.4,
+          "right_censored": false,
+          "observation_end_seconds": 13.4
+        }
+      }
+    },
+    "ellipse_perpendicular_handoff": {
+      "handoff_events": {
+        "not_enabled": 6,
+        "none": 3925,
+        "no_observed_replacement_pair": 357
+      },
+      "states_agent_frames": {
+        "not_enabled": 6,
+        "idle": 4282
+      },
+      "rollback_reasons": {},
+      "v1_reasons_agent_frames": {
+        "not_enabled": 4288
+      },
+      "phase_events": {
+        "SEARCH": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 13.4
+        },
+        "DISCOVER": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 13.4
+        },
+        "ENCLOSE": {
+          "frame": 9,
+          "seconds": 0.45,
+          "right_censored": false,
+          "observation_end_seconds": 13.4
+        },
+        "CONTACT_READY": {
+          "frame": 154,
+          "seconds": 7.7,
+          "right_censored": false,
+          "observation_end_seconds": 13.4
+        },
+        "TRANSPORT": {
+          "frame": 155,
+          "seconds": 7.75,
+          "right_censored": false,
+          "observation_end_seconds": 13.4
+        },
+        "BRAKE": {
+          "frame": 193,
+          "seconds": 9.65,
+          "right_censored": false,
+          "observation_end_seconds": 13.4
+        },
+        "HOLD": {
+          "frame": 228,
+          "seconds": 11.4,
+          "right_censored": false,
+          "observation_end_seconds": 13.4
+        }
+      }
+    },
+    "rectangle_parallel_legacy": {
+      "handoff_events": {
+        "not_enabled": 6704
+      },
+      "states_agent_frames": {
+        "not_enabled": 6704
+      },
+      "rollback_reasons": {},
+      "v1_reasons_agent_frames": {
+        "not_enabled": 6704
+      },
+      "phase_events": {
+        "SEARCH": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 20.950000000000003
+        },
+        "DISCOVER": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 20.950000000000003
+        },
+        "ENCLOSE": {
+          "frame": 40,
+          "seconds": 2.0,
+          "right_censored": false,
+          "observation_end_seconds": 20.950000000000003
+        },
+        "CONTACT_READY": {
+          "frame": 96,
+          "seconds": 4.800000000000001,
+          "right_censored": false,
+          "observation_end_seconds": 20.950000000000003
+        },
+        "TRANSPORT": {
+          "frame": 207,
+          "seconds": 10.350000000000001,
+          "right_censored": false,
+          "observation_end_seconds": 20.950000000000003
+        },
+        "BRAKE": {
+          "frame": 277,
+          "seconds": 13.850000000000001,
+          "right_censored": false,
+          "observation_end_seconds": 20.950000000000003
+        },
+        "HOLD": {
+          "frame": 379,
+          "seconds": 18.95,
+          "right_censored": false,
+          "observation_end_seconds": 20.950000000000003
+        }
+      }
+    },
+    "rectangle_parallel_handoff": {
+      "handoff_events": {
+        "not_enabled": 7,
+        "none": 5871,
+        "no_observed_replacement_pair": 722,
+        "proposed": 2,
+        "phase_or_information_abort": 1,
+        "accepted_keep_pressing": 1,
+        "arrived_not_confirmed": 1,
+        "rollback:patch_or_estimate_lost": 1,
+        "rollback:replacement_or_link_lost": 1,
+        "rollback_returned": 1
+      },
+      "states_agent_frames": {
+        "not_enabled": 7,
+        "idle": 6589,
+        "offer": 9,
+        "engage": 1,
+        "rollback": 2
+      },
+      "rollback_reasons": {
+        "patch_or_estimate_lost": 1,
+        "replacement_or_link_lost": 1
+      },
+      "v1_reasons_agent_frames": {
+        "not_enabled": 6608
+      },
+      "phase_events": {
+        "SEARCH": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 20.650000000000002
+        },
+        "DISCOVER": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 20.650000000000002
+        },
+        "ENCLOSE": {
+          "frame": 40,
+          "seconds": 2.0,
+          "right_censored": false,
+          "observation_end_seconds": 20.650000000000002
+        },
+        "CONTACT_READY": {
+          "frame": 96,
+          "seconds": 4.800000000000001,
+          "right_censored": false,
+          "observation_end_seconds": 20.650000000000002
+        },
+        "TRANSPORT": {
+          "frame": 207,
+          "seconds": 10.350000000000001,
+          "right_censored": false,
+          "observation_end_seconds": 20.650000000000002
+        },
+        "BRAKE": {
+          "frame": 277,
+          "seconds": 13.850000000000001,
+          "right_censored": false,
+          "observation_end_seconds": 20.650000000000002
+        },
+        "HOLD": {
+          "frame": 373,
+          "seconds": 18.650000000000002,
+          "right_censored": false,
+          "observation_end_seconds": 20.650000000000002
+        }
+      }
+    },
+    "rectangle_perpendicular_legacy": {
+      "handoff_events": {
+        "not_enabled": 6416
+      },
+      "states_agent_frames": {
+        "not_enabled": 6416
+      },
+      "rollback_reasons": {},
+      "v1_reasons_agent_frames": {
+        "not_enabled": 6416
+      },
+      "phase_events": {
+        "SEARCH": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 20.05
+        },
+        "DISCOVER": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 20.05
+        },
+        "ENCLOSE": {
+          "frame": 31,
+          "seconds": 1.55,
+          "right_censored": false,
+          "observation_end_seconds": 20.05
+        },
+        "CONTACT_READY": {
+          "frame": 91,
+          "seconds": 4.55,
+          "right_censored": false,
+          "observation_end_seconds": 20.05
+        },
+        "TRANSPORT": {
+          "frame": 276,
+          "seconds": 13.8,
+          "right_censored": false,
+          "observation_end_seconds": 20.05
+        },
+        "BRAKE": {
+          "frame": 309,
+          "seconds": 15.450000000000001,
+          "right_censored": false,
+          "observation_end_seconds": 20.05
+        },
+        "HOLD": {
+          "frame": 361,
+          "seconds": 18.05,
+          "right_censored": false,
+          "observation_end_seconds": 20.05
+        }
+      }
+    },
+    "rectangle_perpendicular_handoff": {
+      "handoff_events": {
+        "not_enabled": 6,
+        "none": 5555,
+        "no_observed_replacement_pair": 855
+      },
+      "states_agent_frames": {
+        "not_enabled": 6,
+        "idle": 6410
+      },
+      "rollback_reasons": {},
+      "v1_reasons_agent_frames": {
+        "not_enabled": 6416
+      },
+      "phase_events": {
+        "SEARCH": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 20.05
+        },
+        "DISCOVER": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 20.05
+        },
+        "ENCLOSE": {
+          "frame": 31,
+          "seconds": 1.55,
+          "right_censored": false,
+          "observation_end_seconds": 20.05
+        },
+        "CONTACT_READY": {
+          "frame": 91,
+          "seconds": 4.55,
+          "right_censored": false,
+          "observation_end_seconds": 20.05
+        },
+        "TRANSPORT": {
+          "frame": 276,
+          "seconds": 13.8,
+          "right_censored": false,
+          "observation_end_seconds": 20.05
+        },
+        "BRAKE": {
+          "frame": 309,
+          "seconds": 15.450000000000001,
+          "right_censored": false,
+          "observation_end_seconds": 20.05
+        },
+        "HOLD": {
+          "frame": 361,
+          "seconds": 18.05,
+          "right_censored": false,
+          "observation_end_seconds": 20.05
+        }
+      }
+    },
+    "l_reference_legacy": {
+      "handoff_events": {
+        "not_enabled": 7728
+      },
+      "states_agent_frames": {
+        "not_enabled": 7728
+      },
+      "rollback_reasons": {},
+      "v1_reasons_agent_frames": {
+        "not_enabled": 7728
+      },
+      "phase_events": {
+        "SEARCH": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 24.150000000000002
+        },
+        "DISCOVER": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 24.150000000000002
+        },
+        "ENCLOSE": {
+          "frame": 26,
+          "seconds": 1.3,
+          "right_censored": false,
+          "observation_end_seconds": 24.150000000000002
+        },
+        "CONTACT_READY": {
+          "frame": 99,
+          "seconds": 4.95,
+          "right_censored": false,
+          "observation_end_seconds": 24.150000000000002
+        },
+        "TRANSPORT": {
+          "frame": 307,
+          "seconds": 15.350000000000001,
+          "right_censored": false,
+          "observation_end_seconds": 24.150000000000002
+        },
+        "BRAKE": {
+          "frame": 357,
+          "seconds": 17.85,
+          "right_censored": false,
+          "observation_end_seconds": 24.150000000000002
+        },
+        "HOLD": {
+          "frame": 443,
+          "seconds": 22.150000000000002,
+          "right_censored": false,
+          "observation_end_seconds": 24.150000000000002
+        }
+      }
+    },
+    "l_reference_handoff": {
+      "handoff_events": {
+        "not_enabled": 3,
+        "none": 6450,
+        "no_observed_replacement_pair": 1273,
+        "proposed": 1,
+        "phase_or_information_abort": 1
+      },
+      "states_agent_frames": {
+        "not_enabled": 3,
+        "idle": 7712,
+        "offer": 13
+      },
+      "rollback_reasons": {},
+      "v1_reasons_agent_frames": {
+        "not_enabled": 7728
+      },
+      "phase_events": {
+        "SEARCH": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 24.150000000000002
+        },
+        "DISCOVER": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 24.150000000000002
+        },
+        "ENCLOSE": {
+          "frame": 26,
+          "seconds": 1.3,
+          "right_censored": false,
+          "observation_end_seconds": 24.150000000000002
+        },
+        "CONTACT_READY": {
+          "frame": 99,
+          "seconds": 4.95,
+          "right_censored": false,
+          "observation_end_seconds": 24.150000000000002
+        },
+        "TRANSPORT": {
+          "frame": 307,
+          "seconds": 15.350000000000001,
+          "right_censored": false,
+          "observation_end_seconds": 24.150000000000002
+        },
+        "BRAKE": {
+          "frame": 357,
+          "seconds": 17.85,
+          "right_censored": false,
+          "observation_end_seconds": 24.150000000000002
+        },
+        "HOLD": {
+          "frame": 443,
+          "seconds": 22.150000000000002,
+          "right_censored": false,
+          "observation_end_seconds": 24.150000000000002
+        }
+      }
+    },
+    "l_rotated_legacy": {
+      "handoff_events": {
+        "not_enabled": 13744
+      },
+      "states_agent_frames": {
+        "not_enabled": 13744
+      },
+      "rollback_reasons": {},
+      "v1_reasons_agent_frames": {
+        "not_enabled": 13744
+      },
+      "phase_events": {
+        "SEARCH": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 42.95
+        },
+        "DISCOVER": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 42.95
+        },
+        "ENCLOSE": {
+          "frame": 27,
+          "seconds": 1.35,
+          "right_censored": false,
+          "observation_end_seconds": 42.95
+        },
+        "CONTACT_READY": {
+          "frame": 120,
+          "seconds": 6.0,
+          "right_censored": false,
+          "observation_end_seconds": 42.95
+        },
+        "TRANSPORT": {
+          "frame": null,
+          "seconds": null,
+          "right_censored": true,
+          "observation_end_seconds": 42.95
+        },
+        "BRAKE": {
+          "frame": 495,
+          "seconds": 24.75,
+          "right_censored": false,
+          "observation_end_seconds": 42.95
+        },
+        "HOLD": {
+          "frame": 819,
+          "seconds": 40.95,
+          "right_censored": false,
+          "observation_end_seconds": 42.95
+        }
+      }
+    },
+    "l_rotated_handoff": {
+      "handoff_events": {
+        "not_enabled": 2,
+        "none": 9939,
+        "no_observed_replacement_pair": 3795,
+        "proposed": 4,
+        "rollback_returned": 4
+      },
+      "states_agent_frames": {
+        "not_enabled": 2,
+        "idle": 13666,
+        "offer": 76
+      },
+      "rollback_reasons": {
+        "offer_unacknowledged": 4
+      },
+      "v1_reasons_agent_frames": {
+        "not_enabled": 13744
+      },
+      "phase_events": {
+        "SEARCH": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 42.95
+        },
+        "DISCOVER": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 42.95
+        },
+        "ENCLOSE": {
+          "frame": 27,
+          "seconds": 1.35,
+          "right_censored": false,
+          "observation_end_seconds": 42.95
+        },
+        "CONTACT_READY": {
+          "frame": 120,
+          "seconds": 6.0,
+          "right_censored": false,
+          "observation_end_seconds": 42.95
+        },
+        "TRANSPORT": {
+          "frame": null,
+          "seconds": null,
+          "right_censored": true,
+          "observation_end_seconds": 42.95
+        },
+        "BRAKE": {
+          "frame": 495,
+          "seconds": 24.75,
+          "right_censored": false,
+          "observation_end_seconds": 42.95
+        },
+        "HOLD": {
+          "frame": 819,
+          "seconds": 40.95,
+          "right_censored": false,
+          "observation_end_seconds": 42.95
+        }
+      }
+    },
+    "c_open_toward_legacy": {
+      "handoff_events": {
+        "not_enabled": 4992
+      },
+      "states_agent_frames": {
+        "not_enabled": 4992
+      },
+      "rollback_reasons": {},
+      "v1_reasons_agent_frames": {
+        "not_enabled": 4992
+      },
+      "phase_events": {
+        "SEARCH": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 15.600000000000001
+        },
+        "DISCOVER": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 15.600000000000001
+        },
+        "ENCLOSE": {
+          "frame": 29,
+          "seconds": 1.4500000000000002,
+          "right_censored": false,
+          "observation_end_seconds": 15.600000000000001
+        },
+        "CONTACT_READY": {
+          "frame": 78,
+          "seconds": 3.9000000000000004,
+          "right_censored": false,
+          "observation_end_seconds": 15.600000000000001
+        },
+        "TRANSPORT": {
+          "frame": 193,
+          "seconds": 9.65,
+          "right_censored": false,
+          "observation_end_seconds": 15.600000000000001
+        },
+        "BRAKE": {
+          "frame": 226,
+          "seconds": 11.3,
+          "right_censored": false,
+          "observation_end_seconds": 15.600000000000001
+        },
+        "HOLD": {
+          "frame": 272,
+          "seconds": 13.600000000000001,
+          "right_censored": false,
+          "observation_end_seconds": 15.600000000000001
+        }
+      }
+    },
+    "c_open_toward_handoff": {
+      "handoff_events": {
+        "none": 4247,
+        "no_observed_replacement_pair": 745
+      },
+      "states_agent_frames": {
+        "idle": 4992
+      },
+      "rollback_reasons": {},
+      "v1_reasons_agent_frames": {
+        "not_enabled": 4992
+      },
+      "phase_events": {
+        "SEARCH": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 15.600000000000001
+        },
+        "DISCOVER": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 15.600000000000001
+        },
+        "ENCLOSE": {
+          "frame": 29,
+          "seconds": 1.4500000000000002,
+          "right_censored": false,
+          "observation_end_seconds": 15.600000000000001
+        },
+        "CONTACT_READY": {
+          "frame": 78,
+          "seconds": 3.9000000000000004,
+          "right_censored": false,
+          "observation_end_seconds": 15.600000000000001
+        },
+        "TRANSPORT": {
+          "frame": 193,
+          "seconds": 9.65,
+          "right_censored": false,
+          "observation_end_seconds": 15.600000000000001
+        },
+        "BRAKE": {
+          "frame": 226,
+          "seconds": 11.3,
+          "right_censored": false,
+          "observation_end_seconds": 15.600000000000001
+        },
+        "HOLD": {
+          "frame": 272,
+          "seconds": 13.600000000000001,
+          "right_censored": false,
+          "observation_end_seconds": 15.600000000000001
+        }
+      }
+    },
+    "c_open_away_legacy": {
+      "handoff_events": {
+        "not_enabled": 192000
+      },
+      "states_agent_frames": {
+        "not_enabled": 192000
+      },
+      "rollback_reasons": {},
+      "v1_reasons_agent_frames": {
+        "not_enabled": 192000
+      },
+      "phase_events": {
+        "SEARCH": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 600.0
+        },
+        "DISCOVER": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 600.0
+        },
+        "ENCLOSE": {
+          "frame": 26,
+          "seconds": 1.3,
+          "right_censored": false,
+          "observation_end_seconds": 600.0
+        },
+        "CONTACT_READY": {
+          "frame": 76,
+          "seconds": 3.8000000000000003,
+          "right_censored": false,
+          "observation_end_seconds": 600.0
+        },
+        "TRANSPORT": {
+          "frame": 257,
+          "seconds": 12.850000000000001,
+          "right_censored": false,
+          "observation_end_seconds": 600.0
+        },
+        "BRAKE": {
+          "frame": 10741,
+          "seconds": 537.0500000000001,
+          "right_censored": false,
+          "observation_end_seconds": 600.0
+        },
+        "HOLD": {
+          "frame": null,
+          "seconds": null,
+          "right_censored": true,
+          "observation_end_seconds": 600.0
+        }
+      }
+    },
+    "c_open_away_handoff": {
+      "handoff_events": {
+        "not_enabled": 6,
+        "none": 158103,
+        "no_observed_replacement_pair": 33811,
+        "proposed": 30,
+        "accepted_keep_pressing": 6,
+        "arrived_not_confirmed": 3,
+        "rollback_returned": 21,
+        "rollback:replacement_or_link_lost": 5,
+        "travel_authorized": 3,
+        "phase_or_information_abort": 9,
+        "rollback:travel_expired": 1,
+        "rollback_return_expired": 1,
+        "rollback:donor_or_link_lost": 1
+      },
+      "states_agent_frames": {
+        "not_enabled": 6,
+        "idle": 191191,
+        "offer": 402,
+        "engage": 41,
+        "travel": 233,
+        "rollback": 127
+      },
+      "rollback_reasons": {
+        "patch_or_estimate_lost": 2,
+        "replacement_or_link_lost": 5,
+        "offer_unacknowledged": 17,
+        "travel_expired": 2,
+        "donor_or_link_lost": 1
+      },
+      "v1_reasons_agent_frames": {
+        "not_enabled": 192000
+      },
+      "phase_events": {
+        "SEARCH": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 600.0
+        },
+        "DISCOVER": {
+          "frame": 0,
+          "seconds": 0.0,
+          "right_censored": false,
+          "observation_end_seconds": 600.0
+        },
+        "ENCLOSE": {
+          "frame": 26,
+          "seconds": 1.3,
+          "right_censored": false,
+          "observation_end_seconds": 600.0
+        },
+        "CONTACT_READY": {
+          "frame": 76,
+          "seconds": 3.8000000000000003,
+          "right_censored": false,
+          "observation_end_seconds": 600.0
+        },
+        "TRANSPORT": {
+          "frame": 257,
+          "seconds": 12.850000000000001,
+          "right_censored": false,
+          "observation_end_seconds": 600.0
+        },
+        "BRAKE": {
+          "frame": 1100,
+          "seconds": 55.0,
+          "right_censored": false,
+          "observation_end_seconds": 600.0
+        },
+        "HOLD": {
+          "frame": null,
+          "seconds": null,
+          "right_censored": true,
+          "observation_end_seconds": 600.0
+        }
+      }
+    }
+  },
+  "source_integrity": "PASS",
+  "historical_integrity": "PASS",
+  "scope": "Fixed development seed 2; paired conditions, no reliability inference",
+  "confirmation_limit": "Local gap/command/motion proxy, not physical contact/force or individual causal contribution proof",
+  "confirmation_evaluation_only": [],
+  "patch_abort_evaluation_only": [
+    {
+      "case": "circle_handoff",
+      "frame": 207,
+      "actor": "agent_15",
+      "normal": [
+        0.17702847857121085,
+        -0.9842057293954157
+      ],
+      "desired_direction": [
+        0.7071067811865476,
+        0.7071067811865475
+      ],
+      "local_proxy": true,
+      "gap_m": 0.09663871064032134,
+      "recorded_direction_fails_geometry_gate": true,
+      "prior_physical_contact": false
+    },
+    {
+      "case": "ellipse_parallel_handoff",
+      "frame": 229,
+      "actor": "agent_15",
+      "normal": [
+        0.03880427440978681,
+        -0.999246830511626
+      ],
+      "desired_direction": [
+        0.7936785105601956,
+        0.6083374243583486
+      ],
+      "local_proxy": true,
+      "gap_m": 0.09489366287427355,
+      "recorded_direction_fails_geometry_gate": true,
+      "prior_physical_contact": true
+    },
+    {
+      "case": "ellipse_parallel_handoff",
+      "frame": 351,
+      "actor": "agent_14",
+      "normal": [
+        0.057988008046014033,
+        -0.9983172796876029
+      ],
+      "desired_direction": [
+        0.7071067811865476,
+        0.7071067811865475
+      ],
+      "local_proxy": true,
+      "gap_m": 0.11974564423675375,
+      "recorded_direction_fails_geometry_gate": true,
+      "prior_physical_contact": true
+    },
+    {
+      "case": "rectangle_parallel_handoff",
+      "frame": 223,
+      "actor": "agent_15",
+      "normal": [
+        0.0035462330560158306,
+        -0.9999937120957874
+      ],
+      "desired_direction": [
+        0.7763588572803003,
+        0.6302911428240335
+      ],
+      "local_proxy": true,
+      "gap_m": 0.108132246510742,
+      "recorded_direction_fails_geometry_gate": true,
+      "prior_physical_contact": true
+    },
+    {
+      "case": "c_open_away_handoff",
+      "frame": 314,
+      "actor": "agent_07",
+      "normal": [
+        0.017626731781975064,
+        -0.999844637094527
+      ],
+      "desired_direction": [
+        0.9997548002252246,
+        -0.022143609159789652
+      ],
+      "local_proxy": true,
+      "gap_m": 0.08764187850804253,
+      "recorded_direction_fails_geometry_gate": true,
+      "prior_physical_contact": false
+    },
+    {
+      "case": "c_open_away_handoff",
+      "frame": 1742,
+      "actor": "agent_11",
+      "normal": [
+        -0.103589279799436,
+        -0.9946201592118643
+      ],
+      "desired_direction": [
+        1.0,
+        0.0
+      ],
+      "local_proxy": false,
+      "gap_m": 0.19373339360414654,
+      "recorded_direction_fails_geometry_gate": true,
+      "prior_physical_contact": false
+    }
+  ]
+}

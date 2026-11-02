@@ -1,0 +1,2141 @@
+{
+  "mission": "2026-11-01-contact-reinforcement-v1",
+  "counts": {
+    "reference": {
+      "denominator": 3,
+      "completed": 0,
+      "safe_completed": 0,
+      "g500": 0,
+      "hard_safety_episodes": 0,
+      "execution_errors": 0
+    },
+    "recovery": {
+      "denominator": 3,
+      "completed": 0,
+      "safe_completed": 0,
+      "g500": 0,
+      "hard_safety_episodes": 0,
+      "execution_errors": 0
+    },
+    "reinforcement": {
+      "denominator": 3,
+      "completed": 0,
+      "safe_completed": 0,
+      "g500": 0,
+      "hard_safety_episodes": 0,
+      "execution_errors": 0
+    }
+  },
+  "episodes": [
+    {
+      "condition": "circle",
+      "arm": "reference",
+      "seed": 2,
+      "execution_status": "COMPLETED",
+      "completed": false,
+      "g500": false,
+      "wall_seconds": 1080.5466195000045,
+      "error": "",
+      "endpoint_error_m": 0.8335804808250706,
+      "endpoint_error_150_m": 0.909820780759892,
+      "completed_150": false,
+      "closest_goal_error_m": 0.8335804808250706,
+      "closest_goal_time_s": 580.3500000000199,
+      "first_BRAKE_time_s": null,
+      "first_BRAKE_goal_error_m": null,
+      "seconds": 600.0,
+      "completion_seconds": null,
+      "settled": false,
+      "outcome": "CENSORED_600S",
+      "safe_completed": false,
+      "hard_safety": "",
+      "g500_reasons": "G500: target reached never happened within the 12000-frame run | G500: J=0.4223 m stopped 0.7777 m short of L=1.2000 m, outside the declared arrival tolerance 0.1200 m | G500: the run did not end in HOLD | G500: 5 scaled-barrier event(s), smallest factor 0.840; the contract allows 0",
+      "max_penetration_m": 0.06385577032883138,
+      "penetration_budget_m": 0.09607031288348283,
+      "min_separation_m": 0.28001090088702674,
+      "min_clearance_m": 0.06614422967116862,
+      "barrier_scalings": 5,
+      "final_phase": "TRANSPORT",
+      "brake_reason": null,
+      "final_selected_displacement_error_m": 0.11235210476521072,
+      "final_estimated_remaining_m": 0.8105056054687605,
+      "paused_frames": 0,
+      "resumed_pauses": 0,
+      "recruitment_attempts": 0,
+      "response_confirmations": 0,
+      "direction_role_exits": 0,
+      "no_route_checks": 0,
+      "rollback_events": 0,
+      "last10s_mean_contacts": 3.0,
+      "last10s_max_net_force_N": 21.72558415782515,
+      "last10s_max_speed_m_s": 0.0
+    },
+    {
+      "condition": "circle",
+      "arm": "recovery",
+      "seed": 2,
+      "execution_status": "COMPLETED",
+      "completed": false,
+      "g500": false,
+      "wall_seconds": 1075.8882945000078,
+      "error": "",
+      "endpoint_error_m": 0.8335804808250706,
+      "endpoint_error_150_m": 0.909820780759892,
+      "completed_150": false,
+      "closest_goal_error_m": 0.8335804808250706,
+      "closest_goal_time_s": 580.3500000000199,
+      "first_BRAKE_time_s": null,
+      "first_BRAKE_goal_error_m": null,
+      "seconds": 600.0,
+      "completion_seconds": null,
+      "settled": false,
+      "outcome": "CENSORED_600S",
+      "safe_completed": false,
+      "hard_safety": "",
+      "g500_reasons": "G500: target reached never happened within the 12000-frame run | G500: J=0.4223 m stopped 0.7777 m short of L=1.2000 m, outside the declared arrival tolerance 0.1200 m | G500: the run did not end in HOLD | G500: 5 scaled-barrier event(s), smallest factor 0.840; the contract allows 0",
+      "max_penetration_m": 0.06385577032883138,
+      "penetration_budget_m": 0.09607031288348283,
+      "min_separation_m": 0.28001090088702674,
+      "min_clearance_m": 0.06614422967116862,
+      "barrier_scalings": 5,
+      "final_phase": "TRANSPORT",
+      "brake_reason": null,
+      "final_selected_displacement_error_m": 0.11235210476521072,
+      "final_estimated_remaining_m": 0.8105056054687605,
+      "paused_frames": 0,
+      "resumed_pauses": 0,
+      "recruitment_attempts": 0,
+      "response_confirmations": 0,
+      "direction_role_exits": 0,
+      "no_route_checks": 0,
+      "rollback_events": 0,
+      "last10s_mean_contacts": 3.0,
+      "last10s_max_net_force_N": 21.72558415782515,
+      "last10s_max_speed_m_s": 0.0
+    },
+    {
+      "condition": "circle",
+      "arm": "reinforcement",
+      "seed": 2,
+      "execution_status": "COMPLETED",
+      "completed": false,
+      "g500": false,
+      "wall_seconds": 1090.3554396000109,
+      "error": "",
+      "endpoint_error_m": 0.6145884063123644,
+      "endpoint_error_150_m": 0.8132899943691683,
+      "completed_150": false,
+      "closest_goal_error_m": 0.6145884063123644,
+      "closest_goal_time_s": 589.2000000000119,
+      "first_BRAKE_time_s": 284.9000000000305,
+      "first_BRAKE_goal_error_m": 0.7426617238029848,
+      "seconds": 600.0,
+      "completion_seconds": null,
+      "settled": false,
+      "outcome": "CENSORED_600S",
+      "safe_completed": false,
+      "hard_safety": "",
+      "g500_reasons": "G500: target reached never happened within the 12000-frame run | G500: J=0.6214 m stopped 0.5786 m short of L=1.2000 m, outside the declared arrival tolerance 0.1200 m | G500: the run did not end in HOLD | G500: 34 scaled-barrier event(s), smallest factor 0.156; the contract allows 0",
+      "max_penetration_m": 0.06500786159105612,
+      "penetration_budget_m": 0.09680585328456678,
+      "min_separation_m": 0.2800021540543481,
+      "min_clearance_m": 0.06499213840894388,
+      "barrier_scalings": 34,
+      "final_phase": "BRAKE",
+      "brake_reason": "estimated_stop",
+      "final_selected_displacement_error_m": 0.08663764915152211,
+      "final_estimated_remaining_m": 0.5475530775174559,
+      "paused_frames": 0,
+      "resumed_pauses": 0,
+      "recruitment_attempts": 10,
+      "response_confirmations": 6,
+      "direction_role_exits": 1086,
+      "no_route_checks": 5435,
+      "rollback_events": 10,
+      "last10s_mean_contacts": 1.925,
+      "last10s_max_net_force_N": 23.33537992801982,
+      "last10s_max_speed_m_s": 0.0
+    },
+    {
+      "condition": "ellipse_parallel",
+      "arm": "reference",
+      "seed": 2,
+      "execution_status": "COMPLETED",
+      "completed": false,
+      "g500": false,
+      "wall_seconds": 1112.3975609999907,
+      "error": "",
+      "endpoint_error_m": 0.34563176954948255,
+      "endpoint_error_150_m": 0.5727652043781488,
+      "completed_150": false,
+      "closest_goal_error_m": 0.34563176954948255,
+      "closest_goal_time_s": 598.5500000000034,
+      "first_BRAKE_time_s": 505.95000000008076,
+      "first_BRAKE_goal_error_m": 0.4278928836659985,
+      "seconds": 600.0,
+      "completion_seconds": null,
+      "settled": false,
+      "outcome": "CENSORED_600S",
+      "safe_completed": false,
+      "hard_safety": "",
+      "g500_reasons": "G500: target reached never happened within the 12000-frame run | G500: J=0.8570 m stopped 0.3430 m short of L=1.2000 m, outside the declared arrival tolerance 0.1200 m | G500: the run did not end in HOLD",
+      "max_penetration_m": 0.05427373684471608,
+      "penetration_budget_m": 0.09660168477348788,
+      "min_separation_m": 0.2801173342447245,
+      "min_clearance_m": 0.07572626315528393,
+      "barrier_scalings": 0,
+      "final_phase": "BRAKE",
+      "brake_reason": "estimated_stop",
+      "final_selected_displacement_error_m": 0.011742580797867348,
+      "final_estimated_remaining_m": 0.334608952571497,
+      "paused_frames": 0,
+      "resumed_pauses": 0,
+      "recruitment_attempts": 0,
+      "response_confirmations": 0,
+      "direction_role_exits": 0,
+      "no_route_checks": 0,
+      "rollback_events": 0,
+      "last10s_mean_contacts": 3.6,
+      "last10s_max_net_force_N": 24.24009937803648,
+      "last10s_max_speed_m_s": 2.2415107031864435e-05
+    },
+    {
+      "condition": "ellipse_parallel",
+      "arm": "recovery",
+      "seed": 2,
+      "execution_status": "COMPLETED",
+      "completed": false,
+      "g500": false,
+      "wall_seconds": 1112.3672576999816,
+      "error": "",
+      "endpoint_error_m": 0.34563176954948255,
+      "endpoint_error_150_m": 0.5727652043781488,
+      "completed_150": false,
+      "closest_goal_error_m": 0.34563176954948255,
+      "closest_goal_time_s": 598.5500000000034,
+      "first_BRAKE_time_s": 505.95000000008076,
+      "first_BRAKE_goal_error_m": 0.4278928836659985,
+      "seconds": 600.0,
+      "completion_seconds": null,
+      "settled": false,
+      "outcome": "CENSORED_600S",
+      "safe_completed": false,
+      "hard_safety": "",
+      "g500_reasons": "G500: target reached never happened within the 12000-frame run | G500: J=0.8570 m stopped 0.3430 m short of L=1.2000 m, outside the declared arrival tolerance 0.1200 m | G500: the run did not end in HOLD",
+      "max_penetration_m": 0.05427373684471608,
+      "penetration_budget_m": 0.09660168477348788,
+      "min_separation_m": 0.2801173342447245,
+      "min_clearance_m": 0.07572626315528393,
+      "barrier_scalings": 0,
+      "final_phase": "BRAKE",
+      "brake_reason": "estimated_stop",
+      "final_selected_displacement_error_m": 0.011742580797867348,
+      "final_estimated_remaining_m": 0.334608952571497,
+      "paused_frames": 0,
+      "resumed_pauses": 0,
+      "recruitment_attempts": 0,
+      "response_confirmations": 0,
+      "direction_role_exits": 0,
+      "no_route_checks": 0,
+      "rollback_events": 0,
+      "last10s_mean_contacts": 3.6,
+      "last10s_max_net_force_N": 24.24009937803648,
+      "last10s_max_speed_m_s": 2.2415107031864435e-05
+    },
+    {
+      "condition": "ellipse_parallel",
+      "arm": "reinforcement",
+      "seed": 2,
+      "execution_status": "COMPLETED",
+      "completed": false,
+      "g500": false,
+      "wall_seconds": 1129.5844995999942,
+      "error": "",
+      "endpoint_error_m": 0.721608478520152,
+      "endpoint_error_150_m": 0.7760532704470842,
+      "completed_150": false,
+      "closest_goal_error_m": 0.721608478520152,
+      "closest_goal_time_s": 588.8000000000122,
+      "first_BRAKE_time_s": null,
+      "first_BRAKE_goal_error_m": null,
+      "seconds": 600.0,
+      "completion_seconds": null,
+      "settled": false,
+      "outcome": "CENSORED_600S",
+      "safe_completed": false,
+      "hard_safety": "",
+      "g500_reasons": "G500: target reached never happened within the 12000-frame run | G500: J=0.4849 m stopped 0.7151 m short of L=1.2000 m, outside the declared arrival tolerance 0.1200 m | G500: the run did not end in HOLD | G500: 2 scaled-barrier event(s), smallest factor 0.930; the contract allows 0",
+      "max_penetration_m": 0.0612728733892606,
+      "penetration_budget_m": 0.09490402479635815,
+      "min_separation_m": 0.28000106539121217,
+      "min_clearance_m": 0.0687271266107394,
+      "barrier_scalings": 2,
+      "final_phase": "TRANSPORT",
+      "brake_reason": null,
+      "final_selected_displacement_error_m": 0.01231987686714374,
+      "final_estimated_remaining_m": 0.7127357113288146,
+      "paused_frames": 0,
+      "resumed_pauses": 0,
+      "recruitment_attempts": 15,
+      "response_confirmations": 3,
+      "direction_role_exits": 765,
+      "no_route_checks": 4377,
+      "rollback_events": 14,
+      "last10s_mean_contacts": 3.18,
+      "last10s_max_net_force_N": 22.257589240390818,
+      "last10s_max_speed_m_s": 0.0
+    },
+    {
+      "condition": "c_open_away",
+      "arm": "reference",
+      "seed": 2,
+      "execution_status": "COMPLETED",
+      "completed": false,
+      "g500": false,
+      "wall_seconds": 1319.459717699996,
+      "error": "",
+      "endpoint_error_m": 0.7838538720812278,
+      "endpoint_error_150_m": 0.7919895090863609,
+      "completed_150": false,
+      "closest_goal_error_m": 0.7838538720812278,
+      "closest_goal_time_s": 430.3500000000636,
+      "first_BRAKE_time_s": 17.90000000000012,
+      "first_BRAKE_goal_error_m": 1.0697668706493473,
+      "seconds": 600.0,
+      "completion_seconds": null,
+      "settled": false,
+      "outcome": "CENSORED_600S",
+      "safe_completed": false,
+      "hard_safety": "",
+      "g500_reasons": "G500: target reached never happened within the 12000-frame run | G500: J=0.4195 m stopped 0.7805 m short of L=1.2000 m, outside the declared arrival tolerance 0.1200 m | G500: the run did not end in HOLD",
+      "max_penetration_m": 0.090280172595561,
+      "penetration_budget_m": 0.0931311227874785,
+      "min_separation_m": 0.28046793431658484,
+      "min_clearance_m": 0.03971982740443901,
+      "barrier_scalings": 0,
+      "final_phase": "BRAKE",
+      "brake_reason": "contact_recovery_failed",
+      "final_selected_displacement_error_m": 0.02608624861794406,
+      "final_estimated_remaining_m": 0.744154538714433,
+      "paused_frames": 80,
+      "resumed_pauses": 0,
+      "recruitment_attempts": 0,
+      "response_confirmations": 0,
+      "direction_role_exits": 0,
+      "no_route_checks": 0,
+      "rollback_events": 0,
+      "last10s_mean_contacts": 1.01,
+      "last10s_max_net_force_N": 19.56738987179141,
+      "last10s_max_speed_m_s": 0.0
+    },
+    {
+      "condition": "c_open_away",
+      "arm": "recovery",
+      "seed": 2,
+      "execution_status": "COMPLETED",
+      "completed": false,
+      "g500": false,
+      "wall_seconds": 1328.8123842999921,
+      "error": "",
+      "endpoint_error_m": 0.7838538720812278,
+      "endpoint_error_150_m": 0.7919895090863609,
+      "completed_150": false,
+      "closest_goal_error_m": 0.7838538720812278,
+      "closest_goal_time_s": 430.3500000000636,
+      "first_BRAKE_time_s": 17.90000000000012,
+      "first_BRAKE_goal_error_m": 1.0697668706493473,
+      "seconds": 600.0,
+      "completion_seconds": null,
+      "settled": false,
+      "outcome": "CENSORED_600S",
+      "safe_completed": false,
+      "hard_safety": "",
+      "g500_reasons": "G500: target reached never happened within the 12000-frame run | G500: J=0.4195 m stopped 0.7805 m short of L=1.2000 m, outside the declared arrival tolerance 0.1200 m | G500: the run did not end in HOLD",
+      "max_penetration_m": 0.090280172595561,
+      "penetration_budget_m": 0.0931311227874785,
+      "min_separation_m": 0.28046793431658484,
+      "min_clearance_m": 0.03971982740443901,
+      "barrier_scalings": 0,
+      "final_phase": "BRAKE",
+      "brake_reason": "contact_recovery_failed",
+      "final_selected_displacement_error_m": 0.02608624861794406,
+      "final_estimated_remaining_m": 0.744154538714433,
+      "paused_frames": 80,
+      "resumed_pauses": 0,
+      "recruitment_attempts": 0,
+      "response_confirmations": 0,
+      "direction_role_exits": 0,
+      "no_route_checks": 0,
+      "rollback_events": 0,
+      "last10s_mean_contacts": 1.01,
+      "last10s_max_net_force_N": 19.56738987179141,
+      "last10s_max_speed_m_s": 0.0
+    },
+    {
+      "condition": "c_open_away",
+      "arm": "reinforcement",
+      "seed": 2,
+      "execution_status": "COMPLETED",
+      "completed": false,
+      "g500": false,
+      "wall_seconds": 1498.0665675000055,
+      "error": "",
+      "endpoint_error_m": 0.8138100353127689,
+      "endpoint_error_150_m": 0.9830974323351204,
+      "completed_150": false,
+      "closest_goal_error_m": 0.8138100353127689,
+      "closest_goal_time_s": 595.4000000000062,
+      "first_BRAKE_time_s": 63.399999999998535,
+      "first_BRAKE_goal_error_m": 0.9924094118981948,
+      "seconds": 600.0,
+      "completion_seconds": null,
+      "settled": false,
+      "outcome": "CENSORED_600S",
+      "safe_completed": false,
+      "hard_safety": "",
+      "g500_reasons": "G500: target reached never happened within the 12000-frame run | G500: J=0.3863 m stopped 0.8137 m short of L=1.2000 m, outside the declared arrival tolerance 0.1200 m | G500: the run did not end in HOLD | G500: 3 scaled-barrier event(s), smallest factor 0.660; the contract allows 0",
+      "max_penetration_m": 0.07332346218033671,
+      "penetration_budget_m": 0.09096516341446607,
+      "min_separation_m": 0.28002638673549696,
+      "min_clearance_m": 0.056676537819663295,
+      "barrier_scalings": 3,
+      "final_phase": "BRAKE",
+      "brake_reason": "contact_recovery_failed",
+      "final_selected_displacement_error_m": 0.02896101722105138,
+      "final_estimated_remaining_m": 0.7655026484789603,
+      "paused_frames": 80,
+      "resumed_pauses": 0,
+      "recruitment_attempts": 28,
+      "response_confirmations": 0,
+      "direction_role_exits": 166,
+      "no_route_checks": 5035,
+      "rollback_events": 28,
+      "last10s_mean_contacts": 3.365,
+      "last10s_max_net_force_N": 26.67623487370352,
+      "last10s_max_speed_m_s": 0.01417571764084464
+    }
+  ],
+  "comparisons": [
+    {
+      "condition": "circle",
+      "arm": "recovery",
+      "completion_delta": 0,
+      "endpoint_delta_m": 0.0
+    },
+    {
+      "condition": "circle",
+      "arm": "reinforcement",
+      "completion_delta": 0,
+      "endpoint_delta_m": -0.2189920745127062
+    },
+    {
+      "condition": "ellipse_parallel",
+      "arm": "recovery",
+      "completion_delta": 0,
+      "endpoint_delta_m": 0.0
+    },
+    {
+      "condition": "ellipse_parallel",
+      "arm": "reinforcement",
+      "completion_delta": 0,
+      "endpoint_delta_m": 0.3759767089706694
+    },
+    {
+      "condition": "c_open_away",
+      "arm": "recovery",
+      "completion_delta": 0,
+      "endpoint_delta_m": 0.0
+    },
+    {
+      "condition": "c_open_away",
+      "arm": "reinforcement",
+      "completion_delta": 0,
+      "endpoint_delta_m": 0.029956163231541044
+    }
+  ],
+  "repeat_compatibility": true,
+  "checks": {
+    "circle_reference": {
+      "reference_channel_frames": 11883,
+      "physical_time_alignment_residual": 0.0,
+      "all_replay_arrays_exact": true,
+      "arrays": {
+        "times": true,
+        "phase": true,
+        "min_distance": true,
+        "map_coverage": true,
+        "push_flags": true,
+        "contact_flags": true,
+        "efforts": true,
+        "agent_ids": true,
+        "agent_positions": true,
+        "domain": true,
+        "robot_radius": true,
+        "sensed_counts": true,
+        "sensed_points": true,
+        "cargo/cargo_0/centers": true,
+        "cargo/cargo_0/angles": true,
+        "cargo/cargo_0/local_vertices": true,
+        "cargo/cargo_0/strict_coverage": true,
+        "cargo/cargo_0/contacts": true,
+        "cargo/cargo_0/penetration": true,
+        "cargo/cargo_0/speed": true,
+        "cargo/cargo_0/progress_estimate": true,
+        "task/cargo_0/direction": true,
+        "task/cargo_0/start": true,
+        "task/cargo_0/goal_point": true,
+        "task/cargo_0/distance": true
+      },
+      "all_historical_step_fields_exact": true
+    },
+    "circle_recovery": {
+      "reference_channel_frames": 11883,
+      "physical_time_alignment_residual": 0.0,
+      "recovery_vs_reference_arrays_exact": true,
+      "arrays": {
+        "times": true,
+        "phase": true,
+        "min_distance": true,
+        "map_coverage": true,
+        "push_flags": true,
+        "contact_flags": true,
+        "efforts": true,
+        "agent_ids": true,
+        "agent_positions": true,
+        "domain": true,
+        "robot_radius": true,
+        "sensed_counts": true,
+        "sensed_points": true,
+        "cargo/cargo_0/centers": true,
+        "cargo/cargo_0/angles": true,
+        "cargo/cargo_0/local_vertices": true,
+        "cargo/cargo_0/strict_coverage": true,
+        "cargo/cargo_0/contacts": true,
+        "cargo/cargo_0/penetration": true,
+        "cargo/cargo_0/speed": true,
+        "cargo/cargo_0/progress_estimate": true,
+        "task/cargo_0/direction": true,
+        "task/cargo_0/start": true,
+        "task/cargo_0/goal_point": true,
+        "task/cargo_0/distance": true
+      }
+    },
+    "circle_reinforcement": {
+      "reference_channel_frames": 11883,
+      "physical_time_alignment_residual": 0.0
+    },
+    "ellipse_parallel_reference": {
+      "reference_channel_frames": 11879,
+      "physical_time_alignment_residual": 0.0,
+      "all_replay_arrays_exact": true,
+      "arrays": {
+        "times": true,
+        "phase": true,
+        "min_distance": true,
+        "map_coverage": true,
+        "push_flags": true,
+        "contact_flags": true,
+        "efforts": true,
+        "agent_ids": true,
+        "agent_positions": true,
+        "domain": true,
+        "robot_radius": true,
+        "sensed_counts": true,
+        "sensed_points": true,
+        "cargo/cargo_0/centers": true,
+        "cargo/cargo_0/angles": true,
+        "cargo/cargo_0/local_vertices": true,
+        "cargo/cargo_0/strict_coverage": true,
+        "cargo/cargo_0/contacts": true,
+        "cargo/cargo_0/penetration": true,
+        "cargo/cargo_0/speed": true,
+        "cargo/cargo_0/progress_estimate": true,
+        "task/cargo_0/direction": true,
+        "task/cargo_0/start": true,
+        "task/cargo_0/goal_point": true,
+        "task/cargo_0/distance": true
+      },
+      "all_historical_step_fields_exact": true
+    },
+    "ellipse_parallel_recovery": {
+      "reference_channel_frames": 11879,
+      "physical_time_alignment_residual": 0.0,
+      "recovery_vs_reference_arrays_exact": true,
+      "arrays": {
+        "times": true,
+        "phase": true,
+        "min_distance": true,
+        "map_coverage": true,
+        "push_flags": true,
+        "contact_flags": true,
+        "efforts": true,
+        "agent_ids": true,
+        "agent_positions": true,
+        "domain": true,
+        "robot_radius": true,
+        "sensed_counts": true,
+        "sensed_points": true,
+        "cargo/cargo_0/centers": true,
+        "cargo/cargo_0/angles": true,
+        "cargo/cargo_0/local_vertices": true,
+        "cargo/cargo_0/strict_coverage": true,
+        "cargo/cargo_0/contacts": true,
+        "cargo/cargo_0/penetration": true,
+        "cargo/cargo_0/speed": true,
+        "cargo/cargo_0/progress_estimate": true,
+        "task/cargo_0/direction": true,
+        "task/cargo_0/start": true,
+        "task/cargo_0/goal_point": true,
+        "task/cargo_0/distance": true
+      }
+    },
+    "ellipse_parallel_reinforcement": {
+      "reference_channel_frames": 11882,
+      "physical_time_alignment_residual": 0.0
+    },
+    "c_open_away_reference": {
+      "reference_channel_frames": 11922,
+      "physical_time_alignment_residual": 0.0,
+      "all_replay_arrays_exact": true,
+      "arrays": {
+        "times": true,
+        "phase": true,
+        "min_distance": true,
+        "map_coverage": true,
+        "push_flags": true,
+        "contact_flags": true,
+        "efforts": true,
+        "agent_ids": true,
+        "agent_positions": true,
+        "domain": true,
+        "robot_radius": true,
+        "sensed_counts": true,
+        "sensed_points": true,
+        "cargo/cargo_0/centers": true,
+        "cargo/cargo_0/angles": true,
+        "cargo/cargo_0/local_vertices": true,
+        "cargo/cargo_0/strict_coverage": true,
+        "cargo/cargo_0/contacts": true,
+        "cargo/cargo_0/penetration": true,
+        "cargo/cargo_0/speed": true,
+        "cargo/cargo_0/progress_estimate": true,
+        "task/cargo_0/direction": true,
+        "task/cargo_0/start": true,
+        "task/cargo_0/goal_point": true,
+        "task/cargo_0/distance": true
+      },
+      "all_historical_step_fields_exact": true
+    },
+    "c_open_away_recovery": {
+      "reference_channel_frames": 11922,
+      "physical_time_alignment_residual": 0.0,
+      "recovery_vs_reference_arrays_exact": true,
+      "arrays": {
+        "times": true,
+        "phase": true,
+        "min_distance": true,
+        "map_coverage": true,
+        "push_flags": true,
+        "contact_flags": true,
+        "efforts": true,
+        "agent_ids": true,
+        "agent_positions": true,
+        "domain": true,
+        "robot_radius": true,
+        "sensed_counts": true,
+        "sensed_points": true,
+        "cargo/cargo_0/centers": true,
+        "cargo/cargo_0/angles": true,
+        "cargo/cargo_0/local_vertices": true,
+        "cargo/cargo_0/strict_coverage": true,
+        "cargo/cargo_0/contacts": true,
+        "cargo/cargo_0/penetration": true,
+        "cargo/cargo_0/speed": true,
+        "cargo/cargo_0/progress_estimate": true,
+        "task/cargo_0/direction": true,
+        "task/cargo_0/start": true,
+        "task/cargo_0/goal_point": true,
+        "task/cargo_0/distance": true
+      }
+    },
+    "c_open_away_reinforcement": {
+      "reference_channel_frames": 11922,
+      "physical_time_alignment_residual": 0.0
+    }
+  },
+  "mechanisms": {
+    "circle_reference": {
+      "events": {},
+      "robot_states": {
+        "not_enabled": 192000
+      },
+      "robots": {
+        "agent_00": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_01": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_02": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_03": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_04": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_05": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_06": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_07": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_08": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_09": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_10": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_11": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_12": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_13": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_14": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_15": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        }
+      },
+      "pauses": [],
+      "paused_frames": 0,
+      "resumed_pauses": 0,
+      "started_attempts": 0,
+      "label": "Agent/frame counts are diagnostics, not independent trials; group response is not individual force confirmation."
+    },
+    "circle_recovery": {
+      "events": {},
+      "robot_states": {
+        "not_enabled": 192000
+      },
+      "robots": {
+        "agent_00": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_01": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_02": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_03": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_04": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_05": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_06": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_07": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_08": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_09": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_10": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_11": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_12": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_13": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_14": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_15": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        }
+      },
+      "pauses": [],
+      "paused_frames": 0,
+      "resumed_pauses": 0,
+      "started_attempts": 0,
+      "label": "Agent/frame counts are diagnostics, not independent trials; group response is not individual force confirmation."
+    },
+    "circle_reinforcement": {
+      "events": {
+        "retain_incumbent": 1096,
+        "direction_no_longer_useful": 1086,
+        "no_observed_free_route": 5435,
+        "recruit_request": 11,
+        "phase_or_information_release": 5,
+        "recruit_started": 10,
+        "group_response_confirmed": 6,
+        "rollback:occupied": 3,
+        "rollback_finished": 10,
+        "arrived_not_confirmed": 7,
+        "rollback:direction_lost": 6,
+        "rollback:response_timeout": 1
+      },
+      "robot_states": {
+        "not_enabled": 5,
+        "idle": 138179,
+        "support": 53367,
+        "request": 11,
+        "travel": 95,
+        "rollback": 151,
+        "joining": 192
+      },
+      "robots": {
+        "agent_00": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 553,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_01": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_02": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_03": {
+          "attempts": 3,
+          "max_recorded_path_m": 0.566867406052943,
+          "confirmed_frames": 10,
+          "retained_frames": 4202,
+          "recruited_physical_contact_frames": 3677,
+          "recruited_max_force_N": 21.06141289675648
+        },
+        "agent_04": {
+          "attempts": 1,
+          "max_recorded_path_m": 0.00469807103504149,
+          "confirmed_frames": 0,
+          "retained_frames": 617,
+          "recruited_physical_contact_frames": 543,
+          "recruited_max_force_N": 18.847860772250495
+        },
+        "agent_05": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_06": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 27,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_07": {
+          "attempts": 3,
+          "max_recorded_path_m": 0.005749856075102878,
+          "confirmed_frames": 1,
+          "retained_frames": 2998,
+          "recruited_physical_contact_frames": 1282,
+          "recruited_max_force_N": 18.523113932574343
+        },
+        "agent_08": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 11522,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_09": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_10": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_11": {
+          "attempts": 1,
+          "max_recorded_path_m": 1.254029305359147,
+          "confirmed_frames": 21,
+          "retained_frames": 10920,
+          "recruited_physical_contact_frames": 1346,
+          "recruited_max_force_N": 14.63860958373221
+        },
+        "agent_12": {
+          "attempts": 1,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_13": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_14": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 11496,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_15": {
+          "attempts": 1,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 10973,
+          "recruited_physical_contact_frames": 1911,
+          "recruited_max_force_N": 16.43650397260695
+        }
+      },
+      "pauses": [],
+      "paused_frames": 0,
+      "resumed_pauses": 0,
+      "started_attempts": 10,
+      "label": "Agent/frame counts are diagnostics, not independent trials; group response is not individual force confirmation."
+    },
+    "ellipse_parallel_reference": {
+      "events": {},
+      "robot_states": {
+        "not_enabled": 192000
+      },
+      "robots": {
+        "agent_00": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_01": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_02": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_03": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_04": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_05": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_06": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_07": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_08": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_09": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_10": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_11": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_12": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_13": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_14": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_15": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        }
+      },
+      "pauses": [],
+      "paused_frames": 0,
+      "resumed_pauses": 0,
+      "started_attempts": 0,
+      "label": "Agent/frame counts are diagnostics, not independent trials; group response is not individual force confirmation."
+    },
+    "ellipse_parallel_recovery": {
+      "events": {},
+      "robot_states": {
+        "not_enabled": 192000
+      },
+      "robots": {
+        "agent_00": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_01": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_02": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_03": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_04": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_05": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_06": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_07": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_08": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_09": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_10": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_11": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_12": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_13": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_14": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_15": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        }
+      },
+      "pauses": [],
+      "paused_frames": 0,
+      "resumed_pauses": 0,
+      "started_attempts": 0,
+      "label": "Agent/frame counts are diagnostics, not independent trials; group response is not individual force confirmation."
+    },
+    "ellipse_parallel_reinforcement": {
+      "events": {
+        "retain_incumbent": 773,
+        "direction_no_longer_useful": 765,
+        "no_observed_free_route": 4377,
+        "recruit_request": 16,
+        "recruit_started": 15,
+        "rollback:occupied": 3,
+        "rollback_finished": 14,
+        "phase_or_information_release": 4,
+        "local_request_deferred": 1,
+        "arrived_not_confirmed": 11,
+        "rollback:direction_lost": 10,
+        "group_response_confirmed": 3,
+        "rollback:response_timeout": 1
+      },
+      "robot_states": {
+        "not_enabled": 5,
+        "idle": 128114,
+        "support": 62957,
+        "request": 16,
+        "travel": 308,
+        "joining": 316,
+        "rollback": 284
+      },
+      "robots": {
+        "agent_00": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 12,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_01": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_02": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_03": {
+          "attempts": 3,
+          "max_recorded_path_m": 0.1361656030666386,
+          "confirmed_frames": 0,
+          "retained_frames": 574,
+          "recruited_physical_contact_frames": 321,
+          "recruited_max_force_N": 14.45735656762923
+        },
+        "agent_04": {
+          "attempts": 3,
+          "max_recorded_path_m": 0.2341518315844899,
+          "confirmed_frames": 0,
+          "retained_frames": 8562,
+          "recruited_physical_contact_frames": 8556,
+          "recruited_max_force_N": 24.58485240815999
+        },
+        "agent_05": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 61,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_06": {
+          "attempts": 1,
+          "max_recorded_path_m": 0.0008961607184352334,
+          "confirmed_frames": 0,
+          "retained_frames": 411,
+          "recruited_physical_contact_frames": 3,
+          "recruited_max_force_N": 4.2765569551691245
+        },
+        "agent_07": {
+          "attempts": 1,
+          "max_recorded_path_m": 0.2690981630212458,
+          "confirmed_frames": 26,
+          "retained_frames": 11192,
+          "recruited_physical_contact_frames": 2394,
+          "recruited_max_force_N": 19.256858061227874
+        },
+        "agent_08": {
+          "attempts": 1,
+          "max_recorded_path_m": 0.029568839750894773,
+          "confirmed_frames": 0,
+          "retained_frames": 3690,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_09": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_10": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_11": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 637,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_12": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_13": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_14": {
+          "attempts": 3,
+          "max_recorded_path_m": 0.8089227507904637,
+          "confirmed_frames": 22,
+          "retained_frames": 10961,
+          "recruited_physical_contact_frames": 2837,
+          "recruited_max_force_N": 20.398446980693482
+        },
+        "agent_15": {
+          "attempts": 3,
+          "max_recorded_path_m": 0.1457436731571424,
+          "confirmed_frames": 19,
+          "retained_frames": 7264,
+          "recruited_physical_contact_frames": 2367,
+          "recruited_max_force_N": 19.14185239184346
+        }
+      },
+      "pauses": [],
+      "paused_frames": 0,
+      "resumed_pauses": 0,
+      "started_attempts": 15,
+      "label": "Agent/frame counts are diagnostics, not independent trials; group response is not individual force confirmation."
+    },
+    "c_open_away_reference": {
+      "events": {},
+      "robot_states": {
+        "not_enabled": 192000
+      },
+      "robots": {
+        "agent_00": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_01": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_02": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_03": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_04": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_05": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_06": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_07": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_08": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_09": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_10": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_11": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_12": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_13": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_14": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_15": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        }
+      },
+      "pauses": [
+        {
+          "start_frame": 278,
+          "end_frame": 357,
+          "resumed_transport": false,
+          "max_prospective": null
+        }
+      ],
+      "paused_frames": 80,
+      "resumed_pauses": 0,
+      "started_attempts": 0,
+      "label": "Agent/frame counts are diagnostics, not independent trials; group response is not individual force confirmation."
+    },
+    "c_open_away_recovery": {
+      "events": {},
+      "robot_states": {
+        "not_enabled": 192000
+      },
+      "robots": {
+        "agent_00": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_01": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_02": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_03": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_04": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_05": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_06": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_07": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_08": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_09": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_10": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_11": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_12": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_13": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_14": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_15": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        }
+      },
+      "pauses": [
+        {
+          "start_frame": 278,
+          "end_frame": 357,
+          "resumed_transport": false,
+          "max_prospective": 2
+        }
+      ],
+      "paused_frames": 80,
+      "resumed_pauses": 0,
+      "started_attempts": 0,
+      "label": "Agent/frame counts are diagnostics, not independent trials; group response is not individual force confirmation."
+    },
+    "c_open_away_reinforcement": {
+      "events": {
+        "retain_incumbent": 168,
+        "no_observed_free_route": 5035,
+        "recruit_request": 31,
+        "recruit_started": 28,
+        "local_request_deferred": 3,
+        "rollback:patch_lost": 1,
+        "rollback_finished": 28,
+        "arrived_not_confirmed": 17,
+        "rollback:direction_lost": 14,
+        "direction_no_longer_useful": 166,
+        "rollback:occupied": 5,
+        "rollback:travel_timeout": 5,
+        "rollback:response_timeout": 3
+      },
+      "robot_states": {
+        "not_enabled": 6,
+        "idle": 166842,
+        "support": 23139,
+        "request": 31,
+        "travel": 728,
+        "joining": 722,
+        "rollback": 532
+      },
+      "robots": {
+        "agent_00": {
+          "attempts": 3,
+          "max_recorded_path_m": 0.1532046462219507,
+          "confirmed_frames": 0,
+          "retained_frames": 57,
+          "recruited_physical_contact_frames": 2,
+          "recruited_max_force_N": 0.9221855874316205
+        },
+        "agent_01": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_02": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_03": {
+          "attempts": 3,
+          "max_recorded_path_m": 0.005838529494249658,
+          "confirmed_frames": 0,
+          "retained_frames": 181,
+          "recruited_physical_contact_frames": 101,
+          "recruited_max_force_N": 11.893254467718217
+        },
+        "agent_04": {
+          "attempts": 3,
+          "max_recorded_path_m": 0.16428870397105994,
+          "confirmed_frames": 0,
+          "retained_frames": 85,
+          "recruited_physical_contact_frames": 25,
+          "recruited_max_force_N": 15.194227766851743
+        },
+        "agent_05": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_06": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 20,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_07": {
+          "attempts": 3,
+          "max_recorded_path_m": 1.8353365800871213,
+          "confirmed_frames": 0,
+          "retained_frames": 5106,
+          "recruited_physical_contact_frames": 2266,
+          "recruited_max_force_N": 27.342502422381543
+        },
+        "agent_08": {
+          "attempts": 3,
+          "max_recorded_path_m": 0.35680793410053746,
+          "confirmed_frames": 0,
+          "retained_frames": 467,
+          "recruited_physical_contact_frames": 63,
+          "recruited_max_force_N": 16.347965310186787
+        },
+        "agent_09": {
+          "attempts": 3,
+          "max_recorded_path_m": 0.09343634540916312,
+          "confirmed_frames": 0,
+          "retained_frames": 64,
+          "recruited_physical_contact_frames": 46,
+          "recruited_max_force_N": 8.368793720594004
+        },
+        "agent_10": {
+          "attempts": 1,
+          "max_recorded_path_m": 0.00041939067142322204,
+          "confirmed_frames": 0,
+          "retained_frames": 5,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_11": {
+          "attempts": 3,
+          "max_recorded_path_m": 0.08981417807710217,
+          "confirmed_frames": 0,
+          "retained_frames": 2658,
+          "recruited_physical_contact_frames": 553,
+          "recruited_max_force_N": 20.380842597524317
+        },
+        "agent_12": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 0,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_13": {
+          "attempts": 0,
+          "max_recorded_path_m": 0.0,
+          "confirmed_frames": 0,
+          "retained_frames": 35,
+          "recruited_physical_contact_frames": 0,
+          "recruited_max_force_N": 0.0
+        },
+        "agent_14": {
+          "attempts": 3,
+          "max_recorded_path_m": 1.4705940919979938,
+          "confirmed_frames": 0,
+          "retained_frames": 4434,
+          "recruited_physical_contact_frames": 621,
+          "recruited_max_force_N": 19.57783419496504
+        },
+        "agent_15": {
+          "attempts": 3,
+          "max_recorded_path_m": 0.4935095965214619,
+          "confirmed_frames": 0,
+          "retained_frames": 191,
+          "recruited_physical_contact_frames": 101,
+          "recruited_max_force_N": 17.536434867335085
+        }
+      },
+      "pauses": [
+        {
+          "start_frame": 1188,
+          "end_frame": 1267,
+          "resumed_transport": false,
+          "max_prospective": 2
+        }
+      ],
+      "paused_frames": 80,
+      "resumed_pauses": 0,
+      "started_attempts": 28,
+      "label": "Agent/frame counts are diagnostics, not independent trials; group response is not individual force confirmation."
+    }
+  },
+  "rescued_conditions": [],
+  "development_gate": false,
+  "decision": "No promotion; stop this fixed candidate without retuning.",
+  "statistics": "Three preselected failures, one reused development seed. No reliable success-rate estimate or generalization. Frame/event counts are not independent observations.",
+  "limitations": "Retention/tangential protection and spare recruitment are bundled. A difference cannot isolate their causal contributions. Group response does not prove individual force transfer. Existing shared supervisor retained.",
+  "provenance": {
+    "protocol_sha256": "28005d76d96eef3ec5a2a3b9f016cd4c4a7562538ee385ca608ee9001227cd77",
+    "analysis_sha256": "7f2bfd4f74c26c2a9bb8088a82f4b9a42aa857665a554fde2059445e575b7be9",
+    "inputs": {
+      "runs/research/2026-11-01-feedback-components-v1/run/circle_reference_cvt/case_result.json": "542b65e5c699792c791f146d7a0fad537dea15a11a28ea746ef4c28a4f6f6a6e",
+      "runs/research/2026-11-01-feedback-components-v1/run/circle_reference_cvt/config.json": "514baf1aa4559d5991694b92fda309303eb96b7ca12d629ac51e89648a14fb64",
+      "runs/research/2026-11-01-feedback-components-v1/run/circle_reference_cvt/paired_metrics.json": "6a1cd1bfe7049e6171f7bf9840f747cf74af19323ae09477dcaf340935055dc2",
+      "runs/research/2026-11-01-feedback-components-v1/run/circle_reference_cvt/physics_substeps.json": "7316cf184098ada48aa7bcbce555bee3d8b159621caca9ce497b4f9a5f3f8fce",
+      "runs/research/2026-11-01-feedback-components-v1/run/circle_reference_cvt/replay.npz": "237d0c238d9a3e0ce6615c895b232151dfcf537a4acb8c0322182e54cbcb40e8",
+      "runs/research/2026-11-01-feedback-components-v1/run/circle_reference_cvt/resolved_case.json": "000fe6ad4955a093113dfd1773fee1a8f32a9241ed099481c78414bc7714b7f8",
+      "runs/research/2026-11-01-feedback-components-v1/run/circle_reference_cvt/safety_timeseries.csv": "faccd83b80a61b9549b63f233ad0d435fb2af669445c6edf39b61e37a1a98198",
+      "runs/research/2026-11-01-feedback-components-v1/run/circle_reference_cvt/summary.json": "7d14a97bb30b0d21ef1d5cac89f525d6976283e96890ab401079e86220294281",
+      "runs/research/2026-11-01-feedback-components-v1/run/circle_reference_cvt/trajectories.csv": "21594bad0590c668884359c08ac3a05b4925bb5edaa20469ef029438ca5104c3",
+      "runs/research/2026-11-01-feedback-components-v1/run/ellipse_parallel_reference_cvt/case_result.json": "151ecb7362c997817ecdf0a3a3e0907dda7de3b333a5b1ab751d9ee5243d75ba",
+      "runs/research/2026-11-01-feedback-components-v1/run/ellipse_parallel_reference_cvt/config.json": "6660fea57955fb12b4a1a0f5be8cba1fe70303f70019ce746bcd9cda64af2d5c",
+      "runs/research/2026-11-01-feedback-components-v1/run/ellipse_parallel_reference_cvt/paired_metrics.json": "6a03ed6c512bbec679b0c0e74ead212d0fa1e0f5a31a1b265342698ef0820720",
+      "runs/research/2026-11-01-feedback-components-v1/run/ellipse_parallel_reference_cvt/physics_substeps.json": "dba48076fc5b3d3ec631a44e69875d7d416c666c6856a2448f2b00b2f6893bb9",
+      "runs/research/2026-11-01-feedback-components-v1/run/ellipse_parallel_reference_cvt/replay.npz": "63a2757873a6b282c49db45e77a43cc0df88ebeddaa798ccb2751a951cdbc99d",
+      "runs/research/2026-11-01-feedback-components-v1/run/ellipse_parallel_reference_cvt/resolved_case.json": "7ce5fa1fc524a7c0a65d54aff908b58a67f7006185c9502d83e6c6af84749943",
+      "runs/research/2026-11-01-feedback-components-v1/run/ellipse_parallel_reference_cvt/safety_timeseries.csv": "62f06248c70c94dd96a22a979e521ef6a53dd79556a6b355a58eaa9d82a93a9d",
+      "runs/research/2026-11-01-feedback-components-v1/run/ellipse_parallel_reference_cvt/summary.json": "d5e65a6952aca1f74cfe1dc003a51eb2f2ed0c685f871b6cb027eaf9f7e5f0c1",
+      "runs/research/2026-11-01-feedback-components-v1/run/ellipse_parallel_reference_cvt/trajectories.csv": "4088bb9a4a53c578d3b34ead89334075572de100375fa0ebed6ced71f079a0aa",
+      "runs/research/2026-11-01-feedback-components-v1/run/c_open_away_reference_cvt/case_result.json": "81b586504c56af3d4ebbd2e5936f6274ba69d595e0cf832664d98bd5763d4fb9",
+      "runs/research/2026-11-01-feedback-components-v1/run/c_open_away_reference_cvt/config.json": "b8146e7d9f7e085fbc44186f5bec146c53be37f1cfdcbdf094e4984fb5001bfd",
+      "runs/research/2026-11-01-feedback-components-v1/run/c_open_away_reference_cvt/paired_metrics.json": "bdf0c69b71068a26cb467a182c47714a5526c9345c08f1a52db8b379477cd14b",
+      "runs/research/2026-11-01-feedback-components-v1/run/c_open_away_reference_cvt/physics_substeps.json": "92fbc9189ac811753996c556c2328ed124e7ce375aeb0b7e47218ecf119f86f3",
+      "runs/research/2026-11-01-feedback-components-v1/run/c_open_away_reference_cvt/replay.npz": "ff1e55b36c0b67df05c18bdc1f51750e3823ab16b615dc1122d62c761c42d77f",
+      "runs/research/2026-11-01-feedback-components-v1/run/c_open_away_reference_cvt/resolved_case.json": "c763d121c9c3e311c8d285463a1bc4a0bed9ff2dc0e2430f3fda47c5c493a973",
+      "runs/research/2026-11-01-feedback-components-v1/run/c_open_away_reference_cvt/safety_timeseries.csv": "4235bf8c9cc9cb4e23ed9cc35b8664140d1b153ceb09f0ed400c495165d91a32",
+      "runs/research/2026-11-01-feedback-components-v1/run/c_open_away_reference_cvt/summary.json": "c5ddd28f1b9854584bad721a5616eafd0877b6346931cefee6115ddd16fe1b4c",
+      "runs/research/2026-11-01-feedback-components-v1/run/c_open_away_reference_cvt/trajectories.csv": "97b5b7ec2e0ab9f7d9e530f71ab7c4718c4a7b5207ea8b00c93fb9b7fe9f5937",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/circle_reference/case_result.json": "659a1fa3c3f60a0075dc70b3965b7302b7c06875264a48045e11e41a79e75f7b",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/circle_reference/config.json": "514baf1aa4559d5991694b92fda309303eb96b7ca12d629ac51e89648a14fb64",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/circle_reference/paired_metrics.json": "68133ab73f06fa49b467e24a141c60f40054d5fde7a47e98eff7f6c7cbeed8f6",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/circle_reference/physics_substeps.json": "7316cf184098ada48aa7bcbce555bee3d8b159621caca9ce497b4f9a5f3f8fce",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/circle_reference/replay.npz": "237d0c238d9a3e0ce6615c895b232151dfcf537a4acb8c0322182e54cbcb40e8",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/circle_reference/resolved_case.json": "d0611146138a9b39efd01ee2aed2d9b9fc5fa57f7c8d505485b7fa0e86246f1e",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/circle_reference/safety_timeseries.csv": "faccd83b80a61b9549b63f233ad0d435fb2af669445c6edf39b61e37a1a98198",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/circle_reference/summary.json": "7d14a97bb30b0d21ef1d5cac89f525d6976283e96890ab401079e86220294281",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/circle_reference/trajectories.csv": "21594bad0590c668884359c08ac3a05b4925bb5edaa20469ef029438ca5104c3",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/circle_recovery/case_result.json": "b5b5db7cdcf1415f99f051c5bd0515532a6525b363ad9f63b906c5c36398a309",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/circle_recovery/config.json": "a4fa0e2b8ea7871ddf0b77c4388607f143d8be9fa44c8a25e0f899ef118cee35",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/circle_recovery/paired_metrics.json": "780404a41506d3a8612f55c8fb058f99ef37200ab4ca9dc530ee232939505bd1",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/circle_recovery/physics_substeps.json": "7316cf184098ada48aa7bcbce555bee3d8b159621caca9ce497b4f9a5f3f8fce",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/circle_recovery/replay.npz": "237d0c238d9a3e0ce6615c895b232151dfcf537a4acb8c0322182e54cbcb40e8",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/circle_recovery/resolved_case.json": "be2023f0797a88a29374cfad077555037040b3bce0e5551c68799003ffa25db5",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/circle_recovery/safety_timeseries.csv": "faccd83b80a61b9549b63f233ad0d435fb2af669445c6edf39b61e37a1a98198",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/circle_recovery/summary.json": "dcd7a8d3e1334819a07cb9352a50027207d3e3e817108818f2a2caa47701bdbc",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/circle_recovery/trajectories.csv": "21594bad0590c668884359c08ac3a05b4925bb5edaa20469ef029438ca5104c3",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/circle_reinforcement/case_result.json": "c46fe8f0b70fff23d623526da1addeb5d36ab685e876634246ec638f207c3f7c",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/circle_reinforcement/config.json": "5fd7016c270feed60525baf66e39b0eaf49026cdba92af20a39a559b05cc732b",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/circle_reinforcement/paired_metrics.json": "2b840c138293c39255c33d3c6a2760b00394f8bf158dee6d74043ccc92fc7e08",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/circle_reinforcement/physics_substeps.json": "5aa6a95b28c26cc2faeedadfa3d7c5c5ff5e4b7a592c4301ab8c2d966172f702",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/circle_reinforcement/replay.npz": "f9064f3448e60215d48d80e9140111f7937cd3e5a2bf336b713e7fb69dab936d",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/circle_reinforcement/resolved_case.json": "365419d241992fc6c5d972101908f8fb7d4bd186220c04fb65b5adda95dd7677",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/circle_reinforcement/safety_timeseries.csv": "6192821bd0431c6a91e674e054735b7b82d361a0121339ad964f74c4b257f61b",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/circle_reinforcement/summary.json": "bf9373aa71f5d1d818a680f4502b62f0f109e19b1ccec003c207084c2dd9bff3",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/circle_reinforcement/trajectories.csv": "cc1896e1c5b91cd61337a6cebf975f19640f222b7ab196f0f912b16b8bdbd3d2",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/ellipse_parallel_reference/case_result.json": "60807dce4a02863c642e4a5776d6c381682f46f6aed6daf29312d438ddd04a8a",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/ellipse_parallel_reference/config.json": "6660fea57955fb12b4a1a0f5be8cba1fe70303f70019ce746bcd9cda64af2d5c",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/ellipse_parallel_reference/paired_metrics.json": "5c89c1998f67c21c506ed7cc752d0878579ceec2dc15791093916898b4573504",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/ellipse_parallel_reference/physics_substeps.json": "dba48076fc5b3d3ec631a44e69875d7d416c666c6856a2448f2b00b2f6893bb9",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/ellipse_parallel_reference/replay.npz": "63a2757873a6b282c49db45e77a43cc0df88ebeddaa798ccb2751a951cdbc99d",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/ellipse_parallel_reference/resolved_case.json": "ceb13fd0f98d9986d9e63daee0724dc111acfbcb1288532b4e6e568c0f2c6e3b",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/ellipse_parallel_reference/safety_timeseries.csv": "62f06248c70c94dd96a22a979e521ef6a53dd79556a6b355a58eaa9d82a93a9d",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/ellipse_parallel_reference/summary.json": "d5e65a6952aca1f74cfe1dc003a51eb2f2ed0c685f871b6cb027eaf9f7e5f0c1",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/ellipse_parallel_reference/trajectories.csv": "4088bb9a4a53c578d3b34ead89334075572de100375fa0ebed6ced71f079a0aa",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/ellipse_parallel_recovery/case_result.json": "48bc52834389ff26505a0191e5f8ba027a31436dfdca1a8cd40abeb0cc368f46",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/ellipse_parallel_recovery/config.json": "c260b297c31a129c090a8583a53834fcab68ae66b3f0f9a4040514a445e3764b",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/ellipse_parallel_recovery/paired_metrics.json": "0128f2d83aeb69dcc1ee0eb7a9aab47906d86bd00d3b81e44235eb1df08185b1",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/ellipse_parallel_recovery/physics_substeps.json": "dba48076fc5b3d3ec631a44e69875d7d416c666c6856a2448f2b00b2f6893bb9",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/ellipse_parallel_recovery/replay.npz": "63a2757873a6b282c49db45e77a43cc0df88ebeddaa798ccb2751a951cdbc99d",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/ellipse_parallel_recovery/resolved_case.json": "617467d46ee643afefb57435fab1445e013c9e9b46ab0391781e195d17421ca4",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/ellipse_parallel_recovery/safety_timeseries.csv": "62f06248c70c94dd96a22a979e521ef6a53dd79556a6b355a58eaa9d82a93a9d",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/ellipse_parallel_recovery/summary.json": "b5f068487819936ef4d5474ead78fc61d49ca1acf27f7bdf95f2410e3fff9b48",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/ellipse_parallel_recovery/trajectories.csv": "4088bb9a4a53c578d3b34ead89334075572de100375fa0ebed6ced71f079a0aa",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/ellipse_parallel_reinforcement/case_result.json": "d4dab377ca5e8096459bfa9b0d5aafb987def3a386743d56e28363381ea48093",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/ellipse_parallel_reinforcement/config.json": "4c1bd3e5f203f70bcf67b40f806b7ff7ce374f42f88eee1022a3d97adfe3a3d0",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/ellipse_parallel_reinforcement/paired_metrics.json": "bd0ad4dec0381483d11fc4c15a7e0509ad5c2c7fc73a8197f913eb494d5f90c8",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/ellipse_parallel_reinforcement/physics_substeps.json": "3385f9d6b19863f9c8a57dd0a96a481703f64c1fe452eeb91869e6765cf733d8",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/ellipse_parallel_reinforcement/replay.npz": "fe1189ca698238410d1bb98b03b60783b814acba653d5a6717e6a9bf33b83144",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/ellipse_parallel_reinforcement/resolved_case.json": "f06594d34ba250a008aeb0a0b05cd6bc60e9f61164d733f1eff554ef10ee6683",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/ellipse_parallel_reinforcement/safety_timeseries.csv": "cebfe1acc265ac464223586a1bfa0031677b1907613cdc63e83188a79e190003",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/ellipse_parallel_reinforcement/summary.json": "cdce5020d19ddc742c8b761f3a913ef0eaa610e96c116efb51cc1aa69a6fa765",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/ellipse_parallel_reinforcement/trajectories.csv": "00a6731839e3f0aa81155ea8598e82fd0a865deaac4ca10416f509f1e966836c",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/c_open_away_reference/case_result.json": "adb3bcf2c210965f727a37dd63467af84c1c0a63915f45698cdd1ebbf593b267",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/c_open_away_reference/config.json": "b8146e7d9f7e085fbc44186f5bec146c53be37f1cfdcbdf094e4984fb5001bfd",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/c_open_away_reference/paired_metrics.json": "5ce0d761580e87c0bcdbec0a20a1ed9950045ce13c7c7c7707d2d7e4a7427615",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/c_open_away_reference/physics_substeps.json": "92fbc9189ac811753996c556c2328ed124e7ce375aeb0b7e47218ecf119f86f3",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/c_open_away_reference/replay.npz": "ff1e55b36c0b67df05c18bdc1f51750e3823ab16b615dc1122d62c761c42d77f",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/c_open_away_reference/resolved_case.json": "d57e2f94afa3c1f23e7546af01735997dd03f935c8b3cfdf39f08b27906c9326",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/c_open_away_reference/safety_timeseries.csv": "4235bf8c9cc9cb4e23ed9cc35b8664140d1b153ceb09f0ed400c495165d91a32",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/c_open_away_reference/summary.json": "c5ddd28f1b9854584bad721a5616eafd0877b6346931cefee6115ddd16fe1b4c",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/c_open_away_reference/trajectories.csv": "97b5b7ec2e0ab9f7d9e530f71ab7c4718c4a7b5207ea8b00c93fb9b7fe9f5937",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/c_open_away_recovery/case_result.json": "7f39c379b3e11c05ea9e0913046c648b23c182cf234bdaa3796a9372d0107a39",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/c_open_away_recovery/config.json": "be10280a3fbe7122ad3d059e4708c69c3590093e2e568db3a8d6914224fbff08",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/c_open_away_recovery/paired_metrics.json": "8d589527e11f046728e5d209d20b262088044fe5f42d23d0300ebef303b33fc9",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/c_open_away_recovery/physics_substeps.json": "92fbc9189ac811753996c556c2328ed124e7ce375aeb0b7e47218ecf119f86f3",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/c_open_away_recovery/replay.npz": "ff1e55b36c0b67df05c18bdc1f51750e3823ab16b615dc1122d62c761c42d77f",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/c_open_away_recovery/resolved_case.json": "4f77f3678d7a6605b98ae41b7389fee953a7bfbd6b6ee0f1474d9db3a9772cd2",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/c_open_away_recovery/safety_timeseries.csv": "4235bf8c9cc9cb4e23ed9cc35b8664140d1b153ceb09f0ed400c495165d91a32",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/c_open_away_recovery/summary.json": "d3677bdaa3bec1122cde92880e9cf0f7b07710bb4d78da87e8c950dc6f10f880",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/c_open_away_recovery/trajectories.csv": "97b5b7ec2e0ab9f7d9e530f71ab7c4718c4a7b5207ea8b00c93fb9b7fe9f5937",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/c_open_away_reinforcement/case_result.json": "7d636cde4581b9b056d6dc820655e02640fa5b306bbaa6720c47564b7aaeee59",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/c_open_away_reinforcement/config.json": "e91541e1af417aa3b3e0823c181fc9e691befd150b18370ad69d2c2b80d49577",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/c_open_away_reinforcement/paired_metrics.json": "130b2bfe3cbd58c66214366fb3406b1fa7ff59a95ac659aba4291dc4c9ba6236",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/c_open_away_reinforcement/physics_substeps.json": "b0d152fdff4ff318d2a5ac1f5f77c0247a581a5ff5ff66ea9c37989c04a7209d",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/c_open_away_reinforcement/replay.npz": "0d3a7ca30acd8ff6c5f9635beaf3e158e493363bd86afecb7970c6b7bc58b67a",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/c_open_away_reinforcement/resolved_case.json": "31fca8d7d1a78093d590611786353714864069f3bee641044bba72d6b9c1c874",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/c_open_away_reinforcement/safety_timeseries.csv": "2a82a7917cf8569834ed33a55c4b1c6cd0e1b6677d2ff6883494478e6b8c9bbc",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/c_open_away_reinforcement/summary.json": "379d609bbaca0e287c64177c02aa6629f5a0633cd23ca65f2a6433d6bf41e22c",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/c_open_away_reinforcement/trajectories.csv": "f1743775c218c69f16532e6160e4f011ac3edd27a2c7a2d894b89167bd475103"
+    },
+    "helpers": {
+      "scripts/analyze_feedback_components.py": "c2995734a52e198fcbd1d0f4b5d50d976cc36eb6a08dfb94674d2436be44753d",
+      "scripts/analyze_boundary_navigation_study.py": "175f207bb17ed612b16e433e10a557ff854f7b7b059d69bfdf3453a511b4e753",
+      "scripts/analyze_dynamic_contact_study.py": "a260dded3cf79d390ff0359a83f049d481c62d36b9b5b39ccf39ccc9b763cdfb"
+    }
+  }
+}

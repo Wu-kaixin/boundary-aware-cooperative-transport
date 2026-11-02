@@ -55,6 +55,10 @@ from dbact.geometry import clip_to_domain, normalize
 from dbact.deployment.cvt import LocalCVT, empty_cell_threshold
 from dbact.sensing.sensor import PerceptionParams, RayCastBoundarySensor
 from dbact.control.phase import Phase, PhaseGates, PhaseMonitor, PhaseSignals
+from dbact.control.contact_roles import DynamicContactPolicy
+from dbact.control.contact_handoff import ConfirmedContactHandoff
+from dbact.control.contact_reinforcement import ContactReinforcement
+from dbact.control.boundary_navigation import point_goal_feedback, push_alignment, VoterContinuity
 from dbact.provenance import frame_rng
 from dbact.safety.filter import SafetyFilter, SafetyFilterParams
 from dbact.task import TransportTask
@@ -72,6 +76,16 @@ from dbact.control.transport import (
     reference_stopping_lead,
 )
 from dbact.types import AgentState, BoundaryView, ControlCommand
+
+
+# Experimental 2x2 readout ablation. All four use the same fresh-reference
+# admission; the gate-only arm deliberately differs from original map admission.
+_REFERENCE_CHANNELS = {
+    "observed_reference": (True, True),
+    "observed_reference_gate": (False, False),
+    "observed_reference_position": (True, False),
+    "observed_reference_velocity": (False, True),
+}
 
 
 @dataclass
@@ -231,6 +245,7 @@ class DBACTParams:
     object_row_window: float = 0.28
     object_row_face_cosine: float = 0.26
     object_row_mode: str = "aggregate"
+    aggregate_frame_consistent: bool = False
     dt: float = 0.05
     object_velocity_bound: float = 0.20
     recovery_fraction: float = 0.6
@@ -277,6 +292,31 @@ class DBACTParams:
     # completion. Default transport retains the audited feedback/brake policy.
     transport_feedback_guard: bool = False
     brake_release_integral: bool = False
+    # The corrected previous-frame feedback path is opt-in until task-level
+    # evaluation: False preserves the historical numerical behaviour. Repairing
+    # a feedback channel is not evidence that its old policy improves transport.
+    transport_safety_feedback: bool = False
+    # Opt-in development candidate; never enabled by a historical configuration.
+    dynamic_contact_roles: bool = False
+    # Independent ablations of v1; both True preserve its original joint policy.
+    dynamic_contact_allocation: bool = True
+    dynamic_contact_relocation: bool = True
+    confirmed_contact_handoff: bool = False
+    contact_recovery_fix: bool = False
+    contact_reinforcement: bool = False
+    # Independent defaults-off geometry readouts. The QP remains unchanged.
+    reference_radial_pivot: bool = False
+    reference_innovation_trim: bool = False
+    reference_support_gate: bool = False
+    reference_early_anchor: bool = False
+    reference_bootstrap_gain: float | None = None  # None preserves progress_estimate_gain
+    contact_patch_distance: bool = False
+    # New development arms, off by default. The vector law changes controller
+    # arrival feedback, never the independent simulator completion criterion.
+    boundary_navigation: str = "legacy"  # legacy | adaptive_arc | vector_goal
+    navigation_estimator: str = "accumulated"  # original or opt-in reference/channel ablations
+    navigation_voter_continuity: bool = False
+    navigation_hold_dwell: int = 1  # consecutive original arrival guards before shared HOLD
     transport_deadband: float = 0.05
     brake_gain: float = 0.55
     convoy_gain: float = 1.0
@@ -426,6 +466,7 @@ class DBACTParams:
             transport_quorum=self.min_push_agents,
             brake_fraction=self.brake_fraction,
             recover_on_brake_progress=self.phase_recover_on_brake_progress,
+            hold_dwell=self.navigation_hold_dwell,
         )
 
 
@@ -478,6 +519,60 @@ class AgentDiagnostics:
     map_centroid: tuple[float, float] = (float("nan"), float("nan"))
     cvt_centroid: tuple[float, float] = (float("nan"), float("nan"))
     redeploy_target: tuple[float, float] = (float("nan"), float("nan"))
+    nominal_command: tuple[float, float] = (0.0, 0.0)
+    local_holding: bool = False
+    safety_feedback_blocked: bool = False
+    contact_role: str = "baseline"
+    contact_cone_residual: float = float("nan")
+    contact_allocation: float = float("nan")
+    contact_redeploy_attempts: int = 0
+    contact_redeploy_reason: str = "not_enabled"
+    contact_selected_normal: tuple[float, float] = (float("nan"), float("nan"))
+    contact_desired_direction: tuple[float, float] = (float("nan"), float("nan"))
+    contact_lateral_estimate: tuple[float, float] = (float("nan"), float("nan"))
+    contact_redeploy_target: tuple[float, float] = (float("nan"), float("nan"))
+    handoff_state: str = "not_enabled"
+    handoff_donor_state: str = "not_enabled"
+    handoff_partner: str = ""
+    handoff_event: str = "not_enabled"
+    handoff_rollback_reason: str = ""
+    handoff_attempts: int = 0
+    handoff_contact_proxy: bool = False
+    handoff_confirm_seconds: float = 0.
+    handoff_release_fraction: float = 0.
+    handoff_gap: float = float("nan")
+    handoff_motion_ok: bool = False
+    handoff_local_forward_velocity: float = 0.
+    handoff_local_lateral_velocity: float = 0.
+    navigation_remaining: float = float("nan")
+    navigation_voters: str = ""
+    navigation_displacement: tuple[float, float] = (float("nan"), float("nan"))
+    navigation_error: tuple[float, float] = (float("nan"), float("nan"))
+    navigation_velocity: tuple[float, float] = (float("nan"), float("nan"))
+    reference_status: str = "not_enabled"
+    reference_pivot_status: str = "not_enabled"
+    reference_pivot_rms: float = float("nan")
+    reference_support_minor_rms: float = float("nan")
+    contact_distance_source: str = "map"
+    contact_map_gap: float | None = None
+    contact_used_gap: float | None = None
+    contact_patch_points: int = 0
+    reference_matches: int = 0
+    reference_residual_rms: float = float("nan")
+    reference_displacement: tuple[float, float] = (float("nan"), float("nan"))
+    reference_bootstrap_offset: tuple[float, float] = (float("nan"), float("nan"))
+    reference_angle: float = float("nan")
+    reference_velocity: tuple[float, float] = (float("nan"), float("nan"))
+    recovery_eligible: bool = False
+    reinforcement_state: str = "not_enabled"
+    reinforcement_event: str = "not_enabled"
+    reinforcement_attempts: int = 0
+    reinforcement_confirmed: bool = False
+    reinforcement_confirm_seconds: float = 0.
+    reinforcement_path_length: float = 0.
+    reinforcement_gap: float = float("nan")
+    reinforcement_retain: bool = False
+    reinforcement_suspended_approach: bool = False
 
 
 class DBACTController:
@@ -498,6 +593,52 @@ class DBACTController:
             k: normalize(np.asarray(v, dtype=float)) for k, v in (goal_directions or {}).items()
         }
         self.tasks: dict[str, TransportTask] = dict(tasks or {})
+        if params.aggregate_frame_consistent and (params.object_row_mode != "aggregate" or params.theorem_mode):
+            raise ValueError("Frame-consistent aggregation requires the transport aggregate row model")
+        if params.boundary_navigation not in ("legacy", "adaptive_arc", "vector_goal"):
+            raise ValueError("Unknown boundary_navigation mode")
+        if params.boundary_navigation != "legacy" and (
+                params.dynamic_contact_roles or params.confirmed_contact_handoff
+                or params.theorem_mode or params.planning_every != 1
+                or params.perception_every != 1 or len(self.tasks) != 1
+                or params.task_mode != "transport" or params.transport_law != "progress"):
+            raise ValueError("Boundary navigation v1 requires one every-frame transport task and no other contact candidate")
+        if params.boundary_navigation == "vector_goal" and params.cross_track_deadband <= 0:
+            raise ValueError("Vector goal requires a positive existing cross_track_deadband")
+        if params.navigation_estimator not in ("accumulated", *_REFERENCE_CHANNELS):
+            raise ValueError("Unknown navigation_estimator")
+        if params.navigation_estimator in _REFERENCE_CHANNELS and params.boundary_navigation != "vector_goal":
+            raise ValueError("Observed reference requires the experimental vector_goal controller")
+        if (isinstance(params.navigation_hold_dwell, bool)
+                or not isinstance(params.navigation_hold_dwell, int) or params.navigation_hold_dwell < 1):
+            raise ValueError("navigation_hold_dwell must be a positive integer")
+        if ((params.navigation_voter_continuity or params.navigation_hold_dwell != 1)
+                and params.boundary_navigation != "vector_goal"):
+            raise ValueError("Voter continuity and stop confirmation require vector_goal")
+        if params.contact_recovery_fix and params.boundary_navigation != "vector_goal":
+            raise ValueError("Contact recovery fix requires vector_goal")
+        if params.contact_reinforcement and not params.contact_recovery_fix:
+            raise ValueError("Contact reinforcement requires the separate recovery fix")
+        if params.reference_radial_pivot and params.navigation_estimator != "observed_reference":
+            raise ValueError("Radial pivot requires both observed reference channels")
+        if params.reference_innovation_trim and params.navigation_estimator != "observed_reference":
+            raise ValueError("Innovation trim requires both observed reference channels")
+        if params.reference_support_gate and params.navigation_estimator != "observed_reference":
+            raise ValueError("Reference support gate requires both observed reference channels")
+        if ((params.reference_early_anchor or params.reference_bootstrap_gain is not None)
+                and params.navigation_estimator != "observed_reference"):
+            raise ValueError("Reference-origin options require observed_reference")
+        if params.reference_bootstrap_gain is not None and (
+                isinstance(params.reference_bootstrap_gain, bool)
+                or not np.isfinite(params.reference_bootstrap_gain) or params.reference_bootstrap_gain <= 0):
+            raise ValueError("reference_bootstrap_gain must be finite and positive")
+        if params.contact_patch_distance and (params.boundary_navigation != "vector_goal" or params.planning_every != 1):
+            raise ValueError("Contact patch distance requires every-frame vector_goal")
+        if params.dynamic_contact_roles and (params.planning_every != 1 or len(self.tasks) != 1):
+            raise ValueError("dynamic_contact_roles v1 requires one transport task and planning_every=1")
+        if params.confirmed_contact_handoff and (
+                params.dynamic_contact_roles or params.planning_every != 1 or len(self.tasks) != 1):
+            raise ValueError("confirmed_contact_handoff requires one task, planning_every=1 and dynamic_contact_roles=False")
         for object_id, task in self.tasks.items():
             self.goal_directions[object_id] = normalize(task.direction)
 
@@ -547,6 +688,7 @@ class DBACTController:
                 object_row_inner_limit=params.robot_radius,
                 object_row_face_cosine=params.object_row_face_cosine,
                 object_row_mode=("nearest_feature" if params.theorem_mode else params.object_row_mode),
+                aggregate_frame_consistent=params.aggregate_frame_consistent,
                 dt=params.dt,
                 object_velocity_bound=params.object_velocity_bound,
                 recovery_fraction=params.recovery_fraction,
@@ -591,6 +733,14 @@ class DBACTController:
 
         self.maps: dict[str, LocalBoundaryMap] = {}
         self._redeploy_target: dict[str, np.ndarray | None] = {}
+        self.contact_roles = DynamicContactPolicy(params)
+        self._contact_allocations: dict[str, float] = {}
+        self.contact_handoff = ConfirmedContactHandoff(params)
+        self.contact_reinforcement = ContactReinforcement(params)
+        self._reinforcement_messages = {}
+        self._reinforcement_retain = set()
+        self._recovery_eligible = {}
+        self._handoff_messages = {}
         self._views: dict[str, BoundaryView] = {}
         self._sweep_direction: dict[int, float] = {}
         self._tokens: dict[str, dict[str, tuple[np.ndarray, float]]] = {}
@@ -605,6 +755,13 @@ class DBACTController:
         self.diagnostics: list[AgentDiagnostics] = []
         self.phase_signals = PhaseSignals()
         self.team_progress: dict[str, float] = {}
+        self._navigation = {}
+        self.team_navigation = None
+        self._voter_bridges = {}
+        self._voter_stream = None
+        self.navigation_voter_trace = None
+        self._reference_trackers = {}
+        self._reference_readings = {}
         self._time = 0.0
         self._frame = 0
         # D10-DIAG. Off by default: the extra quantities cost an unheld-target
@@ -658,11 +815,17 @@ class DBACTController:
         else:
             scans = [BoundaryView.empty() for _ in agents]
             interval = 0.0
-        if self.trace_enabled:
+        # Fresh binary detection packets. Consumers must restrict this storage
+        # to own/one-hop agents; trace recording is deliberately not required.
+        self._fresh_detections = {agents[i].agent_id for i, scan in enumerate(scans) if len(scan)}
+        if self.trace_enabled or self.params.contact_patch_distance:
             # A robot's own scan, before the neighbour relay is merged into it.
             # Attribution needs it: "who first saw the far side" is a question about
             # who pointed a sensor at it, and the fused view cannot answer it
             # because a relayed point looks the same as an observed one.
+            # The contact-distance controller also consumes these observations;
+            # enabling diagnostics must never change its information or commands.
+            # Store empty scans on a non-sensing frame rather than reuse stale data.
             self.last_scans = {agents[i].agent_id: scans[i] for i in range(len(agents))}
 
         # Own observations first, then one hop of neighbour relay. Voxel fusion
@@ -674,6 +837,7 @@ class DBACTController:
         # produces nothing to register, nothing to carve and nothing to fuse; running
         # the update on an empty scan would age the map and decay its weights on a
         # frame where no measurement contradicted it.
+        reference_batches = {} if self.params.navigation_estimator in _REFERENCE_CHANNELS else None
         for i, agent in enumerate(agents):
             if not sensing:
                 self._views[agent.agent_id] = self.maps[agent.agent_id].view(timestamp)
@@ -683,12 +847,21 @@ class DBACTController:
             if local_map.carve_enabled:
                 local_map.carve(agent.position, scans[i])
             batch, codes = _merge_scans(scans, [i] + list(neighbors[i]))
+            if reference_batches is not None:
+                reference_batches[agent.agent_id] = batch
             local_map.update(batch, timestamp, agent_codes=codes, dt=interval)
             self._views[agent.agent_id] = local_map.view(timestamp)
 
         self._update_tokens(agents, neighbors, timestamp)
         contact_ready = [self._contact_ready(agents[i], self._views[agents[i].agent_id]) for i in range(len(agents))]
         self._update_progress(agents, neighbors)
+        if reference_batches is not None:
+            self._update_reference(agents, reference_batches, timestamp)
+        if self.params.boundary_navigation == "vector_goal":
+            self._update_navigation(agents, neighbors)
+        if self.params.contact_recovery_fix:
+            self._recovery_eligible = {a.agent_id:self._prospective_push_ready(i,agents,neighbors[i],contact_ready)
+                                      for i,a in enumerate(agents)}
         self.phase_signals = self._phase_signals(agents, contact_ready)
         self.phase_monitor.update(self.phase_signals, self._frame)
 
@@ -711,11 +884,19 @@ class DBACTController:
                     or response_state != self._held_response_state)
         self._held_response_state = response_state
 
-        self.diagnostics = []
+        # Keep the complete previous frame visible throughout planning. Clearing
+        # self.diagnostics here used to make _blocked_along always return False:
+        # the current robot had not yet been appended to the new list.
+        diagnostics = []
         commands: list[ControlCommand] = []
+        if self.params.confirmed_contact_handoff:
+            self.contact_handoff.outbox = {}
+        if self.params.contact_reinforcement:
+            self.contact_reinforcement.outbox = {}
+            self._reinforcement_retain = set()
         for i, agent in enumerate(agents):
             view = self._views[agent.agent_id]
-            self._trace = {}
+            self._trace = {"recovery_eligible":self._recovery_eligible.get(agent.agent_id,False)}
             if planning:
                 u_nom, mode, cell_mass, push_side, effort = self._nominal_command(
                     i, agents, neighbors[i], view, contact_ready, dt
@@ -751,7 +932,20 @@ class DBACTController:
             )
             if self.trace_enabled:
                 self._fill_trace(diagnostic, agent, view, scans[i], u_nom, result)
-            self.diagnostics.append(diagnostic)
+            diagnostics.append(diagnostic)
+        if self.params.confirmed_contact_handoff:
+            # Publish each robot's own command flag only after all decisions;
+            # recipients see previous-frame snapshots on their actual one-hop links.
+            current = {d.agent_id:d for d in diagnostics}
+            self._handoff_messages = {
+                key:replace(message, press=bool(current[key].push_side and current[key].effort > 0.))
+                for key,message in self.contact_handoff.outbox.items()}
+        if self.params.contact_reinforcement:
+            current = {d.agent_id:d for d in diagnostics}
+            self._reinforcement_messages = {
+                key:replace(message,press=bool(current[key].push_side and current[key].effort>0.))
+                for key,message in self.contact_reinforcement.outbox.items()}
+        self.diagnostics = diagnostics
         self._frame += 1
         return commands
 
@@ -824,10 +1018,22 @@ class DBACTController:
             diagnostic.token_distance = float(np.linalg.norm(token - agent.position))
         for name in ("cell_held_fraction", "cell_unheld_mass", "centroid_distance",
                      "redeploy_requested", "redeploy_active", "redeploy_reason",
-                     "redeploy_candidates", "cage_targets"):
+                     "redeploy_candidates", "cage_targets", "contact_role",
+                     "contact_cone_residual", "contact_allocation", "contact_redeploy_attempts",
+                     "contact_redeploy_reason", "handoff_state", "handoff_donor_state",
+                     "handoff_partner", "handoff_event", "handoff_rollback_reason", "handoff_attempts", "handoff_contact_proxy",
+                     "handoff_confirm_seconds", "handoff_release_fraction", "handoff_gap", "handoff_motion_ok",
+                     "handoff_local_forward_velocity", "handoff_local_lateral_velocity",
+                     "navigation_remaining", "navigation_voters", "recovery_eligible",
+                     "reinforcement_state", "reinforcement_event", "reinforcement_attempts",
+                     "reinforcement_confirmed", "reinforcement_confirm_seconds", "reinforcement_path_length",
+                     "reinforcement_gap", "reinforcement_retain", "reinforcement_suspended_approach",
+                     "contact_distance_source", "contact_map_gap", "contact_used_gap", "contact_patch_points"):
             if name in scratch:
                 setattr(diagnostic, name, scratch[name])
-        for name in ("cvt_centroid", "redeploy_target"):
+        for name in ("cvt_centroid", "redeploy_target", "contact_selected_normal",
+                     "contact_desired_direction", "contact_lateral_estimate", "contact_redeploy_target",
+                     "navigation_displacement", "navigation_error", "navigation_velocity"):
             value = scratch.get(name)
             if value is not None:
                 setattr(diagnostic, name, (float(value[0]), float(value[1])))
@@ -837,6 +1043,25 @@ class DBACTController:
         diagnostic.zero_input_feasible = result.zero_input_feasible
         diagnostic.speed_nominal = float(np.linalg.norm(u_nom))
         diagnostic.speed_command = float(np.linalg.norm(result.velocity))
+        diagnostic.nominal_command = (float(u_nom[0]), float(u_nom[1]))
+        loop = self.transport_loops.get(agent.agent_id)
+        diagnostic.local_holding = bool(loop.holding) if loop is not None else False
+        diagnostic.safety_feedback_blocked = self._blocked_along(agent.agent_id)
+        tracker = self._reference_trackers.get(agent.agent_id)
+        if tracker is not None:
+            diagnostic.reference_status = tracker.reason
+            diagnostic.reference_pivot_status = tracker.pivot_status
+            diagnostic.reference_pivot_rms = tracker.pivot_rms
+            diagnostic.reference_support_minor_rms = tracker.support_minor_rms
+            if tracker.initialized:
+                diagnostic.reference_bootstrap_offset = tuple(map(float, tracker.offset))
+            reading = self._reference_readings.get(agent.agent_id)
+            if reading is not None:
+                diagnostic.reference_matches = reading.matches
+                diagnostic.reference_residual_rms = reading.residual_rms
+                diagnostic.reference_displacement = tuple(map(float, reading.displacement))
+                diagnostic.reference_angle = reading.angle
+                diagnostic.reference_velocity = tuple(map(float, reading.velocity))
 
     # ------------------------------------------------------------------ #
     # progress estimation (decentralised)
@@ -897,6 +1122,101 @@ class DBACTController:
             self.team_progress[object_id] = float(np.median(values)) if values else 0.0
         self.team_estimate_quality = self._team_estimate_quality(agents)
 
+    def _update_reference(self, agents, batches, timestamp) -> None:
+        """Observe the same fresh one-hop packets; never replace the safety map.
+
+        By default CONTACT_READY marks the reference epoch. The optional early
+        observer uses already permitted scans sooner, without assuming a stationary
+        cargo or zero displacement. Feedback selection still waits for CONTACT_READY.
+        Initialization alone cannot vote for stop:
+        a subsequent accepted match must measure a velocity as well as position.
+        """
+        self._reference_readings = {}
+        if not self.phase_monitor.reached(Phase.CONTACT_READY) and not self.params.reference_early_anchor:
+            return
+        from dbact.control.observed_reference import ObservedReferenceTracker
+        oid = next(iter(self.tasks))
+        for agent in agents:
+            aid = agent.agent_id
+            tracker = self._reference_trackers.get(aid)
+            if tracker is None:
+                tracker = ObservedReferenceTracker(gate=self.params.registration_gate,
+                    normal_cosine=self.params.registration_normal_cosine,
+                    max_speed=self.params.max_object_speed,
+                    max_yaw_rate=self.params.max_object_yaw_rate,
+                    velocity_filter=self.params.object_velocity_filter,
+                    radial_readout=self.params.reference_radial_pivot,
+                    innovation_trim=self.params.reference_innovation_trim,
+                    support_gate=self.params.reference_support_gate,
+                    range_noise_std=self.params.range_noise_std)
+                self._reference_trackers[aid] = tracker
+            if not tracker.initialized:
+                local_map = self.maps[aid]
+                if local_map.motion_quality.get(oid) == "credible":
+                    gain = (self.params.progress_estimate_gain if self.params.reference_bootstrap_gain is None
+                            else self.params.reference_bootstrap_gain)
+                    tracker.initialize(batches[aid], gain *
+                                       local_map.object_displacement(oid), timestamp)
+                continue
+            reading = tracker.update(batches[aid], timestamp)
+            if reading is not None:
+                self._reference_readings[aid] = reading
+
+    def _update_navigation(self, agents, neighbors) -> None:
+        """Add a two-float displacement message on the existing one-hop links.
+
+        A scalar direction may be observable under a degraded registration while
+        the whole vector is not. Thus only fresh `credible` maps vote here.
+        The all-team median is used only by the already-shared phase supervisor.
+        """
+        object_id, task = next(iter(self.tasks.items()))
+        displacement, velocity = {}, {}
+        if (self.params.navigation_estimator in _REFERENCE_CHANNELS
+                and self.phase_monitor.reached(Phase.CONTACT_READY)):
+            reference_position, reference_velocity = _REFERENCE_CHANNELS[self.params.navigation_estimator]
+            for aid, reading in self._reference_readings.items():
+                # Hold admission fixed across the component experiment. Old map
+                # values here are a diagnostic control, not newly certified data.
+                displacement[aid] = (reading.displacement if reference_position else
+                    self.params.progress_estimate_gain * self.maps[aid].object_displacement(object_id))
+                velocity[aid] = (reading.velocity if reference_velocity else
+                    self.maps[aid].object_velocity(object_id))
+        else:
+            for agent in agents:
+                local_map = self.maps[agent.agent_id]
+                registration = local_map.last_registration.get(object_id)
+                if (local_map.motion_quality.get(object_id) == "credible"
+                        and registration is not None and registration.matches > 0):
+                    displacement[agent.agent_id] = self.params.progress_estimate_gain * local_map.object_displacement(object_id)
+                    velocity[agent.agent_id] = local_map.object_velocity(object_id)
+        target = task.distance * task.direction
+        band = self.params.cross_track_deadband
+        self._navigation = {
+            agent.agent_id: point_goal_feedback(displacement, velocity,
+                [agent.agent_id] + [agents[j].agent_id for j in neighbors[i]], target, band)
+            for i, agent in enumerate(agents)}
+        self.team_navigation = point_goal_feedback(displacement, velocity,
+            [a.agent_id for a in agents], target, band)
+        self.navigation_voter_trace = None
+        if self.params.navigation_voter_continuity:
+            stream = (self.params.navigation_estimator
+                      if self.params.navigation_estimator in _REFERENCE_CHANNELS
+                      and self.phase_monitor.reached(Phase.CONTACT_READY) else 'accumulated')
+            if stream != self._voter_stream:
+                # Map and reference readings have different origins; never bridge
+                # the estimator switch as if it were physical motion.
+                self._voter_bridges = {}
+                self._voter_stream = stream
+            local = {}
+            for agent in agents:
+                aid = agent.agent_id
+                bridge = self._voter_bridges.setdefault(('local', aid), VoterContinuity())
+                self._navigation[aid] = bridge.update(self._navigation[aid], displacement, target, band)
+                local[aid] = bridge.trace
+            bridge = self._voter_bridges.setdefault(('supervisor', ''), VoterContinuity())
+            self.team_navigation = bridge.update(self.team_navigation, displacement, target, band)
+            self.navigation_voter_trace = dict(stream=stream, supervisor=bridge.trace, local=local)
+
     def _credible_task_progress(self, agent_id: str, object_id: str, local_map, direction: np.ndarray) -> float:
         """Hold the last progress that the goal direction could actually see.
 
@@ -949,6 +1269,26 @@ class DBACTController:
     # phase supervisor
     # ------------------------------------------------------------------ #
 
+    def _prospective_push_ready(self, i, agents, neighbours, contact_ready):
+        """Own geometric eligibility without the global enable; not contact truth."""
+        agent=agents[i];nav=self._navigation.get(agent.agent_id)
+        if (nav is None or nav.remaining<=0 or not contact_ready[i]
+                or not self.phase_monitor.reached(Phase.CONTACT_READY)
+                or self.phase_monitor.reached(Phase.HOLD)):
+            return False
+        view=self._views[agent.agent_id];nearest=self._nearest_index(view,agent.position)
+        if nearest is None:return False
+        normal=view.normals[nearest]
+        measured=float((agent.position-view.points[nearest])@normal)
+        if measured>self.params.standoff_range:return False
+        quorum=1+sum(contact_ready[j] for j in neighbours)
+        threshold=self.params.push_side_threshold
+        if self.params.contact_reinforcement:
+            state=self.contact_reinforcement.states.get(agent.agent_id)
+            if state is not None and state.state in ('support','joining'):
+                threshold=self.params.push_share_floor
+        return bool(quorum>=self.params.min_push_agents and -float(normal@nav.direction)>=threshold)
+
     def _phase_signals(self, agents: list[AgentState], contact_ready: list[bool]) -> PhaseSignals:
         informed = 0
         coverage = 0.0
@@ -962,6 +1302,12 @@ class DBACTController:
         progress = self.team_progress.get(object_id, 0.0) if object_id else 0.0
         active = sum(1 for d in self.diagnostics if d.push_side) if self.diagnostics else 0
         speed, stopping = self._estimated_stop(object_id)
+        quality = self.team_estimate_quality
+        if self.params.boundary_navigation == "vector_goal":
+            nav = self.team_navigation
+            progress = target - nav.remaining if nav is not None else 0.
+            speed = float(np.linalg.norm(nav.velocity)) if nav is not None else 0.
+            quality = "credible" if nav is not None else "unavailable"
         return PhaseSignals(
             agent_count=len(agents),
             informed_agents=informed,
@@ -972,7 +1318,8 @@ class DBACTController:
             target_distance=float(target),
             estimated_speed=speed,
             stopping_distance=stopping,
-            estimate_quality=self.team_estimate_quality,
+            estimate_quality=quality,
+            recovery_ready=sum(self._recovery_eligible.values()) if self.params.contact_recovery_fix else None,
         )
 
     def _estimated_stop(self, object_id: str | None) -> tuple[float, float]:
@@ -1014,6 +1361,8 @@ class DBACTController:
         if object_id is None:
             return True
         remaining = float(self.tasks[object_id].distance) - float(self.team_progress.get(object_id, 0.0))
+        if self.params.boundary_navigation == "vector_goal":
+            return self.team_navigation is None or self.team_navigation.remaining <= 0.
         # Open the ring once the estimate has reached the target. Doing it at the
         # reference ramp (0.18 m) was tried on C seed 5 and increased the
         # overshoot from 0.150 m to 0.161 m, so that earlier opening is not used.
@@ -1072,6 +1421,11 @@ class DBACTController:
 
         crowd = np.vstack([agent.position] + [agents[j].position for j in neighbor_indices])
         goal = self._goal_for(view) if self.params.task_mode == "transport" else None
+        if (self.params.boundary_navigation == "vector_goal"
+                and self.phase_monitor.reached(Phase.CONTACT_READY)):
+            nav = self._navigation.get(agent.agent_id)
+            if nav is not None:
+                goal = nav.direction
         shape = self._enclosure_geometry(agent.agent_id, view)
         density = BoundaryAwareDensity.from_view(
             view, shape, robot_positions=crowd, goal_direction=goal
@@ -1086,6 +1440,26 @@ class DBACTController:
                 cvt_centroid=cell.centroid,
             )
             self._trace.update(self._candidate_census(view, agent.position, crowd, goal, shape))
+
+        if self.params.contact_reinforcement:
+            dynamic=self._reinforcement_command(agent,view,[agents[j] for j in neighbor_indices],contact_ready[i],dt)
+            if dynamic is not None:
+                self.transport_loops[agent.agent_id].disarm()
+                return dynamic,"contact_reinforcement",cell.cell_mass,False,0.
+            if agent.agent_id in self._reinforcement_retain:
+                # Protect the patch from the tangential deployment objective.
+                # Original pressure, quorum, convoy and safety filter are retained.
+                bias,pushing,effort,normal=self._transport_command(i,agents,neighbor_indices,view,contact_ready,dt,shape)
+                return bias,"push" if pushing else "cage",cell.cell_mass,pushing,effort
+
+        if self.params.dynamic_contact_roles and self.params.task_mode == "transport":
+            dynamic = self._dynamic_contact_command(agent, view, crowd[1:], dt)
+            if dynamic is not None:
+                return dynamic, "contact_redeploy", cell.cell_mass, False, 0.0
+        elif self.params.confirmed_contact_handoff and self.params.task_mode == "transport":
+            dynamic = self._handoff_command(agent, view, [agents[j] for j in neighbor_indices], dt)
+            if dynamic is not None:
+                return dynamic, "contact_handoff", cell.cell_mass, False, 0.0
 
         if cell.cell_mass <= self.empty_cell_mass:
             # Non-empty map, empty cell: head for the nearest piece of cage ring
@@ -1120,9 +1494,101 @@ class DBACTController:
                 outward = float(np.dot(u, normal))
                 if outward > 0.0:
                     u = u - outward * normal
+            elif agent.agent_id in self._contact_allocations:
+                # A yielding robot must not retain a covert inward CVT press.
+                nearest = self._nearest_index(view, agent.position)
+                n = view.normals[nearest]
+                inward = float(u @ n)
+                if inward < 0.0:
+                    u = u - inward * n
             u = u + bias
         mode = "push" if push_side else "cage"
         return u, mode, cell.cell_mass, push_side, effort
+
+    def _reinforcement_command(self,agent,view,neighbours,ready,dt):
+        nav=self._navigation.get(agent.agent_id)
+        object_id=self._object_for(view,agent.position)
+        keep=view.object_ids==object_id
+        active=(nav is not None and self.phase_monitor.reached(Phase.CONTACT_READY)
+                and not self.phase_monitor.reached(Phase.HOLD) and not self._should_retract())
+        previous=next((d for d in self.diagnostics if d.agent_id==agent.agent_id),None)
+        inbox=[self._reinforcement_messages[n.agent_id] for n in neighbours if n.agent_id in self._reinforcement_messages]
+        command,retain,trace=self.contact_reinforcement.decide(
+            agent.agent_id,view.points[keep],view.normals[keep],agent.position,[n.position for n in neighbours],
+            nav.direction if nav else np.zeros(2),nav.velocity if nav else np.zeros(2),nav.remaining if nav else 0.,
+            inbox,timestamp=self._time,dt=dt,active=active,ready=ready,
+            previous_press=bool(previous is not None and previous.push_side and previous.effort>0.),
+            suspended=self.phase_monitor.push_suspended)
+        if retain:self._reinforcement_retain.add(agent.agent_id)
+        if self.trace_enabled:self._trace.update(trace)
+        return command
+
+    def _dynamic_contact_command(self, agent, view, neighbours, dt):
+        """Local experimental role decision; the common phase monitor is unchanged."""
+        self._contact_allocations.pop(agent.agent_id, None)
+        object_id = self._object_for(view, agent.position)
+        task = self.tasks.get(object_id)
+        goal = self.goal_directions.get(object_id)
+        if goal is None or task is None:
+            return None
+        local_map = self.maps[agent.agent_id]
+        velocity = local_map.object_velocity(object_id)
+        displacement = local_map.object_displacement(object_id)
+        lateral = displacement - float(displacement @ goal) * goal
+        direction = self._steered_direction(agent.agent_id, object_id, goal)
+        active = (self.phase_monitor.reached(Phase.CONTACT_READY)
+                  and not self.phase_monitor.reached(Phase.HOLD)
+                  and self._agent_progress(agent.agent_id, object_id) < task.distance
+                  and self._progress_quality.get(agent.agent_id, {}).get(object_id, "unavailable") != "unavailable")
+        keep = view.object_ids == object_id
+        roles, command, trace = self.contact_roles.decide(
+            agent.agent_id, view.points[keep], view.normals[keep], agent.position,
+            neighbours, direction, goal, lateral, velocity, dt, active=active)
+        if active and self.params.dynamic_contact_allocation:
+            self._contact_allocations[agent.agent_id] = float(roles.weights[0])
+        if self.trace_enabled:
+            self._trace.update(trace)
+        if command is not None:
+            self.transport_loops[agent.agent_id].disarm()
+            self._redeploy_target[agent.agent_id] = None
+        return command
+
+    def _handoff_command(self, agent, view, neighbours, dt):
+        """Own map/state and explicitly received previous-frame one-hop messages."""
+        self._contact_allocations.pop(agent.agent_id, None)
+        object_id = self._object_for(view, agent.position)
+        task, goal = self.tasks.get(object_id), self.goal_directions.get(object_id)
+        if task is None or goal is None:
+            return None
+        local_map = self.maps[agent.agent_id]
+        velocity = local_map.object_velocity(object_id)
+        displacement = local_map.object_displacement(object_id)
+        lateral = displacement - float(displacement @ goal)*goal
+        direction = self._steered_direction(agent.agent_id, object_id, goal)
+        progress = self._agent_progress(agent.agent_id, object_id)
+        quality = self._progress_quality.get(agent.agent_id, {}).get(object_id, "unavailable")
+        active = (self.phase_monitor.reached(Phase.CONTACT_READY)
+                  and not self.phase_monitor.reached(Phase.HOLD)
+                  and not self.phase_monitor.push_suspended and progress < task.distance
+                  and quality != "unavailable")
+        previous = next((d for d in self.diagnostics if d.agent_id == agent.agent_id), None)
+        inbox = [self._handoff_messages[n.agent_id] for n in neighbours
+                 if n.agent_id in self._handoff_messages]
+        keep = view.object_ids == object_id
+        allocation, command, trace = self.contact_handoff.decide(
+            agent.agent_id, view.points[keep], view.normals[keep], agent.position,
+            [n.position for n in neighbours], direction, goal, lateral, velocity, dt, self._time, inbox,
+            active=active, usable=quality == "credible",
+            previous_press=bool(previous is not None and previous.push_side and previous.effort > 0.),
+            reference_speed=self.transport_loops[agent.agent_id].reference_for(task.distance-progress))
+        if active and allocation is not None:
+            self._contact_allocations[agent.agent_id] = allocation
+        if self.trace_enabled:
+            self._trace.update(trace)
+        if command is not None:
+            self.transport_loops[agent.agent_id].disarm()
+            self._redeploy_target[agent.agent_id] = None
+        return command
 
     def _redeploy_step(
         self,
@@ -1327,14 +1793,24 @@ class DBACTController:
         relayed_velocity = self._transport_feedback.get(agent.agent_id, {}).get(object_id)
         velocity = (relayed_velocity if self.params.transport_feedback_guard and relayed_velocity is not None
                     else local_velocity)
+        vector_mode = self.params.boundary_navigation == "vector_goal"
+        nav = self._navigation.get(agent.agent_id) if vector_mode else None
+        if nav is not None:
+            velocity = nav.velocity
+            if self.trace_enabled:
+                self._trace.update(navigation_remaining=nav.remaining,
+                    navigation_voters="|".join(nav.voters), navigation_displacement=nav.displacement,
+                    navigation_error=nav.error, navigation_velocity=nav.velocity)
         loop = self.transport_loops[agent.agent_id]
         feedback_available = not self.params.transport_feedback_guard or (
             self.team_estimate_quality != "unavailable"
             and (relayed_velocity is not None
                  or self._progress_quality.get(agent.agent_id, {}).get(object_id, "unavailable") != "unavailable")
         )
+        if vector_mode:
+            feedback_available = nav is not None
         braking = self.phase_monitor.reached(Phase.BRAKE)
-        if ((braking and not self._brake_has_push_quorum())
+        if ((braking and not self._brake_has_push_quorum() and not vector_mode)
                 or self.phase_monitor.reached(Phase.HOLD)
                 or self.phase_monitor.push_suspended or not feedback_available):
             loop.disarm()
@@ -1356,6 +1832,18 @@ class DBACTController:
             return bias, False, 0.0, None
         normal = view.normals[nearest]
         measured = float(np.dot(agent.position - view.points[nearest], normal))
+        if self.params.contact_patch_distance:
+            from dbact.control.observed_geometry import patch_distance
+            distance, status, count = patch_distance(
+                self.last_scans.get(agent.agent_id, BoundaryView.empty()),
+                agent.position, view.points[nearest], normal, object_id,
+                2*self.params.voxel_size, self.params.residual_tolerance)
+            if self.trace_enabled:
+                self._trace.update(contact_map_gap=measured,
+                    contact_used_gap=measured if distance is None else distance,
+                    contact_distance_source=status, contact_patch_points=count)
+            if distance is not None:
+                measured = distance
         if measured > self.params.standoff_range:
             return bias, False, 0.0, None
         if not contact_ready[i]:
@@ -1367,10 +1855,22 @@ class DBACTController:
         # leaves the line and stays off it: measured, up to 0.98 m of cross-track
         # on a 0.56 m task.
         command = self._steered_direction(agent.agent_id, object_id, goal)
+        if nav is not None:
+            command = nav.direction
+        if self.trace_enabled:
+            self._trace.update(contact_selected_normal=normal, contact_desired_direction=command)
         ring = float(shape.offsets_for(normal[None, :], command)[0])
 
         progress = self._agent_progress(agent.agent_id, object_id)
         distance = task.distance if task is not None else float("inf")
+        if vector_mode:
+            progress = distance - nav.remaining if nav is not None else 0.
+            # A local tube entry can be revoked by a subsequent estimate before
+            # the common HOLD. It is not a truth-based restart after termination.
+            if not self.phase_monitor.reached(Phase.HOLD):
+                loop.holding = False
+            if nav is None or nav.remaining <= 0.:
+                loop.disarm()
         quorum = 1 + sum(1 for j in neighbor_indices if contact_ready[j])
         # Membership is decided against the *task* direction and the weight against
         # the *steered* one. Deciding both against the steered direction couples
@@ -1378,7 +1878,8 @@ class DBACTController:
         # membership test, robots at the edge of a three-robot arc drop out of the
         # push set entirely, and the correction costs more force than it buys aim.
         # Split like this, steering redistributes effort inside a stable arc.
-        alignment = float(np.dot(normal, goal))
+        alignment = push_alignment(normal, goal, command, self.params.boundary_navigation)
+        allocation = self._contact_allocations.get(agent.agent_id)
         if self.phase_monitor.push_suspended:
             loop.disarm()
         pushing = (
@@ -1387,7 +1888,9 @@ class DBACTController:
             and not self.phase_monitor.reached(Phase.HOLD)
             and quorum >= self.params.min_push_agents
             and self.phase_monitor.reached(Phase.CONTACT_READY)
-            and alignment <= -self.params.push_side_threshold
+            and (allocation > .05 if allocation is not None else
+                 alignment <= -self.params.push_side_threshold or
+                 (self.params.contact_reinforcement and agent.agent_id in self._reinforcement_retain))
             # A robot whose own estimate says the cargo has arrived stops being a
             # pusher and becomes part of the ring, which is what backs it out to
             # the hold standoff. Leaving it in the push set only zeroed its
@@ -1409,8 +1912,8 @@ class DBACTController:
                 target_distance=distance,
                 dt=dt,
                 blocked=self._blocked_along(agent.agent_id),
-                braking=braking and (self.params.brake_release_integral or not self._brake_has_push_quorum()),
-                allow_braking_integral=self.params.brake_release_integral and self._brake_has_push_quorum(),
+                braking=braking and (vector_mode or self.params.brake_release_integral or not self._brake_has_push_quorum()),
+                allow_braking_integral=vector_mode or (self.params.brake_release_integral and self._brake_has_push_quorum()),
             )
             # Press inward along the robot's own observed normal at the speed the
             # outer loop asks for. The depth it reaches is set by the object
@@ -1438,6 +1941,8 @@ class DBACTController:
             # against 0.39 m for the rotation. ``_lateral_weight`` is kept for the
             # ablation that shows it.
             share = float(np.clip(-float(np.dot(normal, command)), self.params.push_share_floor, 1.0))
+            if allocation is not None:
+                share = allocation
             speed = effort.effort * share
 
             # The barrier is a limit, not a setpoint. Left alone, the press drives
@@ -1570,6 +2075,8 @@ class DBACTController:
         stores demand it will have to unwind. The flag is read from the previous
         step's own QP result, which is local.
         """
+        if not self.params.transport_safety_feedback:
+            return False
         for diagnostic in self.diagnostics:
             if diagnostic.agent_id == agent_id:
                 return diagnostic.modification > 1e-3

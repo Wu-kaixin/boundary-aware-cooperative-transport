@@ -1,0 +1,46 @@
+{
+  "rows": [
+    {
+      "case": "circle_combined",
+      "endpoint_error_m": 0.6695758024925662,
+      "geometric_contacts": 4,
+      "task_direction": [
+        0.7989631037336741,
+        0.6013800452893782
+      ],
+      "normal_only_balanced_capacity_N": 22.78798321886694,
+      "friction_cone_balanced_capacity_N": 41.439797418814955,
+      "ground_breakaway_N": 24.235605000000003,
+      "input_sha256": "dc47ddbb2ba210677bae01f1630a105884c5e6040afff10570d8879697966580"
+    },
+    {
+      "case": "ellipse_parallel_combined",
+      "endpoint_error_m": 0.039751739199272225,
+      "geometric_contacts": 4,
+      "task_direction": [
+        0.9964021324705589,
+        -0.08475134458002846
+      ],
+      "normal_only_balanced_capacity_N": 13.169659474890235,
+      "friction_cone_balanced_capacity_N": 49.06668182257027,
+      "ground_breakaway_N": 24.235605000000003,
+      "input_sha256": "c711239fa12524eb68a327a2c3942f4336550d16a253df846a6acf82d0898856"
+    },
+    {
+      "case": "c_open_away_combined",
+      "endpoint_error_m": 0.1208171013892693,
+      "geometric_contacts": 1,
+      "task_direction": [
+        0.9999060473263689,
+        0.013707535159813525
+      ],
+      "normal_only_balanced_capacity_N": 0.0,
+      "friction_cone_balanced_capacity_N": 0.0,
+      "ground_breakaway_N": 24.23560500000001,
+      "input_sha256": "3721f3380acbe9dd1cbd0a234398d4d3d9df15d3496f36a3a8a40510cd98a894"
+    }
+  ],
+  "scope": "Post-hoc final-state diagnostic for all three combined-arm cases; same existing nominal pressure budget; no new physics.",
+  "limitations": "Target wrench has zero lateral force and torque. A zero static value does not prove eventual transport impossible. Friction cone is optimistic and does not establish slip realization. Geometry truth is evaluator only.",
+  "script_sha256": "260f18d92750b0dd59c78189958f8c4b030874d18e6d133d1a2f45f34236ee60"
+}

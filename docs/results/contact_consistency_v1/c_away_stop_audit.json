@@ -1,0 +1,386 @@
+{
+  "case": "c_open_away_consistent_aggregate",
+  "events": [
+    {
+      "frame": 0,
+      "seconds": 0.0,
+      "phase": "DISCOVER",
+      "truth_displacement_m": [
+        0.0,
+        0.0
+      ],
+      "controller_feedback": null,
+      "truth_goal_error_m": 1.2000000000000002,
+      "accepted_disagreement_m": null,
+      "accepted": []
+    },
+    {
+      "frame": 200,
+      "seconds": 10.000000000000007,
+      "phase": "TRANSPORT",
+      "truth_displacement_m": [
+        1.1039598015015448,
+        0.02111620610926135
+      ],
+      "controller_feedback": {
+        "displacement": [
+          0.5746448037809142,
+          0.00811786609880151
+        ],
+        "velocity": [
+          0.03783046193939657,
+          0.06433969589411997
+        ],
+        "error": [
+          0.6253551962190858,
+          -0.00811786609880151
+        ],
+        "remaining": 0.605407883855176,
+        "voters": [
+          "agent_01",
+          "agent_03",
+          "agent_05",
+          "agent_06",
+          "agent_13",
+          "agent_15"
+        ]
+      },
+      "truth_goal_error_m": 0.09833419490732362,
+      "accepted_disagreement_m": 0.27156890785316146,
+      "accepted": [
+        {
+          "agent": "agent_01",
+          "displacement": [
+            0.7838003155820769,
+            0.0007642037425205361
+          ],
+          "residual_rms": 0.005641502481482882,
+          "angle": 0.009712916144595352
+        },
+        {
+          "agent": "agent_03",
+          "displacement": [
+            0.6428021539177269,
+            0.013240145969138507
+          ],
+          "residual_rms": 0.005370490094546839,
+          "angle": -0.0005568217083857917
+        },
+        {
+          "agent": "agent_05",
+          "displacement": [
+            0.519752732455484,
+            0.006817693589811165
+          ],
+          "residual_rms": 0.004001208951553378,
+          "angle": 0.00946221936873815
+        },
+        {
+          "agent": "agent_06",
+          "displacement": [
+            0.30310217414273444,
+            0.011895696394254012
+          ],
+          "residual_rms": 0.0034153317799442413,
+          "angle": 0.016576525664762958
+        },
+        {
+          "agent": "agent_13",
+          "displacement": [
+            0.5148944632659673,
+            0.006605301935727063
+          ],
+          "residual_rms": 0.004001208951553431,
+          "angle": 0.009462219368738721
+        },
+        {
+          "agent": "agent_15",
+          "displacement": [
+            0.6295368751063444,
+            0.009418038607791855
+          ],
+          "residual_rms": 0.005378519259774509,
+          "angle": 0.0018386724728643045
+        }
+      ]
+    },
+    {
+      "frame": 400,
+      "seconds": 20.00000000000015,
+      "phase": "BRAKE",
+      "truth_displacement_m": [
+        2.1729507894664177,
+        0.0007714949581147934
+      ],
+      "controller_feedback": null,
+      "truth_goal_error_m": 0.9729510953423073,
+      "accepted_disagreement_m": null,
+      "accepted": []
+    },
+    {
+      "frame": 600,
+      "seconds": 30.00000000000029,
+      "phase": "BRAKE",
+      "truth_displacement_m": [
+        2.00016606617225,
+        -0.017882273858317532
+      ],
+      "controller_feedback": {
+        "displacement": [
+          1.0141198779959413,
+          -0.043774076621569014
+        ],
+        "velocity": [
+          0.07791751750012756,
+          0.004732762816531486
+        ],
+        "error": [
+          0.18588012200405868,
+          0.043774076621569014
+        ],
+        "remaining": 0.1709648908577562,
+        "voters": [
+          "agent_01"
+        ]
+      },
+      "truth_goal_error_m": 0.8003658595741807,
+      "accepted_disagreement_m": 0.0,
+      "accepted": [
+        {
+          "agent": "agent_01",
+          "displacement": [
+            1.0141198779959413,
+            -0.043774076621569014
+          ],
+          "residual_rms": 0.005360609848241247,
+          "angle": 0.013338084805250613
+        }
+      ]
+    },
+    {
+      "frame": 800,
+      "seconds": 39.999999999999865,
+      "phase": "BRAKE",
+      "truth_displacement_m": [
+        1.8277041857201661,
+        -0.021750314848835828
+      ],
+      "controller_feedback": {
+        "displacement": [
+          0.820176180951238,
+          0.033127879788187105
+        ],
+        "velocity": [
+          0.01704060030941474,
+          -0.018842054179355177
+        ],
+        "error": [
+          0.37982381904876195,
+          -0.033127879788187105
+        ],
+        "remaining": 0.36126577336032567,
+        "voters": [
+          "agent_07",
+          "agent_08",
+          "agent_10",
+          "agent_14"
+        ]
+      },
+      "truth_goal_error_m": 0.6280809032016815,
+      "accepted_disagreement_m": 1.0299608230990378,
+      "accepted": [
+        {
+          "agent": "agent_07",
+          "displacement": [
+            1.849668899844343,
+            0.0020789045244213942
+          ],
+          "residual_rms": 0.005413773017414631,
+          "angle": -0.02645750958827475
+        },
+        {
+          "agent": "agent_08",
+          "displacement": [
+            0.7915422297956023,
+            0.05542910404787782
+          ],
+          "residual_rms": 0.005054213005103637,
+          "angle": -0.022448977988327644
+        },
+        {
+          "agent": "agent_10",
+          "displacement": [
+            0.8444034983732343,
+            0.10888824642105092
+          ],
+          "residual_rms": 0.003868549832026765,
+          "angle": -0.0049337127315976885
+        },
+        {
+          "agent": "agent_14",
+          "displacement": [
+            0.7959488635292418,
+            0.010826655528496387
+          ],
+          "residual_rms": 0.00505421300510358,
+          "angle": -0.02244897798832752
+        }
+      ]
+    },
+    {
+      "frame": 890,
+      "seconds": 44.49999999999961,
+      "phase": "HOLD",
+      "truth_displacement_m": [
+        1.9946870596741881,
+        -0.02562626406372459
+      ],
+      "controller_feedback": {
+        "displacement": [
+          1.194373867415866,
+          -0.003351520465733528
+        ],
+        "velocity": [
+          0.004187792735735605,
+          -0.01103527787692622
+        ],
+        "error": [
+          0.005626132584134025,
+          0.003351520465733528
+        ],
+        "remaining": 0.0,
+        "voters": [
+          "agent_00",
+          "agent_03",
+          "agent_07"
+        ]
+      },
+      "truth_goal_error_m": 0.795100137230192,
+      "accepted_disagreement_m": 0.827204200962635,
+      "accepted": [
+        {
+          "agent": "agent_00",
+          "displacement": [
+            1.0082461390370594,
+            0.03565803059375501
+          ],
+          "residual_rms": 0.0076411741065584736,
+          "angle": -0.005960564449897621
+        },
+        {
+          "agent": "agent_03",
+          "displacement": [
+            1.194373867415866,
+            -0.00976143991880771
+          ],
+          "residual_rms": 0.008316611318595863,
+          "angle": -0.026284639668984686
+        },
+        {
+          "agent": "agent_07",
+          "displacement": [
+            2.021578068378501,
+            -0.003351520465733528
+          ],
+          "residual_rms": 0.0066012870683963545,
+          "angle": -0.026753768716108888
+        }
+      ]
+    },
+    {
+      "frame": 929,
+      "seconds": 46.4499999999995,
+      "phase": "HOLD",
+      "truth_displacement_m": [
+        1.9946870596741881,
+        -0.02562626406372459
+      ],
+      "controller_feedback": {
+        "displacement": [
+          1.1697992345871746,
+          -0.017889193566744153
+        ],
+        "velocity": [
+          0.008986095244501795,
+          -0.023974717037927334
+        ],
+        "error": [
+          0.030200765412825348,
+          0.017889193566744153
+        ],
+        "remaining": 0.015101417036765739,
+        "voters": [
+          "agent_01",
+          "agent_07",
+          "agent_08",
+          "agent_13",
+          "agent_14"
+        ]
+      },
+      "truth_goal_error_m": 0.795100137230192,
+      "accepted_disagreement_m": 0.849637220426235,
+      "accepted": [
+        {
+          "agent": "agent_01",
+          "displacement": [
+            1.1566268105177628,
+            -0.022514249921257636
+          ],
+          "residual_rms": 0.005118216641127919,
+          "angle": -0.011806145917596492
+        },
+        {
+          "agent": "agent_07",
+          "displacement": [
+            2.0193089114735514,
+            -0.0031679432794074983
+          ],
+          "residual_rms": 0.004806486599112068,
+          "angle": -0.025314200454701317
+        },
+        {
+          "agent": "agent_08",
+          "displacement": [
+            1.1783921796038228,
+            0.05021281980073444
+          ],
+          "residual_rms": 0.007294369448898521,
+          "angle": -0.023667389487798972
+        },
+        {
+          "agent": "agent_13",
+          "displacement": [
+            0.9788427921759033,
+            -0.01894006800537932
+          ],
+          "residual_rms": 0.0032554156759869355,
+          "angle": 0.00028601902650946106
+        },
+        {
+          "agent": "agent_14",
+          "displacement": [
+            1.1697992345871746,
+            -0.017889193566744153
+          ],
+          "residual_rms": 0.004679125212048878,
+          "angle": -0.0013956424559398773
+        }
+      ]
+    }
+  ],
+  "statuses": {
+    "not_enabled": 1232,
+    "bootstrap_only": 16,
+    "not_initialized": 1,
+    "accepted": 2850,
+    "motion_bound_exceeded": 1635,
+    "translation_unobservable": 9134,
+    "final_match_unobservable": 12
+  },
+  "max_true_speed_mps": 0.3802265301071454,
+  "configured_registration_speed_bound_mps": 0.25,
+  "frames_true_speed_exceeds_registration_bound": 84,
+  "final_yaw_change_rad": -0.02551596722934412,
+  "first_hold_frame": 890,
+  "scope": "Post-hoc log diagnosis, no new intervention. Low residual does not establish correct correspondence. Speed-bound exceedance is not causal proof; no bounds or stop gates changed."
+}

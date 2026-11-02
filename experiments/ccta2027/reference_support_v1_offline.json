@@ -1,0 +1,67 @@
+{
+  "kind": "offline_fixed_input_experiment_not_study_cli",
+  "mission": "2026-11-02-reference-support-v1",
+  "design": {
+    "hypothesis": "Noisy normals can give apparent full rank on nearly collinear matched boundary points. Withholding unsupported 2D reference votes can reduce wrong displacement/stop readouts; bootstrap and point-rotation bias are not corrected.",
+    "candidate": "One opt-in support gate after final point-to-plane fit and before committing the update; reject if minor-axis RMS of centered matched reference points <= 3*range_noise_std. Original initialization schedule, immutable template, least squares, trim, motion bounds, gain, pivot and stopping rules unchanged. Rejection never returns a stale vote.",
+    "parameter_selection": "Factor3 tied to the declared sensor noise scale; chosen once before candidate implementation/outcomes. Engineering conservatism, not a probabilistic or observability certificate; no parameter sweep.",
+    "budget": {
+      "offline_original_trajectories": 8,
+      "offline_arms": 2,
+      "offline_wall_seconds": 1800,
+      "closed_loop_episodes_if_offline_pass": 16,
+      "closed_loop_conditions": 8,
+      "closed_loop_arms": 2,
+      "physical_seconds_per_episode": 600,
+      "closed_loop_wall_seconds": 7200,
+      "workers": 4,
+      "internal_threads": 1
+    },
+    "offline_gate": {
+      "availability_relative_to_original": 0.9,
+      "far_skew_relative_mae_max": 0.75,
+      "other_case_mae_increase_max_m": 0.01,
+      "wrong_hold": "At original far-skew first HOLD, candidate has a fresh estimate with estimated goal error > original .02m position band; missing data does not count as correction.",
+      "stop_if_fail": "No new physical episodes and no tuning. Preserve failed candidate as opt-in research option."
+    },
+    "closed_loop_adoption": {
+      "safe_completed": "Rescue original far-skew failure and retain all seven old completions.",
+      "hard_safety": "No violations under original evaluator.",
+      "g500": "At least old6/8.",
+      "wrong_hold": "None; original evaluator .12m task tolerance.",
+      "limitations": "Development only: same eight already-consumed conditions, no independent validation or algorithm-superiority claim."
+    },
+    "inputs": {
+      "protocol": "experiments\\ccta2027\\reference_origin_v1.json",
+      "sha256": "8d726137d5c85aeea54ff1c4de7a053c10e756dd94d448159852aee783683f8e",
+      "diagnosis_sha256": "3c41087697dcbee296ce3f0c81056d8ac802b23a2be89ad9a5fb847035d297c8"
+    }
+  },
+  "design_sha256": "7d3000bfc87deb64f8adf040cfd03502a498f4f7c0e5b86c4cde99bbe4a06de0",
+  "source_sha256": "62625549e37ca6ad5ebe59e4845a713a881db9f5d6e228ccf5bcbc5d2e167c35",
+  "implementation_sha256": {
+    "src/dbact/control/observed_reference.py": "2c84a62cdb90ac76d3d422c08f775bab2fcfb1912c19ba4e022f7778d2bdb3f1",
+    "src/dbact/control/controller.py": "f001e6e6436fc83ab4998c2976cae51f3775f5b7cec808692da50d726fb9bded"
+  },
+  "runner_sha256": "6677b0a91eb313cef21df4d25cea05a024993b62855863b6576e0e035bd43d38",
+  "input_receipts": {
+    "far_c_open_away_pos0_reference": "ded1940566c30ec323eec9819fa32cb44f21e536d077ca164d7d46ef5d3af712",
+    "far_skew_box_s0_r0_pos0_reference": "4d34054a4ae6a53dbdc290af03ffb3ce859833c5b46bf61989c0e7622a110721",
+    "near_circle_reference": "466a2491c30e78f73307619906f04271ecf56c6dfe40b79e5c768676d55a2b19",
+    "near_ellipse_parallel_reference": "afa0e366b6d937a2b47d8aab4eab1a9b1f3b177f5e26f630dc9bb9544f04f357",
+    "near_rectangle_parallel_reference": "c5b21cb17540a57e4d2a32bed8ff598db701aed2606872ea4b1fec6376bb223f",
+    "near_l_reference_reference": "0ed03aa07353a75045563896d82e7b82bbefe00fa8480e03381ce54e3071b3f1",
+    "near_ellipse_perpendicular_reference": "228200d9db780e491e91306383609a7d78e93a40b7eb4101532fbca3fff9ea19",
+    "near_c_open_away_reference": "4f474c20876a52b281577c90d4645c076963bf54119778adb4f397a9cf1b2402"
+  },
+  "conditions": [
+    "far_c_open_away_pos0",
+    "far_skew_box_s0_r0_pos0",
+    "near_circle",
+    "near_ellipse_parallel",
+    "near_rectangle_parallel",
+    "near_l_reference",
+    "near_ellipse_perpendicular",
+    "near_c_open_away"
+  ]
+}

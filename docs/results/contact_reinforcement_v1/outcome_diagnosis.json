@@ -1,0 +1,148 @@
+{
+  "status": "POST_HOC_DESCRIPTIVE_NOT_A_NEW_COMPARISON",
+  "episodes": [
+    {
+      "condition": "circle",
+      "arm": "reference",
+      "selected_displacement_MAE_m": 0.20029279001430875,
+      "selected_displacement_max_error_m": 0.4212630740936041,
+      "first_BRAKE_time_s": null,
+      "first_BRAKE_physical_goal_error_m": null,
+      "brake_reason": null,
+      "endpoint_error_m": 0.8335804808250706
+    },
+    {
+      "condition": "circle",
+      "arm": "recovery",
+      "selected_displacement_MAE_m": 0.20029279001430875,
+      "selected_displacement_max_error_m": 0.4212630740936041,
+      "first_BRAKE_time_s": null,
+      "first_BRAKE_physical_goal_error_m": null,
+      "brake_reason": null,
+      "endpoint_error_m": 0.8335804808250706
+    },
+    {
+      "condition": "circle",
+      "arm": "reinforcement",
+      "selected_displacement_MAE_m": 0.25034175624508304,
+      "selected_displacement_max_error_m": 0.5194342445380858,
+      "first_BRAKE_time_s": 284.9000000000305,
+      "first_BRAKE_physical_goal_error_m": 0.7426617238029848,
+      "brake_reason": "estimated_stop",
+      "endpoint_error_m": 0.6145884063123644
+    },
+    {
+      "condition": "ellipse_parallel",
+      "arm": "reference",
+      "selected_displacement_MAE_m": 0.014221134868687256,
+      "selected_displacement_max_error_m": 0.06000082259858969,
+      "first_BRAKE_time_s": 505.95000000008076,
+      "first_BRAKE_physical_goal_error_m": 0.4278928836659985,
+      "brake_reason": "estimated_stop",
+      "endpoint_error_m": 0.34563176954948255
+    },
+    {
+      "condition": "ellipse_parallel",
+      "arm": "recovery",
+      "selected_displacement_MAE_m": 0.014221134868687256,
+      "selected_displacement_max_error_m": 0.06000082259858969,
+      "first_BRAKE_time_s": 505.95000000008076,
+      "first_BRAKE_physical_goal_error_m": 0.4278928836659985,
+      "brake_reason": "estimated_stop",
+      "endpoint_error_m": 0.34563176954948255
+    },
+    {
+      "condition": "ellipse_parallel",
+      "arm": "reinforcement",
+      "selected_displacement_MAE_m": 0.014156392982631114,
+      "selected_displacement_max_error_m": 0.09486538171803491,
+      "first_BRAKE_time_s": null,
+      "first_BRAKE_physical_goal_error_m": null,
+      "brake_reason": null,
+      "endpoint_error_m": 0.721608478520152
+    },
+    {
+      "condition": "c_open_away",
+      "arm": "reference",
+      "selected_displacement_MAE_m": 0.02134464579763364,
+      "selected_displacement_max_error_m": 0.0319018072321451,
+      "first_BRAKE_time_s": 17.90000000000012,
+      "first_BRAKE_physical_goal_error_m": 1.0697668706493473,
+      "brake_reason": "contact_recovery_failed",
+      "endpoint_error_m": 0.7838538720812278
+    },
+    {
+      "condition": "c_open_away",
+      "arm": "recovery",
+      "selected_displacement_MAE_m": 0.02134464579763364,
+      "selected_displacement_max_error_m": 0.0319018072321451,
+      "first_BRAKE_time_s": 17.90000000000012,
+      "first_BRAKE_physical_goal_error_m": 1.0697668706493473,
+      "brake_reason": "contact_recovery_failed",
+      "endpoint_error_m": 0.7838538720812278
+    },
+    {
+      "condition": "c_open_away",
+      "arm": "reinforcement",
+      "selected_displacement_MAE_m": 0.012887807994586343,
+      "selected_displacement_max_error_m": 0.03462963344617808,
+      "first_BRAKE_time_s": 63.399999999998535,
+      "first_BRAKE_physical_goal_error_m": 0.9924094118981948,
+      "brake_reason": "contact_recovery_failed",
+      "endpoint_error_m": 0.8138100353127689
+    }
+  ],
+  "circle_first_BRAKE": {
+    "frame": 5699,
+    "guards": {
+      "agent_count": 16,
+      "informed_agents": 16,
+      "map_coverage": 0.9166666666666666,
+      "contact_ready": 9,
+      "transport_active": 4,
+      "progress": 0.7935880942659581,
+      "target_distance": 1.2,
+      "estimated_speed": 0.010703754361418367,
+      "stopping_distance": 0.18333333333333335,
+      "estimate_quality": "credible",
+      "recovery_ready": 6
+    },
+    "navigation": {
+      "displacement": [
+        0.8937952576774846,
+        -0.2967587726267571
+      ],
+      "velocity": [
+        0.01052121269717328,
+        0.001968359929083721
+      ],
+      "error": [
+        0.3062047423225154,
+        0.2967587726267571
+      ],
+      "remaining": 0.4064119057340418,
+      "voters": [
+        "agent_03",
+        "agent_04",
+        "agent_05",
+        "agent_06",
+        "agent_07",
+        "agent_08",
+        "agent_09",
+        "agent_11",
+        "agent_13",
+        "agent_14",
+        "agent_15"
+      ]
+    }
+  },
+  "limits": "MAE uses each arm's own trajectory and cannot isolate estimator accuracy on common inputs. Phase BRAKE is not HOLD or task completion. Time association does not prove role switching caused failure.",
+  "provenance": {
+    "script_sha256": "71941dfe65bb689aa8851a7531c97bb7b18aec97e580acf2b2da27e43d83c407",
+    "inputs": {
+      "artifacts/research/2026-11-01-contact-reinforcement-v1/analysis/analysis.json": "43af0beb79784de02a4ba59ffb84b788282ac25c4a37be1d2fa8c94e645a9914",
+      "artifacts/research/2026-11-01-contact-reinforcement-v1/analysis/timeseries.json": "883c6bb7e5f57140a43c30dd16c79fc380cfa69459a72de5c494e4c13943dc3d",
+      "runs/research/2026-11-01-contact-reinforcement-v1/run/circle_reinforcement/paired_metrics.json": "2b840c138293c39255c33d3c6a2760b00394f8bf158dee6d74043ccc92fc7e08"
+    }
+  }
+}

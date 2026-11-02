@@ -1,0 +1,197 @@
+[
+  {
+    "video": "multishape_overview.mp4",
+    "cases": [
+      "circle_boundary_cvt",
+      "ellipse_parallel_boundary_cvt",
+      "rectangle_parallel_boundary_cvt",
+      "l_reference_boundary_cvt",
+      "c_open_toward_boundary_cvt"
+    ],
+    "duration_physical_s": 26.600000000000243,
+    "rendered_frames": 108,
+    "fps": 10,
+    "stride": 5,
+    "nominal_playback_factor": 2.5,
+    "replay_sha256": {
+      "circle_boundary_cvt": "95a14f5b9ed9e3154c6b6d79bb482e299d9fa197fcf9b749ca507e99e8fba6f5",
+      "ellipse_parallel_boundary_cvt": "ebf2ad11c31782595110accee1ed234bd70088e2de54c6368c716be38c825cb4",
+      "rectangle_parallel_boundary_cvt": "25c0a9e423087f0ebfb7fe18adf714293518a9635be1c20c0a93b53fd03dc391",
+      "l_reference_boundary_cvt": "389232000dc4e68c5971f37d4949ad0ac4d6bc8b99bc62cd97257815d10327f9",
+      "c_open_toward_boundary_cvt": "4576abcbb5bbaadfd9bf7e8ed3c4b64536e0c086383058a5b1679be9c451a2fe"
+    },
+    "output_hash_recorded_after_decode_validation": true,
+    "video_sha256": "d9787207b3abdd63bcf7612921f1e711fc2556159ec7eefe8a116bc0baefc23b"
+  },
+  {
+    "video": "circle.mp4",
+    "cases": [
+      "circle_boundary_cvt",
+      "circle_nearest_observed_target",
+      "circle_local_spacing"
+    ],
+    "duration_physical_s": 13.850000000000062,
+    "rendered_frames": 57,
+    "fps": 10,
+    "stride": 5,
+    "nominal_playback_factor": 2.5,
+    "video_sha256": "e1d237820ee313e82a350f195fd1eae9d3b75b38db1f6190aa3805e8da628765",
+    "replay_sha256": {
+      "circle_boundary_cvt": "95a14f5b9ed9e3154c6b6d79bb482e299d9fa197fcf9b749ca507e99e8fba6f5",
+      "circle_nearest_observed_target": "4eb6c54e1974a5d08d5c24604e2da3e31a73cd49b6b03b22764c60f00e1c03dd",
+      "circle_local_spacing": "992a3e387da431b3e808c15971b57e170402ff49cc541e27685a983dfc5922d3"
+    }
+  },
+  {
+    "video": "ellipse_parallel.mp4",
+    "cases": [
+      "ellipse_parallel_boundary_cvt",
+      "ellipse_parallel_nearest_observed_target",
+      "ellipse_parallel_local_spacing"
+    ],
+    "duration_physical_s": 149.99999999999986,
+    "rendered_frames": 601,
+    "fps": 10,
+    "stride": 5,
+    "nominal_playback_factor": 2.5,
+    "video_sha256": "56750aa13ef8726370046b679989a3095166cb020498102cca7145790af5afdf",
+    "replay_sha256": {
+      "ellipse_parallel_boundary_cvt": "ebf2ad11c31782595110accee1ed234bd70088e2de54c6368c716be38c825cb4",
+      "ellipse_parallel_nearest_observed_target": "204106383fff7d6be18b5420b8613faca253bbd845c82cad0260d9b072972cbf",
+      "ellipse_parallel_local_spacing": "22e9bf320406250aba6b8024419584a64696d7c1d2ffcde41be77b6204b032e8"
+    }
+  },
+  {
+    "video": "ellipse_perpendicular.mp4",
+    "cases": [
+      "ellipse_perpendicular_boundary_cvt",
+      "ellipse_perpendicular_nearest_observed_target",
+      "ellipse_perpendicular_local_spacing"
+    ],
+    "duration_physical_s": 13.400000000000055,
+    "rendered_frames": 55,
+    "fps": 10,
+    "stride": 5,
+    "nominal_playback_factor": 2.5,
+    "video_sha256": "0da7b72d022ea0431559ec5509bd2e941777bd2a9588eab0189d8272f2eb2fdc",
+    "replay_sha256": {
+      "ellipse_perpendicular_boundary_cvt": "ce7d41a78c79025a41a58df654ae32190ae57ba6bd400c5aa08b4762976be120",
+      "ellipse_perpendicular_nearest_observed_target": "4b0162f2513d37b7c53f0292e07645c5892aa9631ff94e14b7516ff6badf5b5c",
+      "ellipse_perpendicular_local_spacing": "e80768fb40aebcc252d7a119fe28f6ff03e96adece6e8f371bc618298906a7f8"
+    }
+  },
+  {
+    "video": "rectangle_parallel.mp4",
+    "cases": [
+      "rectangle_parallel_boundary_cvt",
+      "rectangle_parallel_nearest_observed_target",
+      "rectangle_parallel_local_spacing"
+    ],
+    "duration_physical_s": 30.150000000000293,
+    "rendered_frames": 122,
+    "fps": 10,
+    "stride": 5,
+    "nominal_playback_factor": 2.5,
+    "video_sha256": "6786d1ef6df30321ae0c2545074f9e3a7dd7419e445e7f001c69ebf11c48b4c9",
+    "replay_sha256": {
+      "rectangle_parallel_boundary_cvt": "25c0a9e423087f0ebfb7fe18adf714293518a9635be1c20c0a93b53fd03dc391",
+      "rectangle_parallel_nearest_observed_target": "d0d5ca4b4cc928cc75f185a6010ed0908e780098693c565640fc71be399401b9",
+      "rectangle_parallel_local_spacing": "e82706aacc5924ed8867dbaafaa3f42378183a2a84a6635117972231e301e893"
+    }
+  },
+  {
+    "video": "rectangle_perpendicular.mp4",
+    "cases": [
+      "rectangle_perpendicular_boundary_cvt",
+      "rectangle_perpendicular_nearest_observed_target",
+      "rectangle_perpendicular_local_spacing"
+    ],
+    "duration_physical_s": 23.350000000000197,
+    "rendered_frames": 95,
+    "fps": 10,
+    "stride": 5,
+    "nominal_playback_factor": 2.5,
+    "video_sha256": "40a067cfc0897e82fa26e1b6d8fb12aeb6a306244a6570e1d82c72b33055fff0",
+    "replay_sha256": {
+      "rectangle_perpendicular_boundary_cvt": "390fa17ea983bbb0cf06ca8cac2a7b033965fb9e414d2e332338db4ad52b2718",
+      "rectangle_perpendicular_nearest_observed_target": "ccde5aed9d16e940f591ae3eccbab0e45387eed49909d4b4cb5c9b4aafb4d028",
+      "rectangle_perpendicular_local_spacing": "782ceefe29313b19bc7489888ce836692ffed60e8077719c54ad4ee9eb0b9ef8"
+    }
+  },
+  {
+    "video": "l_reference.mp4",
+    "cases": [
+      "l_reference_boundary_cvt",
+      "l_reference_nearest_observed_target",
+      "l_reference_local_spacing"
+    ],
+    "duration_physical_s": 29.400000000000283,
+    "rendered_frames": 119,
+    "fps": 10,
+    "stride": 5,
+    "nominal_playback_factor": 2.5,
+    "video_sha256": "e0868d72b25021e2c342df3be9c54a4aea28c4e806b96b23173539b256668203",
+    "replay_sha256": {
+      "l_reference_boundary_cvt": "389232000dc4e68c5971f37d4949ad0ac4d6bc8b99bc62cd97257815d10327f9",
+      "l_reference_nearest_observed_target": "b348248a098d4a2aa4440d1fa818bf0774d8c414184cda2e3106abf3f950c015",
+      "l_reference_local_spacing": "d608d1de20bd46e8135863eaa7ef3d3308ae0a71401ad78a2244b4c7f28b66af"
+    }
+  },
+  {
+    "video": "l_rotated.mp4",
+    "cases": [
+      "l_rotated_boundary_cvt",
+      "l_rotated_nearest_observed_target",
+      "l_rotated_local_spacing"
+    ],
+    "duration_physical_s": 149.99999999999986,
+    "rendered_frames": 601,
+    "fps": 10,
+    "stride": 5,
+    "nominal_playback_factor": 2.5,
+    "video_sha256": "153c7656d2fb4beb20d0b601a096c88354fdd540043738f1fc84c3487911cf34",
+    "replay_sha256": {
+      "l_rotated_boundary_cvt": "f514706f629ca521812ce9108727c35ddbd316e34fc67c3f9f00b6cc4e532bce",
+      "l_rotated_nearest_observed_target": "0483dfe8ef90001671e4adc6ace1c898e4e4d959a09fa75500a957d186483dec",
+      "l_rotated_local_spacing": "5b9db162d28f516c6434d678fac6df34cedb889b61dd7c09cfe1fda85d5d4cb7"
+    }
+  },
+  {
+    "video": "c_open_toward.mp4",
+    "cases": [
+      "c_open_toward_boundary_cvt",
+      "c_open_toward_nearest_observed_target",
+      "c_open_toward_local_spacing"
+    ],
+    "duration_physical_s": 17.35000000000011,
+    "rendered_frames": 71,
+    "fps": 10,
+    "stride": 5,
+    "nominal_playback_factor": 2.5,
+    "video_sha256": "989a5d6f74ac315e7db02989faa36d2aa28e582ade82113a80d348de3b54f6e7",
+    "replay_sha256": {
+      "c_open_toward_boundary_cvt": "4576abcbb5bbaadfd9bf7e8ed3c4b64536e0c086383058a5b1679be9c451a2fe",
+      "c_open_toward_nearest_observed_target": "0c12d5564dc0ee0d6dead867339cd6cd9d126fe68d9661caa9e94944d3a32dfa",
+      "c_open_toward_local_spacing": "65d530fccfad0f48866e4cc79b3fe03581d5e76cd1fb4a1cda6397c25b78156d"
+    }
+  },
+  {
+    "video": "c_open_away.mp4",
+    "cases": [
+      "c_open_away_boundary_cvt",
+      "c_open_away_nearest_observed_target",
+      "c_open_away_local_spacing"
+    ],
+    "duration_physical_s": 149.99999999999986,
+    "rendered_frames": 601,
+    "fps": 10,
+    "stride": 5,
+    "nominal_playback_factor": 2.5,
+    "video_sha256": "af39b82b251dd7f6a08486e9f24a9e7ecd1ed413ad896f8fd3e9d11ee5431570",
+    "replay_sha256": {
+      "c_open_away_boundary_cvt": "5a987388dcf565fe349b28c351382c4c6f6185888534ec915ce1febe0ca64159",
+      "c_open_away_nearest_observed_target": "53e55400a803534e0f721f39282d13611f74c91b2757bcfd17946eb523851854",
+      "c_open_away_local_spacing": "fa2c0721115352392277880657830ce25a616da1ff2706ad56f4ca64f768bd3b"
+    }
+  }
+]

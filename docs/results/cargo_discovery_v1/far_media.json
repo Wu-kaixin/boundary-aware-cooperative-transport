@@ -1,0 +1,37 @@
+{
+  "stage": "far",
+  "cases": [
+    "circle_pos0_unknown_location",
+    "circle_pos0_initial_location_hint",
+    "skew_box_s0_r0_pos0_unknown_location",
+    "skew_box_s0_r0_pos0_initial_location_hint",
+    "c_open_away_pos0_unknown_location",
+    "c_open_away_pos0_initial_location_hint"
+  ],
+  "selection": "Fixed first skew geometry / position-0 three-geometry pairs; outcomes not used for selection",
+  "simulation_dt_s": 0.05,
+  "simulation_hz": 20.0,
+  "physical_sample_interval_s": 1.0,
+  "playback_fps": 10.0,
+  "nominal_speedup": 10.0,
+  "rendered_frames": 567,
+  "render_wall_seconds": 377.67947060000733,
+  "render_frames_per_second": 1.5012730215365564,
+  "alignment": "Shared physical time, latest real state; terminal pane frozen and labelled ENDED with true terminal time. Estimate is previous control readout, not truth.",
+  "input_sha256": {
+    "experiments/ccta2027/cargo_far_v1.json": "c8130b9613dc6c10a1dacbff489535e75e83f7508a8b97967d325c1d86affb58",
+    "artifacts/research/2026-11-02-cargo-discovery-v1/far-analysis/analysis.json": "70e1218621cab652461e8291931b9d3a8b8a78cbc804a58c9c723b8b2a321f6e",
+    "artifacts/research/2026-11-02-cargo-discovery-v1/far-analysis/plot_data.json": "95d38812e389f12df452390f66f467dca01d7be9e1a0e895d051095ebdb589cc",
+    "runs/research/2026-11-02-cargo-discovery-v1/far/circle_pos0_unknown_location/replay.npz": "439f7a19b844635a13348a99f4862e5899c9d1d85a85b5fbe47e4f60d9325c54",
+    "runs/research/2026-11-02-cargo-discovery-v1/far/circle_pos0_initial_location_hint/replay.npz": "3fd54406fd7f005d25d8e0e6e6499503dfb9042da12bc1bc3d15551ccaeb9621",
+    "runs/research/2026-11-02-cargo-discovery-v1/far/skew_box_s0_r0_pos0_unknown_location/replay.npz": "ace81a0162349f68d9c1d58f68dc47e2d09252c32d0326ae2bfa1fc2ded6fc97",
+    "runs/research/2026-11-02-cargo-discovery-v1/far/skew_box_s0_r0_pos0_initial_location_hint/replay.npz": "d927543ece0fcddad54b16acc6364ffc9219e17da48292d9d130b65f8e48c570",
+    "runs/research/2026-11-02-cargo-discovery-v1/far/c_open_away_pos0_unknown_location/replay.npz": "62f19eaaa211bc9ef14d4c5ecb1a8d5e66b880f2b9f587389f7d68e0167e7959",
+    "runs/research/2026-11-02-cargo-discovery-v1/far/c_open_away_pos0_initial_location_hint/replay.npz": "606b562d6e4bd95035950e12a99a79a4e109ec426562bf5b0e3deffa69d9b841"
+  },
+  "source_sha256": "a723f465052b66dfb59ef80b8cc20bcae2770b4dd22bae3547e4e4de3231737d",
+  "output_sha256": {
+    "artifacts/research/2026-11-02-cargo-discovery-v1/media/far_synchronized.mp4": "d71f4bf2447268ebc60fad6116132a7dac2b499bd8560cae079c2ce49027dd8c",
+    "artifacts/research/2026-11-02-cargo-discovery-v1/media/far_preview.gif": "5a9b76182c237c29f9944bc3fbb7d493fb9bd550e19c0b7b788440b5a150a179"
+  }
+}

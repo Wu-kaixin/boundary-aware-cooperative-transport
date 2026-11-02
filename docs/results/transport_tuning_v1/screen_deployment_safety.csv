@@ -1,0 +1,49 @@
+case_id,condition,method,arm,ready,safe_ready,ready_physical_seconds,min_separation_m,min_substep_signed_clearance_m,max_substep_penetration_m,barrier_scalings_until_ready,solver_fallbacks_until_ready,solver_infeasible_until_ready,whole_run_scalings_by_phase
+near_circle_boundary_cvt_reference,near_circle,boundary_cvt,reference,True,True,6.050000000000001,0.317290711404592,0.08326710941829256,0.046732890581707445,0,0,0,{}
+near_circle_boundary_cvt_slower_reference,near_circle,boundary_cvt,slower_reference,True,True,6.050000000000001,0.317290711404592,0.08326710941829256,0.046732890581707445,0,0,0,{}
+near_circle_boundary_cvt_lower_effort,near_circle,boundary_cvt,lower_effort,True,True,6.050000000000001,0.317290711404592,0.08326710941829256,0.046732890581707445,0,0,0,{}
+near_circle_boundary_cvt_slower_deployment,near_circle,boundary_cvt,slower_deployment,True,True,7.75,0.28704965604356725,0.08664555029212023,0.04335444970787977,0,0,0,{}
+near_circle_boundary_cvt_tighter_registration,near_circle,boundary_cvt,tighter_registration,True,True,6.050000000000001,0.31740996427495766,0.08199791820108701,0.04800208179891299,0,0,0,{}
+near_circle_boundary_cvt_wider_motion_prior,near_circle,boundary_cvt,wider_motion_prior,True,True,6.050000000000001,0.3250537197427789,0.08472944838159308,0.04527055161840693,0,0,0,{}
+near_ellipse_parallel_boundary_cvt_reference,near_ellipse_parallel,boundary_cvt,reference,True,True,4.75,0.3639334228921131,0.07834247828042376,0.051657521719576244,0,0,0,{}
+near_ellipse_parallel_boundary_cvt_slower_reference,near_ellipse_parallel,boundary_cvt,slower_reference,True,True,4.75,0.3639334228921131,0.07834247828042376,0.051657521719576244,0,0,0,{}
+near_ellipse_parallel_boundary_cvt_lower_effort,near_ellipse_parallel,boundary_cvt,lower_effort,True,True,4.75,0.3639334228921131,0.07834247828042376,0.051657521719576244,0,0,0,{}
+near_ellipse_parallel_boundary_cvt_slower_deployment,near_ellipse_parallel,boundary_cvt,slower_deployment,True,True,5.8500000000000005,0.2922162732841027,0.08535875950146292,0.044641240498537085,0,0,0,{}
+near_ellipse_parallel_boundary_cvt_tighter_registration,near_ellipse_parallel,boundary_cvt,tighter_registration,True,True,4.800000000000001,0.3635044189125964,0.08127458334513768,0.048725416654862325,0,0,0,{}
+near_ellipse_parallel_boundary_cvt_wider_motion_prior,near_ellipse_parallel,boundary_cvt,wider_motion_prior,True,True,4.75,0.3671990998795038,0.08145633639201809,0.048543663607981916,0,0,0,{}
+near_rectangle_parallel_boundary_cvt_reference,near_rectangle_parallel,boundary_cvt,reference,True,True,5.0,0.3273255768346249,0.07847296870193413,0.05152703129806588,0,0,0,{}
+near_rectangle_parallel_boundary_cvt_slower_reference,near_rectangle_parallel,boundary_cvt,slower_reference,True,True,5.0,0.3273255768346249,0.07847296870193413,0.05152703129806588,0,0,0,{'TRANSPORT': 1}
+near_rectangle_parallel_boundary_cvt_lower_effort,near_rectangle_parallel,boundary_cvt,lower_effort,True,True,5.0,0.3273255768346249,0.07847296870193413,0.05152703129806588,0,0,0,{}
+near_rectangle_parallel_boundary_cvt_slower_deployment,near_rectangle_parallel,boundary_cvt,slower_deployment,True,True,6.15,0.30172008557694696,0.08910749696579412,0.040892503034205885,0,0,0,{}
+near_rectangle_parallel_boundary_cvt_tighter_registration,near_rectangle_parallel,boundary_cvt,tighter_registration,True,True,5.050000000000001,0.31760079638980665,0.07837011454728396,0.051629885452716046,0,0,0,{}
+near_rectangle_parallel_boundary_cvt_wider_motion_prior,near_rectangle_parallel,boundary_cvt,wider_motion_prior,True,True,5.1000000000000005,0.32687957508864407,0.07898410146220514,0.05101589853779487,0,0,0,{}
+near_c_open_away_boundary_cvt_reference,near_c_open_away,boundary_cvt,reference,True,True,3.85,0.34615569638004623,0.08850787726168317,0.04149212273831683,0,0,0,"{'CONTACT_READY': 1, 'BRAKE': 2}"
+near_c_open_away_boundary_cvt_slower_reference,near_c_open_away,boundary_cvt,slower_reference,True,True,3.85,0.34615569638004623,0.08850787726168317,0.04149212273831683,0,0,0,{'BRAKE': 8}
+near_c_open_away_boundary_cvt_lower_effort,near_c_open_away,boundary_cvt,lower_effort,True,True,3.85,0.34615569638004623,0.08850787726168317,0.04149212273831683,0,0,0,{'CONTACT_READY': 1}
+near_c_open_away_boundary_cvt_slower_deployment,near_c_open_away,boundary_cvt,slower_deployment,True,True,4.8500000000000005,0.30634405934931974,0.08769505554468182,0.04230494445531818,0,0,0,{}
+near_c_open_away_boundary_cvt_tighter_registration,near_c_open_away,boundary_cvt,tighter_registration,True,True,3.85,0.34615512269756404,0.0879868073678729,0.042013192632127105,0,0,0,{'BRAKE': 31}
+near_c_open_away_boundary_cvt_wider_motion_prior,near_c_open_away,boundary_cvt,wider_motion_prior,True,True,3.85,0.3339520875452115,0.08756328415762171,0.04243671584237829,0,0,0,{}
+near_u_tray_s0_r90_boundary_cvt_reference,near_u_tray_s0_r90,boundary_cvt,reference,True,True,4.55,0.38525151575803473,0.07033345885183549,0.05966654114816451,0,0,0,{}
+near_u_tray_s0_r90_boundary_cvt_slower_reference,near_u_tray_s0_r90,boundary_cvt,slower_reference,True,True,4.55,0.38525151575803473,0.07033345885183549,0.05966654114816451,0,0,0,{}
+near_u_tray_s0_r90_boundary_cvt_lower_effort,near_u_tray_s0_r90,boundary_cvt,lower_effort,True,True,4.55,0.38525151575803473,0.07033345885183549,0.05966654114816451,0,0,0,{}
+near_u_tray_s0_r90_boundary_cvt_slower_deployment,near_u_tray_s0_r90,boundary_cvt,slower_deployment,True,True,5.550000000000001,0.3592224907691369,0.07415411441612611,0.05584588558387389,0,0,0,{}
+near_u_tray_s0_r90_boundary_cvt_tighter_registration,near_u_tray_s0_r90,boundary_cvt,tighter_registration,True,True,4.45,0.3676055025871571,0.0698148050601135,0.0601851949398865,0,0,0,{}
+near_u_tray_s0_r90_boundary_cvt_wider_motion_prior,near_u_tray_s0_r90,boundary_cvt,wider_motion_prior,True,True,4.55,0.2870544213802589,0.07039940160585155,0.059600598394148455,0,0,0,{}
+near_t_load_s0_r90_boundary_cvt_reference,near_t_load_s0_r90,boundary_cvt,reference,True,True,4.45,0.28712986413336883,0.07309820703835175,0.056901792961648254,0,0,0,{'CONTACT_READY': 7}
+near_t_load_s0_r90_boundary_cvt_slower_reference,near_t_load_s0_r90,boundary_cvt,slower_reference,True,True,4.45,0.28712986413336883,0.07309820703835175,0.056901792961648254,0,0,0,{'CONTACT_READY': 7}
+near_t_load_s0_r90_boundary_cvt_lower_effort,near_t_load_s0_r90,boundary_cvt,lower_effort,True,True,4.45,0.28712986413336883,0.07309820703835175,0.056901792961648254,0,0,0,{'CONTACT_READY': 7}
+near_t_load_s0_r90_boundary_cvt_slower_deployment,near_t_load_s0_r90,boundary_cvt,slower_deployment,True,True,5.6000000000000005,0.2868941258303717,0.07802117752966975,0.051978822470330255,0,0,0,{}
+near_t_load_s0_r90_boundary_cvt_tighter_registration,near_t_load_s0_r90,boundary_cvt,tighter_registration,True,True,4.3500000000000005,0.2907323264334859,0.07192848523798943,0.05807151476201057,0,0,0,{}
+near_t_load_s0_r90_boundary_cvt_wider_motion_prior,near_t_load_s0_r90,boundary_cvt,wider_motion_prior,True,True,4.15,0.29426780759102017,0.07378209542816272,0.056217904571837285,0,0,0,{}
+far_skew_box_s0_r0_pos0_boundary_cvt_reference,far_skew_box_s0_r0_pos0,boundary_cvt,reference,True,True,19.450000000000003,0.29078440705632125,0.09026092844893796,0.039739071551062044,0,0,0,"{'CONTACT_READY': 1, 'BRAKE': 14, 'HOLD': 1}"
+far_skew_box_s0_r0_pos0_boundary_cvt_slower_reference,far_skew_box_s0_r0_pos0,boundary_cvt,slower_reference,True,True,19.450000000000003,0.29078440705632125,0.09026092844893796,0.039739071551062044,0,0,0,{'TRANSPORT': 8}
+far_skew_box_s0_r0_pos0_boundary_cvt_lower_effort,far_skew_box_s0_r0_pos0,boundary_cvt,lower_effort,True,True,19.450000000000003,0.29078440705632125,0.09026092844893796,0.039739071551062044,0,0,0,{'BRAKE': 25}
+far_skew_box_s0_r0_pos0_boundary_cvt_slower_deployment,far_skew_box_s0_r0_pos0,boundary_cvt,slower_deployment,True,True,21.85,0.288964418242317,0.09370453673847035,0.03629546326152966,0,0,0,"{'CONTACT_READY': 6, 'TRANSPORT': 1, 'BRAKE': 2}"
+far_skew_box_s0_r0_pos0_boundary_cvt_tighter_registration,far_skew_box_s0_r0_pos0,boundary_cvt,tighter_registration,True,True,19.25,0.29078440705632125,0.09018451015117712,0.03981548984882288,0,0,0,{'CONTACT_READY': 2}
+far_skew_box_s0_r0_pos0_boundary_cvt_wider_motion_prior,far_skew_box_s0_r0_pos0,boundary_cvt,wider_motion_prior,True,True,21.400000000000002,0.2801056281968638,0.09330191663877851,0.03669808336122149,0,0,0,{'CONTACT_READY': 128}
+far_c_open_away_pos1_boundary_cvt_reference,far_c_open_away_pos1,boundary_cvt,reference,True,True,20.650000000000002,0.2800000944626471,0.07961122458521164,0.05038877541478837,0,0,0,"{'CONTACT_READY': 3, 'BRAKE': 639, 'HOLD': 72}"
+far_c_open_away_pos1_boundary_cvt_slower_reference,far_c_open_away_pos1,boundary_cvt,slower_reference,True,True,20.650000000000002,0.2800000944626471,0.07961122458521164,0.05038877541478837,0,0,0,{'BRAKE': 7}
+far_c_open_away_pos1_boundary_cvt_lower_effort,far_c_open_away_pos1,boundary_cvt,lower_effort,True,True,20.650000000000002,0.2800000944626471,0.07961122458521164,0.05038877541478837,0,0,0,{'BRAKE': 4}
+far_c_open_away_pos1_boundary_cvt_slower_deployment,far_c_open_away_pos1,boundary_cvt,slower_deployment,True,True,22.450000000000003,0.28000000000010666,0.08659289961657102,0.04340710038342899,0,0,0,"{'CONTACT_READY': 21, 'BRAKE': 2}"
+far_c_open_away_pos1_boundary_cvt_tighter_registration,far_c_open_away_pos1,boundary_cvt,tighter_registration,True,True,20.0,0.28000000021744553,0.0903565809452953,0.0396434190547047,0,0,0,{}
+far_c_open_away_pos1_boundary_cvt_wider_motion_prior,far_c_open_away_pos1,boundary_cvt,wider_motion_prior,True,True,18.8,0.2800003327074055,0.07961512542257401,0.05038487457742599,0,0,0,{}

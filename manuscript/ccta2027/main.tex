@@ -1,353 +1,171 @@
-\documentclass[conference]{IEEEtran}
-\usepackage[T1]{fontenc}
+\RequirePackage[T1]{fontenc}
+\documentclass[letterpaper,10pt,conference]{ieeeconf}
+\IEEEoverridecommandlockouts
+\overrideIEEEmargins
 \usepackage{amsmath,amssymb,graphicx,booktabs,url,balance}
 \newtheorem{proposition}{Proposition}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\norm}[1]{\left\lVert#1\right\rVert}
-\title{Boundary-Aware Static Robot Deployment:\\Sampled Safety and Limits of Transport Preparation}
-\author{\IEEEauthorblockN{Development manuscript}\IEEEauthorblockA{Author information pending}}
+\input{generated/census_numbers.tex}
+\title{Boundary-Aware Deployment\\for Cooperative Transport of Unknown Objects}
+\author{Development manuscript --- author information pending}
 \begin{document}
 \maketitle
 \begin{abstract}
-Placing robots around an object is a distinct problem from reliably transporting
-it. We study boundary-aware deployment through limited-range centroidal targets
-and a velocity safety filter, separating an exact static oracle-map analysis
-from locally sensed implementations and downstream contact experiments. For a
-fixed polygon and single-integrator robots, a feature-cover construction gives
-whole-hold safety under explicit initialization, communication, sampling and
-projection assumptions. A projected-residual bound clarifies why low commanded
-motion need not imply complete coverage. In a frozen 169-episode campaign, a
-local segment candidate passes nine of nine static path checks, versus one of
-nine for the original point-sample implementation, while reducing the measured
-deployment cost. Its gap guard intervenes on 5,315 of 5,400 frames. Transport
-completion remains limited: boundary CVT completes 5/12 new-seed tasks and 1/18
-perturbed tasks. An independent contact-engine case also fails. These results
-support a restricted static deployment claim and motivate, rather than establish,
-reliable transport with unknown moving boundaries.
+How far does deployment from local boundary observations carry a team toward actual object transport? We examine the complete perception--deployment--contact--transport--stop chain, separating geometric readiness, physical interaction, settling and spatial completion. A frozen development census compares boundary CVT, nearest-observed-target and local-spacing deployment under the same sensing, transport feedback, contact physics and evaluator. Nine shape--orientation conditions cover a 64-sided circle, a 24-vertex ellipse, a rectangle, an L-shape and a C-channel. Equal area, mass, robot initial states and target distance control several important confounders. With one fixed seed and no outcome-driven retries, the three methods complete \CvtComplete/9, \NearestComplete/9 and \SpacingComplete/9 tasks, respectively. A circle run passes the legacy G500 execution contract but misses the spatial goal by 1.177 m, demonstrating why projected arrival cannot replace spatial completion. Earlier feedback interventions and a new signed-error audit are retained as mechanism diagnostics. An anchored local readout rescues neither selected failure and worsens a successful C-shape control. The evidence characterizes capabilities and failure boundaries; it does not establish robust transport, statistical generalization, or a fully decentralized closed loop. The implementation combines local deployment with shared phase supervision.
 \end{abstract}
-\begin{IEEEkeywords}
-Multi-robot deployment, coverage control, sampled safety, cooperative transport.
-\end{IEEEkeywords}
 
 \section{Introduction}
-Robots that must push an unfamiliar object first need useful positions around
-its boundary. A team can approach the boundary quickly while leaving important
-regions unsupported; a configuration can also appear stationary because safety
-constraints block its nominal motion. Once contact starts, estimation drift,
-asymmetric forces and release timing introduce further failure modes. A single
-success label obscures these distinctions.
+A ring of robots around an unknown object is a preparation state, not a completed manipulation task. The team must perceive usable boundary information, distribute itself, generate actual contact forces, move along a requested displacement, and stop near a spatial goal. Failures can occur after apparently satisfactory coverage. Our research question is therefore: \emph{under fixed sensing and transport control, how does boundary-based deployment affect executable transport across geometry and orientation?}
 
-We investigate a boundary-aware deployment controller with separate information
-permissions for control and evaluation. Limited-range Voronoi cells allocate
-observed boundary mass, while a safety filter modifies the resulting velocity.
-The theoretical reference uses a fixed known polygon. The local implementation
-receives only sensed or relayed boundary information; true geometry is reserved
-for an external evaluator. Contact transport is evaluated as a downstream task,
-without extending the static theorem to moving objects.
+This question must be distinguished from novelty by demonstration. Cooperative transport and pushing span substantial prior work \cite{tuci2018,stuber2020}. Caging-based transport already addresses unknown shapes \cite{vardharajan2021}, and adaptive self-allocation has combined local detection, CVT and transport \cite{song2026}. We do not claim that surrounding several shapes or using CVT is new. Instead, this development manuscript presents a controlled evaluation of an existing boundary-aware stack and identifies the evidence still needed for a defensible method contribution.
 
-The contributions are an explicit static feature-cover safety argument, a
-residual interpretation for the saturated-then-projected centroidal law, and an
-auditable comparison that retains failed and censored episodes. The empirical
-segment repair improves the observed static paths with essentially unchanged
-cost reduction, but its conservatism and incomplete geometry prevent a local-map
-safety theorem. Preparation and transport results are reported separately.
-We do not claim general transport superiority or engine invariance.
+The principal comparison changes only the deployment target before the first CONTACT\_READY event. Boundary CVT, nearest observed targets and local spacing otherwise share the same code and inputs. We freeze nine shape--orientation conditions and one seed, then retain all 27 started tasks, including watchdogs and adverse C-shape outcomes. The operational question is falsifiable: does boundary CVT produce more spatial completions than both existing deployment controls within this fixed census? Such a descriptive comparison can fail; it is not a population-level test.
 
-\section{Related Work}
-Voronoi-based coverage control connects locational costs to distributed
-centroidal motion~\cite{cortes2004}. We use that connection to allocate boundary
-density, with truncated cells and a fixed-density theoretical reference. Safety
-projection and numerical centroid errors change the interpretation of the
-classical centroidal equilibrium; coverage convergence cannot simply be inherited.
+The contribution at this stage is a reproducible system integration with explicit information and task contracts, accompanied by complete-task evidence across normalized shapes. The census tests the deployment-to-transport link and exposes its limits; it does not yet establish a superior new deployment algorithm. An earlier progress oracle rescued two selected failures, but a realizable anchored candidate did not. We close its expansion and retain the negative evidence and restricted mathematical diagnosis.
 
-Control barrier functions express forward-invariance requirements as constraints
-on admissible controls and can be combined with performance objectives in a
-quadratic program~\cite{ames2017}. Our concern is the held command between samples,
-including switches of the closest polygon feature. A feasible instantaneous
-inequality against an incomplete observed boundary is insufficient.
+\section{Related Work and Claim Boundaries}
+Caging restricts object escape through configuration-space geometry \cite{pereira2004,wang2025caging}. Local-observation enclosing and grasping \cite{kobayashi2012} and sequential caging \cite{vardharajan2021} are particularly close to the present task. We use \emph{boundary deployment} or operational enclosure for the measured arrangement. A surrounding image or high sampled coverage alone does not establish object closure.
 
-Caging-based decentralized manipulation maintains object closure while moving
-toward a goal~\cite{pereira2004}. Sequential caging has also addressed unknown
-object shapes, distributing contact locations before transport and evaluating
-both simulation and physical robots~\cite{vardharajan2021}. Those results make
-unknown-shape transport an established research direction, not a novelty claim
-of the present work. Here the narrower question is what a boundary-density
-deployment objective and its static safety filter actually establish before
-dynamic contact. We do not equate proximity to a boundary with object closure
-or sufficient contact wrench authority.
+Planar pushing \cite{tang2024,chai2022}, adaptive collaborative control \cite{yan2021,culbertson2021}, Force-ANTS \cite{wang2016force}, and grasp-wrench quality \cite{ferrari1992} connect coordination to manipulation under different assumptions. Sequential caging includes effective pushing and contact maintenance under initialization and communication assumptions. Song et al. combine detection-driven density, CVT and CBF coordination; their reported simulation setting differs from the present polygon/contact census. Tang et al. optimize contact modes and wrench feasibility using known object geometry and physical properties. These precedents preclude claiming novelty for local detection, CVT, or task-directed contact selection alone. Our two engineering deployment controls neither reproduce these approaches nor form a state-of-the-art benchmark.
 
-\section{Model, Information and Objectives}
-Let $D\subset\R^2$ be a closed rectangle and $S\subset D$ a fixed simple polygon.
-There are $N=16$ robots with $\dot p_i=u_i$, $\norm{u_i}\le u_{\max}$.
-At $t_k=k\Delta$, all controls are computed from the same frozen configuration
-$P_k$, then held for $\tau\in[0,\Delta]$. The theoretical oracle exposes the
-polygon features. Local arms instead construct their maps from range observations
-and one-hop communication. An independent evaluator may access $S$ and simulator
-object states, but those values do not select local control commands.
+CVT and coverage control provide the deployment background \cite{du1999,cortes2004}. Safety QPs relate to control-barrier methods \cite{ames2017,wang2017safety}, but moving uncertain boundaries and sampled contact physics require assumptions beyond static-map results. Registration covariance and stable sampling \cite{censi2007,bonnabel2016,gelfand2003} motivate the restricted information audit below. Neither a well-conditioned local matrix nor a correct numerical identity proves physically accurate cumulative progress.
 
-For the analysis only, fix a nonnegative reference density $\phi^\star$ around a
-uniform boundary offset. Direction-dependent, exploration and changing-map terms
-are excluded. With $\Omega_i=V_i(P)\cap B(p_i,R)$, define
+\section{System, Information and Task Contracts}
+\subsection{Local deployment with shared supervision}
+Each robot observes nearby boundary samples and forms a local fused map using its own sensing and one-hop observation exchange. The nominal deployment follows a boundary-weighted centroid in a local Voronoi region. In generic notation,
 \begin{equation}
- H^\star(P)=\int_D \min\{R^2,\min_i\norm{q-p_i}^2\}\phi^\star(q)\,dq.
+c_i=\frac{\int_{V_i}q\rho_i(q)\,dq}{\int_{V_i}\rho_i(q)\,dq},
+\qquad u_i^{\rm deploy}\propto c_i-p_i ,
 \end{equation}
-For each positive-mass cell, $m_i^\star=\int_{\Omega_i}\phi^\star$ and
-$c_i^\star=(m_i^\star)^{-1}\int_{\Omega_i}q\phi^\star(q)\,dq$.
-The implementation computes $\hat m_i,\hat c_i$, projects an out-of-disk centroid
-onto the local disk and uses $p_i$ when its numerical mass is below the floor.
-The command is
-\begin{equation}\label{eq:cascade}
- v_i=\operatorname{sat}_{u_{\max}}(k_c(\hat c_i-p_i)),\qquad
- U_i=\Pi_{F_{i,k}}(v_i).
-\end{equation}
-Here $F_{i,k}$ is the intersection of the speed ball, shared-responsibility
-robot rows, rectangular wall rows and object-feature rows. The exact analysis
-uses the original robust margin, with no infeasibility scaling or clamping.
+where the implemented density includes observed-boundary, directional-offset and exploration terms. The census preserves the existing density, discretization, gains and guards. The QP modifies the nominal command subject to the existing inter-robot and observed-object constraints; no thresholds are changed to improve outcomes.
 
-Static quality is measured by cost reduction and displacement as well as safety.
-In transport, controller CONTACT\_READY, a dwell of positive forward physical
-contacts, G500, settling and final task completion are distinct events. Completion
-requires the existing settling rule and final Euclidean position error at most
-the task tolerance, $0.12$ m in the reported transport cases. An along-track
-arrival estimate alone does not satisfy this definition.
+The nearest control substitutes the closest observed offset target. The spacing control selects among locally eligible offset targets using neighbor separation and distance. Both preserve the CVT mass and deployment guards. After the first CONTACT\_READY event, all three use the same subsequent controller. Earlier deployment can change contact configurations and downstream trajectories; shared code does not imply identical post-deployment states.
 
-\section{Static Sampled Safety and Residual Interpretation}
-For a polygon feature $F$ (a closed edge segment), set
-$h_F(p)=\operatorname{dist}(p,F)-r_{\mathrm{safe}}$. Include every feature in
+Local transport feedback uses the robot's own and neighboring usable progress estimates. A team-wide median progress and aggregate map coverage, readiness and speed signals drive a common monotone phase supervisor. The DBACT project name refers to decentralized boundary-aware cooperative transport as the research direction; this implementation does not yet establish a fully decentralized end-to-end loop. Shared task direction, neighbor communication and common phase state remain explicit assumptions. Object truth is available to simulated sensors, physics and independent evaluation, not to the local control readout. The earlier oracle is a separately labeled exception used only for diagnosis.
+
+\subsection{Five distinct events}
+CONTACT\_READY uses a local-map distance criterion and a team quorum/dwell. In the frozen configuration, the distance band extends to $0.185$ m whereas robot radius is $0.13$ m. It therefore permits a geometric-ready state without physical contact. Physical contact requires penetration and contact force in the simulator. A separate recorded physical-readiness event requires sustained contacts with positive force projected on the task direction. It is stronger than the occurrence of one actual contact and is not assumed necessary for completion.
+
+For target direction $d$, displacement $L$, initial object centroid $x_0$, and terminal centroid $x_f$,
 \begin{equation}
-\begin{split}
- \Phi(p)=\{F:\ &\operatorname{dist}(p,F)\le d_\partial(p)+2u_{\max}\Delta,\\
- &\operatorname{dist}(p,F)\le R_{\mathrm{row}}\},
-\end{split}
+J(t)=d^T(x(t)-x_0),\qquad
+e_{\rm end}=\norm{x_f-(x_0+Ld)}.
 \end{equation}
-where $d_\partial$ is distance to the polygon boundary. Impose
-\begin{equation}\label{eq:row}
- \nabla h_F(p)^T u\ge-\gamma_{\mathrm{obj}}h_F(p)+\rho.
-\end{equation}
-Distances are to finite segments, not their infinite supporting lines.
+Settling checks linear speed only, with no angular-speed criterion. It requires HOLD and speed at most $0.005$ m/s for 40 consecutive control frames. Spatial completion requires settling \emph{and} $e_{\rm end}\leq0.12$ m. The unchanged control step is $0.05$ s and watchdog is 3000 frames. A program finishing successfully is not a task completion.
 
-\subsection{Assumptions and whole-hold argument}
-The initial configuration lies in $D$, has pair separation at least $d_{\min}$,
-and lies outside $S$ with signed clearance at least
-$r_{\mathrm{safe}}+\rho/\gamma_{\mathrm{obj}}$. Geometry and density are fixed;
-communication has no dropout and range at least $2R$, including all pairs within
-$d_{\min}+2u_{\max}\Delta$. The robot rows use the same frozen positions and
-symmetric responsibility. Require $\gamma_{\mathrm{obj}}\Delta\le1$,
-$\gamma_{\mathrm{agent}}\Delta\le1$, and
-\begin{equation}\label{eq:range}
- R_{\mathrm{row}}-u_{\max}\Delta\ge
- r_{\mathrm{safe}}+\rho/\gamma_{\mathrm{obj}}.
-\end{equation}
-All projections and geometry in the following argument use exact arithmetic.
+G500 is a legacy execution contract, not a stricter version of spatial completion. Here it requires specified events and execution/safety checks, but arrival uses only $|J-L|\leq0.12$ m. Efficiency, direction error, cross-track deviation and yaw are diagnostic quality warnings, not pass/fail gates. Event deadlines are disabled, so its name does not impose a 500-frame limit. We report completion, G500 and trajectory quality separately. Discrete safety measurements and barrier-scaling counts are not continuous-time safety certificates.
 
-\begin{proposition}[Static safety under the stated assumptions]
-The exact cascade preserves object clearance
-$r_{\mathrm{safe}}+\rho/\gamma_{\mathrm{obj}}$, pair separation $d_{\min}$ and
-membership in $D$ throughout every hold. Its feasible velocity sets contain zero
-at every sample, so their Euclidean projections exist recursively.
+\section{Frozen Full-Task Development Census}
+\subsection{Geometry and fair comparison}
+The nine conditions are circle; ellipse long axis parallel/perpendicular to the task; rectangle long side parallel/perpendicular; L reference/rotated $180^\circ$; and C opening toward/away from the goal. All world task directions are $+x$. The current CCTA rectangle, L and C outlines are retained as sources. The current C-channel opens in $+y$; rotations $-90^\circ$ and $+90^\circ$ produce the two conditions. L reference means its unrotated source polygon, not an ambiguous opening label. The frozen vertices and figure record each geometry.
+
+Circle and ellipse reuse the historical deterministic 64- and 24-vertex outlines, rather than importing their old scenario settings. Every polygon is centroid-centered at $(4,4)$ and isotropically normalized to area $2.05875$ m$^2$. Areal density is $2$ kg/m$^2$, giving mass $4.1175$ kg. Actual polygon inertias are approximately $1.349$, $1.550$, $1.472$, $2.087$ and $2.547$ kg\,m$^2$ for circle, ellipse, rectangle, L and C. Perimeter, reach, inertia and concavity remain different; equal area and mass do not equalize manipulation difficulty.
+
+All conditions use 16 robots and the same legal scatter initial positions, generated once by seed 2 in a common annulus outside the maximum normalized reach. Actual initial-state and configuration hashes are verified for each three-method group. The goal distance is $1.2$ m. Sensing, robot size, actuation, friction, contact stiffness, four physics substeps, control parameters and success rules are common. The team starts near the object, with some robots initially in sensing range: unknown full geometry is tested, not search from an entirely unknown remote location.
+
+\subsection{Budget, records and selection}
+The budget is exactly $9\times3\times1=27$ episodes. We do not replace seeds, retry failed tasks, extend watchdogs or tune parameters against outcomes. Source/environment snapshots, resolved configurations and product hashes identify this census separately from historical batches and v1/v2.
+
+Every case records phases, contact, motion, braking, termination and safety. All 27 started tasks remain in the table. The nine conditions are within-block descriptive comparisons. The independent randomization unit is the complete shared scene/seed block, of which this census contains one. Frames and contact records are not independent trials; no reliability interval is reported.
+
+Before execution, we select boundary CVT under the five reference orientations for the stage figure and overview video. All nine conditions have three-method videos synchronized by physical time and common view. Ended episodes retain their final measured frame with an explicit label. Videos use every fifth control frame at 10 fps (nominal $2.5\times$ playback), not episode-fraction synchronization. Estimated progress is labeled as the previous control update relative to the post-physics displayed pose; the new census mechanism figure instead aligns the estimate with the preceding, pre-physics object state. Raw laser rays are not retained: displayed teal samples are agent 00's saved fused map.
+
+\begin{figure*}[t]
+\centering\includegraphics[width=\textwidth]{generated/media_v1/full_process.pdf}
+\caption{Circle/CVT event-indexed process: first saved local map, geometric readiness, first physical contact, transport midpoint and actual termination. Event columns need not be chronological: contact here precedes readiness. Orange is evaluation geometry, teal is agent 00's fused map, and rings mark geometric readiness, not contact. The final task fails despite G500 passing.}
+\label{fig:process}
+\end{figure*}
+
+\section{Capabilities and Failure Boundaries}
+Table~\ref{tab:census} reports every condition and method; Fig.~\ref{fig:comparison} adds actual termination time and total robot path. Boundary CVT completes \CvtComplete/9 tasks, nearest target \NearestComplete/9, and local spacing \SpacingComplete/9. Corresponding G500 counts are \CvtG/9, \NearestG/9 and \SpacingG/9. These fixed-condition counts characterize this implementation; they are not success-rate estimates for arbitrary objects.
+
+\input{generated/census_interpretation.tex}
+
+\input{generated/census_table.tex}
+
+\begin{figure*}[t]
+\centering\includegraphics[width=\textwidth]{generated/media_v1/method_comparison.pdf}
+\caption{All 27 tasks in one shared development block. Marker shape identifies method; filled/open markers denote spatial completion/failure. The dotted line marks the unchanged 0.12 m endpoint tolerance. Time is actual termination time, not a successful completion time for failed runs; W marks watchdog termination. Total robot path is computed from all recorded robot displacements. No confidence intervals or energy claims are implied.}
+\label{fig:comparison}
+\end{figure*}
+
+The circle/CVT example makes the contract distinction concrete. It reaches geometric readiness, produces actual contact and motion, and settles after $13.50$ s. Its projected progress is $1.1247$ m, within $0.12$ m of the $1.2$ m target. Its remaining hard execution gates also pass, so G500 passes. Yet lateral displacement yields $e_{\rm end}=1.1772$ m. Recorded direction error is $46.25^\circ$, efficiency $0.6915$, and maximum cross-track $1.1748$ m. These create quality warnings, not G500 failures. Changing the contract to hide this discrepancy would destroy comparability; we retain both labels.
+
+The supplementary five-shape event plate retains the preselected reference orientations and failures; all nine orientations have synchronized three-method videos. First physical contact is selected independently of the supervisor events. The figure sequence is event-indexed rather than an assumed chronological pipeline.
+
+Figure~\ref{fig:mechanism} separates the actual team-progress readout, signed estimation error and true cross-track displacement. Census replay row $k+1$ stores the estimate computed before that step's physics; we therefore compare it with object truth at row $k$. All control samples are retained without smoothing. The circle approaches its projected goal while developing a large lateral offset; the C-away case instead stalls with a large longitudinal shortfall. These distinct trajectories do not establish a common causal estimation fault. Actual contact reports are from after robot motion but before cargo integration, and are labeled separately from control-time states.
+
+\begin{figure*}[t]
+\centering\includegraphics[width=\textwidth]{generated/media_v1/aligned_mechanism.pdf}
+\caption{Time-aligned CVT diagnostics for the circle, rectangle-parallel control and adverse C-away condition, selected after the census to illustrate distinct outcomes. Top: pre-physics evaluation truth and the actual shared team-progress estimate. Middle: signed progress error and true cross-track displacement. Bottom: actual contact reports. Event lines identify READY, TRANSPORT, BRAKE and HOLD; absent events are not imputed. Each column retains its actual time horizon, including the 150 s failure. One seed, no smoothing and no independent-sample inference.}
+\label{fig:mechanism}
+\end{figure*}
+
+\section{Closed Feedback Diagnostic Branch}
+\subsection{Oracle and negative local candidate}
+Nine archived rectangle/L/C development cases all reached geometric readiness and settled, but only five completed. None met the recorded positive-force quorum/dwell, despite completion in five cases. This rejects that particular recorded event as an unexamined necessary gate; it does not deny the need for physical interaction.
+
+A six-episode diagnostic selected rectangle seed 2 and L seed 8 as failures and C seed 8 as a successful control. Replacing only local/team scalar progress with truth, from episode start, reduced endpoint errors from $0.1621$ to $0.0720$ m and $0.1516$ to $0.0485$ m in the failures. C error increased from $0.0083$ to $0.0135$ m. The oracle is not deployable, and post-hoc selection limits interpretation. Matching readiness times does not imply identical states at readiness; the intervention acts over the whole trajectory.
+
+The subsequent v2 audit captured actual trimmed registration normals and fusion corrections. Of 22,812 registrations, 22,797 were task-direction identifiable at the frozen numerical tolerance. All 15 remaining records were already rejected by the original quality gate. Thus strict rank deficiency did not explain admitted measurements in these cases. Identifiability still does not imply accurate correspondences, negligible rotation or low accumulated bias.
+
+A separate fixed nine-episode v2 comparison tested original feedback, a passive certificate and a local anchored readout. Original and certificate-only were identical in all 25 replay arrays and full step fields. The anchored readout used no object truth and retained the existing gain, map, velocity, downstream median and rejection rules. It rescued neither failure. Rectangle endpoint error changed to $0.1592$ m, L to $0.1522$ m, and the successful C case worsened to $0.0187$ m. Same-input local MAE was slightly worse in all three diagnostics. All nine G500 verdicts were false, including the spatially completed C cases. The candidate remains an experimental option, but expansion is stopped.
+
+\subsection{Restricted information analysis}
+For fixed point-to-plane correspondences and small pure translation,
+\begin{equation}
+b=A\Delta x+\epsilon,\qquad j=d^T\Delta x.
+\end{equation}
+\begin{proposition}
+The noiseless task scalar is identifiable for every displacement iff
+$d\in\operatorname{range}(A^T)$. When identifiable, minimum-norm exact weights are
+$\ell=A(A^TA)^\dagger d$, and
+$|\ell^Tb-j|\leq\norm{\ell}\norm{\epsilon}$.
 \end{proposition}
-\begin{IEEEproof}
-Distance to a closed convex segment is convex. For each included feature,
-\eqref{eq:row} and the supporting-gradient inequality give
-\begin{equation}\label{eq:hold}
- h_F(p+\tau u)\ge(1-\gamma_{\mathrm{obj}}\tau)h_F(p)+\rho\tau.
-\end{equation}
-An in-range feature excluded by the cover is initially more than
-$2u_{\max}\Delta$ beyond the nearest boundary distance. Its distance decreases
-by at most $u_{\max}\Delta$, by the Lipschitz property. Range-excluded features
-remain beyond the required margin by \eqref{eq:range}. Thus the minimum boundary
-distance retains the margin even at feature switches or when the included set
-is empty. Starting outside, continuity excludes a first boundary crossing.
-For included pairs, the sum of the two responsibility inequalities bounds the
-initial relative-distance derivative; convexity of squared distance and
-$\gamma_{\mathrm{agent}}\Delta\le1$ preserve separation. Omitted pairs cannot
-close the initial excess distance within a hold. Rectangular wall constraints
-preserve each coordinate throughout the segment. These margins make zero feasible
-in every stacked row at the next sample. Induction proves the assertion.
-\end{IEEEproof}
+\noindent\emph{Proof:} Indistinguishable translations differ by $z\in\ker A$; their task scalars agree iff $d^Tz=0$ for every such $z$. Exact weights satisfy $A^T\ell=d$; the minimum-norm solution is as stated, and Cauchy--Schwarz gives the bound.\hfill$\square$
 
-The reference parameters are $\Delta=0.05$ s, $k_c=0.9$, $u_{\max}=0.35$ m/s,
-$R=0.8$ m, $R_{\mathrm{row}}=0.60$ m, $d_{\min}=0.28$ m,
-$r_{\mathrm{safe}}=0.065$ m, $\rho=0.02$, $\gamma_{\mathrm{obj}}=8$ s$^{-1}$
-and $\gamma_{\mathrm{agent}}=6$ s$^{-1}$. The object margin is $67.5$ mm;
-the local empirical path acceptance threshold is $65$ mm. These are different
-quantities. Full derivations and parameter ledgers accompany the source.
+This standard fact excludes uncertain normals, incorrect association, rotation and evolving maps. A circle's absolute rotation ambiguity does not imply that its translation is unidentifiable. Polygon discretization is part of our executed model. The earlier synthetic observation-layout test is preserved as supplementary diagnosis; no new sensing policy is evaluated in the census.
 
-\subsection{Cost dissipation does not imply complete coverage}
-Define $J_k=\sum_i m_{i,k}^\star\norm{U_{i,k}}^2$ and
-$E_k=\sum_i m_{i,k}^\star\norm{\hat c_{i,k}-c_{i,k}^\star}^2$, with zero-mass
-cells contributing zero. Freezing the current partition gives a quadratic
-majorant of $H^\star$; reassigning points to their nearest truncated cell only
-reduces that majorant. Projection optimality with zero feasible then yields,
-for $a=2/k_c-\Delta>0$,
-\begin{equation}\label{eq:dissipation}
- \overline J\le \frac{2H^\star(P_0)}{aK\Delta}+\frac{4\overline E}{a^2}.
-\end{equation}
-To see this, write $v_i=\lambda_i(\hat c_i-p_i)$, with
-$0<\lambda_i\le k_c$. Projection optimality and zero feasibility imply
-$v_i^TU_i\ge\norm{U_i}^2$. The partition majorant then gives
-$H^\star(P_{k+1})-H^\star(P_k)\le-\Delta aJ_k+2\Delta\sqrt{E_kJ_k}$.
-Young's inequality bounds the right-hand side by
-$-\Delta aJ_k/2+2\Delta E_k/a$; summing and using $H^\star\ge0$
-proves \eqref{eq:dissipation}. This argument does not assume numerical
-monotonicity of the observed cost.
-
-To clarify its meaning, let $r_i$ be \eqref{eq:cascade} computed with $c_i^\star$
-in place of $\hat c_i$ and the same $F_{i,k}$. Nonexpansiveness of saturation
-and projection gives $\norm{r_i-U_i}\le k_c\norm{c_i^\star-\hat c_i}$. Hence
+The rejected candidate reads
 \begin{equation}
- G_k:=\sum_i m_{i,k}^\star\norm{r_i}^2\le2J_k+2k_c^2E_k,
+\widehat J^{a}_k=g\bigl(d^Tm_k^-+\ell_k^Tb_k\bigr),\qquad g=1.24.
 \end{equation}
-and \eqref{eq:dissipation} bounds the average exact-centroid projected residual.
-Zero residual means no descent through the filter's frozen feasible velocity
-set. It does not imply stationarity of the original geometric-position problem
-without an additional tangent-cone equivalence. Nearly massless cells can also
-hide poor spatial support. Therefore neither a small $J$ nor a small $G$
-establishes full boundary coverage, useful contact capacity or transport success.
+It retains the historical map anchor. Under the restrictive rigid-map residual model
+$b_k=A_k[(x_k-x_0)-m_k^-]+\eta_k$,
+its error is $(g-1)J_k+g\ell_k^T\eta_k$.
+A correct certificate does not remove the gain term or bound real map/correspondence errors. This equation is a limitation, not evidence that gain alone caused the observed failures.
 
-\subsection{Local maps, arithmetic and moving boundaries}
-A sufficient local-map extension would require certified coverage of every true
-boundary point relevant to the hold tube within error $\epsilon$, with omitted
-features independently excluded. A whole-hold estimated clearance of at least
-$r_{\mathrm{safe}}+\epsilon$ would then transfer to true clearance by the triangle
-inequality. Our sensor does not provide this coverage certificate. In particular,
-clipping a measured observation gap does not certify missing geometry.
+\subsection{Signed cumulative accounting from existing logs}
+The offline audit uses the recorded pre-physics control-time truth. For robot $i$, define $u_{ik}=d^Tm^+_{ik}$, held-readout term
+$h_{ik}=r^{\rm original}_{ik}-gu_{ik}$, and candidate term
+$c_{ik}=r_{ik}-r^{\rm original}_{ik}$. Then
+$r_{ik}=u_{ik}+(g-1)u_{ik}+h_{ik}+c_{ik}$.
+Median weights $w_{ik}$ reproduce actual team progress $T_k$; tied values use an explicit agent-ID rule. The component allocation is not unique at ties and is not a causal attribution.
 
-Floating-point row residuals also require a separate budget. If the physical
-inequality has violation at most $\epsilon_u$, the last term in \eqref{eq:hold}
-becomes $(\rho-\epsilon_u)\tau$. Row coefficient errors, state error and tracking
-error contribute in addition to solver tolerance. Thus a floating-point
-\texttt{optimal} status is not an exact-arithmetic certificate. Moving polygons
-would further require swept-feature bounds, uncertain boundary velocities and
-recursive feasibility under contact dynamics. Those extensions remain open.
+With $E_k=T_k-J_k$,
+\begin{align}
+\Delta E_k={}&\sum_iw_{ik}(\Delta u_{ik}-\Delta J_k)
++\sum_iw_{ik}(g-1)\Delta u_{ik}\nonumber\\
+&+\sum_iw_{ik}\Delta h_{ik}+\sum_iw_{ik}\Delta c_{ik}
++\sum_i\Delta w_{ik}r_{i,k-1}.
+\end{align}
+Accumulating all terms and the initial error reconstructs the signed error; omitting the voter-change term would misallocate it. Registration plus fusion also reconstructs map increments to numerical precision. Both are accounting checks, not physical-estimation proofs.
 
-\section{Experiments and Failure Evidence}
-\subsection{Protocol and provenance}
-The frozen draft-v2 campaign contains 169 planned episodes: 27 static comparisons,
-27 development transport comparisons, 15 target ablations, six active-exploration
-diagnostics, 36 generalization tasks, 54 perturbation tasks, two QP references
-and two contact-engine references. All planned cases remain in their denominators.
-The source snapshot, expanded configurations, initial-state identities and product
-hashes are archived. The implementation audit passes with zero execution errors;
-that gate does not require scientific task success. Two serial repeats, excluded
-from scientific denominators, reproduce their parallel results.
+\input{generated/cumulative_interpretation.tex}
 
-Static comparisons use rectangle, L and C polygons and seeds 2, 5 and 8, with
-600 complete control holds each. The oracle, original local samples and local
-segment candidate share the task and initial state. Transport compares boundary
-CVT, nearest observed targets and local spacing; only the pre-CONTACT\_READY
-deployment target differs. Generalization uses 12 new seeds with the frozen
-layout/scale factors. Perturbations use two independent seeds repeated across
-shapes and noise, communication loss and slower sensing. These are two seed
-clusters, not 18 independent replications per method.
+For the v2 baseline episodes, the first shared HOLD in rectangle and L occurs with true speeds zero but endpoint errors outside the original task tolerance. Estimated/true progress is $1.4651/1.2939$ m against $L=1.4467$ m for rectangle, and $1.3082/1.1535$ m against $L=1.3044$ m for L. C has already reached the projected goal. These observations identify premature spatial stopping in the selected failures. Individual transport-loop hysteretic holding states were not saved; their exact first transitions cannot be reconstructed from scalar input alone. No new gain, certificate or candidate is introduced.
 
-\begin{table}[t]
-\caption{Frozen v2 static paths: nine cases per arm; required clearance 65 mm.}
-\label{tab:static}\centering
-\begin{tabular}{lrrr}\toprule
-Arm & Safe paths & Min. (mm) & Mean $H_f/H_0$\\\midrule
-Original local samples & 1/9 & 48.33 & 0.1533\\
-Segment candidate & 9/9 & 66.04 & 0.1544\\
-Oracle reference & 9/9 & 67.50 & 0.1534\\\bottomrule
-\end{tabular}
-\end{table}
+\section{Limitations and Research Decision}
+This near-field census uses one robot arrangement and common $+x$ goals, not independent generalization data. Equal area and mass leave inertia, perimeter and contact opportunities unequal. Penalty contact, $0.01$ m range noise, shared supervision and simulated localization restrict external validity. No hardware validation is claimed.
 
-\subsection{Static deployment}
-Table~\ref{tab:static} shows that the local segment candidate passes all nine
-whole-hold path checks; the original local point formulation violates eight.
-The segment candidate's smallest observed margin over the threshold is only
-$1.04$ mm. Mean robot displacement per episode ranges from $0.810$ to $1.013$ m,
-so the cost reduction does not result from remaining stationary. However, the
-gap guard truncates 5,315 of 5,400 frames. This frequent intervention and the
-limited three-shape geometry coverage prevent broad generalization.
+Changed deployment also changes trajectories and contacts; it cannot assign all failures to feedback. Oracle/v2 cases cannot be pooled with this differently normalized census. Algebraic information and bookkeeping results establish neither transport stability nor continuous safety.
 
-The independent planar-QP and CVXPY references both pass their 600-frame checks,
-with maximum recorded position difference $1.82$ mm. We report agreement of the
-checked safety outcomes, not equality of numerical trajectories. Finite path
-verification remains distinct from the exact proposition's assumptions.
+The progress branch is a mechanism diagnostic and limitation, not the main method contribution. A stronger contribution still requires a deployable mechanism with matched information/action budgets, evidence against the closest work, and independent validation. Noise, robot-resource and new-seed designs have not been executed and are not results of this paper. Future candidates should target a supported mechanism with a predeclared falsifier. The current anchored candidate is closed, including expansion across shapes.
 
-\subsection{Preparation versus final transport}
-\begin{table}[t]
-\caption{Frozen v2 task completion, including failed and censored tasks.}
-\label{tab:transport}\centering
-\begin{tabular}{lrrr}\toprule
-Population & CVT & Nearest & Spacing\\\midrule
-Development & 5/9 & 5/9 & 4/9\\
-New-seed generalization & 5/12 & 3/12 & 1/12\\
-Perturbation robustness & 1/18 & 2/18 & 1/18\\\bottomrule
-\end{tabular}
-\end{table}
-In generalization, CVT reaches controller readiness $1.364$ s earlier on average
-than nearest-target deployment over 11 complete pairs; one pair is censored. The
-exploratory seed-cluster bootstrap interval for CVT minus nearest is
-$[-2.736,-0.145]$ s. Against local spacing, the difference is $-1.632$ s with
-interval $[-6.668,1.582]$ s. Complete-pair selection can bias readiness differences.
-Neither comparison establishes transport reliability; the actual task rates
-are given in Table~\ref{tab:transport}. Development and robustness have only
-three and two independent seed clusters, respectively, so their rates are
-descriptive and receive no inferential interval.
-
-The main exploration gain is zero, and removing it produces identical replay
-arrays in all three baseline shapes. It is a null intervention, not evidence
-for the contribution of exploration. A separate gain-six diagnostic has mixed
-outcomes. One seed per shape is insufficient for an ablation benefit claim.
-In the independent-engine pair, penalty contact completes at $0.111$ m endpoint
-error; Pymunk reaches $0.378$ m and triggers its watchdog. Successful recording
-and execution in both engines do not establish physical-model invariance.
-
-\subsection{Failure classification and reliability repairs}
-Reanalysis of the 140 transport receipts retains the frozen outcomes and uses
-each task's original tolerance. For CVT development failures, three are dominated
-by along-track undershoot and one by overshoot. For its 17 robustness failures,
-eight exceed tolerance in the final transverse component, eight exceed it in
-both transverse and longitudinal components, and one is longitudinal undershoot.
-These are geometric outcome classes. Missing physical-contact dwell and missing
-phase events are recorded separately and are not assigned as causal mechanisms
-from compact receipts alone.
-
-Development inspection also found that slow planning could retain a nominal
-command across a supervisor change, and a robot whose progress estimate lagged
-the team could still enter the push set after HOLD. The default revision
-invalidates held commands when supervisor permissions change and explicitly
-prohibits pushing in HOLD. More aggressive changes to brake-integral release
-and feedback routing were tested but caused development regressions; they remain
-experimental options disabled by default. This negative result cautions against
-equating a plausible control-law change with improved task reliability.
-No revision changes tolerances, horizons or the frozen results above.
-Regression tests establish specific control responses; development replays are
-separate from independent validation and do not establish robust transport.
+\section{Conclusion}
+The fixed 27-task census connects unknown-boundary deployment to actual contact, transport and stopping. Smooth and nonconvex objects expose distinct failure boundaries, while legacy execution checks remain separate from spatial completion. Negative feedback and full-task results constrain the next mechanism hypothesis.
 
 \balance
-\section{Limitations and Conclusion}
-The strongest conclusion is static sampled deployment under explicit fixed-map
-assumptions, supported by independent path observations for a local segment
-candidate on nine cases. Static deployment quality and downstream controller
-readiness provide useful measurements, but neither establishes caging or contact
-wrench sufficiency. Robustness failures and the Pymunk discrepancy are material
-limits, not execution errors to exclude.
-
-Further validation must freeze additional geometry, occlusion and sampling
-conditions before observing outcomes, report gap-guard intervention alongside
-deployment quality, and use independent seed clusters for transport comparisons.
-Mechanism studies need frame traces for estimate bias, contact-loss response,
-brake entry and terminal error. Dynamic safety and hardware deployment require
-additional modeling and sensing evidence. The present results delimit a static
-deployment contribution while identifying the measurements needed to assess
-reliable transport in subsequent work.
-
-\begin{thebibliography}{4}
-\bibitem{cortes2004} J. Cort\'es, S. Mart\'inez, T. Karatas, and F. Bullo,
-``Coverage control for mobile sensing networks,'' \emph{IEEE Trans. Robot. Autom.},
-vol. 20, no. 2, pp. 243--255, 2004, doi: 10.1109/TRA.2004.824698.
-\bibitem{ames2017} A. D. Ames, X. Xu, J. W. Grizzle, and P. Tabuada,
-``Control barrier function based quadratic programs for safety critical systems,''
-\emph{IEEE Trans. Autom. Control}, vol. 62, no. 8, pp. 3861--3876, 2017,
-doi: 10.1109/TAC.2016.2638961.
-\bibitem{pereira2004} G. A. S. Pereira, M. F. M. Campos, and V. Kumar,
-``Decentralized algorithms for multi-robot manipulation via caging,''
-\emph{Int. J. Robot. Res.}, vol. 23, no. 7--8, 2004,
-doi: 10.1177/0278364904045477.
-\bibitem{vardharajan2021} V. S. Vardharajan, K. Soma, and G. Beltrame,
-``Collective transport via sequential caging,'' arXiv:2106.03132, 2021.
-\end{thebibliography}
+\input{references.tex}
 \end{document}

@@ -1,0 +1,41 @@
+{
+  "version": "dynamic-contact-v1",
+  "scope": "One development block; no reliability/generalization or hardware claim",
+  "source_sha256": "0806b2fd3b3a6e726aea1482157b1c3f96fb3eb292517c35b53f69a7fc735597",
+  "protocol_sha256": "bb00d095e4a3a28706dfca5bc89e247abb3bf5a9e60788df3ddf2cae53584776",
+  "analysis_script_sha256": "a260dded3cf79d390ff0359a83f049d481c62d36b9b5b39ccf39ccc9b763cdfb",
+  "counts": {
+    "legacy": {
+      "completed": 5,
+      "denominator": 9,
+      "errors": 0,
+      "watchdogs": 1,
+      "g500": 5
+    },
+    "feedback_fix": {
+      "completed": 4,
+      "denominator": 9,
+      "errors": 0,
+      "watchdogs": 2,
+      "g500": 3
+    },
+    "dynamic_contact": {
+      "completed": 2,
+      "denominator": 9,
+      "errors": 0,
+      "watchdogs": 7,
+      "g500": 1
+    }
+  },
+  "legacy_exact_replay_and_old_step_fields": true,
+  "development_gate_pass": false,
+  "products": {
+    "all_27_episodes.csv": "c30cf910c0f924ce0a01ebb2e254c55f09074cc9928650dce63c7d4d4c1ff89b",
+    "capability_table.md": "cb2f2985867b624514fb809c3873fbd3d6291ff1c4e0fe710578acda372a045f",
+    "cargo_paths.pdf": "2c8f2fcd1d0b9eb9e93c8b1c322af25a2a44eea13b7b427e79b5821c28c2f237",
+    "cargo_paths.svg": "899576fc988f8ba5f5593cec060c2c1eaf8989d4dca98e507af491106c2d86b7",
+    "endpoint_comparison.pdf": "b5a13a1eb0349d1ad1eeb6bd71c8b6d6d906d5118d7930040b700045930ffe28",
+    "endpoint_comparison.svg": "888842bc1237baaab398f8f274d9d63cc631595e639767a09923c76a9a0cb4ba",
+    "README.md": "11949a453e80a27237b020d3f3f5919d91edefa188df9da4f609b86a88f91caf"
+  }
+}

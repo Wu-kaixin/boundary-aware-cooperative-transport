@@ -1,0 +1,13 @@
+{
+  "caption": "Paired task error, physical duration and sampled uncovered boundary arc at first CONTACT_READY. Every planned condition is retained. Failed or censored durations use x markers; missing readiness measurements are not filled with zeros. Arc measurements use 360 equal-arclength samples, a 0.42 m observer radius and only external robot centers. They are independent deployment diagnostics, not caging or transport guarantees.",
+  "source_sha256": "716c3bd9e8a02d8f69ce6742f3b556666d94808bb59123453a98aef777dbbdf1",
+  "inputs": {
+    "experiments/ccta2027/cargo_near_v1.json": "c214af1eb7f2753a041601c6749dd0fa690ae013a5ec89446ece43ff4ebbe03b",
+    "artifacts/research/2026-11-02-cargo-discovery-v1/near-analysis/analysis.json": "561bbcc10a110cd28de25fba2aa99979ed6ca751a8ae9eba985de8c66cdd47ed"
+  },
+  "outputs": {
+    "artifacts/research/2026-11-02-cargo-discovery-v1/figures/near_paired_metrics.pdf": "5c4ecaf2854ae07ec7cce8f5b4dfe71597fefc6b2ddfd735416167a7b175048a",
+    "artifacts/research/2026-11-02-cargo-discovery-v1/figures/near_paired_metrics.svg": "2a1422a7a8f6f73f64f5a12178a1635f9a2403f5225f29132124cae7d18213dc",
+    "artifacts/research/2026-11-02-cargo-discovery-v1/figures/near_paired_metrics.png": "3953a06861e486aedb10292a0d59788740713a301f501232708114475ea585da"
+  }
+}

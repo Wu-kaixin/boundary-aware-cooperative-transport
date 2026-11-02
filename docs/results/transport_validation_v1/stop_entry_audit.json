@@ -1,0 +1,1932 @@
+{
+  "cases": [
+    {
+      "case_id": "far_c_open_away_pos0_boundary_cvt_reference",
+      "condition": "far_c_open_away_pos0",
+      "arm": "reference",
+      "status": "EXACT_ENDPOINT_ACCOUNTING",
+      "hold_control_frame": 1177,
+      "seconds": 58.85,
+      "previous_estimated_goal_error_m": 0.06603182764802004,
+      "hold_estimated_goal_error_m": 0.01745545707994734,
+      "hold_true_goal_error_m": 0.1072794401368843,
+      "controller_arrival_band_m": 0.02,
+      "previous_guards": {
+        "agent_count": 16,
+        "informed_agents": 15,
+        "map_coverage": 0.9722222222222222,
+        "contact_ready": 8,
+        "transport_active": 5,
+        "progress": 1.15396817235198,
+        "target_distance": 1.2,
+        "estimated_speed": 0.035300686212188834,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "hold_guards": {
+        "agent_count": 16,
+        "informed_agents": 15,
+        "map_coverage": 0.9444444444444444,
+        "contact_ready": 8,
+        "transport_active": 5,
+        "progress": 1.2,
+        "target_distance": 1.2,
+        "estimated_speed": 0.011988255497995166,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "physical_translation_m": [
+        0.0,
+        0.0
+      ],
+      "team_displacement_change_m": [
+        0.06316504224480934,
+        -0.0017732086514545727
+      ],
+      "remove_noncommon_previous_voters_m": [
+        0.06723734036942153,
+        0.0
+      ],
+      "common_readout_change_m": [
+        -0.0017529944509828699,
+        0.0024817953569803847
+      ],
+      "add_noncommon_current_voters_m": [
+        -0.0023193036736293138,
+        -0.004255004008434957
+      ],
+      "removed": [
+        "agent_03",
+        "agent_14"
+      ],
+      "added": [
+        "agent_00",
+        "agent_04",
+        "agent_12"
+      ],
+      "common": [
+        "agent_01",
+        "agent_02",
+        "agent_05",
+        "agent_06",
+        "agent_07",
+        "agent_08",
+        "agent_09",
+        "agent_10",
+        "agent_11",
+        "agent_13"
+      ],
+      "endpoint_error_m": 0.1072794401368843,
+      "task_completed": true,
+      "input_receipt_sha256": "702f12916f5cf4b56a7b5c6636828e1c9a24ce8e46bcc2f99a37d63d28b3a898"
+    },
+    {
+      "case_id": "near_u_tray_s0_r90_boundary_cvt_candidate",
+      "condition": "near_u_tray_s0_r90",
+      "arm": "candidate",
+      "status": "EXACT_ENDPOINT_ACCOUNTING",
+      "hold_control_frame": 231,
+      "seconds": 11.55,
+      "previous_estimated_goal_error_m": 0.014625607781537271,
+      "hold_estimated_goal_error_m": 0.0196418889115962,
+      "hold_true_goal_error_m": 0.022557255944765105,
+      "controller_arrival_band_m": 0.02,
+      "previous_guards": {
+        "agent_count": 16,
+        "informed_agents": 16,
+        "map_coverage": 1.0,
+        "contact_ready": 8,
+        "transport_active": 0,
+        "progress": 1.2,
+        "target_distance": 1.2,
+        "estimated_speed": 0.05847290790010239,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "hold_guards": {
+        "agent_count": 16,
+        "informed_agents": 16,
+        "map_coverage": 1.0,
+        "contact_ready": 8,
+        "transport_active": 0,
+        "progress": 1.2,
+        "target_distance": 1.2,
+        "estimated_speed": 0.017067122088804752,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "physical_translation_m": [
+        0.0,
+        0.0
+      ],
+      "team_displacement_change_m": [
+        0.006215835057433061,
+        -0.0015338825389268097
+      ],
+      "remove_noncommon_previous_voters_m": [
+        0.0,
+        0.0
+      ],
+      "common_readout_change_m": [
+        0.006215835057433061,
+        -0.0015338825389268097
+      ],
+      "add_noncommon_current_voters_m": [
+        0.0,
+        0.0
+      ],
+      "removed": [],
+      "added": [],
+      "common": [
+        "agent_00",
+        "agent_01",
+        "agent_02",
+        "agent_03",
+        "agent_04",
+        "agent_05",
+        "agent_06",
+        "agent_07",
+        "agent_08",
+        "agent_09",
+        "agent_10",
+        "agent_11",
+        "agent_12",
+        "agent_13",
+        "agent_14",
+        "agent_15"
+      ],
+      "endpoint_error_m": 0.022557255944765105,
+      "task_completed": true,
+      "input_receipt_sha256": "2820dcf939fc3f08b43ad3bea4128b93a6ca6b5f3f5239b991823ba9fb48bd92"
+    },
+    {
+      "case_id": "near_ellipse_parallel_boundary_cvt_candidate",
+      "condition": "near_ellipse_parallel",
+      "arm": "candidate",
+      "status": "EXACT_ENDPOINT_ACCOUNTING",
+      "hold_control_frame": 241,
+      "seconds": 12.05,
+      "previous_estimated_goal_error_m": 0.022691875118849746,
+      "hold_estimated_goal_error_m": 0.019658315384192694,
+      "hold_true_goal_error_m": 0.016571633702319188,
+      "controller_arrival_band_m": 0.02,
+      "previous_guards": {
+        "agent_count": 16,
+        "informed_agents": 16,
+        "map_coverage": 0.9722222222222222,
+        "contact_ready": 5,
+        "transport_active": 3,
+        "progress": 1.1973081248811501,
+        "target_distance": 1.2,
+        "estimated_speed": 0.024992547942067084,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "hold_guards": {
+        "agent_count": 16,
+        "informed_agents": 16,
+        "map_coverage": 0.9722222222222222,
+        "contact_ready": 4,
+        "transport_active": 3,
+        "progress": 1.2,
+        "target_distance": 1.2,
+        "estimated_speed": 0.019001167789428817,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "physical_translation_m": [
+        -6.609405234048182e-05,
+        -0.0009671463915026379
+      ],
+      "team_displacement_change_m": [
+        -0.0026936402173802776,
+        -0.0015191182014132592
+      ],
+      "remove_noncommon_previous_voters_m": [
+        0.0,
+        0.0
+      ],
+      "common_readout_change_m": [
+        -0.0026936402173802776,
+        -0.0015191182014132592
+      ],
+      "add_noncommon_current_voters_m": [
+        0.0,
+        0.0
+      ],
+      "removed": [],
+      "added": [],
+      "common": [
+        "agent_00",
+        "agent_01",
+        "agent_02",
+        "agent_03",
+        "agent_04",
+        "agent_05",
+        "agent_06",
+        "agent_07",
+        "agent_08",
+        "agent_09",
+        "agent_10",
+        "agent_11",
+        "agent_12",
+        "agent_13",
+        "agent_14",
+        "agent_15"
+      ],
+      "endpoint_error_m": 0.016571633702319188,
+      "task_completed": true,
+      "input_receipt_sha256": "87331f596b8c5df2308e79964a8f46ebb685db6a8900047b9b68749a89e51e2b"
+    },
+    {
+      "case_id": "far_c_open_away_pos1_boundary_cvt_reference",
+      "condition": "far_c_open_away_pos1",
+      "arm": "reference",
+      "status": "EXACT_ENDPOINT_ACCOUNTING",
+      "hold_control_frame": 1101,
+      "seconds": 55.050000000000004,
+      "previous_estimated_goal_error_m": 0.0523049069407797,
+      "hold_estimated_goal_error_m": 0.017588809264241966,
+      "hold_true_goal_error_m": 0.07412679528901053,
+      "controller_arrival_band_m": 0.02,
+      "previous_guards": {
+        "agent_count": 16,
+        "informed_agents": 12,
+        "map_coverage": 1.0,
+        "contact_ready": 7,
+        "transport_active": 1,
+        "progress": 1.1676950930592203,
+        "target_distance": 1.2,
+        "estimated_speed": 0.010488223587529983,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "hold_guards": {
+        "agent_count": 16,
+        "informed_agents": 12,
+        "map_coverage": 1.0,
+        "contact_ready": 6,
+        "transport_active": 2,
+        "progress": 1.2,
+        "target_distance": 1.2,
+        "estimated_speed": 0.019281205735762797,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "physical_translation_m": [
+        0.0,
+        0.0
+      ],
+      "team_displacement_change_m": [
+        -0.03472550289795895,
+        -0.0016594989178224141
+      ],
+      "remove_noncommon_previous_voters_m": [
+        -0.03216600480624909,
+        -0.0023305415438526524
+      ],
+      "common_readout_change_m": [
+        -0.0025594980917098553,
+        -0.0010845512840676336
+      ],
+      "add_noncommon_current_voters_m": [
+        0.0,
+        0.0017555939100978718
+      ],
+      "removed": [
+        "agent_10"
+      ],
+      "added": [
+        "agent_14",
+        "agent_15"
+      ],
+      "common": [
+        "agent_04",
+        "agent_05",
+        "agent_06",
+        "agent_07",
+        "agent_08",
+        "agent_09",
+        "agent_11",
+        "agent_12",
+        "agent_13"
+      ],
+      "endpoint_error_m": 0.07412679528901053,
+      "task_completed": true,
+      "input_receipt_sha256": "2aa5251f04756b84db4f71f8a208a556cfe587f8ba8fb8b4d3b4cce88c7d5860"
+    },
+    {
+      "case_id": "near_ellipse_perpendicular_boundary_cvt_candidate",
+      "condition": "near_ellipse_perpendicular",
+      "arm": "candidate",
+      "status": "EXACT_ENDPOINT_ACCOUNTING",
+      "hold_control_frame": 271,
+      "seconds": 13.55,
+      "previous_estimated_goal_error_m": 0.011860926017127299,
+      "hold_estimated_goal_error_m": 0.015931645579638144,
+      "hold_true_goal_error_m": 0.0065979263349055855,
+      "controller_arrival_band_m": 0.02,
+      "previous_guards": {
+        "agent_count": 16,
+        "informed_agents": 16,
+        "map_coverage": 1.0,
+        "contact_ready": 8,
+        "transport_active": 1,
+        "progress": 1.2,
+        "target_distance": 1.2,
+        "estimated_speed": 0.027409915042994733,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "hold_guards": {
+        "agent_count": 16,
+        "informed_agents": 16,
+        "map_coverage": 1.0,
+        "contact_ready": 8,
+        "transport_active": 2,
+        "progress": 1.2,
+        "target_distance": 1.2,
+        "estimated_speed": 0.005515050251377703,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "physical_translation_m": [
+        0.0,
+        0.0
+      ],
+      "team_displacement_change_m": [
+        -0.000943127809974742,
+        0.004392604921597879
+      ],
+      "remove_noncommon_previous_voters_m": [
+        0.0,
+        0.0
+      ],
+      "common_readout_change_m": [
+        -0.000943127809974742,
+        0.004392604921597879
+      ],
+      "add_noncommon_current_voters_m": [
+        0.0,
+        0.0
+      ],
+      "removed": [],
+      "added": [],
+      "common": [
+        "agent_00",
+        "agent_01",
+        "agent_02",
+        "agent_03",
+        "agent_04",
+        "agent_05",
+        "agent_06",
+        "agent_07",
+        "agent_08",
+        "agent_09",
+        "agent_10",
+        "agent_11",
+        "agent_12",
+        "agent_13",
+        "agent_14",
+        "agent_15"
+      ],
+      "endpoint_error_m": 0.0065979263349055855,
+      "task_completed": true,
+      "input_receipt_sha256": "6f6bdcdd2f755b06cf02b88f4ce2a88e221bb4b3141d40e31e16561d9a496b04"
+    },
+    {
+      "case_id": "near_circle_boundary_cvt_reference",
+      "condition": "near_circle",
+      "arm": "reference",
+      "status": "EXACT_ENDPOINT_ACCOUNTING",
+      "hold_control_frame": 232,
+      "seconds": 11.600000000000001,
+      "previous_estimated_goal_error_m": 0.001996472104889477,
+      "hold_estimated_goal_error_m": 0.0023976859813589486,
+      "hold_true_goal_error_m": 0.007515724686079414,
+      "controller_arrival_band_m": 0.02,
+      "previous_guards": {
+        "agent_count": 16,
+        "informed_agents": 16,
+        "map_coverage": 0.8888888888888888,
+        "contact_ready": 5,
+        "transport_active": 0,
+        "progress": 1.2,
+        "target_distance": 1.2,
+        "estimated_speed": 0.020666815159483556,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "hold_guards": {
+        "agent_count": 16,
+        "informed_agents": 16,
+        "map_coverage": 0.8888888888888888,
+        "contact_ready": 5,
+        "transport_active": 0,
+        "progress": 1.2,
+        "target_distance": 1.2,
+        "estimated_speed": 0.017141451014849172,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "physical_translation_m": [
+        0.0,
+        0.0
+      ],
+      "team_displacement_change_m": [
+        -0.0013390436746840706,
+        0.0005460303006618681
+      ],
+      "remove_noncommon_previous_voters_m": [
+        -0.0008763096259640779,
+        -0.0009846954053916047
+      ],
+      "common_readout_change_m": [
+        -0.0004627340487199927,
+        0.0015307257060534728
+      ],
+      "add_noncommon_current_voters_m": [
+        0.0,
+        0.0
+      ],
+      "removed": [
+        "agent_01"
+      ],
+      "added": [],
+      "common": [
+        "agent_00",
+        "agent_03",
+        "agent_04",
+        "agent_05",
+        "agent_06",
+        "agent_07",
+        "agent_10",
+        "agent_13"
+      ],
+      "endpoint_error_m": 0.007515724686079414,
+      "task_completed": true,
+      "input_receipt_sha256": "708e2bdd993e8acb2507a4324bde929bc9de7255bcb2ffd7744ae61d94415aff"
+    },
+    {
+      "case_id": "near_ellipse_parallel_boundary_cvt_reference",
+      "condition": "near_ellipse_parallel",
+      "arm": "reference",
+      "status": "EXACT_ENDPOINT_ACCOUNTING",
+      "hold_control_frame": 303,
+      "seconds": 15.15,
+      "previous_estimated_goal_error_m": 0.02161759069150603,
+      "hold_estimated_goal_error_m": 0.01930537619557207,
+      "hold_true_goal_error_m": 0.020744191950541974,
+      "controller_arrival_band_m": 0.02,
+      "previous_guards": {
+        "agent_count": 16,
+        "informed_agents": 16,
+        "map_coverage": 1.0,
+        "contact_ready": 4,
+        "transport_active": 1,
+        "progress": 1.1983824093084938,
+        "target_distance": 1.2,
+        "estimated_speed": 0.010565482826404076,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "hold_guards": {
+        "agent_count": 16,
+        "informed_agents": 16,
+        "map_coverage": 1.0,
+        "contact_ready": 6,
+        "transport_active": 1,
+        "progress": 1.2,
+        "target_distance": 1.2,
+        "estimated_speed": 0.019131992317032234,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "physical_translation_m": [
+        0.0,
+        0.0
+      ],
+      "team_displacement_change_m": [
+        -0.0017832957412671213,
+        -0.001614580653968481
+      ],
+      "remove_noncommon_previous_voters_m": [
+        0.0,
+        0.0
+      ],
+      "common_readout_change_m": [
+        -0.0017832957412671213,
+        -0.001614580653968481
+      ],
+      "add_noncommon_current_voters_m": [
+        0.0,
+        0.0
+      ],
+      "removed": [],
+      "added": [],
+      "common": [
+        "agent_00",
+        "agent_01",
+        "agent_02",
+        "agent_03",
+        "agent_04",
+        "agent_05",
+        "agent_06",
+        "agent_07",
+        "agent_08",
+        "agent_09",
+        "agent_10",
+        "agent_11",
+        "agent_12",
+        "agent_13",
+        "agent_14",
+        "agent_15"
+      ],
+      "endpoint_error_m": 0.020744191950541974,
+      "task_completed": true,
+      "input_receipt_sha256": "fe8cfb9114759415ce0d8412a2ae29a1c4aaaec50dfba47d369d3cac6ce76a4b"
+    },
+    {
+      "case_id": "near_skew_box_s1_r90_boundary_cvt_reference",
+      "condition": "near_skew_box_s1_r90",
+      "arm": "reference",
+      "status": "EXACT_ENDPOINT_ACCOUNTING",
+      "hold_control_frame": 266,
+      "seconds": 13.3,
+      "previous_estimated_goal_error_m": 0.02519998248027977,
+      "hold_estimated_goal_error_m": 0.019886776092318148,
+      "hold_true_goal_error_m": 0.06345696728630244,
+      "controller_arrival_band_m": 0.02,
+      "previous_guards": {
+        "agent_count": 16,
+        "informed_agents": 16,
+        "map_coverage": 1.0,
+        "contact_ready": 5,
+        "transport_active": 2,
+        "progress": 1.1948000175197202,
+        "target_distance": 1.2,
+        "estimated_speed": 0.008521971933406494,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "hold_guards": {
+        "agent_count": 16,
+        "informed_agents": 16,
+        "map_coverage": 1.0,
+        "contact_ready": 6,
+        "transport_active": 2,
+        "progress": 1.2,
+        "target_distance": 1.2,
+        "estimated_speed": 0.018608412577859813,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "physical_translation_m": [
+        -0.0004405758779748581,
+        0.0015382327158302012
+      ],
+      "team_displacement_change_m": [
+        0.0018575170836756527,
+        0.005401563120772258
+      ],
+      "remove_noncommon_previous_voters_m": [
+        0.0,
+        0.0
+      ],
+      "common_readout_change_m": [
+        0.0018575170836756527,
+        0.005401563120772258
+      ],
+      "add_noncommon_current_voters_m": [
+        0.0,
+        0.0
+      ],
+      "removed": [],
+      "added": [],
+      "common": [
+        "agent_00",
+        "agent_01",
+        "agent_02",
+        "agent_03",
+        "agent_04",
+        "agent_05",
+        "agent_06",
+        "agent_07",
+        "agent_08",
+        "agent_09",
+        "agent_10",
+        "agent_11",
+        "agent_12",
+        "agent_13",
+        "agent_14",
+        "agent_15"
+      ],
+      "endpoint_error_m": 0.06340114514481959,
+      "task_completed": true,
+      "input_receipt_sha256": "0e509e7c1362966bbe0c24d2ff8f9537c62a647617588a9a01ae9045011d34ef"
+    },
+    {
+      "case_id": "near_c_open_away_boundary_cvt_reference",
+      "condition": "near_c_open_away",
+      "arm": "reference",
+      "status": "EXACT_ENDPOINT_ACCOUNTING",
+      "hold_control_frame": 220,
+      "seconds": 11.0,
+      "previous_estimated_goal_error_m": 0.017776816540076082,
+      "hold_estimated_goal_error_m": 0.019863046593955224,
+      "hold_true_goal_error_m": 0.02300819379820288,
+      "controller_arrival_band_m": 0.02,
+      "previous_guards": {
+        "agent_count": 16,
+        "informed_agents": 16,
+        "map_coverage": 0.9722222222222222,
+        "contact_ready": 7,
+        "transport_active": 0,
+        "progress": 1.2,
+        "target_distance": 1.2,
+        "estimated_speed": 0.026343019578627995,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "hold_guards": {
+        "agent_count": 16,
+        "informed_agents": 16,
+        "map_coverage": 0.9722222222222222,
+        "contact_ready": 8,
+        "transport_active": 0,
+        "progress": 1.2,
+        "target_distance": 1.2,
+        "estimated_speed": 0.018327353289758097,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "physical_translation_m": [
+        0.0,
+        0.0
+      ],
+      "team_displacement_change_m": [
+        0.0014430821581665754,
+        -0.0016346195680287702
+      ],
+      "remove_noncommon_previous_voters_m": [
+        0.0,
+        0.0
+      ],
+      "common_readout_change_m": [
+        0.0014430821581665754,
+        -0.0016346195680287702
+      ],
+      "add_noncommon_current_voters_m": [
+        0.0,
+        0.0
+      ],
+      "removed": [],
+      "added": [],
+      "common": [
+        "agent_00",
+        "agent_01",
+        "agent_02",
+        "agent_03",
+        "agent_04",
+        "agent_05",
+        "agent_06",
+        "agent_07",
+        "agent_08",
+        "agent_09",
+        "agent_10",
+        "agent_11",
+        "agent_12",
+        "agent_13",
+        "agent_14",
+        "agent_15"
+      ],
+      "endpoint_error_m": 0.02300819379820288,
+      "task_completed": true,
+      "input_receipt_sha256": "5eb18580ee5aa43fd762c99f34f1375c41e0086908ee0cfea3165a1c8a9084ea"
+    },
+    {
+      "case_id": "near_skew_box_s1_r90_boundary_cvt_candidate",
+      "condition": "near_skew_box_s1_r90",
+      "arm": "candidate",
+      "status": "EXACT_ENDPOINT_ACCOUNTING",
+      "hold_control_frame": 236,
+      "seconds": 11.8,
+      "previous_estimated_goal_error_m": 0.021353820692762242,
+      "hold_estimated_goal_error_m": 0.01965091653489178,
+      "hold_true_goal_error_m": 0.06282094013935524,
+      "controller_arrival_band_m": 0.02,
+      "previous_guards": {
+        "agent_count": 16,
+        "informed_agents": 16,
+        "map_coverage": 1.0,
+        "contact_ready": 10,
+        "transport_active": 6,
+        "progress": 1.1986461793072376,
+        "target_distance": 1.2,
+        "estimated_speed": 0.0022391217900766033,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "hold_guards": {
+        "agent_count": 16,
+        "informed_agents": 16,
+        "map_coverage": 1.0,
+        "contact_ready": 10,
+        "transport_active": 7,
+        "progress": 1.2,
+        "target_distance": 1.2,
+        "estimated_speed": 0.006528226693351937,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "physical_translation_m": [
+        0.0,
+        0.0
+      ],
+      "team_displacement_change_m": [
+        -0.0014558141519673828,
+        0.003766312938784641
+      ],
+      "remove_noncommon_previous_voters_m": [
+        0.0,
+        0.0
+      ],
+      "common_readout_change_m": [
+        -0.0014558141519673828,
+        0.003766312938784641
+      ],
+      "add_noncommon_current_voters_m": [
+        0.0,
+        0.0
+      ],
+      "removed": [],
+      "added": [],
+      "common": [
+        "agent_00",
+        "agent_01",
+        "agent_02",
+        "agent_03",
+        "agent_04",
+        "agent_05",
+        "agent_06",
+        "agent_07",
+        "agent_08",
+        "agent_09",
+        "agent_10",
+        "agent_11",
+        "agent_12",
+        "agent_13",
+        "agent_14",
+        "agent_15"
+      ],
+      "endpoint_error_m": 0.06282094013935524,
+      "task_completed": true,
+      "input_receipt_sha256": "bec434c9d4b1925a7d799e50e90b1bcbdb6126050a6a54ccdfa1206f69ce7595"
+    },
+    {
+      "case_id": "near_circle_boundary_cvt_candidate",
+      "condition": "near_circle",
+      "arm": "candidate",
+      "status": "EXACT_ENDPOINT_ACCOUNTING",
+      "hold_control_frame": 279,
+      "seconds": 13.950000000000001,
+      "previous_estimated_goal_error_m": 0.020294952198815136,
+      "hold_estimated_goal_error_m": 0.019780387130297835,
+      "hold_true_goal_error_m": 0.019148005056892906,
+      "controller_arrival_band_m": 0.02,
+      "previous_guards": {
+        "agent_count": 16,
+        "informed_agents": 16,
+        "map_coverage": 0.8888888888888888,
+        "contact_ready": 12,
+        "transport_active": 6,
+        "progress": 1.1997050478011848,
+        "target_distance": 1.2,
+        "estimated_speed": 0.012714379774289348,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "hold_guards": {
+        "agent_count": 16,
+        "informed_agents": 16,
+        "map_coverage": 0.8888888888888888,
+        "contact_ready": 11,
+        "transport_active": 4,
+        "progress": 1.2,
+        "target_distance": 1.2,
+        "estimated_speed": 0.0151497995832487,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "physical_translation_m": [
+        0.0,
+        0.0
+      ],
+      "team_displacement_change_m": [
+        -0.0007101856361122483,
+        0.0014116610356869792
+      ],
+      "remove_noncommon_previous_voters_m": [
+        0.0,
+        0.0
+      ],
+      "common_readout_change_m": [
+        -0.0007101856361122483,
+        0.0014116610356869792
+      ],
+      "add_noncommon_current_voters_m": [
+        0.0,
+        0.0
+      ],
+      "removed": [],
+      "added": [],
+      "common": [
+        "agent_00",
+        "agent_01",
+        "agent_02",
+        "agent_03",
+        "agent_04",
+        "agent_05",
+        "agent_06",
+        "agent_07",
+        "agent_08",
+        "agent_09",
+        "agent_10",
+        "agent_11",
+        "agent_12",
+        "agent_13",
+        "agent_14",
+        "agent_15"
+      ],
+      "endpoint_error_m": 0.019148005056892906,
+      "task_completed": true,
+      "input_receipt_sha256": "e75770f5c70df3cad533bd0d61cb8274cf5677ef06604ce5b13932ec28b6121b"
+    },
+    {
+      "case_id": "far_c_open_away_pos0_boundary_cvt_candidate",
+      "condition": "far_c_open_away_pos0",
+      "arm": "candidate",
+      "status": "EXACT_ENDPOINT_ACCOUNTING",
+      "hold_control_frame": 1468,
+      "seconds": 73.4,
+      "previous_estimated_goal_error_m": 0.06319163068878883,
+      "hold_estimated_goal_error_m": 0.016715761608908423,
+      "hold_true_goal_error_m": 0.07740908703872568,
+      "controller_arrival_band_m": 0.02,
+      "previous_guards": {
+        "agent_count": 16,
+        "informed_agents": 15,
+        "map_coverage": 1.0,
+        "contact_ready": 5,
+        "transport_active": 2,
+        "progress": 1.1568083693112112,
+        "target_distance": 1.2,
+        "estimated_speed": 0.014694770465507616,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "hold_guards": {
+        "agent_count": 16,
+        "informed_agents": 15,
+        "map_coverage": 0.9722222222222222,
+        "contact_ready": 4,
+        "transport_active": 2,
+        "progress": 1.2,
+        "target_distance": 1.2,
+        "estimated_speed": 0.014039720784183835,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "physical_translation_m": [
+        0.0,
+        0.0
+      ],
+      "team_displacement_change_m": [
+        -0.062350351432644,
+        0.004319553060792729
+      ],
+      "remove_noncommon_previous_voters_m": [
+        -0.03284536367107016,
+        0.004557071611570304
+      ],
+      "common_readout_change_m": [
+        0.0002181549792936721,
+        -0.0034350373785643866
+      ],
+      "add_noncommon_current_voters_m": [
+        -0.029723142740867514,
+        0.003197518827786811
+      ],
+      "removed": [
+        "agent_08"
+      ],
+      "added": [
+        "agent_12"
+      ],
+      "common": [
+        "agent_00",
+        "agent_01",
+        "agent_02",
+        "agent_03",
+        "agent_05",
+        "agent_06",
+        "agent_07",
+        "agent_09",
+        "agent_10",
+        "agent_11",
+        "agent_13",
+        "agent_14"
+      ],
+      "endpoint_error_m": 0.07740908703872568,
+      "task_completed": true,
+      "input_receipt_sha256": "ebbf3b6b5e907ff6dea93caf31560b66fd56133f0bff422db0e3bbc1962ec6c5"
+    },
+    {
+      "case_id": "far_circle_pos0_boundary_cvt_reference",
+      "condition": "far_circle_pos0",
+      "arm": "reference",
+      "status": "EXACT_ENDPOINT_ACCOUNTING",
+      "hold_control_frame": 998,
+      "seconds": 49.900000000000006,
+      "previous_estimated_goal_error_m": 0.02337604228703812,
+      "hold_estimated_goal_error_m": 0.019153973955546414,
+      "hold_true_goal_error_m": 0.0350780309404147,
+      "controller_arrival_band_m": 0.02,
+      "previous_guards": {
+        "agent_count": 16,
+        "informed_agents": 14,
+        "map_coverage": 1.0,
+        "contact_ready": 5,
+        "transport_active": 1,
+        "progress": 1.1966239577129618,
+        "target_distance": 1.2,
+        "estimated_speed": 0.00935901469962031,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "hold_guards": {
+        "agent_count": 16,
+        "informed_agents": 14,
+        "map_coverage": 1.0,
+        "contact_ready": 5,
+        "transport_active": 2,
+        "progress": 1.2,
+        "target_distance": 1.2,
+        "estimated_speed": 0.013275644054946164,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "physical_translation_m": [
+        0.0,
+        0.0
+      ],
+      "team_displacement_change_m": [
+        -0.0031985354980239578,
+        -0.004458194911930393
+      ],
+      "remove_noncommon_previous_voters_m": [
+        0.0,
+        0.0
+      ],
+      "common_readout_change_m": [
+        -0.0031985354980239578,
+        -0.00030168318059734314
+      ],
+      "add_noncommon_current_voters_m": [
+        0.0,
+        -0.0041565117313330496
+      ],
+      "removed": [],
+      "added": [
+        "agent_04",
+        "agent_12"
+      ],
+      "common": [
+        "agent_01",
+        "agent_02",
+        "agent_03",
+        "agent_05",
+        "agent_06",
+        "agent_07",
+        "agent_08",
+        "agent_09",
+        "agent_10",
+        "agent_11",
+        "agent_13",
+        "agent_14"
+      ],
+      "endpoint_error_m": 0.0350780309404147,
+      "task_completed": true,
+      "input_receipt_sha256": "b7ee8d99c78b1c6c694c5e829e6abd10bb73d0d5619803ebee5bde9e5ed7873f"
+    },
+    {
+      "case_id": "near_l_reference_boundary_cvt_reference",
+      "condition": "near_l_reference",
+      "arm": "reference",
+      "status": "EXACT_ENDPOINT_ACCOUNTING",
+      "hold_control_frame": 277,
+      "seconds": 13.850000000000001,
+      "previous_estimated_goal_error_m": 0.015165053883652874,
+      "hold_estimated_goal_error_m": 0.01634309012478648,
+      "hold_true_goal_error_m": 0.020208940229057344,
+      "controller_arrival_band_m": 0.02,
+      "previous_guards": {
+        "agent_count": 16,
+        "informed_agents": 16,
+        "map_coverage": 1.0,
+        "contact_ready": 8,
+        "transport_active": 0,
+        "progress": 1.2,
+        "target_distance": 1.2,
+        "estimated_speed": 0.0318580144534496,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "hold_guards": {
+        "agent_count": 16,
+        "informed_agents": 16,
+        "map_coverage": 1.0,
+        "contact_ready": 8,
+        "transport_active": 0,
+        "progress": 1.2,
+        "target_distance": 1.2,
+        "estimated_speed": 0.004424090673937409,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "physical_translation_m": [
+        0.0,
+        0.0
+      ],
+      "team_displacement_change_m": [
+        -0.0021218827206688218,
+        -0.0018680783917291981
+      ],
+      "remove_noncommon_previous_voters_m": [
+        0.0,
+        0.0
+      ],
+      "common_readout_change_m": [
+        -0.0021218827206688218,
+        -0.0018680783917291981
+      ],
+      "add_noncommon_current_voters_m": [
+        0.0,
+        0.0
+      ],
+      "removed": [],
+      "added": [],
+      "common": [
+        "agent_00",
+        "agent_01",
+        "agent_02",
+        "agent_03",
+        "agent_04",
+        "agent_05",
+        "agent_06",
+        "agent_07",
+        "agent_08",
+        "agent_09",
+        "agent_10",
+        "agent_11",
+        "agent_12",
+        "agent_13",
+        "agent_14",
+        "agent_15"
+      ],
+      "endpoint_error_m": 0.020208940229057344,
+      "task_completed": true,
+      "input_receipt_sha256": "60f35b26e211ded49da4cdf5479c25bd0ae02c4b36d77b23fbd72b7d62ba61c7"
+    },
+    {
+      "case_id": "far_circle_pos0_boundary_cvt_candidate",
+      "condition": "far_circle_pos0",
+      "arm": "candidate",
+      "status": "EXACT_ENDPOINT_ACCOUNTING",
+      "hold_control_frame": 1098,
+      "seconds": 54.900000000000006,
+      "previous_estimated_goal_error_m": 0.0266993995152381,
+      "hold_estimated_goal_error_m": 0.019692538640732626,
+      "hold_true_goal_error_m": 0.0007788175976591705,
+      "controller_arrival_band_m": 0.02,
+      "previous_guards": {
+        "agent_count": 16,
+        "informed_agents": 14,
+        "map_coverage": 1.0,
+        "contact_ready": 7,
+        "transport_active": 0,
+        "progress": 1.193300600484762,
+        "target_distance": 1.2,
+        "estimated_speed": 0.012349186530722735,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "hold_guards": {
+        "agent_count": 16,
+        "informed_agents": 14,
+        "map_coverage": 1.0,
+        "contact_ready": 6,
+        "transport_active": 1,
+        "progress": 1.2,
+        "target_distance": 1.2,
+        "estimated_speed": 0.019988359593143545,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "physical_translation_m": [
+        0.0,
+        0.0
+      ],
+      "team_displacement_change_m": [
+        -0.0065013980662496085,
+        0.005319338515873434
+      ],
+      "remove_noncommon_previous_voters_m": [
+        0.0,
+        0.0
+      ],
+      "common_readout_change_m": [
+        -0.000490049825253136,
+        0.0016374574424247168
+      ],
+      "add_noncommon_current_voters_m": [
+        -0.0060113482409964725,
+        0.0036818810734487173
+      ],
+      "removed": [],
+      "added": [
+        "agent_08",
+        "agent_12"
+      ],
+      "common": [
+        "agent_01",
+        "agent_02",
+        "agent_03",
+        "agent_04",
+        "agent_05",
+        "agent_06",
+        "agent_07",
+        "agent_09",
+        "agent_10",
+        "agent_11",
+        "agent_13",
+        "agent_14"
+      ],
+      "endpoint_error_m": 0.0007788175976591705,
+      "task_completed": true,
+      "input_receipt_sha256": "521251ef19f0c1c17bd8010a7327bd6e2caad0d93bbaba31d768878863f783a1"
+    },
+    {
+      "case_id": "near_u_tray_s0_r90_boundary_cvt_reference",
+      "condition": "near_u_tray_s0_r90",
+      "arm": "reference",
+      "status": "EXACT_ENDPOINT_ACCOUNTING",
+      "hold_control_frame": 264,
+      "seconds": 13.200000000000001,
+      "previous_estimated_goal_error_m": 0.02530128357540239,
+      "hold_estimated_goal_error_m": 0.01809469286211795,
+      "hold_true_goal_error_m": 0.003985912848708353,
+      "controller_arrival_band_m": 0.02,
+      "previous_guards": {
+        "agent_count": 16,
+        "informed_agents": 16,
+        "map_coverage": 0.9444444444444444,
+        "contact_ready": 11,
+        "transport_active": 2,
+        "progress": 1.1946987164245975,
+        "target_distance": 1.2,
+        "estimated_speed": 0.045081770979332296,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "hold_guards": {
+        "agent_count": 16,
+        "informed_agents": 16,
+        "map_coverage": 0.9444444444444444,
+        "contact_ready": 9,
+        "transport_active": 2,
+        "progress": 1.2,
+        "target_distance": 1.2,
+        "estimated_speed": 0.011955609706260884,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "physical_translation_m": [
+        -0.0003755172445920607,
+        0.003546240532599221
+      ],
+      "team_displacement_change_m": [
+        0.0084787440823626,
+        0.0006385596707792224
+      ],
+      "remove_noncommon_previous_voters_m": [
+        0.01573789527620173,
+        0.0038413089250198366
+      ],
+      "common_readout_change_m": [
+        1.8685801336237873e-05,
+        -0.0011573711618932843
+      ],
+      "add_noncommon_current_voters_m": [
+        -0.0072778369951753685,
+        -0.00204537809234733
+      ],
+      "removed": [
+        "agent_07",
+        "agent_09"
+      ],
+      "added": [
+        "agent_08"
+      ],
+      "common": [
+        "agent_00",
+        "agent_01",
+        "agent_02",
+        "agent_03",
+        "agent_04",
+        "agent_05",
+        "agent_06",
+        "agent_10",
+        "agent_11",
+        "agent_13"
+      ],
+      "endpoint_error_m": 0.0038074767355313517,
+      "task_completed": true,
+      "input_receipt_sha256": "4ad8214e5d3077bf7be90f1c3ab7f3fd542a4de9a085baa4265cd9aae83860ce"
+    },
+    {
+      "case_id": "near_rectangle_parallel_boundary_cvt_candidate",
+      "condition": "near_rectangle_parallel",
+      "arm": "candidate",
+      "status": "EXACT_ENDPOINT_ACCOUNTING",
+      "hold_control_frame": 227,
+      "seconds": 11.350000000000001,
+      "previous_estimated_goal_error_m": 0.017054664045692683,
+      "hold_estimated_goal_error_m": 0.018573965929203774,
+      "hold_true_goal_error_m": 0.01281738536822963,
+      "controller_arrival_band_m": 0.02,
+      "previous_guards": {
+        "agent_count": 16,
+        "informed_agents": 16,
+        "map_coverage": 1.0,
+        "contact_ready": 9,
+        "transport_active": 1,
+        "progress": 1.2,
+        "target_distance": 1.2,
+        "estimated_speed": 0.021423598206991815,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "hold_guards": {
+        "agent_count": 16,
+        "informed_agents": 16,
+        "map_coverage": 1.0,
+        "contact_ready": 10,
+        "transport_active": 1,
+        "progress": 1.2,
+        "target_distance": 1.2,
+        "estimated_speed": 0.010041745864536636,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "physical_translation_m": [
+        0.0,
+        0.0
+      ],
+      "team_displacement_change_m": [
+        -1.5904631543328662e-05,
+        0.0015944584324048133
+      ],
+      "remove_noncommon_previous_voters_m": [
+        0.0,
+        0.0
+      ],
+      "common_readout_change_m": [
+        -1.5904631543328662e-05,
+        0.0015944584324048133
+      ],
+      "add_noncommon_current_voters_m": [
+        0.0,
+        0.0
+      ],
+      "removed": [],
+      "added": [],
+      "common": [
+        "agent_00",
+        "agent_01",
+        "agent_02",
+        "agent_03",
+        "agent_04",
+        "agent_05",
+        "agent_06",
+        "agent_07",
+        "agent_08",
+        "agent_09",
+        "agent_10",
+        "agent_11",
+        "agent_12",
+        "agent_13",
+        "agent_14",
+        "agent_15"
+      ],
+      "endpoint_error_m": 0.01281738536822963,
+      "task_completed": true,
+      "input_receipt_sha256": "ad97c09b7dd6278d45d7c77dbfc22c28842d852ec79a4a9197d7307febfdf9e7"
+    },
+    {
+      "case_id": "near_rectangle_parallel_boundary_cvt_reference",
+      "condition": "near_rectangle_parallel",
+      "arm": "reference",
+      "status": "EXACT_ENDPOINT_ACCOUNTING",
+      "hold_control_frame": 329,
+      "seconds": 16.45,
+      "previous_estimated_goal_error_m": 0.009693932552996005,
+      "hold_estimated_goal_error_m": 0.009978234587712662,
+      "hold_true_goal_error_m": 0.010743248211099019,
+      "controller_arrival_band_m": 0.02,
+      "previous_guards": {
+        "agent_count": 16,
+        "informed_agents": 16,
+        "map_coverage": 1.0,
+        "contact_ready": 9,
+        "transport_active": 0,
+        "progress": 1.2,
+        "target_distance": 1.2,
+        "estimated_speed": 0.024742876851459036,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "hold_guards": {
+        "agent_count": 16,
+        "informed_agents": 16,
+        "map_coverage": 1.0,
+        "contact_ready": 9,
+        "transport_active": 1,
+        "progress": 1.2,
+        "target_distance": 1.2,
+        "estimated_speed": 0.0156488633533643,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "physical_translation_m": [
+        0.0,
+        0.0
+      ],
+      "team_displacement_change_m": [
+        -0.00026048837344161413,
+        -0.0012369036084061433
+      ],
+      "remove_noncommon_previous_voters_m": [
+        0.0,
+        0.0
+      ],
+      "common_readout_change_m": [
+        -0.00026048837344161413,
+        -0.0012369036084061433
+      ],
+      "add_noncommon_current_voters_m": [
+        0.0,
+        0.0
+      ],
+      "removed": [],
+      "added": [],
+      "common": [
+        "agent_00",
+        "agent_01",
+        "agent_02",
+        "agent_03",
+        "agent_04",
+        "agent_05",
+        "agent_06",
+        "agent_07",
+        "agent_08",
+        "agent_09",
+        "agent_10",
+        "agent_11",
+        "agent_12",
+        "agent_13",
+        "agent_14",
+        "agent_15"
+      ],
+      "endpoint_error_m": 0.010743248211099019,
+      "task_completed": true,
+      "input_receipt_sha256": "3c7e6e1b2e24b7e1a67b5bdf0f01dd963ce791dc590e80e75f00cfc7f9a1c1c8"
+    },
+    {
+      "case_id": "near_c_open_away_boundary_cvt_candidate",
+      "condition": "near_c_open_away",
+      "arm": "candidate",
+      "status": "EXACT_ENDPOINT_ACCOUNTING",
+      "hold_control_frame": 198,
+      "seconds": 9.9,
+      "previous_estimated_goal_error_m": 0.020290187030531134,
+      "hold_estimated_goal_error_m": 0.018835791219853248,
+      "hold_true_goal_error_m": 0.03880422431865691,
+      "controller_arrival_band_m": 0.02,
+      "previous_guards": {
+        "agent_count": 16,
+        "informed_agents": 16,
+        "map_coverage": 1.0,
+        "contact_ready": 10,
+        "transport_active": 4,
+        "progress": 1.1997098129694688,
+        "target_distance": 1.2,
+        "estimated_speed": 0.02095403862183757,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "hold_guards": {
+        "agent_count": 16,
+        "informed_agents": 16,
+        "map_coverage": 1.0,
+        "contact_ready": 9,
+        "transport_active": 4,
+        "progress": 1.2,
+        "target_distance": 1.2,
+        "estimated_speed": 0.007986309148453394,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "physical_translation_m": [
+        0.0,
+        0.0
+      ],
+      "team_displacement_change_m": [
+        -0.001609575813451336,
+        0.0003203110870115683
+      ],
+      "remove_noncommon_previous_voters_m": [
+        0.0,
+        0.0
+      ],
+      "common_readout_change_m": [
+        -0.001609575813451336,
+        0.0003203110870115683
+      ],
+      "add_noncommon_current_voters_m": [
+        0.0,
+        0.0
+      ],
+      "removed": [],
+      "added": [],
+      "common": [
+        "agent_00",
+        "agent_01",
+        "agent_02",
+        "agent_03",
+        "agent_04",
+        "agent_05",
+        "agent_06",
+        "agent_07",
+        "agent_08",
+        "agent_09",
+        "agent_10",
+        "agent_11",
+        "agent_12",
+        "agent_13",
+        "agent_14",
+        "agent_15"
+      ],
+      "endpoint_error_m": 0.03880422431865691,
+      "task_completed": true,
+      "input_receipt_sha256": "f829875a57b7db697ae548924c9e1f9e284a296076fe0980d30830a3f680ddc8"
+    },
+    {
+      "case_id": "far_skew_box_s0_r0_pos0_boundary_cvt_candidate",
+      "condition": "far_skew_box_s0_r0_pos0",
+      "arm": "candidate",
+      "status": "EXACT_ENDPOINT_ACCOUNTING",
+      "hold_control_frame": 1745,
+      "seconds": 87.25,
+      "previous_estimated_goal_error_m": 0.0413314366587388,
+      "hold_estimated_goal_error_m": 0.018157704980053344,
+      "hold_true_goal_error_m": 0.1351061190171348,
+      "controller_arrival_band_m": 0.02,
+      "previous_guards": {
+        "agent_count": 16,
+        "informed_agents": 15,
+        "map_coverage": 0.9444444444444444,
+        "contact_ready": 10,
+        "transport_active": 6,
+        "progress": 1.1786685633412612,
+        "target_distance": 1.2,
+        "estimated_speed": 0.01214966812541736,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "hold_guards": {
+        "agent_count": 16,
+        "informed_agents": 15,
+        "map_coverage": 0.9166666666666666,
+        "contact_ready": 10,
+        "transport_active": 6,
+        "progress": 1.2,
+        "target_distance": 1.2,
+        "estimated_speed": 0.00713727132743299,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "physical_translation_m": [
+        0.0,
+        0.0
+      ],
+      "team_displacement_change_m": [
+        -0.05308448061802129,
+        0.0011419536228351145
+      ],
+      "remove_noncommon_previous_voters_m": [
+        -0.04925156321254276,
+        0.0014418954471566488
+      ],
+      "common_readout_change_m": [
+        -0.003832917405478531,
+        -0.0002999418243215344
+      ],
+      "add_noncommon_current_voters_m": [
+        0.0,
+        0.0
+      ],
+      "removed": [
+        "agent_03"
+      ],
+      "added": [],
+      "common": [
+        "agent_00",
+        "agent_01",
+        "agent_02",
+        "agent_04",
+        "agent_05",
+        "agent_06",
+        "agent_07",
+        "agent_08",
+        "agent_09",
+        "agent_10",
+        "agent_11",
+        "agent_12",
+        "agent_13",
+        "agent_14"
+      ],
+      "endpoint_error_m": 0.1351061190171348,
+      "task_completed": false,
+      "input_receipt_sha256": "2868e22a421c35f066497ffdeca4eed48cd83286a6131fea6193d41d08e9732e"
+    },
+    {
+      "case_id": "far_c_open_away_pos1_boundary_cvt_candidate",
+      "condition": "far_c_open_away_pos1",
+      "arm": "candidate",
+      "status": "EXACT_ENDPOINT_ACCOUNTING",
+      "hold_control_frame": 976,
+      "seconds": 48.800000000000004,
+      "previous_estimated_goal_error_m": 0.035770078710115755,
+      "hold_estimated_goal_error_m": 0.01750703089800732,
+      "hold_true_goal_error_m": 0.014810838502036293,
+      "controller_arrival_band_m": 0.02,
+      "previous_guards": {
+        "agent_count": 16,
+        "informed_agents": 12,
+        "map_coverage": 1.0,
+        "contact_ready": 4,
+        "transport_active": 0,
+        "progress": 1.1842299212898841,
+        "target_distance": 1.2,
+        "estimated_speed": 0.025690436145399478,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "hold_guards": {
+        "agent_count": 16,
+        "informed_agents": 12,
+        "map_coverage": 1.0,
+        "contact_ready": 4,
+        "transport_active": 0,
+        "progress": 1.2,
+        "target_distance": 1.2,
+        "estimated_speed": 0.011717749546094756,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "physical_translation_m": [
+        0.0,
+        0.0
+      ],
+      "team_displacement_change_m": [
+        0.01823753950799123,
+        0.00206546725416391
+      ],
+      "remove_noncommon_previous_voters_m": [
+        0.0,
+        0.0
+      ],
+      "common_readout_change_m": [
+        -0.0012185273222218296,
+        -0.0006269550792056197
+      ],
+      "add_noncommon_current_voters_m": [
+        0.01945606683021306,
+        0.0026924223333695298
+      ],
+      "removed": [],
+      "added": [
+        "agent_09"
+      ],
+      "common": [
+        "agent_04",
+        "agent_05",
+        "agent_06",
+        "agent_07",
+        "agent_08",
+        "agent_10",
+        "agent_11",
+        "agent_12",
+        "agent_13",
+        "agent_14",
+        "agent_15"
+      ],
+      "endpoint_error_m": 0.014810838502036293,
+      "task_completed": true,
+      "input_receipt_sha256": "1e5c7d43dfcd1a5c6f5bf6c91a46d142dad01f950d0093d31ea4a3dccaed90c8"
+    },
+    {
+      "case_id": "near_l_reference_boundary_cvt_candidate",
+      "condition": "near_l_reference",
+      "arm": "candidate",
+      "status": "EXACT_ENDPOINT_ACCOUNTING",
+      "hold_control_frame": 353,
+      "seconds": 17.650000000000002,
+      "previous_estimated_goal_error_m": 0.020643437222541465,
+      "hold_estimated_goal_error_m": 0.019107897856921727,
+      "hold_true_goal_error_m": 0.008433050706511073,
+      "controller_arrival_band_m": 0.02,
+      "previous_guards": {
+        "agent_count": 16,
+        "informed_agents": 16,
+        "map_coverage": 1.0,
+        "contact_ready": 7,
+        "transport_active": 2,
+        "progress": 1.1993565627774585,
+        "target_distance": 1.2,
+        "estimated_speed": 0.014290042603458664,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "hold_guards": {
+        "agent_count": 16,
+        "informed_agents": 16,
+        "map_coverage": 1.0,
+        "contact_ready": 4,
+        "transport_active": 2,
+        "progress": 1.2,
+        "target_distance": 1.2,
+        "estimated_speed": 0.006845107443283442,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "physical_translation_m": [
+        0.0,
+        0.0
+      ],
+      "team_displacement_change_m": [
+        -0.0009803889365935792,
+        -0.001807970361726901
+      ],
+      "remove_noncommon_previous_voters_m": [
+        0.0,
+        0.0
+      ],
+      "common_readout_change_m": [
+        -0.0009803889365935792,
+        -0.001807970361726901
+      ],
+      "add_noncommon_current_voters_m": [
+        0.0,
+        0.0
+      ],
+      "removed": [],
+      "added": [],
+      "common": [
+        "agent_00",
+        "agent_01",
+        "agent_02",
+        "agent_03",
+        "agent_04",
+        "agent_05",
+        "agent_06",
+        "agent_07",
+        "agent_08",
+        "agent_09",
+        "agent_10",
+        "agent_11",
+        "agent_12",
+        "agent_13",
+        "agent_14",
+        "agent_15"
+      ],
+      "endpoint_error_m": 0.008433050706511073,
+      "task_completed": true,
+      "input_receipt_sha256": "52d3210cacfc3b2c3d04b81929b029beebea171e1de0911eeba607708a42864e"
+    },
+    {
+      "case_id": "near_ellipse_perpendicular_boundary_cvt_reference",
+      "condition": "near_ellipse_perpendicular",
+      "arm": "reference",
+      "status": "EXACT_ENDPOINT_ACCOUNTING",
+      "hold_control_frame": 263,
+      "seconds": 13.15,
+      "previous_estimated_goal_error_m": 0.02070241888631576,
+      "hold_estimated_goal_error_m": 0.019864685965465582,
+      "hold_true_goal_error_m": 0.008110937071570047,
+      "controller_arrival_band_m": 0.02,
+      "previous_guards": {
+        "agent_count": 16,
+        "informed_agents": 16,
+        "map_coverage": 1.0,
+        "contact_ready": 8,
+        "transport_active": 2,
+        "progress": 1.1992975811136841,
+        "target_distance": 1.2,
+        "estimated_speed": 0.010168252217951246,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "hold_guards": {
+        "agent_count": 16,
+        "informed_agents": 16,
+        "map_coverage": 1.0,
+        "contact_ready": 7,
+        "transport_active": 2,
+        "progress": 1.2,
+        "target_distance": 1.2,
+        "estimated_speed": 0.0025211713746185623,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "physical_translation_m": [
+        0.0,
+        0.0
+      ],
+      "team_displacement_change_m": [
+        0.00028878001337528936,
+        -0.0012348021860722688
+      ],
+      "remove_noncommon_previous_voters_m": [
+        0.0,
+        0.0
+      ],
+      "common_readout_change_m": [
+        0.00028878001337528936,
+        -0.0012348021860722688
+      ],
+      "add_noncommon_current_voters_m": [
+        0.0,
+        0.0
+      ],
+      "removed": [],
+      "added": [],
+      "common": [
+        "agent_00",
+        "agent_01",
+        "agent_02",
+        "agent_03",
+        "agent_04",
+        "agent_05",
+        "agent_06",
+        "agent_07",
+        "agent_08",
+        "agent_09",
+        "agent_10",
+        "agent_11",
+        "agent_12",
+        "agent_13",
+        "agent_14",
+        "agent_15"
+      ],
+      "endpoint_error_m": 0.008110937071570047,
+      "task_completed": true,
+      "input_receipt_sha256": "68b6f73277cc4ed5e659da398333d0910a7a311f9e461aa5e2af361eff96e627"
+    },
+    {
+      "case_id": "far_skew_box_s0_r0_pos0_boundary_cvt_reference",
+      "condition": "far_skew_box_s0_r0_pos0",
+      "arm": "reference",
+      "status": "EXACT_ENDPOINT_ACCOUNTING",
+      "hold_control_frame": 1292,
+      "seconds": 64.60000000000001,
+      "previous_estimated_goal_error_m": 0.29888115906505236,
+      "hold_estimated_goal_error_m": 0.016763836022589667,
+      "hold_true_goal_error_m": 0.9361231353335226,
+      "controller_arrival_band_m": 0.02,
+      "previous_guards": {
+        "agent_count": 16,
+        "informed_agents": 15,
+        "map_coverage": 1.0,
+        "contact_ready": 10,
+        "transport_active": 6,
+        "progress": 0.9211188409349476,
+        "target_distance": 1.2,
+        "estimated_speed": 0.005028459109803316,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "hold_guards": {
+        "agent_count": 16,
+        "informed_agents": 15,
+        "map_coverage": 1.0,
+        "contact_ready": 9,
+        "transport_active": 6,
+        "progress": 1.2,
+        "target_distance": 1.2,
+        "estimated_speed": 0.003233458003108716,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "physical_translation_m": [
+        0.0,
+        0.0
+      ],
+      "team_displacement_change_m": [
+        0.2918186309927653,
+        -0.0024432015355350598
+      ],
+      "remove_noncommon_previous_voters_m": [
+        0.12599797330273854,
+        -0.023690105416522722
+      ],
+      "common_readout_change_m": [
+        0.0030767391157040525,
+        -0.002253705443699461
+      ],
+      "add_noncommon_current_voters_m": [
+        0.1627439185743227,
+        0.023500609324687123
+      ],
+      "removed": [
+        "agent_10"
+      ],
+      "added": [
+        "agent_08",
+        "agent_12",
+        "agent_13"
+      ],
+      "common": [
+        "agent_03",
+        "agent_05"
+      ],
+      "endpoint_error_m": 0.9361231353335226,
+      "task_completed": false,
+      "input_receipt_sha256": "eafc443a302961fadcc269372540c742c507919447f36dd323cc8b1aeb554d93"
+    }
+  ],
+  "scope": "Post-hoc explanation of all 24 CVT first-HOLD transitions, not another experiment or independent statistical samples.",
+  "formula": "M(B,t1)-M(A,t0)=[M(C,t0)-M(A,t0)]+[M(C,t1)-M(C,t0)]+[M(B,t1)-M(C,t1)], C=A intersect B",
+  "timing": "Controller frame k is row index k with post-physics receipt.frame=k+1; use replay centers[k] for the control input.",
+  "limitation": "The common-voter population is selected using two recorded endpoints offline. This is accounting, not proof of bias-free readout or a deployable replacement; earlier accumulated errors remain.",
+  "script_sha256": "bccff41cbaedd11098c1c19a20cbc38c34266bf5d8e4b7937e51f7dc2879c193"
+}

@@ -1,0 +1,33 @@
+{
+  "stage": "near",
+  "cases": [
+    "skew_box_s0_r0_boundary_cvt",
+    "skew_box_s0_r0_local_spacing",
+    "skew_box_s0_r0_nearest_observed_target",
+    "skew_box_s0_r0_detection_density_cvt"
+  ],
+  "selection": "Fixed first skew geometry / position-0 three-geometry pairs; outcomes not used for selection",
+  "simulation_dt_s": 0.05,
+  "simulation_hz": 20.0,
+  "physical_sample_interval_s": 1.0,
+  "playback_fps": 10.0,
+  "nominal_speedup": 10.0,
+  "rendered_frames": 602,
+  "render_wall_seconds": 226.52685720002046,
+  "render_frames_per_second": 2.657521529416008,
+  "alignment": "Shared physical time, latest real state; terminal pane frozen and labelled ENDED with true terminal time. Estimate is previous control readout, not truth.",
+  "input_sha256": {
+    "experiments/ccta2027/cargo_near_v1.json": "c214af1eb7f2753a041601c6749dd0fa690ae013a5ec89446ece43ff4ebbe03b",
+    "artifacts/research/2026-11-02-cargo-discovery-v1/near-analysis/analysis.json": "561bbcc10a110cd28de25fba2aa99979ed6ca751a8ae9eba985de8c66cdd47ed",
+    "artifacts/research/2026-11-02-cargo-discovery-v1/near-analysis/plot_data.json": "66bc06545587c59c5b09c3409b68ce8951b9a39c8567095aa18f51f0c9cd82e5",
+    "runs/research/2026-11-02-cargo-discovery-v1/near/skew_box_s0_r0_boundary_cvt/replay.npz": "fbc83b7e6699302abf4d9227ed257ee812110d6e0497d137ffe474ca139c6547",
+    "runs/research/2026-11-02-cargo-discovery-v1/near/skew_box_s0_r0_local_spacing/replay.npz": "258d541790960ae0c091e5f49482fa763572c46e0d881ce185f4b4a4b849699e",
+    "runs/research/2026-11-02-cargo-discovery-v1/near/skew_box_s0_r0_nearest_observed_target/replay.npz": "f35b833e98cabb0a1d81ec384f3184b92b599923c11ba43147a166d5cec4b26d",
+    "runs/research/2026-11-02-cargo-discovery-v1/near/skew_box_s0_r0_detection_density_cvt/replay.npz": "8ffd367cbfdf75d8abe21692887aaa511484d8aa0251eb1608f7727c087214fe"
+  },
+  "source_sha256": "a723f465052b66dfb59ef80b8cc20bcae2770b4dd22bae3547e4e4de3231737d",
+  "output_sha256": {
+    "artifacts/research/2026-11-02-cargo-discovery-v1/media/near_synchronized.mp4": "0208fdf01b820f65420302cb6b1243fee1c03e86b677467a80639c77c068ddab",
+    "artifacts/research/2026-11-02-cargo-discovery-v1/media/near_preview.gif": "914015f67f5eb1292aa9e7eceff40d011330627c982739fb79fe472e2fe10f30"
+  }
+}

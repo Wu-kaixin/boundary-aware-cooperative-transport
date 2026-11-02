@@ -1,0 +1,325 @@
+{
+  "case": "ellipse_parallel_patch",
+  "receipt_sha256": "a07b1bc3cfea30025403e6e9cc6acf561c2ab1a69e30c84759f124c2ea7fcfee",
+  "phase_gates": {
+    "informed_fraction": 0.55,
+    "map_coverage_min": 0.7,
+    "contact_quorum": 4,
+    "contact_dwell": 20,
+    "transport_quorum": 4,
+    "brake_fraction": 0.65,
+    "hold_tolerance": 0.0,
+    "hold_speed": 0.02,
+    "hold_dwell": 1,
+    "sustain_contacts": 1,
+    "contact_loss_dwell": 20,
+    "contact_regain_dwell": 20,
+    "pause_limit": 80,
+    "estimate_loss_dwell": 20,
+    "recover_on_brake_progress": false
+  },
+  "controller_arrival_band": 0.02,
+  "physical_tolerance": 0.12,
+  "first_true_goal_band_s": 297.45000000003336,
+  "goal_band_frames": 6052,
+  "max_physical_goal_and_quiet_streak_frames": 957,
+  "physical_goal_and_quiet_frames": 5919,
+  "controller_arrived_frames": 0,
+  "controller_slow_frames": 11060,
+  "all_hold_gates_frames": 0,
+  "max_all_hold_gates_streak_frames": 0,
+  "within_true_goal_controller_arrival_fail_frames": 6052,
+  "within_true_goal_controller_speed_fail_frames": 315,
+  "final_true_goal_error": 0.039751739199272225,
+  "final_true_speed": 0.0,
+  "final_navigation": {
+    "displacement": [
+      1.1516196446555507,
+      -0.004178368198458952
+    ],
+    "velocity": [
+      0.012038897340326864,
+      0.004418259260253368
+    ],
+    "error": [
+      0.04838035534444929,
+      0.004178368198458952
+    ],
+    "remaining": 0.02856045246964937,
+    "voters": [
+      "agent_00",
+      "agent_01",
+      "agent_02",
+      "agent_03",
+      "agent_04",
+      "agent_05",
+      "agent_06",
+      "agent_07",
+      "agent_08",
+      "agent_09",
+      "agent_10",
+      "agent_11",
+      "agent_12",
+      "agent_13",
+      "agent_14",
+      "agent_15"
+    ]
+  },
+  "final_phase_guards": {
+    "agent_count": 16,
+    "informed_agents": 16,
+    "map_coverage": 1.0,
+    "contact_ready": 9,
+    "transport_active": 3,
+    "progress": 1.1714395475303505,
+    "target_distance": 1.2,
+    "estimated_speed": 0.012824042422798823,
+    "stopping_distance": 0.18333333333333335,
+    "estimate_quality": "credible",
+    "recovery_ready": null
+  },
+  "final_phase": "BRAKE",
+  "final_robot_diagnostics": [
+    {
+      "agent_id": "agent_00",
+      "push_side": false,
+      "navigation_error": [
+        0.04222614549741999,
+        0.002981572277998241
+      ],
+      "contact_distance_source": "accepted",
+      "contact_map_gap": 0.1644269939798274,
+      "contact_used_gap": 0.1822520737296558,
+      "reference_velocity": [
+        0.015247001606811052,
+        0.005319255062632148
+      ]
+    },
+    {
+      "agent_id": "agent_01",
+      "push_side": false,
+      "navigation_error": [
+        null,
+        null
+      ],
+      "contact_distance_source": "map",
+      "contact_map_gap": null,
+      "contact_used_gap": null,
+      "reference_velocity": [
+        0.021440138885278622,
+        0.0009171910639249308
+      ]
+    },
+    {
+      "agent_id": "agent_02",
+      "push_side": false,
+      "navigation_error": [
+        0.051260060432864574,
+        -0.002102388026824508
+      ],
+      "contact_distance_source": "accepted",
+      "contact_map_gap": 0.1877875623691602,
+      "contact_used_gap": 0.19138132684085601,
+      "reference_velocity": [
+        0.014335163015769536,
+        -0.00814763191516294
+      ]
+    },
+    {
+      "agent_id": "agent_03",
+      "push_side": false,
+      "navigation_error": [
+        0.04222614549741999,
+        0.002981572277998241
+      ],
+      "contact_distance_source": "accepted",
+      "contact_map_gap": 0.378838946972535,
+      "contact_used_gap": 0.4116293879672116,
+      "reference_velocity": [
+        0.013758759940435556,
+        0.006222885335188557
+      ]
+    },
+    {
+      "agent_id": "agent_04",
+      "push_side": true,
+      "navigation_error": [
+        0.05075388554861493,
+        0.008401642610996227
+      ],
+      "contact_distance_source": "accepted",
+      "contact_map_gap": 0.0974685156418314,
+      "contact_used_gap": 0.10109329733273349,
+      "reference_velocity": [
+        0.01312066050402656,
+        0.015956241494276942
+      ]
+    },
+    {
+      "agent_id": "agent_05",
+      "push_side": false,
+      "navigation_error": [
+        0.056007120841195634,
+        0.005546780788510144
+      ],
+      "contact_distance_source": "accepted",
+      "contact_map_gap": 0.11666266188980384,
+      "contact_used_gap": 0.11966274187781817,
+      "reference_velocity": [
+        0.01846441974700297,
+        0.0032733279146704986
+      ]
+    },
+    {
+      "agent_id": "agent_06",
+      "push_side": false,
+      "navigation_error": [
+        null,
+        null
+      ],
+      "contact_distance_source": "map",
+      "contact_map_gap": null,
+      "contact_used_gap": null,
+      "reference_velocity": [
+        -0.02008309255486157,
+        -0.005252608276115212
+      ]
+    },
+    {
+      "agent_id": "agent_07",
+      "push_side": true,
+      "navigation_error": [
+        0.045500650256034,
+        0.011256504433482308
+      ],
+      "contact_distance_source": "accepted",
+      "contact_map_gap": 0.1383513456518232,
+      "contact_used_gap": 0.14328502783526614,
+      "reference_velocity": [
+        5.655029926607703e-05,
+        0.015726408137615333
+      ]
+    },
+    {
+      "agent_id": "agent_08",
+      "push_side": true,
+      "navigation_error": [
+        0.03809083455379514,
+        0.011256504433482308
+      ],
+      "contact_distance_source": "accepted",
+      "contact_map_gap": 0.15321146247522432,
+      "contact_used_gap": 0.17726115173623055,
+      "reference_velocity": [
+        -0.005121347028067264,
+        0.004333780727738616
+      ]
+    },
+    {
+      "agent_id": "agent_09",
+      "push_side": false,
+      "navigation_error": [
+        0.05075388554861493,
+        0.005460972453714904
+      ],
+      "contact_distance_source": "accepted",
+      "contact_map_gap": 0.18319650282397906,
+      "contact_used_gap": 0.18662426375834482,
+      "reference_velocity": [
+        0.03580806746400765,
+        0.012936011235608686
+      ]
+    },
+    {
+      "agent_id": "agent_10",
+      "push_side": false,
+      "navigation_error": [
+        0.051260060432864574,
+        -0.002102388026824508
+      ],
+      "contact_distance_source": "no_interpolation",
+      "contact_map_gap": 0.3035365316838908,
+      "contact_used_gap": 0.3035365316838908,
+      "reference_velocity": [
+        0.010957134176627166,
+        -0.008704250037463914
+      ]
+    },
+    {
+      "agent_id": "agent_11",
+      "push_side": false,
+      "navigation_error": [
+        0.03612624936709907,
+        0.014813389563586729
+      ],
+      "contact_distance_source": "accepted",
+      "contact_map_gap": 0.23384562272482778,
+      "contact_used_gap": 0.24802683638926415,
+      "reference_velocity": [
+        -0.0062064825474006866,
+        0.007216442653616181
+      ]
+    },
+    {
+      "agent_id": "agent_12",
+      "push_side": false,
+      "navigation_error": [
+        0.05540820006556846,
+        -0.002102388026824508
+      ],
+      "contact_distance_source": "accepted",
+      "contact_map_gap": 0.28696079875191355,
+      "contact_used_gap": 0.30387144061774135,
+      "reference_velocity": [
+        0.006952306996535937,
+        0.004048439051194173
+      ]
+    },
+    {
+      "agent_id": "agent_13",
+      "push_side": false,
+      "navigation_error": [
+        0.05540820006556846,
+        -0.002102388026824508
+      ],
+      "contact_distance_source": "accepted",
+      "contact_map_gap": 0.17321644344506615,
+      "contact_used_gap": 0.1708643588374291,
+      "reference_velocity": [
+        0.031056074932038234,
+        -0.00018797490973335032
+      ]
+    },
+    {
+      "agent_id": "agent_14",
+      "push_side": true,
+      "navigation_error": [
+        0.03586433888173013,
+        0.010059776444951919
+      ],
+      "contact_distance_source": "accepted",
+      "contact_map_gap": 0.11993669129908262,
+      "contact_used_gap": 0.1375973532921083,
+      "reference_velocity": [
+        -0.006471609442047863,
+        0.009777056563292976
+      ]
+    },
+    {
+      "agent_id": "agent_15",
+      "push_side": false,
+      "navigation_error": [
+        0.045500650256034,
+        0.005546780788510144
+      ],
+      "contact_distance_source": "accepted",
+      "contact_map_gap": 0.0983069905932547,
+      "contact_used_gap": 0.10999814152853643,
+      "reference_velocity": [
+        -0.01199391450616249,
+        0.00450273779276812
+      ]
+    }
+  ],
+  "limits": "Independent post-physics goal/speed versus recorded controller guard inputs. A physical quiet interval without HOLD does not satisfy the original run termination. No threshold or historical outcome changed."
+}

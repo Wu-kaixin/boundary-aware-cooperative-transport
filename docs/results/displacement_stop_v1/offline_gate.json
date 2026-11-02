@@ -1,0 +1,46 @@
+{
+  "status": "PASS",
+  "frames": 12000,
+  "physical_trajectory": "Historical C-away vector-CVT, unchanged",
+  "evaluation_window_s": [
+    30,
+    600
+  ],
+  "paired_frames": 11400,
+  "availability": 1.0,
+  "original_same_admitted_frame_mae_m": 0.28192151897853807,
+  "candidate_mae_m": 0.011953557567764466,
+  "fractional_MAE_reduction": 0.9575996979192125,
+  "final_vector_error_m": 0.014437802276107374,
+  "final_truth": [
+    1.1849909612739662,
+    0.018301397449102197
+  ],
+  "final_reference_estimate": [
+    1.178533366974393,
+    0.031214553934876314
+  ],
+  "final_goal_error_m": 0.0378835678204863,
+  "bootstrap": {
+    "status": "NOT_SAVED: reporting-path exception after full replay; saved readouts reused without rerunning the estimator"
+  },
+  "wall_seconds": null,
+  "reporting_recovery": true,
+  "reasons": {
+    "accepted": 188242,
+    "before_contact_ready": 1232,
+    "bootstrap_only": 16,
+    "final_match_unobservable": 7,
+    "motion_bound_exceeded": 2365,
+    "not_initialized": 6,
+    "translation_unobservable": 132
+  },
+  "gate": "At least 25% same-input MAE reduction, final displacement error <= .12m, availability >= .9 after30s; frozen before implementation",
+  "limitations": "Reused selected development trajectory; no closed-loop result; observed-anchor displacement approximates center displacement under rotation; bootstrap bias remains",
+  "source_sha256": {
+    "scripts\\replay_observed_reference.py": "0142faa2691bdcf042aefeef7554daad007e568ef476fa12f016c725effd1bf7",
+    "src\\dbact\\control\\observed_reference.py": "373b68e2a45143a4b919e7d56a9f6d0643e89962c5dd0802a71b98fc8daacb88",
+    "artifacts\\research\\2026-11-01-displacement-stop-v1\\c-away-reconstruction\\audit.json": "cba3e7258f2585a2f8395b1c9273f3cbc800193c9e877ac3c140c2bc48a397da",
+    "artifacts\\research\\2026-11-01-displacement-stop-v1\\c-away-reconstruction\\reconstruction.npz": "76dc3a0114fa6d65baac9cfdf818995748f9dbb4bf7cb007688edd381bf31cc4"
+  }
+}

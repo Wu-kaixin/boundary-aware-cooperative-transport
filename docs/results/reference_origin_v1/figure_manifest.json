@@ -1,0 +1,61 @@
+{
+  "figures": {
+    "all_episodes": {
+      "caption": "All eight reused development condition blocks and three paired arms. Cells show safe task completion, Euclidean endpoint error, elapsed physical duration and the original G500 verdict. A failed episode duration is not a completion time. All episodes terminated before the fixed 600 s cap. No population reliability is inferred from these selected conditions.",
+      "inputs": {
+        "analysis.json": "bf5aa8de949b10e9b4ec8956b4d52e4758edc0f49c3d382a3090c69d006b2738"
+      },
+      "size_inches": [
+        7.2,
+        4.5
+      ],
+      "files": {
+        "pdf": "13b745bfb6a183111cd1ab23ddd9950fbf62b6ae29adb49e342474bdce4fdfab",
+        "svg": "2ad79a9a20e89e8baf7be5501d5684d704de0b111728b21280da9cc74d2867e0",
+        "png": "b5a41031410740a4bd117d47bb8f4754adabff4c217b3a5e5e4fa1b1129c2c6e"
+      }
+    },
+    "stop_and_bias": {
+      "caption": "All recorded control-time samples for the two preselected far-field conditions, without smoothing. From top: evaluator truth goal error, controller-used goal error, and signed x displacement error. Dotted lines mark the unchanged 0.12 m task tolerance and 0.02 m control arrival band; circles mark first HOLD. Curves stop at actual termination. These are different closed-loop trajectories, not a same-input estimator accuracy ranking.",
+      "inputs": {
+        "runs\\maintenance\\2026-11-02-reference-origin-v1\\timeseries\\far_c_open_away_pos0_reference.csv": "5f7bcf6691b1f92d8b89ab07b073c9f30baeffd73d629cc1c34acba8fcb0d5bd",
+        "runs\\maintenance\\2026-11-02-reference-origin-v1\\timeseries\\far_c_open_away_pos0_early_reference.csv": "394c8f12c94179c3cfadc4212906b5fc4ea27bb1edc08ef1e4548f8b9278988f",
+        "runs\\maintenance\\2026-11-02-reference-origin-v1\\timeseries\\far_c_open_away_pos0_unscaled_bootstrap.csv": "db476aaa0fe5910cd7efa9868b221274728dd16fbc4ca3a7dd031789b247e7f3",
+        "runs\\maintenance\\2026-11-02-reference-origin-v1\\timeseries\\far_skew_box_s0_r0_pos0_reference.csv": "18b306992885ea17b38420599fb5116b3cd6a204e35345396e09fc897495c715",
+        "runs\\maintenance\\2026-11-02-reference-origin-v1\\timeseries\\far_skew_box_s0_r0_pos0_early_reference.csv": "3db8a67223c57d582ac39237d573224b0fa1a2301669eecbd1d6ba5fefaebfce",
+        "runs\\maintenance\\2026-11-02-reference-origin-v1\\timeseries\\far_skew_box_s0_r0_pos0_unscaled_bootstrap.csv": "c2298e7062c60e95170a5a0ac003383d72dfe4be4e093610808211553a52b2d3"
+      },
+      "size_inches": [
+        7.2,
+        5.6
+      ],
+      "files": {
+        "pdf": "fb6dff3fefb8b3300b4d0deefcbdb9060ec15fd45951dcf74d0df7991628aca0",
+        "svg": "97f865d0a3a070058ed9627dd99a85c90959a7dbbf264970eb919d0cc27941ed",
+        "png": "6ffeceff4f592a93089943e85410868fe656a4f5935ec8ecedb2fb47af44961b"
+      }
+    },
+    "hold_error_components": {
+      "caption": "Exact signed error decomposition at first HOLD on each arm's own trajectory, using the actual recorded initialization and voter set. Nested coordinate medians separate bootstrap bias, rotation of the chosen material reference point relative to the evaluated object center, and the registration remainder. Signed components add to the diamond; their norms do not add. These correlated, order-dependent bookkeeping terms are not independent causal effects. Truth is used only offline.",
+      "inputs": {
+        "analysis.json": "bf5aa8de949b10e9b4ec8956b4d52e4758edc0f49c3d382a3090c69d006b2738"
+      },
+      "size_inches": [
+        7.2,
+        4.4
+      ],
+      "files": {
+        "pdf": "a44c126577a1897028e32f10a243b984e70d358b466e533f49237294de9945bd",
+        "svg": "887b25d3cc4d1b912f91307435eb87712990cb629a99709eb87bfcdf9f5192a7",
+        "png": "1374d6a43ee811467521fcfbf3a0ab1144c3ea3584449bb0265e00ff92cf7ad2"
+      }
+    }
+  },
+  "script_sha256": "28bca6d0b29a61447d7f2db0ec48a4e3f0f3dd2336f1033c2a78a27ad0a2a5d5",
+  "formats": [
+    "PDF embedded TrueType",
+    "SVG text",
+    "PNG 220dpi"
+  ],
+  "sampling": "Full recorded time samples, no smoothing. Eight paired development blocks; no per-frame uncertainty interval."
+}

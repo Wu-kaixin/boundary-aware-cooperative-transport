@@ -1,0 +1,1944 @@
+{
+  "far_skew_box_s0_r0_pos0_confirmation": {
+    "first_hold": null,
+    "status_counts": {
+      "disabled": 12000
+    },
+    "max_bridge_identity_residual_m": 0.0,
+    "same_input_samples": 11760,
+    "same_input_raw_MAE_m": 0.39475379363987734,
+    "same_input_used_MAE_m": 0.39475379363987734,
+    "max_guard_streak": 10,
+    "minimum_common_voters": null,
+    "one_common_voter_frames": 0,
+    "local_reanchors": 0,
+    "max_local_offset_m": 0.0,
+    "max_offset_m": 0.0
+  },
+  "far_skew_box_s0_r0_pos0_continuity": {
+    "first_hold": {
+      "control_frame": 1223,
+      "seconds": 61.150000000000006,
+      "true_goal_error_m": 0.4428748577238639,
+      "estimated_goal_error_m": 0.008336289748622383,
+      "estimate_error_vector_m": [
+        -0.44738153632681055,
+        -0.03311711566159295
+      ],
+      "raw_error_vector_m": [
+        -0.015127427314544306,
+        -0.03568202247995692
+      ],
+      "offset_m": [
+        -0.43225410901226613,
+        0.0025649068183639743
+      ],
+      "voters": [
+        "agent_00",
+        "agent_02",
+        "agent_04",
+        "agent_05",
+        "agent_06",
+        "agent_07",
+        "agent_08",
+        "agent_09",
+        "agent_10",
+        "agent_11",
+        "agent_12",
+        "agent_13",
+        "agent_14"
+      ],
+      "confirmation_streak": 1,
+      "guards": {
+        "agent_count": 16,
+        "informed_agents": 15,
+        "map_coverage": 1.0,
+        "contact_ready": 10,
+        "transport_active": 5,
+        "progress": 1.2,
+        "target_distance": 1.2,
+        "estimated_speed": 0.016801024395098688,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "false_hold": true
+    },
+    "status_counts": {
+      "no_readings": 240,
+      "initialized": 2,
+      "reanchored": 9,
+      "continuous": 1017
+    },
+    "max_bridge_identity_residual_m": 2.220446049250313e-16,
+    "same_input_samples": 1019,
+    "same_input_raw_MAE_m": 0.044302903569219496,
+    "same_input_used_MAE_m": 0.30583186270225343,
+    "max_guard_streak": 16,
+    "minimum_common_voters": 1,
+    "one_common_voter_frames": 15,
+    "local_reanchors": 83,
+    "max_local_offset_m": 0.9059745062847745,
+    "max_offset_m": 0.4610422955601243
+  },
+  "near_circle_combined": {
+    "first_hold": {
+      "control_frame": 287,
+      "seconds": 14.350000000000001,
+      "true_goal_error_m": 0.010309104099576612,
+      "estimated_goal_error_m": 0.01754457732794192,
+      "estimate_error_vector_m": [
+        0.0032516055465554583,
+        -0.014281653270762295
+      ],
+      "raw_error_vector_m": [
+        0.0028248123768317424,
+        -0.0028968041298450334
+      ],
+      "offset_m": [
+        0.00042679316972364656,
+        -0.011384849140917261
+      ],
+      "voters": [
+        "agent_00",
+        "agent_01",
+        "agent_02",
+        "agent_03",
+        "agent_05",
+        "agent_06",
+        "agent_07",
+        "agent_08",
+        "agent_09",
+        "agent_10",
+        "agent_11",
+        "agent_12",
+        "agent_13",
+        "agent_14",
+        "agent_15"
+      ],
+      "confirmation_streak": 20,
+      "guards": {
+        "agent_count": 16,
+        "informed_agents": 16,
+        "map_coverage": 0.8888888888888888,
+        "contact_ready": 14,
+        "transport_active": 2,
+        "progress": 1.2,
+        "target_distance": 1.2,
+        "estimated_speed": 0.0008041256445039909,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "false_hold": false
+    },
+    "status_counts": {
+      "no_readings": 2,
+      "initialized": 2,
+      "continuous": 323
+    },
+    "max_bridge_identity_residual_m": 1.1102230246251565e-16,
+    "same_input_samples": 325,
+    "same_input_raw_MAE_m": 0.00570910518805357,
+    "same_input_used_MAE_m": 0.010643326201823542,
+    "max_guard_streak": 59,
+    "minimum_common_voters": 4,
+    "one_common_voter_frames": 0,
+    "local_reanchors": 1,
+    "max_local_offset_m": 0.061437485338237174,
+    "max_offset_m": 0.016934846130443992
+  },
+  "near_ellipse_parallel_confirmation": {
+    "first_hold": {
+      "control_frame": 805,
+      "seconds": 40.25,
+      "true_goal_error_m": 0.016571633702319188,
+      "estimated_goal_error_m": 0.017007398178353214,
+      "estimate_error_vector_m": [
+        0.0058908036983549295,
+        -0.006447612371650039
+      ],
+      "raw_error_vector_m": [
+        0.0058908036983549295,
+        -0.006447612371650039
+      ],
+      "offset_m": [
+        0.0,
+        0.0
+      ],
+      "voters": [
+        "agent_00",
+        "agent_01",
+        "agent_02",
+        "agent_03",
+        "agent_04",
+        "agent_05",
+        "agent_06",
+        "agent_07",
+        "agent_08",
+        "agent_09",
+        "agent_10",
+        "agent_11",
+        "agent_12",
+        "agent_13",
+        "agent_14",
+        "agent_15"
+      ],
+      "confirmation_streak": 20,
+      "guards": {
+        "agent_count": 16,
+        "informed_agents": 16,
+        "map_coverage": 1.0,
+        "contact_ready": 12,
+        "transport_active": 0,
+        "progress": 1.2,
+        "target_distance": 1.2,
+        "estimated_speed": 0.0124843725216962,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "false_hold": false
+    },
+    "status_counts": {
+      "disabled": 845
+    },
+    "max_bridge_identity_residual_m": 0.0,
+    "same_input_samples": 843,
+    "same_input_raw_MAE_m": 0.006751015190130357,
+    "same_input_used_MAE_m": 0.006751015190130357,
+    "max_guard_streak": 35,
+    "minimum_common_voters": null,
+    "one_common_voter_frames": 0,
+    "local_reanchors": 0,
+    "max_local_offset_m": 0.0,
+    "max_offset_m": 0.0
+  },
+  "near_circle_continuity": {
+    "first_hold": {
+      "control_frame": 268,
+      "seconds": 13.4,
+      "true_goal_error_m": 0.010309104099576612,
+      "estimated_goal_error_m": 0.01629579612984867,
+      "estimate_error_vector_m": [
+        0.0015316001849479122,
+        -0.01428923470640737
+      ],
+      "raw_error_vector_m": [
+        0.00021829863631905866,
+        -0.004245159860251707
+      ],
+      "offset_m": [
+        0.0013133015486287841,
+        -0.010044074846155663
+      ],
+      "voters": [
+        "agent_00",
+        "agent_01",
+        "agent_02",
+        "agent_03",
+        "agent_04",
+        "agent_05",
+        "agent_06",
+        "agent_07",
+        "agent_08",
+        "agent_09",
+        "agent_10",
+        "agent_11",
+        "agent_12",
+        "agent_13",
+        "agent_14",
+        "agent_15"
+      ],
+      "confirmation_streak": 1,
+      "guards": {
+        "agent_count": 16,
+        "informed_agents": 16,
+        "map_coverage": 0.8888888888888888,
+        "contact_ready": 13,
+        "transport_active": 1,
+        "progress": 1.2,
+        "target_distance": 1.2,
+        "estimated_speed": 0.012682159346303668,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "false_hold": false
+    },
+    "status_counts": {
+      "no_readings": 2,
+      "initialized": 2,
+      "continuous": 304
+    },
+    "max_bridge_identity_residual_m": 1.1102230246251565e-16,
+    "same_input_samples": 306,
+    "same_input_raw_MAE_m": 0.0058511425284541625,
+    "same_input_used_MAE_m": 0.010693233312981207,
+    "max_guard_streak": 29,
+    "minimum_common_voters": 4,
+    "one_common_voter_frames": 0,
+    "local_reanchors": 1,
+    "max_local_offset_m": 0.061437485338237174,
+    "max_offset_m": 0.016934846130443992
+  },
+  "near_circle_reference": {
+    "first_hold": {
+      "control_frame": 279,
+      "seconds": 13.950000000000001,
+      "true_goal_error_m": 0.019148005056892906,
+      "estimated_goal_error_m": 0.019780387130297835,
+      "estimate_error_vector_m": [
+        0.001247040879363004,
+        -0.002436671613127815
+      ],
+      "raw_error_vector_m": [
+        0.001247040879363004,
+        -0.002436671613127815
+      ],
+      "offset_m": [
+        0.0,
+        0.0
+      ],
+      "voters": [
+        "agent_00",
+        "agent_01",
+        "agent_02",
+        "agent_03",
+        "agent_04",
+        "agent_05",
+        "agent_06",
+        "agent_07",
+        "agent_08",
+        "agent_09",
+        "agent_10",
+        "agent_11",
+        "agent_12",
+        "agent_13",
+        "agent_14",
+        "agent_15"
+      ],
+      "confirmation_streak": 1,
+      "guards": {
+        "agent_count": 16,
+        "informed_agents": 16,
+        "map_coverage": 0.8888888888888888,
+        "contact_ready": 11,
+        "transport_active": 4,
+        "progress": 1.2,
+        "target_distance": 1.2,
+        "estimated_speed": 0.0151497995832487,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "false_hold": false
+    },
+    "status_counts": {
+      "disabled": 319
+    },
+    "max_bridge_identity_residual_m": 0.0,
+    "same_input_samples": 317,
+    "same_input_raw_MAE_m": 0.006043859505991484,
+    "same_input_used_MAE_m": 0.006043859505991484,
+    "max_guard_streak": 5,
+    "minimum_common_voters": null,
+    "one_common_voter_frames": 0,
+    "local_reanchors": 0,
+    "max_local_offset_m": 0.0,
+    "max_offset_m": 0.0
+  },
+  "near_ellipse_parallel_combined": {
+    "first_hold": {
+      "control_frame": 305,
+      "seconds": 15.25,
+      "true_goal_error_m": 0.014643592255842011,
+      "estimated_goal_error_m": 0.01964057316609402,
+      "estimate_error_vector_m": [
+        0.005081456110469507,
+        0.006540148046735625
+      ],
+      "raw_error_vector_m": [
+        0.009434868994537382,
+        -0.00016385444033451338
+      ],
+      "offset_m": [
+        -0.004353412884067792,
+        0.006704002487070138
+      ],
+      "voters": [
+        "agent_00",
+        "agent_01",
+        "agent_02",
+        "agent_03",
+        "agent_04",
+        "agent_05",
+        "agent_06",
+        "agent_07",
+        "agent_08",
+        "agent_09",
+        "agent_10",
+        "agent_11",
+        "agent_12",
+        "agent_13",
+        "agent_14",
+        "agent_15"
+      ],
+      "confirmation_streak": 20,
+      "guards": {
+        "agent_count": 16,
+        "informed_agents": 16,
+        "map_coverage": 1.0,
+        "contact_ready": 12,
+        "transport_active": 3,
+        "progress": 1.2,
+        "target_distance": 1.2,
+        "estimated_speed": 0.018564317856949605,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "false_hold": false
+    },
+    "status_counts": {
+      "no_readings": 2,
+      "initialized": 2,
+      "continuous": 341
+    },
+    "max_bridge_identity_residual_m": 1.1102230246251565e-16,
+    "same_input_samples": 343,
+    "same_input_raw_MAE_m": 0.0067438365594491055,
+    "same_input_used_MAE_m": 0.008766134471827173,
+    "max_guard_streak": 33,
+    "minimum_common_voters": 5,
+    "one_common_voter_frames": 0,
+    "local_reanchors": 2,
+    "max_local_offset_m": 0.08482918764944103,
+    "max_offset_m": 0.018115100717293928
+  },
+  "near_ellipse_perpendicular_continuity": {
+    "first_hold": {
+      "control_frame": 270,
+      "seconds": 13.5,
+      "true_goal_error_m": 0.016796702430747813,
+      "estimated_goal_error_m": 0.013898040198089656,
+      "estimate_error_vector_m": [
+        0.0055905001868143955,
+        -0.0009671023928778701
+      ],
+      "raw_error_vector_m": [
+        0.006608179900957634,
+        0.007617590552798231
+      ],
+      "offset_m": [
+        -0.0010176797141433214,
+        -0.008584692945676101
+      ],
+      "voters": [
+        "agent_00",
+        "agent_01",
+        "agent_02",
+        "agent_03",
+        "agent_04",
+        "agent_05",
+        "agent_06",
+        "agent_07",
+        "agent_08",
+        "agent_09",
+        "agent_10",
+        "agent_11",
+        "agent_12",
+        "agent_13",
+        "agent_14",
+        "agent_15"
+      ],
+      "confirmation_streak": 1,
+      "guards": {
+        "agent_count": 16,
+        "informed_agents": 16,
+        "map_coverage": 1.0,
+        "contact_ready": 9,
+        "transport_active": 3,
+        "progress": 1.2,
+        "target_distance": 1.2,
+        "estimated_speed": 0.012759512266473533,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "false_hold": false
+    },
+    "status_counts": {
+      "no_readings": 2,
+      "initialized": 2,
+      "continuous": 306
+    },
+    "max_bridge_identity_residual_m": 1.1102230246251565e-16,
+    "same_input_samples": 308,
+    "same_input_raw_MAE_m": 0.00821313597884681,
+    "same_input_used_MAE_m": 0.00728266407664263,
+    "max_guard_streak": 16,
+    "minimum_common_voters": 5,
+    "one_common_voter_frames": 0,
+    "local_reanchors": 2,
+    "max_local_offset_m": 0.05289252322928151,
+    "max_offset_m": 0.021172296943687354
+  },
+  "near_l_reference_reference": {
+    "first_hold": {
+      "control_frame": 353,
+      "seconds": 17.650000000000002,
+      "true_goal_error_m": 0.008433050706511073,
+      "estimated_goal_error_m": 0.019107897856921727,
+      "estimate_error_vector_m": [
+        0.025675958519921327,
+        0.009732216134655303
+      ],
+      "raw_error_vector_m": [
+        0.025675958519921327,
+        0.009732216134655303
+      ],
+      "offset_m": [
+        0.0,
+        0.0
+      ],
+      "voters": [
+        "agent_00",
+        "agent_01",
+        "agent_02",
+        "agent_03",
+        "agent_04",
+        "agent_05",
+        "agent_06",
+        "agent_07",
+        "agent_08",
+        "agent_09",
+        "agent_10",
+        "agent_11",
+        "agent_12",
+        "agent_13",
+        "agent_14",
+        "agent_15"
+      ],
+      "confirmation_streak": 1,
+      "guards": {
+        "agent_count": 16,
+        "informed_agents": 16,
+        "map_coverage": 1.0,
+        "contact_ready": 4,
+        "transport_active": 2,
+        "progress": 1.2,
+        "target_distance": 1.2,
+        "estimated_speed": 0.006845107443283442,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "false_hold": false
+    },
+    "status_counts": {
+      "disabled": 393
+    },
+    "max_bridge_identity_residual_m": 0.0,
+    "same_input_samples": 391,
+    "same_input_raw_MAE_m": 0.02298611648206692,
+    "same_input_used_MAE_m": 0.02298611648206692,
+    "max_guard_streak": 18,
+    "minimum_common_voters": null,
+    "one_common_voter_frames": 0,
+    "local_reanchors": 0,
+    "max_local_offset_m": 0.0,
+    "max_offset_m": 0.0
+  },
+  "far_c_open_away_pos0_continuity": {
+    "first_hold": null,
+    "status_counts": {
+      "no_readings": 218,
+      "initialized": 2,
+      "reanchored": 10,
+      "continuous": 11770
+    },
+    "max_bridge_identity_residual_m": 2.220446049250313e-16,
+    "same_input_samples": 11772,
+    "same_input_raw_MAE_m": 0.5425325648952615,
+    "same_input_used_MAE_m": 0.4407641452339136,
+    "max_guard_streak": 0,
+    "minimum_common_voters": 1,
+    "one_common_voter_frames": 16,
+    "local_reanchors": 79,
+    "max_local_offset_m": 1.3229974780464406,
+    "max_offset_m": 0.2682398277091506
+  },
+  "far_c_open_away_pos0_reference": {
+    "first_hold": {
+      "control_frame": 1468,
+      "seconds": 73.4,
+      "true_goal_error_m": 0.07740908703872568,
+      "estimated_goal_error_m": 0.016715761608908423,
+      "estimate_error_vector_m": [
+        0.0754770622759302,
+        0.032106714851701516
+      ],
+      "raw_error_vector_m": [
+        0.0754770622759302,
+        0.032106714851701516
+      ],
+      "offset_m": [
+        0.0,
+        0.0
+      ],
+      "voters": [
+        "agent_00",
+        "agent_01",
+        "agent_02",
+        "agent_03",
+        "agent_05",
+        "agent_06",
+        "agent_07",
+        "agent_09",
+        "agent_10",
+        "agent_11",
+        "agent_12",
+        "agent_13",
+        "agent_14"
+      ],
+      "confirmation_streak": 1,
+      "guards": {
+        "agent_count": 16,
+        "informed_agents": 15,
+        "map_coverage": 0.9722222222222222,
+        "contact_ready": 4,
+        "transport_active": 2,
+        "progress": 1.2,
+        "target_distance": 1.2,
+        "estimated_speed": 0.014039720784183835,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "false_hold": false
+    },
+    "status_counts": {
+      "disabled": 1508
+    },
+    "max_bridge_identity_residual_m": 0.0,
+    "same_input_samples": 1290,
+    "same_input_raw_MAE_m": 0.10491737866366249,
+    "same_input_used_MAE_m": 0.10491737866366249,
+    "max_guard_streak": 2,
+    "minimum_common_voters": null,
+    "one_common_voter_frames": 0,
+    "local_reanchors": 0,
+    "max_local_offset_m": 0.0,
+    "max_offset_m": 0.0
+  },
+  "near_c_open_away_continuity": {
+    "first_hold": {
+      "control_frame": 339,
+      "seconds": 16.95,
+      "true_goal_error_m": 0.04180965320291275,
+      "estimated_goal_error_m": 0.0197443571929517,
+      "estimate_error_vector_m": [
+        0.042262084057050675,
+        -0.015855184689935235
+      ],
+      "raw_error_vector_m": [
+        0.023510251087467626,
+        0.013680034483177443
+      ],
+      "offset_m": [
+        0.018751832969583077,
+        -0.02953521917311268
+      ],
+      "voters": [
+        "agent_00",
+        "agent_01",
+        "agent_02",
+        "agent_03",
+        "agent_04",
+        "agent_05",
+        "agent_06",
+        "agent_07",
+        "agent_08",
+        "agent_09",
+        "agent_10",
+        "agent_11",
+        "agent_12",
+        "agent_13",
+        "agent_14",
+        "agent_15"
+      ],
+      "confirmation_streak": 1,
+      "guards": {
+        "agent_count": 16,
+        "informed_agents": 16,
+        "map_coverage": 0.9722222222222222,
+        "contact_ready": 4,
+        "transport_active": 2,
+        "progress": 1.2,
+        "target_distance": 1.2,
+        "estimated_speed": 0.012721535323718334,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "false_hold": false
+    },
+    "status_counts": {
+      "no_readings": 3,
+      "initialized": 2,
+      "continuous": 371,
+      "reanchored": 3
+    },
+    "max_bridge_identity_residual_m": 5.551115123125783e-17,
+    "same_input_samples": 373,
+    "same_input_raw_MAE_m": 0.02494538774108459,
+    "same_input_used_MAE_m": 0.02772421399714899,
+    "max_guard_streak": 2,
+    "minimum_common_voters": 1,
+    "one_common_voter_frames": 2,
+    "local_reanchors": 65,
+    "max_local_offset_m": 0.2590689332633426,
+    "max_offset_m": 0.07665850352790449
+  },
+  "far_c_open_away_pos0_combined": {
+    "first_hold": null,
+    "status_counts": {
+      "no_readings": 218,
+      "initialized": 2,
+      "reanchored": 10,
+      "continuous": 11770
+    },
+    "max_bridge_identity_residual_m": 2.220446049250313e-16,
+    "same_input_samples": 11772,
+    "same_input_raw_MAE_m": 0.5425325648952615,
+    "same_input_used_MAE_m": 0.4407641452339136,
+    "max_guard_streak": 0,
+    "minimum_common_voters": 1,
+    "one_common_voter_frames": 16,
+    "local_reanchors": 79,
+    "max_local_offset_m": 1.3229974780464406,
+    "max_offset_m": 0.2682398277091506
+  },
+  "near_circle_confirmation": {
+    "first_hold": {
+      "control_frame": 606,
+      "seconds": 30.3,
+      "true_goal_error_m": 0.018495924577113135,
+      "estimated_goal_error_m": 0.016500036537132848,
+      "estimate_error_vector_m": [
+        0.0006662816235523117,
+        -0.004843921271571841
+      ],
+      "raw_error_vector_m": [
+        0.0006662816235523117,
+        -0.004843921271571841
+      ],
+      "offset_m": [
+        0.0,
+        0.0
+      ],
+      "voters": [
+        "agent_00",
+        "agent_01",
+        "agent_02",
+        "agent_03",
+        "agent_04",
+        "agent_05",
+        "agent_06",
+        "agent_07",
+        "agent_08",
+        "agent_09",
+        "agent_10",
+        "agent_11",
+        "agent_12",
+        "agent_13",
+        "agent_14",
+        "agent_15"
+      ],
+      "confirmation_streak": 20,
+      "guards": {
+        "agent_count": 16,
+        "informed_agents": 16,
+        "map_coverage": 0.8888888888888888,
+        "contact_ready": 15,
+        "transport_active": 2,
+        "progress": 1.2,
+        "target_distance": 1.2,
+        "estimated_speed": 0.011576728522310592,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "false_hold": false
+    },
+    "status_counts": {
+      "disabled": 646
+    },
+    "max_bridge_identity_residual_m": 0.0,
+    "same_input_samples": 644,
+    "same_input_raw_MAE_m": 0.005558450347343142,
+    "same_input_used_MAE_m": 0.005558450347343142,
+    "max_guard_streak": 50,
+    "minimum_common_voters": null,
+    "one_common_voter_frames": 0,
+    "local_reanchors": 0,
+    "max_local_offset_m": 0.0,
+    "max_offset_m": 0.0
+  },
+  "near_ellipse_parallel_reference": {
+    "first_hold": {
+      "control_frame": 241,
+      "seconds": 12.05,
+      "true_goal_error_m": 0.016571633702319188,
+      "estimated_goal_error_m": 0.019658315384192694,
+      "estimate_error_vector_m": [
+        0.005157247859590708,
+        -0.0005089824166417973
+      ],
+      "raw_error_vector_m": [
+        0.005157247859590708,
+        -0.0005089824166417973
+      ],
+      "offset_m": [
+        0.0,
+        0.0
+      ],
+      "voters": [
+        "agent_00",
+        "agent_01",
+        "agent_02",
+        "agent_03",
+        "agent_04",
+        "agent_05",
+        "agent_06",
+        "agent_07",
+        "agent_08",
+        "agent_09",
+        "agent_10",
+        "agent_11",
+        "agent_12",
+        "agent_13",
+        "agent_14",
+        "agent_15"
+      ],
+      "confirmation_streak": 1,
+      "guards": {
+        "agent_count": 16,
+        "informed_agents": 16,
+        "map_coverage": 0.9722222222222222,
+        "contact_ready": 4,
+        "transport_active": 3,
+        "progress": 1.2,
+        "target_distance": 1.2,
+        "estimated_speed": 0.019001167789428817,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "false_hold": false
+    },
+    "status_counts": {
+      "disabled": 281
+    },
+    "max_bridge_identity_residual_m": 0.0,
+    "same_input_samples": 279,
+    "same_input_raw_MAE_m": 0.007266591751241266,
+    "same_input_used_MAE_m": 0.007266591751241266,
+    "max_guard_streak": 9,
+    "minimum_common_voters": null,
+    "one_common_voter_frames": 0,
+    "local_reanchors": 0,
+    "max_local_offset_m": 0.0,
+    "max_offset_m": 0.0
+  },
+  "near_ellipse_perpendicular_confirmation": {
+    "first_hold": {
+      "control_frame": 290,
+      "seconds": 14.5,
+      "true_goal_error_m": 0.0065979263349055855,
+      "estimated_goal_error_m": 0.015266579025707943,
+      "estimate_error_vector_m": [
+        0.00738404300230644,
+        0.009383231162704203
+      ],
+      "raw_error_vector_m": [
+        0.00738404300230644,
+        0.009383231162704203
+      ],
+      "offset_m": [
+        0.0,
+        0.0
+      ],
+      "voters": [
+        "agent_00",
+        "agent_01",
+        "agent_02",
+        "agent_03",
+        "agent_04",
+        "agent_05",
+        "agent_06",
+        "agent_07",
+        "agent_08",
+        "agent_09",
+        "agent_10",
+        "agent_11",
+        "agent_12",
+        "agent_13",
+        "agent_14",
+        "agent_15"
+      ],
+      "confirmation_streak": 20,
+      "guards": {
+        "agent_count": 16,
+        "informed_agents": 16,
+        "map_coverage": 1.0,
+        "contact_ready": 9,
+        "transport_active": 0,
+        "progress": 1.2,
+        "target_distance": 1.2,
+        "estimated_speed": 0.006669810506353089,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "false_hold": false
+    },
+    "status_counts": {
+      "disabled": 330
+    },
+    "max_bridge_identity_residual_m": 0.0,
+    "same_input_samples": 328,
+    "same_input_raw_MAE_m": 0.009909806128411192,
+    "same_input_used_MAE_m": 0.009909806128411192,
+    "max_guard_streak": 41,
+    "minimum_common_voters": null,
+    "one_common_voter_frames": 0,
+    "local_reanchors": 0,
+    "max_local_offset_m": 0.0,
+    "max_offset_m": 0.0
+  },
+  "near_rectangle_parallel_confirmation": {
+    "first_hold": {
+      "control_frame": 292,
+      "seconds": 14.600000000000001,
+      "true_goal_error_m": 0.02615093046882864,
+      "estimated_goal_error_m": 0.002812784665408702,
+      "estimate_error_vector_m": [
+        -0.00940498171348314,
+        0.02135920508537177
+      ],
+      "raw_error_vector_m": [
+        -0.00940498171348314,
+        0.02135920508537177
+      ],
+      "offset_m": [
+        0.0,
+        0.0
+      ],
+      "voters": [
+        "agent_00",
+        "agent_01",
+        "agent_02",
+        "agent_03",
+        "agent_04",
+        "agent_05",
+        "agent_06",
+        "agent_07",
+        "agent_08",
+        "agent_09",
+        "agent_10",
+        "agent_11",
+        "agent_12",
+        "agent_13",
+        "agent_14",
+        "agent_15"
+      ],
+      "confirmation_streak": 20,
+      "guards": {
+        "agent_count": 16,
+        "informed_agents": 16,
+        "map_coverage": 1.0,
+        "contact_ready": 11,
+        "transport_active": 4,
+        "progress": 1.2,
+        "target_distance": 1.2,
+        "estimated_speed": 0.008624848060086591,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "false_hold": false
+    },
+    "status_counts": {
+      "disabled": 332
+    },
+    "max_bridge_identity_residual_m": 0.0,
+    "same_input_samples": 325,
+    "same_input_raw_MAE_m": 0.015880398395184837,
+    "same_input_used_MAE_m": 0.015880398395184837,
+    "max_guard_streak": 59,
+    "minimum_common_voters": null,
+    "one_common_voter_frames": 0,
+    "local_reanchors": 0,
+    "max_local_offset_m": 0.0,
+    "max_offset_m": 0.0
+  },
+  "near_c_open_away_confirmation": {
+    "first_hold": {
+      "control_frame": 320,
+      "seconds": 16.0,
+      "true_goal_error_m": 0.04145649507106024,
+      "estimated_goal_error_m": 0.014199193516971124,
+      "estimate_error_vector_m": [
+        -0.018990326814423808,
+        0.022421054362190558
+      ],
+      "raw_error_vector_m": [
+        -0.018990326814423808,
+        0.022421054362190558
+      ],
+      "offset_m": [
+        0.0,
+        0.0
+      ],
+      "voters": [
+        "agent_00",
+        "agent_01",
+        "agent_02",
+        "agent_03",
+        "agent_04",
+        "agent_05",
+        "agent_06",
+        "agent_07",
+        "agent_08",
+        "agent_09",
+        "agent_10",
+        "agent_11",
+        "agent_12",
+        "agent_13",
+        "agent_14",
+        "agent_15"
+      ],
+      "confirmation_streak": 20,
+      "guards": {
+        "agent_count": 16,
+        "informed_agents": 16,
+        "map_coverage": 1.0,
+        "contact_ready": 13,
+        "transport_active": 5,
+        "progress": 1.2,
+        "target_distance": 1.2,
+        "estimated_speed": 0.008473796984184706,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "false_hold": false
+    },
+    "status_counts": {
+      "disabled": 360
+    },
+    "max_bridge_identity_residual_m": 0.0,
+    "same_input_samples": 357,
+    "same_input_raw_MAE_m": 0.02660111477252224,
+    "same_input_used_MAE_m": 0.02660111477252224,
+    "max_guard_streak": 59,
+    "minimum_common_voters": null,
+    "one_common_voter_frames": 0,
+    "local_reanchors": 0,
+    "max_local_offset_m": 0.0,
+    "max_offset_m": 0.0
+  },
+  "far_c_open_away_pos0_confirmation": {
+    "first_hold": null,
+    "status_counts": {
+      "disabled": 12000
+    },
+    "max_bridge_identity_residual_m": 0.0,
+    "same_input_samples": 11782,
+    "same_input_raw_MAE_m": 0.08729594391405009,
+    "same_input_used_MAE_m": 0.08729594391405009,
+    "max_guard_streak": 18,
+    "minimum_common_voters": null,
+    "one_common_voter_frames": 0,
+    "local_reanchors": 0,
+    "max_local_offset_m": 0.0,
+    "max_offset_m": 0.0
+  },
+  "near_l_reference_continuity": {
+    "first_hold": {
+      "control_frame": 310,
+      "seconds": 15.5,
+      "true_goal_error_m": 0.009217567309021556,
+      "estimated_goal_error_m": 0.018906196334616487,
+      "estimate_error_vector_m": [
+        0.009660002803849821,
+        -0.0009399779316700968
+      ],
+      "raw_error_vector_m": [
+        0.009660002803849821,
+        -0.0025163140959388527
+      ],
+      "offset_m": [
+        0.0,
+        0.001576336164268756
+      ],
+      "voters": [
+        "agent_00",
+        "agent_01",
+        "agent_02",
+        "agent_03",
+        "agent_04",
+        "agent_05",
+        "agent_06",
+        "agent_07",
+        "agent_08",
+        "agent_09",
+        "agent_10",
+        "agent_11",
+        "agent_12",
+        "agent_13",
+        "agent_14",
+        "agent_15"
+      ],
+      "confirmation_streak": 1,
+      "guards": {
+        "agent_count": 16,
+        "informed_agents": 16,
+        "map_coverage": 1.0,
+        "contact_ready": 7,
+        "transport_active": 3,
+        "progress": 1.2,
+        "target_distance": 1.2,
+        "estimated_speed": 0.015463934197897607,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "false_hold": false
+    },
+    "status_counts": {
+      "no_readings": 2,
+      "initialized": 2,
+      "continuous": 346
+    },
+    "max_bridge_identity_residual_m": 3.469446951953614e-17,
+    "same_input_samples": 348,
+    "same_input_raw_MAE_m": 0.015658842387870166,
+    "same_input_used_MAE_m": 0.03837859221673121,
+    "max_guard_streak": 1,
+    "minimum_common_voters": 1,
+    "one_common_voter_frames": 2,
+    "local_reanchors": 57,
+    "max_local_offset_m": 0.19924279398428638,
+    "max_offset_m": 0.15513365430069323
+  },
+  "near_l_reference_confirmation": {
+    "first_hold": {
+      "control_frame": 415,
+      "seconds": 20.75,
+      "true_goal_error_m": 0.008433050706511073,
+      "estimated_goal_error_m": 0.016975609336793603,
+      "estimate_error_vector_m": [
+        0.023894707507029933,
+        0.008230289466339642
+      ],
+      "raw_error_vector_m": [
+        0.023894707507029933,
+        0.008230289466339642
+      ],
+      "offset_m": [
+        0.0,
+        0.0
+      ],
+      "voters": [
+        "agent_00",
+        "agent_01",
+        "agent_02",
+        "agent_03",
+        "agent_04",
+        "agent_05",
+        "agent_06",
+        "agent_07",
+        "agent_08",
+        "agent_09",
+        "agent_10",
+        "agent_11",
+        "agent_12",
+        "agent_13",
+        "agent_14",
+        "agent_15"
+      ],
+      "confirmation_streak": 20,
+      "guards": {
+        "agent_count": 16,
+        "informed_agents": 16,
+        "map_coverage": 1.0,
+        "contact_ready": 10,
+        "transport_active": 3,
+        "progress": 1.2,
+        "target_distance": 1.2,
+        "estimated_speed": 0.002978581911584773,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "false_hold": false
+    },
+    "status_counts": {
+      "disabled": 455
+    },
+    "max_bridge_identity_residual_m": 0.0,
+    "same_input_samples": 453,
+    "same_input_raw_MAE_m": 0.023542315825229504,
+    "same_input_used_MAE_m": 0.023542315825229504,
+    "max_guard_streak": 53,
+    "minimum_common_voters": null,
+    "one_common_voter_frames": 0,
+    "local_reanchors": 0,
+    "max_local_offset_m": 0.0,
+    "max_offset_m": 0.0
+  },
+  "near_ellipse_parallel_continuity": {
+    "first_hold": {
+      "control_frame": 286,
+      "seconds": 14.3,
+      "true_goal_error_m": 0.014643592255842011,
+      "estimated_goal_error_m": 0.01641494682902079,
+      "estimate_error_vector_m": [
+        0.0015811148224966765,
+        0.007469125057144538
+      ],
+      "raw_error_vector_m": [
+        0.005934527706564552,
+        0.0007651225700744
+      ],
+      "offset_m": [
+        -0.004353412884067792,
+        0.006704002487070138
+      ],
+      "voters": [
+        "agent_00",
+        "agent_01",
+        "agent_02",
+        "agent_03",
+        "agent_04",
+        "agent_05",
+        "agent_06",
+        "agent_07",
+        "agent_08",
+        "agent_09",
+        "agent_10",
+        "agent_11",
+        "agent_12",
+        "agent_13",
+        "agent_14",
+        "agent_15"
+      ],
+      "confirmation_streak": 1,
+      "guards": {
+        "agent_count": 16,
+        "informed_agents": 16,
+        "map_coverage": 1.0,
+        "contact_ready": 11,
+        "transport_active": 4,
+        "progress": 1.2,
+        "target_distance": 1.2,
+        "estimated_speed": 0.01752164306499554,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "false_hold": false
+    },
+    "status_counts": {
+      "no_readings": 2,
+      "initialized": 2,
+      "continuous": 322
+    },
+    "max_bridge_identity_residual_m": 1.1102230246251565e-16,
+    "same_input_samples": 324,
+    "same_input_raw_MAE_m": 0.006819472316023756,
+    "same_input_used_MAE_m": 0.008850073301710084,
+    "max_guard_streak": 18,
+    "minimum_common_voters": 5,
+    "one_common_voter_frames": 0,
+    "local_reanchors": 2,
+    "max_local_offset_m": 0.08482918764944103,
+    "max_offset_m": 0.018115100717293928
+  },
+  "near_rectangle_parallel_continuity": {
+    "first_hold": {
+      "control_frame": 246,
+      "seconds": 12.3,
+      "true_goal_error_m": 0.025134562722023347,
+      "estimated_goal_error_m": 0.009111924456335994,
+      "estimate_error_vector_m": [
+        -0.015724231180841874,
+        -0.003710116604029935
+      ],
+      "raw_error_vector_m": [
+        -0.014563857373862454,
+        0.00578775779532782
+      ],
+      "offset_m": [
+        -0.001160373806979375,
+        -0.009497874399357755
+      ],
+      "voters": [
+        "agent_00",
+        "agent_01",
+        "agent_02",
+        "agent_03",
+        "agent_04",
+        "agent_05",
+        "agent_06",
+        "agent_07",
+        "agent_08",
+        "agent_09",
+        "agent_10",
+        "agent_11",
+        "agent_12",
+        "agent_13",
+        "agent_14",
+        "agent_15"
+      ],
+      "confirmation_streak": 1,
+      "guards": {
+        "agent_count": 16,
+        "informed_agents": 16,
+        "map_coverage": 1.0,
+        "contact_ready": 10,
+        "transport_active": 2,
+        "progress": 1.2,
+        "target_distance": 1.2,
+        "estimated_speed": 0.014047655849538905,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "false_hold": false
+    },
+    "status_counts": {
+      "no_readings": 7,
+      "initialized": 2,
+      "reanchored": 5,
+      "continuous": 272
+    },
+    "max_bridge_identity_residual_m": 5.551115123125783e-17,
+    "same_input_samples": 274,
+    "same_input_raw_MAE_m": 0.017403690044193183,
+    "same_input_used_MAE_m": 0.029946563745567076,
+    "max_guard_streak": 40,
+    "minimum_common_voters": 1,
+    "one_common_voter_frames": 7,
+    "local_reanchors": 100,
+    "max_local_offset_m": 0.30183603980443213,
+    "max_offset_m": 0.10860476044823637
+  },
+  "near_l_reference_combined": {
+    "first_hold": {
+      "control_frame": 430,
+      "seconds": 21.5,
+      "true_goal_error_m": 0.015691554194100527,
+      "estimated_goal_error_m": 0.016001290936132534,
+      "estimate_error_vector_m": [
+        0.0061114846295293734,
+        -0.0019863914090062565
+      ],
+      "raw_error_vector_m": [
+        0.0061114846295293734,
+        -0.0035627275732750124
+      ],
+      "offset_m": [
+        0.0,
+        0.001576336164268756
+      ],
+      "voters": [
+        "agent_00",
+        "agent_01",
+        "agent_02",
+        "agent_03",
+        "agent_04",
+        "agent_05",
+        "agent_06",
+        "agent_07",
+        "agent_08",
+        "agent_09",
+        "agent_10",
+        "agent_11",
+        "agent_12",
+        "agent_13",
+        "agent_14",
+        "agent_15"
+      ],
+      "confirmation_streak": 20,
+      "guards": {
+        "agent_count": 16,
+        "informed_agents": 16,
+        "map_coverage": 1.0,
+        "contact_ready": 12,
+        "transport_active": 3,
+        "progress": 1.2,
+        "target_distance": 1.2,
+        "estimated_speed": 0.0016957356574018752,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "false_hold": false
+    },
+    "status_counts": {
+      "no_readings": 2,
+      "initialized": 2,
+      "continuous": 466
+    },
+    "max_bridge_identity_residual_m": 3.469446951953614e-17,
+    "same_input_samples": 468,
+    "same_input_raw_MAE_m": 0.014078878373112195,
+    "same_input_used_MAE_m": 0.030857843934522317,
+    "max_guard_streak": 59,
+    "minimum_common_voters": 1,
+    "one_common_voter_frames": 2,
+    "local_reanchors": 57,
+    "max_local_offset_m": 0.19924279398428638,
+    "max_offset_m": 0.15513365430069323
+  },
+  "near_c_open_away_combined": {
+    "first_hold": {
+      "control_frame": 470,
+      "seconds": 23.5,
+      "true_goal_error_m": 0.045003344699765295,
+      "estimated_goal_error_m": 0.013027263457087407,
+      "estimate_error_vector_m": [
+        0.04899896824529848,
+        -0.01803414274379385
+      ],
+      "raw_error_vector_m": [
+        0.03024713527571543,
+        0.01150107642931883
+      ],
+      "offset_m": [
+        0.018751832969583077,
+        -0.02953521917311268
+      ],
+      "voters": [
+        "agent_00",
+        "agent_01",
+        "agent_02",
+        "agent_03",
+        "agent_04",
+        "agent_05",
+        "agent_06",
+        "agent_07",
+        "agent_08",
+        "agent_09",
+        "agent_10",
+        "agent_11",
+        "agent_12",
+        "agent_13",
+        "agent_14",
+        "agent_15"
+      ],
+      "confirmation_streak": 20,
+      "guards": {
+        "agent_count": 16,
+        "informed_agents": 16,
+        "map_coverage": 1.0,
+        "contact_ready": 9,
+        "transport_active": 3,
+        "progress": 1.2,
+        "target_distance": 1.2,
+        "estimated_speed": 0.009173335014078266,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "false_hold": false
+    },
+    "status_counts": {
+      "no_readings": 3,
+      "initialized": 2,
+      "continuous": 502,
+      "reanchored": 3
+    },
+    "max_bridge_identity_residual_m": 5.551115123125783e-17,
+    "same_input_samples": 504,
+    "same_input_raw_MAE_m": 0.02686947848003207,
+    "same_input_used_MAE_m": 0.03410455779753383,
+    "max_guard_streak": 59,
+    "minimum_common_voters": 1,
+    "one_common_voter_frames": 2,
+    "local_reanchors": 65,
+    "max_local_offset_m": 0.2590689332633426,
+    "max_offset_m": 0.07665850352790449
+  },
+  "far_skew_box_s0_r0_pos0_reference": {
+    "first_hold": {
+      "control_frame": 1745,
+      "seconds": 87.25,
+      "true_goal_error_m": 0.1351061190171348,
+      "estimated_goal_error_m": 0.018157704980053344,
+      "estimate_error_vector_m": [
+        0.12103704561372863,
+        -0.019924888256653304
+      ],
+      "raw_error_vector_m": [
+        0.12103704561372863,
+        -0.019924888256653304
+      ],
+      "offset_m": [
+        0.0,
+        0.0
+      ],
+      "voters": [
+        "agent_00",
+        "agent_01",
+        "agent_02",
+        "agent_04",
+        "agent_05",
+        "agent_06",
+        "agent_07",
+        "agent_08",
+        "agent_09",
+        "agent_10",
+        "agent_11",
+        "agent_12",
+        "agent_13",
+        "agent_14"
+      ],
+      "confirmation_streak": 1,
+      "guards": {
+        "agent_count": 16,
+        "informed_agents": 15,
+        "map_coverage": 0.9166666666666666,
+        "contact_ready": 10,
+        "transport_active": 6,
+        "progress": 1.2,
+        "target_distance": 1.2,
+        "estimated_speed": 0.00713727132743299,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "false_hold": true
+    },
+    "status_counts": {
+      "disabled": 1785
+    },
+    "max_bridge_identity_residual_m": 0.0,
+    "same_input_samples": 1545,
+    "same_input_raw_MAE_m": 0.12027982405603765,
+    "same_input_used_MAE_m": 0.12027982405603765,
+    "max_guard_streak": 2,
+    "minimum_common_voters": null,
+    "one_common_voter_frames": 0,
+    "local_reanchors": 0,
+    "max_local_offset_m": 0.0,
+    "max_offset_m": 0.0
+  },
+  "near_rectangle_parallel_combined": {
+    "first_hold": {
+      "control_frame": 265,
+      "seconds": 13.25,
+      "true_goal_error_m": 0.027298475235359332,
+      "estimated_goal_error_m": 0.010778680075167723,
+      "estimate_error_vector_m": [
+        -0.015689657340587804,
+        -0.0052137350833160526
+      ],
+      "raw_error_vector_m": [
+        -0.014529283533608384,
+        0.0042841393160417025
+      ],
+      "offset_m": [
+        -0.001160373806979375,
+        -0.009497874399357755
+      ],
+      "voters": [
+        "agent_00",
+        "agent_01",
+        "agent_02",
+        "agent_03",
+        "agent_04",
+        "agent_05",
+        "agent_06",
+        "agent_07",
+        "agent_08",
+        "agent_09",
+        "agent_10",
+        "agent_11",
+        "agent_12",
+        "agent_13",
+        "agent_14",
+        "agent_15"
+      ],
+      "confirmation_streak": 20,
+      "guards": {
+        "agent_count": 16,
+        "informed_agents": 16,
+        "map_coverage": 1.0,
+        "contact_ready": 11,
+        "transport_active": 3,
+        "progress": 1.2,
+        "target_distance": 1.2,
+        "estimated_speed": 0.012259281107355297,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "false_hold": false
+    },
+    "status_counts": {
+      "no_readings": 7,
+      "initialized": 2,
+      "reanchored": 5,
+      "continuous": 291
+    },
+    "max_bridge_identity_residual_m": 5.551115123125783e-17,
+    "same_input_samples": 293,
+    "same_input_raw_MAE_m": 0.01729876134636473,
+    "same_input_used_MAE_m": 0.029111783948863407,
+    "max_guard_streak": 59,
+    "minimum_common_voters": 1,
+    "one_common_voter_frames": 7,
+    "local_reanchors": 100,
+    "max_local_offset_m": 0.30183603980443213,
+    "max_offset_m": 0.10860476044823637
+  },
+  "near_rectangle_parallel_reference": {
+    "first_hold": {
+      "control_frame": 227,
+      "seconds": 11.350000000000001,
+      "true_goal_error_m": 0.01281738536822963,
+      "estimated_goal_error_m": 0.018573965929203774,
+      "estimate_error_vector_m": [
+        -0.003443161206162948,
+        0.008381775053416609
+      ],
+      "raw_error_vector_m": [
+        -0.003443161206162948,
+        0.008381775053416609
+      ],
+      "offset_m": [
+        0.0,
+        0.0
+      ],
+      "voters": [
+        "agent_00",
+        "agent_01",
+        "agent_02",
+        "agent_03",
+        "agent_04",
+        "agent_05",
+        "agent_06",
+        "agent_07",
+        "agent_08",
+        "agent_09",
+        "agent_10",
+        "agent_11",
+        "agent_12",
+        "agent_13",
+        "agent_14",
+        "agent_15"
+      ],
+      "confirmation_streak": 1,
+      "guards": {
+        "agent_count": 16,
+        "informed_agents": 16,
+        "map_coverage": 1.0,
+        "contact_ready": 10,
+        "transport_active": 1,
+        "progress": 1.2,
+        "target_distance": 1.2,
+        "estimated_speed": 0.010041745864536636,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "false_hold": false
+    },
+    "status_counts": {
+      "disabled": 267
+    },
+    "max_bridge_identity_residual_m": 0.0,
+    "same_input_samples": 260,
+    "same_input_raw_MAE_m": 0.013599130508804902,
+    "same_input_used_MAE_m": 0.013599130508804902,
+    "max_guard_streak": 25,
+    "minimum_common_voters": null,
+    "one_common_voter_frames": 0,
+    "local_reanchors": 0,
+    "max_local_offset_m": 0.0,
+    "max_offset_m": 0.0
+  },
+  "far_skew_box_s0_r0_pos0_combined": {
+    "first_hold": {
+      "control_frame": 1630,
+      "seconds": 81.5,
+      "true_goal_error_m": 0.3601589074440312,
+      "estimated_goal_error_m": 0.008925732844294198,
+      "estimate_error_vector_m": [
+        -0.35921066426849446,
+        0.0108128574072217
+      ],
+      "raw_error_vector_m": [
+        0.03049683864030106,
+        -0.0004617967838433448
+      ],
+      "offset_m": [
+        -0.38970750290879563,
+        0.011274654191065044
+      ],
+      "voters": [
+        "agent_00",
+        "agent_01",
+        "agent_02",
+        "agent_04",
+        "agent_05",
+        "agent_06",
+        "agent_07",
+        "agent_08",
+        "agent_09",
+        "agent_10",
+        "agent_11",
+        "agent_12",
+        "agent_13",
+        "agent_14",
+        "agent_15"
+      ],
+      "confirmation_streak": 20,
+      "guards": {
+        "agent_count": 16,
+        "informed_agents": 16,
+        "map_coverage": 1.0,
+        "contact_ready": 12,
+        "transport_active": 7,
+        "progress": 1.2,
+        "target_distance": 1.2,
+        "estimated_speed": 0.0038950911724291064,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "false_hold": true
+    },
+    "status_counts": {
+      "no_readings": 240,
+      "initialized": 2,
+      "reanchored": 9,
+      "continuous": 1419
+    },
+    "max_bridge_identity_residual_m": 2.220446049250313e-16,
+    "same_input_samples": 1421,
+    "same_input_raw_MAE_m": 0.041290656093882876,
+    "same_input_used_MAE_m": 0.33189221073311703,
+    "max_guard_streak": 37,
+    "minimum_common_voters": 1,
+    "one_common_voter_frames": 15,
+    "local_reanchors": 83,
+    "max_local_offset_m": 0.8736965500439883,
+    "max_offset_m": 0.4610422955601243
+  },
+  "near_ellipse_perpendicular_reference": {
+    "first_hold": {
+      "control_frame": 271,
+      "seconds": 13.55,
+      "true_goal_error_m": 0.0065979263349055855,
+      "estimated_goal_error_m": 0.015931645579638144,
+      "estimate_error_vector_m": [
+        0.006291510948594814,
+        0.010284522007914704
+      ],
+      "raw_error_vector_m": [
+        0.006291510948594814,
+        0.010284522007914704
+      ],
+      "offset_m": [
+        0.0,
+        0.0
+      ],
+      "voters": [
+        "agent_00",
+        "agent_01",
+        "agent_02",
+        "agent_03",
+        "agent_04",
+        "agent_05",
+        "agent_06",
+        "agent_07",
+        "agent_08",
+        "agent_09",
+        "agent_10",
+        "agent_11",
+        "agent_12",
+        "agent_13",
+        "agent_14",
+        "agent_15"
+      ],
+      "confirmation_streak": 1,
+      "guards": {
+        "agent_count": 16,
+        "informed_agents": 16,
+        "map_coverage": 1.0,
+        "contact_ready": 8,
+        "transport_active": 2,
+        "progress": 1.2,
+        "target_distance": 1.2,
+        "estimated_speed": 0.005515050251377703,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "false_hold": false
+    },
+    "status_counts": {
+      "disabled": 311
+    },
+    "max_bridge_identity_residual_m": 0.0,
+    "same_input_samples": 309,
+    "same_input_raw_MAE_m": 0.009862016129296453,
+    "same_input_used_MAE_m": 0.009862016129296453,
+    "max_guard_streak": 36,
+    "minimum_common_voters": null,
+    "one_common_voter_frames": 0,
+    "local_reanchors": 0,
+    "max_local_offset_m": 0.0,
+    "max_offset_m": 0.0
+  },
+  "near_ellipse_perpendicular_combined": {
+    "first_hold": {
+      "control_frame": 295,
+      "seconds": 14.75,
+      "true_goal_error_m": 0.014375341544143012,
+      "estimated_goal_error_m": 0.010109289698355464,
+      "estimate_error_vector_m": [
+        0.0047843723707230446,
+        -0.0021616153871508482
+      ],
+      "raw_error_vector_m": [
+        0.005802052084866283,
+        0.006423077558525253
+      ],
+      "offset_m": [
+        -0.0010176797141433214,
+        -0.008584692945676101
+      ],
+      "voters": [
+        "agent_00",
+        "agent_01",
+        "agent_02",
+        "agent_03",
+        "agent_04",
+        "agent_05",
+        "agent_06",
+        "agent_07",
+        "agent_08",
+        "agent_09",
+        "agent_10",
+        "agent_11",
+        "agent_12",
+        "agent_13",
+        "agent_14",
+        "agent_15"
+      ],
+      "confirmation_streak": 20,
+      "guards": {
+        "agent_count": 16,
+        "informed_agents": 16,
+        "map_coverage": 1.0,
+        "contact_ready": 11,
+        "transport_active": 4,
+        "progress": 1.2,
+        "target_distance": 1.2,
+        "estimated_speed": 0.012791097915307081,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "false_hold": false
+    },
+    "status_counts": {
+      "no_readings": 2,
+      "initialized": 2,
+      "continuous": 331
+    },
+    "max_bridge_identity_residual_m": 1.1102230246251565e-16,
+    "same_input_samples": 333,
+    "same_input_raw_MAE_m": 0.008164179576584751,
+    "same_input_used_MAE_m": 0.007274019931010616,
+    "max_guard_streak": 34,
+    "minimum_common_voters": 5,
+    "one_common_voter_frames": 0,
+    "local_reanchors": 2,
+    "max_local_offset_m": 0.05289252322928151,
+    "max_offset_m": 0.021172296943687354
+  },
+  "near_c_open_away_reference": {
+    "first_hold": {
+      "control_frame": 198,
+      "seconds": 9.9,
+      "true_goal_error_m": 0.03880422431865691,
+      "estimated_goal_error_m": 0.018835791219853248,
+      "estimate_error_vector_m": [
+        -0.01659129416024241,
+        0.023308323681970805
+      ],
+      "raw_error_vector_m": [
+        -0.01659129416024241,
+        0.023308323681970805
+      ],
+      "offset_m": [
+        0.0,
+        0.0
+      ],
+      "voters": [
+        "agent_00",
+        "agent_01",
+        "agent_02",
+        "agent_03",
+        "agent_04",
+        "agent_05",
+        "agent_06",
+        "agent_07",
+        "agent_08",
+        "agent_09",
+        "agent_10",
+        "agent_11",
+        "agent_12",
+        "agent_13",
+        "agent_14",
+        "agent_15"
+      ],
+      "confirmation_streak": 1,
+      "guards": {
+        "agent_count": 16,
+        "informed_agents": 16,
+        "map_coverage": 1.0,
+        "contact_ready": 9,
+        "transport_active": 4,
+        "progress": 1.2,
+        "target_distance": 1.2,
+        "estimated_speed": 0.007986309148453394,
+        "stopping_distance": 0.18333333333333335,
+        "estimate_quality": "credible",
+        "recovery_ready": null
+      },
+      "false_hold": false
+    },
+    "status_counts": {
+      "disabled": 238
+    },
+    "max_bridge_identity_residual_m": 0.0,
+    "same_input_samples": 235,
+    "same_input_raw_MAE_m": 0.025481742377843532,
+    "same_input_used_MAE_m": 0.025481742377843532,
+    "max_guard_streak": 12,
+    "minimum_common_voters": null,
+    "one_common_voter_frames": 0,
+    "local_reanchors": 0,
+    "max_local_offset_m": 0.0,
+    "max_offset_m": 0.0
+  }
+}

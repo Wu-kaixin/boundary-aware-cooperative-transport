@@ -175,7 +175,7 @@ class PhaseHUD:
                     f"Mapped samples  {detected:8d}",
                     f"Coverage        {coverage:8.3f}",
                     f"Max gap         {_format(gap, 'm'):>8}",
-                    f"Contact agents  {len(contacts):8d}",
+                    f"Geometric-ready {len(contacts):8d}",
                     f"Push agents     {len(pushers):8d}",
                     "",
                     f"Progress J      {progress:7.3f} m",
