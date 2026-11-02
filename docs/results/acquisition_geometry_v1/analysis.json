@@ -1,0 +1,6772 @@
+{
+  "scope": "Eight prospective episodes on four reused development conditions; one geometry mechanism; no general reliability or deployment superiority claim",
+  "episodes": [
+    {
+      "case_id": "near_l_reference_safe_geometry",
+      "condition": "near_l_reference",
+      "arm": "safe_geometry",
+      "execution": "COMPLETED",
+      "completed": true,
+      "safe_completed": true,
+      "g500": true,
+      "false_hold": false,
+      "hard_safety": [],
+      "zero_epoch_valid": true,
+      "receipt_sha256": "44839f32d6a4f3f127660082a095e83d5d952ddc77ca62e9bb934b9598a4e282",
+      "g500_failure_reasons": [],
+      "first_hold": {
+        "frame": 311,
+        "physical_error_before_m": 0.01883574954212439,
+        "physical_error_after_m": 0.01883574954212439,
+        "nominal_error_m": 0.018284703994820347,
+        "workspace_error_bound_m": 0.029624845120487076
+      },
+      "hold_entries": [
+        {
+          "frame": 311,
+          "physical_error_before_m": 0.01883574954212439,
+          "physical_error_after_m": 0.01883574954212439,
+          "nominal_error_m": 0.018284703994820347,
+          "workspace_error_bound_m": 0.029624845120487076
+        }
+      ],
+      "acquisition": {
+        "status": "frozen",
+        "epoch": 1.7000000000000008,
+        "supporters": [
+          "agent_00",
+          "agent_01",
+          "agent_02",
+          "agent_03",
+          "agent_04",
+          "agent_05",
+          "agent_10"
+        ],
+        "pre_epoch_contact_samples": 0,
+        "max_pre_epoch_translation": 0.0,
+        "max_pre_epoch_rotation": 0.0,
+        "zero_epoch_valid": true,
+        "motion_model": "translation",
+        "use_all_captured": true,
+        "selected_trackers": [
+          "agent_00",
+          "agent_01",
+          "agent_02",
+          "agent_03",
+          "agent_04",
+          "agent_05",
+          "agent_06",
+          "agent_07",
+          "agent_08",
+          "agent_09",
+          "agent_10",
+          "agent_11",
+          "agent_12",
+          "agent_13",
+          "agent_14",
+          "agent_15"
+        ],
+        "bound_semantics": "translation hypothesis; not a rotation-robust center certificate",
+        "safe_acquisition_geometry": true
+      },
+      "endpoint_m": 0.01883574954212439,
+      "seconds": 17.5,
+      "termination": {
+        "frames_run": 350,
+        "max_frames": 12000,
+        "settled": true,
+        "terminated_by": "settled",
+        "settle_frames": 40,
+        "settle_speed": 0.005
+      },
+      "final_phase": "HOLD",
+      "budget_terminated": false,
+      "barrier_scalings": 0,
+      "safety_metrics": {
+        "min_inter_agent_distance": 0.2843045307459878,
+        "d_min": 0.28,
+        "min_signed_clearance": 0.08112780105319545,
+        "max_penetration": 0.04887219894680456,
+        "penetration_budget": 0.09765937211492455,
+        "solver_fallbacks": 0,
+        "solver_infeasible": 0
+      },
+      "estimation": {
+        "post_ready_frames": 270,
+        "available_frames": 270,
+        "quorum_frames": 270,
+        "missing_frames": 0,
+        "insufficient_quorum_frames": 0,
+        "mae_m": 0.004523180004480107,
+        "p95_m": 0.0067479588009117936,
+        "max_m": 0.007727730578830092,
+        "scope": "Available control readings versus pre-physics truth; within each episode, not paired frames across different paths"
+      },
+      "maximum_absolute_rotation_deg": 1.397483822853125,
+      "contact_redeploy_attempts_by_agent": {
+        "agent_00": 0,
+        "agent_01": 0,
+        "agent_02": 0,
+        "agent_03": 0,
+        "agent_04": 0,
+        "agent_05": 0,
+        "agent_06": 0,
+        "agent_07": 0,
+        "agent_08": 0,
+        "agent_09": 0,
+        "agent_10": 0,
+        "agent_11": 0,
+        "agent_12": 0,
+        "agent_13": 0,
+        "agent_14": 0,
+        "agent_15": 0
+      },
+      "phase_response": {
+        "final_phase": "HOLD",
+        "entered": {
+          "SEARCH": 0,
+          "DISCOVER": 0,
+          "ENCLOSE": 35,
+          "CONTACT_READY": 81,
+          "TRANSPORT": 196,
+          "BRAKE": 228,
+          "HOLD": 310
+        },
+        "first_detection_frame": 0,
+        "enclosure_frame": 35,
+        "contact_ready_frame": 81,
+        "transport_frame": 196,
+        "brake_frame": 228,
+        "hold_frame": 310,
+        "brake_reason": "estimated_stop",
+        "push_suspended": false,
+        "overshoot": false,
+        "short_of_target": true,
+        "contact_recovery_failed": false,
+        "estimate_stopped": false
+      },
+      "scaling": {
+        "scaled_robot_steps": 0,
+        "acquisition": 0,
+        "post_acquisition": 0,
+        "by_capture_state": {},
+        "by_phase": {},
+        "control_frames_with_scaling": 0,
+        "min_scale": 1.0,
+        "events": []
+      }
+    },
+    {
+      "case_id": "near_circle_translation_all_captured",
+      "condition": "near_circle",
+      "arm": "translation_all_captured",
+      "execution": "COMPLETED",
+      "completed": true,
+      "safe_completed": true,
+      "g500": true,
+      "false_hold": false,
+      "hard_safety": [],
+      "zero_epoch_valid": true,
+      "receipt_sha256": "90e0702c5477a25cca9ae80ff198e75a63a6a577c83aafc0b4ddd645958381b9",
+      "g500_failure_reasons": [],
+      "first_hold": {
+        "frame": 255,
+        "physical_error_before_m": 0.017600523399126156,
+        "physical_error_after_m": 0.017600523399126156,
+        "nominal_error_m": 0.01956042393445252,
+        "workspace_error_bound_m": 0.0254270907730011
+      },
+      "hold_entries": [
+        {
+          "frame": 255,
+          "physical_error_before_m": 0.017600523399126156,
+          "physical_error_after_m": 0.017600523399126156,
+          "nominal_error_m": 0.01956042393445252,
+          "workspace_error_bound_m": 0.0254270907730011
+        }
+      ],
+      "acquisition": {
+        "status": "frozen",
+        "epoch": 1.800000000000001,
+        "supporters": [
+          "agent_00",
+          "agent_05",
+          "agent_10",
+          "agent_11"
+        ],
+        "pre_epoch_contact_samples": 0,
+        "max_pre_epoch_translation": 0.0,
+        "max_pre_epoch_rotation": 0.0,
+        "zero_epoch_valid": true,
+        "motion_model": "translation",
+        "use_all_captured": true,
+        "selected_trackers": [
+          "agent_00",
+          "agent_01",
+          "agent_02",
+          "agent_03",
+          "agent_04",
+          "agent_05",
+          "agent_06",
+          "agent_07",
+          "agent_08",
+          "agent_09",
+          "agent_10",
+          "agent_11",
+          "agent_12",
+          "agent_13",
+          "agent_14",
+          "agent_15"
+        ],
+        "bound_semantics": "translation hypothesis; not a rotation-robust center certificate"
+      },
+      "endpoint_m": 0.017600523399126156,
+      "seconds": 14.700000000000001,
+      "termination": {
+        "frames_run": 294,
+        "max_frames": 12000,
+        "settled": true,
+        "terminated_by": "settled",
+        "settle_frames": 40,
+        "settle_speed": 0.005
+      },
+      "final_phase": "HOLD",
+      "budget_terminated": false,
+      "barrier_scalings": 0,
+      "safety_metrics": {
+        "min_inter_agent_distance": 0.281509606667187,
+        "d_min": 0.28,
+        "min_signed_clearance": 0.08214705586725092,
+        "max_penetration": 0.047852944132749084,
+        "penetration_budget": 0.09875790976855692,
+        "solver_fallbacks": 0,
+        "solver_infeasible": 0
+      },
+      "estimation": {
+        "post_ready_frames": 195,
+        "available_frames": 195,
+        "quorum_frames": 195,
+        "missing_frames": 0,
+        "insufficient_quorum_frames": 0,
+        "mae_m": 0.0027186298056489262,
+        "p95_m": 0.005810675252212368,
+        "max_m": 0.006844467819390374,
+        "scope": "Available control readings versus pre-physics truth; within each episode, not paired frames across different paths"
+      },
+      "maximum_absolute_rotation_deg": 0.0,
+      "contact_redeploy_attempts_by_agent": {
+        "agent_00": 0,
+        "agent_01": 0,
+        "agent_02": 0,
+        "agent_03": 0,
+        "agent_04": 0,
+        "agent_05": 0,
+        "agent_06": 0,
+        "agent_07": 0,
+        "agent_08": 0,
+        "agent_09": 0,
+        "agent_10": 0,
+        "agent_11": 0,
+        "agent_12": 0,
+        "agent_13": 0,
+        "agent_14": 0,
+        "agent_15": 0
+      },
+      "phase_response": {
+        "final_phase": "HOLD",
+        "entered": {
+          "SEARCH": 0,
+          "DISCOVER": 0,
+          "ENCLOSE": 21,
+          "CONTACT_READY": 100,
+          "TRANSPORT": 136,
+          "BRAKE": 179,
+          "HOLD": 254
+        },
+        "first_detection_frame": 0,
+        "enclosure_frame": 21,
+        "contact_ready_frame": 100,
+        "transport_frame": 136,
+        "brake_frame": 179,
+        "hold_frame": 254,
+        "brake_reason": "estimated_stop",
+        "push_suspended": false,
+        "overshoot": false,
+        "short_of_target": true,
+        "contact_recovery_failed": false,
+        "estimate_stopped": false
+      },
+      "scaling": {
+        "scaled_robot_steps": 0,
+        "acquisition": 0,
+        "post_acquisition": 0,
+        "by_capture_state": {},
+        "by_phase": {},
+        "control_frames_with_scaling": 0,
+        "min_scale": 1.0,
+        "events": []
+      }
+    },
+    {
+      "case_id": "near_l_reference_translation_all_captured",
+      "condition": "near_l_reference",
+      "arm": "translation_all_captured",
+      "execution": "COMPLETED",
+      "completed": true,
+      "safe_completed": true,
+      "g500": true,
+      "false_hold": false,
+      "hard_safety": [],
+      "zero_epoch_valid": true,
+      "receipt_sha256": "cc640931b7dd236aa1135adfd490b13d3d100d804a7f155cc848fd5b8c8e3792",
+      "g500_failure_reasons": [],
+      "first_hold": {
+        "frame": 314,
+        "physical_error_before_m": 0.024398420672210857,
+        "physical_error_after_m": 0.024398420672210857,
+        "nominal_error_m": 0.018989848210088346,
+        "workspace_error_bound_m": 0.03776300870859247
+      },
+      "hold_entries": [
+        {
+          "frame": 314,
+          "physical_error_before_m": 0.024398420672210857,
+          "physical_error_after_m": 0.024398420672210857,
+          "nominal_error_m": 0.018989848210088346,
+          "workspace_error_bound_m": 0.03776300870859247
+        }
+      ],
+      "acquisition": {
+        "status": "frozen",
+        "epoch": 1.7000000000000008,
+        "supporters": [
+          "agent_00",
+          "agent_01",
+          "agent_02",
+          "agent_03",
+          "agent_04",
+          "agent_05",
+          "agent_10"
+        ],
+        "pre_epoch_contact_samples": 0,
+        "max_pre_epoch_translation": 0.0,
+        "max_pre_epoch_rotation": 0.0,
+        "zero_epoch_valid": true,
+        "motion_model": "translation",
+        "use_all_captured": true,
+        "selected_trackers": [
+          "agent_00",
+          "agent_01",
+          "agent_02",
+          "agent_03",
+          "agent_04",
+          "agent_05",
+          "agent_06",
+          "agent_07",
+          "agent_08",
+          "agent_09",
+          "agent_10",
+          "agent_11",
+          "agent_12",
+          "agent_13",
+          "agent_14",
+          "agent_15"
+        ],
+        "bound_semantics": "translation hypothesis; not a rotation-robust center certificate"
+      },
+      "endpoint_m": 0.024398420672210857,
+      "seconds": 17.650000000000002,
+      "termination": {
+        "frames_run": 353,
+        "max_frames": 12000,
+        "settled": true,
+        "terminated_by": "settled",
+        "settle_frames": 40,
+        "settle_speed": 0.005
+      },
+      "final_phase": "HOLD",
+      "budget_terminated": false,
+      "barrier_scalings": 0,
+      "safety_metrics": {
+        "min_inter_agent_distance": 0.28120845265479844,
+        "d_min": 0.28,
+        "min_signed_clearance": 0.07933238376046514,
+        "max_penetration": 0.05066761623953486,
+        "penetration_budget": 0.09837808196975671,
+        "solver_fallbacks": 0,
+        "solver_infeasible": 0
+      },
+      "estimation": {
+        "post_ready_frames": 275,
+        "available_frames": 275,
+        "quorum_frames": 275,
+        "missing_frames": 0,
+        "insufficient_quorum_frames": 0,
+        "mae_m": 0.005170088920244473,
+        "p95_m": 0.007584903034093422,
+        "max_m": 0.00901634940997927,
+        "scope": "Available control readings versus pre-physics truth; within each episode, not paired frames across different paths"
+      },
+      "maximum_absolute_rotation_deg": 1.8987487131990328,
+      "contact_redeploy_attempts_by_agent": {
+        "agent_00": 0,
+        "agent_01": 0,
+        "agent_02": 0,
+        "agent_03": 0,
+        "agent_04": 0,
+        "agent_05": 0,
+        "agent_06": 0,
+        "agent_07": 0,
+        "agent_08": 0,
+        "agent_09": 0,
+        "agent_10": 0,
+        "agent_11": 0,
+        "agent_12": 0,
+        "agent_13": 0,
+        "agent_14": 0,
+        "agent_15": 0
+      },
+      "phase_response": {
+        "final_phase": "HOLD",
+        "entered": {
+          "SEARCH": 0,
+          "DISCOVER": 0,
+          "ENCLOSE": 29,
+          "CONTACT_READY": 79,
+          "TRANSPORT": 161,
+          "BRAKE": 203,
+          "HOLD": 313
+        },
+        "first_detection_frame": 0,
+        "enclosure_frame": 29,
+        "contact_ready_frame": 79,
+        "transport_frame": 161,
+        "brake_frame": 203,
+        "hold_frame": 313,
+        "brake_reason": "estimated_stop",
+        "push_suspended": false,
+        "overshoot": false,
+        "short_of_target": true,
+        "contact_recovery_failed": false,
+        "estimate_stopped": false
+      },
+      "scaling": {
+        "scaled_robot_steps": 0,
+        "acquisition": 0,
+        "post_acquisition": 0,
+        "by_capture_state": {},
+        "by_phase": {},
+        "control_frames_with_scaling": 0,
+        "min_scale": 1.0,
+        "events": []
+      }
+    },
+    {
+      "case_id": "far_c_open_away_pos0_translation_all_captured",
+      "condition": "far_c_open_away_pos0",
+      "arm": "translation_all_captured",
+      "execution": "COMPLETED",
+      "completed": true,
+      "safe_completed": true,
+      "g500": false,
+      "false_hold": false,
+      "hard_safety": [],
+      "zero_epoch_valid": true,
+      "receipt_sha256": "70473337825dd9d5b2ccb2674d6a63de0230790d1fcbde89a6043cf06114c7f6",
+      "g500_failure_reasons": [
+        "G500: 8 scaled-barrier event(s), smallest factor 0.152; the contract allows 0"
+      ],
+      "first_hold": {
+        "frame": 833,
+        "physical_error_before_m": 0.01292471735929012,
+        "physical_error_after_m": 0.01292471735929012,
+        "nominal_error_m": 0.013430808941829955,
+        "workspace_error_bound_m": 0.027066170304224074
+      },
+      "hold_entries": [
+        {
+          "frame": 833,
+          "physical_error_before_m": 0.01292471735929012,
+          "physical_error_after_m": 0.01292471735929012,
+          "nominal_error_m": 0.013430808941829955,
+          "workspace_error_bound_m": 0.027066170304224074
+        }
+      ],
+      "acquisition": {
+        "status": "frozen",
+        "epoch": 20.500000000000156,
+        "supporters": [
+          "agent_04",
+          "agent_05",
+          "agent_06",
+          "agent_07"
+        ],
+        "pre_epoch_contact_samples": 0,
+        "max_pre_epoch_translation": 0.0,
+        "max_pre_epoch_rotation": 0.0,
+        "zero_epoch_valid": true,
+        "motion_model": "translation",
+        "use_all_captured": true,
+        "selected_trackers": [
+          "agent_00",
+          "agent_01",
+          "agent_02",
+          "agent_03",
+          "agent_04",
+          "agent_05",
+          "agent_06",
+          "agent_07",
+          "agent_08",
+          "agent_09",
+          "agent_10",
+          "agent_11",
+          "agent_12",
+          "agent_13",
+          "agent_14",
+          "agent_15"
+        ],
+        "bound_semantics": "translation hypothesis; not a rotation-robust center certificate"
+      },
+      "endpoint_m": 0.01292471735929012,
+      "seconds": 43.6,
+      "termination": {
+        "frames_run": 872,
+        "max_frames": 12000,
+        "settled": true,
+        "terminated_by": "settled",
+        "settle_frames": 40,
+        "settle_speed": 0.005
+      },
+      "final_phase": "HOLD",
+      "budget_terminated": false,
+      "barrier_scalings": 8,
+      "safety_metrics": {
+        "min_inter_agent_distance": 0.28000411769816264,
+        "d_min": 0.28,
+        "min_signed_clearance": 0.07956753574564547,
+        "max_penetration": 0.050432464254354534,
+        "penetration_budget": 0.0990947624824942,
+        "solver_fallbacks": 0,
+        "solver_infeasible": 0
+      },
+      "estimation": {
+        "post_ready_frames": 423,
+        "available_frames": 423,
+        "quorum_frames": 423,
+        "missing_frames": 0,
+        "insufficient_quorum_frames": 0,
+        "mae_m": 0.014299043718473906,
+        "p95_m": 0.027484721030053512,
+        "max_m": 0.03212369315818019,
+        "scope": "Available control readings versus pre-physics truth; within each episode, not paired frames across different paths"
+      },
+      "maximum_absolute_rotation_deg": 2.5737916252223845,
+      "contact_redeploy_attempts_by_agent": {
+        "agent_00": 0,
+        "agent_01": 0,
+        "agent_02": 0,
+        "agent_03": 0,
+        "agent_04": 0,
+        "agent_05": 0,
+        "agent_06": 0,
+        "agent_07": 0,
+        "agent_08": 0,
+        "agent_09": 0,
+        "agent_10": 0,
+        "agent_11": 0,
+        "agent_12": 0,
+        "agent_13": 0,
+        "agent_14": 0,
+        "agent_15": 0
+      },
+      "phase_response": {
+        "final_phase": "HOLD",
+        "entered": {
+          "SEARCH": 0,
+          "DISCOVER": 174,
+          "ENCLOSE": 307,
+          "CONTACT_READY": 450,
+          "TRANSPORT": 712,
+          "BRAKE": 722,
+          "HOLD": 832
+        },
+        "first_detection_frame": 174,
+        "enclosure_frame": 307,
+        "contact_ready_frame": 450,
+        "transport_frame": 712,
+        "brake_frame": 722,
+        "hold_frame": 832,
+        "brake_reason": "estimated_stop",
+        "push_suspended": false,
+        "overshoot": false,
+        "short_of_target": true,
+        "contact_recovery_failed": false,
+        "estimate_stopped": false
+      },
+      "scaling": {
+        "scaled_robot_steps": 8,
+        "acquisition": 1,
+        "post_acquisition": 7,
+        "by_capture_state": {
+          "acquiring": 1,
+          "frozen": 7
+        },
+        "by_phase": {
+          "ENCLOSE": 1,
+          "CONTACT_READY": 7
+        },
+        "control_frames_with_scaling": 8,
+        "min_scale": 0.15234375,
+        "events": [
+          {
+            "frame": 408,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_08"
+            ]
+          },
+          {
+            "frame": 543,
+            "capture_state": "frozen",
+            "phase": "CONTACT_READY",
+            "agents": [
+              "agent_04"
+            ]
+          },
+          {
+            "frame": 572,
+            "capture_state": "frozen",
+            "phase": "CONTACT_READY",
+            "agents": [
+              "agent_04"
+            ]
+          },
+          {
+            "frame": 573,
+            "capture_state": "frozen",
+            "phase": "CONTACT_READY",
+            "agents": [
+              "agent_04"
+            ]
+          },
+          {
+            "frame": 574,
+            "capture_state": "frozen",
+            "phase": "CONTACT_READY",
+            "agents": [
+              "agent_04"
+            ]
+          },
+          {
+            "frame": 576,
+            "capture_state": "frozen",
+            "phase": "CONTACT_READY",
+            "agents": [
+              "agent_04"
+            ]
+          },
+          {
+            "frame": 578,
+            "capture_state": "frozen",
+            "phase": "CONTACT_READY",
+            "agents": [
+              "agent_04"
+            ]
+          },
+          {
+            "frame": 579,
+            "capture_state": "frozen",
+            "phase": "CONTACT_READY",
+            "agents": [
+              "agent_04"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "far_c_open_away_pos0_safe_geometry",
+      "condition": "far_c_open_away_pos0",
+      "arm": "safe_geometry",
+      "execution": "COMPLETED",
+      "completed": true,
+      "safe_completed": true,
+      "g500": false,
+      "false_hold": false,
+      "hard_safety": [],
+      "zero_epoch_valid": true,
+      "receipt_sha256": "5120ec2f2fb156d401606f65b7cde8ed580aff14ea6058f9bccfb8e1100004ec",
+      "g500_failure_reasons": [
+        "G500: 16 scaled-barrier event(s), smallest factor 0.445; the contract allows 0"
+      ],
+      "first_hold": {
+        "frame": 1099,
+        "physical_error_before_m": 0.05536925200238908,
+        "physical_error_after_m": 0.05536925200238908,
+        "nominal_error_m": 0.014518804537000263,
+        "workspace_error_bound_m": 0.037286346856184246
+      },
+      "hold_entries": [
+        {
+          "frame": 1099,
+          "physical_error_before_m": 0.05536925200238908,
+          "physical_error_after_m": 0.05536925200238908,
+          "nominal_error_m": 0.014518804537000263,
+          "workspace_error_bound_m": 0.037286346856184246
+        }
+      ],
+      "acquisition": {
+        "status": "frozen",
+        "epoch": 20.450000000000156,
+        "supporters": [
+          "agent_04",
+          "agent_05",
+          "agent_06",
+          "agent_07"
+        ],
+        "pre_epoch_contact_samples": 0,
+        "max_pre_epoch_translation": 0.0,
+        "max_pre_epoch_rotation": 0.0,
+        "zero_epoch_valid": true,
+        "motion_model": "translation",
+        "use_all_captured": true,
+        "selected_trackers": [
+          "agent_00",
+          "agent_01",
+          "agent_02",
+          "agent_03",
+          "agent_04",
+          "agent_05",
+          "agent_06",
+          "agent_07",
+          "agent_08",
+          "agent_09",
+          "agent_10",
+          "agent_11",
+          "agent_12",
+          "agent_13",
+          "agent_14",
+          "agent_15"
+        ],
+        "bound_semantics": "translation hypothesis; not a rotation-robust center certificate",
+        "safe_acquisition_geometry": true
+      },
+      "endpoint_m": 0.05536925200238908,
+      "seconds": 56.900000000000006,
+      "termination": {
+        "frames_run": 1138,
+        "max_frames": 12000,
+        "settled": true,
+        "terminated_by": "settled",
+        "settle_frames": 40,
+        "settle_speed": 0.005
+      },
+      "final_phase": "HOLD",
+      "budget_terminated": false,
+      "barrier_scalings": 16,
+      "safety_metrics": {
+        "min_inter_agent_distance": 0.28000356620300726,
+        "d_min": 0.28,
+        "min_signed_clearance": 0.07012964964670407,
+        "max_penetration": 0.05987035035329594,
+        "penetration_budget": 0.09984730708649402,
+        "solver_fallbacks": 0,
+        "solver_infeasible": 0
+      },
+      "estimation": {
+        "post_ready_frames": 673,
+        "available_frames": 673,
+        "quorum_frames": 673,
+        "missing_frames": 0,
+        "insufficient_quorum_frames": 0,
+        "mae_m": 0.013519594805397541,
+        "p95_m": 0.04157193607352494,
+        "max_m": 0.04633123914688301,
+        "scope": "Available control readings versus pre-physics truth; within each episode, not paired frames across different paths"
+      },
+      "maximum_absolute_rotation_deg": 3.575046079206934,
+      "contact_redeploy_attempts_by_agent": {
+        "agent_00": 0,
+        "agent_01": 0,
+        "agent_02": 0,
+        "agent_03": 0,
+        "agent_04": 0,
+        "agent_05": 0,
+        "agent_06": 0,
+        "agent_07": 0,
+        "agent_08": 0,
+        "agent_09": 0,
+        "agent_10": 0,
+        "agent_11": 0,
+        "agent_12": 0,
+        "agent_13": 0,
+        "agent_14": 0,
+        "agent_15": 0
+      },
+      "phase_response": {
+        "final_phase": "HOLD",
+        "entered": {
+          "SEARCH": 0,
+          "DISCOVER": 174,
+          "ENCLOSE": 309,
+          "CONTACT_READY": 466,
+          "TRANSPORT": 836,
+          "BRAKE": 845,
+          "HOLD": 1098
+        },
+        "first_detection_frame": 174,
+        "enclosure_frame": 309,
+        "contact_ready_frame": 466,
+        "transport_frame": 836,
+        "brake_frame": 845,
+        "hold_frame": 1098,
+        "brake_reason": "estimated_stop",
+        "push_suspended": false,
+        "overshoot": false,
+        "short_of_target": true,
+        "contact_recovery_failed": false,
+        "estimate_stopped": false
+      },
+      "scaling": {
+        "scaled_robot_steps": 16,
+        "acquisition": 0,
+        "post_acquisition": 16,
+        "by_capture_state": {
+          "frozen": 16
+        },
+        "by_phase": {
+          "BRAKE": 16
+        },
+        "control_frames_with_scaling": 16,
+        "min_scale": 0.4453125,
+        "events": [
+          {
+            "frame": 914,
+            "capture_state": "frozen",
+            "phase": "BRAKE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 915,
+            "capture_state": "frozen",
+            "phase": "BRAKE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 916,
+            "capture_state": "frozen",
+            "phase": "BRAKE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 917,
+            "capture_state": "frozen",
+            "phase": "BRAKE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 918,
+            "capture_state": "frozen",
+            "phase": "BRAKE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 919,
+            "capture_state": "frozen",
+            "phase": "BRAKE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 920,
+            "capture_state": "frozen",
+            "phase": "BRAKE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 922,
+            "capture_state": "frozen",
+            "phase": "BRAKE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 923,
+            "capture_state": "frozen",
+            "phase": "BRAKE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 924,
+            "capture_state": "frozen",
+            "phase": "BRAKE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 925,
+            "capture_state": "frozen",
+            "phase": "BRAKE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 926,
+            "capture_state": "frozen",
+            "phase": "BRAKE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 929,
+            "capture_state": "frozen",
+            "phase": "BRAKE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 931,
+            "capture_state": "frozen",
+            "phase": "BRAKE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 932,
+            "capture_state": "frozen",
+            "phase": "BRAKE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 933,
+            "capture_state": "frozen",
+            "phase": "BRAKE",
+            "agents": [
+              "agent_05"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "far_skew_box_s0_r0_pos0_translation_all_captured",
+      "condition": "far_skew_box_s0_r0_pos0",
+      "arm": "translation_all_captured",
+      "execution": "COMPLETED",
+      "completed": true,
+      "safe_completed": true,
+      "g500": false,
+      "false_hold": false,
+      "hard_safety": [],
+      "zero_epoch_valid": true,
+      "receipt_sha256": "b0f2ea1fa8587df2560848c1519ea1bcd8ec342d5f8730ebfc0f2135d13a6239",
+      "g500_failure_reasons": [
+        "G500: 240 scaled-barrier event(s), smallest factor 0.004; the contract allows 0"
+      ],
+      "first_hold": {
+        "frame": 1006,
+        "physical_error_before_m": 0.01812602924241922,
+        "physical_error_after_m": 0.01812602924241922,
+        "nominal_error_m": 0.016204341752498092,
+        "workspace_error_bound_m": 0.03620039361274514
+      },
+      "hold_entries": [
+        {
+          "frame": 1006,
+          "physical_error_before_m": 0.01812602924241922,
+          "physical_error_after_m": 0.01812602924241922,
+          "nominal_error_m": 0.016204341752498092,
+          "workspace_error_bound_m": 0.03620039361274514
+        }
+      ],
+      "acquisition": {
+        "status": "frozen",
+        "epoch": 39.49999999999989,
+        "supporters": [
+          "agent_03",
+          "agent_05",
+          "agent_06",
+          "agent_07"
+        ],
+        "pre_epoch_contact_samples": 0,
+        "max_pre_epoch_translation": 0.0,
+        "max_pre_epoch_rotation": 0.0,
+        "zero_epoch_valid": true,
+        "motion_model": "translation",
+        "use_all_captured": true,
+        "selected_trackers": [
+          "agent_00",
+          "agent_01",
+          "agent_02",
+          "agent_03",
+          "agent_04",
+          "agent_05",
+          "agent_06",
+          "agent_07",
+          "agent_08",
+          "agent_09",
+          "agent_10",
+          "agent_11",
+          "agent_12",
+          "agent_13",
+          "agent_14",
+          "agent_15"
+        ],
+        "bound_semantics": "translation hypothesis; not a rotation-robust center certificate"
+      },
+      "endpoint_m": 0.01812602924241922,
+      "seconds": 52.25,
+      "termination": {
+        "frames_run": 1045,
+        "max_frames": 12000,
+        "settled": true,
+        "terminated_by": "settled",
+        "settle_frames": 40,
+        "settle_speed": 0.005
+      },
+      "final_phase": "HOLD",
+      "budget_terminated": false,
+      "barrier_scalings": 240,
+      "safety_metrics": {
+        "min_inter_agent_distance": 0.280000085976618,
+        "d_min": 0.28,
+        "min_signed_clearance": 0.09674458427993501,
+        "max_penetration": 0.03325541572006499,
+        "penetration_budget": 0.09584456721056889,
+        "solver_fallbacks": 0,
+        "solver_infeasible": 0
+      },
+      "estimation": {
+        "post_ready_frames": 236,
+        "available_frames": 236,
+        "quorum_frames": 236,
+        "missing_frames": 0,
+        "insufficient_quorum_frames": 0,
+        "mae_m": 0.007187134345450603,
+        "p95_m": 0.015576908055025474,
+        "max_m": 0.017337085628779846,
+        "scope": "Available control readings versus pre-physics truth; within each episode, not paired frames across different paths"
+      },
+      "maximum_absolute_rotation_deg": 0.0,
+      "contact_redeploy_attempts_by_agent": {
+        "agent_00": 0,
+        "agent_01": 0,
+        "agent_02": 0,
+        "agent_03": 0,
+        "agent_04": 0,
+        "agent_05": 0,
+        "agent_06": 0,
+        "agent_07": 0,
+        "agent_08": 0,
+        "agent_09": 0,
+        "agent_10": 0,
+        "agent_11": 0,
+        "agent_12": 0,
+        "agent_13": 0,
+        "agent_14": 0,
+        "agent_15": 0
+      },
+      "phase_response": {
+        "final_phase": "HOLD",
+        "entered": {
+          "SEARCH": 0,
+          "DISCOVER": 192,
+          "ENCLOSE": 384,
+          "CONTACT_READY": 810,
+          "TRANSPORT": 910,
+          "BRAKE": 959,
+          "HOLD": 1005
+        },
+        "first_detection_frame": 192,
+        "enclosure_frame": 384,
+        "contact_ready_frame": 810,
+        "transport_frame": 910,
+        "brake_frame": 959,
+        "hold_frame": 1005,
+        "brake_reason": "estimated_stop",
+        "push_suspended": false,
+        "overshoot": false,
+        "short_of_target": true,
+        "contact_recovery_failed": false,
+        "estimate_stopped": false
+      },
+      "scaling": {
+        "scaled_robot_steps": 240,
+        "acquisition": 240,
+        "post_acquisition": 0,
+        "by_capture_state": {
+          "acquiring": 240
+        },
+        "by_phase": {
+          "ENCLOSE": 240
+        },
+        "control_frames_with_scaling": 183,
+        "min_scale": 0.00390625,
+        "events": [
+          {
+            "frame": 437,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 438,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 439,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 440,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 441,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 442,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 443,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 444,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 445,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 446,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 447,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 448,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 449,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 450,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 451,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 452,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 453,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 454,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 455,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 456,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 457,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 458,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 459,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 460,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 461,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 462,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 463,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 464,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 465,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 466,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 467,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 468,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 469,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 470,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 471,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 472,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 473,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 474,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 475,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 476,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 477,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 478,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 479,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 480,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 481,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 482,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 483,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 484,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 485,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 486,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 487,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 488,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 489,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 490,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 491,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 492,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 493,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 494,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 495,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 496,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 497,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 498,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 499,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 500,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 501,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 502,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 503,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 504,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 509,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_09"
+            ]
+          },
+          {
+            "frame": 510,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_09"
+            ]
+          },
+          {
+            "frame": 513,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_09"
+            ]
+          },
+          {
+            "frame": 606,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 623,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 644,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 645,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 653,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 656,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 657,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 661,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 662,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 664,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 667,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 670,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 671,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 672,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 674,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 676,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 677,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 678,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 680,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 682,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 683,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 684,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 685,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 687,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 688,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 690,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 691,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 692,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 693,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 694,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 695,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 696,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 699,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 700,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 701,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 702,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 703,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 704,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 705,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 706,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05",
+              "agent_09"
+            ]
+          },
+          {
+            "frame": 707,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 708,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05",
+              "agent_06",
+              "agent_09"
+            ]
+          },
+          {
+            "frame": 709,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05",
+              "agent_06",
+              "agent_09"
+            ]
+          },
+          {
+            "frame": 710,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 711,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 712,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 713,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 714,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 715,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05",
+              "agent_06",
+              "agent_09"
+            ]
+          },
+          {
+            "frame": 716,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 717,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 718,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 719,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05",
+              "agent_06",
+              "agent_09"
+            ]
+          },
+          {
+            "frame": 720,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 721,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 722,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 723,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 724,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 726,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 727,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 729,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 730,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 731,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 732,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 733,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 734,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 735,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 736,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 737,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 738,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 739,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 740,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 741,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 742,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 743,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 744,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 745,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 746,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 747,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 748,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 749,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 750,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 751,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 752,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 753,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05",
+              "agent_06",
+              "agent_10"
+            ]
+          },
+          {
+            "frame": 754,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 755,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 756,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 758,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 759,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 762,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 763,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 764,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 765,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 766,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 767,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 768,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 769,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 770,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 771,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 772,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 773,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 774,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 776,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 777,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 778,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 779,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 780,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 781,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 782,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 783,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 784,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "far_skew_box_s0_r0_pos0_safe_geometry",
+      "condition": "far_skew_box_s0_r0_pos0",
+      "arm": "safe_geometry",
+      "execution": "COMPLETED",
+      "completed": true,
+      "safe_completed": true,
+      "g500": false,
+      "false_hold": false,
+      "hard_safety": [],
+      "zero_epoch_valid": true,
+      "receipt_sha256": "c227bf154fd06a8331d1510c73bb46ee0561e4c7b516e2b7afd3d3c0aca523a5",
+      "g500_failure_reasons": [
+        "G500: 689 scaled-barrier event(s), smallest factor 0.000; the contract allows 0"
+      ],
+      "first_hold": {
+        "frame": 1572,
+        "physical_error_before_m": 0.026044231397046702,
+        "physical_error_after_m": 0.026044231397046702,
+        "nominal_error_m": 0.019549991586061813,
+        "workspace_error_bound_m": 0.03713564765052111
+      },
+      "hold_entries": [
+        {
+          "frame": 1572,
+          "physical_error_before_m": 0.026044231397046702,
+          "physical_error_after_m": 0.026044231397046702,
+          "nominal_error_m": 0.019549991586061813,
+          "workspace_error_bound_m": 0.03713564765052111
+        }
+      ],
+      "acquisition": {
+        "status": "frozen",
+        "epoch": 55.74999999999897,
+        "supporters": [
+          "agent_06",
+          "agent_07",
+          "agent_10",
+          "agent_14"
+        ],
+        "pre_epoch_contact_samples": 0,
+        "max_pre_epoch_translation": 0.0,
+        "max_pre_epoch_rotation": 0.0,
+        "zero_epoch_valid": true,
+        "motion_model": "translation",
+        "use_all_captured": true,
+        "selected_trackers": [
+          "agent_00",
+          "agent_01",
+          "agent_02",
+          "agent_03",
+          "agent_04",
+          "agent_05",
+          "agent_06",
+          "agent_07",
+          "agent_08",
+          "agent_09",
+          "agent_10",
+          "agent_11",
+          "agent_12",
+          "agent_13",
+          "agent_14",
+          "agent_15"
+        ],
+        "bound_semantics": "translation hypothesis; not a rotation-robust center certificate",
+        "safe_acquisition_geometry": true
+      },
+      "endpoint_m": 0.026044231397046702,
+      "seconds": 80.55000000000001,
+      "termination": {
+        "frames_run": 1611,
+        "max_frames": 12000,
+        "settled": true,
+        "terminated_by": "settled",
+        "settle_frames": 40,
+        "settle_speed": 0.005
+      },
+      "final_phase": "HOLD",
+      "budget_terminated": false,
+      "barrier_scalings": 689,
+      "safety_metrics": {
+        "min_inter_agent_distance": 0.27999999890469074,
+        "d_min": 0.28,
+        "min_signed_clearance": 0.08824455136859993,
+        "max_penetration": 0.04175544863140007,
+        "penetration_budget": 0.10032835641251481,
+        "solver_fallbacks": 0,
+        "solver_infeasible": 0
+      },
+      "estimation": {
+        "post_ready_frames": 475,
+        "available_frames": 475,
+        "quorum_frames": 475,
+        "missing_frames": 0,
+        "insufficient_quorum_frames": 0,
+        "mae_m": 0.008586666066271918,
+        "p95_m": 0.01966154794620756,
+        "max_m": 0.0288213844608259,
+        "scope": "Available control readings versus pre-physics truth; within each episode, not paired frames across different paths"
+      },
+      "maximum_absolute_rotation_deg": 1.4068159597185594,
+      "contact_redeploy_attempts_by_agent": {
+        "agent_00": 0,
+        "agent_01": 0,
+        "agent_02": 0,
+        "agent_03": 0,
+        "agent_04": 0,
+        "agent_05": 0,
+        "agent_06": 0,
+        "agent_07": 0,
+        "agent_08": 0,
+        "agent_09": 0,
+        "agent_10": 0,
+        "agent_11": 0,
+        "agent_12": 0,
+        "agent_13": 0,
+        "agent_14": 0,
+        "agent_15": 0
+      },
+      "phase_response": {
+        "final_phase": "HOLD",
+        "entered": {
+          "SEARCH": 0,
+          "DISCOVER": 192,
+          "ENCLOSE": 723,
+          "CONTACT_READY": 1137,
+          "TRANSPORT": 1312,
+          "BRAKE": 1337,
+          "HOLD": 1571
+        },
+        "first_detection_frame": 192,
+        "enclosure_frame": 723,
+        "contact_ready_frame": 1137,
+        "transport_frame": 1312,
+        "brake_frame": 1337,
+        "hold_frame": 1571,
+        "brake_reason": "estimated_stop",
+        "push_suspended": false,
+        "overshoot": false,
+        "short_of_target": true,
+        "contact_recovery_failed": false,
+        "estimate_stopped": false
+      },
+      "scaling": {
+        "scaled_robot_steps": 689,
+        "acquisition": 689,
+        "post_acquisition": 0,
+        "by_capture_state": {
+          "acquiring": 689
+        },
+        "by_phase": {
+          "DISCOVER": 92,
+          "ENCLOSE": 597
+        },
+        "control_frames_with_scaling": 328,
+        "min_scale": 0.0,
+        "events": [
+          {
+            "frame": 433,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_08"
+            ]
+          },
+          {
+            "frame": 503,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_08"
+            ]
+          },
+          {
+            "frame": 507,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_08"
+            ]
+          },
+          {
+            "frame": 510,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_08"
+            ]
+          },
+          {
+            "frame": 513,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_08"
+            ]
+          },
+          {
+            "frame": 536,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_08"
+            ]
+          },
+          {
+            "frame": 541,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_08"
+            ]
+          },
+          {
+            "frame": 542,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_08"
+            ]
+          },
+          {
+            "frame": 545,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_08"
+            ]
+          },
+          {
+            "frame": 546,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_08"
+            ]
+          },
+          {
+            "frame": 548,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_08"
+            ]
+          },
+          {
+            "frame": 551,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_08"
+            ]
+          },
+          {
+            "frame": 554,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_08"
+            ]
+          },
+          {
+            "frame": 568,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 569,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_06",
+              "agent_08"
+            ]
+          },
+          {
+            "frame": 577,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 578,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_06",
+              "agent_08"
+            ]
+          },
+          {
+            "frame": 582,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 583,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 584,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 585,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_06",
+              "agent_08"
+            ]
+          },
+          {
+            "frame": 586,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 587,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 588,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 589,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 590,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_06",
+              "agent_08"
+            ]
+          },
+          {
+            "frame": 591,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 592,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 594,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_06",
+              "agent_08"
+            ]
+          },
+          {
+            "frame": 595,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 596,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 597,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 598,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 599,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 601,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_06",
+              "agent_08"
+            ]
+          },
+          {
+            "frame": 602,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_06",
+              "agent_08"
+            ]
+          },
+          {
+            "frame": 603,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 606,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 608,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 610,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 611,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_06",
+              "agent_08"
+            ]
+          },
+          {
+            "frame": 612,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_06",
+              "agent_08"
+            ]
+          },
+          {
+            "frame": 613,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 617,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 618,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 619,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 620,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 622,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 625,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_06",
+              "agent_08"
+            ]
+          },
+          {
+            "frame": 626,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 627,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 628,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_06",
+              "agent_08"
+            ]
+          },
+          {
+            "frame": 629,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 631,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 632,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 633,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 634,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_06",
+              "agent_08"
+            ]
+          },
+          {
+            "frame": 635,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 636,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 637,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 638,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 639,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 641,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 642,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 644,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 645,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_06",
+              "agent_08"
+            ]
+          },
+          {
+            "frame": 646,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_06",
+              "agent_08"
+            ]
+          },
+          {
+            "frame": 648,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_08"
+            ]
+          },
+          {
+            "frame": 651,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_08"
+            ]
+          },
+          {
+            "frame": 652,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_08"
+            ]
+          },
+          {
+            "frame": 665,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_08"
+            ]
+          },
+          {
+            "frame": 669,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_08"
+            ]
+          },
+          {
+            "frame": 678,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_04"
+            ]
+          },
+          {
+            "frame": 679,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_04"
+            ]
+          },
+          {
+            "frame": 681,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_08"
+            ]
+          },
+          {
+            "frame": 702,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_08"
+            ]
+          },
+          {
+            "frame": 714,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_08"
+            ]
+          },
+          {
+            "frame": 719,
+            "capture_state": "acquiring",
+            "phase": "DISCOVER",
+            "agents": [
+              "agent_08"
+            ]
+          },
+          {
+            "frame": 740,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 792,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02"
+            ]
+          },
+          {
+            "frame": 793,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02"
+            ]
+          },
+          {
+            "frame": 817,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02"
+            ]
+          },
+          {
+            "frame": 818,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02"
+            ]
+          },
+          {
+            "frame": 823,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02"
+            ]
+          },
+          {
+            "frame": 828,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02"
+            ]
+          },
+          {
+            "frame": 829,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02"
+            ]
+          },
+          {
+            "frame": 834,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 835,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 836,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05",
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 837,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 838,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 839,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 840,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 841,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 842,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 843,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 844,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 845,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 846,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_04",
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 847,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 848,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 849,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 850,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_04",
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 851,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 852,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_04",
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 853,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_04",
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 854,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 855,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 856,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_04",
+              "agent_06",
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 857,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02"
+            ]
+          },
+          {
+            "frame": 858,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02"
+            ]
+          },
+          {
+            "frame": 859,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02"
+            ]
+          },
+          {
+            "frame": 860,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 861,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 862,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_04",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 863,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_04",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 864,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_04"
+            ]
+          },
+          {
+            "frame": 865,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_04"
+            ]
+          },
+          {
+            "frame": 866,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_04",
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 867,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_04",
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 868,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_04"
+            ]
+          },
+          {
+            "frame": 869,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_04"
+            ]
+          },
+          {
+            "frame": 870,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_04"
+            ]
+          },
+          {
+            "frame": 871,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_04",
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 872,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_04",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 873,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_04"
+            ]
+          },
+          {
+            "frame": 874,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_04",
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 875,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_04",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 876,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_04",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 877,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_04",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 878,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_04"
+            ]
+          },
+          {
+            "frame": 879,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_04"
+            ]
+          },
+          {
+            "frame": 880,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_04"
+            ]
+          },
+          {
+            "frame": 881,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_04",
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 882,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 883,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_04",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 884,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_04",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 885,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_04",
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 886,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_04",
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 887,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 888,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 889,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 890,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 891,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 892,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 893,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_04",
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 894,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_04"
+            ]
+          },
+          {
+            "frame": 895,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_04",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 896,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_04",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 897,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_04",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 898,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_04"
+            ]
+          },
+          {
+            "frame": 899,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_04",
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 900,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_04",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 901,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_04",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 902,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_04",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 903,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_04",
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 904,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_04",
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 905,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_04",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 906,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_04",
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 907,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_04",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 908,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_04",
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 909,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_04",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 910,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 911,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 912,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_04",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 913,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 914,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 915,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_13"
+            ]
+          },
+          {
+            "frame": 916,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_04",
+              "agent_05",
+              "agent_06",
+              "agent_13"
+            ]
+          },
+          {
+            "frame": 917,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_04",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 918,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_04",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 919,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_04"
+            ]
+          },
+          {
+            "frame": 920,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_04",
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 921,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_04",
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 922,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_04",
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 923,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 924,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 925,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 926,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 927,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 928,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 929,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 930,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 931,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 932,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 933,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 934,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 935,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 936,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 937,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 938,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 939,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 940,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 941,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 942,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 943,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 944,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 945,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 946,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 947,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 948,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 949,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 950,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02"
+            ]
+          },
+          {
+            "frame": 951,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 952,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 953,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 954,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 955,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 956,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 957,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 958,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 959,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 960,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 961,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 962,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 963,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 964,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 965,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 966,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 967,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 968,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 969,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 970,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 971,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 972,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 973,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 974,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 975,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 976,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 977,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 978,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 979,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 980,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 981,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 982,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 983,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 984,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 985,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 986,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 987,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 988,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 989,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 990,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 991,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 992,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 993,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 994,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 995,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 996,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 997,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 998,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 999,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 1000,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 1001,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 1002,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 1003,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 1004,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 1005,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 1006,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 1007,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 1008,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 1009,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 1010,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 1011,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 1012,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 1013,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 1014,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 1015,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02"
+            ]
+          },
+          {
+            "frame": 1016,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 1017,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 1018,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 1019,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 1020,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 1021,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 1022,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02"
+            ]
+          },
+          {
+            "frame": 1023,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02"
+            ]
+          },
+          {
+            "frame": 1024,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 1025,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 1027,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 1030,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 1032,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_06"
+            ]
+          },
+          {
+            "frame": 1067,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 1068,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 1071,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 1072,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 1073,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 1074,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 1075,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05",
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 1076,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 1077,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 1078,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 1079,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 1080,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 1081,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 1082,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 1083,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05",
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 1084,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 1085,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05",
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 1086,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05",
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 1087,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 1088,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 1089,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05",
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 1090,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 1091,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 1092,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05",
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 1093,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 1094,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 1095,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 1096,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 1097,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 1098,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 1099,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 1100,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 1101,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 1102,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 1103,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 1104,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 1105,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 1106,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 1107,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 1108,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 1109,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 1110,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05",
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 1111,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 1112,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05",
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 1113,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05",
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 1114,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_12"
+            ]
+          },
+          {
+            "frame": 1115,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_02",
+              "agent_05",
+              "agent_12"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "near_circle_safe_geometry",
+      "condition": "near_circle",
+      "arm": "safe_geometry",
+      "execution": "COMPLETED",
+      "completed": true,
+      "safe_completed": true,
+      "g500": true,
+      "false_hold": false,
+      "hard_safety": [],
+      "zero_epoch_valid": true,
+      "receipt_sha256": "fafa94d563c9466066b82a4dd3bdb793fdc4e95fe030822e978e990a83c96439",
+      "g500_failure_reasons": [],
+      "first_hold": {
+        "frame": 223,
+        "physical_error_before_m": 0.0164025848510865,
+        "physical_error_after_m": 0.0164025848510865,
+        "nominal_error_m": 0.01695824982226371,
+        "workspace_error_bound_m": 0.02138635821954996
+      },
+      "hold_entries": [
+        {
+          "frame": 223,
+          "physical_error_before_m": 0.0164025848510865,
+          "physical_error_after_m": 0.0164025848510865,
+          "nominal_error_m": 0.01695824982226371,
+          "workspace_error_bound_m": 0.02138635821954996
+        }
+      ],
+      "acquisition": {
+        "status": "frozen",
+        "epoch": 1.950000000000001,
+        "supporters": [
+          "agent_00",
+          "agent_05",
+          "agent_10",
+          "agent_11"
+        ],
+        "pre_epoch_contact_samples": 0,
+        "max_pre_epoch_translation": 0.0,
+        "max_pre_epoch_rotation": 0.0,
+        "zero_epoch_valid": true,
+        "motion_model": "translation",
+        "use_all_captured": true,
+        "selected_trackers": [
+          "agent_00",
+          "agent_01",
+          "agent_02",
+          "agent_03",
+          "agent_04",
+          "agent_05",
+          "agent_06",
+          "agent_07",
+          "agent_08",
+          "agent_09",
+          "agent_10",
+          "agent_11",
+          "agent_12",
+          "agent_13",
+          "agent_14",
+          "agent_15"
+        ],
+        "bound_semantics": "translation hypothesis; not a rotation-robust center certificate",
+        "safe_acquisition_geometry": true
+      },
+      "endpoint_m": 0.0164025848510865,
+      "seconds": 13.100000000000001,
+      "termination": {
+        "frames_run": 262,
+        "max_frames": 12000,
+        "settled": true,
+        "terminated_by": "settled",
+        "settle_frames": 40,
+        "settle_speed": 0.005
+      },
+      "final_phase": "HOLD",
+      "budget_terminated": false,
+      "barrier_scalings": 0,
+      "safety_metrics": {
+        "min_inter_agent_distance": 0.2812927065025812,
+        "d_min": 0.28,
+        "min_signed_clearance": 0.08088221473975984,
+        "max_penetration": 0.04911778526024016,
+        "penetration_budget": 0.09801311122440323,
+        "solver_fallbacks": 0,
+        "solver_infeasible": 0
+      },
+      "estimation": {
+        "post_ready_frames": 165,
+        "available_frames": 165,
+        "quorum_frames": 165,
+        "missing_frames": 0,
+        "insufficient_quorum_frames": 0,
+        "mae_m": 0.003567201479099745,
+        "p95_m": 0.00715723984801858,
+        "max_m": 0.008296071372187972,
+        "scope": "Available control readings versus pre-physics truth; within each episode, not paired frames across different paths"
+      },
+      "maximum_absolute_rotation_deg": 0.0,
+      "contact_redeploy_attempts_by_agent": {
+        "agent_00": 0,
+        "agent_01": 0,
+        "agent_02": 0,
+        "agent_03": 0,
+        "agent_04": 0,
+        "agent_05": 0,
+        "agent_06": 0,
+        "agent_07": 0,
+        "agent_08": 0,
+        "agent_09": 0,
+        "agent_10": 0,
+        "agent_11": 0,
+        "agent_12": 0,
+        "agent_13": 0,
+        "agent_14": 0,
+        "agent_15": 0
+      },
+      "phase_response": {
+        "final_phase": "HOLD",
+        "entered": {
+          "SEARCH": 0,
+          "DISCOVER": 0,
+          "ENCLOSE": 19,
+          "CONTACT_READY": 98,
+          "TRANSPORT": 107,
+          "BRAKE": 156,
+          "HOLD": 222
+        },
+        "first_detection_frame": 0,
+        "enclosure_frame": 19,
+        "contact_ready_frame": 98,
+        "transport_frame": 107,
+        "brake_frame": 156,
+        "hold_frame": 222,
+        "brake_reason": "estimated_stop",
+        "push_suspended": false,
+        "overshoot": false,
+        "short_of_target": true,
+        "contact_recovery_failed": false,
+        "estimate_stopped": false
+      },
+      "scaling": {
+        "scaled_robot_steps": 0,
+        "acquisition": 0,
+        "post_acquisition": 0,
+        "by_capture_state": {},
+        "by_phase": {},
+        "control_frames_with_scaling": 0,
+        "min_scale": 1.0,
+        "events": []
+      }
+    }
+  ],
+  "totals": {
+    "translation_all_captured": {
+      "episodes": 4,
+      "safe_completed": 4,
+      "false_holds": 0,
+      "hard_failures": 0,
+      "g500": 2,
+      "timeouts": 0
+    },
+    "safe_geometry": {
+      "episodes": 4,
+      "safe_completed": 4,
+      "false_holds": 0,
+      "hard_failures": 0,
+      "g500": 2,
+      "timeouts": 0
+    }
+  },
+  "gates": {
+    "all_eight_execution_complete": true,
+    "all_four_baselines_exact": true,
+    "all_four_candidate_safe_complete_no_false_hold_valid_epoch": true,
+    "preserve_each_matched_baseline_g500_pass": true,
+    "candidate_acquisition_scalings_zero": false,
+    "no_matched_post_acquisition_scaling_increase": false
+  },
+  "baseline_reproduction": {
+    "near_circle": {
+      "exact": true,
+      "replay_keys_equal": true,
+      "arrays": {
+        "times": true,
+        "phase": true,
+        "min_distance": true,
+        "map_coverage": true,
+        "push_flags": true,
+        "contact_flags": true,
+        "efforts": true,
+        "agent_ids": true,
+        "agent_positions": true,
+        "domain": true,
+        "robot_radius": true,
+        "sensed_counts": true,
+        "sensed_points": true,
+        "cargo/cargo_0/centers": true,
+        "cargo/cargo_0/angles": true,
+        "cargo/cargo_0/local_vertices": true,
+        "cargo/cargo_0/strict_coverage": true,
+        "cargo/cargo_0/contacts": true,
+        "cargo/cargo_0/penetration": true,
+        "cargo/cargo_0/speed": true,
+        "cargo/cargo_0/progress_estimate": true,
+        "task/cargo_0/direction": true,
+        "task/cargo_0/start": true,
+        "task/cargo_0/goal_point": true,
+        "task/cargo_0/distance": true
+      },
+      "scientific_fields_exact": {
+        "config.json": true,
+        "paired_metrics.json": true,
+        "physics_substeps.json": true,
+        "summary.json": true,
+        "case_result_scientific_fields": true
+      },
+      "execution_metadata": {
+        "git_sha": [
+          "77e5ed9bca17209a398d9f401aaaf70532ed1bb6-dirty",
+          "b7bf69f6576c680909993a2fd46287d610b8e49c-dirty"
+        ],
+        "case_id": [
+          "near_circle_translation_all_captured",
+          "near_circle_translation_all_captured"
+        ],
+        "factors": [
+          {
+            "condition": "circle",
+            "shape": "circle",
+            "stratum": "near",
+            "area_m2": 2.0587500000000003,
+            "mass_kg": 4.117500000000001,
+            "inertia_kg_m2": 1.3491417315354244,
+            "perimeter_m": 5.088400033654982,
+            "diameter_m": 1.620338677462703,
+            "reach_m": 0.8101693387314333,
+            "vertex_count": 64,
+            "initial_centroid": [
+              3.999999999999942,
+              3.999999999999943
+            ],
+            "task": {
+              "object_id": "cargo_0",
+              "direction": [
+                1.0,
+                0.0
+              ],
+              "angle_deg": 0.0,
+              "target_distance": 1.2,
+              "start": [
+                3.999999999999942,
+                3.999999999999943
+              ],
+              "goal_point": [
+                5.199999999999942,
+                3.999999999999943
+              ],
+              "tolerance": 0.12,
+              "clearance": 1.3951693387314332,
+              "sampling_attempts": 1
+            },
+            "initial_own_scan_returns": [
+              11,
+              0,
+              0,
+              0,
+              0,
+              9,
+              0,
+              10,
+              0,
+              0,
+              7,
+              3,
+              0,
+              0,
+              0,
+              0
+            ],
+            "minimum_initial_boundary_distance_m": 0.8917481715794422,
+            "initial_tokens": "empty",
+            "agent_initial_sha256": "b887bc83a42a30d875306b7bf213aabe04de3e3fc253003b1d2d38d28714f9b1",
+            "physical_initial_sha256": "35493bb8a7ee88cf0eb63a756a30cf738127fbe00dba1e1f95dfe1788d7f2234",
+            "cohort": "task_translation_physical_development",
+            "origin_case": "circle_boundary_cvt",
+            "geometry_setting": "historical frozen definition",
+            "parameter_setting": "candidate",
+            "original_parameter": 0.25,
+            "candidate_parameter": 0.45,
+            "minimum_initial_pair_distance_m": 0.34963340957703687,
+            "validation_seed": 20261102,
+            "initial_rule": "Existing near scatter; far grid translated to [3.75,1.05] with Gaussian jitter sigma=.005m",
+            "historical_source_case": "near_circle_reference"
+          },
+          {
+            "condition": "circle",
+            "shape": "circle",
+            "stratum": "near",
+            "area_m2": 2.0587500000000003,
+            "mass_kg": 4.117500000000001,
+            "inertia_kg_m2": 1.3491417315354244,
+            "perimeter_m": 5.088400033654982,
+            "diameter_m": 1.620338677462703,
+            "reach_m": 0.8101693387314333,
+            "vertex_count": 64,
+            "initial_centroid": [
+              3.999999999999942,
+              3.999999999999943
+            ],
+            "task": {
+              "object_id": "cargo_0",
+              "direction": [
+                1.0,
+                0.0
+              ],
+              "angle_deg": 0.0,
+              "target_distance": 1.2,
+              "start": [
+                3.999999999999942,
+                3.999999999999943
+              ],
+              "goal_point": [
+                5.199999999999942,
+                3.999999999999943
+              ],
+              "tolerance": 0.12,
+              "clearance": 1.3951693387314332,
+              "sampling_attempts": 1
+            },
+            "initial_own_scan_returns": [
+              11,
+              0,
+              0,
+              0,
+              0,
+              9,
+              0,
+              10,
+              0,
+              0,
+              7,
+              3,
+              0,
+              0,
+              0,
+              0
+            ],
+            "minimum_initial_boundary_distance_m": 0.8917481715794422,
+            "initial_tokens": "empty",
+            "agent_initial_sha256": "b887bc83a42a30d875306b7bf213aabe04de3e3fc253003b1d2d38d28714f9b1",
+            "physical_initial_sha256": "35493bb8a7ee88cf0eb63a756a30cf738127fbe00dba1e1f95dfe1788d7f2234",
+            "cohort": "acquisition_geometry_development",
+            "origin_case": "circle_boundary_cvt",
+            "geometry_setting": "historical frozen definition",
+            "parameter_setting": "candidate",
+            "original_parameter": 0.25,
+            "candidate_parameter": 0.45,
+            "minimum_initial_pair_distance_m": 0.34963340957703687,
+            "validation_seed": 20261102,
+            "initial_rule": "Existing near scatter; far grid translated to [3.75,1.05] with Gaussian jitter sigma=.005m",
+            "historical_source_case": "near_circle_reference"
+          }
+        ],
+        "wall_seconds": [
+          35.65471820003586,
+          41.903029799985234
+        ]
+      }
+    },
+    "near_l_reference": {
+      "exact": true,
+      "replay_keys_equal": true,
+      "arrays": {
+        "times": true,
+        "phase": true,
+        "min_distance": true,
+        "map_coverage": true,
+        "push_flags": true,
+        "contact_flags": true,
+        "efforts": true,
+        "agent_ids": true,
+        "agent_positions": true,
+        "domain": true,
+        "robot_radius": true,
+        "sensed_counts": true,
+        "sensed_points": true,
+        "cargo/cargo_0/centers": true,
+        "cargo/cargo_0/angles": true,
+        "cargo/cargo_0/local_vertices": true,
+        "cargo/cargo_0/strict_coverage": true,
+        "cargo/cargo_0/contacts": true,
+        "cargo/cargo_0/penetration": true,
+        "cargo/cargo_0/speed": true,
+        "cargo/cargo_0/progress_estimate": true,
+        "task/cargo_0/direction": true,
+        "task/cargo_0/start": true,
+        "task/cargo_0/goal_point": true,
+        "task/cargo_0/distance": true
+      },
+      "scientific_fields_exact": {
+        "config.json": true,
+        "paired_metrics.json": true,
+        "physics_substeps.json": true,
+        "summary.json": true,
+        "case_result_scientific_fields": true
+      },
+      "execution_metadata": {
+        "git_sha": [
+          "77e5ed9bca17209a398d9f401aaaf70532ed1bb6-dirty",
+          "b7bf69f6576c680909993a2fd46287d610b8e49c-dirty"
+        ],
+        "case_id": [
+          "near_l_reference_translation_all_captured",
+          "near_l_reference_translation_all_captured"
+        ],
+        "factors": [
+          {
+            "condition": "l_reference",
+            "shape": "l_shape",
+            "stratum": "near",
+            "area_m2": 2.0587500000000007,
+            "mass_kg": 4.1175000000000015,
+            "inertia_kg_m2": 2.086619857838117,
+            "perimeter_m": 7.200000000000001,
+            "diameter_m": 2.545584412271572,
+            "reach_m": 1.3200471192360912,
+            "vertex_count": 6,
+            "initial_centroid": [
+              3.999999999999982,
+              3.999999999999985
+            ],
+            "task": {
+              "object_id": "cargo_0",
+              "direction": [
+                1.0,
+                0.0
+              ],
+              "angle_deg": 0.0,
+              "target_distance": 1.2,
+              "start": [
+                3.999999999999982,
+                3.999999999999985
+              ],
+              "goal_point": [
+                5.1999999999999815,
+                3.999999999999985
+              ],
+              "tolerance": 0.12,
+              "clearance": 1.9050471192360914,
+              "sampling_attempts": 1
+            },
+            "initial_own_scan_returns": [
+              10,
+              0,
+              0,
+              8,
+              5,
+              13,
+              4,
+              13,
+              0,
+              0,
+              6,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "minimum_initial_boundary_distance_m": 0.5614213689425158,
+            "initial_tokens": "empty",
+            "agent_initial_sha256": "b887bc83a42a30d875306b7bf213aabe04de3e3fc253003b1d2d38d28714f9b1",
+            "physical_initial_sha256": "7847a31860a1d66ea04babe22e5ed18721e35f0fa7fcc1e43119054ef3090d3a",
+            "cohort": "task_translation_physical_development",
+            "origin_case": "l_reference_boundary_cvt",
+            "geometry_setting": "historical frozen definition",
+            "parameter_setting": "candidate",
+            "original_parameter": 0.25,
+            "candidate_parameter": 0.45,
+            "minimum_initial_pair_distance_m": 0.34963340957703687,
+            "validation_seed": 20261102,
+            "initial_rule": "Existing near scatter; far grid translated to [3.75,1.05] with Gaussian jitter sigma=.005m",
+            "historical_source_case": "near_l_reference_reference"
+          },
+          {
+            "condition": "l_reference",
+            "shape": "l_shape",
+            "stratum": "near",
+            "area_m2": 2.0587500000000007,
+            "mass_kg": 4.1175000000000015,
+            "inertia_kg_m2": 2.086619857838117,
+            "perimeter_m": 7.200000000000001,
+            "diameter_m": 2.545584412271572,
+            "reach_m": 1.3200471192360912,
+            "vertex_count": 6,
+            "initial_centroid": [
+              3.999999999999982,
+              3.999999999999985
+            ],
+            "task": {
+              "object_id": "cargo_0",
+              "direction": [
+                1.0,
+                0.0
+              ],
+              "angle_deg": 0.0,
+              "target_distance": 1.2,
+              "start": [
+                3.999999999999982,
+                3.999999999999985
+              ],
+              "goal_point": [
+                5.1999999999999815,
+                3.999999999999985
+              ],
+              "tolerance": 0.12,
+              "clearance": 1.9050471192360914,
+              "sampling_attempts": 1
+            },
+            "initial_own_scan_returns": [
+              10,
+              0,
+              0,
+              8,
+              5,
+              13,
+              4,
+              13,
+              0,
+              0,
+              6,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "minimum_initial_boundary_distance_m": 0.5614213689425158,
+            "initial_tokens": "empty",
+            "agent_initial_sha256": "b887bc83a42a30d875306b7bf213aabe04de3e3fc253003b1d2d38d28714f9b1",
+            "physical_initial_sha256": "7847a31860a1d66ea04babe22e5ed18721e35f0fa7fcc1e43119054ef3090d3a",
+            "cohort": "acquisition_geometry_development",
+            "origin_case": "l_reference_boundary_cvt",
+            "geometry_setting": "historical frozen definition",
+            "parameter_setting": "candidate",
+            "original_parameter": 0.25,
+            "candidate_parameter": 0.45,
+            "minimum_initial_pair_distance_m": 0.34963340957703687,
+            "validation_seed": 20261102,
+            "initial_rule": "Existing near scatter; far grid translated to [3.75,1.05] with Gaussian jitter sigma=.005m",
+            "historical_source_case": "near_l_reference_reference"
+          }
+        ],
+        "wall_seconds": [
+          60.08166580001125,
+          52.82785729999887
+        ]
+      }
+    },
+    "far_c_open_away_pos0": {
+      "exact": true,
+      "replay_keys_equal": true,
+      "arrays": {
+        "times": true,
+        "phase": true,
+        "min_distance": true,
+        "map_coverage": true,
+        "push_flags": true,
+        "contact_flags": true,
+        "efforts": true,
+        "agent_ids": true,
+        "agent_positions": true,
+        "domain": true,
+        "robot_radius": true,
+        "sensed_counts": true,
+        "sensed_points": true,
+        "cargo/cargo_0/centers": true,
+        "cargo/cargo_0/angles": true,
+        "cargo/cargo_0/local_vertices": true,
+        "cargo/cargo_0/strict_coverage": true,
+        "cargo/cargo_0/contacts": true,
+        "cargo/cargo_0/penetration": true,
+        "cargo/cargo_0/speed": true,
+        "cargo/cargo_0/progress_estimate": true,
+        "task/cargo_0/direction": true,
+        "task/cargo_0/start": true,
+        "task/cargo_0/goal_point": true,
+        "task/cargo_0/distance": true
+      },
+      "scientific_fields_exact": {
+        "config.json": true,
+        "paired_metrics.json": true,
+        "physics_substeps.json": true,
+        "summary.json": true,
+        "case_result_scientific_fields": true
+      },
+      "execution_metadata": {
+        "git_sha": [
+          "77e5ed9bca17209a398d9f401aaaf70532ed1bb6-dirty",
+          "b7bf69f6576c680909993a2fd46287d610b8e49c-dirty"
+        ],
+        "case_id": [
+          "far_c_open_away_pos0_translation_all_captured",
+          "far_c_open_away_pos0_translation_all_captured"
+        ],
+        "factors": [
+          {
+            "condition": "c_open_away_pos0",
+            "shape": "c_shape",
+            "stratum": "far",
+            "area_m2": 2.0587500000000007,
+            "mass_kg": 4.1175000000000015,
+            "inertia_kg_m2": 2.5465684724161357,
+            "perimeter_m": 8.858595028691228,
+            "diameter_m": 2.460720841303119,
+            "reach_m": 1.2936966521890678,
+            "vertex_count": 8,
+            "initial_centroid": [
+              3.0999999999999495,
+              5.600000000000051
+            ],
+            "task": {
+              "object_id": "cargo_0",
+              "direction": [
+                1.0,
+                0.0
+              ],
+              "angle_deg": 0.0,
+              "target_distance": 1.2,
+              "start": [
+                3.0999999999999495,
+                5.600000000000051
+              ],
+              "goal_point": [
+                4.299999999999949,
+                5.600000000000051
+              ],
+              "tolerance": 0.12,
+              "clearance": 1.8786966521890678,
+              "sampling_attempts": 1
+            },
+            "initial_own_scan_returns": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "minimum_initial_boundary_distance_m": 3.018300036921219,
+            "initial_tokens": "empty",
+            "agent_initial_sha256": "2e79fb2332d9fa15cbc60f3fdfcd929d3f94c19c9d7018f47355a73b91a3ca88",
+            "physical_initial_sha256": "46e871c8e69468fc014c6ee4424abde35896112e70e7b77a1ed39bae7880f1a2",
+            "cohort": "task_translation_physical_development",
+            "geometry_from_near": "c_open_away",
+            "position_id": 0,
+            "normalization": "same physical state across location-information arms; geometry remains unknown",
+            "origin_case": "c_open_away_pos0_unknown_location",
+            "parameter_setting": "candidate",
+            "original_parameter": 0.25,
+            "candidate_parameter": 0.45,
+            "minimum_initial_pair_distance_m": 0.34802137650114573,
+            "validation_seed": 20261102,
+            "initial_rule": "Existing near scatter; far grid translated to [3.75,1.05] with Gaussian jitter sigma=.005m",
+            "historical_source_case": "far_c_open_away_pos0_reference"
+          },
+          {
+            "condition": "c_open_away_pos0",
+            "shape": "c_shape",
+            "stratum": "far",
+            "area_m2": 2.0587500000000007,
+            "mass_kg": 4.1175000000000015,
+            "inertia_kg_m2": 2.5465684724161357,
+            "perimeter_m": 8.858595028691228,
+            "diameter_m": 2.460720841303119,
+            "reach_m": 1.2936966521890678,
+            "vertex_count": 8,
+            "initial_centroid": [
+              3.0999999999999495,
+              5.600000000000051
+            ],
+            "task": {
+              "object_id": "cargo_0",
+              "direction": [
+                1.0,
+                0.0
+              ],
+              "angle_deg": 0.0,
+              "target_distance": 1.2,
+              "start": [
+                3.0999999999999495,
+                5.600000000000051
+              ],
+              "goal_point": [
+                4.299999999999949,
+                5.600000000000051
+              ],
+              "tolerance": 0.12,
+              "clearance": 1.8786966521890678,
+              "sampling_attempts": 1
+            },
+            "initial_own_scan_returns": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "minimum_initial_boundary_distance_m": 3.018300036921219,
+            "initial_tokens": "empty",
+            "agent_initial_sha256": "2e79fb2332d9fa15cbc60f3fdfcd929d3f94c19c9d7018f47355a73b91a3ca88",
+            "physical_initial_sha256": "46e871c8e69468fc014c6ee4424abde35896112e70e7b77a1ed39bae7880f1a2",
+            "cohort": "acquisition_geometry_development",
+            "geometry_from_near": "c_open_away",
+            "position_id": 0,
+            "normalization": "same physical state across location-information arms; geometry remains unknown",
+            "origin_case": "c_open_away_pos0_unknown_location",
+            "parameter_setting": "candidate",
+            "original_parameter": 0.25,
+            "candidate_parameter": 0.45,
+            "minimum_initial_pair_distance_m": 0.34802137650114573,
+            "validation_seed": 20261102,
+            "initial_rule": "Existing near scatter; far grid translated to [3.75,1.05] with Gaussian jitter sigma=.005m",
+            "historical_source_case": "far_c_open_away_pos0_reference"
+          }
+        ],
+        "wall_seconds": [
+          80.57099699997343,
+          82.43918619997567
+        ]
+      }
+    },
+    "far_skew_box_s0_r0_pos0": {
+      "exact": true,
+      "replay_keys_equal": true,
+      "arrays": {
+        "times": true,
+        "phase": true,
+        "min_distance": true,
+        "map_coverage": true,
+        "push_flags": true,
+        "contact_flags": true,
+        "efforts": true,
+        "agent_ids": true,
+        "agent_positions": true,
+        "domain": true,
+        "robot_radius": true,
+        "sensed_counts": true,
+        "sensed_points": true,
+        "cargo/cargo_0/centers": true,
+        "cargo/cargo_0/angles": true,
+        "cargo/cargo_0/local_vertices": true,
+        "cargo/cargo_0/strict_coverage": true,
+        "cargo/cargo_0/contacts": true,
+        "cargo/cargo_0/penetration": true,
+        "cargo/cargo_0/speed": true,
+        "cargo/cargo_0/progress_estimate": true,
+        "task/cargo_0/direction": true,
+        "task/cargo_0/start": true,
+        "task/cargo_0/goal_point": true,
+        "task/cargo_0/distance": true
+      },
+      "scientific_fields_exact": {
+        "config.json": true,
+        "paired_metrics.json": true,
+        "physics_substeps.json": true,
+        "summary.json": true,
+        "case_result_scientific_fields": true
+      },
+      "execution_metadata": {
+        "git_sha": [
+          "77e5ed9bca17209a398d9f401aaaf70532ed1bb6-dirty",
+          "b7bf69f6576c680909993a2fd46287d610b8e49c-dirty"
+        ],
+        "case_id": [
+          "far_skew_box_s0_r0_pos0_translation_all_captured",
+          "far_skew_box_s0_r0_pos0_translation_all_captured"
+        ],
+        "factors": [
+          {
+            "condition": "skew_box_s0_r0_pos0",
+            "shape": "skew_box",
+            "stratum": "far",
+            "area_m2": 2.05875,
+            "mass_kg": 4.1175,
+            "inertia_kg_m2": 1.579496120257831,
+            "perimeter_m": 5.988113250582847,
+            "diameter_m": 2.1391496288136986,
+            "reach_m": 1.205373574883876,
+            "vertex_count": 4,
+            "initial_centroid": [
+              3.0999999999999965,
+              5.599999999999994
+            ],
+            "task": {
+              "object_id": "cargo_0",
+              "direction": [
+                1.0,
+                0.0
+              ],
+              "angle_deg": 0.0,
+              "target_distance": 1.2,
+              "start": [
+                3.0999999999999965,
+                5.599999999999994
+              ],
+              "goal_point": [
+                4.299999999999996,
+                5.599999999999994
+              ],
+              "tolerance": 0.12,
+              "clearance": 1.7903735748838763,
+              "sampling_attempts": 1
+            },
+            "initial_own_scan_returns": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "minimum_initial_boundary_distance_m": 3.46009927206023,
+            "initial_tokens": "empty",
+            "agent_initial_sha256": "2e79fb2332d9fa15cbc60f3fdfcd929d3f94c19c9d7018f47355a73b91a3ca88",
+            "physical_initial_sha256": "84e7bbb49fda860a0d921332dcb68d8fa3535b3fb5d3b7dc06a8a8504c2f230f",
+            "cohort": "task_translation_physical_development",
+            "geometry_from_near": "skew_box_s0_r0",
+            "position_id": 0,
+            "normalization": "same physical state across location-information arms; geometry remains unknown",
+            "origin_case": "skew_box_s0_r0_pos0_unknown_location",
+            "parameter_setting": "candidate",
+            "original_parameter": 0.25,
+            "candidate_parameter": 0.45,
+            "minimum_initial_pair_distance_m": 0.34802137650114573,
+            "validation_seed": 20261102,
+            "initial_rule": "Existing near scatter; far grid translated to [3.75,1.05] with Gaussian jitter sigma=.005m",
+            "historical_source_case": "far_skew_box_s0_r0_pos0_reference"
+          },
+          {
+            "condition": "skew_box_s0_r0_pos0",
+            "shape": "skew_box",
+            "stratum": "far",
+            "area_m2": 2.05875,
+            "mass_kg": 4.1175,
+            "inertia_kg_m2": 1.579496120257831,
+            "perimeter_m": 5.988113250582847,
+            "diameter_m": 2.1391496288136986,
+            "reach_m": 1.205373574883876,
+            "vertex_count": 4,
+            "initial_centroid": [
+              3.0999999999999965,
+              5.599999999999994
+            ],
+            "task": {
+              "object_id": "cargo_0",
+              "direction": [
+                1.0,
+                0.0
+              ],
+              "angle_deg": 0.0,
+              "target_distance": 1.2,
+              "start": [
+                3.0999999999999965,
+                5.599999999999994
+              ],
+              "goal_point": [
+                4.299999999999996,
+                5.599999999999994
+              ],
+              "tolerance": 0.12,
+              "clearance": 1.7903735748838763,
+              "sampling_attempts": 1
+            },
+            "initial_own_scan_returns": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "minimum_initial_boundary_distance_m": 3.46009927206023,
+            "initial_tokens": "empty",
+            "agent_initial_sha256": "2e79fb2332d9fa15cbc60f3fdfcd929d3f94c19c9d7018f47355a73b91a3ca88",
+            "physical_initial_sha256": "84e7bbb49fda860a0d921332dcb68d8fa3535b3fb5d3b7dc06a8a8504c2f230f",
+            "cohort": "acquisition_geometry_development",
+            "geometry_from_near": "skew_box_s0_r0",
+            "position_id": 0,
+            "normalization": "same physical state across location-information arms; geometry remains unknown",
+            "origin_case": "skew_box_s0_r0_pos0_unknown_location",
+            "parameter_setting": "candidate",
+            "original_parameter": 0.25,
+            "candidate_parameter": 0.45,
+            "minimum_initial_pair_distance_m": 0.34802137650114573,
+            "validation_seed": 20261102,
+            "initial_rule": "Existing near scatter; far grid translated to [3.75,1.05] with Gaussian jitter sigma=.005m",
+            "historical_source_case": "far_skew_box_s0_r0_pos0_reference"
+          }
+        ],
+        "wall_seconds": [
+          77.28766979998909,
+          78.03402409999399
+        ]
+      }
+    }
+  },
+  "advance_gate": "FAIL",
+  "candidate_adopted": false,
+  "new_physical_episodes": 8,
+  "protocol_sha256": "38efea5ce15a12b38ef8b706fc0f17db7ce9ef8771e6ae8c4edd6a60de6cc399",
+  "source_sha256": "b602d6d64413d897f95e0a2b58914159f9eb97c1c2f6870431aaed3479b5511d",
+  "environment": {
+    "python": "3.12.14",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "executable": "C:\\Users\\kai\\boundary-aware-cooperative-transport\\.venv\\Scripts\\python.exe",
+    "packages": {
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "shapely": "2.2.0",
+      "PyYAML": "6.0.2",
+      "cvxpy": "1.9.3",
+      "clarabel": "0.11.1",
+      "osqp": "1.1.3",
+      "scs": "3.3.1",
+      "pymunk": "7.3.1",
+      "matplotlib": "3.11.2",
+      "threadpoolctl": "3.7.0"
+    }
+  },
+  "analyzer_sha256": "652204e04e144d891d9a96f8ef8b627c5dc8ba1d966342b25f1c35b30b5cc36b"
+}

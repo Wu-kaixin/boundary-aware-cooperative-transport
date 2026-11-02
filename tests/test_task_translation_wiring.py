@@ -38,6 +38,7 @@ def test_reference_selectors_default_off_preserve_all_protected_numerical_values
     values = asdict(env.controller.params)
     assert values.pop('initial_reference_motion_model') == 'se2'
     assert values.pop('initial_reference_use_all_captured') is False
+    assert values.pop('initial_reference_safe_geometry') is False
     assert values.pop('reference_surface_refinement') is False
     receipt = json.loads(Path('docs/results/reference_surface_v1/protected_baseline.json').read_text(encoding='utf-8'))
     assert values == receipt['effective_controller']
@@ -57,9 +58,11 @@ def test_invalid_reference_selector_combinations_fail_explicitly(updates, messag
 
 
 @pytest.mark.parametrize('all_captured, model', [(False, 'se2'), (True, 'translation')])
-def test_original_freeze_is_preserved_and_late_data_cannot_create_a_new_zero(all_captured, model):
+@pytest.mark.parametrize('safe_geometry', [False, True])
+def test_original_freeze_is_preserved_and_late_data_cannot_create_a_new_zero(all_captured, model, safe_geometry):
     cfg = config()
     cfg['controller'].update(initial_reference_motion_model=model,
+                             initial_reference_safe_geometry=safe_geometry,
                              initial_reference_use_all_captured=all_captured)
     env = SimulationEnvironment(cfg, seed=20261102)
     c = env.controller

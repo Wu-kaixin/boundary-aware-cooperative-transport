@@ -315,6 +315,7 @@ class DBACTParams:
     initial_task_reference: bool = False
     initial_reference_motion_model: str = "se2"  # se2 | translation (explicit hypothesis)
     initial_reference_use_all_captured: bool = False
+    initial_reference_safe_geometry: bool = False
     initial_acquisition_seconds: float = 60.0
     contact_patch_distance: bool = False
     # New development arms, off by default. The vector law changes controller
@@ -643,6 +644,10 @@ class DBACTController:
             raise ValueError("reference_bootstrap_gain must be finite and positive")
         if params.initial_task_reference and not params.initial_reference_acquisition:
             raise ValueError("Initial task reference requires stationary acquisition")
+        if (not isinstance(params.initial_reference_safe_geometry, bool)
+                or (params.initial_reference_safe_geometry and (
+                    not params.initial_reference_acquisition or params.task_mode != "transport"))):
+            raise ValueError("Acquisition geometry must be boolean and requires transport with initial acquisition")
         if params.initial_reference_motion_model not in ("se2", "translation"):
             raise ValueError("Initial reference motion model must be se2 or translation")
         if not isinstance(params.initial_reference_use_all_captured, bool):
@@ -1797,6 +1802,13 @@ class DBACTController:
         base = self.density_params
         if self.params.task_mode != "transport":
             return base
+        if self.params.initial_reference_safe_geometry and self.initial_reference_status == "acquiring":
+            # Match the active non-contact acquisition band using the existing
+            # feasibility margin. This is a nominal geometry contract, not a
+            # guarantee that all simultaneous QP constraints are feasible.
+            standoff = self.safety.params.r_safe + self.feasibility.press_margin
+            base = replace(base, cage_offset=max(base.cage_offset, standoff),
+                           lead_offset=None if base.lead_offset is None else max(base.lead_offset, standoff))
         if self.phase_monitor.reached(Phase.HOLD) or self._should_retract():
             standoff = max(self.params.hold_offset, self.params.robot_radius + 1e-3)
             return replace(base, cage_offset=standoff, lead_offset=standoff)

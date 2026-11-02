@@ -382,6 +382,11 @@ def transport_arm(cfg, seed, variant, frames, out):
                 " Opt-in motion_model=" + env.controller.params.initial_reference_motion_model
                 + ", use_all_captured=" + str(env.controller.params.initial_reference_use_all_captured)
                 + ". Fitted zero yaw in translation mode is a hypothesis, not measured physical zero yaw.")
+        if env.controller.params.initial_reference_safe_geometry:
+            result['initial_reference']['safe_acquisition_geometry'] = True
+            result['changed_mechanism'] += (
+                " Acquisition cage/lead offsets respect the active safety radius plus the existing "
+                "feasibility margin; original geometry resumes at freeze. This does not certify QP feasibility.")
     elif (env.controller.params.reference_early_anchor
             or env.controller.params.reference_bootstrap_gain is not None):
         result["changed_mechanism"] = (
