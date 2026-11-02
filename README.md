@@ -18,7 +18,7 @@
 
 [完整试验报告与图表](docs/results/reference_surface_v1/README.md) · [全部八块数据](docs/results/reference_surface_v1/all_eight_blocks.csv) · [基线复现证据](docs/results/reference_surface_v1/baseline_reproduction.json) · [部署贡献审计](docs/results/deployment_contribution_v1/README.md)
 
-上述成果已随研究提交 [`bee74ee`](https://github.com/Wu-kaixin/boundary-aware-cooperative-transport/commit/bee74ee16abe153e649ba74c0d3e071412180da8)同步到 GitHub；该提交的 [Windows / Ubuntu CI](https://github.com/Wu-kaixin/boundary-aware-cooperative-transport/actions/runs/41487180862)均通过，核心测试各为 854 项通过、2 项跳过，MAS 和运行器检查通过。工程测试通过不等于研究候选达到采用门槛。Git 跟踪代码、配置、协议和精简证据；大体积原始轨迹及源码快照仍按[数据索引](docs/DATA_INDEX.md)保留在本地。
+参考面试验与基线复现已随研究提交 [`bee74ee`](https://github.com/Wu-kaixin/boundary-aware-cooperative-transport/commit/bee74ee16abe153e649ba74c0d3e071412180da8)同步到 GitHub；该提交的 [Windows / Ubuntu CI](https://github.com/Wu-kaixin/boundary-aware-cooperative-transport/actions/runs/41487180862)均通过，核心测试各为 854 项通过、2 项跳过，MAS 和运行器检查通过。后续自由射线诊断的[本地完整回归](docs/results/free_ray_enclosure_v1/engineering_checks.json)为 872 项通过、2 项跳过，独立审查无待修复问题。工程测试通过不等于研究候选达到采用门槛。Git 跟踪代码、配置、协议和精简证据；大体积原始轨迹及源码快照仍按[数据索引](docs/DATA_INDEX.md)保留在本地。
 
 ## 目前遗留的问题与下一步
 

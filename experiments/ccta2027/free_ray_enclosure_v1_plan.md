@@ -34,7 +34,7 @@ sensor inputs and scores all candidates, without advancing physics.
   face counts and area; retain all feasible faces and use the workspace if none remain.
 - [x] Run component tests: 18 component tests pass; 39 tests pass with initial
   task-reference and protected surface-reference regressions.
-- [ ] Obtain one final independent read-only mathematical/code review of the full change.
+- [x] Obtain one final independent read-only mathematical/code review of the full change.
 - [x] Implement scripts/audit_free_ray_enclosure.py with frozen protocol and fresh
   runs/research/ output, independent expected case identities, sanitized raw
   packets, original scan-count checks, and complete per-agent results.
@@ -63,3 +63,33 @@ contraction 0/128; all-team contraction 2/4; observed object/center exclusions 0
 The four-panel PNG was visually inspected. Report/README keep the candidate
 unwired and the entire goal active; acquisition quality and task observability
 remain separate next steps.
+
+Final review: fresh-context reviewer checked the complete 7da54cc..3a9dcda change,
+owning scanner/controller logic, source and original product identities, all
+aggregates and the figure. No Critical, Important or actionable Minor findings;
+no invalidation or fix required. Full core suite: 872 passed, 2 skipped in
+130.39 s. Repository health: PASS at committed 3a9dcda (health-tracked.json;
+1255 tracked files, 423 parsed Python files). The reviewer cited the earlier
+health receipt; the executor independently checked this later tracked-HEAD receipt.
+
+Final: Ruling: closed-loop reliability, dynamic safety and preservation of all
+transport successes remain outside this zero-physics diagnostic — the component
+is unwired and cannot establish them — treating it as a repair would leave the
+original false-stop/stall failures unresolved.
+
+Final: Ruling: no unconditional Gaussian-tail or hardware missed-detection claim —
+the mathematical result is conditional and the driver contract requires complete
+raw scans — deployment without those conditions could exclude the real object.
+
+Final: Ruling: temporal accumulation, relaying, dropout and active observation
+require separately frozen work — a single snapshot does not execute them —
+assuming them here would overstate available local information.
+
+Final: Ruling: deployment-method superiority and CCTA2027 readiness remain open
+in the full-goal ledger — no new comparison or manuscript revision was executed —
+marking them complete would misrepresent the research evidence.
+
+Final: Ruling: retain the recorded PyYAML environment identity and defer its
+reconciliation to a separately declared check — changing dependencies during
+this frozen study would invalidate its identity — locked-environment physical
+reproduction is still unverified.
