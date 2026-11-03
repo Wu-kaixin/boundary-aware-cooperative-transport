@@ -1,5 +1,7 @@
 # CCTA 2027 实验入口
 
+2026-11-03：[冻结八回合协议](post_acquisition_finite_support_v1.json)及[物理设计](post_acquisition_finite_support_v1_physical_design.md)已冻结并启动，四对照完成且精确复现，八回合均已执行结束、候选四例均预算截尾，任务收据为对照4/4、候选0/4完成，完整候选约束审计待完成。[分析更正](post_acquisition_finite_support_v1_analysis_addendum.md)仅适配预定臂名与数组精确比较，80步合成预检不计作物理试验；[发布检查点](../../docs/results/post_support_validation_checkpoint_v1/README.md)保留身份。另行预声明的[接触兼容性设计](post_support_contact_compatibility_v1_design.md)完成1749帧旧对照重放：17个正向力状态与新行冲突，11个声明推手反事实速度均转为目标反向；[完整诊断](../../docs/results/post_support_contact_compatibility_v1/README.md)新增物理0，不能直接断言新闭环失败。
+
 2026-11-03：[桥接后冲突设计](map_bridge_conflicts_v1_design.md)、[17状态有限观测设计](map_bridge_finite_observer_v1_design.md)及[272状态邻域筛查](map_bridge_neighborhood_observer_v1_design.md)已完成；[结果](../../docs/results/map_bridge_conflicts_v1/README.md)包含18状态/226比较、181获准状态全部可行和6个完整上界负结果。原17状态设计的0.6文字错误由[勘误](map_bridge_finite_observer_v1_motion_cap_erratum.json)更正为实际使用的0.2，原件保留。[默认关闭的新实现设计](post_acquisition_finite_support_v1_spec.md)和[执行记录](post_acquisition_finite_support_v1_plan.md)区分288状态集成审计与待执行八回合；本轮新物理回合0。
 
 2026-11-03：[共同投票者增量设计](map_reference_bridge_v1_design.md)、[冻结协议](map_reference_bridge_v1.json)完成4条件×2臂8个新物理回合。[结果](../../docs/results/map_reference_bridge_v1/README.md)：两臂安全完成均4/4、G500均2/4，但斜箱冻结后缩放1→17、C仍未正式TRANSPORT，预定门槛FAIL、候选未采用。前置989帧地图点源重放（另20帧预检）定位参考投票集合变化引入的地图跳变；[执行记录](map_ancestry_v1_plan.md)与新18状态事后筛查分开记账，数值参数、初态与门槛保持。

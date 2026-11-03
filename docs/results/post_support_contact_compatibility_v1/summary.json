@@ -1,0 +1,92 @@
+{
+  "new_physical_episodes": 0,
+  "verified_replay_frames": 1749,
+  "conditions": 4,
+  "counts": {
+    "events": 8,
+    "robot_states": 128,
+    "admitted": 112,
+    "positive_force_states": 17,
+    "positive_force_admitted": 17,
+    "positive_force_capped_conflicts": 17,
+    "positive_force_uncapped_conflicts": 17,
+    "positive_force_goal_command_reversed": 13,
+    "positive_force_declared_pushers": 11,
+    "positive_force_declared_pushers_reversed": 11
+  },
+  "events": [
+    {
+      "condition": "near_circle",
+      "frame": 79,
+      "rules": [
+        "first_positive_force"
+      ],
+      "phase": "ENCLOSE",
+      "positive_force_sum": 3.0041893310397376
+    },
+    {
+      "condition": "near_circle",
+      "frame": 162,
+      "rules": [
+        "maximum_positive_force"
+      ],
+      "phase": "TRANSPORT",
+      "positive_force_sum": 33.20782662712761
+    },
+    {
+      "condition": "near_l_reference",
+      "frame": 71,
+      "rules": [
+        "first_positive_force"
+      ],
+      "phase": "ENCLOSE",
+      "positive_force_sum": 3.4408908054081873
+    },
+    {
+      "condition": "near_l_reference",
+      "frame": 124,
+      "rules": [
+        "maximum_positive_force"
+      ],
+      "phase": "TRANSPORT",
+      "positive_force_sum": 39.91214326813547
+    },
+    {
+      "condition": "far_c_open_away_pos0",
+      "frame": 478,
+      "rules": [
+        "first_positive_force"
+      ],
+      "phase": "ENCLOSE",
+      "positive_force_sum": 2.523576637262705
+    },
+    {
+      "condition": "far_c_open_away_pos0",
+      "frame": 572,
+      "rules": [
+        "maximum_positive_force"
+      ],
+      "phase": "CONTACT_READY",
+      "positive_force_sum": 37.35786285454356
+    },
+    {
+      "condition": "far_skew_box_s0_r0_pos0",
+      "frame": 559,
+      "rules": [
+        "first_positive_force"
+      ],
+      "phase": "CONTACT_READY",
+      "positive_force_sum": 1.4633045686107253
+    },
+    {
+      "condition": "far_skew_box_s0_r0_pos0",
+      "frame": 891,
+      "rules": [
+        "maximum_positive_force"
+      ],
+      "phase": "TRANSPORT",
+      "positive_force_sum": 41.99284573584484
+    }
+  ],
+  "inference_limit": "Counterfactual robot commands at selected old-control force events do not establish candidate closed-loop forces or outcomes."
+}

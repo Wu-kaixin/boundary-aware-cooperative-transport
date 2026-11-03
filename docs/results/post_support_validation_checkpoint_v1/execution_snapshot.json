@@ -1,0 +1,75 @@
+{
+  "observed_at_utc": "2026-11-03T12:12:31.440694+00:00",
+  "planned_physical_episodes": 8,
+  "execution_outcome_present": false,
+  "cases": [
+    {
+      "case_id": "near_l_reference_post_support_candidate",
+      "condition": "near_l_reference",
+      "arm": "post_support_candidate",
+      "terminal_receipt_present": false
+    },
+    {
+      "case_id": "near_circle_map_bridge_control",
+      "condition": "near_circle",
+      "arm": "map_bridge_control",
+      "terminal_receipt_present": true,
+      "execution_status": "COMPLETED",
+      "receipt_sha256": "44963e777058a093e7e8fd4e161295b037c00548ef1b82960f6e259513b9b2f2"
+    },
+    {
+      "case_id": "near_l_reference_map_bridge_control",
+      "condition": "near_l_reference",
+      "arm": "map_bridge_control",
+      "terminal_receipt_present": true,
+      "execution_status": "COMPLETED",
+      "receipt_sha256": "effde7572d7cf775e3950d34e7186c0769b93e742656aba07b7bdb10bd12e036"
+    },
+    {
+      "case_id": "far_c_open_away_pos0_map_bridge_control",
+      "condition": "far_c_open_away_pos0",
+      "arm": "map_bridge_control",
+      "terminal_receipt_present": true,
+      "execution_status": "COMPLETED",
+      "receipt_sha256": "154f67d5c2d913d0ca4dc5f215238b80b95b38cd7d11d3f67e9898ebd47e12fb"
+    },
+    {
+      "case_id": "far_c_open_away_pos0_post_support_candidate",
+      "condition": "far_c_open_away_pos0",
+      "arm": "post_support_candidate",
+      "terminal_receipt_present": true,
+      "execution_status": "COMPLETED",
+      "receipt_sha256": "2507cd0da06a826cbf0b0406f7c689d57bc214470af25dc405b3749cdf6ee2c5"
+    },
+    {
+      "case_id": "far_skew_box_s0_r0_pos0_map_bridge_control",
+      "condition": "far_skew_box_s0_r0_pos0",
+      "arm": "map_bridge_control",
+      "terminal_receipt_present": true,
+      "execution_status": "COMPLETED",
+      "receipt_sha256": "1b4d37a4417fd9ada202a0c882496a17bfc81ee8b7787ba85f588d51ee088a1e"
+    },
+    {
+      "case_id": "far_skew_box_s0_r0_pos0_post_support_candidate",
+      "condition": "far_skew_box_s0_r0_pos0",
+      "arm": "post_support_candidate",
+      "terminal_receipt_present": true,
+      "execution_status": "COMPLETED",
+      "receipt_sha256": "b49d2e5d2c60a1a33f8ebb6f99ce22ab9dc97a733c2976ad10dc4c52565e7961"
+    },
+    {
+      "case_id": "near_circle_post_support_candidate",
+      "condition": "near_circle",
+      "arm": "post_support_candidate",
+      "terminal_receipt_present": true,
+      "execution_status": "COMPLETED",
+      "receipt_sha256": "b5edafb7183c7d43d88822438dd2d6f5d9debd606d3786eb4889bd597b5ab4c0"
+    }
+  ],
+  "completed_receipts": 7,
+  "candidate_task_verdict": "NOT_YET_AUDITED",
+  "candidate_adopted": false,
+  "protocol_sha256": "49e0779f7231b61e275976c9a99ba56ea83b63595655812c8033fd444729367a",
+  "source_sha256": "e6b7456f5f0a4d71ddd4b33159c058e215115aae35c01b6c5c9eae7e68f32767",
+  "scope": "Dated receipt observation, not an eight-episode outcome or candidate acceptance."
+}

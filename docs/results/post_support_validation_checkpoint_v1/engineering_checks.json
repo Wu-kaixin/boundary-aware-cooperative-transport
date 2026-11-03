@@ -1,0 +1,77 @@
+{
+  "tests": {
+    "publication-core.xml": {
+      "tests": 1081,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 2,
+      "passed": 1079,
+      "sha256": "508fe6cb439a52d7f8d9ded0b6a5759f6f9dbd1c8a7107a668152435df0c9e6f"
+    },
+    "packet-comparison-green.xml": {
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "passed": 5,
+      "sha256": "4515871a912593f99476afcf7632cff6a88bd7d030c3df1382ef84de04a4580e"
+    }
+  },
+  "freeze_tests": {
+    "physical-core.xml": {
+      "tests": 1076,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 2,
+      "passed": 1074,
+      "sha256": "4b2962f0ad993a2a10f59fc4b1b8333fd2fa18a7f989fd1795ac59883e0cd355"
+    },
+    "physical-gates-green.xml": {
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "passed": 7,
+      "sha256": "8257b21a8c4bdd9b473cd5cdc52f98134ff5c243fed8e4d1c67016c1c30a5701"
+    }
+  },
+  "canonical_sha256": "a5d5c8e200fa502557d4da9a9db2a646d027abababd59661bcdac21a1b43b112",
+  "source_sha256": "e6b7456f5f0a4d71ddd4b33159c058e215115aae35c01b6c5c9eae7e68f32767",
+  "frozen_helper_count": 22,
+  "synthetic_preflight": {
+    "status": "VERIFIED_SYNTHETIC_REPLAY",
+    "frames": 80,
+    "new_physical_episodes": 0,
+    "scope": "80 controller steps driven by saved control poses; no physics integration and no candidate task outcome.",
+    "audit": {
+      "verified": true,
+      "frames": 80,
+      "total_physical_frames": 80,
+      "full_episode_verified": true,
+      "agent_steps": 1280,
+      "applied": 412,
+      "guard_counts": {
+        "outside_frozen_reference": 736,
+        "no_current_map_motion": 16,
+        "supported": 412,
+        "outside_range": 115,
+        "isolated_gap_exceeds_cap": 1
+      },
+      "hard_violations": 0,
+      "capped_object_violations": 0,
+      "uncapped_object_violations": 0,
+      "minimum_uncapped_object_residual": -1.734723475976807e-18,
+      "scope": "Exact controller replay of the stated frame range; every current packet/row and admitted executed command checked. Geometry/motion assumptions remain empirical."
+    },
+    "omitted_residual_records": 0,
+    "source_helpers": {
+      "preflight_post_support_analysis.py": "87d6e99a81321da832d59d4e830709493583a795804054797cc51528be527afa",
+      "analyze_post_acquisition_support_v1.py": "dc815599b7473404a71408ac3358bf1e091c6dd3d4cc7fde3467a7ae25adff48",
+      "trace_boundary_map.py": "eba86f44652d990768d1e9d3e19dba0fe55559a7a1096b34d229e38391ce17f8",
+      "post_acquisition_finite_support_v1_analysis_addendum.md": "b20986f89c1b1b7bbbe3089cdfe4ec415366c6b12a78d8d1b4cc60bccc76ba49"
+    },
+    "raw_outcome": "runs/research/2026-11-03-post-acquisition-support-v1/analysis_preflight_v1/outcome.json",
+    "raw_outcome_sha256": "d0742704dc3fb85ee15b1438978702d0604f3f95a75d9538b4fb72bcd0978d7c"
+  },
+  "analysis_status": "Full eight-episode candidate replay and gates remain pending."
+}

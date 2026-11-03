@@ -1,6 +1,8 @@
 # 数据与原始文件索引
 
-2026-11-03：[桥接后有限边界冲突与实现检查点](results/map_bridge_conflicts_v1/README.md)的517帧重放、18帧全队288状态、226项比较、17状态观测器、272状态邻域筛查及864项无速度球核验在 `runs/research/2026-11-03-map-bridge-conflicts-v1/`，每次尝试与原文字勘误均单独保留。新实现288状态审计在 `runs/research/2026-11-03-post-acquisition-support-v1/observer/`；两套源码身份分别冻结。发布日志及1069通过/2跳过收据在 `runs/maintenance/2026-11-03-map-conflicts-publication-v1/`。Git保存完整分母的精简CSV、审计JSON与产品哈希；新物理回合0，后续八回合尚未冻结或执行。
+2026-11-03：[接触兼容性诊断](results/post_support_contact_compatibility_v1/README.md)原件在 `runs/research/2026-11-03-post-support-contact-compatibility-v2/`，v1原序列化失败及快照保留。1749帧重放、8事件/128状态、17个正向力状态的完整表和哈希发布到Git，新增物理0。[独立八回合检查点](results/post_support_validation_checkpoint_v1/README.md)对应 `runs/research/2026-11-03-post-acquisition-support-v1/`：freeze与run保存源码/协议和物理原件，analysis_preflight_v1保存80步无物理积分的合成控制重放。发布快照为四对照完成、八回合均已执行结束、候选四例均预算截尾，完整分析待执行；原臂名比较失败、两版比较和全部测试日志保留在同名maintenance目录。
+
+2026-11-03：[桥接后有限边界冲突与实现检查点](results/map_bridge_conflicts_v1/README.md)的517帧重放、18帧全队288状态、226项比较、17状态观测器、272状态邻域筛查及864项无速度球核验在 `runs/research/2026-11-03-map-bridge-conflicts-v1/`，每次尝试与原文字勘误均单独保留。新实现288状态审计在 `runs/research/2026-11-03-post-acquisition-support-v1/observer/`；两套源码身份分别冻结。发布日志及1069通过/2跳过收据在 `runs/maintenance/2026-11-03-map-conflicts-publication-v1/`。Git保存完整分母的精简CSV、审计JSON与产品哈希；新物理回合0，该检查点当时后续八回合尚未冻结或执行。
 
 2026-11-03：[配对后残余诊断](results/pair_residual_v1/README.md)原件在 `runs/research/2026-11-03-pair-residual-v1/`：freeze为执行前快照，preflight为另列40帧，replay为C1074/斜箱989帧完整重放及分量追踪，analysis保存完整10个单机及36个配对问题、八回合5550帧/22200子步分析。原物理数据仍在local-pair-safety-v1，不重标为新实验。全部RED/GREEN、1044/1045项核心测试及日志保留在同名maintenance目录；额外7536个合格C分量样本的位置差分核验另存。Git保存完整分母的表、所选矩阵、阶段结果及哈希，原始大文件保持本地。
 

@@ -1,0 +1,794 @@
+{
+  "checks": {
+    "near_circle": {
+      "exact": true,
+      "replay_keys_equal": true,
+      "arrays": {
+        "times": true,
+        "phase": true,
+        "min_distance": true,
+        "map_coverage": true,
+        "push_flags": true,
+        "contact_flags": true,
+        "efforts": true,
+        "agent_ids": true,
+        "agent_positions": true,
+        "domain": true,
+        "robot_radius": true,
+        "sensed_counts": true,
+        "sensed_points": true,
+        "cargo/cargo_0/centers": true,
+        "cargo/cargo_0/angles": true,
+        "cargo/cargo_0/local_vertices": true,
+        "cargo/cargo_0/strict_coverage": true,
+        "cargo/cargo_0/contacts": true,
+        "cargo/cargo_0/penetration": true,
+        "cargo/cargo_0/speed": true,
+        "cargo/cargo_0/progress_estimate": true,
+        "task/cargo_0/direction": true,
+        "task/cargo_0/start": true,
+        "task/cargo_0/goal_point": true,
+        "task/cargo_0/distance": true
+      },
+      "scientific_fields_exact": {
+        "config.json": true,
+        "paired_metrics.json": true,
+        "physics_substeps.json": true,
+        "summary.json": true,
+        "case_result_scientific_fields": true
+      },
+      "execution_metadata": {
+        "git_sha": [
+          "1f50d8deb0865951e2bd9a0ea051e0a11a46afd0-dirty",
+          "cec6a5a2d46d519ea7b107b3738bba5fe1a533c5"
+        ],
+        "case_id": [
+          "near_circle_map_bridge_candidate",
+          "near_circle_map_bridge_control"
+        ],
+        "factors": [
+          {
+            "condition": "circle",
+            "shape": "circle",
+            "stratum": "near",
+            "area_m2": 2.0587500000000003,
+            "mass_kg": 4.117500000000001,
+            "inertia_kg_m2": 1.3491417315354244,
+            "perimeter_m": 5.088400033654982,
+            "diameter_m": 1.620338677462703,
+            "reach_m": 0.8101693387314333,
+            "vertex_count": 64,
+            "initial_centroid": [
+              3.999999999999942,
+              3.999999999999943
+            ],
+            "task": {
+              "object_id": "cargo_0",
+              "direction": [
+                1.0,
+                0.0
+              ],
+              "angle_deg": 0.0,
+              "target_distance": 1.2,
+              "start": [
+                3.999999999999942,
+                3.999999999999943
+              ],
+              "goal_point": [
+                5.199999999999942,
+                3.999999999999943
+              ],
+              "tolerance": 0.12,
+              "clearance": 1.3951693387314332,
+              "sampling_attempts": 1
+            },
+            "initial_own_scan_returns": [
+              11,
+              0,
+              0,
+              0,
+              0,
+              9,
+              0,
+              10,
+              0,
+              0,
+              7,
+              3,
+              0,
+              0,
+              0,
+              0
+            ],
+            "minimum_initial_boundary_distance_m": 0.8917481715794422,
+            "initial_tokens": "empty",
+            "agent_initial_sha256": "b887bc83a42a30d875306b7bf213aabe04de3e3fc253003b1d2d38d28714f9b1",
+            "physical_initial_sha256": "35493bb8a7ee88cf0eb63a756a30cf738127fbe00dba1e1f95dfe1788d7f2234",
+            "cohort": "map_reference_bridge_development",
+            "origin_case": "circle_boundary_cvt",
+            "geometry_setting": "historical frozen definition",
+            "parameter_setting": "candidate",
+            "original_parameter": 0.25,
+            "candidate_parameter": 0.45,
+            "minimum_initial_pair_distance_m": 0.34963340957703687,
+            "validation_seed": 20261102,
+            "initial_rule": "Existing near scatter; far grid translated to [3.75,1.05] with Gaussian jitter sigma=.005m",
+            "historical_source_case": "near_circle_reference"
+          },
+          {
+            "condition": "circle",
+            "shape": "circle",
+            "stratum": "near",
+            "area_m2": 2.0587500000000003,
+            "mass_kg": 4.117500000000001,
+            "inertia_kg_m2": 1.3491417315354244,
+            "perimeter_m": 5.088400033654982,
+            "diameter_m": 1.620338677462703,
+            "reach_m": 0.8101693387314333,
+            "vertex_count": 64,
+            "initial_centroid": [
+              3.999999999999942,
+              3.999999999999943
+            ],
+            "task": {
+              "object_id": "cargo_0",
+              "direction": [
+                1.0,
+                0.0
+              ],
+              "angle_deg": 0.0,
+              "target_distance": 1.2,
+              "start": [
+                3.999999999999942,
+                3.999999999999943
+              ],
+              "goal_point": [
+                5.199999999999942,
+                3.999999999999943
+              ],
+              "tolerance": 0.12,
+              "clearance": 1.3951693387314332,
+              "sampling_attempts": 1
+            },
+            "initial_own_scan_returns": [
+              11,
+              0,
+              0,
+              0,
+              0,
+              9,
+              0,
+              10,
+              0,
+              0,
+              7,
+              3,
+              0,
+              0,
+              0,
+              0
+            ],
+            "minimum_initial_boundary_distance_m": 0.8917481715794422,
+            "initial_tokens": "empty",
+            "agent_initial_sha256": "b887bc83a42a30d875306b7bf213aabe04de3e3fc253003b1d2d38d28714f9b1",
+            "physical_initial_sha256": "35493bb8a7ee88cf0eb63a756a30cf738127fbe00dba1e1f95dfe1788d7f2234",
+            "cohort": "post_acquisition_finite_support_development",
+            "origin_case": "circle_boundary_cvt",
+            "geometry_setting": "historical frozen definition",
+            "parameter_setting": "candidate",
+            "original_parameter": 0.25,
+            "candidate_parameter": 0.45,
+            "minimum_initial_pair_distance_m": 0.34963340957703687,
+            "validation_seed": 20261102,
+            "initial_rule": "Existing near scatter; far grid translated to [3.75,1.05] with Gaussian jitter sigma=.005m",
+            "historical_source_case": "near_circle_reference"
+          }
+        ],
+        "wall_seconds": [
+          48.796331999998074,
+          50.306139899999835
+        ],
+        "arm": [
+          "map_bridge_candidate",
+          "map_bridge_control"
+        ]
+      },
+      "planned_arm_identity_verified": true
+    },
+    "near_l_reference": {
+      "exact": true,
+      "replay_keys_equal": true,
+      "arrays": {
+        "times": true,
+        "phase": true,
+        "min_distance": true,
+        "map_coverage": true,
+        "push_flags": true,
+        "contact_flags": true,
+        "efforts": true,
+        "agent_ids": true,
+        "agent_positions": true,
+        "domain": true,
+        "robot_radius": true,
+        "sensed_counts": true,
+        "sensed_points": true,
+        "cargo/cargo_0/centers": true,
+        "cargo/cargo_0/angles": true,
+        "cargo/cargo_0/local_vertices": true,
+        "cargo/cargo_0/strict_coverage": true,
+        "cargo/cargo_0/contacts": true,
+        "cargo/cargo_0/penetration": true,
+        "cargo/cargo_0/speed": true,
+        "cargo/cargo_0/progress_estimate": true,
+        "task/cargo_0/direction": true,
+        "task/cargo_0/start": true,
+        "task/cargo_0/goal_point": true,
+        "task/cargo_0/distance": true
+      },
+      "scientific_fields_exact": {
+        "config.json": true,
+        "paired_metrics.json": true,
+        "physics_substeps.json": true,
+        "summary.json": true,
+        "case_result_scientific_fields": true
+      },
+      "execution_metadata": {
+        "git_sha": [
+          "1f50d8deb0865951e2bd9a0ea051e0a11a46afd0-dirty",
+          "cec6a5a2d46d519ea7b107b3738bba5fe1a533c5"
+        ],
+        "case_id": [
+          "near_l_reference_map_bridge_candidate",
+          "near_l_reference_map_bridge_control"
+        ],
+        "factors": [
+          {
+            "condition": "l_reference",
+            "shape": "l_shape",
+            "stratum": "near",
+            "area_m2": 2.0587500000000007,
+            "mass_kg": 4.1175000000000015,
+            "inertia_kg_m2": 2.086619857838117,
+            "perimeter_m": 7.200000000000001,
+            "diameter_m": 2.545584412271572,
+            "reach_m": 1.3200471192360912,
+            "vertex_count": 6,
+            "initial_centroid": [
+              3.999999999999982,
+              3.999999999999985
+            ],
+            "task": {
+              "object_id": "cargo_0",
+              "direction": [
+                1.0,
+                0.0
+              ],
+              "angle_deg": 0.0,
+              "target_distance": 1.2,
+              "start": [
+                3.999999999999982,
+                3.999999999999985
+              ],
+              "goal_point": [
+                5.1999999999999815,
+                3.999999999999985
+              ],
+              "tolerance": 0.12,
+              "clearance": 1.9050471192360914,
+              "sampling_attempts": 1
+            },
+            "initial_own_scan_returns": [
+              10,
+              0,
+              0,
+              8,
+              5,
+              13,
+              4,
+              13,
+              0,
+              0,
+              6,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "minimum_initial_boundary_distance_m": 0.5614213689425158,
+            "initial_tokens": "empty",
+            "agent_initial_sha256": "b887bc83a42a30d875306b7bf213aabe04de3e3fc253003b1d2d38d28714f9b1",
+            "physical_initial_sha256": "7847a31860a1d66ea04babe22e5ed18721e35f0fa7fcc1e43119054ef3090d3a",
+            "cohort": "map_reference_bridge_development",
+            "origin_case": "l_reference_boundary_cvt",
+            "geometry_setting": "historical frozen definition",
+            "parameter_setting": "candidate",
+            "original_parameter": 0.25,
+            "candidate_parameter": 0.45,
+            "minimum_initial_pair_distance_m": 0.34963340957703687,
+            "validation_seed": 20261102,
+            "initial_rule": "Existing near scatter; far grid translated to [3.75,1.05] with Gaussian jitter sigma=.005m",
+            "historical_source_case": "near_l_reference_reference"
+          },
+          {
+            "condition": "l_reference",
+            "shape": "l_shape",
+            "stratum": "near",
+            "area_m2": 2.0587500000000007,
+            "mass_kg": 4.1175000000000015,
+            "inertia_kg_m2": 2.086619857838117,
+            "perimeter_m": 7.200000000000001,
+            "diameter_m": 2.545584412271572,
+            "reach_m": 1.3200471192360912,
+            "vertex_count": 6,
+            "initial_centroid": [
+              3.999999999999982,
+              3.999999999999985
+            ],
+            "task": {
+              "object_id": "cargo_0",
+              "direction": [
+                1.0,
+                0.0
+              ],
+              "angle_deg": 0.0,
+              "target_distance": 1.2,
+              "start": [
+                3.999999999999982,
+                3.999999999999985
+              ],
+              "goal_point": [
+                5.1999999999999815,
+                3.999999999999985
+              ],
+              "tolerance": 0.12,
+              "clearance": 1.9050471192360914,
+              "sampling_attempts": 1
+            },
+            "initial_own_scan_returns": [
+              10,
+              0,
+              0,
+              8,
+              5,
+              13,
+              4,
+              13,
+              0,
+              0,
+              6,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "minimum_initial_boundary_distance_m": 0.5614213689425158,
+            "initial_tokens": "empty",
+            "agent_initial_sha256": "b887bc83a42a30d875306b7bf213aabe04de3e3fc253003b1d2d38d28714f9b1",
+            "physical_initial_sha256": "7847a31860a1d66ea04babe22e5ed18721e35f0fa7fcc1e43119054ef3090d3a",
+            "cohort": "post_acquisition_finite_support_development",
+            "origin_case": "l_reference_boundary_cvt",
+            "geometry_setting": "historical frozen definition",
+            "parameter_setting": "candidate",
+            "original_parameter": 0.25,
+            "candidate_parameter": 0.45,
+            "minimum_initial_pair_distance_m": 0.34963340957703687,
+            "validation_seed": 20261102,
+            "initial_rule": "Existing near scatter; far grid translated to [3.75,1.05] with Gaussian jitter sigma=.005m",
+            "historical_source_case": "near_l_reference_reference"
+          }
+        ],
+        "wall_seconds": [
+          57.806309399951715,
+          55.01632560003782
+        ],
+        "arm": [
+          "map_bridge_candidate",
+          "map_bridge_control"
+        ]
+      },
+      "planned_arm_identity_verified": true
+    },
+    "far_c_open_away_pos0": {
+      "exact": true,
+      "replay_keys_equal": true,
+      "arrays": {
+        "times": true,
+        "phase": true,
+        "min_distance": true,
+        "map_coverage": true,
+        "push_flags": true,
+        "contact_flags": true,
+        "efforts": true,
+        "agent_ids": true,
+        "agent_positions": true,
+        "domain": true,
+        "robot_radius": true,
+        "sensed_counts": true,
+        "sensed_points": true,
+        "cargo/cargo_0/centers": true,
+        "cargo/cargo_0/angles": true,
+        "cargo/cargo_0/local_vertices": true,
+        "cargo/cargo_0/strict_coverage": true,
+        "cargo/cargo_0/contacts": true,
+        "cargo/cargo_0/penetration": true,
+        "cargo/cargo_0/speed": true,
+        "cargo/cargo_0/progress_estimate": true,
+        "task/cargo_0/direction": true,
+        "task/cargo_0/start": true,
+        "task/cargo_0/goal_point": true,
+        "task/cargo_0/distance": true
+      },
+      "scientific_fields_exact": {
+        "config.json": true,
+        "paired_metrics.json": true,
+        "physics_substeps.json": true,
+        "summary.json": true,
+        "case_result_scientific_fields": true
+      },
+      "execution_metadata": {
+        "git_sha": [
+          "1f50d8deb0865951e2bd9a0ea051e0a11a46afd0-dirty",
+          "cec6a5a2d46d519ea7b107b3738bba5fe1a533c5"
+        ],
+        "case_id": [
+          "far_c_open_away_pos0_map_bridge_candidate",
+          "far_c_open_away_pos0_map_bridge_control"
+        ],
+        "factors": [
+          {
+            "condition": "c_open_away_pos0",
+            "shape": "c_shape",
+            "stratum": "far",
+            "area_m2": 2.0587500000000007,
+            "mass_kg": 4.1175000000000015,
+            "inertia_kg_m2": 2.5465684724161357,
+            "perimeter_m": 8.858595028691228,
+            "diameter_m": 2.460720841303119,
+            "reach_m": 1.2936966521890678,
+            "vertex_count": 8,
+            "initial_centroid": [
+              3.0999999999999495,
+              5.600000000000051
+            ],
+            "task": {
+              "object_id": "cargo_0",
+              "direction": [
+                1.0,
+                0.0
+              ],
+              "angle_deg": 0.0,
+              "target_distance": 1.2,
+              "start": [
+                3.0999999999999495,
+                5.600000000000051
+              ],
+              "goal_point": [
+                4.299999999999949,
+                5.600000000000051
+              ],
+              "tolerance": 0.12,
+              "clearance": 1.8786966521890678,
+              "sampling_attempts": 1
+            },
+            "initial_own_scan_returns": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "minimum_initial_boundary_distance_m": 3.018300036921219,
+            "initial_tokens": "empty",
+            "agent_initial_sha256": "2e79fb2332d9fa15cbc60f3fdfcd929d3f94c19c9d7018f47355a73b91a3ca88",
+            "physical_initial_sha256": "46e871c8e69468fc014c6ee4424abde35896112e70e7b77a1ed39bae7880f1a2",
+            "cohort": "map_reference_bridge_development",
+            "geometry_from_near": "c_open_away",
+            "position_id": 0,
+            "normalization": "same physical state across location-information arms; geometry remains unknown",
+            "origin_case": "c_open_away_pos0_unknown_location",
+            "parameter_setting": "candidate",
+            "original_parameter": 0.25,
+            "candidate_parameter": 0.45,
+            "minimum_initial_pair_distance_m": 0.34802137650114573,
+            "validation_seed": 20261102,
+            "initial_rule": "Existing near scatter; far grid translated to [3.75,1.05] with Gaussian jitter sigma=.005m",
+            "historical_source_case": "far_c_open_away_pos0_reference"
+          },
+          {
+            "condition": "c_open_away_pos0",
+            "shape": "c_shape",
+            "stratum": "far",
+            "area_m2": 2.0587500000000007,
+            "mass_kg": 4.1175000000000015,
+            "inertia_kg_m2": 2.5465684724161357,
+            "perimeter_m": 8.858595028691228,
+            "diameter_m": 2.460720841303119,
+            "reach_m": 1.2936966521890678,
+            "vertex_count": 8,
+            "initial_centroid": [
+              3.0999999999999495,
+              5.600000000000051
+            ],
+            "task": {
+              "object_id": "cargo_0",
+              "direction": [
+                1.0,
+                0.0
+              ],
+              "angle_deg": 0.0,
+              "target_distance": 1.2,
+              "start": [
+                3.0999999999999495,
+                5.600000000000051
+              ],
+              "goal_point": [
+                4.299999999999949,
+                5.600000000000051
+              ],
+              "tolerance": 0.12,
+              "clearance": 1.8786966521890678,
+              "sampling_attempts": 1
+            },
+            "initial_own_scan_returns": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "minimum_initial_boundary_distance_m": 3.018300036921219,
+            "initial_tokens": "empty",
+            "agent_initial_sha256": "2e79fb2332d9fa15cbc60f3fdfcd929d3f94c19c9d7018f47355a73b91a3ca88",
+            "physical_initial_sha256": "46e871c8e69468fc014c6ee4424abde35896112e70e7b77a1ed39bae7880f1a2",
+            "cohort": "post_acquisition_finite_support_development",
+            "geometry_from_near": "c_open_away",
+            "position_id": 0,
+            "normalization": "same physical state across location-information arms; geometry remains unknown",
+            "origin_case": "c_open_away_pos0_unknown_location",
+            "parameter_setting": "candidate",
+            "original_parameter": 0.25,
+            "candidate_parameter": 0.45,
+            "minimum_initial_pair_distance_m": 0.34802137650114573,
+            "validation_seed": 20261102,
+            "initial_rule": "Existing near scatter; far grid translated to [3.75,1.05] with Gaussian jitter sigma=.005m",
+            "historical_source_case": "far_c_open_away_pos0_reference"
+          }
+        ],
+        "wall_seconds": [
+          143.7148549000267,
+          136.89459740003804
+        ],
+        "arm": [
+          "map_bridge_candidate",
+          "map_bridge_control"
+        ]
+      },
+      "planned_arm_identity_verified": true
+    },
+    "far_skew_box_s0_r0_pos0": {
+      "exact": true,
+      "replay_keys_equal": true,
+      "arrays": {
+        "times": true,
+        "phase": true,
+        "min_distance": true,
+        "map_coverage": true,
+        "push_flags": true,
+        "contact_flags": true,
+        "efforts": true,
+        "agent_ids": true,
+        "agent_positions": true,
+        "domain": true,
+        "robot_radius": true,
+        "sensed_counts": true,
+        "sensed_points": true,
+        "cargo/cargo_0/centers": true,
+        "cargo/cargo_0/angles": true,
+        "cargo/cargo_0/local_vertices": true,
+        "cargo/cargo_0/strict_coverage": true,
+        "cargo/cargo_0/contacts": true,
+        "cargo/cargo_0/penetration": true,
+        "cargo/cargo_0/speed": true,
+        "cargo/cargo_0/progress_estimate": true,
+        "task/cargo_0/direction": true,
+        "task/cargo_0/start": true,
+        "task/cargo_0/goal_point": true,
+        "task/cargo_0/distance": true
+      },
+      "scientific_fields_exact": {
+        "config.json": true,
+        "paired_metrics.json": true,
+        "physics_substeps.json": true,
+        "summary.json": true,
+        "case_result_scientific_fields": true
+      },
+      "execution_metadata": {
+        "git_sha": [
+          "1f50d8deb0865951e2bd9a0ea051e0a11a46afd0-dirty",
+          "cec6a5a2d46d519ea7b107b3738bba5fe1a533c5-dirty"
+        ],
+        "case_id": [
+          "far_skew_box_s0_r0_pos0_map_bridge_candidate",
+          "far_skew_box_s0_r0_pos0_map_bridge_control"
+        ],
+        "factors": [
+          {
+            "condition": "skew_box_s0_r0_pos0",
+            "shape": "skew_box",
+            "stratum": "far",
+            "area_m2": 2.05875,
+            "mass_kg": 4.1175,
+            "inertia_kg_m2": 1.579496120257831,
+            "perimeter_m": 5.988113250582847,
+            "diameter_m": 2.1391496288136986,
+            "reach_m": 1.205373574883876,
+            "vertex_count": 4,
+            "initial_centroid": [
+              3.0999999999999965,
+              5.599999999999994
+            ],
+            "task": {
+              "object_id": "cargo_0",
+              "direction": [
+                1.0,
+                0.0
+              ],
+              "angle_deg": 0.0,
+              "target_distance": 1.2,
+              "start": [
+                3.0999999999999965,
+                5.599999999999994
+              ],
+              "goal_point": [
+                4.299999999999996,
+                5.599999999999994
+              ],
+              "tolerance": 0.12,
+              "clearance": 1.7903735748838763,
+              "sampling_attempts": 1
+            },
+            "initial_own_scan_returns": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "minimum_initial_boundary_distance_m": 3.46009927206023,
+            "initial_tokens": "empty",
+            "agent_initial_sha256": "2e79fb2332d9fa15cbc60f3fdfcd929d3f94c19c9d7018f47355a73b91a3ca88",
+            "physical_initial_sha256": "84e7bbb49fda860a0d921332dcb68d8fa3535b3fb5d3b7dc06a8a8504c2f230f",
+            "cohort": "map_reference_bridge_development",
+            "geometry_from_near": "skew_box_s0_r0",
+            "position_id": 0,
+            "normalization": "same physical state across location-information arms; geometry remains unknown",
+            "origin_case": "skew_box_s0_r0_pos0_unknown_location",
+            "parameter_setting": "candidate",
+            "original_parameter": 0.25,
+            "candidate_parameter": 0.45,
+            "minimum_initial_pair_distance_m": 0.34802137650114573,
+            "validation_seed": 20261102,
+            "initial_rule": "Existing near scatter; far grid translated to [3.75,1.05] with Gaussian jitter sigma=.005m",
+            "historical_source_case": "far_skew_box_s0_r0_pos0_reference"
+          },
+          {
+            "condition": "skew_box_s0_r0_pos0",
+            "shape": "skew_box",
+            "stratum": "far",
+            "area_m2": 2.05875,
+            "mass_kg": 4.1175,
+            "inertia_kg_m2": 1.579496120257831,
+            "perimeter_m": 5.988113250582847,
+            "diameter_m": 2.1391496288136986,
+            "reach_m": 1.205373574883876,
+            "vertex_count": 4,
+            "initial_centroid": [
+              3.0999999999999965,
+              5.599999999999994
+            ],
+            "task": {
+              "object_id": "cargo_0",
+              "direction": [
+                1.0,
+                0.0
+              ],
+              "angle_deg": 0.0,
+              "target_distance": 1.2,
+              "start": [
+                3.0999999999999965,
+                5.599999999999994
+              ],
+              "goal_point": [
+                4.299999999999996,
+                5.599999999999994
+              ],
+              "tolerance": 0.12,
+              "clearance": 1.7903735748838763,
+              "sampling_attempts": 1
+            },
+            "initial_own_scan_returns": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "minimum_initial_boundary_distance_m": 3.46009927206023,
+            "initial_tokens": "empty",
+            "agent_initial_sha256": "2e79fb2332d9fa15cbc60f3fdfcd929d3f94c19c9d7018f47355a73b91a3ca88",
+            "physical_initial_sha256": "84e7bbb49fda860a0d921332dcb68d8fa3535b3fb5d3b7dc06a8a8504c2f230f",
+            "cohort": "post_acquisition_finite_support_development",
+            "geometry_from_near": "skew_box_s0_r0",
+            "position_id": 0,
+            "normalization": "same physical state across location-information arms; geometry remains unknown",
+            "origin_case": "skew_box_s0_r0_pos0_unknown_location",
+            "parameter_setting": "candidate",
+            "original_parameter": 0.25,
+            "candidate_parameter": 0.45,
+            "minimum_initial_pair_distance_m": 0.34802137650114573,
+            "validation_seed": 20261102,
+            "initial_rule": "Existing near scatter; far grid translated to [3.75,1.05] with Gaussian jitter sigma=.005m",
+            "historical_source_case": "far_skew_box_s0_r0_pos0_reference"
+          }
+        ],
+        "wall_seconds": [
+          133.4478317000321,
+          134.6352579999948
+        ],
+        "arm": [
+          "map_bridge_candidate",
+          "map_bridge_control"
+        ]
+      },
+      "planned_arm_identity_verified": true
+    }
+  },
+  "adapter_sha256": "dc815599b7473404a71408ac3358bf1e091c6dd3d4cc7fde3467a7ae25adff48",
+  "protocol_sha256": "49e0779f7231b61e275976c9a99ba56ea83b63595655812c8033fd444729367a"
+}
