@@ -2,7 +2,7 @@
 
 ## 最新成果与保护基线（2026-11-03）
 
-**本轮结论：有限支持候选出现明显搬运退化，继续默认关闭。** 最新[接触兼容性诊断](docs/results/post_support_contact_compatibility_v1/README.md)已完成；[独立八回合检查点](docs/results/post_support_validation_checkpoint_v1/README.md)公开冻结协议、四个对照的精确复现和审计工具验证。八个物理回合均已执行结束、执行错误0；任务收据为对照4/4完成、候选0/4完成，四个候选均在600秒预算截尾。完整约束重放及正式门槛审计尚待完成。成果沿 [`paper/boundary-aware-safe-deployment`](https://github.com/Wu-kaixin/boundary-aware-cooperative-transport/tree/paper/boundary-aware-safe-deployment) 发布。
+**本轮结论：有限支持候选出现明显搬运退化，继续默认关闭。** 最新[接触约束分解与运动上界诊断](docs/results/post_support_contact_row_decomposition_v1/README.md)已完成；[独立八回合检查点](docs/results/post_support_validation_checkpoint_v1/README.md)公开冻结协议、四个对照的精确复现和审计工具验证。八个物理回合均已执行结束、执行错误0；任务收据为对照4/4完成、候选0/4完成，四个候选均在600秒预算截尾。完整约束重放已启动，正式门槛审计仍待完成；[审计进度快照](docs/results/post_support_contact_row_decomposition_v1/analysis_checkpoint.json)记录核对时点和执行身份。成果沿 [`paper/boundary-aware-safe-deployment`](https://github.com/Wu-kaixin/boundary-aware-cooperative-transport/tree/paper/boundary-aware-safe-deployment) 发布。
 
 最终目标：**利用局部感知与邻域通信，实现未知形状物体的安全部署、无附着协作搬运和可靠停止，单独证明边界部署的贡献，并完成符合 CCTA2027 要求的论文初稿。** 当前仍在完善公共搬运链，尚未达到最终验收。
 
@@ -18,6 +18,8 @@
 
 这些是同状态重新过滤后的**机器人速度**，不代表新物体受力或新闭环失败。四条件反复用于开发，事件与机器人状态也不是独立统计样本。完整[128状态表](docs/results/post_support_contact_compatibility_v1/all_128_states.csv)和[17个正向力状态表](docs/results/post_support_contact_compatibility_v1/all_17_positive_force_states.csv)保留全部分母。
 
+随后对同一固定状态组做两项代数诊断，新增物理回合仍为 **0**。移除非负运动需求项后，17/17个正向力状态的原指令仍违反新物体行；允许原0.2m/s速度界内任意有符号运动时，其中 **9/17**（实际正向施力的声明推手中 **8/11**）仍被至少一行排除。单独更换运动项无法恢复全部原指令，需继续拆解有限支持的法向、几何余量和接触距离。该结论只针对这些固定原指令，**不表示不存在其他安全推动指令**；[全部128状态、公式、条件分母与证据限制](docs/results/post_support_contact_row_decomposition_v1/README.md)均已保留。
+
 此前[有限边界冲突诊断](docs/results/map_bridge_conflicts_v1/README.md)精确重放517帧，覆盖18个缩放状态及226项比较。局部有限扫描与接收速度模长，使17个冻结后冲突由0/17变为17/17未截断可行；同17帧全队272状态中，181个获准状态全部可行。新接触诊断说明：**QP可行与维持推动能力必须同时验证。** 接收速度模长不是物体真实速度的安全证书，完整0.2m/s需求仍曾新增6个未截断冲突。
 
 | 新物理批次的执行与任务收据 | 状态 |
@@ -25,12 +27,12 @@
 | 冻结计划 | 四条件×两臂，8回合，每例600秒；最佳数值参数、初态及原判据不变 |
 | 四个桥接对照 | 已完成；全部25组数组和科学字段精确复现 |
 | 四个有限支持候选 | 全部执行结束，任务完成0/4、G500 0/4；均在600秒预算截尾 |
-| 候选完整逐帧约束审计与正式门槛 | 待完成；任务回退已确认，候选未采用 |
+| 候选完整逐帧约束审计与正式门槛 | 审计执行中；正式结论待完成，任务回退已确认，候选未采用 |
 | 审计工程预检 | 80步旧姿态驱动的合成控制重放，412个准入状态；无物理积分 |
 
 [全部八回合任务收据](docs/results/post_support_validation_checkpoint_v1/all_eight_receipts.csv)保留四个候选终点误差：圆形1.041m、L形1.142m、C形1.197m、斜箱1.195m。
 
-[冻结协议](experiments/ccta2027/post_acquisition_finite_support_v1.json)、[执行记录](experiments/ccta2027/post_acquisition_finite_support_v1_physical_plan.md)和[最终执行收据](docs/results/post_support_validation_checkpoint_v1/execution_outcome.json)分别保留身份；较早的7/8回合快照也完整保留。分析适配层仅处理预定实验臂更名和扫描数组精确比较；原错误比较、序列化失败及修复预检均保留，运行源码与冻结辅助文件未改。候选完整审计尚未执行，合成重放不代替物理验收。
+[冻结协议](experiments/ccta2027/post_acquisition_finite_support_v1.json)、[执行记录](experiments/ccta2027/post_acquisition_finite_support_v1_physical_plan.md)和[最终执行收据](docs/results/post_support_validation_checkpoint_v1/execution_outcome.json)分别保留身份；较早的7/8回合快照也完整保留。分析适配层仅处理预定实验臂更名和扫描数组精确比较；原错误比较、序列化失败及修复预检均保留，运行源码与冻结辅助文件未改。候选完整审计正沿原分析尝试执行；合成重放和局部审计进度均不代替完整物理验收。
 
 最近**完整发布并审计**的闭环批次仍是[共同投票者增量八回合](docs/results/map_reference_bridge_v1/README.md)：两臂安全完成均4/4、G500均2/4，错误HOLD、原硬安全违规和预算截尾均0；但机制与完整门槛均FAIL。斜箱冻结后缩放1→17，C形最大转角4.942°→5.839°，且未正式进入TRANSPORT。全部失败和回退仍在原报告中。
 
@@ -40,7 +42,7 @@
 
 | 优先级 | 遗留问题及证据 | 下一项工作与验收方向 |
 | --- | --- | --- |
-| P0 | **有限支持与正常接触的兼容性未解决。** 17个正向力状态的原指令均与新物体行冲突，其中11个声明推手的反事实目标向速度均变负；新候选任务完成0/4，完整约束审计仍待完成。 | 完成全部逐帧约束审计，再设计同时修复错误边界外推、保留合法推动接触的机制。不能只以可行或缩放减少为成功。 |
+| P0 | **有限支持与正常接触的兼容性未解决。** 新候选任务完成0/4；17个原正向力指令去掉非负运动项后仍冲突，其中9个在原配置速度球内也无法恢复。完整约束审计仍待完成。 | 完成全部逐帧约束审计，分解扫描半间距、噪声、法向及真实接触距离，再设计兼容推动的边界约束。不能将固定原指令被排除等同于所有推动指令不可行，也不能只以QP可行为成功。 |
 | P0 | **采集期残余冲突及上游参考偏差仍在。** 402帧agent_05的采集冲突未被本候选覆盖；旧451.596mm换票跳变虽已追清，局部配准为何接受大偏差仍待解释。 | 追踪参考准入、匹配支撑及偏差累积，分别核验地图、导航和停止读数；共同来源增量不能消除时变偏差。 |
 | P0 | **C形协作激活、施力与停止尚未联合达标。** 上轮C形完成但未正式TRANSPORT、旋转回退；两臂G500均2/4，完整门槛FAIL。 | 核验部署运动、推手邻域确认、正式施力与制动的先后关系，保留原四台门槛和停止规则；共同检查安全完成、错误HOLD、硬违规、截尾、终点误差、G500和转角。 |
 | P1 | **独立部署贡献未证明最终完成率优势。** [36条历史匹配轨迹](docs/results/deployment_contribution_v1/README.md)中，CVT覆盖率相对spacing/nearest增加1.52/4.85个百分点，三方法完成均11/12。 | 公共搬运链稳定后，用相同参数、初态与信息权限冻结匹配对照，分别评估覆盖、最大空缺、路径、耗时和最终搬运。 |

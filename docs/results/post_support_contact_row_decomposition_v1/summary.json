@@ -1,0 +1,26 @@
+{
+  "decomposition_counts": {
+    "all_states": 128,
+    "admitted": 112,
+    "admitted_still_conflicting_without_motion": 27,
+    "admitted_negative_h": 20,
+    "positive_force": 17,
+    "positive_force_still_conflicting_without_motion": 17,
+    "positive_force_negative_h": 11,
+    "positive_force_pusher": 11,
+    "positive_force_pusher_still_conflicting_without_motion": 11,
+    "positive_force_pusher_negative_h": 8
+  },
+  "motion_envelope_counts": {
+    "all_states": 128,
+    "admitted": 112,
+    "admitted_original_command_rejected_for_all_bounded_motion": 12,
+    "positive_force": 17,
+    "positive_force_original_command_rejected_for_all_bounded_motion": 9,
+    "positive_force_pusher": 11,
+    "positive_force_pusher_original_command_rejected_for_all_bounded_motion": 8
+  },
+  "new_physical_episodes": 0,
+  "limiting_row_h_note": "negative_h counts refer to the selected minimum-residual row, not every row.",
+  "inference_limit": "Conditional witnesses exclude the same original commands within the configured motion ball. They do not exclude every other pushing command or certify true object motion."
+}

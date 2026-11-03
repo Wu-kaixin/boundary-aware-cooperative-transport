@@ -178,3 +178,45 @@ pass study.check(). The fixture itself matches all4original Windows hashes.
 Targeted10passed locally; current full suite/updated exact-headCI follow.
 
 Portable CI test follow-up: local full core1084passed/2skipped; targeted10passed; healthPASS. Runtime,22frozen helpers and original experiment receipts unchanged. Preserve the failed6ecaUbuntu run, then verify the next exact-head Windows/Ubuntu workflows separately.
+
+## Running audit and contact-row publication checkpoint
+
+The exact f1a8497 commit passed Windows and Ubuntu CI in run 41638558059.
+The prior user publication request was delivered; its original delivery receipt
+is retained. Full physical-candidate analysis then started at 2026-11-03 12:52:54
+UTC using the unchanged adapter and frozen runtime/helpers, in session 56448.
+Keep this attempt and its log. Partial replay progress is not a complete audit.
+
+Two additional zero-physics diagnostics used the same predeclared 8 events and
+all 128 states from contact-compatibility-v2. Row decomposition verifies all 112
+admitted matrices: removing the nonnegative motion demand leaves 17/17 original
+positive-force commands conflicting (27/112 admitted states). The signed-motion
+envelope independently bounds the selected row over the configured 0.2 m/s ball:
+9/17 positive-force commands, including 8/11 declared pushers, remain excluded;
+there are 12/112 such witnesses in all admitted states. This excludes those SAME
+commands, not all possible pushing commands. Original inputs and all failures
+remain unchanged; the separate designs and snapshots bind each diagnostic.
+
+Ruling: publish the completed algebraic evidence and a timestamped live-audit
+checkpoint in response to the user's upload/README request — full replay is
+still running and must not be restarted or relabeled complete — cost: full
+constraint verification and the formal gate result remain outstanding.
+
+Ruling: retain all numerical parameters and the default-disabled candidate —
+task completion regressed from 4/4 controls to 0/4 candidates — cost: contact
+geometry, acquisition/reference bias and C-shape activation still need work.
+
+Publication increment starts at f1a8497. Update the repository README and evidence
+indices, validate all product and source identities and scalar witnesses, run
+repository health, then obtain one fresh-context read-only final review before
+the authorized normal branch push. No extra physics or claim of a finished
+research goal is part of this publication checkpoint.
+
+Publication checks at 2026-11-03 13:34 UTC: four data-product hashes match,
+all 128 exported rows and 112 independently recomputed scalar envelopes match,
+and all script/design snapshots plus 22 frozen helpers retain their identities.
+Protected YAML SHA-256 remains a5d5c8e200fa502557d4da9a9db2a646d027abababd59661bcdac21a1b43b112.
+Repository health PASS (1,713 tracked files, 541 Python files parsed, 15 navigation
+documents; pip check and Git object integrity PASS); git diff --check PASS.
+The analysis checkpoint records 3,600 frames for the first L candidate. Its
+original live process continues; no full-audit outcome was present at this check.

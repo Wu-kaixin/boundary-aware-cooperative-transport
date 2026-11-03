@@ -1,0 +1,33 @@
+{
+  "status": "PARTIAL_REPLAY_FULL_AUDIT_PENDING",
+  "observed_at_utc": "2026-11-03T13:34:04.765332+00:00",
+  "analysis_start_utc": "2026-11-03T12:52:54Z",
+  "started_receipt": "runs/research/2026-11-03-post-acquisition-support-v1/analysis_adapter_v1/started.json",
+  "started_receipt_sha256": "186b16d78ce3788f4529e8a2deb7f4552a411463ffb607d0afec92449d5594c1",
+  "analysis_identity": {
+    "protocol_sha256": "49e0779f7231b61e275976c9a99ba56ea83b63595655812c8033fd444729367a",
+    "runtime_source_sha256": "e6b7456f5f0a4d71ddd4b33159c058e215115aae35c01b6c5c9eae7e68f32767",
+    "adapter_sha256": "dc815599b7473404a71408ac3358bf1e091c6dd3d4cc7fde3467a7ae25adff48",
+    "design_sha256": "b20986f89c1b1b7bbbe3089cdfe4ec415366c6b12a78d8d1b4cc60bccc76ba49",
+    "test_sha256": "20666ed7f562a2e818ef91cd31b50d97d3d3e25a8341a1747f299b722dbfd540",
+    "original_comparator_sha256": "ea730c94fc3ae6f42f93cecab9c2e2b1bdc53b09aaccfe687eff56ada2e088b5",
+    "original_auditor_sha256": "495b5fd5283c7124946f9a617712315491770378a3b1a4e933dd22eb13af795f",
+    "serialization_helper_sha256": "eba86f44652d990768d1e9d3e19dba0fe55559a7a1096b34d229e38391ce17f8",
+    "precheck_sha256": "8dae67055ec166c571b381473e7f5532f8b92d7f7674eb2e5cd4c9a7575ab2c7",
+    "new_physical_episodes": 0,
+    "scope": "Analysis only: verify the planned result.arm rename and compare packet arrays as exact lists. Every scientific value and audit assertion is retained."
+  },
+  "log": "runs/maintenance/2026-11-03-post-acquisition-support-v1/analysis-adapter-v1.log",
+  "log_prefix_sha256": "54fe5eaaf5f1eb24ab4e3b8c28c17a3f7072e43b0fc7c51fc453f5184c15fdfd",
+  "log_prefix_bytes": 1508,
+  "last_reported_progress": {
+    "audit_case": "near_l_reference_post_support_candidate",
+    "verified_frames": 3600
+  },
+  "full_analysis_outcome_present": false,
+  "analysis_failure_present": false,
+  "physical_episodes_complete": 8,
+  "candidate_task_completion": "0/4",
+  "control_task_completion": "4/4",
+  "scope": "Timestamped partial progress only. It does not establish full audit or formal gate completion."
+}
