@@ -20,7 +20,12 @@ has previously failed repeatedly, so use targeted reads if symbolic service fail
 - [x] Implement bounded diagnostic and meaningful witness-selection regressions.
 - [x] Separate20-frame C/L preflights, then exact full4 acquisition prefixes.
 - [x] Evaluate findings and freeze a separate physical protocol if justified.
-- [ ] Publish complete outcomes, one fresh final review, authorized branch sync.
+- [x] Publish complete outcomes and complete one fresh final review.
+
+Authorized branch synchronization follows the final publication commit. Its
+completion evidence is the post-commit github_sync.json/github_ci.json in
+runs/maintenance/2026-11-03-finite-acquisition-support-v2/ rather than a claim
+written before that commit exists.
 
 ## Review focus
 
@@ -94,3 +99,29 @@ exactly4 additive baseline-count corrections and318 navigation links checked.
 The first ad-hoc verifier used a nonexistent CSV case_id field; its failure
 receipt is retained. Corrected only the verifier to use condition/arm keys;
 neither scientific products nor runtime changed.
+
+Task4 publication/review complete: fresh read-only reviewer checked7f7f069..
+fa0640a, including raw8-episode receipts,25-array/physics comparisons, all
+path/reason/scaling denominators,7deterministic witnesses and14row identities.
+Critical/Important/Minor: none. Ready to publish negative validation result;
+no corrective pass or re-review. Repository health PASS on1530tracked files,
+486Python files, original evidence, navigation, pip consistency and git objects.
+
+Final: Ruling: prior runtime correction not re-reviewed — source is unchanged
+from already-reviewed base; this review checked integration and evidence —
+cost if wrong: an unseen-input defect may remain, so retain default-off and
+bounded claims with future regression/validation requirements.
+
+Final: Ruling: general reliability, arbitrary-boundary safety, deployment
+superiority and hardware readiness are not concluded — four reused development
+conditions cannot establish them; publication explicitly withholds those claims —
+cost if wrong: additional frozen experiments and hardware work remain necessary,
+and this package cannot serve as full research-goal completion.
+
+Final: Ruling: parent owns remote synchronization/CI — the reviewer was local
+and read-only; check the actual final remote head and both OS jobs after normal
+authorized push — cost if wrong: platform-specific failure or an unsynchronized
+README could remain, so require terminal receipts before claiming upload complete.
+
+Final: deferred minors: none. No runtime/source/frozen-helper edits followed the
+995-pass suite or8physical episodes; only publication and review documents changed.
