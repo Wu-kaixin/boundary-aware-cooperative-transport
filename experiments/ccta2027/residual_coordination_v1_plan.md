@@ -14,7 +14,11 @@ new physical receipts. Saved-state matrices are not new dynamics.
 - [x] Add diagnostic helpers with meaningful RED/GREEN fixtures.
 - [x] Freeze and run two-witness decomposition and all8 phase/contact audits.
 - [x] Decide the next controller mechanism from verified evidence; retain limits.
-- [ ] Publish complete results and one fresh final review; synchronize normally.
+- [x] Publish complete results and one fresh final review.
+
+Delivery gate after publication: synchronize the authorized branch normally,
+then verify the remote commit, README and exact-head CI. Keep the delivery
+receipts in runs/maintenance/2026-11-03-residual-coordination-v1/.
 
 Review focus:
 1. Corrected rows and retained original hard rows use identical margins/caps.
@@ -75,3 +79,20 @@ legend was then changed from "paired certificate" to "paired feasible witness"
 to match the text's same-state-only scope. Layout v2 and its hash-matching
 publisher remain archived; layout v3 has identical six scientific products,
 unchanged source/configuration hashes, and verified result links.
+
+Final review: one fresh read-only reviewer, range dabaa940..ebd078d. Independently
+recomputed all eight phase reports, both residual decompositions and all four
+paired systems; confirmed peer-row provenance, caps, source/config hashes and
+sampling scope. No Critical/Important technical findings, nothing declined.
+The reviewer labeled the README full-rho denominator ambiguity Minor; the
+executor regraded it as a publication correctness issue because the user's
+requested README must not overcount full-margin evidence. Fixed in one pass:
+both README entries now explicitly say two states x full/rho-free = four,
+including two full-rho problems. Verified directly against published identities;
+documentation-only correction, no mirror-the-wording tests or repeated physics.
+No deferred minors. Full review recorded in docs/results/residual_coordination_v1/final_review.md.
+
+Review-package helper first failed to initialize MSYS inside the sandbox. Its
+permitted retry generated the complete556376-byte package; missing wc/tr in PATH
+only affected the helper's printed byte count. Package header/range and size
+were independently verified before review. All raw receipts remain local.

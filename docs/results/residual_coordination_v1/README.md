@@ -81,6 +81,7 @@
 
 [工程收据](engineering_checks.json)：核心**1000通过/2跳过**，新增五项回归包含速度冲突、冗余行、
 全部子步积分、缺失子步拒绝和首子步报告识别。原始失败和所有日志保留。
+[独立发布审查](final_review.md)复算全部阶段、残余分解与四个联合问题；README分母措辞已修正。
 
 - 物理来源仍为[有限支持v2协议](../../../experiments/ccta2027/finite_acquisition_support_v2.json)，
   运行时源码SHA-256仍为`cce9a4fdc1677a54a7faa9ea6d9baf6c5110387b8acee63e158f6da378952177`。
