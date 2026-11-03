@@ -1,0 +1,30 @@
+{
+  "mechanism": {
+    "schedule_complete": true,
+    "all_execution_complete": true,
+    "original_controls_exact": true,
+    "safe_complete_no_false_hold": true,
+    "preserve_matched_g500": true,
+    "no_acquisition_scaling_increase": true,
+    "no_post_acquisition_scaling_increase": false,
+    "skew_post_acquisition_improved": false,
+    "bridge_audits": true
+  },
+  "full": {
+    "schedule_complete": true,
+    "all_execution_complete": true,
+    "original_controls_exact": true,
+    "safe_complete_no_false_hold": true,
+    "preserve_matched_g500": true,
+    "no_acquisition_scaling_increase": true,
+    "no_post_acquisition_scaling_increase": false,
+    "skew_post_acquisition_improved": false,
+    "bridge_audits": true,
+    "zero_candidate_scaling": false,
+    "g500_all": false,
+    "formal_transport_all": false
+  },
+  "mechanism_verdict": "FAIL",
+  "full_verdict": "FAIL",
+  "candidate_adopted": false
+}

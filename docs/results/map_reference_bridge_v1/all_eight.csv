@@ -1,0 +1,9 @@
+condition,arm,safe_completed,false_hold,hard_safety_count,g500,g500_reasons,budget_terminated,formal_transport,seconds,endpoint_mm,max_true_rotation_deg,acquisition_scaling,post_acquisition_scaling,minimum_scale,bridge_agent_steps,bridge_resets,bridge_audit_verified
+near_circle,local_pair_candidate,True,False,0,True,,False,True,16.6,18.598888083942796,0.0,0,0,1.0,,,
+near_circle,map_bridge_candidate,True,False,0,True,,False,True,13.700000000000001,15.598915759365195,0.0,0,0,1.0,4384,0,True
+near_l_reference,local_pair_candidate,True,False,0,True,,False,True,13.25,23.114765100783668,1.9469933862125373,0,0,1.0,,,
+near_l_reference,map_bridge_candidate,True,False,0,True,,False,True,13.700000000000001,17.94939164193535,1.5414025363660793,0,0,1.0,4384,0,True
+far_c_open_away_pos0,local_pair_candidate,True,False,0,False,G500: transport activation never happened within the 1074-frame run,False,False,53.7,6.9387521883149486,4.9424758321921,0,0,1.0,,,
+far_c_open_away_pos0,map_bridge_candidate,True,False,0,False,G500: transport activation never happened within the 1037-frame run,False,False,51.85,17.444756096299038,5.839328792597956,0,0,1.0,16592,5,True
+far_skew_box_s0_r0_pos0,local_pair_candidate,True,False,0,False,"G500: 2 scaled-barrier event(s), smallest factor 0.117; the contract allows 0",False,True,55.35,12.932653548319374,2.289194597863987,1,1,0.1171875,,,
+far_skew_box_s0_r0_pos0,map_bridge_candidate,True,False,0,False,"G500: 18 scaled-barrier event(s), smallest factor 0.020; the contract allows 0",False,True,54.6,16.456722018859775,2.293379330956834,1,17,0.01953125,17472,0,True

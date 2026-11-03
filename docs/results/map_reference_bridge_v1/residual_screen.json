@@ -1,0 +1,5749 @@
+{
+  "status": "VERIFIED_POST_STUDY_SCREEN",
+  "protocol_sha256": "29930eb5069c1734e39126a2e39b29e04cd9f0f5e7cdc8f4c1aafb370200401b",
+  "raw_analysis_sha256": "a3a5e1b815d66fc08d3005a9df8150560f519409515ee13136fb6cf59180db96",
+  "script_sha256": "87dddebc4266ffcc2615a5ffb44b149ab45c5d4cec7f083770fade16d40ff9b3",
+  "new_physical_episodes": 0,
+  "new_replay_frames": 0,
+  "scaled_robot_steps": 18,
+  "events": [
+    {
+      "case_id": "far_skew_box_s0_r0_pos0_map_bridge_candidate",
+      "saved_frame": 402,
+      "agent_id": "agent_05",
+      "phase": "ENCLOSE",
+      "capture_state": "acquiring",
+      "true_gap_m": 0.22491915507222385,
+      "true_displacement": [
+        0.0,
+        0.0
+      ],
+      "map_displacement_error_m": [
+        0.0,
+        0.0
+      ],
+      "raw_aggregate_error_m": [
+        0.0,
+        0.0
+      ],
+      "map_displacement_error_norm_m": 0.0,
+      "true_angle_rad": 0.0,
+      "diagnostic": {
+        "agent_id": "agent_05",
+        "mode": "acquisition_circulation",
+        "cell_mass": 0.0,
+        "object_rows": 25,
+        "contact_ready": false,
+        "push_side": false,
+        "solver_status": "scaled_barrier",
+        "modification": 0.14302196320484775,
+        "effort": 0.0,
+        "progress": 0.0,
+        "map_points": 97,
+        "direct_visible": true,
+        "own_scan_points": 6,
+        "boundary_distance": 0.2393040454613664,
+        "token_distance": 0.9895131612834959,
+        "map_angular_coverage": 0.6388888888888888,
+        "cell_held_fraction": 0.0,
+        "cell_unheld_mass": 0.0,
+        "centroid_distance": 0.0,
+        "redeploy_requested": false,
+        "redeploy_active": false,
+        "redeploy_reason": "",
+        "redeploy_candidates": 0,
+        "cage_targets": 0,
+        "agent_rows": 10,
+        "agent_rows_active": 1,
+        "object_rows_active": 0,
+        "zero_input_feasible": false,
+        "speed_nominal": 0.35,
+        "speed_command": 0.21440575761362823,
+        "map_centroid": [
+          3.420250933442984,
+          5.327654410874326
+        ],
+        "cvt_centroid": [
+          null,
+          null
+        ],
+        "redeploy_target": [
+          null,
+          null
+        ],
+        "nominal_command": [
+          0.2562447873296572,
+          0.2384084918084478
+        ],
+        "local_holding": false,
+        "safety_feedback_blocked": false,
+        "contact_role": "baseline",
+        "contact_cone_residual": null,
+        "contact_allocation": null,
+        "contact_redeploy_attempts": 0,
+        "contact_redeploy_reason": "not_enabled",
+        "contact_selected_normal": [
+          null,
+          null
+        ],
+        "contact_desired_direction": [
+          null,
+          null
+        ],
+        "contact_lateral_estimate": [
+          null,
+          null
+        ],
+        "contact_redeploy_target": [
+          null,
+          null
+        ],
+        "handoff_state": "not_enabled",
+        "handoff_donor_state": "not_enabled",
+        "handoff_partner": "",
+        "handoff_event": "not_enabled",
+        "handoff_rollback_reason": "",
+        "handoff_attempts": 0,
+        "handoff_contact_proxy": false,
+        "handoff_confirm_seconds": 0.0,
+        "handoff_release_fraction": 0.0,
+        "handoff_gap": null,
+        "handoff_motion_ok": false,
+        "handoff_local_forward_velocity": 0.0,
+        "handoff_local_lateral_velocity": 0.0,
+        "navigation_remaining": null,
+        "navigation_voters": "",
+        "navigation_displacement": [
+          null,
+          null
+        ],
+        "navigation_error": [
+          null,
+          null
+        ],
+        "navigation_velocity": [
+          null,
+          null
+        ],
+        "reference_status": "not_enabled",
+        "reference_pivot_status": "not_enabled",
+        "reference_pivot_rms": null,
+        "reference_support_minor_rms": null,
+        "contact_distance_source": "map",
+        "contact_map_gap": null,
+        "contact_used_gap": null,
+        "contact_patch_points": 0,
+        "reference_matches": 0,
+        "reference_residual_rms": null,
+        "reference_displacement": [
+          null,
+          null
+        ],
+        "reference_bootstrap_offset": [
+          null,
+          null
+        ],
+        "reference_angle": null,
+        "reference_velocity": [
+          null,
+          null
+        ],
+        "recovery_eligible": false,
+        "reinforcement_state": "not_enabled",
+        "reinforcement_event": "not_enabled",
+        "reinforcement_attempts": 0,
+        "reinforcement_confirmed": false,
+        "reinforcement_confirm_seconds": 0.0,
+        "reinforcement_path_length": 0.0,
+        "reinforcement_gap": null,
+        "reinforcement_retain": false,
+        "reinforcement_suspended_approach": false,
+        "acquisition_support": {
+          "applied": true,
+          "reason": "supported",
+          "stage": "stationary_acquisition",
+          "source_agents": [
+            "agent_05",
+            "agent_04",
+            "agent_06",
+            "agent_07",
+            "agent_08",
+            "agent_09",
+            "agent_10",
+            "agent_11",
+            "agent_12",
+            "agent_13",
+            "agent_14"
+          ],
+          "source_timestamps": [
+            20.05000000000015,
+            20.05000000000015,
+            20.05000000000015,
+            20.05000000000015,
+            20.05000000000015,
+            20.05000000000015,
+            20.05000000000015,
+            20.05000000000015,
+            20.05000000000015,
+            20.05000000000015,
+            20.05000000000015
+          ],
+          "motion_model": "existing_stationary_acquisition_assumption",
+          "near_returns": 21,
+          "uncovered_returns": 0,
+          "point_guard_rows": 6,
+          "object_rows": 25,
+          "empirical_only": true,
+          "motion_bound": 0.0,
+          "cap_active": 1
+        },
+        "map_reference_status": "stationary_acquisition",
+        "map_reference_voters": [],
+        "map_reference_displacement": [
+          0.0,
+          0.0
+        ],
+        "map_reference_velocity": [
+          0.0,
+          0.0
+        ],
+        "map_reference_bridge": {
+          "status": "stationary",
+          "displacement": [
+            0.0,
+            0.0
+          ],
+          "velocity": [
+            0.0,
+            0.0
+          ],
+          "delta": [
+            0.0,
+            0.0
+          ],
+          "voters": [],
+          "common_voters": [],
+          "reset_history": false,
+          "current": {},
+          "previous": {},
+          "raw_displacement": [
+            0.0,
+            0.0
+          ],
+          "discarded_cells": 0,
+          "retained_cells_before_alignment": 97
+        },
+        "pair_safety": {
+          "eligible": false,
+          "reason": "capped_or_moving_support",
+          "executed_status": "scaled_barrier",
+          "executed_barrier_scale": 0.1171875
+        }
+      }
+    },
+    {
+      "case_id": "far_skew_box_s0_r0_pos0_map_bridge_candidate",
+      "saved_frame": 469,
+      "agent_id": "agent_14",
+      "phase": "ENCLOSE",
+      "capture_state": "frozen",
+      "true_gap_m": 0.15982897734503032,
+      "true_displacement": [
+        0.0,
+        0.0
+      ],
+      "map_displacement_error_m": [
+        -0.0031496137651707548,
+        0.003237459832396478
+      ],
+      "raw_aggregate_error_m": [
+        -0.001320863227310263,
+        0.000257488455081534
+      ],
+      "map_displacement_error_norm_m": 0.004516770199615399,
+      "true_angle_rad": 0.0,
+      "diagnostic": {
+        "agent_id": "agent_14",
+        "mode": "cage",
+        "cell_mass": 0.07626693311324198,
+        "object_rows": 1,
+        "contact_ready": true,
+        "push_side": false,
+        "solver_status": "scaled_barrier",
+        "modification": 0.2808259564678244,
+        "effort": 0.0,
+        "progress": -0.003905521068811724,
+        "map_points": 84,
+        "direct_visible": true,
+        "own_scan_points": 11,
+        "boundary_distance": 0.16956030085699067,
+        "token_distance": 0.7845779176188474,
+        "map_angular_coverage": 0.8333333333333334,
+        "cell_held_fraction": 0.7710479129695827,
+        "cell_unheld_mass": 0.01746147350768599,
+        "centroid_distance": 0.12093504182349893,
+        "redeploy_requested": false,
+        "redeploy_active": false,
+        "redeploy_reason": "contact_ready",
+        "redeploy_candidates": 16,
+        "cage_targets": 84,
+        "agent_rows": 10,
+        "agent_rows_active": 1,
+        "object_rows_active": 0,
+        "zero_input_feasible": false,
+        "speed_nominal": 0.3016760803272775,
+        "speed_command": 0.026608977537897177,
+        "map_centroid": [
+          3.7179703932302655,
+          5.496874287430038
+        ],
+        "cvt_centroid": [
+          4.160329771265043,
+          4.99369457089199
+        ],
+        "redeploy_target": [
+          null,
+          null
+        ],
+        "nominal_command": [
+          0.21653654576215509,
+          0.21004852246808145
+        ],
+        "local_holding": false,
+        "safety_feedback_blocked": false,
+        "contact_role": "baseline",
+        "contact_cone_residual": null,
+        "contact_allocation": null,
+        "contact_redeploy_attempts": 0,
+        "contact_redeploy_reason": "not_enabled",
+        "contact_selected_normal": [
+          0.8920577085301502,
+          0.4519215027545578
+        ],
+        "contact_desired_direction": [
+          0.9999999770296574,
+          -0.00021433778189384092
+        ],
+        "contact_lateral_estimate": [
+          null,
+          null
+        ],
+        "contact_redeploy_target": [
+          null,
+          null
+        ],
+        "handoff_state": "not_enabled",
+        "handoff_donor_state": "not_enabled",
+        "handoff_partner": "",
+        "handoff_event": "not_enabled",
+        "handoff_rollback_reason": "",
+        "handoff_attempts": 0,
+        "handoff_contact_proxy": false,
+        "handoff_confirm_seconds": 0.0,
+        "handoff_release_fraction": 0.0,
+        "handoff_gap": null,
+        "handoff_motion_ok": false,
+        "handoff_local_forward_velocity": 0.0,
+        "handoff_local_lateral_velocity": 0.0,
+        "navigation_remaining": 1.1813208908220627,
+        "navigation_voters": "agent_14|agent_04|agent_05|agent_06|agent_07|agent_08|agent_09|agent_10|agent_11|agent_12|agent_13",
+        "navigation_displacement": [
+          -0.001320863227310263,
+          0.000257488455081534
+        ],
+        "navigation_error": [
+          1.2013208632273102,
+          -0.000257488455081534
+        ],
+        "navigation_velocity": [
+          -0.017290670514067165,
+          0.010489848729119232
+        ],
+        "reference_status": "accepted",
+        "reference_pivot_status": "accepted",
+        "reference_pivot_rms": null,
+        "reference_support_minor_rms": 0.21648835169969308,
+        "contact_distance_source": "insufficient_patch",
+        "contact_map_gap": 0.022606350257110688,
+        "contact_used_gap": 0.022606350257110688,
+        "contact_patch_points": 0,
+        "reference_matches": 198,
+        "reference_residual_rms": 0.004593605237494299,
+        "reference_displacement": [
+          -0.00121505600851076,
+          -0.000579620879647651
+        ],
+        "reference_bootstrap_offset": [
+          0.0,
+          0.0
+        ],
+        "reference_angle": 0.0,
+        "reference_velocity": [
+          -0.02244374557995342,
+          0.012782252745292372
+        ],
+        "recovery_eligible": false,
+        "reinforcement_state": "not_enabled",
+        "reinforcement_event": "not_enabled",
+        "reinforcement_attempts": 0,
+        "reinforcement_confirmed": false,
+        "reinforcement_confirm_seconds": 0.0,
+        "reinforcement_path_length": 0.0,
+        "reinforcement_gap": null,
+        "reinforcement_retain": false,
+        "reinforcement_suspended_approach": false,
+        "acquisition_support": {
+          "applied": false,
+          "reason": "outside_stationary_acquisition",
+          "stage": "fresh_reference",
+          "source_agents": []
+        },
+        "map_reference_status": "fresh_reference",
+        "map_reference_voters": [
+          "agent_14",
+          "agent_04",
+          "agent_05",
+          "agent_06",
+          "agent_07",
+          "agent_08",
+          "agent_09",
+          "agent_10",
+          "agent_11",
+          "agent_12",
+          "agent_13"
+        ],
+        "map_reference_displacement": [
+          -0.0031496137651707548,
+          0.003237459832396478
+        ],
+        "map_reference_velocity": [
+          -0.017290670514067165,
+          0.010489848729119232
+        ],
+        "map_reference_bridge": {
+          "status": "continuous",
+          "displacement": [
+            -0.0031496137651707548,
+            0.003237459832396478
+          ],
+          "velocity": [
+            -0.017290670514067165,
+            0.010489848729119232
+          ],
+          "delta": [
+            -0.0028822501330472224,
+            0.0017431342886273635
+          ],
+          "voters": [
+            "agent_14",
+            "agent_04",
+            "agent_05",
+            "agent_06",
+            "agent_07",
+            "agent_08",
+            "agent_09",
+            "agent_10",
+            "agent_11",
+            "agent_12",
+            "agent_13"
+          ],
+          "common_voters": [
+            "agent_14",
+            "agent_04",
+            "agent_05",
+            "agent_06",
+            "agent_07",
+            "agent_08",
+            "agent_09",
+            "agent_10",
+            "agent_11",
+            "agent_12",
+            "agent_13"
+          ],
+          "reset_history": false,
+          "current": {
+            "agent_14": [
+              -0.00121505600851076,
+              -0.000579620879647651
+            ],
+            "agent_04": [
+              -0.0004960024644243398,
+              0.00188669918058891
+            ],
+            "agent_05": [
+              -0.0004960024644243391,
+              0.0018866991805889237
+            ],
+            "agent_06": [
+              -0.0015144764651714678,
+              0.0002275785984008608
+            ],
+            "agent_07": [
+              -0.001095688235752105,
+              0.0006976391890029523
+            ],
+            "agent_08": [
+              -0.0016762975714443937,
+              0.0012849901488185148
+            ],
+            "agent_09": [
+              -0.0009543269056584754,
+              0.0022934453972221934
+            ],
+            "agent_10": [
+              -0.0014858330808902981,
+              -0.00013099027895462046
+            ],
+            "agent_11": [
+              -0.002494125916746073,
+              -0.002846727466185095
+            ],
+            "agent_12": [
+              -0.0012791721012257965,
+              0.00022029480716922258
+            ],
+            "agent_13": [
+              -0.002265303997621784,
+              -0.0022865726969492476
+            ]
+          },
+          "previous": {
+            "agent_14": [
+              0.0026102995213356413,
+              -0.0027268538252503503
+            ],
+            "agent_04": [
+              0.002386247520070871,
+              0.0001435647188650604
+            ],
+            "agent_05": [
+              0.002386247520070872,
+              0.00014356471886507266
+            ],
+            "agent_06": [
+              0.0030213472929072954,
+              -0.00011984282575779233
+            ],
+            "agent_07": [
+              0.0023812906514321386,
+              -0.0007429861752350843
+            ],
+            "agent_08": [
+              0.00041701664452556696,
+              -1.4976669680133149e-05
+            ],
+            "agent_09": [
+              -0.0009918738114122869,
+              9.516475780362813e-05
+            ],
+            "agent_10": [
+              0.003585693239532367,
+              -0.003833009366239987
+            ],
+            "agent_11": [
+              -0.00047608604763798744,
+              -0.0017098187486269188
+            ],
+            "agent_12": [
+              0.0036008498609642068,
+              -0.0042043564165306175
+            ],
+            "agent_13": [
+              -0.0016390436523395708,
+              -0.002302461296723704
+            ]
+          },
+          "raw_displacement": [
+            -0.001320863227310263,
+            0.000257488455081534
+          ],
+          "discarded_cells": 0,
+          "retained_cells_before_alignment": 86
+        },
+        "pair_safety": {
+          "eligible": false,
+          "reason": "outside_stationary_acquisition"
+        }
+      }
+    },
+    {
+      "case_id": "far_skew_box_s0_r0_pos0_map_bridge_candidate",
+      "saved_frame": 473,
+      "agent_id": "agent_14",
+      "phase": "ENCLOSE",
+      "capture_state": "frozen",
+      "true_gap_m": 0.16182756706415047,
+      "true_displacement": [
+        0.0,
+        0.0
+      ],
+      "map_displacement_error_m": [
+        -0.0008225320058253556,
+        0.002589250573876697
+      ],
+      "raw_aggregate_error_m": [
+        0.0006202688622693264,
+        -0.00320529079183835
+      ],
+      "map_displacement_error_norm_m": 0.002716758626548904,
+      "true_angle_rad": 0.0,
+      "diagnostic": {
+        "agent_id": "agent_14",
+        "mode": "cage",
+        "cell_mass": 0.07538503986932192,
+        "object_rows": 1,
+        "contact_ready": true,
+        "push_side": false,
+        "solver_status": "scaled_barrier",
+        "modification": 0.2967436557581272,
+        "effort": 0.0,
+        "progress": -0.0010199396872234351,
+        "map_points": 85,
+        "direct_visible": true,
+        "own_scan_points": 10,
+        "boundary_distance": 0.16962062036830491,
+        "token_distance": 0.7975905182119086,
+        "map_angular_coverage": 0.8611111111111112,
+        "cell_held_fraction": 0.7757148253581724,
+        "cell_unheld_mass": 0.016907746832472002,
+        "centroid_distance": 0.11629063070046668,
+        "redeploy_requested": false,
+        "redeploy_active": false,
+        "redeploy_reason": "contact_ready",
+        "redeploy_candidates": 17,
+        "cage_targets": 85,
+        "agent_rows": 10,
+        "agent_rows_active": 1,
+        "object_rows_active": 0,
+        "zero_input_feasible": false,
+        "speed_nominal": 0.31335524389572894,
+        "speed_command": 0.020585331681732797,
+        "map_centroid": [
+          3.7094400264369316,
+          5.504135782558775
+        ],
+        "cvt_centroid": [
+          4.168898580268119,
+          4.9965469449642015
+        ],
+        "redeploy_target": [
+          null,
+          null
+        ],
+        "nominal_command": [
+          0.22037472373937284,
+          0.22277003841124343
+        ],
+        "local_holding": false,
+        "safety_feedback_blocked": false,
+        "contact_role": "baseline",
+        "contact_cone_residual": null,
+        "contact_allocation": null,
+        "contact_redeploy_attempts": 0,
+        "contact_redeploy_reason": "not_enabled",
+        "contact_selected_normal": [
+          0.8805944316657114,
+          0.4738707069648247
+        ],
+        "contact_desired_direction": [
+          0.9999964290058446,
+          0.002672447484770433
+        ],
+        "contact_lateral_estimate": [
+          null,
+          null
+        ],
+        "contact_redeploy_target": [
+          null,
+          null
+        ],
+        "handoff_state": "not_enabled",
+        "handoff_donor_state": "not_enabled",
+        "handoff_partner": "",
+        "handoff_event": "not_enabled",
+        "handoff_rollback_reason": "",
+        "handoff_attempts": 0,
+        "handoff_contact_proxy": false,
+        "handoff_confirm_seconds": 0.0,
+        "handoff_release_fraction": 0.0,
+        "handoff_gap": null,
+        "handoff_motion_ok": false,
+        "handoff_local_forward_velocity": 0.0,
+        "handoff_local_lateral_velocity": 0.0,
+        "navigation_remaining": 1.179384014131035,
+        "navigation_voters": "agent_14|agent_04|agent_05|agent_06|agent_07|agent_08|agent_09|agent_10|agent_11|agent_12|agent_13",
+        "navigation_displacement": [
+          0.0006202688622693264,
+          -0.00320529079183835
+        ],
+        "navigation_error": [
+          1.1993797311377306,
+          0.00320529079183835
+        ],
+        "navigation_velocity": [
+          0.006813001518904973,
+          0.0008398048439731497
+        ],
+        "reference_status": "accepted",
+        "reference_pivot_status": "accepted",
+        "reference_pivot_rms": null,
+        "reference_support_minor_rms": 0.22068075112950047,
+        "contact_distance_source": "insufficient_patch",
+        "contact_map_gap": 0.016575510884327876,
+        "contact_used_gap": 0.016575510884327876,
+        "contact_patch_points": 0,
+        "reference_matches": 189,
+        "reference_residual_rms": 0.0044887390430235425,
+        "reference_displacement": [
+          -0.0010670514824796778,
+          -0.0006463862144896942
+        ],
+        "reference_bootstrap_offset": [
+          0.0,
+          0.0
+        ],
+        "reference_angle": 0.0,
+        "reference_velocity": [
+          0.0013053484736111295,
+          0.010146398556013368
+        ],
+        "recovery_eligible": false,
+        "reinforcement_state": "not_enabled",
+        "reinforcement_event": "not_enabled",
+        "reinforcement_attempts": 0,
+        "reinforcement_confirmed": false,
+        "reinforcement_confirm_seconds": 0.0,
+        "reinforcement_path_length": 0.0,
+        "reinforcement_gap": null,
+        "reinforcement_retain": false,
+        "reinforcement_suspended_approach": false,
+        "acquisition_support": {
+          "applied": false,
+          "reason": "outside_stationary_acquisition",
+          "stage": "fresh_reference",
+          "source_agents": []
+        },
+        "map_reference_status": "fresh_reference",
+        "map_reference_voters": [
+          "agent_14",
+          "agent_04",
+          "agent_05",
+          "agent_06",
+          "agent_07",
+          "agent_08",
+          "agent_09",
+          "agent_10",
+          "agent_11",
+          "agent_12",
+          "agent_13"
+        ],
+        "map_reference_displacement": [
+          -0.0008225320058253556,
+          0.002589250573876697
+        ],
+        "map_reference_velocity": [
+          0.006813001518904973,
+          0.0008398048439731497
+        ],
+        "map_reference_bridge": {
+          "status": "continuous",
+          "displacement": [
+            -0.0008225320058253556,
+            0.002589250573876697
+          ],
+          "velocity": [
+            0.006813001518904973,
+            0.0008398048439731497
+          ],
+          "delta": [
+            0.0002193910674867263,
+            0.0018804451520489564
+          ],
+          "voters": [
+            "agent_14",
+            "agent_04",
+            "agent_05",
+            "agent_06",
+            "agent_07",
+            "agent_08",
+            "agent_09",
+            "agent_10",
+            "agent_11",
+            "agent_12",
+            "agent_13"
+          ],
+          "common_voters": [
+            "agent_14",
+            "agent_04",
+            "agent_05",
+            "agent_06",
+            "agent_07",
+            "agent_08",
+            "agent_09",
+            "agent_10",
+            "agent_11",
+            "agent_12",
+            "agent_13"
+          ],
+          "reset_history": false,
+          "current": {
+            "agent_14": [
+              -0.0010670514824796778,
+              -0.0006463862144896942
+            ],
+            "agent_04": [
+              0.0027187551601124058,
+              0.002420638083492613
+            ],
+            "agent_05": [
+              0.0027187551601124066,
+              0.002420638083492627
+            ],
+            "agent_06": [
+              0.00035946523969393815,
+              -0.0058918606979721485
+            ],
+            "agent_07": [
+              0.0019332094597388813,
+              -0.004907447341143749
+            ],
+            "agent_08": [
+              2.998571671468118e-05,
+              -0.004536131873480606
+            ],
+            "agent_09": [
+              0.0041706063640461494,
+              -0.004301141111698423
+            ],
+            "agent_10": [
+              -0.00011636571239020127,
+              -0.0038701316802091925
+            ],
+            "agent_11": [
+              -0.0002268495701762873,
+              0.0031258189901819575
+            ],
+            "agent_12": [
+              0.0005521096394395813,
+              -0.004163110225219885
+            ],
+            "agent_13": [
+              -0.0006231904682502228,
+              0.0012877943453691186
+            ]
+          },
+          "previous": {
+            "agent_14": [
+              -0.0005201413749607783,
+              -0.0030952375161879355
+            ],
+            "agent_04": [
+              0.0002324022996624891,
+              0.0007983870995317425
+            ],
+            "agent_05": [
+              0.00023240229966248963,
+              0.0007983870995317555
+            ],
+            "agent_06": [
+              0.0019086423484081178,
+              -0.006489983762590833
+            ],
+            "agent_07": [
+              0.0017444867678958335,
+              -0.003821539105678028
+            ],
+            "agent_08": [
+              0.0013729003205751999,
+              -0.007456741701168251
+            ],
+            "agent_09": [
+              0.0016498304852935338,
+              -0.0033264728175654104
+            ],
+            "agent_10": [
+              0.0011480503713079421,
+              -0.007180537938682544
+            ],
+            "agent_11": [
+              -0.002192362523690673,
+              0.0007313172027861568
+            ],
+            "agent_12": [
+              0.0014781068764820708,
+              -0.005563990723227875
+            ],
+            "agent_13": [
+              -0.001159807020023438,
+              -0.0011083666845273878
+            ]
+          },
+          "raw_displacement": [
+            0.0006202688622693264,
+            -0.00320529079183835
+          ],
+          "discarded_cells": 0,
+          "retained_cells_before_alignment": 83
+        },
+        "pair_safety": {
+          "eligible": false,
+          "reason": "outside_stationary_acquisition"
+        }
+      }
+    },
+    {
+      "case_id": "far_skew_box_s0_r0_pos0_map_bridge_candidate",
+      "saved_frame": 474,
+      "agent_id": "agent_14",
+      "phase": "ENCLOSE",
+      "capture_state": "frozen",
+      "true_gap_m": 0.16233894857514541,
+      "true_displacement": [
+        0.0,
+        0.0
+      ],
+      "map_displacement_error_m": [
+        0.0008134521918500594,
+        0.0015929528470323903
+      ],
+      "raw_aggregate_error_m": [
+        0.0013175645598301193,
+        -0.0015931926214925857
+      ],
+      "map_displacement_error_norm_m": 0.001788631667307236,
+      "true_angle_rad": 0.0,
+      "diagnostic": {
+        "agent_id": "agent_14",
+        "mode": "cage",
+        "cell_mass": 0.07993317125279203,
+        "object_rows": 1,
+        "contact_ready": true,
+        "push_side": false,
+        "solver_status": "scaled_barrier",
+        "modification": 0.30736919343843394,
+        "effort": 0.0,
+        "progress": 0.0010086807178940795,
+        "map_points": 87,
+        "direct_visible": true,
+        "own_scan_points": 11,
+        "boundary_distance": 0.16829437141907208,
+        "token_distance": 0.8000671911046439,
+        "map_angular_coverage": 0.8611111111111112,
+        "cell_held_fraction": 0.7805956133494497,
+        "cell_unheld_mass": 0.017537688411752236,
+        "centroid_distance": 0.12190346993095637,
+        "redeploy_requested": false,
+        "redeploy_active": false,
+        "redeploy_reason": "contact_ready",
+        "redeploy_candidates": 16,
+        "cage_targets": 87,
+        "agent_rows": 10,
+        "agent_rows_active": 1,
+        "object_rows_active": 0,
+        "zero_input_feasible": false,
+        "speed_nominal": 0.31884501896429124,
+        "speed_command": 0.015590585511258645,
+        "map_centroid": [
+          3.715104455678117,
+          5.512249836728897
+        ],
+        "cvt_centroid": [
+          4.169346222938426,
+          5.005778247364086
+        ],
+        "redeploy_target": [
+          null,
+          null
+        ],
+        "nominal_command": [
+          0.21986600744035267,
+          0.2309135874966608
+        ],
+        "local_holding": false,
+        "safety_feedback_blocked": false,
+        "contact_role": "baseline",
+        "contact_cone_residual": null,
+        "contact_allocation": null,
+        "contact_redeploy_attempts": 0,
+        "contact_redeploy_reason": "not_enabled",
+        "contact_selected_normal": [
+          0.8805944316657114,
+          0.4738707069648247
+        ],
+        "contact_desired_direction": [
+          0.9999991167213795,
+          0.0013291186782715865
+        ],
+        "contact_lateral_estimate": [
+          null,
+          null
+        ],
+        "contact_redeploy_target": [
+          null,
+          null
+        ],
+        "handoff_state": "not_enabled",
+        "handoff_donor_state": "not_enabled",
+        "handoff_partner": "",
+        "handoff_event": "not_enabled",
+        "handoff_rollback_reason": "",
+        "handoff_attempts": 0,
+        "handoff_contact_proxy": false,
+        "handoff_confirm_seconds": 0.0,
+        "handoff_release_fraction": 0.0,
+        "handoff_gap": null,
+        "handoff_motion_ok": false,
+        "handoff_local_forward_velocity": 0.0,
+        "handoff_local_lateral_velocity": 0.0,
+        "navigation_remaining": 1.178683494211673,
+        "navigation_voters": "agent_14|agent_04|agent_05|agent_06|agent_07|agent_08|agent_09|agent_10|agent_11|agent_12|agent_13",
+        "navigation_displacement": [
+          0.0013175645598301193,
+          -0.0015931926214925857
+        ],
+        "navigation_error": [
+          1.19868243544017,
+          0.0015931926214925857
+        ],
+        "navigation_velocity": [
+          0.012196380891981875,
+          0.00033708395011568297
+        ],
+        "reference_status": "accepted",
+        "reference_pivot_status": "accepted",
+        "reference_pivot_rms": null,
+        "reference_support_minor_rms": 0.2280484722207255,
+        "contact_distance_source": "insufficient_patch",
+        "contact_map_gap": 0.016585605586022227,
+        "contact_used_gap": 0.016585605586022227,
+        "contact_patch_points": 0,
+        "reference_matches": 203,
+        "reference_residual_rms": 0.004995351608500726,
+        "reference_displacement": [
+          0.0013175645517319835,
+          -0.0015931926133901195
+        ],
+        "reference_bootstrap_offset": [
+          0.0,
+          0.0
+        ],
+        "reference_angle": 0.0,
+        "reference_velocity": [
+          0.017540788747328624,
+          -3.248573089419289e-05
+        ],
+        "recovery_eligible": false,
+        "reinforcement_state": "not_enabled",
+        "reinforcement_event": "not_enabled",
+        "reinforcement_attempts": 0,
+        "reinforcement_confirmed": false,
+        "reinforcement_confirm_seconds": 0.0,
+        "reinforcement_path_length": 0.0,
+        "reinforcement_gap": null,
+        "reinforcement_retain": false,
+        "reinforcement_suspended_approach": false,
+        "acquisition_support": {
+          "applied": false,
+          "reason": "outside_stationary_acquisition",
+          "stage": "fresh_reference",
+          "source_agents": []
+        },
+        "map_reference_status": "fresh_reference",
+        "map_reference_voters": [
+          "agent_14",
+          "agent_04",
+          "agent_05",
+          "agent_06",
+          "agent_07",
+          "agent_08",
+          "agent_09",
+          "agent_10",
+          "agent_11",
+          "agent_12",
+          "agent_13"
+        ],
+        "map_reference_displacement": [
+          0.0008134521918500594,
+          0.0015929528470323903
+        ],
+        "map_reference_velocity": [
+          0.012196380891981875,
+          0.00033708395011568297
+        ],
+        "map_reference_bridge": {
+          "status": "continuous",
+          "displacement": [
+            0.0008134521918500594,
+            0.0015929528470323903
+          ],
+          "velocity": [
+            0.012196380891981875,
+            0.00033708395011568297
+          ],
+          "delta": [
+            0.001635984197675415,
+            -0.0009962977268443067
+          ],
+          "voters": [
+            "agent_14",
+            "agent_04",
+            "agent_05",
+            "agent_06",
+            "agent_07",
+            "agent_08",
+            "agent_09",
+            "agent_10",
+            "agent_11",
+            "agent_12",
+            "agent_13"
+          ],
+          "common_voters": [
+            "agent_14",
+            "agent_04",
+            "agent_05",
+            "agent_06",
+            "agent_07",
+            "agent_08",
+            "agent_09",
+            "agent_10",
+            "agent_11",
+            "agent_12",
+            "agent_13"
+          ],
+          "reset_history": false,
+          "current": {
+            "agent_14": [
+              0.0013175645517319835,
+              -0.0015931926133901195
+            ],
+            "agent_04": [
+              0.0002842400103329807,
+              0.005485966813163346
+            ],
+            "agent_05": [
+              0.00028424001033298084,
+              0.00548596681316336
+            ],
+            "agent_06": [
+              0.002574345253884765,
+              -0.007598362429762703
+            ],
+            "agent_07": [
+              0.0015319704032995059,
+              -0.0033878479568706216
+            ],
+            "agent_08": [
+              0.0033183546330662382,
+              -0.00746584690845372
+            ],
+            "agent_09": [
+              0.001254515135336593,
+              -0.0006393046477382956
+            ],
+            "agent_10": [
+              0.0018704358447379549,
+              -0.004274517602121462
+            ],
+            "agent_11": [
+              -0.0005816130829697227,
+              0.0010336734225084292
+            ],
+            "agent_12": [
+              0.002397634154781323,
+              -0.005718773480680968
+            ],
+            "agent_13": [
+              0.001193666842080055,
+              -3.905057084606337e-05
+            ]
+          },
+          "previous": {
+            "agent_14": [
+              -0.0010670514824796778,
+              -0.0006463862144896942
+            ],
+            "agent_04": [
+              0.0027187551601124058,
+              0.002420638083492613
+            ],
+            "agent_05": [
+              0.0027187551601124066,
+              0.002420638083492627
+            ],
+            "agent_06": [
+              0.00035946523969393815,
+              -0.0058918606979721485
+            ],
+            "agent_07": [
+              0.0019332094597388813,
+              -0.004907447341143749
+            ],
+            "agent_08": [
+              2.998571671468118e-05,
+              -0.004536131873480606
+            ],
+            "agent_09": [
+              0.0041706063640461494,
+              -0.004301141111698423
+            ],
+            "agent_10": [
+              -0.00011636571239020127,
+              -0.0038701316802091925
+            ],
+            "agent_11": [
+              -0.0002268495701762873,
+              0.0031258189901819575
+            ],
+            "agent_12": [
+              0.0005521096394395813,
+              -0.004163110225219885
+            ],
+            "agent_13": [
+              -0.0006231904682502228,
+              0.0012877943453691186
+            ]
+          },
+          "raw_displacement": [
+            0.0013175645598301193,
+            -0.0015931926214925857
+          ],
+          "discarded_cells": 0,
+          "retained_cells_before_alignment": 85
+        },
+        "pair_safety": {
+          "eligible": false,
+          "reason": "outside_stationary_acquisition"
+        }
+      }
+    },
+    {
+      "case_id": "far_skew_box_s0_r0_pos0_map_bridge_candidate",
+      "saved_frame": 475,
+      "agent_id": "agent_14",
+      "phase": "ENCLOSE",
+      "capture_state": "frozen",
+      "true_gap_m": 0.16279205014352366,
+      "true_displacement": [
+        0.0,
+        0.0
+      ],
+      "map_displacement_error_m": [
+        -0.0003511428911997254,
+        0.002593489778337293
+      ],
+      "raw_aggregate_error_m": [
+        7.8212164744015e-05,
+        -0.0012068927721586632
+      ],
+      "map_displacement_error_norm_m": 0.002617153140414241,
+      "true_angle_rad": 0.0,
+      "diagnostic": {
+        "agent_id": "agent_14",
+        "mode": "cage",
+        "cell_mass": 0.05591094468256897,
+        "object_rows": 1,
+        "contact_ready": true,
+        "push_side": false,
+        "solver_status": "scaled_barrier",
+        "modification": 0.3181912475628781,
+        "effort": 0.0,
+        "progress": -0.00043541718508764775,
+        "map_points": 87,
+        "direct_visible": true,
+        "own_scan_points": 6,
+        "boundary_distance": 0.1701582471792745,
+        "token_distance": 0.8019703789749342,
+        "map_angular_coverage": 0.8333333333333334,
+        "cell_held_fraction": 0.7874825129060082,
+        "cell_unheld_mass": 0.011882053464990739,
+        "centroid_distance": 0.06527669949212671,
+        "redeploy_requested": false,
+        "redeploy_active": false,
+        "redeploy_reason": "contact_ready",
+        "redeploy_candidates": 16,
+        "cage_targets": 87,
+        "agent_rows": 10,
+        "agent_rows_active": 2,
+        "object_rows_active": 0,
+        "zero_input_feasible": false,
+        "speed_nominal": 0.3275728111266896,
+        "speed_command": 0.012569776225754217,
+        "map_centroid": [
+          3.7136658893533383,
+          5.512829596764538
+        ],
+        "cvt_centroid": [
+          4.214646105307432,
+          4.9707622708486525
+        ],
+        "redeploy_target": [
+          null,
+          null
+        ],
+        "nominal_command": [
+          0.2599367438132868,
+          0.1993410038230659
+        ],
+        "local_holding": false,
+        "safety_feedback_blocked": false,
+        "contact_role": "baseline",
+        "contact_cone_residual": null,
+        "contact_allocation": null,
+        "contact_redeploy_attempts": 0,
+        "contact_redeploy_reason": "not_enabled",
+        "contact_selected_normal": [
+          0.8805944316657114,
+          0.4738707069648247
+        ],
+        "contact_desired_direction": [
+          0.9999994941739763,
+          0.0010058090234849476
+        ],
+        "contact_lateral_estimate": [
+          null,
+          null
+        ],
+        "contact_redeploy_target": [
+          null,
+          null
+        ],
+        "handoff_state": "not_enabled",
+        "handoff_donor_state": "not_enabled",
+        "handoff_partner": "",
+        "handoff_event": "not_enabled",
+        "handoff_rollback_reason": "",
+        "handoff_attempts": 0,
+        "handoff_contact_proxy": false,
+        "handoff_confirm_seconds": 0.0,
+        "handoff_release_fraction": 0.0,
+        "handoff_gap": null,
+        "handoff_motion_ok": false,
+        "handoff_local_forward_velocity": 0.0,
+        "handoff_local_lateral_velocity": 0.0,
+        "navigation_remaining": 1.1799223947872297,
+        "navigation_voters": "agent_14|agent_04|agent_05|agent_06|agent_07|agent_08|agent_09|agent_10|agent_11|agent_12|agent_13",
+        "navigation_displacement": [
+          7.8212164744015e-05,
+          -0.0012068927721586632
+        ],
+        "navigation_error": [
+          1.199921787835256,
+          0.0012068927721586632
+        ],
+        "navigation_velocity": [
+          -0.0024486848442224506,
+          0.014470413907901778
+        ],
+        "reference_status": "accepted",
+        "reference_pivot_status": "accepted",
+        "reference_pivot_rms": null,
+        "reference_support_minor_rms": 0.22617411663319006,
+        "contact_distance_source": "insufficient_patch",
+        "contact_map_gap": 0.017851745259325584,
+        "contact_used_gap": 0.017851745259325584,
+        "contact_patch_points": 0,
+        "reference_matches": 199,
+        "reference_residual_rms": 0.005346992330543032,
+        "reference_displacement": [
+          0.0014594687979263864,
+          -0.00031598541907418493
+        ],
+        "reference_bootstrap_offset": [
+          0.0,
+          0.0
+        ],
+        "reference_angle": 0.0,
+        "reference_velocity": [
+          0.012394842409124413,
+          0.00891933463513019
+        ],
+        "recovery_eligible": false,
+        "reinforcement_state": "not_enabled",
+        "reinforcement_event": "not_enabled",
+        "reinforcement_attempts": 0,
+        "reinforcement_confirmed": false,
+        "reinforcement_confirm_seconds": 0.0,
+        "reinforcement_path_length": 0.0,
+        "reinforcement_gap": null,
+        "reinforcement_retain": false,
+        "reinforcement_suspended_approach": false,
+        "acquisition_support": {
+          "applied": false,
+          "reason": "outside_stationary_acquisition",
+          "stage": "fresh_reference",
+          "source_agents": []
+        },
+        "map_reference_status": "fresh_reference",
+        "map_reference_voters": [
+          "agent_14",
+          "agent_04",
+          "agent_05",
+          "agent_06",
+          "agent_07",
+          "agent_08",
+          "agent_09",
+          "agent_10",
+          "agent_11",
+          "agent_12",
+          "agent_13"
+        ],
+        "map_reference_displacement": [
+          -0.0003511428911997254,
+          0.002593489778337293
+        ],
+        "map_reference_velocity": [
+          -0.0024486848442224506,
+          0.014470413907901778
+        ],
+        "map_reference_bridge": {
+          "status": "continuous",
+          "displacement": [
+            -0.0003511428911997254,
+            0.002593489778337293
+          ],
+          "velocity": [
+            -0.0024486848442224506,
+            0.014470413907901778
+          ],
+          "delta": [
+            -0.0011645950830497848,
+            0.0010005369313049028
+          ],
+          "voters": [
+            "agent_14",
+            "agent_04",
+            "agent_05",
+            "agent_06",
+            "agent_07",
+            "agent_08",
+            "agent_09",
+            "agent_10",
+            "agent_11",
+            "agent_12",
+            "agent_13"
+          ],
+          "common_voters": [
+            "agent_14",
+            "agent_04",
+            "agent_05",
+            "agent_06",
+            "agent_07",
+            "agent_08",
+            "agent_09",
+            "agent_10",
+            "agent_11",
+            "agent_12",
+            "agent_13"
+          ],
+          "reset_history": false,
+          "current": {
+            "agent_14": [
+              0.0014594687979263864,
+              -0.00031598541907418493
+            ],
+            "agent_04": [
+              3.7248514941578554e-05,
+              0.00498091871882248
+            ],
+            "agent_05": [
+              3.724851494157863e-05,
+              0.004980918718822492
+            ],
+            "agent_06": [
+              -0.0003140414375525593,
+              -0.0025073688763320944
+            ],
+            "agent_07": [
+              0.001214372059859169,
+              -0.003386128413998451
+            ],
+            "agent_08": [
+              0.00014901616079185503,
+              -0.0025434089237863847
+            ],
+            "agent_09": [
+              -0.0014113742342046322,
+              -8.339260615935898e-06
+            ],
+            "agent_10": [
+              0.0007022405298780356,
+              -0.0018208642266339323
+            ],
+            "agent_11": [
+              -0.0013939007730322912,
+              0.00036467344241525724
+            ],
+            "agent_12": [
+              0.000983282028636599,
+              -0.0024557406559986344
+            ],
+            "agent_13": [
+              -0.002478236414379439,
+              9.96253770555988e-05
+            ]
+          },
+          "previous": {
+            "agent_14": [
+              0.0013175645517319835,
+              -0.0015931926133901195
+            ],
+            "agent_04": [
+              0.0002842400103329807,
+              0.005485966813163346
+            ],
+            "agent_05": [
+              0.00028424001033298084,
+              0.00548596681316336
+            ],
+            "agent_06": [
+              0.002574345253884765,
+              -0.007598362429762703
+            ],
+            "agent_07": [
+              0.0015319704032995059,
+              -0.0033878479568706216
+            ],
+            "agent_08": [
+              0.0033183546330662382,
+              -0.00746584690845372
+            ],
+            "agent_09": [
+              0.001254515135336593,
+              -0.0006393046477382956
+            ],
+            "agent_10": [
+              0.0018704358447379549,
+              -0.004274517602121462
+            ],
+            "agent_11": [
+              -0.0005816130829697227,
+              0.0010336734225084292
+            ],
+            "agent_12": [
+              0.002397634154781323,
+              -0.005718773480680968
+            ],
+            "agent_13": [
+              0.001193666842080055,
+              -3.905057084606337e-05
+            ]
+          },
+          "raw_displacement": [
+            7.8212164744015e-05,
+            -0.0012068927721586632
+          ],
+          "discarded_cells": 0,
+          "retained_cells_before_alignment": 87
+        },
+        "pair_safety": {
+          "eligible": false,
+          "reason": "outside_stationary_acquisition"
+        }
+      }
+    },
+    {
+      "case_id": "far_skew_box_s0_r0_pos0_map_bridge_candidate",
+      "saved_frame": 476,
+      "agent_id": "agent_14",
+      "phase": "ENCLOSE",
+      "capture_state": "frozen",
+      "true_gap_m": 0.16322857011930764,
+      "true_displacement": [
+        0.0,
+        0.0
+      ],
+      "map_displacement_error_m": [
+        0.000280115844867438,
+        0.0012228368631713338
+      ],
+      "raw_aggregate_error_m": [
+        0.00023031787603802187,
+        -0.0008867369955998863
+      ],
+      "map_displacement_error_norm_m": 0.001254509816811533,
+      "true_angle_rad": 0.0,
+      "diagnostic": {
+        "agent_id": "agent_14",
+        "mode": "cage",
+        "cell_mass": 0.06707921391763715,
+        "object_rows": 1,
+        "contact_ready": true,
+        "push_side": false,
+        "solver_status": "scaled_barrier",
+        "modification": 0.31481947705680585,
+        "effort": 0.0,
+        "progress": 0.000347343647635629,
+        "map_points": 87,
+        "direct_visible": true,
+        "own_scan_points": 10,
+        "boundary_distance": 0.17013987816859136,
+        "token_distance": 0.8012052521944805,
+        "map_angular_coverage": 0.8333333333333334,
+        "cell_held_fraction": 0.7899344363833971,
+        "cell_unheld_mass": 0.014091032878567118,
+        "centroid_distance": 0.10851646106099337,
+        "redeploy_requested": false,
+        "redeploy_active": false,
+        "redeploy_reason": "contact_ready",
+        "redeploy_candidates": 16,
+        "cage_targets": 87,
+        "agent_rows": 10,
+        "agent_rows_active": 1,
+        "object_rows_active": 0,
+        "zero_input_feasible": false,
+        "speed_nominal": 0.3207937360949263,
+        "speed_command": 0.010224811465681287,
+        "map_centroid": [
+          3.714304809121535,
+          5.511742589694681
+        ],
+        "cvt_centroid": [
+          4.182543792394138,
+          4.999220877530049
+        ],
+        "redeploy_target": [
+          null,
+          null
+        ],
+        "nominal_command": [
+          0.23267693023907388,
+          0.22083946036037658
+        ],
+        "local_holding": false,
+        "safety_feedback_blocked": false,
+        "contact_role": "baseline",
+        "contact_cone_residual": null,
+        "contact_allocation": null,
+        "contact_redeploy_attempts": 0,
+        "contact_redeploy_reason": "not_enabled",
+        "contact_selected_normal": [
+          0.8868711489970255,
+          0.462016845014006
+        ],
+        "contact_desired_direction": [
+          0.9999997268735776,
+          0.0007390891490429946
+        ],
+        "contact_lateral_estimate": [
+          null,
+          null
+        ],
+        "contact_redeploy_target": [
+          null,
+          null
+        ],
+        "handoff_state": "not_enabled",
+        "handoff_donor_state": "not_enabled",
+        "handoff_partner": "",
+        "handoff_event": "not_enabled",
+        "handoff_rollback_reason": "",
+        "handoff_attempts": 0,
+        "handoff_contact_proxy": false,
+        "handoff_confirm_seconds": 0.0,
+        "handoff_release_fraction": 0.0,
+        "handoff_gap": null,
+        "handoff_motion_ok": false,
+        "handoff_local_forward_velocity": 0.0,
+        "handoff_local_lateral_velocity": 0.0,
+        "navigation_remaining": 1.1797700098128523,
+        "navigation_voters": "agent_14|agent_04|agent_05|agent_06|agent_07|agent_08|agent_09|agent_10|agent_11|agent_12|agent_13",
+        "navigation_displacement": [
+          0.00023031787603802187,
+          -0.0008867369955998863
+        ],
+        "navigation_error": [
+          1.1997696821239618,
+          0.0008867369955998863
+        ],
+        "navigation_velocity": [
+          -0.0008362077476200641,
+          0.0005584096713571442
+        ],
+        "reference_status": "accepted",
+        "reference_pivot_status": "accepted",
+        "reference_pivot_rms": null,
+        "reference_support_minor_rms": 0.22745354088000627,
+        "contact_distance_source": "insufficient_patch",
+        "contact_map_gap": 0.020302422565640958,
+        "contact_used_gap": 0.020302422565640958,
+        "contact_patch_points": 0,
+        "reference_matches": 181,
+        "reference_residual_rms": 0.0038050261045263706,
+        "reference_displacement": [
+          0.002721673610941571,
+          -0.003278887499493043
+        ],
+        "reference_bootstrap_offset": [
+          0.0,
+          0.0
+        ],
+        "reference_angle": 0.0,
+        "reference_velocity": [
+          0.016892081257037034,
+          -0.014942747050097082
+        ],
+        "recovery_eligible": false,
+        "reinforcement_state": "not_enabled",
+        "reinforcement_event": "not_enabled",
+        "reinforcement_attempts": 0,
+        "reinforcement_confirmed": false,
+        "reinforcement_confirm_seconds": 0.0,
+        "reinforcement_path_length": 0.0,
+        "reinforcement_gap": null,
+        "reinforcement_retain": false,
+        "reinforcement_suspended_approach": false,
+        "acquisition_support": {
+          "applied": false,
+          "reason": "outside_stationary_acquisition",
+          "stage": "fresh_reference",
+          "source_agents": []
+        },
+        "map_reference_status": "fresh_reference",
+        "map_reference_voters": [
+          "agent_14",
+          "agent_04",
+          "agent_05",
+          "agent_06",
+          "agent_07",
+          "agent_08",
+          "agent_09",
+          "agent_10",
+          "agent_11",
+          "agent_12",
+          "agent_13"
+        ],
+        "map_reference_displacement": [
+          0.000280115844867438,
+          0.0012228368631713338
+        ],
+        "map_reference_velocity": [
+          -0.0008362077476200641,
+          0.0005584096713571442
+        ],
+        "map_reference_bridge": {
+          "status": "continuous",
+          "displacement": [
+            0.000280115844867438,
+            0.0012228368631713338
+          ],
+          "velocity": [
+            -0.0008362077476200641,
+            0.0005584096713571442
+          ],
+          "delta": [
+            0.0006312587360671634,
+            -0.0013706529151659593
+          ],
+          "voters": [
+            "agent_14",
+            "agent_04",
+            "agent_05",
+            "agent_06",
+            "agent_07",
+            "agent_08",
+            "agent_09",
+            "agent_10",
+            "agent_11",
+            "agent_12",
+            "agent_13"
+          ],
+          "common_voters": [
+            "agent_14",
+            "agent_04",
+            "agent_05",
+            "agent_06",
+            "agent_07",
+            "agent_08",
+            "agent_09",
+            "agent_10",
+            "agent_11",
+            "agent_12",
+            "agent_13"
+          ],
+          "reset_history": false,
+          "current": {
+            "agent_14": [
+              0.002721673610941571,
+              -0.003278887499493043
+            ],
+            "agent_04": [
+              0.002753419372778472,
+              -0.0010569806714551956
+            ],
+            "agent_05": [
+              0.002753419372778473,
+              -0.0010569806714551874
+            ],
+            "agent_06": [
+              -0.00012547377351485397,
+              -0.0004498446185409998
+            ],
+            "agent_07": [
+              0.0004949728575017751,
+              -0.002248371428619009
+            ],
+            "agent_08": [
+              -0.000811928672427001,
+              0.0004203952973314752
+            ],
+            "agent_09": [
+              -0.001156176062965268,
+              -0.002454794118878771
+            ],
+            "agent_10": [
+              0.0002657196599330467,
+              -0.0003168717192955565
+            ],
+            "agent_11": [
+              -0.00037501762649747635,
+              -0.001020912897709589
+            ],
+            "agent_12": [
+              0.0006404610569138185,
+              -0.0006885930465043525
+            ],
+            "agent_13": [
+              -0.0018686513719576526,
+              -0.0013509437117151832
+            ]
+          },
+          "previous": {
+            "agent_14": [
+              0.0014594687979263864,
+              -0.00031598541907418493
+            ],
+            "agent_04": [
+              3.7248514941578554e-05,
+              0.00498091871882248
+            ],
+            "agent_05": [
+              3.724851494157863e-05,
+              0.004980918718822492
+            ],
+            "agent_06": [
+              -0.0003140414375525593,
+              -0.0025073688763320944
+            ],
+            "agent_07": [
+              0.001214372059859169,
+              -0.003386128413998451
+            ],
+            "agent_08": [
+              0.00014901616079185503,
+              -0.0025434089237863847
+            ],
+            "agent_09": [
+              -0.0014113742342046322,
+              -8.339260615935898e-06
+            ],
+            "agent_10": [
+              0.0007022405298780356,
+              -0.0018208642266339323
+            ],
+            "agent_11": [
+              -0.0013939007730322912,
+              0.00036467344241525724
+            ],
+            "agent_12": [
+              0.000983282028636599,
+              -0.0024557406559986344
+            ],
+            "agent_13": [
+              -0.002478236414379439,
+              9.96253770555988e-05
+            ]
+          },
+          "raw_displacement": [
+            0.00023031787603802187,
+            -0.0008867369955998863
+          ],
+          "discarded_cells": 0,
+          "retained_cells_before_alignment": 87
+        },
+        "pair_safety": {
+          "eligible": false,
+          "reason": "outside_stationary_acquisition"
+        }
+      }
+    },
+    {
+      "case_id": "far_skew_box_s0_r0_pos0_map_bridge_candidate",
+      "saved_frame": 477,
+      "agent_id": "agent_14",
+      "phase": "ENCLOSE",
+      "capture_state": "frozen",
+      "true_gap_m": 0.16362375142754854,
+      "true_displacement": [
+        0.0,
+        0.0
+      ],
+      "map_displacement_error_m": [
+        0.0032156961275996683,
+        0.0012989673110656462
+      ],
+      "raw_aggregate_error_m": [
+        0.004025673738577245,
+        -0.0006451156344305826
+      ],
+      "map_displacement_error_norm_m": 0.003468143258326654,
+      "true_angle_rad": 0.0,
+      "diagnostic": {
+        "agent_id": "agent_14",
+        "mode": "cage",
+        "cell_mass": 0.07291535464445609,
+        "object_rows": 1,
+        "contact_ready": true,
+        "push_side": false,
+        "solver_status": "scaled_barrier",
+        "modification": 0.32165941224324135,
+        "effort": 0.0,
+        "progress": 0.003987463198223601,
+        "map_points": 84,
+        "direct_visible": true,
+        "own_scan_points": 11,
+        "boundary_distance": 0.1689160078862466,
+        "token_distance": 0.803464349850512,
+        "map_angular_coverage": 0.8333333333333334,
+        "cell_held_fraction": 0.7934676580605635,
+        "cell_unheld_mass": 0.015059378958064078,
+        "centroid_distance": 0.1190795376393558,
+        "redeploy_requested": false,
+        "redeploy_active": false,
+        "redeploy_reason": "contact_ready",
+        "redeploy_candidates": 16,
+        "cage_targets": 84,
+        "agent_rows": 10,
+        "agent_rows_active": 1,
+        "object_rows_active": 0,
+        "zero_input_feasible": false,
+        "speed_nominal": 0.32575179673233795,
+        "speed_command": 0.006755069456923457,
+        "map_centroid": [
+          3.7121781900491766,
+          5.51225956609592
+        ],
+        "cvt_centroid": [
+          4.179097146786609,
+          5.011037572808007
+        ],
+        "redeploy_target": [
+          null,
+          null
+        ],
+        "nominal_command": [
+          0.2291218197588068,
+          0.23155436680131786
+        ],
+        "local_holding": false,
+        "safety_feedback_blocked": false,
+        "contact_role": "baseline",
+        "contact_cone_residual": null,
+        "contact_allocation": null,
+        "contact_redeploy_attempts": 0,
+        "contact_redeploy_reason": "not_enabled",
+        "contact_selected_normal": [
+          0.8868711489970253,
+          0.46201684501400586
+        ],
+        "contact_desired_direction": [
+          0.9999998545206574,
+          0.000539405843766057
+        ],
+        "contact_lateral_estimate": [
+          null,
+          null
+        ],
+        "contact_redeploy_target": [
+          null,
+          null
+        ],
+        "handoff_state": "not_enabled",
+        "handoff_donor_state": "not_enabled",
+        "handoff_partner": "",
+        "handoff_event": "not_enabled",
+        "handoff_rollback_reason": "",
+        "handoff_attempts": 0,
+        "handoff_contact_proxy": false,
+        "handoff_confirm_seconds": 0.0,
+        "handoff_release_fraction": 0.0,
+        "handoff_gap": null,
+        "handoff_motion_ok": false,
+        "handoff_local_forward_velocity": 0.0,
+        "handoff_local_lateral_velocity": 0.0,
+        "navigation_remaining": 1.1759745002510067,
+        "navigation_voters": "agent_14|agent_04|agent_05|agent_06|agent_07|agent_08|agent_09|agent_10|agent_11|agent_12|agent_13",
+        "navigation_displacement": [
+          0.004025673738577245,
+          -0.0006451156344305826
+        ],
+        "navigation_error": [
+          1.1959743262614226,
+          0.0006451156344305826
+        ],
+        "navigation_velocity": [
+          0.023170416454626048,
+          0.005948597243352115
+        ],
+        "reference_status": "accepted",
+        "reference_pivot_status": "accepted",
+        "reference_pivot_rms": null,
+        "reference_support_minor_rms": 0.2310447124439441,
+        "contact_distance_source": "insufficient_patch",
+        "contact_map_gap": 0.01806927999863542,
+        "contact_used_gap": 0.01806927999863542,
+        "contact_patch_points": 0,
+        "reference_matches": 190,
+        "reference_residual_rms": 0.003823242226556204,
+        "reference_displacement": [
+          0.005266075381363487,
+          -0.0004903772292486411
+        ],
+        "reference_bootstrap_offset": [
+          0.0,
+          0.0
+        ],
+        "reference_angle": 0.0,
+        "reference_velocity": [
+          0.02879066521002723,
+          0.009806786309147435
+        ],
+        "recovery_eligible": false,
+        "reinforcement_state": "not_enabled",
+        "reinforcement_event": "not_enabled",
+        "reinforcement_attempts": 0,
+        "reinforcement_confirmed": false,
+        "reinforcement_confirm_seconds": 0.0,
+        "reinforcement_path_length": 0.0,
+        "reinforcement_gap": null,
+        "reinforcement_retain": false,
+        "reinforcement_suspended_approach": false,
+        "acquisition_support": {
+          "applied": false,
+          "reason": "outside_stationary_acquisition",
+          "stage": "fresh_reference",
+          "source_agents": []
+        },
+        "map_reference_status": "fresh_reference",
+        "map_reference_voters": [
+          "agent_14",
+          "agent_04",
+          "agent_05",
+          "agent_06",
+          "agent_07",
+          "agent_08",
+          "agent_09",
+          "agent_10",
+          "agent_11",
+          "agent_12",
+          "agent_13"
+        ],
+        "map_reference_displacement": [
+          0.0032156961275996683,
+          0.0012989673110656462
+        ],
+        "map_reference_velocity": [
+          0.023170416454626048,
+          0.005948597243352115
+        ],
+        "map_reference_bridge": {
+          "status": "continuous",
+          "displacement": [
+            0.0032156961275996683,
+            0.0012989673110656462
+          ],
+          "velocity": [
+            0.023170416454626048,
+            0.005948597243352115
+          ],
+          "delta": [
+            0.00293558028273223,
+            7.613044789431241e-05
+          ],
+          "voters": [
+            "agent_14",
+            "agent_04",
+            "agent_05",
+            "agent_06",
+            "agent_07",
+            "agent_08",
+            "agent_09",
+            "agent_10",
+            "agent_11",
+            "agent_12",
+            "agent_13"
+          ],
+          "common_voters": [
+            "agent_14",
+            "agent_04",
+            "agent_05",
+            "agent_06",
+            "agent_07",
+            "agent_08",
+            "agent_09",
+            "agent_10",
+            "agent_11",
+            "agent_12",
+            "agent_13"
+          ],
+          "reset_history": false,
+          "current": {
+            "agent_14": [
+              0.005266075381363487,
+              -0.0004903772292486411
+            ],
+            "agent_04": [
+              0.005688999402187437,
+              -0.0009808546506989125
+            ],
+            "agent_05": [
+              0.005688999402187438,
+              -0.000980854650698904
+            ],
+            "agent_06": [
+              0.005097439358810597,
+              -0.0018796345657153025
+            ],
+            "agent_07": [
+              0.003907388697059197,
+              -0.00010339118495356967
+            ],
+            "agent_08": [
+              0.0023596929515157525,
+              -6.851486730536104e-05
+            ],
+            "agent_09": [
+              0.0015291086308184098,
+              -0.0019281204435895169
+            ],
+            "agent_10": [
+              0.004983973744901507,
+              -0.001956577973650616
+            ],
+            "agent_11": [
+              -0.0005367725649412907,
+              0.00019640446221602212
+            ],
+            "agent_12": [
+              0.003911992045653071,
+              -3.426133203028722e-05
+            ],
+            "agent_13": [
+              0.00018821962026961626,
+              -0.0013352578145349144
+            ]
+          },
+          "previous": {
+            "agent_14": [
+              0.002721673610941571,
+              -0.003278887499493043
+            ],
+            "agent_04": [
+              0.002753419372778472,
+              -0.0010569806714551956
+            ],
+            "agent_05": [
+              0.002753419372778473,
+              -0.0010569806714551874
+            ],
+            "agent_06": [
+              -0.00012547377351485397,
+              -0.0004498446185409998
+            ],
+            "agent_07": [
+              0.0004949728575017751,
+              -0.002248371428619009
+            ],
+            "agent_08": [
+              -0.000811928672427001,
+              0.0004203952973314752
+            ],
+            "agent_09": [
+              -0.001156176062965268,
+              -0.002454794118878771
+            ],
+            "agent_10": [
+              0.0002657196599330467,
+              -0.0003168717192955565
+            ],
+            "agent_11": [
+              -0.00037501762649747635,
+              -0.001020912897709589
+            ],
+            "agent_12": [
+              0.0006404610569138185,
+              -0.0006885930465043525
+            ],
+            "agent_13": [
+              -0.0018686513719576526,
+              -0.0013509437117151832
+            ]
+          },
+          "raw_displacement": [
+            0.004025673738577245,
+            -0.0006451156344305826
+          ],
+          "discarded_cells": 0,
+          "retained_cells_before_alignment": 87
+        },
+        "pair_safety": {
+          "eligible": false,
+          "reason": "outside_stationary_acquisition"
+        }
+      }
+    },
+    {
+      "case_id": "far_skew_box_s0_r0_pos0_map_bridge_candidate",
+      "saved_frame": 478,
+      "agent_id": "agent_14",
+      "phase": "ENCLOSE",
+      "capture_state": "frozen",
+      "true_gap_m": 0.16387339265142806,
+      "true_displacement": [
+        0.0,
+        0.0
+      ],
+      "map_displacement_error_m": [
+        0.001903153405067207,
+        0.0015759736282960173
+      ],
+      "raw_aggregate_error_m": [
+        0.002217363937897091,
+        -0.00022541441559998317
+      ],
+      "map_displacement_error_norm_m": 0.00247096858747808,
+      "true_angle_rad": 0.0,
+      "diagnostic": {
+        "agent_id": "agent_14",
+        "mode": "cage",
+        "cell_mass": 0.07634871344415371,
+        "object_rows": 1,
+        "contact_ready": true,
+        "push_side": false,
+        "solver_status": "scaled_barrier",
+        "modification": 0.3305262348098808,
+        "effort": 0.0,
+        "progress": 0.002359910222283343,
+        "map_points": 84,
+        "direct_visible": true,
+        "own_scan_points": 11,
+        "boundary_distance": 0.17009800737354305,
+        "token_distance": 0.8047460601720655,
+        "map_angular_coverage": 0.8333333333333334,
+        "cell_held_fraction": 0.7998738259302601,
+        "cell_unheld_mass": 0.015279375916725393,
+        "centroid_distance": 0.12123778183211462,
+        "redeploy_requested": false,
+        "redeploy_active": false,
+        "redeploy_reason": "contact_ready",
+        "redeploy_candidates": 16,
+        "cage_targets": 84,
+        "agent_rows": 10,
+        "agent_rows_active": 1,
+        "object_rows_active": 0,
+        "zero_input_feasible": false,
+        "speed_nominal": 0.33339223829484327,
+        "speed_command": 0.0048669326729727826,
+        "map_centroid": [
+          3.7106635791517615,
+          5.512215495159056
+        ],
+        "cvt_centroid": [
+          4.183655043652118,
+          5.018750021168651
+        ],
+        "redeploy_target": [
+          null,
+          null
+        ],
+        "nominal_command": [
+          0.23292217288071948,
+          0.23853227441117852
+        ],
+        "local_holding": false,
+        "safety_feedback_blocked": false,
+        "contact_role": "baseline",
+        "contact_cone_residual": null,
+        "contact_allocation": null,
+        "contact_redeploy_attempts": 0,
+        "contact_redeploy_reason": "not_enabled",
+        "contact_selected_normal": [
+          0.8868711489970253,
+          0.46201684501400586
+        ],
+        "contact_desired_direction": [
+          0.9999999822916809,
+          0.00018819308681027283
+        ],
+        "contact_lateral_estimate": [
+          null,
+          null
+        ],
+        "contact_redeploy_target": [
+          null,
+          null
+        ],
+        "handoff_state": "not_enabled",
+        "handoff_donor_state": "not_enabled",
+        "handoff_partner": "",
+        "handoff_event": "not_enabled",
+        "handoff_rollback_reason": "",
+        "handoff_attempts": 0,
+        "handoff_contact_proxy": false,
+        "handoff_confirm_seconds": 0.0,
+        "handoff_release_fraction": 0.0,
+        "handoff_gap": null,
+        "handoff_motion_ok": false,
+        "handoff_local_forward_velocity": 0.0,
+        "handoff_local_lateral_velocity": 0.0,
+        "navigation_remaining": 1.1777826572728205,
+        "navigation_voters": "agent_14|agent_04|agent_05|agent_06|agent_07|agent_08|agent_09|agent_10|agent_11|agent_12|agent_13",
+        "navigation_displacement": [
+          0.002217363937897091,
+          -0.00022541441559998317
+        ],
+        "navigation_error": [
+          1.197782636062103,
+          0.00022541441559998317
+        ],
+        "navigation_velocity": [
+          0.0047889347695813135,
+          -0.00048720371192934346
+        ],
+        "reference_status": "accepted",
+        "reference_pivot_status": "accepted",
+        "reference_pivot_rms": null,
+        "reference_support_minor_rms": 0.23259711005013778,
+        "contact_distance_source": "insufficient_patch",
+        "contact_map_gap": 0.01938386475479045,
+        "contact_used_gap": 0.01938386475479045,
+        "contact_patch_points": 0,
+        "reference_matches": 195,
+        "reference_residual_rms": 0.004381437537785821,
+        "reference_displacement": [
+          0.003445122765722704,
+          -0.0017514126719916766
+        ],
+        "reference_bootstrap_offset": [
+          0.0,
+          0.0
+        ],
+        "reference_angle": 0.0,
+        "reference_velocity": [
+          0.005967264077032403,
+          -0.0024528369982552917
+        ],
+        "recovery_eligible": false,
+        "reinforcement_state": "not_enabled",
+        "reinforcement_event": "not_enabled",
+        "reinforcement_attempts": 0,
+        "reinforcement_confirmed": false,
+        "reinforcement_confirm_seconds": 0.0,
+        "reinforcement_path_length": 0.0,
+        "reinforcement_gap": null,
+        "reinforcement_retain": false,
+        "reinforcement_suspended_approach": false,
+        "acquisition_support": {
+          "applied": false,
+          "reason": "outside_stationary_acquisition",
+          "stage": "fresh_reference",
+          "source_agents": []
+        },
+        "map_reference_status": "fresh_reference",
+        "map_reference_voters": [
+          "agent_14",
+          "agent_04",
+          "agent_05",
+          "agent_06",
+          "agent_07",
+          "agent_08",
+          "agent_09",
+          "agent_10",
+          "agent_11",
+          "agent_12",
+          "agent_13"
+        ],
+        "map_reference_displacement": [
+          0.001903153405067207,
+          0.0015759736282960173
+        ],
+        "map_reference_velocity": [
+          0.0047889347695813135,
+          -0.00048720371192934346
+        ],
+        "map_reference_bridge": {
+          "status": "continuous",
+          "displacement": [
+            0.001903153405067207,
+            0.0015759736282960173
+          ],
+          "velocity": [
+            0.0047889347695813135,
+            -0.00048720371192934346
+          ],
+          "delta": [
+            -0.0013125427225324613,
+            0.0002770063172303712
+          ],
+          "voters": [
+            "agent_14",
+            "agent_04",
+            "agent_05",
+            "agent_06",
+            "agent_07",
+            "agent_08",
+            "agent_09",
+            "agent_10",
+            "agent_11",
+            "agent_12",
+            "agent_13"
+          ],
+          "common_voters": [
+            "agent_14",
+            "agent_04",
+            "agent_05",
+            "agent_06",
+            "agent_07",
+            "agent_08",
+            "agent_09",
+            "agent_10",
+            "agent_11",
+            "agent_12",
+            "agent_13"
+          ],
+          "reset_history": false,
+          "current": {
+            "agent_14": [
+              0.003445122765722704,
+              -0.0017514126719916766
+            ],
+            "agent_04": [
+              0.0034134908934513016,
+              0.0008833700146022992
+            ],
+            "agent_05": [
+              0.0034134908934513033,
+              0.0008833700146023072
+            ],
+            "agent_06": [
+              0.0018677597193451846,
+              0.0006910397791444922
+            ],
+            "agent_07": [
+              0.0030957857756211495,
+              0.001517725918559129
+            ],
+            "agent_08": [
+              0.00161079444901886,
+              7.645477901105901e-05
+            ],
+            "agent_09": [
+              -7.474637810161284e-06,
+              -0.002699109120473542
+            ],
+            "agent_10": [
+              0.0036016872982105367,
+              -0.0016095741867454135
+            ],
+            "agent_11": [
+              -0.0013334018282481251,
+              -0.0013708351370893322
+            ],
+            "agent_12": [
+              0.0032294547063397914,
+              -0.0016439182849955773
+            ],
+            "agent_13": [
+              -0.0006991990950808325,
+              -0.0010819316679561218
+            ]
+          },
+          "previous": {
+            "agent_14": [
+              0.005266075381363487,
+              -0.0004903772292486411
+            ],
+            "agent_04": [
+              0.005688999402187437,
+              -0.0009808546506989125
+            ],
+            "agent_05": [
+              0.005688999402187438,
+              -0.000980854650698904
+            ],
+            "agent_06": [
+              0.005097439358810597,
+              -0.0018796345657153025
+            ],
+            "agent_07": [
+              0.003907388697059197,
+              -0.00010339118495356967
+            ],
+            "agent_08": [
+              0.0023596929515157525,
+              -6.851486730536104e-05
+            ],
+            "agent_09": [
+              0.0015291086308184098,
+              -0.0019281204435895169
+            ],
+            "agent_10": [
+              0.004983973744901507,
+              -0.001956577973650616
+            ],
+            "agent_11": [
+              -0.0005367725649412907,
+              0.00019640446221602212
+            ],
+            "agent_12": [
+              0.003911992045653071,
+              -3.426133203028722e-05
+            ],
+            "agent_13": [
+              0.00018821962026961626,
+              -0.0013352578145349144
+            ]
+          },
+          "raw_displacement": [
+            0.002217363937897091,
+            -0.00022541441559998317
+          ],
+          "discarded_cells": 0,
+          "retained_cells_before_alignment": 84
+        },
+        "pair_safety": {
+          "eligible": false,
+          "reason": "outside_stationary_acquisition"
+        }
+      }
+    },
+    {
+      "case_id": "far_skew_box_s0_r0_pos0_map_bridge_candidate",
+      "saved_frame": 479,
+      "agent_id": "agent_14",
+      "phase": "ENCLOSE",
+      "capture_state": "frozen",
+      "true_gap_m": 0.1640561875193219,
+      "true_displacement": [
+        0.0,
+        0.0
+      ],
+      "map_displacement_error_m": [
+        0.0006059611388172848,
+        0.0007264537121437921
+      ],
+      "raw_aggregate_error_m": [
+        0.0013577107648911635,
+        -0.0005284559169882768
+      ],
+      "map_displacement_error_norm_m": 0.0009460041742213595,
+      "true_angle_rad": 0.0,
+      "diagnostic": {
+        "agent_id": "agent_14",
+        "mode": "cage",
+        "cell_mass": 0.05622065706722147,
+        "object_rows": 1,
+        "contact_ready": true,
+        "push_side": false,
+        "solver_status": "scaled_barrier",
+        "modification": 0.32425629325654126,
+        "effort": 0.0,
+        "progress": 0.000751391812133445,
+        "map_points": 86,
+        "direct_visible": true,
+        "own_scan_points": 11,
+        "boundary_distance": 0.17029226597456437,
+        "token_distance": 0.8070234349975021,
+        "map_angular_coverage": 0.8333333333333334,
+        "cell_held_fraction": 0.806586749973592,
+        "cell_unheld_mass": 0.010873820001991445,
+        "centroid_distance": 0.06620145297875181,
+        "redeploy_requested": false,
+        "redeploy_active": false,
+        "redeploy_reason": "contact_ready",
+        "redeploy_candidates": 16,
+        "cage_targets": 86,
+        "agent_rows": 10,
+        "agent_rows_active": 2,
+        "object_rows_active": 0,
+        "zero_input_feasible": false,
+        "speed_nominal": 0.32674695668702164,
+        "speed_command": 0.003867650946939672,
+        "map_centroid": [
+          3.7068548147724916,
+          5.511426442171535
+        ],
+        "cvt_centroid": [
+          4.215718492509064,
+          4.971267676646328
+        ],
+        "redeploy_target": [
+          null,
+          null
+        ],
+        "nominal_command": [
+          0.26156234471092693,
+          0.19582827562319138
+        ],
+        "local_holding": false,
+        "safety_feedback_blocked": false,
+        "contact_role": "baseline",
+        "contact_cone_residual": null,
+        "contact_allocation": null,
+        "contact_redeploy_attempts": 0,
+        "contact_redeploy_reason": "not_enabled",
+        "contact_selected_normal": [
+          0.8868711489970253,
+          0.46201684501400586
+        ],
+        "contact_desired_direction": [
+          0.999999902812977,
+          0.000440878709499265
+        ],
+        "contact_lateral_estimate": [
+          null,
+          null
+        ],
+        "contact_redeploy_target": [
+          null,
+          null
+        ],
+        "handoff_state": "not_enabled",
+        "handoff_donor_state": "not_enabled",
+        "handoff_partner": "",
+        "handoff_event": "not_enabled",
+        "handoff_rollback_reason": "",
+        "handoff_attempts": 0,
+        "handoff_contact_proxy": false,
+        "handoff_confirm_seconds": 0.0,
+        "handoff_release_fraction": 0.0,
+        "handoff_gap": null,
+        "handoff_motion_ok": false,
+        "handoff_local_forward_velocity": 0.0,
+        "handoff_local_lateral_velocity": 0.0,
+        "navigation_remaining": 1.1786424057275957,
+        "navigation_voters": "agent_14|agent_04|agent_05|agent_06|agent_07|agent_08|agent_09|agent_10|agent_11|agent_12|agent_13",
+        "navigation_displacement": [
+          0.0013577107648911635,
+          -0.0005284559169882768
+        ],
+        "navigation_error": [
+          1.1986422892351087,
+          0.0005284559169882768
+        ],
+        "navigation_velocity": [
+          -0.003301401705488376,
+          -0.00342840592704551
+        ],
+        "reference_status": "accepted",
+        "reference_pivot_status": "accepted",
+        "reference_pivot_rms": null,
+        "reference_support_minor_rms": 0.2305383297451353,
+        "contact_distance_source": "insufficient_patch",
+        "contact_map_gap": 0.02112510959256152,
+        "contact_used_gap": 0.02112510959256152,
+        "contact_patch_points": 0,
+        "reference_matches": 183,
+        "reference_residual_rms": 0.0040482229773170335,
+        "reference_displacement": [
+          0.0016027712912745837,
+          -0.00017766998519353353
+        ],
+        "reference_bootstrap_offset": [
+          0.0,
+          0.0
+        ],
+        "reference_angle": 0.0,
+        "reference_velocity": [
+          -0.009017738671065596,
+          0.009421854758720904
+        ],
+        "recovery_eligible": false,
+        "reinforcement_state": "not_enabled",
+        "reinforcement_event": "not_enabled",
+        "reinforcement_attempts": 0,
+        "reinforcement_confirmed": false,
+        "reinforcement_confirm_seconds": 0.0,
+        "reinforcement_path_length": 0.0,
+        "reinforcement_gap": null,
+        "reinforcement_retain": false,
+        "reinforcement_suspended_approach": false,
+        "acquisition_support": {
+          "applied": false,
+          "reason": "outside_stationary_acquisition",
+          "stage": "fresh_reference",
+          "source_agents": []
+        },
+        "map_reference_status": "fresh_reference",
+        "map_reference_voters": [
+          "agent_14",
+          "agent_04",
+          "agent_05",
+          "agent_06",
+          "agent_07",
+          "agent_08",
+          "agent_09",
+          "agent_10",
+          "agent_11",
+          "agent_12",
+          "agent_13"
+        ],
+        "map_reference_displacement": [
+          0.0006059611388172848,
+          0.0007264537121437921
+        ],
+        "map_reference_velocity": [
+          -0.003301401705488376,
+          -0.00342840592704551
+        ],
+        "map_reference_bridge": {
+          "status": "continuous",
+          "displacement": [
+            0.0006059611388172848,
+            0.0007264537121437921
+          ],
+          "velocity": [
+            -0.003301401705488376,
+            -0.00342840592704551
+          ],
+          "delta": [
+            -0.0012971922662499222,
+            -0.0008495199161522251
+          ],
+          "voters": [
+            "agent_14",
+            "agent_04",
+            "agent_05",
+            "agent_06",
+            "agent_07",
+            "agent_08",
+            "agent_09",
+            "agent_10",
+            "agent_11",
+            "agent_12",
+            "agent_13"
+          ],
+          "common_voters": [
+            "agent_14",
+            "agent_04",
+            "agent_05",
+            "agent_06",
+            "agent_07",
+            "agent_08",
+            "agent_09",
+            "agent_10",
+            "agent_11",
+            "agent_12",
+            "agent_13"
+          ],
+          "reset_history": false,
+          "current": {
+            "agent_14": [
+              0.0016027712912745837,
+              -0.00017766998519353353
+            ],
+            "agent_04": [
+              0.001399599561526444,
+              -0.00039174782020895773
+            ],
+            "agent_05": [
+              0.001399599561526446,
+              -0.000391747820208949
+            ],
+            "agent_06": [
+              0.001553903315031588,
+              -0.0007116347421783675
+            ],
+            "agent_07": [
+              0.0007542686508380889,
+              0.0034219083454156574
+            ],
+            "agent_08": [
+              0.002023573354362782,
+              -0.002226416888291642
+            ],
+            "agent_09": [
+              -0.002522895426471429,
+              0.0025379659538584017
+            ],
+            "agent_10": [
+              0.002223402844948399,
+              -0.003165242449461111
+            ],
+            "agent_11": [
+              -0.0005759300865595827,
+              -0.0011594297209735376
+            ],
+            "agent_12": [
+              0.0017640665090176398,
+              -0.0025854900247932657
+            ],
+            "agent_13": [
+              -0.00023064738843124656,
+              -0.001411138836376496
+            ]
+          },
+          "previous": {
+            "agent_14": [
+              0.003445122765722704,
+              -0.0017514126719916766
+            ],
+            "agent_04": [
+              0.0034134908934513016,
+              0.0008833700146022992
+            ],
+            "agent_05": [
+              0.0034134908934513033,
+              0.0008833700146023072
+            ],
+            "agent_06": [
+              0.0018677597193451846,
+              0.0006910397791444922
+            ],
+            "agent_07": [
+              0.0030957857756211495,
+              0.001517725918559129
+            ],
+            "agent_08": [
+              0.00161079444901886,
+              7.645477901105901e-05
+            ],
+            "agent_09": [
+              -7.474637810161284e-06,
+              -0.002699109120473542
+            ],
+            "agent_10": [
+              0.0036016872982105367,
+              -0.0016095741867454135
+            ],
+            "agent_11": [
+              -0.0013334018282481251,
+              -0.0013708351370893322
+            ],
+            "agent_12": [
+              0.0032294547063397914,
+              -0.0016439182849955773
+            ],
+            "agent_13": [
+              -0.0006991990950808325,
+              -0.0010819316679561218
+            ]
+          },
+          "raw_displacement": [
+            0.0013577107648911635,
+            -0.0005284559169882768
+          ],
+          "discarded_cells": 0,
+          "retained_cells_before_alignment": 84
+        },
+        "pair_safety": {
+          "eligible": false,
+          "reason": "outside_stationary_acquisition"
+        }
+      }
+    },
+    {
+      "case_id": "far_skew_box_s0_r0_pos0_map_bridge_candidate",
+      "saved_frame": 480,
+      "agent_id": "agent_14",
+      "phase": "ENCLOSE",
+      "capture_state": "frozen",
+      "true_gap_m": 0.1642119742833372,
+      "true_displacement": [
+        0.0,
+        0.0
+      ],
+      "map_displacement_error_m": [
+        0.0009930989916829404,
+        0.002355381042885396
+      ],
+      "raw_aggregate_error_m": [
+        0.0012947737159636694,
+        0.0011298495147062926
+      ],
+      "map_displacement_error_norm_m": 0.0025561818136559788,
+      "true_angle_rad": 0.0,
+      "diagnostic": {
+        "agent_id": "agent_14",
+        "mode": "cage",
+        "cell_mass": 0.07248990194769207,
+        "object_rows": 1,
+        "contact_ready": true,
+        "push_side": false,
+        "solver_status": "scaled_barrier",
+        "modification": 0.32414660898787095,
+        "effort": 0.0,
+        "progress": 0.0012314427496868576,
+        "map_points": 87,
+        "direct_visible": true,
+        "own_scan_points": 10,
+        "boundary_distance": 0.17155845068370587,
+        "token_distance": 0.8166358572905017,
+        "map_angular_coverage": 0.8333333333333334,
+        "cell_held_fraction": 0.8048470763532097,
+        "cell_unheld_mass": 0.014146616299961261,
+        "centroid_distance": 0.11850358255940324,
+        "redeploy_requested": false,
+        "redeploy_active": false,
+        "redeploy_reason": "contact_ready",
+        "redeploy_candidates": 17,
+        "cage_targets": 87,
+        "agent_rows": 10,
+        "agent_rows_active": 1,
+        "object_rows_active": 0,
+        "zero_input_feasible": false,
+        "speed_nominal": 0.3256014912927917,
+        "speed_command": 0.002522403490976548,
+        "map_centroid": [
+          3.7038815696269842,
+          5.521702102095759
+        ],
+        "cvt_centroid": [
+          4.180163140623254,
+          5.010386814382096
+        ],
+        "redeploy_target": [
+          null,
+          null
+        ],
+        "nominal_command": [
+          0.2293928287979065,
+          0.23107414660273934
+        ],
+        "local_holding": false,
+        "safety_feedback_blocked": false,
+        "contact_role": "baseline",
+        "contact_cone_residual": null,
+        "contact_allocation": null,
+        "contact_redeploy_attempts": 0,
+        "contact_redeploy_reason": "not_enabled",
+        "contact_selected_normal": [
+          0.8868711489970253,
+          0.46201684501400586
+        ],
+        "contact_desired_direction": [
+          0.9999995557922573,
+          -0.0009425578432830403
+        ],
+        "contact_lateral_estimate": [
+          null,
+          null
+        ],
+        "contact_redeploy_target": [
+          null,
+          null
+        ],
+        "handoff_state": "not_enabled",
+        "handoff_donor_state": "not_enabled",
+        "handoff_partner": "",
+        "handoff_event": "not_enabled",
+        "handoff_rollback_reason": "",
+        "handoff_attempts": 0,
+        "handoff_contact_proxy": false,
+        "handoff_confirm_seconds": 0.0,
+        "handoff_release_fraction": 0.0,
+        "handoff_gap": null,
+        "handoff_motion_ok": false,
+        "handoff_local_forward_velocity": 0.0,
+        "handoff_local_lateral_velocity": 0.0,
+        "navigation_remaining": 1.1787057587584155,
+        "navigation_voters": "agent_14|agent_04|agent_05|agent_06|agent_07|agent_08|agent_09|agent_10|agent_11|agent_12|agent_13",
+        "navigation_displacement": [
+          0.0012947737159636694,
+          0.0011298495147062926
+        ],
+        "navigation_error": [
+          1.1987052262840363,
+          -0.0011298495147062926
+        ],
+        "navigation_velocity": [
+          -0.001783319852418805,
+          0.014979640061305545
+        ],
+        "reference_status": "accepted",
+        "reference_pivot_status": "accepted",
+        "reference_pivot_rms": null,
+        "reference_support_minor_rms": 0.2263371864849673,
+        "contact_distance_source": "insufficient_patch",
+        "contact_map_gap": 0.020176560517913462,
+        "contact_used_gap": 0.020176560517913462,
+        "contact_patch_points": 0,
+        "reference_matches": 194,
+        "reference_residual_rms": 0.004664992074567368,
+        "reference_displacement": [
+          0.0007289224335533905,
+          0.001161549239835067
+        ],
+        "reference_bootstrap_offset": [
+          0.0,
+          0.0
+        ],
+        "reference_angle": 0.0,
+        "reference_velocity": [
+          -0.011978472140240903,
+          0.015498740168368658
+        ],
+        "recovery_eligible": false,
+        "reinforcement_state": "not_enabled",
+        "reinforcement_event": "not_enabled",
+        "reinforcement_attempts": 0,
+        "reinforcement_confirmed": false,
+        "reinforcement_confirm_seconds": 0.0,
+        "reinforcement_path_length": 0.0,
+        "reinforcement_gap": null,
+        "reinforcement_retain": false,
+        "reinforcement_suspended_approach": false,
+        "acquisition_support": {
+          "applied": false,
+          "reason": "outside_stationary_acquisition",
+          "stage": "fresh_reference",
+          "source_agents": []
+        },
+        "map_reference_status": "fresh_reference",
+        "map_reference_voters": [
+          "agent_14",
+          "agent_04",
+          "agent_05",
+          "agent_06",
+          "agent_07",
+          "agent_08",
+          "agent_09",
+          "agent_10",
+          "agent_11",
+          "agent_12",
+          "agent_13"
+        ],
+        "map_reference_displacement": [
+          0.0009930989916829404,
+          0.002355381042885396
+        ],
+        "map_reference_velocity": [
+          -0.001783319852418805,
+          0.014979640061305545
+        ],
+        "map_reference_bridge": {
+          "status": "continuous",
+          "displacement": [
+            0.0009930989916829404,
+            0.002355381042885396
+          ],
+          "velocity": [
+            -0.001783319852418805,
+            0.014979640061305545
+          ],
+          "delta": [
+            0.0003871378528656556,
+            0.0016289273307416039
+          ],
+          "voters": [
+            "agent_14",
+            "agent_04",
+            "agent_05",
+            "agent_06",
+            "agent_07",
+            "agent_08",
+            "agent_09",
+            "agent_10",
+            "agent_11",
+            "agent_12",
+            "agent_13"
+          ],
+          "common_voters": [
+            "agent_14",
+            "agent_04",
+            "agent_05",
+            "agent_06",
+            "agent_07",
+            "agent_08",
+            "agent_09",
+            "agent_10",
+            "agent_11",
+            "agent_12",
+            "agent_13"
+          ],
+          "reset_history": false,
+          "current": {
+            "agent_14": [
+              0.0007289224335533905,
+              0.001161549239835067
+            ],
+            "agent_04": [
+              0.001419901457466915,
+              0.002680394063503927
+            ],
+            "agent_05": [
+              0.0014199014574669182,
+              0.0026803940635039335
+            ],
+            "agent_06": [
+              0.0005845814190530874,
+              0.0010634512609355002
+            ],
+            "agent_07": [
+              0.0017148647953841194,
+              0.0029393836916396265
+            ],
+            "agent_08": [
+              0.001347850586638585,
+              0.0014194333701610094
+            ],
+            "agent_09": [
+              0.000806452329800741,
+              0.0006797491082369972
+            ],
+            "agent_10": [
+              0.0021431247649489156,
+              0.0004890257500215148
+            ],
+            "agent_11": [
+              0.002416565576110244,
+              -0.0027442743691493653
+            ],
+            "agent_12": [
+              0.0035967981298041817,
+              -0.0019039194446763843
+            ],
+            "agent_13": [
+              0.003091866567511305,
+              -0.00214092045706591
+            ]
+          },
+          "previous": {
+            "agent_14": [
+              0.0016027712912745837,
+              -0.00017766998519353353
+            ],
+            "agent_04": [
+              0.001399599561526444,
+              -0.00039174782020895773
+            ],
+            "agent_05": [
+              0.001399599561526446,
+              -0.000391747820208949
+            ],
+            "agent_06": [
+              0.001553903315031588,
+              -0.0007116347421783675
+            ],
+            "agent_07": [
+              0.0007542686508380889,
+              0.0034219083454156574
+            ],
+            "agent_08": [
+              0.002023573354362782,
+              -0.002226416888291642
+            ],
+            "agent_09": [
+              -0.002522895426471429,
+              0.0025379659538584017
+            ],
+            "agent_10": [
+              0.002223402844948399,
+              -0.003165242449461111
+            ],
+            "agent_11": [
+              -0.0005759300865595827,
+              -0.0011594297209735376
+            ],
+            "agent_12": [
+              0.0017640665090176398,
+              -0.0025854900247932657
+            ],
+            "agent_13": [
+              -0.00023064738843124656,
+              -0.001411138836376496
+            ]
+          },
+          "raw_displacement": [
+            0.0012947737159636694,
+            0.0011298495147062926
+          ],
+          "discarded_cells": 0,
+          "retained_cells_before_alignment": 86
+        },
+        "pair_safety": {
+          "eligible": false,
+          "reason": "outside_stationary_acquisition"
+        }
+      }
+    },
+    {
+      "case_id": "far_skew_box_s0_r0_pos0_map_bridge_candidate",
+      "saved_frame": 482,
+      "agent_id": "agent_14",
+      "phase": "ENCLOSE",
+      "capture_state": "frozen",
+      "true_gap_m": 0.16404583126528677,
+      "true_displacement": [
+        0.0,
+        0.0
+      ],
+      "map_displacement_error_m": [
+        0.0018249929006309562,
+        0.0011406894596614502
+      ],
+      "raw_aggregate_error_m": [
+        0.002310271617301089,
+        -0.0009766581158781572
+      ],
+      "map_displacement_error_norm_m": 0.002152155089842766,
+      "true_angle_rad": 0.0,
+      "diagnostic": {
+        "agent_id": "agent_14",
+        "mode": "cage",
+        "cell_mass": 0.05669433143599951,
+        "object_rows": 1,
+        "contact_ready": true,
+        "push_side": false,
+        "solver_status": "scaled_barrier",
+        "modification": 0.31766395833387906,
+        "effort": 0.0,
+        "progress": 0.0022629911967823966,
+        "map_points": 88,
+        "direct_visible": true,
+        "own_scan_points": 11,
+        "boundary_distance": 0.1736070245161732,
+        "token_distance": 0.8120727039140266,
+        "map_angular_coverage": 0.8333333333333334,
+        "cell_held_fraction": 0.8116371423011479,
+        "cell_unheld_mass": 0.010679106284610735,
+        "centroid_distance": 0.06777591238139886,
+        "redeploy_requested": false,
+        "redeploy_active": false,
+        "redeploy_reason": "contact_ready",
+        "redeploy_candidates": 17,
+        "cage_targets": 88,
+        "agent_rows": 10,
+        "agent_rows_active": 2,
+        "object_rows_active": 0,
+        "zero_input_feasible": false,
+        "speed_nominal": 0.3258859257244715,
+        "speed_command": 0.008358389532632089,
+        "map_centroid": [
+          3.7033041038446943,
+          5.515228819059768
+        ],
+        "cvt_centroid": [
+          4.213166014363721,
+          4.971335097116282
+        ],
+        "redeploy_target": [
+          null,
+          null
+        ],
+        "nominal_command": [
+          0.26355737085509573,
+          0.19167459104754936
+        ],
+        "local_holding": false,
+        "safety_feedback_blocked": false,
+        "contact_role": "baseline",
+        "contact_cone_residual": null,
+        "contact_allocation": null,
+        "contact_redeploy_attempts": 0,
+        "contact_redeploy_reason": "not_enabled",
+        "contact_selected_normal": [
+          0.8948526423312474,
+          0.44636167903706153
+        ],
+        "contact_desired_direction": [
+          0.9999996675194346,
+          0.0008154514211933211
+        ],
+        "contact_lateral_estimate": [
+          null,
+          null
+        ],
+        "contact_redeploy_target": [
+          null,
+          null
+        ],
+        "handoff_state": "not_enabled",
+        "handoff_donor_state": "not_enabled",
+        "handoff_partner": "",
+        "handoff_event": "not_enabled",
+        "handoff_rollback_reason": "",
+        "handoff_attempts": 0,
+        "handoff_contact_proxy": false,
+        "handoff_confirm_seconds": 0.0,
+        "handoff_release_fraction": 0.0,
+        "handoff_gap": null,
+        "handoff_motion_ok": false,
+        "handoff_local_forward_velocity": 0.0,
+        "handoff_local_lateral_velocity": 0.0,
+        "navigation_remaining": 1.1776901265913893,
+        "navigation_voters": "agent_14|agent_04|agent_05|agent_06|agent_07|agent_08|agent_09|agent_10|agent_11|agent_12|agent_13",
+        "navigation_displacement": [
+          0.002310271617301089,
+          -0.0009766581158781572
+        ],
+        "navigation_error": [
+          1.1976897283826988,
+          0.0009766581158781572
+        ],
+        "navigation_velocity": [
+          0.004502070265087202,
+          -0.0007101549004163489
+        ],
+        "reference_status": "accepted",
+        "reference_pivot_status": "accepted",
+        "reference_pivot_rms": null,
+        "reference_support_minor_rms": 0.23276863426188246,
+        "contact_distance_source": "insufficient_patch",
+        "contact_map_gap": 0.01572820117357106,
+        "contact_used_gap": 0.01572820117357106,
+        "contact_patch_points": 0,
+        "reference_matches": 206,
+        "reference_residual_rms": 0.004604471761062984,
+        "reference_displacement": [
+          0.002290944639345876,
+          -0.0010802058883766373
+        ],
+        "reference_bootstrap_offset": [
+          0.0,
+          0.0
+        ],
+        "reference_angle": 0.0,
+        "reference_velocity": [
+          0.002013159987229633,
+          -8.729456504994251e-05
+        ],
+        "recovery_eligible": false,
+        "reinforcement_state": "not_enabled",
+        "reinforcement_event": "not_enabled",
+        "reinforcement_attempts": 0,
+        "reinforcement_confirmed": false,
+        "reinforcement_confirm_seconds": 0.0,
+        "reinforcement_path_length": 0.0,
+        "reinforcement_gap": null,
+        "reinforcement_retain": false,
+        "reinforcement_suspended_approach": false,
+        "acquisition_support": {
+          "applied": false,
+          "reason": "outside_stationary_acquisition",
+          "stage": "fresh_reference",
+          "source_agents": []
+        },
+        "map_reference_status": "fresh_reference",
+        "map_reference_voters": [
+          "agent_14",
+          "agent_04",
+          "agent_05",
+          "agent_06",
+          "agent_07",
+          "agent_08",
+          "agent_09",
+          "agent_10",
+          "agent_11",
+          "agent_12",
+          "agent_13"
+        ],
+        "map_reference_displacement": [
+          0.0018249929006309562,
+          0.0011406894596614502
+        ],
+        "map_reference_velocity": [
+          0.004502070265087202,
+          -0.0007101549004163489
+        ],
+        "map_reference_bridge": {
+          "status": "continuous",
+          "displacement": [
+            0.0018249929006309562,
+            0.0011406894596614502
+          ],
+          "velocity": [
+            0.004502070265087202,
+            -0.0007101549004163489
+          ],
+          "delta": [
+            0.00047465824981370974,
+            0.0005725786929459909
+          ],
+          "voters": [
+            "agent_14",
+            "agent_04",
+            "agent_05",
+            "agent_06",
+            "agent_07",
+            "agent_08",
+            "agent_09",
+            "agent_10",
+            "agent_11",
+            "agent_12",
+            "agent_13"
+          ],
+          "common_voters": [
+            "agent_14",
+            "agent_04",
+            "agent_05",
+            "agent_06",
+            "agent_07",
+            "agent_08",
+            "agent_09",
+            "agent_10",
+            "agent_11",
+            "agent_12",
+            "agent_13"
+          ],
+          "reset_history": false,
+          "current": {
+            "agent_14": [
+              0.002290944639345876,
+              -0.0010802058883766373
+            ],
+            "agent_04": [
+              0.0027595111996704205,
+              0.003684629497796252
+            ],
+            "agent_05": [
+              0.0027595111996704252,
+              0.0036846294977962587
+            ],
+            "agent_06": [
+              0.002310271764844009,
+              -0.0009766578420025577
+            ],
+            "agent_07": [
+              0.0024577450642274687,
+              0.0032979644981328844
+            ],
+            "agent_08": [
+              0.003317820619910538,
+              -0.0005026592429517962
+            ],
+            "agent_09": [
+              0.0018264859963013466,
+              -0.002350967233541874
+            ],
+            "agent_10": [
+              0.003746232712657715,
+              -0.002991283971706067
+            ],
+            "agent_11": [
+              -0.0015494991042514748,
+              -0.001975936981087364
+            ],
+            "agent_12": [
+              0.0042896612789325795,
+              -0.005636454461844473
+            ],
+            "agent_13": [
+              -0.0022618434343687354,
+              -0.0018174655068277459
+            ]
+          },
+          "previous": {
+            "agent_14": [
+              0.0023044697699068127,
+              -0.002535093050489885
+            ],
+            "agent_04": [
+              0.00120049195441595,
+              0.0020259887504029406
+            ],
+            "agent_05": [
+              0.0012004919544159529,
+              0.0020259887504029466
+            ],
+            "agent_06": [
+              0.0017589804051870244,
+              -0.0011585649139337884
+            ],
+            "agent_07": [
+              0.001414058361165009,
+              0.001778836872350327
+            ],
+            "agent_08": [
+              0.002423426470749686,
+              -0.0010429497012450978
+            ],
+            "agent_09": [
+              0.0018756865727944042,
+              -0.0022704526129459475
+            ],
+            "agent_10": [
+              0.002519135858031159,
+              -0.0012779062342818937
+            ],
+            "agent_11": [
+              -0.000997503202833791,
+              -0.0028440050054506913
+            ],
+            "agent_12": [
+              0.004225479985139687,
+              -0.005268128482813973
+            ],
+            "agent_13": [
+              -0.000634052400663006,
+              -0.0030045493416321904
+            ]
+          },
+          "raw_displacement": [
+            0.002310271617301089,
+            -0.0009766581158781572
+          ],
+          "discarded_cells": 0,
+          "retained_cells_before_alignment": 87
+        },
+        "pair_safety": {
+          "eligible": false,
+          "reason": "outside_stationary_acquisition"
+        }
+      }
+    },
+    {
+      "case_id": "far_skew_box_s0_r0_pos0_map_bridge_candidate",
+      "saved_frame": 483,
+      "agent_id": "agent_14",
+      "phase": "ENCLOSE",
+      "capture_state": "frozen",
+      "true_gap_m": 0.16414929164206793,
+      "true_displacement": [
+        0.0,
+        0.0
+      ],
+      "map_displacement_error_m": [
+        0.0017661144804324283,
+        0.0010032588358323458
+      ],
+      "raw_aggregate_error_m": [
+        0.0027297074380499228,
+        -0.0024196824113699375
+      ],
+      "map_displacement_error_norm_m": 0.0020311791279128437,
+      "true_angle_rad": 0.0,
+      "diagnostic": {
+        "agent_id": "agent_14",
+        "mode": "cage",
+        "cell_mass": 0.07236149262069207,
+        "object_rows": 1,
+        "contact_ready": true,
+        "push_side": false,
+        "solver_status": "scaled_barrier",
+        "modification": 0.33176951012437567,
+        "effort": 0.0,
+        "progress": 0.0021899819557362164,
+        "map_points": 88,
+        "direct_visible": true,
+        "own_scan_points": 10,
+        "boundary_distance": 0.17453554576935368,
+        "token_distance": 0.8119827939260819,
+        "map_angular_coverage": 0.8333333333333334,
+        "cell_held_fraction": 0.8242521970754764,
+        "cell_unheld_mass": 0.012717373344425765,
+        "centroid_distance": 0.10546982954601618,
+        "redeploy_requested": false,
+        "redeploy_active": false,
+        "redeploy_reason": "contact_ready",
+        "redeploy_candidates": 15,
+        "cage_targets": 88,
+        "agent_rows": 10,
+        "agent_rows_active": 2,
+        "object_rows_active": 0,
+        "zero_input_feasible": false,
+        "speed_nominal": 0.33740368465234793,
+        "speed_command": 0.00591051938646284,
+        "map_centroid": [
+          3.7032791305087556,
+          5.514896445099718
+        ],
+        "cvt_centroid": [
+          4.19734696031309,
+          5.009801176281247
+        ],
+        "redeploy_target": [
+          null,
+          null
+        ],
+        "nominal_command": [
+          0.2472167521947481,
+          0.22961951975226666
+        ],
+        "local_holding": false,
+        "safety_feedback_blocked": false,
+        "contact_role": "baseline",
+        "contact_cone_residual": null,
+        "contact_allocation": null,
+        "contact_redeploy_attempts": 0,
+        "contact_redeploy_reason": "not_enabled",
+        "contact_selected_normal": [
+          0.8898103051840828,
+          0.45633060470256614
+        ],
+        "contact_desired_direction": [
+          0.9999979577871906,
+          0.0020209951628264605
+        ],
+        "contact_lateral_estimate": [
+          null,
+          null
+        ],
+        "contact_redeploy_target": [
+          null,
+          null
+        ],
+        "handoff_state": "not_enabled",
+        "handoff_donor_state": "not_enabled",
+        "handoff_partner": "",
+        "handoff_event": "not_enabled",
+        "handoff_rollback_reason": "",
+        "handoff_attempts": 0,
+        "handoff_contact_proxy": false,
+        "handoff_confirm_seconds": 0.0,
+        "handoff_release_fraction": 0.0,
+        "handoff_gap": null,
+        "handoff_motion_ok": false,
+        "handoff_local_forward_velocity": 0.0,
+        "handoff_local_lateral_velocity": 0.0,
+        "navigation_remaining": 1.1772727376476713,
+        "navigation_voters": "agent_14|agent_04|agent_05|agent_06|agent_07|agent_08|agent_09|agent_10|agent_11|agent_12|agent_13",
+        "navigation_displacement": [
+          0.0027297074380499228,
+          -0.0024196824113699375
+        ],
+        "navigation_error": [
+          1.19727029256195,
+          0.0024196824113699375
+        ],
+        "navigation_velocity": [
+          0.0017557284657114623,
+          -0.002381793356403651
+        ],
+        "reference_status": "accepted",
+        "reference_pivot_status": "accepted",
+        "reference_pivot_rms": null,
+        "reference_support_minor_rms": 0.23286466845710663,
+        "contact_distance_source": "insufficient_patch",
+        "contact_map_gap": 0.015089464695216482,
+        "contact_used_gap": 0.015089464695216482,
+        "contact_patch_points": 0,
+        "reference_matches": 198,
+        "reference_residual_rms": 0.004322704193442382,
+        "reference_displacement": [
+          0.0038251242919906643,
+          -0.0017039265659118345
+        ],
+        "reference_bootstrap_offset": [
+          0.0,
+          0.0
+        ],
+        "reference_angle": 0.0,
+        "reference_velocity": [
+          0.012047811560212625,
+          -0.00442278621002878
+        ],
+        "recovery_eligible": false,
+        "reinforcement_state": "not_enabled",
+        "reinforcement_event": "not_enabled",
+        "reinforcement_attempts": 0,
+        "reinforcement_confirmed": false,
+        "reinforcement_confirm_seconds": 0.0,
+        "reinforcement_path_length": 0.0,
+        "reinforcement_gap": null,
+        "reinforcement_retain": false,
+        "reinforcement_suspended_approach": false,
+        "acquisition_support": {
+          "applied": false,
+          "reason": "outside_stationary_acquisition",
+          "stage": "fresh_reference",
+          "source_agents": []
+        },
+        "map_reference_status": "fresh_reference",
+        "map_reference_voters": [
+          "agent_14",
+          "agent_04",
+          "agent_05",
+          "agent_06",
+          "agent_07",
+          "agent_08",
+          "agent_09",
+          "agent_10",
+          "agent_11",
+          "agent_12",
+          "agent_13"
+        ],
+        "map_reference_displacement": [
+          0.0017661144804324283,
+          0.0010032588358323458
+        ],
+        "map_reference_velocity": [
+          0.0017557284657114623,
+          -0.002381793356403651
+        ],
+        "map_reference_bridge": {
+          "status": "continuous",
+          "displacement": [
+            0.0017661144804324283,
+            0.0010032588358323458
+          ],
+          "velocity": [
+            0.0017557284657114623,
+            -0.002381793356403651
+          ],
+          "delta": [
+            -5.8878420198527904e-05,
+            -0.0001374306238291045
+          ],
+          "voters": [
+            "agent_14",
+            "agent_04",
+            "agent_05",
+            "agent_06",
+            "agent_07",
+            "agent_08",
+            "agent_09",
+            "agent_10",
+            "agent_11",
+            "agent_12",
+            "agent_13"
+          ],
+          "common_voters": [
+            "agent_14",
+            "agent_04",
+            "agent_05",
+            "agent_06",
+            "agent_07",
+            "agent_08",
+            "agent_09",
+            "agent_10",
+            "agent_11",
+            "agent_12",
+            "agent_13"
+          ],
+          "reset_history": false,
+          "current": {
+            "agent_14": [
+              0.0038251242919906643,
+              -0.0017039265659118345
+            ],
+            "agent_04": [
+              0.0025802660118157362,
+              0.0038668453264164362
+            ],
+            "agent_05": [
+              0.002580266011815742,
+              0.0038668453264164415
+            ],
+            "agent_06": [
+              0.004639764841620348,
+              -0.006032598116228648
+            ],
+            "agent_07": [
+              0.0027493265063711354,
+              0.0031838695766217132
+            ],
+            "agent_08": [
+              0.004802326560295676,
+              -0.005771554632711402
+            ],
+            "agent_09": [
+              0.0008432292406000235,
+              -0.00311080973391918
+            ],
+            "agent_10": [
+              0.004022504518864289,
+              -0.003765806513995828
+            ],
+            "agent_11": [
+              -0.00193619510360668,
+              -0.0021738141177103615
+            ],
+            "agent_12": [
+              0.003606548220358825,
+              -0.004139153618874181
+            ],
+            "agent_13": [
+              -0.0023207306219941186,
+              -0.001954866871233329
+            ]
+          },
+          "previous": {
+            "agent_14": [
+              0.002290944639345876,
+              -0.0010802058883766373
+            ],
+            "agent_04": [
+              0.0027595111996704205,
+              0.003684629497796252
+            ],
+            "agent_05": [
+              0.0027595111996704252,
+              0.0036846294977962587
+            ],
+            "agent_06": [
+              0.002310271764844009,
+              -0.0009766578420025577
+            ],
+            "agent_07": [
+              0.0024577450642274687,
+              0.0032979644981328844
+            ],
+            "agent_08": [
+              0.003317820619910538,
+              -0.0005026592429517962
+            ],
+            "agent_09": [
+              0.0018264859963013466,
+              -0.002350967233541874
+            ],
+            "agent_10": [
+              0.003746232712657715,
+              -0.002991283971706067
+            ],
+            "agent_11": [
+              -0.0015494991042514748,
+              -0.001975936981087364
+            ],
+            "agent_12": [
+              0.0042896612789325795,
+              -0.005636454461844473
+            ],
+            "agent_13": [
+              -0.0022618434343687354,
+              -0.0018174655068277459
+            ]
+          },
+          "raw_displacement": [
+            0.0027297074380499228,
+            -0.0024196824113699375
+          ],
+          "discarded_cells": 0,
+          "retained_cells_before_alignment": 88
+        },
+        "pair_safety": {
+          "eligible": false,
+          "reason": "outside_stationary_acquisition"
+        }
+      }
+    },
+    {
+      "case_id": "far_skew_box_s0_r0_pos0_map_bridge_candidate",
+      "saved_frame": 484,
+      "agent_id": "agent_14",
+      "phase": "ENCLOSE",
+      "capture_state": "frozen",
+      "true_gap_m": 0.16422477514300704,
+      "true_displacement": [
+        0.0,
+        0.0
+      ],
+      "map_displacement_error_m": [
+        0.00023653990845427407,
+        0.001763624971972588
+      ],
+      "raw_aggregate_error_m": [
+        0.0009617444518244449,
+        -0.0006952953140449896
+      ],
+      "map_displacement_error_norm_m": 0.0017794168061634318,
+      "true_angle_rad": 0.0,
+      "diagnostic": {
+        "agent_id": "agent_14",
+        "mode": "cage",
+        "cell_mass": 0.072023159375555,
+        "object_rows": 1,
+        "contact_ready": true,
+        "push_side": false,
+        "solver_status": "scaled_barrier",
+        "modification": 0.3335852212770329,
+        "effort": 0.0,
+        "progress": 0.00029330948648331246,
+        "map_points": 89,
+        "direct_visible": true,
+        "own_scan_points": 6,
+        "boundary_distance": 0.1760309106296819,
+        "token_distance": 0.8224803961374876,
+        "map_angular_coverage": 0.8611111111111112,
+        "cell_held_fraction": 0.8296133437305505,
+        "cell_unheld_mass": 0.012271785299962468,
+        "centroid_distance": 0.10565345292490319,
+        "redeploy_requested": false,
+        "redeploy_active": false,
+        "redeploy_reason": "contact_ready",
+        "redeploy_candidates": 16,
+        "cage_targets": 89,
+        "agent_rows": 10,
+        "agent_rows_active": 2,
+        "object_rows_active": 0,
+        "zero_input_feasible": false,
+        "speed_nominal": 0.3375539375052919,
+        "speed_command": 0.004171369402124558,
+        "map_centroid": [
+          3.6974161577979117,
+          5.523700357473484
+        ],
+        "cvt_centroid": [
+          4.197611846652564,
+          5.010175529148766
+        ],
+        "redeploy_target": [
+          null,
+          null
+        ],
+        "nominal_command": [
+          0.24721498471605263,
+          0.22984214595493224
+        ],
+        "local_holding": false,
+        "safety_feedback_blocked": false,
+        "contact_role": "baseline",
+        "contact_cone_residual": null,
+        "contact_allocation": null,
+        "contact_redeploy_attempts": 0,
+        "contact_redeploy_reason": "not_enabled",
+        "contact_selected_normal": [
+          0.8898103051840828,
+          0.45633060470256614
+        ],
+        "contact_desired_direction": [
+          0.999999831871081,
+          0.0005798774091889716
+        ],
+        "contact_lateral_estimate": [
+          null,
+          null
+        ],
+        "contact_redeploy_target": [
+          null,
+          null
+        ],
+        "handoff_state": "not_enabled",
+        "handoff_donor_state": "not_enabled",
+        "handoff_partner": "",
+        "handoff_event": "not_enabled",
+        "handoff_rollback_reason": "",
+        "handoff_attempts": 0,
+        "handoff_contact_proxy": false,
+        "handoff_confirm_seconds": 0.0,
+        "handoff_release_fraction": 0.0,
+        "handoff_gap": null,
+        "handoff_motion_ok": false,
+        "handoff_local_forward_velocity": 0.0,
+        "handoff_local_lateral_velocity": 0.0,
+        "navigation_remaining": 1.1790384571412151,
+        "navigation_voters": "agent_14|agent_04|agent_05|agent_06|agent_07|agent_08|agent_09|agent_10|agent_11|agent_12|agent_13",
+        "navigation_displacement": [
+          0.0009617444518244449,
+          -0.0006952953140449896
+        ],
+        "navigation_error": [
+          1.1990382555481756,
+          0.0006952953140449896
+        ],
+        "navigation_velocity": [
+          -0.010412831740318339,
+          0.0035111808246543327
+        ],
+        "reference_status": "accepted",
+        "reference_pivot_status": "accepted",
+        "reference_pivot_rms": null,
+        "reference_support_minor_rms": 0.23283526034835406,
+        "contact_distance_source": "insufficient_patch",
+        "contact_map_gap": 0.016398913250486192,
+        "contact_used_gap": 0.016398913250486192,
+        "contact_patch_points": 0,
+        "reference_matches": 193,
+        "reference_residual_rms": 0.0044098005779375105,
+        "reference_displacement": [
+          0.0011057188802590376,
+          -0.00010298201298623752
+        ],
+        "reference_bootstrap_offset": [
+          0.0,
+          0.0
+        ],
+        "reference_angle": 0.0,
+        "reference_velocity": [
+          -0.01120476036798291,
+          0.00833180083396031
+        ],
+        "recovery_eligible": false,
+        "reinforcement_state": "not_enabled",
+        "reinforcement_event": "not_enabled",
+        "reinforcement_attempts": 0,
+        "reinforcement_confirmed": false,
+        "reinforcement_confirm_seconds": 0.0,
+        "reinforcement_path_length": 0.0,
+        "reinforcement_gap": null,
+        "reinforcement_retain": false,
+        "reinforcement_suspended_approach": false,
+        "acquisition_support": {
+          "applied": false,
+          "reason": "outside_stationary_acquisition",
+          "stage": "fresh_reference",
+          "source_agents": []
+        },
+        "map_reference_status": "fresh_reference",
+        "map_reference_voters": [
+          "agent_14",
+          "agent_04",
+          "agent_05",
+          "agent_06",
+          "agent_07",
+          "agent_08",
+          "agent_09",
+          "agent_10",
+          "agent_11",
+          "agent_12",
+          "agent_13"
+        ],
+        "map_reference_displacement": [
+          0.00023653990845427407,
+          0.001763624971972588
+        ],
+        "map_reference_velocity": [
+          -0.010412831740318339,
+          0.0035111808246543327
+        ],
+        "map_reference_bridge": {
+          "status": "continuous",
+          "displacement": [
+            0.00023653990845427407,
+            0.001763624971972588
+          ],
+          "velocity": [
+            -0.010412831740318339,
+            0.0035111808246543327
+          ],
+          "delta": [
+            -0.0015295745719781542,
+            0.0007603661361402424
+          ],
+          "voters": [
+            "agent_14",
+            "agent_04",
+            "agent_05",
+            "agent_06",
+            "agent_07",
+            "agent_08",
+            "agent_09",
+            "agent_10",
+            "agent_11",
+            "agent_12",
+            "agent_13"
+          ],
+          "common_voters": [
+            "agent_14",
+            "agent_04",
+            "agent_05",
+            "agent_06",
+            "agent_07",
+            "agent_08",
+            "agent_09",
+            "agent_10",
+            "agent_11",
+            "agent_12",
+            "agent_13"
+          ],
+          "reset_history": false,
+          "current": {
+            "agent_14": [
+              0.0011057188802590376,
+              -0.00010298201298623752
+            ],
+            "agent_04": [
+              0.000934055843254894,
+              0.000777402611364091
+            ],
+            "agent_05": [
+              0.0009340558432549005,
+              0.0007774026113640958
+            ],
+            "agent_06": [
+              0.0008693867034803927,
+              -0.0018547852162199142
+            ],
+            "agent_07": [
+              0.001313013470455981,
+              0.0005656992052180142
+            ],
+            "agent_08": [
+              0.001101236719389158,
+              -0.0006661052272199546
+            ],
+            "agent_09": [
+              0.0007732375684175552,
+              -0.004005965078031937
+            ],
+            "agent_10": [
+              0.001425788131536585,
+              -0.002270884537170532
+            ],
+            "agent_11": [
+              -0.001273042109772756,
+              -0.001183715613097662
+            ],
+            "agent_12": [
+              0.0020769736541881296,
+              -0.003378787379800473
+            ],
+            "agent_13": [
+              -0.002089065474957364,
+              -0.0008421095366896356
+            ]
+          },
+          "previous": {
+            "agent_14": [
+              0.0038251242919906643,
+              -0.0017039265659118345
+            ],
+            "agent_04": [
+              0.0025802660118157362,
+              0.0038668453264164362
+            ],
+            "agent_05": [
+              0.002580266011815742,
+              0.0038668453264164415
+            ],
+            "agent_06": [
+              0.004639764841620348,
+              -0.006032598116228648
+            ],
+            "agent_07": [
+              0.0027493265063711354,
+              0.0031838695766217132
+            ],
+            "agent_08": [
+              0.004802326560295676,
+              -0.005771554632711402
+            ],
+            "agent_09": [
+              0.0008432292406000235,
+              -0.00311080973391918
+            ],
+            "agent_10": [
+              0.004022504518864289,
+              -0.003765806513995828
+            ],
+            "agent_11": [
+              -0.00193619510360668,
+              -0.0021738141177103615
+            ],
+            "agent_12": [
+              0.003606548220358825,
+              -0.004139153618874181
+            ],
+            "agent_13": [
+              -0.0023207306219941186,
+              -0.001954866871233329
+            ]
+          },
+          "raw_displacement": [
+            0.0009617444518244449,
+            -0.0006952953140449896
+          ],
+          "discarded_cells": 0,
+          "retained_cells_before_alignment": 88
+        },
+        "pair_safety": {
+          "eligible": false,
+          "reason": "outside_stationary_acquisition"
+        }
+      }
+    },
+    {
+      "case_id": "far_skew_box_s0_r0_pos0_map_bridge_candidate",
+      "saved_frame": 500,
+      "agent_id": "agent_14",
+      "phase": "ENCLOSE",
+      "capture_state": "frozen",
+      "true_gap_m": 0.16137542070596214,
+      "true_displacement": [
+        0.0,
+        0.0
+      ],
+      "map_displacement_error_m": [
+        -0.00039443619368293055,
+        0.005109316342660621
+      ],
+      "raw_aggregate_error_m": [
+        0.0015456327733756753,
+        0.0008164244513505655
+      ],
+      "map_displacement_error_norm_m": 0.005124518845732347,
+      "true_angle_rad": 0.0,
+      "diagnostic": {
+        "agent_id": "agent_14",
+        "mode": "cage",
+        "cell_mass": 0.06439240957164297,
+        "object_rows": 1,
+        "contact_ready": true,
+        "push_side": false,
+        "solver_status": "scaled_barrier",
+        "modification": 0.3393010013066077,
+        "effort": 0.0,
+        "progress": -0.0004891008801668271,
+        "map_points": 98,
+        "direct_visible": true,
+        "own_scan_points": 11,
+        "boundary_distance": 0.15636281774652658,
+        "token_distance": 0.8621635350393319,
+        "map_angular_coverage": 0.8611111111111112,
+        "cell_held_fraction": 0.8846638558959118,
+        "cell_unheld_mass": 0.007426772229564484,
+        "centroid_distance": 0.05043633054991309,
+        "redeploy_requested": false,
+        "redeploy_active": false,
+        "redeploy_reason": "contact_ready",
+        "redeploy_candidates": 20,
+        "cage_targets": 98,
+        "agent_rows": 10,
+        "agent_rows_active": 2,
+        "object_rows_active": 0,
+        "zero_input_feasible": false,
+        "speed_nominal": 0.3545735796576978,
+        "speed_command": 0.02371046091680672,
+        "map_centroid": [
+          3.652220639478094,
+          5.542130372613975
+        ],
+        "cvt_centroid": [
+          4.227834536144586,
+          4.967431371266739
+        ],
+        "redeploy_target": [
+          null,
+          null
+        ],
+        "nominal_command": [
+          0.2744901444329337,
+          0.22444951325512152
+        ],
+        "local_holding": false,
+        "safety_feedback_blocked": false,
+        "contact_role": "baseline",
+        "contact_cone_residual": null,
+        "contact_allocation": null,
+        "contact_redeploy_attempts": 0,
+        "contact_redeploy_reason": "not_enabled",
+        "contact_selected_normal": [
+          0.848764502012153,
+          0.5287710469797507
+        ],
+        "contact_desired_direction": [
+          0.9999997679621384,
+          -0.0006812309957186697
+        ],
+        "contact_lateral_estimate": [
+          null,
+          null
+        ],
+        "contact_redeploy_target": [
+          null,
+          null
+        ],
+        "handoff_state": "not_enabled",
+        "handoff_donor_state": "not_enabled",
+        "handoff_partner": "",
+        "handoff_event": "not_enabled",
+        "handoff_rollback_reason": "",
+        "handoff_attempts": 0,
+        "handoff_contact_proxy": false,
+        "handoff_confirm_seconds": 0.0,
+        "handoff_release_fraction": 0.0,
+        "handoff_gap": null,
+        "handoff_motion_ok": false,
+        "handoff_local_forward_velocity": 0.0,
+        "handoff_local_lateral_velocity": 0.0,
+        "navigation_remaining": 1.1784546453134774,
+        "navigation_voters": "agent_14|agent_04|agent_05|agent_06|agent_07|agent_08|agent_09|agent_10|agent_11|agent_12|agent_13",
+        "navigation_displacement": [
+          0.0015456327733756753,
+          0.0008164244513505655
+        ],
+        "navigation_error": [
+          1.1984543672266244,
+          -0.0008164244513505655
+        ],
+        "navigation_velocity": [
+          -0.012435677601689388,
+          0.010940620051733782
+        ],
+        "reference_status": "accepted",
+        "reference_pivot_status": "accepted",
+        "reference_pivot_rms": null,
+        "reference_support_minor_rms": 0.2581470704270656,
+        "contact_distance_source": "insufficient_patch",
+        "contact_map_gap": -0.0218841508453007,
+        "contact_used_gap": -0.0218841508453007,
+        "contact_patch_points": 0,
+        "reference_matches": 202,
+        "reference_residual_rms": 0.004363883579045583,
+        "reference_displacement": [
+          0.002892673092863905,
+          -0.0014956338623613556
+        ],
+        "reference_bootstrap_offset": [
+          0.0,
+          0.0
+        ],
+        "reference_angle": 0.0,
+        "reference_velocity": [
+          -0.0003359957594556008,
+          0.0019632776490144666
+        ],
+        "recovery_eligible": false,
+        "reinforcement_state": "not_enabled",
+        "reinforcement_event": "not_enabled",
+        "reinforcement_attempts": 0,
+        "reinforcement_confirmed": false,
+        "reinforcement_confirm_seconds": 0.0,
+        "reinforcement_path_length": 0.0,
+        "reinforcement_gap": null,
+        "reinforcement_retain": false,
+        "reinforcement_suspended_approach": false,
+        "acquisition_support": {
+          "applied": false,
+          "reason": "outside_stationary_acquisition",
+          "stage": "fresh_reference",
+          "source_agents": []
+        },
+        "map_reference_status": "fresh_reference",
+        "map_reference_voters": [
+          "agent_14",
+          "agent_04",
+          "agent_05",
+          "agent_06",
+          "agent_07",
+          "agent_08",
+          "agent_09",
+          "agent_10",
+          "agent_11",
+          "agent_12",
+          "agent_13"
+        ],
+        "map_reference_displacement": [
+          -0.00039443619368293055,
+          0.005109316342660621
+        ],
+        "map_reference_velocity": [
+          -0.012435677601689388,
+          0.010940620051733782
+        ],
+        "map_reference_bridge": {
+          "status": "continuous",
+          "displacement": [
+            -0.00039443619368293055,
+            0.005109316342660621
+          ],
+          "velocity": [
+            -0.012435677601689388,
+            0.010940620051733782
+          ],
+          "delta": [
+            -0.0016746056079227985,
+            0.00047982130941556165
+          ],
+          "voters": [
+            "agent_14",
+            "agent_04",
+            "agent_05",
+            "agent_06",
+            "agent_07",
+            "agent_08",
+            "agent_09",
+            "agent_10",
+            "agent_11",
+            "agent_12",
+            "agent_13"
+          ],
+          "common_voters": [
+            "agent_14",
+            "agent_04",
+            "agent_05",
+            "agent_06",
+            "agent_07",
+            "agent_08",
+            "agent_09",
+            "agent_10",
+            "agent_11",
+            "agent_12",
+            "agent_13"
+          ],
+          "reset_history": false,
+          "current": {
+            "agent_14": [
+              0.002892673092863905,
+              -0.0014956338623613556
+            ],
+            "agent_04": [
+              0.0011437478604240958,
+              0.003842767152956454
+            ],
+            "agent_05": [
+              0.0011437478604240977,
+              0.0038427671529564582
+            ],
+            "agent_06": [
+              -0.001957284932215183,
+              0.008734434079425247
+            ],
+            "agent_07": [
+              0.0017008531468077563,
+              0.002996119678172145
+            ],
+            "agent_08": [
+              0.004169281559356978,
+              -0.004512323445390332
+            ],
+            "agent_09": [
+              0.0006169243425533761,
+              -0.0022549176895458726
+            ],
+            "agent_10": [
+              0.003031839100706759,
+              0.0011953084298765842
+            ],
+            "agent_11": [
+              -0.002653202679942265,
+              -0.0020518330394774776
+            ],
+            "agent_12": [
+              0.0026188351213634474,
+              -6.596274899814156e-05
+            ],
+            "agent_13": [
+              -0.0034800887608215495,
+              -0.0003389525612502711
+            ]
+          },
+          "previous": {
+            "agent_14": [
+              0.0023665488822357953,
+              -0.0012190727093525542
+            ],
+            "agent_04": [
+              0.003503475910594609,
+              0.0030660624080585588
+            ],
+            "agent_05": [
+              0.003503475910594612,
+              0.003066062408058563
+            ],
+            "agent_06": [
+              -0.002278589488618021,
+              0.005425655018336502
+            ],
+            "agent_07": [
+              0.0035124746351095143,
+              0.002806144974344182
+            ],
+            "agent_08": [
+              0.0017755205847023283,
+              0.0003652048687044307
+            ],
+            "agent_09": [
+              0.0021934708995505394,
+              -0.004137058346008751
+            ],
+            "agent_10": [
+              0.0032915835305042445,
+              0.0005338154532099806
+            ],
+            "agent_11": [
+              -0.0007474883516617664,
+              -0.002368629754316837
+            ],
+            "agent_12": [
+              0.003407718394301571,
+              0.00030425899074697324
+            ],
+            "agent_13": [
+              0.0019920171776004877,
+              -0.0033664107832131643
+            ]
+          },
+          "raw_displacement": [
+            0.0015456327733756753,
+            0.0008164244513505655
+          ],
+          "discarded_cells": 0,
+          "retained_cells_before_alignment": 98
+        },
+        "pair_safety": {
+          "eligible": false,
+          "reason": "outside_stationary_acquisition"
+        }
+      }
+    },
+    {
+      "case_id": "far_skew_box_s0_r0_pos0_map_bridge_candidate",
+      "saved_frame": 501,
+      "agent_id": "agent_14",
+      "phase": "ENCLOSE",
+      "capture_state": "frozen",
+      "true_gap_m": 0.16236108597820134,
+      "true_displacement": [
+        0.0,
+        0.0
+      ],
+      "map_displacement_error_m": [
+        -0.00024540780213003893,
+        0.003988192083665599
+      ],
+      "raw_aggregate_error_m": [
+        0.001677596841143508,
+        0.0001487521806171753
+      ],
+      "map_displacement_error_norm_m": 0.003995735362303071,
+      "true_angle_rad": 0.0,
+      "diagnostic": {
+        "agent_id": "agent_14",
+        "mode": "cage",
+        "cell_mass": 0.0640232048574445,
+        "object_rows": 1,
+        "contact_ready": true,
+        "push_side": false,
+        "solver_status": "scaled_barrier",
+        "modification": 0.3394186442246692,
+        "effort": 0.0,
+        "progress": -0.0003043056746412416,
+        "map_points": 98,
+        "direct_visible": true,
+        "own_scan_points": 11,
+        "boundary_distance": 0.15796923504346638,
+        "token_distance": 0.8626361236692932,
+        "map_angular_coverage": 0.8611111111111112,
+        "cell_held_fraction": 0.8875252586822866,
+        "cell_unheld_mass": 0.007200993404672041,
+        "centroid_distance": 0.050373054420574936,
+        "redeploy_requested": false,
+        "redeploy_active": false,
+        "redeploy_reason": "contact_ready",
+        "redeploy_candidates": 20,
+        "cage_targets": 98,
+        "agent_rows": 10,
+        "agent_rows_active": 2,
+        "object_rows_active": 0,
+        "zero_input_feasible": false,
+        "speed_nominal": 0.3525623813193298,
+        "speed_command": 0.02954364145771063,
+        "map_centroid": [
+          3.652424360768599,
+          5.541472970771974
+        ],
+        "cvt_centroid": [
+          4.229310456847053,
+          4.96712616244037
+        ],
+        "redeploy_target": [
+          null,
+          null
+        ],
+        "nominal_command": [
+          0.2841369127645934,
+          0.20872577111167262
+        ],
+        "local_holding": false,
+        "safety_feedback_blocked": false,
+        "contact_role": "baseline",
+        "contact_cone_residual": null,
+        "contact_allocation": null,
+        "contact_redeploy_attempts": 0,
+        "contact_redeploy_reason": "not_enabled",
+        "contact_selected_normal": [
+          0.8753548080089049,
+          0.48348108556146546
+        ],
+        "contact_desired_direction": [
+          0.9999999922954137,
+          -0.00012413368812848763
+        ],
+        "contact_lateral_estimate": [
+          null,
+          null
+        ],
+        "contact_redeploy_target": [
+          null,
+          null
+        ],
+        "handoff_state": "not_enabled",
+        "handoff_donor_state": "not_enabled",
+        "handoff_partner": "",
+        "handoff_event": "not_enabled",
+        "handoff_rollback_reason": "",
+        "handoff_attempts": 0,
+        "handoff_contact_proxy": false,
+        "handoff_confirm_seconds": 0.0,
+        "handoff_release_fraction": 0.0,
+        "handoff_gap": null,
+        "handoff_motion_ok": false,
+        "handoff_local_forward_velocity": 0.0,
+        "handoff_local_lateral_velocity": 0.0,
+        "navigation_remaining": 1.1783224123914349,
+        "navigation_voters": "agent_14|agent_04|agent_05|agent_06|agent_07|agent_08|agent_09|agent_10|agent_11|agent_12|agent_13",
+        "navigation_displacement": [
+          0.001677596841143508,
+          0.0001487521806171753
+        ],
+        "navigation_error": [
+          1.1983224031588564,
+          -0.0001487521806171753
+        ],
+        "navigation_velocity": [
+          -0.006731915585873987,
+          -0.002317695879962827
+        ],
+        "reference_status": "accepted",
+        "reference_pivot_status": "accepted",
+        "reference_pivot_rms": null,
+        "reference_support_minor_rms": 0.2517427440674491,
+        "contact_distance_source": "insufficient_patch",
+        "contact_map_gap": -0.007487267977902919,
+        "contact_used_gap": -0.007487267977902919,
+        "contact_patch_points": 0,
+        "reference_matches": 201,
+        "reference_residual_rms": 0.004213996921247725,
+        "reference_displacement": [
+          0.0022586604696153397,
+          0.0005259453988568013
+        ],
+        "reference_bootstrap_offset": [
+          0.0,
+          0.0
+        ],
+        "reference_angle": 0.0,
+        "reference_velocity": [
+          -0.004656485606386034,
+          0.015427185300386299
+        ],
+        "recovery_eligible": false,
+        "reinforcement_state": "not_enabled",
+        "reinforcement_event": "not_enabled",
+        "reinforcement_attempts": 0,
+        "reinforcement_confirmed": false,
+        "reinforcement_confirm_seconds": 0.0,
+        "reinforcement_path_length": 0.0,
+        "reinforcement_gap": null,
+        "reinforcement_retain": false,
+        "reinforcement_suspended_approach": false,
+        "acquisition_support": {
+          "applied": false,
+          "reason": "outside_stationary_acquisition",
+          "stage": "fresh_reference",
+          "source_agents": []
+        },
+        "map_reference_status": "fresh_reference",
+        "map_reference_voters": [
+          "agent_14",
+          "agent_04",
+          "agent_05",
+          "agent_06",
+          "agent_07",
+          "agent_08",
+          "agent_09",
+          "agent_10",
+          "agent_11",
+          "agent_12",
+          "agent_13"
+        ],
+        "map_reference_displacement": [
+          -0.00024540780213003893,
+          0.003988192083665599
+        ],
+        "map_reference_velocity": [
+          -0.006731915585873987,
+          -0.002317695879962827
+        ],
+        "map_reference_bridge": {
+          "status": "continuous",
+          "displacement": [
+            -0.00024540780213003893,
+            0.003988192083665599
+          ],
+          "velocity": [
+            -0.006731915585873987,
+            -0.002317695879962827
+          ],
+          "delta": [
+            0.00014902839155289164,
+            -0.001121124258995022
+          ],
+          "voters": [
+            "agent_14",
+            "agent_04",
+            "agent_05",
+            "agent_06",
+            "agent_07",
+            "agent_08",
+            "agent_09",
+            "agent_10",
+            "agent_11",
+            "agent_12",
+            "agent_13"
+          ],
+          "common_voters": [
+            "agent_14",
+            "agent_04",
+            "agent_05",
+            "agent_06",
+            "agent_07",
+            "agent_08",
+            "agent_09",
+            "agent_10",
+            "agent_11",
+            "agent_12",
+            "agent_13"
+          ],
+          "reset_history": false,
+          "current": {
+            "agent_14": [
+              0.0022586604696153397,
+              0.0005259453988568013
+            ],
+            "agent_04": [
+              0.0016208656337846842,
+              0.0014359992020963146
+            ],
+            "agent_05": [
+              0.001620865633784685,
+              0.0014359992020963198
+            ],
+            "agent_06": [
+              -0.001896490400599788,
+              0.007804934072012488
+            ],
+            "agent_07": [
+              0.0016071634210409061,
+              0.0015083502463317997
+            ],
+            "agent_08": [
+              0.0032296803575769,
+              -0.002997617115402492
+            ],
+            "agent_09": [
+              0.0007872468351981344,
+              -0.0022590436734165375
+            ],
+            "agent_10": [
+              0.0022684560635641855,
+              -0.00027056621491832594
+            ],
+            "agent_11": [
+              -0.0013316721620414227,
+              -0.002437269281770411
+            ],
+            "agent_12": [
+              0.003052081928655681,
+              -0.0026171361683970397
+            ],
+            "agent_13": [
+              -0.0018391460120855813,
+              -0.001809825715275983
+            ]
+          },
+          "previous": {
+            "agent_14": [
+              0.002892673092863905,
+              -0.0014956338623613556
+            ],
+            "agent_04": [
+              0.0011437478604240958,
+              0.003842767152956454
+            ],
+            "agent_05": [
+              0.0011437478604240977,
+              0.0038427671529564582
+            ],
+            "agent_06": [
+              -0.001957284932215183,
+              0.008734434079425247
+            ],
+            "agent_07": [
+              0.0017008531468077563,
+              0.002996119678172145
+            ],
+            "agent_08": [
+              0.004169281559356978,
+              -0.004512323445390332
+            ],
+            "agent_09": [
+              0.0006169243425533761,
+              -0.0022549176895458726
+            ],
+            "agent_10": [
+              0.003031839100706759,
+              0.0011953084298765842
+            ],
+            "agent_11": [
+              -0.002653202679942265,
+              -0.0020518330394774776
+            ],
+            "agent_12": [
+              0.0026188351213634474,
+              -6.596274899814156e-05
+            ],
+            "agent_13": [
+              -0.0034800887608215495,
+              -0.0003389525612502711
+            ]
+          },
+          "raw_displacement": [
+            0.001677596841143508,
+            0.0001487521806171753
+          ],
+          "discarded_cells": 0,
+          "retained_cells_before_alignment": 98
+        },
+        "pair_safety": {
+          "eligible": false,
+          "reason": "outside_stationary_acquisition"
+        }
+      }
+    },
+    {
+      "case_id": "far_skew_box_s0_r0_pos0_map_bridge_candidate",
+      "saved_frame": 502,
+      "agent_id": "agent_14",
+      "phase": "ENCLOSE",
+      "capture_state": "frozen",
+      "true_gap_m": 0.16369712645226384,
+      "true_displacement": [
+        0.0,
+        0.0
+      ],
+      "map_displacement_error_m": [
+        0.0018915549117322207,
+        0.0036259310840429763
+      ],
+      "raw_aggregate_error_m": [
+        0.004156332747788794,
+        0.00015315551318948386
+      ],
+      "map_displacement_error_norm_m": 0.004089664559634123,
+      "true_angle_rad": 0.0,
+      "diagnostic": {
+        "agent_id": "agent_14",
+        "mode": "cage",
+        "cell_mass": 0.06186139802250162,
+        "object_rows": 1,
+        "contact_ready": true,
+        "push_side": false,
+        "solver_status": "scaled_barrier",
+        "modification": 0.33650526945017006,
+        "effort": 0.0,
+        "progress": 0.002345528090547961,
+        "map_points": 99,
+        "direct_visible": true,
+        "own_scan_points": 12,
+        "boundary_distance": 0.16218528930488627,
+        "token_distance": 0.8626788526349285,
+        "map_angular_coverage": 0.8611111111111112,
+        "cell_held_fraction": 0.8901096017662103,
+        "cell_unheld_mass": 0.006797973663991672,
+        "centroid_distance": 0.05265195039276108,
+        "redeploy_requested": false,
+        "redeploy_active": false,
+        "redeploy_reason": "contact_ready",
+        "redeploy_candidates": 20,
+        "cage_targets": 99,
+        "agent_rows": 10,
+        "agent_rows_active": 2,
+        "object_rows_active": 0,
+        "zero_input_feasible": false,
+        "speed_nominal": 0.3488172564044713,
+        "speed_command": 0.04268871465196373,
+        "map_centroid": [
+          3.649406194613989,
+          5.536579286281424
+        ],
+        "cvt_centroid": [
+          4.227594484288332,
+          4.9672587276194795
+        ],
+        "redeploy_target": [
+          null,
+          null
+        ],
+        "nominal_command": [
+          0.2885028173952608,
+          0.1960602017762389
+        ],
+        "local_holding": false,
+        "safety_feedback_blocked": false,
+        "contact_role": "baseline",
+        "contact_cone_residual": null,
+        "contact_allocation": null,
+        "contact_redeploy_attempts": 0,
+        "contact_redeploy_reason": "not_enabled",
+        "contact_selected_normal": [
+          0.8955163372696525,
+          0.44502863917184693
+        ],
+        "contact_desired_direction": [
+          0.9999999917986292,
+          -0.00012807318893557113
+        ],
+        "contact_lateral_estimate": [
+          null,
+          null
+        ],
+        "contact_redeploy_target": [
+          null,
+          null
+        ],
+        "handoff_state": "not_enabled",
+        "handoff_donor_state": "not_enabled",
+        "handoff_partner": "",
+        "handoff_event": "not_enabled",
+        "handoff_rollback_reason": "",
+        "handoff_attempts": 0,
+        "handoff_contact_proxy": false,
+        "handoff_confirm_seconds": 0.0,
+        "handoff_release_fraction": 0.0,
+        "handoff_gap": null,
+        "handoff_motion_ok": false,
+        "handoff_local_forward_velocity": 0.0,
+        "handoff_local_lateral_velocity": 0.0,
+        "navigation_remaining": 1.1758436770597687,
+        "navigation_voters": "agent_14|agent_04|agent_05|agent_06|agent_07|agent_08|agent_09|agent_10|agent_11|agent_12|agent_13",
+        "navigation_displacement": [
+          0.004156332747788794,
+          0.00015315551318948386
+        ],
+        "navigation_error": [
+          1.1958436672522113,
+          -0.00015315551318948386
+        ],
+        "navigation_velocity": [
+          0.010234772101317907,
+          -6.5040465978001525e-06
+        ],
+        "reference_status": "accepted",
+        "reference_pivot_status": "accepted",
+        "reference_pivot_rms": null,
+        "reference_support_minor_rms": 0.2580746238609878,
+        "contact_distance_source": "insufficient_patch",
+        "contact_map_gap": 0.007534308274290749,
+        "contact_used_gap": 0.007534308274290749,
+        "contact_patch_points": 0,
+        "reference_matches": 216,
+        "reference_residual_rms": 0.004824817600469531,
+        "reference_displacement": [
+          0.004350682827448289,
+          0.0003247048603911898
+        ],
+        "reference_bootstrap_offset": [
+          0.0,
+          0.0
+        ],
+        "reference_angle": 0.0,
+        "reference_velocity": [
+          0.011617440860679517,
+          0.008618986675991834
+        ],
+        "recovery_eligible": false,
+        "reinforcement_state": "not_enabled",
+        "reinforcement_event": "not_enabled",
+        "reinforcement_attempts": 0,
+        "reinforcement_confirmed": false,
+        "reinforcement_confirm_seconds": 0.0,
+        "reinforcement_path_length": 0.0,
+        "reinforcement_gap": null,
+        "reinforcement_retain": false,
+        "reinforcement_suspended_approach": false,
+        "acquisition_support": {
+          "applied": false,
+          "reason": "outside_stationary_acquisition",
+          "stage": "fresh_reference",
+          "source_agents": []
+        },
+        "map_reference_status": "fresh_reference",
+        "map_reference_voters": [
+          "agent_14",
+          "agent_04",
+          "agent_05",
+          "agent_06",
+          "agent_07",
+          "agent_08",
+          "agent_09",
+          "agent_10",
+          "agent_11",
+          "agent_12",
+          "agent_13"
+        ],
+        "map_reference_displacement": [
+          0.0018915549117322207,
+          0.0036259310840429763
+        ],
+        "map_reference_velocity": [
+          0.010234772101317907,
+          -6.5040465978001525e-06
+        ],
+        "map_reference_bridge": {
+          "status": "continuous",
+          "displacement": [
+            0.0018915549117322207,
+            0.0036259310840429763
+          ],
+          "velocity": [
+            0.010234772101317907,
+            -6.5040465978001525e-06
+          ],
+          "delta": [
+            0.0021369627138622597,
+            -0.00036226099962262295
+          ],
+          "voters": [
+            "agent_14",
+            "agent_04",
+            "agent_05",
+            "agent_06",
+            "agent_07",
+            "agent_08",
+            "agent_09",
+            "agent_10",
+            "agent_11",
+            "agent_12",
+            "agent_13"
+          ],
+          "common_voters": [
+            "agent_14",
+            "agent_04",
+            "agent_05",
+            "agent_06",
+            "agent_07",
+            "agent_08",
+            "agent_09",
+            "agent_10",
+            "agent_11",
+            "agent_12",
+            "agent_13"
+          ],
+          "reset_history": false,
+          "current": {
+            "agent_14": [
+              0.004350682827448289,
+              0.0003247048603911898
+            ],
+            "agent_04": [
+              0.005756929495564384,
+              -0.001944376003849921
+            ],
+            "agent_05": [
+              0.005756929495564386,
+              -0.0019443760038499154
+            ],
+            "agent_06": [
+              0.0025612021321166087,
+              0.003097804437683784
+            ],
+            "agent_07": [
+              0.006158485242040736,
+              -0.0014456792233690547
+            ],
+            "agent_08": [
+              0.004095640787163705,
+              0.00023181254492669195
+            ],
+            "agent_09": [
+              0.0026782451374465833,
+              -0.002582237665502798
+            ],
+            "agent_10": [
+              0.004325218574134687,
+              0.0011254032141318415
+            ],
+            "agent_11": [
+              -0.00042391661627721685,
+              -0.0027225392360783543
+            ],
+            "agent_12": [
+              0.004400753815483991,
+              0.0011290441924858654
+            ],
+            "agent_13": [
+              0.0007617130741932153,
+              -0.0028497088240646965
+            ]
+          },
+          "previous": {
+            "agent_14": [
+              0.0022586604696153397,
+              0.0005259453988568013
+            ],
+            "agent_04": [
+              0.0016208656337846842,
+              0.0014359992020963146
+            ],
+            "agent_05": [
+              0.001620865633784685,
+              0.0014359992020963198
+            ],
+            "agent_06": [
+              -0.001896490400599788,
+              0.007804934072012488
+            ],
+            "agent_07": [
+              0.0016071634210409061,
+              0.0015083502463317997
+            ],
+            "agent_08": [
+              0.0032296803575769,
+              -0.002997617115402492
+            ],
+            "agent_09": [
+              0.0007872468351981344,
+              -0.0022590436734165375
+            ],
+            "agent_10": [
+              0.0022684560635641855,
+              -0.00027056621491832594
+            ],
+            "agent_11": [
+              -0.0013316721620414227,
+              -0.002437269281770411
+            ],
+            "agent_12": [
+              0.003052081928655681,
+              -0.0026171361683970397
+            ],
+            "agent_13": [
+              -0.0018391460120855813,
+              -0.001809825715275983
+            ]
+          },
+          "raw_displacement": [
+            0.004156332747788794,
+            0.00015315551318948386
+          ],
+          "discarded_cells": 0,
+          "retained_cells_before_alignment": 98
+        },
+        "pair_safety": {
+          "eligible": false,
+          "reason": "outside_stationary_acquisition"
+        }
+      }
+    },
+    {
+      "case_id": "far_skew_box_s0_r0_pos0_map_bridge_candidate",
+      "saved_frame": 516,
+      "agent_id": "agent_14",
+      "phase": "CONTACT_READY",
+      "capture_state": "frozen",
+      "true_gap_m": 0.17026158750466397,
+      "true_displacement": [
+        0.0,
+        0.0
+      ],
+      "map_displacement_error_m": [
+        -0.001147736420258438,
+        0.0003494708596925645
+      ],
+      "raw_aggregate_error_m": [
+        0.00025016589263375045,
+        -0.002866417574501137
+      ],
+      "map_displacement_error_norm_m": 0.0011997619647921474,
+      "true_angle_rad": 0.0,
+      "diagnostic": {
+        "agent_id": "agent_14",
+        "mode": "cage",
+        "cell_mass": 0.06498737601852188,
+        "object_rows": 1,
+        "contact_ready": true,
+        "push_side": false,
+        "solver_status": "scaled_barrier",
+        "modification": 0.4167593068214598,
+        "effort": 0.0,
+        "progress": -0.0031149004757462504,
+        "map_points": 99,
+        "direct_visible": true,
+        "own_scan_points": 12,
+        "boundary_distance": 0.17180606783670627,
+        "token_distance": 0.8551589551957994,
+        "map_angular_coverage": 0.8611111111111112,
+        "cell_held_fraction": 0.9026924161537875,
+        "cell_unheld_mass": 0.00632376454086766,
+        "centroid_distance": 0.03923677067072287,
+        "redeploy_requested": false,
+        "redeploy_active": false,
+        "redeploy_reason": "contact_ready",
+        "redeploy_candidates": 22,
+        "cage_targets": 99,
+        "agent_rows": 9,
+        "agent_rows_active": 1,
+        "object_rows_active": 0,
+        "zero_input_feasible": false,
+        "speed_nominal": 0.35664444941061024,
+        "speed_command": 0.3485444406781258,
+        "map_centroid": [
+          3.6391757960886597,
+          5.512778124140684
+        ],
+        "cvt_centroid": [
+          4.22629903887842,
+          4.94286731813749
+        ],
+        "redeploy_target": [
+          null,
+          null
+        ],
+        "nominal_command": [
+          0.2761506277303017,
+          0.22569026141940118
+        ],
+        "local_holding": false,
+        "safety_feedback_blocked": false,
+        "contact_role": "baseline",
+        "contact_cone_residual": null,
+        "contact_allocation": null,
+        "contact_redeploy_attempts": 0,
+        "contact_redeploy_reason": "not_enabled",
+        "contact_selected_normal": [
+          0.8326171160265997,
+          0.5538490210333029
+        ],
+        "contact_desired_direction": [
+          0.9999971459231444,
+          0.00238917256917792
+        ],
+        "contact_lateral_estimate": [
+          null,
+          null
+        ],
+        "contact_redeploy_target": [
+          null,
+          null
+        ],
+        "handoff_state": "not_enabled",
+        "handoff_donor_state": "not_enabled",
+        "handoff_partner": "",
+        "handoff_event": "not_enabled",
+        "handoff_rollback_reason": "",
+        "handoff_attempts": 0,
+        "handoff_contact_proxy": false,
+        "handoff_confirm_seconds": 0.0,
+        "handoff_release_fraction": 0.0,
+        "handoff_gap": null,
+        "handoff_motion_ok": false,
+        "handoff_local_forward_velocity": 0.0,
+        "handoff_local_lateral_velocity": 0.0,
+        "navigation_remaining": 1.1797532582953731,
+        "navigation_voters": "agent_14|agent_04|agent_05|agent_07|agent_08|agent_09|agent_10|agent_11|agent_12|agent_13",
+        "navigation_displacement": [
+          0.00025016589263375045,
+          -0.002866417574501137
+        ],
+        "navigation_error": [
+          1.1997498341073662,
+          0.002866417574501137
+        ],
+        "navigation_velocity": [
+          -0.007253573072181089,
+          -0.011109670411260762
+        ],
+        "reference_status": "accepted",
+        "reference_pivot_status": "accepted",
+        "reference_pivot_rms": null,
+        "reference_support_minor_rms": 0.2677126891075083,
+        "contact_distance_source": "insufficient_patch",
+        "contact_map_gap": -0.04463063464280944,
+        "contact_used_gap": -0.04463063464280944,
+        "contact_patch_points": 0,
+        "reference_matches": 207,
+        "reference_residual_rms": 0.004221413401779058,
+        "reference_displacement": [
+          -0.0005393214797595051,
+          -0.0017518489336642638
+        ],
+        "reference_bootstrap_offset": [
+          0.0,
+          0.0
+        ],
+        "reference_angle": 0.0,
+        "reference_velocity": [
+          -0.010692673197465231,
+          -0.005792034978525274
+        ],
+        "recovery_eligible": false,
+        "reinforcement_state": "not_enabled",
+        "reinforcement_event": "not_enabled",
+        "reinforcement_attempts": 0,
+        "reinforcement_confirmed": false,
+        "reinforcement_confirm_seconds": 0.0,
+        "reinforcement_path_length": 0.0,
+        "reinforcement_gap": null,
+        "reinforcement_retain": false,
+        "reinforcement_suspended_approach": false,
+        "acquisition_support": {
+          "applied": false,
+          "reason": "outside_stationary_acquisition",
+          "stage": "fresh_reference",
+          "source_agents": []
+        },
+        "map_reference_status": "fresh_reference",
+        "map_reference_voters": [
+          "agent_14",
+          "agent_04",
+          "agent_05",
+          "agent_07",
+          "agent_08",
+          "agent_09",
+          "agent_10",
+          "agent_11",
+          "agent_12",
+          "agent_13"
+        ],
+        "map_reference_displacement": [
+          -0.001147736420258438,
+          0.0003494708596925645
+        ],
+        "map_reference_velocity": [
+          -0.007253573072181089,
+          -0.011109670411260762
+        ],
+        "map_reference_bridge": {
+          "status": "continuous",
+          "displacement": [
+            -0.001147736420258438,
+            0.0003494708596925645
+          ],
+          "velocity": [
+            -0.007253573072181089,
+            -0.011109670411260762
+          ],
+          "delta": [
+            0.0008966467192897678,
+            -0.0017300505329210277
+          ],
+          "voters": [
+            "agent_14",
+            "agent_04",
+            "agent_05",
+            "agent_07",
+            "agent_08",
+            "agent_09",
+            "agent_10",
+            "agent_11",
+            "agent_12",
+            "agent_13"
+          ],
+          "common_voters": [
+            "agent_14",
+            "agent_04",
+            "agent_05",
+            "agent_07",
+            "agent_08",
+            "agent_09",
+            "agent_10",
+            "agent_11",
+            "agent_12",
+            "agent_13"
+          ],
+          "reset_history": false,
+          "current": {
+            "agent_14": [
+              -0.0005393214797595051,
+              -0.0017518489336642638
+            ],
+            "agent_04": [
+              -0.0003649052046037643,
+              -0.0009835662091101677
+            ],
+            "agent_05": [
+              -6.554100693866462e-05,
+              -0.0007548587515941203
+            ],
+            "agent_07": [
+              0.0004131583423492821,
+              -0.0030282093352631116
+            ],
+            "agent_08": [
+              0.0002501665683825792,
+              -0.0028664173545659174
+            ],
+            "agent_09": [
+              0.0017162086743034233,
+              -0.003170528734580813
+            ],
+            "agent_10": [
+              -0.00015648821637904688,
+              -0.003187447641868268
+            ],
+            "agent_11": [
+              -0.0017926516885692586,
+              -0.0017962716855070733
+            ],
+            "agent_12": [
+              0.00020389395471737305,
+              -0.0035228739672860977
+            ],
+            "agent_13": [
+              0.000642258326704968,
+              -0.004426104988482177
+            ]
+          },
+          "previous": {
+            "agent_14": [
+              -0.0014376223620005883,
+              -0.00038055358928444063
+            ],
+            "agent_04": [
+              0.0002411475133253497,
+              -0.00232981129717367
+            ],
+            "agent_05": [
+              0.00035102814675006536,
+              -0.0014262685312209657
+            ],
+            "agent_07": [
+              0.0014885126921531581,
+              -0.005112796987421615
+            ],
+            "agent_08": [
+              -0.0013740428267797588,
+              0.00293482584441105
+            ],
+            "agent_09": [
+              0.0018173742451632854,
+              -0.0014281207273707825
+            ],
+            "agent_10": [
+              -0.0038255668884169176,
+              0.00043320016924761805
+            ],
+            "agent_11": [
+              -0.0026296586681695865,
+              0.00014796616367252153
+            ],
+            "agent_12": [
+              -0.003401039688093773,
+              0.00031377337680015444
+            ],
+            "agent_13": [
+              -0.0009180598581647626,
+              -0.0022848159889859096
+            ]
+          },
+          "raw_displacement": [
+            0.00025016589263375045,
+            -0.002866417574501137
+          ],
+          "discarded_cells": 0,
+          "retained_cells_before_alignment": 98
+        },
+        "pair_safety": {
+          "eligible": false,
+          "reason": "outside_stationary_acquisition"
+        }
+      }
+    },
+    {
+      "case_id": "far_skew_box_s0_r0_pos0_map_bridge_candidate",
+      "saved_frame": 517,
+      "agent_id": "agent_14",
+      "phase": "CONTACT_READY",
+      "capture_state": "frozen",
+      "true_gap_m": 0.1858572713423425,
+      "true_displacement": [
+        0.0,
+        0.0
+      ],
+      "map_displacement_error_m": [
+        -5.693682449850793e-05,
+        0.0009232869445339837
+      ],
+      "raw_aggregate_error_m": [
+        0.001545925895277617,
+        -0.0021256547897033004
+      ],
+      "map_displacement_error_norm_m": 0.0009250408552766053,
+      "true_angle_rad": 0.0,
+      "diagnostic": {
+        "agent_id": "agent_14",
+        "mode": "redeploy",
+        "cell_mass": 0.05877202222676347,
+        "object_rows": 1,
+        "contact_ready": false,
+        "push_side": false,
+        "solver_status": "scaled_barrier",
+        "modification": 0.6764098226668198,
+        "effort": 0.0,
+        "progress": -0.0016386720424312038,
+        "map_points": 98,
+        "direct_visible": true,
+        "own_scan_points": 11,
+        "boundary_distance": 0.18607801056564066,
+        "token_distance": 0.8738918649124452,
+        "map_angular_coverage": 0.8611111111111112,
+        "cell_held_fraction": 0.8944860794015315,
+        "cell_unheld_mass": 0.006201266486646148,
+        "centroid_distance": 0.027634839685857344,
+        "redeploy_requested": true,
+        "redeploy_active": true,
+        "redeploy_reason": "committed_new",
+        "redeploy_candidates": 22,
+        "cage_targets": 98,
+        "agent_rows": 9,
+        "agent_rows_active": 1,
+        "object_rows_active": 0,
+        "zero_input_feasible": false,
+        "speed_nominal": 1.187717282964675,
+        "speed_command": 0.34884714120607146,
+        "map_centroid": [
+          3.6422353882939627,
+          5.518128166368774
+        ],
+        "cvt_centroid": [
+          4.2411801094997195,
+          4.919888589349331
+        ],
+        "redeploy_target": [
+          2.9390155164446754,
+          4.948912275456024
+        ],
+        "nominal_command": [
+          -1.1868240911159829,
+          0.04605345806463337
+        ],
+        "local_holding": false,
+        "safety_feedback_blocked": false,
+        "contact_role": "baseline",
+        "contact_cone_residual": null,
+        "contact_allocation": null,
+        "contact_redeploy_attempts": 0,
+        "contact_redeploy_reason": "not_enabled",
+        "contact_selected_normal": [
+          null,
+          null
+        ],
+        "contact_desired_direction": [
+          null,
+          null
+        ],
+        "contact_lateral_estimate": [
+          null,
+          null
+        ],
+        "contact_redeploy_target": [
+          null,
+          null
+        ],
+        "handoff_state": "not_enabled",
+        "handoff_donor_state": "not_enabled",
+        "handoff_partner": "",
+        "handoff_event": "not_enabled",
+        "handoff_rollback_reason": "",
+        "handoff_attempts": 0,
+        "handoff_contact_proxy": false,
+        "handoff_confirm_seconds": 0.0,
+        "handoff_release_fraction": 0.0,
+        "handoff_gap": null,
+        "handoff_motion_ok": false,
+        "handoff_local_forward_velocity": 0.0,
+        "handoff_local_lateral_velocity": 0.0,
+        "navigation_remaining": null,
+        "navigation_voters": "",
+        "navigation_displacement": [
+          null,
+          null
+        ],
+        "navigation_error": [
+          null,
+          null
+        ],
+        "navigation_velocity": [
+          null,
+          null
+        ],
+        "reference_status": "accepted",
+        "reference_pivot_status": "accepted",
+        "reference_pivot_rms": null,
+        "reference_support_minor_rms": 0.2761157057678883,
+        "contact_distance_source": "map",
+        "contact_map_gap": null,
+        "contact_used_gap": null,
+        "contact_patch_points": 0,
+        "reference_matches": 207,
+        "reference_residual_rms": 0.004507284534841078,
+        "reference_displacement": [
+          -0.0021291959162761448,
+          -0.0003890205720032732
+        ],
+        "reference_bootstrap_offset": [
+          0.0,
+          0.0
+        ],
+        "reference_angle": 0.0,
+        "reference_velocity": [
+          -0.01807935863396872,
+          0.00577497579558537
+        ],
+        "recovery_eligible": false,
+        "reinforcement_state": "not_enabled",
+        "reinforcement_event": "not_enabled",
+        "reinforcement_attempts": 0,
+        "reinforcement_confirmed": false,
+        "reinforcement_confirm_seconds": 0.0,
+        "reinforcement_path_length": 0.0,
+        "reinforcement_gap": null,
+        "reinforcement_retain": false,
+        "reinforcement_suspended_approach": false,
+        "acquisition_support": {
+          "applied": false,
+          "reason": "outside_stationary_acquisition",
+          "stage": "fresh_reference",
+          "source_agents": []
+        },
+        "map_reference_status": "fresh_reference",
+        "map_reference_voters": [
+          "agent_14",
+          "agent_04",
+          "agent_05",
+          "agent_07",
+          "agent_08",
+          "agent_09",
+          "agent_10",
+          "agent_11",
+          "agent_12",
+          "agent_13"
+        ],
+        "map_reference_displacement": [
+          -5.693682449850793e-05,
+          0.0009232869445339837
+        ],
+        "map_reference_velocity": [
+          0.0028749009045513437,
+          -0.0043958475065813615
+        ],
+        "map_reference_bridge": {
+          "status": "continuous",
+          "displacement": [
+            -5.693682449850793e-05,
+            0.0009232869445339837
+          ],
+          "velocity": [
+            0.0028749009045513437,
+            -0.0043958475065813615
+          ],
+          "delta": [
+            0.00109079959575993,
+            0.0005738160848414193
+          ],
+          "voters": [
+            "agent_14",
+            "agent_04",
+            "agent_05",
+            "agent_07",
+            "agent_08",
+            "agent_09",
+            "agent_10",
+            "agent_11",
+            "agent_12",
+            "agent_13"
+          ],
+          "common_voters": [
+            "agent_14",
+            "agent_04",
+            "agent_05",
+            "agent_07",
+            "agent_08",
+            "agent_09",
+            "agent_10",
+            "agent_11",
+            "agent_12",
+            "agent_13"
+          ],
+          "reset_history": false,
+          "current": {
+            "agent_14": [
+              -0.0021291959162761448,
+              -0.0003890205720032732
+            ],
+            "agent_04": [
+              0.0015291716653498748,
+              -0.0028528233116387374
+            ],
+            "agent_05": [
+              0.0020001041566730464,
+              -0.002097495851432161
+            ],
+            "agent_07": [
+              0.000352042360763564,
+              -0.0037228145315746472
+            ],
+            "agent_08": [
+              0.0023138891421872762,
+              -0.0031455351892824123
+            ],
+            "agent_09": [
+              0.002839765586476496,
+              -0.0006533967677480347
+            ],
+            "agent_10": [
+              0.001332089980874964,
+              -0.0031076016471803373
+            ],
+            "agent_11": [
+              -0.0027038784319924417,
+              0.0020722467905515875
+            ],
+            "agent_12": [
+              0.0016098356210055933,
+              -0.002052978236337835
+            ],
+            "agent_13": [
+              0.0001414961810904477,
+              0.0005119645889591976
+            ]
+          },
+          "previous": {
+            "agent_14": [
+              -0.0005393214797595051,
+              -0.0017518489336642638
+            ],
+            "agent_04": [
+              -0.0003649052046037643,
+              -0.0009835662091101677
+            ],
+            "agent_05": [
+              -6.554100693866462e-05,
+              -0.0007548587515941203
+            ],
+            "agent_07": [
+              0.0004131583423492821,
+              -0.0030282093352631116
+            ],
+            "agent_08": [
+              0.0002501665683825792,
+              -0.0028664173545659174
+            ],
+            "agent_09": [
+              0.0017162086743034233,
+              -0.003170528734580813
+            ],
+            "agent_10": [
+              -0.00015648821637904688,
+              -0.003187447641868268
+            ],
+            "agent_11": [
+              -0.0017926516885692586,
+              -0.0017962716855070733
+            ],
+            "agent_12": [
+              0.00020389395471737305,
+              -0.0035228739672860977
+            ],
+            "agent_13": [
+              0.000642258326704968,
+              -0.004426104988482177
+            ]
+          },
+          "raw_displacement": [
+            0.001545925895277617,
+            -0.0021256547897033004
+          ],
+          "discarded_cells": 0,
+          "retained_cells_before_alignment": 99
+        },
+        "pair_safety": {
+          "eligible": false,
+          "reason": "outside_stationary_acquisition"
+        }
+      }
+    }
+  ],
+  "scope": "All candidate scaled states from the completed eight-episode study. Pre-command truth is evaluation only. Map/reference errors do not identify the selected safety row or prove the cause of infeasibility; a frozen exact row replay is the next discriminating step."
+}

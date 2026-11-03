@@ -21,7 +21,7 @@ source snapshots, protocols and receipts remain unchanged.
 - [x] Task2: reconstruct selected cell ancestry, check fusion weights and all
   translations, identify the earliest responsible operation and its reference
   inputs. Preserve branching ancestry and distinguish evidence from hypotheses.
-- [ ] Task3: implement a source-level correction only if the cause is established;
+- [x] Task3: implement a source-level correction only if the cause is established;
   regressions must fail first. Otherwise publish the concrete diagnosis and the
   next discriminating experiment, without calling it a repair. Physical changes
   require a separate frozen matched protocol, original controls and full gates.
@@ -59,3 +59,27 @@ Ruling: validate same-voter increments as a new default-off mechanism — the
 source of the map jump is proved, but increment integration and map resets can
 alter trajectories — cost: existing registration bias and physical regressions
 may remain; matched trials and the original gates decide, not the unit tests.
+
+Task3 complete: final core1055passed/2skipped,151.13s,terminal0. Frozen physical
+runtime de7e895a.., protocol29930eb5..; commit1f50d8d retains implementation and
+protocol. Eight episodes completed,5455physical steps, execution_errors0 and
+source_integrityPASS. Four original controls reproduce25arrays and scientific
+fields exactly. Both arms safe4/4, falseHOLD/hardfail/cutoff0, G5002/4. Candidate
+skew post-acquisition scaling1→17; Crotation4.942→5.839degrees and noTRANSPORT.
+42832candidate robot steps passed message membership/increment audits. Mechanism
+andfullgatesFAIL. All processes terminal; no repeat physical attempt.
+
+Post-study screen: all18candidate scaled states, no newphysics/replay. New17are
+agent_14 frames469–517 (ENCLOSE15, CONTACT_READY2), truegap159.829–185.857mm,
+mapdisplacementerror0.925–5.125mm, continuousbridge/noreset. Selected safetyrows
+and joint infeasibility still untraced. This changes the next action to exact
+row/geometry reconstruction rather than assuming another large map jump.
+
+Ruling: do not adopt this candidate after its failed physical gate — eliminating
+the roster-jump mechanism did not improve the full task and increased scaling —
+cost: the original map jump remains in the prior experimental control until a
+combined estimator/geometry solution passes the matched tests.
+
+Task4 publication:9generated products, all8outcomes, separate18-state screen,
+and the complete point ancestry. PNG visually inspected. Independent review and
+GitHub exact-head CI remain before delivery completion.
