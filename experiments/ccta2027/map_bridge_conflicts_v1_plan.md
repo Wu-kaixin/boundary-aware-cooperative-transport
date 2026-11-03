@@ -92,3 +92,8 @@ post_acquisition_finite_support_v1_plan.md. The new flag stays defaultFalse.
 The user's latest instruction requests publication now; the independent
 eight-episode freeze/run remains pending. Publish completed evidence and mark
 this remaining validation explicitly in README rather than inventing outcomes.
+
+Publication checkpoint reviewed once over430327f..986a478 (44files): no findings,
+94 independent tests passed. Core1069 passed/2 skipped, protected YAML unchanged.
+Public evidence and README distinguish the completed diagnosis from the pending
+physical protocol. Full research completion is not asserted.

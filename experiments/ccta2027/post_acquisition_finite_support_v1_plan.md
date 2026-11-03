@@ -48,3 +48,14 @@ and has not been exercised on a physical candidate. No new physical episode.
 Tasks2--3 still require the separate eight-episode freeze, exact original-control
 reproduction, full input/row/command audit, and all adverse outcomes. The selected
 saved-state improvement is not a closed-loop acceptance or adoption decision.
+
+## Final publication review
+
+Implementation/diagnosis checkpoint committed as986a478. One fresh independent
+read-only review covered430327f..986a478/all44files: no Critical, Important or
+Minor findings;94 independent focused tests passed. Full local core1069 passed,
+2 skipped; committed-head healthPASS,10 committed product byte hashes and every
+CSV aggregate verified. Scope rulings are in docs/results/map_bridge_conflicts_v1/
+final_review.md; pending physical validation and research limitations remain.
+No runtime fix pass required. Normal branch synchronization and exact-head CI
+are the publication delivery checks; the full research goal remains active.

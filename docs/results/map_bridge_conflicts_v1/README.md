@@ -39,6 +39,8 @@
 
 [工程收据](engineering_checks.json)：本次完整核心回归1069通过、2跳过，仓库健康PASS。先前运行接入针对性75通过、前瞻门槛2通过的RED/GREEN原日志保留。核心测试不替代科学门槛。
 
+[独立最终审查](final_review.md)覆盖本轮44个变更文件，无Critical/Important/Minor待修复项；另行94项针对性回归全部通过。审查只认可此诊断与实现检查点可发布，不代表闭环或研究目标完成。
+
 最佳配置SHA-256仍为 `a5d5c8e200fa502557d4da9a9db2a646d027abababd59661bcdac21a1b43b112`。旧轨迹诊断的运行源码为 `de7e895a4a74c44b39bc4395ca800d73b9579c9452c96da67fe3e6fcca3d5432`；新实现状态审计的源码为 `e6b7456f5f0a4d71ddd4b33159c058e215115aae35c01b6c5c9eae7e68f32767`。两者分别保存快照，未重标旧结果。当前本地joblib/PyYAML为1.5.1/6.0.2，锁文件1.6.0/6.0.3，环境差异保留记录。
 
 原始数据：`runs/research/2026-11-03-map-bridge-conflicts-v1/`；集成审计：`runs/research/2026-11-03-post-acquisition-support-v1/observer/`；发布验证：`runs/maintenance/2026-11-03-map-conflicts-publication-v1/`。[发布清单](publication.json)绑定10个证据产品，README与后续审查由Git追踪。大体积原始轨迹、源码快照和完整环境按仓库约定保留本地。
