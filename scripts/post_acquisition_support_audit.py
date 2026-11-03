@@ -1,4 +1,4 @@
-"""Prospective physical replay auditor; not yet exercised on a full candidate run."""
+"""Replay candidate commands and audit current local support and executed rows."""
 from __future__ import annotations
 
 from collections import Counter
@@ -13,8 +13,12 @@ from probe_map_bridge_finite_support import observed_system, systems
 from dbact_sim.environment import SimulationEnvironment
 
 
-def audit(folder, case):
+def audit(folder, case, *, limit_frames=None):
     rows=read(folder/'paired_metrics.json')['steps']
+    total_frames=len(rows)
+    if limit_frames is not None:
+        assert type(limit_frames) is int and 0 < limit_frames <= total_frames
+        rows=rows[:limit_frames]
     with np.load(folder/'replay.npz',allow_pickle=False) as z:
         saved={key:z[key].copy() for key in ('times','agent_positions',
             'cargo/cargo_0/centers','cargo/cargo_0/angles','sensed_counts','sensed_points')}
@@ -111,10 +115,11 @@ def audit(folder, case):
         if frame%200==0:
             print(json.dumps(dict(audit_case=case['case_id'],verified_frames=frame)),flush=True)
     assert sum(counts.values())==len(rows)*len(ids)
-    return dict(verified=True,frames=len(rows),agent_steps=sum(counts.values()),applied=len(residuals),
+    return dict(verified=True,frames=len(rows),total_physical_frames=total_frames,
+        full_episode_verified=len(rows)==total_frames,agent_steps=sum(counts.values()),applied=len(residuals),
         guard_counts=dict(counts),hard_violations=sum(r['minimum_hard'] < -1e-7 for r in residuals),
         capped_object_violations=sum(r['minimum_capped_object'] < -1e-7 for r in residuals),
         uncapped_object_violations=sum(r['minimum_uncapped_object'] < -1e-7 for r in residuals),
         minimum_uncapped_object_residual=min((r['minimum_uncapped_object'] for r in residuals),default=None),
         violations=[r for r in residuals if min(r['minimum_hard'],r['minimum_uncapped_object']) < -1e-7],
-        scope='Exact full controller replay; every current packet/row and admitted executed command checked. Geometry/motion assumptions remain empirical.')
+        scope='Exact controller replay of the stated frame range; every current packet/row and admitted executed command checked. Geometry/motion assumptions remain empirical.')
