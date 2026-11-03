@@ -14,8 +14,8 @@ Base: fee2f61ff396c3d6aa7b1c00b93c1c87d91b30d2. Spec: contact_activation_v1_desi
       preserving original commands, maps, diagnostics and solver state.
 - [x] Publish evidence-backed architectural diagnosis and choose one next
       mechanism using a separate prospective design; no numeric retuning.
-- [ ] Finish the increment's checks, single final review, evidence/README update
-      and authorized normal research-branch publication with exact-head CI.
+- [x] Finish the checkpoint's checks, single final review and evidence/README
+      update. Post-push branch/CI receipts are saved separately in maintenance.
 
 Previous goal turn: progress. Published all12 physical outcomes, updated README,
 preserved failure gates and protected configuration; fee2f61 Windows/Ubuntu CI
@@ -32,3 +32,8 @@ all later successful receipts remain. New implementation has its own source and
 engineering identity; it was not used to produce the frozen diagnostic evidence.
 The latest user request is to upload these results and update README now; the
 prospective eight-episode repair experiment remains explicitly pending.
+
+Final review and rulings: see reference_reacquisition_v1_plan.md and
+docs/results/reference_reacquisition_v1/final_review.md. One verification gap was
+closed by six boundary tests; final focused63 and core934 passed/2 skipped.
+The frozen diagnostic products and original script/design hashes are unchanged.

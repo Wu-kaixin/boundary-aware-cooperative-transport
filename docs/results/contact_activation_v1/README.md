@@ -41,4 +41,4 @@
 
 原冻结运行源码 SHA-256 为 `37f2e00017ce2e34ec932956174e7778f639c0732206e023fed74a34ef6dda1e`，原协议 SHA-256 为 `0ca3f1369196fc882d884cf5583205d7671ab3749489f33a0dc116f140d9fdae`。新候选代码没有参与上述旧控制器重放。完整逐帧记录、失败预检、脚本及设计快照保存在本地 `runs/research/2026-11-03-contact-activation-v1/`，执行日志在同名 `runs/maintenance/` 目录，详见[数据索引](../../DATA_INDEX.md)。
 
-[诊断设计](../../../experiments/ccta2027/contact_activation_v1_design.md) · [实施记录](../../../experiments/ccta2027/contact_activation_v1_plan.md) · [保存记录审计脚本](../../../scripts/audit_contact_activation.py) · [精确重放脚本](../../../scripts/trace_contact_activation.py) · [独立分析脚本](../../../scripts/analyze_contact_activation.py)
+[诊断设计](../../../experiments/ccta2027/contact_activation_v1_design.md) · [实施记录](../../../experiments/ccta2027/contact_activation_v1_plan.md) · [保存记录审计脚本](../../../scripts/audit_contact_activation.py) · [精确重放脚本](../../../scripts/trace_contact_activation.py) · [独立分析脚本](../../../scripts/analyze_contact_activation.py) · [联合最终审查](../reference_reacquisition_v1/final_review.md)

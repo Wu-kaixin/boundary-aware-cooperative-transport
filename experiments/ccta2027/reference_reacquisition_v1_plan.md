@@ -31,8 +31,9 @@ targets disguised as an acquisition mode. Keep these boundaries in focused tests
       using unchanged original episode/reproduction evaluators. Freeze8 cases,
       execute once, assert exact old4 and unchanged candidate acquisition prefix,
       report mechanism and full-chain gates separately with all negative results.
-- [ ] Publish all evidence and README, one fresh final review, resolve Important
-      findings once, integrity checks, authorized normal branch push and exact-head CI.
+- [x] Prepare the evidence/README publication checkpoint, one fresh final review,
+      resolve Important findings once and verify integrity. Remote publication
+      and exact-head CI are recorded after push in the local maintenance receipts.
 
 Commands use .\.venv\Scripts\python.exe explicitly. Tests/experiment logs go in
 runs/maintenance/2026-11-03-reference-reacquisition-v1/. Scientific freeze/run data
@@ -45,3 +46,21 @@ unchanged. The latest user request is to publish current results and README now;
 the study helper, executable freeze and all8 physical episodes have NOT run.
 Publication covers diagnostic evidence and default-off engineering only. The
 prospective study stays unchecked and must retain its original acceptance gates.
+
+Final: fixed missing boundary regression coverage — six new cases reject three
+isolated synthetic source faults (1+2+3 failures), then focused63 and full934
+passed/2 skipped. The original implementation's RED16/GREEN57/core928 receipts
+remain unchanged. One new test fixture initially referenced the wrong statistics
+attribute; its failure is retained separately, not attributed to runtime behavior.
+No runtime code or numerical configuration changed in this review fix pass.
+Final review: one fresh read-only reviewer, c8f93b2; no second review. No Critical
+or deferred Minor findings. Important verification gap resolved by executor tests.
+Final: Ruling: closed-loop performance remains unjudged — publish default-off at
+the user's requested checkpoint, with eight episodes explicitly pending — cost
+if wrong: the candidate may still fail transport; no adoption claim is permitted.
+Final: Ruling: future observation recovery/contact/dynamic safety remain unjudged
+— eight witnesses certify only one-step conditional feasibility — cost if wrong:
+later recovery may fail or produce contact/constraint conflict.
+Final: Ruling: adoption/generalization/rotation/decentralization/hardware remain
+unjudged — keep them outside this research checkpoint's claims — cost if wrong:
+unsupported full-system readiness claims, so those validations remain outstanding.

@@ -1,0 +1,72 @@
+{
+  "checked_at_utc": "2026-11-03T01:44:13.818927+00:00",
+  "status": "PASS",
+  "reviewed_commit": "c8f93b2cb0b1fbd5ed3fe5ad6a0c7d66d10d74d7",
+  "runtime_source_sha256": "5251bea3bc76971a74f62fc2c7899a33cca52cd57a267cd1feebcd033d8e0eb6",
+  "canonical_sha256": "a5d5c8e200fa502557d4da9a9db2a646d027abababd59661bcdac21a1b43b112",
+  "prior_engineering_receipt_sha256": "1fcbcfdc28497ddb7abd52c151b03b0051fadc86ec0d8fe5713d0e8f71320ef3",
+  "test_file_sha256": "21e8fcb4dee3bd6b8d4a41c192b3f8d685b1348ad620ff6e3eb33b42a8942540",
+  "focused": {
+    "tests": 63,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "passed": 63,
+    "seconds": 4.056,
+    "xml_sha256": "73dd42067a6669d4d0e718ba15dd8091cc25475ef8f0cd120f45e19216696ed0",
+    "log_sha256": "e28f3c00eaf8404b7f2aea82bbfe6d4219609136739f009b3e502df59fd2112b"
+  },
+  "core": {
+    "tests": 936,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 2,
+    "passed": 934,
+    "seconds": 150.484,
+    "xml_sha256": "b961814ce1779a895d9ad6acc68f87d2eb7083f879703e006521c7b9aa7086ab",
+    "log_sha256": "75c58c0c506cbb0f60bfa2440995ef885c6b3d4ed19e45d1e9275ed672c0c1bd"
+  },
+  "mutation_checks": {
+    "status": "ALL_THREE_MUTANTS_REJECTED",
+    "scope": "Synthetic regressions in isolated copied sources; not discovered runtime defects or physical episodes",
+    "original_controller_sha256": "96005c5215b84ded4fd94a9f09e75fa9eb3210acb881d8ffa0ddb1d81a2c248e",
+    "test_sha256": "21e8fcb4dee3bd6b8d4a41c192b3f8d685b1348ad620ff6e3eb33b42a8942540",
+    "results": [
+      {
+        "mutant": "fresh_reference",
+        "expected_failures": 1,
+        "failures": 1,
+        "errors": 0,
+        "exit_code": 1,
+        "controller_sha256": "bf21139d1558df89fdb4adf210c856acca44b81f7b678d8a3ff1a4cb88e695ed",
+        "test": "test_fresh_reference_is_identical_with_reacquisition_enabled_or_disabled",
+        "xml_sha256": "bade25e7ef71e99667760bf59be222b44a65c990ca99325f1dc01d4bea1505a9"
+      },
+      {
+        "mutant": "stale_approach",
+        "expected_failures": 2,
+        "failures": 2,
+        "errors": 0,
+        "exit_code": 1,
+        "controller_sha256": "b77b0fbf7d1b6e51e183cdf0be1dbb66912e91456cc29a065194ed78cb089187",
+        "test": "test_real_approach_uses_current_packet_despite_stale_targets",
+        "xml_sha256": "7127ab9cdb334e6864e6f9eb7386264edd402407d98d374d6376bd7f32f6ad81"
+      },
+      {
+        "mutant": "phase_guard",
+        "expected_failures": 3,
+        "failures": 3,
+        "errors": 0,
+        "exit_code": 1,
+        "controller_sha256": "819050e0b362c00cec0eaec75f4ee2051eaeee871a5f6cc15282e70e640213d8",
+        "test": "test_recovery_stops_on_the_controller_step_entering_a_later_phase",
+        "xml_sha256": "9c72c04936765467e5a77be89b80363bb82389b2eb17469531ebf201050ed125"
+      }
+    ]
+  },
+  "mutation_summary_sha256": "3ed1d97b870b1ca0c24b2075c0339943d7ed1239155a9a579c806cd9456ec623",
+  "local_checks": "runs/maintenance/2026-11-03-reference-reacquisition-v1",
+  "new_physical_episodes": 0,
+  "runtime_changes_after_review": false,
+  "scope": "Six added boundary regressions reject synthetic faults in isolated source copies; not six observed runtime defects or closed-loop research validation"
+}

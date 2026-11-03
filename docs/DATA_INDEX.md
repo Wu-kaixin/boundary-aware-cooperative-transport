@@ -1,6 +1,6 @@
 # 数据与原始文件索引
 
-2026-11-03：[接触激活诊断](results/contact_activation_v1/README.md)的十二回合保存记录审计、4,317 帧精确重放、约束见证及脚本/设计快照保存在 `runs/research/2026-11-03-contact-activation-v1/`。公开精简证据包含前缀计数、全部保存谓词汇总、四份重放收据、8 个条件运动见证与图表哈希，新增物理回合 0。首轮 CSV 预检失败及后续通过记录均保留。[观测恢复候选](results/reference_reacquisition_v1/README.md)只有工程验证；16 项 RED、57 项针对性 GREEN、928 通过/2 跳过的完整回归在 `runs/maintenance/2026-11-03-reference-reacquisition-v1/`。候选八回合物理比较尚未执行。
+2026-11-03：[接触激活诊断](results/contact_activation_v1/README.md)的十二回合保存记录审计、4,317 帧精确重放、约束见证及脚本/设计快照保存在 `runs/research/2026-11-03-contact-activation-v1/`。公开精简证据包含前缀计数、全部保存谓词汇总、四份重放收据、8 个条件运动见证与图表哈希，新增物理回合 0。首轮 CSV 预检失败及后续通过记录均保留。[观测恢复候选](results/reference_reacquisition_v1/README.md)只有工程验证；16 项 RED、57 项针对性 GREEN、928 通过/2 跳过的完整回归在 `runs/maintenance/2026-11-03-reference-reacquisition-v1/`。审查后补齐六项边界测试，最终 63 项针对性通过、934 项核心通过/2 跳过及三个隔离源码故障验证另存同目录的 review-targeted / review-full / boundary-mutation-v1，原收据不变。候选八回合物理比较尚未执行。
 
 2026-11-03：[主动采集巡行完整12回合](results/acquisition_circulation_v1/README.md)的冻结与运行在 `runs/research/2026-11-03-acquisition-circulation-v1/`，原始逐帧结果位于其 `run/`，执行前源码/脚本/协议位于 `freeze/`。三臂安全完成4/4、3/4、2/4，门槛FAIL，所有负结果保留；公开精简证据含完整12行CSV、阶段/接触直方图、原图与仅调整标签的v2图及各自哈希。912通过/2跳过的核心回归、物理/分析/发布日志在同名 `runs/maintenance/` 目录。
 
