@@ -114,3 +114,30 @@ results visible. Narrative separates received-row audit from unknown-boundary
 proof, current comparison from older better C rotation/time, and all test runs.
 Task5 starts with current publication/navigation verification, then one fresh
 whole-increment review, normal authorized branch push and exact-head CI.
+
+Task5 final review: one fresh read-only reviewer checked77de03d..2a96cdd,
+noCritical/noImportant/noMinor; ready to publish the default-off experiment.
+Independent checks include9products,137runtime files,13helpers,all8denominator,
+4exact controls and7pairs. Fresh full core-publication run:1040passed/2skipped,
+138.92s,exit0. Committed-tree repository healthPASS. No runtime fix or new physics.
+The first ad-hoc publication verifier imported the wrong class name and stopped
+before checking anything; correcting its command to DBACTParams yieldedPASS.
+The failed command and successful verification are separately recorded locally.
+
+Final: Ruling: asynchronous/hardware timing and untrusted network input remain
+outside this synchronous in-process increment — retain the documented scope —
+if applied to a real network prematurely, its message/timing assumptions may fail.
+Final: Ruling: unknown object geometry is not certified by the received-row audit —
+publish only the observational evidence — otherwise safety claims would be overstated.
+Final: Ruling: generalization, wider old-success preservation and independent
+deployment benefit need separate experiments — retain all4reused conditions as
+development evidence — otherwise regressions or incorrect attribution may be hidden.
+Final: Ruling: C activation/rotation and skew regression remain disclosed research
+failures, with candidate unadopted — do not soften predeclared gates to ship it —
+premature adoption would retain observed scaling and physical regression.
+Final: minor (deferred): none.
+
+This committed ledger is the pre-push publication snapshot. Task5 delivery is
+completed only when the same head is verified on GitHub and its Windows/Ubuntu
+CI passes; external delivery receipts are appended under the maintenance folder,
+without rewriting this snapshot or the frozen experiment evidence.

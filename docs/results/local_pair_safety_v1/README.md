@@ -48,4 +48,6 @@
 - 本机使用根 `.venv`，Python 3.12.14；原有 joblib/PyYAML 为 1.5.1/6.0.2，与锁文件 1.6.0/6.0.3 的差异如实记录，未更换环境或重标历史数据。
 - 原始轨迹、执行前源码和测试快照保留于 `runs/research/2026-11-03-local-pair-safety-v1/`；全部测试失败与通过、执行和发布日志保留于同名 `runs/maintenance/` 目录。大体积原始数据不进入 Git，入口见 [数据索引](../../DATA_INDEX.md)。[publication.json](publication.json)记录九个生成产品及发布脚本的哈希。
 
+[独立最终审查](final_review.md)未发现 Critical/Important/Minor 问题；发布前完整核心回归另录 **1040 通过、2 跳过**，仓库健康检查通过，见 [发布检查](publication_checks.json)。没有修改本轮物理冻结源码或重跑回合。
+
 局部配对的本轮证据未消除经验支持几何的适用限制，也未解决全队进度聚合和共同阶段监督器的去中心化问题。独立边界部署的完成率优势、未使用条件可靠性、实机表现与当前论文更新仍待完成。

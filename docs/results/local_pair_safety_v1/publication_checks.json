@@ -1,0 +1,43 @@
+{
+  "reviewed_head": "2a96cdd909dec20668206930429569f50468db7e",
+  "core": {
+    "tests": 1042,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 2,
+    "passed": 1040
+  },
+  "core_receipt_sha256": "98f7dd402439168569ddc2ae49c2b4999bf95bcbac0ba5b3996354c44a40ea48",
+  "health": {
+    "schema": "repository-health-v1",
+    "checked_at_utc": "2026-11-03T08:11:29.532095+00:00",
+    "status": "PASS",
+    "head": "2a96cdd909dec20668206930429569f50468db7e",
+    "tree": "aff9a1eaf9b7a8953b18f59c0315dff1ba6670a1",
+    "python": "3.12.14",
+    "executable": "C:\\Users\\kai\\boundary-aware-cooperative-transport\\.venv\\Scripts\\python.exe",
+    "tracked_files_checked": 1573,
+    "python_files_parsed": 498,
+    "curated_evidence_verified": {
+      "ccta2027_draft_v2": 26,
+      "reliability_2026-10-22": 20
+    },
+    "navigation_documents_checked": 15,
+    "pip_check": "No broken requirements found.",
+    "git_fsck": "PASS",
+    "local_data_scope": "Full raw runs, downloaded references, environment payloads and backup archives stay local; see docs/DATA_INDEX.md",
+    "security_scope": "Filename and embedded private-key/token screening only; not a dependency vulnerability audit",
+    "failures": []
+  },
+  "publication": {
+    "status": "PASS",
+    "generated_product_hashes": 9,
+    "new_physical_episodes": 8,
+    "accepted_pairs": 7,
+    "local_links": 338,
+    "default_off": true,
+    "frozen_source_sha256": "6a24d76064d89dbc9485c5f5b3623c4dc7ad2ef187436c32319fe6bf2b782727",
+    "canonical_sha256": "a5d5c8e200fa502557d4da9a9db2a646d027abababd59661bcdac21a1b43b112"
+  },
+  "physical_scope": "Same frozen eight episodes; this publication verification adds no physical episodes or runtime changes."
+}
