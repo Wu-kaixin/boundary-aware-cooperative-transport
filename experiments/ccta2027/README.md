@@ -1,5 +1,7 @@
 # CCTA 2027 实验入口
 
+2026-11-03：[残余与接触诊断设计](residual_coordination_v1_design.md)及后续[局部配对可行性设计](local_pair_feasibility_v1_design.md)已执行，[完整结果](../../docs/results/residual_coordination_v1/README.md)保留5,361帧阶段响应、21,444子步、两个残余状态及四个联合问题，新物理回合0。四个配对问题在原限速/裕量下均有双求解器可行见证；C制动前旋转与推手不足仍在。[局部协商实现草案](local_pair_safety_v1_spec.md)尚未实现或物理冻结；[执行记录](residual_coordination_v1_plan.md)保留首次采样误标、修正与全部原件。
+
 2026-11-03：[修后物理设计](finite_acquisition_support_physical_v2_design.md)及[新冻结协议](finite_acquisition_support_v2.json)已完成独立8回合，数值参数及原门槛不变。[结果](../../docs/results/finite_acquisition_support_v2/README.md)：两臂安全完成均4/4，G500均2/4，机制及完整门槛均FAIL；修后候选与旧候选的25组回放数组和物理子步一致，约束诊断改变。此前[同状态审计设计](finite_support_review_validation_v1_design.md)完成874帧完整重放、另列40帧预检、七个见证14次QP比较；新增物理回合0。[执行记录](finite_support_review_validation_v1_plan.md)分开保存诊断、物理执行和发布过程，核心995通过/2跳过。
 
 2026-11-03：[有限支持物理设计](finite_acquisition_support_physical_v1_design.md)及[冻结协议](finite_acquisition_support_v1.json)完成四条件×两臂8回合。[全部结果](../../docs/results/finite_acquisition_support_v1/README.md)：安全完成均4/4，C/斜箱采集缩放均13→1、斜箱冻结后6→0，但G500仍2/4、C形仍未TRANSPORT且转角/耗时退化；机制及完整门槛均FAIL、候选未采用。全部最佳数值参数不变；[实施记录](finite_acquisition_support_v1_plan.md)保留RED/GREEN及所有决定。前置[三替代方法](finite_support_probe_v1_design.md)、[仅弦段v1](finite_acquisition_support_v1_design.md)和[孤立点保护v2](finite_acquisition_point_guard_v2_design.md)均为旧26状态诊断，新增物理回合0。

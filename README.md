@@ -2,9 +2,11 @@
 
 ## 最新成果与保护基线（2026-11-03）
 
-**最新结果：[修正后有限支持的独立八回合验证](docs/results/finite_acquisition_support_v2/README.md)。** 全部最佳数值参数不变，两臂安全完成均 **4/4**，错误 HOLD、原硬安全违规和预算截尾均 **0**。相对观测恢复对照，C 形/斜箱采集缩放均 **13→1**，斜箱冻结后缩放 **6→0**；但 **G500仍2/4，C形仍未正式TRANSPORT**，其最大转角 **1.471°→9.072°**、耗时 **50.45→59.45s**、终点误差 **3.748→17.690mm**。**机制门槛和完整门槛均FAIL，候选未采用、默认关闭。** 四个原对照的25组回放数组及全部科学字段精确复现；四个修后候选与修正前候选的25组回放数组及物理子步也一致，约束诊断记录有所变化。这次约束遗漏修补没有进一步改善任务表现。
+**本轮诊断：[残余约束、邻机协同与C形制动前接触](docs/results/residual_coordination_v1/README.md)。** 新物理回合0，完整重建八回合 **5,361帧**阶段响应，核验 **21,444个**物理子步。两个残余状态均涉及agent_05/09：去rho后的独立最小可行速度为 **0.383/0.504m/s**，超过原0.35上限；保留完整rho及其他约束、只重新分配两机相互避碰责任后，四个同状态问题均有双求解器核验的可行指令。**尚未接入控制器，不能称为缩放已消除。** C形CONTACT_READY阶段最多仅2台声明推手，制动前已旋转 **9.066°**，四台阶段信号晚于制动 **1.10s**。核心 **1000通过/2跳过**；[下一机制草案](experiments/ccta2027/local_pair_safety_v1_spec.md)要求一跳消息确认、互斥配对及真实执行证书。
 
-**本次补齐的验证：[874帧完整采集审计及七个独立求解器见证](docs/results/finite_acquisition_support_v2/README.md#修正前完整采集前缀的同状态诊断)。** 原控制重放逐帧精确，修后几何只作观察器，新增物理回合0；另列40帧预检，14次QP可行性比较全部一致。两个残余状态在修后几何下去掉rho仍不可行。随后另行冻结上述8个新物理回合，补齐[孤立回波遗漏修正](docs/results/finite_acquisition_support_v1/final_review.md)的闭环验证；当前核心 **995通过/2跳过**。[原八回合](docs/results/finite_acquisition_support_v1/README.md)及哈希保持原身份，原CSV基线使用量的四个0占位值另以[更正衍生表](docs/results/finite_acquisition_support_v2/prior_v1_all_eight_usage_corrected.csv)补齐。
+**最新物理结果：[修正后有限支持的独立八回合验证](docs/results/finite_acquisition_support_v2/README.md)。** 全部最佳数值参数不变，两臂安全完成均 **4/4**，错误 HOLD、原硬安全违规和预算截尾均 **0**。相对观测恢复对照，C 形/斜箱采集缩放均 **13→1**，斜箱冻结后缩放 **6→0**；但 **G500仍2/4，C形仍未正式TRANSPORT**，其最大转角 **1.471°→9.072°**、耗时 **50.45→59.45s**、终点误差 **3.748→17.690mm**。**机制门槛和完整门槛均FAIL，候选未采用、默认关闭。** 四个原对照的25组回放数组及全部科学字段精确复现；四个修后候选与修正前候选的25组回放数组及物理子步也一致，约束诊断记录有所变化。这次约束遗漏修补没有进一步改善任务表现。
+
+**本次补齐的验证：[874帧完整采集审计及七个独立求解器见证](docs/results/finite_acquisition_support_v2/README.md#修正前完整采集前缀的同状态诊断)。** 原控制重放逐帧精确，修后几何只作观察器，新增物理回合0；另列40帧预检，14次QP可行性比较全部一致。两个残余状态在修后几何下去掉rho仍不可行。随后另行冻结上述8个新物理回合，补齐[孤立回波遗漏修正](docs/results/finite_acquisition_support_v1/final_review.md)的闭环验证；当次核心 **995通过/2跳过**。[原八回合](docs/results/finite_acquisition_support_v1/README.md)及哈希保持原身份，原CSV基线使用量的四个0占位值另以[更正衍生表](docs/results/finite_acquisition_support_v2/prior_v1_all_eight_usage_corrected.csv)补齐。
 
 **前置诊断：[采集边界外推与 C 形正式激活](docs/results/acquisition_normal_audit_v1/README.md)。** 784 帧精确重放覆盖全部 26 次采集缩放，另行重建 2,589 帧阶段响应，新增物理回合 0。26 个状态都在真实采集安全边距之外，所选边的投影都越过有限端点；换用对应真实边的无限平面后仍有 25 个负屏障值，支持优先修复边界外推。原观测恢复C形首次达到4台门槛在开始制动4.8秒后，未发现满足人数门槛却遗漏的TRANSPORT转换。该原因定位与最新有限支持闭环结果分开保留。
 
@@ -60,14 +62,14 @@
 
 [完整试验报告与图表](docs/results/reference_surface_v1/README.md) · [全部八块数据](docs/results/reference_surface_v1/all_eight_blocks.csv) · [基线复现证据](docs/results/reference_surface_v1/baseline_reproduction.json) · [部署贡献审计](docs/results/deployment_contribution_v1/README.md)
 
-本次[工程收据](docs/results/finite_acquisition_support_v2/engineering_checks.json)记录完整核心 **995通过/2跳过**、874帧审计、40帧预检和8个新物理回合，分别计数。[原物理987项回归](docs/results/finite_acquisition_support_v1/engineering_checks.json)、[修补检查点992项回归](docs/results/finite_acquisition_support_v1/post_review_checks.json)及原8回合均保留原身份，不重标为本次验证。[Windows / Ubuntu CI](https://github.com/Wu-kaixin/boundary-aware-cooperative-transport/actions/workflows/tests.yml)按各自提交记录核心、MAS和smoke检查。单元测试不等同于研究成功；大体积原始轨迹和冻结源码仍按[数据索引](docs/DATA_INDEX.md)保留本地。
+本轮诊断[工程收据](docs/results/residual_coordination_v1/engineering_checks.json)记录核心 **1000通过/2跳过**，未改运行时；此前物理验证[工程收据](docs/results/finite_acquisition_support_v2/engineering_checks.json)记录当次核心 **995通过/2跳过**、874帧审计、40帧预检和8个新物理回合，分别计数。[原物理987项回归](docs/results/finite_acquisition_support_v1/engineering_checks.json)、[修补检查点992项回归](docs/results/finite_acquisition_support_v1/post_review_checks.json)及原8回合均保留原身份，不重标为本次验证。[Windows / Ubuntu CI](https://github.com/Wu-kaixin/boundary-aware-cooperative-transport/actions/workflows/tests.yml)按各自提交记录核心、MAS和smoke检查。单元测试不等同于研究成功；大体积原始轨迹和冻结源码仍按[数据索引](docs/DATA_INDEX.md)保留本地。
 
 ## 目前遗留的问题与下一步
 
 | 优先级 | 遗留问题及证据 | 下一项工作与验收方向 |
 | --- | --- | --- |
-| P0 | **联合安全约束还剩两个缩放步。** 最新C/斜箱均13→1次采集缩放，斜箱冻结后6→0；残余事件均为agent_05，已应用有限支持、没有可达性截断。完整审计确认两个状态在修后几何下去rho仍不可行，约束遗漏修补未改变实际轨迹。 | 分解已精确重建的联合QP，分别检查物体、邻域和速度约束，定位必要冲突组合；保留原参数与安全半径，以采集缩放清零、冻结后不增加及原G500验收。 |
-| P0 | **C形仍未正式协作激活，旋转和耗时退化。** 最新候选59.45s完成，但最大转角由1.471°增至9.072°、终点误差由3.748增至17.690mm，仍未TRANSPORT。旧对照首次四台门槛晚于制动4.8s；新候选时序需另行诊断。 | 分析制动前接触分工、侧向力和转矩，区分几何push标志与实际接触/推进效果；保留原四台门槛和制动规则，并检查平移参考在该转角下的误差。 |
+| P0 | **联合安全约束还剩两个缩放步。** 两状态均由agent_05/09的间距行与物体行构成最小冲突；原限速下去rho仍不可行，取消限速后可行。局部两机责任分配在完整rho下有0.147/0.085、0.146/0.102m/s的可行见证，但运行控制尚未改变。 | 实现当前一跳消息的双向确认、互斥配对和执行约束核验；保留所有其他约束与数值参数，再独立冻结物理对照。不得提高限速、删物体行或通过改统计隐藏缩放。 |
+| P0 | **C形仍未正式协作激活，旋转和耗时退化。** 最新候选59.45s完成，最大转角9.072°；制动前已有9.066°。CONTACT_READY最多2台声明推手，首次四台阶段信号晚于制动1.10s；有正向物理接触不等同于满足推手门槛。 | 追踪非推手覆盖速度的法向挤压及初始推手布局，区分首子步接触样本与整步冲量；保留原四台门槛和制动规则，并检查平移参考在该转角下的误差。 |
 | P0 | **完整可靠性仍未建立。** 最新两臂均4/4安全完成、无错误HOLD或原硬违规，但G500均2/4；有限支持机制和完整门槛均FAIL，四个条件已用于开发。 | 先取得同一机制在四条件上的完整验收，再做更广原成功保持和未使用条件验证；不默认采用，不将四条件成功外推为普遍可靠性。 |
 | P1 | **有限支持与目标参考都存在适用边界。** 实测半间距不能界定任意未知边界延伸，平移参考中的零拟合转角也不是真实零旋转。 | 明确未知延伸、噪声、运动和旋转的适用条件；检验偏置接触和不完整观测，不得把经验裕量或条件上界称作安全/配准证书。 |
 | P1 | **独立部署贡献仍限于覆盖等过程指标。** CVT、spacing、nearest 的完成数同为 11/12；公共估计/安全修复不能归作 CVT 的独立贡献。 | 在公共搬运链稳定后，以相同参数、初态和信息权限做匹配对照，分别评价部署覆盖、最大空缺、路径/时间和最终搬运。 |
