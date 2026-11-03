@@ -1,0 +1,73 @@
+[
+  {
+    "condition": "far_skew_box_s0_r0_pos0",
+    "saved_frame": 402,
+    "agent_id": "agent_05",
+    "phase": "ENCLOSE",
+    "reference_status": "acquiring",
+    "solver_status": "scaled_barrier",
+    "pair_admission": {
+      "eligible": false,
+      "reason": "capped_or_moving_support",
+      "executed_status": "scaled_barrier",
+      "executed_barrier_scale": 0.1171875
+    },
+    "finite_support": {
+      "applied": true,
+      "reason": "supported",
+      "stage": "stationary_acquisition",
+      "source_agents": [
+        "agent_05",
+        "agent_04",
+        "agent_06",
+        "agent_07",
+        "agent_08",
+        "agent_09",
+        "agent_10",
+        "agent_11",
+        "agent_12",
+        "agent_13",
+        "agent_14"
+      ],
+      "source_timestamps": [
+        20.05000000000015,
+        20.05000000000015,
+        20.05000000000015,
+        20.05000000000015,
+        20.05000000000015,
+        20.05000000000015,
+        20.05000000000015,
+        20.05000000000015,
+        20.05000000000015,
+        20.05000000000015,
+        20.05000000000015
+      ],
+      "motion_model": "existing_stationary_acquisition_assumption",
+      "near_returns": 21,
+      "uncovered_returns": 0,
+      "point_guard_rows": 6,
+      "object_rows": 25,
+      "empirical_only": true,
+      "motion_bound": 0.0,
+      "cap_active": 1
+    }
+  },
+  {
+    "condition": "far_skew_box_s0_r0_pos0",
+    "saved_frame": 989,
+    "agent_id": "agent_05",
+    "phase": "BRAKE",
+    "reference_status": "frozen",
+    "solver_status": "scaled_barrier",
+    "pair_admission": {
+      "eligible": false,
+      "reason": "outside_stationary_acquisition"
+    },
+    "finite_support": {
+      "applied": false,
+      "reason": "outside_stationary_acquisition",
+      "stage": "fresh_reference",
+      "source_agents": []
+    }
+  }
+]

@@ -1,0 +1,9 @@
+condition,arm,safe_completed,false_hold,hard_safety_count,budget_terminated,g500,g500_failure_reasons,formal_transport,seconds,endpoint_mm,max_true_rotation_deg,acquisition_scaled_robot_steps,post_acquisition_scaled_robot_steps,minimum_scale,accepted_pair_steps,accepted_robot_steps,eligible_independent_infeasible_proposals,peer_trials,execution_audit_verified
+near_circle,finite_acquisition_support,True,False,0,False,True,,True,16.6,18.598888083942796,0.0,0,0,1.0,0,0,0,0,True
+near_circle,local_pair_candidate,True,False,0,False,True,,True,16.6,18.598888083942796,0.0,0,0,1.0,0,0,0,0,True
+near_l_reference,finite_acquisition_support,True,False,0,False,True,,True,13.25,23.114765100783668,1.9469933862125373,0,0,1.0,0,0,0,0,True
+near_l_reference,local_pair_candidate,True,False,0,False,True,,True,13.25,23.114765100783668,1.9469933862125373,0,0,1.0,0,0,0,0,True
+far_c_open_away_pos0,finite_acquisition_support,True,False,0,False,False,"G500: transport activation never happened within the 1189-frame run | G500: 1 scaled-barrier event(s), smallest factor 0.934; the contract allows 0",False,59.45,17.69038296007379,9.071854171178066,1,0,0.93359375,0,0,0,0,True
+far_c_open_away_pos0,local_pair_candidate,True,False,0,False,False,G500: transport activation never happened within the 1074-frame run,False,53.7,6.9387521883149486,4.9424758321921,0,0,1.0,4,8,4,14,True
+far_skew_box_s0_r0_pos0,finite_acquisition_support,True,False,0,False,False,"G500: 1 scaled-barrier event(s), smallest factor 0.777; the contract allows 0",True,49.300000000000004,18.14918828418539,0.7922361068082564,1,0,0.77734375,0,0,0,0,True
+far_skew_box_s0_r0_pos0,local_pair_candidate,True,False,0,False,False,"G500: 2 scaled-barrier event(s), smallest factor 0.117; the contract allows 0",True,55.35,12.932653548319374,2.289194597863987,1,1,0.1171875,3,6,3,15,True

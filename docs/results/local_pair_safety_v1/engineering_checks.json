@@ -1,0 +1,213 @@
+{
+  "tests": {
+    "core-final.xml": {
+      "tests": 1035,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 2,
+      "passed": 1033,
+      "sha256": "659a196c1d6aeea3f7cfda26eb22ed6bcc0042c2957f0b97bc0d5d35247ca27b"
+    },
+    "study-green2.xml": {
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "passed": 7,
+      "sha256": "26a44c00c102f7ab360efcff1cf5133cc2a67fc1e8a83f0208b47e3f676f9ee4"
+    }
+  },
+  "runtime_core_scope": "1033 passed / 2 skipped before seven new study/audit tests",
+  "separate_study_tests": 7,
+  "new_physical_episodes": 8,
+  "exact_original_controls": 4,
+  "accepted_pair_steps": 7,
+  "accepted_robot_steps": 14,
+  "all_execution_audits_verified": true,
+  "runtime_source_sha256": "6a24d76064d89dbc9485c5f5b3623c4dc7ad2ef187436c32319fe6bf2b782727",
+  "canonical_sha256": "a5d5c8e200fa502557d4da9a9db2a646d027abababd59661bcdac21a1b43b112",
+  "environment": {
+    "python": "3.12.14",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "executable": "C:\\Users\\kai\\boundary-aware-cooperative-transport\\.venv\\Scripts\\python.exe",
+    "packages": {
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "shapely": "2.2.0",
+      "PyYAML": "6.0.2",
+      "cvxpy": "1.9.3",
+      "clarabel": "0.11.1",
+      "osqp": "1.1.3",
+      "scs": "3.3.1",
+      "pymunk": "7.3.1",
+      "matplotlib": "3.11.2",
+      "threadpoolctl": "3.7.0"
+    }
+  },
+  "installed_locked_packages": {
+    "cffi": {
+      "locked": "==2.1.1",
+      "installed": "2.1.1"
+    },
+    "clarabel": {
+      "locked": "==0.11.1",
+      "installed": "0.11.1"
+    },
+    "cloudpickle": {
+      "locked": "==3.1.2",
+      "installed": "3.1.2"
+    },
+    "colorama": {
+      "locked": "==0.4.6",
+      "installed": "0.4.6"
+    },
+    "contourpy": {
+      "locked": "==1.4.0",
+      "installed": "1.4.0"
+    },
+    "cvxpy": {
+      "locked": "==1.9.3",
+      "installed": "1.9.3"
+    },
+    "cycler": {
+      "locked": "==0.12.1",
+      "installed": "0.12.1"
+    },
+    "fonttools": {
+      "locked": "==4.67.0",
+      "installed": "4.67.0"
+    },
+    "highspy": {
+      "locked": "==1.15.1",
+      "installed": "1.15.1"
+    },
+    "imageio-ffmpeg": {
+      "locked": "==0.6.0",
+      "installed": "0.6.0"
+    },
+    "iniconfig": {
+      "locked": "==2.3.1",
+      "installed": "2.3.1"
+    },
+    "jinja2": {
+      "locked": "==3.1.6",
+      "installed": "3.1.6"
+    },
+    "joblib": {
+      "locked": "==1.6.0",
+      "installed": "1.5.1"
+    },
+    "kiwisolver": {
+      "locked": "==1.5.1",
+      "installed": "1.5.1"
+    },
+    "markupsafe": {
+      "locked": "==3.0.4",
+      "installed": "3.0.4"
+    },
+    "matplotlib": {
+      "locked": "==3.11.2",
+      "installed": "3.11.2"
+    },
+    "numpy": {
+      "locked": "==2.5.4",
+      "installed": "2.5.4"
+    },
+    "osqp": {
+      "locked": "==1.1.3",
+      "installed": "1.1.3"
+    },
+    "packaging": {
+      "locked": "==26.3",
+      "installed": "26.3"
+    },
+    "pandas": {
+      "locked": "==3.1.0",
+      "installed": "3.1.0"
+    },
+    "pillow": {
+      "locked": "==13.0.0",
+      "installed": "13.0.0"
+    },
+    "pluggy": {
+      "locked": "==1.7.0",
+      "installed": "1.7.0"
+    },
+    "pycparser": {
+      "locked": "==3.12",
+      "installed": "3.12"
+    },
+    "pygments": {
+      "locked": "==2.21.0",
+      "installed": "2.21.0"
+    },
+    "pymunk": {
+      "locked": "==7.3.1",
+      "installed": "7.3.1"
+    },
+    "pyparsing": {
+      "locked": "==3.3.3",
+      "installed": "3.3.3"
+    },
+    "pypdf": {
+      "locked": "==6.21.2",
+      "installed": "6.21.2"
+    },
+    "pytest": {
+      "locked": "==9.1.1",
+      "installed": "9.1.1"
+    },
+    "python-dateutil": {
+      "locked": "==3.0.0",
+      "installed": "3.0.0"
+    },
+    "pyyaml": {
+      "locked": "==6.0.3",
+      "installed": "6.0.2"
+    },
+    "pyzmq": {
+      "locked": "==27.2.0",
+      "installed": "27.2.0"
+    },
+    "qdldl": {
+      "locked": "==0.1.9.post1",
+      "installed": "0.1.9.post1"
+    },
+    "ruff": {
+      "locked": "==0.17.1",
+      "installed": "0.17.1"
+    },
+    "scipy": {
+      "locked": "==1.18.1",
+      "installed": "1.18.1"
+    },
+    "scs": {
+      "locked": "==3.3.1",
+      "installed": "3.3.1"
+    },
+    "setuptools": {
+      "locked": "==84.2.1",
+      "installed": "84.2.1"
+    },
+    "shapely": {
+      "locked": "==2.2.0",
+      "installed": "2.2.0"
+    },
+    "six": {
+      "locked": "==1.17.0",
+      "installed": "1.17.0"
+    },
+    "sparsediffpy": {
+      "locked": "==0.6.1",
+      "installed": "0.6.1"
+    },
+    "threadpoolctl": {
+      "locked": "==3.7.0",
+      "installed": "3.7.0"
+    },
+    "tzdata": {
+      "locked": "==2026.5",
+      "installed": "2026.5"
+    }
+  }
+}

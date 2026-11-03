@@ -1,5 +1,7 @@
 # 数据与原始文件索引
 
+2026-11-03：[局部配对完整物理比较](results/local_pair_safety_v1/README.md)的8回合原件在 `runs/research/2026-11-03-local-pair-safety-v1/run/`；执行前源码、协议、设计与测试快照在同级 `freeze/`，执行/分析收据与完整分析在同级目录。1033通过/2跳过和另7项审计测试、所有RED及首次失败、运行/分析/发布日志保留在同名maintenance目录。Git保存全部八行指标、7次实际配对、402/989残余事件、精简复现矩阵、分析、图表和产品哈希；大体积逐帧原件保持本地。两项门槛FAIL，候选未采用，数值参数及历史身份不变。
+
 2026-11-03：[残余协同诊断](results/residual_coordination_v1/README.md)原件在 `runs/research/2026-11-03-residual-coordination-v1/attempt2/`；attempt1因误标首子步为末子步追加作废，全部冻结源码和结果保留。两状态×两rho的联合见证在 `runs/research/2026-11-03-local-pair-feasibility-v1/`。1000通过/2跳过、RED/GREEN、分析/发布日志及三版图布局/措辞在 `runs/maintenance/2026-11-03-residual-coordination-v1/`。新物理回合0；5,361帧阶段重建、21,444个子步分析与四个同状态优化分别记账。
 
 2026-11-03：[修正后有限支持独立验证](results/finite_acquisition_support_v2/README.md)的新8回合原件在 `runs/research/2026-11-03-finite-acquisition-support-v2/run/`，执行前快照在同级 `freeze/`，完整分析及执行收据在同级目录。874帧完整重放和分列的40帧预检在 `runs/research/2026-11-03-finite-support-review-validation-v1/`，包含原脚本/设计/修后模块快照、压缩逐调用追踪及七个QP见证。995通过/2跳过、首次失败及全部执行日志保留在对应maintenance目录。公开v2目录包含全部八行CSV、分析、审计、逐数组复现矩阵、图表和哈希；旧v1的四个基线使用量占位值仅在新增衍生CSV更正，未覆盖旧表。新物理8回合、旧状态874+40帧及旧物理比较对象分别计数。

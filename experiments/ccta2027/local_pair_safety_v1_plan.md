@@ -32,7 +32,7 @@ Review focus:
 - [x] Task3: src/dbact/control/controller.py and tests/test_local_pair_wiring.py.
   Only one default-off selector; preserve old default and raw diagnostics;
   integrate before finalization, check applied commands; full core suite.
-- [ ] Task4: separate physical design/protocol and scripts/local_pair_study.py.
+- [x] Task4: separate physical design/protocol and scripts/local_pair_study.py.
   Freeze source/environment/inputs first; execute4+4 episodes once; independently
   audit pair execution and matched baseline evidence; publish complete metrics.
 - [ ] Task5: one fresh independent final review, fix material findings once,
@@ -86,3 +86,31 @@ protocolSHA d991f0ffa0eeceedcdff2a68475a9662fd1b8be258294db5703032b073bd8230.
 Every prior effective-controller hash matches after removing only the new boolean;
 canonical YAML and original physical parameters/gates/initial states are exact.
 Frozen source, helpers, designs, tests and environment receipts are preserved.
+
+Task4 physical execution completed8/8,0execution errors,source integrityPASS,
+terminal0 (session51882 closed). Independent analysis also terminal0 (2173closed):
+all4original controls exactly reproduce all25arrays and scientific fields;
+all7accepted pair commitments/14robot steps verified from recorded rows and
+measured commands. Both arms safe4/4,falseHOLD/hardfail/timeouts0,G5002/4.
+C: acquisition scaling1->0,rotation9.071854->4.942476deg,time59.45->53.70s,
+endpoint17.690->6.939mm,still noformalTRANSPORT. Skew: acquisition scaling1->1,
+post-freeze0->1,rotation.792236->2.289195deg,time49.30->55.35s,
+endpoint18.149->12.933mm. Near circle/L physical outcomes unchanged.
+MechanismFAIL(acquisition scaling and post-freeze nonincrease); full-chainFAIL.
+Candidate remains default-off and unadopted. No retuning or extra physical runs.
+
+Read-only residual inspection: skew saved402 agent05 has one active reach cap,
+so correctly rejected by this candidate's predeclared scope; saved989 occurs
+inBRAKE after reference freeze, also outside scope. Accepted pair frames in the
+audit are zero-based; publication must convert to one-based saved frames or label
+them explicitly. C4/skew3accepted pairs, allagent05/09;22failed peer solver trials
+are numerical nonverification, not22proofs of infeasibility. Do not remove scope
+guards to claim success; diagnose the uncapped402demand and989motion rows first.
+
+Task4 publication complete: nine generated products under
+docs/results/local_pair_safety_v1/, all8rows and all7accepted pairs retained.
+Figure visually inspected: complete labels/units/denominators and adverse skew
+results visible. Narrative separates received-row audit from unknown-boundary
+proof, current comparison from older better C rotation/time, and all test runs.
+Task5 starts with current publication/navigation verification, then one fresh
+whole-increment review, normal authorized branch push and exact-head CI.
