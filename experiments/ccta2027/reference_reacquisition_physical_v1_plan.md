@@ -23,9 +23,10 @@ Spec: reference_reacquisition_v1_design.md. No runtime change is planned.
 - [x] Analyze with original episode/reproduction/scaling evaluators. Verify all
       four old cases exactly and candidate capture prefixes through the first
       frozen frame. Report recovery modes, availability, activation and failures.
-- [ ] Publish to docs/results/reference_reacquisition_physical_v1, preserving the
+- [x] Prepare publication in docs/results/reference_reacquisition_physical_v1, preserving the
       existing engineering checkpoint directory and all historical raw products.
-      One fresh final review, integrity checks, normal research-branch push/CI.
+      One fresh final review and integrity checks complete. The final operation
+      is a normal research-branch push and exact-commit CI, recorded separately.
 
 Review focus: pre/post-physics prefix indexing and ragged sensor arrays; protocol
 budget matches eight resolved cases; full-chain gate keeps zero acquisition
@@ -80,3 +81,21 @@ passed: seven navigation documents/298 local links, all product hashes and CSV
 metrics, original receipt identities, frozen runtime/scripts/environment and
 protected config unchanged. Receipt: physical_integrity.json in maintenance.
 Final review and exact pushed-commit CI are still pending at this ledger entry.
+
+Final review: one fresh gpt-6-astra reviewer completed the whole ec2aa56..1d97a89
+increment read-only. Critical0, Important0, Minor1; bounded publication approved.
+Final: minor (deferred): add direct freeze-frame position/ragged-point/command
+negative cases in a separate follow-up test file; current implementation is
+correct and actual complete-prefix comparisons pass. Cost: a future off-by-one
+exclusion could escape the current unit tests. Preserve frozen test identity.
+Final: Ruling: unused-condition generalization, rotation, hardware and adoption
+were outside review scope — keep those claims explicitly unestablished and the
+candidate off, since four reused conditions and remaining failures cannot justify
+them — cost if wrong: overstated reliability and readiness.
+Final: Ruling: exact published-commit CI was pending — require the final pushed
+SHA's Windows/Ubuntu results before reporting success, save new physical_github_*
+receipts — cost if omitted: unsupported cross-platform validation. CI does not
+relabel the local physical environment.
+No fix pass or second review was required. The remaining local steps are final
+publication integrity, commit, normal push and exact-commit CI. Their receipts
+are saved separately after this document's commit, so it does not preclaim them.

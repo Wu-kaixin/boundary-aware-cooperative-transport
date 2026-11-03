@@ -51,7 +51,7 @@
 
 [完整试验报告与图表](docs/results/reference_surface_v1/README.md) · [全部八块数据](docs/results/reference_surface_v1/all_eight_blocks.csv) · [基线复现证据](docs/results/reference_surface_v1/baseline_reproduction.json) · [部署贡献审计](docs/results/deployment_contribution_v1/README.md)
 
-本轮冻结源码与评价器对应的[本地完整回归](docs/results/reference_reacquisition_physical_v1/engineering_checks.json)为 **938 项通过、2 项跳过**；新增4项评价器回归覆盖采集前缀索引、变长观测及门槛区分。八个新物理回合、此前4,317帧重放和两个既有冲突见证分别记账。此前912/934项工程收据及独立审查均保留原身份。[Windows / Ubuntu CI](https://github.com/Wu-kaixin/boundary-aware-cooperative-transport/actions/workflows/tests.yml)按各自提交记录核心、MAS和smoke检查。单元测试不等同于研究成功；大体积原始轨迹和冻结源码仍按[数据索引](docs/DATA_INDEX.md)保留本地。
+本轮冻结源码与评价器对应的[本地完整回归](docs/results/reference_reacquisition_physical_v1/engineering_checks.json)为 **938 项通过、2 项跳过**；新增4项评价器回归覆盖采集前缀索引、变长观测及门槛区分。[独立最终审查](docs/results/reference_reacquisition_physical_v1/final_review.md)无阻塞项，保留一项冻结当帧负例的测试补强建议。八个新物理回合、此前4,317帧重放和两个既有冲突见证分别记账。此前912/934项工程收据及独立审查均保留原身份。[Windows / Ubuntu CI](https://github.com/Wu-kaixin/boundary-aware-cooperative-transport/actions/workflows/tests.yml)按各自提交记录核心、MAS和smoke检查。单元测试不等同于研究成功；大体积原始轨迹和冻结源码仍按[数据索引](docs/DATA_INDEX.md)保留本地。
 
 ## 目前遗留的问题与下一步
 
