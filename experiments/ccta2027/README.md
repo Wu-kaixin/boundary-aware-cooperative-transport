@@ -1,5 +1,7 @@
 # CCTA 2027 实验入口
 
+2026-11-03：[采集边界与正式激活事后诊断设计](acquisition_normal_audit_v1_design.md)已执行；[记录](acquisition_normal_audit_v1_plan.md)和[结果](../../docs/results/acquisition_normal_audit_v1/README.md)区分784帧精确控制重放、20帧预检和2,589帧阶段重建，新增物理回合0。全部26个采集冲突保留，支持优先处理有限边界外推及C形制动前协作激活；没有修改运行代码或原门槛。
+
 2026-11-03：[reference_reacquisition_v1.json](reference_reacquisition_v1.json)冻结四条件×两臂八回合，现已全部完成。原主动采集与观测恢复安全完成2/4→4/4，错误HOLD/原硬违规均0，G500仍2/4；四个原对照和四个采集前缀精确一致。[完整结果](../../docs/results/reference_reacquisition_physical_v1/README.md)保留13/13次采集缩放、斜箱6次冻结后缩放和C形未正式TRANSPORT：机制PASS、完整筛选FAIL、候选未采用。[原设计](reference_reacquisition_v1_design.md)和全部参数/门槛未改；[两个旧冲突见证的事后设计](circulation_conflict_witness_v1_design.md)没有新增物理回合。
 
 前置[接触激活诊断设计](contact_activation_v1_design.md)完成十二回合保存谓词审计与4,317帧精确重放，[证据](../../docs/results/contact_activation_v1/README.md)不包含新物理样本。[观测恢复实现检查点](../../docs/results/reference_reacquisition_v1/README.md)保留当时934通过/2跳过、针对性63通过的工程身份；本次八回合及938通过/2跳过另行记录。

@@ -1,0 +1,1431 @@
+{
+  "source_sha256": "5251bea3bc76971a74f62fc2c7899a33cca52cd57a267cd1feebcd033d8e0eb6",
+  "protocol_sha256": "b4c04255521da8a72345422e0a65c150c8438abc26c5c55104767b0198b26f0b",
+  "script_sha256": "dfd16a5cc5d2dd5e8e3a70f709a84efc4b665000e5f575aabd1efa4d7100b7a3",
+  "design_sha256": "7e24405c58c17ccb43cc248fe2339c7d452c01bdad4dfeb95cc0a9e8348e140c",
+  "new_physical_episodes": 0,
+  "new_controller_replay_frames": 0,
+  "scope": "Original phase monitor only, driven by original saved signals; not a new controller trajectory",
+  "episodes": [
+    {
+      "case_id": "near_l_reference_reference_reacquisition",
+      "verified_frames": 265,
+      "gates": {
+        "informed_fraction": 0.55,
+        "map_coverage_min": 0.7,
+        "contact_quorum": 4,
+        "contact_dwell": 20,
+        "transport_quorum": 4,
+        "brake_fraction": 0.65,
+        "hold_tolerance": 0.0,
+        "hold_speed": 0.02,
+        "hold_dwell": 1,
+        "sustain_contacts": 1,
+        "contact_loss_dwell": 20,
+        "contact_regain_dwell": 20,
+        "pause_limit": 80,
+        "estimate_loss_dwell": 20,
+        "recover_on_brake_progress": false
+      },
+      "receipt_sha256": "2f39061641af93c8a79d15368a950b9cd20f417d7aa6b916e2d9b949127df5d7",
+      "by_phase": {
+        "DISCOVER": {
+          "frames": 44,
+          "maximum_active": 0,
+          "quorum_frames": 0,
+          "first_quorum_frame": null,
+          "minimum_remaining_m": 1.1788447678011313
+        },
+        "ENCLOSE": {
+          "frames": 50,
+          "maximum_active": 0,
+          "quorum_frames": 0,
+          "first_quorum_frame": null,
+          "minimum_remaining_m": 1.1783680391117475
+        },
+        "CONTACT_READY": {
+          "frames": 15,
+          "maximum_active": 2,
+          "quorum_frames": 0,
+          "first_quorum_frame": null,
+          "minimum_remaining_m": 1.145098319120367
+        },
+        "TRANSPORT": {
+          "frames": 51,
+          "maximum_active": 4,
+          "quorum_frames": 2,
+          "first_quorum_frame": 110,
+          "minimum_remaining_m": 0.42221814961819715
+        },
+        "BRAKE": {
+          "frames": 65,
+          "maximum_active": 6,
+          "quorum_frames": 17,
+          "first_quorum_frame": 168,
+          "minimum_remaining_m": 0.0
+        },
+        "HOLD": {
+          "frames": 40,
+          "maximum_active": 1,
+          "quorum_frames": 0,
+          "first_quorum_frame": null,
+          "minimum_remaining_m": 0.0
+        }
+      },
+      "events": {
+        "DISCOVER": {
+          "frame": 1,
+          "monitor_frame": 0,
+          "time": 0.0,
+          "from_phase": "SEARCH",
+          "signals": {
+            "agent_count": 16,
+            "informed_agents": 13,
+            "map_coverage": 0.4166666666666667,
+            "contact_ready": 0,
+            "transport_active": 0,
+            "progress": 0.0,
+            "target_distance": 1.2,
+            "estimated_speed": 0.0,
+            "stopping_distance": 0.18333333333333335,
+            "estimate_quality": "unavailable",
+            "recovery_ready": null,
+            "task_reference_ready": false
+          },
+          "brake_due": false,
+          "brake_lead_m": 0.42,
+          "response": {
+            "final_phase": "DISCOVER",
+            "entered": {
+              "SEARCH": 0,
+              "DISCOVER": 0
+            },
+            "first_detection_frame": 0,
+            "enclosure_frame": null,
+            "contact_ready_frame": null,
+            "transport_frame": null,
+            "brake_frame": null,
+            "hold_frame": null,
+            "brake_reason": null,
+            "push_suspended": false,
+            "overshoot": false,
+            "short_of_target": false,
+            "contact_recovery_failed": false,
+            "estimate_stopped": false
+          }
+        },
+        "ENCLOSE": {
+          "frame": 45,
+          "monitor_frame": 44,
+          "time": 2.2,
+          "from_phase": "DISCOVER",
+          "signals": {
+            "agent_count": 16,
+            "informed_agents": 16,
+            "map_coverage": 0.7222222222222222,
+            "contact_ready": 0,
+            "transport_active": 0,
+            "progress": 0.019166674904168568,
+            "target_distance": 1.2,
+            "estimated_speed": 0.013238197465548666,
+            "stopping_distance": 0.18333333333333335,
+            "estimate_quality": "credible",
+            "recovery_ready": null,
+            "task_reference_ready": false
+          },
+          "brake_due": false,
+          "brake_lead_m": 0.42,
+          "response": {
+            "final_phase": "ENCLOSE",
+            "entered": {
+              "SEARCH": 0,
+              "DISCOVER": 0,
+              "ENCLOSE": 44
+            },
+            "first_detection_frame": 0,
+            "enclosure_frame": 44,
+            "contact_ready_frame": null,
+            "transport_frame": null,
+            "brake_frame": null,
+            "hold_frame": null,
+            "brake_reason": null,
+            "push_suspended": false,
+            "overshoot": false,
+            "short_of_target": false,
+            "contact_recovery_failed": false,
+            "estimate_stopped": false
+          }
+        },
+        "CONTACT_READY": {
+          "frame": 95,
+          "monitor_frame": 94,
+          "time": 4.7,
+          "from_phase": "ENCLOSE",
+          "signals": {
+            "agent_count": 16,
+            "informed_agents": 16,
+            "map_coverage": 0.9722222222222222,
+            "contact_ready": 8,
+            "transport_active": 0,
+            "progress": 0.01867011639914007,
+            "target_distance": 1.2,
+            "estimated_speed": 0.004595455375044522,
+            "stopping_distance": 0.18333333333333335,
+            "estimate_quality": "credible",
+            "recovery_ready": null,
+            "task_reference_ready": false
+          },
+          "brake_due": false,
+          "brake_lead_m": 0.42,
+          "response": {
+            "final_phase": "CONTACT_READY",
+            "entered": {
+              "SEARCH": 0,
+              "DISCOVER": 0,
+              "ENCLOSE": 44,
+              "CONTACT_READY": 94
+            },
+            "first_detection_frame": 0,
+            "enclosure_frame": 44,
+            "contact_ready_frame": 94,
+            "transport_frame": null,
+            "brake_frame": null,
+            "hold_frame": null,
+            "brake_reason": null,
+            "push_suspended": false,
+            "overshoot": false,
+            "short_of_target": false,
+            "contact_recovery_failed": false,
+            "estimate_stopped": false
+          }
+        },
+        "first_quorum": {
+          "frame": 110,
+          "time": 5.45,
+          "phase": "TRANSPORT",
+          "active": 4
+        },
+        "TRANSPORT": {
+          "frame": 110,
+          "monitor_frame": 109,
+          "time": 5.45,
+          "from_phase": "CONTACT_READY",
+          "signals": {
+            "agent_count": 16,
+            "informed_agents": 16,
+            "map_coverage": 0.9444444444444444,
+            "contact_ready": 8,
+            "transport_active": 4,
+            "progress": 0.056728739107473114,
+            "target_distance": 1.2,
+            "estimated_speed": 0.07105092494207821,
+            "stopping_distance": 0.18333333333333335,
+            "estimate_quality": "credible",
+            "recovery_ready": null,
+            "task_reference_ready": false
+          },
+          "brake_due": false,
+          "brake_lead_m": 0.42,
+          "response": {
+            "final_phase": "TRANSPORT",
+            "entered": {
+              "SEARCH": 0,
+              "DISCOVER": 0,
+              "ENCLOSE": 44,
+              "CONTACT_READY": 94,
+              "TRANSPORT": 109
+            },
+            "first_detection_frame": 0,
+            "enclosure_frame": 44,
+            "contact_ready_frame": 94,
+            "transport_frame": 109,
+            "brake_frame": null,
+            "hold_frame": null,
+            "brake_reason": null,
+            "push_suspended": false,
+            "overshoot": false,
+            "short_of_target": false,
+            "contact_recovery_failed": false,
+            "estimate_stopped": false
+          }
+        },
+        "BRAKE": {
+          "frame": 161,
+          "monitor_frame": 160,
+          "time": 8.0,
+          "from_phase": "TRANSPORT",
+          "signals": {
+            "agent_count": 16,
+            "informed_agents": 16,
+            "map_coverage": 0.9444444444444444,
+            "contact_ready": 5,
+            "transport_active": 0,
+            "progress": 0.7913041911874538,
+            "target_distance": 1.2,
+            "estimated_speed": 0.29738306223989935,
+            "stopping_distance": 0.18333333333333335,
+            "estimate_quality": "credible",
+            "recovery_ready": null,
+            "task_reference_ready": false
+          },
+          "brake_due": true,
+          "brake_lead_m": 0.42,
+          "response": {
+            "final_phase": "BRAKE",
+            "entered": {
+              "SEARCH": 0,
+              "DISCOVER": 0,
+              "ENCLOSE": 44,
+              "CONTACT_READY": 94,
+              "TRANSPORT": 109,
+              "BRAKE": 160
+            },
+            "first_detection_frame": 0,
+            "enclosure_frame": 44,
+            "contact_ready_frame": 94,
+            "transport_frame": 109,
+            "brake_frame": 160,
+            "hold_frame": null,
+            "brake_reason": "estimated_stop",
+            "push_suspended": false,
+            "overshoot": false,
+            "short_of_target": true,
+            "contact_recovery_failed": false,
+            "estimate_stopped": false
+          }
+        },
+        "HOLD": {
+          "frame": 226,
+          "monitor_frame": 225,
+          "time": 11.25,
+          "from_phase": "BRAKE",
+          "signals": {
+            "agent_count": 16,
+            "informed_agents": 16,
+            "map_coverage": 0.9722222222222222,
+            "contact_ready": 9,
+            "transport_active": 1,
+            "progress": 1.2,
+            "target_distance": 1.2,
+            "estimated_speed": 0.00942070701637559,
+            "stopping_distance": 0.18333333333333335,
+            "estimate_quality": "credible",
+            "recovery_ready": null,
+            "task_reference_ready": true
+          },
+          "brake_due": true,
+          "brake_lead_m": 0.42,
+          "response": {
+            "final_phase": "HOLD",
+            "entered": {
+              "SEARCH": 0,
+              "DISCOVER": 0,
+              "ENCLOSE": 44,
+              "CONTACT_READY": 94,
+              "TRANSPORT": 109,
+              "BRAKE": 160,
+              "HOLD": 225
+            },
+            "first_detection_frame": 0,
+            "enclosure_frame": 44,
+            "contact_ready_frame": 94,
+            "transport_frame": 109,
+            "brake_frame": 160,
+            "hold_frame": 225,
+            "brake_reason": "estimated_stop",
+            "push_suspended": false,
+            "overshoot": false,
+            "short_of_target": true,
+            "contact_recovery_failed": false,
+            "estimate_stopped": false
+          }
+        }
+      },
+      "contact_ready_decisions": {
+        "entered_update_in_CONTACT_READY": 15,
+        "CONTACT_READY_quorum_met": 1,
+        "CONTACT_READY_brake_due": 0
+      },
+      "final_response": {
+        "final_phase": "HOLD",
+        "entered": {
+          "SEARCH": 0,
+          "DISCOVER": 0,
+          "ENCLOSE": 44,
+          "CONTACT_READY": 94,
+          "TRANSPORT": 109,
+          "BRAKE": 160,
+          "HOLD": 225
+        },
+        "first_detection_frame": 0,
+        "enclosure_frame": 44,
+        "contact_ready_frame": 94,
+        "transport_frame": 109,
+        "brake_frame": 160,
+        "hold_frame": 225,
+        "brake_reason": "estimated_stop",
+        "push_suspended": false,
+        "overshoot": false,
+        "short_of_target": true,
+        "contact_recovery_failed": false,
+        "estimate_stopped": false
+      }
+    },
+    {
+      "case_id": "far_c_open_away_pos0_reference_reacquisition",
+      "verified_frames": 1009,
+      "gates": {
+        "informed_fraction": 0.55,
+        "map_coverage_min": 0.7,
+        "contact_quorum": 4,
+        "contact_dwell": 20,
+        "transport_quorum": 4,
+        "brake_fraction": 0.65,
+        "hold_tolerance": 0.0,
+        "hold_speed": 0.02,
+        "hold_dwell": 1,
+        "sustain_contacts": 1,
+        "contact_loss_dwell": 20,
+        "contact_regain_dwell": 20,
+        "pause_limit": 80,
+        "estimate_loss_dwell": 20,
+        "recover_on_brake_progress": false
+      },
+      "receipt_sha256": "b1f04138fb8a95a0a0f7e713d47ce9400dd9d298c285ea89a2c7b57af0dca308",
+      "by_phase": {
+        "SEARCH": {
+          "frames": 174,
+          "maximum_active": 0,
+          "quorum_frames": 0,
+          "first_quorum_frame": null,
+          "minimum_remaining_m": 1.2
+        },
+        "DISCOVER": {
+          "frames": 127,
+          "maximum_active": 0,
+          "quorum_frames": 0,
+          "first_quorum_frame": null,
+          "minimum_remaining_m": 1.2
+        },
+        "ENCLOSE": {
+          "frames": 190,
+          "maximum_active": 0,
+          "quorum_frames": 0,
+          "first_quorum_frame": null,
+          "minimum_remaining_m": 1.1794329657317888
+        },
+        "CONTACT_READY": {
+          "frames": 334,
+          "maximum_active": 3,
+          "quorum_frames": 0,
+          "first_quorum_frame": null,
+          "minimum_remaining_m": 0.4243968592040356
+        },
+        "BRAKE": {
+          "frames": 144,
+          "maximum_active": 5,
+          "quorum_frames": 18,
+          "first_quorum_frame": 922,
+          "minimum_remaining_m": 0.0
+        },
+        "HOLD": {
+          "frames": 40,
+          "maximum_active": 0,
+          "quorum_frames": 0,
+          "first_quorum_frame": null,
+          "minimum_remaining_m": 0.0
+        }
+      },
+      "events": {
+        "DISCOVER": {
+          "frame": 175,
+          "monitor_frame": 174,
+          "time": 8.700000000000001,
+          "from_phase": "SEARCH",
+          "signals": {
+            "agent_count": 16,
+            "informed_agents": 1,
+            "map_coverage": 0.08333333333333333,
+            "contact_ready": 0,
+            "transport_active": 0,
+            "progress": 0.0,
+            "target_distance": 1.2,
+            "estimated_speed": 0.0,
+            "stopping_distance": 0.18333333333333335,
+            "estimate_quality": "unavailable",
+            "recovery_ready": null,
+            "task_reference_ready": false
+          },
+          "brake_due": false,
+          "brake_lead_m": 0.42,
+          "response": {
+            "final_phase": "DISCOVER",
+            "entered": {
+              "SEARCH": 0,
+              "DISCOVER": 174
+            },
+            "first_detection_frame": 174,
+            "enclosure_frame": null,
+            "contact_ready_frame": null,
+            "transport_frame": null,
+            "brake_frame": null,
+            "hold_frame": null,
+            "brake_reason": null,
+            "push_suspended": false,
+            "overshoot": false,
+            "short_of_target": false,
+            "contact_recovery_failed": false,
+            "estimate_stopped": false
+          }
+        },
+        "ENCLOSE": {
+          "frame": 302,
+          "monitor_frame": 301,
+          "time": 15.05,
+          "from_phase": "DISCOVER",
+          "signals": {
+            "agent_count": 16,
+            "informed_agents": 11,
+            "map_coverage": 0.7222222222222222,
+            "contact_ready": 0,
+            "transport_active": 0,
+            "progress": 0.0,
+            "target_distance": 1.2,
+            "estimated_speed": 0.0,
+            "stopping_distance": 0.18333333333333335,
+            "estimate_quality": "unavailable",
+            "recovery_ready": null,
+            "task_reference_ready": false
+          },
+          "brake_due": false,
+          "brake_lead_m": 0.42,
+          "response": {
+            "final_phase": "ENCLOSE",
+            "entered": {
+              "SEARCH": 0,
+              "DISCOVER": 174,
+              "ENCLOSE": 301
+            },
+            "first_detection_frame": 174,
+            "enclosure_frame": 301,
+            "contact_ready_frame": null,
+            "transport_frame": null,
+            "brake_frame": null,
+            "hold_frame": null,
+            "brake_reason": null,
+            "push_suspended": false,
+            "overshoot": false,
+            "short_of_target": false,
+            "contact_recovery_failed": false,
+            "estimate_stopped": false
+          }
+        },
+        "CONTACT_READY": {
+          "frame": 492,
+          "monitor_frame": 491,
+          "time": 24.55,
+          "from_phase": "ENCLOSE",
+          "signals": {
+            "agent_count": 16,
+            "informed_agents": 14,
+            "map_coverage": 0.7777777777777778,
+            "contact_ready": 4,
+            "transport_active": 0,
+            "progress": 0.016834882340622137,
+            "target_distance": 1.2,
+            "estimated_speed": 0.03192769948313578,
+            "stopping_distance": 0.18333333333333335,
+            "estimate_quality": "credible",
+            "recovery_ready": null,
+            "task_reference_ready": false
+          },
+          "brake_due": false,
+          "brake_lead_m": 0.42,
+          "response": {
+            "final_phase": "CONTACT_READY",
+            "entered": {
+              "SEARCH": 0,
+              "DISCOVER": 174,
+              "ENCLOSE": 301,
+              "CONTACT_READY": 491
+            },
+            "first_detection_frame": 174,
+            "enclosure_frame": 301,
+            "contact_ready_frame": 491,
+            "transport_frame": null,
+            "brake_frame": null,
+            "hold_frame": null,
+            "brake_reason": null,
+            "push_suspended": false,
+            "overshoot": false,
+            "short_of_target": false,
+            "contact_recovery_failed": false,
+            "estimate_stopped": false
+          }
+        },
+        "BRAKE": {
+          "frame": 826,
+          "monitor_frame": 825,
+          "time": 41.25,
+          "from_phase": "CONTACT_READY",
+          "signals": {
+            "agent_count": 16,
+            "informed_agents": 15,
+            "map_coverage": 0.8888888888888888,
+            "contact_ready": 9,
+            "transport_active": 1,
+            "progress": 0.7800057961798856,
+            "target_distance": 1.2,
+            "estimated_speed": 0.08505869495957558,
+            "stopping_distance": 0.18333333333333335,
+            "estimate_quality": "credible",
+            "recovery_ready": null,
+            "task_reference_ready": false
+          },
+          "brake_due": true,
+          "brake_lead_m": 0.42,
+          "response": {
+            "final_phase": "BRAKE",
+            "entered": {
+              "SEARCH": 0,
+              "DISCOVER": 174,
+              "ENCLOSE": 301,
+              "CONTACT_READY": 491,
+              "BRAKE": 825
+            },
+            "first_detection_frame": 174,
+            "enclosure_frame": 301,
+            "contact_ready_frame": 491,
+            "transport_frame": null,
+            "brake_frame": 825,
+            "hold_frame": null,
+            "brake_reason": "estimated_stop_from_contact_ready",
+            "push_suspended": false,
+            "overshoot": false,
+            "short_of_target": true,
+            "contact_recovery_failed": false,
+            "estimate_stopped": false
+          }
+        },
+        "first_quorum": {
+          "frame": 922,
+          "time": 46.050000000000004,
+          "phase": "BRAKE",
+          "active": 4
+        },
+        "HOLD": {
+          "frame": 970,
+          "monitor_frame": 969,
+          "time": 48.45,
+          "from_phase": "BRAKE",
+          "signals": {
+            "agent_count": 16,
+            "informed_agents": 15,
+            "map_coverage": 0.8888888888888888,
+            "contact_ready": 12,
+            "transport_active": 0,
+            "progress": 1.2,
+            "target_distance": 1.2,
+            "estimated_speed": 0.016495918886964115,
+            "stopping_distance": 0.18333333333333335,
+            "estimate_quality": "credible",
+            "recovery_ready": null,
+            "task_reference_ready": true
+          },
+          "brake_due": true,
+          "brake_lead_m": 0.42,
+          "response": {
+            "final_phase": "HOLD",
+            "entered": {
+              "SEARCH": 0,
+              "DISCOVER": 174,
+              "ENCLOSE": 301,
+              "CONTACT_READY": 491,
+              "BRAKE": 825,
+              "HOLD": 969
+            },
+            "first_detection_frame": 174,
+            "enclosure_frame": 301,
+            "contact_ready_frame": 491,
+            "transport_frame": null,
+            "brake_frame": 825,
+            "hold_frame": 969,
+            "brake_reason": "estimated_stop_from_contact_ready",
+            "push_suspended": false,
+            "overshoot": false,
+            "short_of_target": true,
+            "contact_recovery_failed": false,
+            "estimate_stopped": false
+          }
+        }
+      },
+      "contact_ready_decisions": {
+        "entered_update_in_CONTACT_READY": 334,
+        "CONTACT_READY_quorum_met": 0,
+        "CONTACT_READY_brake_due": 1
+      },
+      "final_response": {
+        "final_phase": "HOLD",
+        "entered": {
+          "SEARCH": 0,
+          "DISCOVER": 174,
+          "ENCLOSE": 301,
+          "CONTACT_READY": 491,
+          "BRAKE": 825,
+          "HOLD": 969
+        },
+        "first_detection_frame": 174,
+        "enclosure_frame": 301,
+        "contact_ready_frame": 491,
+        "transport_frame": null,
+        "brake_frame": 825,
+        "hold_frame": 969,
+        "brake_reason": "estimated_stop_from_contact_ready",
+        "push_suspended": false,
+        "overshoot": false,
+        "short_of_target": true,
+        "contact_recovery_failed": false,
+        "estimate_stopped": false
+      }
+    },
+    {
+      "case_id": "far_skew_box_s0_r0_pos0_reference_reacquisition",
+      "verified_frames": 983,
+      "gates": {
+        "informed_fraction": 0.55,
+        "map_coverage_min": 0.7,
+        "contact_quorum": 4,
+        "contact_dwell": 20,
+        "transport_quorum": 4,
+        "brake_fraction": 0.65,
+        "hold_tolerance": 0.0,
+        "hold_speed": 0.02,
+        "hold_dwell": 1,
+        "sustain_contacts": 1,
+        "contact_loss_dwell": 20,
+        "contact_regain_dwell": 20,
+        "pause_limit": 80,
+        "estimate_loss_dwell": 20,
+        "recover_on_brake_progress": false
+      },
+      "receipt_sha256": "754728849de657a1aa56bda4c70c5aff0c0f48d4e8113faa37b72220fad244c2",
+      "by_phase": {
+        "SEARCH": {
+          "frames": 191,
+          "maximum_active": 0,
+          "quorum_frames": 0,
+          "first_quorum_frame": null,
+          "minimum_remaining_m": 1.2
+        },
+        "DISCOVER": {
+          "frames": 145,
+          "maximum_active": 0,
+          "quorum_frames": 0,
+          "first_quorum_frame": null,
+          "minimum_remaining_m": 1.2
+        },
+        "ENCLOSE": {
+          "frames": 196,
+          "maximum_active": 0,
+          "quorum_frames": 0,
+          "first_quorum_frame": null,
+          "minimum_remaining_m": 1.1739426496058294
+        },
+        "CONTACT_READY": {
+          "frames": 331,
+          "maximum_active": 3,
+          "quorum_frames": 0,
+          "first_quorum_frame": null,
+          "minimum_remaining_m": 0.8540531682095865
+        },
+        "TRANSPORT": {
+          "frames": 42,
+          "maximum_active": 4,
+          "quorum_frames": 3,
+          "first_quorum_frame": 864,
+          "minimum_remaining_m": 0.42139257067653335
+        },
+        "BRAKE": {
+          "frames": 38,
+          "maximum_active": 4,
+          "quorum_frames": 1,
+          "first_quorum_frame": 906,
+          "minimum_remaining_m": 0.0
+        },
+        "HOLD": {
+          "frames": 40,
+          "maximum_active": 0,
+          "quorum_frames": 0,
+          "first_quorum_frame": null,
+          "minimum_remaining_m": 0.0
+        }
+      },
+      "events": {
+        "DISCOVER": {
+          "frame": 192,
+          "monitor_frame": 191,
+          "time": 9.55,
+          "from_phase": "SEARCH",
+          "signals": {
+            "agent_count": 16,
+            "informed_agents": 4,
+            "map_coverage": 0.19444444444444445,
+            "contact_ready": 0,
+            "transport_active": 0,
+            "progress": 0.0,
+            "target_distance": 1.2,
+            "estimated_speed": 0.0,
+            "stopping_distance": 0.18333333333333335,
+            "estimate_quality": "unavailable",
+            "recovery_ready": null,
+            "task_reference_ready": false
+          },
+          "brake_due": false,
+          "brake_lead_m": 0.42,
+          "response": {
+            "final_phase": "DISCOVER",
+            "entered": {
+              "SEARCH": 0,
+              "DISCOVER": 191
+            },
+            "first_detection_frame": 191,
+            "enclosure_frame": null,
+            "contact_ready_frame": null,
+            "transport_frame": null,
+            "brake_frame": null,
+            "hold_frame": null,
+            "brake_reason": null,
+            "push_suspended": false,
+            "overshoot": false,
+            "short_of_target": false,
+            "contact_recovery_failed": false,
+            "estimate_stopped": false
+          }
+        },
+        "ENCLOSE": {
+          "frame": 337,
+          "monitor_frame": 336,
+          "time": 16.8,
+          "from_phase": "DISCOVER",
+          "signals": {
+            "agent_count": 16,
+            "informed_agents": 11,
+            "map_coverage": 0.7222222222222222,
+            "contact_ready": 0,
+            "transport_active": 0,
+            "progress": 0.0,
+            "target_distance": 1.2,
+            "estimated_speed": 0.0,
+            "stopping_distance": 0.18333333333333335,
+            "estimate_quality": "unavailable",
+            "recovery_ready": null,
+            "task_reference_ready": false
+          },
+          "brake_due": false,
+          "brake_lead_m": 0.42,
+          "response": {
+            "final_phase": "ENCLOSE",
+            "entered": {
+              "SEARCH": 0,
+              "DISCOVER": 191,
+              "ENCLOSE": 336
+            },
+            "first_detection_frame": 191,
+            "enclosure_frame": 336,
+            "contact_ready_frame": null,
+            "transport_frame": null,
+            "brake_frame": null,
+            "hold_frame": null,
+            "brake_reason": null,
+            "push_suspended": false,
+            "overshoot": false,
+            "short_of_target": false,
+            "contact_recovery_failed": false,
+            "estimate_stopped": false
+          }
+        },
+        "CONTACT_READY": {
+          "frame": 533,
+          "monitor_frame": 532,
+          "time": 26.6,
+          "from_phase": "ENCLOSE",
+          "signals": {
+            "agent_count": 16,
+            "informed_agents": 14,
+            "map_coverage": 0.9166666666666666,
+            "contact_ready": 5,
+            "transport_active": 0,
+            "progress": 0.0202033681413043,
+            "target_distance": 1.2,
+            "estimated_speed": 0.011723156733900003,
+            "stopping_distance": 0.18333333333333335,
+            "estimate_quality": "credible",
+            "recovery_ready": null,
+            "task_reference_ready": false
+          },
+          "brake_due": false,
+          "brake_lead_m": 0.42,
+          "response": {
+            "final_phase": "CONTACT_READY",
+            "entered": {
+              "SEARCH": 0,
+              "DISCOVER": 191,
+              "ENCLOSE": 336,
+              "CONTACT_READY": 532
+            },
+            "first_detection_frame": 191,
+            "enclosure_frame": 336,
+            "contact_ready_frame": 532,
+            "transport_frame": null,
+            "brake_frame": null,
+            "hold_frame": null,
+            "brake_reason": null,
+            "push_suspended": false,
+            "overshoot": false,
+            "short_of_target": false,
+            "contact_recovery_failed": false,
+            "estimate_stopped": false
+          }
+        },
+        "first_quorum": {
+          "frame": 864,
+          "time": 43.150000000000006,
+          "phase": "TRANSPORT",
+          "active": 4
+        },
+        "TRANSPORT": {
+          "frame": 864,
+          "monitor_frame": 863,
+          "time": 43.150000000000006,
+          "from_phase": "CONTACT_READY",
+          "signals": {
+            "agent_count": 16,
+            "informed_agents": 15,
+            "map_coverage": 1.0,
+            "contact_ready": 11,
+            "transport_active": 4,
+            "progress": 0.34684649120500033,
+            "target_distance": 1.2,
+            "estimated_speed": 0.03558309923423713,
+            "stopping_distance": 0.18333333333333335,
+            "estimate_quality": "credible",
+            "recovery_ready": null,
+            "task_reference_ready": false
+          },
+          "brake_due": false,
+          "brake_lead_m": 0.42,
+          "response": {
+            "final_phase": "TRANSPORT",
+            "entered": {
+              "SEARCH": 0,
+              "DISCOVER": 191,
+              "ENCLOSE": 336,
+              "CONTACT_READY": 532,
+              "TRANSPORT": 863
+            },
+            "first_detection_frame": 191,
+            "enclosure_frame": 336,
+            "contact_ready_frame": 532,
+            "transport_frame": 863,
+            "brake_frame": null,
+            "hold_frame": null,
+            "brake_reason": null,
+            "push_suspended": false,
+            "overshoot": false,
+            "short_of_target": false,
+            "contact_recovery_failed": false,
+            "estimate_stopped": false
+          }
+        },
+        "BRAKE": {
+          "frame": 906,
+          "monitor_frame": 905,
+          "time": 45.25,
+          "from_phase": "TRANSPORT",
+          "signals": {
+            "agent_count": 16,
+            "informed_agents": 15,
+            "map_coverage": 1.0,
+            "contact_ready": 10,
+            "transport_active": 4,
+            "progress": 0.7905126696222057,
+            "target_distance": 1.2,
+            "estimated_speed": 0.26860652461785556,
+            "stopping_distance": 0.18333333333333335,
+            "estimate_quality": "credible",
+            "recovery_ready": null,
+            "task_reference_ready": false
+          },
+          "brake_due": true,
+          "brake_lead_m": 0.42,
+          "response": {
+            "final_phase": "BRAKE",
+            "entered": {
+              "SEARCH": 0,
+              "DISCOVER": 191,
+              "ENCLOSE": 336,
+              "CONTACT_READY": 532,
+              "TRANSPORT": 863,
+              "BRAKE": 905
+            },
+            "first_detection_frame": 191,
+            "enclosure_frame": 336,
+            "contact_ready_frame": 532,
+            "transport_frame": 863,
+            "brake_frame": 905,
+            "hold_frame": null,
+            "brake_reason": "estimated_stop",
+            "push_suspended": false,
+            "overshoot": false,
+            "short_of_target": true,
+            "contact_recovery_failed": false,
+            "estimate_stopped": false
+          }
+        },
+        "HOLD": {
+          "frame": 944,
+          "monitor_frame": 943,
+          "time": 47.150000000000006,
+          "from_phase": "BRAKE",
+          "signals": {
+            "agent_count": 16,
+            "informed_agents": 15,
+            "map_coverage": 1.0,
+            "contact_ready": 11,
+            "transport_active": 0,
+            "progress": 1.2,
+            "target_distance": 1.2,
+            "estimated_speed": 0.011061127457692605,
+            "stopping_distance": 0.18333333333333335,
+            "estimate_quality": "credible",
+            "recovery_ready": null,
+            "task_reference_ready": true
+          },
+          "brake_due": true,
+          "brake_lead_m": 0.42,
+          "response": {
+            "final_phase": "HOLD",
+            "entered": {
+              "SEARCH": 0,
+              "DISCOVER": 191,
+              "ENCLOSE": 336,
+              "CONTACT_READY": 532,
+              "TRANSPORT": 863,
+              "BRAKE": 905,
+              "HOLD": 943
+            },
+            "first_detection_frame": 191,
+            "enclosure_frame": 336,
+            "contact_ready_frame": 532,
+            "transport_frame": 863,
+            "brake_frame": 905,
+            "hold_frame": 943,
+            "brake_reason": "estimated_stop",
+            "push_suspended": false,
+            "overshoot": false,
+            "short_of_target": true,
+            "contact_recovery_failed": false,
+            "estimate_stopped": false
+          }
+        }
+      },
+      "contact_ready_decisions": {
+        "entered_update_in_CONTACT_READY": 331,
+        "CONTACT_READY_quorum_met": 1,
+        "CONTACT_READY_brake_due": 0
+      },
+      "final_response": {
+        "final_phase": "HOLD",
+        "entered": {
+          "SEARCH": 0,
+          "DISCOVER": 191,
+          "ENCLOSE": 336,
+          "CONTACT_READY": 532,
+          "TRANSPORT": 863,
+          "BRAKE": 905,
+          "HOLD": 943
+        },
+        "first_detection_frame": 191,
+        "enclosure_frame": 336,
+        "contact_ready_frame": 532,
+        "transport_frame": 863,
+        "brake_frame": 905,
+        "hold_frame": 943,
+        "brake_reason": "estimated_stop",
+        "push_suspended": false,
+        "overshoot": false,
+        "short_of_target": true,
+        "contact_recovery_failed": false,
+        "estimate_stopped": false
+      }
+    },
+    {
+      "case_id": "near_circle_reference_reacquisition",
+      "verified_frames": 332,
+      "gates": {
+        "informed_fraction": 0.55,
+        "map_coverage_min": 0.7,
+        "contact_quorum": 4,
+        "contact_dwell": 20,
+        "transport_quorum": 4,
+        "brake_fraction": 0.65,
+        "hold_tolerance": 0.0,
+        "hold_speed": 0.02,
+        "hold_dwell": 1,
+        "sustain_contacts": 1,
+        "contact_loss_dwell": 20,
+        "contact_regain_dwell": 20,
+        "pause_limit": 80,
+        "estimate_loss_dwell": 20,
+        "recover_on_brake_progress": false
+      },
+      "receipt_sha256": "0def631c41c665c019550d6dd1bc10abefdbdd8400dc08b48a5838b82efcf0ae",
+      "by_phase": {
+        "DISCOVER": {
+          "frames": 23,
+          "maximum_active": 0,
+          "quorum_frames": 0,
+          "first_quorum_frame": null,
+          "minimum_remaining_m": 1.2
+        },
+        "ENCLOSE": {
+          "frames": 87,
+          "maximum_active": 0,
+          "quorum_frames": 0,
+          "first_quorum_frame": null,
+          "minimum_remaining_m": 1.1615987767352867
+        },
+        "CONTACT_READY": {
+          "frames": 1,
+          "maximum_active": 0,
+          "quorum_frames": 0,
+          "first_quorum_frame": null,
+          "minimum_remaining_m": 1.1592596572630882
+        },
+        "TRANSPORT": {
+          "frames": 55,
+          "maximum_active": 6,
+          "quorum_frames": 36,
+          "first_quorum_frame": 112,
+          "minimum_remaining_m": 0.4220026170877429
+        },
+        "BRAKE": {
+          "frames": 126,
+          "maximum_active": 6,
+          "quorum_frames": 75,
+          "first_quorum_frame": 167,
+          "minimum_remaining_m": 0.0
+        },
+        "HOLD": {
+          "frames": 40,
+          "maximum_active": 0,
+          "quorum_frames": 0,
+          "first_quorum_frame": null,
+          "minimum_remaining_m": 0.0
+        }
+      },
+      "events": {
+        "DISCOVER": {
+          "frame": 1,
+          "monitor_frame": 0,
+          "time": 0.0,
+          "from_phase": "SEARCH",
+          "signals": {
+            "agent_count": 16,
+            "informed_agents": 9,
+            "map_coverage": 0.4722222222222222,
+            "contact_ready": 0,
+            "transport_active": 0,
+            "progress": 0.0,
+            "target_distance": 1.2,
+            "estimated_speed": 0.0,
+            "stopping_distance": 0.18333333333333335,
+            "estimate_quality": "unavailable",
+            "recovery_ready": null,
+            "task_reference_ready": false
+          },
+          "brake_due": false,
+          "brake_lead_m": 0.42,
+          "response": {
+            "final_phase": "DISCOVER",
+            "entered": {
+              "SEARCH": 0,
+              "DISCOVER": 0
+            },
+            "first_detection_frame": 0,
+            "enclosure_frame": null,
+            "contact_ready_frame": null,
+            "transport_frame": null,
+            "brake_frame": null,
+            "hold_frame": null,
+            "brake_reason": null,
+            "push_suspended": false,
+            "overshoot": false,
+            "short_of_target": false,
+            "contact_recovery_failed": false,
+            "estimate_stopped": false
+          }
+        },
+        "ENCLOSE": {
+          "frame": 24,
+          "monitor_frame": 23,
+          "time": 1.1500000000000001,
+          "from_phase": "DISCOVER",
+          "signals": {
+            "agent_count": 16,
+            "informed_agents": 16,
+            "map_coverage": 0.7222222222222222,
+            "contact_ready": 0,
+            "transport_active": 0,
+            "progress": 0.0,
+            "target_distance": 1.2,
+            "estimated_speed": 0.0,
+            "stopping_distance": 0.18333333333333335,
+            "estimate_quality": "unavailable",
+            "recovery_ready": null,
+            "task_reference_ready": false
+          },
+          "brake_due": false,
+          "brake_lead_m": 0.42,
+          "response": {
+            "final_phase": "ENCLOSE",
+            "entered": {
+              "SEARCH": 0,
+              "DISCOVER": 0,
+              "ENCLOSE": 23
+            },
+            "first_detection_frame": 0,
+            "enclosure_frame": 23,
+            "contact_ready_frame": null,
+            "transport_frame": null,
+            "brake_frame": null,
+            "hold_frame": null,
+            "brake_reason": null,
+            "push_suspended": false,
+            "overshoot": false,
+            "short_of_target": false,
+            "contact_recovery_failed": false,
+            "estimate_stopped": false
+          }
+        },
+        "CONTACT_READY": {
+          "frame": 111,
+          "monitor_frame": 110,
+          "time": 5.5,
+          "from_phase": "ENCLOSE",
+          "signals": {
+            "agent_count": 16,
+            "informed_agents": 16,
+            "map_coverage": 0.8333333333333334,
+            "contact_ready": 6,
+            "transport_active": 0,
+            "progress": 0.04074034273691174,
+            "target_distance": 1.2,
+            "estimated_speed": 0.037596666387545996,
+            "stopping_distance": 0.18333333333333335,
+            "estimate_quality": "credible",
+            "recovery_ready": null,
+            "task_reference_ready": false
+          },
+          "brake_due": false,
+          "brake_lead_m": 0.42,
+          "response": {
+            "final_phase": "CONTACT_READY",
+            "entered": {
+              "SEARCH": 0,
+              "DISCOVER": 0,
+              "ENCLOSE": 23,
+              "CONTACT_READY": 110
+            },
+            "first_detection_frame": 0,
+            "enclosure_frame": 23,
+            "contact_ready_frame": 110,
+            "transport_frame": null,
+            "brake_frame": null,
+            "hold_frame": null,
+            "brake_reason": null,
+            "push_suspended": false,
+            "overshoot": false,
+            "short_of_target": false,
+            "contact_recovery_failed": false,
+            "estimate_stopped": false
+          }
+        },
+        "first_quorum": {
+          "frame": 112,
+          "time": 5.550000000000001,
+          "phase": "TRANSPORT",
+          "active": 5
+        },
+        "TRANSPORT": {
+          "frame": 112,
+          "monitor_frame": 111,
+          "time": 5.550000000000001,
+          "from_phase": "CONTACT_READY",
+          "signals": {
+            "agent_count": 16,
+            "informed_agents": 16,
+            "map_coverage": 0.8333333333333334,
+            "contact_ready": 6,
+            "transport_active": 5,
+            "progress": 0.041801501006372366,
+            "target_distance": 1.2,
+            "estimated_speed": 0.028002830710830623,
+            "stopping_distance": 0.18333333333333335,
+            "estimate_quality": "credible",
+            "recovery_ready": null,
+            "task_reference_ready": false
+          },
+          "brake_due": false,
+          "brake_lead_m": 0.42,
+          "response": {
+            "final_phase": "TRANSPORT",
+            "entered": {
+              "SEARCH": 0,
+              "DISCOVER": 0,
+              "ENCLOSE": 23,
+              "CONTACT_READY": 110,
+              "TRANSPORT": 111
+            },
+            "first_detection_frame": 0,
+            "enclosure_frame": 23,
+            "contact_ready_frame": 110,
+            "transport_frame": 111,
+            "brake_frame": null,
+            "hold_frame": null,
+            "brake_reason": null,
+            "push_suspended": false,
+            "overshoot": false,
+            "short_of_target": false,
+            "contact_recovery_failed": false,
+            "estimate_stopped": false
+          }
+        },
+        "BRAKE": {
+          "frame": 167,
+          "monitor_frame": 166,
+          "time": 8.3,
+          "from_phase": "TRANSPORT",
+          "signals": {
+            "agent_count": 16,
+            "informed_agents": 16,
+            "map_coverage": 0.8611111111111112,
+            "contact_ready": 6,
+            "transport_active": 5,
+            "progress": 0.7928646076743118,
+            "target_distance": 1.2,
+            "estimated_speed": 0.3054328960801632,
+            "stopping_distance": 0.18333333333333335,
+            "estimate_quality": "credible",
+            "recovery_ready": null,
+            "task_reference_ready": false
+          },
+          "brake_due": true,
+          "brake_lead_m": 0.42,
+          "response": {
+            "final_phase": "BRAKE",
+            "entered": {
+              "SEARCH": 0,
+              "DISCOVER": 0,
+              "ENCLOSE": 23,
+              "CONTACT_READY": 110,
+              "TRANSPORT": 111,
+              "BRAKE": 166
+            },
+            "first_detection_frame": 0,
+            "enclosure_frame": 23,
+            "contact_ready_frame": 110,
+            "transport_frame": 111,
+            "brake_frame": 166,
+            "hold_frame": null,
+            "brake_reason": "estimated_stop",
+            "push_suspended": false,
+            "overshoot": false,
+            "short_of_target": true,
+            "contact_recovery_failed": false,
+            "estimate_stopped": false
+          }
+        },
+        "HOLD": {
+          "frame": 293,
+          "monitor_frame": 292,
+          "time": 14.600000000000001,
+          "from_phase": "BRAKE",
+          "signals": {
+            "agent_count": 16,
+            "informed_agents": 16,
+            "map_coverage": 0.8611111111111112,
+            "contact_ready": 12,
+            "transport_active": 0,
+            "progress": 1.2,
+            "target_distance": 1.2,
+            "estimated_speed": 0.013820092634393565,
+            "stopping_distance": 0.18333333333333335,
+            "estimate_quality": "credible",
+            "recovery_ready": null,
+            "task_reference_ready": true
+          },
+          "brake_due": true,
+          "brake_lead_m": 0.42,
+          "response": {
+            "final_phase": "HOLD",
+            "entered": {
+              "SEARCH": 0,
+              "DISCOVER": 0,
+              "ENCLOSE": 23,
+              "CONTACT_READY": 110,
+              "TRANSPORT": 111,
+              "BRAKE": 166,
+              "HOLD": 292
+            },
+            "first_detection_frame": 0,
+            "enclosure_frame": 23,
+            "contact_ready_frame": 110,
+            "transport_frame": 111,
+            "brake_frame": 166,
+            "hold_frame": 292,
+            "brake_reason": "estimated_stop",
+            "push_suspended": false,
+            "overshoot": false,
+            "short_of_target": true,
+            "contact_recovery_failed": false,
+            "estimate_stopped": false
+          }
+        }
+      },
+      "contact_ready_decisions": {
+        "entered_update_in_CONTACT_READY": 1,
+        "CONTACT_READY_quorum_met": 1,
+        "CONTACT_READY_brake_due": 0
+      },
+      "final_response": {
+        "final_phase": "HOLD",
+        "entered": {
+          "SEARCH": 0,
+          "DISCOVER": 0,
+          "ENCLOSE": 23,
+          "CONTACT_READY": 110,
+          "TRANSPORT": 111,
+          "BRAKE": 166,
+          "HOLD": 292
+        },
+        "first_detection_frame": 0,
+        "enclosure_frame": 23,
+        "contact_ready_frame": 110,
+        "transport_frame": 111,
+        "brake_frame": 166,
+        "hold_frame": 292,
+        "brake_reason": "estimated_stop",
+        "push_suspended": false,
+        "overshoot": false,
+        "short_of_target": true,
+        "contact_recovery_failed": false,
+        "estimate_stopped": false
+      }
+    }
+  ],
+  "phase_reconstruction_frames": 2589,
+  "status": "EXACT_PHASE_RECONSTRUCTION",
+  "active_from_previous_diagnostics_verified": true,
+  "frame_convention": "Saved frame is one-based; monitor frame and control time are zero-based"
+}

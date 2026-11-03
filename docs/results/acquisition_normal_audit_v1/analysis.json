@@ -1,0 +1,519 @@
+{
+  "source_sha256": "5251bea3bc76971a74f62fc2c7899a33cca52cd57a267cd1feebcd033d8e0eb6",
+  "protocol_sha256": "b4c04255521da8a72345422e0a65c150c8438abc26c5c55104767b0198b26f0b",
+  "script_sha256": "6b523393aa9a824e695a17c4501467a50f11ed1ad1d7f9e01bce37eaf0dea97b",
+  "design_sha256": "7e24405c58c17ccb43cc248fe2339c7d452c01bdad4dfeb95cc0a9e8348e140c",
+  "new_physical_episodes": 0,
+  "new_controller_replay_frames": 0,
+  "numerical_lineage_check_atol": 1e-10,
+  "scope": "Posthoc analysis of all26 saved acquisition conflicts on two reused conditions; source-normal reconstruction and true finite-edge geometry are observer-only",
+  "cases": {
+    "candidate-c": {
+      "case_id": "far_c_open_away_pos0_reference_reacquisition",
+      "trace_outcome_sha256": "3b9fbc334eab4d2ad88440d2184640820c0d318c0881207f1184ecee53440dc5",
+      "verified_controller_frames": 375,
+      "conflict_events": 13,
+      "unique_selected_cells": 9,
+      "fusion_reconstruction_checks": 1326,
+      "maximum_normal_reconstruction_residual": 5.551115123125783e-16,
+      "reconstructed_source_returns": 2437,
+      "reconstructed_source_scans": 794,
+      "events": [
+        {
+          "frame": 326,
+          "agent_id": "agent_05",
+          "scale": 0.15234375,
+          "true_margin_m": 0.0663030445362674,
+          "aggregate_h_m": -0.07923430870108647,
+          "selected_cells": 2,
+          "outside_true_segment_projection_cells": 2,
+          "min_map_normal_error_deg": 3.5834496342697495,
+          "max_map_normal_error_deg": 36.72084095516214,
+          "corrected_true_supporting_planes_h_m": -0.14604786130493225
+        },
+        {
+          "frame": 327,
+          "agent_id": "agent_05",
+          "scale": 0.25390625,
+          "true_margin_m": 0.05174891131405698,
+          "aggregate_h_m": -0.08877308175925726,
+          "selected_cells": 2,
+          "outside_true_segment_projection_cells": 2,
+          "min_map_normal_error_deg": 3.5834496342697495,
+          "max_map_normal_error_deg": 31.065966145785644,
+          "corrected_true_supporting_planes_h_m": -0.13958475940406928
+        },
+        {
+          "frame": 334,
+          "agent_id": "agent_05",
+          "scale": 0.78515625,
+          "true_margin_m": 0.0012533391298078789,
+          "aggregate_h_m": -0.020912137842599626,
+          "selected_cells": 7,
+          "outside_true_segment_projection_cells": 7,
+          "min_map_normal_error_deg": 0.7054545465853284,
+          "max_map_normal_error_deg": 44.09968201889019,
+          "corrected_true_supporting_planes_h_m": -0.004665125583598079
+        },
+        {
+          "frame": 351,
+          "agent_id": "agent_05",
+          "scale": 0.9609375,
+          "true_margin_m": 0.0005555740422525379,
+          "aggregate_h_m": -0.020731392193668013,
+          "selected_cells": 6,
+          "outside_true_segment_projection_cells": 6,
+          "min_map_normal_error_deg": 0.24121616928725492,
+          "max_map_normal_error_deg": 55.19916764462533,
+          "corrected_true_supporting_planes_h_m": -0.006424565743927302
+        },
+        {
+          "frame": 352,
+          "agent_id": "agent_05",
+          "scale": 0.44140625,
+          "true_margin_m": 0.009788981828996207,
+          "aggregate_h_m": -0.07266089269573714,
+          "selected_cells": 4,
+          "outside_true_segment_projection_cells": 4,
+          "min_map_normal_error_deg": 0.10445338144852194,
+          "max_map_normal_error_deg": 53.56319049749266,
+          "corrected_true_supporting_planes_h_m": -0.037905496816294376
+        },
+        {
+          "frame": 353,
+          "agent_id": "agent_05",
+          "scale": 0.35546875,
+          "true_margin_m": 0.016773530903902018,
+          "aggregate_h_m": -0.06932837560365912,
+          "selected_cells": 4,
+          "outside_true_segment_projection_cells": 4,
+          "min_map_normal_error_deg": 0.24121616928725492,
+          "max_map_normal_error_deg": 57.402268434998625,
+          "corrected_true_supporting_planes_h_m": -0.032388631313130606
+        },
+        {
+          "frame": 368,
+          "agent_id": "agent_05",
+          "scale": 0.671875,
+          "true_margin_m": 0.0006725582534902741,
+          "aggregate_h_m": -0.01202295818679372,
+          "selected_cells": 7,
+          "outside_true_segment_projection_cells": 7,
+          "min_map_normal_error_deg": 0.497733653739239,
+          "max_map_normal_error_deg": 56.7167881766372,
+          "corrected_true_supporting_planes_h_m": -0.004608786015174782
+        },
+        {
+          "frame": 369,
+          "agent_id": "agent_05",
+          "scale": 0.41796875,
+          "true_margin_m": 0.0024219095280712533,
+          "aggregate_h_m": -0.06295754290261063,
+          "selected_cells": 6,
+          "outside_true_segment_projection_cells": 6,
+          "min_map_normal_error_deg": 1.0860198160464158,
+          "max_map_normal_error_deg": 54.277518451120514,
+          "corrected_true_supporting_planes_h_m": -0.03966323502884375
+        },
+        {
+          "frame": 370,
+          "agent_id": "agent_05",
+          "scale": 0.44140625,
+          "true_margin_m": 0.003953547198475099,
+          "aggregate_h_m": -0.0585262389802256,
+          "selected_cells": 6,
+          "outside_true_segment_projection_cells": 6,
+          "min_map_normal_error_deg": 0.5436296880873736,
+          "max_map_normal_error_deg": 35.656505537069314,
+          "corrected_true_supporting_planes_h_m": -0.06734753782112629
+        },
+        {
+          "frame": 371,
+          "agent_id": "agent_05",
+          "scale": 0.484375,
+          "true_margin_m": 0.005477281572072196,
+          "aggregate_h_m": -0.05638819846349624,
+          "selected_cells": 6,
+          "outside_true_segment_projection_cells": 6,
+          "min_map_normal_error_deg": 0.47589873828695695,
+          "max_map_normal_error_deg": 34.741402742621986,
+          "corrected_true_supporting_planes_h_m": -0.06250625996640055
+        },
+        {
+          "frame": 372,
+          "agent_id": "agent_05",
+          "scale": 0.53125,
+          "true_margin_m": 0.007191946788214748,
+          "aggregate_h_m": -0.05219330752064513,
+          "selected_cells": 6,
+          "outside_true_segment_projection_cells": 6,
+          "min_map_normal_error_deg": 0.2959633766659483,
+          "max_map_normal_error_deg": 33.43323304491056,
+          "corrected_true_supporting_planes_h_m": -0.05720206728220684
+        },
+        {
+          "frame": 373,
+          "agent_id": "agent_05",
+          "scale": 0.5859375,
+          "true_margin_m": 0.009176671443021311,
+          "aggregate_h_m": -0.047889483754153056,
+          "selected_cells": 6,
+          "outside_true_segment_projection_cells": 6,
+          "min_map_normal_error_deg": 0.47589873828695695,
+          "max_map_normal_error_deg": 36.35469459961868,
+          "corrected_true_supporting_planes_h_m": -0.05141492702086056
+        },
+        {
+          "frame": 374,
+          "agent_id": "agent_05",
+          "scale": 0.66015625,
+          "true_margin_m": 0.011586510324488347,
+          "aggregate_h_m": -0.04358956727809343,
+          "selected_cells": 6,
+          "outside_true_segment_projection_cells": 6,
+          "min_map_normal_error_deg": 0.4519744326574334,
+          "max_map_normal_error_deg": 64.71233951374064,
+          "corrected_true_supporting_planes_h_m": -0.017013711445551777
+        }
+      ],
+      "first_event_cells": [
+        {
+          "key": 2199154327629,
+          "point": [
+            3.730842123344667,
+            4.625048824917676
+          ],
+          "normal": [
+            0.8015582090721507,
+            -0.5979167479415897
+          ],
+          "nearest_true_edge": 0,
+          "true_edge_normal": [
+            1.0,
+            -0.0
+          ],
+          "true_edge_start": [
+            3.7368924530431102,
+            4.615711663478804
+          ],
+          "true_edge_end": [
+            3.7368924530431102,
+            6.584288336521299
+          ],
+          "map_normal_error_to_nearest_true_edge_deg": 36.72084095516214,
+          "robot_projection_on_true_edge": -0.1303869862650828,
+          "projection_outside_edge": true,
+          "true_supporting_plane_h": -0.14604786130493225,
+          "source_return_count": 364,
+          "source_agent_count": 8,
+          "source_normal_error_min_deg": 0.001562928213474632,
+          "source_normal_error_max_deg": 103.18527136920305,
+          "coefficient_weighted_source_normal_error_deg": 13.902745340912855,
+          "normalized_source_coefficients": {
+            "agent_06": 0.042378955113904805,
+            "agent_04": 0.20626380584156537,
+            "agent_08": 0.015044586662910043,
+            "agent_05": 0.34746762703173956,
+            "agent_12": 0.0968314376999793,
+            "agent_07": 2.0532989420496867e-05,
+            "agent_10": 0.23284639622698589,
+            "agent_09": 0.059146658433494446
+          }
+        },
+        {
+          "key": 2199156424781,
+          "point": [
+            3.753914551074139,
+            4.625737097656343
+          ],
+          "normal": [
+            0.9980448243581626,
+            0.06250222853534657
+          ],
+          "nearest_true_edge": 0,
+          "true_edge_normal": [
+            1.0,
+            -0.0
+          ],
+          "true_edge_start": [
+            3.7368924530431102,
+            4.615711663478804
+          ],
+          "true_edge_end": [
+            3.7368924530431102,
+            6.584288336521299
+          ],
+          "map_normal_error_to_nearest_true_edge_deg": 3.5834496342697495,
+          "robot_projection_on_true_edge": -0.1303869862650828,
+          "projection_outside_edge": true,
+          "true_supporting_plane_h": -0.14604786130493225,
+          "source_return_count": 8,
+          "source_agent_count": 5,
+          "source_normal_error_min_deg": 0.48703212178559585,
+          "source_normal_error_max_deg": 13.457982948057328,
+          "coefficient_weighted_source_normal_error_deg": 5.196448806517273,
+          "normalized_source_coefficients": {
+            "agent_08": 0.22799524435099794,
+            "agent_06": 0.24736395716760634,
+            "agent_12": 0.11725663050115134,
+            "agent_04": 0.134741673489586,
+            "agent_10": 0.27264249449065847
+          }
+        }
+      ],
+      "lineage_sha256": "3f7e45407eb851a5357d1858689a8c8b302ed5ae605602d1f95ad8f31a884469",
+      "all_true_margins_positive": true,
+      "all_original_aggregate_h_negative": true,
+      "negative_after_true_plane_correction": 13
+    },
+    "candidate-skew": {
+      "case_id": "far_skew_box_s0_r0_pos0_reference_reacquisition",
+      "trace_outcome_sha256": "c03cb260aca6bb4d83015ac18a455097f8af90be9949f06de5202bb967ce1107",
+      "verified_controller_frames": 409,
+      "conflict_events": 13,
+      "unique_selected_cells": 4,
+      "fusion_reconstruction_checks": 483,
+      "maximum_normal_reconstruction_residual": 4.440892098500626e-16,
+      "reconstructed_source_returns": 40,
+      "reconstructed_source_scans": 30,
+      "events": [
+        {
+          "frame": 384,
+          "agent_id": "agent_05",
+          "scale": 0.76171875,
+          "true_margin_m": 0.07532950931267757,
+          "aggregate_h_m": -0.23080892603129802,
+          "selected_cells": 2,
+          "outside_true_segment_projection_cells": 2,
+          "min_map_normal_error_deg": 0.9503110843655926,
+          "max_map_normal_error_deg": 9.240786666649976,
+          "corrected_true_supporting_planes_h_m": -0.18668915551249085
+        },
+        {
+          "frame": 385,
+          "agent_id": "agent_05",
+          "scale": 0.72265625,
+          "true_margin_m": 0.07971869534803006,
+          "aggregate_h_m": -0.20020372042177814,
+          "selected_cells": 1,
+          "outside_true_segment_projection_cells": 1,
+          "min_map_normal_error_deg": 1.838836242446172,
+          "max_map_normal_error_deg": 1.838836242446172,
+          "corrected_true_supporting_planes_h_m": -0.17830704390666566
+        },
+        {
+          "frame": 386,
+          "agent_id": "agent_05",
+          "scale": 0.66796875,
+          "true_margin_m": 0.08270930103138346,
+          "aggregate_h_m": -0.19261582979677844,
+          "selected_cells": 1,
+          "outside_true_segment_projection_cells": 1,
+          "min_map_normal_error_deg": 1.838836242446172,
+          "max_map_normal_error_deg": 1.838836242446172,
+          "corrected_true_supporting_planes_h_m": -0.17063730826630932
+        },
+        {
+          "frame": 388,
+          "agent_id": "agent_05",
+          "scale": 0.65234375,
+          "true_margin_m": 0.07353980537232202,
+          "aggregate_h_m": -0.20803460739786842,
+          "selected_cells": 2,
+          "outside_true_segment_projection_cells": 2,
+          "min_map_normal_error_deg": 1.838836242446172,
+          "max_map_normal_error_deg": 9.240786666649976,
+          "corrected_true_supporting_planes_h_m": -0.1624101094297821
+        },
+        {
+          "frame": 392,
+          "agent_id": "agent_05",
+          "scale": 0.6640625,
+          "true_margin_m": 0.07834232690812887,
+          "aggregate_h_m": -0.17728224044365287,
+          "selected_cells": 1,
+          "outside_true_segment_projection_cells": 1,
+          "min_map_normal_error_deg": 4.2666576841051835,
+          "max_map_normal_error_deg": 4.2666576841051835,
+          "corrected_true_supporting_planes_h_m": -0.13515326980737147
+        },
+        {
+          "frame": 393,
+          "agent_id": "agent_05",
+          "scale": 0.6875,
+          "true_margin_m": 0.0784841222816105,
+          "aggregate_h_m": -0.15910848578915077,
+          "selected_cells": 1,
+          "outside_true_segment_projection_cells": 1,
+          "min_map_normal_error_deg": 2.7825434158296787,
+          "max_map_normal_error_deg": 2.7825434158296787,
+          "corrected_true_supporting_planes_h_m": -0.12827251180200483
+        },
+        {
+          "frame": 394,
+          "agent_id": "agent_05",
+          "scale": 0.72265625,
+          "true_margin_m": 0.07862298325885464,
+          "aggregate_h_m": -0.1518897357891505,
+          "selected_cells": 1,
+          "outside_true_segment_projection_cells": 1,
+          "min_map_normal_error_deg": 2.7825434158296787,
+          "max_map_normal_error_deg": 2.7825434158296787,
+          "corrected_true_supporting_planes_h_m": -0.12113056852795163
+        },
+        {
+          "frame": 395,
+          "agent_id": "agent_05",
+          "scale": 0.7734375,
+          "true_margin_m": 0.07887444436949065,
+          "aggregate_h_m": -0.1443018451641503,
+          "selected_cells": 1,
+          "outside_true_segment_projection_cells": 1,
+          "min_map_normal_error_deg": 2.7825434158296787,
+          "max_map_normal_error_deg": 2.7825434158296787,
+          "corrected_true_supporting_planes_h_m": -0.11362879396658869
+        },
+        {
+          "frame": 396,
+          "agent_id": "agent_05",
+          "scale": 0.84375,
+          "true_margin_m": 0.07941395708189464,
+          "aggregate_h_m": -0.13618075141415004,
+          "selected_cells": 1,
+          "outside_true_segment_projection_cells": 1,
+          "min_map_normal_error_deg": 2.7825434158296787,
+          "max_map_normal_error_deg": 2.7825434158296787,
+          "corrected_true_supporting_planes_h_m": -0.10559845932541939
+        },
+        {
+          "frame": 397,
+          "agent_id": "agent_05",
+          "scale": 0.9375,
+          "true_margin_m": 0.0804303176424081,
+          "aggregate_h_m": -0.12732137641415053,
+          "selected_cells": 1,
+          "outside_true_segment_projection_cells": 1,
+          "min_map_normal_error_deg": 2.7825434158296787,
+          "max_map_normal_error_deg": 2.7825434158296787,
+          "corrected_true_supporting_planes_h_m": -0.0968307377132999
+        },
+        {
+          "frame": 399,
+          "agent_id": "agent_05",
+          "scale": 0.796875,
+          "true_margin_m": 0.0751928483071298,
+          "aggregate_h_m": -0.14786834938257432,
+          "selected_cells": 1,
+          "outside_true_segment_projection_cells": 1,
+          "min_map_normal_error_deg": 8.23507375272311,
+          "max_map_normal_error_deg": 8.23507375272311,
+          "corrected_true_supporting_planes_h_m": -0.0858937410971087
+        },
+        {
+          "frame": 400,
+          "agent_id": "agent_05",
+          "scale": 0.6875,
+          "true_margin_m": 0.07441234463149438,
+          "aggregate_h_m": -0.13950116188257436,
+          "selected_cells": 1,
+          "outside_true_segment_projection_cells": 1,
+          "min_map_normal_error_deg": 8.23507375272311,
+          "max_map_normal_error_deg": 8.23507375272311,
+          "corrected_true_supporting_planes_h_m": -0.07808518099802558
+        },
+        {
+          "frame": 408,
+          "agent_id": "agent_05",
+          "scale": 0.3046875,
+          "true_margin_m": 0.04339623188774189,
+          "aggregate_h_m": -0.026477616652427788,
+          "selected_cells": 2,
+          "outside_true_segment_projection_cells": 2,
+          "min_map_normal_error_deg": 7.3360063131024065,
+          "max_map_normal_error_deg": 106.94204411673167,
+          "corrected_true_supporting_planes_h_m": 0.04195865329533624
+        }
+      ],
+      "first_event_cells": [
+        {
+          "key": 2199171104852,
+          "point": [
+            4.174445490258598,
+            5.065804051883625
+          ],
+          "normal": [
+            0.9433080795524337,
+            0.3319184644624331
+          ],
+          "nearest_true_edge": 1,
+          "true_edge_normal": [
+            0.9486832980505137,
+            0.31622776601683866
+          ],
+          "true_edge_start": [
+            4.162752383411288,
+            5.0575108986178146
+          ],
+          "true_edge_end": [
+            3.744223108208607,
+            6.3130987242258545
+          ],
+          "map_normal_error_to_nearest_true_edge_deg": 0.9503110843655926,
+          "robot_projection_on_true_edge": -0.2041560619052012,
+          "projection_outside_edge": true,
+          "true_supporting_plane_h": -0.18668915551249085,
+          "source_return_count": 5,
+          "source_agent_count": 3,
+          "source_normal_error_min_deg": 0.5285099970449818,
+          "source_normal_error_max_deg": 3.0806500877948952,
+          "coefficient_weighted_source_normal_error_deg": 1.4739249673658081,
+          "normalized_source_coefficients": {
+            "agent_06": 0.21612006115963608,
+            "agent_08": 0.5639324940588318,
+            "agent_04": 0.21994744478153228
+          }
+        },
+        {
+          "key": 2199171104853,
+          "point": [
+            4.1830517083742915,
+            5.0771002312753195
+          ],
+          "normal": [
+            0.8855904049118071,
+            0.46446704374814524
+          ],
+          "nearest_true_edge": 1,
+          "true_edge_normal": [
+            0.9486832980505137,
+            0.31622776601683866
+          ],
+          "true_edge_start": [
+            4.162752383411288,
+            5.0575108986178146
+          ],
+          "true_edge_end": [
+            3.744223108208607,
+            6.3130987242258545
+          ],
+          "map_normal_error_to_nearest_true_edge_deg": 9.240786666649976,
+          "robot_projection_on_true_edge": -0.2041560619052012,
+          "projection_outside_edge": true,
+          "true_supporting_plane_h": -0.18668915551249085,
+          "source_return_count": 1,
+          "source_agent_count": 1,
+          "source_normal_error_min_deg": 9.240786666649937,
+          "source_normal_error_max_deg": 9.240786666649937,
+          "coefficient_weighted_source_normal_error_deg": 9.240786666649937,
+          "normalized_source_coefficients": {
+            "agent_04": 1.0
+          }
+        }
+      ],
+      "lineage_sha256": "0cc4370b3f584de4a3721cc9e9569c68842da286eb0ce9b638082f4c8f31fb90",
+      "all_true_margins_positive": true,
+      "all_original_aggregate_h_negative": true,
+      "negative_after_true_plane_correction": 12
+    }
+  }
+}

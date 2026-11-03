@@ -1,5 +1,7 @@
 # 数据与原始文件索引
 
+2026-11-03：[采集边界与正式激活诊断](results/acquisition_normal_audit_v1/README.md)的784帧地图更新追踪、全部26个事件的原QP及来源系数、2,589帧阶段重建、20帧预检和脚本/设计快照在 `runs/research/2026-11-03-acquisition-normal-audit-v1/`；执行与发布日志在同名maintenance目录。Git保存完整26行CSV、四例阶段表、精简分析、图表和产品哈希，大体积原始追踪保持本地。新增物理回合0，来源八回合原件和历史结论未覆盖。
+
 2026-11-03：[观测恢复八回合闭环验证](results/reference_reacquisition_physical_v1/README.md)的原始数据在 `runs/research/2026-11-03-reference-reacquisition-v1/run/`，运行前源码、脚本、协议、环境与测试快照在同级 `freeze/`。四个旧对照全回放及四个候选采集前缀精确一致，安全完成2/4→4/4，机制PASS、完整筛选FAIL，全部失败保留。公开证据包含八行CSV、完整分析、图表与产品哈希；938通过/2跳过、冻结/运行/分析/发布日志分别保存在同名maintenance目录的study-*文件，未覆盖原实现检查收据。[两个采集冲突见证](results/circulation_conflict_witness_v1/README.md)的事后诊断与脚本/设计快照另在 `runs/research/2026-11-03-circulation-conflict-witness-v1/`，新增物理回合0，仅分析两个旧状态。
 
 前置[接触激活诊断](results/contact_activation_v1/README.md)的十二回合保存记录审计、4,317帧精确重放、约束见证及脚本/设计快照在 `runs/research/2026-11-03-contact-activation-v1/`，新增物理回合0。首轮CSV预检失败及后续通过记录均保留。[观测恢复实现检查点](results/reference_reacquisition_v1/README.md)的16项RED、57项针对性GREEN、928通过/2跳过，以及审查后的63项针对性通过、934项核心通过/2跳过和三个隔离源码故障验证，仍保存在 `runs/maintenance/2026-11-03-reference-reacquisition-v1/` 原文件中，不重标为本次物理验证。
