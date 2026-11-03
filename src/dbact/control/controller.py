@@ -318,6 +318,7 @@ class DBACTParams:
     initial_reference_safe_geometry: bool = False
     initial_reference_map_motion: bool = False
     initial_acquisition_circulation: bool = False
+    reference_map_reacquisition: bool = False
     initial_acquisition_seconds: float = 60.0
     contact_patch_distance: bool = False
     # New development arms, off by default. The vector law changes controller
@@ -655,6 +656,9 @@ class DBACTController:
         if (not isinstance(params.initial_acquisition_circulation, bool)
                 or (params.initial_acquisition_circulation and not params.initial_reference_map_motion)):
             raise ValueError("Acquisition circulation requires boolean selection and reference-map motion")
+        if (not isinstance(params.reference_map_reacquisition, bool)
+                or (params.reference_map_reacquisition and not params.initial_reference_map_motion)):
+            raise ValueError("Reference reacquisition requires boolean selection and reference-map motion")
         if params.initial_task_reference and not params.initial_reference_acquisition:
             raise ValueError("Initial task reference requires stationary acquisition")
         if (not isinstance(params.initial_reference_safe_geometry, bool)
@@ -969,7 +973,17 @@ class DBACTController:
                 u_nom, mode, push_side, effort = np.zeros(2), "initial_reference_unavailable", False, 0.
             if (self.params.initial_reference_map_motion
                     and self._map_reference_state[agent.agent_id]['status'] == 'unavailable'):
-                u_nom, mode, push_side, effort = np.zeros(2), "map_reference_unavailable", False, 0.
+                reacquiring = (self.params.reference_map_reacquisition
+                    and self.initial_reference_status == 'frozen'
+                    and not self.phase_monitor.reached(Phase.TRANSPORT)
+                    and mode in ('search', 'recall', 'approach')
+                    and not push_side and effort == 0.)
+                if reacquiring:
+                    # Only exploration/token/current-packet targets are permitted.
+                    # The original QP and missing-motion bounds still apply below.
+                    mode = 'map_reference_reacquire_' + mode
+                else:
+                    u_nom, mode, push_side, effort = np.zeros(2), "map_reference_unavailable", False, 0.
             points, normals, v_obj, v_points = self._object_rows_from_map(
                 agent.agent_id, agent.position, view
             )

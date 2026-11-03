@@ -402,6 +402,14 @@ def transport_arm(cfg, seed, variant, frames, out):
                 "counterclockwise using existing speed/gain and non-contact offset parameters. "
                 "Original search, QP, capture admission/deadline and post-capture transport remain; "
                 "no true object pose or shape enters this policy and no new safety guarantee is claimed.")
+        if env.controller.params.reference_map_reacquisition:
+            result['initial_reference']['map_reacquisition'] = True
+            result['changed_mechanism'] += (
+                " Opt-in exception to missing-reference nominal inhibition: after a valid capture "
+                "and before TRANSPORT, nonpressing search/recall/approach may recover observations. "
+                "Other modes and later phases still abstain; fresh packets, maximum-speed motion "
+                "bounds, original QP and all numerical/physical/acceptance parameters remain. "
+                "This is not proof of future reacquisition, non-contact motion or dynamic safety.")
     elif (env.controller.params.reference_early_anchor
             or env.controller.params.reference_bootstrap_gain is not None):
         result["changed_mechanism"] = (

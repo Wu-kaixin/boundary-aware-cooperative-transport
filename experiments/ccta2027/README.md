@@ -1,5 +1,7 @@
 # CCTA 2027 实验入口
 
+2026-11-03：[接触激活诊断设计](contact_activation_v1_design.md)已完成十二回合保存谓词审计与 4,317 帧精确重放，[证据](../../docs/results/contact_activation_v1/README.md)不包含新物理样本。[观测恢复设计](reference_reacquisition_v1_design.md)对应默认关闭的新开关，工程回归 928 通过/2 跳过、针对性 57 通过；拟议四条件×两臂八回合仍待冻结执行，不能把[当前实现检查点](../../docs/results/reference_reacquisition_v1/README.md)当作闭环成功。
+
 2026-11-03：[acquisition_circulation_v1.json](acquisition_circulation_v1.json)冻结四条件×三臂12回合，现已全部完成。原平移/参考地图/主动采集安全完成4/4、3/4、2/4，G500均2/4；八个旧臂精确复现，全部数值参数及判据不变。[完整结果](../../docs/results/acquisition_circulation_v1/README.md)保留新候选两项远场600秒截尾和约束缩放，门槛FAIL、候选未采用。[前置采集追踪](../../docs/results/acquisition_trace_v1/README.md)精确复现1,992旧帧、没有新增物理回合；[机制设计](acquisition_circulation_v1_design.md)的原验收门槛未改。
 
 2026-11-03：[reference_map_v1.json](reference_map_v1.json)冻结原平移参照与参考驱动地图候选，四条件×两臂，最佳数值参数不变。[完整结果](../../docs/results/reference_map_v1/README.md)为4/4→3/4安全完成、门槛FAIL，候选未采用；保留斜箱600秒截尾及全部缩放。[来源追踪设计](map_provenance_v1_design.md)与[933帧离线证据](../../docs/results/map_provenance_v1/README.md)单独记账，后者没有新物理回合。

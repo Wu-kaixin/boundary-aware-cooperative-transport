@@ -1,0 +1,435 @@
+{
+  "source_sha256": "37f2e00017ce2e34ec932956174e7778f639c0732206e023fed74a34ef6dda1e",
+  "protocol_sha256": "0ca3f1369196fc882d884cf5583205d7671ab3749489f33a0dc116f140d9fdae",
+  "script_sha256": "8669b1aca1aaf0c619b1863da02f43ac137d3f2883ed8ab06958901f8163cc51",
+  "new_physical_episodes": 0,
+  "saved_cases": 12,
+  "saved_transport_calls_verified": 279908,
+  "saved_predicate_scope": "Final cage/push modes; reference overrides and early nominal branches reported separately",
+  "exact_replay_frames": 4317,
+  "replay_scope": "Two full far translation baselines and two circulation prefixes to frame1200; not full600-second candidate replays",
+  "prefix_summaries": [
+    {
+      "case_id": "far_c_open_away_pos0_translation_all_captured",
+      "alias": "c-baseline",
+      "replayed_frames": 872,
+      "contact_ready": {
+        "frames": 262,
+        "robot_steps": 4192,
+        "map_unavailable": 0,
+        "nonzero_nominal_suppressed": 0,
+        "ready": 1488,
+        "ready_with_navigation": 1488,
+        "observed_direction_eligible": 393,
+        "true_task_direction_eligible": 387,
+        "observed_reject_true_accept": 19,
+        "observed_accept_true_reject": 25,
+        "both_directions_reject": 1076,
+        "both_reject_and_redeploy_disabled": 1076
+      },
+      "suppressed_modes": {}
+    },
+    {
+      "case_id": "far_c_open_away_pos0_acquisition_circulation",
+      "alias": "c-candidate",
+      "replayed_frames": 1200,
+      "contact_ready": {
+        "frames": 712,
+        "robot_steps": 11392,
+        "map_unavailable": 2848,
+        "nonzero_nominal_suppressed": 2848,
+        "ready": 4634,
+        "ready_with_navigation": 4634,
+        "observed_direction_eligible": 26,
+        "true_task_direction_eligible": 0,
+        "observed_reject_true_accept": 0,
+        "observed_accept_true_reject": 26,
+        "both_directions_reject": 4608,
+        "both_reject_and_redeploy_disabled": 4608
+      },
+      "suppressed_modes": {
+        "search": 1931,
+        "approach": 712,
+        "recall": 205
+      }
+    },
+    {
+      "case_id": "far_skew_box_s0_r0_pos0_translation_all_captured",
+      "alias": "skew-baseline",
+      "replayed_frames": 1045,
+      "contact_ready": {
+        "frames": 100,
+        "robot_steps": 1600,
+        "ready": 905,
+        "ready_with_navigation": 905,
+        "observed_direction_eligible": 245,
+        "true_task_direction_eligible": 241,
+        "observed_reject_true_accept": 0,
+        "observed_accept_true_reject": 4,
+        "both_directions_reject": 660,
+        "map_unavailable": 0,
+        "nonzero_nominal_suppressed": 0,
+        "both_reject_and_redeploy_disabled": 660
+      },
+      "suppressed_modes": {}
+    },
+    {
+      "case_id": "far_skew_box_s0_r0_pos0_acquisition_circulation",
+      "alias": "skew-candidate",
+      "replayed_frames": 1200,
+      "contact_ready": {
+        "frames": 668,
+        "robot_steps": 10688,
+        "map_unavailable": 2703,
+        "nonzero_nominal_suppressed": 2703,
+        "ready": 5077,
+        "ready_with_navigation": 5077,
+        "observed_direction_eligible": 14,
+        "true_task_direction_eligible": 0,
+        "observed_reject_true_accept": 0,
+        "observed_accept_true_reject": 14,
+        "both_directions_reject": 5063,
+        "both_reject_and_redeploy_disabled": 5063
+      },
+      "suppressed_modes": {
+        "search": 1825,
+        "recall": 251,
+        "approach": 627
+      }
+    }
+  ],
+  "conditional_motion_witnesses": [
+    {
+      "alias": "c-candidate",
+      "case_id": "far_c_open_away_pos0_acquisition_circulation",
+      "frame": 1200,
+      "agent_id": "agent_00",
+      "nominal_mode": "search",
+      "map_points": 0,
+      "position": [
+        0.6607421275528577,
+        5.210272160263347
+      ],
+      "nominal_before_override": [
+        0.022265744894284678,
+        0.28
+      ],
+      "actual_nominal": [
+        0.0,
+        0.0
+      ],
+      "actual_command": [
+        0.0,
+        0.0
+      ],
+      "row_kinds": [],
+      "A": [],
+      "b": [],
+      "max_speed": 0.35,
+      "feasible": true,
+      "conditional_command": [
+        0.022265744894284678,
+        0.28
+      ],
+      "independent_command": [
+        0.022265744099296162,
+        0.2799999900027246
+      ],
+      "independent_solver": "CLARABEL",
+      "snapshot_sha256": "289f458b8b94096424a300c55578266969e378a598b7662c714bc63a3eaaab72"
+    },
+    {
+      "alias": "c-candidate",
+      "case_id": "far_c_open_away_pos0_acquisition_circulation",
+      "frame": 1200,
+      "agent_id": "agent_01",
+      "nominal_mode": "approach",
+      "map_points": 21,
+      "position": [
+        1.0461531886598112,
+        3.657054881514242
+      ],
+      "nominal_before_override": [
+        1.4964474319670251,
+        0.8353009054283413
+      ],
+      "actual_nominal": [
+        0.0,
+        0.0
+      ],
+      "actual_command": [
+        0.0,
+        0.0
+      ],
+      "row_kinds": [
+        "agent"
+      ],
+      "A": [
+        [
+          -2.570802818541429,
+          -1.7184628902333445
+        ]
+      ],
+      "b": [
+        -6.936406377697271
+      ],
+      "max_speed": 0.35,
+      "feasible": true,
+      "conditional_command": [
+        0.3056127264983505,
+        0.17058974588832826
+      ],
+      "independent_command": [
+        0.3056081674372346,
+        0.1705979114445681
+      ],
+      "independent_solver": "CLARABEL",
+      "snapshot_sha256": "289f458b8b94096424a300c55578266969e378a598b7662c714bc63a3eaaab72"
+    },
+    {
+      "alias": "c-candidate",
+      "case_id": "far_c_open_away_pos0_acquisition_circulation",
+      "frame": 1200,
+      "agent_id": "agent_02",
+      "nominal_mode": "search",
+      "map_points": 0,
+      "position": [
+        1.530153127176953,
+        1.8528771791618643
+      ],
+      "nominal_before_override": [
+        0.05844374564609378,
+        0.28
+      ],
+      "actual_nominal": [
+        0.0,
+        0.0
+      ],
+      "actual_command": [
+        0.0,
+        0.0
+      ],
+      "row_kinds": [],
+      "A": [],
+      "b": [],
+      "max_speed": 0.35,
+      "feasible": true,
+      "conditional_command": [
+        0.05844374564609378,
+        0.28
+      ],
+      "independent_command": [
+        0.058443742646125695,
+        0.27999998562735756
+      ],
+      "independent_solver": "CLARABEL",
+      "snapshot_sha256": "289f458b8b94096424a300c55578266969e378a598b7662c714bc63a3eaaab72"
+    },
+    {
+      "alias": "c-candidate",
+      "case_id": "far_c_open_away_pos0_acquisition_circulation",
+      "frame": 1200,
+      "agent_id": "agent_15",
+      "nominal_mode": "search",
+      "map_points": 0,
+      "position": [
+        7.328124999922001,
+        3.0376503792683756
+      ],
+      "nominal_before_override": [
+        1.559978812792906e-10,
+        0.28
+      ],
+      "actual_nominal": [
+        0.0,
+        0.0
+      ],
+      "actual_command": [
+        0.0,
+        0.0
+      ],
+      "row_kinds": [],
+      "A": [],
+      "b": [],
+      "max_speed": 0.35,
+      "feasible": true,
+      "conditional_command": [
+        1.559978812792906e-10,
+        0.28
+      ],
+      "independent_command": [
+        1.559978760317691e-10,
+        0.27999999058124386
+      ],
+      "independent_solver": "CLARABEL",
+      "snapshot_sha256": "289f458b8b94096424a300c55578266969e378a598b7662c714bc63a3eaaab72"
+    },
+    {
+      "alias": "skew-candidate",
+      "case_id": "far_skew_box_s0_r0_pos0_acquisition_circulation",
+      "frame": 1200,
+      "agent_id": "agent_00",
+      "nominal_mode": "search",
+      "map_points": 0,
+      "position": [
+        0.6666566671639108,
+        5.7244844236881
+      ],
+      "nominal_before_override": [
+        0.01043666567217838,
+        0.28
+      ],
+      "actual_nominal": [
+        0.0,
+        0.0
+      ],
+      "actual_command": [
+        0.0,
+        0.0
+      ],
+      "row_kinds": [],
+      "A": [],
+      "b": [],
+      "max_speed": 0.35,
+      "feasible": true,
+      "conditional_command": [
+        0.01043666567217838,
+        0.28
+      ],
+      "independent_command": [
+        0.010436665316493954,
+        0.2799999904575232
+      ],
+      "independent_solver": "CLARABEL",
+      "snapshot_sha256": "c2fc37b349dec7f016c48966ec16ce7048d6ea76414821608450232335e2ec95"
+    },
+    {
+      "alias": "skew-candidate",
+      "case_id": "far_skew_box_s0_r0_pos0_acquisition_circulation",
+      "frame": 1200,
+      "agent_id": "agent_01",
+      "nominal_mode": "approach",
+      "map_points": 26,
+      "position": [
+        1.0462380832425724,
+        4.168586522967032
+      ],
+      "nominal_before_override": [
+        1.3679802622991462,
+        0.7084889900011526
+      ],
+      "actual_nominal": [
+        0.0,
+        0.0
+      ],
+      "actual_command": [
+        0.0,
+        0.0
+      ],
+      "row_kinds": [
+        "agent"
+      ],
+      "A": [
+        [
+          -2.2938290559306176,
+          -1.441526400792272
+        ]
+      ],
+      "b": [
+        -5.269537576509503
+      ],
+      "max_speed": 0.35,
+      "feasible": true,
+      "conditional_command": [
+        0.3107914895440131,
+        0.16096164147713451
+      ],
+      "independent_command": [
+        0.31078920110670394,
+        0.1609660594469231
+      ],
+      "independent_solver": "CLARABEL",
+      "snapshot_sha256": "c2fc37b349dec7f016c48966ec16ce7048d6ea76414821608450232335e2ec95"
+    },
+    {
+      "alias": "skew-candidate",
+      "case_id": "far_skew_box_s0_r0_pos0_acquisition_circulation",
+      "frame": 1200,
+      "agent_id": "agent_02",
+      "nominal_mode": "search",
+      "map_points": 0,
+      "position": [
+        1.5508849707546726,
+        2.19524704447084
+      ],
+      "nominal_before_override": [
+        0.01698005849065476,
+        0.28
+      ],
+      "actual_nominal": [
+        0.0,
+        0.0
+      ],
+      "actual_command": [
+        0.0,
+        0.0
+      ],
+      "row_kinds": [],
+      "A": [],
+      "b": [],
+      "max_speed": 0.35,
+      "feasible": true,
+      "conditional_command": [
+        0.01698005849065476,
+        0.28
+      ],
+      "independent_command": [
+        0.01698005789936333,
+        0.27999999024964495
+      ],
+      "independent_solver": "CLARABEL",
+      "snapshot_sha256": "c2fc37b349dec7f016c48966ec16ce7048d6ea76414821608450232335e2ec95"
+    },
+    {
+      "alias": "skew-candidate",
+      "case_id": "far_skew_box_s0_r0_pos0_acquisition_circulation",
+      "frame": 1200,
+      "agent_id": "agent_15",
+      "nominal_mode": "search",
+      "map_points": 0,
+      "position": [
+        7.32812499999783,
+        3.5136503792683684
+      ],
+      "nominal_before_override": [
+        4.339639758654812e-12,
+        0.28
+      ],
+      "actual_nominal": [
+        0.0,
+        0.0
+      ],
+      "actual_command": [
+        0.0,
+        0.0
+      ],
+      "row_kinds": [],
+      "A": [],
+      "b": [],
+      "max_speed": 0.35,
+      "feasible": true,
+      "conditional_command": [
+        4.339639758654812e-12,
+        0.28
+      ],
+      "independent_command": [
+        4.339639612676208e-12,
+        0.27999999058124386
+      ],
+      "independent_solver": "CLARABEL",
+      "snapshot_sha256": "c2fc37b349dec7f016c48966ec16ce7048d6ea76414821608450232335e2ec95"
+    }
+  ],
+  "conditional_scope": "One-step counterfactual using exactly the recorded original constraints and speed cap. Does not prove future safety, reference recovery or task completion.",
+  "full_saved_audit_sha256": "574e136ca842e7ac5542b824aae4b0170d968b44d14d31463ab0fe3c12356f70"
+}

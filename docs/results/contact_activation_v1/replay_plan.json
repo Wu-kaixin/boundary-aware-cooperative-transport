@@ -1,0 +1,36 @@
+{
+  "status": "FROZEN_BEFORE_FULL_REPLAY",
+  "cases": [
+    {
+      "case_id": "far_c_open_away_pos0_translation_all_captured",
+      "end_frame": 872,
+      "alias": "c-baseline"
+    },
+    {
+      "case_id": "far_c_open_away_pos0_acquisition_circulation",
+      "end_frame": 1200,
+      "alias": "c-candidate"
+    },
+    {
+      "case_id": "far_skew_box_s0_r0_pos0_translation_all_captured",
+      "end_frame": 1045,
+      "alias": "skew-baseline"
+    },
+    {
+      "case_id": "far_skew_box_s0_r0_pos0_acquisition_circulation",
+      "end_frame": 1200,
+      "alias": "skew-candidate"
+    }
+  ],
+  "exact_frames_planned": 4317,
+  "files": {
+    "scripts/trace_contact_activation.py": "f61812596acdae90de940ef30da92e608c147f0faa0564c37fde3927c9693c7b",
+    "scripts/research_io.py": "10f0b47f3a9b5dc96ac45aed449b282fd3fea93c680488b5ce4651010bbb7fc3",
+    "scripts/replay_qp_conflict.py": "31a26c2db58a18178dfab04f36917afff8fe1202ac418db95d156ee16c467818",
+    "scripts/trace_boundary_map.py": "eba86f44652d990768d1e9d3e19dba0fe55559a7a1096b34d229e38391ce17f8",
+    "experiments/ccta2027/contact_activation_v1_design.md": "06d91c67282cc318485eb72966e539a3010fda9922c6d5e509ffaf3c6dde5f72"
+  },
+  "source_sha256": "37f2e00017ce2e34ec932956174e7778f639c0732206e023fed74a34ef6dda1e",
+  "protocol_sha256": "0ca3f1369196fc882d884cf5583205d7671ab3749489f33a0dc116f140d9fdae",
+  "new_physical_episodes": 0
+}
