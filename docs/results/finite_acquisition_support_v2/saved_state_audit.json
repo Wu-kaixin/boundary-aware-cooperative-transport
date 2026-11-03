@@ -1,0 +1,1151 @@
+{
+  "cases": {
+    "preflight-c": {
+      "identity": {
+        "case_id": "far_c_open_away_pos0_finite_acquisition_support",
+        "condition": "far_c_open_away_pos0",
+        "end_frame": 20,
+        "freeze_frame": 377,
+        "protocol_sha256": "c50140a639f488add5424cc93db491bcea30f15d2a09c0eb74ad6500e8e5d54a",
+        "original_source_sha256": "dab8a22ad7f9ef2e488e09ff2a5a2c8923ac53a2ff2af2f5e820a8341475be97",
+        "corrected_source_sha256": "cce9a4fdc1677a54a7faa9ea6d9baf6c5110387b8acee63e158f6da378952177",
+        "candidate_module_sha256": "98ff36941d20ed08d12a8d1aec5f3fc41715ec216b05974efcdddb1f41e927e8",
+        "environment": {
+          "python": "3.12.14",
+          "platform": "Windows-11-10.0.26300-SP0",
+          "executable": "C:\\Users\\kai\\boundary-aware-cooperative-transport\\.venv\\Scripts\\python.exe",
+          "packages": {
+            "numpy": "2.5.4",
+            "scipy": "1.18.1",
+            "shapely": "2.2.0",
+            "PyYAML": "6.0.2",
+            "cvxpy": "1.9.3",
+            "clarabel": "0.11.1",
+            "osqp": "1.1.3",
+            "scs": "3.3.1",
+            "pymunk": "7.3.1",
+            "matplotlib": "3.11.2",
+            "threadpoolctl": "3.7.0"
+          }
+        },
+        "original_receipt_sha256": "c2e551dd241d270e8d4526b84126be4e5f6ea34cfbbc2f3cb4fad57c254f3e41",
+        "design_sha256": "d7d5d04668ddc244c17a678e8239236c2a2701aa646ead7f51082f9b85dd469e",
+        "scripts": {
+          "audit_finite_support_review.py": "54b1ec7cce7f88690c1a6c0b8443a8aaf630a6c4e22eaf0756560a7e3a3316d0",
+          "research_io.py": "10f0b47f3a9b5dc96ac45aed449b282fd3fea93c680488b5ce4651010bbb7fc3",
+          "replay_qp_conflict.py": "31a26c2db58a18178dfab04f36917afff8fe1202ac418db95d156ee16c467818",
+          "trace_boundary_map.py": "eba86f44652d990768d1e9d3e19dba0fe55559a7a1096b34d229e38391ce17f8"
+        },
+        "new_physical_episodes": 0,
+        "status": "EXACT_RECONSTRUCTION",
+        "verified_frames": 20,
+        "elapsed_seconds": 0.5929042999632657,
+        "products": {
+          "geometry_calls.jsonl.gz": "4cb16cd834e5c74e98005afaa9d3c62fb287b5bfda430154c174a410c0488e36",
+          "witnesses.json": "5c47dcef1ef5e68c5d388adf5642c4e92b76dfe86aaaf80a116dbe9f2c5ded3b",
+          "summary.json": "2dc7a3d0c93dbf40d6d84bd44f9738cd2508a73bb8d22a3087b64faee11f64fe"
+        }
+      },
+      "summary": {
+        "counters": {
+          "filter_calls": 320,
+          "without_finite_packets": 320
+        },
+        "admission_transitions": {},
+        "corrected_reasons": {},
+        "original_residuals": [],
+        "scope": "Original exact controller replay with corrected same-state geometry/QPs; no physics or adoption"
+      },
+      "raw_directory": "runs/research/2026-11-03-finite-support-review-validation-v1/preflight-c"
+    },
+    "preflight-l": {
+      "identity": {
+        "case_id": "near_l_reference_finite_acquisition_support",
+        "condition": "near_l_reference",
+        "end_frame": 20,
+        "freeze_frame": 41,
+        "protocol_sha256": "c50140a639f488add5424cc93db491bcea30f15d2a09c0eb74ad6500e8e5d54a",
+        "original_source_sha256": "dab8a22ad7f9ef2e488e09ff2a5a2c8923ac53a2ff2af2f5e820a8341475be97",
+        "corrected_source_sha256": "cce9a4fdc1677a54a7faa9ea6d9baf6c5110387b8acee63e158f6da378952177",
+        "candidate_module_sha256": "98ff36941d20ed08d12a8d1aec5f3fc41715ec216b05974efcdddb1f41e927e8",
+        "environment": {
+          "python": "3.12.14",
+          "platform": "Windows-11-10.0.26300-SP0",
+          "executable": "C:\\Users\\kai\\boundary-aware-cooperative-transport\\.venv\\Scripts\\python.exe",
+          "packages": {
+            "numpy": "2.5.4",
+            "scipy": "1.18.1",
+            "shapely": "2.2.0",
+            "PyYAML": "6.0.2",
+            "cvxpy": "1.9.3",
+            "clarabel": "0.11.1",
+            "osqp": "1.1.3",
+            "scs": "3.3.1",
+            "pymunk": "7.3.1",
+            "matplotlib": "3.11.2",
+            "threadpoolctl": "3.7.0"
+          }
+        },
+        "original_receipt_sha256": "71e857bb466674839dad0bb8959bd3a52918d31f4d197cacb79a7b288f31202e",
+        "design_sha256": "d7d5d04668ddc244c17a678e8239236c2a2701aa646ead7f51082f9b85dd469e",
+        "scripts": {
+          "audit_finite_support_review.py": "54b1ec7cce7f88690c1a6c0b8443a8aaf630a6c4e22eaf0756560a7e3a3316d0",
+          "research_io.py": "10f0b47f3a9b5dc96ac45aed449b282fd3fea93c680488b5ce4651010bbb7fc3",
+          "replay_qp_conflict.py": "31a26c2db58a18178dfab04f36917afff8fe1202ac418db95d156ee16c467818",
+          "trace_boundary_map.py": "eba86f44652d990768d1e9d3e19dba0fe55559a7a1096b34d229e38391ce17f8"
+        },
+        "new_physical_episodes": 0,
+        "status": "EXACT_RECONSTRUCTION",
+        "verified_frames": 20,
+        "elapsed_seconds": 3.212800699984655,
+        "products": {
+          "geometry_calls.jsonl.gz": "a476609a099c7fe6b39878b50c2b427b201d816fb30d5f4a14b06a6e7852009e",
+          "witnesses.json": "674c49f80f463ea21e833e7c863d354b7c12fac613e22a82d1351fb8ad46b608",
+          "summary.json": "3788169ab8394985d868f73ef0c8c96f5621507d080d27c93b7d934ad726233d"
+        }
+      },
+      "summary": {
+        "counters": {
+          "filter_calls": 320,
+          "supplied_geometry_calls": 233,
+          "geometry_changed": 13,
+          "original_admitted": 54,
+          "corrected_admitted": 52,
+          "without_finite_packets": 87,
+          "full_rho_feasible": 52,
+          "full_rho_old_command_violation": 0,
+          "rho_free_feasible": 52,
+          "rho_free_old_command_violation": 0,
+          "independent_qp_comparisons": 2
+        },
+        "admission_transitions": {
+          "0->0": 179,
+          "1->1": 52,
+          "1->0": 2
+        },
+        "corrected_reasons": {
+          "outside_range": 179,
+          "supported": 52,
+          "isolated_gap_exceeds_cap": 2
+        },
+        "original_residuals": [],
+        "scope": "Original exact controller replay with corrected same-state geometry/QPs; no physics or adoption"
+      },
+      "raw_directory": "runs/research/2026-11-03-finite-support-review-validation-v1/preflight-l"
+    },
+    "circle": {
+      "identity": {
+        "case_id": "near_circle_finite_acquisition_support",
+        "condition": "near_circle",
+        "end_frame": 47,
+        "freeze_frame": 47,
+        "protocol_sha256": "c50140a639f488add5424cc93db491bcea30f15d2a09c0eb74ad6500e8e5d54a",
+        "original_source_sha256": "dab8a22ad7f9ef2e488e09ff2a5a2c8923ac53a2ff2af2f5e820a8341475be97",
+        "corrected_source_sha256": "cce9a4fdc1677a54a7faa9ea6d9baf6c5110387b8acee63e158f6da378952177",
+        "candidate_module_sha256": "98ff36941d20ed08d12a8d1aec5f3fc41715ec216b05974efcdddb1f41e927e8",
+        "environment": {
+          "python": "3.12.14",
+          "platform": "Windows-11-10.0.26300-SP0",
+          "executable": "C:\\Users\\kai\\boundary-aware-cooperative-transport\\.venv\\Scripts\\python.exe",
+          "packages": {
+            "numpy": "2.5.4",
+            "scipy": "1.18.1",
+            "shapely": "2.2.0",
+            "PyYAML": "6.0.2",
+            "cvxpy": "1.9.3",
+            "clarabel": "0.11.1",
+            "osqp": "1.1.3",
+            "scs": "3.3.1",
+            "pymunk": "7.3.1",
+            "matplotlib": "3.11.2",
+            "threadpoolctl": "3.7.0"
+          }
+        },
+        "original_receipt_sha256": "695d2a69ab3c68c236fbd9c6263a32dcdfc2ca3a74474ae262cf1e933ecada96",
+        "design_sha256": "d7d5d04668ddc244c17a678e8239236c2a2701aa646ead7f51082f9b85dd469e",
+        "scripts": {
+          "audit_finite_support_review.py": "54b1ec7cce7f88690c1a6c0b8443a8aaf630a6c4e22eaf0756560a7e3a3316d0",
+          "research_io.py": "10f0b47f3a9b5dc96ac45aed449b282fd3fea93c680488b5ce4651010bbb7fc3",
+          "replay_qp_conflict.py": "31a26c2db58a18178dfab04f36917afff8fe1202ac418db95d156ee16c467818",
+          "trace_boundary_map.py": "eba86f44652d990768d1e9d3e19dba0fe55559a7a1096b34d229e38391ce17f8"
+        },
+        "new_physical_episodes": 0,
+        "status": "EXACT_RECONSTRUCTION",
+        "verified_frames": 47,
+        "elapsed_seconds": 5.9782285000546835,
+        "products": {
+          "geometry_calls.jsonl.gz": "1173a5c0a1bc0817b0bce1507513e17b915853c48ef47784bf655d8071eb39f4",
+          "witnesses.json": "f50b7ae90f00b2f8947cfada70041d23cfb59605f2f41660251d3897072b5fae",
+          "summary.json": "69e753f0363d571bd89f3305bb3991840ce94b8908b41769d7b3ddbf6f27d674"
+        }
+      },
+      "summary": {
+        "counters": {
+          "filter_calls": 752,
+          "supplied_geometry_calls": 568,
+          "geometry_changed": 35,
+          "original_admitted": 131,
+          "corrected_admitted": 131,
+          "without_finite_packets": 184,
+          "full_rho_feasible": 131,
+          "full_rho_old_command_violation": 0,
+          "rho_free_feasible": 131,
+          "rho_free_old_command_violation": 0,
+          "independent_qp_comparisons": 2
+        },
+        "admission_transitions": {
+          "0->0": 437,
+          "1->1": 131
+        },
+        "corrected_reasons": {
+          "outside_range": 437,
+          "supported": 131
+        },
+        "original_residuals": [],
+        "scope": "Original exact controller replay with corrected same-state geometry/QPs; no physics or adoption"
+      },
+      "raw_directory": "runs/research/2026-11-03-finite-support-review-validation-v1/circle"
+    },
+    "l": {
+      "identity": {
+        "case_id": "near_l_reference_finite_acquisition_support",
+        "condition": "near_l_reference",
+        "end_frame": 41,
+        "freeze_frame": 41,
+        "protocol_sha256": "c50140a639f488add5424cc93db491bcea30f15d2a09c0eb74ad6500e8e5d54a",
+        "original_source_sha256": "dab8a22ad7f9ef2e488e09ff2a5a2c8923ac53a2ff2af2f5e820a8341475be97",
+        "corrected_source_sha256": "cce9a4fdc1677a54a7faa9ea6d9baf6c5110387b8acee63e158f6da378952177",
+        "candidate_module_sha256": "98ff36941d20ed08d12a8d1aec5f3fc41715ec216b05974efcdddb1f41e927e8",
+        "environment": {
+          "python": "3.12.14",
+          "platform": "Windows-11-10.0.26300-SP0",
+          "executable": "C:\\Users\\kai\\boundary-aware-cooperative-transport\\.venv\\Scripts\\python.exe",
+          "packages": {
+            "numpy": "2.5.4",
+            "scipy": "1.18.1",
+            "shapely": "2.2.0",
+            "PyYAML": "6.0.2",
+            "cvxpy": "1.9.3",
+            "clarabel": "0.11.1",
+            "osqp": "1.1.3",
+            "scs": "3.3.1",
+            "pymunk": "7.3.1",
+            "matplotlib": "3.11.2",
+            "threadpoolctl": "3.7.0"
+          }
+        },
+        "original_receipt_sha256": "71e857bb466674839dad0bb8959bd3a52918d31f4d197cacb79a7b288f31202e",
+        "design_sha256": "d7d5d04668ddc244c17a678e8239236c2a2701aa646ead7f51082f9b85dd469e",
+        "scripts": {
+          "audit_finite_support_review.py": "54b1ec7cce7f88690c1a6c0b8443a8aaf630a6c4e22eaf0756560a7e3a3316d0",
+          "research_io.py": "10f0b47f3a9b5dc96ac45aed449b282fd3fea93c680488b5ce4651010bbb7fc3",
+          "replay_qp_conflict.py": "31a26c2db58a18178dfab04f36917afff8fe1202ac418db95d156ee16c467818",
+          "trace_boundary_map.py": "eba86f44652d990768d1e9d3e19dba0fe55559a7a1096b34d229e38391ce17f8"
+        },
+        "new_physical_episodes": 0,
+        "status": "EXACT_RECONSTRUCTION",
+        "verified_frames": 41,
+        "elapsed_seconds": 4.995853700034786,
+        "products": {
+          "geometry_calls.jsonl.gz": "48cbbfa5e6c9dd41f63faceddea5a7f771abfa17bf516dc10e1b05088090dfd6",
+          "witnesses.json": "674c49f80f463ea21e833e7c863d354b7c12fac613e22a82d1351fb8ad46b608",
+          "summary.json": "b8914c936bdfad4827a66b0f3330749d0576fbbbe030083281bf07502731aa98"
+        }
+      },
+      "summary": {
+        "counters": {
+          "filter_calls": 656,
+          "supplied_geometry_calls": 507,
+          "geometry_changed": 64,
+          "original_admitted": 193,
+          "corrected_admitted": 183,
+          "without_finite_packets": 149,
+          "full_rho_feasible": 183,
+          "full_rho_old_command_violation": 0,
+          "rho_free_feasible": 183,
+          "rho_free_old_command_violation": 0,
+          "independent_qp_comparisons": 2
+        },
+        "admission_transitions": {
+          "0->0": 313,
+          "1->1": 182,
+          "1->0": 11,
+          "0->1": 1
+        },
+        "corrected_reasons": {
+          "outside_range": 306,
+          "supported": 183,
+          "isolated_gap_exceeds_cap": 18
+        },
+        "original_residuals": [],
+        "scope": "Original exact controller replay with corrected same-state geometry/QPs; no physics or adoption"
+      },
+      "raw_directory": "runs/research/2026-11-03-finite-support-review-validation-v1/l"
+    },
+    "c": {
+      "identity": {
+        "case_id": "far_c_open_away_pos0_finite_acquisition_support",
+        "condition": "far_c_open_away_pos0",
+        "end_frame": 377,
+        "freeze_frame": 377,
+        "protocol_sha256": "c50140a639f488add5424cc93db491bcea30f15d2a09c0eb74ad6500e8e5d54a",
+        "original_source_sha256": "dab8a22ad7f9ef2e488e09ff2a5a2c8923ac53a2ff2af2f5e820a8341475be97",
+        "corrected_source_sha256": "cce9a4fdc1677a54a7faa9ea6d9baf6c5110387b8acee63e158f6da378952177",
+        "candidate_module_sha256": "98ff36941d20ed08d12a8d1aec5f3fc41715ec216b05974efcdddb1f41e927e8",
+        "environment": {
+          "python": "3.12.14",
+          "platform": "Windows-11-10.0.26300-SP0",
+          "executable": "C:\\Users\\kai\\boundary-aware-cooperative-transport\\.venv\\Scripts\\python.exe",
+          "packages": {
+            "numpy": "2.5.4",
+            "scipy": "1.18.1",
+            "shapely": "2.2.0",
+            "PyYAML": "6.0.2",
+            "cvxpy": "1.9.3",
+            "clarabel": "0.11.1",
+            "osqp": "1.1.3",
+            "scs": "3.3.1",
+            "pymunk": "7.3.1",
+            "matplotlib": "3.11.2",
+            "threadpoolctl": "3.7.0"
+          }
+        },
+        "original_receipt_sha256": "c2e551dd241d270e8d4526b84126be4e5f6ea34cfbbc2f3cb4fad57c254f3e41",
+        "design_sha256": "d7d5d04668ddc244c17a678e8239236c2a2701aa646ead7f51082f9b85dd469e",
+        "scripts": {
+          "audit_finite_support_review.py": "54b1ec7cce7f88690c1a6c0b8443a8aaf630a6c4e22eaf0756560a7e3a3316d0",
+          "research_io.py": "10f0b47f3a9b5dc96ac45aed449b282fd3fea93c680488b5ce4651010bbb7fc3",
+          "replay_qp_conflict.py": "31a26c2db58a18178dfab04f36917afff8fe1202ac418db95d156ee16c467818",
+          "trace_boundary_map.py": "eba86f44652d990768d1e9d3e19dba0fe55559a7a1096b34d229e38391ce17f8"
+        },
+        "new_physical_episodes": 0,
+        "status": "EXACT_RECONSTRUCTION",
+        "verified_frames": 377,
+        "elapsed_seconds": 17.283564699988347,
+        "products": {
+          "geometry_calls.jsonl.gz": "5cc627b4a729c157582a52caa40dd6abc644b88d6f5798f305ed0f966f8c66bc",
+          "witnesses.json": "5baa09dc770bf2077bc8d609fa5da82655f1989b307e7f48109f5a3843299a8e",
+          "summary.json": "aa00413284e6dd1ea195ffd509504615bab7529e6683343131494f4c1c1b6aa9"
+        }
+      },
+      "summary": {
+        "counters": {
+          "filter_calls": 6032,
+          "without_finite_packets": 4751,
+          "supplied_geometry_calls": 1281,
+          "geometry_changed": 441,
+          "original_admitted": 842,
+          "corrected_admitted": 838,
+          "full_rho_feasible": 835,
+          "full_rho_old_command_violation": 3,
+          "rho_free_feasible": 837,
+          "rho_free_old_command_violation": 1,
+          "independent_qp_comparisons": 6
+        },
+        "admission_transitions": {
+          "0->0": 438,
+          "1->1": 837,
+          "0->1": 1,
+          "1->0": 5
+        },
+        "corrected_reasons": {
+          "isolated_gap_unknown": 3,
+          "outside_range": 433,
+          "supported": 838,
+          "isolated_gap_exceeds_cap": 7
+        },
+        "original_residuals": [
+          [
+            365,
+            "agent_05"
+          ]
+        ],
+        "scope": "Original exact controller replay with corrected same-state geometry/QPs; no physics or adoption"
+      },
+      "raw_directory": "runs/research/2026-11-03-finite-support-review-validation-v1/c"
+    },
+    "skew": {
+      "identity": {
+        "case_id": "far_skew_box_s0_r0_pos0_finite_acquisition_support",
+        "condition": "far_skew_box_s0_r0_pos0",
+        "end_frame": 409,
+        "freeze_frame": 409,
+        "protocol_sha256": "c50140a639f488add5424cc93db491bcea30f15d2a09c0eb74ad6500e8e5d54a",
+        "original_source_sha256": "dab8a22ad7f9ef2e488e09ff2a5a2c8923ac53a2ff2af2f5e820a8341475be97",
+        "corrected_source_sha256": "cce9a4fdc1677a54a7faa9ea6d9baf6c5110387b8acee63e158f6da378952177",
+        "candidate_module_sha256": "98ff36941d20ed08d12a8d1aec5f3fc41715ec216b05974efcdddb1f41e927e8",
+        "environment": {
+          "python": "3.12.14",
+          "platform": "Windows-11-10.0.26300-SP0",
+          "executable": "C:\\Users\\kai\\boundary-aware-cooperative-transport\\.venv\\Scripts\\python.exe",
+          "packages": {
+            "numpy": "2.5.4",
+            "scipy": "1.18.1",
+            "shapely": "2.2.0",
+            "PyYAML": "6.0.2",
+            "cvxpy": "1.9.3",
+            "clarabel": "0.11.1",
+            "osqp": "1.1.3",
+            "scs": "3.3.1",
+            "pymunk": "7.3.1",
+            "matplotlib": "3.11.2",
+            "threadpoolctl": "3.7.0"
+          }
+        },
+        "original_receipt_sha256": "adb770005eeffb8bae80cd5604a9fd674d504f60e84b6a722176c6d260bb5ba0",
+        "design_sha256": "d7d5d04668ddc244c17a678e8239236c2a2701aa646ead7f51082f9b85dd469e",
+        "scripts": {
+          "audit_finite_support_review.py": "54b1ec7cce7f88690c1a6c0b8443a8aaf630a6c4e22eaf0756560a7e3a3316d0",
+          "research_io.py": "10f0b47f3a9b5dc96ac45aed449b282fd3fea93c680488b5ce4651010bbb7fc3",
+          "replay_qp_conflict.py": "31a26c2db58a18178dfab04f36917afff8fe1202ac418db95d156ee16c467818",
+          "trace_boundary_map.py": "eba86f44652d990768d1e9d3e19dba0fe55559a7a1096b34d229e38391ce17f8"
+        },
+        "new_physical_episodes": 0,
+        "status": "EXACT_RECONSTRUCTION",
+        "verified_frames": 409,
+        "elapsed_seconds": 15.576070000010077,
+        "products": {
+          "geometry_calls.jsonl.gz": "a056f35a0816aa52c3a6cb20e738b6c2cc7c4de5b6b2c623d60cc9d78d10d640",
+          "witnesses.json": "60e44e5ac318318a87f456ef0215a712192994c75e4273c66d85fe20657a4954",
+          "summary.json": "9eb72b466bf976d679afb2bd0095cf8cc7e1c8414e6cd21c07780442d6462c8c"
+        }
+      },
+      "summary": {
+        "counters": {
+          "filter_calls": 6544,
+          "without_finite_packets": 5424,
+          "supplied_geometry_calls": 1120,
+          "geometry_changed": 286,
+          "original_admitted": 606,
+          "corrected_admitted": 586,
+          "full_rho_feasible": 585,
+          "full_rho_old_command_violation": 1,
+          "rho_free_feasible": 585,
+          "rho_free_old_command_violation": 1,
+          "independent_qp_comparisons": 4
+        },
+        "admission_transitions": {
+          "0->0": 513,
+          "1->1": 585,
+          "1->0": 21,
+          "0->1": 1
+        },
+        "corrected_reasons": {
+          "isolated_gap_unknown": 1,
+          "outside_range": 500,
+          "supported": 586,
+          "isolated_gap_exceeds_cap": 33
+        },
+        "original_residuals": [
+          [
+            399,
+            "agent_05"
+          ]
+        ],
+        "scope": "Original exact controller replay with corrected same-state geometry/QPs; no physics or adoption"
+      },
+      "raw_directory": "runs/research/2026-11-03-finite-support-review-validation-v1/skew"
+    }
+  },
+  "original_command_violations": [
+    {
+      "case_id": "far_c_open_away_pos0_finite_acquisition_support",
+      "original_solver_status": "relaxed_margin",
+      "frame": 355,
+      "agent_id": "agent_05",
+      "original_scaled": false,
+      "old_ready": true,
+      "new_ready": true,
+      "old_reason": "supported",
+      "new_reason": "supported",
+      "old_rows": 24,
+      "new_rows": 27,
+      "new_point_guards": 6,
+      "changed": true,
+      "solves": [
+        {
+          "kind": "full_rho",
+          "rho": 0.02,
+          "feasible": false,
+          "cap_rows": 0,
+          "old_command_minimum_row_residual": -0.019999999999999685,
+          "command": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "kind": "rho_free",
+          "rho": 0.0,
+          "feasible": true,
+          "cap_rows": 0,
+          "old_command_minimum_row_residual": 3.191891195797325e-16,
+          "command": [
+            -0.1835551618015746,
+            -0.21028090161145055
+          ]
+        }
+      ],
+      "old_command": [
+        -0.1835551618015746,
+        -0.21028090161145055
+      ],
+      "new_A": [
+        [
+          0.42261826174069883,
+          -0.9063077870366502
+        ],
+        [
+          0.4999999999999997,
+          -0.8660254037844389
+        ],
+        [
+          0.4999999999999997,
+          -0.8660254037844389
+        ],
+        [
+          0.6427876096865398,
+          -0.7660444431189776
+        ],
+        [
+          0.6427876096865398,
+          -0.7660444431189776
+        ],
+        [
+          0.7071067811865481,
+          -0.7071067811865467
+        ],
+        [
+          0.7660444431189783,
+          -0.6427876096865389
+        ],
+        [
+          0.8191520442889921,
+          -0.5735764363510456
+        ],
+        [
+          0.294011430203889,
+          -0.9558019035916719
+        ],
+        [
+          0.33529345349135076,
+          -0.9421137405036842
+        ],
+        [
+          0.30479557200187496,
+          -0.9524177966040165
+        ],
+        [
+          0.3507336721400828,
+          -0.9364752485928995
+        ],
+        [
+          0.42030851764431076,
+          -0.90738125944701
+        ],
+        [
+          0.4508828037763127,
+          -0.8925831598561622
+        ],
+        [
+          0.4911654811969534,
+          -0.8710662834024545
+        ],
+        [
+          0.6466341745467901,
+          -0.7628002650158109
+        ],
+        [
+          0.3161763047869095,
+          -0.9487004502430129
+        ],
+        [
+          0.38375982589229296,
+          -0.9234329407331736
+        ],
+        [
+          0.3927341499138001,
+          -0.9196520469674846
+        ],
+        [
+          0.41182345788454267,
+          -0.9112636498489436
+        ],
+        [
+          0.47691448018681704,
+          -0.8789497019671478
+        ],
+        [
+          0.7868885073163011,
+          -0.6170951928621091
+        ],
+        [
+          0.3362828690384396,
+          -0.94176102700806
+        ],
+        [
+          0.32256635673703093,
+          -0.9465468533048951
+        ],
+        [
+          0.4530204459823442,
+          -0.8915001264845439
+        ],
+        [
+          0.6949827264984518,
+          -0.719026431968101
+        ],
+        [
+          0.7337266107306513,
+          -0.6794448179990125
+        ]
+      ],
+      "new_h": [
+        0.02338960497992093,
+        0.026179558818026694,
+        0.02294422039889557,
+        0.049507191159537584,
+        0.037138566951894714,
+        0.08685580486006333,
+        0.09465832007086894,
+        0.12476841065852945,
+        0.14563466597813518,
+        0.06530037130389932,
+        0.12162402668066974,
+        0.08717032262977514,
+        0.061279736734399626,
+        0.020801006205836692,
+        -0.01162658050809351,
+        0.043138353196478796,
+        0.12805613220071954,
+        0.08925579586991622,
+        0.05700916361785352,
+        0.019134888616308382,
+        0.00199808604188928,
+        0.1250708996897194,
+        0.11849726896425394,
+        0.13742392831079336,
+        0.054444042287279754,
+        0.09023973519543399,
+        0.08047636813198611
+      ]
+    },
+    {
+      "case_id": "far_c_open_away_pos0_finite_acquisition_support",
+      "original_solver_status": "relaxed_margin",
+      "frame": 363,
+      "agent_id": "agent_05",
+      "original_scaled": false,
+      "old_ready": true,
+      "new_ready": true,
+      "old_reason": "supported",
+      "new_reason": "supported",
+      "old_rows": 20,
+      "new_rows": 22,
+      "new_point_guards": 4,
+      "changed": true,
+      "solves": [
+        {
+          "kind": "full_rho",
+          "rho": 0.02,
+          "feasible": false,
+          "cap_rows": 0,
+          "old_command_minimum_row_residual": -0.02000000000000003,
+          "command": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "kind": "rho_free",
+          "rho": 0.0,
+          "feasible": true,
+          "cap_rows": 0,
+          "old_command_minimum_row_residual": -2.7755575615628914e-17,
+          "command": [
+            -0.2471926733270427,
+            -0.20199808659384427
+          ]
+        }
+      ],
+      "old_command": [
+        -0.2471926733270427,
+        -0.20199808659384427
+      ],
+      "new_A": [
+        [
+          0.4226182617406995,
+          -0.9063077870366499
+        ],
+        [
+          0.4226182617406995,
+          -0.9063077870366499
+        ],
+        [
+          0.5735764363510462,
+          -0.8191520442889919
+        ],
+        [
+          0.5735764363510462,
+          -0.8191520442889919
+        ],
+        [
+          0.7071067811865482,
+          -0.7071067811865468
+        ],
+        [
+          0.7071067811865482,
+          -0.7071067811865468
+        ],
+        [
+          0.766044443118978,
+          -0.6427876096865393
+        ],
+        [
+          0.3079201173400938,
+          -0.9514122142043704
+        ],
+        [
+          0.3023545717205902,
+          -0.953195527139977
+        ],
+        [
+          0.4325238420961123,
+          -0.9016224964021347
+        ],
+        [
+          0.4527824983176645,
+          -0.8916210008839036
+        ],
+        [
+          0.42694660207327684,
+          -0.9042768375769021
+        ],
+        [
+          0.5935013929400021,
+          -0.804832961910903
+        ],
+        [
+          0.3365189167943377,
+          -0.9416767060087902
+        ],
+        [
+          0.37216158522974674,
+          -0.9281679559644805
+        ],
+        [
+          0.4497519669575156,
+          -0.8931534964483123
+        ],
+        [
+          0.3364860176261848,
+          -0.9416884622538766
+        ],
+        [
+          0.36719422014210895,
+          -0.9301442924053388
+        ],
+        [
+          0.44219123518519277,
+          -0.8969207944547799
+        ],
+        [
+          0.29453377909830636,
+          -0.9556410691101916
+        ],
+        [
+          0.47308841666978996,
+          -0.8810149544774318
+        ],
+        [
+          0.3043515071506349,
+          -0.9525597934487562
+        ]
+      ],
+      "new_h": [
+        -0.009825537616249158,
+        -0.006633855952642986,
+        0.042518930288404894,
+        0.027909122654201646,
+        0.08177988061933322,
+        0.07368906255252455,
+        0.10413019652437239,
+        0.1056637747510753,
+        0.07062289685990314,
+        0.059654010946242286,
+        0.03025508304184857,
+        0.016996067425768868,
+        0.009770746552404896,
+        0.0815730848554741,
+        0.04051384032677405,
+        0.023294541661320195,
+        0.016404693466811116,
+        0.02129984848095612,
+        0.02483374551752901,
+        0.12915157318544884,
+        0.04822660751181479,
+        0.12030501712361891
+      ]
+    },
+    {
+      "case_id": "far_c_open_away_pos0_finite_acquisition_support",
+      "original_solver_status": "scaled_barrier",
+      "frame": 365,
+      "agent_id": "agent_05",
+      "original_scaled": true,
+      "old_ready": true,
+      "new_ready": true,
+      "old_reason": "supported",
+      "new_reason": "supported",
+      "old_rows": 23,
+      "new_rows": 27,
+      "new_point_guards": 7,
+      "changed": true,
+      "solves": [
+        {
+          "kind": "full_rho",
+          "rho": 0.02,
+          "feasible": false,
+          "cap_rows": 0,
+          "old_command_minimum_row_residual": -0.028410231803473365,
+          "command": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "kind": "rho_free",
+          "rho": 0.0,
+          "feasible": false,
+          "cap_rows": 0,
+          "old_command_minimum_row_residual": -0.008410231803473375,
+          "command": [
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "old_command": [
+        -0.26228779613817793,
+        -0.2314739735011832
+      ],
+      "new_A": [
+        [
+          0.4092155056914668,
+          -0.9124377622071969
+        ],
+        [
+          0.42261826174069883,
+          -0.9063077870366503
+        ],
+        [
+          0.49999999999999967,
+          -0.8660254037844389
+        ],
+        [
+          0.64278760968654,
+          -0.7660444431189773
+        ],
+        [
+          0.64278760968654,
+          -0.7660444431189773
+        ],
+        [
+          0.7071067811865482,
+          -0.7071067811865467
+        ],
+        [
+          0.7660444431189782,
+          -0.6427876096865391
+        ],
+        [
+          0.28996400695026164,
+          -0.9570375513392088
+        ],
+        [
+          0.27806053656425195,
+          -0.9605635522991699
+        ],
+        [
+          0.3018071318776409,
+          -0.9533690026153527
+        ],
+        [
+          0.36690367322044043,
+          -0.9302589395310039
+        ],
+        [
+          0.36932902940301465,
+          -0.929298696889341
+        ],
+        [
+          0.5557264253578639,
+          -0.8313652266958069
+        ],
+        [
+          0.6933492741442544,
+          -0.7206016819600378
+        ],
+        [
+          0.7910570215675178,
+          -0.6117424201645064
+        ],
+        [
+          0.2642835040174686,
+          -0.9644450370571921
+        ],
+        [
+          0.30107393611268246,
+          -0.9536007995978277
+        ],
+        [
+          0.5048645178282422,
+          -0.8631985974490788
+        ],
+        [
+          0.3220400578650234,
+          -0.9467260433358176
+        ],
+        [
+          0.47790126282796885,
+          -0.878413560338997
+        ],
+        [
+          0.25881904510252024,
+          -0.9659258262890684
+        ],
+        [
+          0.3255719299207796,
+          -0.9455172755945072
+        ],
+        [
+          0.25822807744278536,
+          -0.966083981867106
+        ],
+        [
+          0.45321469710032464,
+          -0.8914013901336821
+        ],
+        [
+          0.7268312358166722,
+          -0.6868160995792171
+        ],
+        [
+          0.7328494641643132,
+          -0.6803908162769975
+        ],
+        [
+          0.7466001416435616,
+          -0.6652730480771137
+        ]
+      ],
+      "new_h": [
+        0.033927155215088656,
+        0.03272458888804952,
+        0.04304098281102539,
+        0.04200905515628836,
+        0.02602660891746178,
+        0.08567678104987575,
+        0.07945408270503784,
+        0.13265397721383526,
+        0.09180393601526143,
+        0.06781881688746261,
+        0.045392166970581904,
+        -0.015831024571243968,
+        0.04128261305413353,
+        0.05464284791652596,
+        0.12136613431159238,
+        0.10563124314493949,
+        0.060856869555645565,
+        0.007831062133243805,
+        0.04838871705423528,
+        0.022085591323816878,
+        0.13547084959710792,
+        0.05513045468808264,
+        0.1254577646474182,
+        0.03582283024963143,
+        0.12086814301017085,
+        0.08551971176558898,
+        0.11892252098059686
+      ]
+    },
+    {
+      "case_id": "far_skew_box_s0_r0_pos0_finite_acquisition_support",
+      "original_solver_status": "scaled_barrier",
+      "frame": 399,
+      "agent_id": "agent_05",
+      "original_scaled": true,
+      "old_ready": true,
+      "new_ready": true,
+      "old_reason": "supported",
+      "new_reason": "supported",
+      "old_rows": 25,
+      "new_rows": 26,
+      "new_point_guards": 7,
+      "changed": true,
+      "solves": [
+        {
+          "kind": "full_rho",
+          "rho": 0.02,
+          "feasible": false,
+          "cap_rows": 0,
+          "old_command_minimum_row_residual": -0.03991129808639794,
+          "command": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "kind": "rho_free",
+          "rho": 0.0,
+          "feasible": false,
+          "cap_rows": 0,
+          "old_command_minimum_row_residual": -0.01991129808639794,
+          "command": [
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "old_command": [
+        -0.24093441912529284,
+        -0.2535660989399662
+      ],
+      "new_A": [
+        [
+          0.5735764363510467,
+          -0.8191520442889912
+        ],
+        [
+          0.5735764363510467,
+          -0.8191520442889912
+        ],
+        [
+          0.6427876096865396,
+          -0.7660444431189779
+        ],
+        [
+          0.7071067811865475,
+          -0.7071067811865475
+        ],
+        [
+          0.7660444431189791,
+          -0.6427876096865381
+        ],
+        [
+          0.8191520442889921,
+          -0.5735764363510457
+        ],
+        [
+          0.4724064696363387,
+          -0.8813808072823749
+        ],
+        [
+          0.47490065840560214,
+          -0.8800394108481311
+        ],
+        [
+          0.4973590000439677,
+          -0.8675448259745802
+        ],
+        [
+          0.5437029492861586,
+          -0.8392777269399759
+        ],
+        [
+          0.47629702548143193,
+          -0.8792844497189406
+        ],
+        [
+          0.4959052559276993,
+          -0.8683766332319652
+        ],
+        [
+          0.4877241242553279,
+          -0.8729978113485586
+        ],
+        [
+          0.6007991451967956,
+          -0.7994000169694768
+        ],
+        [
+          0.42016369236748463,
+          -0.9074483299979795
+        ],
+        [
+          0.44143558152365686,
+          -0.8972929440070677
+        ],
+        [
+          0.5330689701244341,
+          -0.8460717895607176
+        ],
+        [
+          0.48634162126276603,
+          -0.8737687493996935
+        ],
+        [
+          0.6314791091824777,
+          -0.7753928905181581
+        ],
+        [
+          0.4819191236351993,
+          -0.8762157030518692
+        ],
+        [
+          0.47481823265108447,
+          -0.880083885741638
+        ],
+        [
+          0.6228776032567935,
+          -0.7823193026898112
+        ],
+        [
+          0.8113031435614209,
+          -0.5846257001256073
+        ],
+        [
+          0.4634567640163602,
+          -0.8861195336338568
+        ],
+        [
+          0.48735389134793383,
+          -0.8732045491109321
+        ],
+        [
+          0.6766692046453777,
+          -0.7362871637374864
+        ]
+      ],
+      "new_h": [
+        -0.011178272609907614,
+        0.0017863792227962305,
+        0.019179087588553384,
+        0.059602498059453224,
+        0.08008433643811125,
+        0.09440198976021774,
+        0.12403048840961184,
+        0.09748361579928105,
+        0.07515436016736693,
+        0.05223154417991599,
+        0.021485144876857487,
+        0.07183177203962299,
+        0.029108794740944133,
+        -0.0011068301321094376,
+        0.1017505917241121,
+        0.05505680000077795,
+        0.010594244436660044,
+        0.033893459586973484,
+        0.016838389628973938,
+        0.10486538410892005,
+        0.12167083964970715,
+        0.046770991095021364,
+        0.09438876270162372,
+        0.10954484561648825,
+        0.1020197934225599,
+        0.0438238121164673
+      ]
+    }
+  ],
+  "scope": "874 exact historical control frames plus40 separate preflight frames; zero new physical episodes; old relaxed/scaled commands are not automatically new omission violations"
+}

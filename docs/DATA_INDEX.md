@@ -1,5 +1,7 @@
 # 数据与原始文件索引
 
+2026-11-03：[修正后有限支持独立验证](results/finite_acquisition_support_v2/README.md)的新8回合原件在 `runs/research/2026-11-03-finite-acquisition-support-v2/run/`，执行前快照在同级 `freeze/`，完整分析及执行收据在同级目录。874帧完整重放和分列的40帧预检在 `runs/research/2026-11-03-finite-support-review-validation-v1/`，包含原脚本/设计/修后模块快照、压缩逐调用追踪及七个QP见证。995通过/2跳过、首次失败及全部执行日志保留在对应maintenance目录。公开v2目录包含全部八行CSV、分析、审计、逐数组复现矩阵、图表和哈希；旧v1的四个基线使用量占位值仅在新增衍生CSV更正，未覆盖旧表。新物理8回合、旧状态874+40帧及旧物理比较对象分别计数。
+
 2026-11-03：[有限观测支持八回合](results/finite_acquisition_support_v1/README.md)的原始数据在 `runs/research/2026-11-03-finite-acquisition-support-v1/run/`，执行前快照在同级 `freeze/`，完整分析在同级 `analysis.json`。公开CSV、完整分析、两个残余事件、图表和哈希保留所有改善及退化。987通过/2跳过及首次失败日志、冻结/执行/分析/发布记录在同名maintenance目录。前置旧状态筛选分别在 `runs/research/2026-11-03-finite-support-probe-v1/`、`runs/research/2026-11-03-ray-chord-support-probe-v1/`、`runs/research/2026-11-03-ray-chord-support-probe-v2/`；各自脚本/模块/设计快照保持原身份，新增物理回合均0，不能把v1零准入写成成功。
 
 [审查后工程修正](results/finite_acquisition_support_v1/post_review_checks.json)的源码快照及RED/GREEN/core XML在 `runs/maintenance/2026-11-03-finite-acquisition-support-v1/review_fix/`，原日志为同级 `review-red.log`、`review-green.log`、`review-core.log`。修后992通过/2跳过，新研究物理回合0；原物理源码、协议及公开产品哈希全部再次核验，未改写。首次图表布局与脚本保存在同级 `publication_layout_v1/`，只将数值标签错开放置的发布版在 `publication_layout_v2/`，科学数据完全一致。

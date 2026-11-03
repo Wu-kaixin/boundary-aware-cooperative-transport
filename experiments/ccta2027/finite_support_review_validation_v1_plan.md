@@ -19,7 +19,7 @@ has previously failed repeatedly, so use targeted reads if symbolic service fail
 
 - [x] Implement bounded diagnostic and meaningful witness-selection regressions.
 - [x] Separate20-frame C/L preflights, then exact full4 acquisition prefixes.
-- [ ] Evaluate findings and freeze a separate physical protocol if justified.
+- [x] Evaluate findings and freeze a separate physical protocol if justified.
 - [ ] Publish complete outcomes, one fresh final review, authorized branch sync.
 
 ## Review focus
@@ -68,3 +68,29 @@ Proceed to physical freeze because all exactness and independent-solver entry
 checks passed. Saved-state infeasibility remains a negative diagnostic and does
 not lower the physical acceptance gates. Do not modify frozen source/helpers
 while the new8episode study executes.
+
+Task3 complete: independent physical-v2 freeze/run/analyze all exited0. Eight
+new episodes completed, execution_errors0, source_integrityPASS; runtime
+cce9a4fd... and canonical numeric configuration unchanged. Both arms safe4/4,
+falseHOLD/hardfailure/timeout0, G5002/4. Mechanism and full-chain gates bothFAIL;
+two acquisition scaled robot-steps and C's absent TRANSPORT/9.071854deg remain.
+All4 original controls reproduce25arrays and scientific fields exactly. All4
+corrected candidates reproduce historical candidates'25arrays, physics_substeps,
+config, summary and case-result scientific fields; paired_metrics differs.
+Old candidates are historical comparisons, not part of the new8 denominator.
+
+Task4 publication prepared: scripts/publish_finite_support_validation.py exited0,
+verified original-v1 hashes and all6 audit outcomes, and published complete
+analysis,8-row CSV,7witnesses/14QP comparisons, candidate reproduction matrix,
+figure PNG/PDF, engineering receipt and product hashes. Additive correction of
+the old CSV changes only4 baseline path-use placeholders to actual counts;
+original CSV remains unchanged. Figure inspected with all labels legible.
+Root README/navigation now distinguish original physics, corrected saved-state
+audit and corrected new physics. Final review and remote synchronization pending.
+
+Publication verification PASS: frozen source/environment/helper identities,
+10 new product hashes,8 original product hashes,8 unique condition/arm rows,
+exactly4 additive baseline-count corrections and318 navigation links checked.
+The first ad-hoc verifier used a nonexistent CSV case_id field; its failure
+receipt is retained. Corrected only the verifier to use condition/arm keys;
+neither scientific products nor runtime changed.

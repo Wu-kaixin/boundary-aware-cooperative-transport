@@ -1,0 +1,2486 @@
+{
+  "scope": "Eight new matched episodes on four reused conditions using corrected finite support; separate from original v1 physics, no general reliability, default adoption or deployment-superiority claim",
+  "episodes": [
+    {
+      "case_id": "near_l_reference_finite_acquisition_support",
+      "condition": "near_l_reference",
+      "arm": "finite_acquisition_support",
+      "execution": "COMPLETED",
+      "completed": true,
+      "safe_completed": true,
+      "g500": true,
+      "false_hold": false,
+      "hard_safety": [],
+      "zero_epoch_valid": true,
+      "receipt_sha256": "a796cea30620c2acdbd962d32d23648898fb82de866be45d94dc83fd1624b4fe",
+      "g500_failure_reasons": [],
+      "first_hold": {
+        "frame": 226,
+        "physical_error_before_m": 0.02311476510078367,
+        "physical_error_after_m": 0.02311476510078367,
+        "nominal_error_m": 0.01632327752911243,
+        "workspace_error_bound_m": 0.03748914885395818
+      },
+      "hold_entries": [
+        {
+          "frame": 226,
+          "physical_error_before_m": 0.02311476510078367,
+          "physical_error_after_m": 0.02311476510078367,
+          "nominal_error_m": 0.01632327752911243,
+          "workspace_error_bound_m": 0.03748914885395818
+        }
+      ],
+      "acquisition": {
+        "status": "frozen",
+        "epoch": 2.000000000000001,
+        "supporters": [
+          "agent_00",
+          "agent_07",
+          "agent_13",
+          "agent_14"
+        ],
+        "pre_epoch_contact_samples": 0,
+        "max_pre_epoch_translation": 0.0,
+        "max_pre_epoch_rotation": 0.0,
+        "zero_epoch_valid": true,
+        "motion_model": "translation",
+        "use_all_captured": true,
+        "selected_trackers": [
+          "agent_00",
+          "agent_01",
+          "agent_02",
+          "agent_03",
+          "agent_04",
+          "agent_05",
+          "agent_06",
+          "agent_07",
+          "agent_08",
+          "agent_09",
+          "agent_10",
+          "agent_11",
+          "agent_12",
+          "agent_13",
+          "agent_14",
+          "agent_15"
+        ],
+        "bound_semantics": "translation hypothesis; not a rotation-robust center certificate",
+        "reference_driven_map_motion": true,
+        "acquisition_circulation": true,
+        "map_reacquisition": true
+      },
+      "endpoint_m": 0.02311476510078367,
+      "seconds": 13.25,
+      "termination": {
+        "frames_run": 265,
+        "max_frames": 12000,
+        "settled": true,
+        "terminated_by": "settled",
+        "settle_frames": 40,
+        "settle_speed": 0.005
+      },
+      "final_phase": "HOLD",
+      "budget_terminated": false,
+      "barrier_scalings": 0,
+      "safety_metrics": {
+        "min_inter_agent_distance": 0.28067392199421043,
+        "d_min": 0.28,
+        "min_signed_clearance": 0.08888981881781065,
+        "max_penetration": 0.041110181182189356,
+        "penetration_budget": 0.09801140797446084,
+        "solver_fallbacks": 0,
+        "solver_infeasible": 0
+      },
+      "estimation": {
+        "post_ready_frames": 172,
+        "available_frames": 172,
+        "quorum_frames": 172,
+        "missing_frames": 0,
+        "insufficient_quorum_frames": 0,
+        "mae_m": 0.008140734949677432,
+        "p95_m": 0.01244381624448721,
+        "max_m": 0.014012297766308968,
+        "scope": "Available control readings versus pre-physics truth; within each episode, not paired frames across different paths"
+      },
+      "maximum_absolute_rotation_deg": 1.9469933862125373,
+      "contact_redeploy_attempts_by_agent": {
+        "agent_00": 0,
+        "agent_01": 0,
+        "agent_02": 0,
+        "agent_03": 0,
+        "agent_04": 0,
+        "agent_05": 0,
+        "agent_06": 0,
+        "agent_07": 0,
+        "agent_08": 0,
+        "agent_09": 0,
+        "agent_10": 0,
+        "agent_11": 0,
+        "agent_12": 0,
+        "agent_13": 0,
+        "agent_14": 0,
+        "agent_15": 0
+      },
+      "phase_response": {
+        "final_phase": "HOLD",
+        "entered": {
+          "SEARCH": 0,
+          "DISCOVER": 0,
+          "ENCLOSE": 44,
+          "CONTACT_READY": 94,
+          "TRANSPORT": 109,
+          "BRAKE": 160,
+          "HOLD": 225
+        },
+        "first_detection_frame": 0,
+        "enclosure_frame": 44,
+        "contact_ready_frame": 94,
+        "transport_frame": 109,
+        "brake_frame": 160,
+        "hold_frame": 225,
+        "brake_reason": "estimated_stop",
+        "push_suspended": false,
+        "overshoot": false,
+        "short_of_target": true,
+        "contact_recovery_failed": false,
+        "estimate_stopped": false
+      },
+      "scaling": {
+        "scaled_robot_steps": 0,
+        "acquisition": 0,
+        "post_acquisition": 0,
+        "by_capture_state": {},
+        "by_phase": {},
+        "control_frames_with_scaling": 0,
+        "min_scale": 1.0,
+        "events": []
+      },
+      "support_audit": {
+        "counts": {
+          "robot_steps": 4240,
+          "original_row_robot_steps": 4057,
+          "applied_robot_steps": 183,
+          "point_guard_rows": 668,
+          "reach_cap_rows": 0
+        },
+        "reasons": {
+          "outside_range": 306,
+          "no_current_own_returns": 133,
+          "supported": 183,
+          "isolated_gap_exceeds_cap": 18,
+          "outside_stationary_acquisition": 3600
+        },
+        "locality_and_freeze_boundary_verified": true
+      }
+    },
+    {
+      "case_id": "near_circle_reference_reacquisition",
+      "condition": "near_circle",
+      "arm": "reference_reacquisition",
+      "execution": "COMPLETED",
+      "completed": true,
+      "safe_completed": true,
+      "g500": true,
+      "false_hold": false,
+      "hard_safety": [],
+      "zero_epoch_valid": true,
+      "receipt_sha256": "6a1cc21906f3d534e475d227c21b9f4e1ca7a77918d832eed408e83633157110",
+      "g500_failure_reasons": [],
+      "first_hold": {
+        "frame": 293,
+        "physical_error_before_m": 0.018598888083942795,
+        "physical_error_after_m": 0.018598888083942795,
+        "nominal_error_m": 0.01853743110109062,
+        "workspace_error_bound_m": 0.027053893349414354
+      },
+      "hold_entries": [
+        {
+          "frame": 293,
+          "physical_error_before_m": 0.018598888083942795,
+          "physical_error_after_m": 0.018598888083942795,
+          "nominal_error_m": 0.01853743110109062,
+          "workspace_error_bound_m": 0.027053893349414354
+        }
+      ],
+      "acquisition": {
+        "status": "frozen",
+        "epoch": 2.3,
+        "supporters": [
+          "agent_00",
+          "agent_05",
+          "agent_10",
+          "agent_11",
+          "agent_12"
+        ],
+        "pre_epoch_contact_samples": 0,
+        "max_pre_epoch_translation": 0.0,
+        "max_pre_epoch_rotation": 0.0,
+        "zero_epoch_valid": true,
+        "motion_model": "translation",
+        "use_all_captured": true,
+        "selected_trackers": [
+          "agent_00",
+          "agent_01",
+          "agent_02",
+          "agent_03",
+          "agent_04",
+          "agent_05",
+          "agent_06",
+          "agent_07",
+          "agent_08",
+          "agent_09",
+          "agent_10",
+          "agent_11",
+          "agent_12",
+          "agent_13",
+          "agent_14",
+          "agent_15"
+        ],
+        "bound_semantics": "translation hypothesis; not a rotation-robust center certificate",
+        "reference_driven_map_motion": true,
+        "acquisition_circulation": true,
+        "map_reacquisition": true
+      },
+      "endpoint_m": 0.018598888083942795,
+      "seconds": 16.6,
+      "termination": {
+        "frames_run": 332,
+        "max_frames": 12000,
+        "settled": true,
+        "terminated_by": "settled",
+        "settle_frames": 40,
+        "settle_speed": 0.005
+      },
+      "final_phase": "HOLD",
+      "budget_terminated": false,
+      "barrier_scalings": 0,
+      "safety_metrics": {
+        "min_inter_agent_distance": 0.28008185474804537,
+        "d_min": 0.28,
+        "min_signed_clearance": 0.08404166848297605,
+        "max_penetration": 0.045958331517023956,
+        "penetration_budget": 0.09846152113635653,
+        "solver_fallbacks": 0,
+        "solver_infeasible": 0
+      },
+      "estimation": {
+        "post_ready_frames": 223,
+        "available_frames": 223,
+        "quorum_frames": 223,
+        "missing_frames": 0,
+        "insufficient_quorum_frames": 0,
+        "mae_m": 0.003795205317367443,
+        "p95_m": 0.007683641622199563,
+        "max_m": 0.008786423031122134,
+        "scope": "Available control readings versus pre-physics truth; within each episode, not paired frames across different paths"
+      },
+      "maximum_absolute_rotation_deg": 0.0,
+      "contact_redeploy_attempts_by_agent": {
+        "agent_00": 0,
+        "agent_01": 0,
+        "agent_02": 0,
+        "agent_03": 0,
+        "agent_04": 0,
+        "agent_05": 0,
+        "agent_06": 0,
+        "agent_07": 0,
+        "agent_08": 0,
+        "agent_09": 0,
+        "agent_10": 0,
+        "agent_11": 0,
+        "agent_12": 0,
+        "agent_13": 0,
+        "agent_14": 0,
+        "agent_15": 0
+      },
+      "phase_response": {
+        "final_phase": "HOLD",
+        "entered": {
+          "SEARCH": 0,
+          "DISCOVER": 0,
+          "ENCLOSE": 23,
+          "CONTACT_READY": 110,
+          "TRANSPORT": 111,
+          "BRAKE": 166,
+          "HOLD": 292
+        },
+        "first_detection_frame": 0,
+        "enclosure_frame": 23,
+        "contact_ready_frame": 110,
+        "transport_frame": 111,
+        "brake_frame": 166,
+        "hold_frame": 292,
+        "brake_reason": "estimated_stop",
+        "push_suspended": false,
+        "overshoot": false,
+        "short_of_target": true,
+        "contact_recovery_failed": false,
+        "estimate_stopped": false
+      },
+      "scaling": {
+        "scaled_robot_steps": 0,
+        "acquisition": 0,
+        "post_acquisition": 0,
+        "by_capture_state": {},
+        "by_phase": {},
+        "control_frames_with_scaling": 0,
+        "min_scale": 1.0,
+        "events": []
+      },
+      "support_audit": {
+        "counts": {
+          "robot_steps": 5312,
+          "original_row_robot_steps": 5312,
+          "applied_robot_steps": 0,
+          "point_guard_rows": 0,
+          "reach_cap_rows": 0
+        },
+        "reasons": {
+          "disabled": 5312
+        },
+        "locality_and_freeze_boundary_verified": true,
+        "count_semantics": "Filter-path robot steps including steps with zero object rows"
+      }
+    },
+    {
+      "case_id": "near_l_reference_reference_reacquisition",
+      "condition": "near_l_reference",
+      "arm": "reference_reacquisition",
+      "execution": "COMPLETED",
+      "completed": true,
+      "safe_completed": true,
+      "g500": true,
+      "false_hold": false,
+      "hard_safety": [],
+      "zero_epoch_valid": true,
+      "receipt_sha256": "ffa5a692ace51135877333d209f04d81374623338a453e3c5673dce414175632",
+      "g500_failure_reasons": [],
+      "first_hold": {
+        "frame": 226,
+        "physical_error_before_m": 0.02311476510078367,
+        "physical_error_after_m": 0.02311476510078367,
+        "nominal_error_m": 0.01632327752911243,
+        "workspace_error_bound_m": 0.03748914885395818
+      },
+      "hold_entries": [
+        {
+          "frame": 226,
+          "physical_error_before_m": 0.02311476510078367,
+          "physical_error_after_m": 0.02311476510078367,
+          "nominal_error_m": 0.01632327752911243,
+          "workspace_error_bound_m": 0.03748914885395818
+        }
+      ],
+      "acquisition": {
+        "status": "frozen",
+        "epoch": 2.000000000000001,
+        "supporters": [
+          "agent_00",
+          "agent_07",
+          "agent_13",
+          "agent_14"
+        ],
+        "pre_epoch_contact_samples": 0,
+        "max_pre_epoch_translation": 0.0,
+        "max_pre_epoch_rotation": 0.0,
+        "zero_epoch_valid": true,
+        "motion_model": "translation",
+        "use_all_captured": true,
+        "selected_trackers": [
+          "agent_00",
+          "agent_01",
+          "agent_02",
+          "agent_03",
+          "agent_04",
+          "agent_05",
+          "agent_06",
+          "agent_07",
+          "agent_08",
+          "agent_09",
+          "agent_10",
+          "agent_11",
+          "agent_12",
+          "agent_13",
+          "agent_14",
+          "agent_15"
+        ],
+        "bound_semantics": "translation hypothesis; not a rotation-robust center certificate",
+        "reference_driven_map_motion": true,
+        "acquisition_circulation": true,
+        "map_reacquisition": true
+      },
+      "endpoint_m": 0.02311476510078367,
+      "seconds": 13.25,
+      "termination": {
+        "frames_run": 265,
+        "max_frames": 12000,
+        "settled": true,
+        "terminated_by": "settled",
+        "settle_frames": 40,
+        "settle_speed": 0.005
+      },
+      "final_phase": "HOLD",
+      "budget_terminated": false,
+      "barrier_scalings": 0,
+      "safety_metrics": {
+        "min_inter_agent_distance": 0.28067392199421043,
+        "d_min": 0.28,
+        "min_signed_clearance": 0.08888981881781065,
+        "max_penetration": 0.041110181182189356,
+        "penetration_budget": 0.09801140797446084,
+        "solver_fallbacks": 0,
+        "solver_infeasible": 0
+      },
+      "estimation": {
+        "post_ready_frames": 172,
+        "available_frames": 172,
+        "quorum_frames": 172,
+        "missing_frames": 0,
+        "insufficient_quorum_frames": 0,
+        "mae_m": 0.008140734949677432,
+        "p95_m": 0.01244381624448721,
+        "max_m": 0.014012297766308968,
+        "scope": "Available control readings versus pre-physics truth; within each episode, not paired frames across different paths"
+      },
+      "maximum_absolute_rotation_deg": 1.9469933862125373,
+      "contact_redeploy_attempts_by_agent": {
+        "agent_00": 0,
+        "agent_01": 0,
+        "agent_02": 0,
+        "agent_03": 0,
+        "agent_04": 0,
+        "agent_05": 0,
+        "agent_06": 0,
+        "agent_07": 0,
+        "agent_08": 0,
+        "agent_09": 0,
+        "agent_10": 0,
+        "agent_11": 0,
+        "agent_12": 0,
+        "agent_13": 0,
+        "agent_14": 0,
+        "agent_15": 0
+      },
+      "phase_response": {
+        "final_phase": "HOLD",
+        "entered": {
+          "SEARCH": 0,
+          "DISCOVER": 0,
+          "ENCLOSE": 44,
+          "CONTACT_READY": 94,
+          "TRANSPORT": 109,
+          "BRAKE": 160,
+          "HOLD": 225
+        },
+        "first_detection_frame": 0,
+        "enclosure_frame": 44,
+        "contact_ready_frame": 94,
+        "transport_frame": 109,
+        "brake_frame": 160,
+        "hold_frame": 225,
+        "brake_reason": "estimated_stop",
+        "push_suspended": false,
+        "overshoot": false,
+        "short_of_target": true,
+        "contact_recovery_failed": false,
+        "estimate_stopped": false
+      },
+      "scaling": {
+        "scaled_robot_steps": 0,
+        "acquisition": 0,
+        "post_acquisition": 0,
+        "by_capture_state": {},
+        "by_phase": {},
+        "control_frames_with_scaling": 0,
+        "min_scale": 1.0,
+        "events": []
+      },
+      "support_audit": {
+        "counts": {
+          "robot_steps": 4240,
+          "original_row_robot_steps": 4240,
+          "applied_robot_steps": 0,
+          "point_guard_rows": 0,
+          "reach_cap_rows": 0
+        },
+        "reasons": {
+          "disabled": 4240
+        },
+        "locality_and_freeze_boundary_verified": true,
+        "count_semantics": "Filter-path robot steps including steps with zero object rows"
+      }
+    },
+    {
+      "case_id": "far_c_open_away_pos0_reference_reacquisition",
+      "condition": "far_c_open_away_pos0",
+      "arm": "reference_reacquisition",
+      "execution": "COMPLETED",
+      "completed": true,
+      "safe_completed": true,
+      "g500": false,
+      "false_hold": false,
+      "hard_safety": [],
+      "zero_epoch_valid": true,
+      "receipt_sha256": "b720a87c066a187f242f9cb80ceb94150f5e447f78505f89e9c3286a474787d3",
+      "g500_failure_reasons": [
+        "G500: transport activation never happened within the 1009-frame run",
+        "G500: 13 scaled-barrier event(s), smallest factor 0.152; the contract allows 0"
+      ],
+      "first_hold": {
+        "frame": 970,
+        "physical_error_before_m": 0.0037482303726655095,
+        "physical_error_after_m": 0.0037482303726655095,
+        "nominal_error_m": 0.0018994893253745104,
+        "workspace_error_bound_m": 0.013284773196048122
+      },
+      "hold_entries": [
+        {
+          "frame": 970,
+          "physical_error_before_m": 0.0037482303726655095,
+          "physical_error_after_m": 0.0037482303726655095,
+          "nominal_error_m": 0.0018994893253745104,
+          "workspace_error_bound_m": 0.013284773196048122
+        }
+      ],
+      "acquisition": {
+        "status": "frozen",
+        "epoch": 18.70000000000013,
+        "supporters": [
+          "agent_04",
+          "agent_06",
+          "agent_08",
+          "agent_10",
+          "agent_12"
+        ],
+        "pre_epoch_contact_samples": 0,
+        "max_pre_epoch_translation": 0.0,
+        "max_pre_epoch_rotation": 0.0,
+        "zero_epoch_valid": true,
+        "motion_model": "translation",
+        "use_all_captured": true,
+        "selected_trackers": [
+          "agent_00",
+          "agent_01",
+          "agent_02",
+          "agent_03",
+          "agent_04",
+          "agent_05",
+          "agent_06",
+          "agent_07",
+          "agent_08",
+          "agent_09",
+          "agent_10",
+          "agent_11",
+          "agent_12",
+          "agent_13",
+          "agent_14",
+          "agent_15"
+        ],
+        "bound_semantics": "translation hypothesis; not a rotation-robust center certificate",
+        "reference_driven_map_motion": true,
+        "acquisition_circulation": true,
+        "map_reacquisition": true
+      },
+      "endpoint_m": 0.0037482303726655095,
+      "seconds": 50.45,
+      "termination": {
+        "frames_run": 1009,
+        "max_frames": 12000,
+        "settled": true,
+        "terminated_by": "settled",
+        "settle_frames": 40,
+        "settle_speed": 0.005
+      },
+      "final_phase": "HOLD",
+      "budget_terminated": false,
+      "barrier_scalings": 13,
+      "safety_metrics": {
+        "min_inter_agent_distance": 0.2800616400439944,
+        "d_min": 0.28,
+        "min_signed_clearance": 0.07046502940802801,
+        "max_penetration": 0.05953497059197199,
+        "penetration_budget": 0.0994396036921257,
+        "solver_fallbacks": 0,
+        "solver_infeasible": 0
+      },
+      "estimation": {
+        "post_ready_frames": 519,
+        "available_frames": 519,
+        "quorum_frames": 519,
+        "missing_frames": 0,
+        "insufficient_quorum_frames": 0,
+        "mae_m": 0.0043305897092643505,
+        "p95_m": 0.0076110214462765564,
+        "max_m": 0.011875394545552163,
+        "scope": "Available control readings versus pre-physics truth; within each episode, not paired frames across different paths"
+      },
+      "maximum_absolute_rotation_deg": 1.4712164166707733,
+      "contact_redeploy_attempts_by_agent": {
+        "agent_00": 0,
+        "agent_01": 0,
+        "agent_02": 0,
+        "agent_03": 0,
+        "agent_04": 0,
+        "agent_05": 0,
+        "agent_06": 0,
+        "agent_07": 0,
+        "agent_08": 0,
+        "agent_09": 0,
+        "agent_10": 0,
+        "agent_11": 0,
+        "agent_12": 0,
+        "agent_13": 0,
+        "agent_14": 0,
+        "agent_15": 0
+      },
+      "phase_response": {
+        "final_phase": "HOLD",
+        "entered": {
+          "SEARCH": 0,
+          "DISCOVER": 174,
+          "ENCLOSE": 301,
+          "CONTACT_READY": 491,
+          "BRAKE": 825,
+          "HOLD": 969
+        },
+        "first_detection_frame": 174,
+        "enclosure_frame": 301,
+        "contact_ready_frame": 491,
+        "transport_frame": null,
+        "brake_frame": 825,
+        "hold_frame": 969,
+        "brake_reason": "estimated_stop_from_contact_ready",
+        "push_suspended": false,
+        "overshoot": false,
+        "short_of_target": true,
+        "contact_recovery_failed": false,
+        "estimate_stopped": false
+      },
+      "scaling": {
+        "scaled_robot_steps": 13,
+        "acquisition": 13,
+        "post_acquisition": 0,
+        "by_capture_state": {
+          "acquiring": 13
+        },
+        "by_phase": {
+          "ENCLOSE": 13
+        },
+        "control_frames_with_scaling": 13,
+        "min_scale": 0.15234375,
+        "events": [
+          {
+            "frame": 326,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 327,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 334,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 351,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 352,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 353,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 368,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 369,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 370,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 371,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 372,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 373,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 374,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          }
+        ]
+      },
+      "support_audit": {
+        "counts": {
+          "robot_steps": 16144,
+          "original_row_robot_steps": 16144,
+          "applied_robot_steps": 0,
+          "point_guard_rows": 0,
+          "reach_cap_rows": 0
+        },
+        "reasons": {
+          "disabled": 16144
+        },
+        "locality_and_freeze_boundary_verified": true,
+        "count_semantics": "Filter-path robot steps including steps with zero object rows"
+      }
+    },
+    {
+      "case_id": "far_c_open_away_pos0_finite_acquisition_support",
+      "condition": "far_c_open_away_pos0",
+      "arm": "finite_acquisition_support",
+      "execution": "COMPLETED",
+      "completed": true,
+      "safe_completed": true,
+      "g500": false,
+      "false_hold": false,
+      "hard_safety": [],
+      "zero_epoch_valid": true,
+      "receipt_sha256": "9860dbe6e3f348d1c59035be380ce416e1d344aeb38755c335ae3444f2539781",
+      "g500_failure_reasons": [
+        "G500: transport activation never happened within the 1189-frame run",
+        "G500: 1 scaled-barrier event(s), smallest factor 0.934; the contract allows 0"
+      ],
+      "first_hold": {
+        "frame": 1150,
+        "physical_error_before_m": 0.017690382960073792,
+        "physical_error_after_m": 0.017690382960073792,
+        "nominal_error_m": 0.0162861239006343,
+        "workspace_error_bound_m": 0.08743798273709605
+      },
+      "hold_entries": [
+        {
+          "frame": 1150,
+          "physical_error_before_m": 0.017690382960073792,
+          "physical_error_after_m": 0.017690382960073792,
+          "nominal_error_m": 0.0162861239006343,
+          "workspace_error_bound_m": 0.08743798273709605
+        }
+      ],
+      "acquisition": {
+        "status": "frozen",
+        "epoch": 18.800000000000132,
+        "supporters": [
+          "agent_04",
+          "agent_06",
+          "agent_08",
+          "agent_12"
+        ],
+        "pre_epoch_contact_samples": 0,
+        "max_pre_epoch_translation": 0.0,
+        "max_pre_epoch_rotation": 0.0,
+        "zero_epoch_valid": true,
+        "motion_model": "translation",
+        "use_all_captured": true,
+        "selected_trackers": [
+          "agent_00",
+          "agent_01",
+          "agent_02",
+          "agent_03",
+          "agent_04",
+          "agent_05",
+          "agent_06",
+          "agent_07",
+          "agent_08",
+          "agent_09",
+          "agent_10",
+          "agent_11",
+          "agent_12",
+          "agent_13",
+          "agent_14",
+          "agent_15"
+        ],
+        "bound_semantics": "translation hypothesis; not a rotation-robust center certificate",
+        "reference_driven_map_motion": true,
+        "acquisition_circulation": true,
+        "map_reacquisition": true
+      },
+      "endpoint_m": 0.017690382960073792,
+      "seconds": 59.45,
+      "termination": {
+        "frames_run": 1189,
+        "max_frames": 12000,
+        "settled": true,
+        "terminated_by": "settled",
+        "settle_frames": 40,
+        "settle_speed": 0.005
+      },
+      "final_phase": "HOLD",
+      "budget_terminated": false,
+      "barrier_scalings": 1,
+      "safety_metrics": {
+        "min_inter_agent_distance": 0.2800445439892683,
+        "d_min": 0.28,
+        "min_signed_clearance": 0.0670797360655119,
+        "max_penetration": 0.0629202639344881,
+        "penetration_budget": 0.09844497593364118,
+        "solver_fallbacks": 0,
+        "solver_infeasible": 0
+      },
+      "estimation": {
+        "post_ready_frames": 715,
+        "available_frames": 715,
+        "quorum_frames": 713,
+        "missing_frames": 0,
+        "insufficient_quorum_frames": 2,
+        "mae_m": 0.019307309684011523,
+        "p95_m": 0.0437017978587896,
+        "max_m": 0.054007090749238075,
+        "scope": "Available control readings versus pre-physics truth; within each episode, not paired frames across different paths"
+      },
+      "maximum_absolute_rotation_deg": 9.071854171178066,
+      "contact_redeploy_attempts_by_agent": {
+        "agent_00": 0,
+        "agent_01": 0,
+        "agent_02": 0,
+        "agent_03": 0,
+        "agent_04": 0,
+        "agent_05": 0,
+        "agent_06": 0,
+        "agent_07": 0,
+        "agent_08": 0,
+        "agent_09": 0,
+        "agent_10": 0,
+        "agent_11": 0,
+        "agent_12": 0,
+        "agent_13": 0,
+        "agent_14": 0,
+        "agent_15": 0
+      },
+      "phase_response": {
+        "final_phase": "HOLD",
+        "entered": {
+          "SEARCH": 0,
+          "DISCOVER": 174,
+          "ENCLOSE": 301,
+          "CONTACT_READY": 475,
+          "BRAKE": 929,
+          "HOLD": 1149
+        },
+        "first_detection_frame": 174,
+        "enclosure_frame": 301,
+        "contact_ready_frame": 475,
+        "transport_frame": null,
+        "brake_frame": 929,
+        "hold_frame": 1149,
+        "brake_reason": "estimated_stop_from_contact_ready",
+        "push_suspended": false,
+        "overshoot": false,
+        "short_of_target": true,
+        "contact_recovery_failed": false,
+        "estimate_stopped": false
+      },
+      "scaling": {
+        "scaled_robot_steps": 1,
+        "acquisition": 1,
+        "post_acquisition": 0,
+        "by_capture_state": {
+          "acquiring": 1
+        },
+        "by_phase": {
+          "ENCLOSE": 1
+        },
+        "control_frames_with_scaling": 1,
+        "min_scale": 0.93359375,
+        "events": [
+          {
+            "frame": 365,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          }
+        ]
+      },
+      "support_audit": {
+        "counts": {
+          "robot_steps": 19024,
+          "original_row_robot_steps": 18186,
+          "applied_robot_steps": 838,
+          "point_guard_rows": 6096,
+          "reach_cap_rows": 0
+        },
+        "reasons": {
+          "no_current_own_returns": 4735,
+          "isolated_gap_unknown": 3,
+          "outside_range": 433,
+          "supported": 838,
+          "isolated_gap_exceeds_cap": 7,
+          "outside_stationary_acquisition": 13008
+        },
+        "locality_and_freeze_boundary_verified": true
+      }
+    },
+    {
+      "case_id": "far_skew_box_s0_r0_pos0_reference_reacquisition",
+      "condition": "far_skew_box_s0_r0_pos0",
+      "arm": "reference_reacquisition",
+      "execution": "COMPLETED",
+      "completed": true,
+      "safe_completed": true,
+      "g500": false,
+      "false_hold": false,
+      "hard_safety": [],
+      "zero_epoch_valid": true,
+      "receipt_sha256": "fb057a507e1e5d377fe758a97c156edb2209b9bb055dbf490fbd2d3f0643cfaa",
+      "g500_failure_reasons": [
+        "G500: 19 scaled-barrier event(s), smallest factor 0.168; the contract allows 0"
+      ],
+      "first_hold": {
+        "frame": 944,
+        "physical_error_before_m": 0.00563372797659785,
+        "physical_error_after_m": 0.00563372797659785,
+        "nominal_error_m": 0.005495228237201892,
+        "workspace_error_bound_m": 0.013404949006770557
+      },
+      "hold_entries": [
+        {
+          "frame": 944,
+          "physical_error_before_m": 0.00563372797659785,
+          "physical_error_after_m": 0.00563372797659785,
+          "nominal_error_m": 0.005495228237201892,
+          "workspace_error_bound_m": 0.013404949006770557
+        }
+      ],
+      "acquisition": {
+        "status": "frozen",
+        "epoch": 20.400000000000155,
+        "supporters": [
+          "agent_04",
+          "agent_05",
+          "agent_06",
+          "agent_07",
+          "agent_08",
+          "agent_10",
+          "agent_12"
+        ],
+        "pre_epoch_contact_samples": 0,
+        "max_pre_epoch_translation": 0.0,
+        "max_pre_epoch_rotation": 0.0,
+        "zero_epoch_valid": true,
+        "motion_model": "translation",
+        "use_all_captured": true,
+        "selected_trackers": [
+          "agent_00",
+          "agent_01",
+          "agent_02",
+          "agent_03",
+          "agent_04",
+          "agent_05",
+          "agent_06",
+          "agent_07",
+          "agent_08",
+          "agent_09",
+          "agent_10",
+          "agent_11",
+          "agent_12",
+          "agent_13",
+          "agent_14",
+          "agent_15"
+        ],
+        "bound_semantics": "translation hypothesis; not a rotation-robust center certificate",
+        "reference_driven_map_motion": true,
+        "acquisition_circulation": true,
+        "map_reacquisition": true
+      },
+      "endpoint_m": 0.00563372797659785,
+      "seconds": 49.150000000000006,
+      "termination": {
+        "frames_run": 983,
+        "max_frames": 12000,
+        "settled": true,
+        "terminated_by": "settled",
+        "settle_frames": 40,
+        "settle_speed": 0.005
+      },
+      "final_phase": "HOLD",
+      "budget_terminated": false,
+      "barrier_scalings": 19,
+      "safety_metrics": {
+        "min_inter_agent_distance": 0.28002328380307134,
+        "d_min": 0.28,
+        "min_signed_clearance": 0.0633248970351757,
+        "max_penetration": 0.0666751029648243,
+        "penetration_budget": 0.09668073691880101,
+        "solver_fallbacks": 0,
+        "solver_infeasible": 0
+      },
+      "estimation": {
+        "post_ready_frames": 452,
+        "available_frames": 452,
+        "quorum_frames": 452,
+        "missing_frames": 0,
+        "insufficient_quorum_frames": 0,
+        "mae_m": 0.003824481980088186,
+        "p95_m": 0.008319584407073078,
+        "max_m": 0.017645151395809116,
+        "scope": "Available control readings versus pre-physics truth; within each episode, not paired frames across different paths"
+      },
+      "maximum_absolute_rotation_deg": 0.8429529152916903,
+      "contact_redeploy_attempts_by_agent": {
+        "agent_00": 0,
+        "agent_01": 0,
+        "agent_02": 0,
+        "agent_03": 0,
+        "agent_04": 0,
+        "agent_05": 0,
+        "agent_06": 0,
+        "agent_07": 0,
+        "agent_08": 0,
+        "agent_09": 0,
+        "agent_10": 0,
+        "agent_11": 0,
+        "agent_12": 0,
+        "agent_13": 0,
+        "agent_14": 0,
+        "agent_15": 0
+      },
+      "phase_response": {
+        "final_phase": "HOLD",
+        "entered": {
+          "SEARCH": 0,
+          "DISCOVER": 191,
+          "ENCLOSE": 336,
+          "CONTACT_READY": 532,
+          "TRANSPORT": 863,
+          "BRAKE": 905,
+          "HOLD": 943
+        },
+        "first_detection_frame": 191,
+        "enclosure_frame": 336,
+        "contact_ready_frame": 532,
+        "transport_frame": 863,
+        "brake_frame": 905,
+        "hold_frame": 943,
+        "brake_reason": "estimated_stop",
+        "push_suspended": false,
+        "overshoot": false,
+        "short_of_target": true,
+        "contact_recovery_failed": false,
+        "estimate_stopped": false
+      },
+      "scaling": {
+        "scaled_robot_steps": 19,
+        "acquisition": 13,
+        "post_acquisition": 6,
+        "by_capture_state": {
+          "acquiring": 13,
+          "frozen": 6
+        },
+        "by_phase": {
+          "ENCLOSE": 19
+        },
+        "control_frames_with_scaling": 19,
+        "min_scale": 0.16796875,
+        "events": [
+          {
+            "frame": 384,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 385,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 386,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 388,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 392,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 393,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 394,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 395,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 396,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 397,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 399,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 400,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 408,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 421,
+            "capture_state": "frozen",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          },
+          {
+            "frame": 484,
+            "capture_state": "frozen",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_14"
+            ]
+          },
+          {
+            "frame": 506,
+            "capture_state": "frozen",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_14"
+            ]
+          },
+          {
+            "frame": 507,
+            "capture_state": "frozen",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_14"
+            ]
+          },
+          {
+            "frame": 509,
+            "capture_state": "frozen",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_14"
+            ]
+          },
+          {
+            "frame": 510,
+            "capture_state": "frozen",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_14"
+            ]
+          }
+        ]
+      },
+      "support_audit": {
+        "counts": {
+          "robot_steps": 15728,
+          "original_row_robot_steps": 15728,
+          "applied_robot_steps": 0,
+          "point_guard_rows": 0,
+          "reach_cap_rows": 0
+        },
+        "reasons": {
+          "disabled": 15728
+        },
+        "locality_and_freeze_boundary_verified": true,
+        "count_semantics": "Filter-path robot steps including steps with zero object rows"
+      }
+    },
+    {
+      "case_id": "far_skew_box_s0_r0_pos0_finite_acquisition_support",
+      "condition": "far_skew_box_s0_r0_pos0",
+      "arm": "finite_acquisition_support",
+      "execution": "COMPLETED",
+      "completed": true,
+      "safe_completed": true,
+      "g500": false,
+      "false_hold": false,
+      "hard_safety": [],
+      "zero_epoch_valid": true,
+      "receipt_sha256": "2a6c46e5428085ba973181db44d5ae9fed7e76aad0a5886d4912539b8ff4d573",
+      "g500_failure_reasons": [
+        "G500: 1 scaled-barrier event(s), smallest factor 0.777; the contract allows 0"
+      ],
+      "first_hold": {
+        "frame": 947,
+        "physical_error_before_m": 0.018149188284185387,
+        "physical_error_after_m": 0.018149188284185387,
+        "nominal_error_m": 0.018709401666592726,
+        "workspace_error_bound_m": 0.02271272981907491
+      },
+      "hold_entries": [
+        {
+          "frame": 947,
+          "physical_error_before_m": 0.018149188284185387,
+          "physical_error_after_m": 0.018149188284185387,
+          "nominal_error_m": 0.018709401666592726,
+          "workspace_error_bound_m": 0.02271272981907491
+        }
+      ],
+      "acquisition": {
+        "status": "frozen",
+        "epoch": 20.400000000000155,
+        "supporters": [
+          "agent_04",
+          "agent_05",
+          "agent_06",
+          "agent_07",
+          "agent_08",
+          "agent_10",
+          "agent_12",
+          "agent_14"
+        ],
+        "pre_epoch_contact_samples": 0,
+        "max_pre_epoch_translation": 0.0,
+        "max_pre_epoch_rotation": 0.0,
+        "zero_epoch_valid": true,
+        "motion_model": "translation",
+        "use_all_captured": true,
+        "selected_trackers": [
+          "agent_00",
+          "agent_01",
+          "agent_02",
+          "agent_03",
+          "agent_04",
+          "agent_05",
+          "agent_06",
+          "agent_07",
+          "agent_08",
+          "agent_09",
+          "agent_10",
+          "agent_11",
+          "agent_12",
+          "agent_13",
+          "agent_14",
+          "agent_15"
+        ],
+        "bound_semantics": "translation hypothesis; not a rotation-robust center certificate",
+        "reference_driven_map_motion": true,
+        "acquisition_circulation": true,
+        "map_reacquisition": true
+      },
+      "endpoint_m": 0.018149188284185387,
+      "seconds": 49.300000000000004,
+      "termination": {
+        "frames_run": 986,
+        "max_frames": 12000,
+        "settled": true,
+        "terminated_by": "settled",
+        "settle_frames": 40,
+        "settle_speed": 0.005
+      },
+      "final_phase": "HOLD",
+      "budget_terminated": false,
+      "barrier_scalings": 1,
+      "safety_metrics": {
+        "min_inter_agent_distance": 0.280031568263192,
+        "d_min": 0.28,
+        "min_signed_clearance": 0.07375797699746825,
+        "max_penetration": 0.056242023002531755,
+        "penetration_budget": 0.10032336633151191,
+        "solver_fallbacks": 0,
+        "solver_infeasible": 0
+      },
+      "estimation": {
+        "post_ready_frames": 483,
+        "available_frames": 483,
+        "quorum_frames": 483,
+        "missing_frames": 0,
+        "insufficient_quorum_frames": 0,
+        "mae_m": 0.0031528431099921506,
+        "p95_m": 0.0074102327604733,
+        "max_m": 0.01198466001379027,
+        "scope": "Available control readings versus pre-physics truth; within each episode, not paired frames across different paths"
+      },
+      "maximum_absolute_rotation_deg": 0.7922361068082564,
+      "contact_redeploy_attempts_by_agent": {
+        "agent_00": 0,
+        "agent_01": 0,
+        "agent_02": 0,
+        "agent_03": 0,
+        "agent_04": 0,
+        "agent_05": 0,
+        "agent_06": 0,
+        "agent_07": 0,
+        "agent_08": 0,
+        "agent_09": 0,
+        "agent_10": 0,
+        "agent_11": 0,
+        "agent_12": 0,
+        "agent_13": 0,
+        "agent_14": 0,
+        "agent_15": 0
+      },
+      "phase_response": {
+        "final_phase": "HOLD",
+        "entered": {
+          "SEARCH": 0,
+          "DISCOVER": 191,
+          "ENCLOSE": 336,
+          "CONTACT_READY": 504,
+          "TRANSPORT": 845,
+          "BRAKE": 887,
+          "HOLD": 946
+        },
+        "first_detection_frame": 191,
+        "enclosure_frame": 336,
+        "contact_ready_frame": 504,
+        "transport_frame": 845,
+        "brake_frame": 887,
+        "hold_frame": 946,
+        "brake_reason": "estimated_stop",
+        "push_suspended": false,
+        "overshoot": false,
+        "short_of_target": true,
+        "contact_recovery_failed": false,
+        "estimate_stopped": false
+      },
+      "scaling": {
+        "scaled_robot_steps": 1,
+        "acquisition": 1,
+        "post_acquisition": 0,
+        "by_capture_state": {
+          "acquiring": 1
+        },
+        "by_phase": {
+          "ENCLOSE": 1
+        },
+        "control_frames_with_scaling": 1,
+        "min_scale": 0.77734375,
+        "events": [
+          {
+            "frame": 399,
+            "capture_state": "acquiring",
+            "phase": "ENCLOSE",
+            "agents": [
+              "agent_05"
+            ]
+          }
+        ]
+      },
+      "support_audit": {
+        "counts": {
+          "robot_steps": 15776,
+          "original_row_robot_steps": 15190,
+          "applied_robot_steps": 586,
+          "point_guard_rows": 3980,
+          "reach_cap_rows": 0
+        },
+        "reasons": {
+          "no_current_own_returns": 5408,
+          "isolated_gap_unknown": 1,
+          "outside_range": 500,
+          "supported": 586,
+          "isolated_gap_exceeds_cap": 33,
+          "outside_stationary_acquisition": 9248
+        },
+        "locality_and_freeze_boundary_verified": true
+      }
+    },
+    {
+      "case_id": "near_circle_finite_acquisition_support",
+      "condition": "near_circle",
+      "arm": "finite_acquisition_support",
+      "execution": "COMPLETED",
+      "completed": true,
+      "safe_completed": true,
+      "g500": true,
+      "false_hold": false,
+      "hard_safety": [],
+      "zero_epoch_valid": true,
+      "receipt_sha256": "70091c09587a27230e99c4971cd541e1be48f0e4cb3eee37583c1fe0243db28c",
+      "g500_failure_reasons": [],
+      "first_hold": {
+        "frame": 293,
+        "physical_error_before_m": 0.018598888083942795,
+        "physical_error_after_m": 0.018598888083942795,
+        "nominal_error_m": 0.01853743110109062,
+        "workspace_error_bound_m": 0.027053893349414354
+      },
+      "hold_entries": [
+        {
+          "frame": 293,
+          "physical_error_before_m": 0.018598888083942795,
+          "physical_error_after_m": 0.018598888083942795,
+          "nominal_error_m": 0.01853743110109062,
+          "workspace_error_bound_m": 0.027053893349414354
+        }
+      ],
+      "acquisition": {
+        "status": "frozen",
+        "epoch": 2.3,
+        "supporters": [
+          "agent_00",
+          "agent_05",
+          "agent_10",
+          "agent_11",
+          "agent_12"
+        ],
+        "pre_epoch_contact_samples": 0,
+        "max_pre_epoch_translation": 0.0,
+        "max_pre_epoch_rotation": 0.0,
+        "zero_epoch_valid": true,
+        "motion_model": "translation",
+        "use_all_captured": true,
+        "selected_trackers": [
+          "agent_00",
+          "agent_01",
+          "agent_02",
+          "agent_03",
+          "agent_04",
+          "agent_05",
+          "agent_06",
+          "agent_07",
+          "agent_08",
+          "agent_09",
+          "agent_10",
+          "agent_11",
+          "agent_12",
+          "agent_13",
+          "agent_14",
+          "agent_15"
+        ],
+        "bound_semantics": "translation hypothesis; not a rotation-robust center certificate",
+        "reference_driven_map_motion": true,
+        "acquisition_circulation": true,
+        "map_reacquisition": true
+      },
+      "endpoint_m": 0.018598888083942795,
+      "seconds": 16.6,
+      "termination": {
+        "frames_run": 332,
+        "max_frames": 12000,
+        "settled": true,
+        "terminated_by": "settled",
+        "settle_frames": 40,
+        "settle_speed": 0.005
+      },
+      "final_phase": "HOLD",
+      "budget_terminated": false,
+      "barrier_scalings": 0,
+      "safety_metrics": {
+        "min_inter_agent_distance": 0.28008185474804537,
+        "d_min": 0.28,
+        "min_signed_clearance": 0.08404166848297605,
+        "max_penetration": 0.045958331517023956,
+        "penetration_budget": 0.09846152113635653,
+        "solver_fallbacks": 0,
+        "solver_infeasible": 0
+      },
+      "estimation": {
+        "post_ready_frames": 223,
+        "available_frames": 223,
+        "quorum_frames": 223,
+        "missing_frames": 0,
+        "insufficient_quorum_frames": 0,
+        "mae_m": 0.003795205317367443,
+        "p95_m": 0.007683641622199563,
+        "max_m": 0.008786423031122134,
+        "scope": "Available control readings versus pre-physics truth; within each episode, not paired frames across different paths"
+      },
+      "maximum_absolute_rotation_deg": 0.0,
+      "contact_redeploy_attempts_by_agent": {
+        "agent_00": 0,
+        "agent_01": 0,
+        "agent_02": 0,
+        "agent_03": 0,
+        "agent_04": 0,
+        "agent_05": 0,
+        "agent_06": 0,
+        "agent_07": 0,
+        "agent_08": 0,
+        "agent_09": 0,
+        "agent_10": 0,
+        "agent_11": 0,
+        "agent_12": 0,
+        "agent_13": 0,
+        "agent_14": 0,
+        "agent_15": 0
+      },
+      "phase_response": {
+        "final_phase": "HOLD",
+        "entered": {
+          "SEARCH": 0,
+          "DISCOVER": 0,
+          "ENCLOSE": 23,
+          "CONTACT_READY": 110,
+          "TRANSPORT": 111,
+          "BRAKE": 166,
+          "HOLD": 292
+        },
+        "first_detection_frame": 0,
+        "enclosure_frame": 23,
+        "contact_ready_frame": 110,
+        "transport_frame": 111,
+        "brake_frame": 166,
+        "hold_frame": 292,
+        "brake_reason": "estimated_stop",
+        "push_suspended": false,
+        "overshoot": false,
+        "short_of_target": true,
+        "contact_recovery_failed": false,
+        "estimate_stopped": false
+      },
+      "scaling": {
+        "scaled_robot_steps": 0,
+        "acquisition": 0,
+        "post_acquisition": 0,
+        "by_capture_state": {},
+        "by_phase": {},
+        "control_frames_with_scaling": 0,
+        "min_scale": 1.0,
+        "events": []
+      },
+      "support_audit": {
+        "counts": {
+          "robot_steps": 5312,
+          "original_row_robot_steps": 5181,
+          "applied_robot_steps": 131,
+          "point_guard_rows": 650,
+          "reach_cap_rows": 0
+        },
+        "reasons": {
+          "outside_range": 437,
+          "no_current_own_returns": 168,
+          "supported": 131,
+          "outside_stationary_acquisition": 4576
+        },
+        "locality_and_freeze_boundary_verified": true
+      }
+    }
+  ],
+  "totals": {
+    "reference_reacquisition": {
+      "episodes": 4,
+      "safe_completed": 4,
+      "false_holds": 0,
+      "hard_failures": 0,
+      "g500": 2,
+      "timeouts": 0
+    },
+    "finite_acquisition_support": {
+      "episodes": 4,
+      "safe_completed": 4,
+      "false_holds": 0,
+      "hard_failures": 0,
+      "g500": 2,
+      "timeouts": 0
+    }
+  },
+  "original_reproduction": {
+    "near_circle": {
+      "exact": true,
+      "replay_keys_equal": true,
+      "arrays": {
+        "times": true,
+        "phase": true,
+        "min_distance": true,
+        "map_coverage": true,
+        "push_flags": true,
+        "contact_flags": true,
+        "efforts": true,
+        "agent_ids": true,
+        "agent_positions": true,
+        "domain": true,
+        "robot_radius": true,
+        "sensed_counts": true,
+        "sensed_points": true,
+        "cargo/cargo_0/centers": true,
+        "cargo/cargo_0/angles": true,
+        "cargo/cargo_0/local_vertices": true,
+        "cargo/cargo_0/strict_coverage": true,
+        "cargo/cargo_0/contacts": true,
+        "cargo/cargo_0/penetration": true,
+        "cargo/cargo_0/speed": true,
+        "cargo/cargo_0/progress_estimate": true,
+        "task/cargo_0/direction": true,
+        "task/cargo_0/start": true,
+        "task/cargo_0/goal_point": true,
+        "task/cargo_0/distance": true
+      },
+      "scientific_fields_exact": {
+        "config.json": true,
+        "paired_metrics.json": true,
+        "physics_substeps.json": true,
+        "summary.json": true,
+        "case_result_scientific_fields": true
+      },
+      "execution_metadata": {
+        "git_sha": [
+          "5e2a53651893d57aecd71879f35be7449f9ad8d8",
+          "914c7897fd6a8d64fb9215dfa78f39d8674d71e4"
+        ],
+        "case_id": [
+          "near_circle_reference_reacquisition",
+          "near_circle_reference_reacquisition"
+        ],
+        "factors": [
+          {
+            "condition": "circle",
+            "shape": "circle",
+            "stratum": "near",
+            "area_m2": 2.0587500000000003,
+            "mass_kg": 4.117500000000001,
+            "inertia_kg_m2": 1.3491417315354244,
+            "perimeter_m": 5.088400033654982,
+            "diameter_m": 1.620338677462703,
+            "reach_m": 0.8101693387314333,
+            "vertex_count": 64,
+            "initial_centroid": [
+              3.999999999999942,
+              3.999999999999943
+            ],
+            "task": {
+              "object_id": "cargo_0",
+              "direction": [
+                1.0,
+                0.0
+              ],
+              "angle_deg": 0.0,
+              "target_distance": 1.2,
+              "start": [
+                3.999999999999942,
+                3.999999999999943
+              ],
+              "goal_point": [
+                5.199999999999942,
+                3.999999999999943
+              ],
+              "tolerance": 0.12,
+              "clearance": 1.3951693387314332,
+              "sampling_attempts": 1
+            },
+            "initial_own_scan_returns": [
+              11,
+              0,
+              0,
+              0,
+              0,
+              9,
+              0,
+              10,
+              0,
+              0,
+              7,
+              3,
+              0,
+              0,
+              0,
+              0
+            ],
+            "minimum_initial_boundary_distance_m": 0.8917481715794422,
+            "initial_tokens": "empty",
+            "agent_initial_sha256": "b887bc83a42a30d875306b7bf213aabe04de3e3fc253003b1d2d38d28714f9b1",
+            "physical_initial_sha256": "35493bb8a7ee88cf0eb63a756a30cf738127fbe00dba1e1f95dfe1788d7f2234",
+            "cohort": "finite_acquisition_support_development",
+            "origin_case": "circle_boundary_cvt",
+            "geometry_setting": "historical frozen definition",
+            "parameter_setting": "candidate",
+            "original_parameter": 0.25,
+            "candidate_parameter": 0.45,
+            "minimum_initial_pair_distance_m": 0.34963340957703687,
+            "validation_seed": 20261102,
+            "initial_rule": "Existing near scatter; far grid translated to [3.75,1.05] with Gaussian jitter sigma=.005m",
+            "historical_source_case": "near_circle_reference"
+          },
+          {
+            "condition": "circle",
+            "shape": "circle",
+            "stratum": "near",
+            "area_m2": 2.0587500000000003,
+            "mass_kg": 4.117500000000001,
+            "inertia_kg_m2": 1.3491417315354244,
+            "perimeter_m": 5.088400033654982,
+            "diameter_m": 1.620338677462703,
+            "reach_m": 0.8101693387314333,
+            "vertex_count": 64,
+            "initial_centroid": [
+              3.999999999999942,
+              3.999999999999943
+            ],
+            "task": {
+              "object_id": "cargo_0",
+              "direction": [
+                1.0,
+                0.0
+              ],
+              "angle_deg": 0.0,
+              "target_distance": 1.2,
+              "start": [
+                3.999999999999942,
+                3.999999999999943
+              ],
+              "goal_point": [
+                5.199999999999942,
+                3.999999999999943
+              ],
+              "tolerance": 0.12,
+              "clearance": 1.3951693387314332,
+              "sampling_attempts": 1
+            },
+            "initial_own_scan_returns": [
+              11,
+              0,
+              0,
+              0,
+              0,
+              9,
+              0,
+              10,
+              0,
+              0,
+              7,
+              3,
+              0,
+              0,
+              0,
+              0
+            ],
+            "minimum_initial_boundary_distance_m": 0.8917481715794422,
+            "initial_tokens": "empty",
+            "agent_initial_sha256": "b887bc83a42a30d875306b7bf213aabe04de3e3fc253003b1d2d38d28714f9b1",
+            "physical_initial_sha256": "35493bb8a7ee88cf0eb63a756a30cf738127fbe00dba1e1f95dfe1788d7f2234",
+            "cohort": "finite_acquisition_support_corrected_development",
+            "origin_case": "circle_boundary_cvt",
+            "geometry_setting": "historical frozen definition",
+            "parameter_setting": "candidate",
+            "original_parameter": 0.25,
+            "candidate_parameter": 0.45,
+            "minimum_initial_pair_distance_m": 0.34963340957703687,
+            "validation_seed": 20261102,
+            "initial_rule": "Existing near scatter; far grid translated to [3.75,1.05] with Gaussian jitter sigma=.005m",
+            "historical_source_case": "near_circle_reference"
+          }
+        ],
+        "wall_seconds": [
+          51.46101839997573,
+          45.11297509999713
+        ]
+      }
+    },
+    "near_l_reference": {
+      "exact": true,
+      "replay_keys_equal": true,
+      "arrays": {
+        "times": true,
+        "phase": true,
+        "min_distance": true,
+        "map_coverage": true,
+        "push_flags": true,
+        "contact_flags": true,
+        "efforts": true,
+        "agent_ids": true,
+        "agent_positions": true,
+        "domain": true,
+        "robot_radius": true,
+        "sensed_counts": true,
+        "sensed_points": true,
+        "cargo/cargo_0/centers": true,
+        "cargo/cargo_0/angles": true,
+        "cargo/cargo_0/local_vertices": true,
+        "cargo/cargo_0/strict_coverage": true,
+        "cargo/cargo_0/contacts": true,
+        "cargo/cargo_0/penetration": true,
+        "cargo/cargo_0/speed": true,
+        "cargo/cargo_0/progress_estimate": true,
+        "task/cargo_0/direction": true,
+        "task/cargo_0/start": true,
+        "task/cargo_0/goal_point": true,
+        "task/cargo_0/distance": true
+      },
+      "scientific_fields_exact": {
+        "config.json": true,
+        "paired_metrics.json": true,
+        "physics_substeps.json": true,
+        "summary.json": true,
+        "case_result_scientific_fields": true
+      },
+      "execution_metadata": {
+        "git_sha": [
+          "5e2a53651893d57aecd71879f35be7449f9ad8d8",
+          "914c7897fd6a8d64fb9215dfa78f39d8674d71e4"
+        ],
+        "case_id": [
+          "near_l_reference_reference_reacquisition",
+          "near_l_reference_reference_reacquisition"
+        ],
+        "factors": [
+          {
+            "condition": "l_reference",
+            "shape": "l_shape",
+            "stratum": "near",
+            "area_m2": 2.0587500000000007,
+            "mass_kg": 4.1175000000000015,
+            "inertia_kg_m2": 2.086619857838117,
+            "perimeter_m": 7.200000000000001,
+            "diameter_m": 2.545584412271572,
+            "reach_m": 1.3200471192360912,
+            "vertex_count": 6,
+            "initial_centroid": [
+              3.999999999999982,
+              3.999999999999985
+            ],
+            "task": {
+              "object_id": "cargo_0",
+              "direction": [
+                1.0,
+                0.0
+              ],
+              "angle_deg": 0.0,
+              "target_distance": 1.2,
+              "start": [
+                3.999999999999982,
+                3.999999999999985
+              ],
+              "goal_point": [
+                5.1999999999999815,
+                3.999999999999985
+              ],
+              "tolerance": 0.12,
+              "clearance": 1.9050471192360914,
+              "sampling_attempts": 1
+            },
+            "initial_own_scan_returns": [
+              10,
+              0,
+              0,
+              8,
+              5,
+              13,
+              4,
+              13,
+              0,
+              0,
+              6,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "minimum_initial_boundary_distance_m": 0.5614213689425158,
+            "initial_tokens": "empty",
+            "agent_initial_sha256": "b887bc83a42a30d875306b7bf213aabe04de3e3fc253003b1d2d38d28714f9b1",
+            "physical_initial_sha256": "7847a31860a1d66ea04babe22e5ed18721e35f0fa7fcc1e43119054ef3090d3a",
+            "cohort": "finite_acquisition_support_development",
+            "origin_case": "l_reference_boundary_cvt",
+            "geometry_setting": "historical frozen definition",
+            "parameter_setting": "candidate",
+            "original_parameter": 0.25,
+            "candidate_parameter": 0.45,
+            "minimum_initial_pair_distance_m": 0.34963340957703687,
+            "validation_seed": 20261102,
+            "initial_rule": "Existing near scatter; far grid translated to [3.75,1.05] with Gaussian jitter sigma=.005m",
+            "historical_source_case": "near_l_reference_reference"
+          },
+          {
+            "condition": "l_reference",
+            "shape": "l_shape",
+            "stratum": "near",
+            "area_m2": 2.0587500000000007,
+            "mass_kg": 4.1175000000000015,
+            "inertia_kg_m2": 2.086619857838117,
+            "perimeter_m": 7.200000000000001,
+            "diameter_m": 2.545584412271572,
+            "reach_m": 1.3200471192360912,
+            "vertex_count": 6,
+            "initial_centroid": [
+              3.999999999999982,
+              3.999999999999985
+            ],
+            "task": {
+              "object_id": "cargo_0",
+              "direction": [
+                1.0,
+                0.0
+              ],
+              "angle_deg": 0.0,
+              "target_distance": 1.2,
+              "start": [
+                3.999999999999982,
+                3.999999999999985
+              ],
+              "goal_point": [
+                5.1999999999999815,
+                3.999999999999985
+              ],
+              "tolerance": 0.12,
+              "clearance": 1.9050471192360914,
+              "sampling_attempts": 1
+            },
+            "initial_own_scan_returns": [
+              10,
+              0,
+              0,
+              8,
+              5,
+              13,
+              4,
+              13,
+              0,
+              0,
+              6,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "minimum_initial_boundary_distance_m": 0.5614213689425158,
+            "initial_tokens": "empty",
+            "agent_initial_sha256": "b887bc83a42a30d875306b7bf213aabe04de3e3fc253003b1d2d38d28714f9b1",
+            "physical_initial_sha256": "7847a31860a1d66ea04babe22e5ed18721e35f0fa7fcc1e43119054ef3090d3a",
+            "cohort": "finite_acquisition_support_corrected_development",
+            "origin_case": "l_reference_boundary_cvt",
+            "geometry_setting": "historical frozen definition",
+            "parameter_setting": "candidate",
+            "original_parameter": 0.25,
+            "candidate_parameter": 0.45,
+            "minimum_initial_pair_distance_m": 0.34963340957703687,
+            "validation_seed": 20261102,
+            "initial_rule": "Existing near scatter; far grid translated to [3.75,1.05] with Gaussian jitter sigma=.005m",
+            "historical_source_case": "near_l_reference_reference"
+          }
+        ],
+        "wall_seconds": [
+          41.68667349999305,
+          39.08724159997655
+        ]
+      }
+    },
+    "far_c_open_away_pos0": {
+      "exact": true,
+      "replay_keys_equal": true,
+      "arrays": {
+        "times": true,
+        "phase": true,
+        "min_distance": true,
+        "map_coverage": true,
+        "push_flags": true,
+        "contact_flags": true,
+        "efforts": true,
+        "agent_ids": true,
+        "agent_positions": true,
+        "domain": true,
+        "robot_radius": true,
+        "sensed_counts": true,
+        "sensed_points": true,
+        "cargo/cargo_0/centers": true,
+        "cargo/cargo_0/angles": true,
+        "cargo/cargo_0/local_vertices": true,
+        "cargo/cargo_0/strict_coverage": true,
+        "cargo/cargo_0/contacts": true,
+        "cargo/cargo_0/penetration": true,
+        "cargo/cargo_0/speed": true,
+        "cargo/cargo_0/progress_estimate": true,
+        "task/cargo_0/direction": true,
+        "task/cargo_0/start": true,
+        "task/cargo_0/goal_point": true,
+        "task/cargo_0/distance": true
+      },
+      "scientific_fields_exact": {
+        "config.json": true,
+        "paired_metrics.json": true,
+        "physics_substeps.json": true,
+        "summary.json": true,
+        "case_result_scientific_fields": true
+      },
+      "execution_metadata": {
+        "git_sha": [
+          "5e2a53651893d57aecd71879f35be7449f9ad8d8",
+          "914c7897fd6a8d64fb9215dfa78f39d8674d71e4"
+        ],
+        "case_id": [
+          "far_c_open_away_pos0_reference_reacquisition",
+          "far_c_open_away_pos0_reference_reacquisition"
+        ],
+        "factors": [
+          {
+            "condition": "c_open_away_pos0",
+            "shape": "c_shape",
+            "stratum": "far",
+            "area_m2": 2.0587500000000007,
+            "mass_kg": 4.1175000000000015,
+            "inertia_kg_m2": 2.5465684724161357,
+            "perimeter_m": 8.858595028691228,
+            "diameter_m": 2.460720841303119,
+            "reach_m": 1.2936966521890678,
+            "vertex_count": 8,
+            "initial_centroid": [
+              3.0999999999999495,
+              5.600000000000051
+            ],
+            "task": {
+              "object_id": "cargo_0",
+              "direction": [
+                1.0,
+                0.0
+              ],
+              "angle_deg": 0.0,
+              "target_distance": 1.2,
+              "start": [
+                3.0999999999999495,
+                5.600000000000051
+              ],
+              "goal_point": [
+                4.299999999999949,
+                5.600000000000051
+              ],
+              "tolerance": 0.12,
+              "clearance": 1.8786966521890678,
+              "sampling_attempts": 1
+            },
+            "initial_own_scan_returns": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "minimum_initial_boundary_distance_m": 3.018300036921219,
+            "initial_tokens": "empty",
+            "agent_initial_sha256": "2e79fb2332d9fa15cbc60f3fdfcd929d3f94c19c9d7018f47355a73b91a3ca88",
+            "physical_initial_sha256": "46e871c8e69468fc014c6ee4424abde35896112e70e7b77a1ed39bae7880f1a2",
+            "cohort": "finite_acquisition_support_development",
+            "geometry_from_near": "c_open_away",
+            "position_id": 0,
+            "normalization": "same physical state across location-information arms; geometry remains unknown",
+            "origin_case": "c_open_away_pos0_unknown_location",
+            "parameter_setting": "candidate",
+            "original_parameter": 0.25,
+            "candidate_parameter": 0.45,
+            "minimum_initial_pair_distance_m": 0.34802137650114573,
+            "validation_seed": 20261102,
+            "initial_rule": "Existing near scatter; far grid translated to [3.75,1.05] with Gaussian jitter sigma=.005m",
+            "historical_source_case": "far_c_open_away_pos0_reference"
+          },
+          {
+            "condition": "c_open_away_pos0",
+            "shape": "c_shape",
+            "stratum": "far",
+            "area_m2": 2.0587500000000007,
+            "mass_kg": 4.1175000000000015,
+            "inertia_kg_m2": 2.5465684724161357,
+            "perimeter_m": 8.858595028691228,
+            "diameter_m": 2.460720841303119,
+            "reach_m": 1.2936966521890678,
+            "vertex_count": 8,
+            "initial_centroid": [
+              3.0999999999999495,
+              5.600000000000051
+            ],
+            "task": {
+              "object_id": "cargo_0",
+              "direction": [
+                1.0,
+                0.0
+              ],
+              "angle_deg": 0.0,
+              "target_distance": 1.2,
+              "start": [
+                3.0999999999999495,
+                5.600000000000051
+              ],
+              "goal_point": [
+                4.299999999999949,
+                5.600000000000051
+              ],
+              "tolerance": 0.12,
+              "clearance": 1.8786966521890678,
+              "sampling_attempts": 1
+            },
+            "initial_own_scan_returns": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "minimum_initial_boundary_distance_m": 3.018300036921219,
+            "initial_tokens": "empty",
+            "agent_initial_sha256": "2e79fb2332d9fa15cbc60f3fdfcd929d3f94c19c9d7018f47355a73b91a3ca88",
+            "physical_initial_sha256": "46e871c8e69468fc014c6ee4424abde35896112e70e7b77a1ed39bae7880f1a2",
+            "cohort": "finite_acquisition_support_corrected_development",
+            "geometry_from_near": "c_open_away",
+            "position_id": 0,
+            "normalization": "same physical state across location-information arms; geometry remains unknown",
+            "origin_case": "c_open_away_pos0_unknown_location",
+            "parameter_setting": "candidate",
+            "original_parameter": 0.25,
+            "candidate_parameter": 0.45,
+            "minimum_initial_pair_distance_m": 0.34802137650114573,
+            "validation_seed": 20261102,
+            "initial_rule": "Existing near scatter; far grid translated to [3.75,1.05] with Gaussian jitter sigma=.005m",
+            "historical_source_case": "far_c_open_away_pos0_reference"
+          }
+        ],
+        "wall_seconds": [
+          110.34572219999973,
+          95.12390960002085
+        ]
+      }
+    },
+    "far_skew_box_s0_r0_pos0": {
+      "exact": true,
+      "replay_keys_equal": true,
+      "arrays": {
+        "times": true,
+        "phase": true,
+        "min_distance": true,
+        "map_coverage": true,
+        "push_flags": true,
+        "contact_flags": true,
+        "efforts": true,
+        "agent_ids": true,
+        "agent_positions": true,
+        "domain": true,
+        "robot_radius": true,
+        "sensed_counts": true,
+        "sensed_points": true,
+        "cargo/cargo_0/centers": true,
+        "cargo/cargo_0/angles": true,
+        "cargo/cargo_0/local_vertices": true,
+        "cargo/cargo_0/strict_coverage": true,
+        "cargo/cargo_0/contacts": true,
+        "cargo/cargo_0/penetration": true,
+        "cargo/cargo_0/speed": true,
+        "cargo/cargo_0/progress_estimate": true,
+        "task/cargo_0/direction": true,
+        "task/cargo_0/start": true,
+        "task/cargo_0/goal_point": true,
+        "task/cargo_0/distance": true
+      },
+      "scientific_fields_exact": {
+        "config.json": true,
+        "paired_metrics.json": true,
+        "physics_substeps.json": true,
+        "summary.json": true,
+        "case_result_scientific_fields": true
+      },
+      "execution_metadata": {
+        "git_sha": [
+          "5e2a53651893d57aecd71879f35be7449f9ad8d8",
+          "914c7897fd6a8d64fb9215dfa78f39d8674d71e4"
+        ],
+        "case_id": [
+          "far_skew_box_s0_r0_pos0_reference_reacquisition",
+          "far_skew_box_s0_r0_pos0_reference_reacquisition"
+        ],
+        "factors": [
+          {
+            "condition": "skew_box_s0_r0_pos0",
+            "shape": "skew_box",
+            "stratum": "far",
+            "area_m2": 2.05875,
+            "mass_kg": 4.1175,
+            "inertia_kg_m2": 1.579496120257831,
+            "perimeter_m": 5.988113250582847,
+            "diameter_m": 2.1391496288136986,
+            "reach_m": 1.205373574883876,
+            "vertex_count": 4,
+            "initial_centroid": [
+              3.0999999999999965,
+              5.599999999999994
+            ],
+            "task": {
+              "object_id": "cargo_0",
+              "direction": [
+                1.0,
+                0.0
+              ],
+              "angle_deg": 0.0,
+              "target_distance": 1.2,
+              "start": [
+                3.0999999999999965,
+                5.599999999999994
+              ],
+              "goal_point": [
+                4.299999999999996,
+                5.599999999999994
+              ],
+              "tolerance": 0.12,
+              "clearance": 1.7903735748838763,
+              "sampling_attempts": 1
+            },
+            "initial_own_scan_returns": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "minimum_initial_boundary_distance_m": 3.46009927206023,
+            "initial_tokens": "empty",
+            "agent_initial_sha256": "2e79fb2332d9fa15cbc60f3fdfcd929d3f94c19c9d7018f47355a73b91a3ca88",
+            "physical_initial_sha256": "84e7bbb49fda860a0d921332dcb68d8fa3535b3fb5d3b7dc06a8a8504c2f230f",
+            "cohort": "finite_acquisition_support_development",
+            "geometry_from_near": "skew_box_s0_r0",
+            "position_id": 0,
+            "normalization": "same physical state across location-information arms; geometry remains unknown",
+            "origin_case": "skew_box_s0_r0_pos0_unknown_location",
+            "parameter_setting": "candidate",
+            "original_parameter": 0.25,
+            "candidate_parameter": 0.45,
+            "minimum_initial_pair_distance_m": 0.34802137650114573,
+            "validation_seed": 20261102,
+            "initial_rule": "Existing near scatter; far grid translated to [3.75,1.05] with Gaussian jitter sigma=.005m",
+            "historical_source_case": "far_skew_box_s0_r0_pos0_reference"
+          },
+          {
+            "condition": "skew_box_s0_r0_pos0",
+            "shape": "skew_box",
+            "stratum": "far",
+            "area_m2": 2.05875,
+            "mass_kg": 4.1175,
+            "inertia_kg_m2": 1.579496120257831,
+            "perimeter_m": 5.988113250582847,
+            "diameter_m": 2.1391496288136986,
+            "reach_m": 1.205373574883876,
+            "vertex_count": 4,
+            "initial_centroid": [
+              3.0999999999999965,
+              5.599999999999994
+            ],
+            "task": {
+              "object_id": "cargo_0",
+              "direction": [
+                1.0,
+                0.0
+              ],
+              "angle_deg": 0.0,
+              "target_distance": 1.2,
+              "start": [
+                3.0999999999999965,
+                5.599999999999994
+              ],
+              "goal_point": [
+                4.299999999999996,
+                5.599999999999994
+              ],
+              "tolerance": 0.12,
+              "clearance": 1.7903735748838763,
+              "sampling_attempts": 1
+            },
+            "initial_own_scan_returns": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "minimum_initial_boundary_distance_m": 3.46009927206023,
+            "initial_tokens": "empty",
+            "agent_initial_sha256": "2e79fb2332d9fa15cbc60f3fdfcd929d3f94c19c9d7018f47355a73b91a3ca88",
+            "physical_initial_sha256": "84e7bbb49fda860a0d921332dcb68d8fa3535b3fb5d3b7dc06a8a8504c2f230f",
+            "cohort": "finite_acquisition_support_corrected_development",
+            "geometry_from_near": "skew_box_s0_r0",
+            "position_id": 0,
+            "normalization": "same physical state across location-information arms; geometry remains unknown",
+            "origin_case": "skew_box_s0_r0_pos0_unknown_location",
+            "parameter_setting": "candidate",
+            "original_parameter": 0.25,
+            "candidate_parameter": 0.45,
+            "minimum_initial_pair_distance_m": 0.34802137650114573,
+            "validation_seed": 20261102,
+            "initial_rule": "Existing near scatter; far grid translated to [3.75,1.05] with Gaussian jitter sigma=.005m",
+            "historical_source_case": "far_skew_box_s0_r0_pos0_reference"
+          }
+        ],
+        "wall_seconds": [
+          95.62375820003217,
+          83.48902149999049
+        ]
+      }
+    }
+  },
+  "mechanism_gates": {
+    "resolved_schedule_complete": true,
+    "all_eight_execution_complete": true,
+    "four_original_controls_exact": true,
+    "four_candidates_safe_complete": true,
+    "candidate_acquisition_scaling_zero": false,
+    "no_post_acquisition_scaling_increase": true,
+    "preserve_each_baseline_g500_pass": true
+  },
+  "full_chain_gates": {
+    "resolved_schedule_complete": true,
+    "all_eight_execution_complete": true,
+    "four_original_controls_exact": true,
+    "four_candidates_safe_complete": true,
+    "candidate_acquisition_scaling_zero": false,
+    "no_post_acquisition_scaling_increase": true,
+    "preserve_each_baseline_g500_pass": true,
+    "candidate_all_original_g500": false,
+    "candidate_all_formal_transport": false
+  },
+  "mechanism_gate": "FAIL",
+  "full_chain_gate": "FAIL",
+  "candidate_adopted": false,
+  "source_sha256": "cce9a4fdc1677a54a7faa9ea6d9baf6c5110387b8acee63e158f6da378952177",
+  "protocol_sha256": "f2112af74dd9379f50d8fc8d47ae4ade040f97ca2a9b3ef3dde552ca770f169c"
+}

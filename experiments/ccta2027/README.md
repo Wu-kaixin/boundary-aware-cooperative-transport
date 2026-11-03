@@ -1,8 +1,10 @@
 # CCTA 2027 实验入口
 
+2026-11-03：[修后物理设计](finite_acquisition_support_physical_v2_design.md)及[新冻结协议](finite_acquisition_support_v2.json)已完成独立8回合，数值参数及原门槛不变。[结果](../../docs/results/finite_acquisition_support_v2/README.md)：两臂安全完成均4/4，G500均2/4，机制及完整门槛均FAIL；修后候选与旧候选的25组回放数组和物理子步一致，约束诊断改变。此前[同状态审计设计](finite_support_review_validation_v1_design.md)完成874帧完整重放、另列40帧预检、七个见证14次QP比较；新增物理回合0。[执行记录](finite_support_review_validation_v1_plan.md)分开保存诊断、物理执行和发布过程，核心995通过/2跳过。
+
 2026-11-03：[有限支持物理设计](finite_acquisition_support_physical_v1_design.md)及[冻结协议](finite_acquisition_support_v1.json)完成四条件×两臂8回合。[全部结果](../../docs/results/finite_acquisition_support_v1/README.md)：安全完成均4/4，C/斜箱采集缩放均13→1、斜箱冻结后6→0，但G500仍2/4、C形仍未TRANSPORT且转角/耗时退化；机制及完整门槛均FAIL、候选未采用。全部最佳数值参数不变；[实施记录](finite_acquisition_support_v1_plan.md)保留RED/GREEN及所有决定。前置[三替代方法](finite_support_probe_v1_design.md)、[仅弦段v1](finite_acquisition_support_v1_design.md)和[孤立点保护v2](finite_acquisition_point_guard_v2_design.md)均为旧26状态诊断，新增物理回合0。
 
-[审查修正规格](finite_acquisition_support_review_fix_v1.md)及[工程闭环](../../docs/results/finite_acquisition_support_v1/final_review.md)另记：孤立回波必须先计算结构裕量再决定是否竞争，4个失败回归已修复，核心992通过/2跳过。当前修正版与原物理冻结身份不同，需要新协议，不能重跑/覆盖旧目录或将旧8回合归给当前源码。
+[审查修正规格](finite_acquisition_support_review_fix_v1.md)及[工程闭环](../../docs/results/finite_acquisition_support_v1/final_review.md)另记：孤立回波必须先计算结构裕量再决定是否竞争，4个失败回归已修复，当时核心992通过/2跳过。修正版与原物理冻结身份不同；上方v2协议另行执行，旧目录、旧8回合及历史结论保持不变。
 
 2026-11-03：[采集边界与正式激活事后诊断设计](acquisition_normal_audit_v1_design.md)已执行；[记录](acquisition_normal_audit_v1_plan.md)和[结果](../../docs/results/acquisition_normal_audit_v1/README.md)区分784帧精确控制重放、20帧预检和2,589帧阶段重建，新增物理回合0。全部26个采集冲突保留，支持优先处理有限边界外推及C形制动前协作激活；没有修改运行代码或原门槛。
 
