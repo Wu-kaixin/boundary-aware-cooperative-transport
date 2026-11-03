@@ -62,7 +62,7 @@ soft filter would be an artefact of the weight.
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 
 import numpy as np
 
@@ -272,6 +272,25 @@ class FilterResult:
     empty_feasible_set: bool = False
     zero_not_in_F: bool = False
 
+
+
+@dataclass
+class PreparedVelocity:
+    """An unexecuted local problem; preparing it does not change solver stats."""
+
+    u_nom: np.ndarray
+    A: np.ndarray
+    b: np.ndarray
+    b_original: np.ndarray
+    b_no_margin: np.ndarray
+    h_object: np.ndarray
+    agent_count: int
+    wall_count: int
+    object_count: int
+    row_kinds: list[str]
+    clamped: bool
+    parameters: SafetyFilterParams
+    consumed: bool = False
 
 
 class SafetyFilter:
@@ -935,7 +954,11 @@ class SafetyFilter:
 
         return wall_halfplanes(position, self.params.domain, self.params.dt)
 
-    def filter_velocity(
+    def filter_velocity(self, *args, **kwargs) -> FilterResult:
+        """Select and account for one command using the original solver policy."""
+        return self.finish_velocity(self.prepare_velocity(*args, **kwargs))
+
+    def prepare_velocity(
         self,
         position: np.ndarray,
         nominal_velocity: np.ndarray,
@@ -950,7 +973,7 @@ class SafetyFilter:
         finite_support_packets: list | None = None,
         finite_support_motion_bound: float | None = None,
         finite_support_trace: dict | None = None,
-    ) -> FilterResult:
+    ) -> PreparedVelocity:
         u_nom = np.asarray(nominal_velocity, dtype=float).reshape(2)
         speed = float(np.linalg.norm(u_nom))
         if speed > self.params.max_speed:
@@ -1021,8 +1044,6 @@ class SafetyFilter:
         # Stack order matters for active-row accounting and for the scaled-barrier
         # split: agent | wall | object. Walls are hard domain constraints and are
         # never scaled; only object rows may be scaled when allowed.
-        self._agent_row_count = len(A_agent)
-        self._wall_row_count = len(A_wall)
         blocks_A = [block for block in (A_agent, A_wall, A_obj) if len(block)]
         blocks_b = [block for block in (b_agent, b_wall, b_obj) if len(block)]
         A = np.vstack(blocks_A) if blocks_A else np.empty((0, 2))
@@ -1054,8 +1075,30 @@ class SafetyFilter:
                 if float(b_obj_free[i]) <= 1e-9 and float(b[n_pre + i]) > 0.0:
                     b[n_pre + i] = 0.0
                     clamped = True
-            if clamped:
-                self.stats.margin_relaxations += 1
+
+        return PreparedVelocity(
+            u_nom=u_nom.copy(), A=A.copy(), b=b.copy(), b_original=b_original,
+            b_no_margin=b_no_margin.copy(), h_object=h_obj.copy(),
+            agent_count=len(A_agent), wall_count=len(A_wall), object_count=len(A_obj),
+            row_kinds=row_kinds, clamped=clamped, parameters=replace(self.params),
+        )
+
+    def finish_velocity(self, problem: PreparedVelocity) -> FilterResult:
+        """Finalize once, after any local negotiation, without erasing a fallback."""
+        if problem.consumed:
+            raise ValueError('Safety problem was already finalized')
+        if problem.parameters != self.params:
+            raise ValueError('Safety parameters changed after preparation')
+        problem.consumed = True
+        u_nom, A, b = problem.u_nom, problem.A, problem.b
+        b_original, b_no_margin = problem.b_original, problem.b_no_margin
+        h_obj, row_kinds, clamped = problem.h_object, problem.row_kinds, problem.clamped
+        na, nw = problem.agent_count, problem.wall_count
+        self._agent_row_count, self._wall_row_count = na, nw
+        A_agent, A_wall, A_obj = A[:na], A[na:na+nw], A[na+nw:]
+        b_agent, b_wall, b_obj = b_original[:na], b_original[na:na+nw], b_original[na+nw:]
+        if clamped:
+            self.stats.margin_relaxations += 1
 
         # The certificate is about the barrier, so it is evaluated against the
         # margin-free right-hand side. Evaluating it with rho included would report
