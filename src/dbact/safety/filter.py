@@ -947,6 +947,9 @@ class SafetyFilter:
         obstacle_vertices: np.ndarray | None = None,
         observed_segments: list | None = None,
         observation_time: float = 0.0,
+        finite_support_packets: list | None = None,
+        finite_support_motion_bound: float | None = None,
+        finite_support_trace: dict | None = None,
     ) -> FilterResult:
         u_nom = np.asarray(nominal_velocity, dtype=float).reshape(2)
         speed = float(np.linalg.norm(u_nom))
@@ -981,6 +984,28 @@ class SafetyFilter:
                 boundary_point_velocities,
                 obstacle_vertices=obstacle_vertices,
             )
+
+        if finite_support_packets is not None and self.params.enable_object_rows:
+            if self.params.object_row_mode != 'aggregate' or observed_segments is not None:
+                raise ValueError('Finite acquisition support requires aggregate fallback without segment supplements')
+            from dbact.sensing.finite_support import support_rows
+            support = support_rows(position, finite_support_packets, self.params,
+                observation_time, finite_support_motion_bound, isolated_point_guards=True)
+            if finite_support_trace is not None:
+                finite_support_trace.update(applied=support.ready,reason=support.reason,
+                    near_returns=support.near_returns,uncovered_returns=support.uncovered_returns,
+                    point_guard_rows=support.point_guard_rows,object_rows=len(support.A),
+                    empirical_only=True,motion_bound=finite_support_motion_bound)
+            if support.ready:
+                # The isotropic speed bound is valid for every new radial normal.
+                # Projecting an old face-normal velocity would lose that guarantee.
+                A_obj, h_obj = support.A, support.h
+                demand = finite_support_motion_bound - self.params.gamma_obj*h_obj
+                b_obj = self._cap_to_reachable(A_obj,demand+self.params.rho)
+                b_obj_free = self._cap_to_reachable(A_obj,demand)
+                if finite_support_trace is not None:
+                    finite_support_trace['cap_active'] = int(np.count_nonzero(
+                        b_obj < demand+self.params.rho-1e-15))
 
         if observed_segments is not None and self.params.enable_object_rows:
             from dbact.sensing.features import segment_rows

@@ -81,6 +81,12 @@ class RayCastBoundarySensor:
     ) -> BoundaryView:
         """The same scan as ``sense``, as arrays. This is the inner-loop form."""
         returns = self.raw_returns(agent, cargoes, timestamp)
+        if getattr(self, 'record_finite_support', False):
+            from dbact.sensing.finite_support import scan_support
+            if not hasattr(self, 'finite_support_packets'):
+                self.finite_support_packets = {}
+            self.finite_support_packets[agent.agent_id] = scan_support(
+                returns, agent.position, timestamp, self.params.range_noise_std)
         if getattr(self, 'record_local_features', False):
             from dbact.sensing.features import scan_segments
             if not hasattr(self, 'local_features'): self.local_features = {}

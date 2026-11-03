@@ -319,6 +319,7 @@ class DBACTParams:
     initial_reference_map_motion: bool = False
     initial_acquisition_circulation: bool = False
     reference_map_reacquisition: bool = False
+    acquisition_finite_support: bool = False
     initial_acquisition_seconds: float = 60.0
     contact_patch_distance: bool = False
     # New development arms, off by default. The vector law changes controller
@@ -659,6 +660,10 @@ class DBACTController:
         if (not isinstance(params.reference_map_reacquisition, bool)
                 or (params.reference_map_reacquisition and not params.initial_reference_map_motion)):
             raise ValueError("Reference reacquisition requires boolean selection and reference-map motion")
+        if (not isinstance(params.acquisition_finite_support, bool)
+                or (params.acquisition_finite_support and
+                    (not params.initial_reference_map_motion or params.theorem_mode))):
+            raise ValueError("Finite acquisition support requires boolean selection and empirical reference-map motion")
         if params.initial_task_reference and not params.initial_reference_acquisition:
             raise ValueError("Initial task reference requires stationary acquisition")
         if (not isinstance(params.initial_reference_safe_geometry, bool)
@@ -706,6 +711,7 @@ class DBACTController:
                 seed=self.seed,
             )
         )
+        self.sensor.record_finite_support = params.acquisition_finite_support
         self.cvt = LocalCVT(
             local_radius=params.local_radius,
             grid_resolution=params.grid_resolution,
@@ -987,6 +993,12 @@ class DBACTController:
             points, normals, v_obj, v_points = self._object_rows_from_map(
                 agent.agent_id, agent.position, view
             )
+            support_inputs = {}
+            if self.params.acquisition_finite_support:
+                from dbact.control.acquisition_support import filter_inputs
+                support_inputs, support_trace = filter_inputs(self,agent.agent_id,
+                    [agent.agent_id]+[agents[j].agent_id for j in neighbors[i]],timestamp)
+                self._trace['acquisition_support'] = support_trace
             result = self.safety.filter_velocity(
                 agent.position,
                 u_nom,
@@ -995,6 +1007,7 @@ class DBACTController:
                 boundary_normals=normals,
                 object_velocity=v_obj,
                 boundary_point_velocities=v_points,
+                **support_inputs,
             )
             commands.append(ControlCommand(agent.agent_id, result.velocity, mode=mode))
             diagnostic = AgentDiagnostics(
@@ -1108,7 +1121,8 @@ class DBACTController:
                      "reinforcement_state", "reinforcement_event", "reinforcement_attempts",
                      "reinforcement_confirmed", "reinforcement_confirm_seconds", "reinforcement_path_length",
                      "reinforcement_gap", "reinforcement_retain", "reinforcement_suspended_approach",
-                     "contact_distance_source", "contact_map_gap", "contact_used_gap", "contact_patch_points"):
+                     "contact_distance_source", "contact_map_gap", "contact_used_gap", "contact_patch_points",
+                     "acquisition_support"):
             if name in scratch:
                 setattr(diagnostic, name, scratch[name])
         for name in ("cvt_centroid", "redeploy_target", "contact_selected_normal",
