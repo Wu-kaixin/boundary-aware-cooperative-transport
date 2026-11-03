@@ -322,6 +322,7 @@ class DBACTParams:
     reference_map_reacquisition: bool = False
     acquisition_finite_support: bool = False
     acquisition_pair_safety: bool = False
+    post_acquisition_finite_support: bool = False
     initial_acquisition_seconds: float = 60.0
     contact_patch_distance: bool = False
     # New development arms, off by default. The vector law changes controller
@@ -673,6 +674,11 @@ class DBACTController:
                 or (params.acquisition_pair_safety and
                     (not params.acquisition_finite_support or params.backend != 'qp'))):
             raise ValueError('Pair acquisition safety requires boolean selection, finite support and qp backend')
+        if (not isinstance(params.post_acquisition_finite_support, bool)
+                or (params.post_acquisition_finite_support and
+                    (not params.reference_map_bridge or not params.acquisition_finite_support
+                     or params.backend != 'qp' or params.theorem_mode))):
+            raise ValueError('Post-acquisition support requires boolean selection, map bridge, finite acquisition and empirical qp')
         if params.initial_task_reference and not params.initial_reference_acquisition:
             raise ValueError("Initial task reference requires stationary acquisition")
         if (not isinstance(params.initial_reference_safe_geometry, bool)
@@ -1013,6 +1019,12 @@ class DBACTController:
                 support_inputs, support_trace = filter_inputs(self,agent.agent_id,
                     [agent.agent_id]+[agents[j].agent_id for j in neighbors[i]],timestamp)
                 self._trace['acquisition_support'] = support_trace
+            if self.params.post_acquisition_finite_support:
+                from dbact.control.post_support import filter_inputs as post_inputs
+                current_inputs, post_trace = post_inputs(self, agent.agent_id,
+                    [agent.agent_id]+[agents[j].agent_id for j in neighbors[i]], timestamp)
+                support_inputs.update(current_inputs)
+                self._trace['post_acquisition_support'] = post_trace
             filter_call = self.safety.prepare_velocity if pair_active else self.safety.filter_velocity
             result = filter_call(
                 agent.position,
@@ -1167,7 +1179,7 @@ class DBACTController:
                      "reinforcement_confirmed", "reinforcement_confirm_seconds", "reinforcement_path_length",
                      "reinforcement_gap", "reinforcement_retain", "reinforcement_suspended_approach",
                      "contact_distance_source", "contact_map_gap", "contact_used_gap", "contact_patch_points",
-                     "acquisition_support"):
+                     "acquisition_support", "post_acquisition_support"):
             if name in scratch:
                 setattr(diagnostic, name, scratch[name])
         for name in ("cvt_centroid", "redeploy_target", "contact_selected_normal",

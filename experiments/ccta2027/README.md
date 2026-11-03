@@ -1,5 +1,7 @@
 # CCTA 2027 实验入口
 
+2026-11-03：[桥接后冲突设计](map_bridge_conflicts_v1_design.md)、[17状态有限观测设计](map_bridge_finite_observer_v1_design.md)及[272状态邻域筛查](map_bridge_neighborhood_observer_v1_design.md)已完成；[结果](../../docs/results/map_bridge_conflicts_v1/README.md)包含18状态/226比较、181获准状态全部可行和6个完整上界负结果。原17状态设计的0.6文字错误由[勘误](map_bridge_finite_observer_v1_motion_cap_erratum.json)更正为实际使用的0.2，原件保留。[默认关闭的新实现设计](post_acquisition_finite_support_v1_spec.md)和[执行记录](post_acquisition_finite_support_v1_plan.md)区分288状态集成审计与待执行八回合；本轮新物理回合0。
+
 2026-11-03：[共同投票者增量设计](map_reference_bridge_v1_design.md)、[冻结协议](map_reference_bridge_v1.json)完成4条件×2臂8个新物理回合。[结果](../../docs/results/map_reference_bridge_v1/README.md)：两臂安全完成均4/4、G500均2/4，但斜箱冻结后缩放1→17、C仍未正式TRANSPORT，预定门槛FAIL、候选未采用。前置989帧地图点源重放（另20帧预检）定位参考投票集合变化引入的地图跳变；[执行记录](map_ancestry_v1_plan.md)与新18状态事后筛查分开记账，数值参数、初态与门槛保持。
 
 2026-11-03：[配对残余诊断设计](pair_residual_v1_design.md)及[冻结协议](pair_residual_v1.json)完成C1074/斜箱989帧精确重放、全八回合阶段重建、10个单机和36个配对问题。[结果](../../docs/results/pair_residual_v1/README.md)：18个未截断配对无可行见证，989单物体行超过原限速，C仍只有2台制动前声明推手。新增物理0，未改控制器/数值参数/门槛，保留配对准入保护。[执行记录](pair_residual_v1_plan.md)区分40帧预检、2063帧完整重放和全部工程收据。

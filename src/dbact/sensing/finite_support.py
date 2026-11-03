@@ -68,15 +68,19 @@ def scan_support(returns, origin, timestamp, noise_std) -> ScanSupport:
         np.asarray(chords,dtype=int).reshape(-1,2),np.asarray(half_gaps,dtype=float))
 
 
-def support_rows(position, packets, params, timestamp, motion_bound, *, isolated_point_guards=False) -> SupportRows:
+def support_rows(position, packets, params, timestamp, motion_bound, *, isolated_point_guards=False,
+                 noise_in_radius=True) -> SupportRows:
     """Guard current observed coverage, then keep all competing finite chords.
 
     ``motion_bound`` is a speed ball, independent of the resulting radial normal.
     This function only builds geometry; the safety layer must add that bound to
-    each row's demand. The caller's acquisition r_safe includes the noise allowance.
+    each row's demand. Acquisition r_safe includes the noise allowance by default;
+    callers using a physical contact floor pass noise_in_radius=False.
     """
     if motion_bound is None or not np.isfinite(motion_bound) or motion_bound < 0.:
         raise ValueError('An explicit finite nonnegative boundary motion bound is required')
+    if not isinstance(noise_in_radius, bool):
+        raise ValueError('Noise convention must be explicitly boolean')
     p = np.asarray(position,dtype=float).reshape(2)
     if not np.isfinite(p).all() or not np.isfinite(timestamp):
         raise ValueError('Query position and time must be finite')
@@ -87,7 +91,7 @@ def support_rows(position, packets, params, timestamp, motion_bound, *, isolated
     packets = [packet for packet in packets if abs(timestamp-packet.timestamp) <= 1e-9 and len(packet.points)]
     if not packets:
         return missing('no_current_returns')
-    if any(packet.noise_allowance > params.r_safe for packet in packets):
+    if noise_in_radius and any(packet.noise_allowance > params.r_safe for packet in packets):
         raise ValueError('Acquisition radius must contain the existing range-noise allowance')
     points = np.vstack([packet.points for packet in packets])
     object_ids = np.concatenate([packet.object_ids for packet in packets])
@@ -153,6 +157,7 @@ def support_rows(position, packets, params, timestamp, motion_bound, *, isolated
         if normal@(origins[index]-feet[index]) < 0.:
             normal = -normal
         normals[index] = normal
+    h = distances-structural-params.r_safe if noise_in_radius else lower-params.r_safe
     return SupportRows(True,'supported',normals[keep],
-        (distances-structural-params.r_safe)[keep],lower[keep],int(near.sum()),0,
+        h[keep],lower[keep],int(near.sum()),0,
         int(np.count_nonzero(point_feature & keep)))

@@ -1,0 +1,10 @@
+{
+  "kind": "DESIGN_TEXT_ERRATUM",
+  "original_design": "experiments/ccta2027/map_bridge_finite_observer_v1_design.md",
+  "original_output": "runs/research/2026-11-03-map-bridge-conflicts-v1/finite-observer/",
+  "incorrect_text": "0.6 m/s in these states",
+  "correct_value_m_per_s": 0.2,
+  "authoritative_field": "saved.params.object_velocity_bound",
+  "scope": "All 17 actual saved states use 0.2 m/s. The script reads this field directly; it does not contain a 0.6 constant. The 0.6 value exists only in synthetic regression fixtures. Original results, script, design and receipts are retained unchanged.",
+  "effect": "Documentation correction only; no changed computation, runtime, parameter, episode or acceptance threshold."
+}

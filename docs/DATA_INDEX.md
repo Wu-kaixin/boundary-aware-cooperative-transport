@@ -1,5 +1,7 @@
 # 数据与原始文件索引
 
+2026-11-03：[桥接后有限边界冲突与实现检查点](results/map_bridge_conflicts_v1/README.md)的517帧重放、18帧全队288状态、226项比较、17状态观测器、272状态邻域筛查及864项无速度球核验在 `runs/research/2026-11-03-map-bridge-conflicts-v1/`，每次尝试与原文字勘误均单独保留。新实现288状态审计在 `runs/research/2026-11-03-post-acquisition-support-v1/observer/`；两套源码身份分别冻结。发布日志及1069通过/2跳过收据在 `runs/maintenance/2026-11-03-map-conflicts-publication-v1/`。Git保存完整分母的精简CSV、审计JSON与产品哈希；新物理回合0，后续八回合尚未冻结或执行。
+
 2026-11-03：[配对后残余诊断](results/pair_residual_v1/README.md)原件在 `runs/research/2026-11-03-pair-residual-v1/`：freeze为执行前快照，preflight为另列40帧，replay为C1074/斜箱989帧完整重放及分量追踪，analysis保存完整10个单机及36个配对问题、八回合5550帧/22200子步分析。原物理数据仍在local-pair-safety-v1，不重标为新实验。全部RED/GREEN、1044/1045项核心测试及日志保留在同名maintenance目录；额外7536个合格C分量样本的位置差分核验另存。Git保存完整分母的表、所选矩阵、阶段结果及哈希，原始大文件保持本地。
 
 2026-11-03：[局部配对完整物理比较](results/local_pair_safety_v1/README.md)的8回合原件在 `runs/research/2026-11-03-local-pair-safety-v1/run/`；执行前源码、协议、设计与测试快照在同级 `freeze/`，执行/分析收据与完整分析在同级目录。1033通过/2跳过和另7项审计测试、所有RED及首次失败、运行/分析/发布日志保留在同名maintenance目录。Git保存全部八行指标、7次实际配对、402/989残余事件、精简复现矩阵、分析、图表和产品哈希；大体积逐帧原件保持本地。两项门槛FAIL，候选未采用，数值参数及历史身份不变。

@@ -1,0 +1,545 @@
+frame,agent_id,known_target,model,ready,reason,source_agents,object_rows,minimum_h_m,demand_speed_m_s,original_capped_full_feasible,capped_full_feasible,capped_full_newly_infeasible,capped_full_rescued,original_uncapped_full_feasible,uncapped_full_feasible,uncapped_full_newly_infeasible,uncapped_full_rescued
+469,agent_00,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+469,agent_00,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+469,agent_01,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+469,agent_01,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+469,agent_02,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+469,agent_02,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+469,agent_03,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+469,agent_03,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+469,agent_04,False,full_bound,True,supported,agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,62,0.08283792183614763,0.2,True,True,False,False,True,True,False,False
+469,agent_04,False,received_speed,True,supported,agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,62,0.08283792183614763,0.020223852580204302,True,True,False,False,True,True,False,False
+469,agent_05,False,full_bound,True,supported,agent_05 agent_04 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,42,-0.014268096442311015,0.2,True,True,False,False,True,True,False,False
+469,agent_05,False,received_speed,True,supported,agent_05 agent_04 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,42,-0.014268096442311015,0.020223852580204302,True,True,False,False,True,True,False,False
+469,agent_06,False,full_bound,True,supported,agent_06 agent_04 agent_05 agent_07 agent_08 agent_10 agent_12 agent_14,25,0.06515722945871513,0.2,True,True,False,False,True,True,False,False
+469,agent_06,False,received_speed,True,supported,agent_06 agent_04 agent_05 agent_07 agent_08 agent_10 agent_12 agent_14,25,0.06515722945871513,0.02064931676731956,True,True,False,False,True,True,False,False
+469,agent_07,False,full_bound,True,supported,agent_07 agent_04 agent_05 agent_06 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,63,0.07449529102129268,0.2,True,True,False,False,True,True,False,False
+469,agent_07,False,received_speed,True,supported,agent_07 agent_04 agent_05 agent_06 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,63,0.07449529102129268,0.0202238525802043,True,True,False,False,True,True,False,False
+469,agent_08,False,full_bound,True,supported,agent_08 agent_04 agent_05 agent_06 agent_07 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,56,0.05000176249502669,0.2,True,True,False,False,True,True,False,False
+469,agent_08,False,received_speed,True,supported,agent_08 agent_04 agent_05 agent_06 agent_07 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,56,0.05000176249502669,0.020223852580204302,True,True,False,False,True,True,False,False
+469,agent_09,False,full_bound,True,supported,agent_09 agent_04 agent_05 agent_07 agent_08 agent_10 agent_11 agent_12 agent_13 agent_14,48,0.1692897007526192,0.2,True,True,False,False,True,True,False,False
+469,agent_09,False,received_speed,True,supported,agent_09 agent_04 agent_05 agent_07 agent_08 agent_10 agent_11 agent_12 agent_13 agent_14,48,0.1692897007526192,0.020064272763198377,True,True,False,False,True,True,False,False
+469,agent_10,False,full_bound,True,supported,agent_10 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_11 agent_12 agent_13 agent_14,49,0.20618788311177322,0.2,True,True,False,False,True,True,False,False
+469,agent_10,False,received_speed,True,supported,agent_10 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_11 agent_12 agent_13 agent_14,49,0.20618788311177322,0.020223852580204302,True,True,False,False,True,True,False,False
+469,agent_11,False,full_bound,True,supported,agent_11 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,18,0.49759627670697487,0.2,True,True,False,False,True,True,False,False
+469,agent_11,False,received_speed,True,supported,agent_11 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,18,0.49759627670697487,0.019064809563593542,True,True,False,False,True,True,False,False
+469,agent_12,False,full_bound,True,supported,agent_12 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,61,0.22232944192651366,0.2,True,True,False,False,True,True,False,False
+469,agent_12,False,received_speed,True,supported,agent_12 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,61,0.22232944192651366,0.02049452366580837,True,True,False,False,True,True,False,False
+469,agent_13,False,full_bound,True,supported,agent_13 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_14,35,0.3318671129393063,0.2,True,True,False,False,True,True,False,False
+469,agent_13,False,received_speed,True,supported,agent_13 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_14,35,0.3318671129393063,0.020064272763198377,True,True,False,False,True,True,False,False
+469,agent_14,True,full_bound,True,supported,agent_14 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13,32,0.04826396046492262,0.2,False,True,False,True,False,True,False,True
+469,agent_14,True,received_speed,True,supported,agent_14 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13,32,0.04826396046492262,0.0202238525802043,False,True,False,True,False,True,False,True
+469,agent_15,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+469,agent_15,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+473,agent_00,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+473,agent_00,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+473,agent_01,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+473,agent_01,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+473,agent_02,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+473,agent_02,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+473,agent_03,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+473,agent_03,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+473,agent_04,False,full_bound,True,supported,agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,55,0.04179873776064974,0.2,True,True,False,False,True,True,False,False
+473,agent_04,False,received_speed,True,supported,agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,55,0.04179873776064974,0.00686456567253619,True,True,False,False,True,True,False,False
+473,agent_05,False,full_bound,True,supported,agent_05 agent_04 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,39,-0.013344873903741866,0.2,True,True,False,False,True,True,False,False
+473,agent_05,False,received_speed,True,supported,agent_05 agent_04 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,39,-0.013344873903741866,0.00686456567253619,True,True,False,False,True,True,False,False
+473,agent_06,False,full_bound,False,isolated_gap_exceeds_cap,agent_06 agent_04 agent_05 agent_07 agent_08 agent_10 agent_12 agent_14,,,,True,,,,True,,,
+473,agent_06,False,received_speed,False,isolated_gap_exceeds_cap,agent_06 agent_04 agent_05 agent_07 agent_08 agent_10 agent_12 agent_14,,,,True,,,,True,,,
+473,agent_07,False,full_bound,True,supported,agent_07 agent_04 agent_05 agent_06 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,62,0.07710990098915024,0.2,True,True,False,False,True,True,False,False
+473,agent_07,False,received_speed,True,supported,agent_07 agent_04 agent_05 agent_06 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,62,0.07710990098915024,0.00686456567253619,True,True,False,False,True,True,False,False
+473,agent_08,False,full_bound,True,supported,agent_08 agent_04 agent_05 agent_06 agent_07 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,63,0.0654497504027525,0.2,True,True,False,False,True,True,False,False
+473,agent_08,False,received_speed,True,supported,agent_08 agent_04 agent_05 agent_06 agent_07 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,63,0.0654497504027525,0.0068645656725361895,True,True,False,False,True,True,False,False
+473,agent_09,False,full_bound,True,supported,agent_09 agent_04 agent_05 agent_07 agent_08 agent_10 agent_11 agent_12 agent_13 agent_14,53,0.17278096416466995,0.2,True,True,False,False,True,True,False,False
+473,agent_09,False,received_speed,True,supported,agent_09 agent_04 agent_05 agent_07 agent_08 agent_10 agent_11 agent_12 agent_13 agent_14,53,0.17278096416466995,0.00903352957452276,True,True,False,False,True,True,False,False
+473,agent_10,False,full_bound,True,supported,agent_10 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_11 agent_12 agent_13 agent_14,45,0.19448276682809057,0.2,True,True,False,False,True,True,False,False
+473,agent_10,False,received_speed,True,supported,agent_10 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_11 agent_12 agent_13 agent_14,45,0.19448276682809057,0.0068645656725361895,True,True,False,False,True,True,False,False
+473,agent_11,False,full_bound,True,supported,agent_11 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,26,0.500991760991639,0.2,True,True,False,False,True,True,False,False
+473,agent_11,False,received_speed,True,supported,agent_11 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,26,0.500991760991639,0.011767043037021703,True,True,False,False,True,True,False,False
+473,agent_12,False,full_bound,True,supported,agent_12 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,58,0.20195605076408268,0.2,True,True,False,False,True,True,False,False
+473,agent_12,False,received_speed,True,supported,agent_12 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,58,0.20195605076408268,0.0064930329672701625,True,True,False,False,True,True,False,False
+473,agent_13,False,full_bound,True,supported,agent_13 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_14,37,0.3239794521211998,0.2,True,True,False,False,True,True,False,False
+473,agent_13,False,received_speed,True,supported,agent_13 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_14,37,0.3239794521211998,0.009033529574522754,True,True,False,False,True,True,False,False
+473,agent_14,True,full_bound,True,supported,agent_14 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13,34,0.04135450975204091,0.2,False,True,False,True,False,True,False,True
+473,agent_14,True,received_speed,True,supported,agent_14 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13,34,0.04135450975204091,0.0068645656725361895,False,True,False,True,False,True,False,True
+473,agent_15,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+473,agent_15,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+474,agent_00,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+474,agent_00,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+474,agent_01,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+474,agent_01,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+474,agent_02,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+474,agent_02,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+474,agent_03,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+474,agent_03,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+474,agent_04,False,full_bound,True,supported,agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,57,0.03412175663000222,0.2,True,True,False,False,True,True,False,False
+474,agent_04,False,received_speed,True,supported,agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,57,0.03412175663000222,0.012201038171062587,True,True,False,False,True,True,False,False
+474,agent_05,False,full_bound,True,supported,agent_05 agent_04 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,37,-0.0163154206592305,0.2,True,True,False,False,True,False,True,False
+474,agent_05,False,received_speed,True,supported,agent_05 agent_04 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,37,-0.0163154206592305,0.012201038171062587,True,True,False,False,True,True,False,False
+474,agent_06,False,full_bound,False,isolated_gap_exceeds_cap,agent_06 agent_04 agent_05 agent_07 agent_08 agent_10 agent_12 agent_14,,,,True,,,,True,,,
+474,agent_06,False,received_speed,False,isolated_gap_exceeds_cap,agent_06 agent_04 agent_05 agent_07 agent_08 agent_10 agent_12 agent_14,,,,True,,,,True,,,
+474,agent_07,False,full_bound,True,supported,agent_07 agent_04 agent_05 agent_06 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,56,0.08122474728719445,0.2,True,True,False,False,True,True,False,False
+474,agent_07,False,received_speed,True,supported,agent_07 agent_04 agent_05 agent_06 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,56,0.08122474728719445,0.012201038171062587,True,True,False,False,True,True,False,False
+474,agent_08,False,full_bound,True,supported,agent_08 agent_04 agent_05 agent_06 agent_07 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,60,0.06763856558926948,0.2,True,True,False,False,True,True,False,False
+474,agent_08,False,received_speed,True,supported,agent_08 agent_04 agent_05 agent_06 agent_07 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,60,0.06763856558926948,0.012201038171062589,True,True,False,False,True,True,False,False
+474,agent_09,False,full_bound,True,supported,agent_09 agent_04 agent_05 agent_07 agent_08 agent_10 agent_11 agent_12 agent_13 agent_14,52,0.1565477092586535,0.2,True,True,False,False,True,True,False,False
+474,agent_09,False,received_speed,True,supported,agent_09 agent_04 agent_05 agent_07 agent_08 agent_10 agent_11 agent_12 agent_13 agent_14,52,0.1565477092586535,0.011918246993294513,True,True,False,False,True,True,False,False
+474,agent_10,False,full_bound,True,supported,agent_10 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_11 agent_12 agent_13 agent_14,50,0.20571654623305485,0.2,True,True,False,False,True,True,False,False
+474,agent_10,False,received_speed,True,supported,agent_10 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_11 agent_12 agent_13 agent_14,50,0.20571654623305485,0.012201038171062589,True,True,False,False,True,True,False,False
+474,agent_11,False,full_bound,True,supported,agent_11 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,29,0.4920753714315322,0.2,True,True,False,False,True,True,False,False
+474,agent_11,False,received_speed,True,supported,agent_11 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,29,0.4920753714315322,0.011034398196612071,True,True,False,False,True,True,False,False
+474,agent_12,False,full_bound,True,supported,agent_12 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,60,0.1958907493901842,0.2,True,True,False,False,True,True,False,False
+474,agent_12,False,received_speed,True,supported,agent_12 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,60,0.1958907493901842,0.01413525333748145,True,True,False,False,True,True,False,False
+474,agent_13,False,full_bound,True,supported,agent_13 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_14,37,0.32930001005729653,0.2,True,True,False,False,True,True,False,False
+474,agent_13,False,received_speed,True,supported,agent_13 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_14,37,0.32930001005729653,0.01191824699329451,True,True,False,False,True,True,False,False
+474,agent_14,True,full_bound,True,supported,agent_14 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13,36,0.04760077078741082,0.2,False,True,False,True,False,True,False,True
+474,agent_14,True,received_speed,True,supported,agent_14 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13,36,0.04760077078741082,0.012201038171062583,False,True,False,True,False,True,False,True
+474,agent_15,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+474,agent_15,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+475,agent_00,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+475,agent_00,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+475,agent_01,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+475,agent_01,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+475,agent_02,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+475,agent_02,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+475,agent_03,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+475,agent_03,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+475,agent_04,False,full_bound,True,supported,agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,56,0.05611987327423909,0.2,True,True,False,False,True,True,False,False
+475,agent_04,False,received_speed,True,supported,agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,56,0.05611987327423909,0.01467613491803349,True,True,False,False,True,True,False,False
+475,agent_05,False,full_bound,True,supported,agent_05 agent_04 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,39,-0.01046986551036011,0.2,True,True,False,False,True,True,False,False
+475,agent_05,False,received_speed,True,supported,agent_05 agent_04 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,39,-0.01046986551036011,0.01467613491803349,True,True,False,False,True,True,False,False
+475,agent_06,False,full_bound,True,supported,agent_06 agent_04 agent_05 agent_07 agent_08 agent_10 agent_12 agent_14,24,0.06823197197234734,0.2,True,True,False,False,True,True,False,False
+475,agent_06,False,received_speed,True,supported,agent_06 agent_04 agent_05 agent_07 agent_08 agent_10 agent_12 agent_14,24,0.06823197197234734,0.01467613736749918,True,True,False,False,True,True,False,False
+475,agent_07,False,full_bound,True,supported,agent_07 agent_04 agent_05 agent_06 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,60,0.06438641669423378,0.2,True,True,False,False,True,True,False,False
+475,agent_07,False,received_speed,True,supported,agent_07 agent_04 agent_05 agent_06 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,60,0.06438641669423378,0.014676134918033492,True,True,False,False,True,True,False,False
+475,agent_08,False,full_bound,True,supported,agent_08 agent_04 agent_05 agent_06 agent_07 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,58,0.0615404526924517,0.2,True,True,False,False,True,True,False,False
+475,agent_08,False,received_speed,True,supported,agent_08 agent_04 agent_05 agent_06 agent_07 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,58,0.0615404526924517,0.014676134918033493,True,True,False,False,True,True,False,False
+475,agent_09,False,full_bound,True,supported,agent_09 agent_04 agent_05 agent_07 agent_08 agent_10 agent_11 agent_12 agent_13 agent_14,50,0.15387591304274142,0.2,True,True,False,False,True,True,False,False
+475,agent_09,False,received_speed,True,supported,agent_09 agent_04 agent_05 agent_07 agent_08 agent_10 agent_11 agent_12 agent_13 agent_14,50,0.15387591304274142,0.014674990230929903,True,True,False,False,True,True,False,False
+475,agent_10,False,full_bound,True,supported,agent_10 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_11 agent_12 agent_13 agent_14,48,0.18803195260439026,0.2,True,True,False,False,True,True,False,False
+475,agent_10,False,received_speed,True,supported,agent_10 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_11 agent_12 agent_13 agent_14,48,0.18803195260439026,0.014676134918033492,True,True,False,False,True,True,False,False
+475,agent_11,False,full_bound,True,supported,agent_11 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,31,0.48995449616177494,0.2,True,True,False,False,True,True,False,False
+475,agent_11,False,received_speed,True,supported,agent_11 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,31,0.48995449616177494,0.014676028657076118,True,True,False,False,True,True,False,False
+475,agent_12,False,full_bound,True,supported,agent_12 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,59,0.18929267580523473,0.2,True,True,False,False,True,True,False,False
+475,agent_12,False,received_speed,True,supported,agent_12 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,59,0.18929267580523473,0.014676134992634657,True,True,False,False,True,True,False,False
+475,agent_13,False,full_bound,True,supported,agent_13 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_14,33,0.31201696541425045,0.2,True,True,False,False,True,True,False,False
+475,agent_13,False,received_speed,True,supported,agent_13 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_14,33,0.31201696541425045,0.014674990230929913,True,True,False,False,True,True,False,False
+475,agent_14,True,full_bound,True,supported,agent_14 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13,32,0.02997834188424381,0.2,False,True,False,True,False,True,False,True
+475,agent_14,True,received_speed,True,supported,agent_14 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13,32,0.02997834188424381,0.014676134918033492,False,True,False,True,False,True,False,True
+475,agent_15,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+475,agent_15,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+476,agent_00,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+476,agent_00,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+476,agent_01,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+476,agent_01,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+476,agent_02,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+476,agent_02,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+476,agent_03,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+476,agent_03,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+476,agent_04,False,full_bound,True,supported,agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,58,0.052216982646985544,0.2,True,True,False,False,True,True,False,False
+476,agent_04,False,received_speed,True,supported,agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,58,0.052216982646985544,0.0010055171595974959,True,True,False,False,True,True,False,False
+476,agent_05,False,full_bound,True,supported,agent_05 agent_04 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,39,-0.008000216342844826,0.2,True,True,False,False,True,True,False,False
+476,agent_05,False,received_speed,True,supported,agent_05 agent_04 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,39,-0.008000216342844826,0.0010055171595974959,True,True,False,False,True,True,False,False
+476,agent_06,False,full_bound,True,supported,agent_06 agent_04 agent_05 agent_07 agent_08 agent_10 agent_12 agent_14,23,0.048865368618573934,0.2,True,True,False,False,True,True,False,False
+476,agent_06,False,received_speed,True,supported,agent_06 agent_04 agent_05 agent_07 agent_08 agent_10 agent_12 agent_14,23,0.048865368618573934,0.019890912012057473,True,True,False,False,True,True,False,False
+476,agent_07,False,full_bound,True,supported,agent_07 agent_04 agent_05 agent_06 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,64,0.0761947956522794,0.2,True,True,False,False,True,True,False,False
+476,agent_07,False,received_speed,True,supported,agent_07 agent_04 agent_05 agent_06 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,64,0.0761947956522794,0.0010055171595974952,True,True,False,False,True,True,False,False
+476,agent_08,False,full_bound,True,supported,agent_08 agent_04 agent_05 agent_06 agent_07 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,60,0.06754304552374854,0.2,True,True,False,False,True,True,False,False
+476,agent_08,False,received_speed,True,supported,agent_08 agent_04 agent_05 agent_06 agent_07 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,60,0.06754304552374854,0.0010055171595974952,True,True,False,False,True,True,False,False
+476,agent_09,False,full_bound,True,supported,agent_09 agent_04 agent_05 agent_07 agent_08 agent_10 agent_11 agent_12 agent_13 agent_14,51,0.15146259824469202,0.2,True,True,False,False,True,True,False,False
+476,agent_09,False,received_speed,True,supported,agent_09 agent_04 agent_05 agent_07 agent_08 agent_10 agent_11 agent_12 agent_13 agent_14,51,0.15146259824469202,0.004619135334707815,True,True,False,False,True,True,False,False
+476,agent_10,False,full_bound,True,supported,agent_10 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_11 agent_12 agent_13 agent_14,48,0.18979815964480679,0.2,True,True,False,False,True,True,False,False
+476,agent_10,False,received_speed,True,supported,agent_10 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_11 agent_12 agent_13 agent_14,48,0.18979815964480679,0.001005517159597497,True,True,False,False,True,True,False,False
+476,agent_11,False,full_bound,True,supported,agent_11 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,30,0.4908064983452392,0.2,True,True,False,False,True,True,False,False
+476,agent_11,False,received_speed,True,supported,agent_11 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,30,0.4908064983452392,0.00823183043754669,True,True,False,False,True,True,False,False
+476,agent_12,False,full_bound,True,supported,agent_12 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,62,0.18218338851208357,0.2,True,True,False,False,True,True,False,False
+476,agent_12,False,received_speed,True,supported,agent_12 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,62,0.18218338851208357,0.007429408897012249,True,True,False,False,True,True,False,False
+476,agent_13,False,full_bound,True,supported,agent_13 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_14,34,0.32476749382100617,0.2,True,True,False,False,True,True,False,False
+476,agent_13,False,received_speed,True,supported,agent_13 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_14,34,0.32476749382100617,0.004619135334707814,True,True,False,False,True,True,False,False
+476,agent_14,True,full_bound,True,supported,agent_14 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13,32,0.04436960713616303,0.2,False,True,False,True,False,True,False,True
+476,agent_14,True,received_speed,True,supported,agent_14 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13,32,0.04436960713616303,0.0010055171595974952,False,True,False,True,False,True,False,True
+476,agent_15,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+476,agent_15,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+477,agent_00,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+477,agent_00,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+477,agent_01,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+477,agent_01,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+477,agent_02,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+477,agent_02,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+477,agent_03,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+477,agent_03,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+477,agent_04,False,full_bound,True,supported,agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,60,0.05091096436301179,0.2,True,True,False,False,True,True,False,False
+477,agent_04,False,received_speed,True,supported,agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,60,0.05091096436301179,0.023921831197557208,True,True,False,False,True,True,False,False
+477,agent_05,False,full_bound,True,supported,agent_05 agent_04 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,40,-0.0005020286931974316,0.2,True,True,False,False,True,True,False,False
+477,agent_05,False,received_speed,True,supported,agent_05 agent_04 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,40,-0.0005020286931974316,0.023921831197557208,True,True,False,False,True,True,False,False
+477,agent_06,False,full_bound,False,isolated_gap_exceeds_cap,agent_06 agent_04 agent_05 agent_07 agent_08 agent_10 agent_12 agent_14,,,,True,,,,True,,,
+477,agent_06,False,received_speed,False,isolated_gap_exceeds_cap,agent_06 agent_04 agent_05 agent_07 agent_08 agent_10 agent_12 agent_14,,,,True,,,,True,,,
+477,agent_07,False,full_bound,True,supported,agent_07 agent_04 agent_05 agent_06 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,63,0.07249267779810306,0.2,True,True,False,False,True,True,False,False
+477,agent_07,False,received_speed,True,supported,agent_07 agent_04 agent_05 agent_06 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,63,0.07249267779810306,0.023921831197557208,True,True,False,False,True,True,False,False
+477,agent_08,False,full_bound,True,supported,agent_08 agent_04 agent_05 agent_06 agent_07 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,62,0.058923573081008734,0.2,True,True,False,False,True,True,False,False
+477,agent_08,False,received_speed,True,supported,agent_08 agent_04 agent_05 agent_06 agent_07 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,62,0.058923573081008734,0.023921831197557208,True,True,False,False,True,True,False,False
+477,agent_09,False,full_bound,True,supported,agent_09 agent_04 agent_05 agent_07 agent_08 agent_10 agent_11 agent_12 agent_13 agent_14,52,0.1472088694994584,0.2,True,True,False,False,True,True,False,False
+477,agent_09,False,received_speed,True,supported,agent_09 agent_04 agent_05 agent_07 agent_08 agent_10 agent_11 agent_12 agent_13 agent_14,52,0.1472088694994584,0.020899526621566456,True,True,False,False,True,True,False,False
+477,agent_10,False,full_bound,True,supported,agent_10 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_11 agent_12 agent_13 agent_14,48,0.1945487269290504,0.2,True,True,False,False,True,True,False,False
+477,agent_10,False,received_speed,True,supported,agent_10 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_11 agent_12 agent_13 agent_14,48,0.1945487269290504,0.023921831197557215,True,True,False,False,True,True,False,False
+477,agent_11,False,full_bound,True,supported,agent_11 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,34,0.4879593371228235,0.2,True,True,False,False,True,True,False,False
+477,agent_11,False,received_speed,True,supported,agent_11 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,34,0.4879593371228235,0.019110955250029624,True,True,False,False,True,True,False,False
+477,agent_12,False,full_bound,True,supported,agent_12 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,59,0.18199005790121828,0.2,True,True,False,False,True,True,False,False
+477,agent_12,False,received_speed,True,supported,agent_12 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,59,0.18199005790121828,0.02648757634909502,True,True,False,False,True,True,False,False
+477,agent_13,False,full_bound,True,supported,agent_13 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_14,35,0.3226879277394295,0.2,True,True,False,False,True,True,False,False
+477,agent_13,False,received_speed,True,supported,agent_13 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_14,35,0.3226879277394295,0.02089952662156646,True,True,False,False,True,True,False,False
+477,agent_14,True,full_bound,True,supported,agent_14 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13,34,0.041633155368248964,0.2,False,True,False,True,False,True,False,True
+477,agent_14,True,received_speed,True,supported,agent_14 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13,34,0.041633155368248964,0.02392183119755722,False,True,False,True,False,True,False,True
+477,agent_15,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+477,agent_15,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+478,agent_00,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+478,agent_00,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+478,agent_01,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+478,agent_01,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+478,agent_02,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+478,agent_02,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+478,agent_03,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+478,agent_03,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+478,agent_04,False,full_bound,True,supported,agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,58,0.041729854794026605,0.2,True,True,False,False,True,True,False,False
+478,agent_04,False,received_speed,True,supported,agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,58,0.041729854794026605,0.004813653880808484,True,True,False,False,True,True,False,False
+478,agent_05,False,full_bound,True,supported,agent_05 agent_04 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,39,-0.005342008224821768,0.2,True,True,False,False,True,True,False,False
+478,agent_05,False,received_speed,True,supported,agent_05 agent_04 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,39,-0.005342008224821768,0.004813653880808484,True,True,False,False,True,True,False,False
+478,agent_06,False,full_bound,False,isolated_gap_exceeds_cap,agent_06 agent_04 agent_05 agent_07 agent_08 agent_10 agent_12 agent_14,,,,True,,,,True,,,
+478,agent_06,False,received_speed,False,isolated_gap_exceeds_cap,agent_06 agent_04 agent_05 agent_07 agent_08 agent_10 agent_12 agent_14,,,,True,,,,True,,,
+478,agent_07,False,full_bound,True,supported,agent_07 agent_04 agent_05 agent_06 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,59,0.08352842278086628,0.2,True,True,False,False,True,True,False,False
+478,agent_07,False,received_speed,True,supported,agent_07 agent_04 agent_05 agent_06 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,59,0.08352842278086628,0.004813653880808483,True,True,False,False,True,True,False,False
+478,agent_08,False,full_bound,True,supported,agent_08 agent_04 agent_05 agent_06 agent_07 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,63,0.06375296792789112,0.2,True,True,False,False,True,True,False,False
+478,agent_08,False,received_speed,True,supported,agent_08 agent_04 agent_05 agent_06 agent_07 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,63,0.06375296792789112,0.004813653880808483,True,True,False,False,True,True,False,False
+478,agent_09,False,full_bound,True,supported,agent_09 agent_04 agent_05 agent_07 agent_08 agent_10 agent_11 agent_12 agent_13 agent_14,51,0.14512844576121756,0.2,True,True,False,False,True,True,False,False
+478,agent_09,False,received_speed,True,supported,agent_09 agent_04 agent_05 agent_07 agent_08 agent_10 agent_11 agent_12 agent_13 agent_14,51,0.14512844576121756,0.004813653945418357,True,True,False,False,True,True,False,False
+478,agent_10,False,full_bound,True,supported,agent_10 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_11 agent_12 agent_13 agent_14,48,0.19915281860538275,0.2,True,True,False,False,True,True,False,False
+478,agent_10,False,received_speed,True,supported,agent_10 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_11 agent_12 agent_13 agent_14,48,0.19915281860538275,0.004813653880808483,True,True,False,False,True,True,False,False
+478,agent_11,False,full_bound,True,supported,agent_11 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,33,0.48278320593611496,0.2,True,True,False,False,True,True,False,False
+478,agent_11,False,received_speed,True,supported,agent_11 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,33,0.48278320593611496,0.004813653878401111,True,True,False,False,True,True,False,False
+478,agent_12,False,full_bound,True,supported,agent_12 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,58,0.17996346652661957,0.2,True,True,False,False,True,True,False,False
+478,agent_12,False,received_speed,True,supported,agent_12 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,58,0.17996346652661957,0.004856317949335172,True,True,False,False,True,True,False,False
+478,agent_13,False,full_bound,True,supported,agent_13 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_14,35,0.32931255130127784,0.2,True,True,False,False,True,True,False,False
+478,agent_13,False,received_speed,True,supported,agent_13 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_14,35,0.32931255130127784,0.004813653945418356,True,True,False,False,True,True,False,False
+478,agent_14,True,full_bound,True,supported,agent_14 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13,34,0.050249076745400606,0.2,False,True,False,True,False,True,False,True
+478,agent_14,True,received_speed,True,supported,agent_14 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13,34,0.050249076745400606,0.004813653880808482,False,True,False,True,False,True,False,True
+478,agent_15,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+478,agent_15,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+479,agent_00,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+479,agent_00,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+479,agent_01,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+479,agent_01,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+479,agent_02,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+479,agent_02,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+479,agent_03,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+479,agent_03,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+479,agent_04,False,full_bound,True,supported,agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,60,0.04492421838197044,0.2,True,True,False,False,True,True,False,False
+479,agent_04,False,received_speed,True,supported,agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,60,0.04492421838197044,0.004759539938019466,True,True,False,False,True,True,False,False
+479,agent_05,False,full_bound,True,supported,agent_05 agent_04 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,39,-0.008106541537949513,0.2,True,True,False,False,True,True,False,False
+479,agent_05,False,received_speed,True,supported,agent_05 agent_04 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,39,-0.008106541537949513,0.004759539938019466,True,True,False,False,True,True,False,False
+479,agent_06,False,full_bound,False,isolated_gap_exceeds_cap,agent_06 agent_04 agent_05 agent_07 agent_08 agent_10 agent_12 agent_14,,,,True,,,,True,,,
+479,agent_06,False,received_speed,False,isolated_gap_exceeds_cap,agent_06 agent_04 agent_05 agent_07 agent_08 agent_10 agent_12 agent_14,,,,True,,,,True,,,
+479,agent_07,False,full_bound,True,supported,agent_07 agent_04 agent_05 agent_06 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,62,0.06349197968234135,0.2,True,True,False,False,True,True,False,False
+479,agent_07,False,received_speed,True,supported,agent_07 agent_04 agent_05 agent_06 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,62,0.06349197968234135,0.004759539938019466,True,True,False,False,True,True,False,False
+479,agent_08,False,full_bound,True,supported,agent_08 agent_04 agent_05 agent_06 agent_07 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,61,0.0714693507545732,0.2,True,True,False,False,True,True,False,False
+479,agent_08,False,received_speed,True,supported,agent_08 agent_04 agent_05 agent_06 agent_07 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,61,0.0714693507545732,0.004759539938019466,True,True,False,False,True,True,False,False
+479,agent_09,False,full_bound,True,supported,agent_09 agent_04 agent_05 agent_07 agent_08 agent_10 agent_11 agent_12 agent_13 agent_14,54,0.14392858423342453,0.2,True,True,False,False,True,True,False,False
+479,agent_09,False,received_speed,True,supported,agent_09 agent_04 agent_05 agent_07 agent_08 agent_10 agent_11 agent_12 agent_13 agent_14,54,0.14392858423342453,0.006227629108386938,True,True,False,False,True,True,False,False
+479,agent_10,False,full_bound,True,supported,agent_10 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_11 agent_12 agent_13 agent_14,48,0.19990801192801705,0.2,True,True,False,False,True,True,False,False
+479,agent_10,False,received_speed,True,supported,agent_10 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_11 agent_12 agent_13 agent_14,48,0.19990801192801705,0.004759539938019465,True,True,False,False,True,True,False,False
+479,agent_11,False,full_bound,True,supported,agent_11 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,33,0.4876467191455787,0.2,True,True,False,False,True,True,False,False
+479,agent_11,False,received_speed,True,supported,agent_11 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,33,0.4876467191455787,0.0043683972185642565,True,True,False,False,True,True,False,False
+479,agent_12,False,full_bound,True,supported,agent_12 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,59,0.17285430868595544,0.2,True,True,False,False,True,True,False,False
+479,agent_12,False,received_speed,True,supported,agent_12 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,59,0.17285430868595544,0.005280830062532528,True,True,False,False,True,True,False,False
+479,agent_13,False,full_bound,True,supported,agent_13 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_14,36,0.33000522159507534,0.2,True,True,False,False,True,True,False,False
+479,agent_13,False,received_speed,True,supported,agent_13 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_14,36,0.33000522159507534,0.006227629108386938,True,True,False,False,True,True,False,False
+479,agent_14,True,full_bound,True,supported,agent_14 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13,34,0.05156312800875118,0.2,False,True,False,True,False,True,False,True
+479,agent_14,True,received_speed,True,supported,agent_14 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13,34,0.05156312800875118,0.004759539938019465,False,True,False,True,False,True,False,True
+479,agent_15,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+479,agent_15,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+480,agent_00,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+480,agent_00,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+480,agent_01,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+480,agent_01,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+480,agent_02,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+480,agent_02,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+480,agent_03,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+480,agent_03,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+480,agent_04,False,full_bound,True,supported,agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,55,0.04486313676838849,0.2,True,True,False,False,True,True,False,False
+480,agent_04,False,received_speed,True,supported,agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,55,0.04486313676838849,0.015085418325731015,True,True,False,False,True,True,False,False
+480,agent_05,False,full_bound,True,supported,agent_05 agent_04 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,40,-0.01966536038523642,0.2,True,True,False,False,True,False,True,False
+480,agent_05,False,received_speed,True,supported,agent_05 agent_04 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,40,-0.01966536038523642,0.015085418325731015,True,True,False,False,True,True,False,False
+480,agent_06,False,full_bound,True,supported,agent_06 agent_04 agent_05 agent_07 agent_08 agent_10 agent_12 agent_14,25,0.05578950580524478,0.2,True,True,False,False,True,True,False,False
+480,agent_06,False,received_speed,True,supported,agent_06 agent_04 agent_05 agent_07 agent_08 agent_10 agent_12 agent_14,25,0.05578950580524478,0.017004029591257717,True,True,False,False,True,True,False,False
+480,agent_07,False,full_bound,True,supported,agent_07 agent_04 agent_05 agent_06 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,55,0.07189767945408004,0.2,True,True,False,False,True,True,False,False
+480,agent_07,False,received_speed,True,supported,agent_07 agent_04 agent_05 agent_06 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,55,0.07189767945408004,0.015085418325731013,True,True,False,False,True,True,False,False
+480,agent_08,False,full_bound,True,supported,agent_08 agent_04 agent_05 agent_06 agent_07 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,62,0.06956275249772362,0.2,True,True,False,False,True,True,False,False
+480,agent_08,False,received_speed,True,supported,agent_08 agent_04 agent_05 agent_06 agent_07 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,62,0.06956275249772362,0.015085418325731013,True,True,False,False,True,True,False,False
+480,agent_09,False,full_bound,True,supported,agent_09 agent_04 agent_05 agent_07 agent_08 agent_10 agent_11 agent_12 agent_13 agent_14,51,0.14434828277112635,0.2,True,True,False,False,True,True,False,False
+480,agent_09,False,received_speed,True,supported,agent_09 agent_04 agent_05 agent_07 agent_08 agent_10 agent_11 agent_12 agent_13 agent_14,51,0.14434828277112635,0.015256380525407955,True,True,False,False,True,True,False,False
+480,agent_10,False,full_bound,True,supported,agent_10 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_11 agent_12 agent_13 agent_14,47,0.18772281893744575,0.2,True,True,False,False,True,True,False,False
+480,agent_10,False,received_speed,True,supported,agent_10 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_11 agent_12 agent_13 agent_14,47,0.18772281893744575,0.015085418325731013,True,True,False,False,True,True,False,False
+480,agent_11,False,full_bound,True,supported,agent_11 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,36,0.47431009019240294,0.2,True,True,False,False,True,True,False,False
+480,agent_11,False,received_speed,True,supported,agent_11 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,36,0.47431009019240294,0.015443657366516107,True,True,False,False,True,True,False,False
+480,agent_12,False,full_bound,True,supported,agent_12 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,59,0.17344580321224393,0.2,True,True,False,False,True,True,False,False
+480,agent_12,False,received_speed,True,supported,agent_12 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,59,0.17344580321224393,0.01591310293142261,True,True,False,False,True,True,False,False
+480,agent_13,False,full_bound,True,supported,agent_13 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_14,35,0.32463885884457916,0.2,True,True,False,False,True,True,False,False
+480,agent_13,False,received_speed,True,supported,agent_13 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_14,35,0.32463885884457916,0.015256380525407951,True,True,False,False,True,True,False,False
+480,agent_14,True,full_bound,True,supported,agent_14 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13,32,0.04457149929489246,0.2,False,True,False,True,False,True,False,True
+480,agent_14,True,received_speed,True,supported,agent_14 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13,32,0.04457149929489246,0.015085418325731011,False,True,False,True,False,True,False,True
+480,agent_15,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+480,agent_15,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+482,agent_00,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+482,agent_00,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+482,agent_01,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+482,agent_01,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+482,agent_02,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+482,agent_02,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+482,agent_03,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+482,agent_03,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+482,agent_04,False,full_bound,True,supported,agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,58,0.03318980052385337,0.2,True,True,False,False,True,True,False,False
+482,agent_04,False,received_speed,True,supported,agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,58,0.03318980052385337,0.004557735913188443,True,True,False,False,True,True,False,False
+482,agent_05,False,full_bound,True,supported,agent_05 agent_04 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,39,-0.01649882348722234,0.2,True,True,False,False,True,False,True,False
+482,agent_05,False,received_speed,True,supported,agent_05 agent_04 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,39,-0.01649882348722234,0.004557735913188443,True,True,False,False,True,True,False,False
+482,agent_06,False,full_bound,False,isolated_gap_exceeds_cap,agent_06 agent_04 agent_05 agent_07 agent_08 agent_10 agent_12 agent_14,,,,True,,,,True,,,
+482,agent_06,False,received_speed,False,isolated_gap_exceeds_cap,agent_06 agent_04 agent_05 agent_07 agent_08 agent_10 agent_12 agent_14,,,,True,,,,True,,,
+482,agent_07,False,full_bound,True,supported,agent_07 agent_04 agent_05 agent_06 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,56,0.06114027697259086,0.2,True,True,False,False,True,True,False,False
+482,agent_07,False,received_speed,True,supported,agent_07 agent_04 agent_05 agent_06 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,56,0.06114027697259086,0.004557735913188443,True,True,False,False,True,True,False,False
+482,agent_08,False,full_bound,True,supported,agent_08 agent_04 agent_05 agent_06 agent_07 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,62,0.06785693524098282,0.2,True,True,False,False,True,True,False,False
+482,agent_08,False,received_speed,True,supported,agent_08 agent_04 agent_05 agent_06 agent_07 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,62,0.06785693524098282,0.0045577359131884435,True,True,False,False,True,True,False,False
+482,agent_09,False,full_bound,True,supported,agent_09 agent_04 agent_05 agent_07 agent_08 agent_10 agent_11 agent_12 agent_13 agent_14,50,0.13534159202558868,0.2,True,True,False,False,True,True,False,False
+482,agent_09,False,received_speed,True,supported,agent_09 agent_04 agent_05 agent_07 agent_08 agent_10 agent_11 agent_12 agent_13 agent_14,50,0.13534159202558868,0.002973150591211506,True,True,False,False,True,True,False,False
+482,agent_10,False,full_bound,True,supported,agent_10 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_11 agent_12 agent_13 agent_14,46,0.180632632315834,0.2,True,True,False,False,True,True,False,False
+482,agent_10,False,received_speed,True,supported,agent_10 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_11 agent_12 agent_13 agent_14,46,0.180632632315834,0.004557735913188445,True,True,False,False,True,True,False,False
+482,agent_11,False,full_bound,True,supported,agent_11 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,38,0.48300091811648266,0.2,True,True,False,False,True,True,False,False
+482,agent_11,False,received_speed,True,supported,agent_11 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,38,0.48300091811648266,0.00378329241594004,True,True,False,False,True,True,False,False
+482,agent_12,False,full_bound,True,supported,agent_12 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,54,0.16366490034477096,0.2,True,True,False,False,True,True,False,False
+482,agent_12,False,received_speed,True,supported,agent_12 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,54,0.16366490034477096,0.00564315886845206,True,True,False,False,True,True,False,False
+482,agent_13,False,full_bound,True,supported,agent_13 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_14,37,0.3205066681788203,0.2,True,True,False,False,True,True,False,False
+482,agent_13,False,received_speed,True,supported,agent_13 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_14,37,0.3205066681788203,0.0029731505912115055,True,True,False,False,True,True,False,False
+482,agent_14,True,full_bound,True,supported,agent_14 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13,33,0.04080416513770477,0.2,False,True,False,True,False,True,False,True
+482,agent_14,True,received_speed,True,supported,agent_14 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13,33,0.04080416513770477,0.004557735913188444,False,True,False,True,False,True,False,True
+482,agent_15,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+482,agent_15,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+483,agent_00,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+483,agent_00,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+483,agent_01,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+483,agent_01,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+483,agent_02,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+483,agent_02,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+483,agent_03,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+483,agent_03,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+483,agent_04,False,full_bound,True,supported,agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,57,0.055728680962205596,0.2,True,True,False,False,True,True,False,False
+483,agent_04,False,received_speed,True,supported,agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,57,0.055728680962205596,0.002958973139100471,True,True,False,False,True,True,False,False
+483,agent_05,False,full_bound,True,supported,agent_05 agent_04 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,41,-0.02410193494886778,0.2,True,True,False,False,True,False,True,False
+483,agent_05,False,received_speed,True,supported,agent_05 agent_04 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,41,-0.02410193494886778,0.002958973139100471,True,True,False,False,True,True,False,False
+483,agent_06,False,full_bound,True,supported,agent_06 agent_04 agent_05 agent_07 agent_08 agent_10 agent_12 agent_14,23,0.06599945640184235,0.2,True,True,False,False,True,True,False,False
+483,agent_06,False,received_speed,True,supported,agent_06 agent_04 agent_05 agent_07 agent_08 agent_10 agent_12 agent_14,23,0.06599945640184235,0.007899699892835984,True,True,False,False,True,True,False,False
+483,agent_07,False,full_bound,True,supported,agent_07 agent_04 agent_05 agent_06 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,58,0.07164152082586056,0.2,True,True,False,False,True,True,False,False
+483,agent_07,False,received_speed,True,supported,agent_07 agent_04 agent_05 agent_06 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,58,0.07164152082586056,0.0029589731391004713,True,True,False,False,True,True,False,False
+483,agent_08,False,full_bound,True,supported,agent_08 agent_04 agent_05 agent_06 agent_07 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,61,0.07107660777631941,0.2,True,True,False,False,True,True,False,False
+483,agent_08,False,received_speed,True,supported,agent_08 agent_04 agent_05 agent_06 agent_07 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,61,0.07107660777631941,0.0029589731391004705,True,True,False,False,True,True,False,False
+483,agent_09,False,full_bound,True,supported,agent_09 agent_04 agent_05 agent_07 agent_08 agent_10 agent_11 agent_12 agent_13 agent_14,50,0.1268153513044281,0.2,True,True,False,False,True,True,False,False
+483,agent_09,False,received_speed,True,supported,agent_09 agent_04 agent_05 agent_07 agent_08 agent_10 agent_11 agent_12 agent_13 agent_14,50,0.1268153513044281,0.0009224321397723131,True,True,False,False,True,True,False,False
+483,agent_10,False,full_bound,True,supported,agent_10 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_11 agent_12 agent_13 agent_14,44,0.18736825410841335,0.2,True,True,False,False,True,True,False,False
+483,agent_10,False,received_speed,True,supported,agent_10 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_11 agent_12 agent_13 agent_14,44,0.18736825410841335,0.002958973139100471,True,True,False,False,True,True,False,False
+483,agent_11,False,full_bound,True,supported,agent_11 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,38,0.4784790666837216,0.2,True,True,False,False,True,True,False,False
+483,agent_11,False,received_speed,True,supported,agent_11 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,38,0.4784790666837216,0.0029368644354200403,True,True,False,False,True,True,False,False
+483,agent_12,False,full_bound,True,supported,agent_12 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,56,0.1615966164160191,0.2,True,True,False,False,True,True,False,False
+483,agent_12,False,received_speed,True,supported,agent_12 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,56,0.1615966164160191,0.005173546500647291,True,True,False,False,True,True,False,False
+483,agent_13,False,full_bound,True,supported,agent_13 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_14,36,0.3171609033554677,0.2,True,True,False,False,True,True,False,False
+483,agent_13,False,received_speed,True,supported,agent_13 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_14,36,0.3171609033554677,0.000922432139772313,True,True,False,False,True,True,False,False
+483,agent_14,True,full_bound,True,supported,agent_14 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13,32,0.04336649687219532,0.2,False,True,False,True,False,True,False,True
+483,agent_14,True,received_speed,True,supported,agent_14 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13,32,0.04336649687219532,0.002958973139100471,False,True,False,True,False,True,False,True
+483,agent_15,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+483,agent_15,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+484,agent_00,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+484,agent_00,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+484,agent_01,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+484,agent_01,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+484,agent_02,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+484,agent_02,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+484,agent_03,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+484,agent_03,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+484,agent_04,False,full_bound,True,supported,agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,60,0.054970735940332915,0.2,True,True,False,False,True,True,False,False
+484,agent_04,False,received_speed,True,supported,agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,60,0.054970735940332915,0.01098887872512939,True,True,False,False,True,True,False,False
+484,agent_05,False,full_bound,True,supported,agent_05 agent_04 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,40,-0.009989326162604076,0.2,True,True,False,False,True,True,False,False
+484,agent_05,False,received_speed,True,supported,agent_05 agent_04 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,40,-0.009989326162604076,0.01098887872512939,True,True,False,False,True,True,False,False
+484,agent_06,False,full_bound,True,supported,agent_06 agent_04 agent_05 agent_07 agent_08 agent_10 agent_12 agent_14,22,0.04165359075401001,0.2,True,True,False,False,True,True,False,False
+484,agent_06,False,received_speed,True,supported,agent_06 agent_04 agent_05 agent_07 agent_08 agent_10 agent_12 agent_14,22,0.04165359075401001,0.01247829529952348,True,True,False,False,True,True,False,False
+484,agent_07,False,full_bound,True,supported,agent_07 agent_04 agent_05 agent_06 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,61,0.07688360496593977,0.2,True,True,False,False,True,True,False,False
+484,agent_07,False,received_speed,True,supported,agent_07 agent_04 agent_05 agent_06 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,61,0.07688360496593977,0.01098887872512939,True,True,False,False,True,True,False,False
+484,agent_08,False,full_bound,True,supported,agent_08 agent_04 agent_05 agent_06 agent_07 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,59,0.06572263041539333,0.2,True,True,False,False,True,True,False,False
+484,agent_08,False,received_speed,True,supported,agent_08 agent_04 agent_05 agent_06 agent_07 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,59,0.06572263041539333,0.01098887872512939,True,True,False,False,True,True,False,False
+484,agent_09,False,full_bound,True,supported,agent_09 agent_04 agent_05 agent_07 agent_08 agent_10 agent_11 agent_12 agent_13 agent_14,50,0.12579902782750224,0.2,True,True,False,False,True,True,False,False
+484,agent_09,False,received_speed,True,supported,agent_09 agent_04 agent_05 agent_07 agent_08 agent_10 agent_11 agent_12 agent_13 agent_14,50,0.12579902782750224,0.009864105530840278,True,True,False,False,True,True,False,False
+484,agent_10,False,full_bound,True,supported,agent_10 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_11 agent_12 agent_13 agent_14,49,0.1677692115079776,0.2,True,True,False,False,True,True,False,False
+484,agent_10,False,received_speed,True,supported,agent_10 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_11 agent_12 agent_13 agent_14,49,0.1677692115079776,0.01098887872512939,True,True,False,False,True,True,False,False
+484,agent_11,False,full_bound,True,supported,agent_11 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,40,0.47931870841790486,0.2,True,True,False,False,True,True,False,False
+484,agent_11,False,received_speed,True,supported,agent_11 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,40,0.47931870841790486,0.008641940284983149,True,True,False,False,True,True,False,False
+484,agent_12,False,full_bound,True,supported,agent_12 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,56,0.1538215983855117,0.2,True,True,False,False,True,True,False,False
+484,agent_12,False,received_speed,True,supported,agent_12 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,56,0.1538215983855117,0.011517341208567962,True,True,False,False,True,True,False,False
+484,agent_13,False,full_bound,True,supported,agent_13 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_14,30,0.2843948335915742,0.2,True,True,False,False,True,True,False,False
+484,agent_13,False,received_speed,True,supported,agent_13 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_14,30,0.2843948335915742,0.009864105530840281,True,True,False,False,True,True,False,False
+484,agent_14,True,full_bound,True,supported,agent_14 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13,30,0.0051110209378062155,0.2,False,False,False,False,False,False,False,False
+484,agent_14,True,received_speed,True,supported,agent_14 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13,30,0.0051110209378062155,0.01098887872512939,False,True,False,True,False,True,False,True
+484,agent_15,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+484,agent_15,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+500,agent_00,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+500,agent_00,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+500,agent_01,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+500,agent_01,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+500,agent_02,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+500,agent_02,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+500,agent_03,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+500,agent_03,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+500,agent_04,False,full_bound,True,supported,agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,52,0.06244249949415709,0.2,True,True,False,False,True,True,False,False
+500,agent_04,False,received_speed,True,supported,agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,52,0.06244249949415709,0.016563310192396888,True,True,False,False,True,True,False,False
+500,agent_05,False,full_bound,True,supported,agent_05 agent_04 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,40,-0.012582598847630466,0.2,True,True,False,False,True,True,False,False
+500,agent_05,False,received_speed,True,supported,agent_05 agent_04 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,40,-0.012582598847630466,0.016563310192396888,True,True,False,False,True,True,False,False
+500,agent_06,False,full_bound,True,supported,agent_06 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_12 agent_14,23,0.08216192239797723,0.2,True,True,False,False,True,True,False,False
+500,agent_06,False,received_speed,True,supported,agent_06 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_12 agent_14,23,0.08216192239797723,0.011835761131406107,True,True,False,False,True,True,False,False
+500,agent_07,False,full_bound,True,supported,agent_07 agent_04 agent_05 agent_06 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,57,0.04732233174111908,0.2,True,True,False,False,True,True,False,False
+500,agent_07,False,received_speed,True,supported,agent_07 agent_04 agent_05 agent_06 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,57,0.04732233174111908,0.016563310192396884,True,True,False,False,True,True,False,False
+500,agent_08,False,full_bound,True,supported,agent_08 agent_04 agent_05 agent_06 agent_07 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,54,0.06533039060521476,0.2,True,True,False,False,True,True,False,False
+500,agent_08,False,received_speed,True,supported,agent_08 agent_04 agent_05 agent_06 agent_07 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,54,0.06533039060521476,0.016563310192396888,True,True,False,False,True,True,False,False
+500,agent_09,False,full_bound,True,supported,agent_09 agent_04 agent_05 agent_06 agent_07 agent_08 agent_10 agent_11 agent_12 agent_13 agent_14,55,0.058249377432882415,0.2,True,True,False,False,True,True,False,False
+500,agent_09,False,received_speed,True,supported,agent_09 agent_04 agent_05 agent_06 agent_07 agent_08 agent_10 agent_11 agent_12 agent_13 agent_14,55,0.058249377432882415,0.016563310192396884,True,True,False,False,True,True,False,False
+500,agent_10,False,full_bound,True,supported,agent_10 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_11 agent_12 agent_13 agent_14,44,0.14495756721710953,0.2,True,True,False,False,True,True,False,False
+500,agent_10,False,received_speed,True,supported,agent_10 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_11 agent_12 agent_13 agent_14,44,0.14495756721710953,0.01656331019239688,True,True,False,False,True,True,False,False
+500,agent_11,False,full_bound,True,supported,agent_11 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,62,0.4253284488908004,0.2,True,True,False,False,True,True,False,False
+500,agent_11,False,received_speed,True,supported,agent_11 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,62,0.4253284488908004,0.017210501629919564,True,True,False,False,True,True,False,False
+500,agent_12,False,full_bound,True,supported,agent_12 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,52,0.05606471379501146,0.2,True,True,False,False,True,True,False,False
+500,agent_12,False,received_speed,True,supported,agent_12 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,52,0.05606471379501146,0.014564745252508492,True,True,False,False,True,True,False,False
+500,agent_13,False,full_bound,True,supported,agent_13 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_14,50,0.29846171483755307,0.2,True,True,False,False,True,True,False,False
+500,agent_13,False,received_speed,True,supported,agent_13 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_14,50,0.29846171483755307,0.01400880387035763,True,True,False,False,True,True,False,False
+500,agent_14,True,full_bound,True,supported,agent_14 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13,38,0.04046345729004633,0.2,False,True,False,True,False,True,False,True
+500,agent_14,True,received_speed,True,supported,agent_14 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13,38,0.04046345729004633,0.016563310192396884,False,True,False,True,False,True,False,True
+500,agent_15,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+500,agent_15,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+501,agent_00,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+501,agent_00,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+501,agent_01,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+501,agent_01,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+501,agent_02,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+501,agent_02,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+501,agent_03,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+501,agent_03,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+501,agent_04,False,full_bound,True,supported,agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,53,0.05446517897901745,0.2,True,True,False,False,True,True,False,False
+501,agent_04,False,received_speed,True,supported,agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,53,0.05446517897901745,0.007119719211270186,True,True,False,False,True,True,False,False
+501,agent_05,False,full_bound,True,supported,agent_05 agent_04 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,38,0.005888378892746765,0.2,True,True,False,False,True,True,False,False
+501,agent_05,False,received_speed,True,supported,agent_05 agent_04 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,38,0.005888378892746765,0.007119719211270186,True,True,False,False,True,True,False,False
+501,agent_06,False,full_bound,True,supported,agent_06 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_12 agent_14,22,0.0573076519405287,0.2,True,True,False,False,True,True,False,False
+501,agent_06,False,received_speed,True,supported,agent_06 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_12 agent_14,22,0.0573076519405287,0.007604240129289404,True,True,False,False,True,True,False,False
+501,agent_07,False,full_bound,True,supported,agent_07 agent_04 agent_05 agent_06 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,55,0.07280110688296856,0.2,True,True,False,False,True,True,False,False
+501,agent_07,False,received_speed,True,supported,agent_07 agent_04 agent_05 agent_06 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,55,0.07280110688296856,0.007119719211270186,True,True,False,False,True,True,False,False
+501,agent_08,False,full_bound,True,supported,agent_08 agent_04 agent_05 agent_06 agent_07 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,55,0.06938851902502122,0.2,True,True,False,False,True,True,False,False
+501,agent_08,False,received_speed,True,supported,agent_08 agent_04 agent_05 agent_06 agent_07 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,55,0.06938851902502122,0.007119719211270187,True,True,False,False,True,True,False,False
+501,agent_09,False,full_bound,True,supported,agent_09 agent_04 agent_05 agent_06 agent_07 agent_08 agent_10 agent_11 agent_12 agent_13 agent_14,54,0.0517209217422519,0.2,True,True,False,False,True,True,False,False
+501,agent_09,False,received_speed,True,supported,agent_09 agent_04 agent_05 agent_06 agent_07 agent_08 agent_10 agent_11 agent_12 agent_13 agent_14,54,0.0517209217422519,0.007119719211270184,True,True,False,False,True,True,False,False
+501,agent_10,False,full_bound,True,supported,agent_10 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_11 agent_12 agent_13 agent_14,47,0.15903250894437085,0.2,True,True,False,False,True,True,False,False
+501,agent_10,False,received_speed,True,supported,agent_10 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_11 agent_12 agent_13 agent_14,47,0.15903250894437085,0.007119719211270185,True,True,False,False,True,True,False,False
+501,agent_11,False,full_bound,True,supported,agent_11 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,60,0.419310174267518,0.2,True,True,False,False,True,True,False,False
+501,agent_11,False,received_speed,True,supported,agent_11 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,60,0.419310174267518,0.0074328174583976935,True,True,False,False,True,True,False,False
+501,agent_12,False,full_bound,True,supported,agent_12 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,47,0.07005684046812735,0.2,True,True,False,False,True,True,False,False
+501,agent_12,False,received_speed,True,supported,agent_12 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,47,0.07005684046812735,0.00755771253092686,True,True,False,False,True,True,False,False
+501,agent_13,False,full_bound,True,supported,agent_13 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_14,52,0.28634084692246303,0.2,True,True,False,False,True,True,False,False
+501,agent_13,False,received_speed,True,supported,agent_13 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_14,52,0.28634084692246303,0.007403342539290889,True,True,False,False,True,True,False,False
+501,agent_14,True,full_bound,True,supported,agent_14 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13,36,0.03367116103906487,0.2,False,True,False,True,False,True,False,True
+501,agent_14,True,received_speed,True,supported,agent_14 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13,36,0.03367116103906487,0.007119719211270186,False,True,False,True,False,True,False,True
+501,agent_15,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+501,agent_15,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+502,agent_00,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+502,agent_00,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+502,agent_01,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+502,agent_01,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+502,agent_02,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+502,agent_02,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+502,agent_03,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+502,agent_03,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+502,agent_04,False,full_bound,True,supported,agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,55,0.07295729285557886,0.2,True,True,False,False,True,True,False,False
+502,agent_04,False,received_speed,True,supported,agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,55,0.07295729285557886,0.010234774167930501,True,True,False,False,True,True,False,False
+502,agent_05,False,full_bound,True,supported,agent_05 agent_04 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,39,-0.004902188282072076,0.2,True,True,False,False,True,True,False,False
+502,agent_05,False,received_speed,True,supported,agent_05 agent_04 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,39,-0.004902188282072076,0.010234774167930501,True,True,False,False,True,True,False,False
+502,agent_06,False,full_bound,True,supported,agent_06 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_12 agent_14,22,0.05740359805476561,0.2,True,True,False,False,True,True,False,False
+502,agent_06,False,received_speed,True,supported,agent_06 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_12 agent_14,22,0.05740359805476561,0.011666661543077448,True,True,False,False,True,True,False,False
+502,agent_07,False,full_bound,True,supported,agent_07 agent_04 agent_05 agent_06 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,50,0.06991125061444925,0.2,True,True,False,False,True,True,False,False
+502,agent_07,False,received_speed,True,supported,agent_07 agent_04 agent_05 agent_06 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,50,0.06991125061444925,0.010234774167930503,True,True,False,False,True,True,False,False
+502,agent_08,False,full_bound,True,supported,agent_08 agent_04 agent_05 agent_06 agent_07 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,58,0.08231450780194335,0.2,True,True,False,False,True,True,False,False
+502,agent_08,False,received_speed,True,supported,agent_08 agent_04 agent_05 agent_06 agent_07 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,58,0.08231450780194335,0.010234774167930501,True,True,False,False,True,True,False,False
+502,agent_09,False,full_bound,True,supported,agent_09 agent_04 agent_05 agent_06 agent_07 agent_08 agent_10 agent_11 agent_12 agent_13 agent_14,55,0.04832214035766788,0.2,True,True,False,False,True,True,False,False
+502,agent_09,False,received_speed,True,supported,agent_09 agent_04 agent_05 agent_06 agent_07 agent_08 agent_10 agent_11 agent_12 agent_13 agent_14,55,0.04832214035766788,0.010234774167930503,True,True,False,False,True,True,False,False
+502,agent_10,False,full_bound,True,supported,agent_10 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_11 agent_12 agent_13 agent_14,45,0.16409858118861206,0.2,True,True,False,False,True,True,False,False
+502,agent_10,False,received_speed,True,supported,agent_10 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_11 agent_12 agent_13 agent_14,45,0.16409858118861206,0.010234774167930503,True,True,False,False,True,True,False,False
+502,agent_11,False,full_bound,True,supported,agent_11 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,60,0.39814811625248897,0.2,True,True,False,False,True,True,False,False
+502,agent_11,False,received_speed,True,supported,agent_11 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,60,0.39814811625248897,0.009398191371524056,True,True,False,False,True,True,False,False
+502,agent_12,False,full_bound,True,supported,agent_12 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,47,0.05614522285552517,0.2,True,True,False,False,True,True,False,False
+502,agent_12,False,received_speed,True,supported,agent_12 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,47,0.05614522285552517,0.012687728241431155,True,True,False,False,True,True,False,False
+502,agent_13,False,full_bound,True,supported,agent_13 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_14,55,0.29037951086343633,0.2,True,True,False,False,True,True,False,False
+502,agent_13,False,received_speed,True,supported,agent_13 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_14,55,0.29037951086343633,0.009315185826134073,True,True,False,False,True,True,False,False
+502,agent_14,True,full_bound,True,supported,agent_14 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13,37,0.04419006256467803,0.2,False,True,False,True,False,True,False,True
+502,agent_14,True,received_speed,True,supported,agent_14 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13,37,0.04419006256467803,0.010234774167930503,False,True,False,True,False,True,False,True
+502,agent_15,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+502,agent_15,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+516,agent_00,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+516,agent_00,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+516,agent_01,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+516,agent_01,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+516,agent_02,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+516,agent_02,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+516,agent_03,False,full_bound,False,outside_range,agent_03 agent_01 agent_02 agent_05,,,,True,,,,True,,,
+516,agent_03,False,received_speed,False,outside_range,agent_03 agent_01 agent_02 agent_05,,,,True,,,,True,,,
+516,agent_04,False,full_bound,True,supported,agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,51,0.03859280857535788,0.2,True,True,False,False,True,True,False,False
+516,agent_04,False,received_speed,True,supported,agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,51,0.03859280857535788,0.013846562330270708,True,True,False,False,True,True,False,False
+516,agent_05,False,full_bound,True,supported,agent_05 agent_03 agent_04 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,35,0.0006658186642863606,0.2,True,True,False,False,True,True,False,False
+516,agent_05,False,received_speed,True,supported,agent_05 agent_03 agent_04 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,35,0.0006658186642863606,0.013267972677101558,True,True,False,False,True,True,False,False
+516,agent_06,False,full_bound,True,supported,agent_06 agent_04 agent_07 agent_08 agent_09 agent_10 agent_12,20,0.059479214084585674,0.2,True,True,False,False,True,True,False,False
+516,agent_06,False,received_speed,True,supported,agent_06 agent_04 agent_07 agent_08 agent_09 agent_10 agent_12,20,0.059479214084585674,0.01800153919935934,True,True,False,False,True,True,False,False
+516,agent_07,False,full_bound,True,supported,agent_07 agent_04 agent_05 agent_06 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,53,0.05160190830652786,0.2,True,True,False,False,True,True,False,False
+516,agent_07,False,received_speed,True,supported,agent_07 agent_04 agent_05 agent_06 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,53,0.05160190830652786,0.01384656233027071,True,True,False,False,True,True,False,False
+516,agent_08,False,full_bound,True,supported,agent_08 agent_04 agent_05 agent_06 agent_07 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,56,0.052598216932978586,0.2,True,True,False,False,True,True,False,False
+516,agent_08,False,received_speed,True,supported,agent_08 agent_04 agent_05 agent_06 agent_07 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,56,0.052598216932978586,0.01384656233027071,True,True,False,False,True,True,False,False
+516,agent_09,False,full_bound,True,supported,agent_09 agent_04 agent_05 agent_06 agent_07 agent_08 agent_10 agent_11 agent_12 agent_13 agent_14,54,-0.00441781554088666,0.2,True,True,False,False,True,False,True,False
+516,agent_09,False,received_speed,True,supported,agent_09 agent_04 agent_05 agent_06 agent_07 agent_08 agent_10 agent_11 agent_12 agent_13 agent_14,54,-0.00441781554088666,0.01384656233027071,True,True,False,False,True,True,False,False
+516,agent_10,False,full_bound,True,supported,agent_10 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_11 agent_12 agent_13 agent_14,40,0.1349157445735499,0.2,True,True,False,False,True,True,False,False
+516,agent_10,False,received_speed,True,supported,agent_10 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_11 agent_12 agent_13 agent_14,40,0.1349157445735499,0.01384656233027071,True,True,False,False,True,True,False,False
+516,agent_11,False,full_bound,True,supported,agent_11 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,73,0.3690804255935936,0.2,True,True,False,False,True,True,False,False
+516,agent_11,False,received_speed,True,supported,agent_11 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,73,0.3690804255935936,0.012823654440860446,True,True,False,False,True,True,False,False
+516,agent_12,False,full_bound,True,supported,agent_12 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,38,0.06639229904399829,0.2,True,True,False,False,True,True,False,False
+516,agent_12,False,received_speed,True,supported,agent_12 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,38,0.06639229904399829,0.014827583062696395,True,True,False,False,True,True,False,False
+516,agent_13,False,full_bound,True,supported,agent_13 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_14,65,0.24668372080190099,0.2,True,True,False,False,True,True,False,False
+516,agent_13,False,received_speed,True,supported,agent_13 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_14,65,0.24668372080190099,0.013267972677101558,True,True,False,False,True,True,False,False
+516,agent_14,True,full_bound,True,supported,agent_14 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13,38,0.05474258782660266,0.2,False,True,False,True,False,True,False,True
+516,agent_14,True,received_speed,True,supported,agent_14 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13,38,0.05474258782660266,0.013267972677101557,False,True,False,True,False,True,False,True
+516,agent_15,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+516,agent_15,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+517,agent_00,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+517,agent_00,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+517,agent_01,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+517,agent_01,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+517,agent_02,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+517,agent_02,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,
+517,agent_03,False,full_bound,False,outside_range,agent_03 agent_01 agent_02 agent_05,,,,True,,,,True,,,
+517,agent_03,False,received_speed,False,outside_range,agent_03 agent_01 agent_02 agent_05,,,,True,,,,True,,,
+517,agent_04,False,full_bound,True,supported,agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,51,0.05475054945924379,0.2,True,True,False,False,True,True,False,False
+517,agent_04,False,received_speed,True,supported,agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,51,0.05475054945924379,0.005301260399081035,True,True,False,False,True,True,False,False
+517,agent_05,False,full_bound,True,supported,agent_05 agent_03 agent_04 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,36,-0.009895030007630076,0.2,True,True,False,False,True,True,False,False
+517,agent_05,False,received_speed,True,supported,agent_05 agent_03 agent_04 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,36,-0.009895030007630076,0.005252478511341832,True,True,False,False,True,True,False,False
+517,agent_06,False,full_bound,True,supported,agent_06 agent_04 agent_07 agent_08 agent_09 agent_10 agent_12,21,0.063022903608879,0.2,True,True,False,False,True,True,False,False
+517,agent_06,False,received_speed,True,supported,agent_06 agent_04 agent_07 agent_08 agent_09 agent_10 agent_12,21,0.063022903608879,0.010073724797317343,True,True,False,False,True,True,False,False
+517,agent_07,False,full_bound,True,supported,agent_07 agent_04 agent_05 agent_06 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,52,0.069412680416049,0.2,True,True,False,False,True,True,False,False
+517,agent_07,False,received_speed,True,supported,agent_07 agent_04 agent_05 agent_06 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,52,0.069412680416049,0.005301260399081035,True,True,False,False,True,True,False,False
+517,agent_08,False,full_bound,True,supported,agent_08 agent_04 agent_05 agent_06 agent_07 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,54,0.0712694926325265,0.2,True,True,False,False,True,True,False,False
+517,agent_08,False,received_speed,True,supported,agent_08 agent_04 agent_05 agent_06 agent_07 agent_09 agent_10 agent_11 agent_12 agent_13 agent_14,54,0.0712694926325265,0.005301260399081035,True,True,False,False,True,True,False,False
+517,agent_09,False,full_bound,True,supported,agent_09 agent_04 agent_05 agent_06 agent_07 agent_08 agent_10 agent_11 agent_12 agent_13 agent_14,54,-0.004459673608944975,0.2,True,True,False,False,True,False,True,False
+517,agent_09,False,received_speed,True,supported,agent_09 agent_04 agent_05 agent_06 agent_07 agent_08 agent_10 agent_11 agent_12 agent_13 agent_14,54,-0.004459673608944975,0.005301260399081035,True,True,False,False,True,True,False,False
+517,agent_10,False,full_bound,True,supported,agent_10 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_11 agent_12 agent_13 agent_14,42,0.15097770678469932,0.2,True,True,False,False,True,True,False,False
+517,agent_10,False,received_speed,True,supported,agent_10 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_11 agent_12 agent_13 agent_14,42,0.15097770678469932,0.005301260399081034,True,True,False,False,True,True,False,False
+517,agent_11,False,full_bound,True,supported,agent_11 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,74,0.3559510317703925,0.2,True,True,False,False,True,True,False,False
+517,agent_11,False,received_speed,True,supported,agent_11 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,74,0.3559510317703925,0.00178042552195894,True,True,False,False,True,True,False,False
+517,agent_12,False,full_bound,True,supported,agent_12 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,38,0.08218959345423693,0.2,True,True,False,False,True,True,False,False
+517,agent_12,False,received_speed,True,supported,agent_12 agent_04 agent_05 agent_06 agent_07 agent_08 agent_09 agent_10 agent_13 agent_14,38,0.08218959345423693,0.005335232591683533,True,True,False,False,True,True,False,False
+517,agent_13,False,full_bound,True,supported,agent_13 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_14,66,0.2681907764020714,0.2,True,True,False,False,True,True,False,False
+517,agent_13,False,received_speed,True,supported,agent_13 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_14,66,0.2681907764020714,0.005252478511341832,True,True,False,False,True,True,False,False
+517,agent_14,True,full_bound,True,supported,agent_14 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13,38,0.08241973265391275,0.2,False,True,False,True,False,True,False,True
+517,agent_14,True,received_speed,True,supported,agent_14 agent_04 agent_05 agent_07 agent_08 agent_09 agent_10 agent_11 agent_12 agent_13,38,0.08241973265391275,0.005252478511341832,False,True,False,True,False,True,False,True
+517,agent_15,False,full_bound,False,no_current_map_motion,,,,,True,,,,True,,,
+517,agent_15,False,received_speed,False,no_current_map_motion,,,,,True,,,,True,,,

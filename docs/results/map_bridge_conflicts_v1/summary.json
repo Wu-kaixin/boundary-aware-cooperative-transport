@@ -1,0 +1,252 @@
+{
+  "new_physical_episodes": 0,
+  "verified_replay_frames": 517,
+  "captured_robot_states": 288,
+  "selected_states": 18,
+  "comparisons": 226,
+  "diagnosis_counts": {
+    "all_18": {
+      "original/capped_full": {
+        "total": 18,
+        "feasible": 0,
+        "object_feasible": 18,
+        "cap_independent_conflicts": 11
+      },
+      "original/uncapped_full": {
+        "total": 18,
+        "feasible": 0,
+        "object_feasible": 16,
+        "cap_independent_conflicts": 11
+      },
+      "original/uncapped_no_rho": {
+        "total": 18,
+        "feasible": 0,
+        "object_feasible": 16,
+        "cap_independent_conflicts": 12
+      },
+      "original/uncapped_zero_motion": {
+        "total": 18,
+        "feasible": 0,
+        "object_feasible": 16,
+        "cap_independent_conflicts": 11
+      },
+      "original/uncapped_zero_motion_no_rho": {
+        "total": 18,
+        "feasible": 0,
+        "object_feasible": 16,
+        "cap_independent_conflicts": 13
+      },
+      "points_only/capped_full": {
+        "total": 17,
+        "feasible": 1,
+        "object_feasible": 17,
+        "cap_independent_conflicts": 15
+      },
+      "points_only/uncapped_full": {
+        "total": 17,
+        "feasible": 0,
+        "object_feasible": 17,
+        "cap_independent_conflicts": 15
+      },
+      "normals_only/capped_full": {
+        "total": 17,
+        "feasible": 2,
+        "object_feasible": 17,
+        "cap_independent_conflicts": 12
+      },
+      "normals_only/uncapped_full": {
+        "total": 17,
+        "feasible": 0,
+        "object_feasible": 16,
+        "cap_independent_conflicts": 12
+      },
+      "points_and_normals/capped_full": {
+        "total": 17,
+        "feasible": 2,
+        "object_feasible": 17,
+        "cap_independent_conflicts": 13
+      },
+      "points_and_normals/uncapped_full": {
+        "total": 17,
+        "feasible": 1,
+        "object_feasible": 17,
+        "cap_independent_conflicts": 13
+      },
+      "true_nearest/capped_full": {
+        "total": 17,
+        "feasible": 17,
+        "object_feasible": 17,
+        "cap_independent_conflicts": 0
+      },
+      "true_nearest/uncapped_full": {
+        "total": 17,
+        "feasible": 17,
+        "object_feasible": 17,
+        "cap_independent_conflicts": 0
+      }
+    },
+    "post_acquisition_17": {
+      "original/capped_full": {
+        "total": 17,
+        "feasible": 0,
+        "object_feasible": 17,
+        "cap_independent_conflicts": 11
+      },
+      "original/uncapped_full": {
+        "total": 17,
+        "feasible": 0,
+        "object_feasible": 15,
+        "cap_independent_conflicts": 11
+      },
+      "original/uncapped_no_rho": {
+        "total": 17,
+        "feasible": 0,
+        "object_feasible": 15,
+        "cap_independent_conflicts": 12
+      },
+      "original/uncapped_zero_motion": {
+        "total": 17,
+        "feasible": 0,
+        "object_feasible": 15,
+        "cap_independent_conflicts": 11
+      },
+      "original/uncapped_zero_motion_no_rho": {
+        "total": 17,
+        "feasible": 0,
+        "object_feasible": 15,
+        "cap_independent_conflicts": 13
+      },
+      "points_only/capped_full": {
+        "total": 17,
+        "feasible": 1,
+        "object_feasible": 17,
+        "cap_independent_conflicts": 15
+      },
+      "points_only/uncapped_full": {
+        "total": 17,
+        "feasible": 0,
+        "object_feasible": 17,
+        "cap_independent_conflicts": 15
+      },
+      "normals_only/capped_full": {
+        "total": 17,
+        "feasible": 2,
+        "object_feasible": 17,
+        "cap_independent_conflicts": 12
+      },
+      "normals_only/uncapped_full": {
+        "total": 17,
+        "feasible": 0,
+        "object_feasible": 16,
+        "cap_independent_conflicts": 12
+      },
+      "points_and_normals/capped_full": {
+        "total": 17,
+        "feasible": 2,
+        "object_feasible": 17,
+        "cap_independent_conflicts": 13
+      },
+      "points_and_normals/uncapped_full": {
+        "total": 17,
+        "feasible": 1,
+        "object_feasible": 17,
+        "cap_independent_conflicts": 13
+      },
+      "true_nearest/capped_full": {
+        "total": 17,
+        "feasible": 17,
+        "object_feasible": 17,
+        "cap_independent_conflicts": 0
+      },
+      "true_nearest/uncapped_full": {
+        "total": 17,
+        "feasible": 17,
+        "object_feasible": 17,
+        "cap_independent_conflicts": 0
+      }
+    }
+  },
+  "observer_17": {
+    "full_bound": {
+      "total": 17,
+      "ready": 17,
+      "feasible": {
+        "capped_full": 16,
+        "uncapped_full": 16
+      }
+    },
+    "received_speed": {
+      "total": 17,
+      "ready": 17,
+      "feasible": {
+        "capped_full": 17,
+        "uncapped_full": 17
+      }
+    },
+    "zero_motion": {
+      "total": 17,
+      "ready": 17,
+      "feasible": {
+        "capped_full": 17,
+        "uncapped_full": 17
+      }
+    }
+  },
+  "neighborhood_272": {
+    "full_bound": {
+      "total": 272,
+      "ready": 181,
+      "fallback": {
+        "no_current_map_motion": 83,
+        "isolated_gap_exceeds_cap": 6,
+        "outside_range": 2
+      },
+      "results": {
+        "capped_full": {
+          "feasible": 180,
+          "newly_infeasible": 0,
+          "rescued": 16
+        },
+        "uncapped_full": {
+          "feasible": 174,
+          "newly_infeasible": 6,
+          "rescued": 16
+        }
+      }
+    },
+    "received_speed": {
+      "total": 272,
+      "ready": 181,
+      "fallback": {
+        "no_current_map_motion": 83,
+        "isolated_gap_exceeds_cap": 6,
+        "outside_range": 2
+      },
+      "results": {
+        "capped_full": {
+          "feasible": 181,
+          "newly_infeasible": 0,
+          "rescued": 17
+        },
+        "uncapped_full": {
+          "feasible": 181,
+          "newly_infeasible": 0,
+          "rescued": 17
+        }
+      }
+    }
+  },
+  "unbounded_solver_crosschecks": 864,
+  "integrated_robot_states": 288,
+  "integrated_admitted": 181,
+  "candidate_adopted": false,
+  "physical_protocol_status": "NOT_FROZEN_NOT_EXECUTED",
+  "old_source_sha256": "de7e895a4a74c44b39bc4395ca800d73b9579c9452c96da67fe3e6fcca3d5432",
+  "new_source_sha256": "e6b7456f5f0a4d71ddd4b33159c058e215115aae35c01b6c5c9eae7e68f32767",
+  "limits": [
+    "Saved-state truth-assisted feasibility cannot establish a deployable repair or closed-loop improvement",
+    "Empirical current-scan observer on 17 selected old states; received speed is not a certified actual speed bound",
+    "Unknown boundary continuations and received motion are empirical assumptions.",
+    "The acquisition state at frame402 is unresolved; the new candidate only replaces post-acquisition rows."
+  ]
+}

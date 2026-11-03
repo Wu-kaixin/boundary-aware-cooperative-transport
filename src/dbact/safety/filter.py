@@ -973,6 +973,8 @@ class SafetyFilter:
         finite_support_packets: list | None = None,
         finite_support_motion_bound: float | None = None,
         finite_support_trace: dict | None = None,
+        post_support_packets: list | None = None,
+        post_support_trace: dict | None = None,
     ) -> PreparedVelocity:
         u_nom = np.asarray(nominal_velocity, dtype=float).reshape(2)
         speed = float(np.linalg.norm(u_nom))
@@ -1008,6 +1010,8 @@ class SafetyFilter:
                 obstacle_vertices=obstacle_vertices,
             )
 
+        if finite_support_packets is not None and post_support_packets is not None:
+            raise ValueError('No simultaneous acquisition and post-acquisition finite support')
         if finite_support_packets is not None and self.params.enable_object_rows:
             if self.params.object_row_mode != 'aggregate' or observed_segments is not None:
                 raise ValueError('Finite acquisition support requires aggregate fallback without segment supplements')
@@ -1029,6 +1033,26 @@ class SafetyFilter:
                 if finite_support_trace is not None:
                     finite_support_trace['cap_active'] = int(np.count_nonzero(
                         b_obj < demand+self.params.rho-1e-15))
+
+        if post_support_packets is not None and self.params.enable_object_rows:
+            if self.params.object_row_mode != 'aggregate' or observed_segments is not None:
+                raise ValueError('Post-acquisition support requires aggregate fallback without segment supplements')
+            from dbact.safety.post_support import build_rows
+            support, demand_speed = build_rows(position, post_support_packets, self.params,
+                observation_time, object_velocity, boundary_point_velocities)
+            if post_support_trace is not None:
+                post_support_trace.update(applied=support.ready, reason=support.reason,
+                    near_returns=support.near_returns, uncovered_returns=support.uncovered_returns,
+                    point_guard_rows=support.point_guard_rows, object_rows=len(support.A),
+                    cover_motion_bound=self.params.object_velocity_bound, demand_speed=demand_speed,
+                    noise_in_radius=False, empirical_only=True)
+            if support.ready:
+                A_obj, h_obj = support.A, support.h
+                demand = demand_speed-self.params.gamma_obj*h_obj
+                b_obj = self._cap_to_reachable(A_obj, demand+self.params.rho)
+                b_obj_free = self._cap_to_reachable(A_obj, demand)
+                if post_support_trace is not None:
+                    post_support_trace['cap_active'] = int(np.count_nonzero(b_obj < demand+self.params.rho-1e-15))
 
         if observed_segments is not None and self.params.enable_object_rows:
             from dbact.sensing.features import segment_rows
