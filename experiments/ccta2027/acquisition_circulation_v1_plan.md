@@ -26,9 +26,12 @@ large configured offsets; information permissions and physical provenance.
 - [x] Add scripts/acquisition_circulation_study.py using unchanged original
       episode/reproduction evaluators. Freeze all12 cases before physics, execute
       once, then report every original and candidate outcome under original gates.
-- [ ] Publish all results and README updates; one fresh final review of the whole
-      increment, one Important-finding fix pass if needed, integrity checks,
-      authorized normal push and verification of that commit's CI.
+- [x] Publish all results and README updates; one fresh final review of the whole
+      increment, one Important-finding fix pass if needed, integrity checks.
+
+Post-commit publication: authorized normal research-branch push and verification
+of that exact commit's CI are recorded in local maintenance github_sync.json and
+github_ci.json; the committed review never assumes future remote success.
 
 Pre-flight interfaces: trace products feed the mechanism rationale only; the
 controller never reads them. New helper feeds only nominal acquisition control;
@@ -61,4 +64,9 @@ both timeout600s in CONTACT_READY; acquisition scaling13/13, post-acquisition0/6
 No adoption, extra physics or retuning. Publish all outcomes and retain the whole
 denominator. First figure has crowded adjacent endpoint labels; a separate v2
 layout and receipt preserve original products and data. Both figures inspected.
-Final review and authorized branch publication remain to be recorded below.
+One independent final review of58b03f1..5d127c5: ready for normal research-branch
+push, no unresolved Critical/Important/Minor findings. No additional fix pass or
+physical rerun. Publication integrity and repository health PASS. Review scope
+and declined claims: docs/results/acquisition_circulation_v1/final_review.md.
+The broader research goal remains active; this increment is a failed development
+screen with better acquisition and worse full transport, not an adopted repair.

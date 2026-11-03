@@ -98,7 +98,7 @@ BRAKE有过4台计数，不应被误写为“整个回合最多3台”。各阶�
 
 [完整分析与全部门槛](analysis.json) · [冻结协议](protocol.json) ·
 [执行收据](execution_outcome.json) · [工程检查](engineering_checks.json) ·
-[原发布产品哈希](publication.json)
+[原发布产品哈希](publication.json) · [最终独立审查](final_review.md)
 
 物理源码SHA-256：`37f2e00017ce2e34ec932956174e7778f639c0732206e023fed74a34ef6dda1e`。
 协议SHA-256：`0ca3f1369196fc882d884cf5583205d7671ab3749489f33a0dc116f140d9fdae`。

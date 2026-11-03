@@ -42,7 +42,7 @@
 
 [完整试验报告与图表](docs/results/reference_surface_v1/README.md) · [全部八块数据](docs/results/reference_surface_v1/all_eight_blocks.csv) · [基线复现证据](docs/results/reference_surface_v1/baseline_reproduction.json) · [部署贡献审计](docs/results/deployment_contribution_v1/README.md)
 
-本轮冻结物理源码对应的[本地完整回归](docs/results/acquisition_circulation_v1/engineering_checks.json)为 **912 项通过、2 项跳过**，针对性检查 **47 项通过**。十二个新物理回合与 1,992 帧旧采集前缀追踪分别记账。前序[配置兼容防护](docs/results/reference_map_v1/final_review.md)继续拒绝会忽略缺测速度界的 `nearest_feature` 组合，历史 903/904 项回归和旧实验仍保留各自源码身份。[Windows / Ubuntu CI](https://github.com/Wu-kaixin/boundary-aware-cooperative-transport/actions/workflows/tests.yml)按各自提交记录核心、MAS 和 smoke 检查。单元测试不等同于研究成功；大体积原始轨迹和冻结源码仍按[数据索引](docs/DATA_INDEX.md)保留本地。
+本轮冻结物理源码对应的[本地完整回归](docs/results/acquisition_circulation_v1/engineering_checks.json)为 **912 项通过、2 项跳过**，针对性检查 **47 项通过**。[最终独立审查](docs/results/acquisition_circulation_v1/final_review.md)无未解决审查项，支持发布完整负结果。十二个新物理回合与 1,992 帧旧采集前缀追踪分别记账。前序[配置兼容防护](docs/results/reference_map_v1/final_review.md)继续拒绝会忽略缺测速度界的 `nearest_feature` 组合，历史 903/904 项回归和旧实验仍保留各自源码身份。[Windows / Ubuntu CI](https://github.com/Wu-kaixin/boundary-aware-cooperative-transport/actions/workflows/tests.yml)按各自提交记录核心、MAS 和 smoke 检查。单元测试不等同于研究成功；大体积原始轨迹和冻结源码仍按[数据索引](docs/DATA_INDEX.md)保留本地。
 
 ## 目前遗留的问题与下一步
 

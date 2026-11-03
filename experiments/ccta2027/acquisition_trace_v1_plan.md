@@ -21,8 +21,9 @@ capacity rejection accounting; individual versus joint QP feasibility.
       publish compact tables and a readable geometry/support figure with hashes.
 - [x] State which hypotheses the evidence supports or refutes, and define the
       next mechanism without changing numeric parameters or relabeling old runs.
-- [ ] Review once, resolve Important findings, check publication integrity,
-      commit and normal-push the existing research branch; verify exact-head CI.
+- [x] Review once, resolve Important findings, check publication integrity and
+      prepare the existing research-branch publication. Post-commit push and
+      exact-head CI receipts are maintained with the joint circulation increment.
 
 Both preflights exact20/20. Full baseline session29611 and candidate23044 terminal
 exit0:791+1201=1992 exactframes. Analyzer46121 terminalexit0. Capacity rejection0,
@@ -34,3 +35,8 @@ Ruling: capacity is not the cause; support and motion stall at a crowded observe
 edge. Proceed under separate acquisition_circulation_v1 design, retaining all old
 failures and numerical parameters. One final review will cover both increments;
 no separate diagnostic-only reviewer or premature push is needed.
+
+Joint final review of58b03f1..5d127c5 found no unresolved Critical/Important/Minor
+issues. The one minor caption ambiguity was clarified without changing historical
+figure products. See docs/results/acquisition_circulation_v1/final_review.md and
+the corresponding maintenance github_sync.json/github_ci.json after publication.
