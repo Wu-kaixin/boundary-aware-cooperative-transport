@@ -1,0 +1,1037 @@
+{
+  "scope": "Posthoc counts from complete preserved episodes; original gates unchanged",
+  "cases": {
+    "far_c_open_away_pos0_reference_map": {
+      "phase_frames": {
+        "SEARCH": 174,
+        "DISCOVER": 208,
+        "ENCLOSE": 73,
+        "CONTACT_READY": 240,
+        "BRAKE": 169,
+        "HOLD": 40
+      },
+      "transport_active_by_phase": {
+        "BRAKE": {
+          "1": 47,
+          "0": 109,
+          "3": 3,
+          "2": 5,
+          "4": 5
+        },
+        "CONTACT_READY": {
+          "0": 19,
+          "1": 167,
+          "2": 45,
+          "3": 9
+        },
+        "DISCOVER": {
+          "0": 208
+        },
+        "ENCLOSE": {
+          "0": 73
+        },
+        "HOLD": {
+          "1": 1,
+          "0": 39
+        },
+        "SEARCH": {
+          "0": 174
+        }
+      },
+      "positive_contacts_by_phase": {
+        "BRAKE": {
+          "1": 128,
+          "0": 41
+        },
+        "CONTACT_READY": {
+          "1": 172,
+          "2": 62,
+          "3": 3,
+          "0": 3
+        },
+        "DISCOVER": {
+          "0": 208
+        },
+        "ENCLOSE": {
+          "0": 39,
+          "1": 14,
+          "2": 20
+        },
+        "HOLD": {
+          "0": 40
+        },
+        "SEARCH": {
+          "0": 174
+        }
+      },
+      "maximum_transport_active": 4,
+      "phase_response": {
+        "final_phase": "HOLD",
+        "entered": {
+          "SEARCH": 0,
+          "DISCOVER": 174,
+          "ENCLOSE": 382,
+          "CONTACT_READY": 455,
+          "BRAKE": 695,
+          "HOLD": 864
+        },
+        "first_detection_frame": 174,
+        "enclosure_frame": 382,
+        "contact_ready_frame": 455,
+        "transport_frame": null,
+        "brake_frame": 695,
+        "hold_frame": 864,
+        "brake_reason": "estimated_stop_from_contact_ready",
+        "push_suspended": false,
+        "overshoot": false,
+        "short_of_target": true,
+        "contact_recovery_failed": false,
+        "estimate_stopped": false
+      }
+    },
+    "near_l_reference_acquisition_circulation": {
+      "phase_frames": {
+        "DISCOVER": 44,
+        "ENCLOSE": 50,
+        "CONTACT_READY": 15,
+        "TRANSPORT": 51,
+        "BRAKE": 65,
+        "HOLD": 40
+      },
+      "transport_active_by_phase": {
+        "BRAKE": {
+          "0": 5,
+          "3": 9,
+          "5": 9,
+          "4": 4,
+          "6": 4,
+          "2": 13,
+          "1": 21
+        },
+        "CONTACT_READY": {
+          "0": 1,
+          "2": 14
+        },
+        "DISCOVER": {
+          "0": 44
+        },
+        "ENCLOSE": {
+          "0": 50
+        },
+        "HOLD": {
+          "1": 1,
+          "0": 39
+        },
+        "TRANSPORT": {
+          "4": 2,
+          "2": 21,
+          "1": 12,
+          "3": 3,
+          "0": 13
+        }
+      },
+      "positive_contacts_by_phase": {
+        "BRAKE": {
+          "2": 31,
+          "1": 21,
+          "0": 13
+        },
+        "CONTACT_READY": {
+          "4": 3,
+          "3": 12
+        },
+        "DISCOVER": {
+          "0": 44
+        },
+        "ENCLOSE": {
+          "0": 26,
+          "1": 21,
+          "2": 2,
+          "3": 1
+        },
+        "HOLD": {
+          "1": 2,
+          "0": 38
+        },
+        "TRANSPORT": {
+          "4": 2,
+          "3": 12,
+          "2": 37
+        }
+      },
+      "maximum_transport_active": 6,
+      "phase_response": {
+        "final_phase": "HOLD",
+        "entered": {
+          "SEARCH": 0,
+          "DISCOVER": 0,
+          "ENCLOSE": 44,
+          "CONTACT_READY": 94,
+          "TRANSPORT": 109,
+          "BRAKE": 160,
+          "HOLD": 225
+        },
+        "first_detection_frame": 0,
+        "enclosure_frame": 44,
+        "contact_ready_frame": 94,
+        "transport_frame": 109,
+        "brake_frame": 160,
+        "hold_frame": 225,
+        "brake_reason": "estimated_stop",
+        "push_suspended": false,
+        "overshoot": false,
+        "short_of_target": true,
+        "contact_recovery_failed": false,
+        "estimate_stopped": false
+      }
+    },
+    "far_c_open_away_pos0_acquisition_circulation": {
+      "phase_frames": {
+        "SEARCH": 174,
+        "DISCOVER": 127,
+        "ENCLOSE": 187,
+        "CONTACT_READY": 11512
+      },
+      "transport_active_by_phase": {
+        "CONTACT_READY": {
+          "0": 11422,
+          "1": 90
+        },
+        "DISCOVER": {
+          "0": 127
+        },
+        "ENCLOSE": {
+          "0": 187
+        },
+        "SEARCH": {
+          "0": 174
+        }
+      },
+      "positive_contacts_by_phase": {
+        "CONTACT_READY": {
+          "0": 4965,
+          "1": 5385,
+          "2": 1064,
+          "3": 98
+        },
+        "DISCOVER": {
+          "0": 127
+        },
+        "ENCLOSE": {
+          "0": 187
+        },
+        "SEARCH": {
+          "0": 174
+        }
+      },
+      "maximum_transport_active": 1,
+      "phase_response": {
+        "final_phase": "CONTACT_READY",
+        "entered": {
+          "SEARCH": 0,
+          "DISCOVER": 174,
+          "ENCLOSE": 301,
+          "CONTACT_READY": 488
+        },
+        "first_detection_frame": 174,
+        "enclosure_frame": 301,
+        "contact_ready_frame": 488,
+        "transport_frame": null,
+        "brake_frame": null,
+        "hold_frame": null,
+        "brake_reason": null,
+        "push_suspended": false,
+        "overshoot": false,
+        "short_of_target": false,
+        "contact_recovery_failed": false,
+        "estimate_stopped": false
+      }
+    },
+    "near_circle_translation_all_captured": {
+      "phase_frames": {
+        "DISCOVER": 21,
+        "ENCLOSE": 79,
+        "CONTACT_READY": 36,
+        "TRANSPORT": 43,
+        "BRAKE": 75,
+        "HOLD": 40
+      },
+      "transport_active_by_phase": {
+        "BRAKE": {
+          "3": 12,
+          "4": 14,
+          "5": 7,
+          "2": 21,
+          "1": 4,
+          "0": 17
+        },
+        "CONTACT_READY": {
+          "0": 1,
+          "2": 19,
+          "1": 1,
+          "3": 15
+        },
+        "DISCOVER": {
+          "0": 21
+        },
+        "ENCLOSE": {
+          "0": 79
+        },
+        "HOLD": {
+          "0": 40
+        },
+        "TRANSPORT": {
+          "4": 1,
+          "3": 33,
+          "2": 9
+        }
+      },
+      "positive_contacts_by_phase": {
+        "BRAKE": {
+          "3": 9,
+          "2": 39,
+          "1": 15,
+          "0": 12
+        },
+        "CONTACT_READY": {
+          "3": 22,
+          "4": 14
+        },
+        "DISCOVER": {
+          "0": 21
+        },
+        "ENCLOSE": {
+          "0": 41,
+          "1": 1,
+          "2": 11,
+          "3": 26
+        },
+        "HOLD": {
+          "0": 40
+        },
+        "TRANSPORT": {
+          "4": 5,
+          "3": 38
+        }
+      },
+      "maximum_transport_active": 5,
+      "phase_response": {
+        "final_phase": "HOLD",
+        "entered": {
+          "SEARCH": 0,
+          "DISCOVER": 0,
+          "ENCLOSE": 21,
+          "CONTACT_READY": 100,
+          "TRANSPORT": 136,
+          "BRAKE": 179,
+          "HOLD": 254
+        },
+        "first_detection_frame": 0,
+        "enclosure_frame": 21,
+        "contact_ready_frame": 100,
+        "transport_frame": 136,
+        "brake_frame": 179,
+        "hold_frame": 254,
+        "brake_reason": "estimated_stop",
+        "push_suspended": false,
+        "overshoot": false,
+        "short_of_target": true,
+        "contact_recovery_failed": false,
+        "estimate_stopped": false
+      }
+    },
+    "far_skew_box_s0_r0_pos0_acquisition_circulation": {
+      "phase_frames": {
+        "SEARCH": 191,
+        "DISCOVER": 145,
+        "ENCLOSE": 196,
+        "CONTACT_READY": 11468
+      },
+      "transport_active_by_phase": {
+        "CONTACT_READY": {
+          "0": 10655,
+          "1": 777,
+          "2": 33,
+          "3": 3
+        },
+        "DISCOVER": {
+          "0": 145
+        },
+        "ENCLOSE": {
+          "0": 196
+        },
+        "SEARCH": {
+          "0": 191
+        }
+      },
+      "positive_contacts_by_phase": {
+        "CONTACT_READY": {
+          "0": 161,
+          "1": 849,
+          "2": 4600,
+          "3": 3742,
+          "4": 1556,
+          "5": 474,
+          "6": 81,
+          "7": 5
+        },
+        "DISCOVER": {
+          "0": 145
+        },
+        "ENCLOSE": {
+          "0": 196
+        },
+        "SEARCH": {
+          "0": 191
+        }
+      },
+      "maximum_transport_active": 3,
+      "phase_response": {
+        "final_phase": "CONTACT_READY",
+        "entered": {
+          "SEARCH": 0,
+          "DISCOVER": 191,
+          "ENCLOSE": 336,
+          "CONTACT_READY": 532
+        },
+        "first_detection_frame": 191,
+        "enclosure_frame": 336,
+        "contact_ready_frame": 532,
+        "transport_frame": null,
+        "brake_frame": null,
+        "hold_frame": null,
+        "brake_reason": null,
+        "push_suspended": false,
+        "overshoot": false,
+        "short_of_target": false,
+        "contact_recovery_failed": false,
+        "estimate_stopped": false
+      }
+    },
+    "far_c_open_away_pos0_translation_all_captured": {
+      "phase_frames": {
+        "SEARCH": 174,
+        "DISCOVER": 133,
+        "ENCLOSE": 143,
+        "CONTACT_READY": 262,
+        "TRANSPORT": 10,
+        "BRAKE": 110,
+        "HOLD": 40
+      },
+      "transport_active_by_phase": {
+        "BRAKE": {
+          "3": 3,
+          "0": 43,
+          "2": 5,
+          "1": 59
+        },
+        "CONTACT_READY": {
+          "0": 79,
+          "1": 97,
+          "2": 74,
+          "3": 12
+        },
+        "DISCOVER": {
+          "0": 133
+        },
+        "ENCLOSE": {
+          "0": 143
+        },
+        "HOLD": {
+          "0": 40
+        },
+        "SEARCH": {
+          "0": 174
+        },
+        "TRANSPORT": {
+          "4": 3,
+          "3": 4,
+          "0": 3
+        }
+      },
+      "positive_contacts_by_phase": {
+        "BRAKE": {
+          "3": 16,
+          "2": 7,
+          "1": 86,
+          "0": 1
+        },
+        "CONTACT_READY": {
+          "2": 66,
+          "3": 8,
+          "0": 1,
+          "1": 187
+        },
+        "DISCOVER": {
+          "0": 133
+        },
+        "ENCLOSE": {
+          "0": 116,
+          "1": 9,
+          "2": 12,
+          "3": 6
+        },
+        "HOLD": {
+          "0": 40
+        },
+        "SEARCH": {
+          "0": 174
+        },
+        "TRANSPORT": {
+          "2": 4,
+          "3": 6
+        }
+      },
+      "maximum_transport_active": 4,
+      "phase_response": {
+        "final_phase": "HOLD",
+        "entered": {
+          "SEARCH": 0,
+          "DISCOVER": 174,
+          "ENCLOSE": 307,
+          "CONTACT_READY": 450,
+          "TRANSPORT": 712,
+          "BRAKE": 722,
+          "HOLD": 832
+        },
+        "first_detection_frame": 174,
+        "enclosure_frame": 307,
+        "contact_ready_frame": 450,
+        "transport_frame": 712,
+        "brake_frame": 722,
+        "hold_frame": 832,
+        "brake_reason": "estimated_stop",
+        "push_suspended": false,
+        "overshoot": false,
+        "short_of_target": true,
+        "contact_recovery_failed": false,
+        "estimate_stopped": false
+      }
+    },
+    "near_l_reference_reference_map": {
+      "phase_frames": {
+        "DISCOVER": 36,
+        "ENCLOSE": 45,
+        "CONTACT_READY": 146,
+        "TRANSPORT": 22,
+        "BRAKE": 80,
+        "HOLD": 40
+      },
+      "transport_active_by_phase": {
+        "BRAKE": {
+          "3": 22,
+          "2": 6,
+          "1": 20,
+          "4": 10,
+          "5": 5,
+          "0": 5,
+          "6": 12
+        },
+        "CONTACT_READY": {
+          "0": 1,
+          "2": 118,
+          "1": 4,
+          "3": 23
+        },
+        "DISCOVER": {
+          "0": 36
+        },
+        "ENCLOSE": {
+          "0": 45
+        },
+        "HOLD": {
+          "2": 1,
+          "0": 39
+        },
+        "TRANSPORT": {
+          "4": 1,
+          "3": 5,
+          "2": 15,
+          "1": 1
+        }
+      },
+      "positive_contacts_by_phase": {
+        "BRAKE": {
+          "2": 16,
+          "3": 26,
+          "1": 34,
+          "0": 4
+        },
+        "CONTACT_READY": {
+          "2": 140,
+          "3": 6
+        },
+        "DISCOVER": {
+          "0": 36
+        },
+        "ENCLOSE": {
+          "0": 17,
+          "1": 11,
+          "2": 17
+        },
+        "HOLD": {
+          "0": 40
+        },
+        "TRANSPORT": {
+          "3": 5,
+          "2": 17
+        }
+      },
+      "maximum_transport_active": 6,
+      "phase_response": {
+        "final_phase": "HOLD",
+        "entered": {
+          "SEARCH": 0,
+          "DISCOVER": 0,
+          "ENCLOSE": 36,
+          "CONTACT_READY": 81,
+          "TRANSPORT": 227,
+          "BRAKE": 249,
+          "HOLD": 329
+        },
+        "first_detection_frame": 0,
+        "enclosure_frame": 36,
+        "contact_ready_frame": 81,
+        "transport_frame": 227,
+        "brake_frame": 249,
+        "hold_frame": 329,
+        "brake_reason": "estimated_stop",
+        "push_suspended": false,
+        "overshoot": false,
+        "short_of_target": true,
+        "contact_recovery_failed": false,
+        "estimate_stopped": false
+      }
+    },
+    "near_l_reference_translation_all_captured": {
+      "phase_frames": {
+        "DISCOVER": 29,
+        "ENCLOSE": 50,
+        "CONTACT_READY": 82,
+        "TRANSPORT": 42,
+        "BRAKE": 110,
+        "HOLD": 40
+      },
+      "transport_active_by_phase": {
+        "BRAKE": {
+          "4": 49,
+          "5": 10,
+          "6": 4,
+          "3": 9,
+          "1": 6,
+          "2": 8,
+          "0": 24
+        },
+        "CONTACT_READY": {
+          "0": 1,
+          "2": 72,
+          "3": 8,
+          "1": 1
+        },
+        "DISCOVER": {
+          "0": 29
+        },
+        "ENCLOSE": {
+          "0": 50
+        },
+        "HOLD": {
+          "3": 1,
+          "0": 39
+        },
+        "TRANSPORT": {
+          "4": 28,
+          "3": 13,
+          "2": 1
+        }
+      },
+      "positive_contacts_by_phase": {
+        "BRAKE": {
+          "2": 15,
+          "3": 14,
+          "1": 7,
+          "0": 74
+        },
+        "CONTACT_READY": {
+          "3": 15,
+          "2": 67
+        },
+        "DISCOVER": {
+          "0": 29
+        },
+        "ENCLOSE": {
+          "0": 24,
+          "1": 13,
+          "2": 12,
+          "3": 1
+        },
+        "HOLD": {
+          "0": 40
+        },
+        "TRANSPORT": {
+          "3": 2,
+          "2": 40
+        }
+      },
+      "maximum_transport_active": 6,
+      "phase_response": {
+        "final_phase": "HOLD",
+        "entered": {
+          "SEARCH": 0,
+          "DISCOVER": 0,
+          "ENCLOSE": 29,
+          "CONTACT_READY": 79,
+          "TRANSPORT": 161,
+          "BRAKE": 203,
+          "HOLD": 313
+        },
+        "first_detection_frame": 0,
+        "enclosure_frame": 29,
+        "contact_ready_frame": 79,
+        "transport_frame": 161,
+        "brake_frame": 203,
+        "hold_frame": 313,
+        "brake_reason": "estimated_stop",
+        "push_suspended": false,
+        "overshoot": false,
+        "short_of_target": true,
+        "contact_recovery_failed": false,
+        "estimate_stopped": false
+      }
+    },
+    "far_skew_box_s0_r0_pos0_translation_all_captured": {
+      "phase_frames": {
+        "SEARCH": 192,
+        "DISCOVER": 192,
+        "ENCLOSE": 426,
+        "CONTACT_READY": 100,
+        "TRANSPORT": 49,
+        "BRAKE": 46,
+        "HOLD": 40
+      },
+      "transport_active_by_phase": {
+        "BRAKE": {
+          "2": 38,
+          "0": 8
+        },
+        "CONTACT_READY": {
+          "0": 1,
+          "2": 56,
+          "3": 43
+        },
+        "DISCOVER": {
+          "0": 192
+        },
+        "ENCLOSE": {
+          "0": 426
+        },
+        "HOLD": {
+          "0": 40
+        },
+        "SEARCH": {
+          "0": 192
+        },
+        "TRANSPORT": {
+          "4": 2,
+          "3": 2,
+          "2": 41,
+          "0": 2,
+          "1": 2
+        }
+      },
+      "positive_contacts_by_phase": {
+        "BRAKE": {
+          "2": 32,
+          "3": 9,
+          "1": 5
+        },
+        "CONTACT_READY": {
+          "3": 10,
+          "4": 3,
+          "2": 87
+        },
+        "DISCOVER": {
+          "0": 192
+        },
+        "ENCLOSE": {
+          "0": 416,
+          "1": 3,
+          "2": 6,
+          "3": 1
+        },
+        "HOLD": {
+          "1": 19,
+          "0": 21
+        },
+        "SEARCH": {
+          "0": 192
+        },
+        "TRANSPORT": {
+          "3": 1,
+          "2": 48
+        }
+      },
+      "maximum_transport_active": 4,
+      "phase_response": {
+        "final_phase": "HOLD",
+        "entered": {
+          "SEARCH": 0,
+          "DISCOVER": 192,
+          "ENCLOSE": 384,
+          "CONTACT_READY": 810,
+          "TRANSPORT": 910,
+          "BRAKE": 959,
+          "HOLD": 1005
+        },
+        "first_detection_frame": 192,
+        "enclosure_frame": 384,
+        "contact_ready_frame": 810,
+        "transport_frame": 910,
+        "brake_frame": 959,
+        "hold_frame": 1005,
+        "brake_reason": "estimated_stop",
+        "push_suspended": false,
+        "overshoot": false,
+        "short_of_target": true,
+        "contact_recovery_failed": false,
+        "estimate_stopped": false
+      }
+    },
+    "far_skew_box_s0_r0_pos0_reference_map": {
+      "phase_frames": {
+        "SEARCH": 192,
+        "DISCOVER": 240,
+        "ENCLOSE": 11568
+      },
+      "transport_active_by_phase": {
+        "DISCOVER": {
+          "0": 240
+        },
+        "ENCLOSE": {
+          "0": 11568
+        },
+        "SEARCH": {
+          "0": 192
+        }
+      },
+      "positive_contacts_by_phase": {
+        "DISCOVER": {
+          "0": 240
+        },
+        "ENCLOSE": {
+          "0": 11568
+        },
+        "SEARCH": {
+          "0": 192
+        }
+      },
+      "maximum_transport_active": 0,
+      "phase_response": {
+        "final_phase": "ENCLOSE",
+        "entered": {
+          "SEARCH": 0,
+          "DISCOVER": 192,
+          "ENCLOSE": 432
+        },
+        "first_detection_frame": 192,
+        "enclosure_frame": 432,
+        "contact_ready_frame": null,
+        "transport_frame": null,
+        "brake_frame": null,
+        "hold_frame": null,
+        "brake_reason": null,
+        "push_suspended": false,
+        "overshoot": false,
+        "short_of_target": false,
+        "contact_recovery_failed": false,
+        "estimate_stopped": false
+      }
+    },
+    "near_circle_acquisition_circulation": {
+      "phase_frames": {
+        "DISCOVER": 23,
+        "ENCLOSE": 87,
+        "CONTACT_READY": 1,
+        "TRANSPORT": 55,
+        "BRAKE": 126,
+        "HOLD": 40
+      },
+      "transport_active_by_phase": {
+        "BRAKE": {
+          "5": 44,
+          "6": 21,
+          "4": 10,
+          "3": 7,
+          "2": 11,
+          "1": 4,
+          "0": 29
+        },
+        "CONTACT_READY": {
+          "0": 1
+        },
+        "DISCOVER": {
+          "0": 23
+        },
+        "ENCLOSE": {
+          "0": 87
+        },
+        "HOLD": {
+          "0": 40
+        },
+        "TRANSPORT": {
+          "5": 23,
+          "3": 13,
+          "2": 6,
+          "4": 12,
+          "6": 1
+        }
+      },
+      "positive_contacts_by_phase": {
+        "BRAKE": {
+          "4": 36,
+          "3": 22,
+          "2": 10,
+          "1": 12,
+          "0": 46
+        },
+        "CONTACT_READY": {
+          "2": 1
+        },
+        "DISCOVER": {
+          "0": 23
+        },
+        "ENCLOSE": {
+          "0": 55,
+          "1": 10,
+          "2": 22
+        },
+        "HOLD": {
+          "0": 40
+        },
+        "TRANSPORT": {
+          "2": 18,
+          "3": 7,
+          "4": 30
+        }
+      },
+      "maximum_transport_active": 6,
+      "phase_response": {
+        "final_phase": "HOLD",
+        "entered": {
+          "SEARCH": 0,
+          "DISCOVER": 0,
+          "ENCLOSE": 23,
+          "CONTACT_READY": 110,
+          "TRANSPORT": 111,
+          "BRAKE": 166,
+          "HOLD": 292
+        },
+        "first_detection_frame": 0,
+        "enclosure_frame": 23,
+        "contact_ready_frame": 110,
+        "transport_frame": 111,
+        "brake_frame": 166,
+        "hold_frame": 292,
+        "brake_reason": "estimated_stop",
+        "push_suspended": false,
+        "overshoot": false,
+        "short_of_target": true,
+        "contact_recovery_failed": false,
+        "estimate_stopped": false
+      }
+    },
+    "near_circle_reference_map": {
+      "phase_frames": {
+        "DISCOVER": 19,
+        "ENCLOSE": 76,
+        "CONTACT_READY": 50,
+        "TRANSPORT": 42,
+        "BRAKE": 113,
+        "HOLD": 40
+      },
+      "transport_active_by_phase": {
+        "BRAKE": {
+          "3": 3,
+          "4": 23,
+          "0": 31,
+          "2": 3,
+          "1": 3,
+          "5": 15,
+          "6": 35
+        },
+        "CONTACT_READY": {
+          "0": 1,
+          "2": 26,
+          "1": 1,
+          "3": 22
+        },
+        "DISCOVER": {
+          "0": 19
+        },
+        "ENCLOSE": {
+          "0": 76
+        },
+        "HOLD": {
+          "1": 1,
+          "0": 39
+        },
+        "TRANSPORT": {
+          "4": 4,
+          "3": 38
+        }
+      },
+      "positive_contacts_by_phase": {
+        "BRAKE": {
+          "3": 6,
+          "2": 10,
+          "1": 34,
+          "0": 63
+        },
+        "CONTACT_READY": {
+          "3": 45,
+          "4": 5
+        },
+        "DISCOVER": {
+          "0": 19
+        },
+        "ENCLOSE": {
+          "0": 43,
+          "1": 1,
+          "2": 11,
+          "3": 21
+        },
+        "HOLD": {
+          "0": 40
+        },
+        "TRANSPORT": {
+          "4": 2,
+          "3": 40
+        }
+      },
+      "maximum_transport_active": 6,
+      "phase_response": {
+        "final_phase": "HOLD",
+        "entered": {
+          "SEARCH": 0,
+          "DISCOVER": 0,
+          "ENCLOSE": 19,
+          "CONTACT_READY": 95,
+          "TRANSPORT": 145,
+          "BRAKE": 187,
+          "HOLD": 300
+        },
+        "first_detection_frame": 0,
+        "enclosure_frame": 19,
+        "contact_ready_frame": 95,
+        "transport_frame": 145,
+        "brake_frame": 187,
+        "hold_frame": 300,
+        "brake_reason": "estimated_stop",
+        "push_suspended": false,
+        "overshoot": false,
+        "short_of_target": true,
+        "contact_recovery_failed": false,
+        "estimate_stopped": false
+      }
+    }
+  }
+}

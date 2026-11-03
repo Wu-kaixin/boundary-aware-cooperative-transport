@@ -23,7 +23,7 @@ large configured offsets; information permissions and physical provenance.
 - [x] Add helper src/dbact/control/acquisition_navigation.py and default-off
       selector/guard/nominal branch in controller.py. Add candidate metadata.
       Verify GREEN and full core, keeping numeric config hash unchanged.
-- [ ] Add scripts/acquisition_circulation_study.py using unchanged original
+- [x] Add scripts/acquisition_circulation_study.py using unchanged original
       episode/reproduction evaluators. Freeze all12 cases before physics, execute
       once, then report every original and candidate outcome under original gates.
 - [ ] Publish all results and README updates; one fresh final review of the whole
@@ -50,6 +50,15 @@ Receipts: runs/maintenance/2026-11-03-acquisition-circulation-v1/.
 Freeze session17136 terminalexit0:12 cases,8 old evaluator rows verified. Source
 37f2e00017ce2e34ec932956174e7778f639c0732206e023fed74a34ef6dda1e; protocol
 0ca3f1369196fc882d884cf5583205d7671ab3749489f33a0dc116f140d9fdae.
-Single physical session44073 is running. Poll that handle until authoritative
-completion; never duplicate a run because an observation timed out. Runtime,
-frozen study helper and design must remain unchanged until analysis completes.
+Single physical session44073 terminal exit0:12/12 complete, execution errors0,
+source integrity PASS. Analyzer59625 and publisher86802 both terminal exit0;
+all8 old arms reproduce25 arrays and scientific fields exactly. Runtime, frozen
+study helpers, design, protocol and canonical numerical configuration unchanged.
+
+Prospective gate FAIL: safe completion4/4,3/4,2/4 across translation/map/circulation;
+G5002/4 each, false HOLD/hard failures0. All4 circulation epochs valid, but C/skew
+both timeout600s in CONTACT_READY; acquisition scaling13/13, post-acquisition0/6.
+No adoption, extra physics or retuning. Publish all outcomes and retain the whole
+denominator. First figure has crowded adjacent endpoint labels; a separate v2
+layout and receipt preserve original products and data. Both figures inspected.
+Final review and authorized branch publication remain to be recorded below.

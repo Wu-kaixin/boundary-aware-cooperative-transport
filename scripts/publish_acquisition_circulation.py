@@ -2,7 +2,9 @@
 from __future__ import annotations
 
 import csv
+from collections import Counter
 from datetime import datetime, timezone
+import gc
 import xml.etree.ElementTree as ET
 
 import matplotlib
@@ -24,17 +26,29 @@ def main():
     assert sha(public/'analysis.json')==sha(study.BASE/'analysis.json')
     assert analysis['protocol_sha256']==sha(study.PROTOCOL)
     assert len(analysis['episodes'])==12 and analysis['candidate_adopted'] is False
-    outputs = ('all_twelve_episodes.csv', 'paired_outcomes.png', 'paired_outcomes.pdf', 'engineering_checks.json', 'publication.json')
+    outputs = ('all_twelve_episodes.csv', 'phase_diagnostics.json', 'paired_outcomes.png', 'paired_outcomes.pdf', 'engineering_checks.json', 'publication.json')
     if any((public/n).exists() for n in outputs):
         raise RuntimeError('Preserve existing publication')
     manifest = read(study.OUT/'manifest.json')
-    data, records = {}, []
+    data, records, phase_details = {}, [], {}
     for case in plan['cases']:
         folder = study.OUT/case['case_id']
         cached_result(folder, {**manifest['identity'], 'case_sha256':encode(case)})
         row = next(r for r in analysis['episodes'] if r['case_id']==case['case_id'])
         assert row['receipt_sha256']==sha(folder/'case_result.json')
         data[(case['condition_id'], case['arm'])] = row
+        if row['execution']=='COMPLETED':
+            steps = read(folder/'paired_metrics.json')['steps']
+            phases = sorted({s['phase'] for s in steps})
+            phase_details[case['case_id']] = dict(
+                phase_frames=dict(Counter(s['phase'] for s in steps)),
+                transport_active_by_phase={phase:dict(Counter(s['phase_guards']['transport_active'] for s in steps if s['phase']==phase)) for phase in phases},
+                positive_contacts_by_phase={phase:dict(Counter(s['positive_contacts'] for s in steps if s['phase']==phase)) for phase in phases},
+                maximum_transport_active=max(s['phase_guards']['transport_active'] for s in steps),
+                phase_response=row['phase_response'])
+            del steps
+            gc.collect()
+        print(dict(case=case['case_id'], publication_audit='complete'), flush=True)
     for condition in plan['conditions']:
         for arm in study.ARMS:
             row = data[(condition, arm)]
@@ -53,6 +67,9 @@ def main():
                 scaled_robot_steps=row.get('barrier_scalings'), minimum_barrier_scale=scale.get('min_scale'),
                 first_hold_true_error_m=first.get('physical_error_before_m'),
                 maximum_absolute_rotation_deg=row.get('maximum_absolute_rotation_deg'),
+                transport_frame=row.get('phase_response', {}).get('transport_frame'),
+                maximum_transport_active=phase_details.get(row['case_id'], {}).get('maximum_transport_active'),
+                brake_reason=row.get('phase_response', {}).get('brake_reason'),
                 **{'estimation_'+k:est.get(k) for k in ('post_ready_frames', 'available_frames', 'quorum_frames', 'mae_m', 'p95_m', 'max_m')},
                 reference_unavailable_robot_steps=row.get('map_reference', {}).get('robot_steps_by_status', {}).get('unavailable'),
                 g500_failure_reasons='; '.join(row.get('g500_failure_reasons', []))))
@@ -60,6 +77,7 @@ def main():
         writer = csv.DictWriter(stream, fieldnames=list(records[0]))
         writer.writeheader()
         writer.writerows(records)
+    dump(public/'phase_diagnostics.json', dict(scope='Posthoc counts from complete preserved episodes; original gates unchanged', cases=phase_details))
     fig, axes = plt.subplots(1, 3, figsize=(12.5, 4.3))
     fig.subplots_adjust(left=.065, right=.99, bottom=.25, top=.84, wspace=.32)
     x, width = np.arange(4), .24

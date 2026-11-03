@@ -1,6 +1,8 @@
 # 数据与原始文件索引
 
-2026-11-03：[斜箱采集追踪](results/acquisition_trace_v1/README.md)的逐帧数据、约束见证和帮助脚本快照在 `runs/research/2026-11-03-acquisition-trace-v1/`；完整前缀791+1201帧，另留两个20帧预检，新增物理回合0。同向巡行的独立12回合冻结与运行在 `runs/research/2026-11-03-acquisition-circulation-v1/`；912通过/2跳过的核心回归及运行日志在同名 `runs/maintenance/` 目录。原始大文件保持本地。
+2026-11-03：[主动采集巡行完整12回合](results/acquisition_circulation_v1/README.md)的冻结与运行在 `runs/research/2026-11-03-acquisition-circulation-v1/`，原始逐帧结果位于其 `run/`，执行前源码/脚本/协议位于 `freeze/`。三臂安全完成4/4、3/4、2/4，门槛FAIL，所有负结果保留；公开精简证据含完整12行CSV、阶段/接触直方图、原图与仅调整标签的v2图及各自哈希。912通过/2跳过的核心回归、物理/分析/发布日志在同名 `runs/maintenance/` 目录。
+
+2026-11-03：[斜箱采集追踪](results/acquisition_trace_v1/README.md)的逐帧数据、约束见证和帮助脚本快照在 `runs/research/2026-11-03-acquisition-trace-v1/`；完整前缀791+1201帧，另留两个20帧预检，新增物理回合0。原始大文件保持本地，不能将旧轨迹诊断计作新的物理验证。
 
 2026-11-03：[参考驱动地图八回合](results/reference_map_v1/README.md)的原始数据在 `runs/research/2026-11-03-reference-map-v1/run/`，源码/脚本/协议冻结在同级 `freeze/`；全部8例均执行完成，候选3/4成功，斜箱600秒截尾，门槛FAIL。核心903通过/2跳过、针对性71通过及后验C形阶段审计在 `runs/maintenance/2026-11-03-reference-map-v1/`。[地图来源追踪](results/map_provenance_v1/README.md)的933帧逐阶段数组、独立祖先分析在 `runs/research/2026-11-03-map-provenance-v1/`，首次失败与第二次通过预检另保留在同名maintenance目录。旧数据和冻结源码均未覆盖。
 
