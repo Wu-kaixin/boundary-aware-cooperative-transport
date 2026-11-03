@@ -1,0 +1,104 @@
+{
+  "tests": {
+    "green-final.xml": {
+      "tests": 10,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "passed": 10,
+      "sha256": "679440a1d681002d0905ed1689dc3582f37d2e77c64abbc5ae790508cd247a9d"
+    },
+    "core-final.xml": {
+      "tests": 1047,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 2,
+      "passed": 1045,
+      "sha256": "0e6d591904ff5c522148c905b57a6303c2a24a8c4033ebd2b6d99ecb56485faa"
+    }
+  },
+  "source_unchanged": true,
+  "canonical_sha256": "a5d5c8e200fa502557d4da9a9db2a646d027abababd59661bcdac21a1b43b112",
+  "environment": {
+    "python": "3.12.14",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "executable": "C:\\Users\\kai\\boundary-aware-cooperative-transport\\.venv\\Scripts\\python.exe",
+    "packages": {
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "shapely": "2.2.0",
+      "PyYAML": "6.0.2",
+      "cvxpy": "1.9.3",
+      "clarabel": "0.11.1",
+      "osqp": "1.1.3",
+      "scs": "3.3.1",
+      "pymunk": "7.3.1",
+      "matplotlib": "3.11.2",
+      "threadpoolctl": "3.7.0"
+    }
+  },
+  "replays": {
+    "c": {
+      "case_id": "far_c_open_away_pos0_local_pair_candidate",
+      "end_frame": 1074,
+      "new_physical_episodes": 0,
+      "preflight": false,
+      "protocol_sha256": "cd867fbbdc427cc1951d6858d05f708a31d8d3fdcfbe07501f1a8e132257d020",
+      "original_receipt_sha256": "733e49e0711a282b288bbaa140afd19e459703061cae22d4899d70b6d80c115c",
+      "status": "EXACT_RECONSTRUCTION",
+      "verified_frames": 1074,
+      "elapsed_seconds": 110.8551425000187,
+      "products": {
+        "components.jsonl.gz": "3acfb22886c73a208ed265e25964e2e664951e7db6fe11045598c1feeb984299",
+        "witnesses.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      }
+    },
+    "skew": {
+      "case_id": "far_skew_box_s0_r0_pos0_local_pair_candidate",
+      "end_frame": 989,
+      "new_physical_episodes": 0,
+      "preflight": false,
+      "protocol_sha256": "cd867fbbdc427cc1951d6858d05f708a31d8d3fdcfbe07501f1a8e132257d020",
+      "original_receipt_sha256": "a7a15a0aa624dc1d5e446db4890a310c76ec942ac004933dc9bc51542381da68",
+      "status": "EXACT_RECONSTRUCTION",
+      "verified_frames": 989,
+      "elapsed_seconds": 92.17584470001748,
+      "products": {
+        "components.jsonl.gz": "f15534b96c5aecb1d560407c0a8b359bfbf812bb872b449dfd2e3fa18f2a9f1b",
+        "witnesses.json": "2540cd43ba7b103ba35e281d07280aaab1a3bb66751c561cdb1417641d3ea605"
+      }
+    }
+  },
+  "preflights": {
+    "c": {
+      "case_id": "far_c_open_away_pos0_local_pair_candidate",
+      "end_frame": 20,
+      "new_physical_episodes": 0,
+      "preflight": true,
+      "protocol_sha256": "cd867fbbdc427cc1951d6858d05f708a31d8d3fdcfbe07501f1a8e132257d020",
+      "original_receipt_sha256": "733e49e0711a282b288bbaa140afd19e459703061cae22d4899d70b6d80c115c",
+      "status": "EXACT_RECONSTRUCTION",
+      "verified_frames": 20,
+      "elapsed_seconds": 2.1455029000062495,
+      "products": {
+        "components.jsonl.gz": "992563d8638f6dd490c2a41d9fc0e880f583b22376c438ee8332eccc2f7d4d8b",
+        "witnesses.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      }
+    },
+    "skew": {
+      "case_id": "far_skew_box_s0_r0_pos0_local_pair_candidate",
+      "end_frame": 20,
+      "new_physical_episodes": 0,
+      "preflight": true,
+      "protocol_sha256": "cd867fbbdc427cc1951d6858d05f708a31d8d3fdcfbe07501f1a8e132257d020",
+      "original_receipt_sha256": "a7a15a0aa624dc1d5e446db4890a310c76ec942ac004933dc9bc51542381da68",
+      "status": "EXACT_RECONSTRUCTION",
+      "verified_frames": 20,
+      "elapsed_seconds": 2.131285100011155,
+      "products": {
+        "components.jsonl.gz": "002928418b7d026c8e964ce582dc51636879ab440f976e307b33a1f0a38ad58e",
+        "witnesses.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      }
+    }
+  }
+}

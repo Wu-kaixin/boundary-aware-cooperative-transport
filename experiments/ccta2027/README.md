@@ -1,5 +1,7 @@
 # CCTA 2027 实验入口
 
+2026-11-03：[配对残余诊断设计](pair_residual_v1_design.md)及[冻结协议](pair_residual_v1.json)完成C1074/斜箱989帧精确重放、全八回合阶段重建、10个单机和36个配对问题。[结果](../../docs/results/pair_residual_v1/README.md)：18个未截断配对无可行见证，989单物体行超过原限速，C仍只有2台制动前声明推手。新增物理0，未改控制器/数值参数/门槛，保留配对准入保护。[执行记录](pair_residual_v1_plan.md)区分40帧预检、2063帧完整重放和全部工程收据。
+
 2026-11-03：[局部配对实现设计](local_pair_safety_v1_design.md)、[物理设计](local_pair_safety_v1_physical_design.md)与[冻结协议](local_pair_safety_v1.json)已完成4条件×2臂8个新物理回合。只增加默认关闭的机制开关，数值参数、初态与门槛不变。[完整结果](../../docs/results/local_pair_safety_v1/README.md)：安全完成均4/4、G500均2/4；C改善而斜箱回退，机制及完整门槛均FAIL，候选未采用。7次配对执行独立审计通过，四个原对照精确复现。[执行记录](local_pair_safety_v1_plan.md)保留所有RED/GREEN、冻结身份和失败，不把旧状态可行见证混作本次物理成功。
 
 2026-11-03：[残余与接触诊断设计](residual_coordination_v1_design.md)及后续[局部配对可行性设计](local_pair_feasibility_v1_design.md)已执行，[完整结果](../../docs/results/residual_coordination_v1/README.md)保留5,361帧阶段响应、21,444子步、两个残余状态及四个联合问题，新物理回合0。两状态×完整rho/去rho共四个配对问题，在原限速下均有双求解器可行见证，其中两个完整rho问题保留原裕量及其他约束；C制动前旋转与推手不足仍在。[当时的局部协商草案](local_pair_safety_v1_spec.md)保持原件，其后续实现与独立物理冻结见上方新试验；[执行记录](residual_coordination_v1_plan.md)保留首次采样误标、修正与全部原件。

@@ -1,0 +1,5462 @@
+[
+  {
+    "case_id": "near_l_reference_local_pair_candidate",
+    "condition": "near_l_reference",
+    "arm": "local_pair_candidate",
+    "receipt_sha256": "d15faf9a7b57bdd1403a080ce94c0a31720807fd8c3b3138e90f352fd93b66a6",
+    "frames": 265,
+    "substep_samples": 1060,
+    "dt": 0.05,
+    "gates": {
+      "informed_fraction": 0.55,
+      "map_coverage_min": 0.7,
+      "contact_quorum": 4,
+      "contact_dwell": 20,
+      "transport_quorum": 4,
+      "brake_fraction": 0.65,
+      "hold_tolerance": 0.0,
+      "hold_speed": 0.02,
+      "hold_dwell": 1,
+      "sustain_contacts": 1,
+      "contact_loss_dwell": 20,
+      "contact_regain_dwell": 20,
+      "pause_limit": 80,
+      "estimate_loss_dwell": 20,
+      "recover_on_brake_progress": false
+    },
+    "phases": {
+      "DISCOVER": {
+        "frames": 44,
+        "signal_active_max": 0,
+        "current_push_flag_max": 0,
+        "physical_positive_contact_max": 0,
+        "current_push_robot_steps": 0,
+        "mode_counts": {
+          "acquisition_circulation": 631,
+          "recall": 8,
+          "search": 1,
+          "cage": 48,
+          "approach": 16
+        },
+        "positive_contact_robot_samples": 0,
+        "positive_samples_with_push_flag": 0,
+        "positive_samples_without_push_flag": 0,
+        "duration_s": 2.2,
+        "substep_net_contact_impulses": {
+          "samples": 176,
+          "force_impulse": [
+            0.0,
+            0.0
+          ],
+          "torque_impulse": 0.0,
+          "absolute_torque_impulse": 0.0
+        }
+      },
+      "ENCLOSE": {
+        "frames": 50,
+        "signal_active_max": 0,
+        "current_push_flag_max": 0,
+        "physical_positive_contact_max": 3,
+        "current_push_robot_steps": 0,
+        "mode_counts": {
+          "cage": 652,
+          "approach": 68,
+          "redeploy": 80
+        },
+        "positive_contact_robot_samples": 28,
+        "positive_samples_with_push_flag": 0,
+        "positive_samples_without_push_flag": 28,
+        "duration_s": 2.5,
+        "substep_net_contact_impulses": {
+          "samples": 200,
+          "force_impulse": [
+            20.458702466782903,
+            -4.238721272817223
+          ],
+          "torque_impulse": -17.822947402559077,
+          "absolute_torque_impulse": 17.822947402559077
+        }
+      },
+      "CONTACT_READY": {
+        "frames": 15,
+        "signal_active_max": 2,
+        "current_push_flag_max": 4,
+        "physical_positive_contact_max": 4,
+        "current_push_robot_steps": 32,
+        "mode_counts": {
+          "cage": 180,
+          "redeploy": 28,
+          "push": 32
+        },
+        "positive_contact_robot_samples": 48,
+        "positive_samples_with_push_flag": 30,
+        "positive_samples_without_push_flag": 18,
+        "duration_s": 0.75,
+        "substep_net_contact_impulses": {
+          "samples": 60,
+          "force_impulse": [
+            17.110012422239862,
+            6.7974300290912995
+          ],
+          "torque_impulse": -10.50639708032761,
+          "absolute_torque_impulse": 10.50639708032761
+        }
+      },
+      "TRANSPORT": {
+        "frames": 51,
+        "signal_active_max": 4,
+        "current_push_flag_max": 4,
+        "physical_positive_contact_max": 4,
+        "current_push_robot_steps": 67,
+        "mode_counts": {
+          "cage": 731,
+          "push": 67,
+          "redeploy": 18
+        },
+        "positive_contact_robot_samples": 118,
+        "positive_samples_with_push_flag": 54,
+        "positive_samples_without_push_flag": 64,
+        "duration_s": 2.5500000000000003,
+        "substep_net_contact_impulses": {
+          "samples": 204,
+          "force_impulse": [
+            61.56188165173295,
+            7.052200656370047
+          ],
+          "torque_impulse": -40.62576015069082,
+          "absolute_torque_impulse": 40.62576015069082
+        }
+      },
+      "BRAKE": {
+        "frames": 65,
+        "signal_active_max": 6,
+        "current_push_flag_max": 6,
+        "physical_positive_contact_max": 2,
+        "current_push_robot_steps": 160,
+        "mode_counts": {
+          "cage": 785,
+          "push": 160,
+          "redeploy": 95
+        },
+        "positive_contact_robot_samples": 83,
+        "positive_samples_with_push_flag": 58,
+        "positive_samples_without_push_flag": 25,
+        "duration_s": 3.25,
+        "substep_net_contact_impulses": {
+          "samples": 260,
+          "force_impulse": [
+            29.86752649685455,
+            -36.81800291531228
+          ],
+          "torque_impulse": -25.096550351199713,
+          "absolute_torque_impulse": 28.401816457911206
+        }
+      },
+      "HOLD": {
+        "frames": 40,
+        "signal_active_max": 1,
+        "current_push_flag_max": 0,
+        "physical_positive_contact_max": 1,
+        "current_push_robot_steps": 0,
+        "mode_counts": {
+          "cage": 612,
+          "redeploy": 28
+        },
+        "positive_contact_robot_samples": 2,
+        "positive_samples_with_push_flag": 0,
+        "positive_samples_without_push_flag": 2,
+        "duration_s": 2.0,
+        "substep_net_contact_impulses": {
+          "samples": 160,
+          "force_impulse": [
+            0.015280658163688052,
+            -0.4666810633116915
+          ],
+          "torque_impulse": 0.06231143406161155,
+          "absolute_torque_impulse": 0.06231143406161155
+        }
+      }
+    },
+    "transitions": [
+      {
+        "to_phase": "DISCOVER",
+        "from_phase": "SEARCH",
+        "frame": 1,
+        "control_time_s": 0.0,
+        "signals": {
+          "agent_count": 16,
+          "informed_agents": 13,
+          "map_coverage": 0.4166666666666667,
+          "contact_ready": 0,
+          "transport_active": 0,
+          "progress": 0.0,
+          "target_distance": 1.2,
+          "estimated_speed": 0.0,
+          "stopping_distance": 0.18333333333333335,
+          "estimate_quality": "unavailable",
+          "recovery_ready": null,
+          "task_reference_ready": false
+        },
+        "before_command_displacement": [
+          0.0,
+          0.0
+        ],
+        "before_command_rotation_deg": 0.0,
+        "after_step_true_displacement": [
+          0.0,
+          0.0
+        ],
+        "after_step_rotation_deg": 0.0
+      },
+      {
+        "to_phase": "ENCLOSE",
+        "from_phase": "DISCOVER",
+        "frame": 45,
+        "control_time_s": 2.2,
+        "signals": {
+          "agent_count": 16,
+          "informed_agents": 16,
+          "map_coverage": 0.7222222222222222,
+          "contact_ready": 0,
+          "transport_active": 0,
+          "progress": 0.019166674904168568,
+          "target_distance": 1.2,
+          "estimated_speed": 0.013238197465548666,
+          "stopping_distance": 0.18333333333333335,
+          "estimate_quality": "credible",
+          "recovery_ready": null,
+          "task_reference_ready": false
+        },
+        "before_command_displacement": [
+          0.0,
+          0.0
+        ],
+        "before_command_rotation_deg": 0.0,
+        "after_step_true_displacement": [
+          0.0,
+          0.0
+        ],
+        "after_step_rotation_deg": 0.0
+      },
+      {
+        "to_phase": "CONTACT_READY",
+        "from_phase": "ENCLOSE",
+        "frame": 95,
+        "control_time_s": 4.7,
+        "signals": {
+          "agent_count": 16,
+          "informed_agents": 16,
+          "map_coverage": 0.9722222222222222,
+          "contact_ready": 8,
+          "transport_active": 0,
+          "progress": 0.01867011639914007,
+          "target_distance": 1.2,
+          "estimated_speed": 0.004595455375044522,
+          "stopping_distance": 0.18333333333333335,
+          "estimate_quality": "credible",
+          "recovery_ready": null,
+          "task_reference_ready": false
+        },
+        "before_command_displacement": [
+          0.0,
+          0.0
+        ],
+        "before_command_rotation_deg": -1.3773480959902258,
+        "after_step_true_displacement": [
+          0.00022424425762723743,
+          6.253204929596023e-05
+        ],
+        "after_step_rotation_deg": -1.4019504961467633
+      },
+      {
+        "to_phase": "TRANSPORT",
+        "from_phase": "CONTACT_READY",
+        "frame": 110,
+        "control_time_s": 5.45,
+        "signals": {
+          "agent_count": 16,
+          "informed_agents": 16,
+          "map_coverage": 0.9444444444444444,
+          "contact_ready": 8,
+          "transport_active": 4,
+          "progress": 0.056728739107473114,
+          "target_distance": 1.2,
+          "estimated_speed": 0.07105092494207821,
+          "stopping_distance": 0.18333333333333335,
+          "estimate_quality": "credible",
+          "recovery_ready": null,
+          "task_reference_ready": false
+        },
+        "before_command_displacement": [
+          0.04464393943561573,
+          0.01818594753123559
+        ],
+        "before_command_rotation_deg": -1.4361039607622519,
+        "after_step_true_displacement": [
+          0.05077390992771269,
+          0.021427793194466638
+        ],
+        "after_step_rotation_deg": -1.4361039607622519
+      },
+      {
+        "to_phase": "BRAKE",
+        "from_phase": "TRANSPORT",
+        "frame": 161,
+        "control_time_s": 8.0,
+        "signals": {
+          "agent_count": 16,
+          "informed_agents": 16,
+          "map_coverage": 0.9444444444444444,
+          "contact_ready": 5,
+          "transport_active": 0,
+          "progress": 0.7913041911874538,
+          "target_distance": 1.2,
+          "estimated_speed": 0.29738306223989935,
+          "stopping_distance": 0.18333333333333335,
+          "estimate_quality": "credible",
+          "recovery_ready": null,
+          "task_reference_ready": false
+        },
+        "before_command_displacement": [
+          0.7898317051099313,
+          0.09370975723999475
+        ],
+        "before_command_rotation_deg": -1.911520839407457,
+        "after_step_true_displacement": [
+          0.8049029806211334,
+          0.0936626423507505
+        ],
+        "after_step_rotation_deg": -1.9124870188508531
+      },
+      {
+        "to_phase": "HOLD",
+        "from_phase": "BRAKE",
+        "frame": 226,
+        "control_time_s": 11.25,
+        "signals": {
+          "agent_count": 16,
+          "informed_agents": 16,
+          "map_coverage": 0.9722222222222222,
+          "contact_ready": 9,
+          "transport_active": 1,
+          "progress": 1.2,
+          "target_distance": 1.2,
+          "estimated_speed": 0.00942070701637559,
+          "stopping_distance": 0.18333333333333335,
+          "estimate_quality": "credible",
+          "recovery_ready": null,
+          "task_reference_ready": true
+        },
+        "before_command_displacement": [
+          1.2004837207199137,
+          0.02310970315537464
+        ],
+        "before_command_rotation_deg": -1.9469933862125373,
+        "after_step_true_displacement": [
+          1.2004837207199137,
+          0.02310970315537464
+        ],
+        "after_step_rotation_deg": -1.9469933862125373
+      }
+    ],
+    "first_quorums": {
+      "contact_ready_signal": {
+        "frame": 74,
+        "control_time_s": 3.6500000000000004,
+        "phase": "ENCLOSE",
+        "count": 4,
+        "threshold": 4
+      },
+      "positive_physical_contacts": {
+        "frame": 95,
+        "control_time_s": 4.7,
+        "phase": "CONTACT_READY",
+        "count": 4,
+        "threshold": 4
+      },
+      "current_push_flags": {
+        "frame": 109,
+        "control_time_s": 5.4,
+        "phase": "CONTACT_READY",
+        "count": 4,
+        "threshold": 4
+      },
+      "transport_active_signal": {
+        "frame": 110,
+        "control_time_s": 5.45,
+        "phase": "TRANSPORT",
+        "count": 4,
+        "threshold": 4
+      }
+    },
+    "before_transitions": {
+      "TRANSPORT": {
+        "entered": true,
+        "frame_count": 109,
+        "control_time_s": 5.45,
+        "true_displacement_before": [
+          0.04464393943561573,
+          0.01818594753123559
+        ],
+        "rotation_before_deg": -1.4361039607622519,
+        "sampled_forward_impulse": 37.568714889022765,
+        "sampled_torque_impulse": -28.329344482886686,
+        "sampled_absolute_torque_impulse": 28.329344482886686
+      },
+      "BRAKE": {
+        "entered": true,
+        "frame_count": 160,
+        "control_time_s": 8.0,
+        "true_displacement_before": [
+          0.7898317051099313,
+          0.09370975723999475
+        ],
+        "rotation_before_deg": -1.911520839407457,
+        "sampled_forward_impulse": 99.13059654075572,
+        "sampled_torque_impulse": -68.9551046335775,
+        "sampled_absolute_torque_impulse": 68.9551046335775
+      }
+    },
+    "final_response": {
+      "final_phase": "HOLD",
+      "entered": {
+        "SEARCH": 0,
+        "DISCOVER": 0,
+        "ENCLOSE": 44,
+        "CONTACT_READY": 94,
+        "TRANSPORT": 109,
+        "BRAKE": 160,
+        "HOLD": 225
+      },
+      "first_detection_frame": 0,
+      "enclosure_frame": 44,
+      "contact_ready_frame": 94,
+      "transport_frame": 109,
+      "brake_frame": 160,
+      "hold_frame": 225,
+      "brake_reason": "estimated_stop",
+      "push_suspended": false,
+      "overshoot": false,
+      "short_of_target": true,
+      "contact_recovery_failed": false,
+      "estimate_stopped": false
+    },
+    "first_substep_contact_samples_by_phase_and_agent": {
+      "DISCOVER": {},
+      "ENCLOSE": {
+        "agent_07": {
+          "contact_samples": 24,
+          "positive_samples": 24,
+          "forward_force_sample_sum": 411.21446251174905,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": -366.1383819380861,
+          "absolute_torque_sample_sum": 366.1383819380861,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 24
+        },
+        "agent_00": {
+          "contact_samples": 3,
+          "positive_samples": 3,
+          "forward_force_sample_sum": 3.037884061081704,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": 2.468491225077711,
+          "absolute_torque_sample_sum": 2.468491225077711,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 3
+        },
+        "agent_05": {
+          "contact_samples": 1,
+          "positive_samples": 1,
+          "forward_force_sample_sum": 0.626776198008011,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": 1.6196561047785594,
+          "absolute_torque_sample_sum": 1.6196561047785594,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 1
+        }
+      },
+      "CONTACT_READY": {
+        "agent_00": {
+          "contact_samples": 13,
+          "positive_samples": 2,
+          "forward_force_sample_sum": 2.4110563121621187,
+          "opposing_force_sample_sum": -15.243829788725263,
+          "torque_sample_sum": -7.333418965438591,
+          "absolute_torque_sample_sum": 11.678781208276689,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 2
+        },
+        "agent_05": {
+          "contact_samples": 15,
+          "positive_samples": 2,
+          "forward_force_sample_sum": 0.09821118431707479,
+          "opposing_force_sample_sum": -39.378308076916575,
+          "torque_sample_sum": 27.8592070312165,
+          "absolute_torque_sample_sum": 27.8592070312165,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 2
+        },
+        "agent_07": {
+          "contact_samples": 15,
+          "positive_samples": 15,
+          "forward_force_sample_sum": 278.64655201048555,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": -256.7131099379186,
+          "absolute_torque_sample_sum": 256.7131099379186,
+          "positive_samples_with_push_flag": 1,
+          "positive_samples_without_push_flag": 14
+        },
+        "agent_12": {
+          "contact_samples": 15,
+          "positive_samples": 15,
+          "forward_force_sample_sum": 67.6211345658826,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": 5.27690304210807,
+          "absolute_torque_sample_sum": 14.405875073937267,
+          "positive_samples_with_push_flag": 15,
+          "positive_samples_without_push_flag": 0
+        },
+        "agent_11": {
+          "contact_samples": 14,
+          "positive_samples": 14,
+          "forward_force_sample_sum": 77.75129237120125,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": 17.283773232022043,
+          "absolute_torque_sample_sum": 17.558769040063194,
+          "positive_samples_with_push_flag": 14,
+          "positive_samples_without_push_flag": 0
+        }
+      },
+      "TRANSPORT": {
+        "agent_00": {
+          "contact_samples": 13,
+          "positive_samples": 2,
+          "forward_force_sample_sum": 1.2680943102752251,
+          "opposing_force_sample_sum": -16.20178917294767,
+          "torque_sample_sum": -8.747562208641252,
+          "absolute_torque_sample_sum": 11.356650550479415,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 2
+        },
+        "agent_05": {
+          "contact_samples": 5,
+          "positive_samples": 0,
+          "forward_force_sample_sum": 0.0,
+          "opposing_force_sample_sum": -9.6233129884611,
+          "torque_sample_sum": 11.974305374289013,
+          "absolute_torque_sample_sum": 11.974305374289013,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 0
+        },
+        "agent_07": {
+          "contact_samples": 51,
+          "positive_samples": 51,
+          "forward_force_sample_sum": 1036.210829110227,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": -997.4973071064428,
+          "absolute_torque_sample_sum": 997.4973071064428,
+          "positive_samples_with_push_flag": 3,
+          "positive_samples_without_push_flag": 48
+        },
+        "agent_11": {
+          "contact_samples": 51,
+          "positive_samples": 51,
+          "forward_force_sample_sum": 516.5151751469635,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": 56.28086237611914,
+          "absolute_torque_sample_sum": 56.28086237611914,
+          "positive_samples_with_push_flag": 37,
+          "positive_samples_without_push_flag": 14
+        },
+        "agent_12": {
+          "contact_samples": 14,
+          "positive_samples": 14,
+          "forward_force_sample_sum": 56.70800726050368,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": 13.936574252745865,
+          "absolute_torque_sample_sum": 14.47716700086682,
+          "positive_samples_with_push_flag": 14,
+          "positive_samples_without_push_flag": 0
+        }
+      },
+      "BRAKE": {
+        "agent_07": {
+          "contact_samples": 31,
+          "positive_samples": 31,
+          "forward_force_sample_sum": 550.097795562163,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": -525.1544296424884,
+          "absolute_torque_sample_sum": 525.1544296424884,
+          "positive_samples_with_push_flag": 25,
+          "positive_samples_without_push_flag": 6
+        },
+        "agent_11": {
+          "contact_samples": 29,
+          "positive_samples": 29,
+          "forward_force_sample_sum": 314.136495286422,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": 42.356910422798585,
+          "absolute_torque_sample_sum": 42.356910422798585,
+          "positive_samples_with_push_flag": 25,
+          "positive_samples_without_push_flag": 4
+        },
+        "agent_13": {
+          "contact_samples": 36,
+          "positive_samples": 23,
+          "forward_force_sample_sum": 46.83018425031191,
+          "opposing_force_sample_sum": -18.36854239528475,
+          "torque_sample_sum": 57.09328257730779,
+          "absolute_torque_sample_sum": 91.87152608811229,
+          "positive_samples_with_push_flag": 8,
+          "positive_samples_without_push_flag": 15
+        },
+        "agent_02": {
+          "contact_samples": 26,
+          "positive_samples": 0,
+          "forward_force_sample_sum": 0.0,
+          "opposing_force_sample_sum": -89.270058441044,
+          "torque_sample_sum": -72.1860802525345,
+          "absolute_torque_sample_sum": 72.1860802525345,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 0
+        },
+        "agent_03": {
+          "contact_samples": 18,
+          "positive_samples": 0,
+          "forward_force_sample_sum": 0.0,
+          "opposing_force_sample_sum": -44.92407289662024,
+          "torque_sample_sum": -84.97683071182101,
+          "absolute_torque_sample_sum": 84.97683071182101,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 0
+        }
+      },
+      "HOLD": {
+        "agent_13": {
+          "contact_samples": 2,
+          "positive_samples": 2,
+          "forward_force_sample_sum": 0.30561316327376103,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": 1.246228681232231,
+          "absolute_torque_sample_sum": 1.246228681232231,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 2
+        }
+      }
+    },
+    "endpoint_m": 0.02311476510078367,
+    "final_displacement": [
+      1.2004837207199137,
+      0.02310970315537464
+    ],
+    "maximum_absolute_rotation_deg": 1.9469933862125373,
+    "per_agent_scope": "First-substep samples only; reconstructed lever-arm torque checked against stored total; sample sums are not integrated per-agent impulses",
+    "net_impulse_scope": "All saved pre-integration contact samples; descriptive, not causal attribution of final rotation"
+  },
+  {
+    "case_id": "near_circle_finite_acquisition_support",
+    "condition": "near_circle",
+    "arm": "finite_acquisition_support",
+    "receipt_sha256": "b088d46db9e2e977155dede3f85f92fa65e70f474f750e01436cb96205f5a87a",
+    "frames": 332,
+    "substep_samples": 1328,
+    "dt": 0.05,
+    "gates": {
+      "informed_fraction": 0.55,
+      "map_coverage_min": 0.7,
+      "contact_quorum": 4,
+      "contact_dwell": 20,
+      "transport_quorum": 4,
+      "brake_fraction": 0.65,
+      "hold_tolerance": 0.0,
+      "hold_speed": 0.02,
+      "hold_dwell": 1,
+      "sustain_contacts": 1,
+      "contact_loss_dwell": 20,
+      "contact_regain_dwell": 20,
+      "pause_limit": 80,
+      "estimate_loss_dwell": 20,
+      "recover_on_brake_progress": false
+    },
+    "phases": {
+      "DISCOVER": {
+        "frames": 23,
+        "signal_active_max": 0,
+        "current_push_flag_max": 0,
+        "physical_positive_contact_max": 0,
+        "current_push_robot_steps": 0,
+        "mode_counts": {
+          "acquisition_circulation": 359,
+          "recall": 9
+        },
+        "positive_contact_robot_samples": 0,
+        "positive_samples_with_push_flag": 0,
+        "positive_samples_without_push_flag": 0,
+        "duration_s": 1.1500000000000001,
+        "substep_net_contact_impulses": {
+          "samples": 92,
+          "force_impulse": [
+            0.0,
+            0.0
+          ],
+          "torque_impulse": 0.0,
+          "absolute_torque_impulse": 0.0
+        }
+      },
+      "ENCLOSE": {
+        "frames": 87,
+        "signal_active_max": 0,
+        "current_push_flag_max": 0,
+        "physical_positive_contact_max": 2,
+        "current_push_robot_steps": 0,
+        "mode_counts": {
+          "acquisition_circulation": 368,
+          "cage": 991,
+          "approach": 16,
+          "redeploy": 17
+        },
+        "positive_contact_robot_samples": 54,
+        "positive_samples_with_push_flag": 0,
+        "positive_samples_without_push_flag": 54,
+        "duration_s": 4.3500000000000005,
+        "substep_net_contact_impulses": {
+          "samples": 348,
+          "force_impulse": [
+            27.843110262172434,
+            -11.492622581900676
+          ],
+          "torque_impulse": -3.4903941895573536,
+          "absolute_torque_impulse": 3.4903941895573536
+        }
+      },
+      "CONTACT_READY": {
+        "frames": 1,
+        "signal_active_max": 0,
+        "current_push_flag_max": 5,
+        "physical_positive_contact_max": 2,
+        "current_push_robot_steps": 5,
+        "mode_counts": {
+          "cage": 10,
+          "push": 5,
+          "redeploy": 1
+        },
+        "positive_contact_robot_samples": 2,
+        "positive_samples_with_push_flag": 2,
+        "positive_samples_without_push_flag": 0,
+        "duration_s": 0.05,
+        "substep_net_contact_impulses": {
+          "samples": 4,
+          "force_impulse": [
+            1.2305530184729108,
+            -0.2865742708328142
+          ],
+          "torque_impulse": -0.14007474475950646,
+          "absolute_torque_impulse": 0.14007474475950646
+        }
+      },
+      "TRANSPORT": {
+        "frames": 55,
+        "signal_active_max": 6,
+        "current_push_flag_max": 6,
+        "physical_positive_contact_max": 4,
+        "current_push_robot_steps": 220,
+        "mode_counts": {
+          "cage": 598,
+          "push": 220,
+          "redeploy": 62
+        },
+        "positive_contact_robot_samples": 177,
+        "positive_samples_with_push_flag": 155,
+        "positive_samples_without_push_flag": 22,
+        "duration_s": 2.75,
+        "substep_net_contact_impulses": {
+          "samples": 220,
+          "force_impulse": [
+            66.88270729606214,
+            -9.025105729126672
+          ],
+          "torque_impulse": -9.282796780732019,
+          "absolute_torque_impulse": 9.282796780732019
+        }
+      },
+      "BRAKE": {
+        "frames": 126,
+        "signal_active_max": 6,
+        "current_push_flag_max": 6,
+        "physical_positive_contact_max": 4,
+        "current_push_robot_steps": 428,
+        "mode_counts": {
+          "push": 428,
+          "cage": 1322,
+          "redeploy": 266
+        },
+        "positive_contact_robot_samples": 242,
+        "positive_samples_with_push_flag": 168,
+        "positive_samples_without_push_flag": 74,
+        "duration_s": 6.300000000000001,
+        "substep_net_contact_impulses": {
+          "samples": 504,
+          "force_impulse": [
+            41.02325930220642,
+            7.360695886885725
+          ],
+          "torque_impulse": 1.2881456247643495,
+          "absolute_torque_impulse": 11.539260667234055
+        }
+      },
+      "HOLD": {
+        "frames": 40,
+        "signal_active_max": 0,
+        "current_push_flag_max": 0,
+        "physical_positive_contact_max": 0,
+        "current_push_robot_steps": 0,
+        "mode_counts": {
+          "cage": 589,
+          "redeploy": 51
+        },
+        "positive_contact_robot_samples": 0,
+        "positive_samples_with_push_flag": 0,
+        "positive_samples_without_push_flag": 0,
+        "duration_s": 2.0,
+        "substep_net_contact_impulses": {
+          "samples": 160,
+          "force_impulse": [
+            -0.006311579517653421,
+            -0.12896752759177899
+          ],
+          "torque_impulse": -0.05026538232353618,
+          "absolute_torque_impulse": 0.05026538232353618
+        }
+      }
+    },
+    "transitions": [
+      {
+        "to_phase": "DISCOVER",
+        "from_phase": "SEARCH",
+        "frame": 1,
+        "control_time_s": 0.0,
+        "signals": {
+          "agent_count": 16,
+          "informed_agents": 9,
+          "map_coverage": 0.4722222222222222,
+          "contact_ready": 0,
+          "transport_active": 0,
+          "progress": 0.0,
+          "target_distance": 1.2,
+          "estimated_speed": 0.0,
+          "stopping_distance": 0.18333333333333335,
+          "estimate_quality": "unavailable",
+          "recovery_ready": null,
+          "task_reference_ready": false
+        },
+        "before_command_displacement": [
+          0.0,
+          0.0
+        ],
+        "before_command_rotation_deg": 0.0,
+        "after_step_true_displacement": [
+          0.0,
+          0.0
+        ],
+        "after_step_rotation_deg": 0.0
+      },
+      {
+        "to_phase": "ENCLOSE",
+        "from_phase": "DISCOVER",
+        "frame": 24,
+        "control_time_s": 1.1500000000000001,
+        "signals": {
+          "agent_count": 16,
+          "informed_agents": 16,
+          "map_coverage": 0.7222222222222222,
+          "contact_ready": 0,
+          "transport_active": 0,
+          "progress": 0.0,
+          "target_distance": 1.2,
+          "estimated_speed": 0.0,
+          "stopping_distance": 0.18333333333333335,
+          "estimate_quality": "unavailable",
+          "recovery_ready": null,
+          "task_reference_ready": false
+        },
+        "before_command_displacement": [
+          0.0,
+          0.0
+        ],
+        "before_command_rotation_deg": 0.0,
+        "after_step_true_displacement": [
+          0.0,
+          0.0
+        ],
+        "after_step_rotation_deg": 0.0
+      },
+      {
+        "to_phase": "CONTACT_READY",
+        "from_phase": "ENCLOSE",
+        "frame": 111,
+        "control_time_s": 5.5,
+        "signals": {
+          "agent_count": 16,
+          "informed_agents": 16,
+          "map_coverage": 0.8333333333333334,
+          "contact_ready": 6,
+          "transport_active": 0,
+          "progress": 0.04074034273691174,
+          "target_distance": 1.2,
+          "estimated_speed": 0.037596666387545996,
+          "stopping_distance": 0.18333333333333335,
+          "estimate_quality": "credible",
+          "recovery_ready": null,
+          "task_reference_ready": false
+        },
+        "before_command_displacement": [
+          0.02261813563173254,
+          -0.005856937523367911
+        ],
+        "before_command_rotation_deg": 0.0,
+        "after_step_true_displacement": [
+          0.02506394944882606,
+          -0.006428564745545984
+        ],
+        "after_step_rotation_deg": 0.0
+      },
+      {
+        "to_phase": "TRANSPORT",
+        "from_phase": "CONTACT_READY",
+        "frame": 112,
+        "control_time_s": 5.550000000000001,
+        "signals": {
+          "agent_count": 16,
+          "informed_agents": 16,
+          "map_coverage": 0.8333333333333334,
+          "contact_ready": 6,
+          "transport_active": 5,
+          "progress": 0.041801501006372366,
+          "target_distance": 1.2,
+          "estimated_speed": 0.028002830710830623,
+          "stopping_distance": 0.18333333333333335,
+          "estimate_quality": "credible",
+          "recovery_ready": null,
+          "task_reference_ready": false
+        },
+        "before_command_displacement": [
+          0.02506394944882606,
+          -0.006428564745545984
+        ],
+        "before_command_rotation_deg": 0.0,
+        "after_step_true_displacement": [
+          0.029459109675112227,
+          -0.007421061648618554
+        ],
+        "after_step_rotation_deg": 0.0
+      },
+      {
+        "to_phase": "BRAKE",
+        "from_phase": "TRANSPORT",
+        "frame": 167,
+        "control_time_s": 8.3,
+        "signals": {
+          "agent_count": 16,
+          "informed_agents": 16,
+          "map_coverage": 0.8611111111111112,
+          "contact_ready": 6,
+          "transport_active": 5,
+          "progress": 0.7928646076743118,
+          "target_distance": 1.2,
+          "estimated_speed": 0.3054328960801632,
+          "stopping_distance": 0.18333333333333335,
+          "estimate_quality": "credible",
+          "recovery_ready": null,
+          "task_reference_ready": false
+        },
+        "before_command_displacement": [
+          0.7917137546217297,
+          -0.1059204901116444
+        ],
+        "before_command_rotation_deg": 0.0,
+        "after_step_true_displacement": [
+          0.8068196758165844,
+          -0.10673977608549068
+        ],
+        "after_step_rotation_deg": 0.0
+      },
+      {
+        "to_phase": "HOLD",
+        "from_phase": "BRAKE",
+        "frame": 293,
+        "control_time_s": 14.600000000000001,
+        "signals": {
+          "agent_count": 16,
+          "informed_agents": 16,
+          "map_coverage": 0.8611111111111112,
+          "contact_ready": 12,
+          "transport_active": 0,
+          "progress": 1.2,
+          "target_distance": 1.2,
+          "estimated_speed": 0.013820092634393565,
+          "stopping_distance": 0.18333333333333335,
+          "estimate_quality": "credible",
+          "recovery_ready": null,
+          "task_reference_ready": true
+        },
+        "before_command_displacement": [
+          1.2001190595416955,
+          0.018598507004180753
+        ],
+        "before_command_rotation_deg": 0.0,
+        "after_step_true_displacement": [
+          1.2001190595416955,
+          0.018598507004180753
+        ],
+        "after_step_rotation_deg": 0.0
+      }
+    ],
+    "first_quorums": {
+      "contact_ready_signal": {
+        "frame": 92,
+        "control_time_s": 4.55,
+        "phase": "ENCLOSE",
+        "count": 4,
+        "threshold": 4
+      },
+      "current_push_flags": {
+        "frame": 111,
+        "control_time_s": 5.5,
+        "phase": "CONTACT_READY",
+        "count": 5,
+        "threshold": 4
+      },
+      "transport_active_signal": {
+        "frame": 112,
+        "control_time_s": 5.550000000000001,
+        "phase": "TRANSPORT",
+        "count": 5,
+        "threshold": 4
+      },
+      "positive_physical_contacts": {
+        "frame": 133,
+        "control_time_s": 6.6000000000000005,
+        "phase": "TRANSPORT",
+        "count": 4,
+        "threshold": 4
+      }
+    },
+    "before_transitions": {
+      "TRANSPORT": {
+        "entered": true,
+        "frame_count": 111,
+        "control_time_s": 5.550000000000001,
+        "true_displacement_before": [
+          0.02506394944882606,
+          -0.006428564745545984
+        ],
+        "rotation_before_deg": 0.0,
+        "sampled_forward_impulse": 29.073663280645345,
+        "sampled_torque_impulse": -3.63046893431686,
+        "sampled_absolute_torque_impulse": 3.63046893431686
+      },
+      "BRAKE": {
+        "entered": true,
+        "frame_count": 166,
+        "control_time_s": 8.3,
+        "true_displacement_before": [
+          0.7917137546217297,
+          -0.1059204901116444
+        ],
+        "rotation_before_deg": 0.0,
+        "sampled_forward_impulse": 95.95637057670749,
+        "sampled_torque_impulse": -12.91326571504888,
+        "sampled_absolute_torque_impulse": 12.91326571504888
+      }
+    },
+    "final_response": {
+      "final_phase": "HOLD",
+      "entered": {
+        "SEARCH": 0,
+        "DISCOVER": 0,
+        "ENCLOSE": 23,
+        "CONTACT_READY": 110,
+        "TRANSPORT": 111,
+        "BRAKE": 166,
+        "HOLD": 292
+      },
+      "first_detection_frame": 0,
+      "enclosure_frame": 23,
+      "contact_ready_frame": 110,
+      "transport_frame": 111,
+      "brake_frame": 166,
+      "hold_frame": 292,
+      "brake_reason": "estimated_stop",
+      "push_suspended": false,
+      "overshoot": false,
+      "short_of_target": true,
+      "contact_recovery_failed": false,
+      "estimate_stopped": false
+    },
+    "first_substep_contact_samples_by_phase_and_agent": {
+      "DISCOVER": {},
+      "ENCLOSE": {
+        "agent_07": {
+          "contact_samples": 32,
+          "positive_samples": 32,
+          "forward_force_sample_sum": 328.7864423242412,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": -36.4709639002611,
+          "absolute_torque_sample_sum": 36.4709639002611,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 32
+        },
+        "agent_11": {
+          "contact_samples": 22,
+          "positive_samples": 22,
+          "forward_force_sample_sum": 235.32154079215036,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": -33.77803188972444,
+          "absolute_torque_sample_sum": 33.77803188972444,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 22
+        }
+      },
+      "CONTACT_READY": {
+        "agent_07": {
+          "contact_samples": 1,
+          "positive_samples": 1,
+          "forward_force_sample_sum": 11.198225884267917,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": -1.364918985731637,
+          "absolute_torque_sample_sum": 1.364918985731637,
+          "positive_samples_with_push_flag": 1,
+          "positive_samples_without_push_flag": 0
+        },
+        "agent_11": {
+          "contact_samples": 1,
+          "positive_samples": 1,
+          "forward_force_sample_sum": 14.362510539626538,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": -1.5642532846876875,
+          "absolute_torque_sample_sum": 1.5642532846876875,
+          "positive_samples_with_push_flag": 1,
+          "positive_samples_without_push_flag": 0
+        }
+      },
+      "TRANSPORT": {
+        "agent_07": {
+          "contact_samples": 55,
+          "positive_samples": 55,
+          "forward_force_sample_sum": 648.348568442831,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": -53.31140916956098,
+          "absolute_torque_sample_sum": 53.81334829372435,
+          "positive_samples_with_push_flag": 36,
+          "positive_samples_without_push_flag": 19
+        },
+        "agent_11": {
+          "contact_samples": 55,
+          "positive_samples": 55,
+          "forward_force_sample_sum": 867.8801480100791,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": -74.31233501951775,
+          "absolute_torque_sample_sum": 74.31233501951775,
+          "positive_samples_with_push_flag": 55,
+          "positive_samples_without_push_flag": 0
+        },
+        "agent_09": {
+          "contact_samples": 47,
+          "positive_samples": 33,
+          "forward_force_sample_sum": 37.62931043358454,
+          "opposing_force_sample_sum": -3.022305485319965,
+          "torque_sample_sum": -41.64162451845254,
+          "absolute_torque_sample_sum": 41.64162451845254,
+          "positive_samples_with_push_flag": 30,
+          "positive_samples_without_push_flag": 3
+        },
+        "agent_12": {
+          "contact_samples": 34,
+          "positive_samples": 34,
+          "forward_force_sample_sum": 100.62542513220107,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": -38.071437007280714,
+          "absolute_torque_sample_sum": 38.071437007280714,
+          "positive_samples_with_push_flag": 34,
+          "positive_samples_without_push_flag": 0
+        }
+      },
+      "BRAKE": {
+        "agent_07": {
+          "contact_samples": 31,
+          "positive_samples": 31,
+          "forward_force_sample_sum": 161.63605018665078,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": -26.693798135756683,
+          "absolute_torque_sample_sum": 26.73459099059389,
+          "positive_samples_with_push_flag": 18,
+          "positive_samples_without_push_flag": 13
+        },
+        "agent_09": {
+          "contact_samples": 38,
+          "positive_samples": 36,
+          "forward_force_sample_sum": 96.87766541122075,
+          "opposing_force_sample_sum": -0.03415344402080267,
+          "torque_sample_sum": 11.448285659790995,
+          "absolute_torque_sample_sum": 43.95611907297754,
+          "positive_samples_with_push_flag": 32,
+          "positive_samples_without_push_flag": 4
+        },
+        "agent_11": {
+          "contact_samples": 72,
+          "positive_samples": 72,
+          "forward_force_sample_sum": 1140.5190653952402,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": -56.395787217296586,
+          "absolute_torque_sample_sum": 68.12436871839898,
+          "positive_samples_with_push_flag": 29,
+          "positive_samples_without_push_flag": 43
+        },
+        "agent_12": {
+          "contact_samples": 36,
+          "positive_samples": 36,
+          "forward_force_sample_sum": 162.2648028127964,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": 4.455367183097291,
+          "absolute_torque_sample_sum": 29.77429096276828,
+          "positive_samples_with_push_flag": 31,
+          "positive_samples_without_push_flag": 5
+        },
+        "agent_14": {
+          "contact_samples": 11,
+          "positive_samples": 11,
+          "forward_force_sample_sum": 25.727581292433186,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": -1.882176167050625,
+          "absolute_torque_sample_sum": 2.7269819317699224,
+          "positive_samples_with_push_flag": 8,
+          "positive_samples_without_push_flag": 3
+        },
+        "agent_05": {
+          "contact_samples": 30,
+          "positive_samples": 2,
+          "forward_force_sample_sum": 2.8629653544624114,
+          "opposing_force_sample_sum": -139.06687243875498,
+          "torque_sample_sum": 44.779202755458456,
+          "absolute_torque_sample_sum": 65.27595227537792,
+          "positive_samples_with_push_flag": 2,
+          "positive_samples_without_push_flag": 0
+        },
+        "agent_00": {
+          "contact_samples": 7,
+          "positive_samples": 7,
+          "forward_force_sample_sum": 20.004568560528952,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": 14.594820067959443,
+          "absolute_torque_sample_sum": 14.594820067959443,
+          "positive_samples_with_push_flag": 5,
+          "positive_samples_without_push_flag": 2
+        },
+        "agent_10": {
+          "contact_samples": 16,
+          "positive_samples": 0,
+          "forward_force_sample_sum": 0.0,
+          "opposing_force_sample_sum": -151.99785078953732,
+          "torque_sample_sum": -3.3776713354031482,
+          "absolute_torque_sample_sum": 8.020253152612222,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 0
+        },
+        "agent_03": {
+          "contact_samples": 17,
+          "positive_samples": 0,
+          "forward_force_sample_sum": 0.0,
+          "opposing_force_sample_sum": -185.23787485364699,
+          "torque_sample_sum": 8.317634880029383,
+          "absolute_torque_sample_sum": 19.96017073530743,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 0
+        },
+        "agent_01": {
+          "contact_samples": 43,
+          "positive_samples": 0,
+          "forward_force_sample_sum": 0.0,
+          "opposing_force_sample_sum": -299.40097309354536,
+          "torque_sample_sum": 11.235787067381613,
+          "absolute_torque_sample_sum": 21.326010182505982,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 0
+        },
+        "agent_08": {
+          "contact_samples": 30,
+          "positive_samples": 30,
+          "forward_force_sample_sum": 184.3042139970387,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": 3.5434561585985804,
+          "absolute_torque_sample_sum": 12.88758155260751,
+          "positive_samples_with_push_flag": 27,
+          "positive_samples_without_push_flag": 3
+        },
+        "agent_13": {
+          "contact_samples": 22,
+          "positive_samples": 17,
+          "forward_force_sample_sum": 7.956352010209877,
+          "opposing_force_sample_sum": -1.7616603265895592,
+          "torque_sample_sum": -5.771897733365473,
+          "absolute_torque_sample_sum": 8.264943707904733,
+          "positive_samples_with_push_flag": 16,
+          "positive_samples_without_push_flag": 1
+        }
+      },
+      "HOLD": {
+        "agent_01": {
+          "contact_samples": 1,
+          "positive_samples": 0,
+          "forward_force_sample_sum": 0.0,
+          "opposing_force_sample_sum": -0.1262315903530684,
+          "torque_sample_sum": -1.0053076464707236,
+          "absolute_torque_sample_sum": 1.0053076464707236,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 0
+        }
+      }
+    },
+    "endpoint_m": 0.018598888083942795,
+    "final_displacement": [
+      1.2001190595416955,
+      0.018598507004180753
+    ],
+    "maximum_absolute_rotation_deg": 0.0,
+    "per_agent_scope": "First-substep samples only; reconstructed lever-arm torque checked against stored total; sample sums are not integrated per-agent impulses",
+    "net_impulse_scope": "All saved pre-integration contact samples; descriptive, not causal attribution of final rotation"
+  },
+  {
+    "case_id": "near_l_reference_finite_acquisition_support",
+    "condition": "near_l_reference",
+    "arm": "finite_acquisition_support",
+    "receipt_sha256": "dde4fefd9ee68308efffed1b58fbc793c8e2f33844d541898b1641320da762d9",
+    "frames": 265,
+    "substep_samples": 1060,
+    "dt": 0.05,
+    "gates": {
+      "informed_fraction": 0.55,
+      "map_coverage_min": 0.7,
+      "contact_quorum": 4,
+      "contact_dwell": 20,
+      "transport_quorum": 4,
+      "brake_fraction": 0.65,
+      "hold_tolerance": 0.0,
+      "hold_speed": 0.02,
+      "hold_dwell": 1,
+      "sustain_contacts": 1,
+      "contact_loss_dwell": 20,
+      "contact_regain_dwell": 20,
+      "pause_limit": 80,
+      "estimate_loss_dwell": 20,
+      "recover_on_brake_progress": false
+    },
+    "phases": {
+      "DISCOVER": {
+        "frames": 44,
+        "signal_active_max": 0,
+        "current_push_flag_max": 0,
+        "physical_positive_contact_max": 0,
+        "current_push_robot_steps": 0,
+        "mode_counts": {
+          "acquisition_circulation": 631,
+          "recall": 8,
+          "search": 1,
+          "cage": 48,
+          "approach": 16
+        },
+        "positive_contact_robot_samples": 0,
+        "positive_samples_with_push_flag": 0,
+        "positive_samples_without_push_flag": 0,
+        "duration_s": 2.2,
+        "substep_net_contact_impulses": {
+          "samples": 176,
+          "force_impulse": [
+            0.0,
+            0.0
+          ],
+          "torque_impulse": 0.0,
+          "absolute_torque_impulse": 0.0
+        }
+      },
+      "ENCLOSE": {
+        "frames": 50,
+        "signal_active_max": 0,
+        "current_push_flag_max": 0,
+        "physical_positive_contact_max": 3,
+        "current_push_robot_steps": 0,
+        "mode_counts": {
+          "cage": 652,
+          "approach": 68,
+          "redeploy": 80
+        },
+        "positive_contact_robot_samples": 28,
+        "positive_samples_with_push_flag": 0,
+        "positive_samples_without_push_flag": 28,
+        "duration_s": 2.5,
+        "substep_net_contact_impulses": {
+          "samples": 200,
+          "force_impulse": [
+            20.458702466782903,
+            -4.238721272817223
+          ],
+          "torque_impulse": -17.822947402559077,
+          "absolute_torque_impulse": 17.822947402559077
+        }
+      },
+      "CONTACT_READY": {
+        "frames": 15,
+        "signal_active_max": 2,
+        "current_push_flag_max": 4,
+        "physical_positive_contact_max": 4,
+        "current_push_robot_steps": 32,
+        "mode_counts": {
+          "cage": 180,
+          "redeploy": 28,
+          "push": 32
+        },
+        "positive_contact_robot_samples": 48,
+        "positive_samples_with_push_flag": 30,
+        "positive_samples_without_push_flag": 18,
+        "duration_s": 0.75,
+        "substep_net_contact_impulses": {
+          "samples": 60,
+          "force_impulse": [
+            17.110012422239862,
+            6.7974300290912995
+          ],
+          "torque_impulse": -10.50639708032761,
+          "absolute_torque_impulse": 10.50639708032761
+        }
+      },
+      "TRANSPORT": {
+        "frames": 51,
+        "signal_active_max": 4,
+        "current_push_flag_max": 4,
+        "physical_positive_contact_max": 4,
+        "current_push_robot_steps": 67,
+        "mode_counts": {
+          "cage": 731,
+          "push": 67,
+          "redeploy": 18
+        },
+        "positive_contact_robot_samples": 118,
+        "positive_samples_with_push_flag": 54,
+        "positive_samples_without_push_flag": 64,
+        "duration_s": 2.5500000000000003,
+        "substep_net_contact_impulses": {
+          "samples": 204,
+          "force_impulse": [
+            61.56188165173295,
+            7.052200656370047
+          ],
+          "torque_impulse": -40.62576015069082,
+          "absolute_torque_impulse": 40.62576015069082
+        }
+      },
+      "BRAKE": {
+        "frames": 65,
+        "signal_active_max": 6,
+        "current_push_flag_max": 6,
+        "physical_positive_contact_max": 2,
+        "current_push_robot_steps": 160,
+        "mode_counts": {
+          "cage": 785,
+          "push": 160,
+          "redeploy": 95
+        },
+        "positive_contact_robot_samples": 83,
+        "positive_samples_with_push_flag": 58,
+        "positive_samples_without_push_flag": 25,
+        "duration_s": 3.25,
+        "substep_net_contact_impulses": {
+          "samples": 260,
+          "force_impulse": [
+            29.86752649685455,
+            -36.81800291531228
+          ],
+          "torque_impulse": -25.096550351199713,
+          "absolute_torque_impulse": 28.401816457911206
+        }
+      },
+      "HOLD": {
+        "frames": 40,
+        "signal_active_max": 1,
+        "current_push_flag_max": 0,
+        "physical_positive_contact_max": 1,
+        "current_push_robot_steps": 0,
+        "mode_counts": {
+          "cage": 612,
+          "redeploy": 28
+        },
+        "positive_contact_robot_samples": 2,
+        "positive_samples_with_push_flag": 0,
+        "positive_samples_without_push_flag": 2,
+        "duration_s": 2.0,
+        "substep_net_contact_impulses": {
+          "samples": 160,
+          "force_impulse": [
+            0.015280658163688052,
+            -0.4666810633116915
+          ],
+          "torque_impulse": 0.06231143406161155,
+          "absolute_torque_impulse": 0.06231143406161155
+        }
+      }
+    },
+    "transitions": [
+      {
+        "to_phase": "DISCOVER",
+        "from_phase": "SEARCH",
+        "frame": 1,
+        "control_time_s": 0.0,
+        "signals": {
+          "agent_count": 16,
+          "informed_agents": 13,
+          "map_coverage": 0.4166666666666667,
+          "contact_ready": 0,
+          "transport_active": 0,
+          "progress": 0.0,
+          "target_distance": 1.2,
+          "estimated_speed": 0.0,
+          "stopping_distance": 0.18333333333333335,
+          "estimate_quality": "unavailable",
+          "recovery_ready": null,
+          "task_reference_ready": false
+        },
+        "before_command_displacement": [
+          0.0,
+          0.0
+        ],
+        "before_command_rotation_deg": 0.0,
+        "after_step_true_displacement": [
+          0.0,
+          0.0
+        ],
+        "after_step_rotation_deg": 0.0
+      },
+      {
+        "to_phase": "ENCLOSE",
+        "from_phase": "DISCOVER",
+        "frame": 45,
+        "control_time_s": 2.2,
+        "signals": {
+          "agent_count": 16,
+          "informed_agents": 16,
+          "map_coverage": 0.7222222222222222,
+          "contact_ready": 0,
+          "transport_active": 0,
+          "progress": 0.019166674904168568,
+          "target_distance": 1.2,
+          "estimated_speed": 0.013238197465548666,
+          "stopping_distance": 0.18333333333333335,
+          "estimate_quality": "credible",
+          "recovery_ready": null,
+          "task_reference_ready": false
+        },
+        "before_command_displacement": [
+          0.0,
+          0.0
+        ],
+        "before_command_rotation_deg": 0.0,
+        "after_step_true_displacement": [
+          0.0,
+          0.0
+        ],
+        "after_step_rotation_deg": 0.0
+      },
+      {
+        "to_phase": "CONTACT_READY",
+        "from_phase": "ENCLOSE",
+        "frame": 95,
+        "control_time_s": 4.7,
+        "signals": {
+          "agent_count": 16,
+          "informed_agents": 16,
+          "map_coverage": 0.9722222222222222,
+          "contact_ready": 8,
+          "transport_active": 0,
+          "progress": 0.01867011639914007,
+          "target_distance": 1.2,
+          "estimated_speed": 0.004595455375044522,
+          "stopping_distance": 0.18333333333333335,
+          "estimate_quality": "credible",
+          "recovery_ready": null,
+          "task_reference_ready": false
+        },
+        "before_command_displacement": [
+          0.0,
+          0.0
+        ],
+        "before_command_rotation_deg": -1.3773480959902258,
+        "after_step_true_displacement": [
+          0.00022424425762723743,
+          6.253204929596023e-05
+        ],
+        "after_step_rotation_deg": -1.4019504961467633
+      },
+      {
+        "to_phase": "TRANSPORT",
+        "from_phase": "CONTACT_READY",
+        "frame": 110,
+        "control_time_s": 5.45,
+        "signals": {
+          "agent_count": 16,
+          "informed_agents": 16,
+          "map_coverage": 0.9444444444444444,
+          "contact_ready": 8,
+          "transport_active": 4,
+          "progress": 0.056728739107473114,
+          "target_distance": 1.2,
+          "estimated_speed": 0.07105092494207821,
+          "stopping_distance": 0.18333333333333335,
+          "estimate_quality": "credible",
+          "recovery_ready": null,
+          "task_reference_ready": false
+        },
+        "before_command_displacement": [
+          0.04464393943561573,
+          0.01818594753123559
+        ],
+        "before_command_rotation_deg": -1.4361039607622519,
+        "after_step_true_displacement": [
+          0.05077390992771269,
+          0.021427793194466638
+        ],
+        "after_step_rotation_deg": -1.4361039607622519
+      },
+      {
+        "to_phase": "BRAKE",
+        "from_phase": "TRANSPORT",
+        "frame": 161,
+        "control_time_s": 8.0,
+        "signals": {
+          "agent_count": 16,
+          "informed_agents": 16,
+          "map_coverage": 0.9444444444444444,
+          "contact_ready": 5,
+          "transport_active": 0,
+          "progress": 0.7913041911874538,
+          "target_distance": 1.2,
+          "estimated_speed": 0.29738306223989935,
+          "stopping_distance": 0.18333333333333335,
+          "estimate_quality": "credible",
+          "recovery_ready": null,
+          "task_reference_ready": false
+        },
+        "before_command_displacement": [
+          0.7898317051099313,
+          0.09370975723999475
+        ],
+        "before_command_rotation_deg": -1.911520839407457,
+        "after_step_true_displacement": [
+          0.8049029806211334,
+          0.0936626423507505
+        ],
+        "after_step_rotation_deg": -1.9124870188508531
+      },
+      {
+        "to_phase": "HOLD",
+        "from_phase": "BRAKE",
+        "frame": 226,
+        "control_time_s": 11.25,
+        "signals": {
+          "agent_count": 16,
+          "informed_agents": 16,
+          "map_coverage": 0.9722222222222222,
+          "contact_ready": 9,
+          "transport_active": 1,
+          "progress": 1.2,
+          "target_distance": 1.2,
+          "estimated_speed": 0.00942070701637559,
+          "stopping_distance": 0.18333333333333335,
+          "estimate_quality": "credible",
+          "recovery_ready": null,
+          "task_reference_ready": true
+        },
+        "before_command_displacement": [
+          1.2004837207199137,
+          0.02310970315537464
+        ],
+        "before_command_rotation_deg": -1.9469933862125373,
+        "after_step_true_displacement": [
+          1.2004837207199137,
+          0.02310970315537464
+        ],
+        "after_step_rotation_deg": -1.9469933862125373
+      }
+    ],
+    "first_quorums": {
+      "contact_ready_signal": {
+        "frame": 74,
+        "control_time_s": 3.6500000000000004,
+        "phase": "ENCLOSE",
+        "count": 4,
+        "threshold": 4
+      },
+      "positive_physical_contacts": {
+        "frame": 95,
+        "control_time_s": 4.7,
+        "phase": "CONTACT_READY",
+        "count": 4,
+        "threshold": 4
+      },
+      "current_push_flags": {
+        "frame": 109,
+        "control_time_s": 5.4,
+        "phase": "CONTACT_READY",
+        "count": 4,
+        "threshold": 4
+      },
+      "transport_active_signal": {
+        "frame": 110,
+        "control_time_s": 5.45,
+        "phase": "TRANSPORT",
+        "count": 4,
+        "threshold": 4
+      }
+    },
+    "before_transitions": {
+      "TRANSPORT": {
+        "entered": true,
+        "frame_count": 109,
+        "control_time_s": 5.45,
+        "true_displacement_before": [
+          0.04464393943561573,
+          0.01818594753123559
+        ],
+        "rotation_before_deg": -1.4361039607622519,
+        "sampled_forward_impulse": 37.568714889022765,
+        "sampled_torque_impulse": -28.329344482886686,
+        "sampled_absolute_torque_impulse": 28.329344482886686
+      },
+      "BRAKE": {
+        "entered": true,
+        "frame_count": 160,
+        "control_time_s": 8.0,
+        "true_displacement_before": [
+          0.7898317051099313,
+          0.09370975723999475
+        ],
+        "rotation_before_deg": -1.911520839407457,
+        "sampled_forward_impulse": 99.13059654075572,
+        "sampled_torque_impulse": -68.9551046335775,
+        "sampled_absolute_torque_impulse": 68.9551046335775
+      }
+    },
+    "final_response": {
+      "final_phase": "HOLD",
+      "entered": {
+        "SEARCH": 0,
+        "DISCOVER": 0,
+        "ENCLOSE": 44,
+        "CONTACT_READY": 94,
+        "TRANSPORT": 109,
+        "BRAKE": 160,
+        "HOLD": 225
+      },
+      "first_detection_frame": 0,
+      "enclosure_frame": 44,
+      "contact_ready_frame": 94,
+      "transport_frame": 109,
+      "brake_frame": 160,
+      "hold_frame": 225,
+      "brake_reason": "estimated_stop",
+      "push_suspended": false,
+      "overshoot": false,
+      "short_of_target": true,
+      "contact_recovery_failed": false,
+      "estimate_stopped": false
+    },
+    "first_substep_contact_samples_by_phase_and_agent": {
+      "DISCOVER": {},
+      "ENCLOSE": {
+        "agent_07": {
+          "contact_samples": 24,
+          "positive_samples": 24,
+          "forward_force_sample_sum": 411.21446251174905,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": -366.1383819380861,
+          "absolute_torque_sample_sum": 366.1383819380861,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 24
+        },
+        "agent_00": {
+          "contact_samples": 3,
+          "positive_samples": 3,
+          "forward_force_sample_sum": 3.037884061081704,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": 2.468491225077711,
+          "absolute_torque_sample_sum": 2.468491225077711,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 3
+        },
+        "agent_05": {
+          "contact_samples": 1,
+          "positive_samples": 1,
+          "forward_force_sample_sum": 0.626776198008011,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": 1.6196561047785594,
+          "absolute_torque_sample_sum": 1.6196561047785594,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 1
+        }
+      },
+      "CONTACT_READY": {
+        "agent_00": {
+          "contact_samples": 13,
+          "positive_samples": 2,
+          "forward_force_sample_sum": 2.4110563121621187,
+          "opposing_force_sample_sum": -15.243829788725263,
+          "torque_sample_sum": -7.333418965438591,
+          "absolute_torque_sample_sum": 11.678781208276689,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 2
+        },
+        "agent_05": {
+          "contact_samples": 15,
+          "positive_samples": 2,
+          "forward_force_sample_sum": 0.09821118431707479,
+          "opposing_force_sample_sum": -39.378308076916575,
+          "torque_sample_sum": 27.8592070312165,
+          "absolute_torque_sample_sum": 27.8592070312165,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 2
+        },
+        "agent_07": {
+          "contact_samples": 15,
+          "positive_samples": 15,
+          "forward_force_sample_sum": 278.64655201048555,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": -256.7131099379186,
+          "absolute_torque_sample_sum": 256.7131099379186,
+          "positive_samples_with_push_flag": 1,
+          "positive_samples_without_push_flag": 14
+        },
+        "agent_12": {
+          "contact_samples": 15,
+          "positive_samples": 15,
+          "forward_force_sample_sum": 67.6211345658826,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": 5.27690304210807,
+          "absolute_torque_sample_sum": 14.405875073937267,
+          "positive_samples_with_push_flag": 15,
+          "positive_samples_without_push_flag": 0
+        },
+        "agent_11": {
+          "contact_samples": 14,
+          "positive_samples": 14,
+          "forward_force_sample_sum": 77.75129237120125,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": 17.283773232022043,
+          "absolute_torque_sample_sum": 17.558769040063194,
+          "positive_samples_with_push_flag": 14,
+          "positive_samples_without_push_flag": 0
+        }
+      },
+      "TRANSPORT": {
+        "agent_00": {
+          "contact_samples": 13,
+          "positive_samples": 2,
+          "forward_force_sample_sum": 1.2680943102752251,
+          "opposing_force_sample_sum": -16.20178917294767,
+          "torque_sample_sum": -8.747562208641252,
+          "absolute_torque_sample_sum": 11.356650550479415,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 2
+        },
+        "agent_05": {
+          "contact_samples": 5,
+          "positive_samples": 0,
+          "forward_force_sample_sum": 0.0,
+          "opposing_force_sample_sum": -9.6233129884611,
+          "torque_sample_sum": 11.974305374289013,
+          "absolute_torque_sample_sum": 11.974305374289013,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 0
+        },
+        "agent_07": {
+          "contact_samples": 51,
+          "positive_samples": 51,
+          "forward_force_sample_sum": 1036.210829110227,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": -997.4973071064428,
+          "absolute_torque_sample_sum": 997.4973071064428,
+          "positive_samples_with_push_flag": 3,
+          "positive_samples_without_push_flag": 48
+        },
+        "agent_11": {
+          "contact_samples": 51,
+          "positive_samples": 51,
+          "forward_force_sample_sum": 516.5151751469635,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": 56.28086237611914,
+          "absolute_torque_sample_sum": 56.28086237611914,
+          "positive_samples_with_push_flag": 37,
+          "positive_samples_without_push_flag": 14
+        },
+        "agent_12": {
+          "contact_samples": 14,
+          "positive_samples": 14,
+          "forward_force_sample_sum": 56.70800726050368,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": 13.936574252745865,
+          "absolute_torque_sample_sum": 14.47716700086682,
+          "positive_samples_with_push_flag": 14,
+          "positive_samples_without_push_flag": 0
+        }
+      },
+      "BRAKE": {
+        "agent_07": {
+          "contact_samples": 31,
+          "positive_samples": 31,
+          "forward_force_sample_sum": 550.097795562163,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": -525.1544296424884,
+          "absolute_torque_sample_sum": 525.1544296424884,
+          "positive_samples_with_push_flag": 25,
+          "positive_samples_without_push_flag": 6
+        },
+        "agent_11": {
+          "contact_samples": 29,
+          "positive_samples": 29,
+          "forward_force_sample_sum": 314.136495286422,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": 42.356910422798585,
+          "absolute_torque_sample_sum": 42.356910422798585,
+          "positive_samples_with_push_flag": 25,
+          "positive_samples_without_push_flag": 4
+        },
+        "agent_13": {
+          "contact_samples": 36,
+          "positive_samples": 23,
+          "forward_force_sample_sum": 46.83018425031191,
+          "opposing_force_sample_sum": -18.36854239528475,
+          "torque_sample_sum": 57.09328257730779,
+          "absolute_torque_sample_sum": 91.87152608811229,
+          "positive_samples_with_push_flag": 8,
+          "positive_samples_without_push_flag": 15
+        },
+        "agent_02": {
+          "contact_samples": 26,
+          "positive_samples": 0,
+          "forward_force_sample_sum": 0.0,
+          "opposing_force_sample_sum": -89.270058441044,
+          "torque_sample_sum": -72.1860802525345,
+          "absolute_torque_sample_sum": 72.1860802525345,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 0
+        },
+        "agent_03": {
+          "contact_samples": 18,
+          "positive_samples": 0,
+          "forward_force_sample_sum": 0.0,
+          "opposing_force_sample_sum": -44.92407289662024,
+          "torque_sample_sum": -84.97683071182101,
+          "absolute_torque_sample_sum": 84.97683071182101,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 0
+        }
+      },
+      "HOLD": {
+        "agent_13": {
+          "contact_samples": 2,
+          "positive_samples": 2,
+          "forward_force_sample_sum": 0.30561316327376103,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": 1.246228681232231,
+          "absolute_torque_sample_sum": 1.246228681232231,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 2
+        }
+      }
+    },
+    "endpoint_m": 0.02311476510078367,
+    "final_displacement": [
+      1.2004837207199137,
+      0.02310970315537464
+    ],
+    "maximum_absolute_rotation_deg": 1.9469933862125373,
+    "per_agent_scope": "First-substep samples only; reconstructed lever-arm torque checked against stored total; sample sums are not integrated per-agent impulses",
+    "net_impulse_scope": "All saved pre-integration contact samples; descriptive, not causal attribution of final rotation"
+  },
+  {
+    "case_id": "far_c_open_away_pos0_finite_acquisition_support",
+    "condition": "far_c_open_away_pos0",
+    "arm": "finite_acquisition_support",
+    "receipt_sha256": "17cd5e4d30c08eb88583355e9f4ab97f5fdb9303f077c4b7083850a67e7eff4a",
+    "frames": 1189,
+    "substep_samples": 4756,
+    "dt": 0.05,
+    "gates": {
+      "informed_fraction": 0.55,
+      "map_coverage_min": 0.7,
+      "contact_quorum": 4,
+      "contact_dwell": 20,
+      "transport_quorum": 4,
+      "brake_fraction": 0.65,
+      "hold_tolerance": 0.0,
+      "hold_speed": 0.02,
+      "hold_dwell": 1,
+      "sustain_contacts": 1,
+      "contact_loss_dwell": 20,
+      "contact_regain_dwell": 20,
+      "pause_limit": 80,
+      "estimate_loss_dwell": 20,
+      "recover_on_brake_progress": false
+    },
+    "phases": {
+      "SEARCH": {
+        "frames": 174,
+        "signal_active_max": 0,
+        "current_push_flag_max": 0,
+        "physical_positive_contact_max": 0,
+        "current_push_robot_steps": 0,
+        "mode_counts": {
+          "search": 2771,
+          "acquisition_circulation": 6,
+          "recall": 7
+        },
+        "positive_contact_robot_samples": 0,
+        "positive_samples_with_push_flag": 0,
+        "positive_samples_without_push_flag": 0,
+        "duration_s": 8.700000000000001,
+        "substep_net_contact_impulses": {
+          "samples": 696,
+          "force_impulse": [
+            0.0,
+            0.0
+          ],
+          "torque_impulse": 0.0,
+          "absolute_torque_impulse": 0.0
+        }
+      },
+      "DISCOVER": {
+        "frames": 127,
+        "signal_active_max": 0,
+        "current_push_flag_max": 0,
+        "physical_positive_contact_max": 0,
+        "current_push_robot_steps": 0,
+        "mode_counts": {
+          "search": 635,
+          "acquisition_circulation": 1080,
+          "recall": 317
+        },
+        "positive_contact_robot_samples": 0,
+        "positive_samples_with_push_flag": 0,
+        "positive_samples_without_push_flag": 0,
+        "duration_s": 6.3500000000000005,
+        "substep_net_contact_impulses": {
+          "samples": 508,
+          "force_impulse": [
+            0.0,
+            0.0
+          ],
+          "torque_impulse": 0.0,
+          "absolute_torque_impulse": 0.0
+        }
+      },
+      "ENCLOSE": {
+        "frames": 174,
+        "signal_active_max": 0,
+        "current_push_flag_max": 0,
+        "physical_positive_contact_max": 1,
+        "current_push_robot_steps": 0,
+        "mode_counts": {
+          "search": 380,
+          "acquisition_circulation": 825,
+          "redeploy": 371,
+          "cage": 741,
+          "approach": 84,
+          "map_reference_reacquire_search": 242,
+          "map_reference_reacquire_approach": 105,
+          "map_reference_unavailable": 36
+        },
+        "positive_contact_robot_samples": 4,
+        "positive_samples_with_push_flag": 0,
+        "positive_samples_without_push_flag": 4,
+        "duration_s": 8.700000000000001,
+        "substep_net_contact_impulses": {
+          "samples": 696,
+          "force_impulse": [
+            -9.090520492640984,
+            24.280178369145798
+          ],
+          "torque_impulse": -10.698230175631553,
+          "absolute_torque_impulse": 10.698230175631553
+        }
+      },
+      "CONTACT_READY": {
+        "frames": 454,
+        "signal_active_max": 2,
+        "current_push_flag_max": 2,
+        "physical_positive_contact_max": 4,
+        "current_push_robot_steps": 506,
+        "mode_counts": {
+          "map_reference_reacquire_search": 908,
+          "cage": 5098,
+          "approach": 26,
+          "redeploy": 726,
+          "push": 506
+        },
+        "positive_contact_robot_samples": 615,
+        "positive_samples_with_push_flag": 415,
+        "positive_samples_without_push_flag": 200,
+        "duration_s": 22.700000000000003,
+        "substep_net_contact_impulses": {
+          "samples": 1816,
+          "force_impulse": [
+            381.3181330422097,
+            -67.93321351354022
+          ],
+          "torque_impulse": 316.89404486834013,
+          "absolute_torque_impulse": 329.65149034213385
+        }
+      },
+      "BRAKE": {
+        "frames": 220,
+        "signal_active_max": 5,
+        "current_push_flag_max": 5,
+        "physical_positive_contact_max": 7,
+        "current_push_robot_steps": 412,
+        "mode_counts": {
+          "map_reference_unavailable": 448,
+          "cage": 2512,
+          "push": 412,
+          "redeploy": 148
+        },
+        "positive_contact_robot_samples": 670,
+        "positive_samples_with_push_flag": 284,
+        "positive_samples_without_push_flag": 386,
+        "duration_s": 11.0,
+        "substep_net_contact_impulses": {
+          "samples": 880,
+          "force_impulse": [
+            185.81510865395123,
+            -50.142466034857904
+          ],
+          "torque_impulse": -16.21296532845334,
+          "absolute_torque_impulse": 60.858395027754334
+        }
+      },
+      "HOLD": {
+        "frames": 40,
+        "signal_active_max": 3,
+        "current_push_flag_max": 0,
+        "physical_positive_contact_max": 0,
+        "current_push_robot_steps": 0,
+        "mode_counts": {
+          "map_reference_unavailable": 80,
+          "cage": 555,
+          "redeploy": 5
+        },
+        "positive_contact_robot_samples": 0,
+        "positive_samples_with_push_flag": 0,
+        "positive_samples_without_push_flag": 0,
+        "duration_s": 2.0,
+        "substep_net_contact_impulses": {
+          "samples": 160,
+          "force_impulse": [
+            0.0,
+            0.0
+          ],
+          "torque_impulse": 0.0,
+          "absolute_torque_impulse": 0.0
+        }
+      }
+    },
+    "transitions": [
+      {
+        "to_phase": "DISCOVER",
+        "from_phase": "SEARCH",
+        "frame": 175,
+        "control_time_s": 8.700000000000001,
+        "signals": {
+          "agent_count": 16,
+          "informed_agents": 1,
+          "map_coverage": 0.08333333333333333,
+          "contact_ready": 0,
+          "transport_active": 0,
+          "progress": 0.0,
+          "target_distance": 1.2,
+          "estimated_speed": 0.0,
+          "stopping_distance": 0.18333333333333335,
+          "estimate_quality": "unavailable",
+          "recovery_ready": null,
+          "task_reference_ready": false
+        },
+        "before_command_displacement": [
+          0.0,
+          0.0
+        ],
+        "before_command_rotation_deg": 0.0,
+        "after_step_true_displacement": [
+          0.0,
+          0.0
+        ],
+        "after_step_rotation_deg": 0.0
+      },
+      {
+        "to_phase": "ENCLOSE",
+        "from_phase": "DISCOVER",
+        "frame": 302,
+        "control_time_s": 15.05,
+        "signals": {
+          "agent_count": 16,
+          "informed_agents": 11,
+          "map_coverage": 0.7222222222222222,
+          "contact_ready": 0,
+          "transport_active": 0,
+          "progress": 0.0,
+          "target_distance": 1.2,
+          "estimated_speed": 0.0,
+          "stopping_distance": 0.18333333333333335,
+          "estimate_quality": "unavailable",
+          "recovery_ready": null,
+          "task_reference_ready": false
+        },
+        "before_command_displacement": [
+          0.0,
+          0.0
+        ],
+        "before_command_rotation_deg": 0.0,
+        "after_step_true_displacement": [
+          0.0,
+          0.0
+        ],
+        "after_step_rotation_deg": 0.0
+      },
+      {
+        "to_phase": "CONTACT_READY",
+        "from_phase": "ENCLOSE",
+        "frame": 476,
+        "control_time_s": 23.75,
+        "signals": {
+          "agent_count": 16,
+          "informed_agents": 14,
+          "map_coverage": 0.7777777777777778,
+          "contact_ready": 8,
+          "transport_active": 0,
+          "progress": 0.015273467562456844,
+          "target_distance": 1.2,
+          "estimated_speed": 0.09099014984919448,
+          "stopping_distance": 0.18333333333333335,
+          "estimate_quality": "credible",
+          "recovery_ready": null,
+          "task_reference_ready": false
+        },
+        "before_command_displacement": [
+          -0.0025091757412050164,
+          0.02179422884472082
+        ],
+        "before_command_rotation_deg": 0.0,
+        "after_step_true_displacement": [
+          -0.00275049256211668,
+          0.02400277199041767
+        ],
+        "after_step_rotation_deg": 0.0
+      },
+      {
+        "to_phase": "BRAKE",
+        "from_phase": "CONTACT_READY",
+        "frame": 930,
+        "control_time_s": 46.45,
+        "signals": {
+          "agent_count": 16,
+          "informed_agents": 14,
+          "map_coverage": 0.8888888888888888,
+          "contact_ready": 8,
+          "transport_active": 1,
+          "progress": 0.781758801910315,
+          "target_distance": 1.2,
+          "estimated_speed": 0.08447983298232456,
+          "stopping_distance": 0.18333333333333335,
+          "estimate_quality": "credible",
+          "recovery_ready": null,
+          "task_reference_ready": false
+        },
+        "before_command_displacement": [
+          0.7684439564018422,
+          -0.04249546353405176
+        ],
+        "before_command_rotation_deg": 9.06555646975711,
+        "after_step_true_displacement": [
+          0.7754211239101019,
+          -0.04290497904480972
+        ],
+        "after_step_rotation_deg": 9.06555646975711
+      },
+      {
+        "to_phase": "HOLD",
+        "from_phase": "BRAKE",
+        "frame": 1150,
+        "control_time_s": 57.45,
+        "signals": {
+          "agent_count": 16,
+          "informed_agents": 14,
+          "map_coverage": 0.8888888888888888,
+          "contact_ready": 10,
+          "transport_active": 3,
+          "progress": 1.2,
+          "target_distance": 1.2,
+          "estimated_speed": 0.011991628400283536,
+          "stopping_distance": 0.18333333333333335,
+          "estimate_quality": "credible",
+          "recovery_ready": null,
+          "task_reference_ready": true
+        },
+        "before_command_displacement": [
+          1.2124048953936906,
+          -0.012612225003767463
+        ],
+        "before_command_rotation_deg": 9.071854171178066,
+        "after_step_true_displacement": [
+          1.2124048953936906,
+          -0.012612225003767463
+        ],
+        "after_step_rotation_deg": 9.071854171178066
+      }
+    ],
+    "first_quorums": {
+      "contact_ready_signal": {
+        "frame": 388,
+        "control_time_s": 19.35,
+        "phase": "ENCLOSE",
+        "count": 4,
+        "threshold": 4
+      },
+      "positive_physical_contacts": {
+        "frame": 601,
+        "control_time_s": 30.0,
+        "phase": "CONTACT_READY",
+        "count": 4,
+        "threshold": 4
+      },
+      "current_push_flags": {
+        "frame": 951,
+        "control_time_s": 47.5,
+        "phase": "BRAKE",
+        "count": 4,
+        "threshold": 4
+      },
+      "transport_active_signal": {
+        "frame": 952,
+        "control_time_s": 47.550000000000004,
+        "phase": "BRAKE",
+        "count": 4,
+        "threshold": 4
+      }
+    },
+    "before_transitions": {
+      "TRANSPORT": {
+        "entered": false,
+        "frame_count": 1189,
+        "control_time_s": null,
+        "true_displacement_before": [
+          1.2124048953936906,
+          -0.012612225003767463
+        ],
+        "rotation_before_deg": 9.071854171178066,
+        "sampled_forward_impulse": 558.0427212035199,
+        "sampled_torque_impulse": 289.98284936425523,
+        "sampled_absolute_torque_impulse": 401.2081155455197
+      },
+      "BRAKE": {
+        "entered": true,
+        "frame_count": 929,
+        "control_time_s": 46.45,
+        "true_displacement_before": [
+          0.7684439564018422,
+          -0.04249546353405176
+        ],
+        "rotation_before_deg": 9.06555646975711,
+        "sampled_forward_impulse": 372.22761254956873,
+        "sampled_torque_impulse": 306.19581469270855,
+        "sampled_absolute_torque_impulse": 340.34972051776543
+      }
+    },
+    "final_response": {
+      "final_phase": "HOLD",
+      "entered": {
+        "SEARCH": 0,
+        "DISCOVER": 174,
+        "ENCLOSE": 301,
+        "CONTACT_READY": 475,
+        "BRAKE": 929,
+        "HOLD": 1149
+      },
+      "first_detection_frame": 174,
+      "enclosure_frame": 301,
+      "contact_ready_frame": 475,
+      "transport_frame": null,
+      "brake_frame": 929,
+      "hold_frame": 1149,
+      "brake_reason": "estimated_stop_from_contact_ready",
+      "push_suspended": false,
+      "overshoot": false,
+      "short_of_target": true,
+      "contact_recovery_failed": false,
+      "estimate_stopped": false
+    },
+    "first_substep_contact_samples_by_phase_and_agent": {
+      "SEARCH": {},
+      "DISCOVER": {},
+      "ENCLOSE": {
+        "agent_05": {
+          "contact_samples": 54,
+          "positive_samples": 0,
+          "forward_force_sample_sum": 0.0,
+          "opposing_force_sample_sum": -155.497078273583,
+          "torque_sample_sum": -189.83370787578565,
+          "absolute_torque_sample_sum": 189.83370787578565,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 0
+        },
+        "agent_09": {
+          "contact_samples": 14,
+          "positive_samples": 0,
+          "forward_force_sample_sum": 0.0,
+          "opposing_force_sample_sum": -36.42408707168176,
+          "torque_sample_sum": 6.6496814420674095,
+          "absolute_torque_sample_sum": 12.921153401190379,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 0
+        },
+        "agent_03": {
+          "contact_samples": 5,
+          "positive_samples": 4,
+          "forward_force_sample_sum": 9.216641894816041,
+          "opposing_force_sample_sum": -0.12031398954583872,
+          "torque_sample_sum": -36.27983813381983,
+          "absolute_torque_sample_sum": 36.27983813381983,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 4
+        }
+      },
+      "CONTACT_READY": {
+        "agent_03": {
+          "contact_samples": 187,
+          "positive_samples": 187,
+          "forward_force_sample_sum": 4021.756203015032,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": 1686.6870809861618,
+          "absolute_torque_sample_sum": 2055.503324260391,
+          "positive_samples_with_push_flag": 154,
+          "positive_samples_without_push_flag": 33
+        },
+        "agent_08": {
+          "contact_samples": 425,
+          "positive_samples": 113,
+          "forward_force_sample_sum": 144.66873566154166,
+          "opposing_force_sample_sum": -586.9517135955371,
+          "torque_sample_sum": 2322.425358266414,
+          "absolute_torque_sample_sum": 2326.815755002766,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 113
+        },
+        "agent_09": {
+          "contact_samples": 202,
+          "positive_samples": 17,
+          "forward_force_sample_sum": 29.94112367385624,
+          "opposing_force_sample_sum": -520.0394564525599,
+          "torque_sample_sum": -169.28906948634835,
+          "absolute_torque_sample_sum": 553.842074686143,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 17
+        },
+        "agent_05": {
+          "contact_samples": 14,
+          "positive_samples": 0,
+          "forward_force_sample_sum": 0.0,
+          "opposing_force_sample_sum": -14.059590973687218,
+          "torque_sample_sum": -22.39697137073956,
+          "absolute_torque_sample_sum": 22.39697137073956,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 0
+        },
+        "agent_01": {
+          "contact_samples": 75,
+          "positive_samples": 75,
+          "forward_force_sample_sum": 1393.7785720581262,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": 599.201357785713,
+          "absolute_torque_sample_sum": 599.201357785713,
+          "positive_samples_with_push_flag": 73,
+          "positive_samples_without_push_flag": 2
+        },
+        "agent_02": {
+          "contact_samples": 193,
+          "positive_samples": 193,
+          "forward_force_sample_sum": 3611.500750315744,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": 1876.8958154266627,
+          "absolute_torque_sample_sum": 1876.8958154266627,
+          "positive_samples_with_push_flag": 188,
+          "positive_samples_without_push_flag": 5
+        },
+        "agent_06": {
+          "contact_samples": 185,
+          "positive_samples": 30,
+          "forward_force_sample_sum": 17.93671291731018,
+          "opposing_force_sample_sum": -202.97279373300628,
+          "torque_sample_sum": 255.1716628725544,
+          "absolute_torque_sample_sum": 308.51483453484957,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 30
+        },
+        "agent_11": {
+          "contact_samples": 15,
+          "positive_samples": 0,
+          "forward_force_sample_sum": 0.0,
+          "opposing_force_sample_sum": -28.58715650259987,
+          "torque_sample_sum": -51.668905880806584,
+          "absolute_torque_sample_sum": 51.668905880806584,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 0
+        }
+      },
+      "BRAKE": {
+        "agent_03": {
+          "contact_samples": 103,
+          "positive_samples": 101,
+          "forward_force_sample_sum": 1068.0510221306238,
+          "opposing_force_sample_sum": -0.11499589469897933,
+          "torque_sample_sum": 808.2658112805756,
+          "absolute_torque_sample_sum": 808.2658112805756,
+          "positive_samples_with_push_flag": 33,
+          "positive_samples_without_push_flag": 68
+        },
+        "agent_06": {
+          "contact_samples": 183,
+          "positive_samples": 174,
+          "forward_force_sample_sum": 572.540337329743,
+          "opposing_force_sample_sum": -5.134775138099205,
+          "torque_sample_sum": -281.7817047388275,
+          "absolute_torque_sample_sum": 333.2619234187201,
+          "positive_samples_with_push_flag": 50,
+          "positive_samples_without_push_flag": 124
+        },
+        "agent_08": {
+          "contact_samples": 216,
+          "positive_samples": 206,
+          "forward_force_sample_sum": 570.9109180542122,
+          "opposing_force_sample_sum": -11.001959178320105,
+          "torque_sample_sum": 1285.4984415373701,
+          "absolute_torque_sample_sum": 1285.4989473786395,
+          "positive_samples_with_push_flag": 61,
+          "positive_samples_without_push_flag": 145
+        },
+        "agent_09": {
+          "contact_samples": 89,
+          "positive_samples": 19,
+          "forward_force_sample_sum": 30.04836806644348,
+          "opposing_force_sample_sum": -100.86146140186706,
+          "torque_sample_sum": -150.82479721594004,
+          "absolute_torque_sample_sum": 177.37391942629824,
+          "positive_samples_with_push_flag": 2,
+          "positive_samples_without_push_flag": 17
+        },
+        "agent_11": {
+          "contact_samples": 210,
+          "positive_samples": 22,
+          "forward_force_sample_sum": 47.22287970842761,
+          "opposing_force_sample_sum": -534.3805057247483,
+          "torque_sample_sum": -2301.4899653945918,
+          "absolute_torque_sample_sum": 2301.7912878363054,
+          "positive_samples_with_push_flag": 3,
+          "positive_samples_without_push_flag": 19
+        },
+        "agent_01": {
+          "contact_samples": 139,
+          "positive_samples": 139,
+          "forward_force_sample_sum": 2286.7285825393524,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": 188.21994938793395,
+          "absolute_torque_sample_sum": 188.39061291749528,
+          "positive_samples_with_push_flag": 134,
+          "positive_samples_without_push_flag": 5
+        },
+        "agent_13": {
+          "contact_samples": 60,
+          "positive_samples": 9,
+          "forward_force_sample_sum": 5.3418134681095095,
+          "opposing_force_sample_sum": -66.71256493703345,
+          "torque_sample_sum": 167.415462977541,
+          "absolute_torque_sample_sum": 167.95578161796573,
+          "positive_samples_with_push_flag": 1,
+          "positive_samples_without_push_flag": 8
+        }
+      },
+      "HOLD": {}
+    },
+    "endpoint_m": 0.017690382960073792,
+    "final_displacement": [
+      1.2124048953936906,
+      -0.012612225003767463
+    ],
+    "maximum_absolute_rotation_deg": 9.071854171178066,
+    "per_agent_scope": "First-substep samples only; reconstructed lever-arm torque checked against stored total; sample sums are not integrated per-agent impulses",
+    "net_impulse_scope": "All saved pre-integration contact samples; descriptive, not causal attribution of final rotation"
+  },
+  {
+    "case_id": "far_c_open_away_pos0_local_pair_candidate",
+    "condition": "far_c_open_away_pos0",
+    "arm": "local_pair_candidate",
+    "receipt_sha256": "733e49e0711a282b288bbaa140afd19e459703061cae22d4899d70b6d80c115c",
+    "frames": 1074,
+    "substep_samples": 4296,
+    "dt": 0.05,
+    "gates": {
+      "informed_fraction": 0.55,
+      "map_coverage_min": 0.7,
+      "contact_quorum": 4,
+      "contact_dwell": 20,
+      "transport_quorum": 4,
+      "brake_fraction": 0.65,
+      "hold_tolerance": 0.0,
+      "hold_speed": 0.02,
+      "hold_dwell": 1,
+      "sustain_contacts": 1,
+      "contact_loss_dwell": 20,
+      "contact_regain_dwell": 20,
+      "pause_limit": 80,
+      "estimate_loss_dwell": 20,
+      "recover_on_brake_progress": false
+    },
+    "phases": {
+      "SEARCH": {
+        "frames": 174,
+        "signal_active_max": 0,
+        "current_push_flag_max": 0,
+        "physical_positive_contact_max": 0,
+        "current_push_robot_steps": 0,
+        "mode_counts": {
+          "search": 2771,
+          "acquisition_circulation": 6,
+          "recall": 7
+        },
+        "positive_contact_robot_samples": 0,
+        "positive_samples_with_push_flag": 0,
+        "positive_samples_without_push_flag": 0,
+        "duration_s": 8.700000000000001,
+        "substep_net_contact_impulses": {
+          "samples": 696,
+          "force_impulse": [
+            0.0,
+            0.0
+          ],
+          "torque_impulse": 0.0,
+          "absolute_torque_impulse": 0.0
+        }
+      },
+      "DISCOVER": {
+        "frames": 127,
+        "signal_active_max": 0,
+        "current_push_flag_max": 0,
+        "physical_positive_contact_max": 0,
+        "current_push_robot_steps": 0,
+        "mode_counts": {
+          "search": 635,
+          "acquisition_circulation": 1080,
+          "recall": 317
+        },
+        "positive_contact_robot_samples": 0,
+        "positive_samples_with_push_flag": 0,
+        "positive_samples_without_push_flag": 0,
+        "duration_s": 6.3500000000000005,
+        "substep_net_contact_impulses": {
+          "samples": 508,
+          "force_impulse": [
+            0.0,
+            0.0
+          ],
+          "torque_impulse": 0.0,
+          "absolute_torque_impulse": 0.0
+        }
+      },
+      "ENCLOSE": {
+        "frames": 179,
+        "signal_active_max": 0,
+        "current_push_flag_max": 0,
+        "physical_positive_contact_max": 1,
+        "current_push_robot_steps": 0,
+        "mode_counts": {
+          "search": 380,
+          "acquisition_circulation": 825,
+          "redeploy": 360,
+          "cage": 804,
+          "approach": 96,
+          "map_reference_reacquire_search": 252,
+          "map_reference_reacquire_approach": 104,
+          "map_reference_unavailable": 43
+        },
+        "positive_contact_robot_samples": 5,
+        "positive_samples_with_push_flag": 0,
+        "positive_samples_without_push_flag": 5,
+        "duration_s": 8.950000000000001,
+        "substep_net_contact_impulses": {
+          "samples": 716,
+          "force_impulse": [
+            -10.91945186730506,
+            30.539238853234195
+          ],
+          "torque_impulse": -15.998200635997872,
+          "absolute_torque_impulse": 15.998200635997872
+        }
+      },
+      "CONTACT_READY": {
+        "frames": 483,
+        "signal_active_max": 2,
+        "current_push_flag_max": 2,
+        "physical_positive_contact_max": 3,
+        "current_push_robot_steps": 574,
+        "mode_counts": {
+          "map_reference_reacquire_search": 966,
+          "cage": 5363,
+          "approach": 20,
+          "redeploy": 805,
+          "push": 574
+        },
+        "positive_contact_robot_samples": 655,
+        "positive_samples_with_push_flag": 464,
+        "positive_samples_without_push_flag": 191,
+        "duration_s": 24.150000000000002,
+        "substep_net_contact_impulses": {
+          "samples": 1932,
+          "force_impulse": [
+            420.2586437017639,
+            20.976291345144478
+          ],
+          "torque_impulse": 305.3290662322899,
+          "absolute_torque_impulse": 321.9361286737256
+        }
+      },
+      "BRAKE": {
+        "frames": 71,
+        "signal_active_max": 7,
+        "current_push_flag_max": 7,
+        "physical_positive_contact_max": 5,
+        "current_push_robot_steps": 166,
+        "mode_counts": {
+          "map_reference_unavailable": 142,
+          "cage": 813,
+          "push": 166,
+          "redeploy": 15
+        },
+        "positive_contact_robot_samples": 161,
+        "positive_samples_with_push_flag": 57,
+        "positive_samples_without_push_flag": 104,
+        "duration_s": 3.5500000000000003,
+        "substep_net_contact_impulses": {
+          "samples": 284,
+          "force_impulse": [
+            24.08158775639962,
+            14.798982108201235
+          ],
+          "torque_impulse": 27.774541219569016,
+          "absolute_torque_impulse": 31.65248245643769
+        }
+      },
+      "HOLD": {
+        "frames": 40,
+        "signal_active_max": 2,
+        "current_push_flag_max": 0,
+        "physical_positive_contact_max": 1,
+        "current_push_robot_steps": 0,
+        "mode_counts": {
+          "map_reference_unavailable": 80,
+          "cage": 556,
+          "redeploy": 4
+        },
+        "positive_contact_robot_samples": 1,
+        "positive_samples_with_push_flag": 0,
+        "positive_samples_without_push_flag": 1,
+        "duration_s": 2.0,
+        "substep_net_contact_impulses": {
+          "samples": 160,
+          "force_impulse": [
+            -0.4251780124499836,
+            -0.2603970646237049
+          ],
+          "torque_impulse": -0.30165746281664335,
+          "absolute_torque_impulse": 0.30165746281664335
+        }
+      }
+    },
+    "transitions": [
+      {
+        "to_phase": "DISCOVER",
+        "from_phase": "SEARCH",
+        "frame": 175,
+        "control_time_s": 8.700000000000001,
+        "signals": {
+          "agent_count": 16,
+          "informed_agents": 1,
+          "map_coverage": 0.08333333333333333,
+          "contact_ready": 0,
+          "transport_active": 0,
+          "progress": 0.0,
+          "target_distance": 1.2,
+          "estimated_speed": 0.0,
+          "stopping_distance": 0.18333333333333335,
+          "estimate_quality": "unavailable",
+          "recovery_ready": null,
+          "task_reference_ready": false
+        },
+        "before_command_displacement": [
+          0.0,
+          0.0
+        ],
+        "before_command_rotation_deg": 0.0,
+        "after_step_true_displacement": [
+          0.0,
+          0.0
+        ],
+        "after_step_rotation_deg": 0.0
+      },
+      {
+        "to_phase": "ENCLOSE",
+        "from_phase": "DISCOVER",
+        "frame": 302,
+        "control_time_s": 15.05,
+        "signals": {
+          "agent_count": 16,
+          "informed_agents": 11,
+          "map_coverage": 0.7222222222222222,
+          "contact_ready": 0,
+          "transport_active": 0,
+          "progress": 0.0,
+          "target_distance": 1.2,
+          "estimated_speed": 0.0,
+          "stopping_distance": 0.18333333333333335,
+          "estimate_quality": "unavailable",
+          "recovery_ready": null,
+          "task_reference_ready": false
+        },
+        "before_command_displacement": [
+          0.0,
+          0.0
+        ],
+        "before_command_rotation_deg": 0.0,
+        "after_step_true_displacement": [
+          0.0,
+          0.0
+        ],
+        "after_step_rotation_deg": 0.0
+      },
+      {
+        "to_phase": "CONTACT_READY",
+        "from_phase": "ENCLOSE",
+        "frame": 481,
+        "control_time_s": 24.0,
+        "signals": {
+          "agent_count": 16,
+          "informed_agents": 14,
+          "map_coverage": 0.8055555555555556,
+          "contact_ready": 5,
+          "transport_active": 0,
+          "progress": 0.017548032455849016,
+          "target_distance": 1.2,
+          "estimated_speed": 0.04327912134752306,
+          "stopping_distance": 0.18333333333333335,
+          "estimate_quality": "credible",
+          "recovery_ready": null,
+          "task_reference_ready": false
+        },
+        "before_command_displacement": [
+          -0.0009013223737812659,
+          0.01040724589251063
+        ],
+        "before_command_rotation_deg": 0.0,
+        "after_step_true_displacement": [
+          -0.0014012520387551852,
+          0.012512325247733713
+        ],
+        "after_step_rotation_deg": 0.0
+      },
+      {
+        "to_phase": "BRAKE",
+        "from_phase": "CONTACT_READY",
+        "frame": 964,
+        "control_time_s": 48.150000000000006,
+        "signals": {
+          "agent_count": 16,
+          "informed_agents": 14,
+          "map_coverage": 0.9166666666666666,
+          "contact_ready": 10,
+          "transport_active": 1,
+          "progress": 0.7875495185070326,
+          "target_distance": 1.2,
+          "estimated_speed": 0.11195425315887905,
+          "stopping_distance": 0.18333333333333335,
+          "estimate_quality": "credible",
+          "recovery_ready": null,
+          "task_reference_ready": false
+        },
+        "before_command_displacement": [
+          0.7590279683509018,
+          -0.013060791264742022
+        ],
+        "before_command_rotation_deg": 4.9424758321921,
+        "after_step_true_displacement": [
+          0.7663380898792735,
+          -0.01162050514014723
+        ],
+        "after_step_rotation_deg": 4.9424758321921
+      },
+      {
+        "to_phase": "HOLD",
+        "from_phase": "BRAKE",
+        "frame": 1035,
+        "control_time_s": 51.7,
+        "signals": {
+          "agent_count": 16,
+          "informed_agents": 14,
+          "map_coverage": 0.8888888888888888,
+          "contact_ready": 10,
+          "transport_active": 2,
+          "progress": 1.2,
+          "target_distance": 1.2,
+          "estimated_speed": 0.016350965440166263,
+          "stopping_distance": 0.18333333333333335,
+          "estimate_quality": "credible",
+          "recovery_ready": null,
+          "task_reference_ready": true
+        },
+        "before_command_displacement": [
+          1.2054799332824033,
+          0.004256361492078753
+        ],
+        "before_command_rotation_deg": 4.9424758321921,
+        "after_step_true_displacement": [
+          1.2054799332824033,
+          0.004256361492078753
+        ],
+        "after_step_rotation_deg": 4.9424758321921
+      }
+    ],
+    "first_quorums": {
+      "contact_ready_signal": {
+        "frame": 398,
+        "control_time_s": 19.85,
+        "phase": "ENCLOSE",
+        "count": 4,
+        "threshold": 4
+      },
+      "current_push_flags": {
+        "frame": 990,
+        "control_time_s": 49.45,
+        "phase": "BRAKE",
+        "count": 4,
+        "threshold": 4
+      },
+      "transport_active_signal": {
+        "frame": 991,
+        "control_time_s": 49.5,
+        "phase": "BRAKE",
+        "count": 4,
+        "threshold": 4
+      },
+      "positive_physical_contacts": {
+        "frame": 995,
+        "control_time_s": 49.7,
+        "phase": "BRAKE",
+        "count": 4,
+        "threshold": 4
+      }
+    },
+    "before_transitions": {
+      "TRANSPORT": {
+        "entered": false,
+        "frame_count": 1074,
+        "control_time_s": null,
+        "true_displacement_before": [
+          1.2054799332824033,
+          0.004256361492078753
+        ],
+        "rotation_before_deg": 4.9424758321921,
+        "sampled_forward_impulse": 432.99560157840847,
+        "sampled_torque_impulse": 316.8037493530444,
+        "sampled_absolute_torque_impulse": 369.8884692289778
+      },
+      "BRAKE": {
+        "entered": true,
+        "frame_count": 963,
+        "control_time_s": 48.150000000000006,
+        "true_displacement_before": [
+          0.7590279683509018,
+          -0.013060791264742022
+        ],
+        "rotation_before_deg": 4.9424758321921,
+        "sampled_forward_impulse": 409.33919183445886,
+        "sampled_torque_impulse": 289.330865596292,
+        "sampled_absolute_torque_impulse": 337.93432930972347
+      }
+    },
+    "final_response": {
+      "final_phase": "HOLD",
+      "entered": {
+        "SEARCH": 0,
+        "DISCOVER": 174,
+        "ENCLOSE": 301,
+        "CONTACT_READY": 480,
+        "BRAKE": 963,
+        "HOLD": 1034
+      },
+      "first_detection_frame": 174,
+      "enclosure_frame": 301,
+      "contact_ready_frame": 480,
+      "transport_frame": null,
+      "brake_frame": 963,
+      "hold_frame": 1034,
+      "brake_reason": "estimated_stop_from_contact_ready",
+      "push_suspended": false,
+      "overshoot": false,
+      "short_of_target": true,
+      "contact_recovery_failed": false,
+      "estimate_stopped": false
+    },
+    "first_substep_contact_samples_by_phase_and_agent": {
+      "SEARCH": {},
+      "DISCOVER": {},
+      "ENCLOSE": {
+        "agent_05": {
+          "contact_samples": 63,
+          "positive_samples": 0,
+          "forward_force_sample_sum": 0.0,
+          "opposing_force_sample_sum": -222.87526445902026,
+          "torque_sample_sum": -282.10089440360406,
+          "absolute_torque_sample_sum": 282.10089440360406,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 0
+        },
+        "agent_14": {
+          "contact_samples": 1,
+          "positive_samples": 0,
+          "forward_force_sample_sum": 0.0,
+          "opposing_force_sample_sum": -0.6338292699786006,
+          "torque_sample_sum": -0.27346755208696427,
+          "absolute_torque_sample_sum": 0.27346755208696427,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 0
+        },
+        "agent_03": {
+          "contact_samples": 5,
+          "positive_samples": 5,
+          "forward_force_sample_sum": 10.041565114461743,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": -38.83055286944522,
+          "absolute_torque_sample_sum": 38.83055286944522,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 5
+        },
+        "agent_09": {
+          "contact_samples": 4,
+          "positive_samples": 0,
+          "forward_force_sample_sum": 0.0,
+          "opposing_force_sample_sum": -5.702987693564564,
+          "torque_sample_sum": -1.2750234107461371,
+          "absolute_torque_sample_sum": 1.3076087468697088,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 0
+        }
+      },
+      "CONTACT_READY": {
+        "agent_03": {
+          "contact_samples": 214,
+          "positive_samples": 212,
+          "forward_force_sample_sum": 4397.921000143245,
+          "opposing_force_sample_sum": -6.269063381786315,
+          "torque_sample_sum": 2062.5628856366784,
+          "absolute_torque_sample_sum": 2373.6030752734805,
+          "positive_samples_with_push_flag": 187,
+          "positive_samples_without_push_flag": 25
+        },
+        "agent_05": {
+          "contact_samples": 44,
+          "positive_samples": 9,
+          "forward_force_sample_sum": 40.38200336358759,
+          "opposing_force_sample_sum": -28.99291303107756,
+          "torque_sample_sum": -50.56794788002847,
+          "absolute_torque_sample_sum": 63.39820137981725,
+          "positive_samples_with_push_flag": 9,
+          "positive_samples_without_push_flag": 0
+        },
+        "agent_09": {
+          "contact_samples": 231,
+          "positive_samples": 8,
+          "forward_force_sample_sum": 2.5764471919845735,
+          "opposing_force_sample_sum": -424.87735835073187,
+          "torque_sample_sum": -291.3264012590692,
+          "absolute_torque_sample_sum": 504.4509788630942,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 8
+        },
+        "agent_08": {
+          "contact_samples": 332,
+          "positive_samples": 118,
+          "forward_force_sample_sum": 139.01198531755617,
+          "opposing_force_sample_sum": -369.2573529727891,
+          "torque_sample_sum": 2117.718844833798,
+          "absolute_torque_sample_sum": 2126.8844730986434,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 118
+        },
+        "agent_01": {
+          "contact_samples": 77,
+          "positive_samples": 77,
+          "forward_force_sample_sum": 1554.6710308834188,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": 653.1931458836027,
+          "absolute_torque_sample_sum": 653.1931458836027,
+          "positive_samples_with_push_flag": 75,
+          "positive_samples_without_push_flag": 2
+        },
+        "agent_02": {
+          "contact_samples": 205,
+          "positive_samples": 205,
+          "forward_force_sample_sum": 3723.2704541476983,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": 2045.4610547927548,
+          "absolute_torque_sample_sum": 2055.554502217548,
+          "positive_samples_with_push_flag": 193,
+          "positive_samples_without_push_flag": 12
+        },
+        "agent_11": {
+          "contact_samples": 106,
+          "positive_samples": 11,
+          "forward_force_sample_sum": 7.646706978821342,
+          "opposing_force_sample_sum": -233.07446463945595,
+          "torque_sample_sum": -258.2693940682645,
+          "absolute_torque_sample_sum": 271.41959413489224,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 11
+        },
+        "agent_06": {
+          "contact_samples": 137,
+          "positive_samples": 15,
+          "forward_force_sample_sum": 3.6029765684347317,
+          "opposing_force_sample_sum": -186.35280571439714,
+          "torque_sample_sum": -44.808207912175234,
+          "absolute_torque_sample_sum": 266.157847090834,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 15
+        }
+      },
+      "BRAKE": {
+        "agent_03": {
+          "contact_samples": 33,
+          "positive_samples": 33,
+          "forward_force_sample_sum": 886.5998690114059,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": 423.4999316737687,
+          "absolute_torque_sample_sum": 423.4999316737687,
+          "positive_samples_with_push_flag": 21,
+          "positive_samples_without_push_flag": 12
+        },
+        "agent_11": {
+          "contact_samples": 55,
+          "positive_samples": 15,
+          "forward_force_sample_sum": 44.502863546506454,
+          "opposing_force_sample_sum": -58.805914300757,
+          "torque_sample_sum": -208.99899469789673,
+          "absolute_torque_sample_sum": 224.84690600275914,
+          "positive_samples_with_push_flag": 4,
+          "positive_samples_without_push_flag": 11
+        },
+        "agent_06": {
+          "contact_samples": 57,
+          "positive_samples": 41,
+          "forward_force_sample_sum": 69.83958928299568,
+          "opposing_force_sample_sum": -14.07758999604422,
+          "torque_sample_sum": -10.620597090566473,
+          "absolute_torque_sample_sum": 65.71288144210266,
+          "positive_samples_with_push_flag": 15,
+          "positive_samples_without_push_flag": 26
+        },
+        "agent_09": {
+          "contact_samples": 4,
+          "positive_samples": 3,
+          "forward_force_sample_sum": 2.973821148141188,
+          "opposing_force_sample_sum": -0.38144768250632066,
+          "torque_sample_sum": -6.251662409108098,
+          "absolute_torque_sample_sum": 6.251662409108098,
+          "positive_samples_with_push_flag": 1,
+          "positive_samples_without_push_flag": 2
+        },
+        "agent_13": {
+          "contact_samples": 35,
+          "positive_samples": 33,
+          "forward_force_sample_sum": 42.03027942008316,
+          "opposing_force_sample_sum": -0.5672954309347711,
+          "torque_sample_sum": 112.62905276234244,
+          "absolute_torque_sample_sum": 112.62905276234244,
+          "positive_samples_with_push_flag": 2,
+          "positive_samples_without_push_flag": 31
+        },
+        "agent_08": {
+          "contact_samples": 38,
+          "positive_samples": 36,
+          "forward_force_sample_sum": 68.44838517448294,
+          "opposing_force_sample_sum": -0.5833620959974304,
+          "torque_sample_sum": 144.64148333707027,
+          "absolute_torque_sample_sum": 144.64148333707027,
+          "positive_samples_with_push_flag": 14,
+          "positive_samples_without_push_flag": 22
+        },
+        "agent_12": {
+          "contact_samples": 23,
+          "positive_samples": 0,
+          "forward_force_sample_sum": 0.0,
+          "opposing_force_sample_sum": -310.9280535021834,
+          "torque_sample_sum": 301.94553788302153,
+          "absolute_torque_sample_sum": 301.94553788302153,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 0
+        },
+        "agent_14": {
+          "contact_samples": 16,
+          "positive_samples": 0,
+          "forward_force_sample_sum": 0.0,
+          "opposing_force_sample_sum": -170.65591061802064,
+          "torque_sample_sum": -166.77915228361024,
+          "absolute_torque_sample_sum": 166.77915228361024,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 0
+        }
+      },
+      "HOLD": {
+        "agent_08": {
+          "contact_samples": 1,
+          "positive_samples": 0,
+          "forward_force_sample_sum": 0.0,
+          "opposing_force_sample_sum": -1.664842461055633,
+          "torque_sample_sum": 3.930855673982415,
+          "absolute_torque_sample_sum": 3.930855673982415,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 0
+        },
+        "agent_11": {
+          "contact_samples": 2,
+          "positive_samples": 1,
+          "forward_force_sample_sum": 1.0962371881711364,
+          "opposing_force_sample_sum": -0.3134798591259926,
+          "torque_sample_sum": 0.166740272708362,
+          "absolute_torque_sample_sum": 1.0010778513949186,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 1
+        },
+        "agent_14": {
+          "contact_samples": 2,
+          "positive_samples": 0,
+          "forward_force_sample_sum": 0.0,
+          "opposing_force_sample_sum": -7.621475116989181,
+          "torque_sample_sum": -10.130745203023645,
+          "absolute_torque_sample_sum": 10.130745203023645,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 0
+        }
+      }
+    },
+    "endpoint_m": 0.006938752188314948,
+    "final_displacement": [
+      1.2054799332824033,
+      0.004256361492078753
+    ],
+    "maximum_absolute_rotation_deg": 4.9424758321921,
+    "per_agent_scope": "First-substep samples only; reconstructed lever-arm torque checked against stored total; sample sums are not integrated per-agent impulses",
+    "net_impulse_scope": "All saved pre-integration contact samples; descriptive, not causal attribution of final rotation"
+  },
+  {
+    "case_id": "far_skew_box_s0_r0_pos0_finite_acquisition_support",
+    "condition": "far_skew_box_s0_r0_pos0",
+    "arm": "finite_acquisition_support",
+    "receipt_sha256": "4d14de3242ee4a9312c6f67924773f6dcdbc278b7cbac4233541e190dbc5f7e9",
+    "frames": 986,
+    "substep_samples": 3944,
+    "dt": 0.05,
+    "gates": {
+      "informed_fraction": 0.55,
+      "map_coverage_min": 0.7,
+      "contact_quorum": 4,
+      "contact_dwell": 20,
+      "transport_quorum": 4,
+      "brake_fraction": 0.65,
+      "hold_tolerance": 0.0,
+      "hold_speed": 0.02,
+      "hold_dwell": 1,
+      "sustain_contacts": 1,
+      "contact_loss_dwell": 20,
+      "contact_regain_dwell": 20,
+      "pause_limit": 80,
+      "estimate_loss_dwell": 20,
+      "recover_on_brake_progress": false
+    },
+    "phases": {
+      "SEARCH": {
+        "frames": 191,
+        "signal_active_max": 0,
+        "current_push_flag_max": 0,
+        "physical_positive_contact_max": 0,
+        "current_push_robot_steps": 0,
+        "mode_counts": {
+          "search": 3025,
+          "recall": 19,
+          "acquisition_circulation": 12
+        },
+        "positive_contact_robot_samples": 0,
+        "positive_samples_with_push_flag": 0,
+        "positive_samples_without_push_flag": 0,
+        "duration_s": 9.55,
+        "substep_net_contact_impulses": {
+          "samples": 764,
+          "force_impulse": [
+            0.0,
+            0.0
+          ],
+          "torque_impulse": 0.0,
+          "absolute_torque_impulse": 0.0
+        }
+      },
+      "DISCOVER": {
+        "frames": 145,
+        "signal_active_max": 0,
+        "current_push_flag_max": 0,
+        "physical_positive_contact_max": 0,
+        "current_push_robot_steps": 0,
+        "mode_counts": {
+          "search": 725,
+          "recall": 414,
+          "acquisition_circulation": 1181
+        },
+        "positive_contact_robot_samples": 0,
+        "positive_samples_with_push_flag": 0,
+        "positive_samples_without_push_flag": 0,
+        "duration_s": 7.25,
+        "substep_net_contact_impulses": {
+          "samples": 580,
+          "force_impulse": [
+            0.0,
+            0.0
+          ],
+          "torque_impulse": 0.0,
+          "absolute_torque_impulse": 0.0
+        }
+      },
+      "ENCLOSE": {
+        "frames": 168,
+        "signal_active_max": 0,
+        "current_push_flag_max": 0,
+        "physical_positive_contact_max": 0,
+        "current_push_robot_steps": 0,
+        "mode_counts": {
+          "search": 365,
+          "acquisition_circulation": 792,
+          "cage": 647,
+          "redeploy": 364,
+          "approach": 45,
+          "map_reference_reacquire_search": 234,
+          "map_reference_reacquire_approach": 97,
+          "map_reference_unavailable": 144
+        },
+        "positive_contact_robot_samples": 0,
+        "positive_samples_with_push_flag": 0,
+        "positive_samples_without_push_flag": 0,
+        "duration_s": 8.4,
+        "substep_net_contact_impulses": {
+          "samples": 672,
+          "force_impulse": [
+            -10.843284866203545,
+            18.074775818434883
+          ],
+          "torque_impulse": 1.1624418276195927,
+          "absolute_torque_impulse": 1.4289156433726538
+        }
+      },
+      "CONTACT_READY": {
+        "frames": 341,
+        "signal_active_max": 3,
+        "current_push_flag_max": 4,
+        "physical_positive_contact_max": 4,
+        "current_push_robot_steps": 409,
+        "mode_counts": {
+          "map_reference_reacquire_search": 445,
+          "map_reference_unavailable": 77,
+          "map_reference_reacquire_approach": 73,
+          "cage": 3476,
+          "redeploy": 958,
+          "push": 409,
+          "approach": 18
+        },
+        "positive_contact_robot_samples": 516,
+        "positive_samples_with_push_flag": 379,
+        "positive_samples_without_push_flag": 137,
+        "duration_s": 17.05,
+        "substep_net_contact_impulses": {
+          "samples": 1364,
+          "force_impulse": [
+            215.93793102959916,
+            106.65771297232281
+          ],
+          "torque_impulse": 126.4061771809762,
+          "absolute_torque_impulse": 143.0257192099038
+        }
+      },
+      "TRANSPORT": {
+        "frames": 42,
+        "signal_active_max": 5,
+        "current_push_flag_max": 5,
+        "physical_positive_contact_max": 6,
+        "current_push_robot_steps": 111,
+        "mode_counts": {
+          "cage": 473,
+          "push": 111,
+          "map_reference_unavailable": 42,
+          "redeploy": 46
+        },
+        "positive_contact_robot_samples": 159,
+        "positive_samples_with_push_flag": 88,
+        "positive_samples_without_push_flag": 71,
+        "duration_s": 2.1,
+        "substep_net_contact_impulses": {
+          "samples": 168,
+          "force_impulse": [
+            49.14791291067227,
+            -4.948217622723638
+          ],
+          "torque_impulse": 9.67820094418764,
+          "absolute_torque_impulse": 10.12797426390355
+        }
+      },
+      "BRAKE": {
+        "frames": 59,
+        "signal_active_max": 4,
+        "current_push_flag_max": 4,
+        "physical_positive_contact_max": 2,
+        "current_push_robot_steps": 128,
+        "mode_counts": {
+          "cage": 730,
+          "push": 128,
+          "redeploy": 27,
+          "map_reference_unavailable": 59
+        },
+        "positive_contact_robot_samples": 62,
+        "positive_samples_with_push_flag": 28,
+        "positive_samples_without_push_flag": 34,
+        "duration_s": 2.95,
+        "substep_net_contact_impulses": {
+          "samples": 236,
+          "force_impulse": [
+            22.130423344938336,
+            16.399983579034345
+          ],
+          "torque_impulse": -17.436191802288405,
+          "absolute_torque_impulse": 18.621047801579298
+        }
+      },
+      "HOLD": {
+        "frames": 40,
+        "signal_active_max": 0,
+        "current_push_flag_max": 0,
+        "physical_positive_contact_max": 1,
+        "current_push_robot_steps": 0,
+        "mode_counts": {
+          "cage": 589,
+          "map_reference_unavailable": 40,
+          "redeploy": 11
+        },
+        "positive_contact_robot_samples": 23,
+        "positive_samples_with_push_flag": 0,
+        "positive_samples_without_push_flag": 23,
+        "duration_s": 2.0,
+        "substep_net_contact_impulses": {
+          "samples": 160,
+          "force_impulse": [
+            8.248761441127314,
+            -1.6850585020828697
+          ],
+          "torque_impulse": 0.4252149379277846,
+          "absolute_torque_impulse": 0.7248567618272059
+        }
+      }
+    },
+    "transitions": [
+      {
+        "to_phase": "DISCOVER",
+        "from_phase": "SEARCH",
+        "frame": 192,
+        "control_time_s": 9.55,
+        "signals": {
+          "agent_count": 16,
+          "informed_agents": 4,
+          "map_coverage": 0.19444444444444445,
+          "contact_ready": 0,
+          "transport_active": 0,
+          "progress": 0.0,
+          "target_distance": 1.2,
+          "estimated_speed": 0.0,
+          "stopping_distance": 0.18333333333333335,
+          "estimate_quality": "unavailable",
+          "recovery_ready": null,
+          "task_reference_ready": false
+        },
+        "before_command_displacement": [
+          0.0,
+          0.0
+        ],
+        "before_command_rotation_deg": 0.0,
+        "after_step_true_displacement": [
+          0.0,
+          0.0
+        ],
+        "after_step_rotation_deg": 0.0
+      },
+      {
+        "to_phase": "ENCLOSE",
+        "from_phase": "DISCOVER",
+        "frame": 337,
+        "control_time_s": 16.8,
+        "signals": {
+          "agent_count": 16,
+          "informed_agents": 11,
+          "map_coverage": 0.7222222222222222,
+          "contact_ready": 0,
+          "transport_active": 0,
+          "progress": 0.0,
+          "target_distance": 1.2,
+          "estimated_speed": 0.0,
+          "stopping_distance": 0.18333333333333335,
+          "estimate_quality": "unavailable",
+          "recovery_ready": null,
+          "task_reference_ready": false
+        },
+        "before_command_displacement": [
+          0.0,
+          0.0
+        ],
+        "before_command_rotation_deg": 0.0,
+        "after_step_true_displacement": [
+          0.0,
+          0.0
+        ],
+        "after_step_rotation_deg": 0.0
+      },
+      {
+        "to_phase": "CONTACT_READY",
+        "from_phase": "ENCLOSE",
+        "frame": 505,
+        "control_time_s": 25.200000000000003,
+        "signals": {
+          "agent_count": 16,
+          "informed_agents": 11,
+          "map_coverage": 0.8611111111111112,
+          "contact_ready": 7,
+          "transport_active": 0,
+          "progress": 0.02398325420932057,
+          "target_distance": 1.2,
+          "estimated_speed": 0.009924045750228148,
+          "stopping_distance": 0.18333333333333335,
+          "estimate_quality": "credible",
+          "recovery_ready": null,
+          "task_reference_ready": false
+        },
+        "before_command_displacement": [
+          0.0,
+          0.0
+        ],
+        "before_command_rotation_deg": 0.0,
+        "after_step_true_displacement": [
+          0.0,
+          0.0
+        ],
+        "after_step_rotation_deg": 0.0
+      },
+      {
+        "to_phase": "TRANSPORT",
+        "from_phase": "CONTACT_READY",
+        "frame": 846,
+        "control_time_s": 42.25,
+        "signals": {
+          "agent_count": 16,
+          "informed_agents": 15,
+          "map_coverage": 1.0,
+          "contact_ready": 12,
+          "transport_active": 4,
+          "progress": 0.4255247830402825,
+          "target_distance": 1.2,
+          "estimated_speed": 0.050416994511905705,
+          "stopping_distance": 0.18333333333333335,
+          "estimate_quality": "credible",
+          "recovery_ready": null,
+          "task_reference_ready": false
+        },
+        "before_command_displacement": [
+          0.4076211366333031,
+          -0.008675028850407607
+        ],
+        "before_command_rotation_deg": 0.7902270998191071,
+        "after_step_true_displacement": [
+          0.4126602800466297,
+          -0.009160067833575702
+        ],
+        "after_step_rotation_deg": 0.7902270998191071
+      },
+      {
+        "to_phase": "BRAKE",
+        "from_phase": "TRANSPORT",
+        "frame": 888,
+        "control_time_s": 44.35,
+        "signals": {
+          "agent_count": 16,
+          "informed_agents": 15,
+          "map_coverage": 1.0,
+          "contact_ready": 10,
+          "transport_active": 2,
+          "progress": 0.7861404908450054,
+          "target_distance": 1.2,
+          "estimated_speed": 0.18820264211570883,
+          "stopping_distance": 0.18333333333333335,
+          "estimate_quality": "credible",
+          "recovery_ready": null,
+          "task_reference_ready": false
+        },
+        "before_command_displacement": [
+          0.7784204461305557,
+          -0.07162938947003372
+        ],
+        "before_command_rotation_deg": 0.7922361068082564,
+        "after_step_true_displacement": [
+          0.7900783106405918,
+          -0.06735329715425475
+        ],
+        "after_step_rotation_deg": 0.7922361068082564
+      },
+      {
+        "to_phase": "HOLD",
+        "from_phase": "BRAKE",
+        "frame": 947,
+        "control_time_s": 47.300000000000004,
+        "signals": {
+          "agent_count": 16,
+          "informed_agents": 15,
+          "map_coverage": 1.0,
+          "contact_ready": 9,
+          "transport_active": 0,
+          "progress": 1.2,
+          "target_distance": 1.2,
+          "estimated_speed": 0.014651132586869066,
+          "stopping_distance": 0.18333333333333335,
+          "estimate_quality": "credible",
+          "recovery_ready": null,
+          "task_reference_ready": true
+        },
+        "before_command_displacement": [
+          1.217845073704423,
+          0.003308531374871748
+        ],
+        "before_command_rotation_deg": -0.30677623205085897,
+        "after_step_true_displacement": [
+          1.217845073704423,
+          0.003308531374871748
+        ],
+        "after_step_rotation_deg": -0.30677623205085897
+      }
+    ],
+    "first_quorums": {
+      "contact_ready_signal": {
+        "frame": 433,
+        "control_time_s": 21.6,
+        "phase": "ENCLOSE",
+        "count": 4,
+        "threshold": 4
+      },
+      "positive_physical_contacts": {
+        "frame": 778,
+        "control_time_s": 38.85,
+        "phase": "CONTACT_READY",
+        "count": 4,
+        "threshold": 4
+      },
+      "current_push_flags": {
+        "frame": 845,
+        "control_time_s": 42.2,
+        "phase": "CONTACT_READY",
+        "count": 4,
+        "threshold": 4
+      },
+      "transport_active_signal": {
+        "frame": 846,
+        "control_time_s": 42.25,
+        "phase": "TRANSPORT",
+        "count": 4,
+        "threshold": 4
+      }
+    },
+    "before_transitions": {
+      "TRANSPORT": {
+        "entered": true,
+        "frame_count": 845,
+        "control_time_s": 42.25,
+        "true_displacement_before": [
+          0.4076211366333031,
+          -0.008675028850407607
+        ],
+        "rotation_before_deg": 0.7902270998191071,
+        "sampled_forward_impulse": 205.09464616339562,
+        "sampled_torque_impulse": 127.56861900859579,
+        "sampled_absolute_torque_impulse": 144.45463485327645
+      },
+      "BRAKE": {
+        "entered": true,
+        "frame_count": 887,
+        "control_time_s": 44.35,
+        "true_displacement_before": [
+          0.7784204461305557,
+          -0.07162938947003372
+        ],
+        "rotation_before_deg": 0.7922361068082564,
+        "sampled_forward_impulse": 254.24255907406788,
+        "sampled_torque_impulse": 137.24681995278343,
+        "sampled_absolute_torque_impulse": 154.58260911718
+      }
+    },
+    "final_response": {
+      "final_phase": "HOLD",
+      "entered": {
+        "SEARCH": 0,
+        "DISCOVER": 191,
+        "ENCLOSE": 336,
+        "CONTACT_READY": 504,
+        "TRANSPORT": 845,
+        "BRAKE": 887,
+        "HOLD": 946
+      },
+      "first_detection_frame": 191,
+      "enclosure_frame": 336,
+      "contact_ready_frame": 504,
+      "transport_frame": 845,
+      "brake_frame": 887,
+      "hold_frame": 946,
+      "brake_reason": "estimated_stop",
+      "push_suspended": false,
+      "overshoot": false,
+      "short_of_target": true,
+      "contact_recovery_failed": false,
+      "estimate_stopped": false
+    },
+    "first_substep_contact_samples_by_phase_and_agent": {
+      "SEARCH": {},
+      "DISCOVER": {},
+      "ENCLOSE": {
+        "agent_05": {
+          "contact_samples": 48,
+          "positive_samples": 0,
+          "forward_force_sample_sum": 0.0,
+          "opposing_force_sample_sum": -216.04598740889008,
+          "torque_sample_sum": 22.51507151885024,
+          "absolute_torque_sample_sum": 28.657483182530235,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 0
+        },
+        "agent_09": {
+          "contact_samples": 1,
+          "positive_samples": 0,
+          "forward_force_sample_sum": 0.0,
+          "opposing_force_sample_sum": -0.8197099151805914,
+          "torque_sample_sum": 0.7337650335416213,
+          "absolute_torque_sample_sum": 0.7337650335416213,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 0
+        }
+      },
+      "CONTACT_READY": {
+        "agent_05": {
+          "contact_samples": 91,
+          "positive_samples": 1,
+          "forward_force_sample_sum": 3.0576050539893185,
+          "opposing_force_sample_sum": -224.99794712613382,
+          "torque_sample_sum": -149.3044653799299,
+          "absolute_torque_sample_sum": 150.0613974844423,
+          "positive_samples_with_push_flag": 1,
+          "positive_samples_without_push_flag": 0
+        },
+        "agent_09": {
+          "contact_samples": 270,
+          "positive_samples": 30,
+          "forward_force_sample_sum": 45.625852234714934,
+          "opposing_force_sample_sum": -437.36801877268954,
+          "torque_sample_sum": 1664.9684903234354,
+          "absolute_torque_sample_sum": 1664.9684903234354,
+          "positive_samples_with_push_flag": 4,
+          "positive_samples_without_push_flag": 26
+        },
+        "agent_06": {
+          "contact_samples": 265,
+          "positive_samples": 27,
+          "forward_force_sample_sum": 18.610767915990518,
+          "opposing_force_sample_sum": -471.8123358375921,
+          "torque_sample_sum": 471.4151454023099,
+          "absolute_torque_sample_sum": 502.51096445152547,
+          "positive_samples_with_push_flag": 5,
+          "positive_samples_without_push_flag": 22
+        },
+        "agent_03": {
+          "contact_samples": 72,
+          "positive_samples": 72,
+          "forward_force_sample_sum": 124.1337539529875,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": -437.58296549556155,
+          "absolute_torque_sample_sum": 437.58296549556155,
+          "positive_samples_with_push_flag": 1,
+          "positive_samples_without_push_flag": 71
+        },
+        "agent_01": {
+          "contact_samples": 228,
+          "positive_samples": 228,
+          "forward_force_sample_sum": 3953.7235631332915,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": 621.8634257962195,
+          "absolute_torque_sample_sum": 630.9203357309176,
+          "positive_samples_with_push_flag": 228,
+          "positive_samples_without_push_flag": 0
+        },
+        "agent_11": {
+          "contact_samples": 80,
+          "positive_samples": 0,
+          "forward_force_sample_sum": 0.0,
+          "opposing_force_sample_sum": -132.12865944654203,
+          "torque_sample_sum": -32.796427682891604,
+          "absolute_torque_sample_sum": 42.85371326390684,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 0
+        },
+        "agent_02": {
+          "contact_samples": 160,
+          "positive_samples": 158,
+          "forward_force_sample_sum": 1846.912191448586,
+          "opposing_force_sample_sum": -0.853890313380918,
+          "torque_sample_sum": 534.0675196037566,
+          "absolute_torque_sample_sum": 1064.823644638305,
+          "positive_samples_with_push_flag": 140,
+          "positive_samples_without_push_flag": 18
+        },
+        "agent_12": {
+          "contact_samples": 70,
+          "positive_samples": 0,
+          "forward_force_sample_sum": 0.0,
+          "opposing_force_sample_sum": -149.0788817137468,
+          "torque_sample_sum": -10.851713010538425,
+          "absolute_torque_sample_sum": 19.421404911342197,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 0
+        },
+        "agent_13": {
+          "contact_samples": 28,
+          "positive_samples": 0,
+          "forward_force_sample_sum": 0.0,
+          "opposing_force_sample_sum": -64.11295706905561,
+          "torque_sample_sum": -24.41836371719575,
+          "absolute_torque_sample_sum": 24.41836371719575,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 0
+        }
+      },
+      "TRANSPORT": {
+        "agent_01": {
+          "contact_samples": 42,
+          "positive_samples": 42,
+          "forward_force_sample_sum": 864.9827603854005,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": 177.672827136152,
+          "absolute_torque_sample_sum": 177.672827136152,
+          "positive_samples_with_push_flag": 42,
+          "positive_samples_without_push_flag": 0
+        },
+        "agent_02": {
+          "contact_samples": 40,
+          "positive_samples": 40,
+          "forward_force_sample_sum": 252.89903500905234,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": 134.46608748012054,
+          "absolute_torque_sample_sum": 134.46608748012054,
+          "positive_samples_with_push_flag": 40,
+          "positive_samples_without_push_flag": 0
+        },
+        "agent_05": {
+          "contact_samples": 37,
+          "positive_samples": 13,
+          "forward_force_sample_sum": 16.43800439354825,
+          "opposing_force_sample_sum": -25.12413539072249,
+          "torque_sample_sum": -151.347715212489,
+          "absolute_torque_sample_sum": 151.347715212489,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 13
+        },
+        "agent_06": {
+          "contact_samples": 27,
+          "positive_samples": 26,
+          "forward_force_sample_sum": 74.55830659781772,
+          "opposing_force_sample_sum": -0.5088694371524349,
+          "torque_sample_sum": 114.92231604737093,
+          "absolute_torque_sample_sum": 114.92231604737093,
+          "positive_samples_with_push_flag": 4,
+          "positive_samples_without_push_flag": 22
+        },
+        "agent_13": {
+          "contact_samples": 35,
+          "positive_samples": 24,
+          "forward_force_sample_sum": 29.24659914202904,
+          "opposing_force_sample_sum": -11.595851672094192,
+          "torque_sample_sum": 16.60589619372303,
+          "absolute_torque_sample_sum": 23.564744447770426,
+          "positive_samples_with_push_flag": 1,
+          "positive_samples_without_push_flag": 23
+        },
+        "agent_12": {
+          "contact_samples": 16,
+          "positive_samples": 14,
+          "forward_force_sample_sum": 15.68808250999415,
+          "opposing_force_sample_sum": -0.633984318283928,
+          "torque_sample_sum": -8.14825721953019,
+          "absolute_torque_sample_sum": 9.120359081305544,
+          "positive_samples_with_push_flag": 1,
+          "positive_samples_without_push_flag": 13
+        }
+      },
+      "BRAKE": {
+        "agent_01": {
+          "contact_samples": 34,
+          "positive_samples": 34,
+          "forward_force_sample_sum": 930.5726220058874,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": 169.89536328854996,
+          "absolute_torque_sample_sum": 191.49169617941567,
+          "positive_samples_with_push_flag": 26,
+          "positive_samples_without_push_flag": 8
+        },
+        "agent_05": {
+          "contact_samples": 49,
+          "positive_samples": 19,
+          "forward_force_sample_sum": 28.030943861177235,
+          "opposing_force_sample_sum": -96.80147254325591,
+          "torque_sample_sum": -459.2074318611831,
+          "absolute_torque_sample_sum": 459.2074318611831,
+          "positive_samples_with_push_flag": 2,
+          "positive_samples_without_push_flag": 17
+        },
+        "agent_13": {
+          "contact_samples": 6,
+          "positive_samples": 1,
+          "forward_force_sample_sum": 0.07793100212537028,
+          "opposing_force_sample_sum": -7.756000713554059,
+          "torque_sample_sum": -1.769302932071705,
+          "absolute_torque_sample_sum": 1.8648877303557903,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 1
+        },
+        "agent_07": {
+          "contact_samples": 25,
+          "positive_samples": 0,
+          "forward_force_sample_sum": 0.0,
+          "opposing_force_sample_sum": -318.2328117290996,
+          "torque_sample_sum": -65.6656869911825,
+          "absolute_torque_sample_sum": 71.49330945706018,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 0
+        },
+        "agent_10": {
+          "contact_samples": 11,
+          "positive_samples": 0,
+          "forward_force_sample_sum": 0.0,
+          "opposing_force_sample_sum": -20.565473292321833,
+          "torque_sample_sum": -18.703714795478025,
+          "absolute_torque_sample_sum": 18.703714795478025,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 0
+        },
+        "agent_09": {
+          "contact_samples": 9,
+          "positive_samples": 8,
+          "forward_force_sample_sum": 12.32015486805766,
+          "opposing_force_sample_sum": -0.0180417531978413,
+          "torque_sample_sum": 30.207832970054334,
+          "absolute_torque_sample_sum": 30.207832970054334,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 8
+        }
+      },
+      "HOLD": {
+        "agent_01": {
+          "contact_samples": 23,
+          "positive_samples": 23,
+          "forward_force_sample_sum": 164.97522882254637,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": 8.50429875855569,
+          "absolute_torque_sample_sum": 14.497135236544112,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 23
+        }
+      }
+    },
+    "endpoint_m": 0.018149188284185387,
+    "final_displacement": [
+      1.217845073704423,
+      0.003308531374871748
+    ],
+    "maximum_absolute_rotation_deg": 0.7922361068082564,
+    "per_agent_scope": "First-substep samples only; reconstructed lever-arm torque checked against stored total; sample sums are not integrated per-agent impulses",
+    "net_impulse_scope": "All saved pre-integration contact samples; descriptive, not causal attribution of final rotation"
+  },
+  {
+    "case_id": "far_skew_box_s0_r0_pos0_local_pair_candidate",
+    "condition": "far_skew_box_s0_r0_pos0",
+    "arm": "local_pair_candidate",
+    "receipt_sha256": "a7a15a0aa624dc1d5e446db4890a310c76ec942ac004933dc9bc51542381da68",
+    "frames": 1107,
+    "substep_samples": 4428,
+    "dt": 0.05,
+    "gates": {
+      "informed_fraction": 0.55,
+      "map_coverage_min": 0.7,
+      "contact_quorum": 4,
+      "contact_dwell": 20,
+      "transport_quorum": 4,
+      "brake_fraction": 0.65,
+      "hold_tolerance": 0.0,
+      "hold_speed": 0.02,
+      "hold_dwell": 1,
+      "sustain_contacts": 1,
+      "contact_loss_dwell": 20,
+      "contact_regain_dwell": 20,
+      "pause_limit": 80,
+      "estimate_loss_dwell": 20,
+      "recover_on_brake_progress": false
+    },
+    "phases": {
+      "SEARCH": {
+        "frames": 191,
+        "signal_active_max": 0,
+        "current_push_flag_max": 0,
+        "physical_positive_contact_max": 0,
+        "current_push_robot_steps": 0,
+        "mode_counts": {
+          "search": 3025,
+          "recall": 19,
+          "acquisition_circulation": 12
+        },
+        "positive_contact_robot_samples": 0,
+        "positive_samples_with_push_flag": 0,
+        "positive_samples_without_push_flag": 0,
+        "duration_s": 9.55,
+        "substep_net_contact_impulses": {
+          "samples": 764,
+          "force_impulse": [
+            0.0,
+            0.0
+          ],
+          "torque_impulse": 0.0,
+          "absolute_torque_impulse": 0.0
+        }
+      },
+      "DISCOVER": {
+        "frames": 145,
+        "signal_active_max": 0,
+        "current_push_flag_max": 0,
+        "physical_positive_contact_max": 0,
+        "current_push_robot_steps": 0,
+        "mode_counts": {
+          "search": 725,
+          "recall": 414,
+          "acquisition_circulation": 1181
+        },
+        "positive_contact_robot_samples": 0,
+        "positive_samples_with_push_flag": 0,
+        "positive_samples_without_push_flag": 0,
+        "duration_s": 7.25,
+        "substep_net_contact_impulses": {
+          "samples": 580,
+          "force_impulse": [
+            0.0,
+            0.0
+          ],
+          "torque_impulse": 0.0,
+          "absolute_torque_impulse": 0.0
+        }
+      },
+      "ENCLOSE": {
+        "frames": 224,
+        "signal_active_max": 0,
+        "current_push_flag_max": 0,
+        "physical_positive_contact_max": 0,
+        "current_push_robot_steps": 0,
+        "mode_counts": {
+          "search": 365,
+          "acquisition_circulation": 792,
+          "cage": 1083,
+          "redeploy": 602,
+          "approach": 79,
+          "map_reference_reacquire_search": 346,
+          "map_reference_reacquire_approach": 133,
+          "map_reference_unavailable": 184
+        },
+        "positive_contact_robot_samples": 0,
+        "positive_samples_with_push_flag": 0,
+        "positive_samples_without_push_flag": 0,
+        "duration_s": 11.200000000000001,
+        "substep_net_contact_impulses": {
+          "samples": 896,
+          "force_impulse": [
+            -24.353190211636974,
+            56.459583294016014
+          ],
+          "torque_impulse": 15.804779618982757,
+          "absolute_torque_impulse": 15.968086008672625
+        }
+      },
+      "CONTACT_READY": {
+        "frames": 399,
+        "signal_active_max": 3,
+        "current_push_flag_max": 4,
+        "physical_positive_contact_max": 5,
+        "current_push_robot_steps": 668,
+        "mode_counts": {
+          "map_reference_reacquire_search": 447,
+          "cage": 4368,
+          "redeploy": 828,
+          "push": 668,
+          "map_reference_reacquire_approach": 36,
+          "map_reference_unavailable": 36,
+          "approach": 1
+        },
+        "positive_contact_robot_samples": 745,
+        "positive_samples_with_push_flag": 617,
+        "positive_samples_without_push_flag": 128,
+        "duration_s": 19.950000000000003,
+        "substep_net_contact_impulses": {
+          "samples": 1596,
+          "force_impulse": [
+            386.2101673105112,
+            -11.817326864434609
+          ],
+          "torque_impulse": 122.58293446380047,
+          "absolute_torque_impulse": 136.03839855637852
+        }
+      },
+      "TRANSPORT": {
+        "frames": 4,
+        "signal_active_max": 4,
+        "current_push_flag_max": 4,
+        "physical_positive_contact_max": 5,
+        "current_push_robot_steps": 12,
+        "mode_counts": {
+          "cage": 44,
+          "push": 12,
+          "redeploy": 4,
+          "map_reference_unavailable": 4
+        },
+        "positive_contact_robot_samples": 13,
+        "positive_samples_with_push_flag": 9,
+        "positive_samples_without_push_flag": 4,
+        "duration_s": 0.2,
+        "substep_net_contact_impulses": {
+          "samples": 16,
+          "force_impulse": [
+            5.199825593235122,
+            -1.0304414024409956
+          ],
+          "torque_impulse": 2.1329765720948686,
+          "absolute_torque_impulse": 2.1329765720948686
+        }
+      },
+      "BRAKE": {
+        "frames": 104,
+        "signal_active_max": 6,
+        "current_push_flag_max": 6,
+        "physical_positive_contact_max": 5,
+        "current_push_robot_steps": 268,
+        "mode_counts": {
+          "cage": 1070,
+          "push": 268,
+          "redeploy": 154,
+          "map_reference_unavailable": 170,
+          "approach": 2
+        },
+        "positive_contact_robot_samples": 140,
+        "positive_samples_with_push_flag": 79,
+        "positive_samples_without_push_flag": 61,
+        "duration_s": 5.2,
+        "substep_net_contact_impulses": {
+          "samples": 416,
+          "force_impulse": [
+            23.84203195563108,
+            -11.77389476908136
+          ],
+          "torque_impulse": 5.902867822355238,
+          "absolute_torque_impulse": 10.328313625679836
+        }
+      },
+      "HOLD": {
+        "frames": 40,
+        "signal_active_max": 0,
+        "current_push_flag_max": 0,
+        "physical_positive_contact_max": 0,
+        "current_push_robot_steps": 0,
+        "mode_counts": {
+          "cage": 558,
+          "redeploy": 40,
+          "approach": 2,
+          "map_reference_unavailable": 40
+        },
+        "positive_contact_robot_samples": 0,
+        "positive_samples_with_push_flag": 0,
+        "positive_samples_without_push_flag": 0,
+        "duration_s": 2.0,
+        "substep_net_contact_impulses": {
+          "samples": 160,
+          "force_impulse": [
+            0.0,
+            0.0
+          ],
+          "torque_impulse": 0.0,
+          "absolute_torque_impulse": 0.0
+        }
+      }
+    },
+    "transitions": [
+      {
+        "to_phase": "DISCOVER",
+        "from_phase": "SEARCH",
+        "frame": 192,
+        "control_time_s": 9.55,
+        "signals": {
+          "agent_count": 16,
+          "informed_agents": 4,
+          "map_coverage": 0.19444444444444445,
+          "contact_ready": 0,
+          "transport_active": 0,
+          "progress": 0.0,
+          "target_distance": 1.2,
+          "estimated_speed": 0.0,
+          "stopping_distance": 0.18333333333333335,
+          "estimate_quality": "unavailable",
+          "recovery_ready": null,
+          "task_reference_ready": false
+        },
+        "before_command_displacement": [
+          0.0,
+          0.0
+        ],
+        "before_command_rotation_deg": 0.0,
+        "after_step_true_displacement": [
+          0.0,
+          0.0
+        ],
+        "after_step_rotation_deg": 0.0
+      },
+      {
+        "to_phase": "ENCLOSE",
+        "from_phase": "DISCOVER",
+        "frame": 337,
+        "control_time_s": 16.8,
+        "signals": {
+          "agent_count": 16,
+          "informed_agents": 11,
+          "map_coverage": 0.7222222222222222,
+          "contact_ready": 0,
+          "transport_active": 0,
+          "progress": 0.0,
+          "target_distance": 1.2,
+          "estimated_speed": 0.0,
+          "stopping_distance": 0.18333333333333335,
+          "estimate_quality": "unavailable",
+          "recovery_ready": null,
+          "task_reference_ready": false
+        },
+        "before_command_displacement": [
+          0.0,
+          0.0
+        ],
+        "before_command_rotation_deg": 0.0,
+        "after_step_true_displacement": [
+          0.0,
+          0.0
+        ],
+        "after_step_rotation_deg": 0.0
+      },
+      {
+        "to_phase": "CONTACT_READY",
+        "from_phase": "ENCLOSE",
+        "frame": 561,
+        "control_time_s": 28.0,
+        "signals": {
+          "agent_count": 16,
+          "informed_agents": 14,
+          "map_coverage": 0.8888888888888888,
+          "contact_ready": 6,
+          "transport_active": 0,
+          "progress": 0.017120510798831923,
+          "target_distance": 1.2,
+          "estimated_speed": 0.024850842656067816,
+          "stopping_distance": 0.18333333333333335,
+          "estimate_quality": "credible",
+          "recovery_ready": null,
+          "task_reference_ready": false
+        },
+        "before_command_displacement": [
+          -0.0033170452939548234,
+          0.009935352209981652
+        ],
+        "before_command_rotation_deg": 0.0,
+        "after_step_true_displacement": [
+          -0.0033170452939548234,
+          0.009935352209981652
+        ],
+        "after_step_rotation_deg": 0.0
+      },
+      {
+        "to_phase": "TRANSPORT",
+        "from_phase": "CONTACT_READY",
+        "frame": 960,
+        "control_time_s": 47.95,
+        "signals": {
+          "agent_count": 16,
+          "informed_agents": 15,
+          "map_coverage": 1.0,
+          "contact_ready": 10,
+          "transport_active": 4,
+          "progress": 0.7556590186097005,
+          "target_distance": 1.2,
+          "estimated_speed": 0.06740901566932829,
+          "stopping_distance": 0.18333333333333335,
+          "estimate_quality": "credible",
+          "recovery_ready": null,
+          "task_reference_ready": false
+        },
+        "before_command_displacement": [
+          0.7370356894326409,
+          -0.02961376889316547
+        ],
+        "before_command_rotation_deg": 2.2715489757715446,
+        "after_step_true_displacement": [
+          0.7441605664289304,
+          -0.0308372339875298
+        ],
+        "after_step_rotation_deg": 2.2715489757715446
+      },
+      {
+        "to_phase": "BRAKE",
+        "from_phase": "TRANSPORT",
+        "frame": 964,
+        "control_time_s": 48.150000000000006,
+        "signals": {
+          "agent_count": 16,
+          "informed_agents": 15,
+          "map_coverage": 1.0,
+          "contact_ready": 10,
+          "transport_active": 2,
+          "progress": 0.790451589739467,
+          "target_distance": 1.2,
+          "estimated_speed": 0.19028611966490575,
+          "stopping_distance": 0.18333333333333335,
+          "estimate_quality": "credible",
+          "recovery_ready": null,
+          "task_reference_ready": false
+        },
+        "before_command_displacement": [
+          0.7694795772235805,
+          -0.035821947269180754
+        ],
+        "before_command_rotation_deg": 2.287117565710822,
+        "after_step_true_displacement": [
+          0.7808048765442299,
+          -0.03728345294279389
+        ],
+        "after_step_rotation_deg": 2.287117565710822
+      },
+      {
+        "to_phase": "HOLD",
+        "from_phase": "BRAKE",
+        "frame": 1068,
+        "control_time_s": 53.35,
+        "signals": {
+          "agent_count": 16,
+          "informed_agents": 15,
+          "map_coverage": 1.0,
+          "contact_ready": 7,
+          "transport_active": 0,
+          "progress": 1.2,
+          "target_distance": 1.2,
+          "estimated_speed": 0.017197578991893354,
+          "stopping_distance": 0.18333333333333335,
+          "estimate_quality": "credible",
+          "recovery_ready": null,
+          "task_reference_ready": true
+        },
+        "before_command_displacement": [
+          1.211902379345981,
+          -0.005058348910980115
+        ],
+        "before_command_rotation_deg": 2.289194597863987,
+        "after_step_true_displacement": [
+          1.211902379345981,
+          -0.005058348910980115
+        ],
+        "after_step_rotation_deg": 2.289194597863987
+      }
+    ],
+    "first_quorums": {
+      "contact_ready_signal": {
+        "frame": 442,
+        "control_time_s": 22.05,
+        "phase": "ENCLOSE",
+        "count": 4,
+        "threshold": 4
+      },
+      "positive_physical_contacts": {
+        "frame": 773,
+        "control_time_s": 38.6,
+        "phase": "CONTACT_READY",
+        "count": 4,
+        "threshold": 4
+      },
+      "current_push_flags": {
+        "frame": 959,
+        "control_time_s": 47.900000000000006,
+        "phase": "CONTACT_READY",
+        "count": 4,
+        "threshold": 4
+      },
+      "transport_active_signal": {
+        "frame": 960,
+        "control_time_s": 47.95,
+        "phase": "TRANSPORT",
+        "count": 4,
+        "threshold": 4
+      }
+    },
+    "before_transitions": {
+      "TRANSPORT": {
+        "entered": true,
+        "frame_count": 959,
+        "control_time_s": 47.95,
+        "true_displacement_before": [
+          0.7370356894326409,
+          -0.02961376889316547
+        ],
+        "rotation_before_deg": 2.2715489757715446,
+        "sampled_forward_impulse": 361.85697709887427,
+        "sampled_torque_impulse": 138.38771408278322,
+        "sampled_absolute_torque_impulse": 152.00648456505115
+      },
+      "BRAKE": {
+        "entered": true,
+        "frame_count": 963,
+        "control_time_s": 48.150000000000006,
+        "true_displacement_before": [
+          0.7694795772235805,
+          -0.035821947269180754
+        ],
+        "rotation_before_deg": 2.287117565710822,
+        "sampled_forward_impulse": 367.0568026921094,
+        "sampled_torque_impulse": 140.52069065487808,
+        "sampled_absolute_torque_impulse": 154.13946113714601
+      }
+    },
+    "final_response": {
+      "final_phase": "HOLD",
+      "entered": {
+        "SEARCH": 0,
+        "DISCOVER": 191,
+        "ENCLOSE": 336,
+        "CONTACT_READY": 560,
+        "TRANSPORT": 959,
+        "BRAKE": 963,
+        "HOLD": 1067
+      },
+      "first_detection_frame": 191,
+      "enclosure_frame": 336,
+      "contact_ready_frame": 560,
+      "transport_frame": 959,
+      "brake_frame": 963,
+      "hold_frame": 1067,
+      "brake_reason": "estimated_stop",
+      "push_suspended": false,
+      "overshoot": false,
+      "short_of_target": true,
+      "contact_recovery_failed": false,
+      "estimate_stopped": false
+    },
+    "first_substep_contact_samples_by_phase_and_agent": {
+      "SEARCH": {},
+      "DISCOVER": {},
+      "ENCLOSE": {
+        "agent_05": {
+          "contact_samples": 97,
+          "positive_samples": 0,
+          "forward_force_sample_sum": 0.0,
+          "opposing_force_sample_sum": -296.7231706588788,
+          "torque_sample_sum": -66.76356429073655,
+          "absolute_torque_sample_sum": 107.48530340254302,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 0
+        },
+        "agent_09": {
+          "contact_samples": 49,
+          "positive_samples": 0,
+          "forward_force_sample_sum": 0.0,
+          "opposing_force_sample_sum": -174.11787151371377,
+          "torque_sample_sum": 382.0533634036577,
+          "absolute_torque_sample_sum": 382.0533634036577,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 0
+        },
+        "agent_06": {
+          "contact_samples": 8,
+          "positive_samples": 0,
+          "forward_force_sample_sum": 0.0,
+          "opposing_force_sample_sum": -15.690453598425098,
+          "torque_sample_sum": 1.7300905906238282,
+          "absolute_torque_sample_sum": 1.7300905906238282,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 0
+        }
+      },
+      "CONTACT_READY": {
+        "agent_05": {
+          "contact_samples": 179,
+          "positive_samples": 2,
+          "forward_force_sample_sum": 0.8203200506376827,
+          "opposing_force_sample_sum": -659.1871050668867,
+          "torque_sample_sum": -2344.5244851426382,
+          "absolute_torque_sample_sum": 2344.5244851426382,
+          "positive_samples_with_push_flag": 2,
+          "positive_samples_without_push_flag": 0
+        },
+        "agent_06": {
+          "contact_samples": 339,
+          "positive_samples": 53,
+          "forward_force_sample_sum": 32.38400700734555,
+          "opposing_force_sample_sum": -518.0188072419323,
+          "torque_sample_sum": 1245.214504587575,
+          "absolute_torque_sample_sum": 1254.2439161505204,
+          "positive_samples_with_push_flag": 3,
+          "positive_samples_without_push_flag": 50
+        },
+        "agent_09": {
+          "contact_samples": 96,
+          "positive_samples": 3,
+          "forward_force_sample_sum": 5.719984458378996,
+          "opposing_force_sample_sum": -152.61105544476797,
+          "torque_sample_sum": 615.9452603121288,
+          "absolute_torque_sample_sum": 624.7973316713176,
+          "positive_samples_with_push_flag": 3,
+          "positive_samples_without_push_flag": 0
+        },
+        "agent_03": {
+          "contact_samples": 26,
+          "positive_samples": 20,
+          "forward_force_sample_sum": 22.88319560955432,
+          "opposing_force_sample_sum": -6.274541505169957,
+          "torque_sample_sum": -82.41957116454223,
+          "absolute_torque_sample_sum": 82.41957116454223,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 20
+        },
+        "agent_01": {
+          "contact_samples": 345,
+          "positive_samples": 345,
+          "forward_force_sample_sum": 6243.313752696508,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": 1283.32166275219,
+          "absolute_torque_sample_sum": 1286.7786205370417,
+          "positive_samples_with_push_flag": 344,
+          "positive_samples_without_push_flag": 1
+        },
+        "agent_02": {
+          "contact_samples": 273,
+          "positive_samples": 273,
+          "forward_force_sample_sum": 3780.3686136005713,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": 2352.6129540466954,
+          "absolute_torque_sample_sum": 2691.933290509503,
+          "positive_samples_with_push_flag": 262,
+          "positive_samples_without_push_flag": 11
+        },
+        "agent_11": {
+          "contact_samples": 146,
+          "positive_samples": 13,
+          "forward_force_sample_sum": 20.043985589836044,
+          "opposing_force_sample_sum": -272.39438162673565,
+          "torque_sample_sum": -255.61120426794253,
+          "absolute_torque_sample_sum": 268.0469572378487,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 13
+        },
+        "agent_12": {
+          "contact_samples": 219,
+          "positive_samples": 33,
+          "forward_force_sample_sum": 18.635415462889334,
+          "opposing_force_sample_sum": -221.88659145078427,
+          "torque_sample_sum": 366.32734484484297,
+          "absolute_torque_sample_sum": 372.7001934635729,
+          "positive_samples_with_push_flag": 3,
+          "positive_samples_without_push_flag": 30
+        },
+        "agent_13": {
+          "contact_samples": 54,
+          "positive_samples": 3,
+          "forward_force_sample_sum": 5.123564858670342,
+          "opposing_force_sample_sum": -155.618155196991,
+          "torque_sample_sum": -551.5468547544212,
+          "absolute_torque_sample_sum": 551.5468547544212,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 3
+        }
+      },
+      "TRANSPORT": {
+        "agent_01": {
+          "contact_samples": 4,
+          "positive_samples": 4,
+          "forward_force_sample_sum": 69.22463442752526,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": 28.210409775352772,
+          "absolute_torque_sample_sum": 28.210409775352772,
+          "positive_samples_with_push_flag": 4,
+          "positive_samples_without_push_flag": 0
+        },
+        "agent_02": {
+          "contact_samples": 4,
+          "positive_samples": 4,
+          "forward_force_sample_sum": 67.7255891420966,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": 39.648918787349345,
+          "absolute_torque_sample_sum": 39.648918787349345,
+          "positive_samples_with_push_flag": 4,
+          "positive_samples_without_push_flag": 0
+        },
+        "agent_06": {
+          "contact_samples": 4,
+          "positive_samples": 2,
+          "forward_force_sample_sum": 8.230259471627974,
+          "opposing_force_sample_sum": -2.228819306954666,
+          "torque_sample_sum": 34.37583280712458,
+          "absolute_torque_sample_sum": 34.37583280712458,
+          "positive_samples_with_push_flag": 1,
+          "positive_samples_without_push_flag": 1
+        },
+        "agent_12": {
+          "contact_samples": 4,
+          "positive_samples": 2,
+          "forward_force_sample_sum": 4.604821584887524,
+          "opposing_force_sample_sum": -4.215428380181107,
+          "torque_sample_sum": 8.63360122296669,
+          "absolute_torque_sample_sum": 8.63360122296669,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 2
+        },
+        "agent_13": {
+          "contact_samples": 4,
+          "positive_samples": 1,
+          "forward_force_sample_sum": 1.4758782794129541,
+          "opposing_force_sample_sum": -9.513039467879707,
+          "torque_sample_sum": -57.74510584630282,
+          "absolute_torque_sample_sum": 57.74510584630282,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 1
+        }
+      },
+      "BRAKE": {
+        "agent_01": {
+          "contact_samples": 35,
+          "positive_samples": 35,
+          "forward_force_sample_sum": 721.7608485198454,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": 211.21453314612077,
+          "absolute_torque_sample_sum": 211.21453314612077,
+          "positive_samples_with_push_flag": 31,
+          "positive_samples_without_push_flag": 4
+        },
+        "agent_02": {
+          "contact_samples": 32,
+          "positive_samples": 32,
+          "forward_force_sample_sum": 312.4367222993034,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": 197.48351123448813,
+          "absolute_torque_sample_sum": 197.48351123448813,
+          "positive_samples_with_push_flag": 30,
+          "positive_samples_without_push_flag": 2
+        },
+        "agent_06": {
+          "contact_samples": 23,
+          "positive_samples": 23,
+          "forward_force_sample_sum": 85.74190201177444,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": 248.34871074022882,
+          "absolute_torque_sample_sum": 248.34871074022882,
+          "positive_samples_with_push_flag": 9,
+          "positive_samples_without_push_flag": 14
+        },
+        "agent_12": {
+          "contact_samples": 34,
+          "positive_samples": 29,
+          "forward_force_sample_sum": 62.36529728094035,
+          "opposing_force_sample_sum": -3.3667676982890766,
+          "torque_sample_sum": 26.70205953018545,
+          "absolute_torque_sample_sum": 28.49171397275539,
+          "positive_samples_with_push_flag": 3,
+          "positive_samples_without_push_flag": 26
+        },
+        "agent_13": {
+          "contact_samples": 36,
+          "positive_samples": 2,
+          "forward_force_sample_sum": 6.9001185692524745,
+          "opposing_force_sample_sum": -99.15319915006194,
+          "torque_sample_sum": -449.89321485473096,
+          "absolute_torque_sample_sum": 449.89321485473096,
+          "positive_samples_with_push_flag": 1,
+          "positive_samples_without_push_flag": 1
+        },
+        "agent_09": {
+          "contact_samples": 33,
+          "positive_samples": 15,
+          "forward_force_sample_sum": 20.416861109119683,
+          "opposing_force_sample_sum": -11.370219030157745,
+          "torque_sample_sum": 14.781442277705379,
+          "absolute_torque_sample_sum": 19.31952419198092,
+          "positive_samples_with_push_flag": 3,
+          "positive_samples_without_push_flag": 12
+        },
+        "agent_14": {
+          "contact_samples": 2,
+          "positive_samples": 2,
+          "forward_force_sample_sum": 5.9857903178656615,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": 10.242472987867291,
+          "absolute_torque_sample_sum": 10.242472987867291,
+          "positive_samples_with_push_flag": 2,
+          "positive_samples_without_push_flag": 0
+        },
+        "agent_07": {
+          "contact_samples": 26,
+          "positive_samples": 0,
+          "forward_force_sample_sum": 0.0,
+          "opposing_force_sample_sum": -203.36884417107996,
+          "torque_sample_sum": -34.725463602849764,
+          "absolute_torque_sample_sum": 34.725463602849764,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 0
+        },
+        "agent_08": {
+          "contact_samples": 24,
+          "positive_samples": 0,
+          "forward_force_sample_sum": 0.0,
+          "opposing_force_sample_sum": -138.74493138841174,
+          "torque_sample_sum": 55.79317470779615,
+          "absolute_torque_sample_sum": 56.20331209526022,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 0
+        },
+        "agent_10": {
+          "contact_samples": 17,
+          "positive_samples": 0,
+          "forward_force_sample_sum": 0.0,
+          "opposing_force_sample_sum": -59.60053355806551,
+          "torque_sample_sum": -42.776658618697915,
+          "absolute_torque_sample_sum": 42.776658618697915,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 0
+        },
+        "agent_04": {
+          "contact_samples": 4,
+          "positive_samples": 2,
+          "forward_force_sample_sum": 0.2491169574239627,
+          "opposing_force_sample_sum": -0.3507078706151475,
+          "torque_sample_sum": -0.2605729529435979,
+          "absolute_torque_sample_sum": 0.27189881624875717,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 2
+        }
+      },
+      "HOLD": {}
+    },
+    "endpoint_m": 0.012932653548319375,
+    "final_displacement": [
+      1.211902379345981,
+      -0.005058348910980115
+    ],
+    "maximum_absolute_rotation_deg": 2.289194597863987,
+    "per_agent_scope": "First-substep samples only; reconstructed lever-arm torque checked against stored total; sample sums are not integrated per-agent impulses",
+    "net_impulse_scope": "All saved pre-integration contact samples; descriptive, not causal attribution of final rotation"
+  },
+  {
+    "case_id": "near_circle_local_pair_candidate",
+    "condition": "near_circle",
+    "arm": "local_pair_candidate",
+    "receipt_sha256": "8e0dd5ffa7dcf7f29b9f60e6048a014d2a1e473a972066c0e33d224421ad975b",
+    "frames": 332,
+    "substep_samples": 1328,
+    "dt": 0.05,
+    "gates": {
+      "informed_fraction": 0.55,
+      "map_coverage_min": 0.7,
+      "contact_quorum": 4,
+      "contact_dwell": 20,
+      "transport_quorum": 4,
+      "brake_fraction": 0.65,
+      "hold_tolerance": 0.0,
+      "hold_speed": 0.02,
+      "hold_dwell": 1,
+      "sustain_contacts": 1,
+      "contact_loss_dwell": 20,
+      "contact_regain_dwell": 20,
+      "pause_limit": 80,
+      "estimate_loss_dwell": 20,
+      "recover_on_brake_progress": false
+    },
+    "phases": {
+      "DISCOVER": {
+        "frames": 23,
+        "signal_active_max": 0,
+        "current_push_flag_max": 0,
+        "physical_positive_contact_max": 0,
+        "current_push_robot_steps": 0,
+        "mode_counts": {
+          "acquisition_circulation": 359,
+          "recall": 9
+        },
+        "positive_contact_robot_samples": 0,
+        "positive_samples_with_push_flag": 0,
+        "positive_samples_without_push_flag": 0,
+        "duration_s": 1.1500000000000001,
+        "substep_net_contact_impulses": {
+          "samples": 92,
+          "force_impulse": [
+            0.0,
+            0.0
+          ],
+          "torque_impulse": 0.0,
+          "absolute_torque_impulse": 0.0
+        }
+      },
+      "ENCLOSE": {
+        "frames": 87,
+        "signal_active_max": 0,
+        "current_push_flag_max": 0,
+        "physical_positive_contact_max": 2,
+        "current_push_robot_steps": 0,
+        "mode_counts": {
+          "acquisition_circulation": 368,
+          "cage": 991,
+          "approach": 16,
+          "redeploy": 17
+        },
+        "positive_contact_robot_samples": 54,
+        "positive_samples_with_push_flag": 0,
+        "positive_samples_without_push_flag": 54,
+        "duration_s": 4.3500000000000005,
+        "substep_net_contact_impulses": {
+          "samples": 348,
+          "force_impulse": [
+            27.843110262172434,
+            -11.492622581900676
+          ],
+          "torque_impulse": -3.4903941895573536,
+          "absolute_torque_impulse": 3.4903941895573536
+        }
+      },
+      "CONTACT_READY": {
+        "frames": 1,
+        "signal_active_max": 0,
+        "current_push_flag_max": 5,
+        "physical_positive_contact_max": 2,
+        "current_push_robot_steps": 5,
+        "mode_counts": {
+          "cage": 10,
+          "push": 5,
+          "redeploy": 1
+        },
+        "positive_contact_robot_samples": 2,
+        "positive_samples_with_push_flag": 2,
+        "positive_samples_without_push_flag": 0,
+        "duration_s": 0.05,
+        "substep_net_contact_impulses": {
+          "samples": 4,
+          "force_impulse": [
+            1.2305530184729108,
+            -0.2865742708328142
+          ],
+          "torque_impulse": -0.14007474475950646,
+          "absolute_torque_impulse": 0.14007474475950646
+        }
+      },
+      "TRANSPORT": {
+        "frames": 55,
+        "signal_active_max": 6,
+        "current_push_flag_max": 6,
+        "physical_positive_contact_max": 4,
+        "current_push_robot_steps": 220,
+        "mode_counts": {
+          "cage": 598,
+          "push": 220,
+          "redeploy": 62
+        },
+        "positive_contact_robot_samples": 177,
+        "positive_samples_with_push_flag": 155,
+        "positive_samples_without_push_flag": 22,
+        "duration_s": 2.75,
+        "substep_net_contact_impulses": {
+          "samples": 220,
+          "force_impulse": [
+            66.88270729606214,
+            -9.025105729126672
+          ],
+          "torque_impulse": -9.282796780732019,
+          "absolute_torque_impulse": 9.282796780732019
+        }
+      },
+      "BRAKE": {
+        "frames": 126,
+        "signal_active_max": 6,
+        "current_push_flag_max": 6,
+        "physical_positive_contact_max": 4,
+        "current_push_robot_steps": 428,
+        "mode_counts": {
+          "push": 428,
+          "cage": 1322,
+          "redeploy": 266
+        },
+        "positive_contact_robot_samples": 242,
+        "positive_samples_with_push_flag": 168,
+        "positive_samples_without_push_flag": 74,
+        "duration_s": 6.300000000000001,
+        "substep_net_contact_impulses": {
+          "samples": 504,
+          "force_impulse": [
+            41.02325930220642,
+            7.360695886885725
+          ],
+          "torque_impulse": 1.2881456247643495,
+          "absolute_torque_impulse": 11.539260667234055
+        }
+      },
+      "HOLD": {
+        "frames": 40,
+        "signal_active_max": 0,
+        "current_push_flag_max": 0,
+        "physical_positive_contact_max": 0,
+        "current_push_robot_steps": 0,
+        "mode_counts": {
+          "cage": 589,
+          "redeploy": 51
+        },
+        "positive_contact_robot_samples": 0,
+        "positive_samples_with_push_flag": 0,
+        "positive_samples_without_push_flag": 0,
+        "duration_s": 2.0,
+        "substep_net_contact_impulses": {
+          "samples": 160,
+          "force_impulse": [
+            -0.006311579517653421,
+            -0.12896752759177899
+          ],
+          "torque_impulse": -0.05026538232353618,
+          "absolute_torque_impulse": 0.05026538232353618
+        }
+      }
+    },
+    "transitions": [
+      {
+        "to_phase": "DISCOVER",
+        "from_phase": "SEARCH",
+        "frame": 1,
+        "control_time_s": 0.0,
+        "signals": {
+          "agent_count": 16,
+          "informed_agents": 9,
+          "map_coverage": 0.4722222222222222,
+          "contact_ready": 0,
+          "transport_active": 0,
+          "progress": 0.0,
+          "target_distance": 1.2,
+          "estimated_speed": 0.0,
+          "stopping_distance": 0.18333333333333335,
+          "estimate_quality": "unavailable",
+          "recovery_ready": null,
+          "task_reference_ready": false
+        },
+        "before_command_displacement": [
+          0.0,
+          0.0
+        ],
+        "before_command_rotation_deg": 0.0,
+        "after_step_true_displacement": [
+          0.0,
+          0.0
+        ],
+        "after_step_rotation_deg": 0.0
+      },
+      {
+        "to_phase": "ENCLOSE",
+        "from_phase": "DISCOVER",
+        "frame": 24,
+        "control_time_s": 1.1500000000000001,
+        "signals": {
+          "agent_count": 16,
+          "informed_agents": 16,
+          "map_coverage": 0.7222222222222222,
+          "contact_ready": 0,
+          "transport_active": 0,
+          "progress": 0.0,
+          "target_distance": 1.2,
+          "estimated_speed": 0.0,
+          "stopping_distance": 0.18333333333333335,
+          "estimate_quality": "unavailable",
+          "recovery_ready": null,
+          "task_reference_ready": false
+        },
+        "before_command_displacement": [
+          0.0,
+          0.0
+        ],
+        "before_command_rotation_deg": 0.0,
+        "after_step_true_displacement": [
+          0.0,
+          0.0
+        ],
+        "after_step_rotation_deg": 0.0
+      },
+      {
+        "to_phase": "CONTACT_READY",
+        "from_phase": "ENCLOSE",
+        "frame": 111,
+        "control_time_s": 5.5,
+        "signals": {
+          "agent_count": 16,
+          "informed_agents": 16,
+          "map_coverage": 0.8333333333333334,
+          "contact_ready": 6,
+          "transport_active": 0,
+          "progress": 0.04074034273691174,
+          "target_distance": 1.2,
+          "estimated_speed": 0.037596666387545996,
+          "stopping_distance": 0.18333333333333335,
+          "estimate_quality": "credible",
+          "recovery_ready": null,
+          "task_reference_ready": false
+        },
+        "before_command_displacement": [
+          0.02261813563173254,
+          -0.005856937523367911
+        ],
+        "before_command_rotation_deg": 0.0,
+        "after_step_true_displacement": [
+          0.02506394944882606,
+          -0.006428564745545984
+        ],
+        "after_step_rotation_deg": 0.0
+      },
+      {
+        "to_phase": "TRANSPORT",
+        "from_phase": "CONTACT_READY",
+        "frame": 112,
+        "control_time_s": 5.550000000000001,
+        "signals": {
+          "agent_count": 16,
+          "informed_agents": 16,
+          "map_coverage": 0.8333333333333334,
+          "contact_ready": 6,
+          "transport_active": 5,
+          "progress": 0.041801501006372366,
+          "target_distance": 1.2,
+          "estimated_speed": 0.028002830710830623,
+          "stopping_distance": 0.18333333333333335,
+          "estimate_quality": "credible",
+          "recovery_ready": null,
+          "task_reference_ready": false
+        },
+        "before_command_displacement": [
+          0.02506394944882606,
+          -0.006428564745545984
+        ],
+        "before_command_rotation_deg": 0.0,
+        "after_step_true_displacement": [
+          0.029459109675112227,
+          -0.007421061648618554
+        ],
+        "after_step_rotation_deg": 0.0
+      },
+      {
+        "to_phase": "BRAKE",
+        "from_phase": "TRANSPORT",
+        "frame": 167,
+        "control_time_s": 8.3,
+        "signals": {
+          "agent_count": 16,
+          "informed_agents": 16,
+          "map_coverage": 0.8611111111111112,
+          "contact_ready": 6,
+          "transport_active": 5,
+          "progress": 0.7928646076743118,
+          "target_distance": 1.2,
+          "estimated_speed": 0.3054328960801632,
+          "stopping_distance": 0.18333333333333335,
+          "estimate_quality": "credible",
+          "recovery_ready": null,
+          "task_reference_ready": false
+        },
+        "before_command_displacement": [
+          0.7917137546217297,
+          -0.1059204901116444
+        ],
+        "before_command_rotation_deg": 0.0,
+        "after_step_true_displacement": [
+          0.8068196758165844,
+          -0.10673977608549068
+        ],
+        "after_step_rotation_deg": 0.0
+      },
+      {
+        "to_phase": "HOLD",
+        "from_phase": "BRAKE",
+        "frame": 293,
+        "control_time_s": 14.600000000000001,
+        "signals": {
+          "agent_count": 16,
+          "informed_agents": 16,
+          "map_coverage": 0.8611111111111112,
+          "contact_ready": 12,
+          "transport_active": 0,
+          "progress": 1.2,
+          "target_distance": 1.2,
+          "estimated_speed": 0.013820092634393565,
+          "stopping_distance": 0.18333333333333335,
+          "estimate_quality": "credible",
+          "recovery_ready": null,
+          "task_reference_ready": true
+        },
+        "before_command_displacement": [
+          1.2001190595416955,
+          0.018598507004180753
+        ],
+        "before_command_rotation_deg": 0.0,
+        "after_step_true_displacement": [
+          1.2001190595416955,
+          0.018598507004180753
+        ],
+        "after_step_rotation_deg": 0.0
+      }
+    ],
+    "first_quorums": {
+      "contact_ready_signal": {
+        "frame": 92,
+        "control_time_s": 4.55,
+        "phase": "ENCLOSE",
+        "count": 4,
+        "threshold": 4
+      },
+      "current_push_flags": {
+        "frame": 111,
+        "control_time_s": 5.5,
+        "phase": "CONTACT_READY",
+        "count": 5,
+        "threshold": 4
+      },
+      "transport_active_signal": {
+        "frame": 112,
+        "control_time_s": 5.550000000000001,
+        "phase": "TRANSPORT",
+        "count": 5,
+        "threshold": 4
+      },
+      "positive_physical_contacts": {
+        "frame": 133,
+        "control_time_s": 6.6000000000000005,
+        "phase": "TRANSPORT",
+        "count": 4,
+        "threshold": 4
+      }
+    },
+    "before_transitions": {
+      "TRANSPORT": {
+        "entered": true,
+        "frame_count": 111,
+        "control_time_s": 5.550000000000001,
+        "true_displacement_before": [
+          0.02506394944882606,
+          -0.006428564745545984
+        ],
+        "rotation_before_deg": 0.0,
+        "sampled_forward_impulse": 29.073663280645345,
+        "sampled_torque_impulse": -3.63046893431686,
+        "sampled_absolute_torque_impulse": 3.63046893431686
+      },
+      "BRAKE": {
+        "entered": true,
+        "frame_count": 166,
+        "control_time_s": 8.3,
+        "true_displacement_before": [
+          0.7917137546217297,
+          -0.1059204901116444
+        ],
+        "rotation_before_deg": 0.0,
+        "sampled_forward_impulse": 95.95637057670749,
+        "sampled_torque_impulse": -12.91326571504888,
+        "sampled_absolute_torque_impulse": 12.91326571504888
+      }
+    },
+    "final_response": {
+      "final_phase": "HOLD",
+      "entered": {
+        "SEARCH": 0,
+        "DISCOVER": 0,
+        "ENCLOSE": 23,
+        "CONTACT_READY": 110,
+        "TRANSPORT": 111,
+        "BRAKE": 166,
+        "HOLD": 292
+      },
+      "first_detection_frame": 0,
+      "enclosure_frame": 23,
+      "contact_ready_frame": 110,
+      "transport_frame": 111,
+      "brake_frame": 166,
+      "hold_frame": 292,
+      "brake_reason": "estimated_stop",
+      "push_suspended": false,
+      "overshoot": false,
+      "short_of_target": true,
+      "contact_recovery_failed": false,
+      "estimate_stopped": false
+    },
+    "first_substep_contact_samples_by_phase_and_agent": {
+      "DISCOVER": {},
+      "ENCLOSE": {
+        "agent_07": {
+          "contact_samples": 32,
+          "positive_samples": 32,
+          "forward_force_sample_sum": 328.7864423242412,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": -36.4709639002611,
+          "absolute_torque_sample_sum": 36.4709639002611,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 32
+        },
+        "agent_11": {
+          "contact_samples": 22,
+          "positive_samples": 22,
+          "forward_force_sample_sum": 235.32154079215036,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": -33.77803188972444,
+          "absolute_torque_sample_sum": 33.77803188972444,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 22
+        }
+      },
+      "CONTACT_READY": {
+        "agent_07": {
+          "contact_samples": 1,
+          "positive_samples": 1,
+          "forward_force_sample_sum": 11.198225884267917,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": -1.364918985731637,
+          "absolute_torque_sample_sum": 1.364918985731637,
+          "positive_samples_with_push_flag": 1,
+          "positive_samples_without_push_flag": 0
+        },
+        "agent_11": {
+          "contact_samples": 1,
+          "positive_samples": 1,
+          "forward_force_sample_sum": 14.362510539626538,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": -1.5642532846876875,
+          "absolute_torque_sample_sum": 1.5642532846876875,
+          "positive_samples_with_push_flag": 1,
+          "positive_samples_without_push_flag": 0
+        }
+      },
+      "TRANSPORT": {
+        "agent_07": {
+          "contact_samples": 55,
+          "positive_samples": 55,
+          "forward_force_sample_sum": 648.348568442831,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": -53.31140916956098,
+          "absolute_torque_sample_sum": 53.81334829372435,
+          "positive_samples_with_push_flag": 36,
+          "positive_samples_without_push_flag": 19
+        },
+        "agent_11": {
+          "contact_samples": 55,
+          "positive_samples": 55,
+          "forward_force_sample_sum": 867.8801480100791,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": -74.31233501951775,
+          "absolute_torque_sample_sum": 74.31233501951775,
+          "positive_samples_with_push_flag": 55,
+          "positive_samples_without_push_flag": 0
+        },
+        "agent_09": {
+          "contact_samples": 47,
+          "positive_samples": 33,
+          "forward_force_sample_sum": 37.62931043358454,
+          "opposing_force_sample_sum": -3.022305485319965,
+          "torque_sample_sum": -41.64162451845254,
+          "absolute_torque_sample_sum": 41.64162451845254,
+          "positive_samples_with_push_flag": 30,
+          "positive_samples_without_push_flag": 3
+        },
+        "agent_12": {
+          "contact_samples": 34,
+          "positive_samples": 34,
+          "forward_force_sample_sum": 100.62542513220107,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": -38.071437007280714,
+          "absolute_torque_sample_sum": 38.071437007280714,
+          "positive_samples_with_push_flag": 34,
+          "positive_samples_without_push_flag": 0
+        }
+      },
+      "BRAKE": {
+        "agent_07": {
+          "contact_samples": 31,
+          "positive_samples": 31,
+          "forward_force_sample_sum": 161.63605018665078,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": -26.693798135756683,
+          "absolute_torque_sample_sum": 26.73459099059389,
+          "positive_samples_with_push_flag": 18,
+          "positive_samples_without_push_flag": 13
+        },
+        "agent_09": {
+          "contact_samples": 38,
+          "positive_samples": 36,
+          "forward_force_sample_sum": 96.87766541122075,
+          "opposing_force_sample_sum": -0.03415344402080267,
+          "torque_sample_sum": 11.448285659790995,
+          "absolute_torque_sample_sum": 43.95611907297754,
+          "positive_samples_with_push_flag": 32,
+          "positive_samples_without_push_flag": 4
+        },
+        "agent_11": {
+          "contact_samples": 72,
+          "positive_samples": 72,
+          "forward_force_sample_sum": 1140.5190653952402,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": -56.395787217296586,
+          "absolute_torque_sample_sum": 68.12436871839898,
+          "positive_samples_with_push_flag": 29,
+          "positive_samples_without_push_flag": 43
+        },
+        "agent_12": {
+          "contact_samples": 36,
+          "positive_samples": 36,
+          "forward_force_sample_sum": 162.2648028127964,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": 4.455367183097291,
+          "absolute_torque_sample_sum": 29.77429096276828,
+          "positive_samples_with_push_flag": 31,
+          "positive_samples_without_push_flag": 5
+        },
+        "agent_14": {
+          "contact_samples": 11,
+          "positive_samples": 11,
+          "forward_force_sample_sum": 25.727581292433186,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": -1.882176167050625,
+          "absolute_torque_sample_sum": 2.7269819317699224,
+          "positive_samples_with_push_flag": 8,
+          "positive_samples_without_push_flag": 3
+        },
+        "agent_05": {
+          "contact_samples": 30,
+          "positive_samples": 2,
+          "forward_force_sample_sum": 2.8629653544624114,
+          "opposing_force_sample_sum": -139.06687243875498,
+          "torque_sample_sum": 44.779202755458456,
+          "absolute_torque_sample_sum": 65.27595227537792,
+          "positive_samples_with_push_flag": 2,
+          "positive_samples_without_push_flag": 0
+        },
+        "agent_00": {
+          "contact_samples": 7,
+          "positive_samples": 7,
+          "forward_force_sample_sum": 20.004568560528952,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": 14.594820067959443,
+          "absolute_torque_sample_sum": 14.594820067959443,
+          "positive_samples_with_push_flag": 5,
+          "positive_samples_without_push_flag": 2
+        },
+        "agent_10": {
+          "contact_samples": 16,
+          "positive_samples": 0,
+          "forward_force_sample_sum": 0.0,
+          "opposing_force_sample_sum": -151.99785078953732,
+          "torque_sample_sum": -3.3776713354031482,
+          "absolute_torque_sample_sum": 8.020253152612222,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 0
+        },
+        "agent_03": {
+          "contact_samples": 17,
+          "positive_samples": 0,
+          "forward_force_sample_sum": 0.0,
+          "opposing_force_sample_sum": -185.23787485364699,
+          "torque_sample_sum": 8.317634880029383,
+          "absolute_torque_sample_sum": 19.96017073530743,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 0
+        },
+        "agent_01": {
+          "contact_samples": 43,
+          "positive_samples": 0,
+          "forward_force_sample_sum": 0.0,
+          "opposing_force_sample_sum": -299.40097309354536,
+          "torque_sample_sum": 11.235787067381613,
+          "absolute_torque_sample_sum": 21.326010182505982,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 0
+        },
+        "agent_08": {
+          "contact_samples": 30,
+          "positive_samples": 30,
+          "forward_force_sample_sum": 184.3042139970387,
+          "opposing_force_sample_sum": 0.0,
+          "torque_sample_sum": 3.5434561585985804,
+          "absolute_torque_sample_sum": 12.88758155260751,
+          "positive_samples_with_push_flag": 27,
+          "positive_samples_without_push_flag": 3
+        },
+        "agent_13": {
+          "contact_samples": 22,
+          "positive_samples": 17,
+          "forward_force_sample_sum": 7.956352010209877,
+          "opposing_force_sample_sum": -1.7616603265895592,
+          "torque_sample_sum": -5.771897733365473,
+          "absolute_torque_sample_sum": 8.264943707904733,
+          "positive_samples_with_push_flag": 16,
+          "positive_samples_without_push_flag": 1
+        }
+      },
+      "HOLD": {
+        "agent_01": {
+          "contact_samples": 1,
+          "positive_samples": 0,
+          "forward_force_sample_sum": 0.0,
+          "opposing_force_sample_sum": -0.1262315903530684,
+          "torque_sample_sum": -1.0053076464707236,
+          "absolute_torque_sample_sum": 1.0053076464707236,
+          "positive_samples_with_push_flag": 0,
+          "positive_samples_without_push_flag": 0
+        }
+      }
+    },
+    "endpoint_m": 0.018598888083942795,
+    "final_displacement": [
+      1.2001190595416955,
+      0.018598507004180753
+    ],
+    "maximum_absolute_rotation_deg": 0.0,
+    "per_agent_scope": "First-substep samples only; reconstructed lever-arm torque checked against stored total; sample sums are not integrated per-agent impulses",
+    "net_impulse_scope": "All saved pre-integration contact samples; descriptive, not causal attribution of final rotation"
+  }
+]

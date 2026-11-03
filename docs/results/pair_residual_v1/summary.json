@@ -1,0 +1,82 @@
+{
+  "status": "VERIFIED_DIAGNOSTIC",
+  "new_physical_episodes": 0,
+  "controller_replay_frames": 2063,
+  "separate_preflight_frames": 40,
+  "phase_frames": 5550,
+  "physics_substeps": 22200,
+  "phase_episodes": 8,
+  "individual_systems": 10,
+  "pair_problems": 36,
+  "pair_counts": {
+    "402": {
+      "capped_full": {
+        "attempts": 10,
+        "two_valid": 1,
+        "two_applied_valid": 1
+      },
+      "uncapped_full": {
+        "attempts": 10,
+        "two_valid": 0,
+        "two_applied_valid": 0
+      }
+    },
+    "989": {
+      "capped_full": {
+        "attempts": 8,
+        "two_valid": 1,
+        "two_applied_valid": 1
+      },
+      "uncapped_full": {
+        "attempts": 8,
+        "two_valid": 0,
+        "two_applied_valid": 0
+      }
+    }
+  },
+  "component_scope": "Pre-command truth normal; eligible means transport called and nominal not subsequently overridden. Positive contacts are first physics substep at post-command robot positions. Association, not causal attribution.",
+  "c_components": {
+    "SEARCH": {
+      "robot_steps": 2784
+    },
+    "DISCOVER": {
+      "robot_steps": 2032
+    },
+    "ENCLOSE": {
+      "robot_steps": 2864,
+      "nonpush_component_eligible": 804,
+      "nonpush_inward_nominal": 436,
+      "nonpush_inward_actual": 436,
+      "nonpush_inward_coverage_outward_bias": 436,
+      "inward_nominal_and_positive_first_sample": 5
+    },
+    "CONTACT_READY": {
+      "robot_steps": 7728,
+      "nonpush_component_eligible": 5363,
+      "nonpush_inward_nominal": 2332,
+      "nonpush_inward_actual": 2328,
+      "nonpush_inward_coverage_outward_bias": 2332,
+      "inward_nominal_and_positive_first_sample": 117
+    },
+    "BRAKE": {
+      "robot_steps": 1136,
+      "nonpush_component_eligible": 813,
+      "nonpush_inward_nominal": 408,
+      "nonpush_inward_actual": 408,
+      "nonpush_inward_coverage_outward_bias": 160,
+      "inward_nominal_and_positive_first_sample": 73
+    },
+    "HOLD": {
+      "robot_steps": 640,
+      "nonpush_component_eligible": 556,
+      "nonpush_inward_nominal": 233,
+      "nonpush_inward_actual": 233,
+      "nonpush_inward_coverage_outward_bias": 233,
+      "inward_nominal_and_positive_first_sample": 0
+    }
+  },
+  "runtime_source_sha256": "6a24d76064d89dbc9485c5f5b3623c4dc7ad2ef187436c32319fe6bf2b782727",
+  "canonical_sha256": "a5d5c8e200fa502557d4da9a9db2a646d027abababd59661bcdac21a1b43b112",
+  "candidate_adopted": false,
+  "physical_gate_scope": "Prior eight physical episodes keep both FAIL verdicts; no new physical validation"
+}
