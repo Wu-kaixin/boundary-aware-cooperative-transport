@@ -93,3 +93,26 @@ receipt core-final.xml retained. Study freeze completed exit0:8 cases,96,000
 maximum total steps, all old numerical/physics/phase/initial-state checks pass.
 Execute the new frozen study exactly once and preserve its process handle. The
 current runtime has not been scientifically validated yet; no candidate adoption.
+
+Task2 complete: the original single run process terminated exit0. All8 cases
+COMPLETED, execution_errors0, source_integrity PASS. Analysis terminated exit0;
+four original controls exact in all25 arrays and scientific records. Both arms
+safe complete4/4, false HOLD/hard violations/timeouts0, G5002/4. Candidate C/skew
+acquisition scaling13->1 each; skew post-acquisition6->0. C still lacks formal
+TRANSPORT; rotation1.471->9.072deg, duration50.45->59.45s, error3.748->17.690mm.
+Mechanism and full-chain gates FAIL. Preserve all outcomes; no adoption or tuning.
+Both residual events used candidate rows with no reach cap; saved diagnostics
+alone do not identify the remaining joint-QP conflict. All4 zero epochs valid.
+
+Publication in progress: a separate presentation helper verifies frozen source,
+protocol,8 receipts, old publication products and all three diagnostic snapshots.
+No changes to frozen runtime, evaluators, physical design or tests during/after
+execution. Root README and navigation now distinguish current results from prior
+observation-reacquisition results and expose rotation/time regressions.
+
+Publication complete:8 CSV rows, full analysis,2 saved residual diagnostics,
+three separately hashed preliminary probes, PNG/PDF and engineering receipt.
+Initial visual inspection found adjacent numeric labels touching; staggered arm
+labels in presentation v2. Preserve initial publisher/outputs under maintenance
+publication_layout_v1; v2 analysis/CSV/probes/residuals/README byte-identical.
+No research rerun or changed conclusion. Final review and branch sync remain.

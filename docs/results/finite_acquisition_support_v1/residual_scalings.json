@@ -1,0 +1,104 @@
+{
+  "new_physical_episodes": 0,
+  "records": [
+    {
+      "case_id": "far_c_open_away_pos0_finite_acquisition_support",
+      "saved_frame": 365,
+      "pre_physics_time_s": 18.2,
+      "agent_id": "agent_05",
+      "phase": "ENCLOSE",
+      "capture_state": "acquiring",
+      "support": {
+        "applied": true,
+        "reason": "supported",
+        "stage": "stationary_acquisition",
+        "source_agents": [
+          "agent_05",
+          "agent_04",
+          "agent_07",
+          "agent_09",
+          "agent_10",
+          "agent_11",
+          "agent_12",
+          "agent_13",
+          "agent_14"
+        ],
+        "source_timestamps": [
+          18.200000000000124,
+          18.200000000000124,
+          18.200000000000124,
+          18.200000000000124,
+          18.200000000000124,
+          18.200000000000124,
+          18.200000000000124,
+          18.200000000000124,
+          18.200000000000124
+        ],
+        "motion_model": "existing_stationary_acquisition_assumption",
+        "near_returns": 20,
+        "uncovered_returns": 0,
+        "point_guard_rows": 3,
+        "object_rows": 23,
+        "empirical_only": true,
+        "motion_bound": 0.0,
+        "cap_active": 0
+      },
+      "zero_input_feasible": false,
+      "agent_rows": 8,
+      "object_rows": 23,
+      "scope": "Saved diagnostics only; no new counterfactual QP or physical episode"
+    },
+    {
+      "case_id": "far_skew_box_s0_r0_pos0_finite_acquisition_support",
+      "saved_frame": 399,
+      "pre_physics_time_s": 19.900000000000002,
+      "agent_id": "agent_05",
+      "phase": "ENCLOSE",
+      "capture_state": "acquiring",
+      "support": {
+        "applied": true,
+        "reason": "supported",
+        "stage": "stationary_acquisition",
+        "source_agents": [
+          "agent_05",
+          "agent_04",
+          "agent_06",
+          "agent_07",
+          "agent_08",
+          "agent_09",
+          "agent_10",
+          "agent_11",
+          "agent_12",
+          "agent_13",
+          "agent_14"
+        ],
+        "source_timestamps": [
+          19.900000000000148,
+          19.900000000000148,
+          19.900000000000148,
+          19.900000000000148,
+          19.900000000000148,
+          19.900000000000148,
+          19.900000000000148,
+          19.900000000000148,
+          19.900000000000148,
+          19.900000000000148,
+          19.900000000000148
+        ],
+        "motion_model": "existing_stationary_acquisition_assumption",
+        "near_returns": 23,
+        "uncovered_returns": 0,
+        "point_guard_rows": 6,
+        "object_rows": 25,
+        "empirical_only": true,
+        "motion_bound": 0.0,
+        "cap_active": 0
+      },
+      "zero_input_feasible": false,
+      "agent_rows": 10,
+      "object_rows": 25,
+      "scope": "Saved diagnostics only; no new counterfactual QP or physical episode"
+    }
+  ],
+  "scope": "Posthoc extraction from the eight episodes already counted; not additional validation"
+}

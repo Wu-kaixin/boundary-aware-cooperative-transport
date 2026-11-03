@@ -1,5 +1,7 @@
 # CCTA 2027 实验入口
 
+2026-11-03：[有限支持物理设计](finite_acquisition_support_physical_v1_design.md)及[冻结协议](finite_acquisition_support_v1.json)完成四条件×两臂8回合。[全部结果](../../docs/results/finite_acquisition_support_v1/README.md)：安全完成均4/4，C/斜箱采集缩放均13→1、斜箱冻结后6→0，但G500仍2/4、C形仍未TRANSPORT且转角/耗时退化；机制及完整门槛均FAIL、候选未采用。全部最佳数值参数不变；[实施记录](finite_acquisition_support_v1_plan.md)保留RED/GREEN及所有决定。前置[三替代方法](finite_support_probe_v1_design.md)、[仅弦段v1](finite_acquisition_support_v1_design.md)和[孤立点保护v2](finite_acquisition_point_guard_v2_design.md)均为旧26状态诊断，新增物理回合0。
+
 2026-11-03：[采集边界与正式激活事后诊断设计](acquisition_normal_audit_v1_design.md)已执行；[记录](acquisition_normal_audit_v1_plan.md)和[结果](../../docs/results/acquisition_normal_audit_v1/README.md)区分784帧精确控制重放、20帧预检和2,589帧阶段重建，新增物理回合0。全部26个采集冲突保留，支持优先处理有限边界外推及C形制动前协作激活；没有修改运行代码或原门槛。
 
 2026-11-03：[reference_reacquisition_v1.json](reference_reacquisition_v1.json)冻结四条件×两臂八回合，现已全部完成。原主动采集与观测恢复安全完成2/4→4/4，错误HOLD/原硬违规均0，G500仍2/4；四个原对照和四个采集前缀精确一致。[完整结果](../../docs/results/reference_reacquisition_physical_v1/README.md)保留13/13次采集缩放、斜箱6次冻结后缩放和C形未正式TRANSPORT：机制PASS、完整筛选FAIL、候选未采用。[原设计](reference_reacquisition_v1_design.md)和全部参数/门槛未改；[两个旧冲突见证的事后设计](circulation_conflict_witness_v1_design.md)没有新增物理回合。
