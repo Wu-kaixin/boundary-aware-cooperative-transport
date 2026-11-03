@@ -69,3 +69,7 @@ G500为对照2/4、候选0/4。八例原硬安全指标违规和错误HOLD均0�
 [分析更正](../../../experiments/ccta2027/post_acquisition_finite_support_v1_analysis_addendum.md)。
 原件在 `runs/research/2026-11-03-post-acquisition-support-v1/`；
 [检查点产品清单](publication.json)与[任务收据产品清单](partial_receipt_publication.json)分别核验。
+
+[独立发布审查与修正](final_review.md)记录本检查点的审查范围、导出异常路径修复与研究验收边界。
+
+审查修正后核心 **1081通过、2跳过**，针对性检查14通过；见[修正核验](review_checks.json)。此前1079项回归和全部实验导出保持各自原身份。

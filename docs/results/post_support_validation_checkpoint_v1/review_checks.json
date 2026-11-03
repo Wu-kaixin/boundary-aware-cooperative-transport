@@ -1,0 +1,53 @@
+{
+  "review_base": "0c7bf9fd04ad2f141cb8d184e0cf440c0a051729",
+  "review_head": "87b69f2cc3e85428e2bf37ea95f3680aca5f043b",
+  "independent_review_sha256": "97f6e0e9e1939c365821714c1aa3e7d6d736c101d1b9c533b2157424cee3e772",
+  "fix": "Execution-error rows retained with unknown metrics null/blank and NA plot labels; original eight-case products unchanged.",
+  "tests": {
+    "review-core.xml": {
+      "tests": 1083,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 2,
+      "passed": 1081,
+      "sha256": "6377d511e06fbd9f1c17d3a05d0cb3b51f9282d7946b19f02d3d8569bbe41baa"
+    },
+    "export-error-green.xml": {
+      "tests": 14,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "passed": 14,
+      "sha256": "7e615914f0f0f6db303d9c82ad2fc364b8afc009f905281dfeeb6c156085c0c2"
+    },
+    "export-figure-green.xml": {
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "passed": 2,
+      "sha256": "56e3131cd174e95ffcefc7ddcd02e1062d78ab01352b672351a74aa3d836e20c"
+    }
+  },
+  "red_receipt_sha256": "7d7d162ec6db9bc734d6d568f242ece3da693b833290384da5346cd6b75d20f5",
+  "fix_source_sha256": {
+    "scripts/export_post_support_receipts.py": "5f611bb33b7cea5736d4c69c0917159095724a4ede1fda67174eea2d6042d32b",
+    "scripts/publish_post_acquisition_support.py": "791fca03ed82313eab4bf719e85a6876c53809e76bda5cafce5fa89f56f74bac",
+    "tests/test_post_support_publication.py": "0620a0662bfb46f30b4408f8a155df21484e75b83fe23f3f5620344b11ffd025"
+  },
+  "unchanged_product_hashes_verified": 13,
+  "frozen_helpers_and_runtime": "UNCHANGED",
+  "canonical_sha256": "a5d5c8e200fa502557d4da9a9db2a646d027abababd59661bcdac21a1b43b112",
+  "full_candidate_constraint_audit": "PENDING",
+  "candidate_adopted": false,
+  "research_goal": "ACTIVE",
+  "repository_health": {
+    "status": "PASS",
+    "receipt": "runs\\maintenance\\2026-11-03-post-acquisition-support-v1\\post-review-health.json",
+    "sha256": "81e9b18423c15138cae441bacaf1dcc9723b5962f02dd50f164cfc8d69c3ec37",
+    "tracked_files_checked": 1695,
+    "python_files_parsed": 537,
+    "pip_check": "No broken requirements found.",
+    "git_fsck": "PASS"
+  }
+}

@@ -132,3 +132,29 @@ from the original7/8snapshot, with existing task/G500 re-evaluation and independ
 endpoint geometry checks. Full pair/bridge/support replay remains pending and
 is the next research action after this user-requested publication checkpoint.
 Do not present the terminal receipt summary as that unperformed full audit.
+
+## Single final review and fix pass
+
+Fresh reviewer compared0c7bf9f..87b69f2, ran12targeted tests, verified13products,
+all8receipt hashes,128contact rows and all4event selections. One P2: both new
+exporters assumed metrics absent from execution-error rows; figures also needed
+explicit missing observations. Actual8receipts have no execution errors and are
+unaffected. Real minimal episode() error rows through both entry points gave
+RED2. Publication-only correction retains errors/nulls/blank CSVs and NA figures;
+focused GREEN14, final figure/export GREEN2, with all8NA positions visible.
+Original research artifacts/exporter snapshots and all frozen identities remain.
+
+Final: Ruling: full pair/bridge/support replay and gates remain pending — this is
+the user's requested evidence publication checkpoint — cost: no accepted new
+candidate or complete research verdict may be claimed yet.
+Final: Ruling: counterfactual contact velocities are not a full causal account of
+all4physical failures — bounded mechanism evidence only — cost: further causal
+and executed-constraint analysis remains necessary.
+Final: Ruling: generalization, deployment contribution, complete decentralization,
+hardware and manuscript remain open — existing evidence does not establish them —
+cost: the broader research goal remains active.
+Final: Ruling: the corrected exporter is verified in this one regression fix pass;
+no second reviewer or new physics — cost: no independent post-fix review, covered
+by RED/GREEN plus current core regression and exact-head CI.
+
+Final: fixed execution-error publication — two entry-point RED failures to GREEN14; current core1081passed/2skipped, final rendering GREEN2. No deferred minors. The same source/parameters and all13previously published product hashes remain unchanged. Full candidate constraint replay remains pending after publication.

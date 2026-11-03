@@ -47,7 +47,7 @@ def main():
         rows.append(row)
         receipts[case['case_id']] = sha(folder / 'case_result.json')
         print(dict(case=case['case_id'], completed=row['safe_completed'],
-                   cutoff=row['budget_terminated'], endpoint_m=row['endpoint_m']), flush=True)
+                   cutoff=row.get('budget_terminated'), endpoint_m=row.get('endpoint_m')), flush=True)
         gc.collect()
     report = dict(observed_at_utc=datetime.now(timezone.utc).isoformat(), episodes=rows,
         scheduled_physical_episodes=8, terminal_episode_receipts=len(receipts),
@@ -64,11 +64,12 @@ def main():
     keys = ('condition', 'arm', 'execution', 'safe_completed', 'g500', 'false_hold',
             'budget_terminated', 'seconds', 'endpoint_m', 'maximum_absolute_rotation_deg', 'barrier_scalings')
     with (PUBLIC / csv_name).open('x', encoding='utf-8', newline='') as stream:
-        writer = csv.DictWriter(stream, fieldnames=[*keys, 'hard_safety_count'])
+        writer = csv.DictWriter(stream, fieldnames=[*keys, 'hard_safety_count', 'execution_error'])
         writer.writeheader()
         for row in sorted(rows, key=lambda r: (plan['conditions'].index(r['condition']), study.ARMS.index(r['arm']))):
             writer.writerow({**{k: row.get(k) for k in keys},
-                'hard_safety_count': None if row['hard_safety'] is None else len(row['hard_safety'])})
+                'hard_safety_count': None if row['hard_safety'] is None else len(row['hard_safety']),
+                'execution_error': row.get('error')})
     names = [summary_name, csv_name]
     if not args.snapshot:
         shutil.copy2(study.BASE / 'execution_outcome.json', PUBLIC / 'execution_outcome.json')

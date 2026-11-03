@@ -43,14 +43,19 @@ def main():
     for row in sorted(report['episodes'],key=lambda r:(order[r['condition']],ARMS.index(r['arm']))):
         audit=row.get('post_support_audit') or {}
         scaling=row.get('scaling') or {}
+        if row['execution']=='COMPLETED':
+            for key in ('budget_terminated','g500_failure_reasons','seconds','endpoint_m','maximum_absolute_rotation_deg'):
+                assert key in row and row[key] is not None, ('Missing completed-episode metric',row['case_id'],key)
+            assert scaling.get('acquisition') is not None and scaling.get('post_acquisition') is not None
         rows.append(dict(condition=row['condition'],arm=row['arm'],execution=row['execution'],
+            execution_error=row.get('error'),
             safe_completed=row['safe_completed'],zero_epoch_valid=row['zero_epoch_valid'],
             false_hold=row['false_hold'],hard_safety_count=len(row['hard_safety']),
-            budget_terminated=row['budget_terminated'],g500=row['g500'],
-            g500_reasons=' | '.join(row['g500_failure_reasons']),
-            formal_transport=(row.get('phase_response') or {}).get('transport_frame') is not None,
-            seconds=row['seconds'],endpoint_mm=None if row['endpoint_m'] is None else 1000*row['endpoint_m'],
-            max_true_rotation_deg=row['maximum_absolute_rotation_deg'],
+            budget_terminated=row.get('budget_terminated'),g500=row['g500'],
+            g500_reasons=' | '.join(row.get('g500_failure_reasons',[])),
+            formal_transport=None if row['execution']!='COMPLETED' else (row.get('phase_response') or {}).get('transport_frame') is not None,
+            seconds=row.get('seconds'),endpoint_mm=None if row.get('endpoint_m') is None else 1000*row['endpoint_m'],
+            max_true_rotation_deg=row.get('maximum_absolute_rotation_deg'),
             acquisition_scaling=scaling.get('acquisition'),post_acquisition_scaling=scaling.get('post_acquisition'),
             support_audit_verified=audit.get('verified'),support_full_episode_verified=audit.get('full_episode_verified'),
             audited_frames=audit.get('frames'),audited_agent_steps=audit.get('agent_steps'),
@@ -71,7 +76,7 @@ def main():
         environment=plan['environment'],installed_locked_packages=plan['installed_locked_packages'],
         source_files=plan['source_files'],scripts=plan['scripts'],preflight=plan['preflight']))
     dump(PUBLIC/'audit_summary.json',dict(
-        candidate_support_audits={r['condition']:r['post_support_audit'] for r in public_report['episodes'] if r['arm']==ARMS[1]},
+        candidate_support_audits={r['condition']:r.get('post_support_audit') for r in public_report['episodes'] if r['arm']==ARMS[1]},
         pair_audits={r['case_id']:r.get('pair_audit') for r in report['episodes']},
         bridge_audits={r['case_id']:r.get('bridge_audit') for r in report['episodes']},
         raw_analysis_sha256=sha(BASE/'analysis.json'),new_physical_episodes=8,
@@ -86,23 +91,24 @@ def main():
         ('endpoint_mm','Final task error','mm'),('seconds','Simulation duration','Seconds')]
     for ax,(key,title,unit) in zip(axes.flat,specs):
         values_by_arm=[[lookup[c,arm][key] for c in plan['conditions']] for arm in ARMS]
-        assert all(v is not None for group in values_by_arm for v in group), 'Figure requires explicit recorded metrics'
-        largest=max(v for group in values_by_arm for v in group)
+        largest=max((v for group in values_by_arm for v in group if v is not None),default=0.)
         for j,values in enumerate(values_by_arm):
             locations=np.arange(4)+(j-.5)*.36
-            ax.bar(locations,values,.36,color=['#777777','#0072B2'][j],label=['Map-bridge control','Finite-support candidate'][j])
+            ax.bar(locations,[np.nan if v is None else v for v in values],.36,
+                color=['#777777','#0072B2'][j],label=['Map-bridge control','Finite-support candidate'][j])
             for x,value in zip(locations,values):
-                label=f'{value:.0f}' if 'scaling' in key else f'{value:.2f}'
-                ax.annotate(label,(x,value),xytext=(0,5),textcoords='offset points',ha='center',fontsize=8,rotation=30)
+                label='NA' if value is None else (f'{value:.0f}' if 'scaling' in key else f'{value:.2f}')
+                ax.annotate(label,(x,0 if value is None else value),xytext=(0,5),textcoords='offset points',ha='center',fontsize=8,rotation=30)
         ax.set(xticks=np.arange(4),xticklabels=['Near circle','Near L','Far C','Far skew'],title=title,ylabel=unit,
-            ylim=(0,max(1,largest*1.35)))
+            xlim=(-.6,3.6),ylim=(0,max(1,largest*1.35)))
         ax.spines[['top','right']].set_visible(False)
         ax.set_axisbelow(True)
         ax.grid(axis='y',alpha=.2)
     fig.suptitle('Current finite support: fixed-parameter paired development study',fontsize=14)
     handles,labels=axes[0,0].get_legend_handles_labels()
     fig.legend(handles,labels,loc='upper center',bbox_to_anchor=(.5,.955),ncol=2,frameon=False)
-    fig.text(.5,.025,f"8 complete scheduled episodes on 4 reused conditions; all outcomes retained.\n"
+    completed=sum(r['execution']=='COMPLETED' for r in rows)
+    fig.text(.5,.025,f"8 scheduled episodes; {completed} completed execution. All outcomes retained; unavailable metrics: NA.\n"
         f"Mechanism: {report['mechanism_gate']}; full chain: {report['full_gate']}. Candidate remains default-off.",
         ha='center',fontsize=10)
     fig.subplots_adjust(top=.85,bottom=.13,hspace=.4,wspace=.3)
