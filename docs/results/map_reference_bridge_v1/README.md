@@ -79,6 +79,9 @@
 
 ## 复现与工程证据
 
+[独立审查](final_review.md)未发现Critical/Important/Minor；另独立运行10项
+新测试全部通过。审查支持保留默认关闭的实验及负面结果，不批准默认采用。
+
 - [机制与物理设计](../../../experiments/ccta2027/map_reference_bridge_v1_design.md)、
   [冻结协议](../../../experiments/ccta2027/map_reference_bridge_v1.json)、
   [执行记录](../../../experiments/ccta2027/map_ancestry_v1_plan.md)。

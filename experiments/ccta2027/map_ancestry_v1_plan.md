@@ -83,3 +83,28 @@ combined estimator/geometry solution passes the matched tests.
 Task4 publication:9generated products, all8outcomes, separate18-state screen,
 and the complete point ancestry. PNG visually inspected. Independent review and
 GitHub exact-head CI remain before delivery completion.
+
+Task4 independent final review3b61c33..2a09f3f: noCritical/noImportant/noMinor;
+reviewer independently reran10newtests, allpass, verified9products and separate
+screen/freeze/source/trace identities. HealthPASS;309local links verified. No
+runtime changes or second review; only final review/operational records follow.
+
+Final: Ruling: generalization/hardware/asynchronous delivery and fully local
+supervision remain unproved — retain the explicit empirical development scope —
+cost: broader deployment and paper claims require further evidence.
+Final: Ruling: sparse/empty-return reanchor safety is not certified — retain
+the default-off experiment without a geometric guarantee — cost: unobserved
+constraints may be lost, so this mechanism is not ready for hardware adoption.
+Final: Ruling: upstream bias and17new conflicts remain unresolved — reconstruct
+actual safety rows before another correction — cost: the known failures remain
+while their causes are distinguished rather than presumed.
+Final: Ruling: accept receipt/hash-based review of the expensive completed runs
+alongside this session's actual1055pass core and exact controls — avoid redundant
+physical runs — cost: independent review does not provide a second execution.
+Final: Ruling: remote publication and exact-head CI are executor follow-up —
+complete both before reporting delivery — cost: wait for CI, no premature sync claim.
+Final: minor (deferred): none.
+
+This committed ledger snapshot precedes final push verification. The immutable
+local delivery receipt records final HEAD/remote/CI completion; the full research
+goal remains active because failed mechanism/full gates and paper evidence remain.
