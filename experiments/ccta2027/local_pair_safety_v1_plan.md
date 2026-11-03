@@ -73,3 +73,9 @@ Task4 audit RED6missing-helper failures, GREEN6passed2.38s. Uses recorded rows,
 actual commands, current neighbor positions, SHA identities and both ACKs rather
 than importing protocol acceptance. Existing original control arm label retained
 to compare every scientific field without an arm-label normalization waiver.
+
+Physical evaluation preflight added an execution-error/absent-audit fixture:
+RED caught None audit handling; use a failed gate rather than an analysis
+exception. The test's insertion location was corrected before its GREEN run.
+Study-green2:7passed, including all6earlier fixtures. This is separate from the
+1033-pass runtime core run. Helper --help import succeeds; no new physics yet.
