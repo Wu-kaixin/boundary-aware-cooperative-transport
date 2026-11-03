@@ -104,3 +104,16 @@ certificate systems are included as curated derived evidence (not raw scan or
 physical archives). The 16 nonadmissions remain explicit in the full state table.
 Task 3 interpretation and independent verification complete; obtain the one
 fresh-context final review for this entire increment before the normal push.
+
+Final review dea31ff..ee89aed independently confirms all 128 states, 3,813 rows,
+336 systems and public receipt identities. No numerical/implementation defect.
+One reviewer Minor: root causal ranking needs fixed-state scope. Final: Ruling:
+grade this as Important for the public research summary — an unqualified ranking
+beside the four-task failure outcome could imply completed trajectory causality —
+cost: correction changes wording only and supplies no additional causal evidence.
+The one documentation pass scopes the claims and keeps nominal/objective effects
+unproven. No runtime, evidence, parameter or frozen source changed. Check prose,
+links and data hashes; do not create a low-impact wording test or rerun unchanged
+local tests. Exact-head remote CI remains a separate final publication check.
+All 14 declined-item rulings are retained in the public review_resolution.md.
+No deferred findings, no second reviewer; preserve the original review report.
