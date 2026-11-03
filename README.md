@@ -34,7 +34,7 @@
 
 最近**完整发布并审计**的闭环批次仍是[共同投票者增量八回合](docs/results/map_reference_bridge_v1/README.md)：两臂安全完成均4/4、G500均2/4，错误HOLD、原硬安全违规和预算截尾均0；但机制与完整门槛均FAIL。斜箱冻结后缩放1→17，C形最大转角4.942°→5.839°，且未正式进入TRANSPORT。全部失败和回退仍在原报告中。
 
-最佳配置 [best_known_transport_v1.yaml](configs/research/best_known_transport_v1.yaml) 的字节和全部数值参数保持不变。冻结前核心1074通过/2跳过；审查修正后核心1081通过/2跳过，见[修正核验](docs/results/post_support_validation_checkpoint_v1/review_checks.json)；此前1079项回归和合成预检保留在[工程收据](docs/results/post_support_validation_checkpoint_v1/engineering_checks.json)，[Windows / Ubuntu CI](https://github.com/Wu-kaixin/boundary-aware-cooperative-transport/actions/workflows/tests.yml)按各自提交核验。测试通过与研究门槛通过分别记录；大体积原件保留本地，位置见[数据索引](docs/DATA_INDEX.md)。
+最佳配置 [best_known_transport_v1.yaml](configs/research/best_known_transport_v1.yaml) 的字节和全部数值参数保持不变。冻结前核心1074通过/2跳过；本地最新核心1084通过/2跳过，见[跨平台检查记录](docs/results/post_support_validation_checkpoint_v1/ci_portability.md)；审查修正后的1081项回归见[修正核验](docs/results/post_support_validation_checkpoint_v1/review_checks.json)；此前1079项回归和合成预检保留在[工程收据](docs/results/post_support_validation_checkpoint_v1/engineering_checks.json)，[Windows / Ubuntu CI](https://github.com/Wu-kaixin/boundary-aware-cooperative-transport/actions/workflows/tests.yml)按各自提交核验。测试通过与研究门槛通过分别记录；大体积原件保留本地，位置见[数据索引](docs/DATA_INDEX.md)。
 
 ## 目前遗留的问题与下一步
 

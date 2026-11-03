@@ -158,3 +158,23 @@ no second reviewer or new physics — cost: no independent post-fix review, cove
 by RED/GREEN plus current core regression and exact-head CI.
 
 Final: fixed execution-error publication — two entry-point RED failures to GREEN14; current core1081passed/2skipped, final rendering GREEN2. No deferred minors. The same source/parameters and all13previously published product hashes remain unchanged. Full candidate constraint replay remains pending after publication.
+
+## Exact-head CI follow-up
+
+Normal push6eca2ce succeeded and remoteREADME bytes matched. Windows CI passed;
+Ubuntu core1080passed/1failed/2skipped: the added historical build-cases test
+compared newly generated Linux positions with a frozen Windows byte hash.
+Preserve the failed CI log and every frozen helper/test byte. The current source
+must continue to reject nonidentical historical initial hashes.
+
+Ruling: retain the original exact Windows-provenance test on Windows, and add
+three portable paired/mutation tests on every OS — the original hash remains a
+platform-bound research identity, not a portable numeric-equality assertion —
+cost: non-Windows CI explicitly skips that one historical-byte test and must pass
+the replacement invariants, including a1e-12m coordinate fixture bound.
+Only an in-memory test fixture receives host-local hashes. All original numeric
+settings and physical hash assertions are retained, and22frozen helpers still
+pass study.check(). The fixture itself matches all4original Windows hashes.
+Targeted10passed locally; current full suite/updated exact-headCI follow.
+
+Portable CI test follow-up: local full core1084passed/2skipped; targeted10passed; healthPASS. Runtime,22frozen helpers and original experiment receipts unchanged. Preserve the failed6ecaUbuntu run, then verify the next exact-head Windows/Ubuntu workflows separately.

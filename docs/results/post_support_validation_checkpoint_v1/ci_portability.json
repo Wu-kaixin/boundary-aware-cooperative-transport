@@ -1,0 +1,39 @@
+{
+  "failed_head": "6eca2ced2f92f13530328fb451115e9f84271423",
+  "failed_ubuntu_run": "https://github.com/Wu-kaixin/boundary-aware-cooperative-transport/actions/runs/41636743760",
+  "ubuntu_core": {
+    "failed": 1,
+    "passed": 1080,
+    "skipped": 2
+  },
+  "windows_workflow": "success",
+  "failure": "Windows historical exact initial-state SHA compared directly on Ubuntu. Original frozen helper and test preserved.",
+  "change": "Run the original Windows-byte provenance test on Windows; run three additional portable paired/mutation checks on every OS. Only the test-local copy binds its expected hash to host coordinates.",
+  "fixture_source_protocol_sha256": "29930eb5069c1734e39126a2e39b29e04cd9f0f5e7cdc8f4c1aafb370200401b",
+  "cross_platform_coordinate_bound_m": 1e-12,
+  "production_hash_check": "EXACT_AND_UNCHANGED",
+  "targeted_tests": {
+    "tests": 10,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "passed": 10,
+    "sha256": "5fa10c484c32d146860b1825f64598922e3675207a9722a65a0abf77e788d41b"
+  },
+  "frozen_helpers": 22,
+  "new_physical_episodes": 0,
+  "candidate_constraint_audit": "PENDING",
+  "local_core": {
+    "tests": 1086,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 2,
+    "passed": 1084,
+    "sha256": "1a5d8097134cff16988fe10331a964be913d4d493667f47fbdc747929ad8983d"
+  },
+  "local_health": {
+    "status": "PASS",
+    "sha256": "674d7e8f4bb4cc48ea161739ea53f24fd8e702d5d465237d660e9d5154775e00",
+    "python_files_parsed": 538
+  }
+}
