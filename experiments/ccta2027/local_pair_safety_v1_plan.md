@@ -79,3 +79,10 @@ RED caught None audit handling; use a failed gate rather than an analysis
 exception. The test's insertion location was corrected before its GREEN run.
 Study-green2:7passed, including all6earlier fixtures. This is separate from the
 1033-pass runtime core run. Helper --help import succeeds; no new physics yet.
+
+Task4 freeze succeeded before physics:8cases, runtime sourceSHA
+6a24d76064d89dbc9485c5f5b3623c4dc7ad2ef187436c32319fe6bf2b782727;
+protocolSHA d991f0ffa0eeceedcdff2a68475a9662fd1b8be258294db5703032b073bd8230.
+Every prior effective-controller hash matches after removing only the new boolean;
+canonical YAML and original physical parameters/gates/initial states are exact.
+Frozen source, helpers, designs, tests and environment receipts are preserved.
