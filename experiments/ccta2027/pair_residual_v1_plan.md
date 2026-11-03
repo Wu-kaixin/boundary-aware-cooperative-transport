@@ -55,3 +55,23 @@ Ruling: retain current cap/phase admission guards rather than accept the two
 capped-only witnesses — no uncapped pair witness exists here and989has a single
 object-row speed contradiction — cost: potentially useful larger coordination
 or other admissible states wait for separate geometry/coordination validation.
+
+Task3 independent final review59ec6c2..1fe51de: noCritical/noImportant/noMinor.
+Reviewer reconstructed all36systems, both valid applied witnesses, C counts and
+all7536position differences. HealthPASS; no runtime or frozen helper fixes.
+Final: Ruling: geometry/larger coordination/deployment-role changes remain
+unverified interventions — require new matched physical trials before adoption —
+otherwise the same failures or new regressions could persist.
+Final: Ruling: generalization/deployment benefit/hardware and asynchronous timing
+remain outside this evidence — retain the four-condition development scope —
+otherwise conclusions may be misattributed or overstated.
+Final: minor (deferred): none.
+
+Post-review author addendum, explicitly outside the review range: direct frozen
+geometry of989's single selected map point. Point-to-robot52.705mm but true
+boundary438.753mm; triangle lower bound333.621mm. Own reference nearly-linear/
+matches0 while map statusfresh_reference. Added a self-verifying reproducible
+read-only helper and distinct receipt; original10products/freeze unchanged.
+No new controller replay or physical episode. Point ancestry still unresolved.
+This pre-push ledger snapshot completes delivery only when its final head is
+verified on GitHub with passing Windows/Ubuntu CI; local delivery.json records it.
