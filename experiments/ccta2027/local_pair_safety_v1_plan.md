@@ -26,7 +26,7 @@ Review focus:
 - [x] Task1: prepare/finalize in src/dbact/safety/filter.py; tests/test_safety_preparation.py.
   RED missing preparation; GREEN side-effect-free preparation, parameter/duplicate
   rejection, original infeasible fallback accounting and interleaved row counts.
-- [ ] Task2: src/dbact/safety/local_pair.py; tests/test_local_pair_safety.py.
+- [x] Task2: src/dbact/safety/local_pair.py; tests/test_local_pair_safety.py.
   RED real repaired/impossible fixtures and handshake failures; GREEN local-only
   offers, solver, independent validation, deterministic disjoint two-ACK commit.
 - [ ] Task3: src/dbact/control/controller.py and tests/test_local_pair_wiring.py.
@@ -47,3 +47,10 @@ copies nominal/rows and has no solver accounting; finalization restores local
 row counts, verifies the parameter snapshot and refuses duplicate accounting.
 Original fallback and zero-input counters retained. Logs/XML under
 runs/maintenance/2026-11-03-local-pair-safety-v1/preparation-{red,green}.*.
+
+Task2:18RED missing-protocol failures, then22GREEN including preparation,2.49s.
+Local offers/one outgoing proposal/one endpoint choice/two digest-matching ACKs
+produce disjoint commitments. Full peer/non-mutual/wall rows and individual caps
+are checked; post-clipping velocities and continuous hold separation are checked.
+SLSQP failure is logged as unverified, never proof of mathematical infeasibility.
+Log/XML pair-red and pair-green1 retained. No new physical episodes yet.
