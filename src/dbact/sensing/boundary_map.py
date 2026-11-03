@@ -258,6 +258,17 @@ class LocalBoundaryMap:
     # motion compensation
     # ------------------------------------------------------------------ #
 
+    def discard_object_history(self, object_id: str) -> int:
+        """Drop only this object's geometric history before an unbridged anchor.
+
+        The caller must supply a fresh reference with ``align_translation`` next.
+        Object codes stay stable; unrelated geometry and motion are untouched.
+        """
+        keep = self._objects != str(object_id)
+        count = int(np.count_nonzero(~keep))
+        self._reorder(np.flatnonzero(keep))
+        return count
+
     def align_translation(self, object_id: str, displacement: np.ndarray, velocity: np.ndarray) -> None:
         """Transport retained cells by an externally observed absolute translation.
 

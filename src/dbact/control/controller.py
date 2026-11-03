@@ -317,6 +317,7 @@ class DBACTParams:
     initial_reference_use_all_captured: bool = False
     initial_reference_safe_geometry: bool = False
     initial_reference_map_motion: bool = False
+    reference_map_bridge: bool = False
     initial_acquisition_circulation: bool = False
     reference_map_reacquisition: bool = False
     acquisition_finite_support: bool = False
@@ -655,6 +656,9 @@ class DBACTController:
             raise ValueError("Reference map requires boolean selection, initial translation reference and every-frame transport")
         if params.initial_reference_map_motion and params.object_row_mode != "aggregate":
             raise ValueError("Reference map requires aggregate object rows to retain missing-motion bounds")
+        if (not isinstance(params.reference_map_bridge, bool)
+                or (params.reference_map_bridge and not params.initial_reference_map_motion)):
+            raise ValueError("Map bridge requires boolean selection and reference-map motion")
         if (not isinstance(params.initial_acquisition_circulation, bool)
                 or (params.initial_acquisition_circulation and not params.initial_reference_map_motion)):
             raise ValueError("Acquisition circulation requires boolean selection and reference-map motion")
@@ -820,6 +824,7 @@ class DBACTController:
         self._reference_trackers = {}
         self._reference_readings = {}
         self._map_reference_state = {}
+        self._map_reference_bridges = {}
         self.initial_reference_status = "disabled"
         self.initial_reference_epoch = None
         self.initial_reference_supporters = []
@@ -1187,6 +1192,8 @@ class DBACTController:
             diagnostic.map_reference_voters = state['voters']
             diagnostic.map_reference_displacement = state.get('displacement')
             diagnostic.map_reference_velocity = state.get('velocity')
+            if self.params.reference_map_bridge:
+                diagnostic.map_reference_bridge = state.get('bridge')
         tracker = self._reference_trackers.get(agent.agent_id)
         if tracker is not None:
             diagnostic.reference_status = tracker.reason

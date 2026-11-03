@@ -32,6 +32,13 @@ def update_reference_maps(controller, agents, neighbors, scans, timestamp, inter
         permitted = [aid] + [agents[j].agent_id for j in neighbors[i]]
         feedback = point_goal_feedback(displacements, velocities, permitted,
             task.distance * task.direction, controller.params.cross_track_deadband, rotation_invariant=True)
+        bridge = None
+        if controller.params.reference_map_bridge:
+            from dbact.control.map_reference_bridge import ReferenceMapBridge
+            if aid not in controller._map_reference_bridges:
+                controller._map_reference_bridges[aid] = ReferenceMapBridge()
+            bridge = controller._map_reference_bridges[aid].update(
+                displacements, velocities, permitted, stationary=stationary)
         if stationary:
             displacement, velocity, voters = np.zeros(2), np.zeros(2), []
             status = "stationary_acquisition"
@@ -46,6 +53,13 @@ def update_reference_maps(controller, agents, neighbors, scans, timestamp, inter
             # current packet without a motion reference cannot safely refresh it.
             controller._views[aid] = batches[aid]
             continue
+        if bridge is not None:
+            displacement, velocity = bridge['displacement'], bridge['velocity']
+            bridge['discarded_cells'] = (local.discard_object_history(object_id)
+                                         if bridge['reset_history'] else 0)
+            bridge['retained_cells_before_alignment'] = int(np.count_nonzero(local._objects == object_id))
+            bridge = {key:(value.tolist() if isinstance(value, np.ndarray) else value)
+                      for key,value in bridge.items()}
         local.align_translation(object_id, displacement, velocity)
         local.register(scans[i], interval, apply_motion=False)
         if local.carve_enabled:
@@ -54,3 +68,5 @@ def update_reference_maps(controller, agents, neighbors, scans, timestamp, inter
         controller._views[aid] = local.view(timestamp)
         controller._map_reference_state[aid] = dict(status=status, voters=voters,
             displacement=displacement.tolist(), velocity=velocity.tolist())
+        if bridge is not None:
+            controller._map_reference_state[aid]['bridge'] = bridge
