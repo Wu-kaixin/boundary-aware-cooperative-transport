@@ -27,7 +27,15 @@ physics, numerical parameters and original gates remain unchanged.
 - [x] Publication integrity PASS: 7 documents / 293 local links, all products
   and 26 CSV rows, phase CSV, old physical products, source/environment and
   protected config verified. Receipt publication_integrity_v1.json.
-- [ ] Repository health, one fresh final review and normal publication.
+- [x] Repository health PASS on 5bfdbefd23f0effc415ff1fdc4f1c4cd4deb223b:
+  1,480 files / 471 Python parses / 46 legacy evidence hashes, pip/fsck PASS.
+- [x] One fresh final reviewer (gpt-6-astra/high), no Critical/Important/Minor
+  findings. Independent hashes, all26 CSV rows, lineage and all2,589 phase
+  responses checked; no fix pass or second review required.
+- Publication is ready. Final remote-head/readme equality and two-platform CI
+  will be recorded after the last documentation commit in local github_sync.json
+  and github_ci.json under this increment's maintenance directory, avoiding
+  another commit solely to record that commit's own CI result.
 
 Raw outputs and frozen helper/design copies are in
 runs/research/2026-11-03-acquisition-normal-audit-v1/; logs in the same-named
@@ -44,5 +52,26 @@ The latest user request is GitHub publication, README and remaining problems.
 Complete this deliverable before further runtime work. The broader research
 goal remains active and incomplete; research-branch publication is authorized.
 
-One fresh final reviewer will cover this new increment when ready, per
-executing-plans. The completed previous publication is not reviewed again.
+One fresh final reviewer completed this increment's review, per executing-plans.
+The completed previous publication was not reviewed again.
+
+Final: Ruling: prior physical efficacy remains the separately reviewed four reused
+conditions; zero new episodes here — avoids conflating evidence — cost if wrong:
+unsupported general success rates or causal claims.
+
+Final: Ruling: no finite-boundary repair safety is established — require a separate
+design/validation with unseen continuation and motion bounds — cost if wrong:
+omitted obstacle constraints and unsafe behavior.
+
+Final: Ruling: six post-freeze skew events remain unresolved — the audited prefix
+does not cover them — cost if wrong: false complete-chain acceptance.
+
+Final: Ruling: retain old regression identity and verify publication-head CI on
+both platforms — this audit did not rerun the core suite locally — cost if wrong:
+undetected integration or platform regressions.
+
+Final: Ruling: no locked-environment equivalence claim — current dependency
+differences remain disclosed — cost if wrong: unsupported reproducibility.
+
+Final: no deferred minors in this increment. The earlier physical-study suggestion
+is unchanged. Final review text: docs/results/acquisition_normal_audit_v1/final_review.md.

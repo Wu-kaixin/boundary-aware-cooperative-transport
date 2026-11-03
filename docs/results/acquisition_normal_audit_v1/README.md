@@ -54,6 +54,7 @@ C 形首个事件的两个地图法向与最近真实边夹角为 36.721° / 3.5
 
 ## 身份、复现与原始数据
 
+- [独立最终审查](final_review.md)无 Critical/Important/Minor 项；独立复核全部 26 行数据、来源系数和 2,589 帧阶段响应，支持研究分支发布。源码和参数未改，后续 CI 按实际提交单独记录。
 - [发布前完整性核验](verification.json)：7 份文档、293 个本地链接通过，全部新产品哈希、26 行事件表、四例阶段表、原物理研究产品及运行源码/环境身份一致。核验收据记录当时的文档范围；它不是新的物理试验或完整核心回归。
 - [冻结诊断设计](../../../experiments/ccta2027/acquisition_normal_audit_v1_design.md)及[执行记录](../../../experiments/ccta2027/acquisition_normal_audit_v1_plan.md)。设计中的原始待办保持冻结，完成状态在执行记录中更新。
 - [精确追踪](../../../scripts/trace_acquisition_normals.py)、[来源与几何分析](../../../scripts/analyze_acquisition_normals.py)、[阶段重建](../../../scripts/audit_reacquisition_phases.py)、[发布脚本](../../../scripts/publish_acquisition_normal_audit.py)。
