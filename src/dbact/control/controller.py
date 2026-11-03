@@ -320,6 +320,7 @@ class DBACTParams:
     initial_acquisition_circulation: bool = False
     reference_map_reacquisition: bool = False
     acquisition_finite_support: bool = False
+    acquisition_pair_safety: bool = False
     initial_acquisition_seconds: float = 60.0
     contact_patch_distance: bool = False
     # New development arms, off by default. The vector law changes controller
@@ -664,6 +665,10 @@ class DBACTController:
                 or (params.acquisition_finite_support and
                     (not params.initial_reference_map_motion or params.theorem_mode))):
             raise ValueError("Finite acquisition support requires boolean selection and empirical reference-map motion")
+        if (not isinstance(params.acquisition_pair_safety, bool)
+                or (params.acquisition_pair_safety and
+                    (not params.acquisition_finite_support or params.backend != 'qp'))):
+            raise ValueError('Pair acquisition safety requires boolean selection, finite support and qp backend')
         if params.initial_task_reference and not params.initial_reference_acquisition:
             raise ValueError("Initial task reference requires stationary acquisition")
         if (not isinstance(params.initial_reference_safe_geometry, bool)
@@ -960,6 +965,10 @@ class DBACTController:
         # the current robot had not yet been appended to the new list.
         diagnostics = []
         commands: list[ControlCommand] = []
+        pair_active = self.params.acquisition_pair_safety and self.initial_reference_status == 'acquiring'
+        pending = []
+        self._pair_commands = {}
+        self._pair_applied = False
         if self.params.confirmed_contact_handoff:
             self.contact_handoff.outbox = {}
         if self.params.contact_reinforcement:
@@ -999,7 +1008,8 @@ class DBACTController:
                 support_inputs, support_trace = filter_inputs(self,agent.agent_id,
                     [agent.agent_id]+[agents[j].agent_id for j in neighbors[i]],timestamp)
                 self._trace['acquisition_support'] = support_trace
-            result = self.safety.filter_velocity(
+            filter_call = self.safety.prepare_velocity if pair_active else self.safety.filter_velocity
+            result = filter_call(
                 agent.position,
                 u_nom,
                 [agents[j].position for j in neighbors[i]],
@@ -1009,23 +1019,40 @@ class DBACTController:
                 boundary_point_velocities=v_points,
                 **support_inputs,
             )
-            commands.append(ControlCommand(agent.agent_id, result.velocity, mode=mode))
-            diagnostic = AgentDiagnostics(
-                agent_id=agent.agent_id,
-                mode=mode,
-                cell_mass=cell_mass,
-                object_rows=result.object_rows,
-                contact_ready=contact_ready[i],
-                push_side=push_side,
-                solver_status=result.status,
-                modification=result.modification,
-                effort=effort,
-                progress=self._agent_progress(agent.agent_id),
-                map_points=len(view),
-            )
-            if self.trace_enabled:
-                self._fill_trace(diagnostic, agent, view, scans[i], u_nom, result)
+            if pair_active:
+                pending.append((i, u_nom, mode, cell_mass, push_side, effort, result, self._trace.copy()))
+                continue
+            pair_trace = (dict(eligible=False, reason='outside_stationary_acquisition')
+                if self.params.acquisition_pair_safety else None)
+            command, diagnostic = self._finish_transport_agent(agent, view, scans[i], u_nom,
+                result, mode, cell_mass, push_side, effort, contact_ready[i], pair_trace)
+            commands.append(command)
             diagnostics.append(diagnostic)
+        if pair_active:
+            from dbact.safety.local_pair import build_offer, exchange
+            offers, pair_traces = {}, {}
+            for i, u_nom, mode, mass, push, effort, problem, scratch in pending:
+                agent = agents[i]
+                offer, reason = build_offer(agent.agent_id, agent.position,
+                    {agents[j].agent_id:agents[j].position for j in neighbors[i]}, problem,
+                    self._frame, timestamp, dt, self.domain, scratch.get('acquisition_support', {}),
+                    acquiring=self.initial_reference_status == 'acquiring')
+                pair_traces[agent.agent_id] = dict(eligible=offer is not None, reason=reason)
+                if offer is not None:
+                    offers[agent.agent_id] = offer
+            self._pair_commands, messages = exchange(offers)
+            for i, u_nom, mode, mass, push, effort, problem, scratch in pending:
+                agent = agents[i]
+                result = self.safety.finish_velocity(problem, pair_command=self._pair_commands.get(agent.agent_id))
+                pair_trace = pair_traces[agent.agent_id]
+                pair_trace.update(messages.get(agent.agent_id, {}))
+                pair_trace['executed_status'] = result.status
+                pair_trace['executed_barrier_scale'] = result.barrier_scale
+                self._trace = scratch
+                command, diagnostic = self._finish_transport_agent(agent, self._views[agent.agent_id],
+                    scans[i], u_nom, result, mode, mass, push, effort, contact_ready[i], pair_trace)
+                commands.append(command)
+                diagnostics.append(diagnostic)
         if self.params.confirmed_contact_handoff:
             # Publish each robot's own command flag only after all decisions;
             # recipients see previous-frame snapshots on their actual one-hop links.
@@ -1041,6 +1068,19 @@ class DBACTController:
         self.diagnostics = diagnostics
         self._frame += 1
         return commands
+
+    def _finish_transport_agent(self, agent, view, scan, u_nom, result, mode,
+                                cell_mass, push_side, effort, contact_ready, pair_trace):
+        command = ControlCommand(agent.agent_id, result.velocity, mode=mode)
+        diagnostic = AgentDiagnostics(agent_id=agent.agent_id, mode=mode, cell_mass=cell_mass,
+            object_rows=result.object_rows, contact_ready=contact_ready, push_side=push_side,
+            solver_status=result.status, modification=result.modification, effort=effort,
+            progress=self._agent_progress(agent.agent_id), map_points=len(view))
+        if self.trace_enabled:
+            self._fill_trace(diagnostic, agent, view, scan, u_nom, result)
+        if pair_trace is not None:
+            diagnostic.pair_safety = pair_trace
+        return command, diagnostic
 
     def _theorem_nominal(
         self,
@@ -2539,10 +2579,22 @@ class DBACTController:
             apply_theorem_commands(self, agents, commands, dt)
             return
         by_id = {cmd.agent_id: cmd for cmd in commands}
+        pairs = getattr(self, '_pair_commands', {})
+        if pairs:
+            if self._pair_applied:
+                raise ValueError('Pair commands were already applied')
+            states = {agent.agent_id:agent for agent in agents}
+            if not pairs.keys() <= by_id.keys() or not pairs.keys() <= states.keys():
+                raise ValueError('Pair execution is missing a participant')
+            # Validate both commitments before mutating ANY agent position.
+            for aid, agreed in pairs.items():
+                agreed.audit_applied(states[aid].position, by_id[aid].velocity, dt, self.domain)
         for agent in agents:
             cmd = by_id[agent.agent_id]
             agent.velocity = cmd.velocity.copy()
             agent.position = clip_to_domain(agent.position + cmd.velocity * dt, self.domain)
+        if pairs:
+            self._pair_applied = True
 
     def mode_counts(self) -> dict[str, int]:
         counts: dict[str, int] = {}

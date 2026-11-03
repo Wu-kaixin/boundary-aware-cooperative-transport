@@ -43,6 +43,7 @@ def test_reference_selectors_default_off_preserve_all_protected_numerical_values
     assert values.pop('initial_acquisition_circulation') is False
     assert values.pop('reference_map_reacquisition') is False
     assert values.pop('acquisition_finite_support') is False
+    assert values.pop('acquisition_pair_safety') is False
     assert values.pop('reference_surface_refinement') is False
     receipt = json.loads(Path('docs/results/reference_surface_v1/protected_baseline.json').read_text(encoding='utf-8'))
     assert values == receipt['effective_controller']

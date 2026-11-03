@@ -1083,12 +1083,15 @@ class SafetyFilter:
             row_kinds=row_kinds, clamped=clamped, parameters=replace(self.params),
         )
 
-    def finish_velocity(self, problem: PreparedVelocity) -> FilterResult:
+    def finish_velocity(self, problem: PreparedVelocity, *, pair_command=None) -> FilterResult:
         """Finalize once, after any local negotiation, without erasing a fallback."""
         if problem.consumed:
             raise ValueError('Safety problem was already finalized')
         if problem.parameters != self.params:
             raise ValueError('Safety parameters changed after preparation')
+        # This validates both offers, both ACKs and every applied pair constraint.
+        # Rejected proposals never reach finalization and retain the old policy.
+        paired = pair_command.for_problem(problem) if pair_command is not None else None
         problem.consumed = True
         u_nom, A, b = problem.u_nom, problem.A, problem.b
         b_original, b_no_margin = problem.b_original, problem.b_no_margin
@@ -1119,7 +1122,14 @@ class SafetyFilter:
             self.stats.inside_margin_band += 1
 
         self.stats.solves += 1
-        u, status, scale = self._solve(u_nom, A, b, b_no_margin)
+        if paired is None:
+            u, status, scale = self._solve(u_nom, A, b, b_no_margin)
+        else:
+            u, b = paired
+            status, scale = 'paired', 1.0
+            # The mutual row is conditional on the acknowledged peer command.
+            # All other rows are unchanged; original individual rows stay below.
+            b_agent = b[:na]
         self.stats.record_status(status)
 
         modification = float(np.linalg.norm(u - u_nom))

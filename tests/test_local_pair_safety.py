@@ -77,6 +77,20 @@ def test_peer_object_constraint_can_make_the_pair_impossible():
     assert traces['a']['attempts'] and not traces['a']['accepted']
 
 
+def test_failed_proposals_retain_both_original_row_sets_for_independent_audit():
+    m = module()
+    a, b, pa, pb = pair(peer_rows=((-1., 0., 0.),))
+    commands, traces = m.exchange({'a': a, 'b': b})
+    assert not commands
+    trace = traces['a']
+    assert 'original_offer' in trace, 'Unexecuted infeasibility needs its original rows'
+    np.testing.assert_array_equal(trace['original_offer']['A'], pa.A)
+    np.testing.assert_array_equal(trace['original_offer']['b'], pa.b)
+    assert 'peer_offer' in trace['attempts'][0], 'Failed peer trials must retain peer constraints too'
+    np.testing.assert_array_equal(trace['attempts'][0]['peer_offer']['A'], pb.A)
+    np.testing.assert_array_equal(trace['attempts'][0]['peer_offer']['b'], pb.b)
+
+
 def test_non_mutual_neighbor_row_cannot_be_deleted_to_make_pair_feasible():
     m = module()
     a, _, _, _ = pair()

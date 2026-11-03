@@ -29,7 +29,7 @@ Review focus:
 - [x] Task2: src/dbact/safety/local_pair.py; tests/test_local_pair_safety.py.
   RED real repaired/impossible fixtures and handshake failures; GREEN local-only
   offers, solver, independent validation, deterministic disjoint two-ACK commit.
-- [ ] Task3: src/dbact/control/controller.py and tests/test_local_pair_wiring.py.
+- [x] Task3: src/dbact/control/controller.py and tests/test_local_pair_wiring.py.
   Only one default-off selector; preserve old default and raw diagnostics;
   integrate before finalization, check applied commands; full core suite.
 - [ ] Task4: separate physical design/protocol and scripts/local_pair_study.py.
@@ -54,3 +54,22 @@ produce disjoint commitments. Full peer/non-mutual/wall rows and individual caps
 are checked; post-clipping velocities and continuous hold separation are checked.
 SLSQP failure is logged as unverified, never proof of mathematical infeasibility.
 Log/XML pair-red and pair-green1 retained. No new physical episodes yet.
+
+Task3 wiring RED8failures/2passes. First GREEN attempt57passes/1failure:
+the projection-backend negative fixture hit the pre-existing paper-config ban
+before pair validation; use cvxpy to exercise the intended unsupported-backend
+guard. Added a meaningful raw-failed-proposal record RED; retained both peers'
+original matrices in failed trials. Final targeted GREEN59passed,4.78s.
+Core first run1032passed/2skipped/1failure,154.14s: the protected-receipt test
+needed to explicitly pop/assert the newly default-off boolean; all140 existing
+parameters matched. Added that assertion without changing the protected receipt.
+All failed logs/XML retained; a fresh full core-final run follows.
+
+Task3 complete: core-final1033passed/2skipped,152.16s,exit0. All root-venv
+runtime checks complete; no live core process remains. Pair selector defaults
+off, execution is validated before mutation, and current diagnostics distinguish
+independent proposals from final solver status. Physical freeze not yet run.
+Task4 audit RED6missing-helper failures, GREEN6passed2.38s. Uses recorded rows,
+actual commands, current neighbor positions, SHA identities and both ACKs rather
+than importing protocol acceptance. Existing original control arm label retained
+to compare every scientific field without an arm-label normalization waiver.

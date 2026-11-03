@@ -285,10 +285,11 @@ class PairCommand:
         rhs[mutual] = own.b[mutual]+peer.b[other]-np.asarray(peer.A[other])@peer_velocity
         return velocity.copy(), rhs
 
-    def audit_applied(self, position, velocity, dt):
+    def audit_applied(self, position, velocity, dt, domain=None):
         index = self.proposal.members.index(self.agent_id)
         own = self.proposal.offers[index]
-        if (dt != own.dt or not np.array_equal(position, own.position)
+        if (dt != own.dt or (domain is not None and tuple(domain) != own.domain)
+                or not np.array_equal(position, own.position)
                 or not np.array_equal(velocity, self.proposal.velocities[index])
                 or not _certificate(*self.proposal.offers, self.proposal.velocities)['valid']):
             raise ValueError('Pair command position, dt or applied velocity changed before execution')
@@ -317,9 +318,10 @@ def exchange(offers):
         traces[aid] = trace
         if independent is None or independent.feasible:
             continue
+        trace['original_offer'] = asdict(own)
         for peer_id, peer in sorted(inboxes[aid].items()):
             proposal, reason = propose(own, peer)
-            trace['attempts'].append(dict(peer=peer_id, reason=reason))
+            trace['attempts'].append(dict(peer=peer_id, reason=reason, peer_offer=asdict(peer)))
             if proposal is not None:
                 proposals[aid] = proposal
                 break

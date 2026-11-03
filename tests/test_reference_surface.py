@@ -129,6 +129,7 @@ def test_protected_configuration_and_resolved_values_match_saved_receipt():
     assert resolved.pop('initial_acquisition_circulation') is False
     assert resolved.pop('reference_map_reacquisition') is False
     assert resolved.pop('acquisition_finite_support') is False
+    assert resolved.pop('acquisition_pair_safety') is False
     assert resolved == receipt['effective_controller']
 
 
