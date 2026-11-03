@@ -18,9 +18,9 @@ Spec: reference_reacquisition_v1_design.md. No runtime change is planned.
       12000 steps at0.05s, four workers/one internal thread, current root .venv,
       unchanged numeric parameters/physics/safety/acceptance. Snapshot source,
       helpers, original identities, environment, budget and design before run.
-- [ ] Execute once in fresh runs/research/2026-11-03-reference-reacquisition-v1;
+- [x] Execute once in fresh runs/research/2026-11-03-reference-reacquisition-v1;
       preserve process handles, partial outputs, failures and completed receipts.
-- [ ] Analyze with original episode/reproduction/scaling evaluators. Verify all
+- [x] Analyze with original episode/reproduction/scaling evaluators. Verify all
       four old cases exactly and candidate capture prefixes through the first
       frozen frame. Report recovery modes, availability, activation and failures.
 - [ ] Publish to docs/results/reference_reacquisition_physical_v1, preserving the
@@ -46,3 +46,37 @@ Freeze session75112 ended exit0 after four exact old evaluator checks and four
 Runtime source5251bea3bc76971a74f62fc2c7899a33cca52cd57a267cd1feebcd033d8e0eb6;
 protocol b4c04255521da8a72345422e0a65c150c8438abc26c5c55104767b0198b26f0b.
 All frozen helpers/source/config/environment must remain unchanged during run.
+
+Physical execution launched once as session12436, starting2026-11-03T02:04:26Z.
+Keep that handle; completed-case receipts do not imply the remaining cases stopped.
+While the two long controls run, a separate zero-physics analysis verifies the
+previously saved first acquisition conflict in each far circulation case. See
+circulation_conflict_witness_v1_design.md; both independent solver checks completed
+exit0. No frozen study helper or runtime file was changed. The new publication
+helper only presents the frozen analysis after completion and does not set gates.
+The final fresh reviewer for this increment must cover that separate diagnosis
+and the additive budget-header erratum as well as the eight-case study.
+
+Execution session12436 completed exit0, all8 cases completed, execution errors0,
+source integrityPASS. Frozen analysis session57332 completed exit0. Four old arms
+exactly reproduce all25 replay arrays/scientific fields; all4 candidate capture
+prefixes exactly match, including complete recorded steps and ragged observations.
+Safe completion2/4→4/4, timeouts2→0, falseHOLD/hard failures0 in both arms.
+MechanismPASS, full-chain screeningFAIL, G5002/4 in both arms; candidate not adopted.
+C/skew candidate errors3.748/5.634mm, times50.45/49.15s, acquisition scalings13/13,
+post-acquisition0/6. C never enters formalTRANSPORT despite maximum active count5;
+this is an unresolved stage/coordination issue, not merely a low maximum count.
+The old two-witness diagnosis can now be related to these exact acquisition prefixes.
+
+Current user instruction: publish this increment to the existing GitHub research
+branch, update README, then report remaining issues. Do not start another physical
+experiment as part of this publication. Runtime, frozen helpers and parameters
+remain unchanged; the broader research goal is still incomplete.
+
+Publication helper session32103 completed exit0, all8 CSV rows and both figure
+formats written once. Figure visually inspected; failed safe completions retain
+hatching and600s is explicitly budget censoring. Independent publication checks
+passed: seven navigation documents/298 local links, all product hashes and CSV
+metrics, original receipt identities, frozen runtime/scripts/environment and
+protected config unchanged. Receipt: physical_integrity.json in maintenance.
+Final review and exact pushed-commit CI are still pending at this ledger entry.

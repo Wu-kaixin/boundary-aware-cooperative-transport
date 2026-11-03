@@ -1,5 +1,9 @@
 # 缺参考时的观测恢复候选：实现检查点
 
+后续进展（2026-11-03）：[另行冻结的八回合闭环验证](../reference_reacquisition_physical_v1/README.md)
+已经完成，安全完成2/4→4/4，机制PASS、完整筛选FAIL，候选继续默认关闭。
+下文保留原实现检查点当时的状态和收据，不将其重标为物理验证。
+
 2026-11-03：实现 `reference_map_reacquisition=False` 候选开关，默认关闭、尚未采用。**目前只有工程验证，新增闭环物理回合为 0。** 本次按用户要求先发布已有成果；八回合比较仍为[前瞻设计](../../../experiments/ccta2027/reference_reacquisition_v1_design.md)，尚未冻结可执行协议或运行。
 
 [接触激活诊断](../contact_activation_v1/README.md)发现，缺少局部位移参考的远处机器人连原搜索、召回、接近指令也被归零。候选仅在初始参考已经有效冻结、局部参考不可用、阶段早于 TRANSPORT 时，允许 `search` / `recall` / `approach` 的原名义指令继续进入原安全 QP，并要求 `push_side=False`、`effort=0`。输出模式增加 `map_reference_reacquire_` 前缀以便追踪。
