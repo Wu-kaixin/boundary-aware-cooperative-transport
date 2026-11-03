@@ -317,6 +317,7 @@ class DBACTParams:
     initial_reference_use_all_captured: bool = False
     initial_reference_safe_geometry: bool = False
     initial_reference_map_motion: bool = False
+    initial_acquisition_circulation: bool = False
     initial_acquisition_seconds: float = 60.0
     contact_patch_distance: bool = False
     # New development arms, off by default. The vector law changes controller
@@ -651,6 +652,9 @@ class DBACTController:
             raise ValueError("Reference map requires boolean selection, initial translation reference and every-frame transport")
         if params.initial_reference_map_motion and params.object_row_mode != "aggregate":
             raise ValueError("Reference map requires aggregate object rows to retain missing-motion bounds")
+        if (not isinstance(params.initial_acquisition_circulation, bool)
+                or (params.initial_acquisition_circulation and not params.initial_reference_map_motion)):
+            raise ValueError("Acquisition circulation requires boolean selection and reference-map motion")
         if params.initial_task_reference and not params.initial_reference_acquisition:
             raise ValueError("Initial task reference requires stationary acquisition")
         if (not isinstance(params.initial_reference_safe_geometry, bool)
@@ -1554,6 +1558,14 @@ class DBACTController:
                 return u, "recall", 0.0, False, 0.0
             u = self._exploration_velocity(i, agents, neighbor_indices, self._time)
             return u, "search", 0.0, False, 0.0
+
+        if self.params.initial_acquisition_circulation and self.initial_reference_status == "acquiring":
+            from dbact.control.acquisition_navigation import circulation_velocity
+            standoff = max(self.density_params.cage_offset, self.density_params.lead_offset or 0.,
+                           self.safety.params.r_safe + self.feasibility.press_margin)
+            command = circulation_velocity(agent.position, view, standoff,
+                                           self.params.kp_cage, self.params.max_speed)
+            return command, "acquisition_circulation", 0.0, False, 0.0
 
         crowd = np.vstack([agent.position] + [agents[j].position for j in neighbor_indices])
         goal = self._goal_for(view) if self.params.task_mode == "transport" else None

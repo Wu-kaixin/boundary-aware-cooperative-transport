@@ -395,6 +395,13 @@ def transport_arm(cfg, seed, variant, frames, out):
                 "add a second rigid displacement. Missing reference inhibits nominal motion, retains "
                 "anchored history, and exposes fresh packets with the existing speed disturbance bound. "
                 "Translation and existing row-cap assumptions remain; no dynamic safety certificate.")
+        if env.controller.params.initial_acquisition_circulation:
+            result['initial_reference']['acquisition_circulation'] = True
+            result['changed_mechanism'] += (
+                " During acquisition only, nominal motion follows the permitted local boundary "
+                "counterclockwise using existing speed/gain and non-contact offset parameters. "
+                "Original search, QP, capture admission/deadline and post-capture transport remain; "
+                "no true object pose or shape enters this policy and no new safety guarantee is claimed.")
     elif (env.controller.params.reference_early_anchor
             or env.controller.params.reference_bootstrap_gain is not None):
         result["changed_mechanism"] = (
