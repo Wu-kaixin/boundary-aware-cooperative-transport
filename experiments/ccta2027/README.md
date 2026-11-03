@@ -1,5 +1,7 @@
 # CCTA 2027 实验入口
 
+2026-11-03：[包几何设计](post_support_contact_packet_geometry_v1_design.md)和[方向能力设计](post_support_contact_direction_capability_v1_design.md)均完成固定128状态分析，前者精确重放1749原控制帧，后者保留336个完整问题的原始/对偶证书。[结果](../../docs/results/post_support_contact_geometry_capability_v1/README.md)：新截断约束在17个原正向力状态中，仅6个允许正向、10个强制反向、1个无解；目标选择另影响3个仍允许正向的状态。新增物理0，不能作闭环或总体可靠性结论；[执行记录](post_support_contact_packet_geometry_v1_plan.md)保留全部核验和环境失败。
+
 2026-11-03：[接触行分解设计](post_support_contact_row_decomposition_v1_design.md)和[有符号运动上界设计](post_support_contact_motion_envelope_v1_design.md)已在同一固定128状态上完成，新增物理0。[结果](../../docs/results/post_support_contact_row_decomposition_v1/README.md)：17/17原正向力指令去掉非负运动项后仍冲突，其中9个在原0.2m/s速度球内也无法恢复；这不是所有推动指令不可行的证明。八回合的完整约束审计已启动，仍按原协议、原分析尝试执行，正式门槛待完成。
 
 2026-11-03：[冻结八回合协议](post_acquisition_finite_support_v1.json)及[物理设计](post_acquisition_finite_support_v1_physical_design.md)已冻结并启动，四对照完成且精确复现，八回合均已执行结束、候选四例均预算截尾，任务收据为对照4/4、候选0/4完成，完整候选约束审计待完成。[分析更正](post_acquisition_finite_support_v1_analysis_addendum.md)仅适配预定臂名与数组精确比较，80步合成预检不计作物理试验；[发布检查点](../../docs/results/post_support_validation_checkpoint_v1/README.md)保留身份。另行预声明的[接触兼容性设计](post_support_contact_compatibility_v1_design.md)完成1749帧旧对照重放：17个正向力状态与新行冲突，11个声明推手反事实速度均转为目标反向；[完整诊断](../../docs/results/post_support_contact_compatibility_v1/README.md)新增物理0，不能直接断言新闭环失败。

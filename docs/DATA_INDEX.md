@@ -1,5 +1,7 @@
 # 数据与原始文件索引
 
+2026-11-03：[接触几何与正向能力](results/post_support_contact_geometry_capability_v1/README.md)的包捕获/几何原件在 `runs/research/2026-11-03-post-support-contact-packet-geometry-v1/`，336个优化问题在 `runs/research/2026-11-03-post-support-contact-direction-capability-v1/`。两者均保留各自运行前设计、脚本、前序分析和运行身份；新增物理0。Git保存128状态、3813物体行、336系统表及完整方向证书，完整扫描包/轨迹留在本地。独立标量核验、RED/GREEN和完整测试（包括首次临时目录设置失败）保存在 `runs/maintenance/2026-11-03-contact-packet-geometry-v1/`，失败记录不覆盖。
+
 2026-11-03：[接触约束分解与运动上界](results/post_support_contact_row_decomposition_v1/README.md)的原件分别位于 `runs/research/2026-11-03-post-support-contact-row-decomposition-v1/` 和 `runs/research/2026-11-03-post-support-contact-motion-envelope-v1/`，各自保留输入、设计、脚本哈希及原始行向量见证。Git公开全部128状态、17个正向力状态和分组统计，新增物理0。完整八回合分析已在原 `post-acquisition-support-v1/analysis_adapter_v1/` 尝试中启动；`analysis_attempt/` 保存逐项重放产物，完整结果尚未生成。发布核验记录位于 `runs/maintenance/2026-11-03-contact-row-publication-v1/`；以下早期检查点仍保留其当时身份。
 
 2026-11-03：[接触兼容性诊断](results/post_support_contact_compatibility_v1/README.md)原件在 `runs/research/2026-11-03-post-support-contact-compatibility-v2/`，v1原序列化失败及快照保留。1749帧重放、8事件/128状态、17个正向力状态的完整表和哈希发布到Git，新增物理0。[独立八回合检查点](results/post_support_validation_checkpoint_v1/README.md)对应 `runs/research/2026-11-03-post-acquisition-support-v1/`：freeze与run保存源码/协议和物理原件，analysis_preflight_v1保存80步无物理积分的合成控制重放。发布快照为四对照完成、八回合均已执行结束、候选四例均预算截尾，完整分析待执行；原臂名比较失败、两版比较和全部测试日志保留在同名maintenance目录。

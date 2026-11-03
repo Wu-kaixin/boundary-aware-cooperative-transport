@@ -1,0 +1,43 @@
+{
+  "direction_red": {
+    "tests": 3,
+    "failures": 3,
+    "errors": 0,
+    "skipped": 0,
+    "passed": 0,
+    "sha256": "915f3c8b57d20897e17b3d451bfde436ec536e234cbab7342643120b7b0ff6f0"
+  },
+  "direction_green": {
+    "tests": 3,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "passed": 3,
+    "sha256": "d402107778467b44bfc6745024f9984eef4d2bd67e099d55f8f9adf1c5e0fb51"
+  },
+  "first_core": {
+    "tests": 1089,
+    "failures": 0,
+    "errors": 76,
+    "skipped": 2,
+    "passed": 1011,
+    "sha256": "8a8358412cd4eef16beb21b065bf7d5ca7cfd03700509c03e68d5aa5cbd8ae5b"
+  },
+  "core": {
+    "tests": 1089,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 2,
+    "passed": 1087,
+    "sha256": "f1c004adc8198a08929cdc4c66407a6e7a24d2769d953cc09cc6872023613a18"
+  },
+  "first_core_error": "All 76 setup errors: pytest could not create its numbered directory in sandbox AC/Temp. Original XML/log retained; tests unchanged, rerun uses a fresh repository-local basetemp.",
+  "health": {
+    "status": "PASS",
+    "sha256": "b8774358325d1b947bec93fcc57fd648c4ffa45e0a1fa8dde343ebcfd6580490",
+    "checked_head": "dea31ff8b344db35c98e0860bd2282e802977188",
+    "python_files_parsed": 546
+  },
+  "new_physical_episodes": 0,
+  "full_candidate_audit": "RUNNING_NOT_COMPLETE"
+}

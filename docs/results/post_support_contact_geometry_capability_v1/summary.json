@@ -1,0 +1,122 @@
+{
+  "geometry": {
+    "all": {
+      "states": 128,
+      "admitted": 112,
+      "limiting_sources": {
+        "own": 64,
+        "one_hop": 48
+      },
+      "limiting_features": {
+        "chord": 112
+      },
+      "conflicts_without_structural": 22,
+      "conflicts_without_noise": 12,
+      "conflicts_without_both": 6,
+      "evaluation_negative_h": 0
+    },
+    "admitted": {
+      "states": 112,
+      "admitted": 112,
+      "limiting_sources": {
+        "own": 64,
+        "one_hop": 48
+      },
+      "limiting_features": {
+        "chord": 112
+      },
+      "conflicts_without_structural": 22,
+      "conflicts_without_noise": 12,
+      "conflicts_without_both": 6,
+      "evaluation_negative_h": 0
+    },
+    "positive_force": {
+      "states": 17,
+      "admitted": 17,
+      "limiting_sources": {
+        "one_hop": 7,
+        "own": 10
+      },
+      "limiting_features": {
+        "chord": 17
+      },
+      "conflicts_without_structural": 14,
+      "conflicts_without_noise": 10,
+      "conflicts_without_both": 6,
+      "evaluation_negative_h": 0
+    },
+    "positive_force_pusher": {
+      "states": 11,
+      "admitted": 11,
+      "limiting_sources": {
+        "own": 6,
+        "one_hop": 5
+      },
+      "limiting_features": {
+        "chord": 11
+      },
+      "conflicts_without_structural": 11,
+      "conflicts_without_noise": 9,
+      "conflicts_without_both": 6,
+      "evaluation_negative_h": 0
+    }
+  },
+  "direction": {
+    "all_admitted": {
+      "states": 112,
+      "systems": {
+        "original_aggregate": {
+          "POSITIVE_CAPABILITY": 112
+        },
+        "finite_capped": {
+          "POSITIVE_CAPABILITY": 99,
+          "MUST_REVERSE": 11,
+          "INFEASIBLE": 2
+        },
+        "finite_uncapped": {
+          "POSITIVE_CAPABILITY": 99,
+          "INFEASIBLE": 4,
+          "MUST_REVERSE": 9
+        }
+      }
+    },
+    "positive_force": {
+      "states": 17,
+      "systems": {
+        "original_aggregate": {
+          "POSITIVE_CAPABILITY": 17
+        },
+        "finite_capped": {
+          "POSITIVE_CAPABILITY": 6,
+          "MUST_REVERSE": 10,
+          "INFEASIBLE": 1
+        },
+        "finite_uncapped": {
+          "POSITIVE_CAPABILITY": 6,
+          "INFEASIBLE": 3,
+          "MUST_REVERSE": 8
+        }
+      }
+    },
+    "positive_force_pusher": {
+      "states": 11,
+      "systems": {
+        "original_aggregate": {
+          "POSITIVE_CAPABILITY": 11
+        },
+        "finite_capped": {
+          "MUST_REVERSE": 9,
+          "POSITIVE_CAPABILITY": 2
+        },
+        "finite_uncapped": {
+          "INFEASIBLE": 2,
+          "POSITIVE_CAPABILITY": 2,
+          "MUST_REVERSE": 7
+        }
+      }
+    }
+  },
+  "original_control_frames_replayed": 1749,
+  "new_physical_episodes": 0,
+  "interpretation": "Instantaneous fixed-state velocity capability; no new force, closed-loop causality or population reliability certificate."
+}

@@ -2,9 +2,11 @@
 
 ## 最新成果与保护基线（2026-11-03）
 
-**本轮结论：有限支持候选出现明显搬运退化，继续默认关闭。** 最新[接触约束分解与运动上界诊断](docs/results/post_support_contact_row_decomposition_v1/README.md)已完成；[独立八回合检查点](docs/results/post_support_validation_checkpoint_v1/README.md)公开冻结协议、四个对照的精确复现和审计工具验证。八个物理回合均已执行结束、执行错误0；任务收据为对照4/4完成、候选0/4完成，四个候选均在600秒预算截尾。完整约束重放已启动，正式门槛审计仍待完成；[审计进度快照](docs/results/post_support_contact_row_decomposition_v1/analysis_checkpoint.json)记录核对时点和执行身份。成果沿 [`paper/boundary-aware-safe-deployment`](https://github.com/Wu-kaixin/boundary-aware-cooperative-transport/tree/paper/boundary-aware-safe-deployment) 发布。
+**本轮结论：有限支持候选出现明显搬运退化，继续默认关闭。** 最新[接触几何与方向能力诊断](docs/results/post_support_contact_geometry_capability_v1/README.md)已完成，进一步确认主要瓶颈在约束本身；[独立八回合检查点](docs/results/post_support_validation_checkpoint_v1/README.md)公开冻结协议、四个对照的精确复现和审计工具验证。八个物理回合均已执行结束、执行错误0；任务收据为对照4/4完成、候选0/4完成，四个候选均在600秒预算截尾。完整约束重放已启动，正式门槛审计仍待完成；[早期审计进度快照](docs/results/post_support_contact_row_decomposition_v1/analysis_checkpoint.json)记录核对时点和执行身份。成果沿 [`paper/boundary-aware-safe-deployment`](https://github.com/Wu-kaixin/boundary-aware-cooperative-transport/tree/paper/boundary-aware-safe-deployment) 发布。
 
 最终目标：**利用局部感知与邻域通信，实现未知形状物体的安全部署、无附着协作搬运和可靠停止，单独证明边界部署的贡献，并完成符合 CCTA2027 要求的论文初稿。** 当前仍在完善公共搬运链，尚未达到最终验收。
+
+最新扫描包追踪重放1749个原控制帧，保留128状态和3813物体行，新增物理0。固定17个原正向力状态中，原聚合约束均允许正向速度；新截断约束仅6个允许，10个强制目标反向、1个无解，全部具有可复算证书。限制最强的行有10个来自自身、7个来自邻居，不能只归咎于邻居粗采样。另有3个状态允许正向却被QP选成反向，其中2个是声明推手。**约束兼容是主要问题，优化目标另有次要问题；正向速度能力不等于接触力或任务成功。** [完整336系统、证书与证据边界](docs/results/post_support_contact_geometry_capability_v1/README.md)保留全部分母。
 
 本次只读诊断对四个已完成对照，分别预先选择参考冻结后、制动前的首次和峰值正向接触力时刻。精确重放 **1749帧**，保留8个事件的全部128个机器人状态，新增物理回合 **0**：
 
@@ -36,13 +38,13 @@
 
 最近**完整发布并审计**的闭环批次仍是[共同投票者增量八回合](docs/results/map_reference_bridge_v1/README.md)：两臂安全完成均4/4、G500均2/4，错误HOLD、原硬安全违规和预算截尾均0；但机制与完整门槛均FAIL。斜箱冻结后缩放1→17，C形最大转角4.942°→5.839°，且未正式进入TRANSPORT。全部失败和回退仍在原报告中。
 
-最佳配置 [best_known_transport_v1.yaml](configs/research/best_known_transport_v1.yaml) 的字节和全部数值参数保持不变。冻结前核心1074通过/2跳过；本地最新核心1084通过/2跳过，见[跨平台检查记录](docs/results/post_support_validation_checkpoint_v1/ci_portability.md)；审查修正后的1081项回归见[修正核验](docs/results/post_support_validation_checkpoint_v1/review_checks.json)；此前1079项回归和合成预检保留在[工程收据](docs/results/post_support_validation_checkpoint_v1/engineering_checks.json)，[Windows / Ubuntu CI](https://github.com/Wu-kaixin/boundary-aware-cooperative-transport/actions/workflows/tests.yml)按各自提交核验。测试通过与研究门槛通过分别记录；大体积原件保留本地，位置见[数据索引](docs/DATA_INDEX.md)。
+最佳配置 [best_known_transport_v1.yaml](configs/research/best_known_transport_v1.yaml) 的字节和全部数值参数保持不变。冻结前核心1074通过/2跳过；本地最新核心1087通过/2跳过，见[几何与方向能力工程收据](docs/results/post_support_contact_geometry_capability_v1/engineering_checks.json)。此前1084项回归见[跨平台检查记录](docs/results/post_support_validation_checkpoint_v1/ci_portability.md)；审查修正后的1081项回归见[修正核验](docs/results/post_support_validation_checkpoint_v1/review_checks.json)；1079项回归和合成预检保留在[工程收据](docs/results/post_support_validation_checkpoint_v1/engineering_checks.json)，[Windows / Ubuntu CI](https://github.com/Wu-kaixin/boundary-aware-cooperative-transport/actions/workflows/tests.yml)按各自提交核验。测试通过与研究门槛通过分别记录；大体积原件保留本地，位置见[数据索引](docs/DATA_INDEX.md)。
 
 ## 目前遗留的问题与下一步
 
 | 优先级 | 遗留问题及证据 | 下一项工作与验收方向 |
 | --- | --- | --- |
-| P0 | **有限支持与正常接触的兼容性未解决。** 新候选任务完成0/4；17个原正向力指令去掉非负运动项后仍冲突，其中9个在原配置速度球内也无法恢复。完整约束审计仍待完成。 | 完成全部逐帧约束审计，分解扫描半间距、噪声、法向及真实接触距离，再设计兼容推动的边界约束。不能将固定原指令被排除等同于所有推动指令不可行，也不能只以QP可行为成功。 |
+| P0 | **有限支持与正常接触的兼容性未解决。** 新候选任务完成0/4；17个原正向力状态中，新截断约束仅6个允许正向速度，10个强制反向、1个无解。另有2个声明推手有正向可行速度却被QP选成反向。完整约束审计仍待完成。 | 完成全部逐帧约束审计，联合处理几何不确定性与有符号相对运动，设计兼容推动的边界约束，再处理优化目标。不能只删裕量、改目标或以QP可行为成功。 |
 | P0 | **采集期残余冲突及上游参考偏差仍在。** 402帧agent_05的采集冲突未被本候选覆盖；旧451.596mm换票跳变虽已追清，局部配准为何接受大偏差仍待解释。 | 追踪参考准入、匹配支撑及偏差累积，分别核验地图、导航和停止读数；共同来源增量不能消除时变偏差。 |
 | P0 | **C形协作激活、施力与停止尚未联合达标。** 上轮C形完成但未正式TRANSPORT、旋转回退；两臂G500均2/4，完整门槛FAIL。 | 核验部署运动、推手邻域确认、正式施力与制动的先后关系，保留原四台门槛和停止规则；共同检查安全完成、错误HOLD、硬违规、截尾、终点误差、G500和转角。 |
 | P1 | **独立部署贡献未证明最终完成率优势。** [36条历史匹配轨迹](docs/results/deployment_contribution_v1/README.md)中，CVT覆盖率相对spacing/nearest增加1.52/4.85个百分点，三方法完成均11/12。 | 公共搬运链稳定后，用相同参数、初态与信息权限冻结匹配对照，分别评估覆盖、最大空缺、路径、耗时和最终搬运。 |

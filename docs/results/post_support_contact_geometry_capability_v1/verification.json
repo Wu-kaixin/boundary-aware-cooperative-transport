@@ -1,0 +1,44 @@
+{
+  "status": "VERIFIED",
+  "checked_at_utc": "2026-11-03T14:13:37.371438+00:00",
+  "verifier_sha256": "ebb5af99cd0132be51df82ec4f7e87eab588e4030d760a8e368ee5bab7569b1d",
+  "geometry_analysis_sha256": "e4460b8565ce9b24c883152c7c1a7bff1dccfaacb160954c4cbbb9de067724ad",
+  "direction_analysis_sha256": "869d9a0b6daeb05b9c32556844565e5dbca4b736b2838b5bd06effd476c0a04c",
+  "states": 128,
+  "object_rows": 3813,
+  "systems": 336,
+  "evaluation_geometry": "SCALAR_RECOMPUTED",
+  "maximum_primal_dual_gap": 1.659502940620783e-08,
+  "reversing_certificates": 20,
+  "least_negative_tolerance_adjusted_upper_bound": -0.021381277903266504,
+  "infeasible_certificates": 6,
+  "least_negative_separator": -0.0219430542069106,
+  "negative_selected_despite_positive_capability": [
+    {
+      "condition": "near_circle",
+      "frame": 162,
+      "agent_id": "agent_09",
+      "declared_pusher": true,
+      "maximum": 0.0902175122090946,
+      "chosen": -0.006843345438287296
+    },
+    {
+      "condition": "near_l_reference",
+      "frame": 124,
+      "agent_id": "agent_12",
+      "declared_pusher": true,
+      "maximum": 0.07317284008995842,
+      "chosen": -0.0892215296468522
+    },
+    {
+      "condition": "far_skew_box_s0_r0_pos0",
+      "frame": 891,
+      "agent_id": "agent_06",
+      "declared_pusher": false,
+      "maximum": 0.23712403204029275,
+      "chosen": -0.0021876597807661824
+    }
+  ],
+  "frozen_identities": "UNCHANGED",
+  "new_physical_episodes": 0
+}
