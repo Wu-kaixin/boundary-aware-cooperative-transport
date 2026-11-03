@@ -220,3 +220,14 @@ Repository health PASS (1,713 tracked files, 541 Python files parsed, 15 navigat
 documents; pip check and Git object integrity PASS); git diff --check PASS.
 The analysis checkpoint records 3,600 frames for the first L candidate. Its
 original live process continues; no full-audit outcome was present at this check.
+
+Single fresh-context review of f1a8497..2c5e503: no Critical/Important/Minor
+findings. Independently checked all 128 states, 3,813 object rows, 112 attained
+motion envelopes, every exported field/count, original source/design snapshots,
+22 frozen helpers, YAML and the exact checkpoint log prefix. The complete report
+and all 13 declined-item rulings are preserved in
+docs/results/post_support_contact_row_decomposition_v1/final_review.md and
+review_resolution.md. No fix pass, new physical run or second reviewer required.
+Committed bytes of all four original data products match their publication hashes;
+347 local links in changed Markdown resolve. Next: authorized normal push and
+remote exact-head verification; do not relabel prior CI as this new commit's CI.
