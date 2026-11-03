@@ -1,0 +1,29 @@
+{
+  "recorded_at_utc": "2026-11-03T02:01:01.987216+00:00",
+  "kind": "APPENDED_METADATA_ERRATUM",
+  "original_protocol_sha256": "0ca3f1369196fc882d884cf5583205d7671ab3749489f33a0dc116f140d9fdae",
+  "original_source_sha256": "37f2e00017ce2e34ec932956174e7778f639c0732206e023fed74a34ef6dda1e",
+  "original_declared_budget": {
+    "new_physical_episodes": 8,
+    "maximum_steps_per_episode": 12000,
+    "maximum_total_steps": 96000,
+    "seconds_per_episode": 600.0,
+    "settling_frames": 40,
+    "settling_speed": 0.005,
+    "wall_clock_cutoff": null
+  },
+  "corrected_descriptive_counts": {
+    "new_physical_episodes": 12,
+    "maximum_total_steps": 144000
+  },
+  "actual_execution": {
+    "status": "COMPLETED",
+    "completed_denominator": 12,
+    "execution_errors": 0,
+    "source_integrity": "PASS",
+    "protocol_sha256": "0ca3f1369196fc882d884cf5583205d7671ab3749489f33a0dc116f140d9fdae"
+  },
+  "reason": "The twelve-case study inherited the older eight-case descriptive budget header. The frozen case list and all-twelve execution gate declared twelve; the runner uses each resolved case frame budget, not this header.",
+  "effect": "Original source, protocol, run receipts and scientific outcomes remain unchanged. This append-only erratum does not reclassify failures or rerun physics.",
+  "new_physical_episodes_in_this_erratum": 0
+}
