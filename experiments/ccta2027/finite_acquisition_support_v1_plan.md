@@ -46,8 +46,8 @@ Do not promote candidate or infer general reliability from reused conditions.
 
 ### Final
 
-- [ ] Publish bounded results, update next actions, perform one fresh final review.
-- [ ] Fix material findings once; preserve raw failures and all review rulings.
+- [x] Publish bounded results, update next actions, perform one fresh final review.
+- [x] Fix material findings once; preserve raw failures and all review rulings.
 - [ ] Integrity checks and authorized normal research-branch sync.
 
 ## Execution ledger
@@ -116,3 +116,34 @@ Initial visual inspection found adjacent numeric labels touching; staggered arm
 labels in presentation v2. Preserve initial publisher/outputs under maintenance
 publication_layout_v1; v2 analysis/CSV/probes/residuals/README byte-identical.
 No research rerun or changed conclusion. Final review and branch sync remain.
+
+Final review: one fresh read-only reviewer of35c8533..3c14d05. Critical0,
+Important1, Minor1; declined-to-judge none. Important: raw-distance prefilter
+omits potentially stricter isolated point guards before structural allowance.
+Both analytical and actual-QP witnesses confirmed; this is separate from the
+already disclosed unknown-boundary limitation. Final verdict With fixes.
+
+Final: fixed omitted competing isolated support — new test_finite_support_review_fix.py
+observed4 failures/1pass RED, then75 targeted GREEN; complete core992pass/2skip
+in152.19s, exit0. Compute all isolated half-gaps before the common guarded cover;
+unknown or over-cap selected features force original-row fallback. No new
+numeric parameter. Original frozen source, protocol, physical analysis and all
+publication products reverified unchanged; corrected snapshot and engineering
+receipt are separate. No second review or additional physical research episode.
+
+Final: minor (deferred): baseline original_row_robot_steps=0 in the initial CSV
+is an absent-counter placeholder, not measured zero. Document the caveat in the
+root README and final review; scientific outcomes/gates unaffected. A corrected
+derivative is deferred, original CSV/analysis/publication remain unchanged.
+
+Ruling: publish the historical eight episodes plus a separate engineering
+correction, without adding to the frozen physical budget — preserves the
+predeclared experiment and fixes a real defect — cost if wrong: the corrected
+runtime may perform differently; it remains off and needs a new physical freeze.
+
+Clarify the old README 'this maintenance does not change control laws' sentence
+as the2026-10-23 consolidation; it does not describe the current optional rows.
+Previous goal turn classification: progress (new physical evidence and corrected
+observed-constraint omission). Full research goal remains active: new corrected
+closed-loop validation, C activation/rotation, deployment contribution and paper
+are not complete. Authorized branch synchronization is the remaining publish step.

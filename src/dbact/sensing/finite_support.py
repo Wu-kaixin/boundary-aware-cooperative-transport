@@ -99,17 +99,17 @@ def support_rows(position, packets, params, timestamp, motion_bound, *, isolated
     near = distances-errors <= np.min(distances+errors)+reach
     missing_count = int(np.count_nonzero(near & ~covered))
     guarded_indices, point_radii = [], []
-    if missing_count and isolated_point_guards:
-        for index in np.flatnonzero(near & ~covered):
+    if isolated_point_guards:
+        # Raw distance cannot exclude a point before its structural allowance is
+        # known: a farther return can induce a stricter guarded feature. Build
+        # every isolated candidate, then apply the common feature cover below.
+        for index in np.flatnonzero(~covered):
             gaps = np.linalg.norm(points-points[index],axis=1)
             eligible = (object_ids == object_ids[index]) & (gaps > 1e-8)
-            if not np.any(eligible):
-                return missing('isolated_gap_unknown',int(near.sum()),missing_count)
-            allowance = .5*float(gaps[eligible].min())
-            if allowance > GAP_GUARD_CAP_M:
-                return missing('isolated_gap_exceeds_cap',int(near.sum()),missing_count)
             guarded_indices.append(index)
-            point_radii.append(allowance)
+            # Unknown gaps stay unbounded; over-cap gaps are not truncated.
+            # A potentially competing unsupported feature must force fallback.
+            point_radii.append(.5*float(gaps[eligible].min()) if np.any(eligible) else np.inf)
     elif missing_count:
         return missing('uncovered_near_return',int(near.sum()),missing_count)
     active = [packet for packet in packets if len(packet.chords)]
@@ -132,6 +132,13 @@ def support_rows(position, packets, params, timestamp, motion_bound, *, isolated
     lower = distances-structural-noise
     keep = ((lower <= np.min(distances+structural+noise)+reach)
             & (lower <= params.object_row_range))
+    if guarded_indices:
+        near[guarded_indices] |= keep[point_feature]
+        unsupported = keep & point_feature & (structural > GAP_GUARD_CAP_M)
+        if np.any(unsupported):
+            reason = ('isolated_gap_unknown' if np.any(~np.isfinite(structural[unsupported]))
+                      else 'isolated_gap_exceeds_cap')
+            return missing(reason,int(near.sum()),int(unsupported.sum()))
     if not np.any(keep):
         return missing('outside_range',int(near.sum()))
     normals = delta/np.maximum(distances[:,None],1e-12)
