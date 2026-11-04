@@ -1,0 +1,65 @@
+\documentclass[10pt,letterpaper,conference,onecolumn]{ieeeconf}
+\IEEEoverridecommandlockouts
+\overrideIEEEmargins
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,graphicx,booktabs,url}
+\makeatletter
+\setlength{\@fptop}{0pt}
+\setlength{\@fpsep}{12pt}
+\setlength{\@fpbot}{0pt plus 1fil}
+\makeatother
+\newtheorem{proposition}{Proposition}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\title{Supplementary Diagnostics and Evidence Index\\Boundary Deployment and Contact Feasibility\\in Cooperative Transport without Prior Object Geometry}
+\author{Development manuscript --- author information pending}
+\date{4 November 2026}
+\begin{document}
+\maketitle
+This supplement preserves additional mathematical diagnostics and measured trajectories. It does not add simulated episodes or extend the claims of the eight-page main manuscript. The batches below have distinct source identities and cannot be pooled as independent repetitions. The result registry is \texttt{RESULTS\_INDEX.md}; current validation records are in \texttt{docs/results/resource\_noise\_validation\_v1/} from the repository root.
+
+\section{Restricted feedback diagnostics}
+\input{supplementary_diagnostics.tex}
+\clearpage
+\section{Historical complete-task comparison}
+The nine-condition, seed-2 census changes the deployment module while retaining the common downstream implementation. All 27 cases are displayed. This historical source/configuration is separate from the 2026-11-04 validation. Boundary CVT and spacing each spatially complete five of nine tasks; nearest completes two. Failed runs have actual termination times, not successful completion times. Command-path length is not physical energy.
+\begin{figure}[!ht]
+\centering\includegraphics[width=\textwidth]{generated/media_v1/method_comparison.pdf}
+\caption{All 27 census tasks: complete denominator, endpoint error, actual duration and robot path. Filled/open markers denote spatial completion/failure. W marks a watchdog. One shared random scene block; no inferential confidence intervals.}
+\end{figure}
+\begin{figure}[!ht]
+\centering\includegraphics[width=.5\textwidth]{generated/media_v1/v2_negative.pdf}
+\caption{Separate rejected feedback candidate. The passive certificate reproduces the original execution; anchored feedback rescues neither selected failure and worsens C8. These are selected development cases, not independent generalization evidence.}
+\end{figure}
+
+\clearpage
+\section{Current-source five-shape stages}
+\begin{figure}[!ht]
+\centering\includegraphics[width=.95\textwidth,height=.77\textheight,keepaspectratio]{generated/resource_noise/five_shape_stages.pdf}
+\caption{Five prospectively selected CVT reference conditions, seed 2026110401, 16 robots and range noise $\sigma=0.01$ m. Columns show the measured state immediately after the first geometric readiness event, a midpoint in the transport interval, and the actual terminal state. Event names do not certify physical contact or completion. All five displayed reference cases complete; failures in the other regimes remain in the complete table and subsequent diagnostics. Orange is offline evaluation geometry, teal is agent 00's fused map, and rings show geometric readiness. No raw laser rays or unrecorded motion are inferred.}
+\end{figure}
+
+\clearpage
+\section{Current vector navigation and stopping}
+\begin{figure}[!ht]
+\centering\includegraphics[width=\textwidth,height=.83\textheight,keepaspectratio]{generated/resource_noise/reference_navigation.pdf}
+\caption{All five preselected reference CVT trajectories. Navigation estimates are the recorded shared vector-displacement readout projected onto the task direction, compared with pre-physics truth. The auxiliary scalar feedback shown in replay media is not substituted for this navigation signal. Goal error uses actual trace poses; contact force belongs to the subsequent contact calculation in each step. READY, BRAKE and HOLD are recorded supervisor events, with no imputed event. All control samples are retained without smoothing.}
+\end{figure}
+
+\clearpage
+\section{Current resource failures and evidence boundaries}
+The C-away, eight-robot condition was selected after the validation to inspect both incomplete trajectories and their matched CVT control. No new physical trajectory or parameter change is introduced. CVT eventually satisfies spatial completion at 571.55 s. Spacing ends at 600 s in BRAKE with 0.110190 m endpoint error, which is inside the positional tolerance but does not satisfy the HOLD dwell. Nearest reaches HOLD at 46.65 s and terminates at 48.65 s, 0.823656 m from the goal. Recorded motion and stopping can occur without the TRANSPORT activation event; the monotone supervisor may skip intermediate phases. These observations identify distinct contract failures, not a unique causal estimator fault.
+\begin{figure}[!ht]
+\centering\includegraphics[width=\textwidth]{generated/resource_noise/c8_failure_diagnostics.pdf}
+\caption{Post hoc diagnosis of all three matched C-away/eight-robot cases, with their distinct measured time horizons. True projected displacement, shared navigation estimate and two-dimensional endpoint error are separate quantities. Gray event lines retain actual READY/BRAKE/HOLD decisions; spacing has no HOLD. The companion synchronized MP4 retains the whole 600 s horizon at 1 s sampling and $10\times$ playback. Ended cases hold their real final state.}
+\end{figure}
+
+Increasing the team to 24 robots also exposes two original hard-safety failures. L/CVT reaches maximum penetration 0.120428 m against its 0.0975 m discrete budget; ellipse-perpendicular/spacing reaches 0.115719 m against 0.1002 m. Both spatially complete but are excluded from completion without hard safety failure. No post hoc change to the penetration allowance or settling rule is made. These safety measurements concern the penalty/contact simulator and discrete evaluator, not certified continuous separation or hardware behavior.
+
+The finite-support branch in the main paper remains rejected. Its interrupted full-trajectory constraint audit is quarantined as incomplete; the eight physical outcomes and fixed 336-system optimization witnesses are separately identified. Conditional local-polygon admission requires an occupancy enclosure and motion bound that have not been implemented. Neither design text nor a numerical witness substitutes for an end-to-end safety or transport theorem.
+
+\section{Reproducibility and workflow}
+All Python work uses the root project environment. The fresh regression records report 1113 passed and two skipped core tests, and 106 passed MAS-platform tests. An earlier sandbox temporary-directory failure is preserved separately. The scientific runtime and protected configuration remain unchanged; presentation and audit helpers do not establish new algorithm behavior. AI assistance and pending author review are disclosed in the package README.
+
+The current workload benchmark used one, four and eight processes on the same eight 100-step engineering prefixes, and selected eight after exact replay comparison. Timings are 92.374, 34.126 and 22.108 s including startup. The 60 scientific cases took 779.104 s. A one-prefix profile is not a whole-run optimization claim; engineering prefixes are excluded from scientific denominators. Matplotlib produces source-bound vector figures, FFmpeg encodes and fully decodes the videos, and Inkscape 1.4.4 verifies a vector export. No GPU acceleration of the physical solver is claimed.
+
+\end{document}

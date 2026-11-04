@@ -1,0 +1,118 @@
+{
+  "total_s": 25.51979829999997,
+  "entries": [
+    {
+      "file": "src\\dbact_sim\\environment.py",
+      "line": 228,
+      "function": "step",
+      "calls": 100,
+      "self_s": 0.0014468,
+      "cumulative_s": 20.709500600000002
+    },
+    {
+      "file": "src\\dbact\\control\\controller.py",
+      "line": 871,
+      "function": "step",
+      "calls": 100,
+      "self_s": 0.006743000000000001,
+      "cumulative_s": 19.522263600000002
+    },
+    {
+      "file": "src\\dbact_sim\\experiments\\deployment.py",
+      "line": 40,
+      "function": "dump",
+      "calls": 5,
+      "self_s": 0.0093916,
+      "cumulative_s": 4.2336005000000005
+    },
+    {
+      "file": "src\\dbact\\sensing\\boundary_map.py",
+      "line": 294,
+      "function": "register",
+      "calls": 2400,
+      "self_s": 0.1194897,
+      "cumulative_s": 3.3334759000000003
+    },
+    {
+      "file": "src\\dbact\\sensing\\boundary_map.py",
+      "line": 727,
+      "function": "update",
+      "calls": 2400,
+      "self_s": 0.1936245,
+      "cumulative_s": 2.8157721000000002
+    },
+    {
+      "file": "src\\dbact\\deployment\\cvt.py",
+      "line": 127,
+      "function": "compute",
+      "calls": 2400,
+      "self_s": 0.06783840000000001,
+      "cumulative_s": 2.3902979
+    },
+    {
+      "file": "src\\dbact\\sensing\\sensor.py",
+      "line": 75,
+      "function": "sense_view",
+      "calls": 2400,
+      "self_s": 0.0326008,
+      "cumulative_s": 2.1772805
+    },
+    {
+      "file": "src\\dbact\\control\\observed_reference.py",
+      "line": 139,
+      "function": "update",
+      "calls": 573,
+      "self_s": 0.0548331,
+      "cumulative_s": 1.8965681
+    },
+    {
+      "file": "src\\dbact\\safety\\qp2d.py",
+      "line": 37,
+      "function": "solve_min_norm_2d",
+      "calls": 2400,
+      "self_s": 0.3249964,
+      "cumulative_s": 0.9278184
+    },
+    {
+      "file": "src\\dbact\\transport_dynamics.py",
+      "line": 63,
+      "function": "step",
+      "calls": 100,
+      "self_s": 0.0015798000000000001,
+      "cumulative_s": 0.4677065
+    },
+    {
+      "file": "src\\dbact\\contact_dynamics.py",
+      "line": 173,
+      "function": "step",
+      "calls": 100,
+      "self_s": 0.0178064,
+      "cumulative_s": 0.46523370000000003
+    },
+    {
+      "file": "src\\dbact\\contact_dynamics.py",
+      "line": 122,
+      "function": "compute_contacts",
+      "calls": 400,
+      "self_s": 0.0292794,
+      "cumulative_s": 0.24089990000000003
+    },
+    {
+      "file": "src\\dbact\\control\\transport.py",
+      "line": 141,
+      "function": "update",
+      "calls": 57,
+      "self_s": 0.0011259,
+      "cumulative_s": 0.0038458000000000003
+    },
+    {
+      "file": "src\\dbact\\control\\phase.py",
+      "line": 124,
+      "function": "update",
+      "calls": 100,
+      "self_s": 0.0006594000000000001,
+      "cumulative_s": 0.001592
+    }
+  ],
+  "note": "One frozen 100-step 24-robot C-away prefix. Nested cumulative times overlap; no full-horizon speed prediction."
+}

@@ -1,0 +1,135 @@
+{
+  "schema_kind": "research_design_contract_not_runtime_configuration",
+  "design_id": "local_polygon_admission_v1",
+  "date_local": "2026-11-04",
+  "status": "DESIGN_ONLY_PRIOR_VALUES_UNADOPTED",
+  "authorization": {
+    "user_reply": "批准局部先验设计及新增 1 小时预算（推荐）",
+    "window_start_utc": "2026-11-03T20:37:14+00:00",
+    "maximum_window_seconds": 3600,
+    "physical_episodes": 0,
+    "controller_replay_frames": 0,
+    "candidate_qp_comparisons": 0,
+    "runtime_integration": false,
+    "numerical_prior_values_adopted": false
+  },
+  "scientific_question": "Can an explicitly declared local polygon class and legal observations support a noncircular occupancy admission certificate for the final executed object-contact step?",
+  "evidence_level": "exploratory design; prior negative outcomes observed; no new task validation",
+  "recommended_design": "all_consistent_local_polygon_occupancy_models",
+  "transparent_baseline": "nonincident_edge_separation_and_turn_bound",
+  "supporting_module": "complete_scan_free_ray_constraints_not_free_fans",
+  "rejected_as_unified_default": "one_continuous_visible_radial_branch",
+  "prior_family": {
+    "physical_shapes": "unknown simple solid polygons; no vertex coordinates or complete outline supplied online",
+    "parameters": {
+      "K_local_physical_edges": {"unit": "count", "domain": "positive integer", "adopted_value": null},
+      "s_nonincident_edges": {"unit": "m", "domain": "strictly positive", "adopted_value": null},
+      "minimum_full_edge_length": {"unit": "m", "domain": "strictly positive", "adopted_value": null},
+      "maximum_absolute_turn": {"unit": "rad", "domain": "0 < phi < pi", "adopted_value": null}
+    },
+    "definitions": [
+      "K counts the total true physical edges intersecting Q across all modeled objects, not a per-object count, returns or artificial crop edges; other objects remain unknown occupancy",
+      "s applies to complete nonincident physical edges, not arbitrarily truncated fragments",
+      "minimum edge length does not reject a short crop of a long physical edge",
+      "signed corner turns do not cancel when bounding tangent variation",
+      "one connected object may have multiple disconnected fragments in Q",
+      "uncertain continuation outside Q must not be replaced by an invented closure",
+      "bounds must be common and fixed before future outcomes; no truth-conditioned per-shape selection"
+    ]
+  },
+  "observation_contract": {
+    "maximum_sources": "own current scan and scans from actual current one-hop neighbors",
+    "required_fields": [
+      "source_agent_id", "packet_id", "timestamp", "coordinate_frame_id", "origin",
+      "ray_count", "sensor_range", "calibration_id", "complete_scan_flag",
+      "hit_mask_or_complete_return_indices", "ray_index", "measured_range",
+      "calibrated_direction", "object_label", "range_error_event_id"
+    ],
+    "forbidden_fields": ["true_normal", "cargo_vertices", "hidden_edge_id", "future_object_motion", "all_team_scan_pool"],
+    "noise": {
+      "existing_sigma_m": 0.01,
+      "existing_epsilon_m": 0.03,
+      "interpretation": "condition on the error bound for all used returns; not deterministic under Gaussian noise",
+      "distribution_changed": false,
+      "new_risk_threshold_adopted": false,
+      "duplicate_packet_rule": "one source packet is one observation, regardless of repeated reception"
+    },
+    "first_hit_semantics": {
+      "required_real_world_premises": ["sensor origin outside solids", "correct labels", "complete hit/miss semantics", "valid calibration and coordinate bounds"],
+      "hit_range_interval": "[max(0,r_hat-epsilon), min(sensor_range,r_hat+epsilon)]",
+      "trusted_free_prefix": "open segment preceding the lower range endpoint",
+      "miss_information": "free ray segment within range only, never the interpolated angular fan",
+      "filtered_cloud_missing_ray": "not evidence of a miss"
+    },
+    "interface_gap": "ScanSupport does not carry complete scan/miss certification fields",
+    "communication_cost": "full raw packets require explicit byte accounting; no claim of unchanged message budget"
+  },
+  "geometry_contract": {
+    "ideal_family": "V(D,P): all allowed worlds consistent with declared priors and observations",
+    "quantity": "solid occupied regions, not boundary samples or centroid enclosures",
+    "inclusion": "Uhat_Q contains union over M in V(D,P) of M intersect Q",
+    "permitted_relaxation": "larger finite local family with a proof that every true allowed world restriction is retained",
+    "topology_rule": "retain every topology not excluded by a verified necessary-condition contradiction",
+    "continuous_parameters": "validated interval or analytic outer bounds, not a finite best-fit grid",
+    "crop_rule": "record physical corners, crop endpoints and possible outside connections separately",
+    "unknown_objects": "retain their unexcluded region as unknown occupancy unless separately bounded",
+    "partial_enumeration": "unprocessed domains remain in the outer set or cause MODEL_UNRESOLVED",
+    "nonempty_witness_scope": "a local-relaxation witness establishes local self-consistency only, not exact V nonemptiness, global extendability or true-world membership",
+    "numerics": "distance lower bounds must account for all geometry and arithmetic enclosure errors"
+  },
+  "execution_contract": {
+    "physical_scope": "one split-execution step of the frozen penalty transport semantics",
+    "robot_path": "S_exec contains initial point, actual clipped terminal point and the explicitly declared path/tracking tube",
+    "engine_velocity": "actual final ControlCommand velocity, not inferred displacement divided by dt",
+    "motion_outer_set": "Uhat_Q(s;u) contains every allowed occupied position throughout the cargo hold stage",
+    "motion_bound_requirements": [
+      "material-point displacement over the entire stage, in metres",
+      "all relevant rotations, contacts, numerical/physical corrections and other robot inputs",
+      "consistent with the actual command if the envelope depends on u",
+      "neither COM speed nor received point-speed clipping alone is sufficient",
+      "local K/scale/turn bounds do not supply a global diameter bound for converting COM/angular-rate limits into material-point displacement"
+    ],
+    "window_exclusion": "B(p,R_Q) subset Q and R_Q > L_exec + r_safe + B_max; prove sup over x in S_exec of norm(x-p) <= L_exec; vmax*dt is a specialization requiring this path bound; uncertain positions require inflation of the entire position set",
+    "robot_stage": "dist(S_exec,Uhat_Q) >= r_safe",
+    "cargo_stage": "dist(p_plus,Uhat_Q(s;u)) >= r_safe for every s in [0,dt]; use the possible terminal-position set when position is uncertain",
+    "time_coverage": "continuous swept outer sets or validated temporal interval bounds; substep endpoint sampling alone is insufficient",
+    "post_solver_check": "verify the final actual command after all modifications, regardless of solver status",
+    "cap_relax_scale": "cannot preserve the original row certificate by naming alone; independent geometric verification can still certify a modified command"
+  },
+  "status_contract": {
+    "INPUT_INVALID": "missing or invalid observation identity/completeness",
+    "PRIOR_UNDECLARED": "one or more required prior values absent",
+    "MODEL_INCONSISTENT": "model/evidence incompatibility proved; never pass via an empty universal set",
+    "MODEL_UNRESOLVED": "complete outer inclusion or numerical verification not established, or total time budget reached; unrefined regions may remain if conservatively included",
+    "GEOMETRY_ONLY": "current occupancy included but motion/execution premise missing",
+    "COMMAND_NOT_CERTIFIED": "this command lacks the required verified inequalities; not a proof of collision or global infeasibility",
+    "CONDITIONAL_OBJECT_STEP": "conditional object-clearance certificate for this step, with all unverified true-world premises attached"
+  },
+  "no_certificate_policy": {
+    "automatic_safe_zero_command": false,
+    "automatic_runtime_action_adopted": false,
+    "empirical_fallback": "requires separate implementation authorization and explicit uncertified accounting",
+    "recursive_feasibility_claim": false,
+    "full_task_or_stopping_claim": false,
+    "robot_pair_or_wall_safety_claim": false
+  },
+  "falsifier": "A declared-prior/observation/motion/execution-consistent world receives CONDITIONAL_OBJECT_STEP, but any point in the stated split execution violates r_safe; incorrect elimination or outer-set exclusion of one allowed world is already sufficient to reject soundness.",
+  "future_logic_cases_not_executed": [
+    "indistinguishable face and corner worlds",
+    "multiple local fragments joined only outside Q",
+    "filtered cloud or dropout misread as complete misses",
+    "continuous branch neither processed nor conservatively included, empty model or total timeout",
+    "cap, relaxation, scaling and position clipping before final check",
+    "safe substep endpoints but unsafe intermediate sweep",
+    "zero command with approaching object",
+    "offline truth audit finds a prior/noise/motion-event violation"
+  ],
+  "implementation_status": {
+    "complete_continuous_outer_builder": false,
+    "validated_motion_tube_provider": false,
+    "admission_rate_measured": false,
+    "runtime_cost_measured": false,
+    "transport_benefit_established": false,
+    "ready_for_controller_integration": false
+  }
+}

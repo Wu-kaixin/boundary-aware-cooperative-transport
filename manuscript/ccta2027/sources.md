@@ -72,3 +72,17 @@ A：本轮检查一手全文相关段落；B：一手题录/摘要与仓库既�
 ## 2026-11-01 最近工作复核
 
 重新阅读Song等v2的§III–IV、Sequential caging的§3–4、Tang等RSS2024的§II–III，并核查CCTA2027 CFP与CSS模板。具体对照、原文入口和未核验部分见[主张与媒体清单](MEDIA_AND_CLAIMS.md)。不能由这三篇的相关段落阅读推称本轮重新精读了全部20篇。现有内部对照不是这三篇的忠实复现。
+
+## 2026-11-04 主线更新与来源复核
+
+当前稿件新增匹配部署比较、有限支持负结果、336 系统方向能力分析和实际执行的 60 回合资源/噪声验证。最新数字见 [RESULTS_INDEX.md](RESULTS_INDEX.md)，不再把资源/噪声实验列为未执行。既有 20 篇文献的历史阅读深度未扩大为本轮全部精读。
+
+本轮检查了 Song 等 v2 的检测密度/CVT/协调相关原文段落、Sequential caging 的原始 PDF 与通信/推动条件、Tang 等 RSS 的题录及本地全文提取中的已知对象几何/物性与准静态假设。信息权限和物理模型不同，因此正文只作有依据的机制比较，不宣称复现或战胜这些方法。Tang 全文在本地 `data/literature/2026-10-22/text/L06.txt`；原件及映射沿用原文献清单，不加入 Git。
+
+- [Song et al., arXiv v2 原文](https://arxiv.org/html/2602.19070v2)：检测位置驱动的密度、CVT 与 CBF 已有先例。
+- [Vardharajan et al., 原始论文](https://arxiv.org/pdf/2106.03132)：未知形状 sequential caging 包含有效推动和接触维护，也有机器人实验证据；不能说前人只做静态包围。
+- [Tang et al., RSS2024 官方入口](https://roboticsproceedings.org/rss20/p063.html)：模型化接触模式与可行推动是既有研究，当前潜在差异须限定在信息权限和执行模型。
+
+2026-11-04 再次核对 [官方 CFP](https://ccta2027.ieeecss.org/authors/call-for-papers) 与 [PaperPlaza 模板说明](https://css.paperplaza.net/conferences/support/tex.php)。主稿使用 8 页 Letter 双栏官方模板，补充 PDF 仅是本地审阅材料。没有上传 PDF 做服务器检查，未宣称通过正式投稿系统验收。
+
+工作流工具出处单独列于 README，不加入机器人学理论证据。Kassis、Agarwal、He、Patel、Brueckner 的 [Scientific Agent Skills](https://arxiv.org/abs/2609.00065v2) 题录已核查；其工具说明不能替代本项目数据和人类科研审阅。

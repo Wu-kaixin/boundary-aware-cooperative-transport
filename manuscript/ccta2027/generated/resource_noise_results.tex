@@ -1,0 +1,11 @@
+The current-source protocol records all 60 planned episodes on one new shared seed, with no outcome-driven retries. The five conditions are circle, ellipse-perpendicular, rectangle-parallel, L-reference and C-away. Each regime has five tasks per deployment module. Eight- and 16-robot layouts are prefixes of the same 24-robot layout; the noisier regime shares the reference initial positions. Fixed gains, four-pusher quorum and 600 s limits are retained.
+\begin{table}[t]
+\centering\caption{Current-source sensitivity. Each cell lists completion without a hard safety failure, then G500; both out of five. One shared seed; descriptive counts.}\label{tab:sensitivity}
+\begin{tabular}{lccc}\toprule
+Regime & CVT & Spacing & Nearest\\\midrule
+Reference & 5/5; 5/5 & 5/5; 5/5 & 5/5; 4/5\\
+8 robots & 5/5; 3/5 & 4/5; 2/5 & 4/5; 3/5\\
+24 robots & 4/5; 1/5 & 4/5; 3/5 & 5/5; 1/5\\
+Noise $\sigma=0.02$ m & 5/5; 5/5 & 5/5; 2/5 & 5/5; 3/5\\
+\bottomrule\end{tabular}\end{table}
+The full case table retains execution errors, watchdogs, endpoint errors, contact and phase events, trajectory quality and safety measurements. Robot-resource changes test the fixed controller, including its unchanged quorum; they are not separately optimized team policies. These designed conditions support sensitivity statements, not a population robustness probability.

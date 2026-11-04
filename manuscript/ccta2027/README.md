@@ -1,57 +1,42 @@
-# CCTA2027 初稿：未知物体的边界部署与完整搬运
+# CCTA2027 英文研究初稿
 
-工作标题：**Boundary-Aware Deployment for Cooperative Transport of Unknown Objects**。
+**Boundary Deployment and Contact Feasibility in Cooperative Transport without Prior Object Geometry**
 
-[LaTeX 源码](main.tex) · [6 页 PDF](main.pdf) · [20 篇相关文献及阅读深度](sources.md) · [新图表、英文图注与主张证据表](MEDIA_AND_CLAIMS.md) · [完整结果与能力表](../../docs/results/multishape_census_v1/README.md)
+[8 页主稿 PDF](main.pdf) · [LaTeX](main.tex) · [补充材料 PDF](supplementary.pdf) · [结果与复现索引](RESULTS_INDEX.md) · [研究总结](RESEARCH_SUMMARY.md) · [媒体与主张](MEDIA_AND_CLAIMS.md) · [文献核验](sources.md)
 
-本稿是研究初稿，作者信息待填写，不是已投稿或已建立新算法优越性的论文。局部部署算法和共享阶段监督器的信息权限已明确区分，不宣称整个闭环完全去中心化。
+2026-11-04 更新。当前交付是完整研究初稿，作者信息待填写。论文主线是局部边界部署与实际接触、搬运和停止之间的差距，以及约束允许的运动方向与 QP 选择方向之间的区别。
 
-## 当前主线与实际结果
+## 本稿成立的结论
 
-九个形状—朝向条件覆盖 circle64、ellipse24、矩形、L、C。三种现有部署方法只改变首次 CONTACT_READY 前目标；共同 seed 2、初态、感知/控制/物理、安全与停止判据，固定27回合。所有失败保留，无调参、换种子或延长预算。
+- 历史九条件普查中，CVT、spacing、nearest 的空间完成数分别为 5/9、5/9、2/9；圆形 CVT 通过 G500 仍有 1.177 m 二维误差。
+- 后续 12 条件匹配比较中，CVT 的共同部署区间覆盖比 spacing/nearest 高 1.52/4.85 个百分点，三方法空间完成均为 11/12。覆盖收益没有证明完成优势。
+- 有限支持候选在四个对照均完成的条件中全部失败；固定状态证书表明，原 17 个正向力状态中有 11 个被新截断约束排除正向速度能力。另有正向可行却由 QP 选择反向的状态。它们不是完整轨迹因果证明。
+- 本次新种子、当前源码的 60 回合验证全部执行结束：58 个空间完成，56 个同时未触发原硬安全失败。8 机器人 C 形出现未收定及停错位置；24 机器人出现两例穿透预算超限。所有失败保留。
 
-| 方法 | 二维完成 | G500 | 收定 |
-|---|---:|---:|---:|
-| boundary_cvt | 5/9 | 5/9 | 8/9 |
-| nearest_observed_target | 2/9 | 1/9 | 7/9 |
-| local_spacing | 5/9 | 3/9 | 7/9 |
+各批源码、参数、条件与统计单位分开记录，不能合并成同一方法的总体成功率。未建立新算法总体优越性、完全去中心化闭环、连续动态安全或任意形状鲁棒性。局部多边形准入仍是条件设计；失败的 anchored、有限支持及射线方向候选未被重新推广。
 
-这是一种子开发普查，不是泛化成功率。圆和两种椭圆朝向均没有二维完成；C开口朝向目标时三方法完成，背向时三方法均watchdog失败。CVT没有优于局部间距的完成数。圆形CVT通过G500却有1.177 m二维终点误差；投影到达、质量告警与空间完成不能混用。
+## 实验、视频与复现
 
-[五形状完整阶段图](../../docs/results/multishape_census_v1/five_shape_stages.png)、
-[全部27回合表](../../docs/results/multishape_census_v1/capability_table.md)、
-[10段完整过程/同步视频索引](../../docs/results/multishape_census_v1/MEDIA.md)
-都来自真实回放。2026-11-01新版正文主图为完整过程、全方法完成/误差/时间/路径比较、时间对齐机制图。五形状事件全图、安全资源及v2负结果图放补充。旧冻结媒体保持原样；新交付见 [媒体与论证说明](MEDIA_AND_CLAIMS.md)。
+完整入口见 [RESULTS_INDEX.md](RESULTS_INDEX.md)。新增 [60 回合结果表](../../docs/results/resource_noise_validation_v1/all_60_episodes.csv)、[配对差值](../../docs/results/resource_noise_validation_v1/paired_differences.csv) 与 [报告](../../docs/results/resource_noise_validation_v1/README.md)均可追溯到冻结协议和原始收据。
 
-## 保留的诊断与数学边界
+当前五形状总览、三方法比较和 GIF 在 `runs/research/2026-11-04-resource-noise-validation-v1/media_v1/`。额外的 C 形 8 机器人失败比较在同级 `diagnostics_v1/`，保留全部 600 s 实际过程并明确标注事后选例。所有 MP4 已完整解码并核对帧数；结束后的案例显示实际末帧。地图是 agent 00 的融合观测，不伪造未记录的原始激光射线。
 
-- [v1](../../docs/results/readiness_diagnostic_v1/README.md)：仅进度oracle在两个选定失败中有效，但令成功C8误差增加；不是可部署算法。
-- [v2](../../docs/results/progress_local_v2/README.md)：实际配准绝大多数可辨识；证书未改变轨迹；anchored候选没有救回失败且C8更差，停止扩展。
-- 本轮只从已有v2日志作带符号累计误差分析，保留原始累计、固定增益、保持值、候选项及中位数权重变化。恒等式不等于物理准确性，分量不是唯一因果贡献。
-- 静态信息模型、采样安全检查和数值通过都不扩展为动态接触或鲁棒搬运保证。
+本次使用根 `.venv`；核心回归 1113 passed、2 skipped，MAS 回归 106 passed。原始临时目录权限失败日志保留，受控目录重跑成功。源码与保护 YAML 未改变。环境实际清单已冻结；joblib、PyYAML 与锁文件的两个既有差异仍在，不能用锁文件冒充本次运行环境。
 
-## 生成关系与复现
+固定工程前缀的 1/4/8 进程耗时为 92.374/34.126/22.108 s，所有科学输出精确一致，因此采用 8 进程。60 回合执行耗时 779.104 s。工程前缀和 profiling 不计入科学分母。Matplotlib 绘图、FFmpeg 编码/解码、Inkscape 1.4.4 矢量导出均实际执行；没有宣称 GPU 加速仿真。
 
-完整数据在本地 runs/research/2026-10-31-multishape-census-v1/。
+## 格式与编译
 
-analysis/analysis.json 是表格/图的共同派生结果。运行 scripts/analyze_multishape_census.py 会生成 CSV、图及 census_numbers.tex、census_rows.tex、census_table.tex；它们与稿件中的数值输入已逐字核对。generated/census_interpretation.tex 是依据同一表撰写的结果解释。generated/cumulative_interpretation.tex 的数字来自 v2-offline-final/signed_error_analysis.json。旧诊断图和表继续保留，不与当前27回合合并计数。
+2026-11-04 核对 [CCTA2027 官方 CFP](https://ccta2027.ieeecss.org/authors/call-for-papers)：IEEE 双栏，初投最多 8 页；录用稿以 6 页为基准，超页另有费用。主稿使用 [CSS PaperPlaza 原始模板](https://css.paperplaza.net/conferences/support/tex.php)，Letter、10pt、conference，模板来源与哈希在 [template/](template/)。补充 PDF 为本地阅读材料，不声称已满足会议附件要求。
 
-分析和渲染读取现有数据，不重跑科研实验。应选择独立输出目录；视频入口支持经过回放哈希和完整解码帧数验证的 --resume-videos。完整源码和结果身份见[公开索引](../../docs/results/multishape_census_v1/identity.json)。
+从仓库根目录编译：
 
-## 官方格式与编译
-
-2026-11-01 再次核对 [CCTA2027 官方 CFP](https://ccta2027.ieeecss.org/authors/call-for-papers)：标准IEEE双栏，初投至多8页，录用稿6页基准。采用 [CSS PaperPlaza 官方 LaTeX 模板](https://css.paperplaza.net/conferences/support/tex.php) 的原始 ieeeconf.cls，Letter、10pt、conference及官方margin指令；模板来源保存在 [template/](template/)。
-
-从仓库根目录使用已有本地Tectonic缓存编译：
-
-~~~powershell
+```powershell
 $env:TECTONIC_CACHE_DIR = Join-Path (Get-Location).Path 'artifacts/research/2026-10-31-readiness-v1/tex-cache'
 & tools/tectonic/tectonic.exe --only-cached --keep-logs manuscript/ccta2027/main.tex
-if ($LASTEXITCODE -ne 0) { throw 'LaTeX build failed.' }
-~~~
+& tools/tectonic/tectonic.exe --only-cached --keep-logs manuscript/ccta2027/supplementary.tex
+```
 
-当前验证：6页Letter；20篇引文全部解析；18个字体全部嵌入、无Type3；20项引用全部解析，无overfull；3个underfull为间距提示，最终六页已逐页目视核验。没有上传稿件，也没有编造作者/单位、导师意见或投稿状态。
+编译、字体、引用、逐页检查和最终文件哈希见 [FINAL_AUDIT.md](FINAL_AUDIT.md)。历史稿件已备份于 `runs/research/2026-11-04-ccta2027-draft-refresh-v1/manuscript_before/`。没有提交、推送或正式投稿。
 
-本次恢复与验证记录：artifacts/research/2026-11-01-paper-media-v1/。旧稿与用户原有修改逐文件备份；本次没有新增物理回合或远端提交。
-
-新媒体包入口：`artifacts/research/2026-11-01-paper-media-v1/INDEX.md`。生成脚本为 `scripts/build_ccta_media.py`，大视频与详细机器清单留在本地，不自动加入Git。官方CFP尚未给出普通论文视频格式/时长/大小细则，本地编码成功不等于投稿附件合规。
+本稿使用 AI 辅助审查、执行、分析、绘图和英文写作；作者须自行核阅科研主张及署名。工作流参考 Kassis 等的 [Scientific Agent Skills: A Library of Procedural Knowledge for Research Agents](https://arxiv.org/abs/2609.00065v2)（2026）。该条仅说明软件工作流来源，不是机器人学结论的证据。
